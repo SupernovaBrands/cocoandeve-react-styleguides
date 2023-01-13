@@ -1,6 +1,9 @@
 import { resolve } from 'path';
 import propTypes from 'prop-types';
 
+import 'bootstrap/dist/css/bootstrap.css'
+import '../src/styles/main.scss' 
+
 function MyApp({ Component, pageProps }) {
 	return (
 		<Component {...pageProps} />
