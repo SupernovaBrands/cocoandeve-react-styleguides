@@ -1,2 +1,5 @@
-@import 'core/functions.scss';
-@import 'core/vars.scss';
+@import 'core';
+@import 'bootstrap/common';
+@import 'bootstrap/main';
+
+@import 'components/buttons.scss';
