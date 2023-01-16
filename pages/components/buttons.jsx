@@ -5,7 +5,17 @@ export default function Buttons() {
 	return (
 		<div>
 			<h1>Buttons</h1>
-			<Button>Button 2</Button>
+			<Button className="mb-2">Button</Button>
+			<br />
+			<Button className="mb-2" variant="outline-primary">Button</Button>
+			<br />
+			<Button className="mb-2" size="lg">Button</Button>
+			<br />
+			<Button className="mb-2" variant="outline-primary" size="lg">Button</Button>
+			<br />
+			<Button className="mb-2">Button</Button>
+			<br />
+			<Button className="mb-2">Button</Button>
 		</div>
 	);
 }
