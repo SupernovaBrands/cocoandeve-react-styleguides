@@ -6,8 +6,10 @@ const AnnouncementBar = (props) => {
 	const [mainText, setText] = useState(text);
 
 	return (
-		<div className="announcement-bar bg-starorange w-100">
-			<div className="container text-center font-weight-bold">{mainText}</div>
+		<div className="announcement-bar bg-primary-light w-100">
+			<div className="container text-center fw-bold">
+				<a href="#">{mainText}</a>
+			</div>
 		</div>
 	);
 }
