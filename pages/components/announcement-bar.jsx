@@ -1,5 +1,8 @@
-export default function AnnouncementBar() {
+import AnnouncementBar from '@/components/AnnouncementBar';
+import { useState } from 'react';
+
+export default function AnnouncementBars() {
 	return (
-		<h1>Announcement Bar</h1>
+		<AnnouncementBar text="Up to 25% off + Free Gift worth $25.40" />
 	);
 }

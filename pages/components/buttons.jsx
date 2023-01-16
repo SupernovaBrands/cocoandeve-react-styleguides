@@ -1,9 +1,8 @@
-// import Button from '../../src/components/button';
 import Button from 'react-bootstrap/Button';
 
 export default function Buttons() {
 	return (
-		<div>
+		<div className="container my-4">
 			<h1>Buttons</h1>
 			<Button className="mb-2">Button</Button>
 			<br />
@@ -13,9 +12,7 @@ export default function Buttons() {
 			<br />
 			<Button className="mb-2" variant="outline-primary" size="lg">Button</Button>
 			<br />
-			<Button className="mb-2">Button</Button>
-			<br />
-			<Button className="mb-2">Button</Button>
+			<Button className="mb-2" size="lg"><span className="spinner-border spinner-border-sm" /></Button>
 		</div>
 	);
 }
