@@ -1,0 +1,10 @@
+.accordion-item {
+    border-right: none;
+    border-left: none;
+}
+
+.accordion-button {
+    &:focus, &:active {
+        box-shadow: none;
+    }
+}

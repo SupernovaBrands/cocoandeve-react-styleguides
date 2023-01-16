@@ -1,10 +1,21 @@
 import AnnouncementBar from '@/components/AnnouncementBar';
-import { useState } from 'react';
 
 export default function AnnouncementBars() {
 	return (
-		<AnnouncementBar
-			text="Up to 25% off + Free Gift worth $25.40"
-			timer={true} />
+		<>
+			<h1>Announcement Bar</h1>
+			<AnnouncementBar
+				text="Up to 25% off + Free Gift worth $25.40"
+				url="/"
+				timerEnabled={true}
+				countDownStart=""
+				countDownEnd=""
+				countDownDays=""
+				countDownDay=""
+				countDownHrs=""
+				countDownHr=""
+				countDownMin=""
+				countDownSec="" />
+		</>
 	);
 }
