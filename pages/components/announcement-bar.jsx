@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 export default function AnnouncementBars() {
 	return (
-		<AnnouncementBar text="Up to 25% off + Free Gift worth $25.40" />
+		<AnnouncementBar
+			text="Up to 25% off + Free Gift worth $25.40"
+			timer={true} />
 	);
 }
