@@ -1,19 +1,11 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
-
-$theme-colors: (
-  "primary": $primary
-);
-
-$custom-theme-colors: (
-  'secondary': $secondary,
-  'gray-400': $gray-400,
-  'gray-600': $gray-600,
-  'sh-purple': $sh-purple,
-  'pink-light': $pink-light
-);
-
-$theme-colors: map-merge($theme-colors, $custom-theme-colors);
-
 @import "bootstrap/scss/maps";
 @import 'bootstrap/scss/mixins';
+
+@import '../core/vars';
+
+@import "bootstrap";
+
+
+
