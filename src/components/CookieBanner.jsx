@@ -12,8 +12,8 @@ const CookieBanner = (props) => {
 	const functionalEl = 'functional';
 	const performanceEl = 'performance';
 	const adsEl = 'ads';
-	const gdprPerformaceList = (window.tSettings && window.tSettings.gdpr_performace_list) ? window.tSettings.gdpr_performace_list : '';
-	const gdprAdsList = (window.tSettings && window.tSettings.gdpr_ads_list) ? window.tSettings.gdpr_ads_list : '';
+	const gdprPerformaceList = '';
+	const gdprAdsList = '';
 
 	const checkCookie = () => {
 		if (getCookie('performance') === 'off') {
