@@ -94,7 +94,8 @@ $custom-theme-colors: (
   'gray-600': $gray-600,
   'sh-purple': $sh-purple,
   'pink-light': $pink-light,
-  'primary-light': $primary-light
+  'primary-light': $primary-light,
+  'bali-bod-blue': $bali-bod-blue,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);

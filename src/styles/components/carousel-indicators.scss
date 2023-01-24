@@ -1,0 +1,21 @@
+.carousel-indicators {
+	&--primary [data-bs-target] {
+		background-color: $primary;
+	}
+
+	&--black {
+		[data-bs-target].active {
+			background-color: $body-color;
+		}
+	}
+
+	&--right {
+		justify-content: flex-end;
+		[data-bs-target] {
+			&:not(.active) {
+				background: transparent;
+				opacity: 1;
+			}
+		}
+	}
+}
