@@ -15,7 +15,8 @@ export default function AnnouncementBars() {
 				countDownHrs=""
 				countDownHr=""
 				countDownMin=""
-				countDownSec="" />
+				countDownSec=""
+			/>
 		</>
 	);
 }
