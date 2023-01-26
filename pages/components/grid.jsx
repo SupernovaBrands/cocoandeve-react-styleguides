@@ -1,6 +1,6 @@
 export default function Grid() {
 	return (
-		<div className="container">
+		<div className="container" className="mt-4">
 			<div className="row">
 				<div className="col">test</div>
 				<div className="col"></div>

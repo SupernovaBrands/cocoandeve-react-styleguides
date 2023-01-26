@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "@svgr/webpack": "^6.5.1",
     "bootstrap": "^5.2.3",
     "lodash": "^4.17.21",
     "next": "13.1.1",
@@ -27,6 +28,7 @@
     "eslint-import-resolver-jsconfig": "^1.1.0",
     "eslint-plugin-import": "^2.27.4",
     "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-react": "^7.32.0"
+    "eslint-plugin-react": "^7.32.0",
+    "file-loader": "^6.2.0"
   }
 }
