@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 					folders[file] ||= [];
 					fs.readdir(`${pages}/${file}`, async (errs, fileList) => {
 						await fileList.forEach((f) => {
-							const obj = { link: `/${file}/${f}`, title: lodash.startCase(f.replace('.jsx', '').replace('-', ' ')) };
+							const obj = { link: `/${file}/${f.replace(/.js?x/, '')}`, title: lodash.startCase(f.replace('.jsx', '').replace('-', ' ')) };
 							folders[file].push(obj);
 
 							if (i === collectFiles.length - 1) {
