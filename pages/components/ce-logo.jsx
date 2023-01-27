@@ -1,9 +1,12 @@
 
 import BrandLogo from '@/components/CELogo';
+import { Container } from "react-bootstrap";
 
 const Logo = (props) => {
 	return (
-        <BrandLogo />
+        <Container className='mt-4'>
+            <BrandLogo />
+        </Container>
     );
 };
 
