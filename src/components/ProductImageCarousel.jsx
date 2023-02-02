@@ -84,8 +84,8 @@ const ProductImageCarousel = (props) => {
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
 				</BadgeCircleImage>
 				<TooltipSoldout>
-					<span class="d-block fw-bold">25</span>
-					<span class="font-size-xs">People bought today!.</span>
+					<span className="d-block fw-bold">25</span>
+					<span className="font-size-xs">People bought today!.</span>
 				</TooltipSoldout>
 			</Col>
 			<ProductImageIndicator totalSlide={props.totalSlide} handleSelect={handleSelect} selectedIndex={index} />
