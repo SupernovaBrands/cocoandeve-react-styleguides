@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Carousel } from "react-bootstrap";
 
 import ChevronUp from '../../src/images/icons/chevron-up.svg';
@@ -9,6 +9,7 @@ const ProductImageIndicator = (props) => {
 	const [index, setIndex] = useState(0);
 	const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+	const MIN_SLIDE_ITEM = 5;
 
 	const indicatorHandleDown = () => {
 		setIndex(index + 1);
@@ -18,11 +19,11 @@ const ProductImageIndicator = (props) => {
 	};
 	const onSlide = () => {
 		setPrevBtnDisabled(index === 0);
-		setNextBtnDisabled(index + 5 === props.totalSlide);
+		setNextBtnDisabled(index + MIN_SLIDE_ITEM === props.totalSlide);
 	};
 	return (
-		<div className="product-image-carousel__indicator col-12 col-lg-1 order-lg-1 mb-1 mb-lg-0 px-0 px-lg-g">
-			{props.totalSlide > 5 && (
+		<div className="product-image-carousel__indicator col-12 col-lg-1 order-lg-1 mb-lg-0 px-lg-g d-none d-lg-block">
+			{props.totalSlide > MIN_SLIDE_ITEM && (
 				<button
 					className="carousel-indicator chevron-up btn-unstyled d-none d-lg-flex mx-auto mb-1 mb-lg-3 text-center align-items-center"
 					href={`#product-image-carousel__indicator${props.num ? props.num : ''}`}
@@ -34,7 +35,7 @@ const ProductImageIndicator = (props) => {
 				</button>
 			)}
 			<Carousel id={`product-image-carousel__indicator${props.num ? props.num : ''}`}
-				className="d-none d-lg-block carousel slide carousel--loop"
+				className="carousel slide carousel--loop"
 				onSlide={onSlide}
 				activeIndex={index}
 				interval={null}
@@ -59,7 +60,7 @@ const ProductImageIndicator = (props) => {
 					)
 				})}
 			</Carousel>
-			{props.totalSlide > 5 && (
+			{props.totalSlide > MIN_SLIDE_ITEM && (
 				<button
 					className="carousel-indicator chevron-down btn-unstyled d-none d-lg-flex mx-auto mt-1 mt-lg-3 text-center align-items-center"
 					href={`#product-image-carousel__indicator${props.num ? props.num : ''}`}

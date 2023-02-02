@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Col, Carousel } from "react-bootstrap";
+import { Col, Carousel, Tooltip } from "react-bootstrap";
 import ProductImageIndicator from "./ProductImageIndicator";
 import PlayButton from '../../src/images/icons/play.svg';
+import TooltipSoldout from "./TooltipSoldout";
 
 const ItemThird = (props) => {
 	const isLast = props.itemIndex === props.totalSlide - 1;
@@ -55,29 +56,36 @@ const ProductImageCarousel = (props) => {
 
 	return (
 		<>
-			<Col xs={12} lg={6} className="product-image-carousel__container position-md-relative order-lg-2">
-				<Carousel as="figure"
-					id={`product-image-carousel${props.num ? props.num : ''}`}
-					className="product-image-carousel carousel--product-preview mb-1 mb-lg-0 no-gutters__in-container"
-					indicators={false}
-					interval={null}
-					controls={false}
-					activeIndex={index}
-					onTouchStart={onTouchStart}
-					onTouchMove={onTouchMove}
-					onTouchEnd={onTouchEnd}
-					wrap={true}
-					>
-						{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => (
-							<Carousel.Item className="col-12 px-0" key={i}>
-								<ItemThird className="item-third" itemIndex={i} totalSlide={props.totalSlide} last={false} />
-								<ItemThird className="item-third d-lg-none" itemIndex={i} totalSlide={props.totalSlide} last={true} />
-							</Carousel.Item>
-						))}
-				</Carousel>
+			<Col xs={12} lg={6} className="product-image-carousel__container order-lg-2">
+				<div className="no-gutters__in-container position-relative">
+					<Carousel as="figure"
+						id={`product-image-carousel${props.num ? props.num : ''}`}
+						className="product-image-carousel carousel--product-preview mb-0"
+						indicators={false}
+						interval={null}
+						controls={false}
+						activeIndex={index}
+						onTouchStart={onTouchStart}
+						onTouchMove={onTouchMove}
+						onTouchEnd={onTouchEnd}
+						wrap={true}
+						>
+							{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => (
+								<Carousel.Item className="col-12 px-0" key={i}>
+									<ItemThird className="item-third" itemIndex={i} totalSlide={props.totalSlide} last={false} />
+									<ItemThird className="item-third d-lg-none" itemIndex={i} totalSlide={props.totalSlide} last={true} />
+								</Carousel.Item>
+							))}
+					</Carousel>
+					<span className="product-card__image-tip position-absolute text-white p-1 w-100 text-center">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+				</div>
 				<picture className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1 me-0 mt-2 me-lg-1 mt-lg-1">
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
 				</picture>
+				<TooltipSoldout className="show">
+					<span class="d-block fw-bold">25</span>
+					<span class="font-size-xs">People bought today!.</span>
+				</TooltipSoldout>
 			</Col>
 			<ProductImageIndicator totalSlide={props.totalSlide} handleSelect={handleSelect} selectedIndex={index} />
 		</>
