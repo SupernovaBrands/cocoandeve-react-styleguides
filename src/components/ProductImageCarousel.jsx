@@ -3,6 +3,7 @@ import { Col, Carousel, Tooltip } from "react-bootstrap";
 import ProductImageIndicator from "./ProductImageIndicator";
 import PlayButton from '../../src/images/icons/play.svg';
 import TooltipSoldout from "./TooltipSoldout";
+import BadgeCircleImage from "./BadgeCircleImg";
 
 const ItemThird = (props) => {
 	const isLast = props.itemIndex === props.totalSlide - 1;
@@ -79,9 +80,9 @@ const ProductImageCarousel = (props) => {
 					</Carousel>
 					<span className="product-card__image-tip position-absolute text-white p-1 w-100 text-center">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
 				</div>
-				<picture className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1 me-0 mt-2 me-lg-1 mt-lg-1">
+				<BadgeCircleImage className="me-0 mt-2 me-lg-1 mt-lg-1">
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
-				</picture>
+				</BadgeCircleImage>
 				<TooltipSoldout>
 					<span class="d-block fw-bold">25</span>
 					<span class="font-size-xs">People bought today!.</span>
