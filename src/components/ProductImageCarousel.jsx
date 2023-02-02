@@ -82,7 +82,7 @@ const ProductImageCarousel = (props) => {
 				<picture className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1 me-0 mt-2 me-lg-1 mt-lg-1">
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
 				</picture>
-				<TooltipSoldout className="show">
+				<TooltipSoldout>
 					<span class="d-block fw-bold">25</span>
 					<span class="font-size-xs">People bought today!.</span>
 				</TooltipSoldout>
