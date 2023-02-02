@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../src/styles/main.scss'
 import '../src/styles/colors.scss'
+import '../src/styles/svgs-page.scss'
 
 function MyApp({ Component, pageProps }) {
 	return (
