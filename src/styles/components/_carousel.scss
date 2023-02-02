@@ -57,15 +57,15 @@
 			transform: translate3d(0, 0, 0);
 		}
 
-		.carousel-item-prev:not(.carousel-item-right) {
+		.carousel-item-prev:not(.carousel-item-end) {
 			transform: translateX(-100%);
 		}
 
-		.active.carousel-item-left + .carousel-item-next.carousel-item-left {
+		.active.carousel-item-start + .carousel-item-next.carousel-item-start {
 			@extend %transform-negative;
 		}
 
-		.active.carousel-item-right + .carousel-item-prev.carousel-item-right {
+		.active.carousel-item-end + .carousel-item-prev.carousel-item-end {
 			@extend %transform-positive;
 		}
 
@@ -74,19 +74,19 @@
 			flex-flow: column;
 		}
 
-		@include carousel-item-level('.carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)', '.carousel-item:not(.carousel-item--last)', 7) {
+		@include carousel-item-level('.carousel-item.active:not(.carousel-item-end):not(.carousel-item-start)', '.carousel-item:not(.carousel-item--last)', 7) {
 			transition: none;
 		}
 
-		@include carousel-item-level('.carousel-item-next.carousel-item-left', '.carousel-item', 7, false) {
+		@include carousel-item-level('.carousel-item-next.carousel-item-start', '.carousel-item', 7, false) {
 			@extend %transform-negative;
 		}
 
-		@include carousel-item-level('.carousel-item-prev.carousel-item-right', '.carousel-item', 7, false) {
+		@include carousel-item-level('.carousel-item-prev.carousel-item-end', '.carousel-item', 7, false) {
 			@extend %transform-positive;
 		}
 
-		.carousel-item-prev.carousel-item-right {
+		.carousel-item-prev.carousel-item-end {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -130,10 +130,6 @@
 				.carousel-item {
 					&--last {
 						transform: translate3d(100%, 0, 0);
-					}
-
-					.product-card__title {
-						min-height: calc-em(50);
 					}
 				}
 			}
@@ -185,14 +181,14 @@
 			left: 3 * $fragment_width - 100%;
 		}
 
-		.carousel-item-next:not(.carousel-item-left),
-		.carousel-item-right.active {
+		.carousel-item-next:not(.carousel-item-start),
+		.carousel-item-end.active {
 			-webkit-transform: translate3d(33%, 0, 0);
 			transform: translate3d(33%, 0, 0);
 		}
 
-		.carousel-item-prev:not(.carousel-item-right),
-		.carousel-item-left.active {
+		.carousel-item-prev:not(.carousel-item-end),
+		.carousel-item-start.active {
 			-webkit-transform: translate3d(-33%, 0, 0);
 			transform: translate3d(-33%, 0, 0);
 		}
@@ -257,14 +253,14 @@
 				margin-right: -2px;
 			}
 
-			.carousel-item-next:not(.carousel-item-left),
-			.carousel-item-right.active {
+			.carousel-item-next:not(.carousel-item-start),
+			.carousel-item-end.active {
 				-webkit-transform: translate3d(50%, 0, 0);
 				transform: translate3d(50%, 0, 0);
 			}
 
-			.carousel-item-prev:not(.carousel-item-right),
-			.carousel-item-left.active {
+			.carousel-item-prev:not(.carousel-item-end),
+			.carousel-item-start.active {
 				-webkit-transform: translate3d(-50%, 0, 0);
 				transform: translate3d(-50%, 0, 0);
 			}
@@ -378,13 +374,13 @@
 		}
 	}
 
-	&.floating-out-left {
+	&.floating-out-start {
 		@include media-breakpoint-up(lg) {
 			left: -2%;
 		}
 	}
 
-	&.floating-out-right {
+	&.floating-out-end {
 		@include media-breakpoint-up(lg) {
 			right: -2%;
 		}
@@ -399,7 +395,7 @@
 		}
 	}
 	@include media-breakpoint-down(md) {
-		&__item.carousel-item-prev.carousel-item-right {
+		&__item.carousel-item-prev.carousel-item-end {
 			width: calc-em(75);
 		}
 	}
@@ -423,38 +419,38 @@
 			padding-bottom: calc(500% + (30px * 4));
 		}
 
-		.carousel-item-next.carousel-item-left,
-		.carousel-item-prev.carousel-item-right {
+		.carousel-item-next.carousel-item-start,
+		.carousel-item-prev.carousel-item-end {
 			transform: translate3d(0, 0, 0);
 		}
 
 		.carousel-item-next,
-		.active.carousel-item-right {
+		.active.carousel-item-end {
 			transform: translate3d(0, 100% 0);
 		}
 
 		.carousel-item-prev,
-		.active.carousel-item-left {
+		.active.carousel-item-start {
 			transform: translate3d(0, -100%, 0);
 		}
 
-		.carousel-item-prev:not(.carousel-item-right) {
+		.carousel-item-prev:not(.carousel-item-end) {
 			transform: translateY(-100%);
 		}
 
-		.active.carousel-item-left+.carousel-item-next.carousel-item-left {
+		.active.carousel-item-start+.carousel-item-next.carousel-item-start {
 			@extend %transform-negative-y;
 		}
 
-		.active.carousel-item-right+.carousel-item-prev.carousel-item-right {
+		.active.carousel-item-end+.carousel-item-prev.carousel-item-end {
 			@extend %transform-positive-y;
 		}
 
-		@include carousel-item-level('.carousel-item-next.carousel-item-left', '.carousel-item', 6, false) {
+		@include carousel-item-level('.carousel-item-next.carousel-item-start', '.carousel-item', 6, false) {
 			@extend %transform-negative-y;
 		}
 
-		@include carousel-item-level('.carousel-item-prev.carousel-item-right', '.carousel-item', 6, false) {
+		@include carousel-item-level('.carousel-item-prev.carousel-item-end', '.carousel-item', 6, false) {
 			@extend %transform-positive-y;
 		}
 	}

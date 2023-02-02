@@ -2,17 +2,34 @@ import { useState } from "react";
 import { Col, Carousel } from "react-bootstrap";
 import ProductImageCarouselIndicator from "./ProductImageCarouselIndicator";
 
+const ItemThird = (props) => {
+	const isLast = props.itemIndex === props.totalSlide - 1;
+	const itemIndex = props.itemIndex + 1;
+	const itemThirdIndex = itemIndex + 1 > props.totalSlide ? 1 : itemIndex + 1;
+	return (
+		<div className={props.className}>
+			<picture className={`${isLast ? 'with-video' : ''}`}>
+				<source srcSet={`https://via.placeholder.com/1140x1140/EFADBA?text=1140x1140+Slide+${itemIndex}`} media="(min-width: 992px)" />
+				<img src={`https://via.placeholder.com/614x614/EFADBA?text=614x614+Slide+${props.last ? itemThirdIndex : itemIndex}`}
+					alt={`Slide ${props.last ? itemThirdIndex : itemIndex}`}
+					className="w-100"
+					loading={`${props.itemIndex === 0 ? '' : 'lazy'}`} />
+				{/* {props.isLast && (
+					<img className="svg text-white" src="icons/play.svg" replace-to-svg />
+				)} */}
+			</picture>
+		</div>
+	);
+};
+
 const ProductImageCarousel = (props) => {
 	const [index, setIndex] = useState(0);
 	const [touchStart, setTouchStart] = useState(null);
 	const [touchEnd, setTouchEnd] = useState(null);
-	const minSwipeDistance = 50;
+	const minSwipeDistance = 10;
 
 	const handleSelect = (e, index) => {
 		setIndex(index);
-	};
-	const onSlide = () => {
-		console.log('onslide fired');
 	};
 	const onTouchStart = (e) => {
 		setTouchEnd(null);
@@ -24,9 +41,15 @@ const ProductImageCarousel = (props) => {
 		const distance = touchStart - touchEnd;
 		const isLeftSwipe = distance > minSwipeDistance;
 		const isRightSwipe = distance < -minSwipeDistance;
-		if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right');
-		// add your conditional logic here
-		setIndex(index + 1);
+		let carouselIndex = 0;
+		if (isLeftSwipe) {
+			carouselIndex = (props.totalSlide - 1 === index) ? 0 : index + 1;
+			setIndex(carouselIndex);
+		}
+		if (isRightSwipe) {
+			carouselIndex = (index - 1 < 0) ? props.totalSlide - 1 : index - 1;
+			setIndex(carouselIndex);
+		}
 	};
 
 	return (
@@ -39,44 +62,17 @@ const ProductImageCarousel = (props) => {
 					interval={null}
 					controls={false}
 					activeIndex={index}
-					onSlide={onSlide}
 					onTouchStart={onTouchStart}
 					onTouchMove={onTouchMove}
 					onTouchEnd={onTouchEnd}
 					wrap={true}
 					>
-					{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => {
-						const isLast = i === props.totalSlide - 1;
-						const itemIndex = i + 1;
-						return (
+					{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => (
 							<Carousel.Item className="col-12 px-0" key={i}>
-								<div className="item-third">
-									<picture className={`${isLast ? 'with-video' : ''}`}>
-										<source srcSet={`https://via.placeholder.com/1140x1140/EFADBA?text=1140x1140+Slide+${itemIndex}`} media="(min-width: 992px)" />
-										<img src={`https://via.placeholder.com/614x614/EFADBA?text=614x614+Slide+${itemIndex}`}
-											alt={`Slide ${itemIndex}`}
-											className="w-100"
-											loading={`${i === 0 ? '' : 'lazy'}`} />
-										{/* {isLast && (
-											<img className="svg text-white" src="icons/play.svg" />
-										)} */}
-									</picture>
-								</div>
-								<div className="item-third d-lg-none">
-									<picture className={`${isLast ? 'with-video' : ''}`}>
-										<source srcSet={`https://via.placeholder.com/1140x1140/EFADBA?text=1140x1140+Slide+${itemIndex}`} media="(min-width: 992px)" />
-										<img src={`https://via.placeholder.com/614x614/EFADBA?text=614x614+Slide+${itemIndex}`}
-											alt={`Slide ${itemIndex}`}
-											className="w-100"
-											loading={`${i === 0 ? '' : 'lazy'}`} />
-										{/* {isLast && (
-											<img className="svg text-white" src="icons/play.svg" replace-to-svg />
-										)} */}
-									</picture>
-								</div>
+								<ItemThird className="item-third" itemIndex={i} totalSlide={props.totalSlide} last={false} />
+								<ItemThird className="item-third d-lg-none" itemIndex={i} totalSlide={props.totalSlide} last={true} />
 							</Carousel.Item>
-						);
-					})}
+						))}
 				</Carousel>
 				<picture className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1 me-0 mt-2 me-lg-1 mt-lg-1">
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
