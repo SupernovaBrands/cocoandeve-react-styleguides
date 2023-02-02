@@ -1,4 +1,8 @@
 .product-image-carousel {
+	&__container {
+		position: relative;
+	}
+
 	@include media-breakpoint-up(lg) {
 		&__container, &__indicator {
 			position: sticky;

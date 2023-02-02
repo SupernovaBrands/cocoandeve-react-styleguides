@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Carousel } from "react-bootstrap";
-import ProductImageCarouselIndicator from "./ProductImageCarouselIndicator";
+import ProductImageIndicator from "./ProductImageIndicator";
+import PlayButton from '../../src/images/icons/play.svg';
 
 const ItemThird = (props) => {
 	const isLast = props.itemIndex === props.totalSlide - 1;
@@ -8,15 +9,15 @@ const ItemThird = (props) => {
 	const itemThirdIndex = itemIndex + 1 > props.totalSlide ? 1 : itemIndex + 1;
 	return (
 		<div className={props.className}>
-			<picture className={`${isLast ? 'with-video' : ''}`}>
+			<picture className={`${isLast ? 'with-video position-relative' : ''}`}>
 				<source srcSet={`https://via.placeholder.com/1140x1140/EFADBA?text=1140x1140+Slide+${itemIndex}`} media="(min-width: 992px)" />
 				<img src={`https://via.placeholder.com/614x614/EFADBA?text=614x614+Slide+${props.last ? itemThirdIndex : itemIndex}`}
 					alt={`Slide ${props.last ? itemThirdIndex : itemIndex}`}
 					className="w-100"
 					loading={`${props.itemIndex === 0 ? '' : 'lazy'}`} />
-				{/* {props.isLast && (
-					<img className="svg text-white" src="icons/play.svg" replace-to-svg />
-				)} */}
+				{props.isLast && (
+					<PlayButton className="svg text-white" />
+				)}
 			</picture>
 		</div>
 	);
@@ -54,7 +55,7 @@ const ProductImageCarousel = (props) => {
 
 	return (
 		<>
-			<Col xs={12} lg={6} className="product-image-carousel__container position-relative order-lg-2">
+			<Col xs={12} lg={6} className="product-image-carousel__container position-md-relative order-lg-2">
 				<Carousel as="figure"
 					id={`product-image-carousel${props.num ? props.num : ''}`}
 					className="product-image-carousel carousel--product-preview mb-1 mb-lg-0 no-gutters__in-container"
@@ -67,7 +68,7 @@ const ProductImageCarousel = (props) => {
 					onTouchEnd={onTouchEnd}
 					wrap={true}
 					>
-					{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => (
+						{props.totalSlide > 0 && [...Array(props.totalSlide)].map((e, i) => (
 							<Carousel.Item className="col-12 px-0" key={i}>
 								<ItemThird className="item-third" itemIndex={i} totalSlide={props.totalSlide} last={false} />
 								<ItemThird className="item-third d-lg-none" itemIndex={i} totalSlide={props.totalSlide} last={true} />
@@ -78,7 +79,7 @@ const ProductImageCarousel = (props) => {
 					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
 				</picture>
 			</Col>
-			<ProductImageCarouselIndicator totalSlide={props.totalSlide} handleSelect={handleSelect} selectedIndex={index} />
+			<ProductImageIndicator totalSlide={props.totalSlide} handleSelect={handleSelect} selectedIndex={index} />
 		</>
 	);
 };
