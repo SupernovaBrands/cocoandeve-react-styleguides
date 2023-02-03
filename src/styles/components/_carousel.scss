@@ -51,6 +51,11 @@
 			margin-right: 0;
 		}
 
+		.carousel-inner {
+			display: flex;
+			flex-wrap: nowrap;
+		}
+
 		.carousel-item-next,
 		.carousel-item-prev {
 			position: relative;
@@ -119,6 +124,13 @@
 			overflow: visible;
 			@include make-carousel-centered(9, $grid-columns);
 
+			@include media-breakpoint-down(md) {
+				.carousel-item {
+					padding-left: $grid-gutter-width / 2;
+					padding-right: $grid-gutter-width / 2;
+				}
+			}
+
 			@include media-breakpoint-up(md) {
 
 				@include make-carousel-centered(3, $grid-columns);
@@ -142,6 +154,26 @@
 				@include media-breakpoint-up(lg) {
 					transform: translateX(-10.5%);
 				}
+			}
+		}
+	}
+
+	&--centered__custom {
+		.carousel-inner {
+			@include make-carousel-centered(27, $grid-columns);
+			@include media-breakpoint-up(md) {
+				@include make-carousel-centered(9, $grid-columns);
+			}
+		}
+
+		.carousel-item {
+			&-next {
+				transition: transform .6s ease-in-out !important;
+				transform: translate3d(-100%, 0, 0) !important;
+			}
+			&-end {
+				transition: transform .6s ease-in-out !important;
+				transform: translate3d(100%, 0, 0) !important;
 			}
 		}
 	}
@@ -281,8 +313,12 @@
 }
 
 .carousel-indicators {
+	[data-bs-target] {
+		border-radius: 50%;
+	}
+
 	&--primary {
-		li {
+		[data-bs-target] {
 			background-color: $primary;
 		}
 	}
@@ -295,7 +331,7 @@
 
 	&--right {
 		justify-content: flex-end;
-		li {
+		[data-bs-target] {
 			&:not(.active) {
 				background: transparent;
 				opacity: 1;

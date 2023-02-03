@@ -1,6 +1,7 @@
 // Grid
 $grid-gutter-width: 15px;
 $grid-gutter-width-lg: 30px;
+$container-padding-x: $grid-gutter-width;
 
 $grid-breakpoints: (
   xs: 0,
@@ -80,6 +81,9 @@ $gray-700: #7B7B7B;
 $gray-900: $body-color;
 $text-muted: $gray-500;
 $border-color: $gray-600;
+
+$link-color: $primary;
+$link-hover-color: darken($link-color, 15%);
 
 $shade-colors: (
   'dark': #885757,
@@ -162,6 +166,7 @@ $carousel-control-prev-icon-bg: none;
 $carousel-control-next-icon-bg: none;
 $carousel-indicator-active-bg: white;
 $carousel-control-width: 10%;
+$carousel-indicator-hit-area-height: 0;
 
 // Upsell
 $upsell-padding-y: calc-em(10);
