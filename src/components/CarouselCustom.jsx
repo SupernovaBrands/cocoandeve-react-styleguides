@@ -51,7 +51,7 @@ const CarouselCustom = (props) => {
 				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''}`}>
 				<div className="carousel-inner d-flex flex-nowrap">
 					{props.slideNumber > 0 && primaryList.map((item, i) => (
-						<div key={i} className={`${props.className} carousel-item ${activeIndex === item.index ? 'active ' : ''} ${`item-${item.index} `} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+						<div key={i} className={`${props.className} carousel-item ${activeIndex === item.index ? 'active ' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
 							<img className="img-fluid" src={`//via.placeholder.com/600x400?text=${item.label}`} alt={`slide ${item.index}`}/>
 						</div>
 					))}
