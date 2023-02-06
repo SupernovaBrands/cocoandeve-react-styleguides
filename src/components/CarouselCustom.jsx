@@ -20,6 +20,7 @@ const CarouselCustom = (props) => {
 	const [primaryList, setPrimaryList] = useState(carouselItems);
 
 	const carouselNext = () => {
+		console.log('next');
 		const itemsPerSlide = props.slideNumber ? props.slideNumber : 3;
 		const totalItems = itemsPerSlide * 2;
 		const firstElem = primaryList[0];
@@ -33,6 +34,7 @@ const CarouselCustom = (props) => {
 		}, 600);
 	};
 	const carouselPrev = () => {
+		console.log('prev');
 		setItemMovingPrev(true);
 		setTimeout(() => {
 			const state = activeIndex <= 0 ? totalItems - 1 : activeIndex - 1;
@@ -60,7 +62,7 @@ const CarouselCustom = (props) => {
 				<>
 					<button
 					onClick={carouselPrev}
-					className="carousel-control carousel-control-prev carousel-control--background carousel-control--loop" href="#carouselLoop4" role="button" data-slide="prev">
+					className="carousel-control carousel-control-prev carousel-control--background carousel-control--loop w-auto">
 						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
 							<Prev className="svg" />
 						</span>
@@ -68,7 +70,7 @@ const CarouselCustom = (props) => {
 					</button>
 					<button
 						onClick={carouselNext}
-						className="carousel-control carousel-control-next carousel-control--background carousel-control--loop" href="#carouselLoop4" role="button" data-slide="next">
+						className="carousel-control carousel-control-next carousel-control--background carousel-control--loop w-auto">
 						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
 							<Next className="svg" />
 						</span>
