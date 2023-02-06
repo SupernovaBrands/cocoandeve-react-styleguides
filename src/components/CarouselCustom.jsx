@@ -43,10 +43,10 @@ const CarouselCustom = (props) => {
 		}, 600);
 	};
 	return (
-		<div className="position-relative">
+		<div className={`position-relative ${props.useRow ? 'row' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''}`}>
 				<div className="carousel-inner d-flex flex-nowrap">
 					{props.slideNumber > 0 && primaryList.map((item, i) => (
 						<div key={i} className={`${props.className} carousel-item ${activeIndex === item.index ? 'active ' : ''} ${`item-${item.index} `} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
