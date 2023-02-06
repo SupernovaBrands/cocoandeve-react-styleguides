@@ -22,7 +22,6 @@ const CarouselCustom = (props) => {
 	const [primaryList, setPrimaryList] = useState(carouselItems);
 
 	const carouselNext = () => {
-		console.log('next');
 		const itemsPerSlide = props.slideNumber ? props.slideNumber : 3;
 		const totalItems = itemsPerSlide * 2;
 		const firstElem = primaryList[0];
@@ -36,7 +35,6 @@ const CarouselCustom = (props) => {
 		}, 600);
 	};
 	const carouselPrev = () => {
-		console.log('prev');
 		setItemMovingPrev(true);
 		setTimeout(() => {
 			const state = activeIndex <= 0 ? totalItems - 1 : activeIndex - 1;
