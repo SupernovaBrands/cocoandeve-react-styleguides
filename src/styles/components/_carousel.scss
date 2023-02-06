@@ -468,6 +468,7 @@
 		.carousel-inner {
 			height: 0;
 			padding-bottom: calc(500% + (30px * 4));
+			flex-direction: column;
 		}
 
 		.carousel-item-next.carousel-item-start,
