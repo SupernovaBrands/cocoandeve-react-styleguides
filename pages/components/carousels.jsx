@@ -6,10 +6,11 @@ export default function Carousels() {
 	let carouselItems = [];
 	for (let i = 0; i < 3; i++) {
 		carouselItems.push({
+			img: 'https://via.placeholder.com/300x100',
 			index: i,
 			label: `Slide ${i + 1}`
 		});
-	}
+	};
 	return (
 		<Container className="pb-4">
 			<h1 className="mb-3">CAROUSEL WITH BULLETS</h1>

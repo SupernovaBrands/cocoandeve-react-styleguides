@@ -18,16 +18,16 @@ const CarouselFull = (props) => {
 		setIndex(idx);
 	};
 	return (
-		<div className="position-relative">
-			<ol className={`carousel-indicators ${props.indicatorClass}`}>
+		<div className={`position-relative ${props.parentClass ? props.parentClass : ''}`}>
+			<ol className={`carousel-indicators ${props.indicatorClass ? props.indicatorClass : ''}`}>
 				{props.items.map((item, i) => (
 					<li key={i} onClick={carouselHandle} data-bs-target={`#${props.id}`} data-bs-slide-to={item.index} className={`rounded-circle border border-white ${i === index ? 'active' : ''} ${!props.indicatorBorder ? 'border-0' : ''}`}></li>
 				))}
 			</ol>
-			<Carousel id={props.id} activeIndex={index} controls={false} indicators={false} interval={null}>
+			<Carousel as={props.as} id={props.id} activeIndex={index} controls={false} indicators={false} interval={null} className={props.className}>
 				{props.items.map((item, i) => (
 					<Carousel.Item key={i}>
-						<img className="d-block w-100" src="https://via.placeholder.com/300x100" alt={item.label}></img>
+						<img className="d-block w-100" src={item.img} alt={item.label}></img>
 					</Carousel.Item>
 				))}
 			</Carousel>
