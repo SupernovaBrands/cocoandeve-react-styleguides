@@ -58,47 +58,22 @@ const CarouselCustom = (props) => {
 				</div>
 			</div>
 
-			{props.roundedControl && (
-				<>
-					<button
-					onClick={carouselPrev}
-					className="carousel-control carousel-control-prev carousel-control--background carousel-control--loop w-auto">
-						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-							<Prev className="svg" />
-						</span>
-						<span className="visually-hidden">Previous</span>
-					</button>
-					<button
-						onClick={carouselNext}
-						className="carousel-control carousel-control-next carousel-control--background carousel-control--loop w-auto">
-						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-							<Next className="svg" />
-						</span>
-						<span className="visually-hidden">Next</span>
-					</button>
-				</>
-			)}
-
-			{!props.roundedControl && (
-				<>
-					<button
-						onClick={carouselPrev}
-						className="carousel-control carousel-control-prev carousel-control--background floating-out-start justify-content-start text-primary">
-						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-							<Prev className="svg" />
-						</span>
-						<span className="visually-hidden">Previous</span>
-					</button>
-					<button
-						onClick={carouselNext}
-						className="carousel-control carousel-control-next carousel-control--background floating-out-end justify-content-end text-primary">
-						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-							<Next className="svg" />
-						</span>
-						<span className="visually-hidden">Next</span>
-					</button>
-				</>
-			)}
+			<button
+				onClick={carouselPrev}
+				className={`carousel-control carousel-control-prev carousel-control--background ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-start justify-content-start text-primary'}`}>
+				<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+					<Prev className="svg" />
+				</span>
+				<span className="visually-hidden">Previous</span>
+			</button>
+			<button
+				onClick={carouselNext}
+				className={`carousel-control carousel-control-next carousel-control--background ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-end justify-content-end text-primary'}`}>
+				<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+					<Next className="svg" />
+				</span>
+				<span className="visually-hidden">Next</span>
+			</button>
 		</div>
 	);
 };
