@@ -12,9 +12,11 @@ const CarouselCustom = (props) => {
 
 	let carouselItems = [];
 	for (let i = 0; i < totalItems; i++) {
+		const idx = i + 1;
+		const labelIndex = idx > props.slideNumber ? idx - props.slideNumber : idx;
 		carouselItems.push({
 			index: i,
-			label: `Slide ${i + 1}`
+			label: `Slide ${labelIndex}`
 		});
 	}
 	const [primaryList, setPrimaryList] = useState(carouselItems);
