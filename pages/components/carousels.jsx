@@ -25,18 +25,20 @@ export default function Carousels() {
 				</Carousel.Item>
 			</Carousel>
 			<h1 className="mb-3">CAROUSEL WITH RIGHT BULLETS INDICATORS</h1>
-			<CarouselFull items={carouselItems} indicatorClass="carousel-indicators--right" indicatorBorder={true} />
+			<CarouselFull id="indicatorRight" items={carouselItems} indicatorClass="carousel-indicators--right" indicatorBorder={true} />
 
 			<h1 className="mt-5">CAROUSEL WITH BULLETS PRIMARY COLOR</h1>
-			<CarouselFull items={carouselItems} indicatorClass="carousel-indicators--primary" indicatorBorder={false} />
+			<CarouselFull id="indicatorPrimary" items={carouselItems} indicatorClass="carousel-indicators--primary" indicatorBorder={false} />
 
 			<h1 className="mt-5">CAROUSEL WITH BULLETS BODY COLOR</h1>
-			<CarouselFull items={carouselItems} indicatorClass="carousel-indicators--body" indicatorBorder={false} />
+			<CarouselFull id="indicatorBody" items={carouselItems} indicatorClass="carousel-indicators--body" indicatorBorder={false} />
 
 			<h1 className="mt-5">CAROUSEL WITH CONTROLS</h1>
-			<CarouselFull items={carouselItems} indicatorBorder={false} customArrows={true} />
+			<CarouselFull id="indicatorAndControls" items={carouselItems} indicatorBorder={false} customArrows={true} />
 
 			<h1 className="mt-5">CAROUSEL WITH GROUPED CONTROLS</h1>
+			<CarouselFull id="groupedControls" items={carouselItems} indicatorBorder={false} customArrows={true} groupedControls={true} />
+
 			<h1 className="mt-5">CAROUSEL LOOP 3 ITEMS</h1>
 			<CarouselCustom id="loop1" slideNumber={4} className="col-12 col-md-4" roundedControl={true} colLgGrid={3} />
 

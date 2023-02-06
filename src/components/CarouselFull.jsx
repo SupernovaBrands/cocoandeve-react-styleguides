@@ -21,10 +21,10 @@ const CarouselFull = (props) => {
 		<div className="position-relative">
 			<ol className={`carousel-indicators ${props.indicatorClass}`}>
 				{props.items.map((item, i) => (
-					<li key={i} onClick={carouselHandle} data-bs-target="#carouselWithRightBullets" data-bs-slide-to={item.index} className={`rounded-circle border border-white ${i === index ? 'active' : ''} ${!props.indicatorBorder ? 'border-0' : ''}`}></li>
+					<li key={i} onClick={carouselHandle} data-bs-target={`#${props.id}`} data-bs-slide-to={item.index} className={`rounded-circle border border-white ${i === index ? 'active' : ''} ${!props.indicatorBorder ? 'border-0' : ''}`}></li>
 				))}
 			</ol>
-			<Carousel activeIndex={index} controls={false} indicators={false} interval={null}>
+			<Carousel id={props.id} activeIndex={index} controls={false} indicators={false} interval={null}>
 				{props.items.map((item, i) => (
 					<Carousel.Item key={i}>
 						<img className="d-block w-100" src="https://via.placeholder.com/300x100" alt={item.label}></img>
@@ -33,14 +33,14 @@ const CarouselFull = (props) => {
 			</Carousel>
 			{props.customArrows && (
 				<>
-					<button onClick={carouselControlHandlePrev} className="carousel-control carousel-control-prev" data-bs-slide="prev">
-						<span className="carousel-control-prev-icon justify-content-center align-items-center" aria-hidden="true">
+					<button onClick={carouselControlHandlePrev} className={`carousel-control carousel-control-prev ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="prev">
+						<span className={`carousel-control-prev-icon ${props.groupedControls ? 'd-flex' : ''} justify-content-center align-items-center`} aria-hidden="true">
 							<Prev className="svg" />
 						</span>
 						<span className="visually-hidden">Previous</span>
 					</button>
-					<button onClick={carouselControlHandleNext} className="carousel-control carousel-control-next" data-bs-slide="next">
-						<span className="carousel-control-next-icon justify-content-center align-items-center" aria-hidden="true">
+					<button onClick={carouselControlHandleNext} className={`carousel-control carousel-control-next ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="next">
+						<span className={`carousel-control-next-icon ${props.groupedControls ? 'd-flex' : ''} justify-content-center align-items-center`} aria-hidden="true">
 							<Next className="svg" />
 						</span>
 						<span className="visually-hidden">Next</span>
