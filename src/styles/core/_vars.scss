@@ -84,6 +84,8 @@ $border-color: $gray-600;
 
 $link-color: $primary;
 $link-hover-color: darken($link-color, 15%);
+$link-decoration: none;
+$link-hover-decoration: underline;
 
 $shade-colors: (
   'dark': #885757,
