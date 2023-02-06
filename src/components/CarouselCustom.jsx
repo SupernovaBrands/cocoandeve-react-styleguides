@@ -45,8 +45,8 @@ const CarouselCustom = (props) => {
 	return (
 		<div className="position-relative">
 			<div
-				id="carouselLoopCentered1"
-				className={`carousel--loop carousel--swipe ${props.centered ? 'carousel--centered carousel--centered__custom' : ''}`}>
+				id={`carouselLoopCentered${props.id}`}
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''}`}>
 				<div className="carousel-inner d-flex flex-nowrap">
 					{props.slideNumber > 0 && primaryList.map((item, i) => (
 						<div key={i} className={`${props.className} carousel-item ${activeIndex === item.index ? 'active ' : ''} ${`item-${item.index} `} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
@@ -56,22 +56,47 @@ const CarouselCustom = (props) => {
 				</div>
 			</div>
 
-			<button
-				onClick={carouselPrev}
-				className="carousel-control carousel-control-prev carousel-control--background floating-out-start justify-content-start text-primary">
-				<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Prev className="svg" />
-				</span>
-				<span className="visually-hidden">Previous</span>
-			</button>
-			<button
-				onClick={carouselNext}
-				className="carousel-control carousel-control-next carousel-control--background floating-out-end justify-content-end text-primary">
-				<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Next className="svg" />
-				</span>
-				<span className="visually-hidden">Next</span>
-			</button>
+			{props.roundedControl && (
+				<>
+					<button
+					onClick={carouselPrev}
+					className="carousel-control carousel-control-prev carousel-control--background carousel-control--loop" href="#carouselLoop4" role="button" data-slide="prev">
+						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Prev className="svg" />
+						</span>
+						<span className="visually-hidden">Previous</span>
+					</button>
+					<button
+						onClick={carouselNext}
+						className="carousel-control carousel-control-next carousel-control--background carousel-control--loop" href="#carouselLoop4" role="button" data-slide="next">
+						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Next className="svg" />
+						</span>
+						<span className="visually-hidden">Next</span>
+					</button>
+				</>
+			)}
+
+			{!props.roundedControl && (
+				<>
+					<button
+						onClick={carouselPrev}
+						className="carousel-control carousel-control-prev carousel-control--background floating-out-start justify-content-start text-primary">
+						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Prev className="svg" />
+						</span>
+						<span className="visually-hidden">Previous</span>
+					</button>
+					<button
+						onClick={carouselNext}
+						className="carousel-control carousel-control-next carousel-control--background floating-out-end justify-content-end text-primary">
+						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Next className="svg" />
+						</span>
+						<span className="visually-hidden">Next</span>
+					</button>
+				</>
+			)}
 		</div>
 	);
 };

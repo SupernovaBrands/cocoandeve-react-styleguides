@@ -176,6 +176,21 @@
 				transform: translate3d(100%, 0, 0) !important;
 			}
 		}
+
+		&-nocenter-3 {
+			.carousel-inner {
+				transform: translateX(-100%);;
+			}
+		}
+
+		&-nocenter-4 {
+			.carousel-inner {
+				transform: translateX(-100%);;
+				@include media-breakpoint-up(md) {
+					transform: translateX(-50%);
+				}
+			}
+		}
 	}
 
 	&--centered-mobile {
