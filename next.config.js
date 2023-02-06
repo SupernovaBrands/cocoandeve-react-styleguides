@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS || false
-let assetPrefix = ''
+let assetPrefix = '_'
 let basePath = '/cocoandeve-react-styleguides'
 
 if (isGithubActions) {
