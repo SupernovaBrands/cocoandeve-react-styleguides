@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS || false
+const isProd = process.env.NODE_ENV === 'production'
 let assetPrefix = '_'
 let basePath = '/'
 
-if (isGithubActions) {
+if (isProd) {
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
 
   assetPrefix = `/${repo}/`
@@ -31,7 +32,7 @@ const ghPages =  {
   },
 }
 
-if (isGithubActions) {
+if (isProd) {
 	module.exports = {...nextConfig, ...ghPages};
 } else {
 	module.exports = nextConfig;
