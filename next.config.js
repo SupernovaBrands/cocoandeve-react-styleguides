@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-console.log('helo', process.env);
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 let assetPrefix = '_'
 let basePath = '/'
@@ -34,6 +33,7 @@ const ghPages =  {
 
 if (isGithubActions) {
 	module.exports = {...nextConfig, ...ghPages};
+	console.log('helo', {...nextConfig, ...ghPages});
 } else {
 	module.exports = nextConfig;
 }
