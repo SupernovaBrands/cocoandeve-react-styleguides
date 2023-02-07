@@ -28,6 +28,12 @@ export default function Home() {
 					<a href="./components/vide-cards">Vide Cards</a>
 					<a href="./components/video-loop-gif">Video Loop Gif</a>
 				</div>
+
+				<div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
+					<h2>compounds</h2>
+					<a href="./compounds/image-with-texts">Image With Text</a>
+					<a href="./compounds/post-cards">Post Card</a>
+				</div>
 			</div>
 		</div>
 	);

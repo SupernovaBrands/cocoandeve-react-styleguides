@@ -1,8 +1,8 @@
-import { Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 const ImageWithText = (props) => {
 	return (
-		<figure className={`imagewtext row position-relative align-items-center mb-lg-2 mt-5 ${props.reverse ? 'flex-row-reverse' : ''}`}>
+		<Row as="figure" className={`imagewtext mobile-wrapper position-relative align-items-center mb-lg-2 mt-5 ${props.reverse ? 'flex-row-reverse' : ''}`}>
 			<Col xs={12} lg={8} className="order-lg-last">
 				<div className="no-gutters__in-container">
 					<picture>
@@ -16,7 +16,7 @@ const ImageWithText = (props) => {
 					{props.children}
 				</div>
 			</Col>
-		</figure>
+		</Row>
 	);
 };
 
