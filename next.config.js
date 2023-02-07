@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS || false
-let assetPrefix = ''
-let basePath = '/cocoandeve-react-styleguides'
+let assetPrefix = '_'
+let basePath = '/'
 
 if (isGithubActions) {
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')

@@ -41,7 +41,7 @@ const PostCards = () => {
 			<h1>POST CARDS GRID</h1>
 			<ul className="row mb-5 list-unstyled">
 				{postData.map((post) => (
-					<li className="col-12 col-lg-4">
+					<li key={post.index} className="col-12 col-lg-4">
 						<PostCard src="https://via.placeholder.com/375x190.jpg/EFADBA" className="mb-4 mb-lg-3">
 							<time>{post.time}</time>
 							<h3 className="mt-1 mb-1">{post.title}</h3>
@@ -54,7 +54,7 @@ const PostCards = () => {
 			<h1>POST CARDS GRID NO IMAGE</h1>
 			<ul className="row mb-5 list-unstyled">
 				{postData.map((post) => (
-					<li className="col-12 col-lg-4">
+					<li key={post.index} className="col-12 col-lg-4">
 						<PostCard>
 							<time>{post.time}</time>
 							<h3 className="mt-1 mb-1">{post.title}</h3>
@@ -74,7 +74,7 @@ const PostCards = () => {
 					className="carousel--fixed-height mb-2"
 					parentClass="no-gutters__in-container" />
 				<time>04 May, 2020</time>
-                <h3 class="mt-1 mb-1">5 things you’re doing wrong with your hair care routine</h3>
+                <h3 className="mt-1 mb-1">5 things you’re doing wrong with your hair care routine</h3>
                 <p>Give these myths the brush off for a healthy scalp & shiny hair!</p>
 			</PostCard>
 

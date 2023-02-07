@@ -6,7 +6,7 @@ export default function Home() {
 			<h1 className="py-2">Coco&Eve Styleguide</h1>
 			<div className="row mt-3">
 				<div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
-					<h2>Core & components</h2>
+					<h2>components</h2>
 					<a href="/components/accordions">Accordions</a>
 					<a href="/components/announcement-bar">Announcement Bar</a>
 					<a href="/components/badge">Badge</a>
@@ -25,7 +25,6 @@ export default function Home() {
 					<a href="/components/svgs">Svgs</a>
 					<a href="/components/tabs">Tabs</a>
 					<a href="/components/tooltips">Tooltips</a>
-					<a href="/components/typography">Typography</a>
 					<a href="/components/vide-cards">Vide Cards</a>
 					<a href="/components/video-loop-gif">Video Loop Gif</a>
 				</div>
