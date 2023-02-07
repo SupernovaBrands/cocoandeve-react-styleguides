@@ -9,7 +9,7 @@ export default function Home() {
 					<h2>components</h2>
 					<a href="/cocoandeve-react-styleguides/components/accordions">Accordions</a>
 					<a href="/cocoandeve-react-styleguides/components/announcement-bar">Announcement Bar</a>
-					<a href="/cocoandeve-react-styleguides/components/badge">Badge</a>
+					<a href="/components/badge">Badge</a>
 					<a href="/cocoandeve-react-styleguides/components/breadcrumbs">Breadcrumbs</a>
 					<a href="/cocoandeve-react-styleguides/components/bullets">Bullets</a>
 					<a href="/cocoandeve-react-styleguides/components/buttons">Buttons</a>
