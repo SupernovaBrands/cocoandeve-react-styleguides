@@ -33,7 +33,6 @@ const ghPages =  {
 
 if (isGithubActions) {
 	module.exports = {...nextConfig, ...ghPages};
-	console.log('helo', {...nextConfig, ...ghPages});
 } else {
 	module.exports = nextConfig;
 }

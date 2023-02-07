@@ -81,7 +81,7 @@ const ProductImageCarousel = (props) => {
 					<span className="product-card__image-tip position-absolute text-white p-1 w-100 text-center">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
 				</div>
 				<BadgeCircleImage className="me-0 mt-2 me-lg-1 mt-lg-1">
-					<img alt="25% Off" className="w-100" src="/badge-25.svg" />
+					<img alt="25% Off" className="w-100" src="../badge-25.svg" />
 				</BadgeCircleImage>
 				<TooltipSoldout>
 					<span className="d-block fw-bold">25</span>
