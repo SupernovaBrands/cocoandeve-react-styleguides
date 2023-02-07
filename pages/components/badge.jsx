@@ -15,7 +15,7 @@ export default function Badge() {
 			<Row>
 				<Col xs={9} lg={3} className="pt-4 position-relative">
 					<BadgeCircleImage>
-						<img alt="25% Off" className="w-100" src="/badge-25.svg" />
+						<img alt="25% Off" className="w-100" src="../badge-25.svg" />
 					</BadgeCircleImage>
 				</Col>
 			</Row>
