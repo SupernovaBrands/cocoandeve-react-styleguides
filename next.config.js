@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+console.log('helo', process.env);
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 let assetPrefix = '_'
 let basePath = '/'
