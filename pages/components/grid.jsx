@@ -13,7 +13,7 @@ export default function Grid() {
 	}`;
 	return (
 		<div className="mobile-wrapper">
-			<style>{cssGrid}</style>
+			<style jsx>{cssGrid}</style>
 			<Container className="mt-4">
 				<Row>
 					<Col></Col>
