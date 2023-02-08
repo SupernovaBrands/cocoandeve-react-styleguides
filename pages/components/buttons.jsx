@@ -13,6 +13,30 @@ export default function Buttons() {
 			<Button className="mb-2" variant="outline-primary" size="lg">Button</Button>
 			<br />
 			<Button className="mb-2" size="lg"><span className="spinner-border spinner-border-sm" /></Button>
+			<br />
+			<div className="d-grid gap-2">
+				<Button variant="primary">
+					Button
+				</Button>
+			</div>
+			<br />
+			<div className="d-grid gap-2">
+				<Button variant="outline-primary">
+					Button
+				</Button>
+			</div>
+			<br />
+			<div className="d-grid gap-2">
+				<Button variant="primary" size="lg">
+					Button
+				</Button>
+			</div>
+			<br />
+			<div className="d-grid gap-2">
+				<Button variant="outline-primary" size="lg">
+					Button
+				</Button>
+			</div>
 		</div>
 	);
 }

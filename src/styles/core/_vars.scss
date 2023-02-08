@@ -201,7 +201,7 @@ $alert-padding-x: 1.25em;
 // Interactions
 $hover-transition-timing: 0.15s ease-in-out;
 
-// accordion
+// Card
 $card-border-radius: 0;
 $card-border-color: $gray-500;
 $card-cap-bg: transparent;
@@ -281,10 +281,16 @@ $popover-body-color: #fff;
 // Table
 $table-border-color: $gray-500;
 
+$accordion-icon-width: $font-size-xs;
 $accordion-button-icon:         url("data:image/svg+xml,<svg role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6' class='svg font-size-xs chevron-down'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'></path></svg>");
 $accordion-button-active-icon:  url("data:image/svg+xml,<svg role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6' class='svg font-size-xs chevron-down'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'></path></svg>");
 $accordion-button-active-bg:  #fff;
 $accordion-button-active-color: $body-color;
 $accordion-border-radius: 0;
+$accordion-button-focus-box-shadow: $accordion-border-color;
+$accordion-button-focus-border-color: $accordion-border-color;
+$accordion-button-padding-x: 0;
+$accordion-button-padding-y: map-get($spacers, 1);
+
 
 $dropdown-link-active-bg: $primary;

@@ -3,8 +3,10 @@
     border-left: none;
 }
 
-.accordion-button {
-    &:focus, &:active {
+.accordion-button:not(.collapsed) {
+    &:focus,
+    &:active {
         box-shadow: none;
+        border-bottom: $accordion-border-width solid $border-color;
     }
 }
