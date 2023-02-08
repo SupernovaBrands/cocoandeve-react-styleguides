@@ -33,6 +33,9 @@ export default function Home() {
 					<h2>compounds</h2>
 					<a href="./compounds/image-with-texts">Image With Text</a>
 					<a href="./compounds/post-cards">Post Card</a>
+					<a href="./compounds/newsletter-form">Newsletter Form</a>
+					<a href="./compounds/product-card">Product Card</a>
+					<a href="./compounds/waitlist-form">Waitlist Form</a>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 447 207">
+  <text
+    id="badge-tex-new"
+    transform="translate(0 155)"
+    fill="#fff"
+    font-size="207"
+    font-family="sofia-pro"
+    class="font-weight-bold"
+  >
+    <tspan x="0" y="0">new!</tspan>
+  </text>
+</svg>
