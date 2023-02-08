@@ -1,3 +1,21 @@
+.custom-control-label {
+  &::before {
+    left: -5.625em;
+    border: 0;
+    height: $custom-switch-indicator-size-height;
+    background-color: $gray-600;
+    width: $custom-switch-width;
+  }
+
+  &::after {
+    width: $custom-switch-indicator-size-height;
+    height: $custom-switch-indicator-size-height;
+    top: 0;
+    left: -($custom-switch-width + $custom-control-gutter);
+    border: 1px solid $custom-control-indicator-checked-disabled-bg;
+  }
+}
+
 .custom-switch {
     padding-left: $custom-switch-width;
     height: $custom-switch-indicator-size-height;
@@ -35,22 +53,6 @@
         top: 0;
         left: -5.625em;
         border: 1px solid #f5f5f5;
-      }
-
-      &::before {
-        left: -5.625em;
-        border: 0;
-        height: $custom-switch-indicator-size-height;
-        background-color: $gray-600;
-        width: $custom-switch-width;
-      }
-  
-      &::after {
-        width: $custom-switch-indicator-size-height;
-        height: $custom-switch-indicator-size-height;
-        top: 0;
-        left: -($custom-switch-width + $custom-control-gutter);
-        border: 1px solid $custom-control-indicator-checked-disabled-bg;
       }
   
       &::before,

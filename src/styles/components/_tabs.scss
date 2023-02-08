@@ -37,10 +37,10 @@
   
     &--product {
         .nav-link {
-            min-width: calc-em(120);
+            width: calc-em(120) !important;
     
             @include media-breakpoint-down(xs) {
-                min-width: calc-em(90);
+                width: calc-em(90);
             }
         }
     }

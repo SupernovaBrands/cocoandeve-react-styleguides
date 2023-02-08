@@ -141,6 +141,7 @@ $nav-link-padding-y-lg: calc-em(24/2);
 $nav-link-padding-x-lg: calc-em(24/2);
 
 // Buttons
+$btn-font-size: 1em;
 $btn-hover-darken: 23.5%;
 $btn-font-weight: 700;
 $btn-padding-y: calc-em(9);
@@ -285,3 +286,5 @@ $accordion-button-active-icon:  url("data:image/svg+xml,<svg role='presentation'
 $accordion-button-active-bg:  #fff;
 $accordion-button-active-color: $body-color;
 $accordion-border-radius: 0;
+
+$dropdown-link-active-bg: $primary;
