@@ -1,5 +1,6 @@
 
 import BrandLogo from '@/components/CELogo';
+import Cart from '../../src/images/icons/cart.svg';
 import { Container } from "react-bootstrap";
 
 const Logo = (props) => {
@@ -20,8 +21,8 @@ const Logo = (props) => {
                 <h3>Logo with menu</h3>
             </div>
             <header class="navbar navbar-expand-lg flex-lg-wrap">
-                <nav class="container">
-                    <button class="navbar-toggler col-2" type="button">
+                <nav class="container px-0 px-lg-g">
+                    <button class="navbar-toggler col-2 border-0" type="button">
                         <span class="d-block"></span>
                     </button>
 
@@ -46,7 +47,7 @@ const Logo = (props) => {
                     </ul>
 
                     <a href="#" class="nav-link col-2 d-flex justify-content-end px-0 d-lg-none font-size-lg">
-                        <img class="svg font-size-lg mr-25" src="icons/cart.svg" replace-to-svg />
+                        <Cart className="svg font-size-lg mr-25" />
                     </a>
                 </nav>
             </header>
