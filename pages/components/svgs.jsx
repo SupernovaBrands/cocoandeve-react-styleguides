@@ -30,6 +30,7 @@ import Heart from '../../src/images/icons/heart.svg';
 import Help from '../../src/images/icons/help.svg';
 import Instagram from '../../src/images/icons/instagram.svg';
 import Loading from '../../src/images/icons/loading.svg';
+import LinkedInSquare from '../../src/images/icons/linkedin-square.svg';
 import MineralOil from '../../src/images/icons/mineral-oil.svg';
 import Minus from '../../src/images/icons/minus.svg';
 import MoneybackEur from '../../src/images/icons/moneyback-eur.svg';
@@ -49,6 +50,7 @@ import QuoteUp from '../../src/images/icons/quote-up.svg';
 import Recurring from '../../src/images/icons/recurring.svg';
 import Recycle from '../../src/images/icons/recycle.svg';
 import SearchAbtest from '../../src/images/icons/search-abtest.svg';
+import Search from '../../src/images/icons/search.svg';
 import ShadeNew from '../../src/images/icons/shade-new.svg';
 import SmallPalmTree from '../../src/images/icons/small-palm-tree.svg';
 import StarBox from '../../src/images/icons/star-box.svg';
@@ -78,7 +80,8 @@ const Svgs = (props) => {
 
     return (
         <Container className="mt-4">
-            <div className="row">
+            <h1>SVG Icons</h1>
+            <div className="row mt-4 mx-0">
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
                         <Account className="svg" />
@@ -219,12 +222,6 @@ const Svgs = (props) => {
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
-                        <FiveStarsBox className="svg" />
-                    </span>
-                    <span className='label'>FiveStarsBox</span>
-                </div>
-                <div className="preview d-flex flex-column text-center">
-                    <span className="inner d-flex justify-content-center align-items-center">
                         <FiveStars className="svg" />
                     </span>
                     <span className='label'>FiveStars</span>
@@ -267,6 +264,12 @@ const Svgs = (props) => {
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
+                        <LinkedInSquare className="svg" />
+                    </span>
+                    <span className='label'>LinkedInSquare</span>
+                </div>
+                <div className="preview d-flex flex-column text-center">
+                    <span className="inner d-flex justify-content-center align-items-center">
                         <Loading className="svg" />
                     </span>
                     <span className='label'>Loading</span>
@@ -294,12 +297,6 @@ const Svgs = (props) => {
                         <MoneybackPounds className="svg" />
                     </span>
                     <span className='label'>MoneybackPounds</span>
-                </div>
-                <div className="preview d-flex flex-column text-center">
-                    <span className="inner d-flex justify-content-center align-items-center">
-                        <MoneybackEur className="svg" />
-                    </span>
-                    <span className='label'>MoneybackEur</span>
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
@@ -390,6 +387,12 @@ const Svgs = (props) => {
                         <SearchAbtest className="svg" />
                     </span>
                     <span className='label'>SearchAbtest</span>
+                </div>
+                <div className="preview d-flex flex-column text-center">
+                    <span className="inner d-flex justify-content-center align-items-center">
+                        <Search className="svg" />
+                    </span>
+                    <span className='label'>Search</span>
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
