@@ -10,10 +10,9 @@ const Toggle = React.forwardRef(({ children, onClick }, ref) => (
             e.preventDefault();
             onClick(e);
         }}
-        className="fw-bold text-primary"
+        className="fw-bold text-primary dropdown-toggle"
     >
         {children}
-        &#x25bc;
     </a>
 ));
 
