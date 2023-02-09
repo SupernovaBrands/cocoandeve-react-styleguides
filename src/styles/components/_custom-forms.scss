@@ -1,10 +1,27 @@
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1.25em;
+  height: 1.25em;
+  opacity: 0;
+}
+
 .custom-control-label {
+  position: relative;
+  
   &::before {
-    left: -5.625em;
-    border: 0;
-    height: $custom-switch-indicator-size-height;
-    background-color: $gray-600;
-    width: $custom-switch-width;
+    border-radius: 0.25rem;
+    position: absolute;
+    top: 0em;
+    left: -1.75em;
+    display: block;
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #fff solid 1px;
   }
 
   &::after {

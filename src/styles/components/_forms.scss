@@ -12,10 +12,16 @@
 	&[readonly]::placeholder {
 		color: $input-disabled-color;
 	}
+
+	@include media-breakpoint-down(md) {
+		margin-bottom: $spacer * 0.5;
+	}
 }
 
 .form-group {
-	@extend .mb-lg-2;
+	@include media-breakpoint-down(md) {
+		margin-bottom: $spacer * 0.5;
+	}
 }
 
 .search-box {
@@ -77,6 +83,15 @@
 
 	&--filled .input-group-append .btn {
 		display: block;
+	}
+
+	.search-box__icon {
+		height: 100%;
+		font-size: .875em;
+		line-height: 1.21429;
+		border-radius: 1.28571em;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 }
 
