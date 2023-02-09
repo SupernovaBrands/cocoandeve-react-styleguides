@@ -1,4 +1,6 @@
 import Button from 'react-bootstrap/Button';
+import SearchAbtest from '../../src/images/icons/search-abtest.svg';
+import ChevronDown from '../../src/images/icons/chevron-down.svg';
 
 export default function Buttons() {
 	return (
@@ -13,6 +15,16 @@ export default function Buttons() {
 			<Button className="mb-2" variant="outline-primary" size="lg">Button</Button>
 			<br />
 			<Button className="mb-2" size="lg"><span className="spinner-border spinner-border-sm" /></Button>
+			<br />
+			<Button className="mb-2">
+				Button with icon <SearchAbtest className="svg font-size-s"/>
+			</Button>
+			<br />
+			<Button className="mb-2">Shop <ChevronDown className="svg font-size-xs"/></Button>
+			<br />
+			<Button className="mb-2" size="lg">Button Large</Button>
+			<br />
+			<Button className="mb-2" variant="outline-primary" size="lg">Button Large</Button>
 			<br />
 			<div className="d-grid gap-2">
 				<Button variant="primary">
