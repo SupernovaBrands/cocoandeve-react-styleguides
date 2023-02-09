@@ -37,7 +37,7 @@ $line-height-sm: calc-em(17, $context: 14, $unit: 1);
 $headings-font-weight: 700;
 $headings-line-height: $line-height-base;
 
-$font-size-base: calc-em(16);
+$font-size-base: 1em; // calc-em(16);
 $font-size-xs: calc-em(12);
 $h1-font-size: calc-em(32);
 $h2-font-size: calc-em(24);
@@ -111,6 +111,7 @@ $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text"
 $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 // Border
+$border-radius: calc-em(4, $unit: 1rem);
 $border-radius-lg: calc-em(8, $unit: 1rem);
 
 // Forms
@@ -149,7 +150,9 @@ $btn-padding-x: calc-em(28);
 $btn-padding-x-icon: calc-em(20);
 
 $btn-font-size-lg: 1em;
+$btn-line-height: $line-height-base;
 $btn-line-height-lg: $line-height-base;
+$btn-border-radius: $border-radius;
 $btn-border-radius-lg: $border-radius-lg;
 $btn-border-width-lg: 2px;
 $btn-padding-y-lg: calc-em(26 / 2);
