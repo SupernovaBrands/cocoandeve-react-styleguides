@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import SearchAbtest from '../../src/images/icons/search.svg';
+import Search from '../../src/images/icons/search.svg';
 import ChevronDown from '../../src/images/icons/chevron-down.svg';
 
 export default function Buttons() {
@@ -13,10 +13,10 @@ export default function Buttons() {
 			<Button className="mb-2">Button a tag</Button>
 			<br />
 			<Button className="mb-2">
-				Button With icon <SearchAbtest className="svg font-size-xs"/>
+				Button With icon <Search className="svg font-size-xs" fill="white"/>
 			</Button>
 			<br />
-			<Button className="mb-2">Shop <ChevronDown className="svg font-size-xs"/></Button>
+			<Button className="mb-2">Shop <ChevronDown className="svg font-size-xs" fill="white"/></Button>
 			<br />
 			<Button className="mb-2" size="lg">Button Large</Button>
 			<br />
