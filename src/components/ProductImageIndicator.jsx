@@ -68,7 +68,7 @@ const ProductImageIndicator = (props) => {
 					aria-hidden="true"
 					disabled={nextBtnDisabled}
 					onClick={indicatorHandleDown}>
-						<ChevronDown className="svg text-primary" />
+						<ChevronDown className="svg svg--current-color text-primary" />
 				</button>
 			)}
 		</div>
