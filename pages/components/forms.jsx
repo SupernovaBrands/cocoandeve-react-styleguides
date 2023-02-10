@@ -11,12 +11,12 @@ const Forms = (props) => {
                         <div class="search-box input-group input-group-sm">
                             <div class="input-group-prepend">
                                 <span class="input-group-text search-box__icon">
-                                    <Search className="svg" />
+                                    <Search className="svg svg--current-color" />
                                 </span>
                             </div>
-                            <input type="text" class="form-control" id="exampleSearch" placeholder="Search" />
+                            <input type="text" class="form-control mb-0" id="exampleSearch" placeholder="Search" />
                             <div class="input-group-append">
-                                <a class="input-group-text search-box__close align-items-center" href="#" role="button">
+                                <a class="input-group-text search-box__close align-items-center h-100" href="#" role="button">
                                 </a>
                             </div>
                             <div class="input-group-append">
@@ -30,7 +30,7 @@ const Forms = (props) => {
                     <div class="col">
                         <form>
                             <div class="row">
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-6 ">
                                     <input class="form-control" type="email" placeholder="Name" required />
                                 </div>
                                 <div class="form-group col-lg-6">
