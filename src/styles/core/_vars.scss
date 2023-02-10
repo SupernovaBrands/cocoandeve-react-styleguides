@@ -220,6 +220,8 @@ $navbar-brand-padding-y: calc-em(9, 16);
 
 // dropdown
 $dropdown-border-width: 0;
+$dropdown-link-hover-bg: $primary;
+$dropdown-link-hover-color: $white;
 
 // tooltip
 $tooltip-opacity: 1;
