@@ -3,9 +3,9 @@ import Accordion from 'react-bootstrap/Accordion';
 const Accordions = () => (
 	<div className="container my-4">
 		<h1>Accordion</h1>
-		<Accordion defaultActiveKey="" flush className="border-top border-bottom">
+		<Accordion defaultActiveKey="" flush className="border-top border-bottom border-gray-500">
 			<Accordion.Item eventKey="0">
-				<Accordion.Button className="text-primary">Accordion Item #1</Accordion.Button>
+				<Accordion.Button className="text-primary border-gray-500">Accordion Item #1</Accordion.Button>
 				<Accordion.Body className="px-0">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
