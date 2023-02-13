@@ -3,10 +3,10 @@ import Accordion from 'react-bootstrap/Accordion';
 const Accordions = () => (
 	<div className="container my-4">
 		<h1>Accordion</h1>
-		<Accordion defaultActiveKey="0">
+		<Accordion defaultActiveKey="" flush className="border-top border-bottom border-gray-500">
 			<Accordion.Item eventKey="0">
-				<Accordion.Header>Accordion Item #1</Accordion.Header>
-				<Accordion.Body>
+				<Accordion.Button className="text-primary border-gray-500">Accordion Item #1</Accordion.Button>
+				<Accordion.Body className="px-0">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
 					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -17,8 +17,8 @@ const Accordions = () => (
 				</Accordion.Body>
 			</Accordion.Item>
 			<Accordion.Item eventKey="1">
-				<Accordion.Header>Accordion Item #2</Accordion.Header>
-				<Accordion.Body>
+				<Accordion.Button className="px-0 py-1 text-primary">Accordion Item #2</Accordion.Button>
+				<Accordion.Body className="px-0">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
 					minim veniam, quis nostrud exercitation ullamco laboris nisi ut

@@ -31,7 +31,7 @@ const ProductImageIndicator = (props) => {
 					aria-hidden="true"
 					onClick={indicatorHandleUp}
 					disabled={prevBtnDisabled}>
-						<ChevronUp className="svg text-primary" />
+						<ChevronUp className="svg svg--current-color text-primary" />
 				</button>
 			)}
 			<Carousel id={`product-image-carousel__indicator${props.num ? props.num : ''}`}
@@ -68,7 +68,7 @@ const ProductImageIndicator = (props) => {
 					aria-hidden="true"
 					disabled={nextBtnDisabled}
 					onClick={indicatorHandleDown}>
-						<ChevronDown className="svg text-primary" />
+						<ChevronDown className="svg svg--current-color text-primary" />
 				</button>
 			)}
 		</div>

@@ -1,3 +1,38 @@
+.custom-control-input {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 1.25em;
+  height: 1.25em;
+  opacity: 0;
+}
+
+.custom-control-label {
+  position: relative;
+  
+  &::before {
+    border-radius: 0.25rem;
+    position: absolute;
+    top: 0em;
+    left: -1.75em;
+    display: block;
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #fff solid 1px;
+  }
+
+  &::after {
+    width: $custom-switch-indicator-size-height;
+    height: $custom-switch-indicator-size-height;
+    top: 0;
+    left: -($custom-switch-width + $custom-control-gutter);
+    border: 1px solid $custom-control-indicator-checked-disabled-bg;
+  }
+}
+
 .custom-switch {
     padding-left: $custom-switch-width;
     height: $custom-switch-indicator-size-height;
@@ -36,22 +71,6 @@
         left: -5.625em;
         border: 1px solid #f5f5f5;
       }
-
-      &::before {
-        left: -5.625em;
-        border: 0;
-        height: $custom-switch-indicator-size-height;
-        background-color: $gray-600;
-        width: $custom-switch-width;
-      }
-  
-      &::after {
-        width: $custom-switch-indicator-size-height;
-        height: $custom-switch-indicator-size-height;
-        top: 0;
-        left: -($custom-switch-width + $custom-control-gutter);
-        border: 1px solid $custom-control-indicator-checked-disabled-bg;
-      }
   
       &::before,
       &::after {
@@ -89,7 +108,12 @@
     color: #151515;
     vertical-align: middle;
     background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6'%3e%3cpath d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'/%3e%3c/svg%3e") right 1em center/1em .5625em no-repeat;
-    border: 1px solid #f5f5f5;
+    border: 1px solid $gray-400;
     border-radius: 0.25rem;
     background-color: $gray-400;
+
+    &.disabled {
+      color: $gray-400;
+      background-color: $gray-100;
+    }
   }

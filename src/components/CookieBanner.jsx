@@ -67,7 +67,7 @@ const CookieBanner = (props) => {
 		<section className="cookies-banner bg-white">
 			<div className="container py-2 font-size-xs">
 				<p className="text-center">
-					We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements.
+					We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements.  
 					<a href="/pages/privacy-policy" className="text-dark text-underline">Find out more.</a>
 				</p>
 				<Collapse in={open}>
@@ -102,9 +102,9 @@ const CookieBanner = (props) => {
 					{open ? (
 						<a className="text-underline text-dark use-default d-none mr-1 btn px-0" onClick={onAcceptCookie}>Use Default</a>
 					) : (
-						<a className="text-underline text-dark mr-1 btn px-0" onClick={() => setOpen(!open)}>Change</a>
+						<a className="text-underline text-dark mr-1 btn px-0 me-1" onClick={() => setOpen(!open)}>Change</a>
 					)}
-					<button className="btn btn-outline-dark rounded-0 accept-cookie mx-1" type="button" onClick={onAcceptCookie}>OK</button>
+					<button className="btn btn-outline-dark rounded-0 accept-cookie" type="button" onClick={onAcceptCookie}>OK</button>
 				</div>
 			</div>
 		</section>

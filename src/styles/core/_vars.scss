@@ -37,7 +37,7 @@ $line-height-sm: calc-em(17, $context: 14, $unit: 1);
 $headings-font-weight: 700;
 $headings-line-height: $line-height-base;
 
-$font-size-base: calc-em(16);
+$font-size-base: 1em; // calc-em(16);
 $font-size-xs: calc-em(12);
 $h1-font-size: calc-em(32);
 $h2-font-size: calc-em(24);
@@ -111,6 +111,7 @@ $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text"
 $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 // Border
+$border-radius: calc-em(4, $unit: 1rem);
 $border-radius-lg: calc-em(8, $unit: 1rem);
 
 // Forms
@@ -141,6 +142,7 @@ $nav-link-padding-y-lg: calc-em(24/2);
 $nav-link-padding-x-lg: calc-em(24/2);
 
 // Buttons
+$btn-font-size: 1em;
 $btn-hover-darken: 23.5%;
 $btn-font-weight: 700;
 $btn-padding-y: calc-em(9);
@@ -148,7 +150,9 @@ $btn-padding-x: calc-em(28);
 $btn-padding-x-icon: calc-em(20);
 
 $btn-font-size-lg: 1em;
+$btn-line-height: $line-height-base;
 $btn-line-height-lg: $line-height-base;
+$btn-border-radius: $border-radius;
 $btn-border-radius-lg: $border-radius-lg;
 $btn-border-width-lg: 2px;
 $btn-padding-y-lg: calc-em(26 / 2);
@@ -200,7 +204,7 @@ $alert-padding-x: 1.25em;
 // Interactions
 $hover-transition-timing: 0.15s ease-in-out;
 
-// accordion
+// Card
 $card-border-radius: 0;
 $card-border-color: $gray-500;
 $card-cap-bg: transparent;
@@ -216,6 +220,8 @@ $navbar-brand-padding-y: calc-em(9, 16);
 
 // dropdown
 $dropdown-border-width: 0;
+$dropdown-link-hover-bg: $primary;
+$dropdown-link-hover-color: $white;
 
 // tooltip
 $tooltip-opacity: 1;
@@ -280,8 +286,17 @@ $popover-body-color: #fff;
 // Table
 $table-border-color: $gray-500;
 
+$accordion-icon-width: $font-size-xs;
 $accordion-button-icon:         url("data:image/svg+xml,<svg role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6' class='svg font-size-xs chevron-down'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'></path></svg>");
 $accordion-button-active-icon:  url("data:image/svg+xml,<svg role='presentation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6' class='svg font-size-xs chevron-down'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'></path></svg>");
 $accordion-button-active-bg:  #fff;
 $accordion-button-active-color: $body-color;
 $accordion-border-radius: 0;
+$accordion-border-color: $gray-500;
+$accordion-button-focus-box-shadow: $accordion-border-color;
+$accordion-button-focus-border-color: $accordion-border-color;
+$accordion-button-padding-x: 0;
+$accordion-button-padding-y: map-get($spacers, 1);
+
+
+$dropdown-link-active-bg: $primary;

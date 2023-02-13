@@ -27,12 +27,12 @@ export default function TabsComponents() {
                 </Tabs>
 			</div>
 
-            <h1>Tabs Real Result</h1>
+            <h1 className="mt-3">Tabs Real Result</h1>
 			<div className="row">
                 <Tabs
                     defaultActiveKey="hair"
                     id="uncontrolled-tab-example"
-                    className="nav nav-tabs mx-auto nav-tabs--real-results text-center mb-2 justify-content-center"
+                    className="nav nav-tabs mx-auto nav-tabs--real-results text-center mb-5 justify-content-center"
                 >
                     <Tab eventKey="tan" title="Tan" tabClassName="nav-link text-decoration-none h4 mb-0 font-weight-normal">
                         <h2>What is Lorem Ipsum?</h2>
