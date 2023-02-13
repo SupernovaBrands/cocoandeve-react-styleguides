@@ -32,9 +32,15 @@ export default function Home() {
 				<div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
 					<h2>compounds</h2>
 					<a href="./compounds/image-with-texts">Image With Text</a>
-					<a href="./compounds/post-cards">Post Card</a>
+					<a href="./compounds/launch-waitlist">Launch Waitlist</a>
+					<a href="./compounds/nav-category">Nav Category</a>
 					<a href="./compounds/newsletter-form">Newsletter Form</a>
+					<a href="./compounds/post-cards">Post Card</a>
 					<a href="./compounds/product-card">Product Card</a>
+					<a href="./compounds/product-banner">Product Banner</a>
+					<a href="./compounds/product-variant">Product Variant</a>
+					<a href="./compounds/result-card">Result Card</a>
+					<a href="./compounds/upsell">Upsell</a>
 					<a href="./compounds/waitlist-form">Waitlist Form</a>
 				</div>
 			</div>

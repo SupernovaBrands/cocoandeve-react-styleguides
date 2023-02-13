@@ -1,15 +1,11 @@
-import Search from '../../src/images/icons/new.svg';
+import New from '../../src/images/icons/new.svg';
 
 const ProductCard = (props) => {
 	return (
         <div>
             {props.icon &&
                 <div className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 447 207">
-                        <text id="badge-tex-new" transform="translate(0 155)" fill="#fff" font-size="207" font-family="sofia-pro" className="font-weight-bold">
-                        <tspan x="0" y="0">new!</tspan>
-                        </text>
-                    </svg>
+                    <New />
                 </div>
             }
             <picture>
