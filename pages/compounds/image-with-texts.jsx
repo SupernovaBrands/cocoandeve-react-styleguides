@@ -1,4 +1,4 @@
-import ImageWithText from "@/components/ImageWithText";
+import ImageWithText from "@/compounds/ImageWithText";
 
 const { Container } = require("react-bootstrap");
 

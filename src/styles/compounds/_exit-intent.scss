@@ -1,0 +1,51 @@
+.exit-intent-popup {
+	.close {
+        top: 1em;
+        right: 1em;
+        opacity: 1;
+        z-index: $zindex-sticky;
+        background-color: transparent;
+        border: 0;
+
+        @include media-breakpoint-up(lg) {
+            color: #fff;
+        }
+
+        .svg {
+            height: calc-em(26);
+        }
+    }
+
+	.modal-dialog {
+		max-width: 630px;
+	}
+
+	&__close {
+		top: map-get($spacers, 2);
+		right: map-get($spacers, 2);
+		cursor: pointer;
+	}
+
+	figcaption {
+		top: 0;
+		bottom: 0;
+		right: 0;
+	}
+
+	&__title {
+		font-size: calc-em(30);
+	}
+
+	&__upto {
+		font-size: calc-em(20);
+	}
+
+	&__discount {
+		font-size: calc-em(64);
+		line-height: calc-em(50, 64, $unit: 1);
+	}
+
+	&__text {
+		font-size: calc-em(24);
+	}
+}

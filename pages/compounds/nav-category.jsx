@@ -1,26 +1,17 @@
 import { Container } from "react-bootstrap";
+import Item from "@/compounds/nav-category";
 
-const NewsletterForm = () => {
+const navCategory = () => {
 	return (
 		<Container>
             <div className="row">
                 <div className="col text-center mb-2 mt-2 nav-category">
                     <ul className="nav justify-content-center align-items-center">
-                        <li className="nav-item">
-                            <a href="#" className="nav-link active pb-0 pt-0">ALL</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link pb-0 pt-0">HAIR</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link pb-0 pt-0">TAN</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link pb-0 pt-0">BODY</a>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link pb-0 pt-0">HOW TO'S</a>
-                        </li>
+                        <Item item="ALL" link="#" active="active" />
+                        <Item item="HAIR" link="#" active="" />
+                        <Item item="TAN" link="#" active="" />
+                        <Item item="BODY" link="#" active="" />
+                        <Item item="HOW TO'S" link="#" active="" />
                     </ul>
                 </div>
             </div>
@@ -28,4 +19,4 @@ const NewsletterForm = () => {
 	);
 };
 
-export default NewsletterForm;
+export default navCategory;

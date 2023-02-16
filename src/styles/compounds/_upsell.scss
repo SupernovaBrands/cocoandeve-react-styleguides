@@ -66,6 +66,7 @@
 
 	.svg {
 		font-size: calc-em(30);
+		fill: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
 
 		path {
 			transition: fill $hover-transition-timing;

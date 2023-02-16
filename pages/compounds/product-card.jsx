@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import ProductCard from "@/components/ProductCard"; 
+import ProductCard from "@/compounds/ProductCard"; 
 import { Col, Row } from "react-bootstrap";
 
 const ProductCards = () => {

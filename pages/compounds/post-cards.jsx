@@ -1,5 +1,5 @@
 import CarouselFull from "@/components/CarouselFull";
-import PostCard from "@/components/PostCard";
+import PostCard from "@/compounds/PostCard";
 import { Container } from "react-bootstrap";
 
 const PostCards = () => {

@@ -3,6 +3,10 @@
       padding-top: percentage(214 / 300);
       border-radius: $badge-border-radius $badge-border-radius 0 0;
     }
+
+    svg {
+      fill: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+    }
   
     &.carousel-item {
       & > div {

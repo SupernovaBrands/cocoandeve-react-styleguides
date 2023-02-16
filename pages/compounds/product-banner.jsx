@@ -1,9 +1,14 @@
 import { Container } from "react-bootstrap";
-import PDPBanner from "@/components/product-banner";
+import PDPBanner from "@/compounds/product-banner";
 
 const ProductBanner = () => {
   return (
-	<PDPBanner />
+    <div>
+      <Container className="container mt-4 mb-2 px-g">
+        <h1>Product Banner</h1>
+      </Container>
+      <PDPBanner />
+    </div>
   );
 };
 

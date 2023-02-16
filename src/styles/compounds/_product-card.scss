@@ -60,6 +60,10 @@
 		}
 	}
 
+	svg {
+		fill: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+	}
+
 	&--quiz {
 		@include media-breakpoint-down(sm) {
 			max-height: calc-em(150);
