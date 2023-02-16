@@ -1,4 +1,5 @@
 import FiveStars from '../../src/images/icons/five-stars.svg';
+import Badges from 'react-bootstrap/Badge';
 
 const ResultCard = (props) => {
     return (
@@ -11,7 +12,7 @@ const ResultCard = (props) => {
             <div className="p-2 bg-white h-100">
                 <p className="d-flex justify-content-between align-items-center mb-0">
                     <FiveStars className="svg text-primary h4 mb-0" />
-                    <span className="badge badge-blue mb-1 mt-1">{props.badge}</span>
+                    <Badges bg="bali-bod-blue" className="mb-1 mt-1">{props.badge}</Badges>
                 </p>
                 <p>
                     <strong>Product:&nbsp;</strong>
