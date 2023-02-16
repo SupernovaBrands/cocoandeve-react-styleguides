@@ -1,6 +1,18 @@
 $grid-column-width-lg: minmax(0, (map-get($container-max-widths, lg) - $grid-gutter-width-lg * $grid-columns) / $grid-columns);
 $grid-column-width-xl: minmax(0, (map-get($container-max-widths, xl) - $grid-gutter-width-lg * $grid-columns) / $grid-columns);
 
+.bg-yellow-light {
+	background-color: $yellow-light;
+}
+
+.bg-purple-light {
+	background-color: $sh-purple-light;
+}
+
+.bg-blue {
+	background-color: $bali-bod-blue;
+}
+
 .product-banner {
 	&__text {
 		padding-left: $grid-gutter-width;
@@ -37,7 +49,6 @@ $grid-column-width-xl: minmax(0, (map-get($container-max-widths, xl) - $grid-gut
 
 		img {
 			object-fit: cover;
-			object-position: left;
 		}
 	}
 

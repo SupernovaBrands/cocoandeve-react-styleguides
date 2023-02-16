@@ -3,6 +3,10 @@ $grid-gutter-width: 15px;
 $grid-gutter-width-lg: 30px;
 $container-padding-x: $grid-gutter-width;
 
+$aspect-ratios: (
+  "6x7": calc(6 / 7 * 100%)
+);
+
 $grid-breakpoints: (
   xs: 0,
   sm: 375px,
