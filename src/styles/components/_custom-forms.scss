@@ -7,6 +7,18 @@
   opacity: 0;
 }
 
+.custom-radio {
+  .custom-control-input:checked ~ .custom-control-label {
+    &::before {
+      background-color: $primary;
+    }
+  }
+
+  .custom-control-label::before {
+    border-radius: 50%;
+  }
+}
+
 .custom-control-label {
   position: relative;
   

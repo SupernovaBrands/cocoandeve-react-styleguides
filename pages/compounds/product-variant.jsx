@@ -1,23 +1,29 @@
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 import ProductVariant from "@/compounds/product-variant";
 
 const ProductVariants = () => {
+  const [isMedium, setMedium] = useState(true);
+  const [isDark, setDark] = useState(false);
+  const [isUltra, setUltra] = useState(false);
 
-  let swatches = [
-    {
-      "label": "Medium",
-      "title": "Subtle glow, lighter skin tones"
-    },
-    {
-      "label": "Dark",
-      "title": "Subtle glow, lighter skin tones"
-    },
-    {
-      "label": "Ultra Dark",
-      "title": "Subtle glow, lighter skin tones"
-    },
-  ]
-
+  const swatchChange = (event) => {
+    if(event.target.getAttribute("data-value") == "medium") {
+      setMedium(true);
+      setDark(false);
+      setUltra(false);
+    }
+    else if(event.target.getAttribute("data-value") == "dark") {
+      setMedium(false);
+      setDark(true);
+      setUltra(false);
+    }
+    else if(event.target.getAttribute("data-value") == "ultra-dark") {
+      setMedium(false);
+      setDark(false);
+      setUltra(true);
+    }
+  }
   return (
     <Container className="mt-4 mb-2 px-g">
       <h1>Product Variant</h1>
@@ -33,11 +39,14 @@ const ProductVariants = () => {
             dataID="32068892426275"
             variant_description="1x Masque + Brush"
             price="$44.90"
-            swatches={swatches}
-            swatch_medium="variant-swatch medium me-2 border-primary"
-            swatch_dark="variant-swatch dark me-2"
-            swatch_ultra_dark="variant-swatch ultra-dark"
-          />
+            >
+            <button onClick={swatchChange} type="button" className={`variant-swatch medium me-2 ${isMedium ? 'border-primary' : ''}`} data-value="medium" data-id="32068891541539"></button>
+            <button onClick={swatchChange} type="button" className={`variant-swatch dark me-2 ${isDark ? 'border-primary' : ''}`} data-value="dark" data-id="32068891607075"></button>
+            <button onClick={swatchChange} type="button" className={`variant-swatch ultra-dark ${isUltra ? 'border-primary' : ''}`} data-value="ultra-dark" data-id="32068891639843"></button>
+            {isMedium && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-medium"><b>Medium</b> - Subtle glow, lighter skin tones</p>}
+            {isDark && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-dark"><b>Dark</b> - Subtle glow, lighter skin tones</p>}
+            {isUltra && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-ultra-dark"><b>Ultra Dark</b> - Subtle glow, lighter skin tones</p>}
+            </ProductVariant>
           <ProductVariant
             id="product-variant-1-x-sunny-honey-bali-bronzing-bundle"
             name="product-variant"
@@ -51,11 +60,14 @@ const ProductVariants = () => {
             note="Ultra dark OOS waitlist, dark oos"
             price="$44.90"
             comparePrice="$89.80"
-            swatches={swatches}
-            swatch_medium="variant-swatch medium me-2 border-primary"
-            swatch_dark="variant-swatch dark me-2 oos"
-            swatch_ultra_dark="variant-swatch ultra-dark oos waitlist"
-          />
+          >
+          <button onClick={swatchChange} type="button" className={`variant-swatch medium me-2 ${isMedium ? 'border-primary' : ''}`} data-value="medium" data-id="32068891541539"></button>
+          <button onClick={swatchChange} type="button" className={`variant-swatch dark me-2 oos ${isDark ? 'border-primary' : ''}`} data-value="dark" data-id="32068891607075"></button>
+          <button onClick={swatchChange} type="button" className={`variant-swatch ultra-dark oos waitlist ${isUltra ? 'border-primary' : ''}`} data-value="ultra-dark" data-id="32068891639843"></button>
+					{isMedium && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-medium"><b>Medium</b> - Subtle glow, lighter skin tones</p>}
+          {isDark && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-dark"><b>Dark</b> - Subtle glow, lighter skin tones</p>}
+          {isUltra && <p className="font-size-sm w-100 mt-2 mb-0 swatch-label-ultra-dark"><b>Ultra Dark</b> - Subtle glow, lighter skin tones</p>}
+          </ProductVariant>
           <ProductVariant
             id="product-variant-bronzing-face-drops"
             name="product-variant"
