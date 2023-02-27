@@ -46,6 +46,14 @@
 		}
 	}
 
+	&__heading {
+		justify-content: center;
+
+		@include media-breakpoint-up(lg) {
+			justify-content: end;
+		}
+	}
+
 	&__close {
 		top: $grid-gutter-width;
 		right: $grid-gutter-width;

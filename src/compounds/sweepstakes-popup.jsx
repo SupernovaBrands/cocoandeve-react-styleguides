@@ -5,7 +5,7 @@ import Popup from '@/components/Popup';
 const SweeptakesPopup = (props) => {
     return (
         <Popup classes="sweepstakes-popup" cotent_classes="mx-g mx-lg-4" body_classes="px-g px-lg-3 py-g" spacing={true}>
-            <div className="sweepstakes-popup__heading row justify-content-end mb-3 mb-lg-g">
+            <div className="sweepstakes-popup__heading row mb-3 mb-lg-g">
                 <div className="col-9 col-lg-8 pl-lg-0 text-center text-secondary pr-0 pr-lg-g">
                     <h2 className="sweepstakes-popup__title h1 font-weight-bold mt-1 mt-lg-1 mb-0 mb-lg-1">Win $500 of products</h2>
                     <p className="mb-lg-0 mt-lg-1">and exclusive savings on our Black Friday Deals and<br className="d-lg-none" />future offers!</p>
