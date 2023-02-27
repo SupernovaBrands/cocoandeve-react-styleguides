@@ -37,7 +37,7 @@ const Popup = (props) => {
             )}
             {ReactDOM.createPortal(
                 <div className={`modal fade show ${props.classes}`} id="birthdayModal" tabIndex="-1" role="dialog" style={{display: `block`}}>
-                    <div className={`modal-dialog ${modal_size} mx-g mx-lg-auto`} role="document">
+                    <div className={`modal-dialog ${modal_size} mx-lg-auto`} role="document">
                         <div className={`modal-content position-relative overflow-hidden ${content_classes}`}>
                             {props.picture &&
                                 <picture className="position-absolute w-100"> 

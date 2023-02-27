@@ -17,6 +17,7 @@
 
 	.form-control {
 		border-width: 2px;
+		height: 3.125rem;
 
 		@include media-breakpoint-up(lg) {
 			border-width: 0;

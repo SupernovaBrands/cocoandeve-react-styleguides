@@ -12,7 +12,7 @@ const SweeptakesPopup = (props) => {
                 </div>
             </div>
             <div className="row justify-content-end">
-                <form className="sweepstakes-popup__form col-lg-8 pl-lg-0 mt-1 mt-lg-0" data-thank-you-message="You are in!">
+                <form className="sweepstakes-popup__form col-lg-8 ps-lg-0 mt-lg-0" data-thank-you-message="You are in!">
                     <div className="input-group form-group mb-25">
                         <input id="sweepstakes-popup__email" className="form-control" type="email" placeholder="Email" />
                     </div>
