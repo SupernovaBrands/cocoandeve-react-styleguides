@@ -5,7 +5,7 @@
   
     .masking-select {
       color: $body-color;
-      padding: .875em 2em .875em .5em;
+      padding: .975em 2em .975em .5em;
       border: 1px solid $gray-400;
       background: #fff url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'/></svg>") no-repeat right 0.33333em center/1em 0.5625em;
       width: calc(100% - #{$grid-gutter-width});
