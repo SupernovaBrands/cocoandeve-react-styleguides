@@ -3,7 +3,7 @@ import Popup from '@/components/Popup';
 
 const BirthdayPopup = (props) => {
     return (
-        <Popup classes="birthday-popup" body_classes="p-0">
+        <Popup classes="birthday-popup" body_classes="p-0" margin={true}>
             <button type="button" className="close position-absolute font-size-sm" onClick={props.onHide}>
                 <CloseRounded className="svg" />
             </button>
@@ -28,7 +28,7 @@ const BirthdayPopup = (props) => {
                             </select>
                         </div>
                     </div>
-                    <div className="row px-g mt-lg-0 mt-1">
+                    <div className="row px-g mt-lg-0">
                         <div className="input-group form-group col-12 px-0 ps-lg-0 pe-lg-g">
                             <button className="btn btn-lg btn-block bg-primary text-white w-100">Submit</button>
                         </div>
