@@ -1,0 +1,8 @@
+.modal-cookies {
+	&__text {
+		@include media-breakpoint-up(sm) {
+			padding-left: $spacer * 0.5;
+            padding-right: $spacer * 0.5;
+		}
+	}
+}

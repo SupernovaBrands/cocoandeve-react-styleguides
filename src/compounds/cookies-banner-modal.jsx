@@ -7,8 +7,8 @@ const CookiesBannerPopup = (props) => {
     var [toggle, setToggle] = useState(false);
 
     return (
-        <Popup classes="modal-cookies-banner" cotent_classes="py-g" body_classes="p-0" spacing={true} modal_size="modal-md">
-            <p className="modal-cookies__text text-center mb-g px-1 px-lg-0">We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements. <a href="#" className="text-body text-underline">Find out more</a></p>
+        <Popup classes="modal-cookies-banner" cotent_classes="py-g px-2" body_classes="p-0" margin={true} modal_size="modal-md">
+            <p className="modal-cookies__text text-center mb-g px-lg-0">We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements. <a href="#" className="text-body text-underline">Find out more</a></p>
 			<Collapse in={toggle}>
                 <div className="collapse px-lg-1" id="cookieBannerCollapse">
                     <div className="custom-control custom-checkbox">
