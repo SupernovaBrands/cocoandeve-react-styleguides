@@ -19,14 +19,14 @@ const LaunchWaitList = (props) => {
                             <span className="masking-select position-absolute rounded border-0">+65</span>
                             <CountriesOptions />
                         </div>
-                        <div className="input-group col-8 col-lg-9 pl-0 mb-1">
+                        <div className="input-group col-8 col-lg-9 ps-0 mb-1">
                             <input className="form-control border-0" type="text" name="phone" placeholder="Enter your phone number" />
                         </div>
                         <small className="col-12 text-danger phone-error d-none">Please enter a valid phone number</small>
                     </div>
                     <div className="row">
                         <div className="input-group col d-flex justify-content-center my-1">
-                            <div className="custom-control custom-checkbox col d-flex justify-content-center my-1">
+                            <div className="ps-sm-2 custom-checkbox col d-flex justify-content-center my-1">
                                 <input type="checkbox" name="tos" className="custom-control-input" required id="agreement"/>
                                 <label className="custom-control-label font-size-sm text-underline" htmlFor="agreement">I agree to Privacy Policy &amp; ToS</label>
                             </div>
