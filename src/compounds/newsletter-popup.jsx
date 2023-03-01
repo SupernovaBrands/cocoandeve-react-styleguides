@@ -4,7 +4,7 @@ import Popup from '@/components/Popup';
 
 const NewsletterPopup = (props) => {
     return (
-        <Popup classes="newsletter-bigger-popup" cotent_classes="bg-secondary" body_classes="py-g" picture={true} spacing={true}>
+        <Popup classes="newsletter-bigger-popup" cotent_classes="bg-secondary" body_classes="px-g" picture={true} margin={true}>
             <button type="button" className="close position-absolute font-size-sm" onClick={props.onHide}>
                 <CloseRounded className="svg" />
             </button>
@@ -16,7 +16,7 @@ const NewsletterPopup = (props) => {
                         <input id="newsletter-bigger-popup__email" className="form-control" type="email" placeholder="Email" aria-label="email" />
                     </div>
                     <p className="text-center newsletter-bigger-popup__separator text-white mb-1 mt-1">and / or</p>
-                    <div className="input-group form-group">
+                    <div className="input-group">
                         <label htmlFor="sweepstakes-popup__country" className="input-group-addon form-control">
                             <span className="position-absolute sweepstakes-popup__country-label align-items-center">+65</span>
                             <ChevronDown className="svg position-absolute" />
@@ -43,7 +43,7 @@ const NewsletterPopup = (props) => {
                                 <option value="VN" data-code="84">Vietnam</option>
                             </select>
                         </label>
-                        <input id="sweepstakes-popup__phone" className="form-control border-left-0" type="phone" placeholder="Phone number" />
+                        <input id="sweepstakes-popup__phone" className="form-control border-left-0 mb-g" type="phone" placeholder="Phone number" />
                     </div>
                     <div className="d-grid">
                         <button type="submit" className="btn btn-lg btn-primary btn-block">Submit</button>
