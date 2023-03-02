@@ -1,3 +1,8 @@
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $primary;
+  background-color: $primary;
+}
+
 .custom-control-input {
   position: absolute;
   left: 0;
@@ -132,4 +137,12 @@
     &:focus-visible {
       outline: 0;
     }
+  }
+
+  .custom-control {
+    position: relative;
+    z-index: 1;
+    display: block;
+    min-height: 1.25em;
+    padding-left: 1.75em;
   }
