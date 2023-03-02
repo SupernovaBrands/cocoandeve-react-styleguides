@@ -2,7 +2,6 @@ import CookieBanner from '@/components/CookieBanner';
 import { useState } from 'react';
 
 const CookieBanners = () => {
-	console.log('cookie banner');
 	const [show, setShow] = useState(false);
 
 	const onAcceptCookie = (active) => {
