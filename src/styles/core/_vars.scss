@@ -58,33 +58,7 @@ $hero-banner-font-size-lg: calc-em(72);
 $playground-font-size: calc-em(52);
 
 // Colors
-$primary: #D62E55;
-$primary-light: #F5DADF;
-$primary-light-second: #FAE6EA;
-$primary-dark: #B22D4B;
-$secondary: #00635B;
-$secondary-light: #E0F0E9;
-$sh-purple: #993366;
-$sh-purple-light: #FFEFFF;
-$bali-bod-blue: #213E7B;
-$bali-bod-blue-light: #bec5d8;
-$sh-orange: #FF9900;
-$sh-orange-light: #FCF6E4;
-$green-light: #00B67A;
-$yellow-light: #f9eeca;
-$pink-light: #FFF2F4;
-$pink-product: #FFF4F6;
-
-$body-color: #151515;
-
-$gray-100: #FAF9F9;
-$gray-400: #F5F5F5;
-$gray-500: #A3A3A3;
-$gray-600: #4E4E4E;
-$gray-700: #7B7B7B;
-$gray-900: $body-color;
-$text-muted: $gray-500;
-$border-color: $gray-600;
+@import 'colors-vars';
 
 $link-color: $primary;
 $link-hover-color: darken($link-color, 15%);
@@ -96,23 +70,6 @@ $shade-colors: (
   'ultra-dark': #5C2323,
   'medium': #AA7878
 );
-
-$custom-theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'gray-400': $gray-400,
-  'gray-600': $gray-600,
-  'sh-purple': $sh-purple,
-  'pink-light': $pink-light,
-  'primary-light': $primary-light,
-  'bali-bod-blue': $bali-bod-blue,
-);
-
-$theme-colors: map-merge($theme-colors, $custom-theme-colors);
-$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
-$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
-$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
-$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 // Border
 $border-radius: calc-em(4, $unit: 1rem);
