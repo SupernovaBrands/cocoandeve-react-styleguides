@@ -5,7 +5,7 @@ import Popup from '@/components/Popup';
 const NewsletterPopup = (props) => {
     return (
         <Popup classes="newsletter-bigger-popup" cotent_classes="bg-secondary" body_classes="px-g" picture={true} margin={true}>
-            <button type="button" className="close position-absolute font-size-sm" onClick={props.onHide}>
+            <button type="button" className="close position-absolute font-size-sm p-0" onClick={props.onHide}>
                 <CloseRounded className="svg" />
             </button>
             <div className="row justify-content-end">

@@ -4,7 +4,7 @@ const LaunchWaitList = (props) => {
     return (
         <div className="col-12 col-lg-5">
             <div className="product-waitlist product-waitlist--launch product-waitlist__form w-100 p-3 mb-3 rounded text-center">
-                <h3>{props.title}</h3>
+                <h3 className="mb-1">{props.title}</h3>
                 <p className="mb-3 font-size-sm">{props.content}</p>
                 <form data-pdp="false" data-product-id="product-id">
                     <div className="row">

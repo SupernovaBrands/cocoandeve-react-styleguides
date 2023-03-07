@@ -4,7 +4,7 @@ import LaunchWaitList from "@/compounds/launch-waitlist";
 const Waitlist = () => {
   return (
     <Container className="px-g mt-4">
-      <h1>Product Waitlist</h1>
+      <h1 className="mb-1">Product Waitlist</h1>
       <div className="row">
         <LaunchWaitList
             title="Join the waitlist"

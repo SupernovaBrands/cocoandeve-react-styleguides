@@ -4,7 +4,7 @@ import Popup from '@/components/Popup';
 const BirthdayPopup = (props) => {
     return (
         <Popup classes="birthday-popup" body_classes="p-0" margin={true}>
-            <button type="button" className="close position-absolute font-size-sm" onClick={props.onHide}>
+            <button type="button" className="close position-absolute font-size-sm p-0" onClick={props.onHide}>
                 <CloseRounded className="svg" />
             </button>
             <div className="row justify-content-end p-0">
@@ -19,7 +19,7 @@ const BirthdayPopup = (props) => {
                         <div className="input-group form-group col-5 col-lg-6 ps-0">
                             <input className="form-control" type="number" placeholder="Date" required="" />
                         </div>
-                        <div className="input-group form-group col-7 col-lg-6 pe-0 pe-lg-g pl-lg-0">
+                        <div className="input-group form-group col-7 col-lg-6 ps-lg-0 pe-lg-g pl-lg-0">
                             <select className="custom-select p-g"  required="">
                                 <option defaultValue="">Select</option>
                                 <option>1</option>
@@ -28,10 +28,8 @@ const BirthdayPopup = (props) => {
                             </select>
                         </div>
                     </div>
-                    <div className="row px-g mt-lg-0">
-                        <div className="input-group form-group col-12 px-0 ps-lg-0 pe-lg-g">
-                            <button className="btn btn-lg btn-block bg-primary text-white w-100">Submit</button>
-                        </div>
+                    <div className="row px-g me-0">
+                        <button className="btn btn-lg btn-block bg-primary text-white me-lg-g">Submit</button>
                     </div>
                 </form>
             </div>

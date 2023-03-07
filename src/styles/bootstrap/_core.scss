@@ -10,8 +10,8 @@
 
 // scss-docs-start import-stack
 // Configuration
-@import "bootstrap/scss/utilities";
 @import '../core/vars';
+@import "bootstrap/scss/utilities";
 
 // Layout & components
 @import "bootstrap/scss/root";
