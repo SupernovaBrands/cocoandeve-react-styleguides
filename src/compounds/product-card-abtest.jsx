@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap";
 
-const ProductCardABtest = (props) => {
+const ProductCard = (props) => {
 	return (
         <Col md={3} className={`${props.hideMobile ? 'd-none d-lg-flex' : 'd-flex'} flex-column col-6 product-card product-card-abtest mb-2`}>
             <a href="#" aria-label="Product link">
@@ -82,4 +82,4 @@ const ProductCardABtest = (props) => {
 	);
 };
 
-export default ProductCardABtest;
+export default ProductCard;

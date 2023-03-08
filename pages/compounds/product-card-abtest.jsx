@@ -1,13 +1,13 @@
 import { Container } from "react-bootstrap";
-import ProductCardAbtest from "@/compounds/ProductCardAbtest"; 
+import ProductCard from "@/compounds/product-card-abtest"; 
 import { Col, Row } from "react-bootstrap";
 
-const ProductCard = () => {
+const ProductCardAbtest = () => {
 	return (
 		<Container className="px-g">
 			<h1>Product Card AB Test</h1>
             <Row className="mt-4">
-                <ProductCardAbtest 
+                <ProductCard 
                     src="https://via.placeholder.com/243x243" 
                     srcSet="https://via.placeholder.com/243x243"
                     subtitle="Like A Virgin"
@@ -16,7 +16,7 @@ const ProductCard = () => {
                     compare_price="$34.90"
                     swatch_style={true}
                 />
-                <ProductCardAbtest 
+                <ProductCard 
                     src="https://via.placeholder.com/243x243" 
                     srcSet="https://via.placeholder.com/243x243"
                     subtitle="Sunny Honey"
@@ -25,7 +25,7 @@ const ProductCard = () => {
                     compare_price="$34.90"
                     swatch_shade={true}
                 />
-                <ProductCardAbtest 
+                <ProductCard 
                     src="https://via.placeholder.com/243x243" 
                     srcSet="https://via.placeholder.com/243x243"
                     subtitle="Glow Figure"
@@ -39,4 +39,4 @@ const ProductCard = () => {
 	);
 };
 
-export default ProductCard;
+export default ProductCardAbtest;
