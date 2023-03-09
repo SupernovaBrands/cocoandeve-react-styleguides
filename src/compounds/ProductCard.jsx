@@ -1,12 +1,12 @@
 import New from '../../src/images/icons/new.svg';
-import FiveStars from '../../src/images/icons/five-stars.svg';
+import Star from '../../src/images/icons/rating-star.svg';
 
 const ProductCard = (props) => {
 	return (
         <div>
             {props.icon &&
                 <div className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1">
-                    <New />
+                    <New className="fw-bold" />
                 </div>
             }
             <picture>
@@ -15,9 +15,13 @@ const ProductCard = (props) => {
             </picture>
             <div className="pt-2 pb-0 position-relative px-2">
                 <div className="d-flex justify-content-center">
-                    <FiveStars className="svg text-primary h4 mb-0" />
+                    <Star className="svg text-primary" />
+                    <Star className="svg text-primary ml-25" />
+                    <Star className="svg text-primary ml-25" />
+                    <Star className="svg text-primary ml-25" />
+                    <Star className="svg text-primary ml-25" />
                 </div>
-                <p className="product-card__title d-flex flex-column justify-content-center h4 h-100 font-weight-normal">
+                <p className="product-card__title d-flex flex-column justify-content-center h4 h-100 fw-normal">
                     <a href="#" className="text-dark">{props.title}</a>
                 </p>
                 <p className="text-center">
@@ -25,7 +29,7 @@ const ProductCard = (props) => {
                 </p>
                 {props.style && 
                     <div>
-                        <button type="button" className="btn btn-lg btn-primary btn-choose btn-block">Choose Style</button>
+                        <button type="button" className="w-100 btn btn-lg btn-primary btn-choose btn-block">Choose Style</button>
                         <div className="swatch-overlay flex-column align-items-center justify-content-end w-100 pb-0 px-2 position-absolute">
                             <div className="text-center w-100 py-2">
                                 <label className="mb-2"><strong>Style: </strong><span data-swatch-label>Girl Print: Limited edition!</span></label>
@@ -38,20 +42,20 @@ const ProductCard = (props) => {
                                     </li>
                                 </ul>
                             </div>
-                            <button type="button" className="btn btn-lg btn-primary add-to-cart btn-block">
+                            <button type="button" className="w-100 btn btn-lg btn-primary add-to-cart btn-block">
                                 Add To Cart
                             </button>
                         </div>
                     </div>
                 }
                 {props.button && 
-                <button type="button" className="btn btn-lg btn-primary add-to-cart btn-block">
+                <button type="button" className="w-100 btn btn-lg btn-primary add-to-cart btn-block">
                     Add To Cart
                 </button>
                 }
                 {props.shade &&
                     <div>
-                        <button type="button" className="btn btn-lg btn-primary btn-choose btn-block">Choose Shade</button>
+                        <button type="button" className="w-100 btn btn-lg btn-primary btn-choose btn-block">Choose Shade</button>
                         <div className="swatch-overlay flex-column align-items-center justify-content-end w-100 pb-0 px-2 position-absolute">
                             <div className="text-center w-100 py-2">
                                 <label className="mb-2"><strong>Shade: </strong><span data-swatch-label>Dark</span></label>
@@ -67,7 +71,7 @@ const ProductCard = (props) => {
                                     </li>
                                 </ul>
                             </div>
-                            <button type="button" className="btn btn-lg btn-primary btn-block add-to-cart">
+                            <button type="button" className="w-100 btn btn-lg btn-primary btn-block add-to-cart">
                                 Add To Cart
                             </button>
                         </div>

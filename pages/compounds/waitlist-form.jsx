@@ -3,7 +3,7 @@ import ProductWaitlist from "@/compounds/product-waitlist-oos";
 
 const WaitlistForm = () => {
 	return (
-		<Container className="mt-4">
+		<Container className="mt-4 mb-2 px-g">
 			<h1>Waitlist Form</h1>
 			<div className="row mt-3">
 				<h2 className="col-12">OOS Product</h2>

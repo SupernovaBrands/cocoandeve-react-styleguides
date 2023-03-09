@@ -168,4 +168,10 @@
 	input::placeholder {
 		color: $gray-600;
 	}
+
+	.btn-primary {
+		@include media-breakpoint-up(sm) {
+			margin-top: $spacer * 0.5;
+		}
+	}
 }

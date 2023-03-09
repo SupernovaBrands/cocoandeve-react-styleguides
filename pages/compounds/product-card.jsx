@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 
 const ProductCards = () => {
 	return (
-		<Container className="mt-4">
+		<Container className="px-g">
 			<h1>Product Card</h1>
             <Row>
                 <Col md={3} className="col-9 product-card text-center mb-5 position-relative">
