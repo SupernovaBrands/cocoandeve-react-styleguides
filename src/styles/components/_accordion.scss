@@ -10,3 +10,30 @@
         border-bottom: $accordion-border-width solid $accordion-border-color;
     }
 }
+
+.card {
+    border-left: none;
+    border-right: none;
+}
+
+.card-header {
+    .chevron-down {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    &.collapsed .chevron-down {
+        transform: translateY(-50%);
+    }
+}
+
+.mobile-nav__menu {
+    .accordion-button:not(.collapsed) {
+        &:focus,
+        &:active {
+            border: none;
+        }
+    }
+}

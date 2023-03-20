@@ -118,6 +118,12 @@
 		color: #fff;
 	}
 
+	&__close {
+		path {
+			fill: white;
+		}
+	}
+
 	&__menu {
 		padding-left: $grid-gutter-width;
 		padding-right: $grid-gutter-width;
@@ -140,7 +146,7 @@
 			margin-top: calc-em(10);
 		}
 
-		li {
+		.accordion-item, li {
 			padding-top: calc-em(5);
 			padding-bottom: calc-em(5);
 		}
@@ -212,6 +218,7 @@
 
 	&:focus {
 		outline: none;
+		box-shadow: none;
 	}
 }
 

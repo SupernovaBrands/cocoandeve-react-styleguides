@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CookieBanner from '@/components/CookieBanner';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import NavMegaMenu from '@/compounds/NavMegaMenu';
+import MobileMenu from '@/compounds/MobileMenu';
 import BrandLogo from '@/components/CELogo';
 import Account from '../../src/images/icons/account.svg';
 import Search from '../../src/images/icons/search-abtest.svg';
@@ -48,6 +49,16 @@ const Header = (props) => {
 		setShowCookie(active);
 	};
 
+	const onToggleMobileNav = () => {
+		console.log('onToggleMobileNav');
+		const mobileClassList = document.getElementById('mobile-nav').classList;
+		if (!mobileClassList.contains('show')) {
+			document.getElementById('mobile-nav').classList.add('show');
+		} else {
+			document.getElementById('mobile-nav').classList.remove('show');
+		}
+	}
+
 	return (
         <header className="main-header">
             {!showCookie && (
@@ -70,8 +81,8 @@ const Header = (props) => {
 				/>
 			)}
             <nav className="bg-white navbar navbar-expand-lg">
-                <div className="container">
-                    <button className="navbar-toggler" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler">
+                <div className="container px-0">
+                    <button className="navbar-toggler border-0" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
                         <span className="d-block"></span>
                     </button>
                     <a href="#" className="navbar-brand mx-auto mx-lg-0"  aria-label="Visit Coco and Eve homepage">
@@ -136,7 +147,7 @@ const Header = (props) => {
 					</ul>
 
 					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center">
-						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 mr-1 mr-lg-0">
+						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 me-1 me-lg-0">
 							<a className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<Account className="svg mr-25" />
 							</a>
@@ -144,7 +155,7 @@ const Header = (props) => {
 								
 							</div>
 						</li>
-						<li className="nav-item pr-1">
+						<li className="nav-item pe-1">
 							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="#" data-cy="search-icon">
 								<Search className="svg mr-25" />
 							</a>
@@ -158,6 +169,26 @@ const Header = (props) => {
 					</ul>
                 </div>
             </nav>
+			<nav class="text-center mobile-secnav p-g bg-white d-lg-none">
+				<ul class="nav justify-content-center">
+					<li class="nav-item">
+						<a href="#" class="nav-link pb-0 pt-0 "><b>Shop All</b></a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link pb-0 pt-0"><b>Hair</b></a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link pb-0 pt-0"><b>Tan</b></a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link pb-0 pt-0"><b>Body</b></a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link pb-0 pt-0"><b>Value Kits</b></a>
+					</li>
+				</ul>
+			</nav>
+			<MobileMenu onToggleMobileNav={onToggleMobileNav} />
         </header>
 	);
 };
