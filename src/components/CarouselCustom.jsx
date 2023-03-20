@@ -11,26 +11,25 @@ const CarouselCustom = (props) => {
 	const [itemMovingPrev, setItemMovingPrev] = useState(false);
 
 	let carouselItems = [];
-	// for (let i = 0; i < totalItems; i++) {
-	// 	const idx = i + 1;
-	// 	const labelIndex = idx > props.slideNumber ? idx - props.slideNumber : idx;
-	// 	carouselItems.push({
-	// 		index: i,
-	// 		label: `Slide ${labelIndex}`
-	// 	});
-	// }
-	const itemsConcat = props.items.concat(props.items);
-	itemsConcat.forEach((item, i) => {
-		// console.log('i', i);
-		const data = item;
-		data.id = i;
-		console.log(carouselItems);
-		carouselItems.push(data);
+	let index = 0;
+	props.items.map((item, idx) => {
+		carouselItems.push({
+			label: `Slide ${idx + 1}`,
+			id: index,
+			index,
+		});
+		index++;
 	});
-	console.log('carouselItems', carouselItems);
+	// process duplicated array of slide
+	props.items.map((item, idx) => {
+		carouselItems.push({
+			label: `Slide ${idx + 1}`,
+			id: index,
+			index,
+		});
+		index++;
+	});
 	const [primaryList, setPrimaryList] = useState(carouselItems);
-	// console.log('carouselItems new', props.items.concat(props.items));
-
 
 	const carouselNext = () => {
 		const itemsPerSlide = props.slideNumber ? props.slideNumber : 3;
