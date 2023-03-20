@@ -1,10 +1,45 @@
 import { useState } from 'react';
 import CookieBanner from '@/components/CookieBanner';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import NavMegaMenu from '@/compounds/NavMegaMenu';
 import BrandLogo from '@/components/CELogo';
 import Account from '../../src/images/icons/account.svg';
 import Search from '../../src/images/icons/search-abtest.svg';
 import Cart from '../../src/images/icons/cart.svg';
+
+const NAV_MEGA_MENU_TEMP = [
+	{
+		title: 'Hair',
+		url: '/'
+	},
+	{
+		title: 'Self Tan',
+		url: '/'
+	},
+	{
+		title: 'Body',
+		url: '/'
+	},
+	{
+		title: 'Value Sets',
+		url: '/'
+	}
+]
+
+const NAV_MEGA_MENU_CARD_TEMP = [
+	{
+		title: 'Bali Bronzing Foam in two lines',
+		url: '/'
+	},
+	{
+		title: 'Bali Bronzing Foam in two lines 2',
+		url: '/'
+	},
+	{
+		title: 'Bali Bronzing Foam in two lines',
+		url: '/'
+	}
+]
 
 const Header = (props) => {
     const [showCookie, setShowCookie] = useState(false);
@@ -44,45 +79,65 @@ const Header = (props) => {
                     </a>
 					<ul className="navbar-nav d-none d-lg-flex navbar__secondary">
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Shop All</a>
-							
+							<a href="#" className="nav-link m-0 fw-bold">Shop All</a>
+							<NavMegaMenu 
+								title="Shop All"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li class="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Hair</a>
-							
+							<a href="#" className="nav-link m-0 fw-bold">Hair</a>
+							<NavMegaMenu
+								title="Hair"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Tan</a>
-							
+							<a href="#" className="nav-link m-0 fw-bold">Tan</a>
+							<NavMegaMenu 
+								title="Tan"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Body</a>
-							
+							<a href="#" className="nav-link m-0 fw-bold">Body</a>
+							<NavMegaMenu
+								title="Body"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Value Sets</a>
-							
+							<a href="#" className="nav-link m-0 fw-bold">Value Sets</a>
+							<NavMegaMenu 
+								title="Value Sets"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link m-0 font-weight-bold">|</a>
+							<a className="nav-link m-0 fw-bold">|</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Results IRL</a>
+							<a href="#" className="nav-link m-0 fw-bold">Results IRL</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Blog</a>
+							<a href="#" className="nav-link m-0 fw-bold">Blog</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Sweepstakes</a>
+							<a href="#" className="nav-link m-0 fw-bold">Sweepstakes</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 font-weight-bold">Help</a>
+							<a href="#" className="nav-link m-0 fw-bold">Help</a>
 						</li>
 					</ul>
 
 					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center">
 						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 mr-1 mr-lg-0">
-							<a className="nav-link h4 m-0 d-flex text-uppercase font-weight-bold" href="#" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<Account className="svg mr-25" />
 							</a>
 							<div className="dropdown-menu dropdown-menu-right border-0 rounded-0 pb-0 mt-sm-6 mt-lg-0 pt-0">
@@ -90,12 +145,12 @@ const Header = (props) => {
 							</div>
 						</li>
 						<li className="nav-item pr-1">
-							<a className="nav-link search h4 m-0 d-flex text-uppercase font-weight-bold search-panel__open" href="#" data-cy="search-icon">
+							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="#" data-cy="search-icon">
 								<Search className="svg mr-25" />
 							</a>
 						</li>
 						<li className="nav-item d-flex">
-							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative font-weight-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon">
+							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative fw-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon">
 								<Cart className="svg me-0" />
 								<span className="cart-drawer__count font-size-xs h-100">102</span>
 							</a>
