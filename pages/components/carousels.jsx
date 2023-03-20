@@ -11,6 +11,17 @@ export default function Carousels() {
 			label: `Slide ${i + 1}`
 		});
 	};
+
+	let carouselCustomItems = [];
+	for (let y = 0; y < 4; y++) {
+		const idx = y + 1;
+		const labelIndex = idx > 4 ? idx - 4 : idx;
+		carouselCustomItems.push({
+			index: y,
+			label: `Slide ${labelIndex}`
+		});
+	};
+
 	return (
 		<Container className="pb-4">
 			<h1 className="mb-3">CAROUSEL WITH BULLETS</h1>
@@ -41,13 +52,13 @@ export default function Carousels() {
 			<CarouselFull id="groupedControls" items={carouselItems} indicatorBorder={false} customArrows={true} groupedControls={true} />
 
 			<h1 className="mt-5">CAROUSEL LOOP 3 ITEMS</h1>
-			<CarouselCustom id="loop1" slideNumber={4} className="col-12 col-md-4" roundedControl={true} colLgGrid={3} useRow={true} />
+			{/* <CarouselCustom id="loop1" items={carouselCustomItems} slideNumber={4} className="col-12 col-md-4" roundedControl={true} colLgGrid={3} useRow={true} /> */}
 
 			<h1 className="mt-5">CAROUSEL LOOP 4 ITEMS</h1>
-			<CarouselCustom id="loop2" slideNumber={4} className="col-12 col-md-3" roundedControl={true} colLgGrid={4} useRow={true} />
+			{/* <CarouselCustom id="loop2" items={carouselCustomItems} slideNumber={4} className="col-12 col-md-3" roundedControl={true} colLgGrid={4} useRow={true} /> */}
 
 			<h1 className="mt-5">CAROUSEL LOOP 4 ITEMS CENTERED</h1>
-			<CarouselCustom id="loop3" slideNumber={4} centered={true} className="col-9 col-md-3" />
+			<CarouselCustom id="loop3" items={carouselCustomItems} slideNumber={4} centered={true} className="col-9 col-md-3" />
 		</Container>
 	);
 }

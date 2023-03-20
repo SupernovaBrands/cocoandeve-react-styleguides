@@ -1,5 +1,5 @@
-import Prev from '../../src/images/icons/chevron-prev.svg';
-import Next from '../../src/images/icons/chevron-next.svg';
+import Prev from '@/images/icons/chevron-prev.svg';
+import Next from '@/images/icons/chevron-next.svg';
 import { useState } from 'react';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
@@ -11,15 +11,26 @@ const CarouselCustom = (props) => {
 	const [itemMovingPrev, setItemMovingPrev] = useState(false);
 
 	let carouselItems = [];
-	for (let i = 0; i < totalItems; i++) {
-		const idx = i + 1;
-		const labelIndex = idx > props.slideNumber ? idx - props.slideNumber : idx;
-		carouselItems.push({
-			index: i,
-			label: `Slide ${labelIndex}`
-		});
-	}
+	// for (let i = 0; i < totalItems; i++) {
+	// 	const idx = i + 1;
+	// 	const labelIndex = idx > props.slideNumber ? idx - props.slideNumber : idx;
+	// 	carouselItems.push({
+	// 		index: i,
+	// 		label: `Slide ${labelIndex}`
+	// 	});
+	// }
+	const itemsConcat = props.items.concat(props.items);
+	itemsConcat.forEach((item, i) => {
+		// console.log('i', i);
+		const data = item;
+		data.id = i;
+		console.log(carouselItems);
+		carouselItems.push(data);
+	});
+	console.log('carouselItems', carouselItems);
 	const [primaryList, setPrimaryList] = useState(carouselItems);
+	// console.log('carouselItems new', props.items.concat(props.items));
+
 
 	const carouselNext = () => {
 		const itemsPerSlide = props.slideNumber ? props.slideNumber : 3;

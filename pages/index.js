@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -45,6 +46,11 @@ export default function Home() {
           <a href="./compounds/result-card">Result Card</a>
           <a href="./compounds/upsell">Upsell</a>
           <a href="./compounds/waitlist-form">Waitlist Form</a>
+        </div>
+
+        <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
+          <h2>sections</h2>
+          <Link href="./sections/product-carousels">Product Carousel</Link>
         </div>
       </div>
     </div>
