@@ -5,7 +5,7 @@ const ProductWaitlist = (props) => {
             <p className="text-center font-size-sm px-lg-3 mb-1">{props.content}</p>
             <div className="input-group rounded">
                 <input type="email" name="email" className="form-control text-body border-right-0 rounded-right-0 rounded bg-white" placeholder="Enter your email" />
-                <button className="btn btn-primary rounded  mt-lg-0 py-1 col-12 col-lg-auto" type="submit">{props.button}</button>
+                <button className="btn btn-primary rounded ms-0 me-0 mt-lg-0 py-1 col-12 col-lg-auto" type="submit">{props.button}</button>
             </div>
         </form>
 	);

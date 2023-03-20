@@ -41,6 +41,7 @@ export default function Home() {
           <a href="./compounds/popups">Popups</a>
           <a href="./compounds/post-cards">Post Cards</a>
           <a href="./compounds/product-banner">Product Banner</a>
+          <a href="./compounds/product-card-abtest">Product Card Abtest</a>
           <a href="./compounds/product-card">Product Card</a>
           <a href="./compounds/product-variant">Product Variant</a>
           <a href="./compounds/result-card">Result Card</a>

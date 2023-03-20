@@ -2,9 +2,9 @@ import Help from '../../src/images/icons/help.svg';
 
 const ProductVariant = (props) => {
 	return (
-        <div className="product-variant custom-radio w-100 mb-1">
+        <div className={`product-variant custom-radio w-100 ${props.margin}`}>
             <input id={props.id} className="custom-control-input" type="radio" name={props.name} value={props.value} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
-            <label htmlFor={props.id} className="custom-control-label w-100 border py-2 pr-2 rounded mb-1">
+            <label htmlFor={props.id} className="custom-control-label w-100 border py-2 pe-2 rounded">
                 <p className="mb-1 fw-bold d-flex">
                     {props.title}
                     {props.subscription &&

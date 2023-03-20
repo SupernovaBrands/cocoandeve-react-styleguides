@@ -39,6 +39,7 @@ const ProductVariants = () => {
             dataID="32068892426275"
             variant_description="1x Masque + Brush"
             price="$44.90"
+            margin="mb-1"
             >
             <button onClick={swatchChange} type="button" className={`variant-swatch medium me-2 ${isMedium ? 'border-primary' : ''}`} data-value="medium" data-id="32068891541539"></button>
             <button onClick={swatchChange} type="button" className={`variant-swatch dark me-2 ${isDark ? 'border-primary' : ''}`} data-value="dark" data-id="32068891607075"></button>
@@ -60,6 +61,7 @@ const ProductVariants = () => {
             note="Ultra dark OOS waitlist, dark oos"
             price="$44.90"
             comparePrice="$89.80"
+            margin="mb-1"
           >
           <button onClick={swatchChange} type="button" className={`variant-swatch medium me-2 ${isMedium ? 'border-primary' : ''}`} data-value="medium" data-id="32068891541539"></button>
           <button onClick={swatchChange} type="button" className={`variant-swatch dark me-2 oos ${isDark ? 'border-primary' : ''}`} data-value="dark" data-id="32068891607075"></button>
@@ -82,6 +84,7 @@ const ProductVariants = () => {
             price="$44.90"
             comparePrice="$89.80"
 			      hideSwatch={true}
+            margin="mb-3"
           />
 		  <ProductVariant
             id="product-variant-shampoo-conditioner-set"
@@ -100,6 +103,7 @@ const ProductVariants = () => {
             comparePrice="$89.80"
             hideSwatch={true}
             subscription={true}
+            margin="mb-3"
           />
         </form>
       </div>

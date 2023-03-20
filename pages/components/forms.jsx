@@ -47,7 +47,7 @@ const Forms = (props) => {
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-6">
-                                    <select class="custom-select">
+                                    <select class="custom-select p-g">
                                         <option selected>Select</option>
                                         <option>Option 1</option>
                                         <option>Option 2</option>
@@ -55,7 +55,7 @@ const Forms = (props) => {
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <select class="custom-select" disabled>
+                                    <select class="custom-select p-g" disabled>
                                         <option selected>Select</option>
                                         <option>Option 1</option>
                                         <option>Option 2</option>
