@@ -47,6 +47,10 @@ export default function Home() {
           <a href="./compounds/upsell">Upsell</a>
           <a href="./compounds/waitlist-form">Waitlist Form</a>
         </div>
+        <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
+          <h2>sections</h2>
+          <a href="./sections/header">Header</a>
+        </div>
       </div>
     </div>
   );
