@@ -1,6 +1,7 @@
 import Prev from '@/images/icons/chevron-prev.svg';
 import Next from '@/images/icons/chevron-next.svg';
 import { useState } from 'react';
+import ProductCard from '@/compounds/ProductCard';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -14,7 +15,7 @@ const CarouselCustom = (props) => {
 	let index = 0;
 	props.items.map((item, idx) => {
 		carouselItems.push({
-			label: `Slide ${idx + 1}`,
+			...item,
 			id: index,
 			index,
 		});
@@ -23,7 +24,7 @@ const CarouselCustom = (props) => {
 	// process duplicated array of slide
 	props.items.map((item, idx) => {
 		carouselItems.push({
-			label: `Slide ${idx + 1}`,
+			...item,
 			id: index,
 			index,
 		});
@@ -58,12 +59,19 @@ const CarouselCustom = (props) => {
 		<div className={`position-relative ${props.useRow ? 'row' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${!props.useCardTemplate ? 'pt-2' : ''}`}>
 				<div className="carousel-inner d-flex flex-nowrap">
 					{props.slideNumber > 0 && primaryList.map((item, i) => (
-						<div key={i} className={`${props.className} carousel-item ${activeIndex === item.index ? 'active ' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
-							<img className="img-fluid" src={`//via.placeholder.com/600x400?text=${item.label}`} alt={`slide ${item.index}`}/>
-						</div>
+						<ProductCard
+							key={i}
+							useCardTemplate={props.useCardTemplate}
+							useCarousel={true}
+							className={props.className}
+							activeIndex={activeIndex}
+							product={item}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+							/>
 					))}
 				</div>
 			</div>

@@ -100,4 +100,10 @@
 			border-radius: 0 !important;
 		}
 	}
+
+	@include media-breakpoint-up(lg) {
+		&__title {
+			min-height: calc-em(50);
+		}
+	}
 }

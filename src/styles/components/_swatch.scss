@@ -86,61 +86,61 @@
 			}
 		}
 	}
-    /*
 
 	&.girl-print-limited-edition,
 	&.girl-print {
 		&:before {
-			background-image: url(asset-url('ce-towel-girl.svg'));
+			background-image: url('//cdn.shopify.com/s/files/1/0286/1327/9779/t/167/assets/ce-towel-girl.svg?v=182997428825652113061659081507');
 		}
 	}
 	&.leaf-print {
 		&:before {
-			background-image: url(asset-url('ce-towel-leaf.svg'));
+			background-image: url('//cdn.shopify.com/s/files/1/0286/1327/9779/t/167/assets/ce-towel-leaf.svg?v=139574708809619257471659081502');
 		}
 	}
+	/*
 	&.green,
 	&.grun {
 		&:before {
-			background-image: url(asset-url('ce-eyemask-green.svg'));
+			background-image: url('ce-eyemask-green.svg');
 		}
 	}
 	&.pink {
 		&:before {
-			background-image: url(asset-url('ce-eyemask-pink.svg'));
+			background-image: url('ce-eyemask-pink.svg');
 		}
 	}
 	&.pool-print-limited-edition,
 	&.pool-print {
 		&:before {
-			background-image: url(asset-url('ce-pool-print.svg'));
+			background-image: url('ce-pool-print.svg');
 			transform: rotate(10deg);
 		}
 	}
 	&.tropical-mango,
 	&.sweet-mango {
 		&:before {
-			background-image: url(asset-url('scent-sweet-manggo.svg'));
+			background-image: url('scent-sweet-manggo.svg');
 		}
 	}
 	&.lychee-dragonfruit {
 		&:before {
-			background-image: url(asset-url('scent-lychee-dragonfruit.svg'));
+			background-image: url('scent-lychee-dragonfruit.svg');
 		}
 	}
 	&.mini-comb {
 		&:before {
-			background-image: url(asset-url('ce-comb.svg'));
+			background-image: url('ce-comb.svg');
 		}
 	}
 	&.shampoo-brush {
 		&:before {
-			background-image: url(asset-url('ce-tangle-teaser.svg'));
+			background-image: url('ce-tangle-teaser.svg');
 		}
 	}
 	&.tangle-tamer {
 		&:before {
-			background-image: url(asset-url('ce-brush.svg'));
+			background-image: url('ce-brush.svg');
 		}
 	}
 	&.hot-pink {
@@ -153,5 +153,5 @@
 			background-color: #F5DADF;
 		}
 	}
-    */
+	*/
 }
