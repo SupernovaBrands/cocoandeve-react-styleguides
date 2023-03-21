@@ -9,8 +9,8 @@ const NavMegaMenu = (props) => {
                         <a href="" class="d-block mb-2 h4 text-body text-underline">{props.title}</a>
                         <ol class="list-unstyled">
                             {props.menus.length > 0 && (
-                                props.menus.map((menu) => {
-                                    return <li class=" mb-1"><a href={menu.url} class="h4 text-body">{menu.title}</a></li>
+                                props.menus.map((menu, i) => {
+                                    return <li class=" mb-1" key={`mobile-menu-${i}`}><a href={menu.url} class="h4 text-body">{menu.title}</a></li>
                                 })
                             )}
                         </ol>
@@ -18,9 +18,9 @@ const NavMegaMenu = (props) => {
                     <div class="col-lg-7 mb-3 row">
                         <span class="d-block mb-2 h4 col-12">Best Sellers:</span>
                         {props.cards.length > 0 && (
-                            props.cards.map((card) => {
+                            props.cards.map((card, i) => {
                                 return (
-                                    <figure class="product-card product-card--search-result position-relative col-4 d-flex flex-lg-column mb-2 px-lg-g">
+                                    <figure key={`mobile-card-${i}`} class="product-card product-card--search-result position-relative col-4 d-flex flex-lg-column mb-2 px-lg-g">
                                         <a href="" class="col-12 px-0 text-decoration-none">
                                             <picture>
                                                 <img src="https://via.placeholder.com/444x558" alt="Placeholder" class="d-block w-100" />

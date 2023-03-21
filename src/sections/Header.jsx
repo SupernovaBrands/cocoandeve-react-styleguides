@@ -5,8 +5,10 @@ import NavMegaMenu from '@/compounds/NavMegaMenu';
 import MobileMenu from '@/compounds/MobileMenu';
 import BrandLogo from '@/components/CELogo';
 import Account from '../../src/images/icons/account.svg';
-import Search from '../../src/images/icons/search-abtest.svg';
+import Search from '../../src/images/icons/search-thin.svg';
 import Cart from '../../src/images/icons/cart.svg';
+import SearchBox from '@/compounds/SearchBox';
+import AccountDropdown from '@/compounds/AccountDropdown';
 
 const NAV_MEGA_MENU_TEMP = [
 	{
@@ -44,7 +46,7 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 
 const Header = (props) => {
     const [showCookie, setShowCookie] = useState(false);
-	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(false);
+	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
     const onAcceptCookie = (active) => {
 		setShowCookie(active);
 	};
@@ -53,9 +55,29 @@ const Header = (props) => {
 		console.log('onToggleMobileNav');
 		const mobileClassList = document.getElementById('mobile-nav').classList;
 		if (!mobileClassList.contains('show')) {
-			document.getElementById('mobile-nav').classList.add('show');
+			document.getElementById('mobile-nav').add('show');
 		} else {
-			document.getElementById('mobile-nav').classList.remove('show');
+			document.getElementById('mobile-nav').remove('show');
+		}
+	}
+
+	const onToggleSearchBox = () => {
+		console.log('onToggleSearchBox');
+		const searchBoxClassList = document.getElementById('searchPanel').classList;
+		if (!searchBoxClassList.contains('show')) {
+			searchBoxClassList.add('show');
+		} else {
+			searchBoxClassList.remove('show');
+		}
+	}
+	
+	const toggleAccountDropdown = () => {
+		console.log('toggleAccountDropdown');
+		const searchBoxClassList = document.getElementById('account-dropdown').classList;
+		if (!searchBoxClassList.contains('show')) {
+			searchBoxClassList.add('show');
+		} else {
+			searchBoxClassList.remove('show');
 		}
 	}
 
@@ -97,7 +119,7 @@ const Header = (props) => {
 								cards={NAV_MEGA_MENU_CARD_TEMP}
 							/>
 						</li>
-						<li class="nav-item">
+						<li className="nav-item">
 							<a href="#" className="nav-link m-0 fw-bold">Hair</a>
 							<NavMegaMenu
 								title="Hair"
@@ -146,17 +168,15 @@ const Header = (props) => {
 						</li>
 					</ul>
 
-					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center">
+					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center ">
 						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 me-1 me-lg-0">
-							<a className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="javascript:void(0);" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<Account className="svg mr-25" />
 							</a>
-							<div className="dropdown-menu dropdown-menu-right border-0 rounded-0 pb-0 mt-sm-6 mt-lg-0 pt-0">
-								
-							</div>
+							<AccountDropdown />
 						</li>
 						<li className="nav-item pe-1">
-							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="#" data-cy="search-icon">
+							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="javascript:void(0);" data-cy="search-icon" onClick={onToggleSearchBox}>
 								<Search className="svg mr-25" />
 							</a>
 						</li>
@@ -169,26 +189,27 @@ const Header = (props) => {
 					</ul>
                 </div>
             </nav>
-			<nav class="text-center mobile-secnav p-g bg-white d-lg-none">
-				<ul class="nav justify-content-center">
-					<li class="nav-item">
-						<a href="#" class="nav-link pb-0 pt-0 "><b>Shop All</b></a>
+			<nav className="text-center mobile-secnav p-g bg-white d-lg-none">
+				<ul className="nav justify-content-center">
+					<li className="nav-item">
+						<a href="#" className="nav-link pb-0 pt-0 "><b>Shop All</b></a>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link pb-0 pt-0"><b>Hair</b></a>
+					<li className="nav-item">
+						<a href="#" className="nav-link pb-0 pt-0"><b>Hair</b></a>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link pb-0 pt-0"><b>Tan</b></a>
+					<li className="nav-item">
+						<a href="#" className="nav-link pb-0 pt-0"><b>Tan</b></a>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link pb-0 pt-0"><b>Body</b></a>
+					<li className="nav-item">
+						<a href="#" className="nav-link pb-0 pt-0"><b>Body</b></a>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link pb-0 pt-0"><b>Value Kits</b></a>
+					<li className="nav-item">
+						<a href="#" className="nav-link pb-0 pt-0"><b>Value Kits</b></a>
 					</li>
 				</ul>
 			</nav>
 			<MobileMenu onToggleMobileNav={onToggleMobileNav} />
+			<SearchBox onToggleSearchBox={onToggleSearchBox} />
         </header>
 	);
 };
