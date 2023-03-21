@@ -130,13 +130,13 @@ export default function ProductCarousels() {
 					className="nav nav-tabs mx-auto nav-tabs--product text-center mb-2 justify-content-center"
 				>
 					<Tab eventKey="new" title="New" tabClassName="nav-link text-decoration-none h4 mb-0 font-weight-normal">
-						<CarouselCustom useProductCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
 					</Tab>
 					<Tab eventKey="bestsellers" title="Bestsellers" tabClassName="nav-link text-decoration-none h4 mb-0 font-weight-normal">
-						<CarouselCustom useProductCard={true} items={bestSellers} id="bestsellersCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom items={bestSellers} id="bestsellersCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
 					</Tab>
 					<Tab eventKey="value-sets" title="Value Sets" tabClassName="nav-link text-decoration-none h4 mb-0 font-weight-normal">
-						<CarouselCustom useProductCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
 					</Tab>
 				</Tabs>
 				<div className="text-center">
