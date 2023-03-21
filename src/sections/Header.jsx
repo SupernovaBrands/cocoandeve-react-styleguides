@@ -8,6 +8,7 @@ import Cart from '../../src/images/icons/cart.svg';
 
 const Header = (props) => {
     const [showCookie, setShowCookie] = useState(false);
+	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(false);
     const onAcceptCookie = (active) => {
 		setShowCookie(active);
 	};
@@ -17,19 +18,22 @@ const Header = (props) => {
             {!showCookie && (
 				<CookieBanner onAcceptCookie={onAcceptCookie} text="Up to 25% off + Free Gift worth $25.40" />
 			)}
-            <AnnouncementBar
-				text="Up to 25% off + Free Gift worth $25.40"
-				url="/"
-				timerEnabled={true}
-				countDownStart=""
-				countDownEnd=""
-				countDownDays=""
-				countDownDay=""
-				countDownHrs=""
-				countDownHr=""
-				countDownMin=""
-				countDownSec=""
-			/>
+			{announcementBarEnabled && (
+				<AnnouncementBar
+					text="Up to 25% off + Free Gift worth $25.40"
+					url="/"
+					timerEnabled={true}
+					countDownStart=""
+					countDownEnd=""
+					countDownDays=""
+					countDownDay=""
+					countDownHrs=""
+					countDownHr=""
+					countDownMin=""
+					countDownSec=""
+					enabled={false}
+				/>
+			)}
             <nav className="bg-white navbar navbar-expand-lg">
                 <div className="container">
                     <button className="navbar-toggler" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler">
@@ -92,8 +96,8 @@ const Header = (props) => {
 						</li>
 						<li className="nav-item d-flex">
 							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative font-weight-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon">
-								<Cart className="svg mr-0" />
-								<span className="cart-drawer__count font-size-xs h-100"></span>
+								<Cart className="svg me-0" />
+								<span className="cart-drawer__count font-size-xs h-100">102</span>
 							</a>
 						</li>
 					</ul>
