@@ -51,7 +51,7 @@ const ProductCard = (props) => {
             <Link href="#">
                 <picture>
                     <source srcSet={props.product.srcSet} />
-                    <img src={props.product.src} className="w-100" alt="Image Alt" />
+                    <img src={props.product.src} className="w-100" alt="Image Alt" loading="lazy" />
                 </picture>
                 {props.product.badgeImg && (
                     <BadgeCircleImage className="">
