@@ -49,7 +49,7 @@ import QuoteDown from '../../src/images/icons/quote-down.svg';
 import QuoteUp from '../../src/images/icons/quote-up.svg';
 import Recurring from '../../src/images/icons/recurring.svg';
 import Recycle from '../../src/images/icons/recycle.svg';
-import SearchAbtest from '../../src/images/icons/search-abtest.svg';
+import SearchThin from '../../src/images/icons/search-thin.svg';
 import Search from '../../src/images/icons/search.svg';
 import ShadeNew from '../../src/images/icons/shade-new.svg';
 import SmallPalmTree from '../../src/images/icons/small-palm-tree.svg';
@@ -384,9 +384,9 @@ const Svgs = (props) => {
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
-                        <SearchAbtest className="svg" />
+                        <SearchThin className="svg" />
                     </span>
-                    <span className='label'>SearchAbtest</span>
+                    <span className='label'>SearchThin</span>
                 </div>
                 <div className="preview d-flex flex-column text-center">
                     <span className="inner d-flex justify-content-center align-items-center">
