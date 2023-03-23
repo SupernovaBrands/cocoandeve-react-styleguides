@@ -337,7 +337,6 @@ const RealResultCarousel = () => {
 	const filteredTan = reviews.filter((item) => (item.badge === 'Tan'));
 	const filteredHair = reviews.filter((item) => (item.badge === 'Hair'));
 	const filteredBody = reviews.filter((item) => (item.badge === 'Body'));
-	const [reviewsState, setReviewsState] = useState(reviews);
 	const [activeTab, setActiveTab] = useState('all');
 	const handleChange = (evt) => {
 		setActiveTab(evt.target.value);
@@ -368,16 +367,16 @@ const RealResultCarousel = () => {
 					onSelect={onSelect}
 				>
 					<Tab eventKey="tan" title="Tan" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-						<CarouselCustom resultCard={true} items={filteredTan} id="bestsellersCarousel" slideNumber={filteredTan.length + 1} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom resultCard={true} items={filteredTan} id="bestsellersCarousel" slideNumber={filteredTan.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
 					<Tab eventKey="hair" title="Hair" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-						<CarouselCustom resultCard={true} items={filteredHair} id="bestsellersCarousel" slideNumber={filteredHair.length + 1} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom resultCard={true} items={filteredHair} id="bestsellersCarousel" slideNumber={filteredHair.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
 					<Tab eventKey="body" title="Body" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-						<CarouselCustom resultCard={true} items={filteredBody} id="bestsellersCarousel" slideNumber={filteredBody.length + 1} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom resultCard={true} items={filteredBody} id="bestsellersCarousel" slideNumber={filteredBody.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
 					<Tab eventKey="all" title="All" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-						<CarouselCustom resultCard={true} items={reviewsState} id="bestsellersCarousel" slideNumber={reviewsState.length + 1} centered={true} className="col-9 col-md-3" />
+						<CarouselCustom resultCard={true} items={reviews} id="bestsellersCarousel" slideNumber={reviews.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
 				</Tabs>
 
