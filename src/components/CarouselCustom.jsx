@@ -3,6 +3,7 @@ import Next from '@/images/icons/chevron-next.svg';
 import { useState } from 'react';
 import ProductCard from '@/compounds/ProductCard';
 import ResultCard from '@/compounds/result-card';
+import VideoCard from '@/components/video-card';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -61,7 +62,7 @@ const CarouselCustom = (props) => {
 			<div
 				id={`carouselLoopCentered${props.id}`}
 				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard ? '' : 'pt-2'}`}>
-				<div className="carousel-inner d-flex flex-nowrap">
+				<div className="carousel-inner d-flex flex-nowrap mx-0">
 					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
 							key={i}
@@ -76,6 +77,16 @@ const CarouselCustom = (props) => {
 					))}
 					{props.resultCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ResultCard
+							key={i}
+							useCarousel={true}
+							item={item}
+							activeIndex={activeIndex}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+						 />
+					))}
+					{props.videoCard && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<VideoCard
 							key={i}
 							useCarousel={true}
 							item={item}

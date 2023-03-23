@@ -51,12 +51,16 @@ export default function Home() {
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>sections</h2>
           <a href="./sections/header">Header</a>
+          <a href="./sections/howto">HowTo</a>
           <a href="./sections/product-carousels">Product Carousel</a>
           <a href="./sections/sidebars">Sidebar</a>
           <a href="./sections/services">Services</a>
           <a href="./sections/footer">Footer</a>
+          <a href="./sections/instagram">Instagram</a>
           <a href="./sections/playground">Playground</a>
           <a href="./sections/real-results">Real Result</a>
+          <a href="./sections/testimonials-carousel">Testimonials Carousel</a>
+          <a href="./sections/testimonials">Testimonials</a>
         </div>
       </div>
     </div>
