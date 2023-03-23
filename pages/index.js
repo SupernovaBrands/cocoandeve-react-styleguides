@@ -52,6 +52,7 @@ export default function Home() {
           <h2>sections</h2>
           <a href="./sections/header">Header</a>
           <Link href="./sections/product-carousels">Product Carousel</Link>
+          <Link href="./sections/sidebars">Sidebar</Link>
         </div>
       </div>
     </div>
