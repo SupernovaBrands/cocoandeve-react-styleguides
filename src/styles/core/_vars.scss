@@ -196,12 +196,16 @@ $supernova-icon-asset: url(font-url('supernova-icon.woff2')) format("woff2"),
 url(font-url('supernova-icon.woff')) format("woff");
 
 // Select
-$custom-select-indicator-padding: 1em;
-$custom-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'/></svg>");
-$custom-select-bg-size: calc-em(16) calc-em(9);
-$custom-select-disabled-bg: $gray-100;
-$custom-select-disabled-color: $gray-400;
-$custom-select-background-mask: $custom-select-indicator no-repeat right $input-padding-x/3 center / $custom-select-bg-size !default;
+// $form-select-indicator-padding: 1rem;
+$form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6'><path d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'/></svg>");
+$form-select-bg-size: calc-em(16) calc-em(9);
+$form-select-disabled-bg: $gray-100;
+$form-select-disabled-color: $gray-400;
+$form-select-background-mask: $form-select-indicator no-repeat right $input-padding-x/3 center / $form-select-bg-size !default;
+$form-select-border-width: 0;
+$form-select-bg: $gray-400;
+$form-select-border-radius-lg: .25rem;
+$form-select-line-height: 1.25;
 
 // Badge
 $badge-font-size: 1em;

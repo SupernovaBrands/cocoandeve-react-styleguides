@@ -2,6 +2,7 @@ import Prev from '@/images/icons/chevron-prev.svg';
 import Next from '@/images/icons/chevron-next.svg';
 import { useState } from 'react';
 import ProductCard from '@/compounds/ProductCard';
+import ResultCard from '@/compounds/result-card';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -56,12 +57,12 @@ const CarouselCustom = (props) => {
 		}, 600);
 	};
 	return (
-		<div className={`position-relative ${props.useRow ? 'row' : ''}`}>
+		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.resultCard ? 'carousel--real-result' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${!props.useCardTemplate ? 'pt-2' : ''}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard ? '' : 'pt-2'}`}>
 				<div className="carousel-inner d-flex flex-nowrap">
-					{props.slideNumber > 0 && primaryList.map((item, i) => (
+					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
 							key={i}
 							useCardTemplate={props.useCardTemplate}
@@ -73,6 +74,16 @@ const CarouselCustom = (props) => {
 							itemMovingPrev={itemMovingPrev}
 							/>
 					))}
+					{props.resultCard && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<ResultCard
+							key={i}
+							useCarousel={true}
+							item={item}
+							activeIndex={activeIndex}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+						 />
+					))}
 				</div>
 			</div>
 
@@ -80,7 +91,7 @@ const CarouselCustom = (props) => {
 				onClick={carouselPrev}
 				className={`carousel-control carousel-control-prev carousel-control--background ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-start justify-content-start text-primary'}`}>
 				<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Prev className="svg" />
+					<Prev className="svg svg--current-color" />
 				</span>
 				<span className="visually-hidden">Previous</span>
 			</button>
@@ -88,7 +99,7 @@ const CarouselCustom = (props) => {
 				onClick={carouselNext}
 				className={`carousel-control carousel-control-next carousel-control--background ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-end justify-content-end text-primary'}`}>
 				<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Next className="svg" />
+					<Next className="svg svg--current-color" />
 				</span>
 				<span className="visually-hidden">Next</span>
 			</button>
