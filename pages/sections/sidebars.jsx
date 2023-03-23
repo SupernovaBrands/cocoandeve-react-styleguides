@@ -6,19 +6,19 @@ export default function Sidebars() {
 		{
 			id: 1,
 			link: '/templates/article',
-			title: '5 things you’re doing wrong with your hair care routine 1',
+			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!'
 		},
 		{
 			id: 2,
 			link: '/templates/article',
-			title: '5 things you’re doing wrong with your hair care routine 2',
+			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!'
 		},
 		{
 			id: 3,
 			link: '/templates/article',
-			title: '5 things you’re doing wrong with your hair care routine 3',
+			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!'
 		}
 	];
