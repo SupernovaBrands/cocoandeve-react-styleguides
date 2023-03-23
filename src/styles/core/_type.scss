@@ -23,9 +23,9 @@
 }
 
 .link-secondary {
-	color: $body-color;
+	color: $body-color !important;
 	&:hover {
-		color: $primary;
+		color: $primary !important;
 	}
 }
 

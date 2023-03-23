@@ -1,4 +1,4 @@
-import { Container, Tabs, Tab } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ProductCarousel from "@/sections/ProductCarousel";
 
 export default function ProductCarousels() {
