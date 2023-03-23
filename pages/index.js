@@ -51,8 +51,8 @@ export default function Home() {
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>sections</h2>
           <a href="./sections/header">Header</a>
-          <Link href="./sections/product-carousels">Product Carousel</Link>
-          <Link href="./sections/sidebars">Sidebar</Link>
+          <a href="./sections/product-carousels">Product Carousel</a>
+          <a href="./sections/sidebars">Sidebar</a>
         </div>
       </div>
     </div>
