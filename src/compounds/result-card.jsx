@@ -1,30 +1,30 @@
 import FiveStars from '../../src/images/icons/five-stars.svg';
 import Badges from 'react-bootstrap/Badge';
+import Link from 'next/link';
 
 const ResultCard = (props) => {
     return (
-        <div className="result-card col-lg-3">
+        <div className={`${props.useCarousel ? 'carousel-item col-9' : ''} result-card col-lg-3 ${props.useCarousel && props.activeIndex === props.item.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
             <picture>
-                <source srcSet="https://via.placeholder.com/570x340" media="(min-width: 992px)"/>
-                <source srcSet="https://via.placeholder.com/276x197.jpg/EFADBA"/>
-                <img className="w-100" alt="/" src="https://via.placeholder.com/276x197.jpg/EFADBA" />
+                <source srcSet={props.item.srcSet} media="(min-width: 992px)"/>
+                <img className="w-100" alt="/" src={props.item.src} />
             </picture>
             <div className="p-2 bg-white h-100">
                 <p className="d-flex justify-content-between align-items-center mb-0">
                     <FiveStars className="svg text-primary h4 mb-0" />
-                    <Badges bg="bali-bod-blue" className="mb-1 mt-1">{props.badge}</Badges>
+                    <Badges bg={props.item.badgeColor} className="mb-1 mt-1">{props.item.badge}</Badges>
                 </p>
                 <p>
                     <strong>Product:&nbsp;</strong>
-                    <a href="#" title="Sunny Honey Bali Bronzing Foam" tabIndex="0" className="text-underline">
-                        {props.title}
-                    </a>
+                    <Link href="#" title={props.item.title} tabIndex="0" className="text-underline">
+                        {props.item.title}
+                    </Link>
                 </p>
-                <p>"{props.comment}"</p>
-                <p className="text-underline font-weight-bold">{props.author}</p>
+                <p>"{props.item.comment}"</p>
+                <p className="text-underline fw-bold">{props.item.author}</p>
             </div>
         </div>
-    );  
+    );
 };
 
 export default ResultCard;

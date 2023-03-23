@@ -26,7 +26,7 @@
 
 .custom-control-label {
   position: relative;
-  
+
   &::before {
     border-radius: 0.25rem;
     position: absolute;
@@ -62,7 +62,7 @@
       height: 1.25em;
       opacity: 0;
     }
-  
+
     .custom-control-label {
       position: relative;
       margin-bottom: 0;
@@ -88,32 +88,32 @@
         left: -5.625em;
         border: 1px solid #f5f5f5;
       }
-  
+
       &::before,
       &::after {
         text-align: center;
         line-height: $custom-switch-indicator-size-height;
       }
     }
-  
+
     .custom-control-input ~ .custom-control-label {
-      &::after {    
+      &::after {
         content: 'Off';
       }
     }
-  
+
     .custom-control-input:checked ~ .custom-control-label {
       &::before {
         background-color: $bali-bod-blue;
       }
-  
+
       &::after {
         content: 'On';
         transform: translateX(2.5em);
       }
     }
   }
-  
+
   .custom-select {
     display: inline-block;
     width: 100%;
@@ -136,7 +136,7 @@
       color: $gray-400;
       background-color: $gray-100;
     }
-    
+
     &:focus-visible {
       outline: 0;
     }
