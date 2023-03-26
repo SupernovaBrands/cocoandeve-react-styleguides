@@ -7,6 +7,7 @@ export default function Carousels() {
 	for (let i = 0; i < 3; i++) {
 		carouselItems.push({
 			img: 'https://via.placeholder.com/300x100',
+			srcSet: 'https://via.placeholder.com/300x100',
 			index: i,
 			label: `Slide ${i + 1}`
 		});

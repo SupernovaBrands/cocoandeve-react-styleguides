@@ -50,7 +50,9 @@ export default function Home() {
         </div>
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>sections</h2>
+          <a href="./sections/comments">Comments</a>
           <a href="./sections/header">Header</a>
+          <a href="./sections/hero-banner">Hero Banner</a>
           <a href="./sections/howto">HowTo</a>
           <a href="./sections/product-carousels">Product Carousel</a>
           <a href="./sections/sidebars">Sidebar</a>

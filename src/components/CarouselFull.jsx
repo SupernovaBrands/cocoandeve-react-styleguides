@@ -27,7 +27,11 @@ const CarouselFull = (props) => {
 			<Carousel as={props.as} id={props.id} activeIndex={index} controls={false} indicators={false} interval={null} className={props.className}>
 				{props.items.map((item, i) => (
 					<Carousel.Item key={i}>
-						<img className="d-block w-100" src={item.img} alt={item.label}></img>
+						<picture>
+							<source srcSet={item.srcSet} media="(min-width: 992px)" />
+							<source srcSet={item.img} />
+							<img className="d-block w-100" src={item.img} alt={item.label}></img>
+						</picture>
 					</Carousel.Item>
 				))}
 			</Carousel>
