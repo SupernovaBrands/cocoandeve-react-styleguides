@@ -55,9 +55,9 @@ const Header = (props) => {
 		console.log('onToggleMobileNav');
 		const mobileClassList = document.getElementById('mobile-nav').classList;
 		if (!mobileClassList.contains('show')) {
-			document.getElementById('mobile-nav').add('show');
+			mobileClassList.add('show');
 		} else {
-			document.getElementById('mobile-nav').remove('show');
+			mobileClassList.remove('show');
 		}
 	}
 

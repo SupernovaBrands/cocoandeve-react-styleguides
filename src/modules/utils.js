@@ -1,3 +1,6 @@
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
+
 export const setCookie = (name, value, days = 1, path = '/', domain) => {
 	let expires = '';
 	if (days) {
@@ -132,4 +135,35 @@ export const debounce = function debounce(func, wait, immediate) {
 		timeout = setTimeout(later, wait);
 		if (callNow) func.apply(context, args);
 	};
+};
+
+export const daysToTime = (days = 1) => days * 24 * 60 * 60 * 1000;
+
+export const setLSWithExpiry = (key, value, ttl = 60 * 60 * 1000) => {
+	const now = new Date();
+	const item = {
+		value,
+		expiry: now.getTime() + ttl,
+	};
+	globalThis.localStorage.setItem(key, JSON.stringify(item));
+};
+
+export const getLSWithExpiry = (key) => {
+	const itemStr = globalThis.localStorage.getItem(key);
+	if (!itemStr) { return null; }
+	const item = JSON.parse(itemStr);
+	const now = new Date();
+	if (now.getTime() > item.expiry) {
+		localStorage.removeItem(key);
+		return null;
+	}
+	return item.value;
+};
+
+export const removeLS = (key) => {
+	localStorage.removeItem(key);
+};
+
+const assetUrl = function (filename) {
+	return `/images/${filename}`;
 };

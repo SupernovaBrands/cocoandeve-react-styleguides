@@ -1,4 +1,6 @@
 /* global tSettings tStrings Cart */
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';

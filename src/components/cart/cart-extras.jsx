@@ -1,10 +1,14 @@
 /* global tSettings tStrings assetUrl */
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
+
 import '@/config';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
 	formatMoney,
+	assetUrl,
 } from '@/modules/utils';
 
 import SvgDelivery from '@/images/icons/fast-delivery.svg';
@@ -15,7 +19,6 @@ import SvgMoneybackEur from '@/images/icons/moneyback-eur.svg';
 
 let currency;
 let locale;
-const tSettings = global.config.tSettings;
 if (tSettings.payment.afterpay) {
 	currency = 'USD';
 	locale = 'en_US';
@@ -44,6 +47,7 @@ export default class CartExtras extends React.Component {
 			loading: false,
 		};
 
+		/*
 		$('#modal-klarna').on('show.bs.modal', function () {
 			$('body').addClass('show-modal-klarna');
 		});
@@ -55,6 +59,7 @@ export default class CartExtras extends React.Component {
 				$('body').removeClass('show-modal-klarna');
 			}
 		});
+		*/
 	}
 
 	componentDidMount() {

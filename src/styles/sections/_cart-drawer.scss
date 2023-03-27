@@ -7,6 +7,14 @@
 
 	.modal-dialog {
 		max-width: calc-em(430);
+		margin: 0;
+		float: right;
+		width: 100%;
+	}
+
+	.modal-content {
+		border: none;
+		box-shadow: none;
 	}
 
 	.modal-dialog, .modal-content {
@@ -24,6 +32,8 @@
 		outline: none;
 		opacity: 1;
 		padding-top: map-get($spacers, 2) + map-get($spacers, 1) / 2;
+		background-color: transparent;
+		border: none;
 	}
 
 	.progress {

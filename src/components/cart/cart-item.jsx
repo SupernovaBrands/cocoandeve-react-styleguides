@@ -1,4 +1,6 @@
 /* global tStrings tSettings */
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -52,14 +54,14 @@ export default class CartItem extends React.Component {
 
 	variantSubtitle = (item) => {
 		let subtitles = [];
-		if (item.merchandise.product.handle === window.tSettings.bundleHandle1) {
-			subtitles = window.tSettings.bundleSubHandle1.split(',');
-		} else if (item.merchandise.product.handle === window.tSettings.bundleHandle2) {
-			subtitles = window.tSettings.bundleSubHandle2.split(',');
-		} else if (item.handle === window.tSettings.bundleHandle3) {
-			subtitles = window.tSettings.bundleSubHandle3.split(',');
-		} else if (item.handle === window.tSettings.bundleHandle4) {
-			subtitles = window.tSettings.bundleSubHandle4.split(',');
+		if (item.merchandise.product.handle === tSettings.bundleHandle1) {
+			subtitles = tSettings.bundleSubHandle1.split(',');
+		} else if (item.merchandise.product.handle === tSettings.bundleHandle2) {
+			subtitles = tSettings.bundleSubHandle2.split(',');
+		} else if (item.handle === tSettings.bundleHandle3) {
+			subtitles = tSettings.bundleSubHandle3.split(',');
+		} else if (item.handle === tSettings.bundleHandle4) {
+			subtitles = tSettings.bundleSubHandle4.split(',');
 		}
 		return subtitles;
 	}
@@ -109,7 +111,7 @@ export default class CartItem extends React.Component {
 					</ConditionWrapper>
 					<figcaption className="col-9">
 						<div className="d-flex align-items-start no-gutters justify-content-between">
-							<p className="mb-1 font-weight-bold col-8">
+							<p className="mb-1 fw-bold col-8 ps-0">
 								{item.isFreeItem && item.originalPrice >= 0 ? (
 									<ConditionWrapper
 										condition={item.isFreeItem}
@@ -132,7 +134,7 @@ export default class CartItem extends React.Component {
 										</ConditionWrapper>
 									)}
 								{item.recurring && (
-									<span className="text-primary mt-1 d-flex font-italic font-size-sm font-weight-normal">
+									<span className="text-primary mt-1 d-flex font-italic font-size-sm fw-normal">
 										<SvgRecurring className="svg mr-1" />
 										{' '}
 										{item.recurringMessage}

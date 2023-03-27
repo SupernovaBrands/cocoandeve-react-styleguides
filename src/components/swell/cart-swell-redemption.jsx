@@ -1,5 +1,8 @@
 /* global tSettings */
 
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
+
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import SvgChevronPrev from '@/images/icons/chevron-prev.svg';

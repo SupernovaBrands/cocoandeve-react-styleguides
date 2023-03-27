@@ -1,4 +1,6 @@
 /* global tStrings tSettings */
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
 
 import React from 'react';
 import PropTypes from 'prop-types';

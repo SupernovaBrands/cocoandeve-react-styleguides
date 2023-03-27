@@ -132,7 +132,7 @@ export default class QuantityBox extends React.Component {
 		return (
 			<div className="quantity-box d-flex">
 				<button
-					className="input-group-text bg-transparent border-right-0 rounded-lg rounded-right-0 border-dark flex-grow-0"
+					className="input-group-text bg-transparent border-end-0 rounded-0 rounded-start border-dark flex-grow-0"
 					type="button"
 					aria-label="Add Subtract"
 					disabled={!this.props.editable || this.state.prevQuantity === 0}
@@ -144,7 +144,7 @@ export default class QuantityBox extends React.Component {
 				<input
 					type="number"
 					name={this.props.name}
-					className="form-control border-left-0 border-right-0 rounded-0 p-0 text-center flex-grow-0 bg-transparent text-body border-dark font-size-dt-lg"
+					className="form-control border-start-0 border-end-0 rounded-0 p-0 text-center flex-grow-0 bg-transparent text-body border-dark font-size-dt-lg"
 					value={this.state.quantity}
 					onChange={this.onChangeQuantity}
 					onFocus={this.onFocus}
@@ -152,7 +152,7 @@ export default class QuantityBox extends React.Component {
 					aria-label="quantity input"
 				/>
 				<button
-					className="input-group-text bg-transparent border-left-0 rounded-lg rounded-left-0 border-dark flex-grow-0"
+					className="input-group-text bg-transparent rounded-0 rounded-end  border-start-0 border-dark flex-grow-0"
 					type="button"
 					aria-label="Add Quantity"
 					disabled={!this.props.editable || this.state.lastStock}

@@ -1,4 +1,7 @@
 /* global tStrings tSettings Cart */
+const tSettings = global.config.tSettings;
+const tStrings = global.config.tStrings;
+
 import StorefrontApi from '@/modules/storefront-api';
 
 import {

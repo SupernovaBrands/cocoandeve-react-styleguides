@@ -4,6 +4,9 @@ import {
 	getCookie,
 } from './utils';
 
+//temp shipping zones to rbe replace with global var later
+const shippingZones = [];
+
 export default class Shipping {
 	/*
 		find zone base of customer country
