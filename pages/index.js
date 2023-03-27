@@ -56,6 +56,7 @@ export default function Home() {
           <a href="./sections/services">Services</a>
           <a href="./sections/footer">Footer</a>
           <a href="./sections/playground">Playground</a>
+          <a href="./sections/cart-drawer">Cart</a>
         </div>
       </div>
     </div>
