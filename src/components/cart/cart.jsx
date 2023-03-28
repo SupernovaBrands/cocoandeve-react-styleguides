@@ -361,6 +361,8 @@ export default class Cart extends React.Component {
 			giftCardAmount,
 		} = this.state;
 
+		console.log(discountData);
+
 		const isSwellDiscCode = isSwellCode(discountData.code);
 
 		return (

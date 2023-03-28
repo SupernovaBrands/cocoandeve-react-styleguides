@@ -153,23 +153,23 @@ const CarouselScroll = (props) => {
                             return <SearchProductCard title={product.title} classes={`carousel-item mb-1 ${i === 0 ? 'active' : ''}`} />
                         })}
                     </div>
-                    <a class="carousel-control carousel-control-prev text-body ml-ng carousel-control-prev--always-show d-none d-lg-flex disabled" role="button">
+                    <a className="carousel-control carousel-control-prev text-body ml-ng carousel-control-prev--always-show d-none d-lg-flex disabled" role="button">
                         <span
-                            class="carousel-control-prev-icon carousel-control--background {{#if (eq id 'search-products')}}carousel-control--transparent{{else}}{{/if}} d-flex justify-content-center align-items-center"
+                            className="carousel-control-prev-icon carousel-control--background {{#if (eq id 'search-products')}}carousel-control--transparent{{else}}{{/if}} d-flex justify-content-center align-items-center"
                             aria-hidden="true">
-                            <ChevronPrev class="svg" />
+                            <ChevronPrev className="svg" />
                         </span>
                     </a>
-                    <a class="carousel-control carousel-control-next text-body mr-ng carousel-control-prev--always-show d-none d-lg-flex" role="button">
+                    <a className="carousel-control carousel-control-next text-body mr-ng carousel-control-prev--always-show d-none d-lg-flex" role="button">
                         <span
-                            class="carousel-control-next-icon carousel-control--background {{#if (eq id 'search-products')}}carousel-control--transparent{{else}}{{/if}} d-flex justify-content-center align-items-center"
+                            className="carousel-control-next-icon carousel-control--background {{#if (eq id 'search-products')}}carousel-control--transparent{{else}}{{/if}} d-flex justify-content-center align-items-center"
                             aria-hidden="true">
-                            <ChevronNext class="svg" />
+                            <ChevronNext className="svg" />
                         </span>
                     </a>
                 </div>
             )}
-            <p className='search-carousel__note mb-3 mb-lg-0 pb-5 pb-lg-0'>Not what you're looking for?<br class='d-lg-none'></br><span class='d-none d-lg-inline'>&nbsp;</span><nobr>Check our <a href='/collections/all' class='text-underline'>shop all page</a></nobr></p>
+            <p className='search-carousel__note mb-3 mb-lg-0 pb-5 pb-lg-0'>Not what you're looking for?<br className='d-lg-none'></br><span className='d-none d-lg-inline'>&nbsp;</span><nobr>Check our <a href='/collections/all' className='text-underline'>shop all page</a></nobr></p>
         </div>
     )
 }

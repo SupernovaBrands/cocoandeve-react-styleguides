@@ -175,7 +175,7 @@ QuantityBox.propTypes = {
 	productId: PropTypes.number.isRequired,
 	productStock: PropTypes.number.isRequired,
 	isLastStock: PropTypes.bool.isRequired,
-	isPdp: PropTypes.bool.isRequired,
+	isPdp: PropTypes.bool,
 };
 
 QuantityBox.defaultProps = {

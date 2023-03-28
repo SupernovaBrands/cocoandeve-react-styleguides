@@ -85,7 +85,7 @@ export const isSwellCode = (code) => {
 
 export const getId = (shopifyId) => {
 	const arrString = shopifyId.split('/');
-	return arrString[arrString.length - 1];
+	return parseInt(arrString[arrString.length - 1]);
 };
 
 export const getCartId = () => {

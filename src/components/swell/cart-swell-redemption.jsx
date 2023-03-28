@@ -114,11 +114,11 @@ const CartSwellRedemption = (props) => {
 				<p className="font-size-sm text-primary mb-1">{errorMsg.replace(/(<([^>]+)>)/ig, '')}</p>
 			)}
 			<button className="position-absolute btn-unstyled text-primary manual-gwp__left" aria-hidden="true" type="button" onClick={() => scroll('left')}>
-				<SvgChevronPrev class="svg" />
+				<SvgChevronPrev className="svg" />
 				<span className="d-none">Left</span>
 			</button>
 			<button className="position-absolute btn-unstyled text-primary manual-gwp__right" aria-hidden="true" type="button" onClick={() => scroll('right')}>
-				<SvgChevronNext class="svg" />
+				<SvgChevronNext className="svg" />
 				<span className="d-none">Right</span>
 			</button>
 			<div className="manual-gwp__container d-flex mb-0 mt-2 text-center" ref={swellRef}>

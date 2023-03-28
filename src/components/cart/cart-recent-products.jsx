@@ -84,7 +84,7 @@ const CartRecentProducts = (props) => {
 			{withNext && (
 				<a className="carousel-control carousel-control-prev carousel-control--background floating-out-left justify-content-start text-primary" href="#cart-recent-products" role="button" data-slide="prev">
 					<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-						<SvgChevronPrev class="svg" />
+						<SvgChevronPrev className="svg" />
 					</span>
 					<span className="sr-only">Previous</span>
 				</a>
@@ -92,7 +92,7 @@ const CartRecentProducts = (props) => {
 			{withNext && (
 				<a className="carousel-control carousel-control-next carousel-control--background floating-out-right justify-content-end text-primary" href="#cart-recent-products" role="button" data-slide="next">
 					<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-						<SvgChevronNext class="svg" />
+						<SvgChevronNext className="svg" />
 					</span>
 					<span className="sr-only">Next</span>
 				</a>

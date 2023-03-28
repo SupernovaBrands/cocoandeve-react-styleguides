@@ -9,6 +9,7 @@ import SvgTag from '@/images/icons/tag.svg';
 import SvgGift from '@/images/icons/gift.svg';
 import SvgCloseCircle from '@/images/icons/close-circle.svg';
 import { isSwellCode, formatMoney } from '@/modules/utils';
+import { Collapse, Button } from 'react-bootstrap';
 
 export default class CartDiscountForm extends React.Component {
 	constructor(props) {
@@ -19,6 +20,7 @@ export default class CartDiscountForm extends React.Component {
 			code: '',
 			prevCode: '',
 			error: '',
+			openForm: false,
 		};
 	}
 
@@ -54,6 +56,7 @@ export default class CartDiscountForm extends React.Component {
 	}
 
 	applyDiscount = (e) => {
+		console.log('e', e);
 		e.stopPropagation();
 		this.setState((prevState) => ({ code: prevState.code.trim() }), () => {
 			this.props.onApply(this.state.code);
@@ -72,8 +75,10 @@ export default class CartDiscountForm extends React.Component {
 	}
 
 	focusTextInput() {
+		console.log();
+		this.setState({ openForm: !this.state.openForm });
 		setTimeout(() => {
-			this.textInput.current.focus();
+			// this.textInput.current.focus();
 		}, 300);
 	}
 
@@ -89,6 +94,7 @@ export default class CartDiscountForm extends React.Component {
 		const {
 			code,
 			error,
+			openForm,
 		} = this.state;
 
 		const hasCode = isApplied || !!appliedGiftCard.code;
@@ -104,7 +110,7 @@ export default class CartDiscountForm extends React.Component {
 							<SvgGift className="svg mr-1" />
 							{`${formatMoney(discAmount)} off`}
 							<button className="btn-unstyled ml-1 text-black-50" onClick={this.removeDiscount} type="button" aria-label="Remove Discount" data-cy="cart-removepromo-icon">
-								<SvgCloseCircle class="svg" />
+								<SvgCloseCircle className="svg" />
 								222
 							</button>
 						</>
@@ -115,7 +121,7 @@ export default class CartDiscountForm extends React.Component {
 							{code}
 							{!isAutoDiscount && (
 								<button className="btn-unstyled ml-1 text-black-50" onClick={this.removeDiscount} type="button" aria-label="Remove Discount" data-cy="cart-removepromo-icon">
-									<SvgCloseCircle class="svg" />
+									<SvgCloseCircle className="svg" />
 								</button>
 							)}
 						</span>
@@ -126,7 +132,7 @@ export default class CartDiscountForm extends React.Component {
 							{code}
 							{!isAutoDiscount && (
 								<button className="btn-unstyled ml-1 text-black-50" onClick={this.removeDiscount} type="button" aria-label="Remove Discount" data-cy="cart-removepromo-icon">
-									<SvgCloseCircle class="svg" />
+									<SvgCloseCircle className="svg" />
 								</button>
 							)}
 						</span>
@@ -136,7 +142,7 @@ export default class CartDiscountForm extends React.Component {
 							<SvgGift className="svg font-size-sm mr-1" />
 							{appliedGiftCard.lastCharacters}
 							<button className="btn-unstyled ml-1 text-black-50" onClick={this.removeGiftCard} type="button" aria-label="Remove Gift" data-cy="cart-removegift-icon">
-								<SvgCloseCircle class="svg" />
+								<SvgCloseCircle className="svg" />
 								789
 							</button>
 						</span>
@@ -146,7 +152,7 @@ export default class CartDiscountForm extends React.Component {
 							<SvgGift className="svg font-size-sm mr-1" />
 							{appliedGiftCard.lastCharacters}
 							<button className="btn-unstyled ml-1 text-black-50" onClick={this.removeGiftCard} type="button" aria-label="Remove Gift" data-cy="cart-removegift-icon">
-								<SvgCloseCircle class="svg" />
+								<SvgCloseCircle className="svg" />
 								456
 							</button>
 						</span>
@@ -159,17 +165,14 @@ export default class CartDiscountForm extends React.Component {
 		) : (
 			<div className="mt-2">
 				<a onClick={this.focusTextInput} className={`text-body text-underline cart-drawer__discount-toggle ${!error ? 'collapsed' : ''}`} data-toggle="collapse" href="#cart-drawer__discount-form" role="button" aria-expanded={!!error} aria-controls="cart-drawer__discount-form" data-cy="applypromo-text">{tStrings.cart_discount_text}</a>
-				<div className={`collapse ${error ? 'show' : ''}`} id="cart-drawer__discount-form">
+				<Collapse in={openForm}>
 					<div className="input-group py-1">
 						<input type="text" ref={this.textInput} name="discount" className="form-control text-body border-right-0" placeholder={tStrings.cart_discount_input} value={code} onChange={this.onTextChange} onKeyUp={this.onKeyUp} readOnly={loading} data-cy="cart-discount" aria-label={tStrings.cart_discount_input} />
 						<button className="btn btn-link border border-left-0 rounded-left-0 font-weight-bold d-flex align-items-center" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
 							{loading ? (<div className="spinner-border" role="status" />) : tStrings.cart_discount_apply}
 						</button>
 					</div>
-					{error && (
-						<p className="small text-danger mb-0" data-cy="cart-discount-error">{error}</p>
-					)}
-				</div>
+				</Collapse>
 			</div>
 		);
 	}
@@ -177,12 +180,12 @@ export default class CartDiscountForm extends React.Component {
 
 CartDiscountForm.propTypes = {
 	isApplied: PropTypes.bool.isRequired,
-	code: PropTypes.string.isRequired,
+	code: PropTypes.string,
 	isAutoDiscount: PropTypes.bool.isRequired,
 	loading: PropTypes.bool.isRequired,
 	error: PropTypes.string.isRequired,
-	errorExtra: PropTypes.bool.isRequired,
-	discAmount: PropTypes.string.isRequired,
+	errorExtra: PropTypes.bool,
+	discAmount: PropTypes.string,
 	onApply: PropTypes.func.isRequired,
 	onRemove: PropTypes.func.isRequired,
 	appliedGiftCard: PropTypes.object,

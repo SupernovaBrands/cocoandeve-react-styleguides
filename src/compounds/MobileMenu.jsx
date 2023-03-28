@@ -10,26 +10,26 @@ const MobileMenu = (props) => {
     }
 
     return (
-        <nav id="mobile-nav" class="mobile-nav position-fixed d-lg-none" onClick={mobileNavClick}>
-		    <Close class="mobile-nav__close svg text-white" onClick={() => props.onToggleMobileNav()} />
-            <ul id="mobileMenu" class="mobile-nav__menu accordion position-fixed h-100 col-9 bg-white list-unstyled py-2 mb-0"
+        <nav id="mobile-nav" className="mobile-nav position-fixed d-lg-none" onClick={mobileNavClick}>
+		    <Close className="mobile-nav__close svg text-white" onClick={() => props.onToggleMobileNav()} />
+            <ul id="mobileMenu" className="mobile-nav__menu accordion position-fixed h-100 col-9 bg-white list-unstyled py-2 mb-0"
 			role="tablist" aria-multiselectable="true">
-                <li class="mb-1">
-                    <a href="#" class="btn btn-primary btn-block w-100" data-cy="shopall-btn">Shop All</a>
+                <li className="mb-1">
+                    <a href="#" className="btn btn-primary btn-block w-100" data-cy="shopall-btn">Shop All</a>
                 </li>
                 <Accordion defaultActiveKey="" flush>
                     <Accordion.Item eventKey="0" className='border-0'>
                         <Accordion.Button className='shadow-none border-0 py-0'>
-                            <figure id="headingHair" class="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
-                                <img class="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
-                                <figcaption class="media-body ms-1 w-100">
+                            <figure id="headingHair" className="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
+                                <img className="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
+                                <figcaption className="media-body ms-1 w-100">
                                     <small>Haircare</small>
-                                    <h4 class="m-0">Like a Virgin</h4>
+                                    <h4 className="m-0">Like a Virgin</h4>
                                 </figcaption>
                             </figure>
                         </Accordion.Button>
                         <Accordion.Body className="px-0 pt-0">
-                            <ul id="hairCare" class="list-unstyled card-body p-0" aria-labelledby="headingHair">
+                            <ul id="hairCare" className="list-unstyled card-body p-0" aria-labelledby="headingHair">
                                 <li><a href="#">Nourishing Hair Masque</a></li>
                                 <li><a href="#">Hair Heroes Gift Set</a></li>
                                 <li><a href="#">That's A Wrap Bundle</a></li>
@@ -42,16 +42,16 @@ const MobileMenu = (props) => {
                     </Accordion.Item>
                     <Accordion.Item eventKey="2" className='border-0'>
                         <Accordion.Button className='shadow-none border-0 py-0'>
-                            <figure class="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
-                                <img class="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
-                                <figcaption class="media-body ms-1 w-100">
+                            <figure className="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
+                                <img className="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
+                                <figcaption className="media-body ms-1 w-100">
                                     <small>Self Tanner</small>
-                                    <h4 class="m-0">Sunny Honey</h4>
+                                    <h4 className="m-0">Sunny Honey</h4>
                                 </figcaption>
                             </figure>
                         </Accordion.Button>
                         <Accordion.Body className="px-0 pt-0">
-                            <ul class="list-unstyled card-body p-0" aria-labelledby="headingHair">
+                            <ul className="list-unstyled card-body p-0" aria-labelledby="headingHair">
                                 <li><a href="#">Bali Bronzing Bundle</a></li>
                                 <li><a href="#">Bali Bronzing Foam</a></li>
                                 <li><a href="#">Bronzing Face Drops</a></li>
@@ -64,16 +64,16 @@ const MobileMenu = (props) => {
                     </Accordion.Item>
                     <Accordion.Item eventKey="3" className='border-0'>
                         <Accordion.Button className='shadow-none border-0 py-0'>
-                            <figure class="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
-                                <img class="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
-                                <figcaption class="media-body ms-1 w-100">
+                            <figure className="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
+                                <img className="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
+                                <figcaption className="media-body ms-1 w-100">
                                     <small>Bodycare</small>
-                                    <h4 class="m-0">Glow Figure</h4>
+                                    <h4 className="m-0">Glow Figure</h4>
                                 </figcaption>
                             </figure>
                         </Accordion.Button>
                         <Accordion.Body className="px-0 pt-0">
-                            <ul class="list-unstyled card-body p-0" aria-labelledby="headingHair">
+                            <ul className="list-unstyled card-body p-0" aria-labelledby="headingHair">
                                 <li><a href="#">Bali Bod Bundle</a></li>
                                 <li><a href="#">Bali Buffing Sugar</a></li>
                                 <li><a href="#">Body Moisture Whip</a></li>
@@ -86,16 +86,16 @@ const MobileMenu = (props) => {
                     </Accordion.Item>
                     <Accordion.Item eventKey="3" className='border-0'>
                         <Accordion.Button className='shadow-none border-0 py-0'>
-                            <figure class="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
-                                <img class="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
-                                <figcaption class="media-body ms-1 w-100">
+                            <figure className="media card-header d-flex position-relative p-0" aria-expanded="false" aria-controls="hairCare">
+                                <img className="rounded" src="https://via.placeholder.com/40x40/EFADBA" alt="Generic placeholder image" />
+                                <figcaption className="media-body ms-1 w-100">
                                     <small>Bundles</small>
-                                    <h4 class="m-0">Value Kits</h4>
+                                    <h4 className="m-0">Value Kits</h4>
                                 </figcaption>
                             </figure>
                         </Accordion.Button>
                         <Accordion.Body className="px-0 pt-0">
-                            <ul class="list-unstyled card-body p-0" aria-labelledby="headingHair">
+                            <ul className="list-unstyled card-body p-0" aria-labelledby="headingHair">
                                 <li><a href="#">Hair Heroes Gift Set</a></li>
                                 <li><a href="#">Bali Bod Bundle</a></li>
                                 <li><a href="#">Taste of the Tropics Kit</a></li>
@@ -112,14 +112,14 @@ const MobileMenu = (props) => {
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Result IRL</a></li>
                 <li><a href="#">Contact Us</a></li>
-                <li class="border-bottom border-top card py-1 my-g">
-                    <h4 id="countrySelect" class="card-header position-relative collapsed p-0 mb-25 mt-25" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry">
+                <li className="border-bottom border-top card py-1 my-g">
+                    <h4 id="countrySelect" className="card-header position-relative collapsed p-0 mb-25 mt-25" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry">
                         Rest of the World (SGD)
                         <ChevronDown className="svg font-size-xs chevron-down" />
                     </h4>
-                    <ul id="collapseCountry" class="collapse list-unstyled card-body p-0"
+                    <ul id="collapseCountry" className="collapse list-unstyled card-body p-0"
                         aria-labelledby="countrySelect" data-parent="#mobileMenu">
-                        <li class="pt-g"><a href="#">USA (USD)</a></li>
+                        <li className="pt-g"><a href="#">USA (USD)</a></li>
                         <li><a href="#">United Kingdom (GBP)</a></li>
                         <li><a href="#">Canada (CAD)</a></li>
                         <li><a href="#">Australia (AUD)</a></li>

@@ -444,20 +444,20 @@ const YotpoReviewWidget = (props) => {
 			{revThanks && (
 				<div className="yotpo-widget__thanks bg-white border px-2 px-lg-4 py-5 mt-2 d-flex flex-column align-items-center text-center position-relative">
 					<button type="button" className="close position-absolute font-size-base" onClick={() => setRevThanks(false)}>
-						<SvgClose class="svg" />
+						<SvgClose className="svg" />
 					</button>
-					<SvgHeart class="svg text-primary h1" />
+					<SvgHeart className="svg text-primary h1" />
 					<p className="h3 text-primary">{tStrings.yotpo.thanksReviewTitle}</p>
 					<p>{tStrings.yotpo.thanksReviewText}</p>
 					<div className="d-flex">
 						<button type="button" className="btn btn-link h2 p-0 mr-2" onClick={() => openPopup(shareFacebookUrl())}>
-							<SvgFacebook class="svg" />
+							<SvgFacebook className="svg" />
 						</button>
 						<button type="button" className="btn btn-link h2 p-0 mr-2" onClick={() => openPopup(shareTwitterUrl())}>
-							<SvgTwitter class="svg" />
+							<SvgTwitter className="svg" />
 						</button>
 						<button type="button" className="btn btn-link h2 p-0" onClick={() => openPopup(shareLinkedinUrl())}>
-							<SvgLinkedin class="svg" />
+							<SvgLinkedin className="svg" />
 						</button>
 					</div>
 				</div>
@@ -466,9 +466,9 @@ const YotpoReviewWidget = (props) => {
 			{qnaThanks && (
 				<div className="yotpo-widget__thanks bg-white border px-2 px-lg-4 py-5 mt-2 d-flex flex-column align-items-center text-center position-relative">
 					<button type="button" className="close position-absolute font-size-base" onClick={() => setQnaThanks(false)}>
-						<SvgClose class="svg" />
+						<SvgClose className="svg" />
 					</button>
-					<SvgHeart class="svg text-primary h1" />
+					<SvgHeart className="svg text-primary h1" />
 					<p className="h3 text-primary">{tStrings.yotpo.thanksQuestionTitle}</p>
 					<p>{tStrings.yotpo.thanksQuestionText1}</p>
 					<p className="mb-0">{tStrings.yotpo.thanksQuestionText2}</p>

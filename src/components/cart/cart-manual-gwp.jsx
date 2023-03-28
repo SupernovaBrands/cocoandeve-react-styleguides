@@ -45,11 +45,11 @@ export default class CartManualGwp extends React.Component {
 				<p className="font-size-base font-weight-bold mb-0">{title}</p>
 				<p className="font-size-base text-gray-600">{`${selectedKey.length}/${maxSelected} ${tStrings.items_selected}`}</p>
 				<button className={`position-absolute btn-unstyled text-primary manual-gwp__left ${this.state.showScroll ? '' : 'd-none'}`} aria-hidden="true" type="button" onClick={() => this.scroll('left')}>
-					<SvgChevronPrev class="svg" />
+					<SvgChevronPrev className="svg" />
 					<span className="d-none">Left</span>
 				</button>
 				<button className={`position-absolute btn-unstyled text-primary manual-gwp__right ${this.state.showScroll ? '' : 'd-none'}`} aria-hidden="true" type="button" onClick={() => this.scroll('right')}>
-					<SvgChevronNext class="svg" />
+					<SvgChevronNext className="svg" />
 					<span className="d-none">Right</span>
 				</button>
 				<ul className="list-unstyled manual-gwp__container d-flex mb-0 text-center" ref={(r) => { this.scrollRef = r; }}>

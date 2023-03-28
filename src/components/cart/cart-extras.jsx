@@ -142,7 +142,7 @@ export default class CartExtras extends React.Component {
 				)}
 
 				{showAfterpay && (
-					<afterpay-placement ref={(r) => { this.afterpayRef = r; }} class="text-center border-top m-0 pt-2" data-locale={locale} data-currency={currency} data-amount={totalPrice / 100} data-size="sm" />
+					<afterpay-placement ref={(r) => { this.afterpayRef = r; }} className="text-center border-top m-0 pt-2" data-locale={locale} data-currency={currency} data-amount={totalPrice / 100} data-size="sm" />
 				)}
 
 				{showKlarna && (

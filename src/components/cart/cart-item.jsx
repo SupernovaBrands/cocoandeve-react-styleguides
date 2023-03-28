@@ -141,8 +141,8 @@ export default class CartItem extends React.Component {
 									</span>
 								)}
 							</p>
-							{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash class="svg" /></button>)}
-							{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash class="svg" /></button>)}
+							{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg" /></button>)}
+							{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg" /></button>)}
 
 						</div>
 
