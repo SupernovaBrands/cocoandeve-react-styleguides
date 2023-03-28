@@ -63,6 +63,7 @@ export default function Home() {
           <a href="./sections/real-results">Real Result</a>
           <a href="./sections/testimonials-carousel">Testimonials Carousel</a>
           <a href="./sections/testimonials">Testimonials</a>
+          <a href="./sections/cart-drawer">Cart</a>
         </div>
       </div>
     </div>
