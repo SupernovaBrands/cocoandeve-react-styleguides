@@ -65,6 +65,11 @@ export default function Home() {
           <a href="./sections/testimonials">Testimonials</a>
           <a href="./sections/cart-drawer">Cart</a>
         </div>
+        <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
+          <h2>Templates</h2>
+          <a href="./templates/article">Article</a>
+          <a href="./templates/blog-filtered">Blog Filtered</a>
+        </div>
       </div>
     </div>
   );
