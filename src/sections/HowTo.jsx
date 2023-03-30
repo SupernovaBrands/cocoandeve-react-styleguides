@@ -20,31 +20,13 @@ const HowToCarousel = (props) => {
 			title: 'Multi-masking #selfcaresunday with Janet Amrani 3',
 			srcSet: 'https://via.placeholder.com/720x720',
 			src: 'https://via.placeholder.com/592x592',
-		},
-        {
-			label: 'Slide 4',
-			title: 'Multi-masking #selfcaresunday with Janet Amrani 4',
-			srcSet: 'https://via.placeholder.com/720x720',
-			src: 'https://via.placeholder.com/592x592',
-		},
-        {
-			label: 'Slide 5',
-			title: 'Multi-masking #selfcaresunday with Janet Amrani 5',
-			srcSet: 'https://via.placeholder.com/720x720',
-			src: 'https://via.placeholder.com/592x592',
-		},
-        {
-			label: 'Slide 6',
-			title: 'Multi-masking #selfcaresunday with Janet Amrani 6',
-			srcSet: 'https://via.placeholder.com/720x720',
-			src: 'https://via.placeholder.com/592x592',
 		}
 	];
 	
 	return (
 		<section className="how-to bg-primary-light py-2 no-gutters__in-container mb-5">
-            <h2 className="text-center h1 py-2 py-lg-1 mb-0">The Ultimate “HOW TO”s</h2>
-			<CarouselCustom videoCard={true} items={items} id="" slideNumber={4} centered={true} />
+			<h2 className="text-center h1 py-2 py-lg-1 mb-0">The Ultimate “HOW TO”s</h2>
+			<CarouselCustom videoCard={true} items={items} id="howToCarousel" slideNumber={3} colLgGrid={4} className="col-9 col-md-4" />
 		</section>
 	);
 };

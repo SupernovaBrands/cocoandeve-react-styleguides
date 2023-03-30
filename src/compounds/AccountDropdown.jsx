@@ -19,11 +19,11 @@ const AccountDropdown = (props) => {
                     <form id="dropdown__login" className="p-g shadow">
                         <p className="font-weight-bold text-center px-2 mb-2">Log In to your account</p>
                         <div className="form-group">
-                            <label for="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
+                            <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
                             <input type="email" className="form-control font-size-sm" id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
                         </div>
                         <div className="form-group mt-2">
-                            <label for="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
+                            <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                             <input type="password" className="form-control font-size-sm" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                         </div>
                         <input type="submit" className="btn btn-primary mt-0 mb-0 w-100" disabled value="Log In" />
@@ -39,29 +39,29 @@ const AccountDropdown = (props) => {
                         <p className="font-weight-bold text-center px-2 mb-2">Registration</p>
                         <div className="row">
                             <div className="form-group col-6 pr-1">
-                                <label for="dropdownFormFName" id="dropdownFormFNameLabel" className="sr-only">First name</label>
+                                <label htmlFor="dropdownFormFName" id="dropdownFormFNameLabel" className="sr-only">First name</label>
                                 <input type="text" className="form-control font-size-sm" id="dropdownFormFName" placeholder="First Name" aria-labelledby="dropdownFormFNameLabel" />
                             </div>
                             <div className="form-group col-6 pl-1">
-                                <label for="dropdownRegisterFormLName" id="dropdownRegisterFormLNameLabel" className="sr-only">Last Name</label>
+                                <label htmlFor="dropdownRegisterFormLName" id="dropdownRegisterFormLNameLabel" className="sr-only">Last Name</label>
                                 <input type="text" className="form-control font-size-sm" id="dropdownRegisterFormLName" placeholder="Last Name" aria-labelledby="dropdownRegisterFormLNameLabel" />
                             </div>
                             <div className="form-group col-12">
-                                <label for="dropdownRegisterFormEmail" id="dropdownRegisterFormEmailLabel" className="sr-only">Email</label>
+                                <label htmlFor="dropdownRegisterFormEmail" id="dropdownRegisterFormEmailLabel" className="sr-only">Email</label>
                                 <input type="email" className="form-control font-size-sm" id="dropdownRegisterFormEmail" placeholder="Email" aria-labelledby="dropdownRegisterFormEmailLabel" />
                             </div>
                             <div className="form-group col-12">
-                                <label for="dropdownRegisterFormPassword" id="dropdownRegisterFormPasswordLabel" className="sr-only">Password</label>
+                                <label htmlFor="dropdownRegisterFormPassword" id="dropdownRegisterFormPasswordLabel" className="sr-only">Password</label>
                                 <input type="text" className="form-control font-size-sm" id="dropdownRegisterFormPassword" placeholder="Password" aria-labelledby="dropdownRegisterFormPasswordLabel" />
                             </div>
                         </div>
                         <div className="custom-control custom-checkbox d-flex justify-content-start font-size-sm mb-1">
                             <input type="checkbox" name="offers" value="true" className="custom-control-input" id="offers" required="" aria-required="true" aria-invalid="true" />
-                            <label for="offers" className="custom-control-label">Keep me up to date on news and exclusive offers</label>
+                            <label htmlFor="offers" className="custom-control-label">Keep me up to date on news and exclusive offers</label>
                         </div>
                         <div className="custom-control custom-checkbox d-flex justify-content-start font-size-sm">
                             <input type="checkbox" name="agreement" value="true" className="custom-control-input" id="agreement" required="" aria-required="true" aria-invalid="true" />
-                            <label for="agreement" className="custom-control-label">
+                            <label htmlFor="agreement" className="custom-control-label">
                                 <span>By clicking here, I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></span>
                             </label>
                         </div>

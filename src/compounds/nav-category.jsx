@@ -1,7 +1,7 @@
 const navItems = (props) => {
     return (
         <li className={`nav-item ${props.search ? 'd-lg-none' : ''}`}>
-            <a href={props.link} className={`nav-link pb-0 pt-0 ${props.active} ${props.search ? 'link-search text-primary' : ''}`}>
+            <a href={props.link} className={props.className}>
                 {props.search ? (
 					props.children
 				) : (
