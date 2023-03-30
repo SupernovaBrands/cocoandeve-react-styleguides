@@ -1,4 +1,5 @@
 /* global tSettings tStrings Shopify */
+import '@/config';
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;

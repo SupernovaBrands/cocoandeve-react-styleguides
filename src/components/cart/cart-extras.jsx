@@ -1,8 +1,9 @@
 /* global tSettings tStrings assetUrl */
+import '@/config';
+
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
-import '@/config';
 import React from 'react';
 import PropTypes from 'prop-types';
 

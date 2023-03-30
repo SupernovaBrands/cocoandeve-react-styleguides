@@ -1,4 +1,6 @@
 /* global tSettings tStrings Cart */
+import '@/config';
+
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 

@@ -1,4 +1,5 @@
 /* global tStrings tSettings */
+import '@/config';
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
