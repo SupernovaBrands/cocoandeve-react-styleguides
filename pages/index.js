@@ -62,13 +62,15 @@ export default function Home() {
           <a href="./sections/playground">Playground</a>
           <a href="./sections/real-results">Real Result</a>
           <a href="./sections/testimonials-carousel">Testimonials Carousel</a>
-          <a href="./sections/testimonials">Testimonials</a>
+          <a href="./sections/editors">Editors</a>
           <a href="./sections/cart-drawer">Cart</a>
         </div>
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>Templates</h2>
           <a href="./templates/article">Article</a>
           <a href="./templates/blog-filtered">Blog Filtered</a>
+          <a href="./templates/homepage">Homepage</a>
+          <a href="./templates/real-results">RealResults</a>
         </div>
       </div>
     </div>

@@ -6,10 +6,12 @@
   
       @include media-breakpoint-up(lg) {
         &--left {
-          @include make-col(3, 7);
+          flex: 0 0 42.85714%;
+          max-width: 42.85714%;
         }
         &--right {
-          @include make-col(4, 7);
+          flex: 0 0 57.14286%;
+          max-width: 57.14286%;
         }
       }
     }
