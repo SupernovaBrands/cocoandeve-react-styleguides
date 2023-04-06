@@ -38,7 +38,8 @@ $custom-theme-colors: (
   'pink-light': $pink-light,
   'primary-light': $primary-light,
   'bali-bod-blue': $bali-bod-blue,
-  'color': $white
+  'color': $white,
+  'orange': $suncare-orange,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);

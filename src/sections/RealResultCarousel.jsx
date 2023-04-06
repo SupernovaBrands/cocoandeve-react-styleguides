@@ -1,4 +1,5 @@
 import CarouselCustom from "@/components/CarouselCustom";
+import Link from "next/link";
 import { useState } from "react";
 import { Container, Tabs, Tab } from "react-bootstrap";
 
@@ -328,8 +329,69 @@ const RealResultCarousel = () => {
 			id: 32,
 			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
 			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
-			badge: 'Tan',
+			badge: 'Suncare',
+			badgeColor: 'orange',
 			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'I struggle with cellulite so wanted to try this 3 step process Glow Figure range! After using the products my skin was a lot softer, smoother and had more glow! They have an amazing lychee sent and contain unique patented cellushape techno formula which gives a reduction in cellulite. What more could a girl ask for! 😛💕🙌🏼'
+		},
+		{
+			id: 33,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			badgeColor: 'orange',
+			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'This hair oil made my hair VERY smooth, shiny and hydrated after using it 🥰 The elixir is very lightweight, no matter how much or how little you decide to use. I\'m obsessed!'
+		},
+		{
+			id: 34,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			badgeColor: 'orange',
+			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'Obsessed with how perfectly golden this leaves my skin! Best part: this is the WORLDS FIRST fake tan formula to help reduce cellulite AND have anti aging'
+		},
+		{
+			id: 35,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			badgeColor: 'orange',
+			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'These Tan Drops give my face the most natural and healthy looking tan. It contains healthy ingredients including Banana, Coconut Water , Dragon Fruit. It is 100% natural and contains 5 different Hyaluronic Acids. For the smoothest application, I like to add a few drops to my moisturizer!'
+		},
+		{
+			id: 36,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			badgeColor: 'orange',
+			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'Ive never found a hair oil like this one! I love how my hair is hydrated, voluminous, shiny and strong! - I’d definitely recommend'
+		},
+		{
+			id: 37,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			badgeColor: 'orange',
+			title: 'Bali Bronzing Foam (Dark)',
+			author: '@kaylaazjones',
+			comment: 'I struggle with cellulite so wanted to try this 3 step process Glow Figure range! After using the products my skin was a lot softer, smoother and had more glow! They have an amazing lychee sent and contain unique patented cellushape techno formula which gives a reduction in cellulite. What more could a girl ask for! 😛💕🙌🏼'
+		},
+		{
+			id: 38,
+			src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
+			badge: 'Suncare',
+			title: 'Bali Bronzing Foam (Dark)',
+			badgeColor: 'orange',
 			author: '@kaylaazjones',
 			comment: 'I struggle with cellulite so wanted to try this 3 step process Glow Figure range! After using the products my skin was a lot softer, smoother and had more glow! They have an amazing lychee sent and contain unique patented cellushape techno formula which gives a reduction in cellulite. What more could a girl ask for! 😛💕🙌🏼'
 		}
@@ -337,6 +399,7 @@ const RealResultCarousel = () => {
 	const filteredTan = reviews.filter((item) => (item.badge === 'Tan'));
 	const filteredHair = reviews.filter((item) => (item.badge === 'Hair'));
 	const filteredBody = reviews.filter((item) => (item.badge === 'Body'));
+	const filteredSuncare = reviews.filter((item) => (item.badge === 'Suncare'));
 	const [activeTab, setActiveTab] = useState('all');
 	const handleChange = (evt) => {
 		setActiveTab(evt.target.value);
@@ -355,6 +418,7 @@ const RealResultCarousel = () => {
 					<select defaultValue="All" id="rangeResultSelect" data-toggle="select" className="form-select form-select-lg" aria-labelledby="rangeResultSelectLabel" onChange={handleChange}>
 						<option value="all">All</option>
 						<option value="tan">Tan</option>
+						<option value="suncare">Suncare</option>
 						<option value="hair">Hair</option>
 						<option value="body">Body</option>
 					</select>
@@ -372,6 +436,9 @@ const RealResultCarousel = () => {
 					<Tab eventKey="hair" title="Hair" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
 						<CarouselCustom resultCard={true} items={filteredHair} id="bestsellersCarousel" slideNumber={filteredHair.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
+					<Tab eventKey="suncare" title="Suncare" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
+						<CarouselCustom resultCard={true} items={filteredSuncare} id="bestsellersCarousel" slideNumber={filteredSuncare.length} centered={true} className="col-9 col-md-3" />
+					</Tab>
 					<Tab eventKey="body" title="Body" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
 						<CarouselCustom resultCard={true} items={filteredBody} id="bestsellersCarousel" slideNumber={filteredBody.length} centered={true} className="col-9 col-md-3" />
 					</Tab>
@@ -381,6 +448,9 @@ const RealResultCarousel = () => {
 				</Tabs>
 
 			</Container>
+			<div className="col-12 text-center">
+				<Link href="#" className="btn btn-lg btn-primary mb-2 mt-3">See All Results</Link>
+			</div>
 		</section>
 	);
 };
