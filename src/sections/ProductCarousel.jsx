@@ -126,13 +126,13 @@ const ProductCarousel = (props) => {
 				className="nav nav-tabs mx-auto nav-tabs--product text-center mb-2 justify-content-center"
 			>
 				<Tab eventKey="new" title="New" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-					<CarouselCustom productCard={true} items={newTab} id="newsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+					<CarouselCustom productCard={true} items={newTab} id="newsCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" />
 				</Tab>
 				<Tab eventKey="bestsellers" title="Bestsellers" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-					<CarouselCustom productCard={true} items={bestSellers} id="bestsellersCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+					<CarouselCustom productCard={true} items={bestSellers} id="bestsellersCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" />
 				</Tab>
 				<Tab eventKey="value-sets" title="Value Sets" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-					<CarouselCustom productCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" />
+					<CarouselCustom productCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" />
 				</Tab>
 			</Tabs>
 			<div className="text-center">

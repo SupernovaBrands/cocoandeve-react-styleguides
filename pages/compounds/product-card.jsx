@@ -50,17 +50,17 @@ const ProductCards = () => {
             <Row>
                 <ProductCard
                     product={product1}
-                    className="position-relative mb-5"
+                    className="position-relative mb-5 col-9 col-md-3 product-card text-center"
                     button={true}
                 />
                 <ProductCard
                     product={product2}
-                    className="position-relative mb-5"
+                    className="position-relative mb-5 col-9 col-md-3 product-card text-center"
                     icon={true}
                 />
                 <ProductCard
                     product={product3}
-                    className="position-relative mb-5"
+                    className="position-relative mb-5 col-9 col-md-3 product-card text-center"
                 />
 		    </Row>
 		</Container>
