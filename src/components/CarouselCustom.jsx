@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ProductCard from '@/compounds/ProductCard';
 import ResultCard from '@/compounds/result-card';
 import VideoCard from '@/components/video-card';
+import ArticleCard from '@/compounds/ArticleCard';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -58,10 +59,10 @@ const CarouselCustom = (props) => {
 		}, 600);
 	};
 	return (
-		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.resultCard ? 'carousel--real-result' : ''}`}>
+		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.resultCard ? 'carousel--real-result' : ''} ${props.articleCard ? 'blog-carousel' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.videoCard ? '' : 'pt-2'}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.videoCard || props.articleCard ? '' : 'pt-2'}`}>
 				<div className="carousel-inner d-flex flex-nowrap mx-0">
 					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
@@ -97,12 +98,23 @@ const CarouselCustom = (props) => {
 							itemMovingPrev={itemMovingPrev}
 						/>
 					))}
+					{props.articleCard && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<ArticleCard
+							key={i}
+							className={props.className}
+							activeIndex={activeIndex}
+							useCarousel={true}
+							item={item}
+							colLg={6}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev} />
+					))}
 				</div>
 			</div>
 
 			<button
 				onClick={carouselPrev}
-				className={`carousel-control carousel-control-prev carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-start justify-content-start text-primary'}`}>
+				className={`carousel-control carousel-control-prev carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-start justify-content-start text-primary'} w-auto`}>
 				<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
 					<Prev className="svg svg--current-color" />
 				</span>
@@ -110,7 +122,7 @@ const CarouselCustom = (props) => {
 			</button>
 			<button
 				onClick={carouselNext}
-				className={`carousel-control carousel-control-next carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop w-auto' : 'floating-out-end justify-content-end text-primary'}`}>
+				className={`carousel-control carousel-control-next carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-end justify-content-end text-primary'} w-auto`}>
 				<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
 					<Next className="svg svg--current-color" />
 				</span>

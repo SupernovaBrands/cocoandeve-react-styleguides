@@ -69,6 +69,7 @@ export default function Home() {
           <h2>Templates</h2>
           <a href="./templates/article">Article</a>
           <a href="./templates/blog-filtered">Blog Filtered</a>
+          <a href="./templates/blog">Blog</a>
         </div>
       </div>
     </div>
