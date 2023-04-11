@@ -132,7 +132,7 @@ const ProductCarousel = (props) => {
 					<CarouselCustom productCard={true} items={bestSellers} id="bestsellersCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" />
 				</Tab>
 				<Tab eventKey="value-sets" title="Value Sets" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-					<CarouselCustom productCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" />
+					<CarouselCustom productCard={true} items={newTab} id="valueSetsCarousel" slideNumber={4} centered={true} className="position-relative mb-5 col-9 col-md-3 product-card text-center" carouselClass="pt-2" />
 				</Tab>
 			</Tabs>
 			<div className="text-center">
