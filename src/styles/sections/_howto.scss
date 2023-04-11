@@ -13,7 +13,7 @@
 
 	.carousel-control-prev,
 	.carousel-control-next {
-		width: 10%;
+		width: 10% !important;
 
 		@include media-breakpoint-up(lg) {
 			background-color: $primary-light-second;
