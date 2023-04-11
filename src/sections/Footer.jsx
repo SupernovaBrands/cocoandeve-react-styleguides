@@ -43,7 +43,7 @@ const Footer = (props) => {
             <div className="container mt-4">
                 <div className="footer-grid-nav">
                     <div className="footer-grid-nav__shop">
-                        <h5 className="h3">Shop</h5>
+                        <h5 className="h2">Shop</h5>
                         <ul className="list-unstyled">
                             <li><a href="">Hair</a></li>
                             <li><a href="">Tan</a></li>
@@ -52,7 +52,7 @@ const Footer = (props) => {
                         </ul>
                     </div>
                     <div className="footer-grid-nav__about">
-                        <h5 className="h3">About Us</h5>
+                        <h5 className="h2">About Us</h5>
                         <ul className="list-unstyled">
                             <li><a href="">Our Story</a></li>
                             <li><a href="">Stockist</a></li>
@@ -61,7 +61,7 @@ const Footer = (props) => {
                         </ul>
                     </div>
                     <div className="footer-grid-nav__help mt-3 mt-lg-0">
-                        <h5 className="h3">Help</h5>
+                        <h5 className="h2">Help</h5>
                         <ul className="list-unstyled">
                             <li><a href="">Track My Order</a></li>
                             <li><a href="">FAQ</a></li>
@@ -95,7 +95,7 @@ const Footer = (props) => {
                     <div className="footer-grid-nav__currency my-2 my-lg-0">
                         <h5 className="h1">Currency</h5>
                         <div className="dropdown">
-                            <a className="dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink"
+                            <a className="dropdown-toggle fw-bold" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 US (USD)
                             </a>
