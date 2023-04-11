@@ -34,9 +34,7 @@ const TestimonialSection = () => {
     ]
     return (
 		<>
-			<Container className="px-g mt-4">
-				<h1>Testimonials Carousel</h1>
-			</Container>
+			<h1>Testimonials Carousel</h1>
             <section className="testimonials-carousel bg-light mt-4 py-4">
                 <Container className="container text-center">
                     <h2 className="h1 mb-0">As seen in</h2>

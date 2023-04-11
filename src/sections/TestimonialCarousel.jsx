@@ -48,13 +48,13 @@ const TestimonialCarousel = (props) => {
 			</Carousel>
 			{props.customArrows && (
 				<>
-					<button onClick={carouselControlHandlePrev} className={`carousel-control carousel-control-prev ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="prev">
+					<button onClick={carouselControlHandlePrev} className={`d-sm-none d-lg-flex carousel-control carousel-control-prev ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="prev">
 						<span className={`carousel-control-prev-icon ${props.groupedControls ? 'd-flex' : ''} justify-content-center align-items-center`} aria-hidden="true">
 							<Prev className="svg" />
 						</span>
 						<span className="visually-hidden">Previous</span>
 					</button>
-					<button onClick={carouselControlHandleNext} className={`carousel-control carousel-control-next ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="next">
+					<button onClick={carouselControlHandleNext} className={`d-sm-none d-lg-flex carousel-control carousel-control-next ${props.groupedControls ? 'carousel-control--background carousel-control--right-lg' : ''}`} data-bs-slide="next">
 						<span className={`carousel-control-next-icon ${props.groupedControls ? 'd-flex' : ''} justify-content-center align-items-center`} aria-hidden="true">
 							<Next className="svg" />
 						</span>
