@@ -92,7 +92,7 @@ const Footer = (props) => {
                             <Tiktok className="svg" />
                         </a>
                     </div>
-                    <div className="footer-grid-nav__currency my-2 my-lg-0">
+                    <div className="footer-grid-nav__currency my-3 my-lg-0">
                         <h5 className="h1">Currency</h5>
                         <div className="dropdown">
                             <a className="dropdown-toggle fw-bold" href="#" role="button" id="dropdownMenuLink"
