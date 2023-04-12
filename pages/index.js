@@ -49,21 +49,22 @@ export default function Home() {
           <a href="./compounds/waitlist-form">Waitlist Form</a>
         </div>
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
-          <h2>sections</h2>
+          <h2>Sections</h2>
+          <a href="./sections/cart-drawer">Cart Drawer</a>
           <a href="./sections/comments">Comments</a>
+          <a href="./sections/footer">Footer</a>
           <a href="./sections/header">Header</a>
           <a href="./sections/hero-banner">Hero Banner</a>
           <a href="./sections/howto">HowTo</a>
-          <a href="./sections/product-carousels">Product Carousel</a>
-          <a href="./sections/sidebars">Sidebar</a>
-          <a href="./sections/services">Services</a>
-          <a href="./sections/footer">Footer</a>
           <a href="./sections/instagram">Instagram</a>
           <a href="./sections/playground">Playground</a>
-          <a href="./sections/real-results">Real Result</a>
+          <a href="./sections/product-carousels">Product Carousel</a>
+          <a href="./sections/real-results">Real Results</a>
+          <a href="./sections/services">Services</a>
+          <a href="./sections/sidebars">Sidebar</a>
           <a href="./sections/testimonials-carousel">Testimonials Carousel</a>
-          <a href="./sections/editors">Editors</a>
-          <a href="./sections/cart-drawer">Cart</a>
+          <a href="./sections/testimonials">Testimonials</a>
+          
         </div>
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>Templates</h2>
