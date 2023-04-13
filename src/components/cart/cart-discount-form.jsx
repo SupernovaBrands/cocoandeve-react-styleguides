@@ -170,7 +170,7 @@ export default class CartDiscountForm extends React.Component {
 				<Collapse in={openForm}>
 					<div className="input-group py-1">
 						<input type="text" ref={this.textInput} name="discount" className="form-control text-body border-right-0" placeholder={tStrings.cart_discount_input} value={code} onChange={this.onTextChange} onKeyUp={this.onKeyUp} readOnly={loading} data-cy="cart-discount" aria-label={tStrings.cart_discount_input} />
-						<button className="btn btn-link border border-left-0 rounded-left-0 font-weight-bold d-flex align-items-center" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
+						<button className="btn btn-link border border-left-0 rounded-left-0 fw-bold d-flex align-items-center" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
 							{loading ? (<div className="spinner-border" role="status" />) : tStrings.cart_discount_apply}
 						</button>
 					</div>

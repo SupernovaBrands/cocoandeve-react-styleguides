@@ -146,7 +146,8 @@ export default class Cart {
         modeling cart fields to add more additional fields to the cart and line items which are necessary on display
     */
 	cartModel(cart) {
-		let cartData = { ...cart };
+		// let cartData = { ...cart };
+		let cartData = { ...global.config.cart };
 		if (cartData && cartData.lines && cartData.lines.edges) {
 			let currentTotal = 0;
 			// eslint-disable-next-line no-return-assign

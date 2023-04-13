@@ -51,7 +51,7 @@ const Collection = (props) => {
                                 </select>
                             </div>
                             <div className="col-6 col-lg-5 d-lg-flex align-items-center justify-content-end">
-                                <span className="sortby-label d-none d-lg-inline-block font-weight-bold me-lg-1">Sort By</span>
+                                <span className="sortby-label d-none d-lg-inline-block fw-bold me-lg-1">Sort By</span>
                                 <select className="p-1 rounded mb-2 mb-lg-0 custom-select pe-1 pe-lg-3">
                                     <option value="Manual">Featured</option>
                                     <option value="best-selling">Best Selling</option>

@@ -370,7 +370,7 @@ export default class Cart extends React.Component {
 			<div className="modal-content mh-100 border-0 rounded-0">
 				<div className="modal-body mobile-wrapper pt-0 px-lg-0">
 					<div className="container d-flex flex-column align-items-stretch text-center pt-2">
-						<h4 className="font-size-lg font-weight-bold">{tStrings.cart_drawer_title}</h4>
+						<h4 className="font-size-lg  fw-bold ">{tStrings.cart_drawer_title}</h4>
 						<button type="button" className="close text-body m-0 px-g pb-2 position-absolute" data-dismiss="modal" aria-label="Close" data-cy="cart-close-icon">
 							<SvgClose className="svg" aria-hidden="true" />
 						</button>
@@ -477,8 +477,8 @@ export default class Cart extends React.Component {
 
 							{tSettings.cartRedemption.enabled && (
 								<>
-									{/*  <CartSwellRedemption cartData={cart} code={discountData.code} discAmount={discountData.amount} /> */}
-									{/*<hr />*/}
+									<CartSwellRedemption cartData={cart} code={discountData.code} discAmount={discountData.amount} />
+									<hr />
 								</>
 							)}
 
@@ -499,41 +499,41 @@ export default class Cart extends React.Component {
 							<hr />
 
 							<div className="row">
-								<p className="col-8 mb-1 font-weight-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
-								<p className="col-4 mb-1 font-weight-bold text-end" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, '${{amount}}')}</p>
+								<p className="col-8 mb-1  fw-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
+								<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, '${{amount}}')}</p>
 
 								{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
 									<>
-										<p className="col-8 mb-1 font-weight-bold" data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
-										<p className="col-4 mb-1 font-weight-bold text-end" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, '${{amount}}')}`}</p>
+										<p className="col-8 mb-1  fw-bold " data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
+										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, '${{amount}}')}`}</p>
 									</>
 								)}
 
 								{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 									<>
-										<p className="col-8 mb-1 font-weight-bold" data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-										<p className="col-4 mb-1 font-weight-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, '${{amount}}')}`}</p>
+										<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, '${{amount}}')}`}</p>
 									</>
 								)}
 
 								{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 									<>
-										<p className="col-8 mb-1 font-weight-bold" data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-										<p className="col-4 mb-1 font-weight-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, '${{amount}}')}`}</p>
+										<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, '${{amount}}')}`}</p>
 									</>
 								)}
 
 								{isSwellDiscCode && (
 									<>
-										<p className="col-8 mb-1 font-weight-bold">Rewards</p>
-										<p className="col-4 mb-1 font-weight-bold text-end">{`-${formatMoney(discountData.amount, '${{amount}}')}`}</p>
+										<p className="col-8 mb-1  fw-bold ">Rewards</p>
+										<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(discountData.amount, '${{amount}}')}`}</p>
 									</>
 								)}
 
 								{shippingData.show && !shippingLineHide && (
 									<>
-										<p className="d-none d-lg-block col-8 mb-1 font-weight-bold" data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-										<p className={`d-none d-lg-block col-4 mb-1 font-weight-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
+										<p className="d-none d-lg-block col-8 mb-1  fw-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
+										<p className={`d-none d-lg-block col-4 mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
 									</>
 								)}
 
@@ -549,7 +549,7 @@ export default class Cart extends React.Component {
 													<span className="font-size-sm">{`${tSettings.cartShippingLine.shippingLine1.replace('_XX_', `${parseFloat(shippingData.freeRate.min_order_subtotal)}€`)}`}</span>
 												)}
 											</p>
-											<p className={`mb-1 font-weight-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
+											<p className={`mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
 										</div>
 										<p className="d-lg-none col-12 mb-1 font-size-sm text-gray-600">{tSettings.cartShippingLine.shippingLine2}</p>
 									</>
@@ -557,15 +557,15 @@ export default class Cart extends React.Component {
 
 								{giftCardAmount > 0 && (
 									<>
-										<p className="col-8 mb-1 font-weight-bold">{tStrings.giftCard}</p>
-										<p className="col-4 mb-1 font-weight-bold text-end">{`-${formatMoney(giftCardAmount, '${{amount}}')}`}</p>
+										<p className="col-8 mb-1  fw-bold ">{tStrings.giftCard}</p>
+										<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(giftCardAmount, '${{amount}}')}`}</p>
 									</>
 								)}
 							</div>
 
 							<hr />
 							
-							{/* <CartExtras totalPrice={cart.totalAmount} */}
+							<CartExtras totalPrice={cart.totalAmount} />
 						</form>
 					))}
 				</div>

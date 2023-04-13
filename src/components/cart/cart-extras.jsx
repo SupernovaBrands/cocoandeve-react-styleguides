@@ -150,7 +150,7 @@ export default class CartExtras extends React.Component {
 					<p className="font-size-sm text-center border-top mt-2 pt-2 text center">
 						<span dangerouslySetInnerHTML={{ __html: klarnaIns }} />
 						<br />
-						<img className="mr-1" height="15" src={assetUrl('logo-klarna.svg')} alt="Klarna" loading="lazy" />
+						<img className="mr-1" height="15" src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921"alt="Klarna" loading="lazy" />
 						<svg data-toggle="modal" href="#modal-klarna" role="button" data-price={totalPrice} className="svg-info modal-klarna-trigger cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" data-cy="klarna-icon"><path d="M7.2 5.6h1.6V4H7.2M8 14.4A6.4 6.4 0 1114.4 8 6.408 6.408 0 018 14.4M8 0a8 8 0 105.657 2.343A8 8 0 008 0m-.8 12h1.6V7.2H7.2z" /></svg>
 					</p>
 				)}
@@ -158,7 +158,7 @@ export default class CartExtras extends React.Component {
 				{!showInstallment && (
 					<button type="submit" className="text-center w-100 bg-white border-0">
 						<div className="cart-drawer__shopify-icon d-flex align-items-center justify-content-center">
-							<img className="d-block mx-1" src={assetUrl('shopify-payment.svg')} width="112" alt="Shopify Icon" loading="lazy" />
+							<img className="d-block mx-1" src="" width="112" alt="Shopify Icon" loading="lazy" />
 						</div>
 
 						{tSettings.cart_payment_icons && (

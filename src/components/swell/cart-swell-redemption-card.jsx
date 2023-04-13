@@ -76,7 +76,7 @@ const SwellRedemptionCard = (props) => {
 		}
 	}
 	return (
-		<figure className="cart-drawer__swell-redemption-item bg-gray-400 rounded-lg pb-1 mr-1 d-flex justify-content-start align-items-center flex-column">
+		<figure className="cart-drawer__swell-redemption-item bg-gray-400 rounded pb-1 me-1 d-flex justify-content-start align-items-center flex-column">
 			{!item.amount && (
 				<div className="cart-drawer__swell-redemption-item-heading d-flex align-items-center h-100 justify-content-center">
 					<SvgStars />
@@ -124,7 +124,7 @@ const SwellRedemptionCard = (props) => {
 				)}
 				{item.quantity === 0 && item.amount > 0 && customerEmail && customerId && !isItemRedeemed && (
 					<button type="button" disabled className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border d-flex align-items-center w-100 py-1 justify-content-center">
-						<span className="font-weight-bold font-size-sm">{tStrings.soldOut}</span>
+						<span className=" fw-bold  font-size-sm">{tStrings.soldOut}</span>
 					</button>
 				)}
 			</figcaption>

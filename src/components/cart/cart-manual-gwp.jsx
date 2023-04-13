@@ -42,7 +42,7 @@ export default class CartManualGwp extends React.Component {
 		} = this.props;
 		return (
 			<div className="manual-gwp position-relative">
-				<p className="font-size-base font-weight-bold mb-0">{title}</p>
+				<p className="font-size-base fw-bold mb-0">{title}</p>
 				<p className="font-size-base text-gray-600">{`${selectedKey.length}/${maxSelected} ${tStrings.items_selected}`}</p>
 				<button className={`position-absolute btn-unstyled text-primary manual-gwp__left ${this.state.showScroll ? '' : 'd-none'}`} aria-hidden="true" type="button" onClick={() => this.scroll('left')}>
 					<SvgChevronPrev className="svg" />

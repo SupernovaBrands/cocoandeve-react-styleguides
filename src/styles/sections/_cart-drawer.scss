@@ -10,11 +10,18 @@
 		margin: 0;
 		float: right;
 		width: 100%;
+		max-height: 100% !important;
 	}
 
 	.modal-content {
 		border: none;
 		box-shadow: none;
+		max-height: 100%;
+    	overflow: hidden;
+	}
+
+	.modal-body {
+		overflow-y: auto;
 	}
 
 	.modal-dialog, .modal-content {
@@ -72,6 +79,12 @@
 		margin: 0;
 	}
 
+	&__swell-redemption {
+		button svg path {
+			fill: $primary;
+		}
+	}
+
 	&__swell-redemption-item {
 		min-width: calc-em(141);
 
@@ -98,6 +111,18 @@
 
 	&__items-tip {
 		background-color: $body-color;
+	}
+	
+	.progress-bar {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		overflow: hidden;
+		color: #fff;
+		text-align: center;
+		white-space: nowrap;
+		background-color: #D62E55;
+		transition: width 0.6s ease;
 	}
 }
 

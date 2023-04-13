@@ -96,7 +96,7 @@ const SearchBox = (props) => {
                         <Search className="svg search-panel__input-search-icon position-absolute h2 mb-0" />
                         <input type="text" placeholder="Search" name="q" className="col-12  border-0 py-2 ps-4 ps-lg-4" aria-label="search" onChange={onChange} />
                         <span className="search-panel__clear position-absolute align-items-center disabled" role="button">Clear</span>
-                        <span className="search-panel__close position-absolute align-items-center font-weight-bold d-flex" role="button">
+                        <span className="search-panel__close position-absolute align-items-center fw-bold d-flex" role="button">
                             <Close className="svg" onClick={props.onToggleSearchBox} />
                         </span>
                     </div>

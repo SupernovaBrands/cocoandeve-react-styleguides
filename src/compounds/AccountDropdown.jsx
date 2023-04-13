@@ -17,7 +17,7 @@ const AccountDropdown = (props) => {
             <Accordion defaultActiveKey="0">
                 <Accordion.Collapse eventKey="0">
                     <form id="dropdown__login" className="p-g shadow">
-                        <p className="font-weight-bold text-center px-2 mb-2">Log In to your account</p>
+                        <p className=" fw-bold  text-center px-2 mb-2">Log In to your account</p>
                         <div className="form-group">
                             <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
                             <input type="email" className="form-control font-size-sm" id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
@@ -36,7 +36,7 @@ const AccountDropdown = (props) => {
 
                 <Accordion.Collapse eventKey="1">
                     <form id="dropdown__register" className="p-g shadow">
-                        <p className="font-weight-bold text-center px-2 mb-2">Registration</p>
+                        <p className=" fw-bold  text-center px-2 mb-2">Registration</p>
                         <div className="row">
                             <div className="form-group col-6 pr-1">
                                 <label htmlFor="dropdownFormFName" id="dropdownFormFNameLabel" className="sr-only">First name</label>

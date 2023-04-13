@@ -38,7 +38,7 @@ const ShopifyUpsell = (props) => {
 		<>
 			{recommended.length > 0 && (
 				<>
-					<p className="font-weight-bold product-upsell__title mb-2">{tStrings.upsellHeading}</p>
+					<p className=" fw-bold  product-upsell__title mb-2">{tStrings.upsellHeading}</p>
 					<ul className="list-unstyled mb-0 order-lg-2 product__recommendation-shopify">
 						{recommended.slice(0, 2).map((item) => {
 							const firstAvailableVariant = item.variants.find((variant) => variant.available);
@@ -51,7 +51,7 @@ const ShopifyUpsell = (props) => {
 												<img src={item.featured_image.replace('.jpg', '_236x236_crop_center.jpg')} className="w-100 h-100" alt="Upsell on product page" width="118" height="118" />
 											</picture>
 											<figcaption className="col-8 d-flex flex-column mx-0 justify-content-around justify-content-lg-between py-0 font-size-base">
-												<a href={item.url} className="mt-0 mb-25 font-weight-bold text-body">{item.title}</a>
+												<a href={item.url} className="mt-0 mb-25 fw-bold text-body">{item.title}</a>
 												{item.tags.includes('Tan') && firstAvailableVariant.option2 && (
 													<p className="mb-25">{firstAvailableVariant.option2}</p>
 												)}

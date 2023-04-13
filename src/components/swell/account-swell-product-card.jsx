@@ -107,7 +107,7 @@ const AccountSwellProductCard = (props) => {
 						</button>
 					)}
 					{!isItemRedeemed && item.quantity === 0 && (
-						<button type="button" disabled className="btn btn-unstyled btn__swell-redemption-item border d-flex align-items-center w-100 py-1 justify-content-center font-size-sm font-weight-bold">
+						<button type="button" disabled className="btn btn-unstyled btn__swell-redemption-item border d-flex align-items-center w-100 py-1 justify-content-center font-size-sm  fw-bold ">
 							{tStrings.soldOut}
 						</button>
 					)}

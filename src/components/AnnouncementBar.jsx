@@ -96,7 +96,7 @@ const AnnouncementBar = (props) => {
 					<div className="announcement-bar  bg-blue w-100">
 						<div className="container text-center text-white d-flex align-items-center justify-content-between justify-content-lg-center">
 							<span className="announcement-bar__timer__title d-block d-lg-inline mr-lg-4 mb-0 font-weight-normal text-left font-size-sm font-size-dt-lg">{mainText}</span>
-							<ul className="d-inline list-inline mb-0 font-weight-bold">
+							<ul className="d-inline list-inline mb-0  fw-bold ">
 								<li id="timerDays" className="list-inline-item position-relative mr-1 h2 mb-0 font-weight-normal">{timerDay}</li>
 								<li id="timerHrs" className="list-inline-item position-relative mx-1 h2 mb-0 font-weight-normal">{timerHrs}</li>
 								<li id="timerMin" className="list-inline-item position-relative mx-1 h2 mb-0 font-weight-normal">{timerMin}</li>

@@ -26,7 +26,7 @@ const NavMegaMenu = (props) => {
                                                 <img src="https://via.placeholder.com/444x558" alt="Placeholder" className="d-block w-100" />
                                             </picture>
                                             <figcaption className="flex-grow-1 d-flex flex-column ml-g ml-lg-0 align-self-center">
-                                                <h5 href="#" className="product-card__text font-weight-bold text-body mb-0 mt-0 mt-1 h6">{card.title}</h5>
+                                                <h5 href="#" className="product-card__text fw-bold text-body mb-0 mt-0 mt-1 h6">{card.title}</h5>
                                             </figcaption>
                                         </a>
                                     </figure>
