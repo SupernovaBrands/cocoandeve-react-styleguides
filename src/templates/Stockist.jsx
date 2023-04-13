@@ -176,14 +176,14 @@ const Stockist = (props) => {
         <>
             <Container as="section" className="text-center stockist my-4">
                 <h1>Find us in a store near you</h1>
-                <form className="d-flex justify-content-center align-items-center">
+                <form className="d-flex flex-wrap justify-content-center align-items-center">
                     <label className="col-12 col-md-auto my-1 h4 fw-bold">Choose your region:</label>
                     <div className="col-8 col-md-3 my-1">
                         <select className="custom-select mb-0 ml-md-2 stockist__select" value={region} onChange={regionChangeHandler} >
                             <option value="united-kingdom" data-label="United Kingdom">United Kingdom</option>
                             <option value="usa" data-label="USA">USA</option>
                             <option value="asia" data-label="Asia">Asia</option>
-                            <option value="europa" data-label="Europe">Europe</option>
+                            <option value="europe" data-label="Europe">Europe</option>
                             <option value="australia" data-label="Australia">Australia</option>
                         </select>
                     </div>
