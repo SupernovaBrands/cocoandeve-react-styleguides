@@ -5,6 +5,7 @@ import ProductCard from '@/compounds/ProductCard';
 import ResultCard from '@/compounds/result-card';
 import VideoCard from '@/components/video-card';
 import ArticleCard from '@/compounds/ArticleCard';
+import PackagingCard from '@/compounds/PackagingCard';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -108,6 +109,16 @@ const CarouselCustom = (props) => {
 							colLg={6}
 							itemMovingNext={itemMovingNext}
 							itemMovingPrev={itemMovingPrev} />
+					))}
+					{props.packaging && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<PackagingCard
+							key={i}
+							useCarousel={true}
+							item={item}
+							activeIndex={activeIndex}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+						/>
 					))}
 				</div>
 			</div>
