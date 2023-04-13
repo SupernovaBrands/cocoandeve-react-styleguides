@@ -23,7 +23,7 @@ export default function Sidebars() {
 		}
 	];
 	return (
-		<div className="mobile-sidebar">
+		<div className="mobile-wrapper">
 			<Container>
 				<h1>SIDEBAR</h1>
 				<Row>
