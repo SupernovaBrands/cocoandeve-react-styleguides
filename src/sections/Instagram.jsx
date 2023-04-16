@@ -3,12 +3,12 @@ import { useState } from 'react';
 const Instagram = (props) => {
     return (
         <section className="instagram pt-4 text-center bg-primary-light container-fluid">
-            <div className="col-11 col-lg-8 text-center mx-auto pb-4">
+            <div className="col-11 col-lg-8 text-center mx-auto pb-4 px-1">
                 <p className="h1">Get social with us</p>
                 <p className="h4">
                     <a href="#" target="_blank"  className="text-dark text-underline">@cocoandeve</a>
                 </p>
-                <p className="h4 font-weight-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                <p className="h4 fw-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
             </div>
             <div className="instagram--feed container-fluid p-1 p-lg-0">
                 <div className="row flex-nowrap p-sm-0 pb-sm-1 p-md-1">
