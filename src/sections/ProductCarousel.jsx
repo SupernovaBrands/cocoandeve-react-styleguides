@@ -10,8 +10,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeImg: true,
 			swatch: {
 				label: 'Choose Style',
@@ -30,8 +30,8 @@ const ProductCarousel = (props) => {
 			price: '$134.90',
 			badgeImg: true,
 
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -47,8 +47,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeText: 'New'
 		},
 		{
@@ -57,8 +57,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		}
 	];
 	const newTab = [
@@ -68,8 +68,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeText: 'New',
 			swatch: {
 				label: 'Choose Shade',
@@ -87,8 +87,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$144.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -104,8 +104,8 @@ const ProductCarousel = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		},
 		{
 			label: 'Slide 4',
@@ -114,8 +114,8 @@ const ProductCarousel = (props) => {
 			comparePrice: '$44.90',
 			price: '$34.90',
 			badgeImg: true,
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		}
 	];
 	return (
