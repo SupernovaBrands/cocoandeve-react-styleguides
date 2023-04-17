@@ -325,6 +325,16 @@
 			}
 		}
 	}
+
+	&--packaging {
+		.carousel-inner {
+			transform: translateX(-75%);
+
+			@include media-breakpoint-up(lg) {
+				transform: translateX(0);
+			}
+		}
+	}
 }
 
 .carousel-indicators {
