@@ -76,6 +76,7 @@ export default function Home() {
           <a href="./templates/blog">Blog</a>
           <a href="./templates/stockist">Stockist</a>
           <a href="./templates/sustainability">Sustainability</a>
+          <a href="./templates/sweepstakes">Sweepstakes</a>
         </div>
       </div>
     </div>
