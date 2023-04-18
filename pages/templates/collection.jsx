@@ -2,8 +2,15 @@ import Header from '@/sections/Header';
 import Footer from '@/sections/Footer';
 import Collection from '@/templates/Collection';
 import Service from "@/sections/Service";
+import Cart from "@/components/cart/cart";
+import { useState } from 'react';
 
 const CollectionTemplate = () => {
+	const [showCart, setShowCart] = useState(false);
+
+    const toggleCart = () => {
+		setShowCart(!showCart);
+	}
     const products = [
 		{
 			title: 'Like a Virgin Hair Masque Like a Virgin Hair Masque',
@@ -122,10 +129,11 @@ const CollectionTemplate = () => {
 
     return (
 		<>
-        	<Header />
+        	<Header toggleCart={toggleCart}  />
 			<Collection products={products}/>
             <Service />
 			<Footer />
+			<Cart showCart={showCart} toggleCart={toggleCart} />
 		</>
     );
 }

@@ -47,6 +47,7 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 const Header = (props) => {
     const [showCookie, setShowCookie] = useState(false);
 	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
+
     const onAcceptCookie = (active) => {
 		setShowCookie(active);
 	};
@@ -181,7 +182,7 @@ const Header = (props) => {
 							</a>
 						</li>
 						<li className="nav-item d-flex">
-							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative fw-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon">
+							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative fw-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={props.toggleCart}>
 								<Cart className="svg me-0" />
 								<span className="cart-drawer__count font-size-xs h-100">102</span>
 							</a>

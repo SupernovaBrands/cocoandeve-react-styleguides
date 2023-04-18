@@ -3,6 +3,11 @@ import { Col, Container, Row } from 'react-bootstrap';
 import ChevronDown from '../../src/images/icons/chevron-down.svg';
 
 const Sweepstakes = (props) => {
+    const [showCart, setShowCart] = useState(false);
+
+    const toggleCart = () => {
+		setShowCart(!showCart);
+	}
 
     return (
         <>

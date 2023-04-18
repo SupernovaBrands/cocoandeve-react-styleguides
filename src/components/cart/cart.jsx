@@ -14,6 +14,7 @@ import CartExtras from '@/components/cart/cart-extras';
 import CartRecentProducts from '@/components/cart/cart-recent-products';
 import CartAction from '@/modules/cart';
 import CartSwellRedemption from '@/components/swell/cart-swell-redemption';
+import Modal from 'react-bootstrap/Modal';
 
 import {
 	isCodeAllowed,
@@ -362,54 +363,125 @@ export default class Cart extends React.Component {
 			giftCardAmount,
 		} = this.state;
 
-		console.log(discountData);
-
 		const isSwellDiscCode = isSwellCode(discountData.code);
 
 		return (
-			<div className="modal-content mh-100 border-0 rounded-0">
-				<div className="modal-body mobile-wrapper pt-0 px-lg-0">
-					<div className="container d-flex flex-column align-items-stretch text-center pt-2">
-						<h4 className="font-size-lg  fw-bold ">{tStrings.cart_drawer_title}</h4>
-						<button type="button" className="close text-body m-0 px-g pb-2 position-absolute" data-dismiss="modal" aria-label="Close" data-cy="cart-close-icon">
-							<SvgClose className="svg" aria-hidden="true" />
-						</button>
+			<Modal show={this.props.showCart} onHide={this.props.toggleCart} className="cart-drawer p-0">
+				<div className="modal-content mh-100 border-0 rounded-0">
+					<div className="modal-body mobile-wrapper pt-0 px-lg-0">
+						<div className="container d-flex flex-column align-items-stretch text-center pt-2">
+							<h4 className="font-size-lg  fw-bold ">{tStrings.cart_drawer_title}</h4>
+							<button type="button" className="close text-body m-0 px-g pb-2 position-absolute" data-dismiss="modal" aria-label="Close" data-cy="cart-close-icon">
+								<SvgClose className="svg" aria-hidden="true" />
+							</button>
 
-						{tSettings.cartDiscountMeter && !tSettings.cartDiscountMeter.enable
-							&& tSettings.cartShippingMeter.enable
-							&& shippingMeter
-							&& shippingMeter.enabled
-							&& itemCount > 0
-							&& (
-								<CartShippingMeter
-									target={shippingMeter.target}
-									current={shippingMeter.current}
+							{tSettings.cartDiscountMeter && !tSettings.cartDiscountMeter.enable
+								&& tSettings.cartShippingMeter.enable
+								&& shippingMeter
+								&& shippingMeter.enabled
+								&& itemCount > 0
+								&& (
+									<CartShippingMeter
+										target={shippingMeter.target}
+										current={shippingMeter.current}
+									/>
+								)}
+							{tSettings.cartDiscountMeter && tSettings.cartDiscountMeter.enable && discountMeter
+								&& discountMeter.enabled && itemCount > 0 && (
+								<CartDiscountMeter
+									target={discountMeter.target}
+									current={discountMeter.current}
+									progressText={discountMeter.progressText}
 								/>
 							)}
-						{tSettings.cartDiscountMeter && tSettings.cartDiscountMeter.enable && discountMeter
-							&& discountMeter.enabled && itemCount > 0 && (
-							<CartDiscountMeter
-								target={discountMeter.target}
-								current={discountMeter.current}
-								progressText={discountMeter.progressText}
-							/>
-						)}
-						<hr className="w-100 m-0" />
-					</div>
-
-					{loadingInit && (
-						<div className="d-flex justify-content-center p-2">
-							<div className="spinner-border" role="status" />
+							<hr className="w-100 m-0" />
 						</div>
-					)}
 
-					{!loadingInit && (itemCount === 0 ? (
-						<div className="pt-3 text-center">
-							<div className="container px-g cart-empty-shop-cta">
-								<p className="my-3 text-center">{tStrings.cart_empty}</p>
-								<a href="/collections" className="btn btn-primary" data-cy="shop-all-btn">Shop all products</a>
+						{loadingInit && (
+							<div className="d-flex justify-content-center p-2">
+								<div className="spinner-border" role="status" />
 							</div>
-							<div className="cart-empty-discount-form container text-start d-none">
+						)}
+
+						{!loadingInit && (itemCount === 0 ? (
+							<div className="pt-3 text-center">
+								<div className="container px-g cart-empty-shop-cta">
+									<p className="my-3 text-center">{tStrings.cart_empty}</p>
+									<a href="/collections" className="btn btn-primary" data-cy="shop-all-btn">Shop all products</a>
+								</div>
+								<div className="cart-empty-discount-form container text-start d-none">
+									<CartDiscountForm
+										isApplied={discountData.isValid}
+										isEmptyCart={itemCount === 0}
+										code={discountData.code}
+										discAmount={discountData.amount}
+										isAutoDiscount={discountData.isAuto}
+										loading={loadingDiscount}
+										error={discountData.error}
+										errorExtra={discountData.errorExtra}
+										onApply={this.onApplyDiscountCode}
+										onRemove={this.onRemoveDiscountCode}
+										appliedGiftCard={giftCardData}
+										onRemoveGiftCard={this.onRemoveGiftCard}
+									/>
+								</div>
+								{recentProducts.length > 0 && (
+									<>
+										<hr />
+										<CartRecentProducts products={recentProducts} onAddToCart={this.onAddItem} />
+									</>
+								)}
+							</div>
+						) : (
+							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+							<form
+								id="cart-drawer-form"
+								className="container"
+								action={cart.checkoutUrl.replace('www', 'us')}
+								method="get"
+								noValidate
+								onKeyDown={this.handleKeyDown}
+							>
+								<input type="hidden" name="checkout" value="Checkout" />
+
+								<ul className="list-unstyled border-bottom">
+									{cart.items && cart.items.map((item) => !item.isManualGwp && (
+										<CartItem
+											key={item.id}
+											item={item}
+											isLastStock={item.id === isLastStockKey}
+											onChangeVariant={this.onChangeVariant}
+											onChangeQuantity={this.onChangeQuantity}
+											onRemoveItem={this.onRemoveItem}
+											productId={getId(item.merchandise.product.id)}
+											productStock={item.merchandise.quantityAvailable}
+										/>
+									))}
+								</ul>
+
+								{manualGwp.enabled && (
+									<>
+										<CartManualGwp
+											title={manualGwp.title}
+											maxSelected={manualGwp.maxSelected}
+											selectedKey={manualGwp.selectedKey}
+											items={manualGwp.items}
+											onAddItem={this.onToggleManualGwp}
+											onRemoveItem={this.onToggleManualGwp}
+											loading={loadingManualGwp.loading}
+											processingId={loadingManualGwp.id}
+										/>
+										<hr />
+									</>
+								)}
+
+								{tSettings.cartRedemption.enabled && (
+									<>
+										<CartSwellRedemption cartData={cart} code={discountData.code} discAmount={discountData.amount} />
+										<hr />
+									</>
+								)}
+
 								<CartDiscountForm
 									isApplied={discountData.isValid}
 									isEmptyCart={itemCount === 0}
@@ -424,175 +496,104 @@ export default class Cart extends React.Component {
 									appliedGiftCard={giftCardData}
 									onRemoveGiftCard={this.onRemoveGiftCard}
 								/>
-							</div>
-							{recentProducts.length > 0 && (
-								<>
-									<hr />
-									<CartRecentProducts products={recentProducts} onAddToCart={this.onAddItem} />
-								</>
-							)}
-						</div>
-					) : (
-						// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-						<form
-							id="cart-drawer-form"
-							className="container"
-							action={cart.checkoutUrl.replace('www', 'us')}
-							method="get"
-							noValidate
-							onKeyDown={this.handleKeyDown}
-						>
-							<input type="hidden" name="checkout" value="Checkout" />
+								<hr />
 
-							<ul className="list-unstyled border-bottom">
-								{cart.items && cart.items.map((item) => !item.isManualGwp && (
-									<CartItem
-										key={item.id}
-										item={item}
-										isLastStock={item.id === isLastStockKey}
-										onChangeVariant={this.onChangeVariant}
-										onChangeQuantity={this.onChangeQuantity}
-										onRemoveItem={this.onRemoveItem}
-										productId={getId(item.merchandise.product.id)}
-										productStock={item.merchandise.quantityAvailable}
-									/>
-								))}
-							</ul>
+								<div className="row">
+									<p className="col-8 mb-1  fw-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
+									<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, '${{amount}}')}</p>
 
-							{manualGwp.enabled && (
-								<>
-									<CartManualGwp
-										title={manualGwp.title}
-										maxSelected={manualGwp.maxSelected}
-										selectedKey={manualGwp.selectedKey}
-										items={manualGwp.items}
-										onAddItem={this.onToggleManualGwp}
-										onRemoveItem={this.onToggleManualGwp}
-										loading={loadingManualGwp.loading}
-										processingId={loadingManualGwp.id}
-									/>
-									<hr />
-								</>
-							)}
+									{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
+										<>
+											<p className="col-8 mb-1  fw-bold " data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
+											<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, '${{amount}}')}`}</p>
+										</>
+									)}
 
-							{tSettings.cartRedemption.enabled && (
-								<>
-									<CartSwellRedemption cartData={cart} code={discountData.code} discAmount={discountData.amount} />
-									<hr />
-								</>
-							)}
+									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
+										<>
+											<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+											<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, '${{amount}}')}`}</p>
+										</>
+									)}
 
-							<CartDiscountForm
-								isApplied={discountData.isValid}
-								isEmptyCart={itemCount === 0}
-								code={discountData.code}
-								discAmount={discountData.amount}
-								isAutoDiscount={discountData.isAuto}
-								loading={loadingDiscount}
-								error={discountData.error}
-								errorExtra={discountData.errorExtra}
-								onApply={this.onApplyDiscountCode}
-								onRemove={this.onRemoveDiscountCode}
-								appliedGiftCard={giftCardData}
-								onRemoveGiftCard={this.onRemoveGiftCard}
-							/>
-							<hr />
+									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
+										<>
+											<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+											<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, '${{amount}}')}`}</p>
+										</>
+									)}
 
-							<div className="row">
-								<p className="col-8 mb-1  fw-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
-								<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, '${{amount}}')}</p>
+									{isSwellDiscCode && (
+										<>
+											<p className="col-8 mb-1  fw-bold ">Rewards</p>
+											<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(discountData.amount, '${{amount}}')}`}</p>
+										</>
+									)}
 
-								{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
-									<>
-										<p className="col-8 mb-1  fw-bold " data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
-										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, '${{amount}}')}`}</p>
-									</>
-								)}
+									{shippingData.show && !shippingLineHide && (
+										<>
+											<p className="d-none d-lg-block col-8 mb-1  fw-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
+											<p className={`d-none d-lg-block col-4 mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
+										</>
+									)}
 
-								{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
-									<>
-										<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, '${{amount}}')}`}</p>
-									</>
-								)}
+									{shippingData.show && !shippingLineHide && (
+										<>
+											<div className="d-flex d-lg-none justify-content-between col-12">
+												<p className="mb-1" data-cy="cart-shipping-label">
+													<strong>{`${tStrings.cart_shipping} `}</strong>
+													{(tSettings.store !== 'fr' && tSettings.store !== 'de') && shippingData.freeRate !== null && shippingData.freeRate.min_order_subtotal > 0 && (
+														<span className="font-size-sm">{tSettings.cartShippingLine.shippingLine1.replace('_XX_', formatMoney((parseFloat(shippingData.freeRate.min_order_subtotal)) * 100, '${{amount}}')).replace('.00', '').replace(',00', '')}</span>
+													)}
+													{(tSettings.store === 'fr' || tSettings.store === 'de') && shippingData.freeRate !== null && shippingData.freeRate.min_order_subtotal > 0 && (
+														<span className="font-size-sm">{`${tSettings.cartShippingLine.shippingLine1.replace('_XX_', `${parseFloat(shippingData.freeRate.min_order_subtotal)}€`)}`}</span>
+													)}
+												</p>
+												<p className={`mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
+											</div>
+											<p className="d-lg-none col-12 mb-1 font-size-sm text-gray-600">{tSettings.cartShippingLine.shippingLine2}</p>
+										</>
+									)}
 
-								{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
-									<>
-										<p className="col-8 mb-1  fw-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-										<p className="col-4 mb-1 fw-bold text-end" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, '${{amount}}')}`}</p>
-									</>
-								)}
+									{giftCardAmount > 0 && (
+										<>
+											<p className="col-8 mb-1  fw-bold ">{tStrings.giftCard}</p>
+											<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(giftCardAmount, '${{amount}}')}`}</p>
+										</>
+									)}
+								</div>
 
-								{isSwellDiscCode && (
-									<>
-										<p className="col-8 mb-1  fw-bold ">Rewards</p>
-										<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(discountData.amount, '${{amount}}')}`}</p>
-									</>
-								)}
-
-								{shippingData.show && !shippingLineHide && (
-									<>
-										<p className="d-none d-lg-block col-8 mb-1  fw-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-										<p className={`d-none d-lg-block col-4 mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
-									</>
-								)}
-
-								{shippingData.show && !shippingLineHide && (
-									<>
-										<div className="d-flex d-lg-none justify-content-between col-12">
-											<p className="mb-1" data-cy="cart-shipping-label">
-												<strong>{`${tStrings.cart_shipping} `}</strong>
-												{(tSettings.store !== 'fr' && tSettings.store !== 'de') && shippingData.freeRate !== null && shippingData.freeRate.min_order_subtotal > 0 && (
-													<span className="font-size-sm">{tSettings.cartShippingLine.shippingLine1.replace('_XX_', formatMoney((parseFloat(shippingData.freeRate.min_order_subtotal)) * 100, '${{amount}}')).replace('.00', '').replace(',00', '')}</span>
-												)}
-												{(tSettings.store === 'fr' || tSettings.store === 'de') && shippingData.freeRate !== null && shippingData.freeRate.min_order_subtotal > 0 && (
-													<span className="font-size-sm">{`${tSettings.cartShippingLine.shippingLine1.replace('_XX_', `${parseFloat(shippingData.freeRate.min_order_subtotal)}€`)}`}</span>
-												)}
-											</p>
-											<p className={`mb-1 fw-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, '${{amount}}') : 'Free'}</p>
-										</div>
-										<p className="d-lg-none col-12 mb-1 font-size-sm text-gray-600">{tSettings.cartShippingLine.shippingLine2}</p>
-									</>
-								)}
-
-								{giftCardAmount > 0 && (
-									<>
-										<p className="col-8 mb-1  fw-bold ">{tStrings.giftCard}</p>
-										<p className="col-4 mb-1 fw-bold text-end">{`-${formatMoney(giftCardAmount, '${{amount}}')}`}</p>
-									</>
-								)}
-							</div>
-
-							<hr />
-							
-							<CartExtras totalPrice={cart.totalAmount} />
-						</form>
-					))}
-				</div>
-
-				{!loadingInit && itemCount > 0 && (
-					<div className="modal-footer px-g">
-						<div className="row no-gutters w-100">
-							<strong className="col-8 font-size-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
-							<strong className="col-4 font-size-lg text-end" data-cy="cart-total-value">{formatMoney(cart.totalAmount, '${{amount}}')}</strong>
-							<div className="col-12 mt-1">
-								<button
-									type="button"
-									className="btn btn-lg btn-block btn-primary px-1 w-100"
-									disabled={loadingDiscount || manualGwp.loading}
-									onClick={this.submitForm}
-									data-cy="checkout-btn"
-								>
-									{tStrings.cart_checkout}
-								</button>
-							</div>
-						</div>
-						{tStrings.cart_shipping_at_checkout !== '' && (
-							<p className="col-12 p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: tStrings.cart_shipping_at_checkout }} />
-						)}
+								<hr />
+								
+								<CartExtras totalPrice={cart.totalAmount} />
+							</form>
+						))}
 					</div>
-				)}
-			</div>
+
+					{!loadingInit && itemCount > 0 && (
+						<div className="modal-footer px-g">
+							<div className="row no-gutters w-100">
+								<strong className="col-8 font-size-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
+								<strong className="col-4 font-size-lg text-end" data-cy="cart-total-value">{formatMoney(cart.totalAmount, '${{amount}}')}</strong>
+								<div className="col-12 mt-1">
+									<button
+										type="button"
+										className="btn btn-lg btn-block btn-primary px-1 w-100"
+										disabled={loadingDiscount || manualGwp.loading}
+										onClick={this.submitForm}
+										data-cy="checkout-btn"
+									>
+										{tStrings.cart_checkout}
+									</button>
+								</div>
+							</div>
+							{tStrings.cart_shipping_at_checkout !== '' && (
+								<p className="col-12 p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: tStrings.cart_shipping_at_checkout }} />
+							)}
+						</div>
+					)}
+				</div>
+			</Modal>
 		);
 	}
 }

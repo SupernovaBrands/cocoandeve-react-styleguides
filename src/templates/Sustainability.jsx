@@ -15,6 +15,12 @@ import CarouselCustom from "@/components/CarouselCustom";
 
 const Sustainability = () => {
     const [index, setIndex] = useState(0);
+    const [showCart, setShowCart] = useState(false);
+
+    const toggleCart = () => {
+		setShowCart(!showCart);
+	}
+    
 	const sourcingCarouselControlHandlePrev = () => {
 		const idx = index - 1 < 0 ? 2 : index - 1;
 		setIndex(idx);
@@ -145,7 +151,6 @@ const Sustainability = () => {
 
     return (
 		<>
-        	<Header />
             <section className="sustainability-banner position-relative">
                 <a href="#">
                     <picture>
@@ -270,8 +275,6 @@ const Sustainability = () => {
                     <CarouselCustom productCard={true} items={FEATURED} id="newsCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 product-card text-center" carouselClass="pt-2" />
                 </div>
             </section>
-
-            <Footer />
 		</>
     );
 }
