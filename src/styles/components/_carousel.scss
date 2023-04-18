@@ -191,6 +191,15 @@
 				}
 			}
 		}
+
+		&-nocenter-5 {
+			.carousel-inner {
+				transform: translateX(-137.5%);
+				@include media-breakpoint-up(md) {
+					transform: translateX(-40%);
+				}
+			}
+		}
 	}
 
 	&--centered-mobile {

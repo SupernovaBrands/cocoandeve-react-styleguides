@@ -26,14 +26,16 @@ const CarouselCustom = (props) => {
 		index++;
 	});
 	// process duplicated array of slide
-	props.items.map((item, idx) => {
-		carouselItems.push({
-			...item,
-			id: index,
-			index,
+	if (props.items.length < 8) {
+		props.items.map((item, idx) => {
+			carouselItems.push({
+				...item,
+				id: index,
+				index,
+			});
+			index++;
 		});
-		index++;
-	});
+	}
 	const [primaryList, setPrimaryList] = useState(carouselItems);
 
 	const carouselNext = () => {
@@ -119,6 +121,11 @@ const CarouselCustom = (props) => {
 							itemMovingNext={itemMovingNext}
 							itemMovingPrev={itemMovingPrev}
 						/>
+					))}
+					{props.imgLogo && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<div key={i} className={`carousel-item ${item.className} ${item.index === activeIndex ? 'active' : ''} ${itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+							<img className="img-fluid" src={item.src} alt={`Slide ${i}`} />
+						</div>
 					))}
 				</div>
 			</div>

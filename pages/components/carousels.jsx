@@ -14,9 +14,9 @@ export default function Carousels() {
 	};
 
 	let carouselCustomItems = [];
-	for (let y = 0; y < 4; y++) {
+	for (let y = 0; y < 5; y++) {
 		const idx = y + 1;
-		const labelIndex = idx > 4 ? idx - 4 : idx;
+		const labelIndex = idx > 5 ? idx - 5 : idx;
 		carouselCustomItems.push({
 			label: `Slide ${labelIndex}`,
 
@@ -57,6 +57,9 @@ export default function Carousels() {
 
 			<h1 className="mt-5">CAROUSEL LOOP 4 ITEMS</h1>
 			<CarouselCustom id="loop2" productCard={true} useCardTemplate={true} items={carouselCustomItems} slideNumber={4} className="col-12 col-md-3" roundedControl={true} colLgGrid={4} useRow={true} />
+
+			<h1 className="mt-5">CAROUSEL LOOP 5 ITEMS</h1>
+			<CarouselCustom id="loop2" productCard={true} useCardTemplate={true} items={carouselCustomItems} slideNumber={5} className="col-12 col-lg-1o5" roundedControl={true} colLgGrid={5} useRow={true} />
 
 			<h1 className="mt-5">CAROUSEL LOOP 4 ITEMS CENTERED</h1>
 			<CarouselCustom id="loop3" productCard={true} useCardTemplate={true} items={carouselCustomItems} slideNumber={4} centered={true} className="col-9 col-md-3" />
