@@ -119,7 +119,7 @@ const ProductCarousel = (props) => {
 		}
 	];
 	return (
-		<Container as="section" className="product-carousel pt-4 pb-4">
+		<Container as="section" className="product-carousel pt-4 pb-4 p-0">
 			<Tabs
 				defaultActiveKey="bestsellers"
 				id="product-carousel-tab"
