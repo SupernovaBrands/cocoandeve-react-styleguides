@@ -64,7 +64,7 @@ export default function Home() {
           <a href="./sections/sidebars">Sidebar</a>
           <a href="./sections/testimonials-carousel">Testimonials Carousel</a>
           <a href="./sections/testimonials">Testimonials</a>
-          
+
         </div>
         <div className="col-12 col-lg-6 mb-3 d-flex flex-column align-items-start">
           <h2>Templates</h2>
@@ -77,6 +77,7 @@ export default function Home() {
           <a href="./templates/stockist">Stockist</a>
           <a href="./templates/sustainability">Sustainability</a>
           <a href="./templates/sweepstakes">Sweepstakes</a>
+          <a href="./templates/our-story">Our Story</a>
         </div>
       </div>
     </div>
