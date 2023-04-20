@@ -170,13 +170,13 @@ const Header = (props) => {
 
 					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center ">
 						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 me-1 me-lg-0">
-							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="javascript:void(0);" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#javascript" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<Account className="svg mr-25" />
 							</a>
 							<AccountDropdown />
 						</li>
 						<li className="nav-item pe-1">
-							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="javascript:void(0);" data-cy="search-icon" onClick={onToggleSearchBox}>
+							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
 								<Search className="svg mr-25" />
 							</a>
 						</li>

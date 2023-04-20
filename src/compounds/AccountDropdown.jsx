@@ -8,7 +8,7 @@ const CustomToggle = ({ children, eventKey }) => {
     );
 
     return (
-        <a type="button" onClick={decoratedOnClick} href="javascript:void(0);">{children}</a>
+        <a type="button" onClick={decoratedOnClick} href="#javascript">{children}</a>
     );
 }
 const AccountDropdown = (props) => {

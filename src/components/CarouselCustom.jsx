@@ -6,6 +6,7 @@ import ResultCard from '@/compounds/result-card';
 import VideoCard from '@/components/video-card';
 import ArticleCard from '@/compounds/ArticleCard';
 import PackCard from '@/compounds/PackagingCard';
+import ProductCardUpsell from '@/compounds/ProductCardUpsell';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {
@@ -112,6 +113,18 @@ const CarouselCustom = (props) => {
 					))}
 					{props.videoCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<VideoCard
+							key={i}
+							useCardTemplate={props.useCardTemplate}
+							useCarousel={true}
+							className={props.className}
+							activeIndex={activeIndex}
+							item={item}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+						/>
+					))}
+					{props.productCardUpsell && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<ProductCardUpsell
 							key={i}
 							useCardTemplate={props.useCardTemplate}
 							useCarousel={true}

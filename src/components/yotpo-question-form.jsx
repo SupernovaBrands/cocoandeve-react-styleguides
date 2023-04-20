@@ -1,4 +1,5 @@
 /* global tStrings */
+const tStrings = global.config.tStrings;
 
 import React, {
 	useState,
@@ -7,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import {
 	validateEmail,
-} from '~mod/utils';
+} from '@/modules/utils_v2';
 
 const YotpoQuestionForm = (props) => {
 	const {

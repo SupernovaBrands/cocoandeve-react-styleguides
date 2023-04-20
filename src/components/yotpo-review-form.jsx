@@ -1,4 +1,5 @@
 /* global tStrings */
+const tStrings = global.config.tStrings;
 
 import React, {
 	useState,
@@ -8,9 +9,9 @@ import PropTypes from 'prop-types';
 import {
 	kebabCase,
 	validateEmail,
-} from '~mod/utils';
+} from '@/modules/utils_v2';
 
-import SvgFull from '~svg/star-full.svg';
+import SvgFull from '@/images/icons/star-full.svg';
 
 const YotpoReviewForm = (props) => {
 	const {

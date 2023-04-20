@@ -32,8 +32,8 @@ const ProductVariant = (props) => {
                 </div>
                 }
                 <p className="product-variant__price-label mb-0 font-size-sm fw-bold">
-                    {props.compare && <span className="text-linethrough mr-25 text-nowrap">{props.comparePrice}</span> }
-                    <span className="text-primary mr-25 text-nowrap">{props.price}</span>
+                    {props.compare && <span className="text-linethrough me-25 text-nowrap">{props.comparePrice}</span> }
+                    <span className="text-primary me-25 text-nowrap">{props.price}</span>
                     {props.compare && <span className="text-primary text-nowrap">{props.save}</span> }
                 </p>
             </label>
