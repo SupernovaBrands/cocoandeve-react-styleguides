@@ -360,7 +360,6 @@ const RealResults = () => {
 
     return (
 		<>
-        	<Header />
             <section class="py-4 real-result">
                 <Container className="p-0 p-md-1">
                     <p className="pb-2 mb-0 h1 text-center">Real Results</p>
@@ -448,7 +447,6 @@ const RealResults = () => {
                     </Tabs>
                 </Container>
             </section>
-            <Footer />
 		</>
     );
 }

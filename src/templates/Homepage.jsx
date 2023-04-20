@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Header from '@/sections/Header';
 import Footer from '@/sections/Footer';
 import HeroBanner from '@/sections/HeroBanner';
@@ -7,11 +8,17 @@ import Service from "@/sections/Service";
 import Editors from '@/sections/Editors';
 import RealResultCarousel from '@/sections/RealResultCarousel';
 import Instagram from '@/sections/Instagram';
+import Cart from "@/components/cart/cart";
 
 const Homepage = () => {
+    const [showCart, setShowCart] = useState(false);
+
+    const toggleCart = () => {
+		setShowCart(!showCart);
+	}
+
     return (
 		<>
-        	<Header />
             <HeroBanner />
             <ProductCarousel />
             <Playground />
@@ -19,7 +26,6 @@ const Homepage = () => {
             <Editors />
             <RealResultCarousel />
             <Instagram />
-            <Footer />
 		</>
     );
 }
