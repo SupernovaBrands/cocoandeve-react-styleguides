@@ -25,7 +25,7 @@ const Service = () => {
 									{list.id === 'money-back' && <MoneyBack className="svg text-secondary svg--current-color" />}
 								</i>
 								<p className="title mb-0">{list.label.split('<br>').map((item) => (
-									<>{item}<br /></>
+									<span key={`${item}-services`}>{item}<br /></span>
 								))}</p>
 							</li>
 						);

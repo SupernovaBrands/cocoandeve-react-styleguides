@@ -1,8 +1,18 @@
 import ProductCardQuiz from "@/components/product-card-quiz";
 import ProductCard from "@/compounds/ProductCard";
+import { useEffect } from "react";
+import { Fragment } from "react";
 
 const Collection = (props) => {
     const { products } = props;
+
+    let BASE_URL = '/';
+
+    useEffect(() => {
+        if (window.location.href.includes('cocoandeve-react-styleguides')) {
+            BASE_URL = '/cocoandeve-react-styleguides/'
+        }
+    }, []);
 
     return (
         <div className="price-cta-abtest">
@@ -25,7 +35,7 @@ const Collection = (props) => {
                             <li className="mb-1"><a href="" className="active">Body</a></li>
                             <li className="mb-1"><a href="">Kits & Gift</a></li>
                             <li className="mb-1"><a href="">All Accesories</a></li>
-                            <li><a href="javascript:void(0)">Shop All</a></li>
+                            <li><a href="#">Shop All</a></li>
                         </ul>
                     </aside>
                     <div className="col-12 col-lg-9">
@@ -76,9 +86,9 @@ const Collection = (props) => {
                             <div className="col-12 loading collapse text-center"><div className="spinner-border mb-3" role="status" aria-label="Loading..."></div></div>
                             {products.length > 0 && products.map((product,index) => {
                                 return index === 2 ? (
-                                    <>
-                                        <ProductCardQuiz title="Find your customised tan shade!" textButton="Take the quiz" imageDesktop="/quiz-banner-desktop.jpg" imageMobile="/quiz-banner-mobile.jpg"/>
-                                        <ProductCardQuiz title="Find your customised tan shade!" addNewLine={true} textButton="Take the quiz" imageDesktop="/quiz-banner-desktop.jpg" imageMobile="/quiz-banner-mobile.jpg"/>
+                                    <Fragment key={`block-${product.id}`}>
+                                        <ProductCardQuiz key={`quiz-product-1`} title="Find your customised tan shade!" textButton="Take the quiz" imageDesktop={`/cocoandeve-react-styleguides/quiz-banner-desktop.jpg`} imageMobile="/cocoandeve-react-styleguides/quiz-banner-mobile.jpg"/>
+                                        <ProductCardQuiz key={`quiz-product-2`} title="Find your customised tan shade!" addNewLine={true} textButton="Take the quiz" imageDesktop={`/cocoandeve-react-styleguides/quiz-banner-desktop.jpg`} imageMobile="/cocoandeve-react-styleguides/quiz-banner-mobile.jpg"/>
                                         <ProductCard
                                             key={product.id}
                                             useCardTemplate={false}
@@ -90,7 +100,7 @@ const Collection = (props) => {
                                             itemMovingPrev=""
                                             abtestBtn={true}
                                         />
-                                    </>
+                                    </Fragment>
                                 ) : (<ProductCard
                                     showTip={index===0}
                                     key={product.id}
