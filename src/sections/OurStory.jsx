@@ -108,7 +108,7 @@ const OurStoryTemplate = () => {
 					<h2>We're #AwardWinning</h2>
 					<p class="ms-auto me-auto mb-5">With 18 beauty awards under our belt, our products speak for themselves. Here’s a look at how we get down.</p>
 				</div>
-				<CarouselCustom id="loop2" imgLogo={true} items={CAROUSEL} slideNumber={4} roundedControl={true} centered={false} colLgGrid={5} useRow={true} />
+				<CarouselCustom id="loop2" imgLogo={true} items={CAROUSEL} slideNumber={4} roundedControl={true} centered={false} colLgGrid={5} useRow={false} />
 			</section>
 			<section className="page-video-banner container-fluid justify-content-center d-lg-flex align-items-center p-0">
 				<figure className="video-card video-card--play-caption ms-auto col-lg-7 p-0 position-relative mb-0">

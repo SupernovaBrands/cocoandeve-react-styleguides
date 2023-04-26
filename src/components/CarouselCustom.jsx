@@ -79,7 +79,7 @@ const CarouselCustom = (props) => {
 		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.packagingCard ? 'carousel--packaging carousel--real-result' : ''} ${props.resultCard ? 'carousel--real-result' : ''} ${props.articleCard ? 'blog-carousel' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.packagingCard || props.videoCard || props.articleCard ? '' : 'pt-2'} ${props.carouselClass ? props.carouselClass : ''}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.packagingCard || props.videoCard || props.articleCard || props.imgLogo ? '' : 'pt-2'} ${props.carouselClass ? props.carouselClass : ''}`}>
 				<div className="carousel-inner d-flex flex-nowrap mx-0">
 					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
