@@ -12,10 +12,12 @@ const BlogFilteredTemplate = () => {
 	}
     return (
 		<>
-        	<Header  toggleCart={toggleCart} />
-			<BlogFiltered />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
-			<Footer />
+			<div className="mobile-wrapper">
+				<Header  toggleCart={toggleCart} />
+				<BlogFiltered />
+				<Cart showCart={showCart} toggleCart={toggleCart} />
+				<Footer />
+			</div>
 		</>
     );
 }

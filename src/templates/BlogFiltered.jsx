@@ -88,18 +88,18 @@ const BlogFiltered = (props) => {
                             </div>
                         </div>
                     </div>
-                    <ul className="blog-grid__post1 list-unstyled col-12 d-lg-flex px-0 flex-wrap">
+                    <div className="blog-grid__post1 col-12 d-lg-flex px-0 flex-wrap">
                         {blogs.map((item, i) => (
                             <BlogPost
                                 key={i}
                                 item={item}
                             />
                         ))}
-                    </ul>
+                    </div>
                     <div className="blog-grid__sidebar col-12 d-lg-block mb-4 mb-lg-0">
                         <aside className="blog__sidebar position-sticky sticky-top">
                             <div className="no-gutters__in-container sidebar bg-primary-light">
-                                <h2 className="mb-3 h1 text-center text-lg-start">Popular Reads</h2>
+                                <h2 className="mb-3 h1 text-center text-lg-start">POPULAR READS</h2>
                                 <div className="slide carousel--sidebar">
                                     <ol className="carousel-indicators carousel-indicators--primary mb-0 d-lg-none">
                                         <li data-target=".carousel--sidebar" data-slide-to="0" className="rounded-circle border-0 active"></li>
