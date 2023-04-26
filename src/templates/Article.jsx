@@ -15,7 +15,7 @@ const Article = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
 			src: 'https://via.placeholder.com/243x243',
 			swatch: {
 				label: 'Choose Style',
@@ -32,7 +32,7 @@ const Article = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$144.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
 			src: 'https://via.placeholder.com/243x243',
 			swatch: {
                 label: 'Add To Cart',
@@ -50,7 +50,7 @@ const Article = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
 			src: 'https://via.placeholder.com/243x243',
 			badgeText: 'New'
 		},
@@ -60,7 +60,7 @@ const Article = (props) => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
 			src: 'https://via.placeholder.com/243x243',
 		}
 	];
@@ -239,28 +239,28 @@ const Article = (props) => {
                         </section>
                     </aside>
                 </article>
-                <div className="blog-post-grid__shop-articles py-5">
-                    <div className="container">
-                        <h4 className="h1 text-center">Shop this article</h4>
-                        <div className="pt-2">
-                            <CarouselCustom productCard={true} items={items} id="articleCarousel" slideNumber={4} centered={true} className="col-9 col-md-3" hideControls={true} />
-                        </div>
-                    </div>
+            </Container>
+        </div>
+        <div className="blog-post-grid__shop-articles py-5 articleCarousel">
+            <Container>
+                <h4 className="h1 text-center">Shop this article</h4>
+                <div className="pt-2">
+                    <CarouselCustom productCard={true} items={items} id="articleCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 product-card text-center" hideControls={false} />
                 </div>
             </Container>
-            <div className="blog-post-grid__recomendation mobile-wrapper bg-pink-light my-4">
-                <Container className="pt-3 pb-lg-1">
-                    <h3 className="text-center h1">You might also like</h3>
-                    <ul className="row mt-2 mt-lg-3 mb-0 mb-lg-4 list-unstyled">
-                        {recomendations.map((item, i) => (
-                            <BlogRecomendation
-                                key={i}
-                                item={item}
-                            />
-                        ))}
-                    </ul>
-                </Container>
-            </div>
+        </div>
+        <div className="blog-post-grid__recomendation mobile-wrapper bg-pink-light my-4">
+            <Container className="pt-3 pb-lg-1">
+                <h3 className="text-center h1">You might also like</h3>
+                <ul className="row mt-2 mt-lg-3 mb-0 mb-lg-4 list-unstyled">
+                    {recomendations.map((item, i) => (
+                        <BlogRecomendation
+                            key={i}
+                            item={item}
+                        />
+                    ))}
+                </ul>
+            </Container>
         </div>
         </>
     );
