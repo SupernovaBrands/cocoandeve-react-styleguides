@@ -83,8 +83,16 @@ const Stockist = (props) => {
             'href': 'https://www.libertylondon.com/uk/brands/c/coco-and-eve/',
             'img': '//cdn.shopify.com/s/files/1/0286/1327/9779/files/Liberty_London_2x_b3980434-667c-4a9b-a456-19c5868ae3c5_X100.png?v=1590064355',
             'img_alt': 'Liberty_London',
-            'status': 'Available online',
+            'status': 'Available in store',
             'id': '9'
+        },
+        {
+            'region': 'usa',
+            'href': 'https://www.birchbox.com/brand/11892/coco-eve',
+            'img': '//cdn.shopify.com/s/files/1/0286/1327/9779/files/Birchbox_2x_2146e6c6-cc3a-419d-b8f8-af60f6912124_X100.png?v=1590061714',
+            'img_alt': 'Birchbox',
+            'status': 'Available online',
+            'id': '20'
         },
         {
             'region': 'usa',
@@ -101,14 +109,6 @@ const Stockist = (props) => {
             'img_alt': 'Revolve',
             'status': 'Available online',
             'id': '11'
-        },
-        {
-            'region': 'australia',
-            'href': 'https://www.revolve.com/coco-eve/br/499065/',
-            'img': '//cdn.shopify.com/s/files/1/0286/1327/9779/files/Revolve_2x_f572fcbb-5af9-46a8-94a6-a87954e80dc8_X100.png?v=1590065407',
-            'img_alt': 'Revolve',
-            'status': 'Available online',
-            'id': '12'
         },
         {
             'region': 'australia',

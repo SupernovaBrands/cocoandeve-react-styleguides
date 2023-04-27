@@ -22,10 +22,10 @@ const Homepage = () => {
             <HeroBanner />
             <ProductCarousel />
             <Playground />
-			<Service />
+			      <Service />
             <Editors />
             <RealResultCarousel />
-            <Instagram />
+            <Instagram className="bg-primary-light" />
 		</>
     );
 }

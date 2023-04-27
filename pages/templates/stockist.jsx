@@ -16,7 +16,7 @@ const stockistTemplate = () => {
 		<>
         	<Header toggleCart={toggleCart}  />
 			<Stockist />
-			<Instagram />
+			<Instagram className="bg-yellow-light" />
 			<Service />
 			<Footer />
 			<Cart showCart={showCart} toggleCart={toggleCart} />

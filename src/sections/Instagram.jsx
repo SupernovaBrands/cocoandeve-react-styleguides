@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 const Instagram = (props) => {
     return (
-        <section className="instagram pt-4 text-center bg-primary-light container-fluid">
+        <section className={`instagram pt-4 text-center ${props.className} container-fluid`}>
             <div className="col-11 col-lg-8 text-center mx-auto pb-4 px-1">
-                <p className="h1">Get social with us</p>
+                <p className="h2">Get social with us</p>
                 <p className="h4">
                     <a href="#" target="_blank"  className="text-dark text-underline">@cocoandeve</a>
                 </p>
