@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[6205],{939:function(n,t,u){(window.__NEXT_P=window.__NEXT_P||[]).push(["/sections/instagram",function(){return u(4844)}])},4844:function(n,t,u){"use strict";u.r(t);var _=u(5893);u(7294);var s=u(176);let e=()=>(0,_.jsx)(s.Z,{});t.default=e}},function(n){n.O(0,[176,9774,2888,179],function(){return n(n.s=939)}),_N_E=n.O()}]);
