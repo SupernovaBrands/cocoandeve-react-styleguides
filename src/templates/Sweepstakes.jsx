@@ -18,7 +18,7 @@ const Sweepstakes = (props) => {
                             <form id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded  mt-2 mt-lg-0">
                                 <h1 className="text-secondary">Coco & Eve Sweepstakes</h1>
                                 <p>Add in your email or mobile number to win your fave Coco and Eve products.</p>
-                                <ul className="d-inline-block list-check text-left">
+                                <ul className="d-inline-block list-check text-start">
                                     <li>First prize is $300 worth of products</li>
                                     <li>Second prize is $200 worth of products</li>
                                     <li>Third prize is $100 worth of products</li>
@@ -68,7 +68,7 @@ const Sweepstakes = (props) => {
                                 <div className="d-none input-error toc-error font-size-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div>
                                 <p className="font-size-xs">By signing up, you agree to receive exclusive offers via email or automated marketing SMS (4/mth). Msg &amp; data rates may apply. Consent not required for purchase. Opt out any time.</p>
                                 <div className="form-group">
-                                    <button id="sweepstakes__submit" type="submit" className="btn btn-lg btn-primary btn-block">Sign me up!</button>
+                                    <button id="sweepstakes__submit" type="submit" className="btn btn-lg btn-primary btn-block w-100">Sign me up!</button>
                                 </div>
                             </form>
                             <div className="d-none sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
