@@ -61,7 +61,7 @@ const SwatchOverlay = (props) => {
 const ProductCard = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
-        <div className={`position-relative ${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+        <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
             <Link href="#">
                 <picture className="d-block position-relative">
                     <source srcSet={props.product.srcSet} />
