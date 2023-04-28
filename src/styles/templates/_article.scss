@@ -1,0 +1,6 @@
+.articleCarousel .carousel-control {
+	display: block;
+	@include media-breakpoint-up(lg) {
+		display: none;
+	}
+}

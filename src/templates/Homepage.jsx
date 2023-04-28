@@ -19,13 +19,13 @@ const Homepage = () => {
 
     return (
 		<>
-      <HeroBanner />
-      <ProductCarousel />
-      <Playground />
-      <Service />
-      <Editors />
-      <RealResultCarousel />
-      <Instagram />
+            <HeroBanner />
+            <ProductCarousel />
+            <Playground />
+			      <Service />
+            <Editors />
+            <RealResultCarousel />
+            <Instagram className="bg-primary-light" />
 		</>
     );
 }

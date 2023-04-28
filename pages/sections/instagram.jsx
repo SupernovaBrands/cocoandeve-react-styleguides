@@ -3,7 +3,7 @@ import Instagram from '@/sections/Instagram';
 
 const InstagramSection = () => {
     return (
-        <Instagram />
+        <Instagram className="bg-primary-light" />
     );
 }
 

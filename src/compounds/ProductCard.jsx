@@ -15,11 +15,11 @@ const AddToCartButton = () => {
 const AddToCartButtonAbTest = (props) => {
     const {price, comparePrice} = props;
     return (
-        <button type="button" class="btn btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
-            <span class="btn-abtest__text">Add to Cart</span>
-            <span class="btn-abtest__prices d-none border-0">
-                <span class="text-linethrough">{comparePrice}</span>
-                <span class="">{price}</span>
+        <button type="button" className="btn btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
+            <span className="btn-abtest__text">Add to Cart</span>
+            <span className="btn-abtest__prices d-none border-0">
+                <span className="text-linethrough">{comparePrice}</span>
+                <span className="">{price}</span>
             </span>
         </button>
     )
@@ -29,11 +29,11 @@ const SwatchOverlay = (props) => {
     return (
         <>
             { !props.abtestBtn && (<button type="button" className="w-100 btn btn-lg btn-primary btn-choose btn-block mb-1">{props.swatch.label}</button>)}
-            { props.abtestBtn && (<button type="button" class="btn btn-choose btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
-                <span class="btn-abtest__text">Add to Cart</span>
-                <span class="btn-abtest__prices d-none border-0">
-                    <span class="text-linethrough">{props.comparePrice}</span>
-                    <span class="">{props.price}</span>
+            { props.abtestBtn && (<button type="button" className="btn btn-choose btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
+                <span className="btn-abtest__text">Add to Cart</span>
+                <span className="btn-abtest__prices d-none border-0">
+                    <span className="text-linethrough">{props.comparePrice}</span>
+                    <span className="">{props.price}</span>
                 </span>
             </button>
             )}
@@ -61,15 +61,15 @@ const SwatchOverlay = (props) => {
 const ProductCard = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
-        <div className={`position-relative ${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+        <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
             <Link href="#">
                 <picture className="d-block position-relative">
                     <source srcSet={props.product.srcSet} />
                     <img src={props.product.src} className="w-100" alt="Image Alt" loading="lazy" />
                     {props.showTip && (
                         <>
-                            <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-block d-lg-none rounded">👻 3 for 2</span>
+                            <span className="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+                            <span className="product-card__image-tip position-absolute text-white font-size-xs p-1 d-block d-lg-none rounded">👻 3 for 2</span>
                         </>
                     )}
                 </picture>

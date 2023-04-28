@@ -11,6 +11,9 @@
 
 	&__search {
 		grid-area: search;
+		input {
+			height: calc(1.21429em + 1.07143em + 2px);
+		}
 	}
 
 	&__post1 {

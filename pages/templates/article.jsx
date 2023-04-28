@@ -46,14 +46,14 @@ const ArticleTemplate = () => {
 							<source srcSet="https://via.placeholder.com/270x250.jpg/F9F9F9?text=variant-half-image" media="(min-width: 992px)" />
 							<img src="https://via.placeholder.com/345x120.jpg/F9F9F9?text=variant-half-image" className="w-100" />
 						</picture>
-						<div className="col-lg-8 col-12 p-2 pr-lg-4">
+						<div className="col-lg-8 col-12 p-2 pe-lg-4">
 							<h2>Join the club & get 15% OFF*!</h2>
 							<p>Get 15% OFF* your first order, plus first access to new product launches, exclusive offers, expert tips and routines.</p>
 							<form className="">
 								<div className="input-group mb-2">
 									<input type="text" className="form-control bg-white border-0" placeholder="Enter your email" aria-label="Enter your email" />
-									<div className="input-group-append">
-										<button className="btn btn-primary" type="button">Subscribe</button>
+									<div className="d-flex input-group-append">
+										<button className="btn btn-primary border-top-left-radius-0 border-bottom-left-radius-0" type="button">Subscribe</button>
 									</div>
 								</div>
 							</form>
