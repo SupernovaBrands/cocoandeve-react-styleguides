@@ -1,44 +1,31 @@
 import Link from "next/link";
 import New from '@/images/icons/new.svg';
 import YotpoStar from "@/components/YotpoStars";
-import BadgeCircleImage from "@/components/BadgeCircleImg";
-import Badges from 'react-bootstrap/Badge';
 
-const AddToCartButton = () => {
+const AddToCartButton = (props) => {
     return (
-        <button type="button" className="btn btn-lg btn-primary add-to-cart btn-block px-0 mb-1 w-100">
-            Add To Cart
+        <button type="button" class="btn btn-lg btn-primary add-to-cart btn-block px-0 align-items-center product-card-btn  mb-1">
+            <span class="product-card-btn__text">Add to Cart</span>
+            <span class="product-card-btn__prices d-none border-0">
+                <span class="text-linethrough">{props.comparePrice}</span>
+                <span class="">{props.price}</span>
+            </span>
         </button>
     );
 };
 
-const AddToCartButtonAbTest = (props) => {
-    const {price, comparePrice} = props;
-    return (
-        <button type="button" className="btn btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
-            <span className="btn-abtest__text">Add to Cart</span>
-            <span className="btn-abtest__prices d-none border-0">
-                <span className="text-linethrough">{comparePrice}</span>
-                <span className="">{price}</span>
-            </span>
-        </button>
-    )
-}
-
 const SwatchOverlay = (props) => {
     return (
         <>
-            { !props.abtestBtn && (<button type="button" className="w-100 btn btn-lg btn-primary btn-choose btn-block mb-1">{props.swatch.label}</button>)}
-            { props.abtestBtn && (<button type="button" className="btn btn-choose btn-lg btn-primary  btn-block px-0 btn-abtest mb-1 w-100">
-                <span className="btn-abtest__text">Add to Cart</span>
-                <span className="btn-abtest__prices d-none border-0">
-                    <span className="text-linethrough">{props.comparePrice}</span>
-                    <span className="">{props.price}</span>
+            <button type="button" class="btn btn-choose btn-lg btn-primary  btn-block px-0 product-card-btn mb-1 w-100">
+                <span class="product-card-btn__text">Add to Cart</span>
+                <span class="product-card-btn__prices d-none border-0">
+                    <span class="text-linethrough">{props.comparePrice}</span>
+                    <span class="">{props.price}</span>
                 </span>
             </button>
-            )}
-            <div className="swatch-overlay flex-column align-items-center justify-content-end w-100 pb-0 px-2 position-absolute">
-                <div className="text-center w-100 py-2">
+            <div className="swatch-overlay flex-column align-items-center justify-content-end pb-0 position-absolute">
+                <div className="text-center w-100 pt-2 pb-lg-2 px-0 py-1">
                     <label className="mb-2">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
@@ -52,62 +39,52 @@ const SwatchOverlay = (props) => {
                         ))}
                     </ul>
                 </div>
-                { props.abtestBtn ? <AddToCartButtonAbTest price={props.price} comparePrice={props.comparePrice}/> : <AddToCartButton /> }
+                <button type="button" class="btn btn-lg btn-primary add-to-cart btn-block px-0 product-card-btn">
+                    <span class="product-card-btn__text">Add to Cart</span>
+                    <span class="product-card-btn__prices d-none">
+                        <span class="text-linethrough">{props.comparePrice}</span>
+                        <span class="">{props.price}</span>
+                    </span>
+                </button>
             </div>
         </>
     );
 };
 
-const ProductCard = (props) => {
+const ProductCardTall = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
-            <Link href="#">
+            <Link href="#" className="product-card__img-link rounded-top">
                 <picture className="d-block position-relative">
                     <source srcSet={props.product.srcSet} />
                     <img src={props.product.src} className="w-100" alt="Image Alt" loading="lazy" />
                     {props.showTip && (
                         <>
-                            <span className="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span className="product-card__image-tip position-absolute text-white font-size-xs p-1 d-block d-lg-none rounded">👻 3 for 2</span>
+                            <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+                            <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-block d-lg-none rounded">👻 3 for 2</span>
                         </>
                     )}
                 </picture>
-                {props.product.badgeImg && (
-                    <BadgeCircleImage className="">
-                        <img alt="25% Off" className="w-100" src="../badge-25.svg" />
-                    </BadgeCircleImage>
-                )}
             </Link>
             {props.icon &&
                 <div className="circle-badge position-absolute rounded-circle bg-primary d-flex p-1">
                     <New className="fw-bold" />
                 </div>
             }
-            {props.product.badgeText && (
-                <Badges bg="white" className="badge position-absolute fw-normal font-size-sm text-body">{props.product.badgeText}</Badges>
-            )}
-            <div className="product-card__content pt-2 pb-0 position-relative flex-grow-1 d-flex flex-column px-2">
+            <div className="product-card__content pt-2 pb-0 px-1 position-relative flex-grow-1 d-flex flex-column">
                 <div className="d-flex justify-content-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={false} />
                 </div>
                 <p className="product-card__title flex-grow-1 d-flex flex-column justify-content-center h4 h-100 fw-normal">
                     <Link href="#" className="text-dark">{props.product.title}</Link>
                 </p>
-                <p className="text-center">
-                    <span className="text-linethrough h4 m-1">{props.product.comparePrice}</span>
-                    <span className="text-primary h4">{props.product.price}</span>
-                </p>
-                {!props.product.swatch && !abtestBtn && (
-                    <AddToCartButton />
-                )}
-
-                {!props.product.swatch && abtestBtn && (
-                    <AddToCartButtonAbTest price={props.product.price} comparePrice={props.product.comparePrice}/>
+                {!props.product.swatch && (
+                    <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} />
                 )}
 
                 {props.product.swatch &&
-                    <SwatchOverlay swatch={props.product.swatch} abtestBtn={abtestBtn} price={props.product.price} comparePrice={props.product.comparePrice}/>
+                    <SwatchOverlay swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice}/>
                 }
             </div>
         </div>
@@ -118,4 +95,4 @@ const ProductCard = (props) => {
 	);
 };
 
-export default ProductCard;
+export default ProductCardTall;

@@ -156,23 +156,26 @@ const CarouselCustom = (props) => {
 					))}
 				</div>
 			</div>
-
-			<button
-				onClick={carouselPrev}
-				className={`carousel-control carousel-control-prev carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-start justify-content-start text-primary'} ${props.packagingCard ? 'd-lg-none' : ''} w-auto ${props.controlPrevClass ? props.controlPrevClass : ''}`}>
-				<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Prev className="svg svg--current-color" />
-				</span>
-				<span className="visually-hidden">Previous</span>
-			</button>
-			<button
-				onClick={carouselNext}
-				className={`carousel-control carousel-control-next carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-end justify-content-end text-primary'} ${props.packagingCard ? 'd-lg-none' : ''} w-auto ${props.controlNextClass ? props.controlNextClass : ''}`}>
-				<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
-					<Next className="svg svg--current-color" />
-				</span>
-				<span className="visually-hidden">Next</span>
-			</button>
+			{!props.packagingCard && (
+				<>
+					<button
+						onClick={carouselPrev}
+						className={`carousel-control carousel-control-prev carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-start justify-content-start text-primary'} ${props.packagingCard ? 'd-lg-none' : ''} w-auto ${props.controlPrevClass ? props.controlPrevClass : ''}`}>
+						<span className="carousel-control-prev-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Prev className="svg svg--current-color" />
+						</span>
+						<span className="visually-hidden">Previous</span>
+					</button>
+					<button
+						onClick={carouselNext}
+						className={`carousel-control carousel-control-next carousel-control--background ${props.hideControls ? 'd-none' : ''} ${props.roundedControl ? 'carousel-control--loop' : 'floating-out-end justify-content-end text-primary'} ${props.packagingCard ? 'd-lg-none' : ''} w-auto ${props.controlNextClass ? props.controlNextClass : ''}`}>
+						<span className="carousel-control-next-icon d-flex justify-content-center align-items-center" aria-hidden="true">
+							<Next className="svg svg--current-color" />
+						</span>
+						<span className="visually-hidden">Next</span>
+					</button>
+				</>
+			)}
 		</div>
 	);
 };

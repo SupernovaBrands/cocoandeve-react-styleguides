@@ -1,8 +1,6 @@
 import Link from "next/link";
 import New from '@/images/icons/new.svg';
 import YotpoStar from "@/components/YotpoStars";
-import BadgeCircleImage from "@/components/BadgeCircleImg";
-import Badges from 'react-bootstrap/Badge';
 
 const AddToCartButton = (props) => {
     return (
@@ -56,7 +54,7 @@ const SwatchOverlay = (props) => {
 const ProductCardTall = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
-        <div className={`position-relative ${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+        <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
             <Link href="#" className="product-card__img-link rounded-top">
                 <picture className="d-block position-relative">
                     <source srcSet={props.product.srcSet} />
@@ -74,9 +72,6 @@ const ProductCardTall = (props) => {
                     <New className="fw-bold" />
                 </div>
             }
-            {props.product.badgeText && (
-                <Badges bg="white" className="badge position-absolute fw-normal font-size-sm text-body">{props.product.badgeText}</Badges>
-            )}
             <div className="product-card__content pt-2 pb-0 px-1 position-relative flex-grow-1 d-flex flex-column">
                 <div className="d-flex justify-content-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={false} />
