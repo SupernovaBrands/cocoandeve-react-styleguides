@@ -21,7 +21,7 @@ const ArticleTemplate = () => {
 			<Header toggleCart={toggleCart} />
 			<Article 
 				title="The 5 Rules of Hair Masking"
-				quickLinks={true}
+				quickLinks={false}
 				srcSet="https://via.placeholder.com/1540x800.jpg/EFADBA"
 				src="https://via.placeholder.com/828x492.jpg/EFADBA"
 			>

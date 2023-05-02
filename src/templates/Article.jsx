@@ -16,7 +16,7 @@ const Article = (props) => {
 			comparePrice: '$44.90',
 			price: '$134.90',
 			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-			src: 'https://via.placeholder.com/243x243',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -33,7 +33,7 @@ const Article = (props) => {
 			comparePrice: '$144.90',
 			price: '$134.90',
 			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-			src: 'https://via.placeholder.com/243x243',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
                 label: 'Add To Cart',
                 shade: true,
@@ -51,7 +51,7 @@ const Article = (props) => {
 			comparePrice: '$44.90',
 			price: '$34.90',
 			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-			src: 'https://via.placeholder.com/243x243',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeText: 'New'
 		},
 		{
@@ -61,7 +61,7 @@ const Article = (props) => {
 			comparePrice: '$44.90',
 			price: '$34.90',
 			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-			src: 'https://via.placeholder.com/243x243',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		}
 	];
 
@@ -245,7 +245,7 @@ const Article = (props) => {
             <Container>
                 <h4 className="h1 text-center">Shop this article</h4>
                 <div className="pt-2">
-                    <CarouselCustom productCard={true} items={items} id="articleCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 product-card text-center" hideControls={false} />
+                    <CarouselCustom shopArticle={true} items={items} id="articleCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 shop-article text-center" hideControls={false} />
                 </div>
             </Container>
         </div>
