@@ -2,6 +2,7 @@ import Prev from '@/images/icons/chevron-prev.svg';
 import Next from '@/images/icons/chevron-next.svg';
 import { useState } from 'react';
 import ProductCard from '@/compounds/ProductCard';
+import ShopArticle from '@/compounds/ShopArticle';
 import ResultCard from '@/compounds/result-card';
 import VideoCard from '@/components/video-card';
 import ArticleCard from '@/compounds/ArticleCard';
@@ -104,6 +105,18 @@ const CarouselCustom = (props) => {
 							itemMovingNext={itemMovingNext}
 							itemMovingPrev={itemMovingPrev}
 							/>
+					))}
+					{props.shopArticle && props.slideNumber > 0 && primaryList.map((item, i) => (
+						<ShopArticle
+							key={i}
+							useCardTemplate={props.useCardTemplate}
+							useCarousel={true}
+							className={props.className}
+							activeIndex={activeIndex}
+							product={item}
+							itemMovingNext={itemMovingNext}
+							itemMovingPrev={itemMovingPrev}
+						/>
 					))}
 					{props.packagingCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<PackCard
