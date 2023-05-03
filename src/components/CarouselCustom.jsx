@@ -75,6 +75,18 @@ const CarouselCustom = (props) => {
 			primaryList.unshift(lastElem);
 		}, 600);
 	};
+
+	const carouselIndicatorpackagingCard = (e) => {
+		const int = parseInt(e.target.dataset.bsSlideTo, 10);
+		console.log(int)
+		setItemMovingPrev(true);
+		if (activeIndex < int) {
+			carouselPrev();
+		} else {
+			carouselNext();
+		}
+	};
+
 	return (
 		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.packagingCard ? 'carousel--packaging carousel--real-result' : ''} ${props.resultCard ? 'carousel--real-result' : ''} ${props.articleCard ? 'blog-carousel' : ''}`}>
 			<div
@@ -175,6 +187,14 @@ const CarouselCustom = (props) => {
 						<span className="visually-hidden">Next</span>
 					</button>
 				</>
+			)}
+
+			{props.packagingCard && (
+				<ol class="carousel-indicators position-relative mt-2 d-flex d-lg-none">
+					<button data-bs-target data-bs-slide-to="1" class={`${activeIndex === 1 ? 'active' : ''} rounded-circle d-flex border border-primary`}  onClick={carouselIndicatorpackagingCard}></button>
+					<button data-bs-target data-bs-slide-to="2" class={`${activeIndex === 2 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard} ></button>
+					<button data-bs-target data-bs-slide-to="3" class={`${activeIndex === 3 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard}></button>
+				</ol>
 			)}
 		</div>
 	);

@@ -33,46 +33,46 @@ const Sustainability = () => {
     const PACKAGING = [
         {
             id: 1,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: 'Sustainable packaging',
             body: 'It’s not just about ingredients, either. We’re constantly challenging ourselves to take a holistic approach to sustainable packaging with containers that are environmentally-friendly, durable and unBALIevably good looking! Way too cute for a single use, our shelfie-ready pots and jars are designed to be repurposed. Our tip? Brighten up your bathroom shelves by upcycling your empties into hair accessory or cotton pad holders.',
             
         },
         {
             id: 2,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: '100% recyclable',
             body: 'Need to bin something? All our packaging is 100% recyclable. Only our travel size tube caps and bottle caps are made from plastic which might be hard to recycle (depending on which country you live in). And you can rest assured we’re working hard to ensure they’re soon recyclable across the world!',
         },
         {
             id: 3,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: 'FSC certified',
             body: '100% of our cardboards and paper are sourced from sustainably managed forests (FSC Certified), and we minimise our plastic use where we can. This means that we only use paper materials to ship our products to you – no plastic bubble wraps here! The EVA bags used for our accessories are 100% biodegradable. However, for hygiene reasons we will sometimes use plastic covers on smaller items.',
         },
         {
             id: 1,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: 'Sustainable packaging',
             body: 'It’s not just about ingredients, either. We’re constantly challenging ourselves to take a holistic approach to sustainable packaging with containers that are environmentally-friendly, durable and unBALIevably good looking! Way too cute for a single use, our shelfie-ready pots and jars are designed to be repurposed. Our tip? Brighten up your bathroom shelves by upcycling your empties into hair accessory or cotton pad holders.',
             classes: 'd-lg-none'
         },
         {
             id: 2,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: '100% recyclable',
             body: 'Need to bin something? All our packaging is 100% recyclable. Only our travel size tube caps and bottle caps are made from plastic which might be hard to recycle (depending on which country you live in). And you can rest assured we’re working hard to ensure they’re soon recyclable across the world!',
             classes: 'd-lg-none'
         },
         {
             id: 3,
-            src: 'https://via.placeholder.com/300x120.jpg/EFADBA',
-            srcSet: 'https://via.placeholder.com/300x120.jpg/EFADBA',
+            src: 'https://via.placeholder.com/300x135.jpg/EFADBA',
+            srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: 'FSC certified',
             body: '100% of our cardboards and paper are sourced from sustainably managed forests (FSC Certified), and we minimise our plastic use where we can. This means that we only use paper materials to ship our products to you – no plastic bubble wraps here! The EVA bags used for our accessories are 100% biodegradable. However, for hygiene reasons we will sometimes use plastic covers on smaller items.',
             classes: 'd-lg-none'
@@ -260,7 +260,8 @@ const Sustainability = () => {
             <section class="py-4 py-lg-5">
                 <div class="container text-center">
                     <h2 class="text-center mx-5">Like what we are doing? Shop now!</h2>
-                    <CarouselCustom productCard={true} items={FEATURED} id="newsCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 product-card text-center" carouselClass="pt-2" />
+                    <CarouselCustom productCard={true} items={FEATURED} id="newsCarousel" slideNumber={4} centered={true} className="position-relative col-9 col-md-3 product-card text-center mb-2" carouselClass="pt-2" />
+                    <a href="/collection/all" class="btn btn-lg btn-outline-primary mb-2 mb-lg-3 mt-4">Shop All</a>
                 </div>
             </section>
 		</>

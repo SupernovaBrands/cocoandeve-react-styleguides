@@ -131,6 +131,10 @@
     -moz-appearance: none;
     text-indent: 1px;
 
+    &.custom-select-filter {
+      width: 40%;
+    }
+
     &.disabled {
       color: $gray-400;
       background-color: $gray-100;

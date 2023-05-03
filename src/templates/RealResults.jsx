@@ -362,10 +362,11 @@ const RealResults = () => {
 		<>
             <section class="py-4 real-result">
                 <Container>
-                    <p className="pb-2 mb-0 h1 text-center">Real Results</p>
-                    <div className="mb-4 mx-auto col-6 d-sm-block d-md-none">
+                    <p className="pb-2 mb-0 h1 text-center">Real Customers. Real Reviews</p>
+                    <div className="mb-4 mx-auto d-sm-flex d-md-none my-3 row align-items-center justify-content-center">
+                        <p className='h4 fw-normal mr-3 mb-0 col-3'>Filter by:</p>
                         <label htmlFor="rangeResultSelect" id="rangeResultSelectLabel" className="visually-hidden">Range Real Result</label>
-                        <select defaultValue="All" id="rangeResultSelect" data-toggle="select" className="form-select form-select-lg" aria-labelledby="rangeResultSelectLabel" onChange={handleChange}>
+                        <select defaultValue="All" id="rangeResultSelect" data-toggle="select" className="form-select form-select-lg custom-select custom-select-filter col-5 d-lg-none" aria-labelledby="rangeResultSelectLabel" onChange={handleChange}>
                             <option value="all">All</option>
                             <option value="tan">Tan</option>
                             <option value="hair">Hair</option>
