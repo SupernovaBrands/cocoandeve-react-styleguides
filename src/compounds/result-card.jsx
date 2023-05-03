@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const ResultCard = (props) => {
     return (
-        <div className={`${props.useCarousel ? 'carousel-item col-9 col-lg-3' : 'col-lg-4'} result-card  ${props.useCarousel && props.activeIndex === props.item.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+        <div className={`${props.useCarousel ? 'carousel-item col-9 col-lg-3' : 'col-lg-4'} result-card overflow-hidden  ${props.useCarousel && props.activeIndex === props.item.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
             <picture>
                 <source srcSet={props.item.srcSet} media="(min-width: 992px)"/>
                 <img className="w-100" alt="/" src={props.item.src} />

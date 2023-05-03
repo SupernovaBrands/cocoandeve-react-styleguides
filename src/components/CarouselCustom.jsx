@@ -78,14 +78,10 @@ const CarouselCustom = (props) => {
 	};
 
 	const carouselIndicatorpackagingCard = (e) => {
+		console.log('carouselIndicatorpackagingCard');
 		const int = parseInt(e.target.dataset.bsSlideTo, 10);
-		console.log(int)
-		setItemMovingPrev(true);
-		if (activeIndex < int) {
-			carouselPrev();
-		} else {
-			carouselNext();
-		}
+		console.log(int, activeIndex, 'int')
+		setActiveIndex(int);
 	};
 
 	return (

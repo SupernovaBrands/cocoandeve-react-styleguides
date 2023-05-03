@@ -501,7 +501,7 @@ const YotpoReviewWidget = (props) => {
 			<div className="tab-content mt-2" id="yotpo-widget__tabContent">
 				<div id="yotpo-widget__reviews" className="tab-pane fade show active" role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div id="yotpoFilterForm">
-						<p className="font-weight-bold mb-2">{tStrings.yotpo.filterReviews}</p>
+						<p className="fw-bold mb-2">{tStrings.yotpo.filterReviews}</p>
 						<div className="input-group col-lg-6 px-0">
 							<input
 								type="text"
@@ -514,7 +514,7 @@ const YotpoReviewWidget = (props) => {
 								}}
 							/>
 							<div className="input-group-append">
-								<button type="button" className="input-group-text bg-white" aria-label="Submit search" onClick={() => onFilterChange()}>
+								<button type="button" className="input-group-text bg-white  h-100 rounded-0" aria-label="Submit search" onClick={() => onFilterChange()}>
 									<SvgSearch className="svg" />
 								</button>
 							</div>
@@ -616,7 +616,7 @@ const YotpoReviewWidget = (props) => {
 
 					{!revLoading && reviews.length > 0 && (
 						<>
-							<p className="font-weight-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
+							<p className="fw-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 							<div className="" role="list">
 								{reviews.map((review) => (
 									<div key={review.id} className="border-bottom py-3 row">
@@ -698,7 +698,7 @@ const YotpoReviewWidget = (props) => {
 							</li>
 							{revPage.show.map((v) => (
 								<li key={v}>
-									<button type="button" className={`btn btn-link px-1 ${v === revPage.page ? 'font-weight-bold' : ''}`} onClick={() => onRevPageChange(v)}>{v}</button>
+									<button type="button" className={`btn btn-link px-1 ${v === revPage.page ? 'fw-bold' : ''}`} onClick={() => onRevPageChange(v)}>{v}</button>
 								</li>
 							))}
 							<li>
@@ -740,7 +740,7 @@ const YotpoReviewWidget = (props) => {
 							<p className="font-size-sm ml-auto">
 								{formatDate(question.created_at)}
 							</p>
-							<p className="font-weight-bold">{`Q: ${decodeHtml(question.content)}`}</p>
+							<p className="fw-bold">{`Q: ${decodeHtml(question.content)}`}</p>
 							<p className="font-size-sm">
 								{tStrings.yotpo.answer}
 								{' ('}
@@ -775,7 +775,7 @@ const YotpoReviewWidget = (props) => {
 							</li>
 							{qnaPage.show.map((v) => (
 								<li key={v}>
-									<button type="button" className={`btn btn-link px-1 ${v === qnaPage.page ? 'font-weight-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
+									<button type="button" className={`btn btn-link px-1 ${v === qnaPage.page ? 'fw-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
 								</li>
 							))}
 							<li>

@@ -1,20 +1,11 @@
-import Header from '@/sections/Header';
-import Footer from '@/sections/Footer';
-import { useState } from "react";
+import YotpoReviewWidget from '@/components/yotpo-review-widget';
+import { useEffect, useState } from "react";
 import { Container, Tabs, Tab } from "react-bootstrap";
 import ResultCard from '@/compounds/result-card';
+import TestimonialCarousel from '@/sections/TestimonialCarousel';
+import ProductCarousel from '@/sections/ProductCarousel';
 
 const REVIEWS = [
-    {
-        id: 1,
-        src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
-        srcSet: 'https://via.placeholder.com/530x378.jpg/EFADBA',
-        badge: 'Body',
-        badgeColor: 'bali-bod-blue',
-        title: 'Bali Bronzing Foam (Dark)',
-        author: '@kaylaazjones',
-        comment: 'I struggle with cellulite so wanted to try this 3 step process Glow Figure range! After using the products my skin was a lot softer, smoother and had more glow! They have an amazing lychee sent and contain unique patented cellushape techno formula which gives a reduction in cellulite. What more could a girl ask for! 😛💕🙌🏼'
-    },
     {
         id: 2,
         src: 'https://via.placeholder.com/530x378.jpg/EFADBA',
@@ -346,8 +337,40 @@ const REVIEWS = [
     }
 ]
 
+const carouselItems = [
+    {
+        index: 0,
+        label: 'Slide 1',
+        quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
+        srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x50.png?v=1591087122',
+        src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x25.png?v=1591087122'
+    },
+    {
+        index: 1,
+        label: 'Slide 2',
+        quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
+        srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Glamour_2x_1_x50.png?v=1591087107',
+        src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Glamour_2x_1_x25.png?v=1591087107'
+    },
+    {
+        index: 2,
+        label: 'Slide 3',
+        quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
+        srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Harpers_Bazaar_logo_logotype_2x_65a7f362-98ec-471c-876e-f7a614a9d237_x50.png?v=1591087114',
+        src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Harpers_Bazaar_logo_logotype_2x_65a7f362-98ec-471c-876e-f7a614a9d237_x25.png?v=1591087114'
+    },
+    {
+        index: 3,
+        label: 'Slide 4',
+        quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
+        srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x50.png?v=1591087122',
+        src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x25.png?v=1591087122'
+    }
+]
+
 const RealResults = () => {
     const [activeTab, setActiveTab] = useState('all');
+    const [reviewTab, setReviewTab] = useState('yotpo_tan');
     const [reviews, setReviews] = useState(REVIEWS);
 
     const handleChange = (evt) => {
@@ -356,6 +379,10 @@ const RealResults = () => {
 
     const onSelect = (event) => {
 		setActiveTab(event);
+	};
+
+    const onReviewTabSelect = (event) => {
+		setReviewTab(event);
 	};
 
     return (
@@ -451,6 +478,60 @@ const RealResults = () => {
                     </Tabs>
                 </Container>
             </section>
+            <section>
+                <h2 class="h1 text-center mb-2">Customer Reviews</h2>
+                <div className='container'>
+                    <div class="row justify-content-center">
+                        <Tabs
+                            defaultActiveKey="yotpo_tan"
+                            activeKey={reviewTab}
+                            id="yotpo-tab"
+                            className="nav nav-tabs mx-auto nav-tabs--real-results text-center mb-5 justify-content-center d-none d-md-flex"
+                            onSelect={onReviewTabSelect}>
+                            <Tab eventKey="yotpo_tan" title="Tan" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
+                                <YotpoReviewWidget
+                                    productId='4543113265187'
+                                    productName=''
+                                    productUrl=''
+                                    productImage=''
+                                    productDesc=''
+                                    canCreate={true}
+                                    productSkus=''
+                                />
+                            </Tab>
+                            <Tab eventKey="yotpo_hair" title="Hair" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
+                                <YotpoReviewWidget
+                                    productId='4543113265187'
+                                    productName=''
+                                    productUrl=''
+                                    productImage=''
+                                    productDesc=''
+                                    canCreate={true}
+                                    productSkus=''
+                                />
+                            </Tab>
+                            <Tab eventKey="yotpo_body" title="Body" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
+                                <YotpoReviewWidget
+                                    productId='4543113265187'
+                                    productName=''
+                                    productUrl=''
+                                    productImage=''
+                                    productDesc=''
+                                    canCreate={true}
+                                    productSkus=''
+                                />
+                            </Tab>
+                        </Tabs>
+                    </div>
+                </div>
+            </section>
+            <section className="testimonials-carousel bg-light mt-4 py-4">
+                <Container className="container text-center">
+                    <h2 className="h1 mb-0">As seen in</h2>
+                    <TestimonialCarousel id="testimonialsCarousel" indicatorClass="carousel-indicators--black" items={carouselItems} indicatorBorder={true} customArrows={true} />
+                </Container>
+            </section>
+            <ProductCarousel />
 		</>
     );
 }
