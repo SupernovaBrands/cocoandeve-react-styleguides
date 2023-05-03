@@ -166,16 +166,20 @@ const Product = (props) => {
                                 <button type="button" className="variant-swatch variant-swatch--lg medium me-2 border-primary" data-value="medium" data-id="32068892295203"></button>
                                 <p className="mb-0"><strong>Your perfect shade – Medium</strong> <br/> will give you subtle glow</p>
                             </div>
-                            <div className="d-flex">
-                                <QuantityBox
-                                    name="quantity-box"
-                                    editable={false}
-                                    isLastStock={false}
-                                    productStock={1}
-                                    quantity={1}
-                                    productId={32068892426275}
-                                />
-                                <input className="btn btn-lg btn-primary btn-block ms-1 ms-lg-g w-100" type="submit" value="Add to Cart"></input>
+                            <div className="product-swatch-mobile__trigger">
+                                <div className="product-form-submit mb-3 position-relative">
+                                    <div className="d-flex">
+                                        <QuantityBox
+                                            name="quantity-box"
+                                            editable={false}
+                                            isLastStock={false}
+                                            productStock={1}
+                                            quantity={1}
+                                            productId={32068892426275}
+                                        />
+                                        <input className="btn btn-lg btn-primary btn-block ms-1 ms-lg-g w-100" type="submit" value="Add to Cart"></input>
+                                    </div>
+                                </div>
                             </div>
                             <SaveResults />
                             <ul className="pdp-services order-lg-2 list-unstyled row mt-3 my-4 text-center d-none d-lg-flex">
