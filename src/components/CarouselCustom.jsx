@@ -167,7 +167,8 @@ const CarouselCustom = (props) => {
 							item={item}
 							colLg={6}
 							itemMovingNext={itemMovingNext}
-							itemMovingPrev={itemMovingPrev} />
+							itemMovingPrev={itemMovingPrev}
+							hideCta={props.hideCta} />
 					))}
 
 					{props.imgLogo && props.slideNumber > 0 && primaryList.map((item, i) => (
