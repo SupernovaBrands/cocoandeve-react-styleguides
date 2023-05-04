@@ -144,7 +144,7 @@ const Sustainability = () => {
                     <div className="col-12 col-lg-7 px-0">
                         <picture>
                             <source srcset="https://via.placeholder.com/670x350.jpg/2596be" media="(min-width: 992px)" />
-                            <img className="fit--cover w-100" alt="/" src="https://via.placeholder.com/375x370.jpg/EFADBA" />
+                            <img className="fit--cover w-100" alt="/" src="https://via.placeholder.com/375x440.jpg/EFADBA" />
                         </picture>
                     </div>
                     <div className="col-12 col-lg-5 py-4 px-g px-lg-3">
