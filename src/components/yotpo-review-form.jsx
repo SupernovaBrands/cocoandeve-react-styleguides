@@ -1,4 +1,5 @@
 /* global tStrings */
+import '@/config';
 const tStrings = global.config.tStrings;
 
 import React, {

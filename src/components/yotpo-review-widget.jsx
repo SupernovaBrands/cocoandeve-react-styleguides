@@ -1,4 +1,5 @@
 /* global tSettings tStrings */
+import '@/config';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
