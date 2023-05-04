@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const ArticleCard = (props) => {
 	return (
-		<div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} mb-4 mb-lg-3 ${props.useCarousel && props.activeIndex === props.item.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`} as="article">
+		<div className={`${props.className} ${props.useCarousel ? 'carousel-item' : 'mb-4 mb-lg-3'} ${props.useCarousel && props.activeIndex === props.item.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`} as="article">
 			<figure className={`border border-secondary-light ${props.useCarousel ? '' : 'mb-2 no-gutters__in-container'}`}>
 				<Link href="./templates/article" aria-label={props.item.title}>
 					<img src={props.item.src} className="w-100" alt={props.item.title} />
