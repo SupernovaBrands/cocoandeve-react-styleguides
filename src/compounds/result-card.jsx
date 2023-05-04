@@ -9,7 +9,7 @@ const ResultCard = (props) => {
                 <source srcSet={props.item.srcSet} media="(min-width: 992px)"/>
                 <img className="w-100" alt="/" src={props.item.src} />
             </picture>
-            <div className="p-2 bg-white h-100 pt-0">
+            <div className="p-2 bg-white h-100 pt-2">
                 <p className="d-flex justify-content-between align-items-center mb-0">
                     <FiveStars className="svg text-primary h4 mb-0" />
                     <Badges bg={props.item.badgeColor} className="mb-1 mt-1">{props.item.badge}</Badges>

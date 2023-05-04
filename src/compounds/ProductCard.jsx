@@ -55,10 +55,10 @@ const ProductCardTall = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
-            <Link href="#" className="product-card__img-link rounded-top">
-                <picture className="d-block position-relative">
+            <Link href="#" className="product-card__img-link rounded-top bg-pink-light">
+                <picture className="d-block position-relative ratio ratio-1x1">
                     <source srcSet={props.product.srcSet} />
-                    <img src={props.product.src} className="w-100" alt="Image Alt" loading="lazy" />
+                    <img src={props.product.src} className="w-100 mt-2" alt="Image Alt" loading="lazy" />
                     {props.showTip && (
                         <>
                             <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
@@ -72,11 +72,11 @@ const ProductCardTall = (props) => {
                     <New className="fw-bold" />
                 </div>
             }
-            <div className="product-card__content pt-2 pb-0 px-1 position-relative flex-grow-1 d-flex flex-column">
+            <div className="product-card__content pt-1 pb-0 px-1 position-relative flex-grow-1 d-flex flex-column">
                 <div className="d-flex justify-content-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={false} />
                 </div>
-                <p className="product-card__title flex-grow-1 d-flex flex-column justify-content-center h4 h-100 fw-normal">
+                <p className="product-card__title flex-grow-1 d-flex flex-column justify-content-center h4 h-100 fw-normal px-2">
                     <Link href="#" className="text-dark">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && (
