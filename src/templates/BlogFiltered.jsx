@@ -67,6 +67,7 @@ const BlogFiltered = (props) => {
                     <Item item="ALL" link="#" className="nav-link pb-0 pt-0 h4 font-weight-normal px-lg-1" />
                     <Item item="HAIR" link="#" className="nav-link active pb-0 pt-0 h4 font-weight-normal px-lg-1" />
                     <Item item="TAN" link="#" className="nav-link pb-0 pt-0 h4 font-weight-normal px-lg-1" />
+                    <Item item="SUNCARE" link="#" className="nav-link pb-0 pt-0 h4 font-weight-normal px-lg-1" />
                     <Item item="BODY" link="#" className="nav-link pb-0 pt-0 h4 font-weight-normal px-lg-1" />
                     <Item item="HOW TO'S" link="#" className="nav-link pb-0 pt-0 h4 font-weight-normal px-lg-1" />
                 </ul>
