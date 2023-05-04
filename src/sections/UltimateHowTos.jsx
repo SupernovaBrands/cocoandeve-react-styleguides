@@ -6,7 +6,7 @@ const UltimateHowTos = () => {
 			id: 1,
 			label: 'Slide 1',
 			title: '5 things you’re doing wrong with your hair care routine',
-			src: 'https://via.placeholder.com/375x190.jpg/EFADBA',
+			src: 'https://via.placeholder.com/553x298.jpg/EFADBA?text=375x340',
 			tags: [
 				{ class: 'bg-yellow-light text-gray-600', label: 'TAN' },
 				{ class: 'bg-secondary text-white', label: 'NEW' },
@@ -16,7 +16,7 @@ const UltimateHowTos = () => {
 			id: 2,
 			label: 'Slide 2',
 			title: '5 things you’re doing wrong with your hair care routine',
-			src: 'https://via.placeholder.com/375x190.jpg/EFADBA',
+			src: 'https://via.placeholder.com/553x298.jpg/EFADBA?text=375x340',
 			tags: [
 				{ class: 'bg-secondary-light text-gray-600', label: 'HAIR' },
 				{ class: 'bg-primary text-white', label: 'HOT' },
@@ -26,7 +26,7 @@ const UltimateHowTos = () => {
 			id: 3,
 			label: 'Slide 3',
 			title: '5 things you’re doing wrong with your hair care routine',
-			src: 'https://via.placeholder.com/375x190.jpg/EFADBA',
+			src: 'https://via.placeholder.com/553x298.jpg/EFADBA?text=375x340',
 			tags: [
 				{ class: 'bg-pink-light text-gray-600', label: 'BODY' },
 				{ class: 'bg-gray-400 text-gray-600', label: 'FEATURED' },
@@ -36,7 +36,7 @@ const UltimateHowTos = () => {
 			id: 4,
 			label: 'Slide 4',
 			title: '5 things you’re doing wrong with your hair care routine',
-			src: 'https://via.placeholder.com/375x190.jpg/EFADBA',
+			src: 'https://via.placeholder.com/553x298.jpg/EFADBA?text=375x340',
 			tags: [
 				{ class: 'bg-secondary-light text-gray-600', label: 'HAIR' },
 				{ class: 'bg-primary text-white', label: 'HOT' },
@@ -53,9 +53,13 @@ const UltimateHowTos = () => {
 				items={articleCarousel}
 				slideNumber={4}
 				className="col-12 col-lg-6"
+				controlPrevClass="ms-lg-2 px-lg-0"
+				controlNextClass="me-lg-2 px-lg-0"
 				roundedControl={false}
 				colLgGrid={4}
-				useRow={true} />
+				useRow={false}
+				hideCta={true}
+				 />
 		</>
 	);
 };

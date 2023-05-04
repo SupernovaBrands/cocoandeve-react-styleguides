@@ -143,16 +143,14 @@ const Blog = () => {
 					</div>
 				</Row>
 				<UltimateHowTos />
-				<Row className="article-list-wrapper mb-lg-4">
-					<div className="d-flex flex-wrap mb-0 mt-2">
-						{ARTICLE_LIST.slice(0, 3).map((article) => (
+				<Row className="article-list-wrapper flex-wrap mb-1 mt-2">
+					{ARTICLE_LIST.slice(0, 3).map((article) => (
 							<ArticleCard key={article.id} item={article} className="col-12 col-lg-4" />
-						))}
-					</div>
-					<div className="w-100 text-center">
-						<Link href="#" className="btn btn-lg btn-outline-primary mb-4">Load more posts</Link>
-					</div>
+					))}
 				</Row>
+				<div className="w-100 text-center">
+					<Link href="#" className="btn btn-lg btn-outline-primary mb-4 border border-primary border-2">Load more posts</Link>
+				</div>
 
 			</Container>
 		</div>
