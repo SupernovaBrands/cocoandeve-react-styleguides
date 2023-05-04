@@ -22,7 +22,7 @@ const Collection = (props) => {
                     <img src="https://via.placeholder.com/828x442" className="w-100" alt="Collection Banner"/>
                 </picture>
                 <figcaption className="collection-banner__content col-12 d-flex d-lg-none position-absolute w-auto align-items-center my-auto top-0 bottom-0">
-                    <h1 className="mb-0">Shop All</h1>
+                    <h1 className="mb-0 px-hg">Shop All</h1>
                 </figcaption>
             </figure>
             <div className="container collection-template">
@@ -88,12 +88,12 @@ const Collection = (props) => {
                                 return index === 2 ? (
                                     <Fragment key={`block-${product.id}`}>
                                         <ProductCardQuiz key={`quiz-product-1`} title="Find your customised tan shade!" textButton="Take the quiz" imageDesktop={`/cocoandeve-react-styleguides/quiz-banner-desktop.jpg`} imageMobile="/cocoandeve-react-styleguides/quiz-banner-mobile.jpg"/>
-                                        <ProductCardQuiz key={`quiz-product-2`} title="Find your customised tan shade!" addNewLine={true} textButton="Take the quiz" imageDesktop={`/cocoandeve-react-styleguides/quiz-banner-desktop.jpg`} imageMobile="/cocoandeve-react-styleguides/quiz-banner-mobile.jpg"/>
+                                        <ProductCardQuiz key={`quiz-product-2`} title="Find your customised tan shade!" isThreeLines={true} addNewLine={true} textButton="Take the quiz" imageDesktop={`/cocoandeve-react-styleguides/quiz-banner-desktop.jpg`} imageMobile="/cocoandeve-react-styleguides/quiz-banner-mobile.jpg"/>
                                         <ProductCard
                                             key={product.id}
                                             useCardTemplate={false}
                                             useCarousel={false}
-                                            className="d-flex flex-column  col-6 col-md-4 mb-5 product-card text-center"
+                                            className="d-flex flex-column  col-6 col-md-4 mb-5 product-card text-center position-relative"
                                             activeIndex=""
                                             product={product}
                                             itemMovingNext=""
@@ -106,7 +106,7 @@ const Collection = (props) => {
                                     key={product.id}
                                     useCardTemplate={false}
                                     useCarousel={false}
-                                    className="d-flex flex-column  col-6 col-md-4 mb-5 product-card text-center"
+                                    className="d-flex flex-column  col-6 col-md-4 mb-5 product-card text-center position-relative"
                                     activeIndex=""
                                     product={product}
                                     itemMovingNext=""

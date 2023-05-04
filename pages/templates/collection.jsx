@@ -17,8 +17,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeImg: false,
 		},
 		{
@@ -26,9 +26,9 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			badgeText: 'New',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			badgeText: '20% OFF* Code: SAVE20',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -43,8 +43,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -59,8 +59,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
             swatch: {
 				label: 'Choose Shade',
 				shade: true,
@@ -76,9 +76,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
-            badgeText: 'New!',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -94,8 +93,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$144.90',
 			price: '$134.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			swatch: {
 				label: 'Choose Style',
 				style: true,
@@ -111,8 +110,8 @@ const CollectionTemplate = () => {
 			productId: 4543113265187,
 			comparePrice: '$44.90',
 			price: '$34.90',
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		},
 		{
 			label: 'Slide 4',
@@ -121,8 +120,8 @@ const CollectionTemplate = () => {
 			comparePrice: '$44.90',
 			price: '$34.90',
 			badgeImg: true,
-			srcSet: 'https://via.placeholder.com/540x540',
-			src: 'https://via.placeholder.com/243x243',
+			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
+			src: 'https://via.placeholder.com/243x243/FFF2F4',
 		}
     ];
 

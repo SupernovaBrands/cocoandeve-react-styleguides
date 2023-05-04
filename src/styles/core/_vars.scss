@@ -32,6 +32,7 @@ $spacers: (
   4: $spacer * 2,     // 40
   5: $spacer * 3,     // 60
   g: $grid-gutter-width,
+  hg: $grid-gutter-width * 0.5,
 );
 
 // Typography

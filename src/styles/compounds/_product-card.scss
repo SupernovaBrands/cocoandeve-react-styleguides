@@ -102,24 +102,19 @@
 	}
 
 	&--quiz {
-		@include media-breakpoint-down(sm) {
+		@include media-breakpoint-down(lg) {
 			max-height: calc-em(150);
 		}
 
 		&__title {
 			max-width: calc-em(180);
 		}
-
-		.embed-responsive {
-			@include media-breakpoint-up(lg) {
-				border-radius: $border-radius-lg;
-			}
-		}
 	}
 
 	&--quiz-three-lines {
 		@include media-breakpoint-down(lg) {
 			max-height: calc-em(165);
+			min-height: calc-em(165);
 		}
 	}
 

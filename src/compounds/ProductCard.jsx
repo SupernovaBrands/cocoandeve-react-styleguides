@@ -55,6 +55,7 @@ const ProductCardTall = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${props.useCarousel ? 'carousel-item' : ''} ${!props.className ? 'col-9 col-md-3 product-card text-center' : ''} ${props.useCarousel && props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+            { props.product.badgeText && (<span className="badge bg-white position-absolute fw-normal font-size-sm text-body">{props.product.badgeText}</span>) }
             <Link href="#" className="product-card__img-link rounded-top bg-pink-light">
                 <picture className="d-block position-relative ratio ratio-1x1">
                     <source srcSet={props.product.srcSet} />
