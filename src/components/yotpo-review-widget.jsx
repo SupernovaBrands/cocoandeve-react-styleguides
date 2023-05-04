@@ -411,10 +411,10 @@ const YotpoReviewWidget = (props) => {
 	) : (
 		<>
 			<div className="d-flex align-items-center justify-content-lg-center">
-				<span className="yotpo-widget__score mr-25">{score ? score.toFixed(1) : 0}</span>
-				<div className="d-lg-flex ml-lg-1">
-					<ReviewStar score={score} />
-					<span className="d-block yotpo-widget__total mt-lg-0 ml-lg-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
+				<span className="yotpo-widget__score me-25 me-lg-0 ">{score ? score.toFixed(1) : 0}</span>
+				<div className="d-lg-flex mx-lg-1">
+					<ReviewStar score={score} className="svg--current-color tetx-primary" />
+					<span className="ms-lg-1 d-block yotpo-widget__total mt-lg-0 ml-lg-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
 			</div>
 
@@ -453,7 +453,7 @@ const YotpoReviewWidget = (props) => {
 			)}
 
 			{!revThanks && !qnaThanks && canCreate && (
-				<div id="yotpoFormCollapse" className="mt-2">
+				<div id="yotpoFormCollapse" className="mt-2 d-none">
 					<div className="row justify-content-end">
 						<div className="col-6 col-md-3 col-xl-2">
 							<button
@@ -624,7 +624,7 @@ const YotpoReviewWidget = (props) => {
 										<div className="col-lg-3">
 											<h4 className="mb-0 d-flex align-items-center">
 												{review.user_name}
-												{review.verified_buyer && <SvgVerified className="svg font-size-xs ml-25 text-secondary" />}
+												{review.verified_buyer && <SvgVerified className="svg font-size-xs ms-25 text-secondary" />}
 											</h4>
 											{review.verified_buyer && <p className="font-size-sm mb-0">{tStrings.yotpo.verifiedBuyer}</p>}
 											<p className="font-size-sm mb-1">
@@ -642,7 +642,7 @@ const YotpoReviewWidget = (props) => {
 												</p>
 											))}
 											<span className="font-size-sm bg-gray-400 d-inline-flex font-size-sm my-2 py-1 px-2">
-												<SvgTranslate className="svg mr-1" />
+												<SvgTranslate className="svg me-1" />
 												{ translateText() }
 											</span>
 										</div>
@@ -658,7 +658,7 @@ const YotpoReviewWidget = (props) => {
 												{review.shortContent && review.shortContent.length > 0 && (
 													<button
 														type="button"
-														className="btn btn-link p-0 ml-25"
+														className="btn btn-link p-0 ms-25"
 														onClick={() => { showMoreContent(review); }}
 													>
 														{review.hideContent ? tStrings.yotpo.readMore : tStrings.yotpo.readLess}

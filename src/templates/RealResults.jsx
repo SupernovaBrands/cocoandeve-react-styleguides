@@ -389,7 +389,7 @@ const RealResults = () => {
 		<>
             <section class="py-4 real-result">
                 <Container>
-                    <p className="pb-2 mb-0 h1 text-center">Real Customers. Real Reviews</p>
+                    <p className="mb-0 mb-lg-3 h1 text-center">Real Customers. Real Reviews</p>
                     <div className="mb-4 mx-auto d-sm-flex d-md-none my-3 row align-items-center justify-content-center">
                         <p className='h4 fw-normal mr-3 mb-0 col-3'>Filter by:</p>
                         <label htmlFor="rangeResultSelect" id="rangeResultSelectLabel" className="visually-hidden">Range Real Result</label>
@@ -476,6 +476,11 @@ const RealResults = () => {
                             </div>
                         </Tab>
                     </Tabs>
+                    <div class="row">
+                        <div class="col text-center">
+                            <a href="#" class="btn btn-lg btn-outline-primary" id="real-result__show-more" data-load-more="4">Show more reviews</a>
+                        </div>
+                    </div>
                 </Container>
             </section>
             <section>
@@ -486,7 +491,7 @@ const RealResults = () => {
                             defaultActiveKey="yotpo_tan"
                             activeKey={reviewTab}
                             id="yotpo-tab"
-                            className="nav nav-tabs mx-auto nav-tabs--real-results text-center mb-5 justify-content-center d-none d-md-flex"
+                            className="nav nav-tabs mx-auto nav-tabs--real-results nav-tabs--real-results-reviews text-center mb-5 justify-content-center"
                             onSelect={onReviewTabSelect}>
                             <Tab eventKey="yotpo_tan" title="Tan" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
                                 <YotpoReviewWidget
