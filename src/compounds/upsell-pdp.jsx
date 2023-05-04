@@ -1,6 +1,6 @@
 const UpsellPdp = (props) => {
 	return (
-        <form className="product-upsell d-flex align-items-center p-0 mb-3">
+        <form className={`product-upsell d-flex align-items-center p-0 ${props.className ? props.className : ''}`}>
             <figure className="d-flex flex-grow-1 mb-0 row">
                 <picture className="col-4">
                     <source srcSet="https://via.placeholder.com/274x274.jpg/EFADBA" media="(min-width: 992px)" />

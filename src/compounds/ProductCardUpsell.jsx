@@ -46,7 +46,7 @@ const ProductCardUpsell = (props) => {
                     )}
                 </div>
             </a>
-            <div className="item-third ps-lg-0 d-flex d-lg-none flex-grow-1 flex-column bg-pink-light position-relative">
+            <div className="item-third ps-lg-0 d-flex d-none flex-grow-1 flex-column bg-pink-light position-relative">
                 <span className="badge badge--square bg-white position-absolute fw-normal font-size-sm product-card__tag text-black">{props.item.nextStep}</span>
                 <picture className="ratio ratio-6x7 mx-auto my-0 mx-lg-0">
                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />

@@ -15,8 +15,8 @@ const Upsell = () => {
 			<h2 className="mt-4">PDP</h2>
 			<div className="row">
 				<div className="col-12 col-lg-5">
-					<UpsellPdp title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
-					<UpsellPdp title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
+					<UpsellPdp className="mb-3" title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
+					<UpsellPdp className="mb-3" title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
 				</div>
 			</div>
 		</Container>
