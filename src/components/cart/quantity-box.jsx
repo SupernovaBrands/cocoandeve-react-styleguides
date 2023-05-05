@@ -49,7 +49,8 @@ export default class QuantityBox extends React.Component {
 		e.preventDefault();
 
 		const qty = parseInt(this.state.quantity, 10);
-
+		this.setState({ quantity: qty + 1 });
+		/*
 		if (qty < 99) {
 			this.setState(
 				{ quantity: qty + 1 },
@@ -72,13 +73,17 @@ export default class QuantityBox extends React.Component {
 				},
 			);
 		}
+		*/
 	}
 
 	onSubtractQuantity = (e) => {
 		e.preventDefault();
 		const qty = parseInt(this.state.quantity, 10);
 		const min = this.props.allowZero ? 0 : 1;
-
+		this.setState(
+			{ quantity: qty - 1 }
+		);
+		/*
 		if (this.state.quantity > min) {
 			this.setState(
 				{ quantity: qty - 1 },
@@ -94,6 +99,7 @@ export default class QuantityBox extends React.Component {
 				},
 			);
 		}
+		*/
 	}
 
 	onFocus = (e) => {

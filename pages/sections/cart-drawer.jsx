@@ -12,9 +12,7 @@ const CartDrawerSection = () => {
 		<div className="container">
 			<h1>Cart Drawer</h1>
 			<button onClick={toggleCart} className="btn btn-primary">Show Cart</button>
-			<Modal show={show} onHide={toggleCart} className="cart-drawer">
-				<Cart />
-			</Modal>
+			<Cart showCart={show} toggleCart={toggleCart} />
 		</div>
 	);
 }

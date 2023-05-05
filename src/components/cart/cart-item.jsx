@@ -29,11 +29,15 @@ export default class CartItem extends React.Component {
 	}
 
 	onSelectVariant(variant, swatchIndex) {
+		this.setState({
+			editingVariant: false,
+		})
+		/*
 		const dataText = document.querySelector('#variant_quantity').innerText;
 		const dataInv = JSON.parse(dataText);
 		const itemProps = this.props.item;
 		const lastStock = dataInv.filter((item) => item.id === variant.id && itemProps.quantity > item.quantity);
-
+		
 		if (variant.availableForSale) {
 			this.setState({
 				editingVariant: variant.id !== this.props.item.merchandise.id ? swatchIndex : false,
@@ -44,6 +48,7 @@ export default class CartItem extends React.Component {
 				}
 			});
 		}
+		*/
 	}
 
 	onRemoveItem = () => {
