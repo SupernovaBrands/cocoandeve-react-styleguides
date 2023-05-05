@@ -166,6 +166,8 @@
 			}
 		}
 
+
+
 		.carousel-item {
 			&-next {
 				transition: transform .6s ease-in-out !important;
@@ -342,6 +344,14 @@
 			@include media-breakpoint-up(lg) {
 				transform: translateX(0);
 			}
+		}
+	}
+}
+
+.product-carousel {
+	.carousel--centered__custom .carousel-inner {
+		@include media-breakpoint-up(lg) {
+			transform: translateX(-75%);
 		}
 	}
 }
