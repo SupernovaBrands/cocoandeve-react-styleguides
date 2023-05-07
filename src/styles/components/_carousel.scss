@@ -584,6 +584,11 @@
 			top: calc-em(130);
 		}
 	}
+
+	.carousel-control.floating-out-start,
+	.carousel-control.floating-out-end {
+		right: -0.6%;
+	}
 	/*
 	.carousel-inner {
 		@include media-breakpoint-up(lg) {
