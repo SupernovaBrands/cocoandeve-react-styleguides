@@ -11,33 +11,31 @@ const PdpUpsell2 = (props) => {
             title: "Deluxe Exfoliating Mitt",
             text: "Exfoliates and lifts dead skin cells to preps skin for the perfect, streak-free self-tan",
             nexttitle: "Sunny Honey Bali Bronzing Bundle",
-            nexttext: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones! ",
+            nexttext: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones!",
             compare_price: "$44.90",
             price: "$34.90",
         },
         {
-            active: "d-lg-flex",
-            swatch_shade: "true",
+            active: "active d-lg-flex",
             step: "Step 2",
             nextStep: "Step 3",
             title: "Sunny Honey Bali Bronzing Bundle",
             text: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones!",
-            nexttitle: "Antioxidant Face Tanning Micromist",
+            nexttitle: "Sunny Honey Bali Bronzing Bundle",
             nexttext: "Innovative micromist technology allows for an even, hands-free face-tanning experience for a flawless, long-lasting glow.",
             compare_price: "$44.90",
-            price: "$34.90"
+            price: "$34.90",
         },
         {
-            active: "d-lg-flex",
+            active: "active d-lg-flex",
             step: "Step 3",
-            nextStep: "Step 1",
+            nextStep: "Step 2",
             title: "Antioxidant Face Tanning Micromist",
             text: "Innovative micromist technology allows for an even, hands-free face-tanning experience for a flawless, long-lasting glow.",
-            nexttitle: "Deluxe Exfoliating Mitt",
-            nexttext: "Exfoliates and lifts dead skin cells to preps skin for the perfect, streak-free self-tan",
+            nexttitle: "Sunny Honey Bali Bronzing Bundle",
+            nexttext: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones! ",
             compare_price: "$44.90",
             price: "$34.90",
-            last: "true"
         }
 	];
 
@@ -45,7 +43,7 @@ const PdpUpsell2 = (props) => {
         <div className="product-upsell-2 py-5">
             <Container>
                 <h2 className="h1 col-12 text-center mb-3">Shop the routine</h2>
-                <CarouselCustom id="ShopTheRoutineCarousel" productCardUpsell={true} useCardTemplate={true} items={items} slideNumber={4} className="col-12 col-md-4" roundedControl={false} colLgGrid={3} useRow={true} hideControls={true}  />
+                <CarouselCustom id="ShopTheRoutineCarousel" productCardUpsell={true} useCardTemplate={true} items={items} slideNumber={4} className="col-12 col-md-4" carouselClass="carousel--product-preview" roundedControl={false} colLgGrid={3} hideControls={true}  />
             </Container>
         </div>
     );

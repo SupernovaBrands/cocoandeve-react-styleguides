@@ -53,6 +53,8 @@
     .product-card__content {
         @include media-breakpoint-down(md) {
             min-height: calc-em(300);
+            padding-right: 1.25rem !important;
+            padding-left: 1.25rem !important;
         }
     }
 
@@ -69,6 +71,7 @@
         &.carousel-item-next {
             @include media-breakpoint-down(md) {
                 display: flex !important;
+                flex-flow: unset !important;
             }
         }
     }

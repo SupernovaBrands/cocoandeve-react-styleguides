@@ -27,9 +27,7 @@ const YotpoStar = (props) => {
 			{props.showScore && <span className="ms-25">{`${score.toFixed(1)} stars`}</span>}
 			{props.showTotal && (
 				<span className="ms-25">
-					(
-					<Link href={`${props.productUrl}#write-a-review`} className="link-secondary text-underline">{total}</Link>
-					)
+					<Link href={`${props.productUrl}#write-a-review`} className="link-secondary">{total.toFixed(1)} stars</Link>
 				</span>
 			)}
 		</div>

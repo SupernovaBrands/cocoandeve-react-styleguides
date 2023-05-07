@@ -453,7 +453,7 @@ const YotpoReviewWidget = (props) => {
 			)}
 
 			{!revThanks && !qnaThanks && canCreate && (
-				<div id="yotpoFormCollapse" className="mt-2 d-none">
+				<div id="yotpoFormCollapse" className="mt-2">
 					<div className="row justify-content-end">
 						<div className="col-6 col-md-3 col-xl-2">
 							<button
@@ -666,9 +666,9 @@ const YotpoReviewWidget = (props) => {
 												)}
 											</p>
 											{review.images_data && review.images_data.length > 0 && (
-												<div className="d-flex flex-nowrap row w-auto overflow-auto pr-g">
+												<div className="d-flex flex-nowrap w-auto overflow-auto pr-g">
 													{review.images_data.map((image, index) => (
-														<button key={image.id} type="button" className={`d-inline-block btn-unstyled ${index === 0 ? 'ml-1 ml-lg-g mr-1' : 'mx-1'} mb-g`} data-toggle="modal" data-target="#yotpoImageModal" onClick={() => { setReviewModal(review); }}>
+														<button key={image.id} type="button" className={`d-inline-block btn-unstyled ${index === 0 ? 'ml-1 ml-lg-g mr-1' : 'mx-1'} mb-g text-start`} data-toggle="modal" data-target="#yotpoImageModal" onClick={() => { setReviewModal(review); }}>
 															<img src={image.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} />
 														</button>
 													))}

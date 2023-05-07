@@ -1,14 +1,14 @@
 const ProductCardUpsell = (props) => {
     return (
-        <div className={`col-12 col-lg-4 carousel-item ${props.item.active} awais-test product-card flex-grow-1`}>
+        <div className={`col-12 col-lg-4 carousel-item ${props.item.active} product-card flex-grow-1`}>
             <a href="#" className="item-third ps-lg-0 d-flex flex-grow-1 flex-column bg-pink-light text-body position-relative">
                 <span className="badge badge--square bg-white position-absolute fw-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
-                <picture className="ratio ratio-6x7 mx-auto my-0 mx-lg-0">
+                <picture className="ratio ratio-1x1 mx-auto my-0 mx-lg-0">
                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />
                     <img className="embed-responsive-item px-3 bg-pink-light" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
                 </picture>
                 <div className="product-card__content pb-0 position-relative flex-grow-1 d-flex flex-column px-2 px-lg-3 bg-pink-light">
-                    <p className="product-card__title fw-bold text-center text-dark h4">{props.item.title}</p>
+                    <p className="product-card__title fw-bold text-center text-dark h4 w-100">{props.item.title}</p>
                     <p className="product-card__desc text-center fw-normal d-flex flex-column">{props.item.text}</p>
                     <p className="text-center d-flex flex-row flex-grow-1 justify-content-center align-items-end">
                         {props.item.compare_price &&
@@ -46,14 +46,14 @@ const ProductCardUpsell = (props) => {
                     )}
                 </div>
             </a>
-            <div className="item-third ps-lg-0 d-flex d-none flex-grow-1 flex-column bg-pink-light position-relative">
+            <div className="item-third ps-lg-0 d-flex d-lg-none flex-grow-1 flex-column bg-pink-light position-relative">
                 <span className="badge badge--square bg-white position-absolute fw-normal font-size-sm product-card__tag text-black">{props.item.nextStep}</span>
-                <picture className="ratio ratio-6x7 mx-auto my-0 mx-lg-0">
+                <picture className="ratio ratio-1x1 mx-auto my-0 mx-lg-0">
                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />
                     <img className="embed-responsive-item px-3 bg-pink-light" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
                 </picture>
                 <div className="product-card__content pb-0 position-relative flex-grow-1 d-flex flex-column px-2 px-lg-3 bg-pink-light">
-                    <p className="product-card__title fw-bold text-center text-dark h4">{props.item.nexttitle}</p>
+                    <p className="product-card__title fw-bold text-center text-dark h4 w-100">{props.item.nexttitle}</p>
                     <p className="product-card__desc text-center fw-normal d-flex flex-column">{props.item.nexttext}</p>
                     <p className="text-center d-flex flex-row flex-grow-1 justify-content-center align-items-end">
                         {props.item.compare_price &&
