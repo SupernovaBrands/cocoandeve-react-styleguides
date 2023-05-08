@@ -585,9 +585,14 @@
 		}
 	}
 
-	.carousel-control.floating-out-start,
+	.carousel-control.floating-out-start {
+		left: -0.6%;
+		width: calc-em(100);
+	}
+
 	.carousel-control.floating-out-end {
 		right: -0.6%;
+		width: calc-em(100);
 	}
 	/*
 	.carousel-inner {
