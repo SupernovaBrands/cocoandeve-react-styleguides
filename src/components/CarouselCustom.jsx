@@ -17,6 +17,9 @@ const CarouselCustom = (props) => {
 	const [itemMovingNext, setItemMovingNext] = useState(false);
 	const [itemMovingPrev, setItemMovingPrev] = useState(false);
 
+	const [touchStart, setTouchStart] = useState(0);
+	const [touchEnd, setTouchEnd] = useState(0);
+
 	let carouselItems = [];
 	let index = 0;
 	props.items.map((item, idx) => {
@@ -84,11 +87,33 @@ const CarouselCustom = (props) => {
 		setActiveIndex(int);
 	};
 
+	const handleTouchStart = (e) => {
+		setTouchStart(e.targetTouches[0].clientX);
+	};
+
+	const handleTouchMove = (e) => {
+		setTouchEnd(e.targetTouches[0].clientX);
+	};
+
+	const handleTouchEnd = () => {
+		if (touchStart - touchEnd > 75) {
+			carouselNext();
+		}
+
+		if (touchStart - touchEnd < -75) {
+			carouselPrev();
+		}
+	}
+
 	return (
 		<div className={`position-relative ${props.useRow ? 'row' : ''} ${props.packagingCard ? 'carousel--packaging carousel--real-result' : ''} ${props.resultCard ? 'carousel--real-result' : ''} ${props.articleCard ? 'blog-carousel' : ''}`}>
 			<div
 				id={`carouselLoopCentered${props.id}`}
-				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.packagingCard || props.videoCard || props.articleCard || props.imgLogo || props.productCardUpsell ? '' : 'pt-2'} ${props.carouselClass ? props.carouselClass : ''}`}>
+				className={`carousel--loop carousel--swipe carousel--centered ${props.centered ? 'carousel--centered__custom' : ''} ${!props.centered ? `carousel--centered__custom-nocenter-${props.colLgGrid}` : ''} ${props.useRow ? 'px-0' : ''} ${props.productCard || props.resultCard || props.packagingCard || props.videoCard || props.articleCard || props.imgLogo || props.productCardUpsell ? '' : 'pt-2'} ${props.carouselClass ? props.carouselClass : ''}`}
+				onTouchStart={handleTouchStart}
+				onTouchMove={handleTouchMove}
+				onTouchEnd={handleTouchEnd}
+				>
 				<div className="carousel-inner d-flex flex-nowrap mx-0">
 					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
