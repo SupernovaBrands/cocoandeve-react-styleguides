@@ -1,9 +1,5 @@
 {
-	"extends": [
-		"next/core-web-vitals",
-		"airbnb",
-		"next/babel"
-	],
+	"extends": ["next/babel","next/core-web-vitals"],
 	"settings": {
 		"import/resolver": {
 			"jsconfig": {
