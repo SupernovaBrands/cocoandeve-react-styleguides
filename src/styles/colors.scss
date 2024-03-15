@@ -1,7 +1,7 @@
 @import 'core';
-@import 'bootstrap/common';
-@import 'bootstrap/main';
-@import 'common';
+// @import 'bootstrap/common';
+// @import 'bootstrap/main';
+// @import 'common';
 
 @mixin make-box($parent, $color) {
 	.box-#{$parent} {

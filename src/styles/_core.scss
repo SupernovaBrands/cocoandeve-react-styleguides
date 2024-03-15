@@ -1,6 +1,19 @@
-@charset 'UTF-8';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import 'core/functions';
+@import 'core/fonts';
+@import 'core/type';
 
-@import 'mixins/carousel';
-@import 'bootstrap/core';
+@layer base {
+	a {
+		@apply text-primary text-base hover:underline hover:text-primary-darken;
+	}
+}
+
+// @charset 'UTF-8';
+
+// @import 'core/functions';
+
+// @import 'mixins/carousel';
+// @import 'bootstrap/core';
