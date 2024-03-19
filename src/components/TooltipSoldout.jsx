@@ -4,9 +4,9 @@ const TooltipSoldout = (props) => {
 	const tooltipOos = useRef(null);
 	useEffect(() => {
 		setTimeout(() => {
-			tooltipOos.current.classList.add('show');
+			tooltipOos.current?.classList.add('show');
 			setTimeout(() => {
-				tooltipOos.current.classList.remove('show');
+				tooltipOos.current?.classList.remove('show');
 			}, 5000);
 		}, 2000);
 		return () => {};
