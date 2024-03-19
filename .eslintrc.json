@@ -12,7 +12,7 @@
 			}
 		}
 	},
-	"parser": "babel-eslint",
+	// "parser": "babel-eslint",
 	"rules": {
 		"indent": [
 			2,
