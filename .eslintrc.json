@@ -1,8 +1,9 @@
 {
 	"extends": [
+		"next/babel",
 		"next/core-web-vitals",
 		"airbnb",
-		"next/babel"
+		"next"
 	],
 	"settings": {
 		"import/resolver": {
@@ -11,6 +12,7 @@
 			}
 		}
 	},
+	"parser": "babel-eslint",
 	"rules": {
 		"indent": [
 			2,
