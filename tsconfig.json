@@ -8,6 +8,7 @@
       "@/templates/*": ["templates/*"],
       "@/images/icons/*": ["images/icons/*"],
       "@/config": ["config"],
+      "@/secret": ["secret"],
       "@/modules/*": ["modules/*"]
     },
     "target": "es5",
