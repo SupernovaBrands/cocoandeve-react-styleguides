@@ -2,7 +2,6 @@ import ChevronDownIcon from '@/images/icons/chevron-down.svg';
 import { useState } from 'react';
 
 const Accordion = (props: any) => {
-	console.log('props', props);
 	interface Accordion {
 		id: number;
 		title: string;
