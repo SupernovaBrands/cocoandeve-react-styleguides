@@ -8,9 +8,9 @@ const Accordions = () => {
 		const clickedButton = buttonRefs.current[state];
 		if (clickedButton === openedRef.current) {
 			openedRef.current = null;
-		return;
+			return;
 		}
-		if (Boolean(openedRef.current?.getAttribute("data-value"))) {
+		if (Boolean(openedRef.current?.getAttribute('data-value'))) {
 			openedRef.current?.click();
 		}
 		openedRef.current = clickedButton;
