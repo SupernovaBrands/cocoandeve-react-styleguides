@@ -8,6 +8,8 @@ export default function Home() {
       <div className="lg:-mx-g flex flex-wrap mt-3">
         <div className="w-full lg:w-1/2 px-0 lg:px-g mb-3 flex flex-col items-start">
           <h2>components</h2>
+          <Link href="./components/grid">Grid</Link>
+          <Link href="./components/typography">Typography</Link>
           <Link href="./components/accordions">Accordions</Link>
           <Link href="./components/announcement-bar">Announcement Bar</Link>
           <Link href="./components/badge">Badge</Link>

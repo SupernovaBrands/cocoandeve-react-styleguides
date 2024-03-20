@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
     "@shopify/theme-images": "^4.1.1",
     "@svgr/webpack": "^6.5.1",
     "axios": "^1.4.0",
