@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+// import { resolve } from 'path';
 import propTypes from 'prop-types';
 // import 'bootstrap/dist/css/bootstrap.css'
 // import '../src/styles/colors.scss'
