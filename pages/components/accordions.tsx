@@ -4,7 +4,6 @@ import ChevronDownIcon from '@/images/icons/chevron-down.svg';
 const Accordions = () => {
 	const buttonRefs = useRef([]);
 	const openedRef = useRef(null);
-	const [disclosureState, setDisclosureState] = useState(0);
 	const handleDisclosureChange = (state: number) => {
 		const clickedButton = buttonRefs.current[state];
 		if (clickedButton === openedRef.current) {
@@ -38,7 +37,7 @@ const Accordions = () => {
 					<Disclosure key={d.id} as="div" className="accordion-item border-t border-b border-gray-500">
 						{({ open }) => (
 							<>
-								<Disclosure.Button className={`flex w-full justify-between items-center text-left text-primary hover:text-primary-darken hover:underline pt-[12px] pb-[12px] ${open ? 'border-b border-gray-500' : ''}`} onClick={() => handleDisclosureChange(d.id)} data-value={open} ref={(ref) => { buttonRefs.current[d.id] = ref }}>
+								<Disclosure.Button className={`flex w-full justify-between items-center text-left text-primary hover:text-primary-darken hover:underline pt-[12px] pb-[12px] leading-base ${open ? 'border-b border-gray-500' : ''}`} onClick={() => handleDisclosureChange(d.id)} data-value={open} ref={(ref) => { buttonRefs.current[d.id] = ref }}>
 									<span>{d.title}</span>
 									<ChevronDownIcon
 										className={`${
