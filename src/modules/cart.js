@@ -1,13 +1,20 @@
 /* global tSettings */
-
-import StorefrontApi from '@/modules/storefront-api';
+import dynamic from 'next/dynamic';
+// import StorefrontApi from '@/modules/storefront-api';
 import Shipping from '@/modules/shipping';
 import Discount from '@/modules/discounts';
 import AutoGwp from '@/modules/autogwp';
-
-import {
+const StorefrontApi = dynamic(() => import('@/modules/storefront-api'), {
+    ssr: false,
+});
+// import {
+// 	setCookie, getCookie, getLSWithExpiry, getId, getCartId, getIndexTotalQuantityAndManualGwp, removeLS, isItemHasProp,
+// } from '@/modules/utils';
+const {
 	setCookie, getCookie, getLSWithExpiry, getId, getCartId, getIndexTotalQuantityAndManualGwp, removeLS, isItemHasProp,
-} from '@/modules/utils';
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 import {
 	queryCartCreate, queryAddItem, queryRemoveItem, queryGetCart,
 	queryChangeQuantity, queryCartAttributesUpdate,

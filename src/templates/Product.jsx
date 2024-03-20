@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { Col, Container, Row, Tabs, Tab, Collapse } from 'react-bootstrap';
+import dynamic from 'next/dynamic';
+import { useState } from "react";
+import { Container, Row, Tabs, Tab, Collapse } from 'react-bootstrap';
 import ProductImageCarousel from "@/components/ProductImageCarousel";
 import LaunchWaitList from "@/compounds/launch-waitlist";
 import ProductVariant from "@/compounds/product-variant";
 import ProductSubscription from "@/components/product-subscription";
-import UpsellPdp from "@/compounds/upsell-pdp"; 
-import QuantityBox from '@/components/cart/quantity-box';
+import UpsellPdp from "@/compounds/upsell-pdp";
+// import QuantityBox from '@/components/cart/quantity-box';
 import SaveResults from "@/components/save-results";
 import YotpoStar from "@/components/YotpoStars";
 import NaturalDha from '@/images/icons/natural-dha.svg';
@@ -23,7 +24,9 @@ import WinnerAward from '@/images/icons/winner-award.svg';
 import MoneyBack from '@/images/icons/moneyback.svg';
 import Plus from '@/images/icons/plus.svg';
 import Minus from '@/images/icons/minus.svg';
-
+const QuantityBox = dynamic(() => import('@/components/cart/quantity-box'), {
+    ssr: false,
+});
 const Product = (props) => {
 
     const [isMedium, setMedium] = useState(true);

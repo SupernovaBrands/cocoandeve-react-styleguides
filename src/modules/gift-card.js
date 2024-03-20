@@ -1,6 +1,18 @@
 /* global tSettings customerEmail */
-
-import {
+import dynamic from 'next/dynamic';
+// import {
+// 	ajaxPromise,
+// 	getCookie,
+// 	setCookie,
+// 	removeCookie,
+// 	setLSWithExpiry,
+// 	getLSWithExpiry,
+// 	removeLS,
+// 	daysToTime,
+// 	isSameText,
+// 	isContainGiftCard,
+// } from '@/modules/utils';
+const {
 	ajaxPromise,
 	getCookie,
 	setCookie,
@@ -11,8 +23,9 @@ import {
 	daysToTime,
 	isSameText,
 	isContainGiftCard,
-} from '@/modules/utils';
-
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 class GiftCard {
 	fetchApi = () => {
 		const url = `${tSettings.apiEndpoint}/shopify/gift_cards/${this.code}?email=${customerEmail}&brand=cocoandeve_shopify_${tSettings.store}`;

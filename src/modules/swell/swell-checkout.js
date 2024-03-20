@@ -1,6 +1,9 @@
 /* global Modal Shopify loadJS */
-import { setCookie } from '~mod/utils';
-
+// import { setCookie } from '~mod/utils';
+import dynamic from 'next/dynamic';
+const { setCookie } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 let modal = null;
 
 const formValidation = () => {

@@ -1,6 +1,6 @@
 /* global tStrings tSettings */
 import '@/config';
-
+import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
@@ -10,8 +10,12 @@ import PropTypes from 'prop-types';
 import SvgTag from '@/images/icons/tag.svg';
 import SvgGift from '@/images/icons/gift.svg';
 import SvgCloseCircle from '@/images/icons/close-circle.svg';
-import { isSwellCode, formatMoney } from '@/modules/utils';
+// import { isSwellCode, formatMoney } from '@/modules/utils';
 import { Collapse, Button } from 'react-bootstrap';
+
+const { isSwellCode, formatMoney } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 
 export default class CartDiscountForm extends React.Component {
 	constructor(props) {

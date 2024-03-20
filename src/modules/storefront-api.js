@@ -1,13 +1,18 @@
 /* global Cart tSettings */
+import dynamic from 'next/dynamic';
 import { getSizedImageUrl } from '@shopify/theme-images';
 import axios from 'axios';
 
-import {
-	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
-} from '@/modules/utils';
+// import {
+// 	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
+// } from '@/modules/utils';
 import { queryProductByHandle, queryBuyerIdentity } from '@/modules/query';
 import storefrontSettings from '../config/storefront';
-
+const {
+	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 class storefrontApi {
 	constructor() {
 		// const { location: { hostname } } = globalThis;

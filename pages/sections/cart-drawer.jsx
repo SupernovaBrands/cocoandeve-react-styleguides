@@ -1,6 +1,10 @@
-import Cart from "@/components/cart/cart";
+import dynamic from 'next/dynamic';
+// import Cart from "@/components/cart/cart";
 import { useState } from "react";
-import Modal from 'react-bootstrap/Modal';
+// import Modal from 'react-bootstrap/Modal';
+const Cart = dynamic(() => import('@/components/cart/cart'), {
+    ssr: false,
+});
 
 const CartDrawerSection = () => {
 	const [show, setShow] = useState(false);

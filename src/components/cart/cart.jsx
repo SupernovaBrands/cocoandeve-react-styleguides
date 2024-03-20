@@ -3,11 +3,14 @@ import '@/config';
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
-
+import dynamic from 'next/dynamic';
 import React from 'react';
 import CartShippingMeter from '@/components/cart/cart-shipping-meter';
 import CartDiscountMeter from '@/components/cart/cart-discount-meter';
-import CartItem from '@/components/cart/cart-item';
+// import CartItem from '@/components/cart/cart-item';
+const CartItem = dynamic(() => import('@/components/cart/cart-item'), {
+    ssr: false,
+});
 import CartDiscountForm from '@/components/cart/cart-discount-form';
 import CartManualGwp from '@/components/cart/cart-manual-gwp';
 import CartExtras from '@/components/cart/cart-extras';
@@ -16,13 +19,13 @@ import CartAction from '@/modules/cart';
 import CartSwellRedemption from '@/components/swell/cart-swell-redemption';
 import Modal from 'react-bootstrap/Modal';
 
-import {
-	isCodeAllowed,
-	getId,
-	getCartId,
-	isSwellCode,
-	formatMoney,
-} from '@/modules/utils';
+// import {
+// 	isCodeAllowed,
+// 	getId,
+// 	getCartId,
+// 	isSwellCode,
+// 	formatMoney,
+// } from '@/modules/utils';
 
 import SvgClose from '@/images/icons/close.svg';
 import { gaEvent } from '@/modules/analytics-event';
@@ -30,7 +33,15 @@ import Discount from '@/modules/discounts';
 import ManualGWP from '@/modules/manual-gwp';
 import Shipping from '@/modules/shipping';
 import giftCard from '@/modules/gift-card';
-
+const {
+	isCodeAllowed,
+	getId,
+	getCartId,
+	isSwellCode,
+	formatMoney,
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 const styleguide = true;
 export default class Cart extends React.Component {
 	constructor(props) {
@@ -564,7 +575,7 @@ export default class Cart extends React.Component {
 								</div>
 
 								<hr />
-								
+
 								<CartExtras totalPrice={cart.totalAmount} />
 							</form>
 						))}

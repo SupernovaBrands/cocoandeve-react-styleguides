@@ -1,6 +1,9 @@
-import CookieBanner from '@/components/CookieBanner';
+import dynamic from 'next/dynamic';
+// import CookieBanner from '@/components/CookieBanner';
 import { useState } from 'react';
-
+const CookieBanner = dynamic(() => import('@/components/CookieBanner'), {
+    ssr: false,
+});
 const CookieBanners = () => {
 	const [show, setShow] = useState(false);
 

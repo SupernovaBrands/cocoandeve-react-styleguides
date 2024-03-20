@@ -1,9 +1,12 @@
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Close from '../../src/images/icons/close.svg';
 import Loading from '../../src/images/icons/loading.svg';
 import Search from '../../src/images/icons/search-thin.svg';
 import SearchProductCard from './SearchProductCard';
-import CarouselScroll from '@/components/CarouselScroll';
+const CarouselScroll = dynamic(() => import('@/components/CarouselScroll'), {
+    ssr: false,
+});
 
 const SearchBox = (props) => {
     const [keyword, setKeyword] = useState('');
@@ -137,7 +140,7 @@ const SearchBox = (props) => {
                 </div>
             )}
         </div>
-    );  
+    );
 };
 
 export default SearchBox;

@@ -1,9 +1,15 @@
-import YotpoReviewWidget from '@/components/yotpo-review-widget';
+import dynamic from 'next/dynamic';
+
+// import YotpoReviewWidget from '@/components/yotpo-review-widget';
+
 import { useEffect, useState } from "react";
 import { Container, Tabs, Tab } from "react-bootstrap";
 import ResultCard from '@/compounds/result-card';
 import TestimonialCarousel from '@/sections/TestimonialCarousel';
 import ProductCarousel from '@/sections/ProductCarousel';
+const YotpoReviewWidget = dynamic(() => import('@/components/yotpo-review-widget'), {
+    ssr: false,
+});
 
 const REVIEWS = [
     {
@@ -408,7 +414,7 @@ const RealResults = () => {
                         className="nav nav-tabs mx-auto nav-tabs--real-results-page nav-tabs--real-results text-center mb-5 justify-content-center d-none d-md-flex"
                         onSelect={onSelect}>
                         <Tab title="Filter By:" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
-                            
+
                         </Tab>
                         <Tab eventKey="tan" title="Tan" tabClassName="nav-link text-decoration-none h4 mb-0 fw-normal">
                             <div class="row real-result__grid">

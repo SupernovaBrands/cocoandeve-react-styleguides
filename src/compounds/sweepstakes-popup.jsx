@@ -1,7 +1,10 @@
-import CloseRounded from '../../src/images/icons/close-rounded.svg';
+import dynamic from 'next/dynamic';
+// import CloseRounded from '../../src/images/icons/close-rounded.svg';
 import ChevronDown from '../../src/images/icons/chevron-down.svg';
-import Popup from '@/components/Popup';
-
+// import Popup from '@/components/Popup';
+const Popup = dynamic(() => import('@/components/Popup'), {
+    ssr: false,
+});
 const SweeptakesPopup = (props) => {
     return (
         <Popup classes="sweepstakes-popup" cotent_classes="mx-g mx-lg-4" body_classes="px-g px-lg-3 py-g" spacing={true}>
@@ -54,7 +57,7 @@ const SweeptakesPopup = (props) => {
                 </form>
             </div>
         </Popup>
-    );  
+    );
 };
 
 export default SweeptakesPopup;

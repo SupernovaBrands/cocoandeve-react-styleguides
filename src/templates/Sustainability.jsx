@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Header from '@/sections/Header';
-import Footer from '@/sections/Footer';
+// import Header from '@/sections/Header';
+// import Footer from '@/sections/Footer';
 import Next from '../../src/images/icons/chevron-next.svg';
 import Prev from '../../src/images/icons/chevron-prev.svg';
 import { Carousel } from "react-bootstrap";
@@ -20,7 +20,7 @@ const Sustainability = () => {
     const toggleCart = () => {
 		setShowCart(!showCart);
 	}
-    
+
 	const sourcingCarouselControlHandlePrev = () => {
 		const idx = index - 1 < 0 ? 2 : index - 1;
 		setIndex(idx);
@@ -37,7 +37,7 @@ const Sustainability = () => {
             srcSet: 'https://via.placeholder.com/300x135.jpg/EFADBA',
             title: 'Sustainable packaging',
             body: 'It’s not just about ingredients, either. We’re constantly challenging ourselves to take a holistic approach to sustainable packaging with containers that are environmentally-friendly, durable and unBALIevably good looking! Way too cute for a single use, our shelfie-ready pots and jars are designed to be repurposed. Our tip? Brighten up your bathroom shelves by upcycling your empties into hair accessory or cotton pad holders.',
-            
+
         },
         {
             id: 2,

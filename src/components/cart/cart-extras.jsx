@@ -1,22 +1,25 @@
 /* global tSettings tStrings assetUrl */
 import '@/config';
-
+import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-	formatMoney,
-	assetUrl,
-} from '@/modules/utils';
+// import {
+// 	formatMoney,
+// 	assetUrl,
+// } from '@/modules/utils';
 
 import SvgDelivery from '@/images/icons/fast-delivery.svg';
 import SvgAwards from '@/images/icons/winner-award.svg';
 import SvgMoneyback from '@/images/icons/moneyback.svg';
 import SvgMoneybackPounds from '@/images/icons/moneyback-pounds.svg';
 import SvgMoneybackEur from '@/images/icons/moneyback-eur.svg';
+const { assetUrl, formatMoney } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 
 let currency;
 let locale;

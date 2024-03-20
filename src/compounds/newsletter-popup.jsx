@@ -1,7 +1,10 @@
 import CloseRounded from '../../src/images/icons/close-rounded.svg';
 import ChevronDown from '../../src/images/icons/chevron-down.svg';
-import Popup from '@/components/Popup';
-
+// import Popup from '@/components/Popup';
+import dynamic from 'next/dynamic';
+const Popup = dynamic(() => import('@/components/Popup'), {
+    ssr: false,
+});
 const NewsletterPopup = (props) => {
     return (
         <Popup classes="newsletter-bigger-popup" cotent_classes="bg-secondary" body_classes="px-g" picture={true} margin={true}>
@@ -52,7 +55,7 @@ const NewsletterPopup = (props) => {
                 </form>
             </div>
         </Popup>
-    );  
+    );
 };
 
 export default NewsletterPopup;

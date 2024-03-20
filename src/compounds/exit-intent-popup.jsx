@@ -1,6 +1,9 @@
+import dynamic from 'next/dynamic';
 import CloseRounded from '../../src/images/icons/close-rounded.svg';
-import Popup from '@/components/Popup';
-
+// import Popup from '@/components/Popup';
+const Popup = dynamic(() => import('@/components/Popup'), {
+    ssr: false,
+});
 const ExitIntent = (props) => {
     return (
         <Popup classes="exit-intent-popup" body_classes="p-0">
@@ -20,7 +23,7 @@ const ExitIntent = (props) => {
                 <CloseRounded className="svg" />
             </button>
         </Popup>
-    );  
+    );
 };
 
 export default ExitIntent;

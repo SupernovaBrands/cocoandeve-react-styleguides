@@ -1,7 +1,14 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import PropTypes from 'prop-types';
-import { getCookie, removeCookie } from '@/modules/utils';
+// import { getCookie, removeCookie } from '@/modules/utils';
+const {
+	getCookie,
+	removeCookie,
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 
 const CookieBanner = (props) => {
 	const [open, setOpen] = useState(false);
@@ -67,7 +74,7 @@ const CookieBanner = (props) => {
 		<section className="cookies-banner bg-white">
 			<div className="container py-2 font-size-xs">
 				<p className="text-center">
-					We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements.  
+					We use cookies to enhance your browsing experience, analyse traffic and serve tailored advertisements.
 					<a href="/pages/privacy-policy" className="text-dark text-underline">Find out more.</a>
 				</p>
 				<Collapse in={open}>

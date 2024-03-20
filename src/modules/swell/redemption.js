@@ -1,9 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 /* global tSettings Cart */
-import {
+import dynamic from 'next/dynamic';
+// import {
+// 	isSwellCode,
+// } from '@/modules/utils';
+const {
 	isSwellCode,
-} from '@/modules/utils';
-
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 const apiEndpoint = 'https://loyalty.yotpo.com/api/v2';
 const { apiKey, guidKey } = global.config.tSettings.cartRedemption;
 const MAX_RETRY = 5;

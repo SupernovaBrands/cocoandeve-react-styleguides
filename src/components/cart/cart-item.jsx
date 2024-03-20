@@ -1,6 +1,6 @@
 /* global tStrings tSettings */
 import '@/config';
-
+import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
@@ -10,15 +10,17 @@ import PropTypes from 'prop-types';
 import ConditionWrapper from '@/components/cart/condition-wrapper';
 import QuantityBox from '@/components/cart/quantity-box';
 
-import {
-	formatMoney,
-	kebabCase,
-} from '@/modules/utils';
+// import {
+// 	formatMoney,
+// 	kebabCase,
+// } from '@/modules/utils';
 
 import SvgTrash from '@/images/icons/trash.svg';
 import SvgRecurring from '@/images/icons/recurring.svg';
 import SvgChevronDown from '@/images/icons/chevron-down.svg';
-
+const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 export default class CartItem extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,7 +39,7 @@ export default class CartItem extends React.Component {
 		const dataInv = JSON.parse(dataText);
 		const itemProps = this.props.item;
 		const lastStock = dataInv.filter((item) => item.id === variant.id && itemProps.quantity > item.quantity);
-		
+
 		if (variant.availableForSale) {
 			this.setState({
 				editingVariant: variant.id !== this.props.item.merchandise.id ? swatchIndex : false,

@@ -1,16 +1,20 @@
 /* global tStrings */
 import '@/config';
 const tStrings = global.config.tStrings;
-
+import dynamic from 'next/dynamic';
 import React, {
 	useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
-import {
+// import {
+// 	validateEmail,
+// } from '@/modules/utils_v2';
+const {
 	validateEmail,
-} from '@/modules/utils_v2';
-
+} = dynamic(() => import('@/modules/utils_v2'), {
+    ssr: false,
+});
 const YotpoQuestionForm = (props) => {
 	const {
 		onSubmit,

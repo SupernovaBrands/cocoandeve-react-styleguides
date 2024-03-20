@@ -1,13 +1,21 @@
 /* global tSettings Cart */
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
-import AccountSwellProductCard from '~comp/swell/account-swell-product-card';
+// import AccountSwellProductCard from '~comp/swell/account-swell-product-card';
 import {
 	mergeById,
 	getRedemptionOptions,
 	getRedemptionProducts,
 	getCustomersBalance,
 } from '@/modules/swell/redemption';
-import { getId } from '~mod/utils';
+
+// import { getId } from '~mod/utils';
+const { getId } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
+const AccountSwellProductCard = dynamic(() => import('@/components/swell/account-swell-product-card'), {
+    ssr: false,
+});
 
 const AccountSwellRewards = () => {
 	const { errorMsg } = tSettings.cartRedemption;

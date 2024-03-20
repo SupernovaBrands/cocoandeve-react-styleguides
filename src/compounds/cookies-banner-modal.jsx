@@ -1,7 +1,10 @@
-import Popup from '@/components/Popup';
+import dynamic from 'next/dynamic';
+// import Popup from '@/components/Popup';
 import { useState, useEffect } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
-
+const Popup = dynamic(() => import('@/components/Popup'), {
+    ssr: false,
+});
 const CookiesBannerPopup = (props) => {
 
     const [open, setOpen] = useState(false);
@@ -36,7 +39,7 @@ const CookiesBannerPopup = (props) => {
 				<a href="#" className="btn btn-sm btn-primary mx-1" data-dismiss="modal" onClick={props.onHide}>Got it</a>
 			</div>
         </Popup>
-    );  
+    );
 };
 
 export default CookiesBannerPopup;

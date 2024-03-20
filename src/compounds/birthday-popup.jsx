@@ -1,5 +1,9 @@
+import dynamic from 'next/dynamic';
 import CloseRounded from '../../src/images/icons/close-rounded.svg';
-import Popup from '@/components/Popup';
+// import Popup from '@/components/Popup';
+const Popup = dynamic(() => import('@/components/Popup'), {
+    ssr: false,
+});
 
 const BirthdayPopup = (props) => {
     return (
@@ -34,7 +38,7 @@ const BirthdayPopup = (props) => {
                 </form>
             </div>
         </Popup>
-    );  
+    );
 };
 
 export default BirthdayPopup;

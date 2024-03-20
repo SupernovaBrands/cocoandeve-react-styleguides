@@ -1,5 +1,6 @@
 /* global tStrings */
 import '@/config';
+import dynamic from 'next/dynamic';
 const tStrings = global.config.tStrings;
 
 import React, {
@@ -7,10 +8,16 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import {
+// import {
+// 	kebabCase,
+// 	validateEmail,
+// } from '@/modules/utils_v2';
+const {
 	kebabCase,
 	validateEmail,
-} from '@/modules/utils_v2';
+} = dynamic(() => import('@/modules/utils_v2'), {
+    ssr: false,
+});
 
 import SvgFull from '@/images/icons/star-full.svg';
 

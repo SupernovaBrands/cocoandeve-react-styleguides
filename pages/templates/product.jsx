@@ -1,5 +1,6 @@
+import dynamic from 'next/dynamic';
 import { Container } from 'react-bootstrap';
-import Header from '@/sections/Header';
+// import Header from '@/sections/Header';
 import Product from '@/templates/Product';
 import PDPBanner from "@/compounds/product-banner";
 import PDPUpsell from "@/sections/pdp-upsell-2";
@@ -9,7 +10,9 @@ import PdpBannerTanDifferent from '@/sections/pdp-banner-tan-different';
 import PdpBannerService from '@/sections/pdp-banner-service';
 import YotpoReviews from '@/components/yotpo-review-widget';
 import Footer from '@/sections/Footer';
-
+const Header = dynamic(() => import('@/sections/Header'), {
+    ssr: false,
+});
 const ProductTemplate = () => {
     return (
 		<>
@@ -31,7 +34,7 @@ const ProductTemplate = () => {
 				<Container>
 					<div className="row">
 						<h2 className="h1 mb-2 col-12 text-center">Customer Reviews</h2>
-						<YotpoReviews 
+						<YotpoReviews
 							productId={4543113265187}
 							productName='Sunny Honey Bali Bronzing Foam'
 							productUrl='https://dev.cocoandeve.com/products/sunny-honey-bali-bronzing-self-tan-mousse'

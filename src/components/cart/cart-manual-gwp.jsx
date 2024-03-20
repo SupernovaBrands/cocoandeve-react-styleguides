@@ -1,13 +1,15 @@
 /* global tStrings */
-
+import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { isItemIdInKey } from '@/modules/utils';
+// import { isItemIdInKey } from '@/modules/utils';
 
 import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
 import SvgChevronNext from '@/images/icons/chevron-next.svg';
-
+const { isItemIdInKey } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 export default class CartManualGwp extends React.Component {
 	constructor(props) {
 		super(props);

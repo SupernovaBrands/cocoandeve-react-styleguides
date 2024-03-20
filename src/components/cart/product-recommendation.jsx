@@ -1,10 +1,13 @@
 /* global tStrings */
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-	formatMoney,
-} from '~mod/utils';
-
+// import {
+// 	formatMoney,
+// } from '~mod/utils';
+const { formatMoney } = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
 const ShopifyUpsell = (props) => {
 	const { productId } = props;
 	const [init, setInit] = useState(false);

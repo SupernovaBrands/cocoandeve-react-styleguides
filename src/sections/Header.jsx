@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import CookieBanner from '@/components/CookieBanner';
+import dynamic from 'next/dynamic';
+// import CookieBanner from '@/components/CookieBanner';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import NavMegaMenu from '@/compounds/NavMegaMenu';
 import MobileMenu from '@/compounds/MobileMenu';
@@ -9,6 +10,10 @@ import Search from '../../src/images/icons/search-thin.svg';
 import Cart from '../../src/images/icons/cart.svg';
 import SearchBox from '@/compounds/SearchBox';
 import AccountDropdown from '@/compounds/AccountDropdown';
+
+const CookieBanner = dynamic(() => import('@/components/CookieBanner'), {
+    ssr: false,
+});
 
 const NAV_MEGA_MENU_TEMP = [
 	{
@@ -71,7 +76,7 @@ const Header = (props) => {
 			searchBoxClassList.remove('show');
 		}
 	}
-	
+
 	const toggleAccountDropdown = () => {
 		console.log('toggleAccountDropdown');
 		const searchBoxClassList = document.getElementById('account-dropdown').classList;
@@ -114,7 +119,7 @@ const Header = (props) => {
 					<ul className="navbar-nav d-none d-lg-flex navbar__secondary">
 						<li className="nav-item">
 							<a href="#" className="nav-link m-0 fw-bold">Shop All</a>
-							<NavMegaMenu 
+							<NavMegaMenu
 								title="Shop All"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}
@@ -130,7 +135,7 @@ const Header = (props) => {
 						</li>
 						<li className="nav-item">
 							<a href="#" className="nav-link m-0 fw-bold">Tan</a>
-							<NavMegaMenu 
+							<NavMegaMenu
 								title="Tan"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}
@@ -146,7 +151,7 @@ const Header = (props) => {
 						</li>
 						<li className="nav-item">
 							<a href="#" className="nav-link m-0 fw-bold">Value Sets</a>
-							<NavMegaMenu 
+							<NavMegaMenu
 								title="Value Sets"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}

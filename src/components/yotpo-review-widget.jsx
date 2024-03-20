@@ -1,4 +1,5 @@
 /* global tSettings tStrings */
+import dynamic from 'next/dynamic';
 import '@/config';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -7,17 +8,31 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 
-import {
+// import {
+// 	kebabCase,
+// 	decodeHtml,
+// 	updateItemInArray,
+// 	objectToQueryString,
+// 	currentTime,
+// 	encryptParam,
+// } from '@/modules/utils_v2';
+
+const {
 	kebabCase,
 	decodeHtml,
 	updateItemInArray,
 	objectToQueryString,
 	currentTime,
 	encryptParam,
-} from '@/modules/utils_v2';
+} = dynamic(() => import('@/modules/utils_v2'), {
+    ssr: false,
+});
 
 import ReviewStar from '@/components/review-star';
-import YotpoReviewForm from '@/components/yotpo-review-form';
+// import YotpoReviewForm from '@/components/yotpo-review-form';
+const YotpoReviewForm = dynamic(() => import('@/components/yotpo-review-form'), {
+    ssr: false,
+});
 import YotpoQuestionForm from '@/components/yotpo-question-form';
 
 import SvgHeart from '@/images/icons/heart.svg';

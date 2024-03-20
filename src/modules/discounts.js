@@ -1,17 +1,26 @@
 /* global tStrings tSettings Cart */
 import '@/config';
+import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
-import StorefrontApi from '@/modules/storefront-api';
+// import StorefrontApi from '@/modules/storefront-api';
 
 import {
 	queryApplyCode, queryChangeQuantity,
 } from '@/modules/query';
 
-import {
+// import {
+// 	daysToTime, getLSWithExpiry, setLSWithExpiry, getId, removeLS, getCartId, formatMoney,
+// } from '@/modules/utils';
+const {
 	daysToTime, getLSWithExpiry, setLSWithExpiry, getId, removeLS, getCartId, formatMoney,
-} from '@/modules/utils';
+} = dynamic(() => import('@/modules/utils'), {
+    ssr: false,
+});
+const StorefrontApi = dynamic(() => import('@/modules/storefront-api'), {
+    ssr: false,
+});
 
 export default class Discounts {
 	constructor() {

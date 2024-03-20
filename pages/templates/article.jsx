@@ -1,12 +1,19 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import Header from '@/sections/Header';
+// import Header from '@/sections/Header';
 import Article from '@/templates/Article';
 import Footer from '@/sections/Footer';
 import Twitter from '@/images/icons/twitter-square.svg';
 import Facebook from '@/images/icons/facebook-square.svg';
 import Pinterest from '@/images/icons/pinterest-square.svg';
 import Documents from '@/images/icons/documents.svg';
-import Cart from "@/components/cart/cart";
+// import Cart from "@/components/cart/cart";
+const Cart = dynamic(() => import('@/components/cart/cart'), {
+    ssr: false,
+});
+const Header = dynamic(() => import('@/sections/Header'), {
+    ssr: false,
+});
 
 const ArticleTemplate = () => {
 	const [showCart, setShowCart] = useState(false);
@@ -17,9 +24,9 @@ const ArticleTemplate = () => {
 
     return (
 		<>
-		
+
 			<Header toggleCart={toggleCart} />
-			<Article 
+			<Article
 				title="The 5 Rules of Hair Masking"
 				quickLinks={false}
 				srcSet="https://via.placeholder.com/1540x800.jpg/EFADBA"
