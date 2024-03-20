@@ -23,6 +23,10 @@ module.exports = {
         xl: '1200px',
         xxl: '1200px',
       },
+      padding: {
+        DEFAULT: '7.5px',
+        lg: '15px',
+      },
     },
     colors: {
       'primary': '#D62E55',
@@ -74,7 +78,11 @@ module.exports = {
       g: '15px',
       hg: '7.5px',
     },
-    extend: {},
+    extend: {
+      lineHeight: {
+        base: '1.25rem',
+      }
+    },
   },
   plugins: [],
 }
