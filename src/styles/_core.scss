@@ -9,6 +9,10 @@
 	a {
 		@apply text-primary text-base hover:underline hover:text-primary-darken;
 	}
+
+	p, div {
+		@apply leading-base;
+	}
 }
 
 // @charset 'UTF-8';
