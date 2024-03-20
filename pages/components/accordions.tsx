@@ -1,20 +1,8 @@
-import { Disclosure, Transition } from '@headlessui/react'
-import { useRef, useState } from 'react';
+
+import { useState } from 'react';
 import ChevronDownIcon from '@/images/icons/chevron-down.svg';
 const Accordions = () => {
-	const buttonRefs = useRef([]);
-	const openedRef = useRef(null);
-	const handleDisclosureChange = (state: number) => {
-		const clickedButton = buttonRefs.current[state];
-		if (clickedButton === openedRef.current) {
-			openedRef.current = null;
-			return;
-		}
-		if (Boolean(openedRef.current?.getAttribute('data-value'))) {
-			openedRef.current?.click();
-		}
-		openedRef.current = clickedButton;
-	};
+	const [openIndex, setOpenIndex] = useState(0);
 
 	const data = [{
 		id: 1,
@@ -29,37 +17,27 @@ const Accordions = () => {
 		title: 'Collapsible #3',
 		text: 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.'
 	}];
+	const toggleCard = (id: number) => {
+		if (id === openIndex) {
+			setOpenIndex(0);
+		} else {
+			setOpenIndex(id);
+		}
+	};
 	return (
 		<div className="container my-4">
 			<h1>Accordion</h1>
 			<div className="border-t border-b border-gray-500 accordion w-full accordion-flush" id="accordionSimple">
 				{data.map((d) => (
-					<Disclosure key={d.id} as="div" className="accordion-item border-t border-b border-gray-500">
-						{({ open }) => (
-							<>
-								<Disclosure.Button className={`flex w-full justify-between items-center text-left text-primary hover:text-primary-darken hover:underline pt-[12px] pb-[12px] leading-base ${open ? 'border-b border-gray-500' : ''}`} onClick={() => handleDisclosureChange(d.id)} data-value={open} ref={(ref) => { buttonRefs.current[d.id] = ref }}>
-									<span>{d.title}</span>
-									<ChevronDownIcon
-										className={`${
-											open ? 'rotate-180 transform' : ''
-										} h-[12px] w-[12px] text-purple-500`}
-									/>
-								</Disclosure.Button>
-								{/* <Transition
-										enter="transition duration-100 ease-out"
-										enterFrom="transform scale-95 opacity-0"
-										enterTo="transform scale-100 opacity-100"
-										leave="transition duration-75 ease-out"
-										leaveFrom="transform scale-100 opacity-100"
-										leaveTo="transform scale-95 opacity-0"
-								> */}
-									<Disclosure.Panel className="leading-base pt-1 pb-1">
-										{d.text}
-									</Disclosure.Panel>
-								{/* </Transition> */}
-							</>
-						)}
-					</Disclosure>
+					<div key={d.id} className="cursor-pointer accordion-item border-t border-b border-gray-500">
+						<div className={`flex w-full justify-between items-center text-left text-primary hover:text-primary-darken hover:underline pt-[12px] pb-[12px] leading-base ${openIndex === d.id ? 'border-b border-gray-500' : ''}`} onClick={() => toggleCard(d.id)}>
+							<span>{d.title}</span>
+							<ChevronDownIcon className={`${openIndex === d.id ? 'rotate-180 transform' : ''} h-[12px] w-[12px] text-purple-500`}/>
+						</div>
+						<div className={`transition-all overflow-hidden bg-green-100 ${openIndex === d.id ? 'duration-1000 max-h-screen' : 'duration-75 max-h-0'}`}>
+							<p className="pt-1 pb-1 leading-base">{d.text}</p>
+						</div>
+					</div>
 				))}
 			</div>
 		</div>
