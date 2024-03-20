@@ -11,6 +11,7 @@ if (isGithubActions) {
 }
 
 const nextConfig = {
+	output: 'export',
 	reactStrictMode: false,
 	webpack(config) {
 		config.module.rules.push({
