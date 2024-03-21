@@ -56,9 +56,9 @@ module.exports = {
       'gray-500': '#A3A3A3',
       'gray-600': '#4E4E4E',
       'gray-700': '#7B7B7B',
-      'blue': '#213E7B'
+      'blue': '#213E7B',
       'white': '#fff',
-      'transparent': 'transparent'
+      'transparent': 'transparent',
     },
     fontFamily: {
       sans: ['sofia-pro', 'sans-serif'],
