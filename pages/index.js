@@ -18,6 +18,7 @@ export default function Home() {
           <Link href="./components/buttons">Buttons</Link>
           <Link href="./components/carousels">Carousels</Link>
           <Link href="./components/ce-logo">Ce Logo</Link>
+          <Link href="./components/modals">Modals</Link>
           <Link href="./components/colors">Colors</Link>
           <Link href="./components/cookie-banners">Cookie Banners</Link>
           <Link href="./components/dropdowns">Dropdowns</Link>
