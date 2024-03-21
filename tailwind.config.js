@@ -29,6 +29,7 @@ module.exports = {
       },
     },
     colors: {
+      'body': '#151515',
       'primary': '#D62E55',
       'primary-darken': '#991e3b',
       'primary-light': '#F5DADF',
@@ -55,6 +56,8 @@ module.exports = {
       'gray-500': '#A3A3A3',
       'gray-600': '#4E4E4E',
       'gray-700': '#7B7B7B',
+      'white': '#ffffff',
+      'blue': '#213E7B'
     },
     fontFamily: {
       sans: ['sofia-pro', 'sans-serif'],
