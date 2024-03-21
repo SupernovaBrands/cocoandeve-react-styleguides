@@ -1,6 +1,6 @@
 export default function Grid() {
 	const cssGrid = `
-	.col {
+	.col{
 		height: 100vh;
 	}
 	.col:before {
@@ -10,23 +10,23 @@ export default function Grid() {
 		height: 100%;
 	}`;
 	return (
-		<div className="mobile-wrapper">
+		<div className="mobile-wrapper pl-[7.5px] pr-[7.5px]">
 			<style jsx>{cssGrid}</style>
 			<h1>GRID</h1>
-			<div className="container mt-4">
-				<div className="flex flex-wrap">
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px]"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px]"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px]"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px]"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
-					<div className="col flex-grow max-w-full flex-1 pr-[15px] pl-[15px] hidden lg:block"></div>
+			<div className="container">
+				<div className="grid lg:grid-cols-12 grid-cols-4 lg:gap-3 gap-[15px]">
+					<div className="col"></div>
+					<div className="col"></div>
+					<div className="col"></div>
+					<div className="col"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
+					<div className="col hidden lg:block"></div>
 				</div>
 			</div>
 		</div>
