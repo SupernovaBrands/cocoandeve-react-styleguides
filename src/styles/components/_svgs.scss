@@ -1,16 +1,8 @@
 .svg {
-	height: $font-size-base;
+	// height: $font-size-base;
 	&--current-color {
 		path {
 			fill: currentColor;
 		}
 	}
-}
-
-.fill-primary {
-	fill: $primary;
-}
-
-.fill-secondary {
-	fill: $secondary;
 }
