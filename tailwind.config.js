@@ -81,6 +81,7 @@ module.exports = {
       5: '50px',
       g: '15px',
       hg: '7.5px',
+      0: 0,
     },
     extend: {
       lineHeight: {
