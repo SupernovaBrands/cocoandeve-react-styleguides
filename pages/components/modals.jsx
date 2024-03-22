@@ -1,27 +1,36 @@
-import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import EmblaCarousel from './EmblaCarousel'
+import React, { useState } from "react";
+import OpenModalButton from "./OpenModalButton";
+import ModalOverlay from "./ModalOverlay";
+import styled from "styled-components";
 
-const Modals = () => {
-  const [emblaRef] = useEmblaCarousel();
-  const OPTIONS = { loop: true }
-const SLIDE_COUNT = 5
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
+const ModalContent = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: #5c3aff;
+  }
+`;
+
+const Modal = () => {
+  const [isOpen, toggle] = useState(false);
+  const handlOpenModal = (open) => {
+    toggle(open);
+  };
 
   return (
-    <>
-    <div className="embla" ref={emblaRef}>
-        <div className="embla__container">
-          <div className="embla__slide">Slide 1</div>
-          <div className="embla__slide">Slide 2</div>
-          <div className="embla__slide">Slide 3</div>
-        </div>
-      </div>
-    <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-    </>
+    <div className="container mt-4">
+      <OpenModalButton handlClick={() => handlOpenModal(true)}>Open</OpenModalButton>
+      <ModalOverlay isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+        <ModalContent>
+          <h1> Awesome modal </h1>
+        </ModalContent>
+      </ModalOverlay>
+    </div>
+  );
+};
 
-
-  )
-}
-
-export default Modals;
+export default Modal;

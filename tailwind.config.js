@@ -55,6 +55,7 @@ module.exports = {
       'gray-500': '#A3A3A3',
       'gray-600': '#4E4E4E',
       'gray-700': '#7B7B7B',
+      white: '#fff',
     },
     fontFamily: {
       sans: ['sofia-pro', 'sans-serif'],
@@ -69,6 +70,7 @@ module.exports = {
       '3xl': ['2.625rem', '3.281rem'], //42px, 52px
     },
     spacing: {
+      0: 0,
       25: '5px',
       1: '10px',
       2: '20px',
