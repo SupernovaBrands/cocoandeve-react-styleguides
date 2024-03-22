@@ -6,12 +6,10 @@
 	transform: translateY(-100%);
 	transition: all 0.4s ease-in-out;
 	visibility: hidden;
-	z-index: $zindex-modal;
 
 	@include media-breakpoint-up(lg) {
 		left: auto;
 		right: 0;
-		margin-right: $grid-gutter-width;
 	}
 
 	&:before {
