@@ -28,7 +28,7 @@ export default function Home() {
             Product Image Carousels
           </Link>
           <Link href="./components/svgs">Svgs</Link>
-          <Link href="./components/tabs">Tabs</Link>
+          <Link href="./components/tabs-comp">Tabs</Link>
           <Link href="./components/tooltips">Tooltips</Link>
           <Link href="./components/vide-cards">Vide Cards</Link>
           <Link href="./components/video-loop-gif">Video Loop Gif</Link>
