@@ -73,7 +73,6 @@ module.exports = {
       '3xl': ['2.625rem', '3.281rem'], //42px, 52px
     },
     spacing: {
-      0: 0,
       25: '5px',
       1: '10px',
       2: '20px',
@@ -87,7 +86,7 @@ module.exports = {
     extend: {
       lineHeight: {
         base: '1.25rem',
-      }
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,26 @@
 @layer components {
 	.modal-backdrop {
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	.modal-sm {
+		@apply max-w-[300px];
+	}
+
+	.modal {
+		@apply max-w-[500px];
+	}
+
+	.modal-lg {
+		@apply max-w-[720px];
+	}
+
+	.modal-xl {
+		@apply max-w-[1140px];
+	}
+
+	.modal-content .input-group-addon svg {
+		top: 50%;
+		transform: translateY(-50%);
 	}
 }
