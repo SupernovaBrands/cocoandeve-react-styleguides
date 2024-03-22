@@ -31,7 +31,7 @@ export default function Home() {
           <Link href="./components/svgs">Svgs</Link>
           <Link href="./components/tabs-comp">Tabs</Link>
           <Link href="./components/tooltips">Tooltips</Link>
-          <Link href="./components/video-cards">Vide Cards</Link>
+          <Link href="./components/video-cards">Video Cards</Link>
           <Link href="./components/video-loop-gif">Video Loop Gif</Link>
           <Link href="./components/instagram-cards">Instagram Card</Link>
         </div>
