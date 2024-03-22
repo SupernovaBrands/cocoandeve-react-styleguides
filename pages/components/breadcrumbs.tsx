@@ -1,5 +1,5 @@
 import React from 'react';
-import Breadcrumb from '@/components/Breadrumb';
+import { Breadcrumb } from '@/components/index';
 
 interface BreadcrumbsProps {}
 
