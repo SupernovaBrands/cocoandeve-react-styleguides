@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const AnnouncementBar = (props) => {
+const AnnouncementBar = (props: any) => {
 	const {
 		text,
 		timerEnabled,
@@ -17,6 +17,7 @@ const AnnouncementBar = (props) => {
 	} = props;
 
 	const [mainText, setText] = useState(text);
+	/*
 	const [showTimer, setShowTimer] = useState(false);
 	const [timerDay, setTimerDay] = useState('');
 	const [timerHrs, setTimerHrs] = useState('');
@@ -88,25 +89,12 @@ const AnnouncementBar = (props) => {
 		starTimer(now, startAt, endAt);
 		setText(text);
 	}, []);
+	*/
 
 	return (
-		<div className={`announcement-bar  ${timerEnabled && showTimer ? 'announcement-bar__timer' : ''} bg-primary-light w-100`}>
-			<div className="container text-center fw-bold">
-				{timerEnabled && showTimer ? (
-					<div className="announcement-bar  bg-blue w-100">
-						<div className="container text-center text-white d-flex align-items-center justify-content-between justify-content-lg-center">
-							<span className="announcement-bar__timer__title d-block d-lg-inline mr-lg-4 mb-0 font-weight-normal text-left font-size-sm font-size-dt-lg">{mainText}</span>
-							<ul className="d-inline list-inline mb-0  fw-bold ">
-								<li id="timerDays" className="list-inline-item position-relative mr-1 h2 mb-0 font-weight-normal">{timerDay}</li>
-								<li id="timerHrs" className="list-inline-item position-relative mx-1 h2 mb-0 font-weight-normal">{timerHrs}</li>
-								<li id="timerMin" className="list-inline-item position-relative mx-1 h2 mb-0 font-weight-normal">{timerMin}</li>
-								<li id="timerSec" className="list-inline-item position-relative mx-1 h2 mb-0 font-weight-normal">{timerSec}</li>
-							</ul>
-						</div>
-					</div>
-				) : (
-					<a href={url}>{mainText}</a>
-				)}
+		<div className={`announcement-bar  bg-primary-light w-100 px-[0] py-[0.59375em]`}>
+			<div className="container text-center font-bold">
+				<a href={url} className='text-secondary'>{mainText}</a>
 			</div>
 		</div>
 	);
