@@ -1,21 +1,36 @@
 h1, .h1 {
-	@apply text-2xl font-bold mb-1;
+	@apply text-2xl font-bold;
 }
 h2, .h2 {
-	@apply text-xl font-bold mb-1;
+	@apply text-xl font-bold;
 }
 h3, .h3 {
-	@apply text-base font-bold mb-1;
+	@apply text-base font-bold;
 }
 h4, .h4 {
-	@apply text-base mb-1;
+	@apply text-base;
 }
+
 .hero-font-size {
 	@apply text-2xl;
 }
 
 .playground-font-size {
 	@apply text-3xl;
+}
+
+.font-size-lg {
+	@apply text-lg;
+}
+
+.font-size-base {
+	@apply text-base;
+}
+.font-size-sm {
+	@apply text-sm;
+}
+.font-size-xs {
+	@apply text-xs;
 }
 
 @screen lg {

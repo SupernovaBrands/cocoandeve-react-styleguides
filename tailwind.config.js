@@ -87,7 +87,7 @@ module.exports = {
     extend: {
       lineHeight: {
         base: '1.25rem',
-      }
+      },
     },
   },
   plugins: [],
