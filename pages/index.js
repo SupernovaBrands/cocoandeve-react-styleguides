@@ -33,6 +33,7 @@ export default function Home() {
           <Link href="./components/tooltips">Tooltips</Link>
           <Link href="./components/vide-cards">Vide Cards</Link>
           <Link href="./components/video-loop-gif">Video Loop Gif</Link>
+          <Link href="./components/instagram-cards">Instagram Card</Link>
         </div>
 
         <div className="w-full lg:w-1/2 px-0 lg:px-g mb-3 flex flex-col items-start">
