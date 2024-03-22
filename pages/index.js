@@ -23,7 +23,7 @@ export default function Home() {
           <Link href="./components/cookie-banners">Cookie Banners</Link>
           <Link href="./components/dropdowns">Dropdowns</Link>
           <Link href="./components/forms">Forms</Link>
-          <Link href="./components/grid">Grid</Link>
+          <Link href="./components/social-icons">Social Icons</Link>
           <Link href="./components/hr">Hr</Link>
           <Link href="./components/product-image-carousels">
             Product Image Carousels
