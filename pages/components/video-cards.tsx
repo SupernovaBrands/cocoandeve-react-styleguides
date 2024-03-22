@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import VideoCard from "@/components/video-card";
 
 const VideoCards = () => {
@@ -9,9 +8,10 @@ const VideoCards = () => {
 		src: 'https://via.placeholder.com/592x592',
 	};
 	return (
-		<Container className="mt-4 position-relative">
+		<div className="container mt-4 relative">
+			<h1 className="mb-[0.625rem]">Video Card</h1>
             <VideoCard item={item} />
-		</Container>
+		</div>
 	);
 }
 
