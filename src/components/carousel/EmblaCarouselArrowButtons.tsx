@@ -6,8 +6,6 @@ import React, {
 } from 'react';
 
 import { EmblaCarouselType } from 'embla-carousel';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
 
 type UsePrevNextButtonsType = {
 	prevBtnDisabled: boolean
@@ -29,6 +27,7 @@ export const usePrevNextButtons = (
 	}, [emblaApi]);
 
 	const onNextButtonClick = useCallback(() => {
+		console.log('here?');
 		if (!emblaApi) return;
 		emblaApi.scrollNext();
 	}, [emblaApi]);
@@ -62,28 +61,26 @@ type PropType = PropsWithChildren<
 >;
 
 export const PrevButton: React.FC<PropType> = (props) => {
-	const { children, ...restProps } = props;
+	const { children, className, ...restProps } = props;
 	return (
 		<button
-			className="carousel__button carousel__button--prev appearance-none bg-transparent touch-manipulation inline-flex cursor-pointer border-0 p-0 m-0 items-center justify-center"
+			className={`carousel__button carousel__button--prev appearance-none touch-manipulation ${className}`}
 			type="button"
 			{...restProps}
 		>
-			<ChevronPrev className="w-[15px] h-[15px]" />
 			{children}
 		</button>
 	);
 };
 
 export const NextButton: React.FC<PropType> = (props) => {
-	const { children, ...restProps } = props;
+	const { children, className, ...restProps } = props;
 	return (
 		<button
-			className="carousel__button carousel__button--next appearance-none bg-transparent touch-manipulation inline-flex cursor-pointer border-0 p-0 m-0 items-center justify-center"
+			className={`carousel__button carousel__button--next appearance-none touch-manipulation ${className}`}
 			type="button"
 			{...restProps}
 		>
-			<ChevronNext className="w-[15px] h-[15px]" />
 			{children}
 		</button>
 	);

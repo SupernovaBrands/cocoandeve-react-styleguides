@@ -10,33 +10,17 @@
 			min-width: 0;
 		}
 
-		&__controls {
-			grid-template-columns: auto 1fr;
-			gap: 1.2rem;
+		&__button--half-rounded {
+			box-shadow: 0 .25em .25em rgba(0,0,0,0.2);
 		}
 
-		&__buttons {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 0.6rem;
-		}
-
-		&__button {
-			-webkit-appearance: none;
+		&__dots li {
+			@apply box-content mr-[3px] ml-[3px] w-[.75rem] h-[.75rem] cursor-pointer bg-clip-padding transition-opacity duration-[600ms] rounded-full;
 		}
 
 		&__dot {
-			@apply appearance-none touch-manipulation w-[.75rem] h-[.75rem] mr-[3px] ml-[3px] indent-[-999px] cursor-pointer bg-clip-padding bg-white transition-opacity duration-[600ms] rounded-full;
+			@apply appearance-none touch-manipulation w-full h-full indent-[-999px];
 		}
-
-		// &__dot:after {
-		// 	@apply w-[1.4rem] h-[1.4rem] rounded-full flex items-center;
-		// 	content: '';
-		// }
-
-		// &__dot--selected:after {
-		// 	@apply bg-primary;
-		// }
-
 
 		&__lazy-load__spinner {
 			border: 0.4rem solid #333;
