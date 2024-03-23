@@ -27,7 +27,6 @@ export const usePrevNextButtons = (
 	}, [emblaApi]);
 
 	const onNextButtonClick = useCallback(() => {
-		console.log('here?');
 		if (!emblaApi) return;
 		emblaApi.scrollNext();
 	}, [emblaApi]);
