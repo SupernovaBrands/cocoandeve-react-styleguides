@@ -36,6 +36,7 @@ const EmblaCarouselMulti: React.FC<PropType> = (props) => {
 		emblaApi.on('select', () => {
 			const autoplay = emblaApi?.plugins()?.autoplay;
 			if (autoplay) autoplay.reset();
+			if (autoplay && !autoplay.isPlaying()) autoplay.play();
 		});
 	}, [emblaApi, updateSlidesInView]);
 

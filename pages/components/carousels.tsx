@@ -84,9 +84,7 @@ const Carousels: React.FC = () => {
 	const autoPlayClick6 = controlAutoplay(emblaApi6);
 
 	// carousel 7
-	const [emblaRef7, emblaApi7] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef7, emblaApi7] = useEmblaCarousel(options);
 	const {
 		prevBtnDisabled: prevDisabled7,
 		nextBtnDisabled: nextDisabled7,
@@ -96,9 +94,7 @@ const Carousels: React.FC = () => {
 	const autoPlayClick7 = controlAutoplay(emblaApi7);
 
 	// carousel 8
-	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options}, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options});
 	const {
 		prevBtnDisabled: prevDisabled8,
 		nextBtnDisabled: nextDisabled8,
@@ -108,9 +104,7 @@ const Carousels: React.FC = () => {
 	const autoPlayClick8 = controlAutoplay(emblaApi8);
 
 	// carousel 9
-	const [emblaRef9, emblaApi9] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef9, emblaApi9] = useEmblaCarousel(options);
 	const {
 		prevBtnDisabled: prevDisabled9,
 		nextBtnDisabled: nextDisabled9,
