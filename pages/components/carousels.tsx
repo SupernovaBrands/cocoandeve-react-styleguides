@@ -238,7 +238,7 @@ const Carousels: React.FC = () => {
 			</EmblaCarousel>
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 3 ITEMS</h1>
-			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef7} emblaApi={emblaApi7} className="-mx-hg" itemClass="w-full lg:w-1/3 lg:basis-1/3">
+			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef7} emblaApi={emblaApi7} className="-mx-hg" itemClass="w-full basis-full lg:w-1/3 lg:basis-1/3">
 				<PrevButton
 					onClick={() => autoPlayClick7(arrowClickPrev7)}
 					disabled={prevDisabled7}
@@ -260,7 +260,7 @@ const Carousels: React.FC = () => {
 			</EmblaCarouselMulti>
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 4 ITEMS</h1>
-			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef8} emblaApi={emblaApi8} className="-mx-hg" itemClass="w-full lg:w-1/4 lg:basis-1/4">
+			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef8} emblaApi={emblaApi8} className="-mx-hg" itemClass="w-full basis-full lg:w-1/4 lg:basis-1/4">
 				<PrevButton
 					onClick={() => autoPlayClick8(arrowClickPrev8)}
 					disabled={prevDisabled8}

@@ -44,7 +44,7 @@ const EmblaCarouselMulti: React.FC<PropType> = (props) => {
 			<div className="overflow-hidden" ref={emblaRef}>
 				<div className="flex carousel__container touch-pan-y lg:-mx-g">
 					{slides.map((index) => (
-						<div className={`carousel__slide flex-grow-0 flex-shrink-0 basis-full ${itemClass} px-hg lg:px-g`} key={index}>
+						<div className={`carousel__slide flex-grow-0 flex-shrink-0 ${itemClass} px-hg lg:px-g`} key={index}>
 							<div className="flex items-center justify-center">
 								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
 							</div>
