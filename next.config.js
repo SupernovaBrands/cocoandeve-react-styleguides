@@ -11,7 +11,6 @@ if (isGithubActions) {
 }
 
 const nextConfig = {
-	output: 'export',
 	reactStrictMode: false,
 	webpack(config) {
 		config.module.rules.push({
@@ -24,12 +23,13 @@ const nextConfig = {
 };
 
 const ghPages =  {
-  assetPrefix: assetPrefix,
-  basePath: basePath,
-  images: {
-    loader: 'imgix',
-    path: 'the "domain" of your Imigix source',
-  },
+	output: 'export',
+	assetPrefix: assetPrefix,
+	basePath: basePath,
+	images: {
+		loader: 'imgix',
+		path: 'the "domain" of your Imigix source',
+	},
 }
 
 if (isGithubActions) {

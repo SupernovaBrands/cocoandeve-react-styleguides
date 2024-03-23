@@ -1,16 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
-import { LazyLoadImage } from '@/components/carousel/EmblaCarouselLazyLoadImage';
 
 type PropType = {
 	slides: number[]
 	children: React.ReactNode
 	emblaRef: any
 	emblaApi: any
+	itemClass: string
+	className: string
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
-	const { slides, children, emblaRef, emblaApi } = props;
+const EmblaCarouselMulti: React.FC<PropType> = (props) => {
+	const { slides, children, emblaRef, emblaApi, itemClass, className } = props;
 
 	const [slidesInView, setSlidesInView] = useState<number[]>([]);
 	const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
@@ -39,29 +40,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 	}, [emblaApi, updateSlidesInView]);
 
 	return (
-		<div className="relative">
+		<div className={`relative ${className}`}>
 			<div className="overflow-hidden" ref={emblaRef}>
-				<div className="flex carousel__container touch-pan-y">
-					{slides.map((index) => {
-						if (index === 0) {
-							return (
-								<LazyLoadImage
-									key={index}
-									imgSrc={`https://via.placeholder.com/300x100/`}
-									inView={slidesInView.indexOf(index) > -1}
-									index={index}
-								/>
-							)
-						} else {
-							return (
-								<div className="carousel__slide" key={index}>
-									<div className="flex items-center justify-center">
-										<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
-									</div>
-								</div>
-							);
-						}
-					})}
+				<div className="flex carousel__container touch-pan-y lg:-mx-g">
+					{slides.map((index) => (
+						<div className={`carousel__slide flex-grow-0 flex-shrink-0 basis-full ${itemClass} px-hg lg:px-g`} key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 			{children}
@@ -69,4 +57,4 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 	);
 };
 
-export default EmblaCarousel;
+export default EmblaCarouselMulti;

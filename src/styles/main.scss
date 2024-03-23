@@ -13,7 +13,7 @@
 @import 'components/video-card';
 @import 'components/colors';
 // @import 'components/social-icons';
-// @import 'components/carousel';
+@import 'components/carousel';
 // @import 'components/article-proggress-bar';
 // @import 'components/badge';
 // @import 'components/list';
@@ -49,43 +49,3 @@
 // @import 'templates/sweepstakes';
 // @import 'templates/our-story';
 // @import 'templates/product';
-.carousel__container {
-	backface-visibility: hidden;
-	margin-left: calc(1rem * -1);
-}
-
-.carousel__slide {
-	flex: 0 0 100%;
-}
-
-.carousel__controls {
-	grid-template-columns: auto 1fr;
-	gap: 1.2rem;
-}
-
-.carousel__buttons {
-	grid-template-columns: repeat(2, 1fr);
-	gap: 0.6rem;
-}
-
-.carousel__button {
-	-webkit-appearance: none;
-}
-
-.carousel__dot {
-	@apply appearance-none bg-transparent touch-manipulation flex cursor-pointer
-	w-[2.6rem]
-	h-[2.6rem]
-	items-center justify-center
-	rounded-full
-	border
-}
-
-.carousel__dot:after {
-	@apply w-[1.4rem] h-[1.4rem] rounded-full flex items-center;
-	content: '';
-}
-
-.carousel__dot--selected:after {
-	@apply bg-primary;
-}
