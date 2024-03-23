@@ -286,7 +286,7 @@ const Carousels: React.FC = () => {
 				<PrevButton
 					onClick={() => autoPlayClick9(arrowClickPrev9)}
 					disabled={prevDisabled9}
-					className="absolute left-0 lg:-left-[1.75em] top-0 lg:w-[2.5em] bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+					className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-[2.5em] bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
 				>
 					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
 						<ChevronPrev className="w-[15px] h-[15px] svg--current-color" />
@@ -295,7 +295,7 @@ const Carousels: React.FC = () => {
 				<NextButton
 					onClick={() => autoPlayClick9(arrowClickNext9)}
 					disabled={nextDisabled9}
-					className="absolute right-0 lg:-right-[1.75em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-[2.5em] p-0 text-primary text-center bg-none border-0"
+					className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-[2.5em] p-0 text-primary text-center bg-none border-0"
 				>
 					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
 						<ChevronNext className="w-[15px] h-[15px] svg--current-color" />
