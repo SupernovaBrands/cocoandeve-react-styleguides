@@ -184,14 +184,14 @@ const Carousels: React.FC = () => {
 					disabled={prevDisabled5}
 					className="absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
 				>
-					<ChevronPrev className="w-[15px] h-[15px] svg--current-color" />
+					<ChevronPrev className="w-g h-g svg--current-color" />
 				</PrevButton>
 				<NextButton
 					onClick={() => autoPlayClick5(arrowClickNext5)}
 					disabled={nextDisabled5}
 					className="absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
 				>
-					<ChevronNext className="w-[15px] h-[15px] svg--current-color" />
+					<ChevronNext className="w-g h-g svg--current-color" />
 				</NextButton>
 				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
 					{SLIDES.map((_, index) => (
@@ -210,19 +210,19 @@ const Carousels: React.FC = () => {
 				<PrevButton
 					onClick={() => autoPlayClick6(arrowClickPrev6)}
 					disabled={prevDisabled6}
-					className="absolute left-0 top-0 lg:right-[5em] lg:left-auto lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-[2.5em] lg:h-[2.5em] p-0 text-primary text-center bg-none border-0"
+					className="absolute left-0 top-0 lg:right-[5em] lg:left-auto lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
 				>
-					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
-						<ChevronPrev className="w-[15px] h-[15px] svg--current-color" />
+					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+						<ChevronPrev className="w-g h-g svg--current-color" />
 					</span>
 				</PrevButton>
 				<NextButton
 					onClick={() => autoPlayClick6(arrowClickNext6)}
 					disabled={nextDisabled6}
-					className="absolute right-0 lg:right-[1.5em] top-0 lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-[2.5em] lg:h-[2.5em] p-0 text-primary text-center bg-none border-0"
+					className="absolute right-0 lg:right-[1.5em] top-0 lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
 				>
-					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
-						<ChevronNext className="w-[15px] h-[15px] svg--current-color" />
+					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+						<ChevronNext className="w-g h-g svg--current-color" />
 					</span>
 				</NextButton>
 				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
@@ -244,8 +244,8 @@ const Carousels: React.FC = () => {
 					disabled={prevDisabled7}
 					className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
 				>
-					<span className="carousel__button--half-rounded left-0 bg-white w-[48.75px] lg:w-[97.5px] h-[97.5px] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
-						<ChevronPrev className="w-[26px] h-[26px] svg--current-color" />
+					<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
+						<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
 					</span>
 				</PrevButton>
 				<NextButton
@@ -253,8 +253,8 @@ const Carousels: React.FC = () => {
 					disabled={nextDisabled7}
 					className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
 				>
-					<span className="carousel__button--half-rounded right-0 bg-white w-[48.75px] lg:w-[97.5px] h-[97.5px] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
-						<ChevronNext className="w-[26px] h-[26px] svg--current-color" />
+					<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
+						<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
 					</span>
 				</NextButton>
 			</EmblaCarouselMulti>
@@ -266,8 +266,8 @@ const Carousels: React.FC = () => {
 					disabled={prevDisabled8}
 					className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
 				>
-					<span className="carousel__button--half-rounded left-0 bg-white w-[48.75px] lg:w-[97.5px] h-[97.5px] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
-						<ChevronPrev className="w-[26px] h-[26px] svg--current-color" />
+					<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
+						<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
 					</span>
 				</PrevButton>
 				<NextButton
@@ -275,8 +275,8 @@ const Carousels: React.FC = () => {
 					disabled={nextDisabled8}
 					className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
 				>
-					<span className="carousel__button--half-rounded right-0 bg-white w-[48.75px] lg:w-[97.5px] h-[97.5px] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
-						<ChevronNext className="w-[26px] h-[26px] svg--current-color" />
+					<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
+						<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
 					</span>
 				</NextButton>
 			</EmblaCarouselMulti>
@@ -286,19 +286,19 @@ const Carousels: React.FC = () => {
 				<PrevButton
 					onClick={() => autoPlayClick9(arrowClickPrev9)}
 					disabled={prevDisabled9}
-					className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-[2.5em] bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+					className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-4 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
 				>
-					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
-						<ChevronPrev className="w-[15px] h-[15px] svg--current-color" />
+					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+						<ChevronPrev className="w-g h-g svg--current-color" />
 					</span>
 				</PrevButton>
 				<NextButton
 					onClick={() => autoPlayClick9(arrowClickNext9)}
 					disabled={nextDisabled9}
-					className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-[2.5em] p-0 text-primary text-center bg-none border-0"
+					className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-4 p-0 text-primary text-center bg-none border-0"
 				>
-					<span className="bg-white w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center">
-						<ChevronNext className="w-[15px] h-[15px] svg--current-color" />
+					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+						<ChevronNext className="w-g h-g svg--current-color" />
 					</span>
 				</NextButton>
 			</EmblaCarouselMulti>

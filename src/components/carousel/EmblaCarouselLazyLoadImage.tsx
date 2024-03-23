@@ -21,7 +21,7 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
 			<div className={'relative h-auto'.concat(
 				hasLoaded ? ' carousel__lazy-load--has-loaded' : ''
 			)}>
-				{!hasLoaded && <span className="carousel__lazy-load__spinner border-4 border-gray-500 border-l-white inline-flex absolute m-auto top-0 bottom-0 left-0 right-0 -indent-[9999em] rounded-full w-[15px] h-[15px] after:w-[15px] after:h-[15px]" />}
+				{!hasLoaded && <span className="carousel__lazy-load__spinner border-4 border-gray-500 border-l-white inline-flex absolute m-auto top-0 bottom-0 left-0 right-0 -indent-[9999em] rounded-full w-g h-g after:w-g after:h-g" />}
 				<img
 					className="carousel__slide__img carousel__lazy-load__img w-full"
 					onLoad={setLoaded}
