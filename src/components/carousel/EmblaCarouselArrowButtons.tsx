@@ -23,6 +23,7 @@ export const usePrevNextButtons = (
 
 	const onPrevButtonClick = useCallback(() => {
 		if (!emblaApi) return;
+		console.log('prev');
 		emblaApi.scrollPrev();
 	}, [emblaApi]);
 
@@ -84,3 +85,13 @@ export const NextButton: React.FC<PropType> = (props) => {
 		</button>
 	);
 };
+
+export const controlAutoplay = (api: any) => useCallback(
+	(callback: () => void) => {
+		const autoplay = api?.plugins()?.autoplay;
+		if (!autoplay) return;
+		autoplay.reset();
+		callback();
+	},
+	[api]
+);

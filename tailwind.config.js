@@ -29,6 +29,7 @@ module.exports = {
       },
     },
     colors: {
+      'black': '#000',
       'body': '#151515',
       'primary': '#D62E55',
       'primary-darken': '#991e3b',

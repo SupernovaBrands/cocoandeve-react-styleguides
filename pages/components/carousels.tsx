@@ -9,6 +9,7 @@ import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
+	controlAutoplay,
 } from '@/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '@/images/icons/chevron-next.svg';
 import ChevronPrev from '@/images/icons/chevron-prev.svg';
@@ -23,15 +24,6 @@ const SLIDE_COUNT_2 = 6;
 const SLIDES_2 = Array.from(Array(SLIDE_COUNT_2).keys());
 
 const Carousels: React.FC = () => {
-	const controlAutoplay = (api: any) => useCallback(
-		(callback: () => void) => {
-			const autoplay = api?.plugins()?.autoplay;
-			if (!autoplay) return;
-			autoplay.reset();
-			callback();
-		},
-		[api]
-	);
 
 	// carousel 1
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [

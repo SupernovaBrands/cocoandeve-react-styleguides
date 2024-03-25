@@ -20,7 +20,6 @@ export default function Home() {
           <Link href="./components/ce-logo">Ce Logo</Link>
           <Link href="./components/modals">Modals</Link>
           <Link href="./components/colors">Colors</Link>
-          <Link href="./components/cookie-banners">Cookie Banners</Link>
           <Link href="./components/dropdowns">Dropdowns</Link>
           <Link href="./components/forms">Forms</Link>
           <Link href="./components/social-icons">Social Icons</Link>
