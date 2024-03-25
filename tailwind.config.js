@@ -29,6 +29,7 @@ module.exports = {
       },
     },
     colors: {
+      'black': '#000',
       'body': '#151515',
       'primary': '#D62E55',
       'primary-darken': '#991e3b',
@@ -78,11 +79,12 @@ module.exports = {
       2: '20px',
       3: '30px',
       4: '40px',
-      5: '50px',
+      5: '60px',
       12: '12px',
       g: '15px',
       hg: '7.5px',
       0: 0,
+      '1em': '1em',
     },
     extend: {
       lineHeight: {

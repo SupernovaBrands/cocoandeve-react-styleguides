@@ -20,10 +20,9 @@ export default function Home() {
           <Link href="./components/ce-logo">Ce Logo</Link>
           <Link href="./components/modals">Modals</Link>
           <Link href="./components/colors">Colors</Link>
-          <Link href="./components/cookie-banners">Cookie Banners</Link>
           <Link href="./components/dropdowns">Dropdowns</Link>
           <Link href="./components/forms">Forms</Link>
-          <Link href="./components/grid">Grid</Link>
+          <Link href="./components/social-icons">Social Icons</Link>
           <Link href="./components/hr">Hr</Link>
           <Link href="./components/product-image-carousels">
             Product Image Carousels
@@ -31,7 +30,7 @@ export default function Home() {
           <Link href="./components/svgs">Svgs</Link>
           <Link href="./components/tabs-comp">Tabs</Link>
           <Link href="./components/tooltips">Tooltips</Link>
-          <Link href="./components/vide-cards">Vide Cards</Link>
+          <Link href="./components/video-cards">Video Cards</Link>
           <Link href="./components/video-loop-gif">Video Loop Gif</Link>
           <Link href="./components/instagram-cards">Instagram Card</Link>
         </div>

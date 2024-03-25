@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useState } from "react";
 import { Container, Row, Tabs, Tab, Collapse } from 'react-bootstrap';
-import ProductImageCarousel from "@/components/ProductImageCarousel";
+// import ProductImageCarousel from "@/components/ProductImageCarousel";
 import LaunchWaitList from "@/compounds/launch-waitlist";
 import ProductVariant from "@/compounds/product-variant";
 import ProductSubscription from "@/components/product-subscription";
@@ -62,7 +62,7 @@ const Product = (props) => {
         <>
             <Container className="px-g mb-4 mt-lg-5">
                 <Row className="align-items-start">
-                    <ProductImageCarousel totalSlide={8} />
+                    {/* <ProductImageCarousel totalSlide={8} /> */}
                     <div className="col-12 col-lg-5 order-lg-3 mt-2 mt-lg-0 d-flex flex-column">
                         <YotpoStar productId={4543113265187} showTotal={true} />
                         <h1 className="mb-2 order-lg-0">Sunny Honey Bali Bronzing Foam</h1>
