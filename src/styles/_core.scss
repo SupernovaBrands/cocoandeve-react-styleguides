@@ -7,7 +7,7 @@
 
 @layer base {
 	a {
-		@apply text-primary text-base hover:underline hover:text-primary-darken;
+		@apply text-primary text-base hover:underline hover:text-primary-darken cursor-pointer;
 	}
 
 	p, div {
@@ -25,6 +25,22 @@
 		background-size: 80%;
 		background-repeat: no-repeat;
 		background-position: center;
+	}
+
+	.hover-overlay {
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			transition: background-color 0.15s ease-in-out;
+		}
+		&:hover:after {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
 	}
 }
 

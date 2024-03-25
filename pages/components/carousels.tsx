@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
-import { EmblaOptionsType } from 'embla-carousel';
+import React, { useCallback, useEffect, useState } from 'react';
+import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import EmblaCarousel from '@/components/carousel/EmblaCarousel';
-import EmblaCarouselMulti from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '@/components/carousel/EmblaCarouselMulti';
 import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
 import Autoplay from 'embla-carousel-autoplay';
 import {
@@ -13,6 +12,7 @@ import {
 } from '@/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '@/images/icons/chevron-next.svg';
 import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import { LazyLoadImage } from '@/components/carousel/EmblaCarouselLazyLoadImage';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -26,10 +26,37 @@ const SLIDES_2 = Array.from(Array(SLIDE_COUNT_2).keys());
 const Carousels: React.FC = () => {
 
 	// carousel 1
+	const [slidesInView, setSlidesInView] = useState<number[]>([]);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
+
+	const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
+		setSlidesInView((slidesInView) => {
+			if (slidesInView.length === emblaApi.slideNodes().length) {
+				emblaApi.off('slidesInView', updateSlidesInView);
+			}
+			const inView = emblaApi
+				.slidesInView()
+				.filter((index) => !slidesInView.includes(index));
+			return slidesInView.concat(inView);
+		});
+	}, []);
+
+	useEffect(() => {
+		if (!emblaApi) return;
+		const autoplay = emblaApi?.plugins()?.autoplay;
+		if (!autoplay) return;
+		updateSlidesInView(emblaApi);
+		emblaApi.on('slidesInView', updateSlidesInView);
+		emblaApi.on('reInit', updateSlidesInView);
+		emblaApi.on('select', () => {
+			const autoplay = emblaApi?.plugins()?.autoplay;
+			if (autoplay) autoplay.reset();
+			if (autoplay && !autoplay.isPlaying()) autoplay.play();
+		});
+	}, [emblaApi, updateSlidesInView]);
 
 	// carousel 2
 	const [emblaRef2, emblaApi2] = useEmblaCarousel(options, [
@@ -114,186 +141,286 @@ const Carousels: React.FC = () => {
 	return (
 		<section className="container pb-4">
 			<h1 className="mb-3">CAROUSEL WITH BULLETS</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef} emblaApi={emblaApi}>
-				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
-							<DotButton
-								onClick={() => onClick1(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi}>
+				<Carousel.Inner emblaRef={emblaRef}>
+					{SLIDES.map((index) => (
+						<LazyLoadImage
+							key={index}
+							imgSrc={`https://via.placeholder.com/300x100/`}
+							inView={slidesInView.indexOf(index) > -1}
+							index={index}
+						/>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
+								<DotButton
+									onClick={() => onClick1(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-3">CAROUSEL WITH RIGHT BULLETS INDICATORS</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef2} emblaApi={emblaApi2}>
-				<ol className="carousel__dots flex flex-wrap justify-end items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`border border-white ${index === idx2 ? ' bg-white' : ''}`}>
-							<DotButton
-								onClick={() => onClick2(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi2}>
+				<Carousel.Inner emblaRef={emblaRef2}>
+					{SLIDES.map((index) => (
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<ol className="carousel__dots flex flex-wrap justify-end items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`border border-white ${index === idx2 ? ' bg-white' : ''}`}>
+								<DotButton
+									onClick={() => onClick2(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH BULLETS PRIMARY COLOR</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef3} emblaApi={emblaApi3}>
-				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-50'}`}>
-							<DotButton
-								onClick={() => onClick3(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi3}>
+				<Carousel.Inner emblaRef={emblaRef3}>
+					{SLIDES.map((index) => (
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-50'}`}>
+								<DotButton
+									onClick={() => onClick3(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH BULLETS BODY COLOR</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef4} emblaApi={emblaApi4}>
-				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`bg-white ${index === idx4 ? ' opacity-1' : ' opacity-50'}`}>
-							<DotButton
-								onClick={() => onClick4(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi4}>
+				<Carousel.Inner emblaRef={emblaRef4}>
+					{SLIDES.map((index) => (
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`bg-white ${index === idx4 ? ' opacity-1' : ' opacity-50'}`}>
+								<DotButton
+									onClick={() => onClick4(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH CONTROLS</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef5} emblaApi={emblaApi5}>
-				<PrevButton
-					onClick={() => autoPlayClick5(arrowClickPrev5)}
-					disabled={prevDisabled5}
-					className="absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
-				>
-					<ChevronPrev className="w-g h-g svg--current-color" />
-				</PrevButton>
-				<NextButton
-					onClick={() => autoPlayClick5(arrowClickNext5)}
-					disabled={nextDisabled5}
-					className="absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
-				>
-					<ChevronNext className="w-g h-g svg--current-color" />
-				</NextButton>
-				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`bg-white ${index === idx5 ? ' opacity-1' : ' opacity-50'}`}>
-							<DotButton
-								onClick={() => onClick5(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi5}>
+				<Carousel.Inner emblaRef={emblaRef5}>
+					{SLIDES.map((index) => (
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<PrevButton
+						onClick={() => autoPlayClick5(arrowClickPrev5)}
+						disabled={prevDisabled5}
+						className="absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+					>
+						<ChevronPrev className="w-g h-g svg--current-color" />
+					</PrevButton>
+					<NextButton
+						onClick={() => autoPlayClick5(arrowClickNext5)}
+						disabled={nextDisabled5}
+						className="absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+					>
+						<ChevronNext className="w-g h-g svg--current-color" />
+					</NextButton>
+					<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`bg-white ${index === idx5 ? ' opacity-1' : ' opacity-50'}`}>
+								<DotButton
+									onClick={() => onClick5(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH GROUPED CONTROLS</h1>
-			<EmblaCarousel slides={SLIDES} emblaRef={emblaRef6} emblaApi={emblaApi6}>
-				<PrevButton
-					onClick={() => autoPlayClick6(arrowClickPrev6)}
-					disabled={prevDisabled6}
-					className="absolute left-0 top-0 lg:right-[5em] lg:left-auto lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
-				>
-					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
-						<ChevronPrev className="w-g h-g svg--current-color" />
-					</span>
-				</PrevButton>
-				<NextButton
-					onClick={() => autoPlayClick6(arrowClickNext6)}
-					disabled={nextDisabled6}
-					className="absolute right-0 lg:right-[1.5em] top-0 lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
-				>
-					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
-						<ChevronNext className="w-g h-g svg--current-color" />
-					</span>
-				</NextButton>
-				<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-					{SLIDES.map((_, index) => (
-						<li key={index} className={`bg-white ${index === idx6 ? ' opacity-1' : ' opacity-50'}`}>
-							<DotButton
-								onClick={() => onClick6(index)}
-								className="carousel__dot"
-							/>
-						</li>
+			<Carousel.Wrapper emblaApi={emblaApi6}>
+				<Carousel.Inner emblaRef={emblaRef6}>
+					{SLIDES.map((index) => (
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
-				</ol>
-			</EmblaCarousel>
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<PrevButton
+						onClick={() => autoPlayClick6(arrowClickPrev6)}
+						disabled={prevDisabled6}
+						className="absolute left-0 top-0 lg:right-[5em] lg:left-auto lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
+					>
+						<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+							<ChevronPrev className="w-g h-g svg--current-color" />
+						</span>
+					</PrevButton>
+					<NextButton
+						onClick={() => autoPlayClick6(arrowClickNext6)}
+						disabled={nextDisabled6}
+						className="absolute right-0 lg:right-[1.5em] top-0 lg:top-auto bottom-0 lg:bottom-[1em] z-[1] flex items-center justify-center w-[10%] lg:w-4 lg:h-4 p-0 text-primary text-center bg-none border-0"
+					>
+						<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+							<ChevronNext className="w-g h-g svg--current-color" />
+						</span>
+					</NextButton>
+					<ol className="carousel__dots flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+						{SLIDES.map((_, index) => (
+							<li key={index} className={`bg-white ${index === idx6 ? ' opacity-1' : ' opacity-50'}`}>
+								<DotButton
+									onClick={() => onClick6(index)}
+									className="carousel__dot"
+								/>
+							</li>
+						))}
+					</ol>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 3 ITEMS</h1>
-			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef7} emblaApi={emblaApi7} className="-mx-hg" itemClass="w-full basis-full lg:w-1/3 lg:basis-1/3">
-				<PrevButton
-					onClick={() => autoPlayClick7(arrowClickPrev7)}
-					disabled={prevDisabled7}
-					className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
-				>
-					<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
-						<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
-					</span>
-				</PrevButton>
-				<NextButton
-					onClick={() => autoPlayClick7(arrowClickNext7)}
-					disabled={nextDisabled7}
-					className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
-				>
-					<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
-						<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
-					</span>
-				</NextButton>
-			</EmblaCarouselMulti>
+			<Carousel.Wrapper emblaApi={emblaApi7} className="-mx-hg">
+				<Carousel.Inner emblaRef={emblaRef7}>
+					{SLIDES_2.map((index) => (
+						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/3 lg:basis-1/3 px-hg lg:px-g" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
+					))}
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<PrevButton
+						onClick={() => autoPlayClick7(arrowClickPrev7)}
+						disabled={prevDisabled7}
+						className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+					>
+						<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
+							<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
+						</span>
+					</PrevButton>
+					<NextButton
+						onClick={() => autoPlayClick7(arrowClickNext7)}
+						disabled={nextDisabled7}
+						className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+					>
+						<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
+							<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
+						</span>
+					</NextButton>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 4 ITEMS</h1>
-			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef8} emblaApi={emblaApi8} className="-mx-hg" itemClass="w-full basis-full lg:w-1/4 lg:basis-1/4">
-				<PrevButton
-					onClick={() => autoPlayClick8(arrowClickPrev8)}
-					disabled={prevDisabled8}
-					className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
-				>
-					<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
-						<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
-					</span>
-				</PrevButton>
-				<NextButton
-					onClick={() => autoPlayClick8(arrowClickNext8)}
-					disabled={nextDisabled8}
-					className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
-				>
-					<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
-						<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
-					</span>
-				</NextButton>
-			</EmblaCarouselMulti>
+			<Carousel.Wrapper emblaApi={emblaApi8} className="-mx-hg">
+				<Carousel.Inner emblaRef={emblaRef8}>
+					{SLIDES_2.map((index) => (
+						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/4 lg:basis-1/4 px-hg lg:px-g" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
+					))}
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<PrevButton
+						onClick={() => autoPlayClick8(arrowClickPrev8)}
+						disabled={prevDisabled8}
+						className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+					>
+						<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
+							<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
+						</span>
+					</PrevButton>
+					<NextButton
+						onClick={() => autoPlayClick8(arrowClickNext8)}
+						disabled={nextDisabled8}
+						className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+					>
+						<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
+							<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
+						</span>
+					</NextButton>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 4 ITEMS CENTERED</h1>
-			<EmblaCarouselMulti slides={SLIDES_2} emblaRef={emblaRef9} emblaApi={emblaApi9} className="" itemClass="w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4">
-				<PrevButton
-					onClick={() => autoPlayClick9(arrowClickPrev9)}
-					disabled={prevDisabled9}
-					className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-4 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
-				>
-					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
-						<ChevronPrev className="w-g h-g svg--current-color" />
-					</span>
-				</PrevButton>
-				<NextButton
-					onClick={() => autoPlayClick9(arrowClickNext9)}
-					disabled={nextDisabled9}
-					className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-4 p-0 text-primary text-center bg-none border-0"
-				>
-					<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
-						<ChevronNext className="w-g h-g svg--current-color" />
-					</span>
-				</NextButton>
-			</EmblaCarouselMulti>
+			<Carousel.Wrapper emblaApi={emblaApi9} className="">
+				<Carousel.Inner emblaRef={emblaRef9}>
+					{SLIDES_2.map((index) => (
+						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 px-hg lg:px-g" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
+					))}
+				</Carousel.Inner>
+				<Carousel.Navigation>
+					<PrevButton
+						onClick={() => autoPlayClick9(arrowClickPrev9)}
+						disabled={prevDisabled9}
+						className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-4 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+					>
+						<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+							<ChevronPrev className="w-g h-g svg--current-color" />
+						</span>
+					</PrevButton>
+					<NextButton
+						onClick={() => autoPlayClick9(arrowClickNext9)}
+						disabled={nextDisabled9}
+						className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-4 p-0 text-primary text-center bg-none border-0"
+					>
+						<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center">
+							<ChevronNext className="w-g h-g svg--current-color" />
+						</span>
+					</NextButton>
+				</Carousel.Navigation>
+			</Carousel.Wrapper>
 		</section>
 	);
 };

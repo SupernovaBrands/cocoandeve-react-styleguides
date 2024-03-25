@@ -1,60 +1,55 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
 
-type PropType = {
-	slides: number[]
+type MultiPropType = {
 	children: React.ReactNode
-	emblaRef: any
-	emblaApi: any
-	itemClass: string
-	className: string
+	emblaApi: EmblaCarouselType
+	className?: string
 };
 
-const EmblaCarouselMulti: React.FC<PropType> = (props) => {
-	const { slides, children, emblaRef, emblaApi, itemClass, className } = props;
-
-	const [slidesInView, setSlidesInView] = useState<number[]>([]);
-	const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
-		setSlidesInView((slidesInView) => {
-			if (slidesInView.length === emblaApi.slideNodes().length) {
-				emblaApi.off('slidesInView', updateSlidesInView);
-			}
-			const inView = emblaApi
-				.slidesInView()
-				.filter((index) => !slidesInView.includes(index));
-			return slidesInView.concat(inView);
-		});
-	}, []);
+const EmblaCarousel: React.FC<MultiPropType> = (props) => {
+	const { children, emblaApi, className } = props;
 
 	useEffect(() => {
 		if (!emblaApi) return;
 		const autoplay = emblaApi?.plugins()?.autoplay;
 		if (!autoplay) return;
-		updateSlidesInView(emblaApi);
-		emblaApi.on('slidesInView', updateSlidesInView);
-		emblaApi.on('reInit', updateSlidesInView);
 		emblaApi.on('select', () => {
 			const autoplay = emblaApi?.plugins()?.autoplay;
 			if (autoplay) autoplay.reset();
 		});
-	}, [emblaApi, updateSlidesInView]);
+	}, [emblaApi]);
 
 	return (
 		<div className={`relative ${className}`}>
-			<div className="overflow-hidden" ref={emblaRef}>
-				<div className="flex carousel__container touch-pan-y lg:-mx-g">
-					{slides.map((index) => (
-						<div className={`carousel__slide flex-grow-0 flex-shrink-0 ${itemClass} px-hg lg:px-g`} key={index}>
-							<div className="flex items-center justify-center">
-								<img className="block w-full" src={`https://via.placeholder.com/600x400?text=${index + 1}`} alt={`slide ${index + 1}`} />
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
 			{children}
 		</div>
 	);
 };
 
-export default EmblaCarouselMulti;
+type NavProp = {
+	children: React.ReactNode;
+};
+const Navigation: React.FC<NavProp> = (props) => props.children;
+
+type InnerProp = {
+	emblaRef: any
+	children: React.ReactNode
+}
+const Inner: React.FC<InnerProp> = (props) => {
+	return (
+		<div className="overflow-hidden" ref={props.emblaRef}>
+			<div className="flex carousel__container lg:-mx-g">
+				{props.children}
+			</div>
+		</div>
+	);
+};
+
+EmblaCarousel.defaultProps = {
+	className: ''
+};
+
+const Carousel = { Wrapper: EmblaCarousel, Inner, Navigation };
+
+export default Carousel;

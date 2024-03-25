@@ -17,7 +17,7 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
 	}, [inView, setHasLoaded]);
 
 	return (
-		<div className="carousel__slide">
+		<div className="w-full basis-full flex-grow-0 flex-shrink-0">
 			<div className={'relative h-auto'.concat(
 				hasLoaded ? ' carousel__lazy-load--has-loaded' : ''
 			)}>
