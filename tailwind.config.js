@@ -40,6 +40,7 @@ module.exports = {
       'secondary-light': '#E0F0E9',
       'sh-purple': '#993366',
       'sh-purple-light': '#FFEFFF',
+      'purple-light': '#FFEFFF',
       'bali-bod-blue': '#213E7B',
       'bali-bod-blue-light': '#bec5d8',
       'sh-orange': '#FF9900',

@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { Container } from 'react-bootstrap';
 // import Header from '@/sections/Header';
 import Product from '@/templates/Product';
-import PDPBanner from "@/compounds/product-banner";
+import PDPBanner from "@/compounds/ProductBanner";
 import PDPUpsell from "@/sections/pdp-upsell-2";
 import RealResultCarousel from "@/sections/RealResultCarousel";
 import Sustainability from '@/sections/Sustainability';
