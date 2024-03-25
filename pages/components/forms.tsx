@@ -28,10 +28,10 @@ const Forms: React.FC = () => {
                             </div>
                             <div className="flex flew-wrap -mx-2">
                                 <div className="w-full lg:w-1/2">
-                                    <Select id="select-1" placeholder="Select Option" options={[{value: '1', label: 'Option 1'}, {value: '2', label: 'Option 2'}]} selected="2"></Select>
+                                    <Select id="select-1" border={true} placeholder="Select Option" options={[{value: '1', label: 'Option 1'}, {value: '2', label: 'Option 2'}]} selected="2"></Select>
                                 </div>
                                 <div className="w-full lg:w-1/2">
-                                    <Select id="select-1" placeholder="Select Option" options={[{value: '1', label: 'Option 1'}, {value: '2', label: 'Option 2'}]} selected="1" disabled={true}></Select>
+                                    <Select id="select-1" border={true} placeholder="Select Option" options={[{value: '1', label: 'Option 1'}, {value: '2', label: 'Option 2'}]} selected="1" disabled={true}></Select>
                                 </div>
                             </div>
                             <div className="flex flew-wrap">

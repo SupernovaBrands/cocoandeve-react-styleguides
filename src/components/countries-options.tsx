@@ -1,7 +1,7 @@
 const CountriesOptions = () => {
 	return (
         <select className="custom-select opacity-0" name="country">
-            <option value="" disabled="" defaultValue="">Country</option>
+            <option value="" defaultValue="">Country</option>
             <option value="US" data-code="1">United States</option>
             <option value="GB" data-code="44">United Kingdom</option>
             <option value="CA" data-code="1">Canada</option>
