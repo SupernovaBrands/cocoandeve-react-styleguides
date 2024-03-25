@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Form from "@/compounds/newsletter-form";
+import Form from "@/compounds/footer-newsletter-form";
 
 const NewsletterForm = () => {
 	return (
@@ -7,7 +7,7 @@ const NewsletterForm = () => {
 		    <Container className="mt-4">
                 <h1>Newsletter Form</h1>
                 <div className="row mt-4">
-                    <div className="col-12 col-lg-4">
+                    <div className="w-full lg:w-1/3">
                         <Form />
                     </div>
                 </div>
