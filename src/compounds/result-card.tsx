@@ -15,7 +15,7 @@ const ResultCard = (props: any) => {
                 </p>
                 <p className='mb-1'>
                     <strong>Product:&nbsp;</strong>
-                    <Link href="#" title={props.item.title} tabIndex="0" className="text-underline">
+                    <Link href="#" title={props.item.title} className="text-underline">
                         {props.item.title}
                     </Link>
                 </p>
