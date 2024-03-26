@@ -7,16 +7,16 @@
 
     &__title {
       font-size: calc-em(32);
-	    @include media-breakpoint-up(lg) {
+	    @screen lg {
 		    font-size: calc-em(42);
 	    }
     }
   
     &__subtitle {
-      @include font-size($font-size-sm);
+      @apply text-sm;
   
-      @include media-breakpoint-up(md) {
-        @include font-size($font-size-base);
+      @screen md {
+        @apply text-base;
       }
     }
   
