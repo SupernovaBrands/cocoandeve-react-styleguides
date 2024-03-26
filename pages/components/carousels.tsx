@@ -144,12 +144,11 @@ const Carousels: React.FC = () => {
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef}>
 					{SLIDES.map((index) => (
-						<LazyLoadImage
-							key={index}
-							imgSrc={`https://via.placeholder.com/300x100/`}
-							inView={slidesInView.indexOf(index) > -1}
-							index={index}
-						/>
+						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+							<div className="flex items-center justify-center">
+								<img className="block w-full" src={`https://via.placeholder.com/300x100/`} alt={`slide ${index + 1}`} />
+							</div>
+						</div>
 					))}
 				</Carousel.Inner>
 				<Carousel.Navigation>

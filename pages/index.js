@@ -24,9 +24,6 @@ export default function Home() {
           <Link href="./components/forms">Forms</Link>
           <Link href="./components/social-icons">Social Icons</Link>
           <Link href="./components/hr">Hr</Link>
-          <Link href="./components/product-image-carousels">
-            Product Image Carousels
-          </Link>
           <Link href="./components/svgs">Svgs</Link>
           <Link href="./components/tabs-comp">Tabs</Link>
           <Link href="./components/tooltips">Tooltips</Link>
@@ -50,6 +47,9 @@ export default function Home() {
           <Link href="./compounds/result-card">Result Card</Link>
           <Link href="./compounds/upsell">Upsell</Link>
           <Link href="./compounds/waitlist-form">Waitlist Form</Link>
+          <Link href="./components/product-image-carousels">
+            Product Image Carousels
+          </Link>
         </div>
         <div className="w-full lg:w-1/2 px-0 lg:px-g mb-3 flex flex-col items-start">
           <h2>Sections</h2>
