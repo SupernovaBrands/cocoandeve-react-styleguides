@@ -106,24 +106,24 @@ const PostCards = () => {
 				<h1 className="mb-1">POST CARD</h1>
 				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 					{postData.map((data) =>
-						<PostCard key={data.id} className="w-full lg:w-1/2 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/2 px-0 lg:px-g" data={data} />
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID</h1>
 				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 					{postData2.map((data) =>
-						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID NO IMAGE</h1>
 				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 					{postData3.map((data) =>
-						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}
 				</div>
 
 				<h1 className="mb-1">POST CARDS CAROUSEL</h1>
-				<Carousel.Wrapper emblaApi={emblaApi}>
+				<Carousel.Wrapper emblaApi={emblaApi} className="mb-4">
 					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 						{postData4.map((data) => (
 							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
@@ -132,18 +132,18 @@ const PostCards = () => {
 					<Carousel.Navigation>
 						<PrevButton
 							onClick={() => autoPlayClick(arrowClickPrev)}
-							className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+							className="absolute left-0 lg:-left-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[auto] p-0 text-primary text-center bg-none border-0"
 						>
-							<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
-								<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color" />
+							<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+								<ChevronPrev className="w-g h-g svg--current-color" />
 							</span>
 						</PrevButton>
 						<NextButton
 							onClick={() => autoPlayClick(arrowClickNext)}
-							className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+							className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[auto] p-0 text-primary text-center bg-none border-0"
 						>
-							<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
-								<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color" />
+							<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+								<ChevronNext className="w-g h-g svg--current-color" />
 							</span>
 						</NextButton>
 					</Carousel.Navigation>

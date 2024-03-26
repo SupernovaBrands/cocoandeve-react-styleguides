@@ -10,7 +10,7 @@ type PropType = {
 const PostCard: React.FC<PropType> = (props) => {
 	const { className, data } = props;
 	return (
-		<article className={`mb-2 ${className}`}>
+		<article className={`${className}`}>
 			<figure className="mb-2 no-gutters__in-container border border-secondary-light h-full flex flex-col">
 				{data.img && (
 					<Link href={data.handle ?? '#'} className="hover-overlay d-block" aria-label={data.title}>
