@@ -1,8 +1,8 @@
 const Testimonial = (props) => {
     return (
-        <picture className="col-4 col-lg-2 pt-3 pb-3">
+        <picture className="w-1/3 lg:w-1/5 pr-4 pl-4 pt-3 pb-3">
             <source srcSet={props.srcSet} />
-            <img className="mw-100" alt="Img Alt" src={props.src} />
+            <img className="max-w-full" alt="Img Alt" src={props.src} />
         </picture>
     );
 };
