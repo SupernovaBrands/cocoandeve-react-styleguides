@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Container, Row, Tabs, Tab, Collapse } from 'react-bootstrap';
 // import ProductImageCarousel from "@/components/ProductImageCarousel";
 import LaunchWaitList from "@/compounds/launch-waitlist";
-import ProductVariant from "@/compounds/product-variant";
+// import ProductVariant from "@/compounds/product-variant";
 import ProductSubscription from "@/components/product-subscription";
 import UpsellPdp from "@/compounds/upsell-pdp";
 // import QuantityBox from '@/components/cart/quantity-box';
@@ -87,7 +87,7 @@ const Product = (props) => {
                             </p>
 
                             <div className="swatch">
-                                <ProductVariant
+                                {/* <ProductVariant
                                     id="product-variant-1-x-sunny-honey-bali-bronzing-foam"
                                     name="product-variant"
                                     title="1x Sunny Honey Bali Bronzing Foam"
@@ -162,7 +162,7 @@ const Product = (props) => {
                                     hideSwatch={true}
                                     subscription={true}
                                     margin="mb-3"
-                                />
+                                /> */}
                             </div>
                             <ProductSubscription />
                             <div className="results-swatch py-2 border border-primary-light-second border-start-0 border-end-0 mb-2 d-flex align-items-center">

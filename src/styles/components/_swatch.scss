@@ -3,7 +3,6 @@
 	width: calc-em(40);
 	height: calc-em(40);
 	border-radius: 50%;
-	border: 2px solid #fff;
 	background-color: white;
 	background-size: calc-em(30);
 	position: relative;
@@ -15,7 +14,7 @@
 	&.oos:after {
 		content: '';
 		height: 1px;
-		background-color: $primary;
+		@apply bg-primary;
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -56,7 +55,7 @@
 	}
 
 	.custom-control-input:checked ~ & {
-		border-color: $primary;
+		@apply border-primary;
 	}
 
 	&.small {
@@ -79,12 +78,16 @@
 		outline: none; // to remove focus border on button
 	}
 
-	@each $color, $value in $shade-colors {
-		&.#{$color} {
-			&:before {
-				background-color: $value;
-			}
-		}
+	&.medium:before {
+		@apply bg-medium;
+	}
+
+	&.dark:before {
+		@apply bg-dark;
+	}
+
+	&.ultra-dark:before {
+		@apply bg-ultra-dark;
 	}
 
 	&.girl-print-limited-edition,

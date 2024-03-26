@@ -61,6 +61,9 @@ module.exports = {
       'blue': '#213E7B',
       'white': '#fff',
       'transparent': 'transparent',
+      'dark': '#885757',
+      'ultra-dark': '#5C2323',
+      'medium': '#AA7878'
     },
     fontFamily: {
       sans: ['sofia-pro', 'sans-serif'],
