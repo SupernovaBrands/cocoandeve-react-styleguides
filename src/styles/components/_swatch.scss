@@ -158,3 +158,24 @@
 	}
 	*/
 }
+
+.swatch-overlay {
+	opacity: 0;
+	visibility: hidden;
+	width: calc(100% - 20px);
+	.button-overlay {
+		width: calc(100% + 4px);
+		margin-left: -2px;
+		margin-bottom: -26px;
+	}
+}
+.btn-choose {
+	width: calc(100% + 2px);
+	margin-left: -1px;
+}
+
+.btn-choose:hover + .swatch-overlay,
+.swatch-overlay:hover {
+	visibility: visible;
+	opacity: 1;
+}
