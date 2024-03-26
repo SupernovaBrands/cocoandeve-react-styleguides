@@ -47,7 +47,7 @@ export default function Home() {
           <Link href="./compounds/result-card">Result Card</Link>
           <Link href="./compounds/upsell">Upsell</Link>
           <Link href="./compounds/waitlist-form">Waitlist Form</Link>
-          <Link href="./components/product-image-carousels">
+          <Link href="./compounds/product-image-carousels">
             Product Image Carousels
           </Link>
         </div>
