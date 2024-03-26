@@ -35,11 +35,12 @@ const Navigation: React.FC<NavProp> = (props) => props.children;
 type InnerProp = {
 	emblaRef: any
 	children: React.ReactNode
+	className?: string
 }
 const Inner: React.FC<InnerProp> = (props) => {
 	return (
 		<div className="overflow-hidden" ref={props.emblaRef}>
-			<div className="flex carousel__container lg:-mx-g">
+			<div className={`flex carousel__container ${props.className}`}>
 				{props.children}
 			</div>
 		</div>
@@ -50,6 +51,9 @@ EmblaCarousel.defaultProps = {
 	className: ''
 };
 
+Inner.defaultProps = {
+	className: ''
+};
 const Carousel = { Wrapper: EmblaCarousel, Inner, Navigation };
 
 export default Carousel;

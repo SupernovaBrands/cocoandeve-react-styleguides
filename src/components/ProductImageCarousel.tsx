@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from '@/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '@/images/icons/chevron-next.svg';
 import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import Carousel from '@/components/carousel/EmblaCarouselMulti';
 
 type PropType = {
 	slides: number[]
@@ -62,8 +63,8 @@ const ProductImageCarousel: React.FC<PropType> = (props) => {
 	return (
 		<>
 			<div className="carousel mb-2 lg:sticky lg:px-g">
-				<div className="overflow-hidden relative" ref={emblaMainRef}>
-					<div className="flex carousel__container touch-pan-y">
+				<Carousel.Wrapper emblaApi={emblaMainApi}>
+					<Carousel.Inner emblaRef={emblaMainRef} className="lg:-mx-g">
 						{slides.map((index) => (
 							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
 								<picture className="flex items-center justify-center">
@@ -72,9 +73,9 @@ const ProductImageCarousel: React.FC<PropType> = (props) => {
 								</picture>
 							</div>
 						))}
-					</div>
+					</Carousel.Inner>
 					<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-				</div>
+				</Carousel.Wrapper>
 			</div>
 			<div className="carousel__progress lg:hidden rounded-sm bg-gray-400 h-[4px] my-1 w-full relative overflow-hidden self-center justify-end">
 				<div
@@ -82,9 +83,9 @@ const ProductImageCarousel: React.FC<PropType> = (props) => {
 					style={{ left: `${scrollProgress}%`, width: `${(1 / slides.length) * 100}%` }}
 					/>
 			</div>
-			<div className="carousel max-w-[90%] relative mx-auto hidden lg:flex items-center">
-				<div className="overflow-hidden relative" ref={emblaThumbsRef}>
-					<div className="flex carousel__container touch-pan-y ml-1">
+			<div className="carousel max-w-[90%] mx-auto hidden lg:flex items-center">
+				<Carousel.Wrapper className="w-full" emblaApi={emblaMainApi}>
+					<Carousel.Inner emblaRef={emblaThumbsRef} className="ml-1">
 						{slides.map((index) => (
 							<div className="flex-grow-0 mx-1 flex-shrink-0 w-[70px] basis-[70px] flex items-center justify-center" key={index}>
 								<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''}`} onClick={() => onThumbClick(index)}>
@@ -92,20 +93,22 @@ const ProductImageCarousel: React.FC<PropType> = (props) => {
 								</button>
 							</div>
 						))}
-					</div>
-				</div>
-				<PrevButton
-					onClick={pdpImagePrev}
-					className="absolute -left-2 top-25 w-5 h-5 rounded-full shadow-lg z-[1] flex items-center justify-center p-0 text-primary text-center bg-white border-0"
-				>
-					<ChevronPrev className="w-g h-g svg--current-color" />
-				</PrevButton>
-				<NextButton
-					onClick={pdpImageNext}
-					className="absolute -right-2 top-25 w-5 h-5 rounded-full shadow-lg z-[1] flex items-center justify-center p-0 text-primary text-center bg-white border-0"
-				>
-					<ChevronNext className="w-g h-g svg--current-color" />
-				</NextButton>
+					</Carousel.Inner>
+					<Carousel.Navigation>
+						<PrevButton
+							onClick={pdpImagePrev}
+							className="absolute -left-2 top-25 w-5 h-5 rounded-full shadow-lg z-[1] flex items-center justify-center p-0 text-primary text-center bg-white border-0"
+						>
+							<ChevronPrev className="w-g h-g svg--current-color" />
+						</PrevButton>
+						<NextButton
+							onClick={pdpImageNext}
+							className="absolute -right-2 top-25 w-5 h-5 rounded-full shadow-lg z-[1] flex items-center justify-center p-0 text-primary text-center bg-white border-0"
+						>
+							<ChevronNext className="w-g h-g svg--current-color" />
+						</NextButton>
+					</Carousel.Navigation>
+				</Carousel.Wrapper>
 			</div>
 
 		</>

@@ -142,7 +142,7 @@ const Carousels: React.FC = () => {
 		<section className="container pb-4">
 			<h1 className="mb-3">CAROUSEL WITH BULLETS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi}>
-				<Carousel.Inner emblaRef={emblaRef}>
+				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -167,7 +167,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-3">CAROUSEL WITH RIGHT BULLETS INDICATORS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi2}>
-				<Carousel.Inner emblaRef={emblaRef2}>
+				<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -192,7 +192,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH BULLETS PRIMARY COLOR</h1>
 			<Carousel.Wrapper emblaApi={emblaApi3}>
-				<Carousel.Inner emblaRef={emblaRef3}>
+				<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -217,7 +217,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH BULLETS BODY COLOR</h1>
 			<Carousel.Wrapper emblaApi={emblaApi4}>
-				<Carousel.Inner emblaRef={emblaRef4}>
+				<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -242,7 +242,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH CONTROLS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi5}>
-				<Carousel.Inner emblaRef={emblaRef5}>
+				<Carousel.Inner emblaRef={emblaRef5} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -281,7 +281,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL WITH GROUPED CONTROLS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi6}>
-				<Carousel.Inner emblaRef={emblaRef6}>
+				<Carousel.Inner emblaRef={emblaRef6} className="lg:-mx-g">
 					{SLIDES.map((index) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 							<div className="flex items-center justify-center">
@@ -324,7 +324,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 3 ITEMS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi7} className="-mx-hg">
-				<Carousel.Inner emblaRef={emblaRef7}>
+				<Carousel.Inner emblaRef={emblaRef7} className="lg:-mx-g">
 					{SLIDES_2.map((index) => (
 						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/3 lg:basis-1/3 px-hg lg:px-g" key={index}>
 							<div className="flex items-center justify-center">
@@ -357,7 +357,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 4 ITEMS</h1>
 			<Carousel.Wrapper emblaApi={emblaApi8} className="-mx-hg">
-				<Carousel.Inner emblaRef={emblaRef8}>
+				<Carousel.Inner emblaRef={emblaRef8} className="lg:-mx-g">
 					{SLIDES_2.map((index) => (
 						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/4 lg:basis-1/4 px-hg lg:px-g" key={index}>
 							<div className="flex items-center justify-center">
@@ -390,7 +390,7 @@ const Carousels: React.FC = () => {
 
 			<h1 className="mb-1 mt-5">CAROUSEL LOOP 4 ITEMS CENTERED</h1>
 			<Carousel.Wrapper emblaApi={emblaApi9} className="">
-				<Carousel.Inner emblaRef={emblaRef9}>
+				<Carousel.Inner emblaRef={emblaRef9} className="lg:-mx-g">
 					{SLIDES_2.map((index) => (
 						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 px-hg lg:px-g" key={index}>
 							<div className="flex items-center justify-center">

@@ -124,7 +124,7 @@ const PostCards = () => {
 
 				<h1 className="mb-1">POST CARDS CAROUSEL</h1>
 				<Carousel.Wrapper emblaApi={emblaApi}>
-					<Carousel.Inner emblaRef={emblaRef}>
+					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 						{postData4.map((data) => (
 							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
 						))}
