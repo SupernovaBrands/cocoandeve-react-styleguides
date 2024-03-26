@@ -1,4 +1,4 @@
-import PostCard from "@/compounds/PostCard";
+// import PostCard from "@/compounds/PostCard";
 import Link from "next/link";
 import { useState } from "react";
 import { Carousel, Col } from "react-bootstrap";
@@ -24,7 +24,7 @@ const Sidebar = (props) => {
 										<li key={i} onClick={carouselHandle} data-bs-target=".carousel--sidebar" data-bs-slide-to={item} className={`rounded-circle ${index === i ? 'active' : ''}`}></li>
 									))}
 								</ol>
-								<Carousel activeIndex={index} className="carousel--sidebar" interval={null} controls={false} indicators={false}>
+								{/* <Carousel activeIndex={index} className="carousel--sidebar" interval={null} controls={false} indicators={false}>
 									{arrayN.map((item, i) => {
 										const idx = item * 2;
 										const sliced = props.data.slice(idx, (item + 1) * 2);
@@ -39,7 +39,7 @@ const Sidebar = (props) => {
 											</Carousel.Item>
 										);
 									})}
-								</Carousel>
+								</Carousel> */}
 							</>
 						)}
 					</div>
