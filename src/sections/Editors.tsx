@@ -3,7 +3,7 @@ import Testimonial from '@/sections/Testimonial';
 const Editors = () => {
     return (
         <div className="container list-logo pt-4 pb-4 text-center">
-            <p className="h1 ">Beauty editors love us</p>
+            <p className="h1 mb-1">Beauty editors love us</p>
             <div className="flex flex-row flex-wrap mx-auto items-center">
                 <Testimonial 
                     src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/nylon_logo_2x_53a0aefa-88f7-40dc-9ba2-c5a76d20509b_medium.png?v=1593581750"
