@@ -3,11 +3,7 @@
 
 		&__container {
 			backface-visibility: hidden;
-		}
-
-		&__slide {
-			flex: 0 0 100%;
-			min-width: 0;
+			@apply touch-pan-y;
 		}
 
 		&__button--half-rounded {

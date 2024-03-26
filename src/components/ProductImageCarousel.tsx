@@ -65,7 +65,7 @@ const ProductImageCarousel: React.FC<PropType> = (props) => {
 				<div className="overflow-hidden relative" ref={emblaMainRef}>
 					<div className="flex carousel__container touch-pan-y">
 						{slides.map((index) => (
-							<div className="carousel__slide basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
+							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
 								<picture className="flex items-center justify-center">
 									<source srcSet={`https://via.placeholder.com/1140x1140/EFADBA?text=1140x1140+${`Slide ${index + 1}`}`} media="(min-width: 992px)" />
 									<img className="block w-full rounded-md lg:rounded-none" src={`https://via.placeholder.com/614x614/EFADBA?text=614x614 ${`Slide ${index + 1}`}`} alt={`slide ${index + 1}`} />
