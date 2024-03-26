@@ -1,37 +1,38 @@
-.playground {
+@layer components {
+  .playground {
 
-    picture {
-      bottom: 0;
-      right: 0;
-    }
-
-    &__title {
-      font-size: calc-em(32);
-	    @screen lg {
-		    font-size: calc-em(42);
-	    }
-    }
-  
-    &__subtitle {
-      @apply text-sm;
-  
-      @screen md {
-        @apply text-base;
+      picture {
+        bottom: 0;
+        right: 0;
       }
-    }
-  
-    &--simple {
-      display: flex !important;
-  
-      &-square {
-        figcaption {
-          position: absolute;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
+
+      &__title {
+        font-size: calc-em(32);
+        @screen lg {
+          font-size: calc-em(42);
+        }
+      }
+    
+      &__subtitle {
+        @apply text-sm;
+    
+        @screen md {
+          @apply text-base;
+        }
+      }
+    
+      &--simple {
+        display: flex !important;
+    
+        &-square {
+          figcaption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+          }
         }
       }
     }
-  }
-  
+}

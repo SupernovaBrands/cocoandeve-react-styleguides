@@ -1,19 +1,23 @@
-.instagram {
-    &--feed {
-      &--link {
-        padding: calc-em(6);
-      }
-  
-      @include media-breakpoint-up(lg) {
-        &--left {
-          flex: 0 0 42.85714%;
-          max-width: 42.85714%;
+@layer components {
+  .instagram {
+      &--feed {
+        &--link {
+          padding: calc-em(6);
         }
-        &--right {
-          flex: 0 0 57.14286%;
-          max-width: 57.14286%;
+    
+        @screen lg {
+          &--left {
+            flex: 0 0 42.85714%;
+            max-width: 42.85714%;
+          }
+          &--right {
+            flex: 0 0 57.14286%;
+            max-width: 57.14286%;
+          }
+          img {
+            border-radius: calc-em(10);
+          }
         }
       }
     }
-  }
-  
+}

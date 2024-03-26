@@ -1,8 +1,10 @@
-@screen lg {
-	.section-service-list {
+@layer components {
+	@screen lg {
+		.section-service-list {
 
-		.list-unstyled p {
-			@apply text-sm;
+			.list-unstyled p {
+				@apply text-sm;
+			}
 		}
 	}
 }
