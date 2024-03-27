@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-// import CookieBanner from '@/components/CookieBanner';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import NavMegaMenu from '@/compounds/NavMegaMenu';
 import MobileMenu from '@/compounds/MobileMenu';
-import BrandLogo from '@/components/CELogo';
+import BrandLogo from '../../src/images/ce-logo.svg';
 import Account from '../../src/images/icons/account.svg';
 import Search from '../../src/images/icons/search-thin.svg';
 import Cart from '../../src/images/icons/cart.svg';
 import SearchBox from '@/compounds/SearchBox';
 import AccountDropdown from '@/compounds/AccountDropdown';
-
-const CookieBanner = dynamic(() => import('@/components/CookieBanner'), {
-    ssr: false,
-});
 
 const NAV_MEGA_MENU_TEMP = [
 	{
@@ -50,12 +45,7 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 ]
 
 const Header = (props) => {
-    const [showCookie, setShowCookie] = useState(false);
 	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
-
-    const onAcceptCookie = (active) => {
-		setShowCookie(active);
-	};
 
 	const onToggleMobileNav = () => {
 		console.log('onToggleMobileNav');
@@ -89,14 +79,10 @@ const Header = (props) => {
 
 	return (
         <header className="main-header">
-            {!showCookie && (
-				<CookieBanner onAcceptCookie={onAcceptCookie} text="Up to 25% off + Free Gift worth $25.40" />
-			)}
 			{announcementBarEnabled && (
 				<AnnouncementBar
 					text="Up to 25% off + Free Gift worth $25.40"
 					url="/"
-					timerEnabled={true}
 					countDownStart=""
 					countDownEnd=""
 					countDownDays=""
@@ -108,17 +94,17 @@ const Header = (props) => {
 					enabled={false}
 				/>
 			)}
-            <nav className="bg-white navbar navbar-expand-lg">
-                <div className="container px-0">
-                    <button className="navbar-toggler border-0" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
+            <nav className="bg-white">
+                <div className="container px-0 lg:flex lg:flex-nowrap">
+                    <button className="navbar-toggler border-0 hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
                         <span className="d-block"></span>
                     </button>
-                    <a href="#" className="navbar-brand mx-auto mx-lg-0"  aria-label="Visit Coco and Eve homepage">
-				        <BrandLogo />
+                    <a href="#" className="inline-block lg:pt-[.72656em] lg:pb-[.72656em] lg:[flex-basis:15%]"  aria-label="Visit Coco and Eve homepage">
+				        <BrandLogo className="lg:h-[41px]" />
                     </a>
-					<ul className="navbar-nav d-none d-lg-flex navbar__secondary">
+					<ul className="list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Shop All</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Shop All</a>
 							<NavMegaMenu
 								title="Shop All"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -126,7 +112,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Hair</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Hair</a>
 							<NavMegaMenu
 								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -134,7 +120,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Tan</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Tan</a>
 							<NavMegaMenu
 								title="Tan"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -142,7 +128,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Body</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Body</a>
 							<NavMegaMenu
 								title="Body"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -150,7 +136,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Value Sets</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Value Sets</a>
 							<NavMegaMenu
 								title="Value Sets"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -158,26 +144,26 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link m-0 fw-bold">|</a>
+							<a className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">|</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Results IRL</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Results IRL</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Blog</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Blog</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Sweepstakes</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Sweepstakes</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="nav-link m-0 fw-bold">Help</a>
+							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Help</a>
 						</li>
 					</ul>
 
-					<ul className="navbar-nav navbar-nav--right flex-row justify-content-end align-items-center ">
-						<li id="dropdownMenuForm" className="nav-item dropdown dropdown--account pl-1 me-1 me-lg-0">
+					<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
+						<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0">
 							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#javascript" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<Account className="svg mr-25" />
+								<Account className="text-[1.375em] h-[1em]" />
 							</a>
 							<AccountDropdown />
 						</li>
@@ -195,6 +181,7 @@ const Header = (props) => {
 					</ul>
                 </div>
             </nav>
+			{/* 
 			<nav className="text-center mobile-secnav p-g bg-white d-lg-none">
 				<ul className="nav justify-content-center">
 					<li className="nav-item">
@@ -214,8 +201,10 @@ const Header = (props) => {
 					</li>
 				</ul>
 			</nav>
-			<MobileMenu onToggleMobileNav={onToggleMobileNav} />
-			<SearchBox onToggleSearchBox={onToggleSearchBox} />
+			*/}
+
+			{/*<MobileMenu onToggleMobileNav={onToggleMobileNav} />
+			<SearchBox onToggleSearchBox={onToggleSearchBox} /> */}
         </header>
 	);
 };

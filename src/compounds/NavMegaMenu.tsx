@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-const NavMegaMenu = (props) => {
+const NavMegaMenu = (props: any) => {
     return (
-        <div className="nav-mega-menu w-100 bg-white position-absolute d-none">
+        <div className="nav-mega-menu w-full left-0 border-top-body mt-[18px] bg-white absolute hidden">
             <div className="container pt-3">
                 <div className="row mx-5 px-3">
                     <div className="col-lg-5 mb-3">

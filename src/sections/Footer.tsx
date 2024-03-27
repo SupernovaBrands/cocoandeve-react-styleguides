@@ -21,20 +21,20 @@ const Footer = (props: any) => {
     }
 
     return (
-        <footer className="lg:pt-4 ">
-            <div className="container mb-4 lg:mb-3">
+        <footer className="pt-4">
+            <div className="container mb-4 lg:mb-3 px-g">
                 <div className='lg:pb-3 grid grid-cols-[1fr] grid-rows-[auto] [grid-template-areas:"newsletter-heading"_"newsletter-form"] lg:grid-cols-[1fr_1fr] lg:[grid-template-areas:"newsletter-heading_newsletter-form"]'>
                     <div className="[grid-area:newsletter-heading]">
                         <h5 className="h1 mb-1 text-xl text-2xl">Newsletter</h5>
-                        <p className=' '>Receive exclusive offers, promotions and beauty tips via email.</p>
+                        <p className='mb-1'>Receive exclusive offers, promotions and beauty tips via email.</p>
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
-                        <p className="text-sm mt-2 lg:mt-0 mb-0 lg:mb-1 ">Please read our Privacy Policy for more information about how we use your data.</p>
                         <Form />
+                        <p className="text-sm lg:mt-0 mb-0 lg:mb-1 lg:order-0">Please read our Privacy Policy for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>
-            <div className="container mt-4">
+            <div className="container mt-4 px-g">
                 <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-banner"_"nav-follow_nav-currency"] lg:grid-cols-[2fr_2fr_2fr_4fr_2fr_2fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
                     <div className="[grid-area:nav-shop]">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
@@ -84,8 +84,28 @@ const Footer = (props: any) => {
                         </a>
                     </div>
                     <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right">
-                        <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency</h5>
-                        <DropdownStore />
+                        <div className='[grid-area:nav-follow] mt-3 mb-2 lg:my-0 hidden inline-block text-left'>
+                            <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
+                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank">
+                                <Instagram className="h-[1.25em]" />
+                            </a>
+                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
+                                <FacebookSquare className="h-[1.25em]" />
+                            </a>
+                            <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank">
+                                <PinterestSquare className="h-[1.25em]" />
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
+                                <Youtube className="h-[1.25em]" />
+                            </a>
+                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank">
+                                <Tiktok className="h-[1.25em]" />
+                            </a>
+                        </div>
+                        <div className='[grid-area:nav-currency] lg:my-0 text-left inline-block mb-2'>
+                            <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency</h5>
+                            <DropdownStore direction='dropup' />
+                        </div>
                     </div>
                 </div>
                 <hr className="border-body opacity-[.2] mb-1 lg:mt-4 lg:mb-1" />
