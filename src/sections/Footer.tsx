@@ -35,7 +35,7 @@ const Footer = (props: any) => {
                 </div>
             </div>
             <div className="container mt-4 px-g">
-                <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-banner"_"nav-follow_nav-currency"] lg:grid-cols-[2fr_2fr_2fr_4fr_2fr_2fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
+                <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-currency"] lg:grid-cols-[2fr_2fr_2fr_4fr_2fr_2fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
                     <div className="[grid-area:nav-shop]">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
                         <ul className="list-unstyled">
@@ -83,7 +83,7 @@ const Footer = (props: any) => {
                             <Tiktok className="h-[1.25em]" />
                         </a>
                     </div>
-                    <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right">
+                    <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right mt-3 lg:mt-0">
                         <div className='[grid-area:nav-follow] mt-3 mb-2 lg:my-0 hidden inline-block text-left'>
                             <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
                             <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank">
