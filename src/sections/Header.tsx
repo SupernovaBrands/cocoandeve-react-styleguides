@@ -93,9 +93,9 @@ const Header = (props) => {
 					countDownSec=""
 				/>
 			)}
-			{/* 
+			
             <nav className="bg-white">
-                <div className="container px-0 lg:flex lg:flex-nowrap">
+                <div className="container px-0 lg:flex lg:flex-nowrap items-center justify-between">
                     <button className="navbar-toggler border-0 hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
                         <span className="d-block"></span>
                     </button>
@@ -104,7 +104,7 @@ const Header = (props) => {
                     </a>
 					<ul className="list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Shop All</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Shop All</a>
 							<NavMegaMenu
 								title="Shop All"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -112,7 +112,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Hair</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Hair</a>
 							<NavMegaMenu
 								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -120,7 +120,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Tan</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Tan</a>
 							<NavMegaMenu
 								title="Tan"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -128,7 +128,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Body</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Body</a>
 							<NavMegaMenu
 								title="Body"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -136,7 +136,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Value Sets</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Value Sets</a>
 							<NavMegaMenu
 								title="Value Sets"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -144,44 +144,44 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">|</a>
+							<a className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">|</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Results IRL</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Results IRL</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Blog</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Blog</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Sweepstakes</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Sweepstakes</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block py-2 pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Help</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Help</a>
 						</li>
 					</ul>
 
 					<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 						<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0">
-							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#javascript" data-cy="account-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#javascript" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 								<Account className="text-[1.375em] h-[1em]" />
 							</a>
 							<AccountDropdown />
 						</li>
-						<li className="nav-item pe-1">
-							<a className="nav-link search h4 m-0 d-flex text-uppercase fw-bold search-panel__open" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
-								<Search className="svg mr-25" />
+						<li className="nav-item px-1">
+							<a className="h4 m-0 flex font-bold" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<Search className="text-[1.375em] h-[1em]" />
 							</a>
 						</li>
 						<li className="nav-item d-flex">
-							<a className="nav-link cart h4 mb-0 d-flex justify-content-end px-0 position-relative fw-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={props.toggleCart}>
-								<Cart className="svg me-0" />
-								<span className="cart-drawer__count font-size-xs h-100">102</span>
+							<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={props.toggleCart}>
+								<Cart className="text-[1.375em] h-[1.3em]" />
+								<span className="cart-drawer__count text-base h-100 top-[50%] left-[50%] text-body -mt-[20px]">102</span>
 							</a>
 						</li>
 					</ul>
                 </div>
             </nav>
-			*/}
+			
 			{/* 
 			<nav className="text-center mobile-secnav p-g bg-white d-lg-none">
 				<ul className="nav justify-content-center">
