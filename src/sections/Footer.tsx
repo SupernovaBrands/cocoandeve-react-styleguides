@@ -108,8 +108,8 @@ const Footer = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <hr className="border-body opacity-[.2] mb-1 lg:mt-4 lg:mb-1" />
-                <p className="flex justify-center items-baseline mt-3">© 2022 Coco&amp;Eve</p>
+                <hr className="border-body opacity-[.2] mb-1 mt-4 lg:mb-1" />
+                <p className="flex justify-center items-baseline mt-1 lg:mt-3 mb-4 text-sm">© 2022 Coco&amp;Eve</p>
             </div>
         </footer>
     );
