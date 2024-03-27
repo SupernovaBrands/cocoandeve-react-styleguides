@@ -14,6 +14,50 @@ const Header = dynamic(() => import('@/sections/Header'), {
     ssr: false,
 });
 const ProductTemplate = () => {
+	const SLIDE_VIDEOS = [
+		{
+			id: 1,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/80ace9f8f186492bbe4b1fa00dca349a.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+		{
+			id: 2,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/949ea964f27e4bcc982b596cca694036.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+		{
+			id: 3,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/1a172216adc3439d8b10c43574075247.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+		{
+			id: 4,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/57c3e426e86a4d499e50a0cfe8da171f.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+		{
+			id: 5,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/80ace9f8f186492bbe4b1fa00dca349a.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+		{
+			id: 6,
+			videoUrl: 'https://cdn.shopify.com/videos/c/o/v/949ea964f27e4bcc982b596cca694036.mp4',
+			product: 'Sunny Honey Bali Bronzing Foam',
+			author: 'Meredith Langosh',
+			url: '/'
+		},
+	];
     return (
 		<>
         	<Header />
@@ -28,7 +72,7 @@ const ProductTemplate = () => {
                 <h4 className="fw-normal mb-2 mb-lg-4"><b>Dark</b><br /> For a back from vacay bronze. Ideal for medium skin tones!</h4>
                 <h4 className="fw-normal mb-0"><b>Ultra Dark</b><br /> A deep, rich tan. For deeper skin tones!</h4>
             </PDPBanner>
-			<RealResultCarousel />
+			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Sustainability />
 			<div className="pt-4 pb-2 bg-light">
 				<Container>
