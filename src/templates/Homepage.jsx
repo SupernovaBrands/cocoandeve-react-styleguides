@@ -24,7 +24,7 @@ const Homepage = () => {
             <Playground />
 			      <Service />
             <Editors />
-            <RealResultCarousel />
+            {/* <RealResultCarousel /> */}
             <Instagram className="bg-primary-light" />
 		</>
     );

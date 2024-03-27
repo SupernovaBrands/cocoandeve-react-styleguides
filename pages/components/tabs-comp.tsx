@@ -13,9 +13,9 @@ export default function TabsComponents() {
 			<div className="row">
                 <div>
                     <ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 pb-lg-2 justify-center">
-                        <li><TabNav title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-                        <li><TabNav title='Bestsellers' active={activeTab === 'best-sellers'} onNavChange={() => setActiveTab('best-sellers')} /></li>
-                        <li><TabNav title='Value Sets' active={activeTab === 'value-sets'} onNavChange={() => setActiveTab('value-sets')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='Bestsellers' active={activeTab === 'best-sellers'} onNavChange={() => setActiveTab('best-sellers')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='Value Sets' active={activeTab === 'value-sets'} onNavChange={() => setActiveTab('value-sets')} /></li>
                     </ul>
                     <div className='px-2'>
                         <TabContent active={activeTab === 'new'}><p>Content 1</p></TabContent>
@@ -29,10 +29,10 @@ export default function TabsComponents() {
             <div className="row">
                 <div>
                     <ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 pb-lg-2 justify-center">
-                        <li><TabNav title='Tan' active={activeTab2 === 'tan'} onNavChange={() => setActiveTab2('tan')} /></li>
-                        <li><TabNav title='Hair' active={activeTab2 === 'hair'} onNavChange={() => setActiveTab2('hair')} /></li>
-                        <li><TabNav title='Body' active={activeTab2 === 'body'} onNavChange={() => setActiveTab2('body')} /></li>
-                        <li><TabNav title='All' active={activeTab2 === 'all'} onNavChange={() => setActiveTab2('all')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='Tan' active={activeTab2 === 'tan'} onNavChange={() => setActiveTab2('tan')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='Hair' active={activeTab2 === 'hair'} onNavChange={() => setActiveTab2('hair')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='Body' active={activeTab2 === 'body'} onNavChange={() => setActiveTab2('body')} /></li>
+                        <li><TabNav className="w-[7.5em]" title='All' active={activeTab2 === 'all'} onNavChange={() => setActiveTab2('all')} /></li>
                     </ul>
                     <div className='px-2'>
                         <TabContent active={activeTab2 === 'tan'}><p>Tan</p></TabContent>

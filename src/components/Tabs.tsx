@@ -8,9 +8,9 @@ const Tabs = (props: any) => {
     return (
         <>
             <ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 pb-lg-2 justify-center">
-                <li><TabNav title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-                <li><TabNav title='Bestsellers' active={activeTab === 'best-sellers'} onNavChange={() => setActiveTab('best-sellers')} /></li>
-                <li><TabNav title='Value Sets' active={activeTab === 'value-sets'} onNavChange={() => setActiveTab('value-sets')} /></li>
+                <li><TabNav className="w-[7.5em]" title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
+                <li><TabNav className="w-[7.5em]" title='Bestsellers' active={activeTab === 'best-sellers'} onNavChange={() => setActiveTab('best-sellers')} /></li>
+                <li><TabNav className="w-[7.5em]" title='Value Sets' active={activeTab === 'value-sets'} onNavChange={() => setActiveTab('value-sets')} /></li>
             </ul>
             <div className='container px-2'>
                 <TabContent active={activeTab === 'new'}><p>Content 1</p></TabContent>
