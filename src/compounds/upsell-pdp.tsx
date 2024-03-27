@@ -10,7 +10,7 @@ const UpsellPdp = (props) => {
                     <span className="mt-0 mb-25 font-bold">{props.title}</span>
                     <p className="mb-25">{props.content}</p>
                     <span className="mb-25 text-primary">
-                        <span className="text-linethrough text-body mr-25 whitespace-no-wrap">{props.comparePrice}</span>
+                        <span className="line-through text-body mr-25 whitespace-no-wrap">{props.comparePrice}</span>
                         <span className="font-bold mr-25 whitespace-no-wrap">{props.price}</span>
                     </span>
                     <div className="flex shrink-0">
