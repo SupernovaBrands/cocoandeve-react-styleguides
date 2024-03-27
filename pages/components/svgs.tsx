@@ -319,7 +319,7 @@ const Svgs = (props) => {
                     <span className="inner flex justify-center items-center">
                         <ParabelFree className="h-[40px]" />
                     </span>
-                    <span className='label'>ParabelFree</span>
+                    <span className='label'>ParabenFree</span>
                 </div>
                 <div className="preview flex flex-col text-center">
                     <span className="inner flex justify-center items-center">
