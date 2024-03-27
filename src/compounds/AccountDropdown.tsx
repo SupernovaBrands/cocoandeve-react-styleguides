@@ -14,6 +14,7 @@ const CustomToggle = ({ children, eventKey }) => {
 const AccountDropdown = (props) => {
     return (
         <div id="account-dropdown" className="account-dropdown dropdown-menu dropdown-menu-right border-0 rounded-0 pb-0 mt-sm-6 mt-lg-0 pt-0">
+            {/** 
             <Accordion defaultActiveKey="0">
                 <Accordion.Collapse eventKey="0">
                     <form id="dropdown__login" className="p-g shadow">
@@ -72,6 +73,7 @@ const AccountDropdown = (props) => {
                     </form>
                 </Accordion.Collapse>
             </Accordion>
+            */}
         </div>
     )
 }
