@@ -3,10 +3,10 @@ import LaunchWaitList from "@/compounds/launch-waitlist";
 
 const Waitlist: React.FC = () => {
   return (
-    <div className="px-g mt-4">
+    <div className="container px-g mt-4">
       <h1 className="mb-1">Product Waitlist</h1>
-      <div className="flex flex-wrap">
-        <div className="w-full lg:w-2/5 px-4">
+      <div className="flex flex-wrap lg:-mx-4">
+        <div className="w-full lg:w-2/5 lg:px-4">
           <LaunchWaitList
               title="Join the waitlist"
               content="Get alerted when our newest product drops, and get a free gift with your purchase. You got to be quick! sign up now cause this is definitely going to sell out fast!"

@@ -11,7 +11,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = (props) => {
     return (
         <figure className={`flex flex-wrap relative items-center lg:mb-2 mt-5 ${props.reverse ? 'flex-row-reverse' : ''}`}>
             <div className="-z-[1] lg:order-last w-full lg:w-2/3 lg:pr-4">
-                <div className="sm:-mx-[15px]">
+                <div className="sm:-mx-[7.5px]">
                     <picture>
                         <source srcSet={props.srcSet} media="(min-width: 992px)" />
                         <img src={props.src} className="w-full" alt="" />
