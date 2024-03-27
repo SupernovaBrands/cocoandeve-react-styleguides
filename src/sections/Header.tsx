@@ -91,7 +91,6 @@ const Header = (props) => {
 					countDownHr=""
 					countDownMin=""
 					countDownSec=""
-					enabled={false}
 				/>
 			)}
 			{/* 
