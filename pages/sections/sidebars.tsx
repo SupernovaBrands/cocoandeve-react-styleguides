@@ -1,5 +1,4 @@
 import Sidebar from "@/sections/Sidebar";
-import { Container, Row } from "react-bootstrap";
 
 export default function Sidebars() {
 	const SIDEBAR_DATA = [
@@ -24,12 +23,12 @@ export default function Sidebars() {
 	];
 	return (
 		<div className="mobile-wrapper">
-			<Container>
-				<h1>SIDEBAR</h1>
-				<Row>
+			<div className="container">
+				<h1 className="mb-1">SIDEBAR</h1>
+				<div className="flex flex-wrap">
 					<Sidebar data={SIDEBAR_DATA} />
-				</Row>
-			</Container>
+				</div>
+			</div>
 		</div>
 	);
 };
