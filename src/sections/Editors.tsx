@@ -1,11 +1,10 @@
 import Testimonial from '@/sections/Testimonial';
-import { Container, Row } from "react-bootstrap";
 
 const Editors = () => {
     return (
-        <Container as="section" className="list-logo pt-4 pb-4 text-center">
-            <p className="h1">Beauty editors love us</p>
-            <Row className="flex-row flex-wrap mx-auto align-items-center">
+        <div className="container list-logo pt-4 pb-4 text-center">
+            <p className="h1 mb-1">Beauty editors love us</p>
+            <div className="flex flex-row flex-wrap mx-auto items-center">
                 <Testimonial 
                     src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/nylon_logo_2x_53a0aefa-88f7-40dc-9ba2-c5a76d20509b_medium.png?v=1593581750"
                     srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/nylon_logo_2x_53a0aefa-88f7-40dc-9ba2-c5a76d20509b_medium.png?v=1593581750"
@@ -36,8 +35,8 @@ const Editors = () => {
                     srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Mail_online_logo_2x_76e10089-d01a-486c-aa16-ea4c0c24a6ad_medium.png?v=1593581961"
                 >
                 </Testimonial>
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

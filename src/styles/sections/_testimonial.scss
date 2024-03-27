@@ -1,6 +1,7 @@
-.list-logo {
-    img {
-      max-height: calc-em(33);
+@layer components {
+  .list-logo {
+      img {
+        max-height: calc-em(33);
+      }
     }
-  }
-  
+}
