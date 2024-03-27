@@ -94,6 +94,7 @@ const Header = (props) => {
 					enabled={false}
 				/>
 			)}
+			{/* 
             <nav className="bg-white">
                 <div className="container px-0 lg:flex lg:flex-nowrap">
                     <button className="navbar-toggler border-0 hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
@@ -181,6 +182,7 @@ const Header = (props) => {
 					</ul>
                 </div>
             </nav>
+			*/}
 			{/* 
 			<nav className="text-center mobile-secnav p-g bg-white d-lg-none">
 				<ul className="nav justify-content-center">
