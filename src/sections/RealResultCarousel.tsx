@@ -11,52 +11,7 @@ const options: EmblaOptionsType = {
 	loop: true,
 };
 
-const SLIDE_VIDEOS = [
-	{
-		id: 1,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/80ace9f8f186492bbe4b1fa00dca349a.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-	{
-		id: 2,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/949ea964f27e4bcc982b596cca694036.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-	{
-		id: 3,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/1a172216adc3439d8b10c43574075247.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-	{
-		id: 4,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/57c3e426e86a4d499e50a0cfe8da171f.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-	{
-		id: 5,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/80ace9f8f186492bbe4b1fa00dca349a.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-	{
-		id: 6,
-		videoUrl: 'https://cdn.shopify.com/videos/c/o/v/949ea964f27e4bcc982b596cca694036.mp4',
-		product: 'Sunny Honey Bali Bronzing Foam',
-		author: 'Meredith Langosh',
-		url: '/'
-	},
-]
-
-const RealResultCarousel = () => {
+const RealResultCarousel = (props: any) => {
 
 	const [activeTab, setActiveTab] = useState('all');
 	//tab 1
@@ -79,6 +34,8 @@ const RealResultCarousel = () => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
+	const { videos } = props;
+
 	return (
 		<div className="instagram-reels container my-3 my-lg-4 text-center">
 			<p className="h1 mb-2">Real Results</p>
@@ -94,7 +51,7 @@ const RealResultCarousel = () => {
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-									{SLIDE_VIDEOS.map((data) => (
+									{videos.map((data: any) => (
 										<InstagramCard
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.videoUrl}
@@ -109,7 +66,7 @@ const RealResultCarousel = () => {
 						<TabContent active={activeTab === 'hair'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g lg:!transform-none">
-									{SLIDE_VIDEOS.map((data) => (
+									{videos.map((data: any) => (
 										<InstagramCard
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.videoUrl}
@@ -124,7 +81,7 @@ const RealResultCarousel = () => {
 						<TabContent active={activeTab === 'tan'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g lg:!transform-none">
-									{SLIDE_VIDEOS.map((data) => (
+									{videos.map((data: any) => (
 										<InstagramCard
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.videoUrl}
@@ -139,7 +96,7 @@ const RealResultCarousel = () => {
 						<TabContent active={activeTab === 'body'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
-									{SLIDE_VIDEOS.map((data) => (
+									{videos.map((data: any) => (
 										<InstagramCard
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.videoUrl}

@@ -21,64 +21,9 @@ const options: EmblaOptionsType = {
 	}
 };
 
-const SLIDE_COUNT_2 = 6;
-const SLIDES_2 = [
-	{
-		id: 1,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    },
-	{
-		id: 2,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    },
-	{
-		id: 3,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    },
-	{
-		id: 4,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    },
-	{
-		id: 5,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    },
-	{
-		id: 6,
-        src: '//via.placeholder.com/520x520/FFF2F4',
-        srcSet: '//via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
-        comparePrice: '$34.90',
-        price: '$24.90',
-        productId: 4543113265187,
-    }
-];
-const ProductCarousel = () => {
+const ProductCarousel = (props: any) => {
+
+	const { products } = props;
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
 	//tab 1
@@ -124,7 +69,7 @@ const ProductCarousel = () => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{SLIDES_2.map((data) => (
+									{products.map((data) => (
 										<ProductCard
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
@@ -155,7 +100,7 @@ const ProductCarousel = () => {
 						<TabContent active={activeTab === 'bestsellers'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="">
 								<Carousel.Inner emblaRef={emblaRef1}>
-									{SLIDES_2.map((data) => (
+									{products.map((data) => (
 										<ProductCard
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
@@ -186,7 +131,7 @@ const ProductCarousel = () => {
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="">
 								<Carousel.Inner emblaRef={emblaRef3}>
-									{SLIDES_2.map((data) => (
+									{products.map((data) => (
 										<ProductCard
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
