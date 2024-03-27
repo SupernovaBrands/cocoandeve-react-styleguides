@@ -7,7 +7,7 @@ import BrandLogo from '../../src/images/ce-logo.svg';
 import Account from '../../src/images/icons/account.svg';
 import Search from '../../src/images/icons/search-thin.svg';
 import Cart from '../../src/images/icons/cart.svg';
-import SearchBox from '@/compounds/SearchBox';
+/*import SearchBox from '@/compounds/SearchBox';*/
 import AccountDropdown from '@/compounds/AccountDropdown';
 
 const NAV_MEGA_MENU_TEMP = [
@@ -46,19 +46,13 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 
 const Header = (props) => {
 	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
+	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const onToggleMobileNav = () => {
-		console.log('onToggleMobileNav');
-		const mobileClassList = document.getElementById('mobile-nav').classList;
-		if (!mobileClassList.contains('show')) {
-			mobileClassList.add('show');
-		} else {
-			mobileClassList.remove('show');
-		}
+		setOpenDrawer(!openDrawer);
 	}
 
 	const onToggleSearchBox = () => {
-		console.log('onToggleSearchBox');
 		const searchBoxClassList = document.getElementById('searchPanel').classList;
 		if (!searchBoxClassList.contains('show')) {
 			searchBoxClassList.add('show');
@@ -94,17 +88,17 @@ const Header = (props) => {
 				/>
 			)}
 			
-            <nav className="bg-white">
-                <div className="container px-0 lg:flex lg:flex-nowrap items-center justify-between">
-                    <button className="navbar-toggler border-0 hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
-                        <span className="d-block"></span>
+            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg">
+                <div className="container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between">
+                    <button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
+                        <span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
                     </button>
-                    <a href="#" className="inline-block lg:pt-[.72656em] lg:pb-[.72656em] lg:[flex-basis:15%]"  aria-label="Visit Coco and Eve homepage">
+                    <a href="#" className="inline-block pt-[.5625em] pb-[.5625em] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 				        <BrandLogo className="lg:h-[41px]" />
                     </a>
-					<ul className="list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
+					<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Shop All</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold p-[.375em]">Shop All</a>
 							<NavMegaMenu
 								title="Shop All"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -112,7 +106,7 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Hair</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold p-[.375em]">Hair</a>
 							<NavMegaMenu
 								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
@@ -120,62 +114,70 @@ const Header = (props) => {
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Tan</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold p-[.375em]">Tan & SPF</a>
 							<NavMegaMenu
-								title="Tan"
+								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold">Body</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold p-[.375em]">Skin</a>
 							<NavMegaMenu
-								title="Body"
+								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}
 							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Value Sets</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 text-body font-bold p-[.375em]">Body</a>
 							<NavMegaMenu
-								title="Value Sets"
+								title="Hair"
 								menus={NAV_MEGA_MENU_TEMP}
 								cards={NAV_MEGA_MENU_CARD_TEMP}
 							/>
 						</li>
 						<li className="nav-item">
-							<a className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">|</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">Value Sets</a>
+							<NavMegaMenu
+								title="Hair"
+								menus={NAV_MEGA_MENU_TEMP}
+								cards={NAV_MEGA_MENU_CARD_TEMP}
+							/>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Results IRL</a>
+							<a className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">|</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Blog</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">Results IRL</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Sweepstakes</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">Blog</a>
 						</li>
 						<li className="nav-item">
-							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold">Help</a>
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">Sweepstakes</a>
+						</li>
+						<li className="nav-item">
+							<a href="#" className="inline-block pl-[7.5px] pr-[7.5px] no-underline m-0 fw-bold text-body font-bold p-[.375em]">Help</a>
 						</li>
 					</ul>
 
 					<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
-						<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0">
-							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase fw-bold" href="#javascript" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+						<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
+							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#javascript" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 								<Account className="text-[1.375em] h-[1em]" />
 							</a>
 							<AccountDropdown />
 						</li>
-						<li className="nav-item px-1">
+						<li className="nav-item pr-1 lg:pl-hg">
 							<a className="h4 m-0 flex font-bold" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
 								<Search className="text-[1.375em] h-[1em]" />
 							</a>
 						</li>
-						<li className="nav-item d-flex">
+						<li className="nav-item d-flex lg:pl-hg">
 							<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={props.toggleCart}>
-								<Cart className="text-[1.375em] h-[1.3em]" />
-								<span className="cart-drawer__count text-base h-100 top-[50%] left-[50%] text-body -mt-[20px]">102</span>
+								<Cart className="text-[27.5px] h-[25px]" />
+								<span className="cart-drawer__count text-sm h-100 top-[50%] left-[50%] text-body -mt-[18px]">102</span>
 							</a>
 						</li>
 					</ul>
@@ -204,8 +206,8 @@ const Header = (props) => {
 			</nav>
 			*/}
 
-			{/*<MobileMenu onToggleMobileNav={onToggleMobileNav} />
-			<SearchBox onToggleSearchBox={onToggleSearchBox} /> */}
+			<MobileMenu onToggleMobileNav={onToggleMobileNav} openDrawer={openDrawer}  />
+			{/*<SearchBox onToggleSearchBox={onToggleSearchBox} /> */}
         </header>
 	);
 };

@@ -6,7 +6,10 @@ const Header = dynamic(() => import('@/sections/Header'), {
 });
 const HeaderSection = () => {
     return (
-        <Header />
+        <>
+            <Header />
+            <img className="w-100" src="//via.placeholder.com/1920x1080/EFADBA" alt="Img Alt"></img>
+        </>
     );
 }
 
