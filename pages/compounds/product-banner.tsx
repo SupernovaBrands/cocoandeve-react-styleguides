@@ -118,11 +118,9 @@ const ProductBanner = () => {
           Packed with Mangosteen, Papaya, Coconut, Mango & Guava that contain all your essential vitamins, minerals, amino acids & antioxidants for healthy-looking skin.
         </h4>
         <div className="d-flex flex-wrap bali-bundle-variants mt-2 mt-lg-4 align-items-center">
-          <img className="mb-2 mb-lg-4" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/t/120/assets/scent-lychee-dragonfruit.svg?v=14552088448922970702" />
           <h4 className="mb-2 mb-lg-4 col-10 ps-0">
             <b>Lychee & Dragonfruit</b>
           </h4>
-          <img className="mb-2 mb-lg-4" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/t/120/assets/scent-sweet-manggo.svg?v=9938120797124222652" />
           <h4 className="mb-2 mb-lg-4 col-10 ps-0">
             <b>Tropical Mango</b>
           </h4>
