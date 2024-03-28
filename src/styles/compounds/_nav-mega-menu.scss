@@ -1,19 +1,4 @@
-.nav-mega-menu {
-	left: 0;
-	border-top: 1px solid #000000;
-	margin-top: 18px;
-
-	&:before {
-		content: ' ';
-		background-color: transparent;
-		width: 100%;
-		height: calc-em(20);
-		position: absolute;
-		margin-top: -#{calc-em(20)};
-	}
-}
-
-.navbar__secondary {
+.header-desktop-nav {
 	.nav-item {
 		&:hover {
 			.nav-mega-menu {
