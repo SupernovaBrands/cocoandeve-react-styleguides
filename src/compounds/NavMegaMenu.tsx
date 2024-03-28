@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 const NavMegaMenu = (props: any) => {
     return (
-        <div className="nav-mega-menu w-full left-0 border-top-body mt-[18px] bg-white absolute hidden">
-            <div className="container pt-3">
-                <div className="row mx-5 px-3">
-                    <div className="col-lg-5 mb-3">
-                        <a href="" className="d-block mb-2 h4 text-body text-underline">{props.title}</a>
+        <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
+            <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
+                <div className="flex mx-5 px-3">
+                    <div className="lg:w-2/5 pr-4 pl-4 mb-3">
+                        <a href="" className="block mb-2 h4 text-body underline">{props.title}</a>
                         <ol className="list-unstyled">
                             {props.menus.length > 0 && (
                                 props.menus.map((menu, i) => {
@@ -15,18 +15,18 @@ const NavMegaMenu = (props: any) => {
                             )}
                         </ol>
                     </div>
-                    <div className="col-lg-7 mb-3 row">
-                        <span className="d-block mb-2 h4 col-12">Best Sellers:</span>
+                    <div className="lg:w-3/5 pr-4 mb-3 flex flex-wrap ">
+                        <span className="block mb-2 text-lg w-full px-g">Best Sellers:</span>
                         {props.cards.length > 0 && (
                             props.cards.map((card, i) => {
                                 return (
-                                    <figure key={`mobile-card-${i}`} className="product-card product-card--search-result position-relative col-4 d-flex flex-lg-column mb-2 px-lg-g">
-                                        <a href="" className="col-12 px-0 text-decoration-none">
+                                    <figure key={`mobile-card-${i}`} className="relative w-1/3 flex lg:flex-col mb-2 lg:px-g">
+                                        <a href="" className="px-0 !no-underline flex-none max-w-none">
                                             <picture>
-                                                <img src="https://via.placeholder.com/444x558" alt="Placeholder" className="d-block w-100" />
+                                                <img src="https://via.placeholder.com/444x558" alt="Placeholder" className="block w-100 object-cover max-h-[none]" />
                                             </picture>
-                                            <figcaption className="flex-grow-1 d-flex flex-column ml-g ml-lg-0 align-self-center">
-                                                <h5 className="product-card__text fw-bold text-body mb-0 mt-0 mt-1 h6">{card.title}</h5>
+                                            <figcaption className="flex-grow-1 d-flex flex-column ml-g lg:ml-0 align-self-center">
+                                                <h5 className="product-card__text font-bold text-body mb-0 mt-1">{card.title}</h5>
                                             </figcaption>
                                         </a>
                                     </figure>
