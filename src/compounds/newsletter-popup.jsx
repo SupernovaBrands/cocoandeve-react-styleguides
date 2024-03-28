@@ -14,7 +14,7 @@ const NewsletterPopup = (props) => {
             <div className="row justify-content-end">
                 <form className="newsletter-bigger-popup__form col-lg-6">
                     <h2 className="newsletter-bigger-popup__title h1 text-center text-white mb-0">Join the club <br/>& get a FREE hair wrap! </h2>
-                    <p className="text-white text-white font-size-sm mb-g text-center">Get a FREE hair wrap on your first order, plus first access to new product launches, exclusive offers, routines, and beauty tips.</p>
+                    <p className="text-white font-size-sm mb-g text-center">Get a FREE hair wrap on your first order, plus first access to new product launches, exclusive offers, routines, and beauty tips.</p>
                     <div className="input-group mb-0">
                         <input id="newsletter-bigger-popup__email" className="form-control" type="email" placeholder="Email" aria-label="email" />
                     </div>
