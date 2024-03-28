@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+
 import TestimonialCarousel from "@/sections/TestimonialCarousel";
 
 const TestimonialSection = () => {
@@ -35,13 +35,10 @@ const TestimonialSection = () => {
     return (
 		<>
 			<h1>Testimonials Carousel</h1>
-            <section className="testimonials-carousel bg-light mt-4 py-4">
-                <Container className="container text-center">
-                    <h2 className="h1 mb-0">As seen in</h2>
-                    <TestimonialCarousel id="testimonialsCarousel" indicatorClass="carousel-indicators--black" items={carouselItems} indicatorBorder={true} customArrows={true} />
-                </Container>
+            <section className="testimonials-carousel bg-gray-100 mt-4 py-4">
+                <TestimonialCarousel data={carouselItems} />
             </section>
-			
+
 		</>
 	);
 }
