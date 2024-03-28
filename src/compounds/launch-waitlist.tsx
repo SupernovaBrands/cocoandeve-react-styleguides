@@ -27,7 +27,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         <InputFormGroup type="text" name="phone" placeholder="Enter your phone number" groupClass="w-2/3 lg:w-3/4 pr-2 pl-2"/>
                         <small className="w-full text-primary email-error hidden">Please enter a valid phone number</small>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center">
+                    <div className="flex flex-wrap items-center justify-start">
                         <div className="-mt-1">
                             <CheckBox label={`I agree to <a href="#">Privacy Policy & ToS<\/a>`} id="agreement" checked={true}/>
                             <small className="w-full text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
