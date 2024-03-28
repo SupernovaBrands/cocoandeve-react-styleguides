@@ -135,11 +135,11 @@ const CollectionTemplate = () => {
 
     return (
 		<>
-        	<Header toggleCart={toggleCart}  />
-			<Collection products={products}/>
+        	{/* <Header toggleCart={toggleCart}  /> */}
+			{/* <Collection products={products}/> */}
             <Service />
 			<Footer />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );
 }
