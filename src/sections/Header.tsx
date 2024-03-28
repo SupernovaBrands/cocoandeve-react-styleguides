@@ -7,7 +7,7 @@ import BrandLogo from '../../src/images/ce-logo.svg';
 import Account from '../../src/images/icons/account.svg';
 import Search from '../../src/images/icons/search-thin.svg';
 import Cart from '../../src/images/icons/cart.svg';
-/*import SearchBox from '@/compounds/SearchBox';*/
+import SearchBox from '@/compounds/SearchBox';
 import AccountDropdown from '@/compounds/AccountDropdown';
 
 const NAV_MEGA_MENU_TEMP = [
@@ -47,28 +47,20 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 const Header = (props) => {
 	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
 	const [openDrawer, setOpenDrawer] = useState(false);
+	const [openSearchBox, setOpenSearchBox] = useState(false);
+	const [openAccountBox, setOpenAccountBox] = useState(false);
 
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
 
 	const onToggleSearchBox = () => {
-		const searchBoxClassList = document.getElementById('searchPanel').classList;
-		if (!searchBoxClassList.contains('show')) {
-			searchBoxClassList.add('show');
-		} else {
-			searchBoxClassList.remove('show');
-		}
+		console.log('onToggleSearchBox');
+		setOpenSearchBox(!openSearchBox);
 	}
 
 	const toggleAccountDropdown = () => {
-		console.log('toggleAccountDropdown');
-		const searchBoxClassList = document.getElementById('account-dropdown').classList;
-		if (!searchBoxClassList.contains('show')) {
-			searchBoxClassList.add('show');
-		} else {
-			searchBoxClassList.remove('show');
-		}
+		setOpenAccountBox(!openAccountBox);
 	}
 
 	return (
@@ -167,7 +159,7 @@ const Header = (props) => {
 							<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#javascript" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 								<Account className="text-[1.375em] h-[1em]" />
 							</a>
-							<AccountDropdown />
+							<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 						</li>
 						<li className="nav-item pr-1 lg:pl-hg">
 							<a className="h4 m-0 flex font-bold" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
@@ -207,7 +199,7 @@ const Header = (props) => {
 			*/}
 
 			<MobileMenu onToggleMobileNav={onToggleMobileNav} openDrawer={openDrawer}  />
-			{/*<SearchBox onToggleSearchBox={onToggleSearchBox} /> */}
+			<SearchBox onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
         </header>
 	);
 };

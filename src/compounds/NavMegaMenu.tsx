@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const NavMegaMenu = (props: any) => {
     return (
-        <div className="nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
+        <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex mx-5 px-3">
                     <div className="lg:w-2/5 pr-4 pl-4 mb-3">
