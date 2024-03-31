@@ -20,13 +20,13 @@ import {
 	queryChangeQuantity, queryCartAttributesUpdate,
 } from '@/modules/query';
 
-const discounts = new Discount();
 let checkingCart = null;
-export default class Cart {
+export default class CartAction {
 	constructor() {
 		this.sfApi = new StorefrontApi();
 		this.shipping = new Shipping();
 		this.autoGwp = new AutoGwp();
+		this.discounts = new Discount();
 		this.recentProducts = (getCookie('recentlyViewedHandle') || '').split(',').filter((el) => el !== '');
 		this.cart = {};
 
@@ -101,7 +101,7 @@ export default class Cart {
 					if (loadPage && cart.discountCodes.length) {
 						const { 0: discountCode } = cart.discountCodes;
 						if (discountCode && !discountCode.applicable && discountCode.code) {
-							discounts.removeDiscountCode(cart, cart.id, false);
+							this.discounts.removeDiscountCode(cart, cart.id, false);
 						}
 					}
 
@@ -207,7 +207,7 @@ export default class Cart {
 		}
 
 		if (cart && cart.id) {
-			cartData.discountData = discounts.getDiscountData(cartData);
+			cartData.discountData = this.discounts.getDiscountData(cartData);
 		}
 
 		cartData = this.autoGwp.processAutoGwp(cartData);

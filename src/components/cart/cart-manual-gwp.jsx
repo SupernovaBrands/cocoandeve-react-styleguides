@@ -3,13 +3,14 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { isItemIdInKey } from '@/modules/utils';
+import { isItemIdInKey } from '@/modules/utils';
+const tStrings = global.config.tStrings;
 
 import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
 import SvgChevronNext from '@/images/icons/chevron-next.svg';
-const { isItemIdInKey } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+// const { isItemIdInKey } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
 export default class CartManualGwp extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +30,7 @@ export default class CartManualGwp extends React.Component {
 		el.scrollTo({ left: left + offset });
 	}
 
-	markText = (price) => ({ __html: `${tStrings.items_worth} ${price}` });
+	markText = (price) => ({ __html: `Worth ${price}` });
 
 	render() {
 		const {
@@ -43,33 +44,33 @@ export default class CartManualGwp extends React.Component {
 			processingId,
 		} = this.props;
 		return (
-			<div className="manual-gwp position-relative">
-				<p className="font-size-base fw-bold mb-0">{title}</p>
-				<p className="font-size-base text-gray-600">{`${selectedKey.length}/${maxSelected} ${tStrings.items_selected}`}</p>
-				<button className={`position-absolute btn-unstyled text-primary manual-gwp__left ${this.state.showScroll ? '' : 'd-none'}`} aria-hidden="true" type="button" onClick={() => this.scroll('left')}>
+			<div className="manual-gwp relative mt-2">
+				<p className="text-base font-bold mb-0">{title}</p>
+				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} ${tStrings.items_selected}`}</p>
+				<button className={`absolute btn-unstyled text-primary manual-gwp__left ${this.state.showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => this.scroll('left')}>
 					<SvgChevronPrev className="svg" />
-					<span className="d-none">Left</span>
+					<span className="hidden">Left</span>
 				</button>
-				<button className={`position-absolute btn-unstyled text-primary manual-gwp__right ${this.state.showScroll ? '' : 'd-none'}`} aria-hidden="true" type="button" onClick={() => this.scroll('right')}>
+				<button className={`absolute btn-unstyled text-primary manual-gwp__right ${this.state.showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => this.scroll('right')}>
 					<SvgChevronNext className="svg" />
-					<span className="d-none">Right</span>
+					<span className="hidden">Right</span>
 				</button>
-				<ul className="list-unstyled manual-gwp__container d-flex mb-0 text-center" ref={(r) => { this.scrollRef = r; }}>
+				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-1 mb-2" ref={(r) => { this.scrollRef = r; }}>
 					{items.map((item) => {
 						const isLoading = loading && processingId === item.id;
 						const isSelected = !!(selectedKey && selectedKey.find((key) => isItemIdInKey(key, item.id)));
 						return (
-							<li key={item.id} className="manual-gwp__item d-flex flex-column mr-2">
+							<li key={item.id} className="manual-gwp__item flex flex-col mr-2 w-[6em] relative max-w-[6em]">
 								<figure className="mb-0">
-									<picture className="d-block">
-										<img src={item.image} alt={item.title} className="w-100 overflow-hidden rounded-circle" loading="lazy" />
+									<picture className="block">
+										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									<figcaption className="position-relative mt-n1" dangerouslySetInnerHTML={this.markText(item.price)} />
+									<figcaption className="relative -mt-1 bg-gray-400 text-xs py-[3px] rounded-lg" dangerouslySetInnerHTML={this.markText(item.price)} />
 								</figure>
-								<p className="flex-grow-1 my-1 font-size-base">{item.title}</p>
+								<p className="grow my-1 text-sm font-bold h-full">{item.title}</p>
 								<button
 									type="button"
-									className={`btn btn-sm btn-block px-1 btn-${isSelected ? 'primary' : 'outline-primary'}`}
+									className={`bg-transparent hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[28px] bg-${isSelected ? 'primary' : 'outline-primary'}`}
 									onClick={() => {
 										if (isSelected) {
 											onRemoveItem(item.id);

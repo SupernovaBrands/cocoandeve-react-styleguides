@@ -109,25 +109,25 @@ const CartSwellRedemption = (props) => {
 	const redeemProductsMerged = mergeById(redeemProducts, redeemProductsDetail);
 
 	return !init || !initPts ? (
-		<div className="d-flex justify-content-center mt-4">
+		<div className="flex justify-center mt-2">
 			<div className="spinner-border" role="status" aria-hidden="true" />
 		</div>
 	) : (
-		<div className="cart-drawer__swell-redemption position-relative">
+		<div className="cart-drawer__swell-redemption relative mt-2">
 			<strong className="d-block mb-1">{(customerEmail && customerId) ? tSettings.cartRedemption.title : tSettings.cartRedemption.titleGuest}</strong>
 			{swellItems.length > 0 && isError && (
-				<p className="font-size-sm text-primary mb-1">{errorMsg.replace(/(<([^>]+)>)/ig, '')}</p>
+				<p className="text-sm text-primary mb-1">{errorMsg.replace(/(<([^>]+)>)/ig, '')}</p>
 			)}
-			<button className="position-absolute btn-unstyled text-primary manual-gwp__left" aria-hidden="true" type="button" onClick={() => scroll('left')}>
+			<button className="absolute btn-unstyled text-primary manual-gwp__left" aria-hidden="true" type="button" onClick={() => scroll('left')}>
 				<SvgChevronPrev className="svg" />
-				<span className="d-none">Left</span>
+				<span className="hidden">Left</span>
 			</button>
-			<button className="position-absolute btn-unstyled text-primary manual-gwp__right" aria-hidden="true" type="button" onClick={() => scroll('right')}>
+			<button className="absolute btn-unstyled text-primary manual-gwp__right" aria-hidden="true" type="button" onClick={() => scroll('right')}>
 				<SvgChevronNext className="svg" />
-				<span className="d-none">Right</span>
+				<span className="hidden">Right</span>
 			</button>
-			<div className="manual-gwp__container d-flex mb-0 mt-2 text-center" ref={swellRef}>
-				{redeemProductsMerged.length > 0 && (
+			<div className="manual-gwp__container flex mb-0 mt-2 text-center max-w-full overflow-x-auto" ref={swellRef}>
+				{/* {redeemProductsMerged.length > 0 && (
 					<SwellRedemptionCard
 						item={itemPlaceholder}
 						customerEmail={customerEmail}
@@ -138,9 +138,10 @@ const CartSwellRedemption = (props) => {
 						swellLoading={swellLoading}
 						setHeaderPoints={setHeaderPoints}
 					/>
-				)}
+				)} */}
 				{redeemProductsMerged.map((item) => (
 					<SwellRedemptionCard
+						key={item.id}
 						item={item}
 						customerEmail={customerEmail}
 						customerId={customerId}

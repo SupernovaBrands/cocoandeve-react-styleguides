@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { debounce } from '@/modules/utils';
+import { debounce } from '@/modules/utils';
 
 import SvgPlus from '@/images/icons/plus.svg';
 import SvgMinus from '@/images/icons/minus.svg';
-const { debounce } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+// const { debounce } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
 export default class QuantityBox extends React.Component {
 	constructor(props) {
 		super(props);
@@ -84,7 +84,7 @@ export default class QuantityBox extends React.Component {
 		const qty = parseInt(this.state.quantity, 10);
 		const min = this.props.allowZero ? 0 : 1;
 		this.setState(
-			{ quantity: qty - 1 }
+			{ quantity: qty - 1 >= 0 ? qty - 1 : 0 }
 		);
 		/*
 		if (this.state.quantity > min) {
@@ -106,10 +106,6 @@ export default class QuantityBox extends React.Component {
 	}
 
 	onFocus = (e) => {
-		const $el = $(e.target);
-		setTimeout(function () {
-			$el.select();
-		}, 50);
 	}
 
 	onChangeQuantity = (e) => {
@@ -139,21 +135,22 @@ export default class QuantityBox extends React.Component {
 
 	render() {
 		return (
-			<div className="quantity-box d-flex">
+			<div className="quantity-box flex rounded-lg border">
 				<button
-					className="input-group-text bg-transparent border-end-0 rounded-0 rounded-start border-dark flex-grow-0"
+					className="p-2 grow-0"
 					type="button"
 					aria-label="Add Subtract"
 					disabled={!this.props.editable || this.state.prevQuantity === 0}
 					onClick={this.onSubtractQuantity}
 					data-cy="cart-subtract-quantity-icon"
 				>
-					<SvgMinus className="svg" />
+					<SvgMinus className="svg w-[1em]" />
 				</button>
 				<input
 					type="number"
 					name={this.props.name}
-					className="form-control border-start-0 border-end-0 rounded-0 p-0 text-center flex-grow-0 bg-transparent text-body border-dark font-size-dt-lg"
+					className="text-body border-dark text-center text-md lg:text-lg w-[2em] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-0"
+					min={0}
 					value={this.state.quantity}
 					onChange={this.onChangeQuantity}
 					onFocus={this.onFocus}
@@ -161,14 +158,14 @@ export default class QuantityBox extends React.Component {
 					aria-label="quantity input"
 				/>
 				<button
-					className="input-group-text bg-transparent rounded-0 rounded-end  border-start-0 border-dark flex-grow-0"
+					className="p-2"
 					type="button"
 					aria-label="Add Quantity"
 					disabled={!this.props.editable || this.state.lastStock}
 					onClick={this.onAddQuantity}
 					data-cy="cart-add-quantity-icon"
 				>
-					<SvgPlus className="svg" />
+					<SvgPlus className="svg w-[1em]" />
 				</button>
 			</div>
 		);
