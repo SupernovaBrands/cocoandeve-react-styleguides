@@ -141,7 +141,7 @@ module.exports = global.config = {
 			"sameQuantity": true
 		},
 		"manualGwp": {
-			"enabled": false,
+			"enabled": true,
 			"title": "Select your free gift",
 			"minPurchase": 1000,
 			"maxSelected": 1,
@@ -232,7 +232,7 @@ module.exports = global.config = {
 			"32068891508771": "CE0000042060"
 		},
 		"cartRedemption": {
-			"enabled": true,
+			"enabled": false,
 			"apiKey": "Lqyuh3Sm0JLBSi9Mec3cJQtt",
 			"guidKey": "UDQ6dSW-H2Gi-71iOvYtnw",
 			"errorMsg": "You can select 1 reward <span class=\"text-uppercase\">per order</span>. To change your reward in cart, first remove item and select the one you want!",
@@ -568,7 +568,7 @@ module.exports = global.config = {
 								}
 							],
 							"image": {
-								"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+								"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 								"id": "gid://shopify/ProductImage/30028969771043",
 								"altText": null,
 								"height": 1140,
@@ -589,7 +589,7 @@ module.exports = global.config = {
 									}
 								],
 								"featuredImage": {
-									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 									"id": "gid://shopify/ProductImage/30028969771043",
 									"altText": null,
 									"height": 1140,
@@ -635,7 +635,7 @@ module.exports = global.config = {
 													}
 												],
 												"image": {
-													"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+													"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 													"id": "gid://shopify/ProductImage/30028969771043",
 													"altText": null,
 													"height": 1140,
@@ -664,7 +664,7 @@ module.exports = global.config = {
 													}
 												],
 												"image": {
-													"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+													"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 													"id": "gid://shopify/ProductImage/30028969771043",
 													"altText": null,
 													"height": 1140,
@@ -716,7 +716,7 @@ module.exports = global.config = {
 									}
 								],
 								"image": {
-									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 									"id": "gid://shopify/ProductImage/30028969771043",
 									"altText": null,
 									"height": 1140,
@@ -743,7 +743,7 @@ module.exports = global.config = {
 									}
 								],
 								"image": {
-									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+									"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 									"id": "gid://shopify/ProductImage/30028969771043",
 									"altText": null,
 									"height": 1140,
@@ -1420,7 +1420,7 @@ module.exports = global.config = {
 						}
 					],
 					"image": {
-						"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+						"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 						"id": "gid://shopify/ProductImage/30028969771043",
 						"altText": null,
 						"height": 1140,
@@ -1441,7 +1441,7 @@ module.exports = global.config = {
 							}
 						],
 						"featuredImage": {
-							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 							"id": "gid://shopify/ProductImage/30028969771043",
 							"altText": null,
 							"height": 1140,
@@ -1487,7 +1487,7 @@ module.exports = global.config = {
 											}
 										],
 										"image": {
-											"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+											"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 											"id": "gid://shopify/ProductImage/30028969771043",
 											"altText": null,
 											"height": 1140,
@@ -1516,7 +1516,7 @@ module.exports = global.config = {
 											}
 										],
 										"image": {
-											"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+											"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 											"id": "gid://shopify/ProductImage/30028969771043",
 											"altText": null,
 											"height": 1140,
@@ -1568,7 +1568,7 @@ module.exports = global.config = {
 							}
 						],
 						"image": {
-							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 							"id": "gid://shopify/ProductImage/30028969771043",
 							"altText": null,
 							"height": 1140,
@@ -1595,7 +1595,7 @@ module.exports = global.config = {
 							}
 						],
 						"image": {
-							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/products/HairMask-SweetRepair.jpg?v=1653289347",
+							"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HairMask-SweetRepair_1.jpg?v=1692783410",
 							"id": "gid://shopify/ProductImage/30028969771043",
 							"altText": null,
 							"height": 1140,

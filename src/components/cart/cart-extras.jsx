@@ -1,25 +1,25 @@
 /* global tSettings tStrings assetUrl */
 import '@/config';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import {
-// 	formatMoney,
-// 	assetUrl,
-// } from '@/modules/utils';
+import {
+	formatMoney,
+	assetUrl,
+} from '@/modules/utils';
 
 import SvgDelivery from '@/images/icons/fast-delivery.svg';
 import SvgAwards from '@/images/icons/winner-award.svg';
 import SvgMoneyback from '@/images/icons/moneyback.svg';
 import SvgMoneybackPounds from '@/images/icons/moneyback-pounds.svg';
 import SvgMoneybackEur from '@/images/icons/moneyback-eur.svg';
-const { assetUrl, formatMoney } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+// const { assetUrl, formatMoney } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
 
 let currency;
 let locale;
@@ -120,7 +120,7 @@ export default class CartExtras extends React.Component {
 
 		return (
 			<>
-				<ul className="cart-drawer__services list-unstyled row mt-3 my-4 text-center">
+				{/* <ul className="cart-drawer__services list-unstyled row mt-3 my-4 text-center">
 					{tSettings.cartServices.map((t, index) => (
 						<li key={t} className={`col-4 d-flex flex-column ${tSettings.cartServicesIcon[index] === 'awards' ? 'px-0' : ''} `}>
 							{(
@@ -135,7 +135,7 @@ export default class CartExtras extends React.Component {
 							{t}
 						</li>
 					))}
-				</ul>
+				</ul> */}
 
 				{showShoppay && (
 					<div className="text-center font-size-sm border-top mt-2 py-2" style={{ minHeight: '5.5em' }}>
@@ -150,11 +150,11 @@ export default class CartExtras extends React.Component {
 				)}
 
 				{showKlarna && (
-					<p className="font-size-sm text-center border-top mt-2 pt-2 text center">
+					<p className="text-sm text-center border-top mt-2 mb-2 pt-2">
 						<span dangerouslySetInnerHTML={{ __html: klarnaIns }} />
 						<br />
-						<img className="mr-1" height="15" src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921"alt="Klarna" loading="lazy" />
-						<svg data-toggle="modal" href="#modal-klarna" role="button" data-price={totalPrice} className="svg-info modal-klarna-trigger cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" data-cy="klarna-icon"><path d="M7.2 5.6h1.6V4H7.2M8 14.4A6.4 6.4 0 1114.4 8 6.408 6.408 0 018 14.4M8 0a8 8 0 105.657 2.343A8 8 0 008 0m-.8 12h1.6V7.2H7.2z" /></svg>
+						<img className="mx-auto" height="15" src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921"alt="Klarna" loading="lazy" />
+						{/* <svg data-toggle="modal" href="#modal-klarna" role="button" data-price={totalPrice} className="svg-info modal-klarna-trigger cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="12" height="12" data-cy="klarna-icon"><path d="M7.2 5.6h1.6V4H7.2M8 14.4A6.4 6.4 0 1114.4 8 6.408 6.408 0 018 14.4M8 0a8 8 0 105.657 2.343A8 8 0 008 0m-.8 12h1.6V7.2H7.2z" /></svg> */}
 					</p>
 				)}
 
