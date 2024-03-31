@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from 'react-bootstrap';
 
 const Stockist = (props) => {
     const [region, setRegion] = useState('usa');
@@ -174,36 +173,36 @@ const Stockist = (props) => {
 
     return (
         <>
-            <Container as="section" className="text-center stockist my-4">
-                <h1>Find us in a store near you</h1>
-                <form className="d-flex flex-wrap justify-content-center align-items-center">
-                    <label className="col-12 col-md-auto my-1 h4 fw-bold">Choose your region:</label>
-                    <div className="col-8 col-md-3 my-1">
-                        <select className="custom-select mb-0 ml-md-2 stockist__select" value={region} onChange={regionChangeHandler} >
+            <section className="container text-center stockist my-4">
+                <h1 className="mb-1">Find us in a store near you</h1>
+                <form className="flex flex-wrap justify-center items-center">
+                    <label className="w-full md:w-auto my-1 h4 font-bold">Choose your region:</label>
+                    <div className="w-2/3 md:w-1/4 my-1 pl-[5px] pr-[5px]">
+                        <select className="custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
                             <option value="united-kingdom" data-label="United Kingdom">United Kingdom</option>
                             <option value="usa" data-label="USA">USA</option>
                             <option value="asia" data-label="Asia">Asia</option>
-                            <option value="europe" data-label="Europe">Europe</option>
+                            <option value="europe" data-label="europe">Europe</option>
                             <option value="australia" data-label="Australia">Australia</option>
                         </select>
                     </div>
                 </form>
-                <p>If we don't stock near you, you can buy online <a href="#" className="text-underline">here</a> and take advantage of our worldwide delivery</p>
+                <p>If we don't stock near you, you can buy online <a href="#" className="underline">here</a> and take advantage of our worldwide delivery</p>
                 <h2 className="mt-4 mb-3">Stockists in <span className="stockist__location">{regionTitle}</span></h2>
-                <hr className="d-lg-none my-3"></hr>
-                <Row className="justify-content-center">
+                <hr className="lg:hidden my-3"></hr>
+                <div className="flex flex-wrap justify-center">
                 {filteredItems.map((filteredItem) => (
-                    <figure key={filteredItem.id} className="m-0 col-6 col-md-4" data-toggle={filteredItem.region}>
-                        <a href={filteredItem.href} className="d-block py-lg-g rounded" target="_blank">
+                    <figure key={filteredItem.id} className="m-0 w-1/2 md:w-1/3 px-g lg:px-g" data-toggle={filteredItem.region}>
+                        <a href={filteredItem.href} className="block lg:py-g rounded" target="_blank">
                             <img src={filteredItem.img} alt={filteredItem.img_alt} />
                         </a>
-                        <figcaption className="h4 my-2 mb-lg-4 mx-lg-4">{filteredItem.status}</figcaption>
+                        <figcaption className="h4 my-2 lg:mb-4 lg:mx-4">{filteredItem.status}</figcaption>
                     </figure>
                 ))}
-                </Row>
+                </div>
                 <h2 className="h1 mt-2">Didn’t find your answer?</h2>
-                <p className="h4 fw-normal">No worries, you can email us: <a href="mailto:hello@cocoandeve.com" className="text-underline fw-bold">hello@cocoandeve.com</a></p>
-            </Container>
+                <p className="h4 font-normal">No worries, you can email us: <a href="mailto:hello@cocoandeve.com" className="underline font-bold">hello@cocoandeve.com</a></p>
+            </section>
         </>
     );
 };
