@@ -22,7 +22,7 @@ const BlogFilteredTemplate = () => {
 			<div className="mobile-wrapper">
 				<Header  toggleCart={toggleCart} />
 				<BlogFiltered />
-				<Cart showCart={showCart} toggleCart={toggleCart} />
+				{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 				<Footer />
 			</div>
 		</>
