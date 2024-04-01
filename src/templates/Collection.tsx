@@ -38,7 +38,7 @@ const Collection = (props: any) => {
                         <div className="flex flex-wrap w-full justify-between mb-25 lg:mb-2 lg:px-g">
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center">Shop All</h2>
                             <div className="w-1/2 lg:hidden px-hg">
-                                <select className="p-1 rounded-lg bg-white mb-2 border border-body w-full min-h-[50px]">
+                                <select className="custom-select p-1 rounded-lg bg-white mb-2 border border-body w-full min-h-[50px]">
                                     <option>Filter by</option>
                                     <option value="all">Shop All</option>
                                     <option value="hair">Hair</option>
@@ -48,7 +48,7 @@ const Collection = (props: any) => {
                                     <option value="kits-gifts">Kit &amp; Gifts</option>
                                     <option value="all-accesories">All Accesories</option>
                                 </select>
-                                <select className="p-1 rounded-lg bg-white mb-2 border border-body hidden w-full lg:block min-h-[50px]">
+                                <select className="custom-select p-1 rounded-lg bg-white mb-2 border border-body hidden w-full lg:block min-h-[50px]">
                                     <option>Filter by</option>
                                     <option value="tan">Tan &amp; SPF</option>
                                     <option value="hair">Hair</option>
@@ -59,7 +59,7 @@ const Collection = (props: any) => {
                                 </select>
                             </div>
                             <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                <select className="p-1 w-full lg:w-auto rounded-lg mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]">
+                                <select className="custom-select p-1 w-full lg:w-auto rounded-lg mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]">
                                     <option value="Manual">Featured</option>
                                     <option value="best-selling">Best Selling</option>
                                     <option value="title-ascending">Alphabetically, A-Z</option>
