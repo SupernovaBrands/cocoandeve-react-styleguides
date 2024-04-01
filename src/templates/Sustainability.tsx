@@ -283,7 +283,7 @@ const Sustainability = () => {
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-1/2 lg:order-2">
                             <h2 className="block lg:hidden text-center lg:text-left mb-1">No Nasties Formula</h2>
-                            <ul className="list-none mx-auto flex flex-wrap text-center justify-center border-b border-gray-400">
+                            <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400">
                                 <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title='Finest ingredients' active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
                                 <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title='Microbead-free' active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
                                 <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title='FAQ' active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
