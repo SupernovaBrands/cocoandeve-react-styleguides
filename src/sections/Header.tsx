@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import NavMegaMenu from '@/compounds/NavMegaMenu';
@@ -49,6 +49,7 @@ const Header = (props) => {
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -63,8 +64,37 @@ const Header = (props) => {
 		setOpenAccountBox(!openAccountBox);
 	}
 
+	useEffect(() => {
+		let lastScrollTop = 0;
+		let scrollTop = 0;
+		const handleScroll = (e) => {
+			if (!openSearchBox) {
+				console.log('Scrolled!', window.scrollY);
+				scrollTop = window.scrollY;
+				if (scrollTop < lastScrollTop) {
+					if (scrollTop <= 0) {
+						setScrolled(false);
+					}
+				} else if (scrollTop <= 0) {
+					setScrolled(false);
+				} else {
+					setScrolled(true);
+				}
+				lastScrollTop = scrollTop;
+			} else {
+				setScrolled(false);
+			}
+		};
+	
+		window.addEventListener('scroll', handleScroll);
+	
+		return () => {
+		  window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
 	return (
-        <header className="main-header">
+        <header className={`main-header z-[1000] w-full ${scrolled ? 'fixed' : ''}`}>
 			{announcementBarEnabled && (
 				<AnnouncementBar
 					text="Up to 25% off + Free Gift worth $25.40"
@@ -80,7 +110,7 @@ const Header = (props) => {
 				/>
 			)}
 			
-            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg">
+            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]">
                 <div className="container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between">
                     <button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
                         <span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>

@@ -26,7 +26,7 @@ const MobileMenu = (props: any) => {
 	}
 
 	return (
-		<nav id="mobile-nav" className={`mobile-nav fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+		<nav id="mobile-nav" className={`mobile-nav z-[1010] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
 			role="tablist" aria-multiselectable="true">
 				<li className="flex justify-between mx-g py-[5px]">
