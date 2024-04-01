@@ -1,6 +1,6 @@
 /* global tStrings */
 import '@/config';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 const tStrings = global.config.tStrings;
 
 import React, {
@@ -8,16 +8,17 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-// import {
-// 	kebabCase,
-// 	validateEmail,
-// } from '@/modules/utils_v2';
-const {
+import {
 	kebabCase,
 	validateEmail,
-} = dynamic(() => import('@/modules/utils_v2'), {
-    ssr: false,
-});
+} from '@/modules/utils_v2';
+
+// const {
+// 	kebabCase,
+// 	validateEmail,
+// } = dynamic(() => import('@/modules/utils_v2'), {
+//     ssr: false,
+// });
 
 import SvgFull from '@/images/icons/star-full.svg';
 
@@ -81,16 +82,16 @@ const YotpoReviewForm = (props) => {
 
 	return (
 		<div id="yotpoReviewForm" className="collapse mt-3" data-parent="#yotpoFormCollapse">
-			<div className="yotpo__review-fields d-flex flex-column">
+			<div className="yotpo__review-fields flex flex-column">
 				<div className="form-group">
 					<h4 className="mb-2">{tStrings.yotpo.writeReview}</h4>
-					<p className="font-size-sm mb-1">
+					<p className="text-sm mb-1">
 						<span className="text-primary">* </span>
 						{tStrings.yotpo.requiredField}
 					</p>
 				</div>
 				<div className="form-group">
-					<p className="font-size-sm mb-1">
+					<p className="text-sm mb-1">
 						<span className="text-primary">* </span>
 						{tStrings.yotpo.score}
 						:
@@ -109,10 +110,10 @@ const YotpoReviewForm = (props) => {
 							/>
 						);
 					})}
-					{errorScore && <small className="text-primary d-flex mb-1">{tStrings.yotpo.scoreError}</small>}
+					{errorScore && <small className="text-primary flex mb-1">{tStrings.yotpo.scoreError}</small>}
 				</div>
 				<div className="form-group">
-					<p className="font-size-sm mb-1">
+					<p className="text-sm mb-1">
 						<span className="text-primary">* </span>
 						{tStrings.yotpo.title}
 						:
@@ -121,7 +122,7 @@ const YotpoReviewForm = (props) => {
 					{errorTitle && <small className="text-primary mb-1">{tStrings.yotpo.titleError}</small>}
 				</div>
 				<div className="form-group">
-					<p className="font-size-sm mb-1">
+					<p className="text-sm mb-1">
 						<span className="text-primary">* </span>
 						{tStrings.yotpo.review}
 						:
@@ -131,19 +132,19 @@ const YotpoReviewForm = (props) => {
 				</div>
 				{customQuestions.map((q) => (
 					<div className="form-group" key={q.slug}>
-						<p className="font-size-sm mb-1">{q.question}</p>
+						<p className="text-sm mb-1">{q.question}</p>
 						{q.options.map((op) => (
 							<div className={`custom-control custom-${q.radio ? 'radio' : 'checkbox'} mb-1`} key={op}>
 								<input className="custom-control-input" type={q.radio ? 'radio' : 'checkbox'} name={q.slug} value={op} id={`${q.slug}-${kebabCase(op)}`} />
 								{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-								<label className="custom-control-label font-size-sm" htmlFor={`${q.slug}-${kebabCase(op)}`}>{op}</label>
+								<label className="custom-control-label text-sm" htmlFor={`${q.slug}-${kebabCase(op)}`}>{op}</label>
 							</div>
 						))}
 					</div>
 				))}
-				<div className="row mx-0 mx-lg-ng mb-3 justify-content-lg-end">
-					<div className="col-lg-4 px-0 px-lg-g mb-1 mb-lg-0">
-						<p className="font-size-sm mb-1">
+				<div className="row mx-0 lg:mx-hg mb-3 lg:justify-end">
+					<div className="lg:w-1/3 px-0 lg:px-g mb-1 lg:mb-0">
+						<p className="text-sm mb-1">
 							<span className="text-primary">* </span>
 							{tStrings.yotpo.name}
 							:
@@ -151,8 +152,8 @@ const YotpoReviewForm = (props) => {
 						<input type="text" id="yotpoReviewName" className="form-control mb-1" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required aria-label="review form name" />
 						{errorName && <small className="text-primary mb-1">{tStrings.yotpo.nameError}</small>}
 					</div>
-					<div className="col-lg-4 px-0 px-lg-g">
-						<p className="font-size-sm mb-1">
+					<div className="lg:w-1/3 px-0 lg:px-g">
+						<p className="text-sm mb-1">
 							<span className="text-primary">* </span>
 							{tStrings.yotpo.email}
 							:
@@ -161,7 +162,7 @@ const YotpoReviewForm = (props) => {
 						{errorEmail && <small className="text-primary mb-1">{tStrings.yotpo.emailError}</small>}
 					</div>
 				</div>
-				<div className="d-flex form-group align-items-center justify-content-end">
+				<div className="flex form-group items-center justify-end">
 					{hasError && <small className="text-primary mr-1">{tStrings.yotpo.formError}</small>}
 					<button type="button" className="btn btn-primary" onClick={onSubmitButton}>{tStrings.yotpo.submit}</button>
 				</div>

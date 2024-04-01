@@ -114,7 +114,7 @@ const CarouselCustom = (props) => {
 				onTouchMove={handleTouchMove}
 				onTouchEnd={handleTouchEnd}
 				>
-				<div className="carousel-inner d-flex flex-nowrap mx-0">
+				<div className="carousel-inner flex flex-nowrap mx-0">
 					{props.productCard && props.slideNumber > 0 && primaryList.map((item, i) => (
 						<ProductCard
 							key={i}
@@ -225,10 +225,10 @@ const CarouselCustom = (props) => {
 			)}
 
 			{props.packagingCard && (
-				<ol class="carousel-indicators position-relative mt-2 d-flex d-lg-none">
-					<button data-bs-target data-bs-slide-to="1" class={`${activeIndex === 1 ? 'active' : ''} rounded-circle d-flex border border-primary`}  onClick={carouselIndicatorpackagingCard}></button>
-					<button data-bs-target data-bs-slide-to="2" class={`${activeIndex === 2 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard} ></button>
-					<button data-bs-target data-bs-slide-to="3" class={`${activeIndex === 3 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard}></button>
+				<ol className="carousel-indicators position-relative mt-2 d-flex d-lg-none">
+					<button data-bs-target data-bs-slide-to="1" className={`${activeIndex === 1 ? 'active' : ''} rounded-circle d-flex border border-primary`}  onClick={carouselIndicatorpackagingCard}></button>
+					<button data-bs-target data-bs-slide-to="2" className={`${activeIndex === 2 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard} ></button>
+					<button data-bs-target data-bs-slide-to="3" className={`${activeIndex === 3 ? 'active' : ''} rounded-circle border d-flex border-primary`} onClick={carouselIndicatorpackagingCard}></button>
 				</ol>
 			)}
 		</div>

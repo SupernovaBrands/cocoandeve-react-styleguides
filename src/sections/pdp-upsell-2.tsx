@@ -41,10 +41,10 @@ const PdpUpsell2 = (props) => {
 
     return (
         <div className="product-upsell-2 py-5">
-            <Container>
+            <div className="container">
                 <h2 className="h1 col-12 text-center mb-3">Shop the routine</h2>
-                <CarouselCustom id="ShopTheRoutineCarousel" productCardUpsell={true} useCardTemplate={true} items={items} slideNumber={4} className="col-12 col-md-4" carouselClass="carousel--product-preview" roundedControl={false} colLgGrid={3} hideControls={true}  />
-            </Container>
+                <CarouselCustom id="ShopTheRoutineCarousel" productCardUpsell={true} useCardTemplate={true} items={items} slideNumber={4} className="w-full md:w-1/3" carouselClass="carousel--product-preview" roundedControl={false} colLgGrid={3} hideControls={true}  />
+            </div>
         </div>
     );
 };

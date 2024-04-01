@@ -6,9 +6,10 @@ interface CheckBoxProps {
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     name?: string;
     checked?: boolean;
+    labelClass?: string;
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass }) => {
     const [isChecked, setIsChecked] = useState<boolean>(checked || false);
 
     const onChangeClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +20,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked 
     };
 
     return (
-        <label htmlFor={id} className="flex justify-content-center my-1 relative pl-3">
+        <label htmlFor={id} className={`${labelClass ? labelClass : 'flex justify-content-center my-1 relative pl-3'}`}>
             <input type="checkbox" checked={isChecked} name={name} className="hidden" id={id} onChange={onChangeClick} />
             <span
                 dangerouslySetInnerHTML={{ __html: label }}

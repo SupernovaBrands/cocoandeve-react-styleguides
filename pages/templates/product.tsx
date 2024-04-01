@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 // import Header from '@/sections/Header';
 import Product from '@/templates/Product';
 import PDPBanner from "@/compounds/ProductBanner";
-import PDPUpsell from "@/sections/pdp-upsell-2";
+import ProductRoutineCarousel from '@/sections/ProductRoutineCarousel';
 import RealResultCarousel from "@/sections/RealResultCarousel";
 // import Sustainability from '@/sections/Sustainability';
 import PdpBannerTanDifferent from '@/sections/pdp-banner-tan-different';
@@ -62,7 +62,7 @@ const ProductTemplate = () => {
 		<>
         	<Header />
             <Product />
-			<PDPUpsell />
+			<ProductRoutineCarousel />
 			<PDPBanner
                 background="bg-yellow-light"
                 src="https://cdn.shopify.com/s/files/1/0075/2163/2309/files/Rectangle_2x_5d1af986-b009-4369-b374-0d6a620bf81d_828x.jpg?v=1585822408"
@@ -91,7 +91,7 @@ const ProductTemplate = () => {
 				</Container>
 			</div>
 			<PdpBannerTanDifferent />
-			<PdpBannerService />
+			{/* <PdpBannerService /> */}
 			<Footer />
 		</>
     );
