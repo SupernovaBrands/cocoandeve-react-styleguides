@@ -111,7 +111,7 @@ export default class CartDiscountForm extends React.Component {
 			<div className="my-2">
 				<div className={`${hasCode ? 'hidden' : 'flex'} flex-nowrap py-1`}>
 					<input type="text" ref={this.textInput} name="discount" className="block appearance-none w-3/4 py-1 px-2 mr-1 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded outline-none mb-0" placeholder={tStrings.cart_discount_input} value={code} onChange={this.onTextChange} onKeyUp={this.onKeyUp} readOnly={loading} data-cy="cart-discount" aria-label={tStrings.cart_discount_input} />
-					<button className="w-1/4 bg-transparent hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[28px]" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
+					<button className="w-1/4 bg-transparent hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[5px]" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
 						{loading ? (<div className="spinner-border" role="status" />) : tStrings.cart_discount_apply}
 					</button>
 				</div>
