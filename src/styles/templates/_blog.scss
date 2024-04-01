@@ -33,7 +33,7 @@
 		&__sidebar {
 			grid-area: sidebar;
 			top: 0;
-			z-index: 1000;
+			z-index: 1;
 
 			aside {
 				@screen lg {
