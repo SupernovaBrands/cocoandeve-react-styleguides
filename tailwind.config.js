@@ -63,7 +63,8 @@ module.exports = {
       'transparent': 'transparent',
       'dark': '#885757',
       'ultra-dark': '#5C2323',
-      'medium': '#AA7878'
+      'medium': '#AA7878',
+      'body-light': '#f6e4ef'
     },
     fontFamily: {
       sans: ['sofia-pro', 'sans-serif'],
