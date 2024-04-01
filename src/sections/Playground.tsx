@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const Playground = (props) => {
     return (
-        <section className="container pt-5 pb-0 md:pb-12 justify-center text-center">
+        <section className="container pb-0 md:pb-12 justify-center text-center">
             <div className="flex flex-wrap">
                 <div className="w-4/5 lg:w-2/3 p-0 pb-1 mx-auto">
                     <h1 className="mb-1 hidden md:block">Discover the Coco &amp; Eve playground</h1>
