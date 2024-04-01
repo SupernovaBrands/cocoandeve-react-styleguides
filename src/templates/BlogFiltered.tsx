@@ -65,11 +65,11 @@ const BlogFiltered = (props) => {
             <div className="container mt-4">
                 <h1 className="text-center mb-0 h3">COCO & EVE BLOG</h1>
                 <ul className="mt-1 mb-2 flex flex-wrap nav-category justify-center items-center">
-                    <Item item="ALL" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1" />
-                    <Item item="HAIR" link="#" className="nav-link active pb-0 pt-0 h4 font-normal lg:px-1" />
-                    <Item item="TAN & SPF" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1" />
-                    <Item item="BODY" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1" />
-                    <Item item="HOW TO'S" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1" />
+                    <Item item="ALL" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1 sm:px-hg" />
+                    <Item item="HAIR" link="#" className="nav-link active pb-0 pt-0 h4 font-normal lg:px-1 sm:px-hg" />
+                    <Item item="TAN & SPF" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1 sm:px-hg" />
+                    <Item item="BODY" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1 sm:px-hg" />
+                    <Item item="HOW TO'S" link="#" className="nav-link pb-0 pt-0 h4 font-normal lg:px-1 sm:px-hg" />
                 </ul>
                 <div className="blog-grid flex flex-wrap mt-3 lg:mt-4 lg:mb-4">
                     <div className="blog-grid__search col hidden lg:block mb-2 items-start lg:px-g sm:px-hg">
