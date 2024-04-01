@@ -1,12 +1,13 @@
 import Instagram from '../../src/images/icons/instagram.svg';
 import FacebookSquare from '../../src/images/icons/facebook-square.svg';
 import PinterestSquare from '../../src/images/icons/pinterest-square.svg';
-import Youtube from '../../src/images/icons/youtube.svg'; 
+import Youtube from '../../src/images/icons/youtube.svg';
 import Tiktok from '../../src/images/icons/tiktok.svg';
 import PalmTree from '../../src/images/icons/palm-tree.svg';
 import { useState } from 'react';
 import Form from "@/compounds/footer-newsletter-form";
 import DropdownStore from '@/components/DropdownStore';
+import Link from 'next/link';
 
 const Footer = (props: any) => {
     const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
                         <Form />
-                        <p className="text-sm lg:mt-0 mb-0 lg:mb-1 lg:order-0">Please read our Privacy Policy for more information about how we use your data.</p>
+                        <p className="text-sm lg:mt-0 mb-0 lg:mb-1 lg:order-0">Please read our <Link href="#" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>
