@@ -18,7 +18,7 @@ const SustainabilityTemplate = () => {
 			<Header toggleCart={toggleCart}  />
         	<Sustainability />
             <Footer />
-            <Cart showCart={showCart} toggleCart={toggleCart} />
+            {/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );
 }
