@@ -1,6 +1,6 @@
 /* global tStrings tSettings */
 import '@/config';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
@@ -9,18 +9,13 @@ import PropTypes from 'prop-types';
 
 import ConditionWrapper from '@/components/cart/condition-wrapper';
 import QuantityBox from '@/components/cart/quantity-box';
-
-// import {
-// 	formatMoney,
-// 	kebabCase,
-// } from '@/modules/utils';
-
 import SvgTrash from '@/images/icons/trash.svg';
 import SvgRecurring from '@/images/icons/recurring.svg';
 import SvgChevronDown from '@/images/icons/chevron-down.svg';
-const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+import { kebabCase, formatMoney } from '@/modules/utils';
+// const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
 export default class CartItem extends React.Component {
 	constructor(props) {
 		super(props);
@@ -34,23 +29,6 @@ export default class CartItem extends React.Component {
 		this.setState({
 			editingVariant: false,
 		})
-		/*
-		const dataText = document.querySelector('#variant_quantity').innerText;
-		const dataInv = JSON.parse(dataText);
-		const itemProps = this.props.item;
-		const lastStock = dataInv.filter((item) => item.id === variant.id && itemProps.quantity > item.quantity);
-
-		if (variant.availableForSale) {
-			this.setState({
-				editingVariant: variant.id !== this.props.item.merchandise.id ? swatchIndex : false,
-			}, () => {
-				if (this.state.editingVariant !== false) {
-					this.props.onChangeVariant(this.props.item, variant.id, lastStock, variant);
-					this.setState({ editingVariant: false, isAccordionOpen: true });
-				}
-			});
-		}
-		*/
 	}
 
 	onRemoveItem = () => {
@@ -107,51 +85,48 @@ export default class CartItem extends React.Component {
 		// for now using settings
 		const subtitles = this.variantSubtitle(item);
 
+		console.log(item.merchandise, 'testing');
 		return (
 			<li className="cart-item" data-mod={item.modified}>
-				<figure className="row py-2 mb-0 align-items-start">
+				<figure className="flex flex-wrap py-1 mb-0 items-start -mx-2">
 					<ConditionWrapper
 						condition={!item.isFreeItem}
-						wrapper={(children) => <a href={item.url} className="col-3">{children}</a>}
+						wrapper={(children) => <a href={item.url} className="w-1/4 pl-2 pr-1">{children}</a>}
 					>
-						<picture className={item.isFreeItem ? 'col-3' : ''}>
-							<img src={item.merchandise.product.featuredImage.url} className="w-100" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<picture className={item.isFreeItem ? 'w-1/4' : ''}>
+							<img src={item.merchandise.product.featuredImage.url} className="w-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 						</picture>
 					</ConditionWrapper>
-					<figcaption className="col-9">
-						<div className="d-flex align-items-start no-gutters justify-content-between">
-							<p className="mb-1 fw-bold col-8 ps-0">
+					<figcaption className="w-3/4 px-2">
+						<div className="flex items-start no-gutters justify-between">
+							<p className="mb-1 font-bold w-2/3 pl-0">
 								{item.isFreeItem && item.originalPrice >= 0 ? (
 									<ConditionWrapper
 										condition={item.isFreeItem}
-										wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="link-secondary">{children}</a>}
+										wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
 									>
-										{ item.isFreeItem && tSettings.locale === 'fr' && (`${item.merchandise.product.title.replace('OFFERT', '').replace('Offert', '').trim()} OFFERT`) }
-
-										{ item.isFreeItem && tSettings.locale === 'de' && (`GRATIS ${item.merchandise.product.title.replace('GRATIS', '').replace('Gratis', '').trim()}`) }
-
-										{ item.isFreeItem && tSettings.locale.includes('en') && (`FREE ${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+										{ item.isFreeItem && (`FREE ${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
 									</ConditionWrapper>
 								)
 									: (
 										<ConditionWrapper
 											condition={!item.isFreeItem}
-											wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="link-secondary">{children}</a>}
+											wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
 										>
 											{ !item.isFreeItem && (`${this.productTitle(item)}`) }
 											{`${item.recurring ? ' Subscriptions' : ''}`}
 										</ConditionWrapper>
 									)}
 								{item.recurring && (
-									<span className="text-primary mt-1 d-flex font-italic font-size-sm fw-normal">
+									<span className="text-primary mt-1 flex font-italic text-sm font-normal">
 										<SvgRecurring className="svg mr-1" />
 										{' '}
 										{item.recurringMessage}
 									</span>
 								)}
 							</p>
-							{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg" /></button>)}
-							{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body d-flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg" /></button>)}
+							{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (<button className="cart-item__remove btn-unstyled text-body flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg w-[1em]" /></button>)}
+							{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex" type="button" aria-label="Remove" onClick={this.onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg w-[1em]" /></button>)}
 
 						</div>
 
@@ -159,7 +134,7 @@ export default class CartItem extends React.Component {
 							condition={isMultiOptions}
 							wrapper={(children) => (
 								<div className="pb-1">
-									<a onClick={this.onAccordionOpen} className={`${!isAccordionOpen ? 'collapsed' : ''} d-inline-block text-primary text-underline card-header p-0 border-bottom-0 position-relative pr-2 mb-1`} data-toggle="collapse" href={`#cart-drawer__shade-${this.extractId(item.id)}`} role="button" aria-expanded={isAccordionOpen} aria-controls={`#cart-drawer__shade-${this.extractId(item.id)}`}>
+									<a onClick={this.onAccordionOpen} className={`${!isAccordionOpen ? 'collapsed' : ''} d-inline-block text-primary text-underline card-header p-0 border-b-[1px]-0 position-relative pr-2 mb-1`} data-toggle="collapse" href={`#cart-drawer__shade-${this.extractId(item.id)}`} role="button" aria-expanded={isAccordionOpen} aria-controls={`#cart-drawer__shade-${this.extractId(item.id)}`}>
 										{isAccordionOpen ? 'Hide details' : 'Show details'}
 										<SvgChevronDown className="svg chevron-down ml-1" width="12" height="12" />
 									</a>
@@ -178,12 +153,12 @@ export default class CartItem extends React.Component {
 								const itemSub = subtitles.length > 0 ? subtitles[index] : false;
 
 								return (
-									<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? 'border-bottom border-bg-primary-light-second' : ''}`}>
+									<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? 'border-b-[1px] border-bg-primary-light-second' : ''}`}>
 
 										{isMultiOptions && itemSub && itemSub.split('///').map((sub, ind) => {
 											if (ind + 1 < itemSub.split('///').length) {
 												return (
-													<p className="font-size-sm mb-1 pb-1 border-bottom border-bg-primary-light-second">{sub}</p>
+													<p className="font-size-sm mb-1 pb-1 border-b-[1px] border-bg-primary-light-second">{sub}</p>
 												);
 											}
 											return (
@@ -191,7 +166,7 @@ export default class CartItem extends React.Component {
 											);
 										})}
 
-										<p className="d-flex mb-1 align-items-center">
+										<p className="flex mb-1 items-center">
 
 											{!showSwatches && (
 												<i className={`d-block variant-swatch ${kebabCase(selected)}`} />
@@ -208,7 +183,7 @@ export default class CartItem extends React.Component {
 												return variant && (
 													<button
 														key={`${opt.id}-${kebabCase(val)}`}
-														className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val && 'border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
+														className={`variant-swatch pr-0 mr-1 before:m-[1px] ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
 														type="button"
 														tabIndex="-1"
 														disabled={!variant.availableForSale || editingVariant !== false}
@@ -235,7 +210,7 @@ export default class CartItem extends React.Component {
 
 						{item.attributes && item.attributes.map((itm) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-						<div className="d-flex align-items-center justify-content-between">
+						<div className="flex items-center justify-between">
 							<QuantityBox
 								name="quantity-box"
 								editable={!item.isFreeItem}
@@ -249,18 +224,18 @@ export default class CartItem extends React.Component {
 							/>
 							{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 								? (
-									<div className="d-flex flex-column text-right">
-										{item.comparePrice > 0 && <span className="text-linethrough">{formatMoney(item.comparePrice)}</span>}
-										{!item.comparePrice && <span className="text-linethrough">{formatMoney(item.originalPrice)}</span>}
+									<div className="flex flex-col text-right">
+										{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice)}</span>}
+										{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice)}</span>}
 										<strong>
 											Free
 										</strong>
 									</div>
 								)
 								: (
-									<div className="d-flex flex-column text-right">
+									<div className="flex flex-col text-right">
 										{item.comparePrice > 0 && (
-											<span className="text-linethrough">{formatMoney(item.comparePrice)}</span>)}
+											<span className="line-through">{formatMoney(item.comparePrice)}</span>)}
 										<strong>
 											{item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice) : 'Free'}
 											{item.recurring && (item.period)}

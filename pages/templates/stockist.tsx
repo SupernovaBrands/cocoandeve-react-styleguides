@@ -23,7 +23,7 @@ const stockistTemplate = () => {
 			<Instagram className="bg-yellow-light" />
 			<Service />
 			<Footer />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );
 }

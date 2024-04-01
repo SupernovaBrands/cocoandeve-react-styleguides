@@ -5,6 +5,7 @@
 @import 'components/svgs';
 @import 'components/accordion';
 @import 'components/modal';
+@import 'components/custom-forms';
 // @import 'components/cookie-banner';
 // @import 'components/announcement-bar';
 // @import 'components/dropdown';
@@ -19,7 +20,7 @@
 @import 'components/swatch';
 // @import 'components/article-proggress-bar';
 // @import 'components/badge';
-// @import 'components/list';
+@import 'components/list';
 // @import 'components/product-subscription';
 
 // @import 'compounds/post-card';
@@ -49,9 +50,9 @@
 // @import 'sections/yotpo-widget';
 
 // @import 'templates/article';
-// @import 'templates/blog';
+@import 'templates/blog';
 // @import 'templates/collection';
-// @import 'templates/stockist';
+@import 'templates/stockist';
 // @import 'templates/sustainability';
 // @import 'templates/sweepstakes';
 // @import 'templates/our-story';

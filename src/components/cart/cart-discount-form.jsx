@@ -10,12 +10,12 @@ import PropTypes from 'prop-types';
 import SvgTag from '@/images/icons/tag.svg';
 import SvgGift from '@/images/icons/gift.svg';
 import SvgCloseCircle from '@/images/icons/close-circle.svg';
-// import { isSwellCode, formatMoney } from '@/modules/utils';
+import { isSwellCode, formatMoney } from '@/modules/utils';
 import { Collapse, Button } from 'react-bootstrap';
 
-const { isSwellCode, formatMoney } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+// const { isSwellCode, formatMoney } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
 
 export default class CartDiscountForm extends React.Component {
 	constructor(props) {
@@ -106,11 +106,18 @@ export default class CartDiscountForm extends React.Component {
 		const hasCode = isApplied || !!appliedGiftCard.code;
 		const isSwellDiscCode = isSwellCode(code);
 
-		return hasCode ? (
-			<div className="mt-2 d-flex flex-column align-items-start">
-				<input type="hidden" name="discount" value={code} />
-				<p className="font-size-xs text-muted mb-1">{appliedGiftCard.code !== '' && appliedGiftCard.lastCharacters ? 'Gift card applied' : tStrings.cart_discount_applied}</p>
-				<div className="bg-light d-flex align-items-center d-inline-block p-1 text-black-50 rounded">
+		return (
+			<>
+			<div className="my-2">
+				<div className={`${hasCode ? 'hidden' : 'flex'} flex-nowrap py-1`}>
+					<input type="text" ref={this.textInput} name="discount" className="block appearance-none w-3/4 py-1 px-2 mr-1 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded outline-none mb-0" placeholder={tStrings.cart_discount_input} value={code} onChange={this.onTextChange} onKeyUp={this.onKeyUp} readOnly={loading} data-cy="cart-discount" aria-label={tStrings.cart_discount_input} />
+					<button className="w-1/4 bg-transparent hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[28px]" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
+						{loading ? (<div className="spinner-border" role="status" />) : tStrings.cart_discount_apply}
+					</button>
+				</div>
+				{ hasCode && <input type="hidden" name="discount" value={code} /> }
+				{/* <p className="font-size-xs text-muted mb-1">{appliedGiftCard.code !== '' && appliedGiftCard.lastCharacters ? 'Gift card applied' : tStrings.cart_discount_applied}</p> */}
+				<div className={`${hasCode ? 'flex' : 'hidden'} bg-light items-center inline-block p-1 text-black-50 rounded`}>
 					{isSwellDiscCode && (
 						<>
 							<SvgGift className="svg mr-1" />
@@ -168,19 +175,8 @@ export default class CartDiscountForm extends React.Component {
 					<p className="small text-danger mt-1 mb-0">{tSettings.custom_error_codes_msg}</p>
 				)}
 			</div>
-		) : (
-			<div className="mt-2">
-				<a onClick={this.focusTextInput} className={`text-body text-underline cart-drawer__discount-toggle ${!error ? 'collapsed' : ''}`} data-toggle="collapse" href="#cart-drawer__discount-form" role="button" aria-expanded={!!error} aria-controls="cart-drawer__discount-form" data-cy="applypromo-text">{tStrings.cart_discount_text}</a>
-				<Collapse in={openForm}>
-					<div className="input-group py-1">
-						<input type="text" ref={this.textInput} name="discount" className="form-control text-body border-right-0" placeholder={tStrings.cart_discount_input} value={code} onChange={this.onTextChange} onKeyUp={this.onKeyUp} readOnly={loading} data-cy="cart-discount" aria-label={tStrings.cart_discount_input} />
-						<button className="btn btn-link border border-left-0 rounded-left-0 fw-bold d-flex align-items-center" type="button" onClick={this.applyDiscount} disabled={!code} data-cy="cart-apply-btn">
-							{loading ? (<div className="spinner-border" role="status" />) : tStrings.cart_discount_apply}
-						</button>
-					</div>
-				</Collapse>
-			</div>
-		);
+			</>
+		)
 	}
 }
 
@@ -191,7 +187,7 @@ CartDiscountForm.propTypes = {
 	loading: PropTypes.bool.isRequired,
 	error: PropTypes.string.isRequired,
 	errorExtra: PropTypes.bool,
-	discAmount: PropTypes.string,
+	discAmount: PropTypes.any,
 	onApply: PropTypes.func.isRequired,
 	onRemove: PropTypes.func.isRequired,
 	appliedGiftCard: PropTypes.object,

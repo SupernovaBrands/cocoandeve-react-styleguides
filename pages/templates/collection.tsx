@@ -5,6 +5,7 @@ import Collection from '@/templates/Collection';
 import Service from "@/sections/Service";
 // import Cart from "@/components/cart/cart";
 import { useState } from 'react';
+import ProductCardQuiz from '@/compounds/ProductCardQuiz';
 const Cart = dynamic(() => import('@/components/cart/cart'), {
     ssr: false,
 });
@@ -135,11 +136,12 @@ const CollectionTemplate = () => {
 
     return (
 		<>
-        	<Header toggleCart={toggleCart}  />
+        	<Header />
 			<Collection products={products}/>
+			{/* <ProductCardQuiz /> */}
             <Service />
 			<Footer />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );
 }

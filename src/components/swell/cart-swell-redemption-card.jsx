@@ -76,9 +76,9 @@ const SwellRedemptionCard = (props) => {
 		}
 	}
 	return (
-		<figure className="cart-drawer__swell-redemption-item bg-gray-400 rounded pb-1 me-1 d-flex justify-content-start align-items-center flex-column">
+		<figure key={props.key} className="w-[5.625em] min-w-[5.625em] cart-drawer__swell-redemption-item bg-gray-400 rounded pb-1 ml-1 flex justify-start items-center flex-col">
 			{!item.amount && (
-				<div className="cart-drawer__swell-redemption-item-heading d-flex align-items-center h-100 justify-content-center">
+				<div className="cart-drawer__swell-redemption-item-heading flex items-center h-full justify-center">
 					<SvgStars />
 				</div>
 			)}
@@ -87,8 +87,8 @@ const SwellRedemptionCard = (props) => {
 					<img alt={item.name} src={imgSrc} width="101" />
 				</picture>
 			)}
-			<figcaption className={`d-flex px-25 align-items-center flex-column h-100 w-100 justify-content-between ${!item.amount ? 'px-1' : ''}`}>
-				<strong className="d-block my-1 mx-25">{item.name}</strong>
+			<figcaption className={`flex px-25 items-center flex-col h-full w-full justify-between ${!item.amount ? 'px-1' : ''}`}>
+				<strong className="block my-1 mx-25">{item.name}</strong>
 				{!item.amount && !customerEmail && !customerId && (
 					<a href="/account/login" className="text-underline">Login/Sign up</a>
 				)}
@@ -96,19 +96,19 @@ const SwellRedemptionCard = (props) => {
 					<span className="text-gray-600">Select a gift &gt;</span>
 				)}
 				{item.amount > 0 && !customerEmail && !customerId && (
-					<div className="d-flex align-items-center">
+					<div className="flex items-center">
 						<SvgStarsSM />
 						<span className="ml-25">{item.amount}</span>
 					</div>
 				)}
 				{item.amount > 0 && customerEmail && customerId && isItemRedeemed && (
-					<div className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border d-flex align-items-center w-100 py-1 justify-content-center">
+					<div className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border flex items-center w-full py-1 justify-center">
 						<span className="font-size-sm">✅ Redeemed</span>
 					</div>
 				)}
 				{(item.quantity === null || item.quantity > 0) && item.amount > 0
 					&& customerEmail && customerId && !isItemRedeemed && (
-					<button type="button" disabled={item.amount > userPts || btnLoading || swellLoading} className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border d-flex align-items-center w-100 py-1 justify-content-center" onClick={redeemItem}>
+					<button type="button" disabled={item.amount > userPts || btnLoading || swellLoading} className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border flex items-center w-full py-1 justify-center" onClick={redeemItem}>
 						{!btnLoading && (
 							<>
 								<SvgStarsSM />
@@ -123,8 +123,8 @@ const SwellRedemptionCard = (props) => {
 					</button>
 				)}
 				{item.quantity === 0 && item.amount > 0 && customerEmail && customerId && !isItemRedeemed && (
-					<button type="button" disabled className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border d-flex align-items-center w-100 py-1 justify-content-center">
-						<span className=" fw-bold  font-size-sm">{tStrings.soldOut}</span>
+					<button type="button" disabled className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border flex items-center w-full py-1 justify-center">
+						<span className="font-bold text-sm">{tStrings.soldOut}</span>
 					</button>
 				)}
 			</figcaption>
@@ -134,9 +134,9 @@ const SwellRedemptionCard = (props) => {
 
 SwellRedemptionCard.propTypes = {
 	item: PropTypes.object.isRequired,
-	customerEmail: PropTypes.string.isRequired,
-	customerId: PropTypes.string.isRequired,
-	userPts: PropTypes.number.isRequired,
+	customerEmail: PropTypes.string,
+	customerId: PropTypes.string,
+	userPts: PropTypes.number,
 	swellItems: PropTypes.array.isRequired,
 	showMessage: PropTypes.func.isRequired,
 	setLoading: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 // import Header from '@/sections/Header';
-import Sweepstakes from '@/templates/Sweepstakes';
 import Footer from '@/sections/Footer';
+import BlogFiltered from '@/templates/BlogFiltered';
 // import Cart from "@/components/cart/cart";
 import { useState } from 'react';
 const Cart = dynamic(() => import('@/components/cart/cart'), {
@@ -10,7 +10,8 @@ const Cart = dynamic(() => import('@/components/cart/cart'), {
 const Header = dynamic(() => import('@/sections/Header'), {
     ssr: false,
 });
-const sweepstakesTemplate = () => {
+
+const BlogFilteredTemplate = () => {
 	const [showCart, setShowCart] = useState(false);
 
     const toggleCart = () => {
@@ -18,12 +19,14 @@ const sweepstakesTemplate = () => {
 	}
     return (
 		<>
-        	<Header toggleCart={toggleCart}  />
-			<Sweepstakes />
-			<Footer />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			<div className="mobile-wrapper">
+				<Header  toggleCart={toggleCart} />
+				<BlogFiltered />
+				{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
+				<Footer />
+			</div>
 		</>
     );
 }
 
-export default sweepstakesTemplate;
+export default BlogFilteredTemplate;

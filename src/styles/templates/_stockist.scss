@@ -1,20 +1,23 @@
-.stockist {
-
-	figure a {
-		background-color: $secondary-light;
-	}
-
-	a {
-		color: $body-color;
-
-		&:hover {
-			color: $primary;
+@layer components {
+	.stockist {
+		&.container {
+			@screen lg {
+				max-width: calc-em(1000);
+			}
 		}
-	}
 
-	img {
-		@include media-breakpoint-down(md) {
-				width: 100%;
+		a {
+			@apply text-body-color;
+
+			&:hover {
+				@apply text-primary;
+			}
+		}
+
+		img {
+			@screen md {
+					width: 100%;
+			}
 		}
 	}
 }
