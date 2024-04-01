@@ -3,7 +3,7 @@ import Close from '../../src/images/icons/close.svg';
 import Percentage from '../../src/images/icons/percentage-square.svg';
 import Sun from '../../src/images/icons/sun.svg';
 import MenuDecoration from '../../src/images/icons/menu-banner-decoration.svg';
-import ChevronDown from '../../src/images/icons/chevron-down.svg';
+import MenuDecorationGreen from '../../src/images/icons/menu-banner-decoration-green.svg';
 import ChevronPrev from '../../src/images/icons/chevron-prev.svg';
 import ChevronNext from '../../src/images/icons/chevron-next.svg';
 import BrandLogo from '../../src/images/ce-logo.svg';
@@ -42,7 +42,7 @@ const MobileMenu = (props: any) => {
 							20% OFF on Sunny Honey Range<br />Code: <b>TAN25</b>
 						</figcaption>
 						<span className="block text-primary pr-1 font-bold">Use</span>
-						<MenuDecoration className="h-[1em] absolute banner-decoration text-secondary-light top-[0] -right-[10px] h-full"/>
+						<MenuDecorationGreen className="absolute banner-decoration text-secondary-light top-[0] -right-[10px] h-full"/>
 					</figure>
 				</li>
 				<li className="mobile-nav__promo-bar flex justify-content-between mx-g mb-g ">
@@ -52,10 +52,10 @@ const MobileMenu = (props: any) => {
 							Find your perfect colour match!<br /><b>Get 10% OFF</b>
 						</figcaption>
 						<span className="block text-primary pr-1 font-bold">Quiz</span>
-						<MenuDecoration className="h-[1em] absolute banner-decoration text-pink-light top-[0] -right-[10px] h-full"/>
+						<MenuDecoration className="absolute banner-decoration text-pink-light top-[0] -right-[10px] h-full"/>
 					</figure>
 				</li>
-				<li className="flex px-g border-b py-0 border-b">
+				<li className="flex px-g py-0 border-b">
 					<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare">
 						<h4 className="m-0 font-weight-normal">Haircare</h4>
 						<ChevronNext className="h-[1em] text-xs" onClick={() => setMenuStates({...defMenuState, 1: true})} />
@@ -80,7 +80,7 @@ const MobileMenu = (props: any) => {
 						<li className="border-b p-0"><a href="#" className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All Hair</strong></a></li>
 					</ul>
 				</li>
-				<li className="flex px-g border-b py-0 border-b">
+				<li className="flex px-g py-0 border-b">
 					<label htmlFor="skinCare" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="skinCare">
 						<h4 className="m-0 font-weight-normal">Self Tan</h4>
 						<ChevronNext className="h-[1em] text-xs" onClick={() => setMenuStates({...defMenuState, 2: true})} />
@@ -105,7 +105,7 @@ const MobileMenu = (props: any) => {
 						<li className="border-b p-0"><a href="#" className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All Tan</strong></a></li>
 					</ul>
 				</li>
-				<li className="flex px-g border-b py-0 border-b">
+				<li className="flex px-g py-0 border-b">
 					<label htmlFor="skin" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="skinCare">
 						<h4 className="m-0 font-weight-normal">Skin</h4>
 						<ChevronNext className="h-[1em] text-xs" onClick={() => setMenuStates({...defMenuState, 3: true})}/>
@@ -130,7 +130,7 @@ const MobileMenu = (props: any) => {
 						<li className="border-b p-0"><a href="#" className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All Skin</strong></a></li>
 					</ul>
 				</li>
-				<li className="flex px-g border-b py-0 border-b">
+				<li className="flex px-g py-0 border-b">
 					<label htmlFor="bodycare" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="bodycare">
 						<h4 className="m-0 font-weight-normal">Bodycare</h4>
 						<ChevronNext className="h-[1em] text-xs" onClick={() => setMenuStates({...defMenuState, 4: true})}/>
@@ -155,7 +155,7 @@ const MobileMenu = (props: any) => {
 						<li className="border-b p-0"><a href="#" className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All Body</strong></a></li>
 					</ul>
 				</li>
-				<li className="flex px-g border-b py-0 border-b">
+				<li className="flex px-g py-0 border-b">
 					<label htmlFor="bundles" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="bundles">
 						<h4 className="m-0 font-weight-normal">Bundles</h4>
 						<ChevronNext className="h-[1em] text-xs" onClick={() => setMenuStates({...defMenuState, 5: true})}/>
@@ -178,7 +178,7 @@ const MobileMenu = (props: any) => {
 						<li className="border-b p-0"><a href="#" className="px-g pb-1 pt-2 block text-body no-underline">Shop all Kits & Gifts</a></li>
 					</ul>
 				</li>
-				<li className="flex px-g border-b py-0 border-b"><a href="" className=" m-0 pb-1 pt-2">Bali Beauty Club</a></li>
+				<li className="flex px-g  py-0 border-b"><a href="" className=" m-0 pb-1 pt-2">Bali Beauty Club</a></li>
 				<li className="my-g p-g">
 					<a href="#" className="block rounded w-full bg-primary text-white border-[1px] border-solid border-transparent px-[1.75em] py-[.5625em] text-[1em]" data-cy="shopall-btn">Shop All</a>
 				</li>

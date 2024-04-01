@@ -30,7 +30,7 @@ const TestimonialCarousel = (props: any) => {
 	const { data } = props;
 	const { selectedIndex: idx, onDotButtonClick: onClick } = useDotButton(emblaApi);
 	return (
-		<div className="container text-center">
+		<div className="container text-center py-4">
 			<h2 className="h1 mb-0">As seen in</h2>
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">

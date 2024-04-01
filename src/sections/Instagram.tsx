@@ -1,6 +1,6 @@
 const Instagram = (props) => {
     return (
-        <section className={`instagram pt-4 text-center ${props.className} container mx-auto lg:px-g max-w-full mx-auto`}>
+        <section className={`instagram pt-4 text-center ${props.className} container mx-auto lg:px-g max-w-full`}>
             <div className="w-11/12 lg:w-2/3 text-center mx-auto pb-4 sm:px-hg">
                 <p className="h1 mb-1">Get social with us</p>
                 <p className="h4 mb-1">
