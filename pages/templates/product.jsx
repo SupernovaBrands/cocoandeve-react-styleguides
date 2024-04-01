@@ -5,7 +5,7 @@ import Product from '@/templates/Product';
 import PDPBanner from "@/compounds/ProductBanner";
 import PDPUpsell from "@/sections/pdp-upsell-2";
 import RealResultCarousel from "@/sections/RealResultCarousel";
-import Sustainability from '@/sections/Sustainability';
+// import Sustainability from '@/sections/Sustainability';
 import PdpBannerTanDifferent from '@/sections/pdp-banner-tan-different';
 import PdpBannerService from '@/sections/pdp-banner-service';
 import YotpoReviews from '@/components/yotpo-review-widget';
@@ -73,7 +73,7 @@ const ProductTemplate = () => {
                 <h4 className="fw-normal mb-0"><b>Ultra Dark</b><br /> A deep, rich tan. For deeper skin tones!</h4>
             </PDPBanner>
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
-			<Sustainability />
+			{/* <Sustainability /> */}
 			<div className="pt-4 pb-2 bg-light">
 				<Container>
 					<div className="row">
