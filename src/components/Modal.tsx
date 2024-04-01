@@ -28,8 +28,8 @@ const Modal = (props: any) => {
 					exit={'exit'}
 					variants={modalVariant}
 					onClick={handleClose}
-					className="modal-backdrop top-0 left-0 w-full h-full">
-					<ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} px-g lg:px-0`} variants={containerVariant} onClick={(e) => e.stopPropagation()}>
+					className="modal-backdrop top-0 left-0 w-full h-full z-[1040]">
+					<ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} px-g lg:px-0 z-[1060]`} variants={containerVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
 						{children}
 					</ModalContainer>
