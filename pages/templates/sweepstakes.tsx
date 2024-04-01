@@ -21,7 +21,7 @@ const sweepstakesTemplate = () => {
         	<Header toggleCart={toggleCart}  />
 			<Sweepstakes />
 			<Footer />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );
 }
