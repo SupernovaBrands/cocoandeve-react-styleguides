@@ -20,7 +20,7 @@ const CartShippingMeter = (props) => {
 
 	const remaining = target - current;
 	const progress = remaining <= 0 ? 100 : Math.floor((current / target) * 100);
-	const amount = formatMoney(remaining, '${{amount}}');
+	const amount = formatMoney(remaining);
 	const text = remaining <= 0 ? finalText : progressText.replace('#{shipping_price}', amount).replace('#{amount}', amount);
 
 	return (
@@ -33,8 +33,8 @@ const CartShippingMeter = (props) => {
 					role="progressbar"
 					aria-label="progress"
 					aria-valuenow={progress}
-					aria-valuemin="0"
-					aria-valuemax="100"
+					aria-valuemin={0}
+					aria-valuemax={100}
 				/>
 			</div>
 		</div>

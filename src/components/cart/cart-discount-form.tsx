@@ -9,6 +9,7 @@ interface Props {
     error: string;
     errorExtra?: boolean;
     discAmount: any;
+	isEmptyCart: boolean;
     appliedGiftCard: {
         code?: string;
         lastCharacters?: string;

@@ -17,8 +17,19 @@ import { kebabCase, formatMoney } from '@/modules/utils';
 // const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
 //     ssr: false,
 // });
+
+type CartItemProps = {
+	item: any;
+	isLastStock: boolean;
+	onChangeVariant: Function;
+	onChangeQuantity: Function;
+	onRemoveItem: Function;
+	productId: number;
+	productStock: number;
+}
+
 export default class CartItem extends React.Component {
-	constructor(props) {
+	constructor(props: CartItemProps) {
 		super(props);
 		this.state = {
 			editingVariant: false,
@@ -26,7 +37,7 @@ export default class CartItem extends React.Component {
 		};
 	}
 
-	onSelectVariant(variant, swatchIndex) {
+	onSelectVariant(variant: any, swatchIndex: number) {
 		this.setState({
 			editingVariant: false,
 		})
