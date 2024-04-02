@@ -9,8 +9,8 @@ const Logo = (props: any) => {
             </div>
 
             <nav className="relative flex flex-wrap items-center content-between py-0 px-4">
-                <div className="container justify-center items-center flex ">
-                    <a href="#" className="mx-auto py-1 inline-block lg:[flex-basis:15%]">
+                <div className="container justify-center items-center flex">
+                    <a href="#" className="mx-auto py-1 inline-block">
                         <BrandLogo />
                     </a>
                 </div>
