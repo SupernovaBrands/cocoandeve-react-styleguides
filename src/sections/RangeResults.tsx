@@ -11,6 +11,14 @@ import {
 	controlAutoplay,
 } from '@/components/carousel/EmblaCarouselArrowButtons';
 
+const data = [
+    {
+        heading: 'Like A Virgin Range Results',
+        desc: "Crafted for every hair type, this collection focuses on revitalizing dry, over-processed, and frizz-prone hair that has endured the effects of heat-styling, dyes and environmental stressors. Guaranteed to leave your mane not only looking and smelling out of this world, but the health of it completely restored so it's like a virgin...again",
+
+    }
+]
+
 const RangeResults = (props: any) => {
     const options: EmblaOptionsType = {
 		loop: true,
@@ -26,11 +34,6 @@ const RangeResults = (props: any) => {
 
     return (
         <div className="container pt-2 pb-1 lg:py-4 px-0">
-            <Carousel.Wrapper emblaApi={emblaApi}>
-				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-                    
-                </Carousel.Inner>   
-            </Carousel.Wrapper>
         </div>
     );
 }
