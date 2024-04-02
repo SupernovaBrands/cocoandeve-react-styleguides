@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ReviewStar from './ReviewStar';
 import Link from 'next/link';
 
-const YotpoStar = (props) => {
+const YotpoStar = (props: any) => {
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(0);
@@ -22,7 +22,7 @@ const YotpoStar = (props) => {
 	}, [props.productId]);
 
 	return init ? (
-		<div className={`flex justify-center ${props.className}`}>
+		<div className={`flex ${props.className}`}>
 			<ReviewStar score={score} />
 			{props.showScore && <span className="ml-25">({`${score.toFixed(0)}`})</span>}
 			{props.showTotal && (

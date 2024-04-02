@@ -1,17 +1,21 @@
 /* global tStrings tSettings */
 import '@/config';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import ReviewStar from '@/components/review-star';
 import SvgFull from '@/images/icons/star-full.svg';
-// import { encryptParam, currentTime } from '@/modules/utils';
-const { encryptParam, currentTime } = dynamic(() => import('@/modules/utils'), {
-    ssr: false,
-});
+import { encryptParam, currentTime } from '@/modules/utils';
+
+const tStrings = global.config.tStrings;
+
+// const { encryptParam, currentTime } = dynamic(() => import('@/modules/utils'), {
+//     ssr: false,
+// });
+
 // const { yotpoKey } = tSettings;
-const apiUrl = 'https://supernova-reviews.herokuapp.com/api';
+const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 
 const { locale } = global.config.tSettings;
 const localeParam = locale.includes('en') ? 'en' : locale;
@@ -35,21 +39,21 @@ const YotpoStar = (props) => {
 
 	if (!init) return (<div />);
 	return props.hideStars ? (
-		<div className={`d-flex ${props.extraClass}`}>
-			<SvgFull className="svg text-primary" />
+		<div className={`flex ${props.extraClass}`}>
+			<SvgFull className="svg text-primary size-[1em]" />
 			<span className="ml-25">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
 			<span className="ml-25">
-				<a className="text-underline text-nowrap" href={`${props.productUrl}#write-a-review`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
+				<a className="underline text-nowrap" href={`${props.productUrl}#write-a-review`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
 			</span>
 		</div>
 	) : (
-		<div className={`d-flex ${props.extraClass}`}>
+		<div className={`flex ${props.extraClass}`}>
 			<ReviewStar score={score} />
 			{props.showScore && <span className="ml-25">{`${score ? score.toFixed(1) : 0} stars`}</span>}
 			{props.showTotal && (
 				<span className="ml-25">
 					(
-					<a className="link-secondary text-underline" href={`${props.productUrl}#write-a-review`}>{total}</a>
+					<a className="link-secondary underline" href={`${props.productUrl}#write-a-review`}>{total}</a>
 					)
 				</span>
 			)}
