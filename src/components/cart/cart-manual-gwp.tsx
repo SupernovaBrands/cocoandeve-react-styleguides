@@ -1,4 +1,5 @@
 /* global tStrings */
+// @ts-nocheck
 import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';

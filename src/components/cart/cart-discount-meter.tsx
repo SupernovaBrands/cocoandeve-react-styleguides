@@ -2,6 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatMoney } from '@/modules/utils';
 
 const CartDiscountMeter = (props) => {
 	const {
@@ -12,7 +13,7 @@ const CartDiscountMeter = (props) => {
 
 	const remaining = target - current;
 	const progress = remaining <= 0 ? 100 : Math.floor((current / target) * 100);
-	const amount = Shopify.formatMoney(remaining, $('#shop_currency_val').text());
+	const amount = formatMoney(remaining);
 	const text = remaining <= 0 ? progressText : progressText.replace('#{remaining}', amount);
 
 	return (
@@ -25,8 +26,8 @@ const CartDiscountMeter = (props) => {
 					role="progressbar"
 					aria-label="progress"
 					aria-valuenow={progress}
-					aria-valuemin="0"
-					aria-valuemax="100"
+					aria-valuemin={0}
+					aria-valuemax={100}
 				/>
 			</div>
 		</>

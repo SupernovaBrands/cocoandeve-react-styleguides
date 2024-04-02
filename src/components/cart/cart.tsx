@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
 import SvgClose from '@/images/icons/close.svg';

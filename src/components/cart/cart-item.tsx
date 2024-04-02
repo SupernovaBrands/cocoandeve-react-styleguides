@@ -1,4 +1,5 @@
 /* global tStrings tSettings */
+// @ts-nocheck
 import '@/config';
 // import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
@@ -16,8 +17,19 @@ import { kebabCase, formatMoney } from '@/modules/utils';
 // const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
 //     ssr: false,
 // });
+
+type CartItemProps = {
+	item: any;
+	isLastStock: boolean;
+	onChangeVariant: Function;
+	onChangeQuantity: Function;
+	onRemoveItem: Function;
+	productId: number;
+	productStock: number;
+}
+
 export default class CartItem extends React.Component {
-	constructor(props) {
+	constructor(props: CartItemProps) {
 		super(props);
 		this.state = {
 			editingVariant: false,
@@ -25,14 +37,16 @@ export default class CartItem extends React.Component {
 		};
 	}
 
-	onSelectVariant(variant, swatchIndex) {
+	onSelectVariant(variant: any, swatchIndex: number) {
 		this.setState({
 			editingVariant: false,
 		})
 	}
 
 	onRemoveItem = () => {
+		//@ts-ignore
 		this.props.onRemoveItem(this.props.item);
+		//@ts-ignore
 		const item = this.props.item;
 		if (item.properties && item.properties._swell_redemption_token) {
 			document.dispatchEvent(new CustomEvent('SwellRemoveItemToCart'));
@@ -55,6 +69,7 @@ export default class CartItem extends React.Component {
 
 	onAccordionOpen = () => {
 		this.setState((prevState) => ({
+			//@ts-ignore
 			isAccordionOpen: !prevState.isAccordionOpen,
 		}));
 	}
@@ -91,7 +106,7 @@ export default class CartItem extends React.Component {
 				<figure className="flex flex-wrap py-1 mb-0 items-start -mx-2">
 					<ConditionWrapper
 						condition={!item.isFreeItem}
-						wrapper={(children) => <a href={item.url} className="w-1/4 pl-2 pr-1">{children}</a>}
+						wrapper={(children: any) => <a href={item.url} className="w-1/4 pl-2 pr-0">{children}</a>}
 					>
 						<picture className={item.isFreeItem ? 'w-1/4' : ''}>
 							<img src={item.merchandise.product.featuredImage.url} className="w-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
@@ -185,7 +200,7 @@ export default class CartItem extends React.Component {
 														key={`${opt.id}-${kebabCase(val)}`}
 														className={`variant-swatch pr-0 mr-1 before:m-[1px] ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
 														type="button"
-														tabIndex="-1"
+														tabIndex={-1}
 														disabled={!variant.availableForSale || editingVariant !== false}
 														aria-label={kebabCase(val)}
 														onClick={() => this.onSelectVariant(variant, index)}

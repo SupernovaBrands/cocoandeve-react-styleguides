@@ -1,6 +1,15 @@
-const CountriesOptions = () => {
+import { useEffect, useState } from "react";
+
+const CountriesOptions = (props) => {
+
+    const dropdownChangeHandler = (event) => {
+        let index = event.target.selectedIndex;
+        let optionElement = event.target.childNodes[index]
+        let code =  optionElement.getAttribute('data-code');
+        props.onChangeFilter(code);
+    }
 	return (
-        <select className="left-0 absolute custom-select opacity-0 inline-block w-full h-[3.125rem] pl-[1em] pr-[2em] py-[.875em] text-[1em] " name="country">
+        <select className="left-0 absolute custom-select opacity-0 inline-block w-full h-[3.125rem] pl-[1em] pr-[2em] py-[.875em] text-[1em] " name="country" value={props.selected} onChange={dropdownChangeHandler}>
             <option value="" disabled={false} defaultValue="">Country</option>
             <option value="US" data-code="1">United States</option>
             <option value="GB" data-code="44">United Kingdom</option>
