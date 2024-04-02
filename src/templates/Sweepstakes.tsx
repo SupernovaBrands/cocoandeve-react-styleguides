@@ -5,10 +5,15 @@ import { InputFormGroup } from '@/components/index';
 
 const Sweepstakes = (props) => {
     const [showCart, setShowCart] = useState(false);
+    const [countryCode, setCountryCode] = useState(65);
 
     const toggleCart = () => {
 		setShowCart(!showCart);
 	}
+
+    const codeChangeHandler = (selectedCode) => {
+        setCountryCode(selectedCode);
+    }
 
     return (
         <>
@@ -33,9 +38,9 @@ const Sweepstakes = (props) => {
                                 <div className="flex flex-wrap">
                                     <div className="relative flex items-stretch w-full mb-g">
                                         <label htmlFor="waitlist-phone" className="bg-gray-400 border-r max-w-[5em] px-2 text-base font-normal leading-normal text-gray-900 text-center bg-gray-300  border-gray-100 rounded block appearance-none w-full text-gray-800  border-gray-200  pr-0 relative flex-auto min-w-[0] mb-0 rounded-tr-none rounded-br-none">
-                                            <CountriesOptions />
+                                            <CountriesOptions selected={countryCode} onChangeFilter={codeChangeHandler} />
                                             <div className="flex h-full items-center border-l-gray-400">
-                                                <span className="mr-1">+65</span>
+                                                <span className="mr-1">+{countryCode}</span>
                                                 <svg className="h-[1em] font-size-sm" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.6 22.6"><path d="M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z"></path></svg>
                                             </div>
                                         </label>
