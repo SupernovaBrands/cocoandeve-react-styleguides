@@ -163,7 +163,8 @@ const Product = (props: any) => {
                         <form className="product-form lg:order-2 mt-1">
                             <figure className="product-card--quiz relative">
                                 <picture className="m-0 h-full">
-                                    <Image alt="Tan Quiz" className="w-full h-full rounded-0" src="/quiz-banner-pdp-mb.jpg" loading="lazy" width="400" height="110"/>
+                                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" media="(min-width: 992px)" />
+                                    <img alt="Tan Quiz" className="w-full h-full rounded-0" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" loading="lazy" width="400" height="110"/>
                                 </picture>
                                 <figcaption className="absolute px-2 px-lg-3 bottom-[50%] translate-y-1/2 top-0 left-0">
                                     <p className="font-bold mb-1">Your true colour match<br/> is 90 seconds away!</p>
