@@ -66,8 +66,9 @@ const ProductRoutineCarousel = (props: any) => {
                     <div className='px-hg'>
 						<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
 						    <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-							    {items.map((data: any) => (
+							    {items.map((data: any, index: number) => (
                                  <ProductCardUpsell
+                                    key={`${index}-routine`}
                                     useCardTemplate={true}
                                     useCarousel={true}
                                     className={props.className}

@@ -74,8 +74,8 @@ const ProductTemplate = () => {
             </PDPBanner>
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			{/* <Sustainability /> */}
-			<div className="pt-4 pb-2 bg-light">
-				<Container>
+			<div className="pt-4 pb-2 bg-gray-100">
+				<div className="container">
 					<div className="row">
 						<h2 className="h1 mb-2 col-12 text-center">Customer Reviews</h2>
 						<YotpoReviews
@@ -88,7 +88,7 @@ const ProductTemplate = () => {
 							canCreate={true}
 						/>
 					</div>
-				</Container>
+				</div>
 			</div>
 			<PdpBannerTanDifferent />
 			{/* <PdpBannerService /> */}
