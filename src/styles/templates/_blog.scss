@@ -50,127 +50,121 @@
 		}
 	}
 
-	// .blog-post-grid {
-	// 	@screen lg {
-	// 		display: grid !important;
-	// 		grid-template-columns: 2fr 1fr;
-	// 		grid-template-rows: auto auto;
-	// 		grid-template-areas: "content sidebar"
-	// 			"comment sidebar";
-	// 	}
+	.blog-post-grid {
+		@screen lg {
+			display: grid !important;
+			grid-template-columns: 2fr 1fr;
+			grid-template-rows: auto auto;
+			grid-template-areas: "content sidebar"
+				"comment sidebar";
+		}
 
-	// 	&__content {
-	// 		grid-area: content;
-	// 	}
+		&__content {
+			grid-area: content;
+		}
 
-	// 	&__comment {
-	// 		grid-area: comment;
-	// 	}
+		&__comment {
+			grid-area: comment;
+		}
 
-	// 	&__sidebar {
-	// 		grid-area: sidebar;
+		&__sidebar {
+			grid-area: sidebar;
 
-	// 		@screen lg {
-	// 			top: 0;
-	// 		}
-	// 	}
+			@screen lg {
+				top: 0;
+			}
+		}
 
-	// 	.blog-post-grid__newsletter {
+		// .blog-post-grid__newsletter {
 
-	// 		.form-control {
-	// 			border-radius: $border-radius-lg;
-	// 		}
+		// 	.form-control {
+		// 		border-radius: $border-radius-lg;
+		// 	}
 
-	// 		.input-group-append .btn {
-	// 			border-top-right-radius: $border-radius-lg;
-	// 			border-bottom-right-radius: $border-radius-lg;
-	// 		}
-	// 	}
+		// 	.input-group-append .btn {
+		// 		border-top-right-radius: $border-radius-lg;
+		// 		border-bottom-right-radius: $border-radius-lg;
+		// 	}
+		// }
 
-	// 	&__shop-articles {
-	// 		.carousel-control-prev-icon, .carousel-control-next-icon {
-	// 			top: 28%;
-	// 			background-color: $pink-light;
-	// 		}
+		// &__shop-articles {
+		// 	.carousel-control-prev-icon, .carousel-control-next-icon {
+		// 		top: 28%;
+		// 		background-color: $pink-light;
+		// 	}
 
-	// 		.carousel-control-prev-icon {
-	// 			left: calc-em(25);
-	// 		}
+		// 	.carousel-control-prev-icon {
+		// 		left: calc-em(25);
+		// 	}
 
-	// 		.carousel-control-next-icon {
-	// 			right: calc-em(25);
-	// 		}
+		// 	.carousel-control-next-icon {
+		// 		right: calc-em(25);
+		// 	}
 
-	// 		.carousel--centered .carousel-inner {
-	// 			@screen lg {
-	// 				transform: translateX(0);
-	// 			}
-	// 		}
-	// 	}
+		// 	.carousel--centered .carousel-inner {
+		// 		@screen lg {
+		// 			transform: translateX(0);
+		// 		}
+		// 	}
+		// }
 
-	// 	&__recomendation {
-	// 		article {
-	// 			height: 100%;
-	// 		}
+		// &__recomendation {
+		// 	article {
+		// 		height: 100%;
+		// 	}
 
-	// 		@include media-breakpoint-down(lg) {
-	// 			background-color: white !important;
-	// 		}
-	// 	}
-	// }
+		// 	@include media-breakpoint-down(lg) {
+		// 		background-color: white !important;
+		// 	}
+		// }
+	}
 
-	// .article__content {
-	// 	img, iframe {
-	// 		max-width: 100%;
-	// 	}
+	.article__content {
+		img, iframe {
+			max-width: 100%;
+		}
 
-	// 	@include media-breakpoint-down(md) {
-	// 		img {
-	// 			height: auto;
-	// 		}
-	// 	}
+		&__banner {
+			width: 100%;
 
-	// 	&__banner {
-	// 		width: 100%;
-
-	// 		@screen lg {
-	// 			width: auto;
-	// 		}
-	// 	}
-	// }
+			@screen lg {
+				width: auto;
+			}
+		}
+	}
 
 	// .badge-blog {
 	// 	line-height: calc-em(20, 16) !important;
 	// 	padding: calc-em(2) calc-em(8) !important;
 	// }
 
-	// .blog-nav-tags {
-	// 	margin-bottom: calc-em(50, $unit: 1rem);
-	// 	overflow-x: scroll;
-	// 	width: auto;
+	.blog-nav-tags {
+		margin-bottom: calc-em(50, $unit: 1rem);
+		overflow-x: scroll;
+		width: auto;
 
-	// 	@screen lg {
-	// 		justify-content: center;
-	// 	}
+		@screen lg {
+			justify-content: center;
+		}
 
-	// 	&::-webkit-scrollbar {
-	// 		display: none;
-	// 	}
+		&::-webkit-scrollbar {
+			display: none;
+		}
 
-	// 	a {
-	// 		background-color: $gray-400;
-	// 		border-radius: calc-em(20);
-	// 		white-space: nowrap;
-	// 		cursor: pointer;
-	// 		color: $body-color;
+		a {
+			@apply bg-gray-400;
+			border-radius: calc-em(20);
+			white-space: nowrap;
+			cursor: pointer;
+			@apply text-body-color;
 
-	// 		&.active {
-	// 			background-color: $primary;
-	// 			color: $white;
-	// 		}
-	// 	}
+			&.active {
+				@apply bg-primary;
+				@apply text-white;
+			}
+		}
 
-	// }
+	}
 
 	// .how-to-wrapper {
 	// 	figure svg {
@@ -194,19 +188,20 @@
 	// 	}
 	// }
 
-	// .blog-post-quick-links {
-	// 	color: $body-color;
-	// 	border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
-	// 	&:hover {
-	// 		text-decoration: none;
-	// 	}
-	// 	& + .blog-post-quick-links {
-	// 		&::before {
-	// 			content: '|';
-	// 			float: none;
-	// 		}
-	// 	}
-	// }
+	.blog-post-quick-links {
+		@apply text-body-color;
+		border-bottom: 1px solid #000;
+		&:hover {
+			text-decoration: none;
+		}
+		& + .blog-post-quick-links {
+			&::before {
+				content: '|';
+				float: none;
+				margin: 5px;
+			}
+		}
+	}
 
 	// .blog-back-to-top {
 	// 	position: fixed;
