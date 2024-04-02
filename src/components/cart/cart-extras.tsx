@@ -1,4 +1,5 @@
 /* global tSettings tStrings assetUrl */
+// @ts-nocheck
 import '@/config';
 // import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
@@ -9,7 +10,6 @@ import PropTypes from 'prop-types';
 
 import {
 	formatMoney,
-	assetUrl,
 } from '@/modules/utils';
 
 import SvgDelivery from '@/images/icons/fast-delivery.svg';
