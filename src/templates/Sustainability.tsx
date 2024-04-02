@@ -245,14 +245,14 @@ const Sustainability = () => {
                         <h3 className="mb-1">Responsible Sourcing</h3>
                         <Carousel.Wrapper emblaApi={emblaApi1}>
                             <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g">
-                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={1}>
-                                    <p>We believe you are the company you keep. This means that we work with only the most ethical and environmentally conscious suppliers – such as Ecocert-approved conscious partners. Our Coconut, Fig, Cacao and Mango are all from traceable sources that have no negative effect on the environment. A sustainable beauty award winner, our Shea Butter is also derived from renewable sources, while our Papaya and Prickly Pear are COSMOS certified</p>
+                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={1}>
+                                    <p className="mb-g">We believe you are the company you keep. This means that we work with only the most ethical and environmentally conscious suppliers – such as Ecocert-approved conscious partners. Our Coconut, Fig, Cacao and Mango are all from traceable sources that have no negative effect on the environment. A sustainable beauty award winner, our Shea Butter is also derived from renewable sources, while our Papaya and Prickly Pear are COSMOS certified</p>
                                 </div>
-                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={2}>
-                                    <p>Wastage drives us (coco)nuts, so we go out of our way to avoid it. We love finding creative ways to use whole fruits, rather than throwing half an ingredient away. Take our hero, coconut, for example. We use the extract in our Hair Masque, the oil in our Elixir, the ground shell in our Scalp Scrub and even a sugar made from the flower in our Body Scrub!</p>
+                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={2}>
+                                    <p className="mb-g">Wastage drives us (coco)nuts, so we go out of our way to avoid it. We love finding creative ways to use whole fruits, rather than throwing half an ingredient away. Take our hero, coconut, for example. We use the extract in our Hair Masque, the oil in our Elixir, the ground shell in our Scalp Scrub and even a sugar made from the flower in our Body Scrub!</p>
                                 </div>
-                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={3}>
-                                    <p>As for shipping, we always look to transport items from our suppliers to our warehouses with the smallest possible carbon footprint. That means our products move around the world less by air, and more by boat! (After all, who doesn’t love a good cruise?)</p>
+                                <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={3}>
+                                    <p className="mb-g">As for shipping, we always look to transport items from our suppliers to our warehouses with the smallest possible carbon footprint. That means our products move around the world less by air, and more by boat! (After all, who doesn’t love a good cruise?)</p>
                                 </div>
                             </Carousel.Inner>
                             <Carousel.Navigation>
