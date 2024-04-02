@@ -91,6 +91,11 @@ module.exports = {
       0: 0,
       '1em': '1em',
     },
+    borderRadius: {
+      'none': '0',
+      'md': '0.5rem',
+      'full': '9999px',
+    },
     extend: {
       lineHeight: {
         base: '1.25rem',
