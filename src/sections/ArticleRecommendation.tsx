@@ -2,15 +2,15 @@ import { Col, Row } from "react-bootstrap";
 
 const RecommendationCard = (props) => {
 	return (
-		<Col lg={4} className="d-flex" as="figure">
-			<picture>
-				<img src={props.data.src} alt={props.data.title} />
+		<figure className="relative w-full lg:w-1/3 flex grow  lg:px-g sm:px-hg mb-[1rem]">
+			<picture className="lg:w-1/4">
+				<img src={props.data.src} alt={props.data.title} className="w-full" />
 			</picture>
-			<figcaption className="ms-1">
-				<p className="h3">{props.data.title}</p>
+			<figcaption className="lg:w-3/4 sm:w-4/5 ms-1">
+				<p className="h3 mb-1">{props.data.title}</p>
 				<p className="mb-0">{props.data.desc}</p>
 			</figcaption>
-		</Col>
+		</figure>
 	);
 };
 
@@ -36,16 +36,16 @@ const ArticleRecommendation = () => {
 		}
 	];
 	return (
-		<Col className="my-4">
+		<div className="w-full my-4">
 			<div className="bg-pink-light p-3 no-gutters__in-container">
-				<p className="h1 text-center">You may also like</p>
-				<Row className="mt-3 mb-0">
+				<p className="h1 text-center mb-1">You may also like</p>
+				<div className="flex flex-wrap mt-3 mb-0">
 					{RECOMMENDATIONS.map((data) => (
 						<RecommendationCard key={data.id} data={data} />
 					))}
-				</Row>
+				</div>
 			</div>
-		</Col>
+		</div>
 	);
 };
 

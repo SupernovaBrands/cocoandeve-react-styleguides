@@ -21,7 +21,7 @@ const BlogTemplate = () => {
 		<>
 			<Header toggleCart={toggleCart}  />
 			<Blog />
-			<Cart showCart={showCart} toggleCart={toggleCart} />
+			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 			<Footer />
 		</>
 	);
