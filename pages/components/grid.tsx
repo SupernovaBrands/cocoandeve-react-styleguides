@@ -12,7 +12,7 @@ export default function Grid() {
 	return (
 		<div className="mobile-wrapper pl-[7.5px] pr-[7.5px]">
 			<style jsx>{cssGrid}</style>
-			<h1>GRID</h1>
+			<h1 className="mb-1">GRID</h1>
 			<div className="container">
 				<div className="grid lg:grid-cols-12 grid-cols-4 lg:gap-3 gap-[15px]">
 					<div className="col"></div>
