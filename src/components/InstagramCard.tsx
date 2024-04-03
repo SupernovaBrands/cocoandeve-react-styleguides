@@ -1,7 +1,7 @@
 const InstagramCard = (props: any) => {
     const { videoUrl, author, product, url, classes } = props;
     return (
-        <div className={`ig-card text-left ${classes}`}>
+        <div className={`text-left ${classes}`}>
             <video className="w-full rounded-lg mb-1" muted={true} loop={true} webkit-playsinline={true} autoPlay={true}>
                 <source src={videoUrl} type="video/mp4" />
             </video>
