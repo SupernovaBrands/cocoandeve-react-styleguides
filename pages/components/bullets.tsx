@@ -29,11 +29,11 @@ const Bullets: React.FC<BulletsProps> = () => {
             onClick: onClick,
         },
         {
-            className: 'size-12 bg-white rounded-full mr-25',
+            className: 'size-12 bg-white rounded-full mr-25 opacity-50',
             onClick: onClick,
         },
         {
-            className: 'size-12 bg-white rounded-full',
+            className: 'size-12 bg-white rounded-full opacity-50',
             onClick: onClick,
         },
     ];
