@@ -94,7 +94,7 @@ const AnnouncementBar = (props: any) => {
 	return (
 		<div className={`announcement-bar  bg-primary-light w-100 px-[0] py-[0.59375em]`}>
 			<div className="container text-center font-bold">
-				<a href={url} className='text-secondary'>{mainText}</a>
+				<a href={url} className='text-secondary hover:text-secondary'>{mainText}</a>
 			</div>
 		</div>
 	);
