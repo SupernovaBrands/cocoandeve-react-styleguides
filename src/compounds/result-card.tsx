@@ -1,6 +1,5 @@
 import FiveStars from '../../src/images/icons/five-stars.svg';
 import Link from 'next/link';
-import Badge from '../badge';
 
 const ResultCard = (props: any) => {
 	return (
