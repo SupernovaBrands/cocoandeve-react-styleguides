@@ -1,7 +1,7 @@
 @layer components {
 	.btn {
 		@apply inline-block align-middle text-center select-none
-				border font-normal rounded py-1 px-3 leading-normal;
+				border font-bold rounded py-1 px-3 leading-normal;
 
 		&-lg {
 			@apply py-g px-4 leading-tight;
