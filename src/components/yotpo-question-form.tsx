@@ -94,7 +94,7 @@ const YotpoQuestionForm = (props) => {
 				</div>
 				<div className="flex form-group mb-1 items-center justify-end">
 					{hasError && <small className="text-primary mr-1">{tStrings.yotpo.formError}</small>}
-					<Button type="button" className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold" onClick={onSubmitButton} label={tStrings.yotpo.submit}></Button>
+					<Button type="button" className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold" onClick={onSubmitButton}>{tStrings.yotpo.submit}</Button>
 				</div>
 			</div>
 		</div>
