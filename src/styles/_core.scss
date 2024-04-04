@@ -15,9 +15,36 @@
 	}
 }
 
+@layer utilities {
+	.no-underline {
+		text-decoration: none;
+	}
+	.spinner-border {
+		display: inline-block;
+		width: 1.9rem;
+		height: 1.9rem;
+		vertical-align: -.125em;
+		border: .25em solid currentcolor;
+		border-right-color: transparent;
+		border-radius: 50%;
+		-webkit-animation: .75s linear infinite spinner-border;
+		@apply animate-spin
+	}
+}
+
 @layer components {
 	.bg-select-arrow {
 		background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.6 22.6'%3e%3cpath d='M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z'/%3e%3c/svg%3e") right 1em center/1em .5625em no-repeat;
+	}
+
+	.custom-radio {
+		input[type="radio"]:checked + span:before {
+			@apply bg-primary border-primary
+		}
+
+		input[type="radio"]:checked + span:after {
+			@apply bg-white content-[''] border-primary
+		}
 	}
 
 	.bg-checkbox-checked {
