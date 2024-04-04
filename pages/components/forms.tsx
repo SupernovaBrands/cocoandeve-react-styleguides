@@ -44,7 +44,7 @@ const Forms: React.FC = () => {
                             </div>
                             <div className="flex flew-wrap">
                                 <div className="w-full mt-1">
-                                    <Button label="Submit form" type="submit" buttonClass="btn-primary"></Button>
+                                    <Button type="submit" buttonClass="btn-primary">Submit form</Button>
                                 </div>
                             </div>
                         </form>

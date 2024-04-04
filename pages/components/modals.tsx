@@ -3,6 +3,10 @@ import ModalWaitlist from "@/components/modal/Waitlist";
 import ModalNewsletter from "@/components/modal/Newsletter";
 import { useState } from "react";
 import Sweepstakes from "@/components/modal/Sweepstakes";
+import CheckoutUpsell from "@/components/modal/CheckoutUpsell";
+import Button from "@/components/Button";
+import Birthday from "@/components/modal/Birthday";
+import ExitIntent from "@/components/modal/ExitIntent";
 
 const Modals = () => {
 	const [isOpen, toggle] = useState(false);
@@ -25,6 +29,16 @@ const Modals = () => {
 		toggleModal4(open);
 	};
 
+	const [modal5, toggleModal5] = useState(false);
+	const handlOpenModal5 = (open: boolean) => {
+		toggleModal5(open);
+	};
+
+	const [modal6, toggleModal6] = useState(false);
+	const handlOpenModal6 = (open: boolean) => {
+		toggleModal6(open);
+	};
+
 	const MODAL_WAITLIST = {
 		title: 'Oh coco-nuts!',
 		desc: 'Our <strong>Miracle Hair Elixir</strong>  has become a worldwide hit and we\'re struggling to keep up with the demand. But don\'t worry, we\'re on it! Sign up to join the waitlist.',
@@ -34,41 +48,105 @@ const Modals = () => {
 		ctaText: 'Yes, notify me!'
 	};
 
-	const MODAL_WAITLIST_TEST = {
-		title: 'Oh coco-nuts111!',
-		desc: 'Our <strong>Miracle Hair Elixir</strong>  has become a worldwide hit and we\'re struggling to keep up with the demand. But don\'t worry, we\'re on it! Sign up to join the waitlist.',
-		date: 'RESTOCKING 6th OCTOBER',
-		invalidEmail: 'Invalid Email Address',
-		email: 'Enter your email',
-		ctaText: 'Yes, notify me!'
+	const UPSELLS = [
+		{
+			id: 1,
+			name: 'Like A Virgin Hair Masque',
+			price: '$44.90',
+			crossedPrice: '$34.90',
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
+		},
+		{
+			id: 2,
+			name: 'Like A Virgin Hair Masque',
+			price: '$44.90',
+			crossedPrice: '$34.90',
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
+		},
+		{
+			id: 3,
+			name: 'Bali Buffing Sugar',
+			price: '$44.90',
+			crossedPrice: '$34.90',
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
+		}
+	];
+
+	const MODAL_NEWSLETTER = {
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Rectangle_2241.png?v=1696414159',
+		srcSet: 'https://cdn.shopify.com/s/files/1/0073/5186/1332/files/newsletter-bigger-mobile.png?v=1646639302',
+		title: 'Join the club',
+		subtitle: '& get a FREE hair wrap!',
+		desc: 'Get a FREE hair wrap on your first order, plus first access to new product launches, exclusive offers, routines, and beauty tips.',
+		tc: 'Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our Privacy Policy (opt out any time). Msg &amp; data rates may apply. Consent not required for purchase.'
+	};
+
+	const MODAL_SWEEPSTAKE = {
+		src: 'https://via.placeholder.com/690x414/FFF2F4',
+		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90d9a664-debc-4d42-8de7-bf77c6f94f00/public',
+		title: 'Win $500 of products',
+		subtitle: 'and exclusive savings on our Black Friday <br />Deals and future offers!'
+	};
+
+	const BIRTHDAY_DATA = {
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Mobile_29349535-f982-4299-8c2c-ce6aa5b74ae7.png',
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/DT_db2c8f07-cfcd-47af-b159-d2507acf8e92.png',
+		title: 'Don’t forget your birthday gift!',
+		desc: 'Tell us your birthday and enjoy $10 off to celebrate!',
+	};
+
+	const EXIT_INTENT = {
+		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d17ae0b2-d981-4cab-7c69-d70ea2ab7e00/public',
+		title: 'OUR BIGGEST<br />SALE EVER',
+		desc1: 'UP<br />TO',
+		desc2: '50% OFF',
+		text: 'Dont’s miss out!'
 	};
 
 
 	return (
 		<div className="container mt-4">
 			<h1 className="mb-1">Modal Waitlist</h1>
-			<button onClick={() => handlOpenModal(true)} className="bg-primary hover:bg-primary-darken rounded border border-transparent font-bold text-white py-[9px] px-[28px] mb-4">
-				Launch Modal
-			</button>
+			<Button lg={false} onClick={() => handlOpenModal(true)}>Launch modal</Button>
 			<Modal className="modal-lg" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
 				<ModalWaitlist data={MODAL_WAITLIST} handleClose={() => handlOpenModal(false)} />
 			</Modal>
 
-			<h1 className="mb-1">Modal Newsletter</h1>
-			<button onClick={() => handlOpenModal2(true)} className="bg-primary hover:bg-primary-darken rounded border border-transparent font-bold text-white py-[9px] px-[28px] mb-4">
-				Launch Modal
-			</button>
+			<h1 className="mt-4 mb-1">Modal Newsletter</h1>
+			<Button lg={false} onClick={() => handlOpenModal2(true)}>Launch modal</Button>
 			<Modal className="modal-lg lg:min-w-[48.1875em]" isOpen={modal2} handleClose={() => handlOpenModal2(false)}>
-				<ModalNewsletter handleClose={() => handlOpenModal2(false)} />
+				<ModalNewsletter handleClose={() => handlOpenModal2(false)} data={MODAL_NEWSLETTER} />
 			</Modal>
 
-			<h1 className="mb-1">Sweepstakes Signup Popup</h1>
-			<button onClick={() => handlOpenModal3(true)} className="bg-primary hover:bg-primary-darken rounded border border-transparent font-bold text-white py-[9px] px-[28px] mb-4">
-				Launch Modal
-			</button>
+			<h1 className="mt-4 mb-1">Sweepstakes Signup Popup</h1>
+			<Button lg={false} onClick={() => handlOpenModal3(true)}>Launch modal</Button>
 			<Modal className="modal-lg" isOpen={modal3} handleClose={() => handlOpenModal3(false)}>
 				{/* <ModalWaitlist data={MODAL_WAITLIST_TEST} handleClose={() => handlOpenModal2(false)} /> */}
-				<Sweepstakes handleClose={() => handlOpenModal3(false)} />
+				<Sweepstakes handleClose={() => handlOpenModal3(false)} data={MODAL_SWEEPSTAKE} />
+			</Modal>
+
+			<h1 className="mt-4 mb-1 hidden lg:block">Exit Intent</h1>
+			<div className="hidden lg:block">
+				<Button lg={false} onClick={() => handlOpenModal4(true)}>Launch Modal</Button>
+			</div>
+			<Modal className="modal lg:max-w-[39.375rem]" isOpen={modal4} handleClose={() => handlOpenModal4(false)}>
+				<ExitIntent handleClose={() => handlOpenModal4(false)} data={EXIT_INTENT} />
+			</Modal>
+
+			<h1 className="mt-4 mb-1">Birthday</h1>
+			<Button lg={false} onClick={() => handlOpenModal5(true)}>Launch Modal</Button>
+			<Modal className="modal-lg" isOpen={modal5} handleClose={() => handlOpenModal5(false)}>
+				<Birthday handleClose={() => handlOpenModal5(false)} data={BIRTHDAY_DATA} />
+			</Modal>
+
+
+			<h1 className="mt-4 mb-1">Checkout Upsell</h1>
+			<Button lg={false} onClick={() => handlOpenModal6(true)}>Launch Modal</Button>
+			<Modal className="modal lg:max-w-[24.063rem] mx-auto text-center" isOpen={modal6} handleClose={() => handlOpenModal6(false)}>
+				<CheckoutUpsell handleClose={() => handlOpenModal6(false)} title="Exclusive Offer Awaits!" description="Get additional discounted products now" products={UPSELLS} />
 			</Modal>
 
 		</div>
