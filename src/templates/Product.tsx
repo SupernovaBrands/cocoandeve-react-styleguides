@@ -271,14 +271,14 @@ const Product = (props: any) => {
                                     <div className="flex">
                                         <QuantityBox
                                             name="quantity-box"
-                                            editable={false}
+                                            editable={true}
                                             isLastStock={false}
                                             productStock={1}
                                             quantity={1}
                                             productId={32068892426275}
                                         />
                                         {/* <input className="btn btn-lg btn-primary btn-block ms-1 lg:ml-g w-full" type="submit" value="Add to Cart"></input> */}
-                                        <Button label="Add to Cart" type="submit" buttonClass="w-full ml-1 border border-primary bg-primary text-white hover:bg-primary-dark"></Button>
+                                        <Button type="submit" buttonClass="w-full ml-1 border border-primary bg-primary text-white hover:bg-primary-dark">Add to Cart</Button>
                                     </div>
                                 </div>
                             </div>
