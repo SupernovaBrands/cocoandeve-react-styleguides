@@ -4,8 +4,8 @@ import Help from '../../src/images/icons/help.svg';
 const ProductSubscription = (props) => {
 
     return (
-        <div className="sm:-mx-2 lg:-mx-0 no-gutters__in-container items-center px-2 mb-2 media flex product-subscription lg:rounded-sm">
-            <div className="media-body ml-0 lg:pl-1">
+        <div className="sm:-mx-2 lg:-mx-0 no-gutters__in-container items-center pl-2 mb-2 media flex product-subscription lg:rounded-sm max-h-[120px] overflow-hidden">
+            <div className="media-body ml-0 lg:pl-0 pr-1">
                 <span className="text-primary">Save 20% off + free shipping</span><br />when you subscribe!
                 <div className="input-group w-full flex justify-left px-0 lg:px-0">
                     <CheckBox labelClass="flex justify-left my-1 relative pl-3" label={`I want to subscribe`} id="subscribe" checked={false}/>
@@ -19,9 +19,9 @@ const ProductSubscription = (props) => {
                     </div> */}
                 </div>
             </div>
-            <picture className="block ml-1">
+            <picture className="flex grow">
                 <source srcSet="https://via.placeholder.com/154x110/EFADBA" media="(min-width: 992px)" />
-                <img src="https://via.placeholder.com/104x110/EFADBA" alt="Placeholder" />
+                <img src="https://via.placeholder.com/104x110/EFADBA" alt="Placeholder" className="sm:max-h-1/2 w-full object-cover"/>
             </picture>
         </div>
     );

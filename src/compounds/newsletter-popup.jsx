@@ -1,6 +1,5 @@
 import CloseRounded from '../../src/images/icons/close-rounded.svg';
 import ChevronDown from '../../src/images/icons/chevron-down.svg';
-// import Popup from '@/components/Popup';
 import dynamic from 'next/dynamic';
 const Popup = dynamic(() => import('@/components/Popup'), {
     ssr: false,

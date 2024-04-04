@@ -166,7 +166,7 @@ const Product = (props: any) => {
                                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" media="(min-width: 992px)" />
                                     <img alt="Tan Quiz" className="w-full h-full rounded-0" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" loading="lazy" width="400" height="110"/>
                                 </picture>
-                                <figcaption className="absolute px-2 px-lg-3 bottom-[50%] translate-y-1/2 top-0 left-0">
+                                <figcaption className="absolute px-2 px-lg-3 top-1/2 -translate-y-1/2 top-0 left-0">
                                     <p className="font-bold mb-1">Your true colour match<br/> is 90 seconds away!</p>
                                     <a href="#" className="px-g rounded-full bg-white text-primary text-sm py-1 border border-primary font-bold">Find my Match</a>
                                 </figcaption>
@@ -309,7 +309,7 @@ const Product = (props: any) => {
                         </a>
                         <a href="#" className="underline text-primary text-sm lg:order-2 mb-2" role="button">Terms and Conditions</a>
                         {/* proud to be and accordion */}
-                        <div className="proud-to-be-wrapper mb-3 mt-3 lg:mb-0 lg:order-2">
+                        <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
                             <h2 className="mb-0">Proud to be</h2>
                             <div className="">
                                 <div className="carousel--scroll position-relative">
@@ -345,7 +345,7 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-3 mt-3 lg:mb-3 lg:order-2">
+                        <div className="mb-3 lg:mt-2 lg:mb-3 lg:order-2">
                             <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} />
                         </div>
                         {/* end of proud to be and accordion */}

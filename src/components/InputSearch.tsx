@@ -18,13 +18,13 @@ const InputSearch: React.FC<InputSearchProps> = ({ id, placeHolder, textButton, 
     }
 
     return (
-        <div className="relative flex items-stretch w-full">
-            <span className="absolute top-[35%] left-1">
-                <SearchIcon className="svg w-1em fill-primary"/>
+        <div className="relative flex items-stretch w-full mb-1">
+            <span className="absolute top-1/2 -translate-y-1/2 left-1">
+                <SearchIcon className="svg w-2 fill-primary"/>
             </span>
             <input type="text"
                 defaultValue={searchText}
-                className="block appearance-none w-full py-1 pl-4 pr-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded rounded-full outline-none mb-0"
+                className="block appearance-none w-full py-1 pl-4 pr-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded rounded-full outline-none mb-0"
                 onChange={onChangeSearch}
                 id={id} placeholder={placeHolder} />
             {searchText !== undefined && searchText !== null && searchText !== "" && (
