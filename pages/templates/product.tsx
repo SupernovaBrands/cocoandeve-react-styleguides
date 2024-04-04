@@ -76,8 +76,8 @@ const ProductTemplate = () => {
 			{/* <Sustainability /> */}
 			<div className="pt-4 pb-2 bg-gray-100">
 				<div className="container">
-					<div className="row">
-						<h2 className="h1 mb-2 col-12 text-center">Customer Reviews</h2>
+					<div className="row px-1">
+						<h2 className="h1 mb-2 w-full text-center">Customer Reviews</h2>
 						<YotpoReviews
 							productId={4543113265187}
 							productName='Sunny Honey Bali Bronzing Foam'
