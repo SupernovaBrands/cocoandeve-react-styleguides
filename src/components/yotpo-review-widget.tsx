@@ -474,7 +474,7 @@ const YotpoReviewWidget = (props) => {
 		</div>
 	) : (
 		<>
-			<div className="flex items-center lg:justify-center">
+			<div className="flex items-center lg:justify-center mb-3">
 				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />
@@ -518,17 +518,17 @@ const YotpoReviewWidget = (props) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className="flex flex-wrap justify-end">
+					<div className="flex flex-wrap justify-end -mx-1">
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('review')} label={tStrings.yotpo.writeReview}
 								type="button"
-								buttonClass="btn-outline-primary">
+								buttonClass="btn-outline-primary w-full">
 							</Button>
 						</div>
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('question')} label={tStrings.yotpo.askQuestion}
 								type="button"
-								buttonClass="btn-outline-primary">
+								buttonClass="btn-outline-primary w-full">
 							</Button>
 						</div>
 					</div>
@@ -750,15 +750,15 @@ const YotpoReviewWidget = (props) => {
 					{!revLoading && revPage.totalPage > 1 && (
 						<ul className="list-unstyled flex justify-center items-center mt-2">
 							<li>
-								<button type="button" className={`text-primary btn border-0 text-primary px-1 ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 							</li>
 							{revPage.show.map((v) => (
 								<li key={v}>
-									<button type="button" className={`text-primary btn border-0 text-primary px-1 ${v === revPage.page ? 'font-bold' : ''}`} onClick={() => onRevPageChange(v)}>{v}</button>
+									<button type="button" className={`text-primary btn border-0 text-primary px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
 								</li>
 							))}
 							<li>
-								<button type="button" className={`text-primary btn border-0 text-primary px-1 ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 							</li>
 						</ul>
 					)}
@@ -908,7 +908,7 @@ const YotpoReviewWidget = (props) => {
 											</a> */}
 										</div>
 									)}
-									<button type="button" className="close absolute flex lg:hidden mr-25" aria-label="Close" onClick={() => setIsOpen(false) }>
+									<button type="button" className="close absolute flex lg:hidden right-0" aria-label="Close" onClick={() => setIsOpen(false) }>
 										<SvgCloseCircle className="svg size-1em" />
 									</button>
 								</div>
