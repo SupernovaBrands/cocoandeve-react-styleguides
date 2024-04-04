@@ -1,5 +1,3 @@
-import { Button } from '@/components/index';
-
 const Playground = (props) => {
     return (
         <section className="container text-center pb-0 playground--collection-list range-banner pt-5">
