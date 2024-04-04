@@ -3,7 +3,7 @@ import CountriesOptions from "@/components/countries-options";
 const ProductWaitlist = (props: any) => {
 	return (
 		<>
-			<div className="product-waitlist product-waitlist__form w-full p-3 mb-3 rounded bg-pink-light">
+			<div className="w-full p-3 mb-3 rounded-lg bg-pink-light">
 				<p className="text-lg font-bold mb-1">Join the waitlist</p>
 				<p className="mb-3">Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.</p>
 				<form data-pdp="false" data-product-id="product-id">
@@ -32,19 +32,19 @@ const ProductWaitlist = (props: any) => {
 							<div className="custom-control custom-checkbox relative flex-grow max-w-full flex-1 flex my-1">
 								<input type="checkbox" name="tos" className="custom-control-input" required id="agreement"/>
 								<label className="custom-control-label text-xs ml-1" htmlFor="agreement">
-									I agree to the <a className="link-secondary text-underline text-xs" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a> and <a className="link-secondary text-underline text-xs" href="/pages/terms-and-conditions" target="_blank" aria-label="Terms of Use">Terms of Use</a>
+									I agree to the <a className="link-secondary underline text-body text-xs" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a> and <a className="link-secondary underline text-body text-xs" href="/pages/terms-and-conditions" target="_blank" aria-label="Terms of Use">Terms of Use</a>
 								</label>
 							</div>
 						</div>
-						<small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
+						<small className="w-full text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
 					</div>
 					<div className="flex my-1">
 						<input className="inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full bg-primary text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[8px]" type="submit" value="Submit" />
 					</div>
-					<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
+					<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-body underline" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
 				</form>
 			</div>
-			<div className="product-waitlist product-waitlist--launch product-waitlist__submitted w-100 p-3 mb-3 rounded text-center {{ class }} d-none">
+			<div className="w-100 p-3 mb-3 rounded text-center hidden">
 				<h3 className="mx-4 mx-lg-5">Thank you for subcribing to our waitlist!</h3>
 				<p className="font-size-sm mb-0">We'll keep you posted on our Bronzing Face Drop launch!. We hope you're exited as much as we are.</p>
 			</div>
