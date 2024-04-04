@@ -3,7 +3,7 @@ import Close from '@/images/icons/close.svg';
 const Sweepstakes = (props: any) => {
 	const { handleClose, data } = props;
 	return (
-		<div className="modal-content rounded-[20px] relative overflow-hidden mx-g lg:mx-4">
+		<div className="modal-content relative overflow-hidden mx-g lg:mx-4">
 			<div className="modal-body px-0 py-0">
 				<picture className="w-100 lg:hidden">
 					<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90d9a664-debc-4d42-8de7-bf77c6f94f00/public" media="(min-width: 992px)" />

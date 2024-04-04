@@ -4,7 +4,7 @@ import ChevronDown from '@/images/icons/chevron-down.svg';
 const Newsletter = (props: any) => {
 	const { handleClose, data } = props;
 	return (
-		<div className="modal-content rounded-[20px] bg-secondary relative overflow-hidden">
+		<div className="modal-content bg-secondary relative overflow-hidden">
 			<picture className="absolute w-full lg:h-100 lg:w-auto">
 				<source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Rectangle_2241.png?v=1696414159" media="(min-width: 992px)" />
 				<img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/files/newsletter-bigger-mobile.png?v=1646639302" className="w-full lg:w-auto" />
