@@ -520,15 +520,17 @@ const YotpoReviewWidget = (props) => {
 				<div id="yotpoFormCollapse" className="mt-2">
 					<div className="flex flex-wrap justify-end">
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
-							<Button onClick={() => handleForm('review')} label={tStrings.yotpo.writeReview}
+							<Button onClick={() => handleForm('review')}
 								type="button"
 								buttonClass="btn-outline-primary">
+									{tStrings.yotpo.writeReview}
 							</Button>
 						</div>
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
-							<Button onClick={() => handleForm('question')} label={tStrings.yotpo.askQuestion}
+							<Button onClick={() => handleForm('question')}
 								type="button"
 								buttonClass="btn-outline-primary">
+									{tStrings.yotpo.askQuestion}
 							</Button>
 						</div>
 					</div>
