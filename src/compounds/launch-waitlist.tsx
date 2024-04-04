@@ -29,7 +29,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                     </div>
                     <div className="flex flex-wrap items-center justify-start">
                         <div className="-mt-1">
-                            <CheckBox label={`I agree to <a href="#">Privacy Policy & ToS<\/a>`} id="agreement" checked={true}/>
+                            <CheckBox label={`I agree to <a href="#">Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={true}/>
                             <small className="w-full text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
                         </div>
                     </div>
