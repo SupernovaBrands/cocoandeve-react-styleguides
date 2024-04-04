@@ -1,12 +1,12 @@
 import Play from '../../src/images/icons/play.svg';
 
-const VideoCard = (props) => {
+const VideoCard = (props: any) => {
 	return !props.useCardTemplate ? (
         <figure className="video-card mb-4 px-lg-2">
             <picture className="block relative w-full">
                 <source srcSet={props.item.srcSet} media="(min-width: 992px)" />
-                <img src={props.item.src} alt="Placeholder" className="d-block w-full" />
-                <Play className="svg h-[1em]" fill="white" />
+                <img src={props.item.src} alt="Placeholder" className="block w-full" />
+                <Play className="svg" fill="white" />
             </picture>
             {props.item.title && (
                 <figcaption className="text-center mt-2">
