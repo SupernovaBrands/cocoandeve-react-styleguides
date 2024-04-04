@@ -15,7 +15,7 @@ const SaveResults = (props: any) => {
             <div className="sm:-mx-2 lg:-mx-0 sm:bg-primary-light lg:bg-transparent items-center px-4 py-2 mb-2 bg-sm-primary-light-second text-center lg:text-left lg:px-0">
                 <p className="h2 mb-1">Save your quiz result!</p>
                 <p className="mb-1">Don’t loose your result, we can save it on your account.</p>
-                <Button buttonClass="border-primary text-primary bg-white px-5 py-1 mt-1 font-bold" label="Yes, save my result"/>
+                <Button buttonClass="border-primary text-primary bg-white px-5 py-1 mt-1 font-bold">Yes, save my result</Button>
             </div>
         </>
     );

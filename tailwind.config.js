@@ -95,6 +95,7 @@ module.exports = {
       'none': '0',
       'DEFAULT': '0.5em',
       'full': '9999px',
+      'h': '0.25em',
     },
     extend: {
       lineHeight: {

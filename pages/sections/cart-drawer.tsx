@@ -23,7 +23,7 @@ const CartDrawerSection = (): ReactElement => { // Add type annotation for retur
 	return (
 		<div className="container">
 			<h1>Cart Drawer</h1>
-			<Button label="Show Cart" type="button" onClick={toggleCart}></Button>
+			<Button type="button" onClick={toggleCart}>Show Cart</Button>
 			<Cart showCart={show} handleClose={handleClose} />
 		</div>
 	);
