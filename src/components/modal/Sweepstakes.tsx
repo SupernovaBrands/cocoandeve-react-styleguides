@@ -1,5 +1,6 @@
 import ChevronDown from '@/images/icons/chevron-down.svg';
 import Close from '@/images/icons/close.svg';
+import SelectCountry from '../SelectCountry';
 const Sweepstakes = (props: any) => {
 	const { handleClose, data } = props;
 	return (
@@ -31,28 +32,7 @@ const Sweepstakes = (props: any) => {
 								<label htmlFor="sweepstakes-popup__country" className="input-group-addon relative text-center rounded appearance-none bg-white border-r-0 h-[50px] w-[77px] lg:w-[87px] flex items-center pr-2">
 									<span className="absolute sweepstakes-popup__country-label items-center bg-white pl-g">+65</span>
 									<ChevronDown className="w-[12px] h-[12px] right-1 absolute" />
-									<select id="modal--sweepstakes__country" className="inline-block h-[50px] w-[50px] align-middle opacity-0">
-										<option value="" disabled>Select Country</option>
-										<option value="KH" data-code="855">Cambodia</option>
-                                        <option value="HK" data-code="852">Hong Kong</option>
-										<option value="IL" data-code="972">Israel</option>
-										<option value="JP" data-code="81">Japan</option>
-										<option value="KR" data-code="82">South Korea</option>
-										<option value="LA" data-code="856">Laos</option>
-										<option value="MO" data-code="853">Macau</option>
-										<option value="MY" data-code="60">Malaysia</option>
-										<option value="MV" data-code="960">Maldives</option>
-										<option value="MM" data-code="95">Myanmar</option>
-										<option value="PG" data-code="675">Papua New Guinea</option>
-										<option value="PH" data-code="63">Philippines</option>
-										<option value="RE" data-code="262">Réunion</option>
-										<option value="RU" data-code="7">Russia</option>
-										<option value="SG" data-code="65" selected>Singapore</option>
-										<option value="LK" data-code="94">Sri Lanka</option>
-										<option value="TW" data-code="886">Taiwan</option>
-										<option value="TR" data-code="90">Turkey</option>
-										<option value="VN" data-code="84">Vietnam</option>
-									</select>
+									<SelectCountry id="modal--sweepstakes__country" />
 								</label>
 								<input className="block appearance-none w-full rounded border-l-0 bg-white " type="phone" value="" placeholder="Phone number" />
 							</div>

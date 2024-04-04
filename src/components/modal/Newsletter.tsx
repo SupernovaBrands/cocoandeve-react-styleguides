@@ -1,5 +1,7 @@
 import Close from '@/images/icons/close.svg';
 import ChevronDown from '@/images/icons/chevron-down.svg';
+import CloseButton from './CloseButton';
+import SelectCountry from '../SelectCountry';
 
 const Newsletter = (props: any) => {
 	const { handleClose, data } = props;
@@ -14,7 +16,8 @@ const Newsletter = (props: any) => {
 				<img src="https://us.cocoandeve.com/cdn/shop/files/Web_pop_up_Tan_Mobile_2_764x332_crop_center.png?v=1697783796" className="w-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:pt-4 lg:pb-3">
-				<Close onClick={handleClose} className="cursor-pointer svg--current-color w-[14px] h-[14px] absolute right-[14px] top-[14px] text-white"/>
+				{/* <Close onClick={handleClose} className="cursor-pointer svg--current-color w-[14px] h-[14px] absolute right-[14px] top-[14px] text-white"/> */}
+				<CloseButton handleClose={handleClose} className="text-white" />
 				<div className="flex flex-wrap justify-end mx-0">
 					<form className="modal--newsletter__form lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0">
 						<h2 className="modal--newsletter__title h1 text-center text-white mb-0">Join the club</h2>
@@ -25,34 +28,12 @@ const Newsletter = (props: any) => {
 						</div>
 						<p className="text-center modal--newsletter__separator text-white mb-1 mt-1">and / or</p>
 						<div className="relative flex items-stretch w-full">
-							<label htmlFor="modal--newsletter__country" className="input-group-addon relative py-g px-2 mb-1 block appearance-none bg-white rounded rounded-tr-none rounded-br-none h-[50px] w-[81px] lg:w-[91px]">
+							<label htmlFor="modal--newsletter__country" className="input-group-addon border-0 relative py-g px-2 mb-1 block appearance-none bg-white rounded rounded-tr-none rounded-br-none h-[50px] w-[81px] lg:w-[91px]">
 								<span className="absolute modal--newsletter__country-label items-center">+65</span>
 								<ChevronDown className="w-[12px] h-[12px] right-25 absolute" />
-
-								<select id="modal--newsletter__country" className="inline-block h-[50px] w-[50px] align-middle opacity-0">
-									<option value="" disabled>Select Country</option>
-									<option value="KH" data-code="855">Cambodia</option>
-									<option value="HK" data-code="852">Hong Kong</option>
-									<option value="IL" data-code="972">Israel</option>
-									<option value="JP" data-code="81">Japan</option>
-									<option value="KR" data-code="82">South Korea</option>
-									<option value="LA" data-code="856">Laos</option>
-									<option value="MO" data-code="853">Macau</option>
-									<option value="MY" data-code="60">Malaysia</option>
-									<option value="MV" data-code="960">Maldives</option>
-									<option value="MM" data-code="95">Myanmar</option>
-									<option value="PG" data-code="675">Papua New Guinea</option>
-									<option value="PH" data-code="63">Philippines</option>
-									<option value="RE" data-code="262">Réunion</option>
-									<option value="RU" data-code="7">Russia</option>
-									<option value="SG" data-code="65" selected>Singapore</option>
-									<option value="LK" data-code="94">Sri Lanka</option>
-									<option value="TW" data-code="886">Taiwan</option>
-									<option value="TR" data-code="90">Turkey</option>
-									<option value="VN" data-code="84">Vietnam</option>
-								</select>
+								<SelectCountry id="modal--newsletter__country" />
 							</label>
-							<input id="modal--newsletter__phone" className="block appearance-none w-full py-g px-2 mb-1 bg-white rounded border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder="Phone number" aria-label="phone" />
+							<input id="modal--newsletter__phone" className="block border-0 appearance-none w-full py-g px-2 mb-1 bg-white rounded border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder="Phone number" aria-label="phone" />
 						</div>
 						<input type="submit" className="bg-primary hover:bg-primary-darken w-full rounded border-0 border-transparent font-bold text-white py-g" value="Submit" />
 						<p className="font-size-xs text-white mt-g text-center mb-0 mx-1">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our Privacy Policy (opt out any time). Msg &amp; data rates may apply. Consent not required for purchase.</p>

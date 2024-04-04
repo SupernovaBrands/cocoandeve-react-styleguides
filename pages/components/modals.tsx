@@ -51,21 +51,24 @@ const Modals = () => {
 			name: 'Like A Virgin Hair Masque',
 			price: '$44.90',
 			crossedPrice: '$34.90',
-			img: 'https://via.placeholder.com/115x115'
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
 		},
 		{
 			id: 2,
 			name: 'Like A Virgin Hair Masque',
 			price: '$44.90',
 			crossedPrice: '$34.90',
-			img: 'https://via.placeholder.com/115x115'
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
 		},
 		{
 			id: 3,
-			name: 'Like A Virgin Hair Masque',
+			name: 'Bali Buffing Sugar',
 			price: '$44.90',
 			crossedPrice: '$34.90',
-			img: 'https://via.placeholder.com/115x115'
+			src: 'https://via.placeholder.com/115x115',
+			srcSet: 'https://via.placeholder.com/115x115'
 		}
 	];
 
