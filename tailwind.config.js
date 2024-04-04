@@ -93,7 +93,7 @@ module.exports = {
     },
     borderRadius: {
       'none': '0',
-      'lg': '0.5rem',
+      'DEFAULT': '0.5em',
       'full': '9999px',
     },
     extend: {
