@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import PercentSquare from '@/images/icons/percent-square.svg';
 import Button from '@/components/Button';
-import CloseButton from './CloseButton';
+import CloseButton from '@/components/modal/CloseButton';
 
 interface Product {
 	name: string
@@ -15,10 +15,10 @@ type CheckoutUpsellProps = {
 	title: string
 	description: string
 	products: Product[]
-	handleClose: (e: ChangeEvent<HTMLInputElement>) => void;
+	handleClose: (e: ChangeEvent<HTMLInputElement>) => void
 }
 const CheckoutUpsell: React.FC<CheckoutUpsellProps> = ({ title, description, products, handleClose }) => (
-	<div className="modal-content bg-white relative -mx-g border lg:border-0">
+	<div className="modal-content bg-white -mx-g border lg:border-0">
 		<CloseButton handleClose={handleClose} />
 		<div className="modal-body text-center px-3 lg:px-4 py-4">
 			<PercentSquare className="svg svg--current-color mb-3 h-[2.25em] text-body mx-auto" />
