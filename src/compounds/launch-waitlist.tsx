@@ -34,7 +34,9 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         </div>
                     </div>
                     <div className="flex flex-wrap px-2 -mx-2">
-                        <Button label="Submit form" type="submit" buttonClass="bg-primary text-white hover:bg-primary-dark w-full my-hg"></Button>
+                        <Button type="submit" buttonClass="bg-primary text-white hover:bg-primary-dark w-full my-hg">
+                            Submit Form
+                        </Button>
                     </div>
                     <p className="font-size-xs">{props.policy}</p>
                 </form>

@@ -1,7 +1,7 @@
 const AddToCartButton = (props: any) => {
     const { className, label } = props;
     return (
-        <button type="button" className={`${className ? className : 'mb-1'} w-[210px!important] max-width-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded-lg sm:py-1 lg:py-g leading-normal no-underline px-3`}>
+        <button type="button" className={`${className ? className : 'mb-1'} w-[210px!important] max-width-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
             <span className="w-full block text-base text-center">{label ?? 'Add to Cart'}</span>
         </button>
     );
@@ -36,7 +36,7 @@ const ProductCardUpsell = (props) => {
     return (
         <div className={`sm:min-w-[310px] w-full lg:w-1/3 ${props.item.active} product-card grow px-1 lg:px-2`}>
             <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
-                <span className="rounded-lg p-25 top-[10px] left-[10px] bg-white absolute font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
+                <span className="rounded p-25 top-[10px] left-[10px] bg-white absolute font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
                 <picture className="ratio ratio-1x1 mx-auto my-0 lg:mx-0">
                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />
                     <a href="#" className="no-underline hover:no-underline text-black hover:text-black">
