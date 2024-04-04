@@ -607,7 +607,7 @@ const YotpoReviewWidget = (props) => {
 							</div>
 						)} */}
 
-						<div className="flex flex-wrap mt-1 ">
+						<div className="flex flex-wrap mt-1 -mx-1">
 							<div className="w-1/2 lg:w-1/4 px-1">
 								<select className="custom-select my-1" name="scores" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.rating}</option>
@@ -673,18 +673,21 @@ const YotpoReviewWidget = (props) => {
 					{!revLoading && reviews.length > 0 && (
 						<>
 							<p className="font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
-							<div className="" role="list">
+							<div className="container" role="list">
 								{reviews.map((review) => (
-									<div key={review.id} className="border-b py-3 flex flex-wrap lg:-mx-2">
-										<div className="w-full lg:w-1/4 px-2">
-											<h4 className="mb-0 flex items-center">
+									<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div className="w-full lg:w-1/4 pl-0 lg:pr-2">
+											<h4 className="mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 												{review.user_name}
 												{review.verified_buyer && <SvgVerified className="svg text-xs ms-25 text-secondary size-[1em] fill-secondary" />}
 											</h4>
-											{review.verified_buyer && <p className="text-sm mb-0">{tStrings.yotpo.verifiedBuyer}</p>}
-											<p className="text-sm mb-1">
+											{review.verified_buyer && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
+											<p className="text-sm mb-1 sm:hidden lg:block">
 												{formatDate(review.created_at)}
 											</p>
+											<div className="flex text-secondary mb-1 sm:block lg:hidden">
+												<ReviewStar score={review.score} />
+											</div>
 											{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
 												<p key={kebabCase(field[0])} className="text-sm mb-0">
 													<strong>
@@ -697,16 +700,12 @@ const YotpoReviewWidget = (props) => {
 													</span>
 												</p>
 											))}
-											<span className="text-sm bg-gray-400 inline-flex text-sm my-2 py-1 px-2">
-												<SvgTranslate className="svg me-1" />
-												{ translateText() }
-											</span>
 										</div>
-										<div className="w-full lg:w-3/4 px-2">
-											<div className="flex text-secondary mt-1 lg:mt-0">
+										<div className="w-full lg:w-3/4 lg:pl-2 pr-0">
+											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>
-											<h4 className="mb-1 mt-1">
+											<h4 className="mb-1 mt-1 font-bold">
 												{decodeHtml(review.title)}
 											</h4>
 											<p className="mb-1">
@@ -793,7 +792,7 @@ const YotpoReviewWidget = (props) => {
 
 					{!qnaLoading && questions.length > 0 && questions.map((question) => (
 						<div key={question.id} className="pt-3 pb-4 border-b">
-							<h4 className="mb-0">{question.user_name}</h4>
+							<h4 className="mb-0 font-bold">{question.user_name}</h4>
 							<p className="text-sm mb-0">{tStrings.yotpo.verifiedReviewer}</p>
 							<p className="text-sm ml-auto mb-1">
 								{formatDate(question.created_at)}
@@ -807,7 +806,7 @@ const YotpoReviewWidget = (props) => {
 							</p>
 							{question.sorted_public_answers.map((answer) => (
 								<div key={answer.id} className="ml-4 mt-2 border-l pl-3">
-									<h4 className="mb-0 text-lg">{tStrings.yotpo.storeOwner}</h4>
+									<h4 className="mb-0 text-lg font-bold">{tStrings.yotpo.storeOwner}</h4>
 									<p className="text-sm">{formatDate(answer.created_at)}</p>
 									<p className="mt-2 text-md" dangerouslySetInnerHTML={{ __html: `A: ${answer.content}` }}></p>
 									<div className="flex justify-end items-center mt-3">
@@ -916,7 +915,7 @@ const YotpoReviewWidget = (props) => {
 								<div className="lg:w-1/2 pl-lg-0 ">
 									<div className="px-3 py-3">
 										<div className="flex">
-											<h4 className="mb-0 text-sm">{reviewModal.user_name}</h4>
+											<h4 className="mb-0 text-sm font-bold">{reviewModal.user_name}</h4>
 											{reviewModal.verified_buyer && (<span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>)}
 											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at)}</span>
 										</div>
