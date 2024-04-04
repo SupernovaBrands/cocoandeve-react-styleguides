@@ -869,7 +869,6 @@ const YotpoReviewWidget = (props) => {
 															<PrevButton
 																onClick={() => autoPlayClick7(arrowClickPrev7)}
 																disabled={prevDisabled7}
-																className="absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center border-0 bg-none"
 															>
 																<span className="left-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center right-0 bg-pink-light">
 																	<ChevronPrev className="w-[1em] h-[1em] fill-primary" />
@@ -878,7 +877,6 @@ const YotpoReviewWidget = (props) => {
 															<NextButton
 																onClick={() => autoPlayClick7(arrowClickNext7)}
 																disabled={nextDisabled7}
-																className="absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center border-0 bg-none"
 															>
 																<span className="right-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center bg-pink-light">
 																	<ChevronNext className="w-[1em] h-[1em] fill-primary" />

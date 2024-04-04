@@ -2,12 +2,11 @@
 	.carousel {
 
 		&__container {
-			backface-visibility: hidden;
 			@apply touch-pan-y;
 		}
 
-		&__button--half-rounded {
-			box-shadow: 0 .25em .25em rgba(0,0,0,0.2);
+		&__dots {
+			@apply flex flex-wrap items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem];
 		}
 
 		&__dots li {
@@ -16,6 +15,18 @@
 
 		&__dot {
 			@apply appearance-none touch-manipulation w-full h-full indent-[-999px];
+		}
+
+		&__button {
+			@apply absolute top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] text-center bg-none border-0;
+
+			&--prev {
+				@apply left-0;
+			}
+
+			&--next {
+				@apply right-0;
+			}
 		}
 
 		&__lazy-load__spinner {
