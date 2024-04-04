@@ -284,7 +284,7 @@ const Product = (props: any) => {
                             </div>
                             <SaveResults />
                             <div className="flex items-center mb-1">
-                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 w-[94px]">
+                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 min-w-[5.875em]">
                                     <img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
