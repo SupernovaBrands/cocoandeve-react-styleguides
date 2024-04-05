@@ -273,7 +273,7 @@ const Product = (props: any) => {
                                             name="quantity-box"
                                             editable={true}
                                             isLastStock={false}
-                                            productStock={1}
+                                            productStock={20}
                                             quantity={1}
                                             productId={32068892426275}
                                         />
