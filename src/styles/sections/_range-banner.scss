@@ -1,10 +1,5 @@
 @layer components {
     .range-banner {
-        img,
-        picture {
-            border-radius: 0.625rem;
-        }
-
         figcaption {
             top: 50%;
             transform: translateY(-50%);
