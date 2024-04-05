@@ -34,9 +34,18 @@ const QuantityBox = dynamic(() => import('@/components/cart/quantity-box'), {
     ssr: false,
 });
 
-const OPTIONS: EmblaOptionsType = { loop: true, align: 'start'}
-const SLIDE_COUNT = 10
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+const SLIDES = [
+    { id: 1, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 2, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 3, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 4, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 5, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 6, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 7, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 8, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 9, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 10, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+];
 
 const Product = (props: any) => {
     const [isMedium, setMedium] = useState(true);
@@ -146,7 +155,7 @@ const Product = (props: any) => {
             <div className="container sm:px-0 lg:px-g mb-4 lg:mt-5">
                 <div className="flex flex-wrap items-start">
                     <div className="product-image-carousel__container w-full lg:w-3/5 lg:order-2 lg:sticky lg:top-[-3em]">
-                        <ProductImageCarousel slides={SLIDES} options={OPTIONS} />
+                        <ProductImageCarousel slides={SLIDES} bottomBadge="👻 Get 3 for 2 with code: HALLOWEEN 👻" />
                     </div>
                     <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-2">
                         <YotpoStar productId={4543113265187} showTotal={true} className="justify-start"/>
