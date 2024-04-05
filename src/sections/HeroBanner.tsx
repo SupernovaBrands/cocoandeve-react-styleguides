@@ -59,7 +59,7 @@ const HeroBanner = (props: any) => {
 					))}
 				</Carousel.Inner>
 				<Carousel.Navigation>
-					<ol className="carousel__dots">
+					<ol className="carousel__dots justify-end">
 						{SLIDES.map((_, index) => (
 							<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
 								<DotButton
