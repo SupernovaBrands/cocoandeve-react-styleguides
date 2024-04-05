@@ -1,6 +1,6 @@
 @layer components {
 	.svg {
-		@apply h-1em;
+		@apply h-[1em];
 		&--current-color {
 			path {
 				fill: currentColor;
