@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '@/components/carousel/EmblaCarouselMulti';
 import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
 import Autoplay from 'embla-carousel-autoplay';
+import Modal from "@/components/Modal";
 import {
 	PrevButton,
 	NextButton,
@@ -14,6 +15,7 @@ import {
 import ChevronNext from '@/images/icons/chevron-next.svg';
 import ChevronPrev from '@/images/icons/chevron-prev.svg';
 import { LazyLoadImage } from '@/components/carousel/EmblaCarouselLazyLoadImage';
+import TermCondition from '@/components/modal/TermCondition';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -42,36 +44,49 @@ const HeroBanner = (props: any) => {
 		const autoplay = emblaApi?.plugins()?.autoplay;
 		if (!autoplay) return;
 	}, [emblaApi]);
+
+	const [isOpen, setIsOpen] = useState(false);
+	const handleOpenModal = () => {
+		setIsOpen(!isOpen);
+	}
 	
 	return (
-		<section className="pb-4">
-			<Carousel.Wrapper emblaApi={emblaApi}>
-				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-					{SLIDES.map((slide, index) => (
-						<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
-							<div className="flex items-center justify-center">
-								<picture>
-									<source srcSet={slide.imgDesk} media="(min-width: 1025px)" width="1200" height="458" />
-									<img className="block w-full" src={slide.imgMob} alt={`slide ${index + 1}`} />
-								</picture>
+		<>
+			<section>
+				<Carousel.Wrapper emblaApi={emblaApi}>
+					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+						{SLIDES.map((slide, index) => (
+							<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
+								<div className="flex items-center justify-center">
+									<picture>
+										<source srcSet={slide.imgDesk} media="(min-width: 1025px)" width="1200" height="458" />
+										<img className="block w-full" src={slide.imgMob} alt={`slide ${index + 1}`} />
+									</picture>
+								</div>
 							</div>
-						</div>
-					))}
-				</Carousel.Inner>
-				<Carousel.Navigation>
-					<ol className="carousel__dots flex flex-wrap justify-end items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
-						{SLIDES.map((_, index) => (
-							<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
-								<DotButton
-									onClick={() => onClick1(index)}
-									className="carousel__dot"
-								/>
-							</li>
 						))}
-					</ol>
-				</Carousel.Navigation>
-			</Carousel.Wrapper>
-		</section>
+					</Carousel.Inner>
+					<Carousel.Navigation>
+						<ol className="carousel__dots flex flex-wrap justify-end items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+							{SLIDES.map((_, index) => (
+								<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
+									<DotButton
+										onClick={() => onClick1(index)}
+										className="carousel__dot"
+									/>
+								</li>
+							))}
+						</ol>
+					</Carousel.Navigation>
+				</Carousel.Wrapper>
+			</section>
+			<div className="pt-1 text-center lg:text-left container">
+				<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
+			</div>
+			<Modal className="modal-lg" isOpen={isOpen}>
+				<TermCondition handleClose={() => handleOpenModal()} />
+			</Modal>
+		</>
 	);
 };
 
