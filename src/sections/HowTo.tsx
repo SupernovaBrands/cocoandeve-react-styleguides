@@ -103,7 +103,7 @@ const HowToCarousel: React.FC = () => {
 					<PrevButton
 						onClick={() => autoPlayClick7(arrowClickPrev7)}
 						disabled={prevDisabled7}
-						className="absolute left-0 top-0 lg:-left-g bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+						className="lg:-left-g"
 					>
 						<span className="top-[30%] shadow-md left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="w-[1em] h-[1em] svg--current-color" />
@@ -112,7 +112,7 @@ const HowToCarousel: React.FC = () => {
 					<NextButton
 						onClick={() => autoPlayClick7(arrowClickNext7)}
 						disabled={nextDisabled7}
-						className="absolute right-0 lg:-right-g top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center bg-none border-0"
+						className="lg:-right-g"
 					>
 						<span className="top-[30%] shadow-md right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
 							<ChevronNext className="w-[1em] h-[1em] svg--current-color" />

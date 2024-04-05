@@ -49,7 +49,7 @@ const HeroBanner = (props: any) => {
 	const handleOpenModal = () => {
 		setIsOpen(!isOpen);
 	}
-	
+
 	return (
 		<>
 			<section>
@@ -67,7 +67,7 @@ const HeroBanner = (props: any) => {
 						))}
 					</Carousel.Inner>
 					<Carousel.Navigation>
-						<ol className="carousel__dots flex flex-wrap justify-end items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%] mb-[1rem]">
+					<ol className="carousel__dots justify-end">
 							{SLIDES.map((_, index) => (
 								<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
 									<DotButton

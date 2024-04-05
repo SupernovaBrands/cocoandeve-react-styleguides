@@ -52,7 +52,7 @@ const TestimonialCarousel = (props: any) => {
 				<Carousel.Navigation>
 					<PrevButton
 						onClick={() => autoPlayClick(arrowClickPrev)}
-						className="absolute left-0 top-0 bottom-0 z-[1] items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0 hidden lg:flex"
+						className="text-body hidden lg:flex"
 					>
 						<span className="left-0 bg-white w-5 h-5 absolute shadow-lg z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
 							<ChevronPrev className="w-g h-g svg--current-color" />
@@ -60,14 +60,14 @@ const TestimonialCarousel = (props: any) => {
 					</PrevButton>
 					<NextButton
 						onClick={() => autoPlayClick(arrowClickNext)}
-						className="absolute right-0 top-0 bottom-0 z-[1] hidden lg:flex items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0"
+						className="text-body hidden lg:flex"
 					>
 						<span className="right-0 bg-white w-5 h-5 absolute shadow-lg z-[-1] flex justify-center items-center rounded-tr-full rounded-br-full lg:rounded-full">
 							<ChevronNext className="w-g h-g svg--current-color" />
 						</span>
 					</NextButton>
 					<Carousel.Navigation>
-						<ol className="carousel__dots mb-0 pt-3 flex flex-wrap justify-center items-center absolute right-0 bottom-0 left-0 z-[15] p-0 mr-[10%] ml-[10%]">
+						<ol className="carousel__dots justify-center">
 							{data.map((_: any, index: number) => (
 								<li key={index} className={`border border-gray-600 ${index === idx ? ' bg-body' : ''}`}>
 									<DotButton

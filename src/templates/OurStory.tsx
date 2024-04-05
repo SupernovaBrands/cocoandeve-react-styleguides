@@ -145,7 +145,7 @@ const OurStoryTemplate = () => {
 					<Carousel.Navigation>
 						<PrevButton
 							onClick={() => autoPlayClick(arrowClickPrev)}
-							className="absolute left-0 top-0 lg:-left-0 bottom-0 z-[1] flex items-center justify-center w-[15%] p-0 text-center bg-none border-0 opacity-90"
+							className="lg:-left-0 w-[15%] opacity-90"
 						>
 							<span className="carousel__button--half-rounded left-0 lg:-left-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
 								<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color lg:-mr-[2em]" />
@@ -153,7 +153,7 @@ const OurStoryTemplate = () => {
 						</PrevButton>
 						<NextButton
 							onClick={() => autoPlayClick(arrowClickNext)}
-							className="absolute right-0 lg:-right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[15%] p-0 text-center bg-none border-0  opacity-90"
+							className="lg:-right-0 w-[15%] opacity-90"
 						>
 							<span className="carousel__button--half-rounded right-0 lg:-right-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
 								<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color lg:-ml-[2em]" />

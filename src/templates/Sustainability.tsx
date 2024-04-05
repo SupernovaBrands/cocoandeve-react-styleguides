@@ -260,7 +260,7 @@ const Sustainability = () => {
                                     <PrevButton
                                         onClick={() => autoPlayClick1(arrowClickPrev1)}
                                         disabled={prevDisabled1}
-                                        className={`absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center p-0 ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'} text-center bg-none border-0`}
+                                        className={`${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                     >
                                         <ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
                                     </PrevButton>
@@ -268,7 +268,7 @@ const Sustainability = () => {
                                     <NextButton
                                         onClick={() => autoPlayClick1(arrowClickNext1)}
                                         disabled={nextDisabled1}
-                                        className={`absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center p-0 ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'} text-center bg-none border-0`}
+                                        className={`${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                     >
                                         <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
                                     </NextButton>
@@ -328,7 +328,7 @@ const Sustainability = () => {
                             ))}
                         </Carousel.Inner>
                         <Carousel.Navigation>
-                            <ol className="carousel__dots flex flex-wrap justify-center items-center p-0 mr-[10%] ml-[10%] my-2 lg:hidden">
+                            <ol className="carousel__dots justify-center my-2 lg:hidden static">
                                 {PACKAGING.map((_, index) => (
                                     <li key={index} className={`border border-primary ${index === idx2 ? ' bg-primary' : 'bg-white opacity-50'}`}>
                                         <DotButton
@@ -372,7 +372,7 @@ const Sustainability = () => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick3(arrowClickPrev3)}
-								className="absolute left-0 lg:-left-[1.25em] top-0 lg:w-4 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-primary text-center bg-none border-0"
+								className="lg:-left-[1.25em] lg:w-4 text-primary"
 							>
 								<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
 									<ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
@@ -380,7 +380,7 @@ const Sustainability = () => {
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick3(arrowClickNext3)}
-								className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] lg:w-4 p-0 text-primary text-center bg-none border-0"
+								className="lg:-right-[1.25em] lg:w-4 text-primary"
 							>
 								<span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
 									<ChevronNext className="w-[16px] h-[16px] svg--current-color" />

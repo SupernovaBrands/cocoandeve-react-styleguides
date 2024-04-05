@@ -132,7 +132,7 @@ const PostCards = () => {
 					<Carousel.Navigation>
 						<PrevButton
 							onClick={() => autoPlayClick(arrowClickPrev)}
-							className="absolute left-0 lg:-left-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[auto] p-0 text-primary text-center bg-none border-0"
+							className="lg:-left-[1.25em] w-[auto] text-primary"
 						>
 							<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 								<ChevronPrev className="w-g h-g svg--current-color" />
@@ -140,7 +140,7 @@ const PostCards = () => {
 						</PrevButton>
 						<NextButton
 							onClick={() => autoPlayClick(arrowClickNext)}
-							className="absolute right-0 lg:-right-[1.25em] top-0 bottom-0 z-[1] flex items-center justify-center w-[auto] p-0 text-primary text-center bg-none border-0"
+							className="lg:-right-[1.25em] w-[auto] text-primary"
 						>
 							<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 								<ChevronNext className="w-g h-g svg--current-color" />
