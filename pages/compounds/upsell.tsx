@@ -13,7 +13,7 @@ const Upsell = () => {
 		    </div>
 			<h2 className="mt-4 mb-1">PDP</h2>
 			<div className="flex flex-wrap">
-				<div className="w-full lg:w-2/5">
+				<div className="w-full lg:w-5/12">
 					<UpsellPdp className="mb-3" title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
 					<UpsellPdp className="mb-3" title="That’s A Wrap Bundle" content="Like A Virgin Coconut Hair Masque, Two-tiered Tangle Tamer." comparePrice="£139.90" price="£129.90" />
 				</div>
