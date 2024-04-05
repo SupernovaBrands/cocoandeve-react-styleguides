@@ -51,20 +51,19 @@ type VariantProp = {
 	keyName?: string
 }
 
-const ProductVariant: React.FC<VariantProp> = (props) => {
-	return (
-		<div key={props.keyName} className={`product-variant custom-radio w-full relative ${props.className}`}>
-            <input id={props.id} className="custom-control-input absolute left-0 -z-[1] w-2 h-2 opacity-0" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
-            <label htmlFor={props.id} className={`border-0 lg:border lg:border-gray-600 inline-block p-0 pl-[2em] relative mb-0 align-top custom-control-label w-full lg:py-2 lg:pr-2 rounded ${props.checked ? 'border-primary' : ''} ${props.checked ? 'before:border-primary before:bg-primary before:text-white' : 'before:border-gray-500'} before:top-0`}>
-				{props.children}
-				<p className="mb-0 font-size-sm font-bold">
-                    {props.compare && <span className="line-through text-body me-25 text-nowrap">{props.compare}</span> }
-                    <span className="text-primary me-25 text-nowrap">{props.price}</span>
-                </p>
-            </label>
-        </div>
-	);
-};
+const ProductVariant: React.FC<VariantProp> = (props) => (
+	<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
+		<input id={props.id} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
+		<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
+			{props.children}
+			<p className="mb-0 font-size-sm font-bold">
+				{props.compare && <span className="line-through text-body mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]">{props.compare}</span> }
+				<span className="text-primary mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]"> {props.price} </span>
+				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline"> (SAVE 30%) </span>}
+			</p>
+		</label>
+	</div>
+);
 
 ProductVariant.defaultProps = {
 	subscription: false,
