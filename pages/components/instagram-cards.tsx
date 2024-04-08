@@ -2,7 +2,7 @@ import InstagramCard from "@/components/InstagramCard";
 
 const InstagramCards = () => {
 	return (
-		<div className="container">
+		<div className="">
 			<h1>Instagram Card</h1>
             <div className="flex flex-wrap">
                 <InstagramCard
