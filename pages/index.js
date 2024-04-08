@@ -68,6 +68,7 @@ export default function Home() {
           <Link href="./sections/testimonials-carousel">Testimonials Carousel</Link>
           <Link href="./sections/testimonials">Testimonials</Link>
           <Link href="./sections/yotpo-widget">Yotpo Widget</Link>
+          <Link href="./sections/quiz-rewards">Discover More</Link>
         </div>
         <div className="w-full lg:w-1/2 px-0 lg:px-g mb-3 flex flex-col items-start">
           <h2>Templates</h2>
