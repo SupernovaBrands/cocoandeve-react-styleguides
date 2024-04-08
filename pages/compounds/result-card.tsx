@@ -16,7 +16,7 @@ const ResultCards = () => {
 		<div className="container mt-4">
 			<h1 className="mb-1">Result Card</h1>
 			<div className="row">
-				<ResultCard item={REVIEW} wrapper="col-9 lg:w-1/3" />
+				<ResultCard item={REVIEW} wrapper="w-9/12 lg:w-1/4" />
 			</div>
 		</div>
 	);
