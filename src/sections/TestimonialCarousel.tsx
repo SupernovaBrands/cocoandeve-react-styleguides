@@ -30,15 +30,15 @@ const TestimonialCarousel = (props: any) => {
 	const { data } = props;
 	const { selectedIndex: idx, onDotButtonClick: onClick } = useDotButton(emblaApi);
 	return (
-		<div className="container text-center py-4">
+		<div className="container text-center">
 			<h2 className="h1 mb-0">As seen in</h2>
-			<Carousel.Wrapper emblaApi={emblaApi}>
+			<Carousel.Wrapper emblaApi={emblaApi} className="lg:pb-2">
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{data.map((item: any) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full text-center" key={item.index}>
 							<div className="flex flex-col items-center justify-center !font-normal h3 mt-4 px-2 pb-4 lg:pt-2 lg:px-4 testimonials-carousel__quote relative">
-								<QuoteDown className="text-primary opacity-30 absolute w-[41px] h-[32px] left-3 -top-g lg:-top-1 svg--current-color lg:left-4" />
-								<QuoteUp className="text-primary opacity-30 absolute w-[41px] h-[32px] right-3 lg:right-[50px] bottom-[50%] lg:bottom-[55%] svg--current-color" />
+								<QuoteDown className="text-primary opacity-30 absolute w-4 h-[2em] left-3 -top-g lg:-top-1 svg--current-color lg:left-4" />
+								<QuoteUp className="text-primary opacity-30 absolute w-4 h-[2em] right-3 lg:right-[3.125em] bottom-[50%] lg:bottom-[55%] svg--current-color" />
 								<p className="mb-4 lg:pb-3">{item.quote}</p>
 								<picture className="block mx-auto">
 									<source srcSet={item.srcSet} media="(min-width: 992px)" />
