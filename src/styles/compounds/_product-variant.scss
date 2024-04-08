@@ -1,34 +1,24 @@
 @layer components {
 	.product-variant {
+		@apply w-full relative;
 
 		.custom-control-label {
-			padding-left: 2em;
-			@screen lg {
-				padding-left: calc-em(69, $unit: 1rem);
-			}
+			@apply border-0 lg:border lg:border-gray-600 inline-block p-0 pl-[2em] lg:pl-[4.313em]
+				relative mb-0 align-top  w-full lg:py-2 lg:pr-2 rounded before:top-0;
+
 			&::before {
-				@apply absolute block w-[1.25em] h-[1.25em] pointer-events-none bg-white top-0 left-0 border border-gray-600 rounded-full;
+				@apply absolute block w-[1.25em] h-[1.25em] pointer-events-none bg-white
+					top-0 left-0 border border-gray-500 rounded-full content-['']
+					transition-all duration-150 ease-in-out;
 				@screen lg {
-					top: calc-em(20, $unit: 1rem);
-					left: calc-em(24, $unit: 1rem);
+					@apply top-[1.25rem] left-[1.5rem];
 				}
-				content: '';
-				transition: background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
 			}
 
 			&::after {
-				@apply absolute top-0 -left-[1.75em] block w-[1.25em] h-[1.25em];
-				content: '';
-				background: 50% / 50% 50% no-repeat;
+				@apply absolute top-0 -left-[1.75em] block w-[1.25em] h-[1.25em] content-['']
+					bg-no-repeat bg-[length:50%_50%] bg-[50%_center];
 			}
-
-			.svg {
-				height: calc-em(16, $unit: 1rem);
-			}
-		}
-
-		.custom-control-input:checked ~ .custom-control-label::before {
-			@apply text-white border-primary bg-primary;
 		}
 
 		.product-swatch,
@@ -36,7 +26,14 @@
 			@apply hidden;
 		}
 
+		&__saving {
+			@apply bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px];
+		}
+
 		.custom-control-input {
+
+			@apply absolute left-0 -z-[1] w-2 h-2 opacity-0;
+
 			&:not(:disabled):active ~ .custom-control-label::before {
 				@apply bg-white;
 			}
@@ -51,11 +48,12 @@
 
 			&:checked ~ .custom-control-label {
 				@apply border-primary;
-				.product-swatch,
-				.product-variant__note {
-					@apply block;
-				}
 
+				&::before {
+					@apply text-white border-primary bg-primary;
+				}
+				.product-swatch,
+				.product-variant__note,
 				.product-variant__description {
 					@apply block;
 				}

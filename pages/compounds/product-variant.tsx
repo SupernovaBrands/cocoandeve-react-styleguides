@@ -62,7 +62,7 @@ const ProductVariants = () => {
 					>
 						<p className="mb-1 font-bold">
 							1x Sunny Honey Bali Bronzing Bundle
-							<span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px]">Save 30%</span>
+							<span className="product-variant__saving">Save 30%</span>
 						</p>
 						<p className="product-variant__description mb-1 font-size-sm">1x Masque + Brush</p>
 						<p className="product-variant__description mb-1 font-size-sm">1x Other items</p>
@@ -83,7 +83,7 @@ const ProductVariants = () => {
 						className="mb-3"
 					>
 						<p className="mb-1 font-bold">
-							Bronzing Face Drops <span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px]">Save 30%</span>
+							Bronzing Face Drops <span className="product-variant__saving">Save 30%</span>
 						</p>
 						<Product.Notes notes={notes} />
 					</Product.Variant>
@@ -97,7 +97,7 @@ const ProductVariants = () => {
 						className="mb-3"
 					>
 						<p className="mb-1 font-bold flex items-center">
-							Subscription (20% OFF) <span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px] ml-25">Save 30%</span>
+							Subscription (20% OFF) <span className="product-variant__saving">Save 30%</span>
 							<a className="text-primary ms-1" data-container="body" data-toggle="popover" data-placement="top" data-content="<strong>No fuss and frizz, just good hair days ahead.</strong><br/>Keep your hair routine in check and never run out of your washday must-haves every month and free shipping on top of that.<br/><br/>Cancel anytime, and come back when you're ready. ❤️" data-html="true">
 								<Help className="svg svg--current-color" />
 							</a>
