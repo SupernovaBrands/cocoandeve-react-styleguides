@@ -7,6 +7,7 @@ import Carousel from '@/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import InstagramCard from '@/components/InstagramCard';
+import Link from 'next/link';
 const options: EmblaOptionsType = {
 	loop: true,
 };
@@ -37,15 +38,15 @@ const RealResultCarousel = (props: any) => {
 	const { videos } = props;
 
 	return (
-		<div className="instagram-reels container my-3 my-lg-4 text-center">
+		<div className="instagram-reels container my-3 lg:my-4 text-center">
 			<p className="h1 mb-2">Real Results</p>
             <div className="row">
-                <div>
+                <div className="text-center">
                     <ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
-						<li><TabNav className={`py-[6px] px-g ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
-						<li><TabNav className={`py-[6px] px-g ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-                        <li><TabNav className={`py-[6px] px-g ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
-                        <li><TabNav className={`py-[6px] px-g ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
+						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
+						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
+                        <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
+                        <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
                     </ul>
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>
@@ -108,6 +109,7 @@ const RealResultCarousel = (props: any) => {
 								</Carousel.Inner>
 							</Carousel.Wrapper>
 						</TabContent>
+						<Link href="#" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5 mt-3">See All Results</Link>
                     </div>
                 </div>
 			</div>
