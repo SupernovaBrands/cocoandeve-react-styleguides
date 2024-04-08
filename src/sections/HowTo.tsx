@@ -74,17 +74,17 @@ const HowToCarousel: React.FC = () => {
 
 	return (
 		<section className="how-to py-2 no-gutters__in-container mb-5">
-			<h2 className="text-center h1 py-2 py-lg-1 mb-0">The Ultimate How-Tos</h2>
-			<Carousel.Wrapper emblaApi={emblaApi7} className="-mx-hg">
+			<h2 className="text-center h1 pt-2 pb-3 mb-0">The Ultimate How-Tos</h2>
+			<Carousel.Wrapper emblaApi={emblaApi7}>
 				<Carousel.Inner emblaRef={emblaRef7} className="lg:-mx-g">
 					{items.map((item, index) => (
-						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-hg lg:px-g">
+						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g">
 							<figure className="border border-secondary-light">
 								<a href="/" className="relative">
 									<picture className="w-full aspect-[4/3] m-0">
-										<img className="w-full aspect-[4/3] max-h-[18.625em] object-cover" alt="Image Alt" loading="lazy" src="https://via.placeholder.com/375x340.jpg/EFADBA"/>
+										<img className="w-full aspect-[4/3] max-h-[11.125em] lg:max-h-[18.625em] object-cover" alt="Image Alt" loading="lazy" src="https://via.placeholder.com/375x340.jpg/EFADBA"/>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
-											className="absolute text-white size-[4em] fill-white top-0 bottom-0 m-auto w-full">
+											className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 												<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
 												</svg>
 									</picture>
@@ -103,19 +103,19 @@ const HowToCarousel: React.FC = () => {
 					<PrevButton
 						onClick={() => autoPlayClick7(arrowClickPrev7)}
 						disabled={prevDisabled7}
-						className="lg:-left-g"
+						className="-left-hg lg:-left-g"
 					>
-						<span className="top-[30%] shadow-md left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
-							<ChevronPrev className="w-[1em] h-[1em] svg--current-color" />
+						<span className="carousel__button--direction shadow-md left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
+							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
 					<NextButton
 						onClick={() => autoPlayClick7(arrowClickNext7)}
 						disabled={nextDisabled7}
-						className="lg:-right-g"
+						className="-right-hg lg:-right-g"
 					>
-						<span className="top-[30%] shadow-md right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
-							<ChevronNext className="w-[1em] h-[1em] svg--current-color" />
+						<span className="carousel__button--direction shadow-md right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
+							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>
 				</Carousel.Navigation>
