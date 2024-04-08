@@ -1,16 +1,17 @@
 import Link from "next/link";
 import YotpoStar from "@/components/YotpoStars";
+import { Button } from "../components";
 
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <button type="button" className={`${className ? className : 'mb-1'} flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded-full sm:py-[2.5px] lg:py-12 leading-normal no-underline px-2`}>
-            <span className="w-full lg:w-1/2 block text-base text-center lg:text-left">Add to Cart</span>
-            <span className="w-full lg:w-1/2 block text-base text-center lg:text-right">
-                <span className="line-through mr-25">{props.comparePrice}</span>
+        <Button buttonClass={`${props.className ?? ''} flex sm:flex-col lg:flex-row sm:btn-sm sm:text-sm md:text-base btn-primary rounded-full`}>
+            <span className="w-full lg:w-1/2 block text-center lg:text-left">Add to Cart</span>
+            <span className="w-full lg:w-1/2 block text-center lg:text-right">
+                {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
-        </button>
+        </Button>
     );
 };
 
@@ -18,7 +19,7 @@ const SwatchOverlay = (props) => {
     return (
         <>
             <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mb-1"/>
-            <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t-lg bottom-[35px]">
+            <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
                         {props.swatch.style && <strong>Style: </strong>}
@@ -44,24 +45,24 @@ const ProductCardTall = (props) => {
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             { props.product.badgeText && (<span className="badge bg-white absolute font-normal text-sm text-body">{props.product.badgeText}</span>) }
-            <Link href="#" className="rounded-t-lg bg-pink-light">
-                <picture className="block relative aspect-square bg-pink-light rounded-t-lg">
+            <Link href="#" className="rounded-t bg-pink-light">
+                <picture className="block relative aspect-square bg-pink-light rounded-t">
                     <source srcSet={props.product.srcSet} />
-                    <img src={props.product.src} className="w-full rounded-t-lg" alt="Image Alt" loading="lazy" />
+                    <img src={props.product.src} className="w-full rounded-t" alt="Image Alt" loading="lazy" />
                     {props.showTip && (
                         <>
-                            <span className="product-card__image-tip position-absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span className="product-card__image-tip position-absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
+                            <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+                            <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
                         </>
                     )}
                 </picture>
             </Link>
-            <div className="pt-1 pb-0 px-1 relative grow flex flex-col bg-pink-light rounded-b-lg">
+            <div className="pt-1 pb-0 px-1 relative grow flex flex-col bg-pink-light rounded-b">
                 <div className="flex justify-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={true} />
                 </div>
-                <p className="grow flex flex-col justify-center h-100 px-2 text-lg mb-1">
-                    <Link href="#" className="text-body text-base lg:text-lg hover:text-primary-dark">{props.product.title}</Link>
+                <p className="grow flex flex-col justify-center h-100 px-1 text-lg mb-1">
+                    <Link href="#" className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && (
                     <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} />
