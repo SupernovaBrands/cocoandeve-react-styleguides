@@ -84,7 +84,7 @@ const ProductCarousels = () => {
 	return (
 		<>
 			<div className="container px-g mt-4">
-				<h1>Product Carousel</h1>
+				<h1 className="mb-1">Product Carousel</h1>
 			</div>
 			<ProductCarousel products={PRODUCTS} />
 		</>
