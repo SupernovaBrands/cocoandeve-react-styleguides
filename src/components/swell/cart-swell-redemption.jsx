@@ -114,7 +114,7 @@ const CartSwellRedemption = (props) => {
 		</div>
 	) : (
 		<div className="cart-drawer__swell-redemption relative mt-2">
-			<strong className="d-block mb-1">{(customerEmail && customerId) ? tSettings.cartRedemption.title : tSettings.cartRedemption.titleGuest}</strong>
+			<strong className="block mb-1">{(customerEmail && customerId) ? tSettings.cartRedemption.title : tSettings.cartRedemption.titleGuest}</strong>
 			{swellItems.length > 0 && isError && (
 				<p className="text-sm text-primary mb-1">{errorMsg.replace(/(<([^>]+)>)/ig, '')}</p>
 			)}

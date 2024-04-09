@@ -40,7 +40,7 @@ const Modal = (props: any) => {
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
 						{children}
 					</ModalContainer>}
-					{cartDrawer && <CartContainer className={`w-full absolute ${className} px-g lg:px-0`} variants={horizontalVariant} onClick={(e) => e.stopPropagation()}>
+					{cartDrawer && <CartContainer className={`w-full absolute ${className} px-0`} variants={horizontalVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
 						{children}
 					</CartContainer>}
