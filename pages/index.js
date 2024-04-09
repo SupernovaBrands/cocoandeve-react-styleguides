@@ -12,7 +12,7 @@ export default function Home() {
           <Link href="./components/typography">Typography</Link>
           <Link href="./components/accordions">Accordions</Link>
           <Link href="./components/announcement-bar">Announcement Bar</Link>
-          <Link href="./components/badge">Badge</Link>
+          <Link href="./components/badges">Badges</Link>
           <Link href="./components/breadcrumbs">Breadcrumbs</Link>
           <Link href="./components/bullets">Bullets</Link>
           <Link href="./components/buttons">Buttons</Link>
