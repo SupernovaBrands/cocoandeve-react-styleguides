@@ -27,9 +27,16 @@ export default function TabsComponents() {
 						<li><TabNav className="py-[6px] w-[7.5em] px-g text-base lg:text-lg" title='Value Sets' active={activeTab === 'value-sets'} onNavChange={() => setActiveTab('value-sets')} /></li>
 					</ul>
 					<div className='px-2'>
-						<TabContent active={activeTab === 'new'}><p></p></TabContent>
-						<TabContent active={activeTab === 'best-sellers'}><p></p></TabContent>
-						<TabContent active={activeTab === 'value-sets'}><p></p></TabContent>
+						<TabContent active={activeTab === 'new'}>
+							<h2>Content 1</h2>
+						</TabContent>
+						<TabContent active={activeTab === 'best-sellers'}>
+							<h2 className='mb-1'>Why do we use it?</h2>
+							<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+						</TabContent>
+						<TabContent active={activeTab === 'value-sets'}>
+							<h2>Content 3</h2>
+						</TabContent>
 					</div>
 				</div>
 			</div>
@@ -64,6 +71,15 @@ export default function TabsComponents() {
 						);
 					})}
 				</ul>
+			</div>
+			<div className='px-2'>
+				<TabContent active={activeTab2 === 'all'}>All Content</TabContent>
+				<TabContent active={activeTab2 === 'tan'}>Tan Content</TabContent>
+				<TabContent active={activeTab2 === 'hair'}>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+				</TabContent>
+				<TabContent active={activeTab2 === 'skin'}>Skin Content</TabContent>
+				<TabContent active={activeTab2 === 'body'}>Body Content</TabContent>
 			</div>
 		</div>
 	);
