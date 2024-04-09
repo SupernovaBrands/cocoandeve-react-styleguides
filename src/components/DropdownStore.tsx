@@ -8,7 +8,7 @@ const DropdownStore = (props: any) => {
         'opacity-100 [transform:translate3d(0px,_-295px,_0px)!important] h-[17.5em] h-[295px]' :
         'opacity-100 [transform:translate3d(0px,_22px,_0px)!important] h-[17.5em] h-[295px]';  
     return (
-        <div className="lg:text-right relative">
+        <div className="relative">
             <div className="relative">
                 <button onClick={() => setOpen(!open)} className={`py-2.5 text-center inline-flex items-center after:inline-block after:ml-[0.255em] after:border-t-[0.3em] after:border-solid after:border-t-primary after:border-x-[0.3em] after:border-b-0 after:border-x-transparent text-body text-base font-bold ${props.labelClass}`} type="button">{activeCountry}</button>
                 <div className={` absolute left-0 bg-white  text-base z-50 list-none [transition:all_0.3s] opacity-0 h-[0] top-[0] ${direction === 'dropup' ? '[transform:translate3d(0,_0,_0)]' : '[transform:translate3d(0,_20px,_0)]'} bottom-[0] overflow-hidden ${!open ? '' : openClasses }`}>
