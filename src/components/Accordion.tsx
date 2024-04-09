@@ -13,7 +13,7 @@ const Accordion = (props: any) => {
 		<div className="border-t border-b border-gray-500 accordion w-full accordion-flush" id="accordionSimple">
 			{data.map((d: Accordion) => (
 				<div key={d.id} className="accordion-item border-t border-b border-gray-500">
-                    <div className={`cursor-pointer flex w-full justify-between items-center text-primary hover:text-primary-darken hover:underline py-12 ${props.openIndex === d.id ? 'border-b border-gray-500' : ''}`} onClick={() => props.onClick(d.id)}>
+                    <div className={`cursor-pointer flex w-full justify-between items-center text-primary hover:text-primary-darken py-12 ${props.openIndex === d.id ? 'border-b border-gray-500' : ''}`} onClick={() => props.onClick(d.id)}>
 	                   	<span>{d.title}</span>
 	                    <ChevronDownIcon className={`transform transition-transform size-12 ${props.openIndex === d.id ? 'rotate-180' : ''}`}/>
 					</div>
