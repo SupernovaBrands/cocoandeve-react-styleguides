@@ -35,7 +35,7 @@ const TestimonialSection = () => {
     return (
 		<>
 			<h1>Testimonials Carousel</h1>
-            <section className="testimonials-carousel bg-gray-100 mt-4 py-4">
+            <section className="testimonials-carousel bg-gray-100 mt-4 pt-4 pb-3">
                 <TestimonialCarousel data={carouselItems} />
             </section>
 
