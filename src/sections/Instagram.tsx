@@ -4,9 +4,9 @@ const Instagram = (props) => {
             <div className="w-11/12 lg:w-2/3 text-center mx-auto pb-4 sm:px-hg">
                 <p className="h2 mb-1">Get social with us</p>
                 <p className="h4 mb-1">
-                    <a href="#" target="_blank"  className="text-body underline lg:text-lg text-base font-bold lg:font-normal">@cocoandeve</a>
+                    <a href="#" target="_blank"  className="text-body lg:text-lg text-base font-bold lg:font-normal underline">@cocoandeve</a>
                 </p>
-                <p className="h4 !font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                <p className="h4 !font-normal mb-0">Want to feature on our website or instagram? Tag us in your Coco & Eve hair, self tanner or skincare photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
             </div>
             <div className="instagram--feed container-fluid p-lg-0">
                 <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1">

@@ -30,8 +30,8 @@ const Footer = (props: any) => {
                         <p className='mb-1'>Receive exclusive offers, promotions and beauty tips via email.</p>
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
-                        <Form />
-                        <p className="text-sm lg:mt-0 mb-0 lg:mb-1 lg:order-0">Please read our <Link href="#" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
+                        <Form classes="lg:order-1" />
+                        <p className="text-sm mt-1 lg-mt-0 mb-0 lg:mb-1 lg:order-0">Please read our <Link href="#" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ const Footer = (props: any) => {
                             <li><a href="" className='text-body'>Privacy Policy</a></li>
                         </ul>
                     </div>
-                    <div className="[grid-area:nav-follow] hidden lg:block text-right">
+                    <div className="[grid-area:nav-follow] hidden lg:block text-left">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
                         <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank">
                             <Instagram className="h-[1.25em]" />
@@ -110,7 +110,7 @@ const Footer = (props: any) => {
                     </div>
                 </div>
                 <hr className="border-body opacity-[.2] mb-1 mt-4 lg:mb-1" />
-                <p className="flex justify-center items-baseline mt-1 lg:mt-3 mb-4 text-sm">© 2022 Coco&amp;Eve</p>
+                <p className="flex justify-center items-baseline mt-1 lg:mt-3 mb-4 text-sm">© 2024 Coco&amp;Eve</p>
             </div>
         </footer>
     );

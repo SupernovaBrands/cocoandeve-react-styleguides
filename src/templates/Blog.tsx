@@ -113,7 +113,8 @@ const Blog = () => {
 				<div className="blog-nav-tags mb-4 flex mt-2">
                     <BlogNavTag title="All" active={true} />
                     <BlogNavTag title="Hair"/>
-                    <BlogNavTag title="Tan"/>
+                    <BlogNavTag title="Tan & SPF"/>
+					<BlogNavTag title="Skin"/>
                     <BlogNavTag title="Body"/>
                     <BlogNavTag title="How to's"/>
                 </div>
@@ -157,7 +158,7 @@ const Blog = () => {
 					)}
 				</div>
 				<div className="w-100 text-center mb-4">
-					<Link href="#" className="bg-transparent hover:bg-primary hover:text-white rounded-lg border-2 border-primary font-bold text-primary py-[13px] px-[54px]">Load more posts</Link>
+                	<Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline">Load more posts</Link>
 				</div>
 			</div>
 		</div>

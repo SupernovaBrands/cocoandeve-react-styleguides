@@ -63,7 +63,7 @@ const ArticleTemplate = () => {
 									<Documents className="ml-25" />
 								</button>
 							</div>
-							<p className="text-sm mb-0 text-gray-600">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
+							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
 						</div>
 					</div>
 				</div>
@@ -81,19 +81,19 @@ const ArticleTemplate = () => {
 					</picture>
 				</a>
 				<time className="mb-1">23 April, 2020</time>
-				<ul className="block mb-4 mt-1 text-[30px]">
+				<ul className="block mb-4 mt-1 text-[1.875em]">
 					<li className="inline-block mr-[0.5rem]">
-						<a href="#" className="no-underline text-primary text-[30px]">
+						<a href="#" className="no-underline text-primary text-[1.875em]">
 							<Twitter className="svg fill-primary h-[1em]" />
 						</a>
 					</li>
 					<li className="inline-block mr-[0.5rem]">
-						<a href="#" className="no-underline text-primary text-[30px]">
+						<a href="#" className="no-underline text-primary text-[1.875em]">
 							<Facebook className="svg fill-primary h-[1em]" />
 						</a>
 					</li>
 					<li className="inline-block">
-						<a href="#" className="no-underline text-primary text-[30px]">
+						<a href="#" className="no-underline text-primary text-[1.875em]">
 							<Pinterest className="svg fill-primary h-[1em]" />
 						</a>
 					</li>

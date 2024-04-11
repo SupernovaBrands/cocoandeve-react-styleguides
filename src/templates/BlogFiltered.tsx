@@ -73,7 +73,7 @@ const BlogFiltered = (props) => {
                 </ul>
                 <div className="blog-grid flex flex-wrap mt-3 lg:mt-4 lg:mb-4">
                     <div className="blog-grid__search col hidden lg:block mb-2 items-start lg:px-g sm:px-hg">
-                        <div className="py-2 px-2 bg-primary-light">
+                        <div className="py-2 px-2 bg-primary-light-second">
                             <InputSearch id="searchInput" placeHolder="Search" textButton="Search" onChange={onSearchChange}></InputSearch>
                         </div>
                     </div>
@@ -87,8 +87,8 @@ const BlogFiltered = (props) => {
                     </div>
                     <div className="blog-grid__sidebar w-full lg:block mb-4 mb-lg-0 lg:px-g sm:px-hg">
                     <aside className="blog-grid__sidebar lg:sticky w-full lg:block mb-4 lg:mb-0 self-start">
-                        <div className="no-gutters__in-container sidebar bg-primary-light">
-                            <h4 className="mb-3 h1 mb-1">POPULAR READS</h4>
+                        <div className="no-gutters__in-container sidebar bg-primary-light-second">
+                            <h4 className="mb-3 h1 mb-1">Popular Reads</h4>
                             <div className="">
                                 <div className="mb-0 pb-1">
                                     <div className="">
@@ -114,8 +114,8 @@ const BlogFiltered = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="w-full text-center mb-4">
-                <Link href="#" className="bg-transparent hover:bg-primary hover:text-white rounded-lg border-2 border-primary font-bold text-primary py-[13px] px-[54px]">Load more posts</Link>
+            <div className="text-center mb-4">
+                <Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline">Load more posts</Link>
             </div>
         </>
     )

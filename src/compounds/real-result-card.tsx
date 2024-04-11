@@ -1,6 +1,7 @@
 import React from 'react';
 import FiveStars from '@/images/icons/five-stars.svg';
 import parse from 'html-react-parser';
+import Badge from '@/components/Badge';
 
 const RealResultCard = (props) => {
 	const { data } = props;
@@ -43,8 +44,8 @@ const RealResultCard = (props) => {
 			</picture>
 			<div className="px-2 pb-2 pt-0 bg-white">
 				<p className="flex justify-between items-center mb-0">
-					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none" />
-					<span className={`inline-block p-1 text-center font-semibold text-sm align-baseline leading-none rounded ${badgeColor} text-white mb-1 mt-1`}>{capitalizeString(data.review_type || '')}</span>
+					<FiveStars className="h-[1em] text-primary fill-primary text-lg mb-0 max-w-none" />
+					<Badge badgeClasses={`bg-sh-purple text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
 				</p>
 				{storeName === 'au' ? (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc)) && (data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50'))}`)}</>
