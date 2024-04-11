@@ -8,6 +8,7 @@ import Service from "@/sections/Service";
 import Editors from '@/sections/Editors';
 import RealResultCarousel from '@/sections/RealResultCarousel';
 import Instagram from '@/sections/Instagram';
+import QuizReward from '@/sections/QuizReward';
 // import Cart from "@/components/cart/cart";
 
 const Homepage = () => {
@@ -150,6 +151,7 @@ const Homepage = () => {
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Service />
             <Playground />
+			<QuizReward />
             <Editors />
             <Instagram className="bg-pink-light" />
 		</>

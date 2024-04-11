@@ -100,7 +100,7 @@ const Header = (props) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1000] w-full ${scrolled ? 'fixed top-0' : ''}`}>
+			<header className={`main-header z-[1000] w-full ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
 				{announcementBarEnabled && (
 					<AnnouncementBar
 						text="Up to 25% off + Free Gift worth $25.40"
