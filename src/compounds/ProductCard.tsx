@@ -5,9 +5,9 @@ import { Button } from "../components";
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <Button buttonClass={`${props.className ?? ''} flex ${props.carousel ? 'items-center justify-between !py-0 px-g mb-1' : 'sm:flex-col sm:text-sm'} lg:flex-row sm:btn-sm md:text-base btn-primary rounded-full `}>
-            <span className={`w-full lg:w-1/2 block lg:text-left text-nowrap ${props.carousel ? 'text-left py-[.8125em]' : 'text-center'}`}>Add to Cart</span>
-            <span className={`w-full lg:w-1/2 block lg:text-right ${props.carousel ? 'text-right py-[.8125em]' : 'text-center'}`}>
+        <Button buttonClass={`${props.className ?? ''} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm'}`}>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-nowrap text-left py-[.8125em]' : 'text-center lg:text-center'}`}>Add to Cart</span>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-right py-[.8125em]' : 'text-center lg:text-center'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
