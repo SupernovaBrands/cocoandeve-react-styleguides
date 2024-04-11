@@ -60,6 +60,8 @@ module.exports = {
       'gray-700': '#7B7B7B',
       'blue': '#213E7B',
       'white': '#fff',
+      'light-yellow': '#F0FF5F',
+      'light-blue': '#C2FAE4',
       'transparent': 'transparent',
       'dark': '#885757',
       'ultra-dark': '#5C2323',

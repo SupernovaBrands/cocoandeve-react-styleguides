@@ -42,12 +42,12 @@ const RealResultCarousel = (props: any) => {
 			<p className="h1 mb-2">Real Results</p>
             <div className="row">
                 <div className="text-center">
-                    <ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
+                    { !props.show && (<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
 						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
 						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
                         <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
                         <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
-                    </ul>
+                    </ul>) }
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
