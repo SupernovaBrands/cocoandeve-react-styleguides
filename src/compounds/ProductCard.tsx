@@ -5,9 +5,9 @@ import { Button } from "../components";
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <Button buttonClass={`${props.className ?? ''} flex sm:flex-col lg:flex-row sm:btn-sm sm:text-sm md:text-base btn-primary rounded-full`}>
-            <span className="w-full lg:w-1/2 block text-center lg:text-left">Add to Cart</span>
-            <span className="w-full lg:w-1/2 block text-center lg:text-right">
+        <Button buttonClass={`${props.className ?? ''} flex sm:flex-col lg:flex-row btn-sm sm:text-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0`}>
+            <span className="w-full lg:w-1/2 block text-center lg:text-center">Add to Cart</span>
+            <span className="w-full lg:w-1/2 block text-center lg:text-center">
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
