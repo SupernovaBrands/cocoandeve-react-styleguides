@@ -2,11 +2,11 @@ const Instagram = (props) => {
     return (
         <section className={`instagram pt-4 text-center ${props.className} container mx-auto lg:px-g max-w-full`}>
             <div className="w-11/12 lg:w-2/3 text-center mx-auto pb-4 sm:px-hg">
-                <p className="h1 mb-1">Get social with us</p>
+                <p className="h2 mb-1">Get social with us</p>
                 <p className="h4 mb-1">
                     <a href="#" target="_blank"  className="text-body underline lg:text-lg text-base font-bold lg:font-normal">@cocoandeve</a>
                 </p>
-                <p className="h4 font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                <p className="h4 !font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
             </div>
             <div className="instagram--feed container-fluid p-lg-0">
                 <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1">

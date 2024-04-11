@@ -1,10 +1,10 @@
-const Testimonial = (props) => {
-    return (
-        <picture className="flex justify-center w-1/3 lg:w-1/6 px-g sm:px-hg lg:pt-3 lg:pb-3 sm:pt-2 sm:pb-2">
-            <source srcSet={props.srcSet} />
-            <img className="max-w-full" alt="Img Alt" src={props.src} />
+const Testimonial = ({ data }) => (
+    <li className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1">
+        <picture>
+            <source srcSet={data.srcSet} media="(min-width: 992px)" />
+            <img className="w-full" src={data.src} loading="lazy" />
         </picture>
-    );
-};
+    </li>
+);
 
 export default Testimonial;

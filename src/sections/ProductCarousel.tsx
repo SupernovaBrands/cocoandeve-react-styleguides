@@ -75,6 +75,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>
@@ -83,16 +84,16 @@ const ProductCarousel = (props: any) => {
 										onClick={() => autoPlayClick2(arrowClickPrev2)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-g h-g svg--current-color" />
+										<span className="lg:-left-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronPrev className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick2(arrowClickNext2)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-g h-g svg--current-color" />
+										<span className="lg:-right-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronNext className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
@@ -106,6 +107,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>
@@ -114,16 +116,16 @@ const ProductCarousel = (props: any) => {
 										onClick={() => autoPlayClick1(arrowClickPrev1)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-g h-g svg--current-color" />
+										<span className="lg:-left-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronPrev className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick1(arrowClickNext1)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-g h-g svg--current-color" />
+										<span className="lg:-right-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronNext className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
@@ -137,6 +139,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>
@@ -145,16 +148,16 @@ const ProductCarousel = (props: any) => {
 										onClick={() => autoPlayClick3(arrowClickPrev3)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-g h-g svg--current-color" />
+										<span className="lg:-left-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronPrev className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick3(arrowClickNext3)}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-g h-g svg--current-color" />
+										<span className="lg:-right-[0.25em] w-4 h-4 absolute z-[-1] flex justify-center items-center lg:top-[8.125em]">
+											<ChevronNext className="w-[1.375em] h-[1.375em] svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>

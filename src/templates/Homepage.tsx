@@ -147,11 +147,11 @@ const Homepage = () => {
 		<>
             <HeroBanner />
             <ProductCarousel products={PRODUCTS} />
+			<RealResultCarousel videos={SLIDE_VIDEOS} />
+			<Service />
             <Playground />
-			      <Service />
             <Editors />
-            <RealResultCarousel videos={SLIDE_VIDEOS} />
-            <Instagram className="bg-primary-light" />
+            <Instagram className="bg-pink-light" />
 		</>
     );
 }
