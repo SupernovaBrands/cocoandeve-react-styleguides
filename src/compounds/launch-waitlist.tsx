@@ -34,14 +34,14 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         </div>
                     </div>
                     <div className="flex flex-wrap px-2 -mx-2 mb-1">
-                        <Button type="submit" buttonClass="btn-primary w-full">
+                        <Button type="submit" buttonClass="btn-primary w-full border-0">
                             Submit Form
                         </Button>
                     </div>
                     <p className="font-size-xs">{props.policy}</p>
                 </form>
             </div>
-            <div className="w-full p-3 mb-3 rounded text-center bg-yellow-light">
+            <div className="w-full p-3 mb-3 rounded text-center bg-yellow-light hidden">
                 <h3 className="mx-4 mx-lg-5">{props.success_msg}</h3>
                 <p className="font-size-sm mb-0">{props.success_content}</p>
             </div>
