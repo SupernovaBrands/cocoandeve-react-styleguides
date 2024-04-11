@@ -16,7 +16,7 @@
 		}
 
 		&-sm {
-			@apply sm:py-[.3125em]
+			@apply sm:py-[.3125em] lg:py-g;
 		}
 	}
 }
