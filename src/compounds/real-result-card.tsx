@@ -6,15 +6,15 @@ const RealResultCard = (props) => {
 	const { data } = props;
 	let badgeColor = 'badge-purple';
 
-    let storeName = 'us';
+	let storeName = 'us';
 
-    const capitalizeString = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+	const capitalizeString = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-    const escapeHtml = (htmlString) => {
-        const div = document.createElement('div');
-        div.appendChild(document.createTextNode(htmlString));
-        return div.innerHTML;
-    };
+	const escapeHtml = (htmlString) => {
+		const div = document.createElement('div');
+		div.appendChild(document.createTextNode(htmlString));
+		return div.innerHTML;
+	};
 
 	if (data.review_type === 'tan') {
 		badgeColor = 'bg-sh-purple';
@@ -37,7 +37,7 @@ const RealResultCard = (props) => {
 
 	return (
 		<div className="w-full lg:w-1/3 lg:inline-block px-g">
-			<picture className="embed-responsive rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]">
+			<picture className="embed-responsive rounded-tl-lg rounded-br-0 rounded-tr-lg rounded-bl-0 overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>

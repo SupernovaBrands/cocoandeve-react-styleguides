@@ -18,7 +18,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
     ];
 
     return (
-        <div className="container py-4">
+        <div className="container py-1">
             <Breadcrumb data={data}></Breadcrumb>
         </div>
     );

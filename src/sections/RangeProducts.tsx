@@ -45,18 +45,18 @@ const RangeProducts = (props: any) => {
                 <Carousel.Navigation>
                     <PrevButton
                         onClick={() => autoPlayClick1(arrowClickPrev1)}
-                        className="absolute left-0 top-0 lg:w-auto lg:h-0 bottom-0 z-[1] hidden lg:flex items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0"
+                        className="lg:w-auto lg:h-0 hidden lg:flex text-body"
                     >
                         <span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-                            <ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
+                            <ChevronPrev className="w-g h-g svg--current-color" />
                         </span>
                     </PrevButton>
                     <NextButton
                         onClick={() => autoPlayClick1(arrowClickNext1)}
-                        className="absolute right-0 top-0 bottom-0 z-[1] hidden lg:flex lg:h-0 items-center justify-center w-[10%] lg:w-auto p-0 text-body text-center bg-none border-0"
+                        className="lg:w-auto lg:h-0 hidden lg:flex text-body"
                     >
                         <span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-                            <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
+                            <ChevronNext className="w-g h-g svg--current-color" />
                         </span>
                     </NextButton>
                 </Carousel.Navigation>

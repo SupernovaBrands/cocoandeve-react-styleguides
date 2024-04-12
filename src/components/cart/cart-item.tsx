@@ -198,7 +198,7 @@ export default class CartItem extends React.Component {
 												return variant && (
 													<button
 														key={`${opt.id}-${kebabCase(val)}`}
-														className={`variant-swatch pr-0 mr-1 before:m-[1px] ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
+														className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
 														type="button"
 														tabIndex={-1}
 														disabled={!variant.availableForSale || editingVariant !== false}

@@ -29,17 +29,19 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                     </div>
                     <div className="flex flex-wrap items-center justify-start">
                         <div className="-mt-1">
-                            <CheckBox label={`I agree to <a href="#">Privacy Policy & ToS<\/a>`} id="agreement" checked={true}/>
+                            <CheckBox label={`I agree to <a href="#">Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={true}/>
                             <small className="w-full text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
                         </div>
                     </div>
-                    <div className="flex flex-wrap px-2 -mx-2">
-                        <Button label="Submit form" type="submit" buttonClass="bg-primary text-white hover:bg-primary-dark w-full my-hg"></Button>
+                    <div className="flex flex-wrap px-2 -mx-2 mb-1">
+                        <Button type="submit" buttonClass="btn-primary w-full border-0">
+                            Submit Form
+                        </Button>
                     </div>
                     <p className="font-size-xs">{props.policy}</p>
                 </form>
             </div>
-            <div className="product-waitlist product-waitlist--launch product-waitlist__submitted w-100 p-3 mb-3 rounded text-center hidden">
+            <div className="w-full p-3 mb-3 rounded text-center bg-yellow-light hidden">
                 <h3 className="mx-4 mx-lg-5">{props.success_msg}</h3>
                 <p className="font-size-sm mb-0">{props.success_content}</p>
             </div>

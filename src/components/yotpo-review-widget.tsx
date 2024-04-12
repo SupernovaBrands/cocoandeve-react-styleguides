@@ -474,8 +474,8 @@ const YotpoReviewWidget = (props) => {
 		</div>
 	) : (
 		<>
-			<div className="flex items-center lg:justify-center">
-				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em]">{score ? score.toFixed(1) : 0}</span>
+			<div className="flex items-center lg:justify-center mb-3">
+				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />
 					<span className="lg:ml-1 block yotpo-widget__total lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
@@ -491,13 +491,13 @@ const YotpoReviewWidget = (props) => {
 					<p className="h3 text-primary">{tStrings.yotpo.thanksReviewTitle}</p>
 					<p>{tStrings.yotpo.thanksReviewText}</p>
 					<div className="flex">
-						<button type="button" className="btn btn-link h2 p-0 mr-2" onClick={() => openPopup(shareFacebookUrl())}>
+						<button type="button" className="btn border-0 text-primary h2 p-0 mr-2" onClick={() => openPopup(shareFacebookUrl())}>
 							<SvgFacebook class="svg" />
 						</button>
-						<button type="button" className="btn btn-link h2 p-0 mr-2" onClick={() => openPopup(shareTwitterUrl())}>
+						<button type="button" className="btn border-0 text-primary h2 p-0 mr-2" onClick={() => openPopup(shareTwitterUrl())}>
 							<SvgTwitter class="svg" />
 						</button>
-						<button type="button" className="btn btn-link h2 p-0" onClick={() => openPopup(shareLinkedinUrl())}>
+						<button type="button" className="btn border-0 text-primary h2 p-0" onClick={() => openPopup(shareLinkedinUrl())}>
 							<SvgLinkedin class="svg" />
 						</button>
 					</div>
@@ -518,12 +518,20 @@ const YotpoReviewWidget = (props) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className="flex flex-wrap justify-end">
-						<div className="w-1/2 md:w-1/4 xl:w-1/5">
-							<Button onClick={() => handleForm('review')} label={tStrings.yotpo.writeReview} type="button" buttonClass="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold"></Button>
+					<div className="flex flex-wrap justify-end -mx-1">
+						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
+							<Button onClick={() => handleForm('review')}
+								type="button"
+								buttonClass="btn-outline-primary w-full">
+									{tStrings.yotpo.writeReview}
+							</Button>
 						</div>
-						<div className="w-1/2 md:w-1/4 xl:w-1/5">
-							<Button onClick={() => handleForm('question')} label={tStrings.yotpo.askQuestion} type="button" buttonClass="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold"></Button>
+						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
+							<Button onClick={() => handleForm('question')}
+								type="button"
+								buttonClass="btn-outline-primary w-full">
+									{tStrings.yotpo.askQuestion}
+							</Button>
 						</div>
 					</div>
 					<YotpoReviewForm
@@ -601,7 +609,7 @@ const YotpoReviewWidget = (props) => {
 							</div>
 						)} */}
 
-						<div className="flex flex-wrap mt-1 ">
+						<div className="flex flex-wrap mt-1 -mx-1">
 							<div className="w-1/2 lg:w-1/4 px-1">
 								<select className="custom-select my-1" name="scores" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.rating}</option>
@@ -667,18 +675,21 @@ const YotpoReviewWidget = (props) => {
 					{!revLoading && reviews.length > 0 && (
 						<>
 							<p className="font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
-							<div className="" role="list">
+							<div className="container" role="list">
 								{reviews.map((review) => (
-									<div key={review.id} className="border-b py-3 flex flex-wrap lg:-mx-2">
-										<div className="w-full lg:w-1/4 px-2">
-											<h4 className="mb-0 flex items-center">
+									<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div className="w-full lg:w-1/4 pl-0 lg:pr-2">
+											<h4 className="mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 												{review.user_name}
 												{review.verified_buyer && <SvgVerified className="svg text-xs ms-25 text-secondary size-[1em] fill-secondary" />}
 											</h4>
-											{review.verified_buyer && <p className="text-sm mb-0">{tStrings.yotpo.verifiedBuyer}</p>}
-											<p className="text-sm mb-1">
+											{review.verified_buyer && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
+											<p className="text-sm mb-1 sm:hidden lg:block">
 												{formatDate(review.created_at)}
 											</p>
+											<div className="flex text-secondary mb-1 sm:block lg:hidden">
+												<ReviewStar score={review.score} />
+											</div>
 											{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
 												<p key={kebabCase(field[0])} className="text-sm mb-0">
 													<strong>
@@ -691,16 +702,12 @@ const YotpoReviewWidget = (props) => {
 													</span>
 												</p>
 											))}
-											<span className="text-sm bg-gray-400 inline-flex text-sm my-2 py-1 px-2">
-												<SvgTranslate className="svg me-1" />
-												{ translateText() }
-											</span>
 										</div>
-										<div className="w-full lg:w-3/4 px-2">
-											<div className="flex text-secondary mt-1 lg:mt-0">
+										<div className="w-full lg:w-3/4 lg:pl-2 pr-0">
+											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>
-											<h4 className="mb-1 mt-1">
+											<h4 className="mb-1 mt-1 font-bold">
 												{decodeHtml(review.title)}
 											</h4>
 											<p className="mb-1">
@@ -708,7 +715,7 @@ const YotpoReviewWidget = (props) => {
 												{review.shortContent && review.shortContent.length > 0 && (
 													<button
 														type="button"
-														className="btn btn-link p-0 ml-25"
+														className="btn border-0 text-primary p-0 ml-25"
 														onClick={() => { showMoreContent(review); }}
 													>
 														{review.hideContent ? tStrings.yotpo.readMore : tStrings.yotpo.readLess}
@@ -745,15 +752,15 @@ const YotpoReviewWidget = (props) => {
 					{!revLoading && revPage.totalPage > 1 && (
 						<ul className="list-unstyled flex justify-center items-center mt-2">
 							<li>
-								<button type="button" className={`text-primary btn btn-link px-1 ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg text-primary size-1em fill-primary" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 							</li>
 							{revPage.show.map((v) => (
 								<li key={v}>
-									<button type="button" className={`text-primary btn btn-link px-1 ${v === revPage.page ? 'font-bold' : ''}`} onClick={() => onRevPageChange(v)}>{v}</button>
+									<button type="button" className={`text-primary btn border-0 text-primary px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
 								</li>
 							))}
 							<li>
-								<button type="button" className={`text-primary btn btn-link px-1 ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg text-primary size-1em fill-primary" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 							</li>
 						</ul>
 					)}
@@ -787,7 +794,7 @@ const YotpoReviewWidget = (props) => {
 
 					{!qnaLoading && questions.length > 0 && questions.map((question) => (
 						<div key={question.id} className="pt-3 pb-4 border-b">
-							<h4 className="mb-0">{question.user_name}</h4>
+							<h4 className="mb-0 font-bold">{question.user_name}</h4>
 							<p className="text-sm mb-0">{tStrings.yotpo.verifiedReviewer}</p>
 							<p className="text-sm ml-auto mb-1">
 								{formatDate(question.created_at)}
@@ -801,9 +808,9 @@ const YotpoReviewWidget = (props) => {
 							</p>
 							{question.sorted_public_answers.map((answer) => (
 								<div key={answer.id} className="ml-4 mt-2 border-l pl-3">
-									<h4 className="mb-0 text-lg">{tStrings.yotpo.storeOwner}</h4>
+									<h4 className="mb-0 text-lg font-bold">{tStrings.yotpo.storeOwner}</h4>
 									<p className="text-sm">{formatDate(answer.created_at)}</p>
-									<p className="mt-2 text-md">{`A: ${decodeHtml(answer.content)}`}</p>
+									<p className="mt-2 text-md" dangerouslySetInnerHTML={{ __html: `A: ${answer.content}` }}></p>
 									<div className="flex justify-end items-center mt-3">
 										<p className="text-sm mr-1 mb-0">{tStrings.yotpo.answerHelpful}</p>
 										<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`answers-${answer.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('answers', answer.id, 'up'); }}>
@@ -823,15 +830,15 @@ const YotpoReviewWidget = (props) => {
 					{!qnaLoading && qnaPage.totalPage > 1 && (
 						<ul className="list-unstyled flex justify-center items-center mt-2">
 							<li>
-								<button type="button" className={`btn btn-link px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-primary" /></button>
+								<button type="button" className={`btn border-0 text-primary px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-primary" /></button>
 							</li>
 							{qnaPage.show.map((v) => (
 								<li key={v}>
-									<button type="button" className={`btn btn-link px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
+									<button type="button" className={`btn border-0 text-primary px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
 								</li>
 							))}
 							<li>
-								<button type="button" className={`btn btn-link px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-primary" /></button>
+								<button type="button" className={`btn border-0 text-primary px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-primary" /></button>
 							</li>
 						</ul>
 					)}
@@ -862,7 +869,6 @@ const YotpoReviewWidget = (props) => {
 															<PrevButton
 																onClick={() => autoPlayClick7(arrowClickPrev7)}
 																disabled={prevDisabled7}
-																className="absolute left-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center border-0 bg-none"
 															>
 																<span className="left-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center right-0 bg-pink-light">
 																	<ChevronPrev className="w-[1em] h-[1em] fill-primary" />
@@ -871,7 +877,6 @@ const YotpoReviewWidget = (props) => {
 															<NextButton
 																onClick={() => autoPlayClick7(arrowClickNext7)}
 																disabled={nextDisabled7}
-																className="absolute right-0 top-0 bottom-0 z-[1] flex items-center justify-center w-[10%] p-0 text-center border-0 bg-none"
 															>
 																<span className="right-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center bg-pink-light">
 																	<ChevronNext className="w-[1em] h-[1em] fill-primary" />
@@ -903,14 +908,14 @@ const YotpoReviewWidget = (props) => {
 											</a> */}
 										</div>
 									)}
-									<button type="button" className="close absolute flex lg:hidden mr-25" aria-label="Close" onClick={() => setIsOpen(false) }>
+									<button type="button" className="close absolute flex lg:hidden right-0" aria-label="Close" onClick={() => setIsOpen(false) }>
 										<SvgCloseCircle className="svg size-1em" />
 									</button>
 								</div>
 								<div className="lg:w-1/2 pl-lg-0 ">
 									<div className="px-3 py-3">
 										<div className="flex">
-											<h4 className="mb-0 text-sm">{reviewModal.user_name}</h4>
+											<h4 className="mb-0 text-sm font-bold">{reviewModal.user_name}</h4>
 											{reviewModal.verified_buyer && (<span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>)}
 											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at)}</span>
 										</div>

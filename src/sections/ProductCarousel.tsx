@@ -14,6 +14,7 @@ import {
 	controlAutoplay,
 } from '@/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "@/compounds/ProductCard";
+import Link from 'next/link';
 const options: EmblaOptionsType = {
 	loop: true,
 	breakpoints: {
@@ -60,12 +61,12 @@ const ProductCarousel = (props: any) => {
 			<h2 className="h1 text-center mb-1 lg:mb-2">Our Products</h2>
 			<div className="row">
 				<div>
-					<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 justify-center">
-						<li><TabNav className={`py-[6px] w-[7.5rem] lg:w-[9.375rem] px-g ${activeTab === 'new' ? 'text-body' : 'text-gray-600'}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-						<li><TabNav className={`py-[6px] w-[7.5rem] lg:w-[9.375rem] px-g ${activeTab === 'bestsellers' ? 'text-body' : 'text-gray-600'}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
-						<li><TabNav className={`py-[6px] w-[7.5rem] lg:w-[9.375rem] px-g ${activeTab === 'valuesets' ? 'text-body' : 'text-gray-600'}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
+					<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
+						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
+						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
+						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
 					</ul>
-					<div className="">
+					<div className="text-center">
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="">
 								<Carousel.Inner emblaRef={emblaRef2}>
@@ -80,18 +81,18 @@ const ProductCarousel = (props: any) => {
 								<Carousel.Navigation>
 									<PrevButton
 										onClick={() => autoPlayClick2(arrowClickPrev2)}
-										className="absolute left-0 top-0 lg:w-auto lg:h-0 bottom-0 z-[1] hidden lg:flex items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronPrev className="w-g h-g svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick2(arrowClickNext2)}
-										className="absolute right-0 top-0 bottom-0 z-[1] hidden lg:flex lg:h-0 items-center justify-center w-[10%] lg:w-auto p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronNext className="w-g h-g svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
@@ -111,18 +112,18 @@ const ProductCarousel = (props: any) => {
 								<Carousel.Navigation>
 									<PrevButton
 										onClick={() => autoPlayClick1(arrowClickPrev1)}
-										className="absolute left-0 top-0 lg:w-auto lg:h-0 bottom-0 z-[1] hidden lg:flex items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronPrev className="w-g h-g svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick1(arrowClickNext1)}
-										className="absolute right-0 top-0 bottom-0 z-[1] hidden lg:flex lg:h-0 items-center justify-center w-[10%] lg:w-auto p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronNext className="w-g h-g svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
@@ -142,24 +143,24 @@ const ProductCarousel = (props: any) => {
 								<Carousel.Navigation>
 									<PrevButton
 										onClick={() => autoPlayClick3(arrowClickPrev3)}
-										className="absolute left-0 top-0 lg:w-auto lg:h-0 bottom-0 z-[1] hidden lg:flex items-center justify-center w-[10%] p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-left-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronPrev className="w-g h-g svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick3(arrowClickNext3)}
-										className="absolute right-0 top-0 bottom-0 z-[1] hidden lg:flex lg:h-0 items-center justify-center w-[10%] lg:w-auto p-0 text-body text-center bg-none border-0"
+										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="bg-white lg:-right-[0.5em] w-5 h-5 absolute z-[-1] flex justify-center items-center rounded-full shadow-lg lg:top-[8.125em]">
-											<ChevronNext className="w-[16px] h-[16px] svg--current-color" />
+											<ChevronNext className="w-g h-g svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-
+						<Link href="#" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
 					</div>
 				</div>
 			</div>

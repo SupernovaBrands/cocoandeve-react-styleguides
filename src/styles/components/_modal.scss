@@ -1,6 +1,6 @@
 @layer components {
 	.modal-backdrop {
-		background: rgba(0, 0, 0, 0.5);
+		@apply bg-black bg-opacity-50;
 	}
 
 	.modal-sm {
@@ -19,8 +19,7 @@
 		@apply max-w-[1140px];
 	}
 
-	.modal-content .input-group-addon svg {
-		top: 50%;
-		transform: translateY(-50%);
+	.modal-content {
+		@apply rounded-[1.25rem] overflow-hidden relative border-0;
 	}
 }

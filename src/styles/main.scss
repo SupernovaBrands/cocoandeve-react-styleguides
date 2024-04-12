@@ -4,6 +4,8 @@
 // @import 'common';
 @import 'components/svgs';
 @import 'components/accordion';
+@import 'components/input';
+@import 'components/buttons';
 @import 'components/modal';
 @import 'components/custom-forms';
 // @import 'components/cookie-banner';
@@ -36,6 +38,8 @@
 @import 'compounds/upsell';
 @import 'sections/testimonial';
 @import 'sections/sidebar';
+@import 'sections/cart-drawer';
+
 // @import 'compounds/birthday-popup';
 // @import 'compounds/exit-intent';
 // @import 'compounds/newsletter-popup';
@@ -43,7 +47,7 @@
 // @import 'compounds/cookies-popup';
 // @import 'compounds/pdp-upsell';
 @import 'compounds/nav-mega-menu';
-
+@import 'sections/howto';
 @import 'sections/playground';
 @import 'sections/services-list';
 @import 'sections/instagram';

@@ -4,7 +4,7 @@ const ProductCards = () => {
     const product1 = {
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
+        title: 'Like a Virgin Hair Masque',
         comparePrice: '$34.90',
         price: '$24.90',
         productId: 4543113265187,
@@ -12,7 +12,7 @@ const ProductCards = () => {
     const product2 = {
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-        title: 'Miracle Hair',
+        title: 'Like a Virgin Hair Masque Like a Virgin Hair Masque',
         comparePrice: '$34.90',
         price: '$24.90',
         productId: 4543113265187,
@@ -28,7 +28,7 @@ const ProductCards = () => {
     const product3 = {
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-        title: 'Sunny Honey Bronzing Bundle',
+        title: 'Like a Virgin Hair Masque',
         comparePrice: '$34.90',
         price: '$24.90',
         productId: 4543113265187,

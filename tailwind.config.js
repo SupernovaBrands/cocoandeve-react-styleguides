@@ -60,6 +60,8 @@ module.exports = {
       'gray-700': '#7B7B7B',
       'blue': '#213E7B',
       'white': '#fff',
+      'light-yellow': '#F0FF5F',
+      'light-blue': '#C2FAE4',
       'transparent': 'transparent',
       'dark': '#885757',
       'ultra-dark': '#5C2323',
@@ -90,6 +92,12 @@ module.exports = {
       hg: '7.5px',
       0: 0,
       '1em': '1em',
+    },
+    borderRadius: {
+      'none': '0',
+      'DEFAULT': '0.5em',
+      'full': '9999px',
+      'h': '0.25em',
     },
     extend: {
       lineHeight: {

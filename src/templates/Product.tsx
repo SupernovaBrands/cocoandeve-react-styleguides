@@ -20,23 +20,30 @@ import Vegan from '@/images/icons/vegan.svg';
 import DimethiconeFree from '@/images/icons/dimethicone-free.svg';
 import CrueltyFree from '@/images/icons/cruelty-free.svg';
 import ToxinFree from '@/images/icons/toxin-free.svg';
-import Gluten from '@/images/icons/gluten.svg';
 import Ethically from '@/images/icons/ethically.svg';
 import ParabenFree from '@/images/icons/paraben-free.svg';
 import Peta from '@/images/icons/peta.svg';
-import Recycle from '@/images/icons/recycle.svg';
 import FastDelivery from '@/images/icons/fast-delivery.svg';
-import WinnerAward from '@/images/icons/winner-award.svg';
-import MoneyBack from '@/images/icons/moneyback.svg';
-import Plus from '@/images/icons/plus.svg';
-import Minus from '@/images/icons/minus.svg';
+
+import TagIcon from '@/images/icons/tag.svg';
+import StarFullIcon from '@/images/icons/star-full.svg';
+
 const QuantityBox = dynamic(() => import('@/components/cart/quantity-box'), {
     ssr: false,
 });
 
-const OPTIONS: EmblaOptionsType = { loop: true, align: 'start'}
-const SLIDE_COUNT = 10
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+const SLIDES = [
+    { id: 1, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 2, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 3, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 4, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 5, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 6, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 7, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 8, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 9, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+    { id: 10, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },
+];
 
 const Product = (props: any) => {
     const [isMedium, setMedium] = useState(true);
@@ -111,14 +118,7 @@ const Product = (props: any) => {
         <b>3. Use Mitt &amp; Brush </b> to apply to tricky areas like the feet, hands, face &amp; ears. </p><p className="mt-3 mb-3">
         <b>4. Allow to develop </b>for a minimum of 2 hours or overnight for a deeper tan. </p><p className="mt-3 mb-3">
         <b>5. Shower in warm water </b> to remove the guide colour and pat skin dry. </p><p className="mt-3 mb-3">
-        <b>6. Repeat every 5-7 days </b> or when needed. Moisturise daily to maintain results.</p>
-        <figure class="video-card mb-0 mt-1">
-            <picture class="block relative" data-toggle="modal" data-src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/TAN_HOW_TO_BONNIE_LR.mp4?v=1610351992" data-target="#video-modal">
-            <source srcset="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4626a59b-d4c0-4ad0-d6cf-a5bac3c9a200/public" media="(min-width: 992px)" width="470">
-            <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4626a59b-d4c0-4ad0-d6cf-a5bac3c9a200/public" alt="how to use video" class="block w-full" loading="lazy" width="384">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54" class="svg size-5"><path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path></svg>
-            </picture>
-        </figure>`
+        <b>6. Repeat every 5-7 days </b> or when needed. Moisturise daily to maintain results.</p>`
 	},{
 		id: 3,
 		title: 'Collapsible FAQ',
@@ -146,11 +146,24 @@ const Product = (props: any) => {
             <div className="container sm:px-0 lg:px-g mb-4 lg:mt-5">
                 <div className="flex flex-wrap items-start">
                     <div className="product-image-carousel__container w-full lg:w-3/5 lg:order-2 lg:sticky lg:top-[-3em]">
-                        <ProductImageCarousel slides={SLIDES} options={OPTIONS} />
+                        <ProductImageCarousel slides={SLIDES} bottomBadge="👻 Get 3 for 2 with code: HALLOWEEN 👻" />
                     </div>
                     <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-2">
                         <YotpoStar productId={4543113265187} showTotal={true} className="justify-start"/>
                         <h1 className="mb-2 lg:order-0">Sunny Honey Bali Bronzing Foam</h1>
+                        <div className="mb-1">
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-secondary text-white mb-25 font-normal px-1">New</span>
+                            <span className="mr-25 whitespace-nowrap inline-block badge badge--sm py-hg rounded bg-dark text-white mb-25 font-normal px-1">
+                                <TagIcon className="svg svg--current-color mr-1 text-white float-left"/>
+                                20% OFF, code: SINGLES
+                            </span>
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-sh-orange text-white mb-25 font-normal px-1">
+                                <StarFullIcon className="svg svg--current-color mr-1 text-white float-left"/>
+                                Best product on Amazon
+                            </span>
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-primary-dark text-white mb-25 font-weight-normal px-1">FREE GIFT</span>
+                        </div>
+
                         <p className="mb-2 lg:mb-4 text-lg lg:order-0">Anti-cellulite, anti-aging self tan</p>
                         <LaunchWaitList
                             title="Join the waitlist"
@@ -166,7 +179,7 @@ const Product = (props: any) => {
                                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" media="(min-width: 992px)" />
                                     <img alt="Tan Quiz" className="w-full h-full rounded-0" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-pdp-mb.jpg" loading="lazy" width="400" height="110"/>
                                 </picture>
-                                <figcaption className="absolute px-2 px-lg-3 bottom-[50%] translate-y-1/2 top-0 left-0">
+                                <figcaption className="absolute px-2 px-lg-3 top-1/2 -translate-y-1/2 top-0 left-0">
                                     <p className="font-bold mb-1">Your true colour match<br/> is 90 seconds away!</p>
                                     <a href="#" className="px-g rounded-full bg-white text-primary text-sm py-1 border border-primary font-bold">Find my Match</a>
                                 </figcaption>
@@ -214,7 +227,7 @@ const Product = (props: any) => {
                                     >
                                         <p className="mb-1 font-bold">
                                             1x Sunny Honey Bali Bronzing Bundle
-                                            <span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px]">Save 30%</span>
+                                            <span className="product-variant__saving">Save 30%</span>
                                         </p>
                                         <p className="product-variant__description mb-1 font-size-sm">1x Masque + Brush</p>
                                         <p className="product-variant__description mb-1 font-size-sm">1x Other items</p>
@@ -236,7 +249,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-3"
                                     >
                                         <p className="mb-1 font-bold">
-                                            Bronzing Face Drops <span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px]">Save 30%</span>
+                                            Bronzing Face Drops <span className="product-variant__saving">Save 30%</span>
                                         </p>
                                         <ProductVariant.Notes notes={notes} />
                                     </ProductVariant.Variant>
@@ -251,7 +264,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-4"
                                     >
                                         <p className="mb-1 font-bold flex items-center">
-                                            Subscription (20% OFF) <span className="bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px] ml-25">Save 30%</span>
+                                            Subscription (20% OFF) <span className="product-variant__saving">Save 30%</span>
                                             <a className="text-primary ms-1" data-container="body" data-toggle="popover" data-placement="top" data-content="<strong>No fuss and frizz, just good hair days ahead.</strong><br/>Keep your hair routine in check and never run out of your washday must-haves every month and free shipping on top of that.<br/><br/>Cancel anytime, and come back when you're ready. ❤️" data-html="true">
                                                 <Help className="svg svg--current-color" />
                                             </a>
@@ -271,20 +284,48 @@ const Product = (props: any) => {
                                     <div className="flex">
                                         <QuantityBox
                                             name="quantity-box"
-                                            editable={false}
+                                            editable={true}
                                             isLastStock={false}
-                                            productStock={1}
+                                            productStock={20}
                                             quantity={1}
                                             productId={32068892426275}
                                         />
                                         {/* <input className="btn btn-lg btn-primary btn-block ms-1 lg:ml-g w-full" type="submit" value="Add to Cart"></input> */}
-                                        <Button label="Add to Cart" type="submit" buttonClass="w-full ml-1 border border-primary bg-primary text-white hover:bg-primary-dark"></Button>
+                                        <Button type="submit" buttonClass="w-full ml-1 border border-primary bg-primary text-white hover:bg-primary-dark">Add to Cart</Button>
                                     </div>
                                 </div>
                             </div>
                             <SaveResults />
-                            <div className="flex items-center mb-1">
-                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 w-[94px]">
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-light-yellow rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-secondary-light rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-light-blue rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 min-w-[5.875em]">
                                     <img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
@@ -309,7 +350,7 @@ const Product = (props: any) => {
                         </a>
                         <a href="#" className="underline text-primary text-sm lg:order-2 mb-2" role="button">Terms and Conditions</a>
                         {/* proud to be and accordion */}
-                        <div className="proud-to-be-wrapper mb-3 mt-3 lg:mb-0 lg:order-2">
+                        <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
                             <h2 className="mb-0">Proud to be</h2>
                             <div className="">
                                 <div className="carousel--scroll position-relative">
@@ -345,7 +386,7 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-3 mt-3 lg:mb-3 lg:order-2">
+                        <div className="mb-3 lg:mt-2 lg:mb-3 lg:order-2">
                             <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} />
                         </div>
                         {/* end of proud to be and accordion */}
