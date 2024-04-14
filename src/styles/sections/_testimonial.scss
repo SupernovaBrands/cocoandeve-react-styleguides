@@ -1,9 +1,7 @@
 @layer components {
   .list-logo {
-    .col-auto {
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
+    img {
+      max-height: calc-em(33);
     }
   }
 }
