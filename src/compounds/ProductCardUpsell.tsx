@@ -1,7 +1,7 @@
 const AddToCartButton = (props: any) => {
     const { className, label } = props;
     return (
-        <button type="button" className={`${className ? className : 'mb-1'} w-[210px!important] max-width-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
+        <button type="button" className={`${className ? className : 'mb-2'} w-[210px!important] max-width-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
             <span className="w-full block text-base text-center">{label ?? 'Add to Cart'}</span>
         </button>
     );
@@ -10,7 +10,7 @@ const AddToCartButton = (props: any) => {
 const SwatchOverlay = (props) => {
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mb-1" label="Choose Scent"/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mb-2" label="Choose Scent"/>
             <div className="swatch-overlay w-[209px!important] flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t-lg bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
@@ -45,7 +45,7 @@ const ProductCardUpsell = (props) => {
                 </picture>
                 <div className="product-card__content pb-0 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">
                     <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
-                        <a href="#" className="no-underline hover:no-underline text-black hover:text-black">{props.item.title}</a>
+                        <a href="#" className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</a>
                     </p>
                     <p className="product-card__desc text-center font-normal flex flex-col">
                         <a href="#" className="no-underline hover:no-underline text-black hover:text-black">{props.item.text}</a>
