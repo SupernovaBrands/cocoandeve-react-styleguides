@@ -1,54 +1,55 @@
-const Sidebar = (props) => {
+import { EmblaOptionsType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
+import Autoplay from 'embla-carousel-autoplay';
+import SidebarCard from '@/components/SidebarCard';
+
+const Sidebar = ({data}) => {
+	const options: EmblaOptionsType = {
+		loop: false,
+		active: true,
+		breakpoints: {
+			'(min-width: 768px)': { active: false },
+		},
+	};
+	const [emblaRef3, emblaApi3] = useEmblaCarousel(options, [
+		Autoplay({ playOnInit: false, delay: 3000 })
+	]);
+	const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
+	const PER_PAGE = 2;
+	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / 2)).keys());
 	return (
-		<div className="flex flex-wrap">
+		<div className="flex flex-wrap -mx-hg lg:-mx-g">
 			<div className="w-full lg:w-1/3 lg:px-g sm:px-hg">
 				<aside className="blog-post-grid__sidebar lg:sticky w-full mt-2 lg:mt-0 mb-0 lg:mb-auto self-end flex lg:block flex-wrap lg:px-g sm:px-hg">
-					<section className="no-gutters__in-container sidebar order-2 bg-gray-400">
+					<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto">
 						<h2 className="mb-3 text-center hidden lg:block h1">Popular reads</h2>
-						<div className="slide carousel--sidebar">
-							<div className="carousel-inner mb-0 pb-1">
-								<div className="carousel-item active">
-									<article className="post-card flex grow mb-3">
-										<picture className="shrink-0 mr-1">
-											<source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-											<a href="/products/bond-building-pre-shampoo-treatment">
-												<img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-full" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-											</a>
-										</picture>
-										<figcaption className="flex flex-col text-sm">
-											<h3 className="mb-1"><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary text-sm">6 Scalp Care Myths – Busted!</a></h3>
-											<p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-										</figcaption>
-									</article>
-									<article className="post-card flex grow mb-3">
-										<picture className="shrink-0 mr-1">
-											<source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-											<a href="/products/bond-building-pre-shampoo-treatment">
-												<img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-full" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-											</a>
-										</picture>
-										<figcaption className="flex flex-col text-sm">
-											<h3 className="mb-1"><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary text-sm">6 Scalp Care Myths – Busted!</a></h3>
-											<p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-										</figcaption>
-									</article>
-								</div>
-								<div className="carousel-item">
-									<article className="post-card flex grow mb-0">
-										<picture className="shrink-0 mr-1">
-											<source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-											<a href="/products/bond-building-pre-shampoo-treatment">
-												<img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-full" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-											</a>
-										</picture>
-										<figcaption className="flex flex-col text-sm">
-											<h3 className="mb-1"><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary text-sm">6 Scalp Care Myths – Busted!</a></h3>
-											<p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-										</figcaption>
-									</article>
-								</div>
-							</div>
-						</div>
+						<Carousel.Wrapper emblaApi={emblaApi3} className="sm:min-h-[16em]">
+							<Carousel.Inner emblaRef={emblaRef3} className="lg:flex-col">
+								{GROUPED_INDEX.map((_, index) => {
+									const pNum = _ + 1;
+									const splitItem = data.slice((pNum - 1) * PER_PAGE, pNum * PER_PAGE);
+									return splitItem.length > 0 && (
+										<div key={index} className="flex-grow-0 flex-shrink-0 w-full basis-full">
+											{splitItem.map((item: any) => <SidebarCard key={item.id} data={item} />)}
+										</div>
+									)
+								})}
+							</Carousel.Inner>
+							<Carousel.Navigation>
+								<ol className="carousel__dots justify-center lg:hidden mb-0">
+									{GROUPED_INDEX.map((_: any, index: number) => (
+										<li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-50'}`}>
+											<DotButton
+												onClick={() => onClick3(index)}
+												className="carousel__dot"
+											/>
+										</li>
+									))}
+								</ol>
+							</Carousel.Navigation>
+						</Carousel.Wrapper>
 					</section>
 				</aside>
 			</div>
