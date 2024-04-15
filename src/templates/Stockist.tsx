@@ -178,7 +178,7 @@ const Stockist = (props) => {
                 <form className="flex flex-wrap justify-center items-center">
                     <label className="w-full md:w-auto my-1 lg:text-lg sm:=text-sm font-bold">Choose your region:</label>
                     <div className="w-2/3 md:w-1/4 my-1 px-[5px]">
-                        <select className="custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
+                        <select className="border-body custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
                             <option value="united-kingdom" data-label="United Kingdom">United Kingdom</option>
                             <option value="usa" data-label="USA">USA</option>
                             <option value="asia" data-label="Asia">Asia</option>

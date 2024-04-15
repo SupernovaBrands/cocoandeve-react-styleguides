@@ -118,32 +118,32 @@ const Blog = () => {
                     <BlogNavTag title="Body"/>
                     <BlogNavTag title="How to's"/>
                 </div>
-				<Carousel.Wrapper emblaApi={emblaApi} className="mb-4">
-					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-						{postData4.map((data) => (
-							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
-						))}
-					</Carousel.Inner>
-					<Carousel.Navigation>
-						<PrevButton
-							onClick={() => autoPlayClick(arrowClickPrev)}
-							className="lg:-left-[1.25em] w-[auto] text-primary"
-						>
-							<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-								<ChevronPrev className="w-g h-g svg--current-color" />
-							</span>
-						</PrevButton>
-						<NextButton
-							onClick={() => autoPlayClick(arrowClickNext)}
-							className="lg:-right-[1.25em] w-[auto] text-primary"
-						>
-							<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-								<ChevronNext className="w-g h-g svg--current-color" />
-							</span>
-						</NextButton>
-					</Carousel.Navigation>
-				</Carousel.Wrapper>
-				<div className="flex flex-wrap article-list-wrapper mb-lg-4">
+				<div className="flex flex-wrap article-list-wrapper lg:mb-4">
+					<Carousel.Wrapper emblaApi={emblaApi} className='mb-1'>
+						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+							{postData4.map((data) => (
+								<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+							))}
+						</Carousel.Inner>
+						<Carousel.Navigation>
+							<PrevButton
+								onClick={() => autoPlayClick(arrowClickPrev)}
+								className="lg:-left-[1.25em] w-[auto] text-primary"
+							>
+								<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+									<ChevronPrev className="w-g h-g svg--current-color" />
+								</span>
+							</PrevButton>
+							<NextButton
+								onClick={() => autoPlayClick(arrowClickNext)}
+								className="lg:-right-[1.25em] w-[auto] text-primary"
+							>
+								<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+									<ChevronNext className="w-g h-g svg--current-color" />
+								</span>
+							</NextButton>
+						</Carousel.Navigation>
+					</Carousel.Wrapper>
 					<ArticleRecommendation />
 					<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 						{postData2.map((data) =>
