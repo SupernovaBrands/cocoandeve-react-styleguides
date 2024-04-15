@@ -18,7 +18,7 @@ const Sidebar = ({data}) => {
 	]);
 	const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
 	const PER_PAGE = 2;
-	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / 2)).keys());
+	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
 	return (
 		<div className="flex flex-wrap -mx-hg lg:-mx-g">
 			<div className="w-full lg:w-1/3 lg:px-g sm:px-hg">
