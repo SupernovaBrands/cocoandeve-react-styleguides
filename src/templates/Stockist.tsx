@@ -176,9 +176,9 @@ const Stockist = (props) => {
             <section className="container text-center stockist my-4">
                 <h1 className="mb-1">Find us in a store near you</h1>
                 <form className="flex flex-wrap justify-center items-center">
-                    <label className="w-full md:w-auto my-1 h4 font-bold">Choose your region:</label>
-                    <div className="w-2/3 md:w-1/4 my-1 pl-[5px] pr-[5px]">
-                        <select className="custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
+                    <label className="w-full md:w-auto my-1 lg:text-lg sm:=text-sm font-bold">Choose your region:</label>
+                    <div className="w-2/3 md:w-1/4 my-1 px-[5px]">
+                        <select className="border-body custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
                             <option value="united-kingdom" data-label="United Kingdom">United Kingdom</option>
                             <option value="usa" data-label="USA">USA</option>
                             <option value="asia" data-label="Asia">Asia</option>
@@ -200,8 +200,8 @@ const Stockist = (props) => {
                     </figure>
                 ))}
                 </div>
-                <h2 className="h1 mt-2">Didn’t find your answer?</h2>
-                <p className="h4 font-normal">No worries, you can email us: <a href="mailto:hello@cocoandeve.com" className="underline font-bold">hello@cocoandeve.com</a></p>
+                <h2 className="h1 mt-2 mb-1">Didn’t find your answer?</h2>
+                <p className="lg:text-lg sm:text-sm font-normal">No worries, you can email us: <a href="mailto:hello@cocoandeve.com" className="underline lg:text-lg font-bold">hello@cocoandeve.com</a></p>
             </section>
         </>
     );

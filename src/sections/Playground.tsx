@@ -1,78 +1,62 @@
-import { useState } from 'react';
-
 const Playground = (props) => {
     return (
-        <section className="container pb-0 md:pb-12 justify-center text-center">
-            <div className="flex flex-wrap">
-                <div className="w-4/5 lg:w-2/3 p-0 pb-1 mx-auto">
-                    <h1 className="mb-1 hidden md:block">Discover the Coco &amp; Eve playground</h1>
-                    <h2 className="h1 mb-1 block md:hidden" role="heading">The Coco &amp; Eve playground</h2>
-                    <p className="pt-1 mb-[1em]"><strong>We're totally coconuts about beauty!</strong></p>
-                    <p className="font-normal playground__heading">Which is why we have combined powerful &amp; tropical ingredients into different ranges to provide amazing results and make your life feel like a constant holiday. <br />21 beauty awards. 100% vegan. Cruelty free.</p>
-                </div>
-            </div>
-            <div className="flex flex-wrap playground playground--simple mb-3 md:mb-0">
-                <div className="md:w-1/4 px-g">
-                    <a href="/" className="text-body block">
-                        <figure className="playground--simple-square bg-secondary-light relative mb-g mt-3 md:mb-4 md:pb-0 overflow-hidden">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_hair_DT_V2_540x680_crop_center.jpg" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/hair_3.png?v=1662715284" loading="lazy" />
-                            </picture>
-                            <figcaption className="p-2 md:py-5 md:px-2 text-left lg:text-center">
-                                <strong className="playground__title mb-3 md:mb-6">Hair</strong>
-                                <p className="playground__subtitle mt-1 mb-[1em]">Explore our award-winning <br />Like a Virgin hair range</p>
-                            </figcaption>
-                        </figure>
+        <section className="container text-center pb-0 playground--collection-list range-banner pt-5">
+            <p className="h1 text-nowrap mb-1">Discover our Playground</p>
+            <p className="font-bold mb-[1rem]">We're totally coco-nuts about beauty!</p>
+            <p className="range-banner__subtitle mb-2 md:mb-4">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p>
+            <div className="flex flex-wrap items-center lg:mx-[-15px] sm:mx-[-7.5px]">
+                <figure className="w-full lg:w-1/4 px-g relative mb-[1rem]">
+                    <a href="#">
+                        <picture className="block bg-primary-light-second rounded">
+                            <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e15ca9cc-50d1-4f6d-0358-d93c1b36fe00/public" media="(min-width: 992px)" />
+                            <img className="w-full rounded" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_hair_mb_828x.jpg?v=1687332953" loading="lazy" />
+                        </picture>
+                        <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g hair">
+                            <p className="range-banner__title font-bold md:mb-0 text-body-color sm:mb-[1rem]">Hair</p>
+                            <p className="range-banner__caption sm:text-sm lg:px-g text-body-color mb-[1rem]">Glossy, hydrated locks are <br />just one click away!</p>
+                            <span className="bg-primary inline-block border-2 font-bold hover:bg-primary-darken border-primary text-white rounded-full px-3 py-1 md:px-4 md:py-g">Shop Hair</span>
+                        </figcaption>
                     </a>
-                    <a href="#" className="inline-block bg-primary hover:bg-primary-darken rounded-lg border-2 border-primary font-bold text-white py-[13px] px-[54px]">Shop Hair</a>
-                </div>
-
-                <div className="md:w-1/4 px-g">
-                    <a href="/" className="text-body block">
-                        <figure className="playground--simple-square bg-yellow-light relative mb-g mt-3 md:mb-4 md:pb-0 overflow-hidden">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_tan_DT_V2_540x680_crop_center.jpg" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/tan_2.png?v=1662715284" loading="lazy" />
-                            </picture>
-                            <figcaption className="p-2 md:py-5 md:px-2 text-left lg:text-center">
-                                <strong className="playground__title mb-3 md:mb-6">Tan & SPF</strong>
-                                <p className="playground__subtitle mt-1 mb-[1em]">Explore Tan & SPF <br /> for a safe & sun-kissed glow!</p>
-                            </figcaption>
-                        </figure>
+                </figure>
+                <figure className="w-full lg:w-1/4 px-g relative mb-[1rem]">
+                    <a href="#">
+                        <picture className="block bg-sh-orange-light rounded">
+                            <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0cb7f041-82e1-409e-becf-9fc3b442c700/public" media="(min-width: 992px)" />
+                            <img className="w-full rounded" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_tan_mb_828x.jpg?v=1687332953" loading="lazy" />
+                        </picture>
+                        <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g hair">
+                            <p className="range-banner__title font-bold md:mb-0 text-body-color sm:mb-[1rem]">Tan & SPF</p>
+                            <p className="range-banner__caption sm:text-sm text-body-color mb-[1rem]">Everything you need to be safely sun-kissed</p>
+                            <span className="bg-primary inline-block border-2 font-bold hover:bg-primary-darken border-primary text-white rounded-full px-3 py-1 md:px-4 md:py-g">Shop Tan & SPF</span>
+                        </figcaption>
                     </a>
-                    <a href="#" className="inline-block bg-primary hover:bg-primary-darken rounded-lg border-2 border-primary font-bold text-white py-[13px] px-[54px]">Shop Tan</a>
-                </div>
-                <div className="md:w-1/4 px-g">
-                    <a href="/" className="text-body block">
-                        <figure className="playground--simple-square bg-primary-light-second relative mb-g mt-3 md:mb-4 md:pb-0 overflow-hidden">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_DT_V2_540x680_crop_center.jpg?v=1695350852" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_MB_V2.jpg?v=1695350853" loading="lazy" />
-                            </picture>
-                            <figcaption className="p-2 md:py-5 md:px-2 text-left lg:text-center">
-                                <strong className="playground__title mb-3 md:mb-6">Skin</strong>
-                                <p className="playground__subtitle mt-1 mb-[1em]">Explore our antioxidant <br />skincare for a radiant glow</p>
-                            </figcaption>
-                        </figure>
+                </figure>
+                <figure className="w-full lg:w-1/4 px-g relative mb-[1rem]">
+                    <a href="#">
+                        <picture className="block bg-suncare-blue rounded">
+                            <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/cd7179f3-ffda-4adb-0b56-72bad978e600/public" media="(min-width: 992px)" />
+                            <img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56d68602-7dc7-4692-807c-e51400248a00/828x" loading="lazy" />
+                        </picture>
+                        <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g hair">
+                            <p className="range-banner__title font-bold md:mb-0 text-body-color sm:mb-[1rem]">Skin</p>
+                            <p className="range-banner__caption sm:text-sm lg:px-g text-body-color mb-[1rem]">Boost your glow with our antioxidant range!</p>
+                            <span className="bg-primary inline-block border-2 font-bold hover:bg-primary-darken border-primary text-white rounded-full px-3 py-1 md:px-4 md:py-g">Shop Skin</span>
+                        </figcaption>
                     </a>
-                    <a href="#" className="inline-block bg-primary hover:bg-primary-darken rounded-lg border-2 border-primary font-bold text-white py-[13px] px-[54px]">Shop Skin</a>
-                </div>
-                <div className="md:w-1/4 px-g">
-                    <a href="/" className="text-body block">
-                        <figure className="playground--simple-square bg-primary-light-second relative mb-g mt-3 md:mb-4 md:pb-0 overflow-hidden">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_DT_V2_540x680_crop_center.jpg?v=1695350852" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/body_1.png?v=1662715287" loading="lazy" />
-                            </picture>
-                            <figcaption className="p-2 md:py-5 md:px-2 text-left lg:text-center">
-                                <strong className="playground__title mb-3 md:mb-6">Body</strong>
-                                <p className="playground__subtitle mt-1 mb-[1em]">Explore Glow Figure. It's Bali <br />beauty for your body </p>
-                            </figcaption>
-                        </figure>
+                </figure>
+                <figure className="w-full lg:w-1/4 px-g relative mb-[1rem]">
+                    <a href="#">
+                        <picture className="block bg-bali-bod-blue-light rounded">
+                            <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/186aae4e-3716-4625-6395-0bcf76a35300/public" media="(min-width: 992px)" />
+                            <img className="w-full rounded" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_mb_828x.jpg?v=1687332953" loading="lazy" />
+                        </picture>
+                        <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g hair">
+                            <p className="range-banner__title font-bold md:mb-0 text-body-color sm:mb-[1rem]">Body</p>
+                            <p className="range-banner__caption sm:text-sm lg:px-g text-body-color mb-[1rem]">Meet your all-over obsession, Glow Figure</p>
+                            <span className="bg-primary inline-block border-2 font-bold hover:bg-primary-darken border-primary text-white rounded-full px-3 py-1 md:px-4 md:py-g">Shop Body</span>
+                        </figcaption>
                     </a>
-                    <a href="#" className="inline-block bg-primary hover:bg-primary-darken rounded-lg border-2 border-primary font-bold text-white py-[13px] px-[54px]">Shop Body</a>
-                </div>
+                </figure>
             </div>
         </section>
     );

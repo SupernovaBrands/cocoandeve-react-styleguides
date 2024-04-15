@@ -25,9 +25,7 @@ export default function Sidebars() {
 		<div className="mobile-wrapper">
 			<div className="container">
 				<h1 className="mb-1">SIDEBAR</h1>
-				<div className="flex flex-wrap">
-					<Sidebar data={SIDEBAR_DATA} />
-				</div>
+				<Sidebar data={SIDEBAR_DATA} />
 			</div>
 		</div>
 	);

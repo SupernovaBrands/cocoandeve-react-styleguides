@@ -75,6 +75,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>
@@ -106,6 +107,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>
@@ -137,6 +139,7 @@ const ProductCarousel = (props: any) => {
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 											button={true}
+											carousel={true}
 										/>
 									))}
 								</Carousel.Inner>

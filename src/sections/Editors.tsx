@@ -2,41 +2,41 @@ import Testimonial from '@/sections/Testimonial';
 
 const Editors = () => {
     return (
-        <div className="container list-logo pt-4 pb-4 text-center">
-            <p className="h1 mb-1">Beauty editors love us</p>
-            <div className="flex flex-row flex-wrap mx-auto items-center">
+        <section className="list-logo container my-4 block">
+            <ul className="flex flex-wrap items-center lg:justify-between lg:px-g flex-nowrap mb-0 lg:mx-[-15px] sm:mx-[-7.5px]">
+                <li className="col-auto flex-[0_0_auto] w-auto max-w-full h4 mb-0 relative lg:px-g sm:px-hg">Featured in:</li>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/nylon_logo_2x_53a0aefa-88f7-40dc-9ba2-c5a76d20509b_medium.png?v=1593581750"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/nylon_logo_2x_53a0aefa-88f7-40dc-9ba2-c5a76d20509b_medium.png?v=1593581750"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_nylon_x19.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_nylon_x15.jpg?v=1687419613"
                 >
                 </Testimonial>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Cosmopolitan_logo_2x_f6470180-7e31-4d14-b92f-50dc54fa5507_medium.png?v=1593581961"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Cosmopolitan_logo_2x_f6470180-7e31-4d14-b92f-50dc54fa5507_medium.png?v=1593581961"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_cosmopolitan_x24.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_cosmopolitan_x17.jpg?v=1687419613"
                 >
                 </Testimonial>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Elle_logo_2x_10778af1-7bd5-42f1-a04f-e13f3a1ad4e8_medium.png?v=1593581961"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Elle_logo_2x_10778af1-7bd5-42f1-a04f-e13f3a1ad4e8_medium.png?v=1593581961"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_elle_x26.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_elle_x22.jpg?v=1687419613"
                 >
                 </Testimonial>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Glamour_2x_68be7813-2fe0-41cf-9649-caaf859f2530_medium.png?v=1593581961"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Glamour_2x_68be7813-2fe0-41cf-9649-caaf859f2530_medium.png?v=1593581961"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_glamor_x26.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_glamor_x17.jpg?v=1687419613"
                 >
                 </Testimonial>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/refinery-29-jecca-makeup-_2x_b58b06be-bd94-4e9b-b907-7cc492578c09_medium.png?v=1593568919"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/refinery-29-jecca-makeup-_2x_b58b06be-bd94-4e9b-b907-7cc492578c09_medium.png?v=1593568919"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_refinery_x40.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_refinery_x36.jpg?v=1687419613"
                 >
                 </Testimonial>
                 <Testimonial 
-                    src="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Mail_online_logo_2x_76e10089-d01a-486c-aa16-ea4c0c24a6ad_medium.png?v=1593581961"
-                    srcset="//cdn.shopify.com/s/files/1/0286/1327/9779/files/Mail_online_logo_2x_76e10089-d01a-486c-aa16-ea4c0c24a6ad_medium.png?v=1593581961"
+                    srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_mail-online_x26.jpg?v=1687419613"
+                    src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/pr_mail-online_x17.jpg?v=1687419613"
                 >
                 </Testimonial>
-            </div>
-        </div>
+            </ul>
+        </section>
     )
 }
 

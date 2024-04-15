@@ -116,7 +116,7 @@ const PostCards = () => {
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID NO IMAGE</h1>
-				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
+				<div className="flex flex-wrap mb-5 mt-2 -mx-hg lg:-mx-g">
 					{postData3.map((data) =>
 						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}

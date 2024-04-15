@@ -1,5 +1,6 @@
 import Facebook from '../../src/images/icons/facebook-square.svg';
 import Instagram from '../../src/images/icons/instagram.svg';
+import Twitter from '../../src/images/icons/twitter-square.svg';
 import Pinterest from '../../src/images/icons/pinterest-square.svg';
 
 export default function Icons() {
@@ -9,6 +10,11 @@ export default function Icons() {
                 <li className="inline-block mr-[0.5rem]">
                     <a href="#" className="text-primary text-[30px]" aria-label="Go to to CocoandEve Instagram">
                         <Instagram className="fill-primary h-[1em]" />
+                    </a>
+                </li>
+                <li className="inline-block mr-[0.5rem]">
+                    <a href="#" className="text-primary text-[30px]" aria-label="Go to to CocoandEve Twitter">
+                        <Twitter className="fill-primary h-[1em]" />
                     </a>
                 </li>
                 <li className="inline-block mr-[0.5rem]">

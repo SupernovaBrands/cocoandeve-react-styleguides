@@ -5,9 +5,9 @@ import { Button } from "../components";
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <Button buttonClass={`${props.className ?? ''} flex sm:flex-col lg:flex-row btn-sm sm:text-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0`}>
-            <span className="w-full lg:w-1/2 block text-center lg:text-center">Add to Cart</span>
-            <span className="w-full lg:w-1/2 block text-center lg:text-center">
+        <Button buttonClass={`${props.className ?? ''} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm'}`}>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-nowrap text-left py-[.8125em]' : 'text-center lg:text-center'}`}>Add to Cart</span>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-right py-[.8125em]' : 'text-center lg:text-center'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
@@ -18,7 +18,7 @@ const AddToCartButton = (props) => {
 const SwatchOverlay = (props) => {
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mb-1"/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="btn-choose mb-1"/>
             <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
@@ -34,7 +34,7 @@ const SwatchOverlay = (props) => {
                         ))}
                     </ul>
                 </div>
-                <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1] w-full mb-0"/>
+                <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/>
             </div>
         </>
     );
@@ -61,15 +61,15 @@ const ProductCardTall = (props) => {
                 <div className="flex justify-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={true} />
                 </div>
-                <p className="grow flex flex-col justify-center h-100 px-1 text-lg mb-1">
+                <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? 'min-h-[3.125em] lg:mx-[0.625rem]' : 'px-1'}`}>
                     <Link href="#" className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && (
-                    <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} />
+                    <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
                 {props.product.swatch &&
-                    <SwatchOverlay swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice}/>
+                    <SwatchOverlay swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} />
                 }
             </div>
         </div>

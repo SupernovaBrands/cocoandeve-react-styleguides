@@ -14,7 +14,7 @@ const PostTag: React.FC<PropType> = (props) => {
 	else if (tag === 'new') className = 'bg-secondary text-white';
 	else if (tag === 'hot') className = 'bg-primary text-white';
 	return (
-		<span className={`inline-block leading-base px-[8px] py-[2px] rounded-lg ${className} mr-25 mb-25`}>{children}</span>
+		<span className={`align-baseline whitespace-nowrap text-center inline-block leading-base px-[.5em] py-[2px] rounded ${className} mr-1 mb-25 min-w-[3.375em]`}>{children}</span>
 	)
 };
 

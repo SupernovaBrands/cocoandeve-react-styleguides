@@ -12,7 +12,7 @@ export default function Home() {
           <Link href="./components/typography">Typography</Link>
           <Link href="./components/accordions">Accordions</Link>
           <Link href="./components/announcement-bar">Announcement Bar</Link>
-          <Link href="./components/badge">Badge</Link>
+          <Link href="./components/badges">Badges</Link>
           <Link href="./components/breadcrumbs">Breadcrumbs</Link>
           <Link href="./components/bullets">Bullets</Link>
           <Link href="./components/buttons">Buttons</Link>
@@ -38,7 +38,7 @@ export default function Home() {
           <Link href="./compounds/launch-waitlist">Launch Waitlist</Link>
           <Link href="./compounds/nav-category">Nav Category</Link>
           <Link href="./compounds/newsletter-form">Newsletter Form</Link>
-          <Link href="./compounds/popups">Popups</Link>
+          {/* <Link href="./compounds/popups">Popups</Link> */}
           <Link href="./compounds/post-cards">Post Cards</Link>
           <Link href="./compounds/product-banner">Product Banner</Link>
           <Link href="./compounds/product-card-abtest">Product Card Abtest</Link>

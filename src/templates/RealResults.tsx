@@ -5,8 +5,8 @@ import RealResultCard from '@/compounds/real-result-card';
 import TestimonialCarousel from '@/sections/TestimonialCarousel';
 import ProductCarousel from '@/sections/ProductCarousel';
 import REVIEWS_PH from '@/modules/reviews';
-import Editors from '@/sections/Editors';
 import Instagram from '@/sections/Instagram';
+import YotpoReviews from '@/components/yotpo-review-widget';
 
 const PRODUCTS = [
 	{
@@ -245,10 +245,10 @@ const RealResults = () => {
 
     return (
 		<>
-			<div className='container'>
-				<div className="my-3 flex flex-wrap  items-center justify-center">
-					<h1 className='text-center mb-2 lg:mb-4 block w-full'>Real Customers. Real Reviews</h1>
-					<label htmlFor="real-result__select" className="h4 font-weight-normal mr-3 mb-0">Filter By:</label>
+			<div className='container py-4'>
+				<div className="mb-3 flex flex-wrap  items-center justify-center">
+					<h1 className='text-center mb-2 lg:mb-3 block w-full'>Real Customers. Real Reviews</h1>
+					<label htmlFor="real-result__select" className="text-base font-normal mr-3 mb-0">Filter By:</label>
 					<select id="real-result__select" className="custom-select rounded-lg bg-white w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
 						<option value="all" selected={true}>All</option>
 						{tabNames.length > 0 && tabNames.map((tab) => {
@@ -290,11 +290,27 @@ const RealResults = () => {
 					</div>
 				)}
 			</div>
+			<div className="pt-4 pb-2">
+				<div className="container">
+					<div className="row px-1">
+						<h2 className="h1 mb-2 w-full text-center">Customer Reviews</h2>
+						<YotpoReviews
+							productId={4543113265187}
+							productName='Sunny Honey Bali Bronzing Foam'
+							productUrl='https://dev.cocoandeve.com/products/sunny-honey-bali-bronzing-self-tan-mousse'
+							productImage='//cdn.shopify.com/s/files/1/0286/1327/9779/products/FOAM_DARK_YELLOW_1_large.jpg%3Fv=1609922006'
+							productDesc='<div> <strong></strong>Anti-cellulite, anti-ageing self tan with zero nasties. Created using unique CellushapeTM formula to hydrate and firm the skin.<br> </div> <ul> <li>Blurs Pigmentation and Perfects Skin.</li> <li>Tropical Mango and Guava Scent. (No biscuit smells!)</li> <li>Lightweight, non-sticky formula.</li> <li>Fast drying and develops in just 2 hours</li> <li>Vegan. 100% Natural DHA. No Nasties</li> </ul>'
+							productSkus='CE0000032020,CE0000032040,CE0000032060,CE0000072020,CE0000072040,CE0000072060'
+							canCreate={true}
+						/>
+					</div>
+				</div>
+			</div>
 			<div className='w-full bg-gray-400 my-4'>
 				<TestimonialCarousel data={testimonialItems} />
 			</div>
 			<ProductCarousel products={PRODUCTS} />
-			<Instagram className="bg-primary-light" />
+			<Instagram className="bg-pink-light" />
 		</>
     );
 }
