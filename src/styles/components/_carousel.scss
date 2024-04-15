@@ -37,22 +37,24 @@
 			}
 		}
 
-		&__products .carousel__button {
+		@screen lg {
+			&__products .carousel__button {
 
-			span {
-				@apply lg:top-[8.125em] lg:w-4 lg:h-4;
-			}
+				span {
+					@apply top-[8.125em] w-4 h-4;
+				}
 
-			svg {
-				@apply lg:w-[1.375em] lg:h-[1.375em];
-			}
+				svg {
+					@apply w-[1.375em] h-[1.375em];
+				}
 
-			&--prev span {
-				@apply lg:-left-[0.25em];
-			}
+				&--prev span {
+					@apply -left-[0.25em];
+				}
 
-			&--next span {
-				@apply lg:-right-[0.25em];
+				&--next span {
+					@apply -right-[0.25em];
+				}
 			}
 		}
 
