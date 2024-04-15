@@ -1,12 +1,12 @@
 const QuizReward = () => {
 	return (
-		<section className="text-center mt-4 lg:mt-5 mb-1 lg:mb-0">
+		<section className="container text-center mt-4 lg:mt-5 mb-1 lg:mb-0">
 			<p className="h1 mb-g lg:mb-3">Discover more</p>
-			<div className="flex flex-wrap">
+			<div className="flex flex-wrap -mx-hg lg:-mx-g">
 				<figure className="w-full lg:w-1/2 px-g mb-g lg:mb-0 block relative">
 					<picture className="block">
-						<source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discover_quiz_dt_1140x.jpg?v=1687413982" media="(min-width: 992px)" />
-						<img className="w-full rounded" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discover_quiz_mb_828x.jpg?v=1687413980" loading="lazy" />
+						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a51bcbe7-e43e-4762-4a41-916d00416b00/1140x" media="(min-width: 992px)" />
+						<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56f87000-b2e4-4813-a00f-d7a0eee86c00/828x" loading="lazy" />
 					</picture>
 					<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
 						<p className="text-lg lg:text-2xl mb-g mb-lg-2 font-bold">Tan Quiz</p>
