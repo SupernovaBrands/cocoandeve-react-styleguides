@@ -1,7 +1,7 @@
 // import { useState } from 'react';
-// import Header from '@/sections/Header';
+// import Header from '~/sections/Header';
 import dynamic from 'next/dynamic';
-const Header = dynamic(() => import('@/sections/Header'), {
+const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
 const HeaderSection = () => {

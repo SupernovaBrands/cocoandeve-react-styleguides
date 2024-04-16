@@ -1,12 +1,12 @@
-import Instagram from '../../src/images/icons/instagram.svg';
-import FacebookSquare from '../../src/images/icons/facebook-square.svg';
-import PinterestSquare from '../../src/images/icons/pinterest-square.svg';
-import Youtube from '../../src/images/icons/youtube.svg';
-import Tiktok from '../../src/images/icons/tiktok.svg';
-import PalmTree from '../../src/images/icons/palm-tree.svg';
+import Instagram from '~/images/icons/instagram.svg';
+import FacebookSquare from '~/images/icons/facebook-square.svg';
+import PinterestSquare from '~/images/icons/pinterest-square.svg';
+import Youtube from '~/images/icons/youtube.svg';
+import Tiktok from '~/images/icons/tiktok.svg';
+import PalmTree from '~/images/icons/palm-tree.svg';
 import { useState } from 'react';
-import Form from "@/compounds/footer-newsletter-form";
-import DropdownStore from '@/components/DropdownStore';
+import Form from "~/compounds/footer-newsletter-form";
+import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
 const Footer = (props: any) => {

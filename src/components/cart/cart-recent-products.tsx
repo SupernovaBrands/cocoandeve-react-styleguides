@@ -3,15 +3,15 @@ import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { formatMoney } from '@/modules/utils';
-import YotpoStar from '@/components/yotpo-star';
+import { formatMoney } from '~/modules/utils';
+import YotpoStar from '~/components/yotpo-star';
 
-import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
-import SvgChevronNext from '@/images/icons/chevron-next.svg';
+import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
+import SvgChevronNext from '~/images/icons/chevron-next.svg';
 
 const tStrings = global.config.tStrings;
 
-// const { formatMoney } = dynamic(() => import('@/modules/utils'), {
+// const { formatMoney } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 

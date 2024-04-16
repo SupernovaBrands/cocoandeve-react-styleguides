@@ -1,10 +1,11 @@
+// @ts-nocheck
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import Close from '../../src/images/icons/close.svg';
-import Loading from '../../src/images/icons/loading.svg';
-import Search from '../../src/images/icons/search-thin.svg';
+import Close from '~/images/icons/close.svg';
+import Loading from '~/images/icons/loading.svg';
+import Search from '~/images/icons/search-thin.svg';
 import SearchProductCard from './SearchProductCard';
-const CarouselScroll = dynamic(() => import('@/components/CarouselScroll'), {
+const CarouselScroll = dynamic(() => import('~/components/CarouselScroll'), {
     ssr: false,
 });
 

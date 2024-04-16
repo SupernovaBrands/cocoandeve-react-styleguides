@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-interface BadgeCircleImageProps {
+type BadgeCircleImageProps = {
   className?: string;
   children?: ReactNode;
 }

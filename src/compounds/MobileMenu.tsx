@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Close from '../../src/images/icons/close.svg';
-import Percentage from '../../src/images/icons/percentage-square.svg';
-import Sun from '../../src/images/icons/sun.svg';
-import MenuDecoration from '../../src/images/icons/menu-banner-decoration.svg';
-import MenuDecorationGreen from '../../src/images/icons/menu-banner-decoration-green.svg';
-import ChevronPrev from '../../src/images/icons/chevron-prev.svg';
-import ChevronNext from '../../src/images/icons/chevron-next.svg';
+import Close from '~/images/icons/close.svg';
+import Percentage from '~/images/icons/percentage-square.svg';
+import Sun from '~/images/icons/sun.svg';
+import MenuDecoration from '~/images/icons/menu-banner-decoration.svg';
+import MenuDecorationGreen from '~/images/icons/menu-banner-decoration-green.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
 import BrandLogo from '../../src/images/ce-logo.svg';
 
 const defMenuState = {
@@ -207,7 +207,7 @@ const MobileMenu = (props: any) => {
 				</li>
 			</ul>
 		</nav>
-	);  
+	);
 };
 
 export default MobileMenu;

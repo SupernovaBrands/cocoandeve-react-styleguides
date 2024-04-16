@@ -1,4 +1,4 @@
-import CountriesOptions from "@/components/countries-options"; 
+import CountriesOptions from "~/components/countries-options";
 
 const ProductWaitlist = (props: any) => {
 	return (

@@ -1,4 +1,4 @@
-import ProductWaitlist from "@/compounds/product-waitlist-oos"; 
+import ProductWaitlist from "~/compounds/product-waitlist-oos";
 
 const WaitlistForm = () => {
 	return (

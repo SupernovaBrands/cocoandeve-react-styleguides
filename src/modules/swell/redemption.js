@@ -3,10 +3,10 @@
 import dynamic from 'next/dynamic';
 // import {
 // 	isSwellCode,
-// } from '@/modules/utils';
+// } from '~/modules/utils';
 const {
 	isSwellCode,
-} = dynamic(() => import('@/modules/utils'), {
+} = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
 const apiEndpoint = 'https://loyalty.yotpo.com/api/v2';

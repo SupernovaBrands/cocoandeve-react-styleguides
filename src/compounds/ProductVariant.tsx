@@ -68,7 +68,7 @@ const ProductVariant: React.FC<VariantProp> = (props) => (
 ProductVariant.defaultProps = {
 	subscription: false,
 	className: '',
-	compare: null,
+	compare: '',
 	checked: false
 }
 

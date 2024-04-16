@@ -1,5 +1,5 @@
 import CloseButton from "./CloseButton";
-import CloseCircleDark from '@/images/icons/close-circle-dark.svg';
+import CloseCircleDark from '~/images/icons/close-circle-dark.svg';
 
 const Terms = (props: any) => (
 	<div className="modal-content mx-1 rounded-none lg:p-1 bg-white">

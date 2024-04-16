@@ -1,6 +1,6 @@
-import InputCountry from '@/components/InputCountry';
-import CloseButton from '@/components/modal/CloseButton';
-import Button from '@/components/Button';
+import InputCountry from '~/components/InputCountry';
+import CloseButton from '~/components/modal/CloseButton';
+import Button from '~/components/Button';
 
 interface SweepstakesData {
 	src: string

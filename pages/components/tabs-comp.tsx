@@ -1,7 +1,8 @@
+'use client';
 import React, { useState } from 'react';
-import Tabs from '@/components/Tabs';
-import TabNav from '@/components/TabNav';
-import TabContent from '@/components/TabContent';
+import Tabs from '~/components/Tabs';
+import TabNav from '~/components/TabNav';
+import TabContent from '~/components/TabContent';
 
 export default function TabsComponents() {
     const [activeTab, setActiveTab] = useState('best-sellers');

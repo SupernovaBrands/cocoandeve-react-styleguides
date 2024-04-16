@@ -1,9 +1,9 @@
-import Item from "@/compounds/nav-category";
-import BlogPost from "@/sections/blog-post";
-import Close from '../../src/images/icons/close.svg';
-import Search from '../../src/images/icons/search.svg';
+import Item from "~/compounds/nav-category";
+import BlogPost from "~/sections/blog-post";
+import Close from '~/images/icons/close.svg';
+import Search from '~/images/icons/search.svg';
 import Link from "next/link";
-import { InputSearch } from '@/components/index';
+import { InputSearch } from '~/components/index';
 
 const BlogFiltered = (props) => {
     const onSearchChange = (e) => {

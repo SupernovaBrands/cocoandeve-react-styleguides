@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import SearchProductCard from '@/compounds/SearchProductCard';
-import ChevronPrev from '../../src/images/icons/chevron-prev.svg';
-import ChevronNext from '../../src/images/icons/chevron-next.svg';
+import { useEffect } from 'react';
+import SearchProductCard from '~/compounds/SearchProductCard';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
 
 const CarouselScroll = (props) => {
     const adjustScrollThumb = (thumb, inner, scrollParent) => {
@@ -52,7 +52,7 @@ const CarouselScroll = (props) => {
             } else {
                 prevButton.classList.remove('disabled');
             }
-    
+
             if (inner.scrollLeft + inner.clientWidth === inner.scrollWidth) {
                 if (!nextButton.classList.contains('carousel-control-prev--always-show')) {
                     nextButton.classList.add('d-none');
@@ -126,7 +126,7 @@ const CarouselScroll = (props) => {
 
             inner.scrollTo({ left: left, behavior: 'smooth' });
         };
-        
+
 
         if (prevButton) {
             prevButton.addEventListener('mousedown', scrollItem('left'));
@@ -138,12 +138,12 @@ const CarouselScroll = (props) => {
     }
 
     useEffect(() => {
-    
+
         const carousel = document.body.querySelector('.carousel--scroll');
         initCarouselScroll(carousel);
-        
+
     }, [])
-    
+
     return (
         <div className='container mb-0 mb-lg-3'>
             {props.products.length > 0 && (

@@ -1,6 +1,6 @@
-import Stars from '@/images/icons/two-line-stars.svg';
-import WinnerAward from '@/images/icons/winner-award.svg';
-import MoneyBack from '@/images/icons/moneyback.svg';
+import Stars from '~/images/icons/two-line-stars.svg';
+import WinnerAward from '~/images/icons/winner-award.svg';
+import MoneyBack from '~/images/icons/moneyback.svg';
 
 const Service = () => {
 	const SERVICES = [

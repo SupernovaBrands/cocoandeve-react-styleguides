@@ -1,4 +1,4 @@
-import ChevronDown from '@/images/icons/chevron-down.svg';
+import ChevronDown from '~/images/icons/chevron-down.svg';
 
 type SelectCountryProp = {
 	id: string

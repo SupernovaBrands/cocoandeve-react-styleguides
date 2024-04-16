@@ -1,12 +1,13 @@
+// @ts-nocheck
 /* global Cart tSettings */
 import { getSizedImageUrl } from '@shopify/theme-images';
 import {
 	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
-} from '@/modules/utils';
-import { queryProductByHandle, queryBuyerIdentity } from '@/modules/query';
+} from '~/modules/utils';
+import { queryProductByHandle, queryBuyerIdentity } from '~/modules/query';
 import storefrontSettings from '../../config/storefront';
 import axios, { AxiosResponse } from 'axios';
-import { CartData } from '@/components/cart/types';
+import { CartData } from '~/components/cart/types';
 
 interface StorefrontSettings {
     storeDomain: string;

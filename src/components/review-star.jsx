@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SvgFull from '@/images/icons/star-full.svg';
-import SvgHalf from '@/images/icons/star-half.svg';
-import SvgLine from '@/images/icons/star-line.svg';
+import SvgFull from '~/images/icons/star-full.svg';
+import SvgHalf from '~/images/icons/star-half.svg';
+import SvgLine from '~/images/icons/star-line.svg';
 
 const ReviewStar = (props) => {
 	const full = Math.floor(props.score);

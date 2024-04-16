@@ -5,13 +5,13 @@ interface CheckBoxProps {
     label: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     name?: string;
-    checked?: boolean;
+    checked?: boolean | false;
     labelClass?: string;
     value?: string;
 }
 
 const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value }) => {
-    const [isChecked, setIsChecked] = useState<boolean>(checked || false);
+    const [isChecked, setIsChecked] = useState(false);
 
     const onChangeClick = (e: ChangeEvent<HTMLInputElement>) => {
         setIsChecked(!isChecked);

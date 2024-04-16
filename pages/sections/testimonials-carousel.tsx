@@ -1,5 +1,5 @@
 
-import TestimonialCarousel from "@/sections/TestimonialCarousel";
+import TestimonialCarousel from "~/sections/TestimonialCarousel";
 
 const TestimonialSection = () => {
     const carouselItems = [

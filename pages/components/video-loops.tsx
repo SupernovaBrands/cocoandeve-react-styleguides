@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import VideoLoop from "@/components/video-loop";
+import VideoLoop from "~/components/video-loop";
 
 const VideoLoopGif = () => {
 	return (

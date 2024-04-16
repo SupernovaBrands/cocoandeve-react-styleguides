@@ -1,5 +1,5 @@
 import React from 'react';
-import FiveStars from '@/images/icons/five-stars.svg';
+import FiveStars from '~/images/icons/five-stars.svg';
 import parse from 'html-react-parser';
 
 const RealResultCard = (props) => {

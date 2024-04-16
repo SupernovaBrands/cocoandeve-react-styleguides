@@ -16,6 +16,7 @@ const AnnouncementBar = (props: any) => {
 		countDownSec
 	} = props;
 
+	// const mainText = text;
 	const [mainText, setText] = useState(text);
 	/*
 	const [showTimer, setShowTimer] = useState(false);

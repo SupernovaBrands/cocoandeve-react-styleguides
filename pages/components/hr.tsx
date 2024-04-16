@@ -1,4 +1,3 @@
-// import { Container } from "react-bootstrap";
 
 const Hrs = (props) => {
 	return (

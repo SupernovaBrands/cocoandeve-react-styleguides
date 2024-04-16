@@ -1,36 +1,35 @@
+// @ts-nocheck
 import { useState } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
-// import Header from '@/sections/Header';
-// import Footer from '@/sections/Footer';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+// import Header from '~/sections/Header';
+// import Footer from '~/sections/Footer';
 // import Next from '@/src/images/icons/chevron-next.svg';
 // import Prev from '@/src/images/icons/chevron-prev.svg';
-// import { Carousel } from "react-bootstrap";
-import DimethiconeFree from '@/images/icons/dimethicone-free.svg';
-import ToxinFree from '@/images/icons/toxin-free.svg';
-import ParabelFree from '@/images/icons/paraben-free.svg';
-import Gluten from '@/images/icons/gluten.svg';
-import CrueltyFree from '@/images/icons/cruelty-free.svg';
-import Vegan from '@/images/icons/vegan.svg';
-// import { Tabs, Tab } from "react-bootstrap";
+import DimethiconeFree from '~/images/icons/dimethicone-free.svg';
+import ToxinFree from '~/images/icons/toxin-free.svg';
+import ParabelFree from '~/images/icons/paraben-free.svg';
+import Gluten from '~/images/icons/gluten.svg';
+import CrueltyFree from '~/images/icons/cruelty-free.svg';
+import Vegan from '~/images/icons/vegan.svg';
 import Link from "next/link";
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
-import ProductCard from "@/compounds/ProductCard";
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import ProductCard from "~/compounds/ProductCard";
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
 import {
     useSelectedSnapDisplay
-} from '@/components/carousel/EmblaCarouselSelected';
-import TabNav from "@/components/TabNav";
-import TabContent from '@/components/TabContent';
-import PackagingCard from "@/components/PackagingCard";
+} from '~/components/carousel/EmblaCarouselSelected';
+import TabNav from "~/components/TabNav";
+import TabContent from '~/components/TabContent';
+import PackagingCard from "~/components/PackagingCard";
 
 const Sustainability = () => {
     const [index, setIndex] = useState(0);

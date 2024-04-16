@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { debounce } from '@/modules/utils';
+import { debounce } from '~/modules/utils';
 
-import SvgPlus from '@/images/icons/plus.svg';
-import SvgMinus from '@/images/icons/minus.svg';
-// const { debounce } = dynamic(() => import('@/modules/utils'), {
+import SvgPlus from '~/images/icons/plus.svg';
+import SvgMinus from '~/images/icons/minus.svg';
+// const { debounce } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 export default class QuantityBox extends React.Component {

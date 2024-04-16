@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import AnnouncementBar from '@/components/AnnouncementBar';
-import NavMegaMenu from '@/compounds/NavMegaMenu';
-import MobileMenu from '@/compounds/MobileMenu';
+import AnnouncementBar from '~/components/AnnouncementBar';
+import NavMegaMenu from '~/compounds/NavMegaMenu';
+import MobileMenu from '~/compounds/MobileMenu';
 import BrandLogo from '../../src/images/ce-logo.svg';
-import Account from '../../src/images/icons/account.svg';
-import Search from '../../src/images/icons/search-thin.svg';
-import CartIcon from '../../src/images/icons/cart.svg';
-import Cart from '@/components/cart/cart';
-import SearchBox from '@/compounds/SearchBox';
-import AccountDropdown from '@/compounds/AccountDropdown';
+import Account from '~/images/icons/account.svg';
+import Search from '~/images/icons/search-thin.svg';
+import CartIcon from '~/images/icons/cart.svg';
+import Cart from '~/components/cart/cart';
+import SearchBox from '~/compounds/SearchBox';
+import AccountDropdown from '~/compounds/AccountDropdown';
 
 const NAV_MEGA_MENU_TEMP = [
 	{

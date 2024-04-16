@@ -1,4 +1,4 @@
-import Footer from '@/sections/Footer';
+import Footer from '~/sections/Footer';
 
 const FooterSection = () => {
     return (

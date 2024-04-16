@@ -1,19 +1,19 @@
-import React from 'react';
-import { Breadcrumb } from '@/components/index';
+import React, { FC } from 'react';
+import { Breadcrumb } from '~/components/index';
 
 interface BreadcrumbsProps {}
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
+const Breadcrumbs: FC<BreadcrumbsProps> = () => {
     const data = [
         {
             link: '#',
             title: 'Blog',
-			className: '',
+            className: '',
         },
         {
             link: null,
             title: 'The 5 Rules Of Hair Masking',
-			className: '',
+            className: '',
         },
     ];
 

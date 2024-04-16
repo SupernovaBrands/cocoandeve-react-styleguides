@@ -1,4 +1,4 @@
-import PlusCircle from '../../src/images/icons/plus-circle.svg';
+import PlusCircle from '~/images/icons/plus-circle.svg';
 
 const UpsellBlog = (props) => {
 	return (

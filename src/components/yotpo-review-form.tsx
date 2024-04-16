@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import {
   kebabCase,
   validateEmail,
-} from '@/modules/utils_v2';
+} from '~/modules/utils_v2';
 
-import SvgFull from '@/images/icons/star-full.svg';
+import SvgFull from '~/images/icons/star-full.svg';
 import CheckBox from './CheckBox';
 import RadioOption from './RadioOption';
 import Button from './Button';

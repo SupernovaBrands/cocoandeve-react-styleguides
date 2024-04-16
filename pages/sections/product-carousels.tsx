@@ -1,4 +1,4 @@
-import ProductCarousel from '@/sections/ProductCarousel';
+import ProductCarousel from '~/sections/ProductCarousel';
 const ProductCarousels = () => {
 
 	const PRODUCTS = [

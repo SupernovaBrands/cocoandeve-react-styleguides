@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import PercentSquare from '@/images/icons/percent-square.svg';
-import Button from '@/components/Button';
-import CloseButton from '@/components/modal/CloseButton';
+import PercentSquare from '~/images/icons/percent-square.svg';
+import Button from '~/components/Button';
+import CloseButton from '~/components/modal/CloseButton';
 
 interface Product {
 	name: string

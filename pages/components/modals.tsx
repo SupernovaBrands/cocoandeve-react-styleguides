@@ -1,12 +1,13 @@
-import Modal from "@/components/Modal";
-import ModalWaitlist from "@/components/modal/Waitlist";
-import ModalNewsletter from "@/components/modal/Newsletter";
+'use client';
+import Modal from "~/components/Modal";
+import ModalWaitlist from "~/components/modal/Waitlist";
+import ModalNewsletter from "~/components/modal/Newsletter";
 import { useState } from "react";
-import Sweepstakes from "@/components/modal/Sweepstakes";
-import CheckoutUpsell from "@/components/modal/CheckoutUpsell";
-import Button from "@/components/Button";
-import Birthday from "@/components/modal/Birthday";
-import ExitIntent from "@/components/modal/ExitIntent";
+import Sweepstakes from "~/components/modal/Sweepstakes";
+import CheckoutUpsell from "~/components/modal/CheckoutUpsell";
+import Button from "~/components/Button";
+import Birthday from "~/components/modal/Birthday";
+import ExitIntent from "~/components/modal/ExitIntent";
 
 const Modals = () => {
 	const [isOpen, toggle] = useState(false);

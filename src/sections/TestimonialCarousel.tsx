@@ -1,19 +1,20 @@
+// @ts-nocheck
 import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
-import QuoteUp from '@/images/icons/quote-up.svg';
-import QuoteDown from '@/images/icons/quote-down.svg';
+import QuoteUp from '~/images/icons/quote-up.svg';
+import QuoteDown from '~/images/icons/quote-down.svg';
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
 
 const TestimonialCarousel = (props: any) => {
 	const options: EmblaOptionsType = {

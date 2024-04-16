@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface BreadcrumbProps {
-    data: { link: string; title: string; className: string;}[];
+    data: { link: string | null; title: string | null; className: string | null;}[];
     className?: string;
 }
 

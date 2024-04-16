@@ -1,4 +1,4 @@
-import Sidebar from "@/sections/Sidebar";
+import Sidebar from "~/sections/Sidebar";
 
 export default function Sidebars() {
 	const SIDEBAR_DATA = [

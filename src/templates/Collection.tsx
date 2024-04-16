@@ -1,7 +1,7 @@
-import Modal from "@/components/Modal";
-import Terms from "@/components/modal/Terms";
-import ProductCard from "@/compounds/ProductCard";
-import ProductCardQuiz from "@/compounds/ProductCardQuiz";
+import Modal from "~/components/Modal";
+import Terms from "~/components/modal/Terms";
+import ProductCard from "~/compounds/ProductCard";
+import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import { useState } from "react";
 
 const Collection = (props: any) => {

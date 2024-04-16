@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface BulletProps {
-    data: { className: string; onClick:  React.MouseEventHandler;}[];
+    data: { className: string | null; onClick:  React.MouseEventHandler | null;}[];
 }
 
 const Bullet: React.FC<BulletProps> = ({ data }) => {

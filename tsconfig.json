@@ -2,14 +2,15 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/compounds/*": ["compounds/*"],
-      "@/sections/*": ["sections/*"],
-      "@/templates/*": ["templates/*"],
-      "@/images/icons/*": ["images/icons/*"],
-      "@/config": ["config"],
-      "@/secret": ["secret"],
-      "@/modules/*": ["modules/*"]
+      "~/components/*": ["components/*"],
+      "~/compounds/*": ["compounds/*"],
+      "~/sections/*": ["sections/*"],
+      "~/templates/*": ["templates/*"],
+      "~/images/icons/*": ["images/icons/*"],
+      "~/config": ["config"],
+      "~/secret": ["secret"],
+      "~/modules/*": ["modules/*"],
+      "~react": ["../node_modules/react"],
     },
     "target": "es5",
     "lib": [

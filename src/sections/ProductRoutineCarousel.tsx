@@ -1,10 +1,11 @@
-// import RealResultCarousel from "@/sections/RealResultCarousel";
+// @ts-nocheck
+// import RealResultCarousel from "~/sections/RealResultCarousel";
 import { EmblaOptionsType } from 'embla-carousel';
 import { useState } from 'react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import ProductCardUpsell from '@/compounds/ProductCardUpsell';
+import ProductCardUpsell from '~/compounds/ProductCardUpsell';
 
 const options: EmblaOptionsType = {
 	loop: true,

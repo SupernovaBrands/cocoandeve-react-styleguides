@@ -1,5 +1,5 @@
-import UpsellBlog from "@/compounds/upsell-blog";
-import UpsellPdp from "@/compounds/upsell-pdp"; 
+import UpsellBlog from "~/compounds/upsell-blog";
+import UpsellPdp from "~/compounds/upsell-pdp";
 
 const Upsell = () => {
 	return (

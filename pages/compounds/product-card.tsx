@@ -1,4 +1,4 @@
-import ProductCard from "@/compounds/ProductCard";
+import ProductCard from "~/compounds/ProductCard";
 
 const ProductCards = () => {
     const product1 = {
