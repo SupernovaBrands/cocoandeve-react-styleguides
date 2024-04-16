@@ -4,12 +4,13 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { isItemIdInKey } from '@/modules/utils';
+import { isItemIdInKey } from '~/modules/utils';
 const tStrings = global.config.tStrings;
 
-import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
-import SvgChevronNext from '@/images/icons/chevron-next.svg';
-// const { isItemIdInKey } = dynamic(() => import('@/modules/utils'), {
+import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
+import SvgChevronNext from '~/images/icons/chevron-next.svg';
+import Button from '../Button';
+// const { isItemIdInKey } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 export default class CartManualGwp extends React.Component {
@@ -66,12 +67,12 @@ export default class CartManualGwp extends React.Component {
 									<picture className="block">
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									<figcaption className="relative -mt-1 bg-gray-400 text-xs py-[3px] rounded-lg" dangerouslySetInnerHTML={this.markText(item.price)} />
+									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded" dangerouslySetInnerHTML={this.markText(item.price)} />
 								</figure>
-								<p className="grow my-1 text-sm font-bold h-full">{item.title}</p>
-								<button
-									type="button"
-									className={`bg-transparent hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[28px] bg-${isSelected ? 'primary' : 'outline-primary'}`}
+								<p className="grow my-1 text-base h-full">{item.title}</p>
+								<Button
+									lg={false}
+								    buttonClass="btn-outline-primary"
 									onClick={() => {
 										if (isSelected) {
 											onRemoveItem(item.id);
@@ -83,7 +84,7 @@ export default class CartManualGwp extends React.Component {
 										<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
 									)}
 									{!isLoading && (isSelected ? tStrings.items_manual_remove : tStrings.items_manual_add)}
-								</button>
+								</Button>
 							</li>
 						);
 					})}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatMoney } from '@/modules/utils';
+import { formatMoney } from '~/modules/utils';
 
 const CartDiscountMeter = (props) => {
 	const {

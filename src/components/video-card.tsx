@@ -1,4 +1,4 @@
-import Play from '../../src/images/icons/play.svg';
+import Play from '~/images/icons/play.svg';
 
 const VideoCard = (props: any) => {
 	return !props.useCardTemplate ? (

@@ -1,4 +1,4 @@
-import AnnouncementBar from '@/components/AnnouncementBar';
+import AnnouncementBar from '~/components/AnnouncementBar';
 
 export default function AnnouncementBars() {
 	return (

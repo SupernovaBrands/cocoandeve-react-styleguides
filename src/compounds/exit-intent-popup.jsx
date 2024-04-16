@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-import CloseRounded from '../../src/images/icons/close-rounded.svg';
-// import Popup from '@/components/Popup';
-const Popup = dynamic(() => import('@/components/Popup'), {
+import CloseRounded from '~/images/icons/close-rounded.svg';
+// import Popup from '~/components/Popup';
+const Popup = dynamic(() => import('~/components/Popup'), {
     ssr: false,
 });
 const ExitIntent = (props) => {

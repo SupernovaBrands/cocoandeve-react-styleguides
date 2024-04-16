@@ -25,10 +25,12 @@ export const useDotButton = (
 	}, [emblaApi]);
 
 	const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+		if (!emblaApi) return;
 		setScrollSnaps(emblaApi.scrollSnapList());
 	}, []);
 
 	const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+		if (!emblaApi) return;
 		setSelectedIndex(emblaApi.selectedScrollSnap());
 	}, []);
 

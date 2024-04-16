@@ -1,16 +1,17 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
-import SvgClose from '@/images/icons/close.svg';
-import CartShippingMeter from '@/components/cart/cart-shipping-meter';
-import CartDiscountMeter from '@/components/cart/cart-discount-meter';
-import CartDiscountForm from '@/components/cart/cart-discount-form';
-import CartManualGwp from '@/components/cart/cart-manual-gwp';
-import CartExtras from '@/components/cart/cart-extras';
+import SvgClose from '~/images/icons/close.svg';
+import CartShippingMeter from '~/components/cart/cart-shipping-meter';
+import CartDiscountMeter from '~/components/cart/cart-discount-meter';
+import CartDiscountForm from '~/components/cart/cart-discount-form';
+import CartManualGwp from '~/components/cart/cart-manual-gwp';
+import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
-import CartSwellRedemption from '@/components/swell/cart-swell-redemption';
-import { formatMoney } from "@/modules/utils";
-// import storefrontApi from "@/modules/storefront-api";
+import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
+import { formatMoney } from "~/modules/utils";
+import Button from "../Button";
+// import storefrontApi from "~/modules/storefront-api";
 import { getCart } from '../../modules/shopify/cart';
 import { CartData } from "./types";
 
@@ -60,9 +61,9 @@ const Cart: React.FC<Props> = (props) => {
 		enabled: true,
 	});
 
-	const [shippingLineHide, setShippingLineHide] = useState(true);
+	const [shippingLineHide, setShippingLineHide] = useState(false);
 	const [shippingData, setShippingData] = useState({
-		show: false, amount: 0, freeRate: 100,
+		show: true, amount: 0, freeRate: 100,
 	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
@@ -73,7 +74,7 @@ const Cart: React.FC<Props> = (props) => {
 			setCart(e);
 			discountData.code = discountData.code === null ? '' : discountData.code;
 			shippingMeter.enabled = true;
-			setShippingData({...shippingData});
+			// setShippingData({...shippingData});
 			setDiscountData({...discountData});
 			setDiscountMeter({...discountMeter});
 			setShippingMeter({...shippingMeter});
@@ -128,13 +129,15 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
+	console.log(shippingData, 'testing');
+
 	return (
 		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={isOpen} handleClose={() => props.handleClose()} cartDrawer={true}>
 				<div className="modal-content mh-100 border-0 rounded-0">
-					<div className="modal-body mobile-wrapper pt-0 px-1 relative overflow-y-auto max-h-[100vh]">
-						<div className="container flex flex-col align-stretch text-center pt-2">
+					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden max-h-[100vh]">
+						<div className="container flex flex-col align-stretch text-center pt-2 px-g lg:px-3">
 							<h4 className="text-lg font-bold ">{tStrings.cart_drawer_title}</h4>
-							<button type="button" className="close text-body m-0 px-g pb-2 absolute right-1" onClick={props.handleClose} aria-label="Close" data-cy="cart-close-icon">
+							<button type="button" className="close text-body m-0 absolute top-0 right-0 px-g" onClick={props.handleClose} aria-label="Close" data-cy="cart-close-icon">
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
@@ -157,12 +160,12 @@ const Cart: React.FC<Props> = (props) => {
 									progressText={discountMeter.progressText}
 								/>
 							)}
-							<hr className="w-100 m-0 my-1" />
+							<hr className="w-full m-0 my-1" />
 						</div>
 
 						{loadingInit && (
-							<div className="d-flex justify-content-center p-2">
-								<div className="spinner-border" role="status" />
+							<div className="flex justify-center p-2">
+								<div className="text-primary spinner-border" role="status" />
 							</div>
 						)}
 
@@ -170,7 +173,7 @@ const Cart: React.FC<Props> = (props) => {
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded-lg py-1 px-2 leading-normal no-underline" data-cy="shop-all-btn">Shop all products</a>
+									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-2 leading-normal no-underline" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								<div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
@@ -193,7 +196,7 @@ const Cart: React.FC<Props> = (props) => {
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
 								id="cart-drawer-form"
-								className="container pb-[150px]"
+								className="container px-g lg:px-3 cart-drawer__form"
 								action={cart.checkoutUrl.replace('www', 'us')}
 								method="get"
 								noValidate
@@ -235,7 +238,7 @@ const Cart: React.FC<Props> = (props) => {
 								{tSettings.cartRedemption.enabled && (
 									<>
 										<CartSwellRedemption cartData={cart} />
-										<hr />
+										<hr className="my-2"/>
 									</>
 								)}
 
@@ -289,14 +292,14 @@ const Cart: React.FC<Props> = (props) => {
 
 									{shippingData.show && !shippingLineHide && (
 										<>
-											<p className="hidden d-lg-block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-											<p className={`hidden d-lg-block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, true) : 'Free'}</p>
+											<p className="hidden lg:block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
+											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, true) : 'Free'}</p>
 										</>
 									)}
 
 									{shippingData.show && !shippingLineHide && (
 										<>
-											<div className="d-flex d-lg-none justify-content-between col-12">
+											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 												</p>
@@ -326,15 +329,13 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true)}</strong>
 								<div className="w-full mt-1">
-									<button
-										type="button"
-										className="w-full bg-primary font-bold text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded-lg py-1 px-2 leading-normal no-underline"
+									<Button buttonClass="btn-primary w-full"
 										disabled={loadingDiscount || manualGwp.loading}
 										onClick={submitForm}
 										data-cy="checkout-btn"
-									>
+										>
 										{tStrings.cart_checkout}
-									</button>
+									</Button>
 								</div>
 							</div>
 							{tStrings.cart_shipping_at_checkout !== '' && (

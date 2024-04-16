@@ -1,4 +1,4 @@
-import CountriesOptions from "@/components/countries-options"; 
+import CountriesOptions from "~/components/countries-options";
 
 const ProductWaitlist = (props: any) => {
 	return (
@@ -29,8 +29,8 @@ const ProductWaitlist = (props: any) => {
 					</div>
 					<div className="row">
 						<div className="flex my-1">
-							<div className="custom-control custom-checkbox relative flex-grow max-w-full flex-1 flex my-1">
-								<input type="checkbox" name="tos" className="custom-control-input" required id="agreement"/>
+							<div className="custom-control custom-checkbox relative flex-grow max-w-full flex-1 flex my-1 pl-g">
+								<input type="checkbox" name="tos" className="[appearance:auto] hidden" required id="agreement"/>
 								<label className="custom-control-label text-xs ml-1" htmlFor="agreement">
 									I agree to the <a className="link-secondary underline text-body text-xs" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a> and <a className="link-secondary underline text-body text-xs" href="/pages/terms-and-conditions" target="_blank" aria-label="Terms of Use">Terms of Use</a>
 								</label>

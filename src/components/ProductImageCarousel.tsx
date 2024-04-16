@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import { PrevButton, NextButton } from '@/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrowButtons';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 
 interface ImageSlide {
 	id: number
@@ -66,7 +66,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 
 	return (
 		<>
-			<div className="carousel mb-2 lg:sticky lg:px-g">
+			<div className="carousel mb-1 lg:mb-2 lg:sticky lg:px-g">
 				<Carousel.Wrapper emblaApi={emblaMainApi}>
 					<Carousel.Inner emblaRef={emblaMainRef} className="lg:-mx-g">
 						{slides.map((slide, index) => (
@@ -85,7 +85,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 				<div className="carousel__progress bg-gray-400">
 					<div
 						className="carousel__progress--scroll bg-gray-500"
-						style={{ left: `${scrollProgress}%`, width: `${(1 / slides.length) * 100}%` }} />
+						style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
 				</div>
 			</div>
 			<div className="carousel max-w-[90%] mx-auto hidden lg:flex items-center">

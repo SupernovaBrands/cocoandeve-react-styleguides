@@ -1,0 +1,31 @@
+@layer components {
+    .range-banner {
+        figcaption {
+            top: 50%;
+            transform: translateY(-50%);
+            @screen lg {
+                top: calc-em(50);
+                left: 0;
+                right: 0;
+                transform: none;
+            }
+        }
+
+        &__title {
+            @apply text-lg;
+            @screen md {
+                @apply text-2xl;
+            }
+        }
+
+        @screen md {
+            &__subtitle {
+                @apply text-lg;
+            }
+
+            &__caption {
+                @apply text-base;
+            }
+        }
+    }
+}

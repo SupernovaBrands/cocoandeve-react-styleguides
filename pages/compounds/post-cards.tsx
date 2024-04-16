@@ -1,12 +1,12 @@
 import { EmblaOptionsType } from 'embla-carousel';
-import Carousel from "@/components/carousel/EmblaCarouselMulti";
-import PostCard from "@/compounds/PostCard";
+import Carousel from "~/components/carousel/EmblaCarouselMulti";
+import PostCard from "~/compounds/PostCard";
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '@/components/carousel/EmblaCarouselArrowButtons';
+import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '~/components/carousel/EmblaCarouselArrowButtons';
 
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -116,7 +116,7 @@ const PostCards = () => {
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID NO IMAGE</h1>
-				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
+				<div className="flex flex-wrap mb-5 mt-2 -mx-hg lg:-mx-g">
 					{postData3.map((data) =>
 						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}

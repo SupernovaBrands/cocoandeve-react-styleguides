@@ -1,36 +1,34 @@
 import dynamic from 'next/dynamic';
 import { useState } from "react";
-import AccordionPDP from '@/components/AccordionPDP';
+import AccordionPDP from '~/components/AccordionPDP';
 import { Button } from '../components';
-import ProductImageCarousel from "@/components/ProductImageCarousel";
+import ProductImageCarousel from "~/components/ProductImageCarousel";
 import { EmblaOptionsType } from 'embla-carousel'
 
-import LaunchWaitList from "@/compounds/launch-waitlist";
-import ProductVariant from "@/compounds/ProductVariant";
-import Help from '@/images/icons/help.svg';
+import LaunchWaitList from "~/compounds/launch-waitlist";
+import ProductVariant from "~/compounds/ProductVariant";
+import Help from '~/images/icons/help.svg';
 import Image from 'next/image'
 
-import ProductSubscription from "@/components/product-subscription";
-import UpsellPdp from "@/compounds/upsell-pdp";
-// import QuantityBox from '@/components/cart/quantity-box';
-import SaveResults from "@/components/save-results";
-import YotpoStar from "@/components/YotpoStars";
-import NaturalDha from '@/images/icons/natural-dha.svg';
-import Vegan from '@/images/icons/vegan.svg';
-import DimethiconeFree from '@/images/icons/dimethicone-free.svg';
-import CrueltyFree from '@/images/icons/cruelty-free.svg';
-import ToxinFree from '@/images/icons/toxin-free.svg';
-import Gluten from '@/images/icons/gluten.svg';
-import Ethically from '@/images/icons/ethically.svg';
-import ParabenFree from '@/images/icons/paraben-free.svg';
-import Peta from '@/images/icons/peta.svg';
-import Recycle from '@/images/icons/recycle.svg';
-import FastDelivery from '@/images/icons/fast-delivery.svg';
-import WinnerAward from '@/images/icons/winner-award.svg';
-import MoneyBack from '@/images/icons/moneyback.svg';
-import Plus from '@/images/icons/plus.svg';
-import Minus from '@/images/icons/minus.svg';
-const QuantityBox = dynamic(() => import('@/components/cart/quantity-box'), {
+import ProductSubscription from "~/components/product-subscription";
+import UpsellPdp from "~/compounds/upsell-pdp";
+// import QuantityBox from '~/components/cart/quantity-box';
+import SaveResults from "~/components/save-results";
+import YotpoStar from "~/components/YotpoStars";
+import NaturalDha from '~/images/icons/natural-dha.svg';
+import Vegan from '~/images/icons/vegan.svg';
+import DimethiconeFree from '~/images/icons/dimethicone-free.svg';
+import CrueltyFree from '~/images/icons/cruelty-free.svg';
+import ToxinFree from '~/images/icons/toxin-free.svg';
+import Ethically from '~/images/icons/ethically.svg';
+import ParabenFree from '~/images/icons/paraben-free.svg';
+import Peta from '~/images/icons/peta.svg';
+import FastDelivery from '~/images/icons/fast-delivery.svg';
+
+import TagIcon from '~/images/icons/tag.svg';
+import StarFullIcon from '~/images/icons/star-full.svg';
+
+const QuantityBox = dynamic(() => import('~/components/cart/quantity-box'), {
     ssr: false,
 });
 
@@ -120,14 +118,7 @@ const Product = (props: any) => {
         <b>3. Use Mitt &amp; Brush </b> to apply to tricky areas like the feet, hands, face &amp; ears. </p><p className="mt-3 mb-3">
         <b>4. Allow to develop </b>for a minimum of 2 hours or overnight for a deeper tan. </p><p className="mt-3 mb-3">
         <b>5. Shower in warm water </b> to remove the guide colour and pat skin dry. </p><p className="mt-3 mb-3">
-        <b>6. Repeat every 5-7 days </b> or when needed. Moisturise daily to maintain results.</p>
-        <figure class="video-card mb-0 mt-1">
-            <picture class="block relative" data-toggle="modal" data-src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/TAN_HOW_TO_BONNIE_LR.mp4?v=1610351992" data-target="#video-modal">
-            <source srcset="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4626a59b-d4c0-4ad0-d6cf-a5bac3c9a200/public" media="(min-width: 992px)" width="470">
-            <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4626a59b-d4c0-4ad0-d6cf-a5bac3c9a200/public" alt="how to use video" class="block w-full" loading="lazy" width="384">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54" class="svg size-5"><path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path></svg>
-            </picture>
-        </figure>`
+        <b>6. Repeat every 5-7 days </b> or when needed. Moisturise daily to maintain results.</p>`
 	},{
 		id: 3,
 		title: 'Collapsible FAQ',
@@ -160,6 +151,19 @@ const Product = (props: any) => {
                     <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-2">
                         <YotpoStar productId={4543113265187} showTotal={true} className="justify-start"/>
                         <h1 className="mb-2 lg:order-0">Sunny Honey Bali Bronzing Foam</h1>
+                        <div className="mb-1">
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-secondary text-white mb-25 font-normal px-1">New</span>
+                            <span className="mr-25 whitespace-nowrap inline-block badge badge--sm py-hg rounded bg-dark text-white mb-25 font-normal px-1">
+                                <TagIcon className="svg svg--current-color mr-1 text-white float-left"/>
+                                20% OFF, code: SINGLES
+                            </span>
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-sh-orange text-white mb-25 font-normal px-1">
+                                <StarFullIcon className="svg svg--current-color mr-1 text-white float-left"/>
+                                Best product on Amazon
+                            </span>
+                            <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-primary-dark text-white mb-25 font-weight-normal px-1">FREE GIFT</span>
+                        </div>
+
                         <p className="mb-2 lg:mb-4 text-lg lg:order-0">Anti-cellulite, anti-aging self tan</p>
                         <LaunchWaitList
                             title="Join the waitlist"
@@ -292,7 +296,35 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                             <SaveResults />
-                            <div className="flex items-center mb-1">
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-light-yellow rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-secondary-light rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+                            <div className="flex items-center mb-1 lg:order-2">
+                                <div className="klarna-icon flex items-center justify-center bg-light-blue rounded py-1 min-w-[5.875em]">
+                                    <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
+                                </div>
+                                <div className="pl-g text-sm">
+                                    <span>4 interest-free payments of $15.70</span>
+                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center mb-1 lg:order-2">
                                 <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 min-w-[5.875em]">
                                     <img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>

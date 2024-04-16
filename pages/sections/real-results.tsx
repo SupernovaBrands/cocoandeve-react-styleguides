@@ -1,4 +1,4 @@
-import RealResultCarousel from '@/sections/RealResultCarousel';
+import RealResultCarousel from '~/sections/RealResultCarousel';
 
 const RealResult = () => {
 	const SLIDE_VIDEOS = [

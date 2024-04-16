@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
-// import Popup from '@/components/Popup';
+// import Popup from '~/components/Popup';
 import { useState, useEffect } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
-const Popup = dynamic(() => import('@/components/Popup'), {
+const Popup = dynamic(() => import('~/components/Popup'), {
     ssr: false,
 });
 const CookiesBannerPopup = (props) => {

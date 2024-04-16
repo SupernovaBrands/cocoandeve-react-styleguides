@@ -1,4 +1,4 @@
-import PlusCircle from '../../src/images/icons/plus-circle.svg';
+import PlusCircle from '~/images/icons/plus-circle.svg';
 
 const UpsellBlog = (props) => {
 	return (
@@ -11,9 +11,9 @@ const UpsellBlog = (props) => {
                 <figcaption className="flex flex-col">
                     <span className="upsell__title">{props.title}</span>
                     <span className="upsell__price text-primary grow">
-                        <span className="compare">{props.comparePrice}</span>
+                        <span className="compare mr-[3px]">{props.comparePrice}</span>
                         {props.price}
-                        <span className="save">{props.save}</span>
+                        <span className="save ml-[3px]">{props.save}</span>
                     </span>
                     <button className="bg-transparent lg:hidden self-start hover:bg-primary hover:text-white rounded border border-primary font-bold text-primary py-[9px] px-[28px] mb-2">
                         Add to cart

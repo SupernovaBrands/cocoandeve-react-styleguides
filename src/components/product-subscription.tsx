@@ -1,5 +1,5 @@
 import CheckBox from './CheckBox';
-import Help from '../../src/images/icons/help.svg';
+import Help from '~/images/icons/help.svg';
 
 const ProductSubscription = (props) => {
 

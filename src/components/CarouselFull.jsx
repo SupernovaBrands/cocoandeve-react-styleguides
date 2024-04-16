@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Carousel } from "react-bootstrap";
 
-import Prev from '@/images/icons/chevron-prev.svg';
-import Next from '@/images/icons/chevron-next.svg';
+import Prev from '~/images/icons/chevron-prev.svg';
+import Next from '~/images/icons/chevron-next.svg';
 
 const CarouselFull = (props) => {
 	const [index, setIndex] = useState(0);

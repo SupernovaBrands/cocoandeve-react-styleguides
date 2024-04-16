@@ -1,5 +1,5 @@
-import PlusIcon from '@/images/icons/plus.svg';
-import MinusIcon from '@/images/icons/minus.svg';
+import PlusIcon from '~/images/icons/plus.svg';
+import MinusIcon from '~/images/icons/minus.svg';
 import { useState } from 'react';
 
 const AccordionPDP = (props: any) => {

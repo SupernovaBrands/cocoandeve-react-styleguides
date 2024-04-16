@@ -1,5 +1,5 @@
 
-import BrandLogo from '../../src/images/ce-logo.svg';
+import BrandLogo from '~/images/ce-logo.svg';
 
 const Logo = () => {
 	return (

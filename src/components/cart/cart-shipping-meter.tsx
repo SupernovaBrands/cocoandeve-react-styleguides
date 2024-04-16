@@ -1,13 +1,13 @@
 /* global tSettings Shopify */
 import dynamic from 'next/dynamic';
-import '@/config';
+import '~/config';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
 	formatMoney,
-} from '@/modules/utils';
-// const { formatMoney } = dynamic(() => import('@/modules/utils'), {
+} from '~/modules/utils';
+// const { formatMoney } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 const CartShippingMeter = (props) => {
@@ -24,9 +24,9 @@ const CartShippingMeter = (props) => {
 	const text = remaining <= 0 ? finalText : progressText.replace('#{shipping_price}', amount).replace('#{amount}', amount);
 
 	return (
-		<div className="hidden lg:block mt-1">
+		<div className="mt-1">
 			<p className="mb-1">{text}</p>
-			<div className="progress mb-g bg-gray-400 rounded">
+			<div className="progress mb-2 bg-gray-400 rounded">
 				<div
 					className="progress-bar bg-primary h-[5px] rounded"
 					style={{ width: `${progress}%` }}

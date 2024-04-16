@@ -1,8 +1,8 @@
-import Instagram from '@/sections/Instagram';
+import Instagram from '~/sections/Instagram';
 
 const InstagramSection = () => {
     return (
-        <Instagram className="bg-primary-light" />
+        <Instagram className="bg-pink-light" />
     );
 }
 

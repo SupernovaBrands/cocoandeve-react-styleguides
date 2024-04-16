@@ -1,15 +1,15 @@
 const Instagram = (props) => {
     return (
-        <section className={`instagram pt-4 text-center ${props.className} container mx-auto lg:px-g max-w-full`}>
+        <section className={`instagram pt-4 pb-3 text-center ${props.className} mx-auto`}>
             <div className="w-11/12 lg:w-2/3 text-center mx-auto pb-4 sm:px-hg">
-                <p className="h1 mb-1">Get social with us</p>
+                <p className="h2 mb-1">Get social with us</p>
                 <p className="h4 mb-1">
-                    <a href="#" target="_blank"  className="text-body lg:text-base text-base font-bold lg:font-bold no-underline">@cocoandeve</a>
+                    <a href="#" target="_blank"  className="text-body lg:text-lg underline">@cocoandeve</a>
                 </p>
-                <p className="text-base font-normal mb-0">Want to feature on our website or instagram? Tag us in your Coco & Eve hair, self tanner or skincare photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                <p className="font-normal mb-0 lg:text-lg">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
             </div>
-            <div className="instagram--feed container-fluid p-lg-0">
-                <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1">
+            <div className="container instagram--feed container-fluid p-lg-0">
+                <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g">
                     <div className="instagram--feed--left w-full p-0">
                         <div className="flex flex-wrap m-0">
                             <div className="w-full lg:w-2/3 p-0">

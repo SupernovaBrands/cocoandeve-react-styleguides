@@ -1,15 +1,15 @@
 import dynamic from 'next/dynamic';
-// import Header from '@/sections/Header';
-import Footer from '@/sections/Footer';
-import Collection from '@/templates/Collection';
-import Service from "@/sections/Service";
-// import Cart from "@/components/cart/cart";
+// import Header from '~/sections/Header';
+import Footer from '~/sections/Footer';
+import Collection from '~/templates/Collection';
+import Service from "~/sections/Service";
+// import Cart from "~/components/cart/cart";
 import { useState } from 'react';
-import ProductCardQuiz from '@/compounds/ProductCardQuiz';
-const Cart = dynamic(() => import('@/components/cart/cart'), {
+import ProductCardQuiz from '~/compounds/ProductCardQuiz';
+const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
-const Header = dynamic(() => import('@/sections/Header'), {
+const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
 

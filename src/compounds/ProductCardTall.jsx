@@ -1,6 +1,6 @@
 import Link from "next/link";
-import New from '@/images/icons/new.svg';
-import YotpoStar from "@/components/YotpoStars";
+import New from '~/images/icons/new.svg';
+import YotpoStar from "~/components/YotpoStars";
 
 const AddToCartButton = (props) => {
     return (

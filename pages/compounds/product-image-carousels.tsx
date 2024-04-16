@@ -1,5 +1,5 @@
-import ProductImageCarousel from "@/components/ProductImageCarousel";
-import { EmblaOptionsType } from 'embla-carousel'
+import ProductImageCarousel from "~/components/ProductImageCarousel";
+
 const ProductImageCarousels = () => {
 	const SLIDES = [
 		{ id: 1, src: 'https://via.placeholder.com/1140x1140/EFADBA?text=_text_' },

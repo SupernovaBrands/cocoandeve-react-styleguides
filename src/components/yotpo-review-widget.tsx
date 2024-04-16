@@ -1,8 +1,8 @@
 /* global tSettings tStrings */
 // @ts-nocheck
 // import dynamic from 'next/dynamic';
-import '@/config';
-import Modal from "@/components/Modal";
+import '~/config';
+import Modal from "~/components/Modal";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -18,42 +18,42 @@ import {
 	objectToQueryString,
 	currentTime,
 	encryptParam,
-} from '@/modules/utils_v2';
+} from '~/modules/utils_v2';
 
-import ReviewStar from '@/components/review-star';
-import YotpoReviewForm from '@/components/yotpo-review-form';
+import ReviewStar from '~/components/review-star';
+import YotpoReviewForm from '~/components/yotpo-review-form';
 import Button from './Button';
-// const YotpoReviewForm = dynamic(() => import('@/components/yotpo-review-form'), {
+// const YotpoReviewForm = dynamic(() => import('~/components/yotpo-review-form'), {
 //     ssr: false,
 // });
 
-import YotpoQuestionForm from '@/components/yotpo-question-form';
-import SvgHeart from '@/images/icons/heart.svg';
-import SvgClose from '@/images/icons/close.svg';
-import SvgFacebook from '@/images/icons/facebook-square.svg';
-import SvgTwitter from '@/images/icons/twitter-square.svg';
-import SvgLinkedin from '@/images/icons/linkedin-square.svg';
-import SvgSearch from '@/images/icons/search.svg';
-import SvgVerified from '@/images/icons/verified.svg';
-import SvgThumbsUp from '@/images/icons/thumbs-up.svg';
-import SvgThumbsDown from '@/images/icons/thumbs-down.svg';
-import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
-import SvgChevronNext from '@/images/icons/chevron-next.svg';
-import SvgTranslate from '@/images/icons/translate.svg';
-import SvgCloseCircle from '@/images/icons/close-rounded.svg';
+import YotpoQuestionForm from '~/components/yotpo-question-form';
+import SvgHeart from '~/images/icons/heart.svg';
+import SvgClose from '~/images/icons/close.svg';
+import SvgFacebook from '~/images/icons/facebook-square.svg';
+import SvgTwitter from '~/images/icons/twitter-square.svg';
+import SvgLinkedin from '~/images/icons/linkedin-square.svg';
+import SvgSearch from '~/images/icons/search.svg';
+import SvgVerified from '~/images/icons/verified.svg';
+import SvgThumbsUp from '~/images/icons/thumbs-up.svg';
+import SvgThumbsDown from '~/images/icons/thumbs-down.svg';
+import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
+import SvgChevronNext from '~/images/icons/chevron-next.svg';
+import SvgTranslate from '~/images/icons/translate.svg';
+import SvgCloseCircle from '~/images/icons/close-rounded.svg';
 
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 
 const { yotpoKey } = tSettings;

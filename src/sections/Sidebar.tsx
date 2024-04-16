@@ -1,32 +1,55 @@
-const Sidebar = (props) => {
+import { EmblaOptionsType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+import Autoplay from 'embla-carousel-autoplay';
+import SidebarCard from '~/components/SidebarCard';
+
+const Sidebar = ({data}) => {
+	const options: EmblaOptionsType = {
+		loop: false,
+		active: true,
+		breakpoints: {
+			'(min-width: 768px)': { active: false },
+		},
+	};
+	const [emblaRef3, emblaApi3] = useEmblaCarousel(options, [
+		Autoplay({ playOnInit: false, delay: 3000 })
+	]);
+	const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
+	const PER_PAGE = 2;
+	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
 	return (
-		<div className="w-full lg:w-1/3 px-g">
-			<aside className="blog-grid__sidebar sidebar lg:sticky w-full lg:block mb-4 lg:mb-0 self-start">
-				<div className="no-gutters__in-container">
-					<h4 className="mb-3 h1 mb-1">POPULAR READS</h4>
-					<div className="">
-						<div className="mb-0 pb-1">
-							<div className="">
-								<article className="post-card mb-2 lg:mb-3">
-									<h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-									<p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-								</article>
-								<article className="post-card mb-2 lg:mb-3">
-									<h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-									<p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-								</article>
-							</div>
-							<div className="">
-								<article className="post-card mb-2 lg:mb-0">
-									<h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-									<p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-								</article>
-							</div>
-						</div>
-					</div>
-				</div>
-			</aside>
-		</div>
+		<aside className="blog-post-grid__sidebar lg:sticky w-full mt-2 lg:mt-0 mb-0 lg:mb-auto self-end flex lg:block flex-wrap lg:px-g sm:px-hg">
+			<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto">
+				<h2 className="mb-3 text-center hidden lg:block h1">Popular reads</h2>
+				<Carousel.Wrapper emblaApi={emblaApi3} className="sm:min-h-[16em]">
+					<Carousel.Inner emblaRef={emblaRef3} className="lg:flex-col">
+						{GROUPED_INDEX.map((_, index) => {
+							const pNum = _ + 1;
+							const splitItem = data.slice((pNum - 1) * PER_PAGE, pNum * PER_PAGE);
+							return splitItem.length > 0 && (
+								<div key={index} className="flex-grow-0 flex-shrink-0 w-full basis-full">
+									{splitItem.map((item: any) => <SidebarCard key={item.id} data={item} />)}
+								</div>
+							)
+						})}
+					</Carousel.Inner>
+					<Carousel.Navigation>
+						<ol className="carousel__dots justify-center lg:hidden mb-0">
+							{GROUPED_INDEX.map((_: any, index: number) => (
+								<li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-50'}`}>
+									<DotButton
+										onClick={() => onClick3(index)}
+										className="carousel__dot"
+									/>
+								</li>
+							))}
+						</ol>
+					</Carousel.Navigation>
+				</Carousel.Wrapper>
+			</section>
+		</aside>
 	);
 };
 

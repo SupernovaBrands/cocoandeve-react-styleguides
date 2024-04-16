@@ -2,7 +2,7 @@ const Button = (props: any) => {
     const {id, label, type, lg, buttonClass, onClick, children} = props
     return (
         <button onClick={onClick} id={id} type={type ?? 'button'}
-            className={`${buttonClass ?? 'btn-primary'} ${lg ?? 'btn-lg'} btn`}>
+            className={`${buttonClass ?? 'btn-primary'} ${lg ?? 'btn-lg'} btn block`}>
             {children}
         </button>
     )

@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import ResultCard from "@/compounds/result-card";
+import ResultCard from "~/compounds/result-card";
 
 const ResultCards = () => {
 	const REVIEW = {
@@ -16,7 +15,7 @@ const ResultCards = () => {
 		<div className="container mt-4">
 			<h1 className="mb-1">Result Card</h1>
 			<div className="row">
-				<ResultCard item={REVIEW} wrapper="w-9/12 lg:w-1/4" />
+				<ResultCard item={REVIEW} wrapper="w-full lg:w-1/4" />
 			</div>
 		</div>
 	);

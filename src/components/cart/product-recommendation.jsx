@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // import {
 // 	formatMoney,
 // } from '~mod/utils';
-const { formatMoney } = dynamic(() => import('@/modules/utils'), {
+const { formatMoney } = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
 const ShopifyUpsell = (props) => {

@@ -1,14 +1,15 @@
 import { useState } from 'react';
-// import Header from '@/sections/Header';
-// import Footer from '@/sections/Footer';
-import HeroBanner from '@/sections/HeroBanner';
-import ProductCarousel from '@/sections/ProductCarousel';
-import Playground from '@/sections/Playground';
-import Service from "@/sections/Service";
-import Editors from '@/sections/Editors';
-import RealResultCarousel from '@/sections/RealResultCarousel';
-import Instagram from '@/sections/Instagram';
-// import Cart from "@/components/cart/cart";
+// import Header from '~/sections/Header';
+// import Footer from '~/sections/Footer';
+import HeroBanner from '~/sections/HeroBanner';
+import ProductCarousel from '~/sections/ProductCarousel';
+import Playground from '~/sections/Playground';
+import Service from "~/sections/Service";
+import Editors from '~/sections/Editors';
+import RealResultCarousel from '~/sections/RealResultCarousel';
+import Instagram from '~/sections/Instagram';
+import QuizReward from '~/sections/QuizReward';
+// import Cart from "~/components/cart/cart";
 
 const Homepage = () => {
     const [showCart, setShowCart] = useState(false);
@@ -147,11 +148,12 @@ const Homepage = () => {
 		<>
             <HeroBanner />
             <ProductCarousel products={PRODUCTS} />
+			<RealResultCarousel videos={SLIDE_VIDEOS} />
+			<Service />
             <Playground />
-			      <Service />
+			<QuizReward />
             <Editors />
-            <RealResultCarousel videos={SLIDE_VIDEOS} />
-            <Instagram className="bg-primary-light" />
+            <Instagram className="bg-pink-light" />
 		</>
     );
 }

@@ -1,6 +1,6 @@
 /* global tStrings tSettings */
 // @ts-nocheck
-import '@/config';
+import '~/config';
 // import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -8,13 +8,13 @@ const tStrings = global.config.tStrings;
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ConditionWrapper from '@/components/cart/condition-wrapper';
-import QuantityBox from '@/components/cart/quantity-box';
-import SvgTrash from '@/images/icons/trash.svg';
-import SvgRecurring from '@/images/icons/recurring.svg';
-import SvgChevronDown from '@/images/icons/chevron-down.svg';
-import { kebabCase, formatMoney } from '@/modules/utils';
-// const { kebabCase, formatMoney } = dynamic(() => import('@/modules/utils'), {
+import ConditionWrapper from '~/components/cart/condition-wrapper';
+import QuantityBox from '~/components/cart/quantity-box';
+import SvgTrash from '~/images/icons/trash.svg';
+import SvgRecurring from '~/images/icons/recurring.svg';
+import SvgChevronDown from '~/images/icons/chevron-down.svg';
+import { kebabCase, formatMoney } from '~/modules/utils';
+// const { kebabCase, formatMoney } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 
@@ -198,7 +198,7 @@ export default class CartItem extends React.Component {
 												return variant && (
 													<button
 														key={`${opt.id}-${kebabCase(val)}`}
-														className={`variant-swatch pr-0 mr-1 before:m-[1px] ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
+														className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val && 'border border-primary'} ${!variant.availableForSale ? 'oos' : ''}`}
 														type="button"
 														tabIndex={-1}
 														disabled={!variant.availableForSale || editingVariant !== false}

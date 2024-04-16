@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputFormGroup, InputSearch, Select, TextArea, CheckBox, Button } from '@/components/index';
+import { InputFormGroup, InputSearch, Select, TextArea, CheckBox, Button } from '~/components/index';
 
 const Forms: React.FC = () => {
     const onSearchChange = (e) => {

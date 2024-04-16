@@ -1,5 +1,5 @@
-import Product from "@/compounds/ProductVariant";
-import Help from '@/images/icons/help.svg';
+import Product from "~/compounds/ProductVariant";
+import Help from '~/images/icons/help.svg';
 import { useState } from "react";
 
 const ProductVariants = () => {

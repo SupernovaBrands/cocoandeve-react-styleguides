@@ -1,10 +1,10 @@
 @layer components {
 	.btn {
 		@apply inline-block align-middle text-center select-none
-				border font-bold rounded py-1 px-3 leading-normal;
+				border font-bold rounded-h py-[9px] px-[28px] leading-base;
 
 		&-lg {
-			@apply py-g px-4 leading-tight;
+			@apply rounded border-2 py-[13px] px-[54px] leading-base;
 		}
 
 		&-primary {
@@ -13,6 +13,10 @@
 
 		&-outline-primary {
 			@apply bg-white border border-primary hover:bg-primary hover:text-white text-primary;
+		}
+
+		&-sm {
+			@apply sm:py-[.3125em] lg:py-g;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-import HeroBanner from "@/sections/HeroBanner";
+import HeroBanner from "~/sections/HeroBanner";
 
 const HeroBannerSection = () => {
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ChevronDown from '../../src/images/icons/chevron-down.svg';
-import CountriesOptions from "@/components/countries-options"; 
-import { InputFormGroup } from '@/components/index';
+import ChevronDown from '~/images/icons/chevron-down.svg';
+import CountriesOptions from "~/components/countries-options";
+import { InputFormGroup } from '~/components/index';
 
 const Sweepstakes = (props) => {
     const [showCart, setShowCart] = useState(false);
@@ -30,6 +30,9 @@ const Sweepstakes = (props) => {
                                     <li>Third prize is $100 worth of products</li>
                                 </ul>
                                 <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
+                                    <InputFormGroup type="text" id="sweepstakes__social-media" placeholder="Type Instagram handle here" groupClass="w-full pr-2 pl-2"></InputFormGroup>
+                                </div>
+                                <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
                                     <InputFormGroup type="text" id="sweepstakes__email" placeholder="Type email here" groupClass="w-full pr-2 pl-2"></InputFormGroup>
                                     <small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
                                 </div>
@@ -52,7 +55,7 @@ const Sweepstakes = (props) => {
                                     <div className="custom-control custom-checkbox relative flex-grow max-w-full flex flex-wrap items-center place-content-center">
                                         <input type="checkbox" name="tos" className="custom-control-input" required id="sweepstakes__toc" />
                                         <label className="custom-control-label text-sm ml-1" htmlFor="sweepstakes__toc">
-                                            I agree to <a href="#">Privacy Policy & ToS</a>
+                                            I agree to <a href="#" className="text-sm">Privacy Policy & ToS</a>
                                         </label>
                                     </div>
                                     <small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>

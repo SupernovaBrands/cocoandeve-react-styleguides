@@ -1,13 +1,13 @@
 /* global tSettings tStrings Cart */
-import '@/config';
+import '~/config';
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SvgStars from '@/images/icons/swell-stars.svg';
-import SvgStarsSM from '@/images/icons/swell-stars-cart-sm.svg';
+import SvgStars from '~/images/icons/swell-stars.svg';
+import SvgStarsSM from '~/images/icons/swell-stars-cart-sm.svg';
 
 const SwellRedemptionCard = (props) => {
 	const {
@@ -76,19 +76,18 @@ const SwellRedemptionCard = (props) => {
 		}
 	}
 	return (
-		<figure key={props.key} className="w-[5.625em] min-w-[5.625em] cart-drawer__swell-redemption-item bg-gray-400 rounded pb-1 ml-1 flex justify-start items-center flex-col">
+		<figure key={props.key} className="w-[5.625em] min-w-[5.625em] cart-drawer__swell-redemption-item bg-gray-400 rounded pb-1 ml-1 flex justify-start items-center flex-col overflow-hidden">
 			{!item.amount && (
 				<div className="cart-drawer__swell-redemption-item-heading flex items-center h-full justify-center">
 					<SvgStars />
 				</div>
 			)}
 			{item.amount > 0 && item.icon !== 'fa-dollar' && (
-				<picture className="w-100">
+				<picture className="w-full mb-25">
 					<img alt={item.name} src={imgSrc} width="101" />
 				</picture>
 			)}
 			<figcaption className={`flex px-25 items-center flex-col h-full w-full justify-between ${!item.amount ? 'px-1' : ''}`}>
-				<strong className="block my-1 mx-25">{item.name}</strong>
 				{!item.amount && !customerEmail && !customerId && (
 					<a href="/account/login" className="text-underline">Login/Sign up</a>
 				)}
@@ -97,8 +96,7 @@ const SwellRedemptionCard = (props) => {
 				)}
 				{item.amount > 0 && !customerEmail && !customerId && (
 					<div className="flex items-center">
-						<SvgStarsSM />
-						<span className="ml-25">{item.amount}</span>
+						<span className="ml-25">⭐️ {item.amount}</span>
 					</div>
 				)}
 				{item.amount > 0 && customerEmail && customerId && isItemRedeemed && (
@@ -106,27 +104,7 @@ const SwellRedemptionCard = (props) => {
 						<span className="font-size-sm">✅ Redeemed</span>
 					</div>
 				)}
-				{(item.quantity === null || item.quantity > 0) && item.amount > 0
-					&& customerEmail && customerId && !isItemRedeemed && (
-					<button type="button" disabled={item.amount > userPts || btnLoading || swellLoading} className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border flex items-center w-full py-1 justify-center" onClick={redeemItem}>
-						{!btnLoading && (
-							<>
-								<SvgStarsSM />
-								<strong className="ml-25 font-size-sm">{item.amount}</strong>
-								<strong className="ml-25 font-size-sm">|</strong>
-								<strong className="ml-25 font-size-sm">Redeem</strong>
-							</>
-						)}
-						{btnLoading && (
-							<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-						)}
-					</button>
-				)}
-				{item.quantity === 0 && item.amount > 0 && customerEmail && customerId && !isItemRedeemed && (
-					<button type="button" disabled className="btn btn-unstyled cart-drawer__swell-redemption-item-btn bg-white border flex items-center w-full py-1 justify-center">
-						<span className="font-bold text-sm">{tStrings.soldOut}</span>
-					</button>
-				)}
+				<button type="button" data-item-id="650226" class="rounded-full btn btn-sm bg-white w-full py-hg px-1 my-1 font-normal border-0 text-sm">Add</button>
 			</figcaption>
 		</figure>
 	);

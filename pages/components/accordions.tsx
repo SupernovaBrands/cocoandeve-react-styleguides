@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import Accordion from '@/components/Accordion';
+import Accordion from '~/components/Accordion';
 const Accordions = () => {
 	const [openIndex, setOpenIndex] = useState(0);
 
@@ -26,7 +26,7 @@ const Accordions = () => {
 	};
 	return (
 		<div className="container my-4">
-			<h1>Accordion</h1>
+			<h1 className="mb-hg">Accordion</h1>
 			<Accordion data={data} onClick={toggleCard} openIndex={openIndex} />
 		</div>
 	);
