@@ -56,14 +56,14 @@ const ArticleTemplate = () => {
 						<div className="lg:w-2/3 w-full p-2 lg:pe-4">
 							<h2 className="mb-1">Join the club & get 15% OFF*!</h2>
 							<p className="mb-[1rem]">Get 15% OFF* your first order, plus first access to new product launches, exclusive offers, expert tips and routines.</p>
-							<Form />
+							<Form background="bg-white" />
 							<div className="blog-post-grid__newsletter--submitted hidden form-group mb-g text-left items-center">
 								<button type="button" className="btn btn-primary btn-lg rounded-lg block d-lg-inline-block mb-0 btn--copy">
 									WELCOME
 									<Documents className="ml-25" />
 								</button>
 							</div>
-							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
+							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline text-sm">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
 						</div>
 					</div>
 				</div>

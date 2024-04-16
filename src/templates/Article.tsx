@@ -1,10 +1,86 @@
 import { useEffect, useState } from "react";
-import ProgressBar from '~/components/ProgressBar';
-import BlogNavTag from '~/compounds/blog-nav-tags';
-import ProductCard from "~/compounds/ProductCard";
-import PostCard from "~/compounds/PostCard";
+// import ProgressBar from '@/components/ProgressBar';
+import BlogNavTag from 'compounds/blog-nav-tags';
+import PostCard from "compounds/PostCard";
+import Sidebar from "sections/Sidebar";
+import ShopArticle from "sections/ShopArticle";
 
 const Article = (props) => {
+    const SIDEBAR_DATA = [
+		{
+			id: 1,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+		{
+			id: 2,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+		{
+			id: 3,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+	];
+
+    const PRODUCTS = [
+		{
+			id: 1,
+			src: '//via.placeholder.com/520x520/FFF2F4',
+			srcSet: '//via.placeholder.com/520x520/FFF2F4',
+			title: 'Sunny Honey Bronzing Bundle',
+			comparePrice: '$34.90',
+			price: '$24.90',
+			productId: 4543113265187,
+		},
+		{
+			id: 2,
+			src: 'https://via.placeholder.com/520x520/FFF2F4',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			title: 'Miracle Hair',
+			comparePrice: '$34.90',
+			price: '$24.90',
+			productId: 4543113265187,
+			swatch: {
+				label: 'Choose Style',
+				style: true,
+				data: [
+					{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: true},
+					{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
+				]
+			}
+		},
+		{
+			src: 'https://via.placeholder.com/520x520/FFF2F4',
+			srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
+			title: 'Sunny Honey Bronzing Bundle',
+			comparePrice: '$34.90',
+			price: '$24.90',
+			productId: 4543113265187,
+			swatch: {
+				label: 'Choose Shade',
+				shade: true,
+				data: [
+					{ id: 32068891541539, value: 'medium', label: 'Medium', available: false},
+					{ id: 32068891607075, value: 'dark', label: 'Dark', available: true},
+					{ id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
+				]
+			}
+		}
+    ]
     // const [offset, setOffset] = useState();
 
     // const items = [
@@ -254,56 +330,7 @@ const Article = (props) => {
                             {props.children}
                         </div>
                     </div>
-
-                    <aside className="blog-post-grid__sidebar lg:sticky col-12 mt-2 lg:mt-0 mb-3 lg:mb-auto self-end flex lg:block flex-wrap lg:px-g sm:px-hg">
-                        <section className="no-gutters__in-container sidebar order-2 bg-gray-400">
-                            <h2 className="mb-3 text-center hidden lg:block h1">Popular reads</h2>
-                            <div>
-                                <ul className="mb-0 pb-1">
-                                    <li className="">
-                                        <article className="post-card flex flex-grow-1 mb-3">
-                                            <picture className="flex-shrink-0 mr-1">
-                                                <source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-                                                <a href="/products/bond-building-pre-shampoo-treatment">
-                                                    <img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-100" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-                                                </a>
-                                            </picture>
-                                            <figcaption className="flex flex-col text-sm">
-                                                <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-black hover:text-primary">6 Scalp Care Myths – Busted!</a></h3>
-                                                <p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                            </figcaption>
-                                        </article>
-                                        <article className="post-card flex flex-grow-1 mb-3">
-                                            <picture className="flex-shrink-0 mr-1">
-                                                <source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-                                                <a href="/products/bond-building-pre-shampoo-treatment">
-                                                    <img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-100" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-                                                </a>
-                                            </picture>
-                                            <figcaption className="flex flex-col text-sm">
-                                                <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-black hover:text-primary">6 Scalp Care Myths – Busted!</a></h3>
-                                                <p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                            </figcaption>
-                                        </article>
-                                    </li>
-                                    <li className="">
-                                        <article className="post-card flex flex-grow-1 mb-0">
-                                            <picture className="flex-shrink-0 mr-1">
-                                                <source srcSet="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" media="(min-width: 992px)" />
-                                                <a href="/products/bond-building-pre-shampoo-treatment">
-                                                    <img src="//cdn.shopify.com/s/files/1/0243/8817/3888/products/PDP_BondBuildingPre-Shampoo_90x90_crop_center.jpg?v=1663207008" className="w-100" loading="lazy" alt="Bond Building Pre-Shampoo Treatment" />
-                                                </a>
-                                            </picture>
-                                            <figcaption className="flex flex-col text-sm">
-                                                <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-black hover:text-primary">6 Scalp Care Myths – Busted!</a></h3>
-                                                <p className="mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                            </figcaption>
-                                        </article>
-                                    </li>
-                                </ul>
-                            </div>
-                        </section>
-                    </aside>
+                    <Sidebar data={SIDEBAR_DATA} />
                 </article>
             </div>
         </div>
@@ -311,22 +338,7 @@ const Article = (props) => {
             <div className="container">
                 <h4 className="h1 text-center mb-1">Shop this article</h4>
                 <div className="pt-2">
-                    <div className="flex flex-wrap -mx-1 lg:-mx-2">
-                        <ProductCard
-                            product={product1}
-                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                            button={true}
-                        />
-                        <ProductCard
-                            product={product2}
-                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                            icon={true}
-                        />
-                        <ProductCard
-                            product={product3}
-                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                        />
-                    </div>
+                    <ShopArticle products={PRODUCTS} />
                 </div>
             </div>
         </div>
