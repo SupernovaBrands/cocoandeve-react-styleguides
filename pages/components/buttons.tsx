@@ -1,7 +1,7 @@
-import Search from '../../src/images/icons/search.svg';
-import ChevronDown from '../../src/images/icons/chevron-down.svg';
-import Spin from '../../src/images/icons/spin.svg';
-import { Button } from '@/components/index';
+import Search from '~/images/icons/search.svg';
+import ChevronDown from '~/images/icons/chevron-down.svg';
+import Spin from '~/images/icons/spin.svg';
+import { Button } from '~/components/index';
 
 export default function Buttons() {
 	return (

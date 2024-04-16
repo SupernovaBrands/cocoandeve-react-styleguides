@@ -1,5 +1,3 @@
-import { Col, Row } from "react-bootstrap";
-
 const RecommendationCard = (props) => {
 	return (
 		<figure className="relative w-full lg:w-1/3 flex grow  lg:px-g sm:px-hg mb-[1rem]">

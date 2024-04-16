@@ -1,13 +1,13 @@
 /* global tSettings Shopify */
 import dynamic from 'next/dynamic';
-import '@/config';
+import '~/config';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
 	formatMoney,
-} from '@/modules/utils';
-// const { formatMoney } = dynamic(() => import('@/modules/utils'), {
+} from '~/modules/utils';
+// const { formatMoney } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 const CartShippingMeter = (props) => {

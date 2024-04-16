@@ -1,4 +1,4 @@
-import PostTag from "@/components/PostTag";
+import PostTag from "~/components/PostTag";
 import Link from "next/link";
 
 type PropType = {

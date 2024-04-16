@@ -1,13 +1,13 @@
-import Prev from '@/images/icons/chevron-prev.svg';
-import Next from '@/images/icons/chevron-next.svg';
+import Prev from '~/images/icons/chevron-prev.svg';
+import Next from '~/images/icons/chevron-next.svg';
 import { useState } from 'react';
-import ProductCard from '@/compounds/ProductCard';
-import ShopArticle from '@/compounds/ShopArticle';
-import ResultCard from '@/compounds/result-card';
-import VideoCard from '@/components/video-card';
-import ArticleCard from '@/compounds/ArticleCard';
-import PackCard from '@/compounds/PackagingCard';
-import ProductCardUpsell from '@/compounds/ProductCardUpsell';
+import ProductCard from '~/compounds/ProductCard';
+import ShopArticle from '~/compounds/ShopArticle';
+import ResultCard from '~/compounds/result-card';
+import VideoCard from '~/components/video-card';
+import ArticleCard from '~/compounds/ArticleCard';
+import PackCard from '~/compounds/PackagingCard';
+import ProductCardUpsell from '~/compounds/ProductCardUpsell';
 
 // https://github.com/react-bootstrap/react-bootstrap/issues/5749
 const CarouselCustom = (props) => {

@@ -1,4 +1,4 @@
-import Editors from '@/sections/Editors';
+import Editors from '~/sections/Editors';
 
 const Testimonials = () => {
     return (

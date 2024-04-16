@@ -1,4 +1,4 @@
-import InstagramCard from "@/components/InstagramCard";
+import InstagramCard from "~/components/InstagramCard";
 
 const InstagramCards = () => {
 	return (

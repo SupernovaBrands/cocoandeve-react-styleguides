@@ -1,6 +1,6 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
 
 import {
@@ -8,10 +8,10 @@ import {
     NextButton,
     usePrevNextButtons,
     controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
 
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 interface Item {
     label: string;
@@ -73,8 +73,8 @@ const HowToCarousel: React.FC = () => {
     };
 
 	return (
-		<section className="how-to py-2 no-gutters__in-container mb-5">
-			<h2 className="text-center h1 pt-2 pb-3 mb-0">The Ultimate How-Tos</h2>
+		<section className="how-to pb-2 no-gutters__in-container mb-5">
+			<h2 className="text-center h1 pt-2 sm:pb-2 md:pb-3 mb-0">The Ultimate How-Tos</h2>
 			<Carousel.Wrapper emblaApi={emblaApi7}>
 				<Carousel.Inner emblaRef={emblaRef7} className="lg:-mx-g">
 					{items.map((item, index) => (

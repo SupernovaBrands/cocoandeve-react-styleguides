@@ -1,4 +1,4 @@
-import Close from '@/images/icons/close.svg';
+import Close from '~/images/icons/close.svg';
 
 type Props = {
 	handleClose: any

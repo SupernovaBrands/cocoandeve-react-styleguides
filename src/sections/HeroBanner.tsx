@@ -2,20 +2,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 import Autoplay from 'embla-carousel-autoplay';
-import Modal from "@/components/Modal";
+import Modal from "~/components/Modal";
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
-import { LazyLoadImage } from '@/components/carousel/EmblaCarouselLazyLoadImage';
-import TermCondition from '@/components/modal/TermCondition';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import { LazyLoadImage } from '~/components/carousel/EmblaCarouselLazyLoadImage';
+import TermCondition from '~/components/modal/TermCondition';
 
 const options: EmblaOptionsType = {
 	loop: true,

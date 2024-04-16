@@ -1,4 +1,4 @@
-import ChevronDownIcon from '@/images/icons/chevron-down.svg';
+import ChevronDownIcon from '~/images/icons/chevron-down.svg';
 
 const Accordion = (props: any) => {
 	interface Accordion {

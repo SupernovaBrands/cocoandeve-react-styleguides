@@ -1,4 +1,4 @@
-import HowToCarousel from "@/sections/HowTo";
+import HowToCarousel from "~/sections/HowTo";
 
 const HowToSection: React.FC = () => {
     return (

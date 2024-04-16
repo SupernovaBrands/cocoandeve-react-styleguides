@@ -1,4 +1,4 @@
-import FiveStars from '../../src/images/icons/five-stars.svg';
+import FiveStars from '~/images/icons/five-stars.svg';
 import Link from 'next/link';
 
 const ResultCard = (props: any) => {

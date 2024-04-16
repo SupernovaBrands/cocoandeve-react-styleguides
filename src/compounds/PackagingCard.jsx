@@ -1,4 +1,4 @@
-import FiveStars from '../../src/images/icons/five-stars.svg';
+import FiveStars from '~/images/icons/five-stars.svg';
 import Badges from 'react-bootstrap/Badge';
 import Link from 'next/link';
 

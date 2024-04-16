@@ -1,9 +1,9 @@
-import Button from '@/components/Button';
+import Button from '~/components/Button';
 import dynamic from 'next/dynamic';
 import { useState } from "react";
 import { ReactElement } from "react"; // Import ReactElement type
 
-const Cart = dynamic(() => import('@/components/cart/cart'), {
+const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
 

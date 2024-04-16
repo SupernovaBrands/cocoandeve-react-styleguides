@@ -4,13 +4,13 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { isItemIdInKey } from '@/modules/utils';
+import { isItemIdInKey } from '~/modules/utils';
 const tStrings = global.config.tStrings;
 
-import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
-import SvgChevronNext from '@/images/icons/chevron-next.svg';
+import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
+import SvgChevronNext from '~/images/icons/chevron-next.svg';
 import Button from '../Button';
-// const { isItemIdInKey } = dynamic(() => import('@/modules/utils'), {
+// const { isItemIdInKey } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 export default class CartManualGwp extends React.Component {

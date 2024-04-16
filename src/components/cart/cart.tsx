@@ -1,17 +1,17 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
-import SvgClose from '@/images/icons/close.svg';
-import CartShippingMeter from '@/components/cart/cart-shipping-meter';
-import CartDiscountMeter from '@/components/cart/cart-discount-meter';
-import CartDiscountForm from '@/components/cart/cart-discount-form';
-import CartManualGwp from '@/components/cart/cart-manual-gwp';
-import CartExtras from '@/components/cart/cart-extras';
+import SvgClose from '~/images/icons/close.svg';
+import CartShippingMeter from '~/components/cart/cart-shipping-meter';
+import CartDiscountMeter from '~/components/cart/cart-discount-meter';
+import CartDiscountForm from '~/components/cart/cart-discount-form';
+import CartManualGwp from '~/components/cart/cart-manual-gwp';
+import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
-import CartSwellRedemption from '@/components/swell/cart-swell-redemption';
-import { formatMoney } from "@/modules/utils";
+import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
+import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
-// import storefrontApi from "@/modules/storefront-api";
+// import storefrontApi from "~/modules/storefront-api";
 import { getCart } from '../../modules/shopify/cart';
 import { CartData } from "./types";
 

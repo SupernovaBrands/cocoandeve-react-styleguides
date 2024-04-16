@@ -1,8 +1,8 @@
 import React, { Component, ChangeEvent, KeyboardEvent } from 'react';
 import Button from '../Button';
 import PropTypes from 'prop-types';
-import SvgPercent from '@/images/icons/percent-square.svg';
-import MenuBannerDecorative from '@/images/icons/menu-banner-decoration.svg';
+import SvgPercent from '~/images/icons/percent-square.svg';
+import MenuBannerDecorative from '~/images/icons/menu-banner-decoration.svg';
 
 interface Props {
     isApplied: boolean;

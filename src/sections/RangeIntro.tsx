@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import React from 'react';
-import DHA from '@/images/icons/natural-dha.svg';
+import DHA from '~/images/icons/natural-dha.svg';
 
 const RangeIntro = (props: any) => {
     const { content } = props;

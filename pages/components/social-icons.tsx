@@ -1,7 +1,7 @@
-import Facebook from '../../src/images/icons/facebook-square.svg';
-import Instagram from '../../src/images/icons/instagram.svg';
-import Twitter from '../../src/images/icons/twitter-square.svg';
-import Pinterest from '../../src/images/icons/pinterest-square.svg';
+import Facebook from '~/images/icons/facebook-square.svg';
+import Instagram from '~/images/icons/instagram.svg';
+import Twitter from '~/images/icons/twitter-square.svg';
+import Pinterest from '~/images/icons/pinterest-square.svg';
 
 export default function Icons() {
 	return (

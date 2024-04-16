@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Next from '@/images/icons/chevron-next.svg';
+import Next from '~/images/icons/chevron-next.svg';
 
 const BlogRecomendationSection = (props) => {
 	return (

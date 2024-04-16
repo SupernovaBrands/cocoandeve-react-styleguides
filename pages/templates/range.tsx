@@ -1,10 +1,10 @@
-import RealResults from '@/templates/RealResults';
+import RealResults from '~/templates/RealResults';
 import { useState } from 'react';
-import Header from '@/sections/Header';
-import Footer from '@/sections/Footer';
-import RangeBanner from '@/sections/RangeBanner';
-import RangeIntro from '@/sections/RangeIntro';
-import RangeProducts from '@/sections/RangeProducts';
+import Header from '~/sections/Header';
+import Footer from '~/sections/Footer';
+import RangeBanner from '~/sections/RangeBanner';
+import RangeIntro from '~/sections/RangeIntro';
+import RangeProducts from '~/sections/RangeProducts';
 
 const RealResultsTemplate = () => {
 

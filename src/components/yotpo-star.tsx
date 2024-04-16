@@ -1,16 +1,16 @@
 /* global tStrings tSettings */
-import '@/config';
+import '~/config';
 // import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ReviewStar from '@/components/review-star';
-import SvgFull from '@/images/icons/star-full.svg';
-import { encryptParam, currentTime } from '@/modules/utils';
+import ReviewStar from '~/components/review-star';
+import SvgFull from '~/images/icons/star-full.svg';
+import { encryptParam, currentTime } from '~/modules/utils';
 
 const tStrings = global.config.tStrings;
 
-// const { encryptParam, currentTime } = dynamic(() => import('@/modules/utils'), {
+// const { encryptParam, currentTime } = dynamic(() => import('~/modules/utils'), {
 //     ssr: false,
 // });
 

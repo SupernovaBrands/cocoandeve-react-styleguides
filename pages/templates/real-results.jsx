@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
-import RealResults from '@/templates/RealResults';
-// import Cart from "@/components/cart/cart";
+import RealResults from '~/templates/RealResults';
+// import Cart from "~/components/cart/cart";
 import { useState } from 'react';
-import Header from '@/sections/Header';
-import Footer from '@/sections/Footer';
-const Cart = dynamic(() => import('@/components/cart/cart'), {
+import Header from '~/sections/Header';
+import Footer from '~/sections/Footer';
+const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import FiveStars from '@/images/icons/five-stars.svg';
+import FiveStars from '~/images/icons/five-stars.svg';
 import parse from 'html-react-parser';
-import Badge from '@/components/Badge';
+import Badge from '~/components/Badge';
 
 const RealResultCard = (props) => {
 	const { data } = props;

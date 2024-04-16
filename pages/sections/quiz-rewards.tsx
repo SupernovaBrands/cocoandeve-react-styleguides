@@ -1,4 +1,4 @@
-import QuizReward from '@/sections/QuizReward';
+import QuizReward from '~/sections/QuizReward';
 
 const QuizRewards = () => {
     return (

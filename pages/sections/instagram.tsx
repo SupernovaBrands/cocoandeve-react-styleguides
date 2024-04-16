@@ -1,4 +1,4 @@
-import Instagram from '@/sections/Instagram';
+import Instagram from '~/sections/Instagram';
 
 const InstagramSection = () => {
     return (

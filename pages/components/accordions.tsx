@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import Accordion from '@/components/Accordion';
+import Accordion from '~/components/Accordion';
 const Accordions = () => {
 	const [openIndex, setOpenIndex] = useState(0);
 

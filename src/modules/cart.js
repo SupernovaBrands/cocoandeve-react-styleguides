@@ -1,24 +1,24 @@
 /* global tSettings */
 import dynamic from 'next/dynamic';
-// import StorefrontApi from '@/modules/storefront-api';
-import Shipping from '@/modules/shipping';
-import Discount from '@/modules/discounts';
-import AutoGwp from '@/modules/autogwp';
-const StorefrontApi = dynamic(() => import('@/modules/storefront-api'), {
+// import StorefrontApi from '~/modules/storefront-api';
+import Shipping from '~/modules/shipping';
+import Discount from '~/modules/discounts';
+import AutoGwp from '~/modules/autogwp';
+const StorefrontApi = dynamic(() => import('~/modules/storefront-api'), {
     ssr: false,
 });
 // import {
 // 	setCookie, getCookie, getLSWithExpiry, getId, getCartId, getIndexTotalQuantityAndManualGwp, removeLS, isItemHasProp,
-// } from '@/modules/utils';
+// } from '~/modules/utils';
 const {
 	setCookie, getCookie, getLSWithExpiry, getId, getCartId, getIndexTotalQuantityAndManualGwp, removeLS, isItemHasProp,
-} = dynamic(() => import('@/modules/utils'), {
+} = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
 import {
 	queryCartCreate, queryAddItem, queryRemoveItem, queryGetCart,
 	queryChangeQuantity, queryCartAttributesUpdate,
-} from '@/modules/query';
+} from '~/modules/query';
 
 let checkingCart = null;
 export default class CartAction {

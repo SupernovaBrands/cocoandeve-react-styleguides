@@ -1,15 +1,15 @@
 /* global tStrings tSettings Cart */
-import '@/config';
+import '~/config';
 
-import StorefrontApi from '@/modules/shopify/storefront';
+import StorefrontApi from '~/modules/shopify/storefront';
 
 import {
 	queryApplyCode, queryChangeQuantity,
-} from '@/modules/query';
+} from '~/modules/query';
 
 import {
 	daysToTime, getLSWithExpiry, setLSWithExpiry, getId, removeLS, getCartId, formatMoney,
-} from '@/modules/utils';
+} from '~/modules/utils';
 
 export default class Discounts {
     private sfApi: any;

@@ -1,4 +1,4 @@
-import CloseButton from '@/components/modal/CloseButton';
+import CloseButton from '~/components/modal/CloseButton';
 import Button from '../Button';
 
 interface BirthdayData {
