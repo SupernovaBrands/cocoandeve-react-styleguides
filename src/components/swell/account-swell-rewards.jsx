@@ -7,13 +7,13 @@ import {
 	getRedemptionOptions,
 	getRedemptionProducts,
 	getCustomersBalance,
-} from '@/modules/swell/redemption';
+} from '~/modules/swell/redemption';
 
 // import { getId } from '~mod/utils';
-const { getId } = dynamic(() => import('@/modules/utils'), {
+const { getId } = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
-const AccountSwellProductCard = dynamic(() => import('@/components/swell/account-swell-product-card'), {
+const AccountSwellProductCard = dynamic(() => import('~/components/swell/account-swell-product-card'), {
     ssr: false,
 });
 

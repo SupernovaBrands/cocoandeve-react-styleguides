@@ -1,6 +1,6 @@
-// import UpsellBlog from "@/compounds/upsell-blog";
-// import UpsellPdp from "@/compounds/upsell-pdp";
-import ProductRoutineCarousel from '@/sections/ProductRoutineCarousel';
+// import UpsellBlog from "~/compounds/upsell-blog";
+// import UpsellPdp from "~/compounds/upsell-pdp";
+import ProductRoutineCarousel from '~/sections/ProductRoutineCarousel';
 
 const Upsell = () => {
 	return (

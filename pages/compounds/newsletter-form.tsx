@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import Form from "@/compounds/footer-newsletter-form";
+import Form from "~/compounds/footer-newsletter-form";
 
 const NewsletterForm = () => {
 	return (

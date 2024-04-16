@@ -1,5 +1,5 @@
 import React from 'react';
-import LaunchWaitList from "@/compounds/launch-waitlist";
+import LaunchWaitList from "~/compounds/launch-waitlist";
 
 const Waitlist: React.FC = () => {
   return (

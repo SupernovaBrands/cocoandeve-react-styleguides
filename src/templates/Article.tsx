@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ProgressBar from '@/components/ProgressBar';
-import BlogNavTag from '@/compounds/blog-nav-tags';
-import ProductCard from "@/compounds/ProductCard";
-import PostCard from "@/compounds/PostCard";
+import ProgressBar from '~/components/ProgressBar';
+import BlogNavTag from '~/compounds/blog-nav-tags';
+import ProductCard from "~/compounds/ProductCard";
+import PostCard from "~/compounds/PostCard";
 
 const Article = (props) => {
     // const [offset, setOffset] = useState();
@@ -136,7 +136,7 @@ const Article = (props) => {
 
     //     window.removeEventListener('scroll', setProgress);
     //     window.addEventListener('scroll', setProgress, { passive: true });
-        
+
     //     return () => window.removeEventListener('scroll', setProgress);
     // }, []);
 

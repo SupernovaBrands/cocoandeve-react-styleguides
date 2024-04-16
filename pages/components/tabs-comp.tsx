@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Tabs from '@/components/Tabs';
-import TabNav from '@/components/TabNav';
-import TabContent from '@/components/TabContent';
+import Tabs from '~/components/Tabs';
+import TabNav from '~/components/TabNav';
+import TabContent from '~/components/TabContent';
 
 export default function TabsComponents() {
 	const [activeTab, setActiveTab] = useState('best-sellers');
@@ -63,7 +63,7 @@ export default function TabsComponents() {
 							.replace('tan-&-spf', 'tan')
 							.replace('cheveux', 'hair')
 							.replace('tan-spf', 'tan');
-						
+
 						return (
 							<li className="nav-item" role="presentation">
 								<a onClick={changeTab} className={`block no-underline hover:no-underline text-lg mb-0 border border-l-0 p-0 leading-[2.3] w-[5.625em] border-body ${tabtitleID === 'body' ? 'rounded-bl-[0] rounded-tl-[0] rounded-br-[6px] rounded-tr-[6px]' : ''} ${activeTab2 === tabtitleID ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'} ${tab === 'Tan & SPF' && 'px-3 w-auto'}`} data-toggle="tab" href={`#${tabtitleID}`} data-target={`${tabtitleID}`} role="tab">{tab}</a>

@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic';
-import Footer from "@/sections/Footer";
-// import Header from "@/sections/Header";
-import Blog from "@/templates/Blog";
-// import Cart from "@/components/cart/cart";
+import Footer from "~/sections/Footer";
+// import Header from "~/sections/Header";
+import Blog from "~/templates/Blog";
+// import Cart from "~/components/cart/cart";
 import { useState } from 'react';
-const Cart = dynamic(() => import('@/components/cart/cart'), {
+const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
-const Header = dynamic(() => import('@/sections/Header'), {
+const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
 

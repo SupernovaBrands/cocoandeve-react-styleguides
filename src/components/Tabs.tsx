@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TabNav from '@/components/TabNav';
-import TabContent from '@/components/TabContent';
+import TabNav from '~/components/TabNav';
+import TabContent from '~/components/TabContent';
 
 const Tabs = (props: any) => {
 	const [activeTab, setActiveTab] = useState('best-sellers');

@@ -1,5 +1,4 @@
-import { Container, Row } from 'react-bootstrap';
-import CarouselCustom from "@/components/CarouselCustom";
+import CarouselCustom from "~/components/CarouselCustom";
 
 const PdpUpsell2 = (props) => {
 

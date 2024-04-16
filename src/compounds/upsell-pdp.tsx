@@ -1,4 +1,4 @@
-import { Button } from '@/components/index';
+import { Button } from '~/components/index';
 const UpsellPdp = (props) => {
 	return (
         <form className={`product-upsell flex flex-wrap items-center p-0 ${props.className ? props.className : ''}`}>

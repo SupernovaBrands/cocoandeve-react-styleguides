@@ -1,4 +1,4 @@
-import Testimonial from '@/sections/Testimonial';
+import Testimonial from '~/sections/Testimonial';
 
 const Editors = () => {
     const DATA = [

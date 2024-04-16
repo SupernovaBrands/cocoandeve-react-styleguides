@@ -1,6 +1,6 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
 
 import {
@@ -8,10 +8,10 @@ import {
     NextButton,
     usePrevNextButtons,
     controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
+} from '~/components/carousel/EmblaCarouselArrowButtons';
 
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 interface Item {
     label: string;

@@ -1,8 +1,8 @@
-import Item from "@/compounds/nav-category";
-import BlogPost from "@/sections/blog-post";
-import Sidebar from "@/sections/Sidebar";
+import Item from "~/compounds/nav-category";
+import BlogPost from "~/sections/blog-post";
+import Sidebar from "~/sections/Sidebar";
 import Link from "next/link";
-import { InputSearch } from '@/components/index';
+import { InputSearch } from '~/components/index';
 
 const BlogFiltered = (props) => {
     const onSearchChange = (e) => {
@@ -113,7 +113,7 @@ const BlogFiltered = (props) => {
                             />
                         ))}
                     </div>
-                    
+
                     <div className="blog-grid__sidebar w-full lg:block mb-4 mb-lg-0">
                         <Sidebar data={SIDEBAR_DATA} />
                     </div>

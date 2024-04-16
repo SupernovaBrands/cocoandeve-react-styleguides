@@ -1,21 +1,21 @@
-// import CarouselCustom from "@/components/CarouselCustom";
-import ImageWithText from "@/compounds/ImageWithText";
+// import CarouselCustom from "~/components/CarouselCustom";
+import ImageWithText from "~/compounds/ImageWithText";
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
-import Play from '@/images/icons/play.svg';
-import Close from '@/images/icons/close.svg';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import Play from '~/images/icons/play.svg';
+import Close from '~/images/icons/close.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import { useState, useRef } from "react";
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
-import Modal from "@/components/Modal";
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+import Modal from "~/components/Modal";
 
 const OurStoryTemplate = () => {
 	const videoElem = useRef(null);

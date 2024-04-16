@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-import { Placeholder } from 'react-bootstrap';
 
 interface TextAreaProps {
     id: string;

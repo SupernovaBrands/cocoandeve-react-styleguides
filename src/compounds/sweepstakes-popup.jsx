@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
-// import CloseRounded from '../../src/images/icons/close-rounded.svg';
-import ChevronDown from '../../src/images/icons/chevron-down.svg';
-// import Popup from '@/components/Popup';
-const Popup = dynamic(() => import('@/components/Popup'), {
+// import CloseRounded from '~/images/icons/close-rounded.svg';
+import ChevronDown from '~/images/icons/chevron-down.svg';
+// import Popup from '~/components/Popup';
+const Popup = dynamic(() => import('~/components/Popup'), {
     ssr: false,
 });
 const SweeptakesPopup = (props) => {

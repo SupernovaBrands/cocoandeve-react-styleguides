@@ -1,7 +1,7 @@
 import Link from "next/link";
-import New from '@/images/icons/new.svg';
-import YotpoStar from "@/components/YotpoStars";
-import BadgeCircleImage from "@/components/BadgeCircleImg";
+import New from '~/images/icons/new.svg';
+import YotpoStar from "~/components/YotpoStars";
+import BadgeCircleImage from "~/components/BadgeCircleImg";
 import Badges from 'react-bootstrap/Badge';
 
 const AddToCartButton = () => {

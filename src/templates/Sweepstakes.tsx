@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ChevronDown from '../../src/images/icons/chevron-down.svg';
-import CountriesOptions from "@/components/countries-options"; 
-import { InputFormGroup } from '@/components/index';
+import ChevronDown from '~/images/icons/chevron-down.svg';
+import CountriesOptions from "~/components/countries-options";
+import { InputFormGroup } from '~/components/index';
 
 const Sweepstakes = (props) => {
     const [showCart, setShowCart] = useState(false);

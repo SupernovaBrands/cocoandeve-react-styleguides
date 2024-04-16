@@ -1,7 +1,7 @@
-import CloseButton from '@/components/modal/CloseButton';
-import InputCountry from '@/components/InputCountry';
-import Button from '@/components/Button';
-import Paste from '@/images/icons/paste.svg';
+import CloseButton from '~/components/modal/CloseButton';
+import InputCountry from '~/components/InputCountry';
+import Button from '~/components/Button';
+import Paste from '~/images/icons/paste.svg';
 import { useState } from 'react';
 
 interface NewsletterData {

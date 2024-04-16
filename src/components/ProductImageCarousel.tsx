@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import { PrevButton, NextButton } from '@/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrowButtons';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 
 interface ImageSlide {
 	id: number

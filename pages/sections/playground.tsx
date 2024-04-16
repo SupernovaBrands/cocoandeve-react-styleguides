@@ -1,4 +1,4 @@
-import Playground from '@/sections/Playground';
+import Playground from '~/sections/Playground';
 
 const PlaygroundSection = () => {
     return (

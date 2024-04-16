@@ -1,13 +1,13 @@
 /* global tSettings tStrings Cart */
-import '@/config';
+import '~/config';
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SvgStars from '@/images/icons/swell-stars.svg';
-import SvgStarsSM from '@/images/icons/swell-stars-cart-sm.svg';
+import SvgStars from '~/images/icons/swell-stars.svg';
+import SvgStarsSM from '~/images/icons/swell-stars-cart-sm.svg';
 
 const SwellRedemptionCard = (props) => {
 	const {

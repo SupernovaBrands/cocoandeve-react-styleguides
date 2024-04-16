@@ -1,10 +1,9 @@
 import React from 'react';
-import ImageWithText from '@/compounds/ImageWithText';
-import { Container } from 'react-bootstrap';
+import ImageWithText from '~/compounds/ImageWithText';
 
 const ImageWithTexts: React.FC = () => {
     return (
-        <Container className="mt-4">
+        <div className="container mt-4">
             <h1>Image With Text</h1>
             <ImageWithText
                 src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/AboutUs_banner03_DT_2x_1000x_a2009ba0-e16e-404e-9e49-f2c1572890ab.jpg?v=1618403172"
@@ -20,7 +19,7 @@ const ImageWithTexts: React.FC = () => {
                 <h1 className="mb-1">We've spent years testing, developing and perfecting our formulas</h1>
                 <p>We’re passionate about our customers, so we never use drying and damaging sulfates, phthalates or parabens, (unlike 98.9% of beauty products!). We also love our furry friends, so Coco & Eve is proudly 100% vegan and cruelty-free.</p>
             </ImageWithText>
-        </Container>
+        </div>
     );
 };
 

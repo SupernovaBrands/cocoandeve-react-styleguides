@@ -1,14 +1,14 @@
 /* global tSettings Cart */
 import dynamic from 'next/dynamic';
-// import StorefrontApi from '@/modules/storefront-api';
+// import StorefrontApi from '~/modules/storefront-api';
 import {
 	queryChangeQuantity,
-} from '@/modules/query';
-// import { getId } from '@/modules/utils';
-const { getId } = dynamic(() => import('@/modules/utils'), {
+} from '~/modules/query';
+// import { getId } from '~/modules/utils';
+const { getId } = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
-const StorefrontApi = dynamic(() => import('@/modules/storefront-api'), {
+const StorefrontApi = dynamic(() => import('~/modules/storefront-api'), {
     ssr: false,
 });
 export default class AutoGwp {

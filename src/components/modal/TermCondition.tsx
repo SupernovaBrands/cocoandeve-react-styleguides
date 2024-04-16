@@ -1,4 +1,4 @@
-import CloseButton from '@/components/modal/CloseButton';
+import CloseButton from '~/components/modal/CloseButton';
 
 const TermCondition = (props: any) => {
 	const { handleClose } = props;

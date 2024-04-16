@@ -1,5 +1,5 @@
 /* global tStrings */
-import '@/config';
+import '~/config';
 const tStrings = global.config.tStrings;
 // import dynamic from 'next/dynamic';
 import React, {
@@ -10,10 +10,10 @@ import Button from './Button';
 
 import {
 	validateEmail,
-} from '@/modules/utils_v2';
+} from '~/modules/utils_v2';
 // const {
 // 	validateEmail,
-// } = dynamic(() => import('@/modules/utils_v2'), {
+// } = dynamic(() => import('~/modules/utils_v2'), {
 //     ssr: false,
 // });
 

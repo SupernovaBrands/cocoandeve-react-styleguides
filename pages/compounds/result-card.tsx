@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import ResultCard from "@/compounds/result-card";
+import ResultCard from "~/compounds/result-card";
 
 const ResultCards = () => {
 	const REVIEW = {

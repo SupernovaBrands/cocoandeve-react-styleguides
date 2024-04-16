@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import DropdownStore from '@/components/DropdownStore';
+import DropdownStore from '~/components/DropdownStore';
 
 const Dropdowns = (props: any) => {
 	return (

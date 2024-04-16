@@ -1,19 +1,19 @@
 import { EmblaOptionsType } from 'embla-carousel';
-import TabNav from '@/components/TabNav';
-import TabContent from '@/components/TabContent';
+import TabNav from '~/components/TabNav';
+import TabContent from '~/components/TabContent';
 import { useState } from 'react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import ChevronNext from '@/images/icons/chevron-next.svg';
-import ChevronPrev from '@/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
 	controlAutoplay,
-} from '@/components/carousel/EmblaCarouselArrowButtons';
-import ProductCard from "@/compounds/ProductCard";
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+import ProductCard from "~/compounds/ProductCard";
 import Link from 'next/link';
 const options: EmblaOptionsType = {
 	loop: true,

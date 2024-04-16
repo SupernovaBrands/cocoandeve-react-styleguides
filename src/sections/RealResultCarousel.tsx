@@ -1,12 +1,12 @@
-// import RealResultCarousel from "@/sections/RealResultCarousel";
+// import RealResultCarousel from "~/sections/RealResultCarousel";
 import { EmblaOptionsType } from 'embla-carousel';
-import TabNav from '@/components/TabNav';
-import TabContent from '@/components/TabContent';
+import TabNav from '~/components/TabNav';
+import TabContent from '~/components/TabContent';
 import { useState } from 'react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import InstagramCard from '@/components/InstagramCard';
+import InstagramCard from '~/components/InstagramCard';
 import Link from 'next/link';
 const options: EmblaOptionsType = {
 	loop: true,

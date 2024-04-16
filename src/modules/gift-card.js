@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 // 	daysToTime,
 // 	isSameText,
 // 	isContainGiftCard,
-// } from '@/modules/utils';
+// } from '~/modules/utils';
 const {
 	ajaxPromise,
 	getCookie,
@@ -23,7 +23,7 @@ const {
 	daysToTime,
 	isSameText,
 	isContainGiftCard,
-} = dynamic(() => import('@/modules/utils'), {
+} = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
 class GiftCard {

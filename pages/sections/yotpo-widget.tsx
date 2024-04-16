@@ -1,4 +1,4 @@
-import YotpoReviews from '@/components/yotpo-review-widget';
+import YotpoReviews from '~/components/yotpo-review-widget';
 
 const ProductTemplate = () => {
     return (

@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-
 
 const AccountDropdown = (props) => {
     const { openAccountBox, toggleAccountDropdown } = props;

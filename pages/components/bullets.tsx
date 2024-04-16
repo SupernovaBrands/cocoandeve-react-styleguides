@@ -1,5 +1,5 @@
 import React from 'react';
-import Bullet from '@/components/Bullets';
+import Bullet from '~/components/Bullets';
 
 interface BulletsProps {}
 
