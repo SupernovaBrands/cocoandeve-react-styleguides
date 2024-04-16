@@ -34,23 +34,23 @@ const SwatchOverlay = (props) => {
 
 const ProductCardUpsell = (props) => {
     return (
-        <div className={`sm:min-w-[310px] w-full lg:w-1/3 ${props.item.active} product-card grow px-1 lg:px-2`}>
+        <div className={`sm:min-w-[310px] w-full lg:w-1/3 ${props.item.active} product-card grow px-1 lg:px-g`}>
             <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
-                <span className="rounded p-25 top-[10px] left-[10px] bg-white absolute font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
-                <picture className="ratio ratio-1x1 mx-auto my-0 lg:mx-0">
+                <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
+                <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
                     <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />
                     <a href="#" className="no-underline hover:no-underline text-black hover:text-black">
-                        <img className="embed-responsive-item px-3 bg-pink-light" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
+                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 px-3 bg-pink-light align-middle" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
                     </a>
                 </picture>
                 <div className="product-card__content pb-0 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">
                     <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
                         <a href="#" className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</a>
                     </p>
-                    <p className="product-card__desc text-center font-normal flex flex-col">
+                    <p className="product-card__desc text-center font-normal flex flex-col mb-[1rem]">
                         <a href="#" className="no-underline hover:no-underline text-black hover:text-black">{props.item.text}</a>
                     </p>
-                    <p className="text-center flex flex-row grow justify-center items-end">
+                    <p className="text-center flex flex-row grow justify-center items-end mb-[1rem]">
                             {props.item.comparePrice &&
                                 <span className="line-through h4 m-1">{props.item.comparePrice}</span>
                             }

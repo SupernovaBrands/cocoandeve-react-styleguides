@@ -4,13 +4,13 @@ import ProductRoutineCarousel from '~/sections/ProductRoutineCarousel';
 
 const Upsell = () => {
 	return (
-		<div className="mobile-wrapper">
+		<>
 			<div className="container mt-4">
 				<h1 className="mb-1">Upsell</h1>
 				<h2 className="mt-4">PDP</h2>
 			</div>
 			<ProductRoutineCarousel />
-		</div>
+		</>
 		// <div className="container mt-4">
 		// 	<h1>Upsell</h1>
 		//     <h2 className="mt-4 mb-1">Blog</h2>

@@ -60,26 +60,26 @@ const ProductRoutineCarousel = (props: any) => {
 	]);
 
 	return (
-		<div className="container my-3 lg:my-4 text-center">
-			<p className="h1 mb-4">Shop the routine</p>
-                <div>
-                    <div className='px-hg'>
-						<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
-						    <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-							    {items.map((data: any, index: number) => (
-                                 <ProductCardUpsell
-                                    key={`${index}-routine`}
-                                    useCardTemplate={true}
-                                    useCarousel={true}
-                                    className={props.className}
-                                    item={data}
-                                    />
-								))}
-							</Carousel.Inner>
-						</Carousel.Wrapper>
-                    </div>
+        <div className="product-upsell-2 py-5">
+            <div className="container">
+                <p className="h1 w-full text-center mb-3">Shop the routine</p>
+                <div className="mx-g">
+                    <Carousel.Wrapper emblaApi={emblaApi1}>
+                        <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
+                            {items.map((data: any, index: number) => (
+                            <ProductCardUpsell
+                                key={`${index}-routine`}
+                                useCardTemplate={true}
+                                useCarousel={true}
+                                className={props.className}
+                                item={data}
+                                />
+                            ))}
+                        </Carousel.Inner>
+                    </Carousel.Wrapper>
                 </div>
-		</div>
+            </div>
+        </div>
 	);
 };
 
