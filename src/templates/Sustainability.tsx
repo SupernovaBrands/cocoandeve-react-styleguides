@@ -388,7 +388,7 @@ const Sustainability = () => {
 							</NextButton>
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
-                    <Link href="/collection/all" className="mb-2 py-[13px] px-[54px] border-2 rounded-lg font-bold border-primary bg-white mb-lg-3 mt-4">Shop All</Link>
+                    <Link href="/collection/all" className="mb-2 lg:mb-3 btn btn-lg btn-outline-primary border-2 hover:no-underline">Shop All</Link>
                 </div>
             </section>
 		</>
