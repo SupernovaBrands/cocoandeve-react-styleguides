@@ -1,9 +1,9 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '@/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '@/components/carousel/EmblaCarouselDotButton';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 import Autoplay from 'embla-carousel-autoplay';
-import SidebarCard from '@/components/SidebarCard';
+import SidebarCard from '~/components/SidebarCard';
 
 const Sidebar = ({data}) => {
 	const options: EmblaOptionsType = {
