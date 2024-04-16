@@ -1,5 +1,5 @@
-import Item from "@/compounds/nav-category";
-import Search from '../../src/images/icons/search.svg';
+import Item from "~/compounds/nav-category";
+import Search from '~/images/icons/search.svg';
 
 const navCategory = () => {
 	return (

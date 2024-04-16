@@ -1,5 +1,5 @@
 /* global tSettings */
-import '@/config';
+import '~/config';
 import dynamic from 'next/dynamic';
 
 const tSettings = global.config.tSettings;
@@ -7,16 +7,16 @@ const tStrings = global.config.tStrings;
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import SvgChevronPrev from '@/images/icons/chevron-prev.svg';
-import SvgChevronNext from '@/images/icons/chevron-next.svg';
-// import SwellRedemptionCard from '@/components/swell/cart-swell-redemption-card';
+import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
+import SvgChevronNext from '~/images/icons/chevron-next.svg';
+// import SwellRedemptionCard from '~/components/swell/cart-swell-redemption-card';
 import {
 	mergeById,
 	getRedemptionOptions,
 	getRedemptionProducts,
 	getCustomersBalance,
-} from '@/modules/swell/redemption';
-const SwellRedemptionCard = dynamic(() => import('@/components/swell/cart-swell-redemption-card'), {
+} from '~/modules/swell/redemption';
+const SwellRedemptionCard = dynamic(() => import('~/components/swell/cart-swell-redemption-card'), {
     ssr: false,
 });
 

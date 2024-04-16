@@ -1,16 +1,14 @@
 import dynamic from 'next/dynamic';
-import { Container } from 'react-bootstrap';
-// import Header from '@/sections/Header';
-import Product from '@/templates/Product';
-import PDPBanner from "@/compounds/ProductBanner";
-import ProductRoutineCarousel from '@/sections/ProductRoutineCarousel';
-import RealResultCarousel from "@/sections/RealResultCarousel";
-// import Sustainability from '@/sections/Sustainability';
-import PdpBannerTanDifferent from '@/sections/pdp-banner-tan-different';
-import PdpBannerService from '@/sections/pdp-banner-service';
-import YotpoReviews from '@/components/yotpo-review-widget';
-import Footer from '@/sections/Footer';
-const Header = dynamic(() => import('@/sections/Header'), {
+// import Header from '~/sections/Header';
+import Product from '~/templates/Product';
+import PDPBanner from "~/compounds/ProductBanner";
+import ProductRoutineCarousel from '~/sections/ProductRoutineCarousel';
+import RealResultCarousel from "~/sections/RealResultCarousel";
+// import Sustainability from '~/sections/Sustainability';
+import PdpBannerTanDifferent from '~/sections/pdp-banner-tan-different';
+import YotpoReviews from '~/components/yotpo-review-widget';
+import Footer from '~/sections/Footer';
+const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
 const ProductTemplate = () => {

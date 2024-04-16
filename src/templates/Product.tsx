@@ -1,34 +1,34 @@
 import dynamic from 'next/dynamic';
 import { useState } from "react";
-import AccordionPDP from '@/components/AccordionPDP';
+import AccordionPDP from '~/components/AccordionPDP';
 import { Button } from '../components';
-import ProductImageCarousel from "@/components/ProductImageCarousel";
+import ProductImageCarousel from "~/components/ProductImageCarousel";
 import { EmblaOptionsType } from 'embla-carousel'
 
-import LaunchWaitList from "@/compounds/launch-waitlist";
-import ProductVariant from "@/compounds/ProductVariant";
-import Help from '@/images/icons/help.svg';
+import LaunchWaitList from "~/compounds/launch-waitlist";
+import ProductVariant from "~/compounds/ProductVariant";
+import Help from '~/images/icons/help.svg';
 import Image from 'next/image'
 
-import ProductSubscription from "@/components/product-subscription";
-import UpsellPdp from "@/compounds/upsell-pdp";
-// import QuantityBox from '@/components/cart/quantity-box';
-import SaveResults from "@/components/save-results";
-import YotpoStar from "@/components/YotpoStars";
-import NaturalDha from '@/images/icons/natural-dha.svg';
-import Vegan from '@/images/icons/vegan.svg';
-import DimethiconeFree from '@/images/icons/dimethicone-free.svg';
-import CrueltyFree from '@/images/icons/cruelty-free.svg';
-import ToxinFree from '@/images/icons/toxin-free.svg';
-import Ethically from '@/images/icons/ethically.svg';
-import ParabenFree from '@/images/icons/paraben-free.svg';
-import Peta from '@/images/icons/peta.svg';
-import FastDelivery from '@/images/icons/fast-delivery.svg';
+import ProductSubscription from "~/components/product-subscription";
+import UpsellPdp from "~/compounds/upsell-pdp";
+// import QuantityBox from '~/components/cart/quantity-box';
+import SaveResults from "~/components/save-results";
+import YotpoStar from "~/components/YotpoStars";
+import NaturalDha from '~/images/icons/natural-dha.svg';
+import Vegan from '~/images/icons/vegan.svg';
+import DimethiconeFree from '~/images/icons/dimethicone-free.svg';
+import CrueltyFree from '~/images/icons/cruelty-free.svg';
+import ToxinFree from '~/images/icons/toxin-free.svg';
+import Ethically from '~/images/icons/ethically.svg';
+import ParabenFree from '~/images/icons/paraben-free.svg';
+import Peta from '~/images/icons/peta.svg';
+import FastDelivery from '~/images/icons/fast-delivery.svg';
 
-import TagIcon from '@/images/icons/tag.svg';
-import StarFullIcon from '@/images/icons/star-full.svg';
+import TagIcon from '~/images/icons/tag.svg';
+import StarFullIcon from '~/images/icons/star-full.svg';
 
-const QuantityBox = dynamic(() => import('@/components/cart/quantity-box'), {
+const QuantityBox = dynamic(() => import('~/components/cart/quantity-box'), {
     ssr: false,
 });
 

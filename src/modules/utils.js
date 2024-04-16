@@ -1,8 +1,8 @@
-import '@/config';
+import '~/config';
 import CryptoJS from 'crypto-js';
 // eslint-disable-next-line import/no-unresolved,import/extensions
-import secrets from '@/secret';
-import countriesCode from '@/modules/countries';
+import secrets from '~/secret';
+import countriesCode from '~/modules/countries';
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;

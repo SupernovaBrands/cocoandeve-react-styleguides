@@ -1,4 +1,4 @@
-import CloseCircle from '@/images/icons/close-circle.svg';
+import CloseCircle from '~/images/icons/close-circle.svg';
 
 const Tooltip = (props: any) => {
 	return (

@@ -1,4 +1,4 @@
-import ProductImageCarousel from "@/components/ProductImageCarousel";
+import ProductImageCarousel from "~/components/ProductImageCarousel";
 
 const ProductImageCarousels = () => {
 	const SLIDES = [

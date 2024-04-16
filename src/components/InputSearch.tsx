@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import SearchIcon from '../../src/images/icons/search.svg';
+import SearchIcon from '~/images/icons/search.svg';
 
 interface InputSearchProps {
     id: string;

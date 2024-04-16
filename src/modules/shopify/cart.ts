@@ -1,9 +1,9 @@
 import {
     queryCartCreate, queryAddItem, queryRemoveItem, queryGetCart,
     queryChangeQuantity, queryCartAttributesUpdate,
-} from '@/modules/query';
+} from '~/modules/query';
 
-import { CartData, Item } from '@/components/cart/types';
+import { CartData, Item } from '~/components/cart/types';
 import StorefrontApi from './storefront';
 import Shipping from './shipping';
 import Discounts from './discounts';

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import YotpoStar from "@/components/YotpoStars";
+import YotpoStar from "~/components/YotpoStars";
 import { Button } from "../components";
 
 const AddToCartButton = (props) => {

@@ -1,4 +1,4 @@
-import Service from "@/sections/Service";
+import Service from "~/sections/Service";
 
 const Services = () => {
 	return (

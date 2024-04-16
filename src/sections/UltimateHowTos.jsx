@@ -1,4 +1,4 @@
-import CarouselCustom from "@/components/CarouselCustom";
+import CarouselCustom from "~/components/CarouselCustom";
 
 const UltimateHowTos = () => {
 	const articleCarousel = [

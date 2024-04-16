@@ -1,5 +1,5 @@
 
-import BrandLogo from '@/components/CELogo';
+import BrandLogo from '~/components/CELogo';
 
 const Logo = (props: any) => {
 	return (

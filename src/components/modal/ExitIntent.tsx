@@ -1,5 +1,5 @@
-import CloseButton from '@/components/modal/CloseButton';
-import Button from '@/components/Button';
+import CloseButton from '~/components/modal/CloseButton';
+import Button from '~/components/Button';
 
 interface ExitIntentData {
 	src: string

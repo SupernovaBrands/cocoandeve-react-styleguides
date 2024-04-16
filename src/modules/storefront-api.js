@@ -5,12 +5,12 @@ import axios from 'axios';
 
 // import {
 // 	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
-// } from '@/modules/utils';
-import { queryProductByHandle, queryBuyerIdentity } from '@/modules/query';
+// } from '~/modules/utils';
+import { queryProductByHandle, queryBuyerIdentity } from '~/modules/query';
 import storefrontSettings from '../config/storefront';
 const {
 	getId, getCartId, getLSWithExpiry, setLSWithExpiry, daysToTime, getCookie, encryptParam,
-} = dynamic(() => import('@/modules/utils'), {
+} = dynamic(() => import('~/modules/utils'), {
     ssr: false,
 });
 class storefrontApi {
