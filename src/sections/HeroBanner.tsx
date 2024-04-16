@@ -69,7 +69,7 @@ const HeroBanner = (props: any) => {
 					<Carousel.Navigation>
 					<ol className="carousel__dots justify-end">
 							{SLIDES.map((_, index) => (
-								<li key={index} className={`bg-white ${index === idx1 ? ' opacity-1' : ' opacity-50'}`}>
+								<li key={index} className={`border border-white ${index === idx1 ? ' bg-white' : ''}`}>
 									<DotButton
 										onClick={() => onClick1(index)}
 										className="carousel__dot"
