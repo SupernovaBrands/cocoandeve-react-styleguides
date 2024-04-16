@@ -249,7 +249,7 @@ const RealResults = () => {
 				<div className="mb-3 flex flex-wrap  items-center justify-center">
 					<h1 className='text-center mb-2 lg:mb-3 block w-full'>Real Customers. Real Reviews</h1>
 					<label htmlFor="real-result__select" className="text-base font-normal mr-3 mb-0">Filter By:</label>
-					<select id="real-result__select" className="custom-select rounded-lg bg-white w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
+					<select id="real-result__select" className="border-body bg-gray-400 custom-select rounded-lg w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
 						<option value="all" selected={true}>All</option>
 						{tabNames.length > 0 && tabNames.map((tab) => {
 							let tabtitleID = tab.toLowerCase().replace(/ /g, '-').replace('autobronzants', 'tan').replace('corps', 'body')

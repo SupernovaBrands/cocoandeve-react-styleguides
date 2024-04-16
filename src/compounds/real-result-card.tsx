@@ -52,8 +52,8 @@ const RealResultCard = (props) => {
 				) : (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc))}`)}</>
 				)}
-				<p>{parse(`${data.body}`)}</p>
-				<p className="text-underline font-weight-bold">@{data.author}</p>
+				<p className='mt-g mb-g'>{parse(`${data.body}`)}</p>
+				<p className="text-underline font-weight-bold mb-g font-bold">@{data.author}</p>
 			</div>
 		</div>
 	);
