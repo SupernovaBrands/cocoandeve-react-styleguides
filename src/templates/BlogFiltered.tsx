@@ -1,7 +1,6 @@
 import Item from "@/compounds/nav-category";
 import BlogPost from "@/sections/blog-post";
-import Close from '../../src/images/icons/close.svg';
-import Search from '../../src/images/icons/search.svg';
+import Sidebar from "@/sections/Sidebar";
 import Link from "next/link";
 import { InputSearch } from '@/components/index';
 
@@ -9,6 +8,35 @@ const BlogFiltered = (props) => {
     const onSearchChange = (e) => {
         console.log(e, 'on Search Change Page');
     }
+    const SIDEBAR_DATA = [
+		{
+			id: 1,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+		{
+			id: 2,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+		{
+			id: 3,
+			link: '/templates/article',
+			title: '5 things you’re doing wrong with your hair care routine',
+			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
+			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			alt: 'Bond Building Pre-Shampoo Treatment',
+		},
+	];
     const blogs = [
         {
 			srcSet: 'https://via.placeholder.com/740x376.jpg/EFADBA',
@@ -85,32 +113,9 @@ const BlogFiltered = (props) => {
                             />
                         ))}
                     </div>
-                    <div className="blog-grid__sidebar w-full lg:block mb-4 mb-lg-0 lg:px-g sm:px-hg">
-                    <aside className="blog-grid__sidebar lg:sticky w-full lg:block mb-4 lg:mb-0 self-start">
-                        <div className="no-gutters__in-container sidebar bg-primary-light-second">
-                            <h4 className="mb-3 h1 mb-1">Popular Reads</h4>
-                            <div className="">
-                                <div className="mb-0 pb-1">
-                                    <div className="">
-                                        <article className="post-card mb-2 lg:mb-3">
-                                            <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-                                            <p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                        </article>
-                                        <article className="post-card mb-2 lg:mb-3">
-                                            <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-                                            <p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                        </article>
-                                    </div>
-                                    <div className="">
-                                        <article className="post-card mb-2 lg:mb-0">
-                                            <h3><a href="/cocoandeve-styleguides/docs/templates/article.html" className="text-body-color hover:text-primary">5 things you’re doing wrong with your hair care routine</a></h3>
-                                            <p className="mt-1 mb-0">Give these myths the brush off for a healthy scalp & shiny hair!</p>
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
+                    
+                    <div className="blog-grid__sidebar w-full lg:block mb-4 mb-lg-0">
+                        <Sidebar data={SIDEBAR_DATA} />
                     </div>
                 </div>
             </div>
