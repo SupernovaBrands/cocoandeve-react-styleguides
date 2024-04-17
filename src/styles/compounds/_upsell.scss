@@ -59,12 +59,14 @@
 			padding-top: 100%;
 		}
 
-		.item-third {
-            &:first-child {
-                padding-left: 0;
-                margin-right: 7.5px;
-            }
-        }
+		@screen lg {
+			.item-third {
+				&:first-child {
+					padding-left: 0;
+					margin-right: 7.5px;
+				}
+        	}
+		}
 	}
 }
 

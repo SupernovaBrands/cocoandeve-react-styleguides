@@ -1,7 +1,9 @@
+import { Button } from '~/components/index';
+
 const AddToCartButton = (props: any) => {
     const { className, label } = props;
     return (
-        <button type="button" className={`${className ? className : 'mb-2'} w-[210px!important] max-width-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
+        <button type="button" className={`${className ? className : 'mb-2'} sm:px-[35px] sm:py-[15px] btn-lg mx-auto lg:w-[210px!important] lg:max-width-[210px] sm:w-[165px!important] sm:max165dth-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
             <span className="w-full block text-base text-center">{label ?? 'Add to Cart'}</span>
         </button>
     );
@@ -10,7 +12,7 @@ const AddToCartButton = (props: any) => {
 const SwatchOverlay = (props) => {
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mb-2" label="Choose Scent"/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="sm:px-[25px!important] mb-2" label="Choose Scent"/>
             <div className="swatch-overlay w-[209px!important] flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t-lg bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
@@ -34,7 +36,7 @@ const SwatchOverlay = (props) => {
 
 const ProductCardUpsell = (props) => {
     return (
-        <div className={`sm:min-w-[310px] w-full lg:w-1/3 ${props.item.active} product-card grow px-1 lg:px-g`}>
+        <div className={`sm:min-w-[263px] w-full lg:w-1/3 ${props.item.active} product-card grow lg:px-g sm:px-hg`}>
             <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                 <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
                 <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
