@@ -10,8 +10,9 @@ import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
 const Footer = (props: any) => {
+    const { aboutMenu, shopMenu, helpMenu } = props;
     const [email, setEmail] = useState('');
-
+    console.log('helpMenu', helpMenu);
     const onSubmit = (evt) => {
         evt.preventDefault();
         console.log(email);
@@ -40,30 +41,19 @@ const Footer = (props: any) => {
                     <div className="[grid-area:nav-shop] mb-g lg:mb-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
                         <ul className="list-unstyled">
-                            <li><a href="" className='text-body'>Hair</a></li>
-                            <li><a href="" className='text-body'>Tan</a></li>
-                            <li><a href="" className='text-body'>Body</a></li>
-                            <li><a href="" className='text-body'>Value Sets</a></li>
+                            {shopMenu.map((item) => (<li><a href={item.handle} className='text-body'>{item.title}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-about] mb-g lg:mb-0">
                         <h5 className="mb-1 text-xl lg:text-2xl font-bold">About Us</h5>
                         <ul className="list-unstyled">
-                            <li><a href="" className='text-body'>Our Story</a></li>
-                            <li><a href="" className='text-body'>Stockist</a></li>
-                            <li><a href="" className='text-body'>Affiliates</a></li>
-                            <li><a href="" className='text-body'>Blog</a></li>
+                            {aboutMenu.map((item) => (<li><a href={item.handle} className='text-body'>{item.title}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-help] mt-3 lg:mt-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Help</h5>
                         <ul className="list-unstyled">
-                            <li><a href="" className='text-body'>Track My Order</a></li>
-                            <li><a href="" className='text-body'>FAQ</a></li>
-                            <li><a href="" className='text-body'>Shipping & Refund</a></li>
-                            <li><a href="" className='text-body'>Contact Us</a></li>
-                            <li><a href="" className='text-body'>Terms & Conditions</a></li>
-                            <li><a href="" className='text-body'>Privacy Policy</a></li>
+                            {helpMenu.map((item) => (<li><a href={item.handle} className='text-body'>{item.title}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-follow] hidden lg:block text-left">
