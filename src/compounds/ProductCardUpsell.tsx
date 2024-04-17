@@ -12,7 +12,7 @@ const AddToCartButton = (props: any) => {
 const SwatchOverlay = (props) => {
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="sm:px-[25px!important] mb-2" label="Choose Scent"/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mr-0 sm:px-[25px!important] mb-2" label="Choose Scent"/>
             <div className="swatch-overlay w-[209px!important] flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t-lg bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
