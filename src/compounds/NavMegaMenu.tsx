@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const NavMegaMenu = (props: any) => {
     return (
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
@@ -10,7 +8,7 @@ const NavMegaMenu = (props: any) => {
                         <ol className="list-unstyled">
                             {props.menus.length > 0 && (
                                 props.menus.map((menu, i) => {
-                                    return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.url} className="h4 text-body">{menu.title}</a></li>
+                                    return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={`/collections/${menu.handle}`} className="h4 text-body">{menu.title}</a></li>
                                 })
                             )}
                         </ol>
