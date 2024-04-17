@@ -4,6 +4,8 @@ import Footer from "~/sections/Footer";
 import Blog from "~/templates/Blog";
 // import Cart from "~/components/cart/cart";
 import { useState } from 'react';
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
@@ -19,10 +21,18 @@ const BlogTemplate = () => {
 	}
 	return (
 		<>
-			<Header toggleCart={toggleCart}  />
+			<Header toggleCart={toggleCart}
+				annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode}/>
 			<Blog />
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
-			<Footer />
+			<Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
 		</>
 	);
 };

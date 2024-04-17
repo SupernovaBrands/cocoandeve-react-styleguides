@@ -5,6 +5,8 @@ import Footer from '~/sections/Footer';
 import RangeBanner from '~/sections/RangeBanner';
 import RangeIntro from '~/sections/RangeIntro';
 import RangeProducts from '~/sections/RangeProducts';
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+
 
 const RealResultsTemplate = () => {
 
@@ -119,11 +121,19 @@ const RealResultsTemplate = () => {
 
     return (
 		<>
-			<Header  />
+			<Header  
+                annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode}/>
         	<RangeBanner content={rangeBannerContent} />
             <RangeIntro content={rangeIntroContent} />
             <RangeProducts heading="Products"  products={PRODUCTS} />
-			<Footer />
+			<Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
 		</>
     );
 }
