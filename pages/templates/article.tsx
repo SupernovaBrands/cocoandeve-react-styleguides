@@ -8,6 +8,7 @@ import Facebook from '~/images/icons/facebook-square.svg';
 import Pinterest from '~/images/icons/pinterest-square.svg';
 import Documents from '~/images/icons/documents.svg';
 import Form from "~/compounds/footer-newsletter-form";
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 // import Cart from "~/components/cart/cart";
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
@@ -25,7 +26,12 @@ const ArticleTemplate = () => {
 
     return (
 		<>
-			<Header toggleCart={toggleCart} />
+			<Header toggleCart={toggleCart}
+				annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode} />
 			<Article
 				title="The 5 Rules of Hair Masking"
 				quickLinks={false}
@@ -100,7 +106,10 @@ const ArticleTemplate = () => {
 				</ul>
 			</Article>
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
-			<Footer />
+			<Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
 		</>
     );
 }

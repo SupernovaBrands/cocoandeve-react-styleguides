@@ -29,6 +29,7 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 
 const Header = (props: any) => {
 	const { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz } = props;
+	console.log({ annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz });
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);

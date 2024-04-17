@@ -4,6 +4,7 @@ import Sustainability from '~/templates/Sustainability';
 import { useState } from 'react';
 import Header from '~/sections/Header';
 import Footer from '~/sections/Footer';
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
@@ -15,9 +16,17 @@ const SustainabilityTemplate = () => {
 	}
     return (
 		<>
-			<Header toggleCart={toggleCart}  />
+			<Header toggleCart={toggleCart}
+				annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode}/>
         	<Sustainability />
-            <Footer />
+            <Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
             {/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 		</>
     );

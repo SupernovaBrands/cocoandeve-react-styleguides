@@ -22,7 +22,6 @@ const MobileMenu = (props: any) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
 	}
-	console.log('menuBannerCode', menuBannerCode);
 
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1010] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>

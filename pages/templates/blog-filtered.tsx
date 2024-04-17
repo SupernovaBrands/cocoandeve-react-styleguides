@@ -4,6 +4,7 @@ import Footer from '~/sections/Footer';
 import BlogFiltered from '~/templates/BlogFiltered';
 // import Cart from "~/components/cart/cart";
 import { useState } from 'react';
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
@@ -20,10 +21,18 @@ const BlogFilteredTemplate = () => {
     return (
 		<>
 			<div className="mobile-wrapper">
-				<Header  toggleCart={toggleCart} />
+				<Header  toggleCart={toggleCart}
+					annBar={annBar}
+					mainMenu={mainMenu}
+					megaMenu={megaMenu}
+					menuBannerQuiz={menuBannerQuiz}
+					menuBannerCode={menuBannerCode}/>
 				<BlogFiltered />
 				{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
-				<Footer />
+				<Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
 			</div>
 		</>
     );
