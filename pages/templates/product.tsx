@@ -8,6 +8,7 @@ import RealResultCarousel from "~/sections/RealResultCarousel";
 import PdpBannerTanDifferent from '~/sections/pdp-banner-tan-different';
 import YotpoReviews from '~/components/yotpo-review-widget';
 import Footer from '~/sections/Footer';
+import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
@@ -58,7 +59,12 @@ const ProductTemplate = () => {
 	];
     return (
 		<>
-        	<Header />
+        	<Header 
+				annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode}/>
             <Product />
 			<ProductRoutineCarousel />
 			<PDPBanner
@@ -90,7 +96,10 @@ const ProductTemplate = () => {
 			</div>
 			<PdpBannerTanDifferent />
 			{/* <PdpBannerService /> */}
-			<Footer />
+			<Footer
+				aboutMenu={aboutMenu}
+				shopMenu={shopMenu}
+				helpMenu={helpMenu} />
 		</>
     );
 }
