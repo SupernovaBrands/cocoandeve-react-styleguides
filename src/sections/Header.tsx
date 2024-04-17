@@ -12,25 +12,6 @@ import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 
-const NAV_MEGA_MENU_TEMP = [
-	{
-		title: 'Hair',
-		url: '/'
-	},
-	{
-		title: 'Self Tan',
-		url: '/'
-	},
-	{
-		title: 'Body',
-		url: '/'
-	},
-	{
-		title: 'Value Sets',
-		url: '/'
-	}
-]
-
 const NAV_MEGA_MENU_CARD_TEMP = [
 	{
 		title: 'Bali Bronzing Foam in two lines',
@@ -46,13 +27,14 @@ const NAV_MEGA_MENU_CARD_TEMP = [
 	}
 ]
 
-const Header = (props) => {
-	const [announcementBarEnabled, setAnnouncementBarEnabled] = useState(true);
+const Header = (props: any) => {
+	const { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	
 
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -107,10 +89,10 @@ const Header = (props) => {
 	return (
 		<>
 			<header className={`main-header z-[1000] w-full ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
-				{announcementBarEnabled && (
+				{annBar?.enabled && (
 					<AnnouncementBar
-						text="Up to 25% off + Free Gift worth $25.40"
-						url="/"
+						text={annBar.text}
+						url={annBar.url}
 						countDownStart=""
 						countDownEnd=""
 						countDownDays=""
@@ -131,62 +113,34 @@ const Header = (props) => {
 							<BrandLogo className="lg:h-[41px]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							<li className="nav-item pr-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold p-[.375em]">SALE</a>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold py-[.375em]">Shop All</a>
-								<NavMegaMenuAll
-									title="Shop All"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold py-[.375em]">Hair</a>
-								<NavMegaMenu
-									title="Hair"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold py-[.375em]">Tan & SPF</a>
-								<NavMegaMenu
-									title="Hair"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold py-[.375em]">Skin</a>
-								<NavMegaMenu
-									title="Hair"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 text-body font-bold py-[.375em]">Body</a>
-								<NavMegaMenu
-									title="Hair"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
-							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">Value Sets</a>
-								<NavMegaMenu
-									title="Hair"
-									menus={NAV_MEGA_MENU_TEMP}
-									cards={NAV_MEGA_MENU_CARD_TEMP}
-								/>
-							</li>
+							{megaMenu && megaMenu.map((nav) => {
+								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
+									return (
+										<li className="nav-item pr-hg">
+											<a href={`/collections/${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
+											{nav.title.includes('Shop') && (
+												<NavMegaMenuAll
+													title={nav.title}
+													menus={megaMenu || []}	
+													cards={NAV_MEGA_MENU_CARD_TEMP}
+												/>
+											)}
+											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
+												<NavMegaMenu
+													title={nav.title}
+													menus={nav.rows || []}
+													cards={NAV_MEGA_MENU_CARD_TEMP}
+												/>
+											)}
+										</li>
+									);
+								}
+							})}
 							<li className="nav-item px-hg">
 								<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">|</a>
 							</li>
 							<li className="nav-item px-hg">
-								<a href="#" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">Results IRL</a>
+								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">Results IRL</a>
 							</li>
 						</ul>
 
@@ -240,7 +194,13 @@ const Header = (props) => {
 				</nav>
 				*/}
 
-				<MobileMenu onToggleMobileNav={onToggleMobileNav} openDrawer={openDrawer}  />
+				<MobileMenu
+					onToggleMobileNav={onToggleMobileNav}
+					openDrawer={openDrawer}
+					mainMenu={mainMenu}
+					menuBannerCode={menuBannerCode}
+					menuBannerQuiz={menuBannerQuiz}
+				/>
 				<SearchBox onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
 
 			</header>
