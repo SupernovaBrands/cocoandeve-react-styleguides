@@ -54,7 +54,7 @@ const ArticleTemplate = () => {
 				<p className="mb-3">Hair masques are generally formulated for intense nourishment and repair, and are therefore most beneficial to your mid-lengths and, especially, your dry, brittle ends! As the hair at your roots is closer to its virgin state, it doesn’t require as intensive a treatment.</p>
 				<p className="mb-3">Even if your hair is coarse and dry? It’s a good idea to avoid applying a masque to the roots if you want to maintain volume and movement. This becomes even more crucial if your locks are ultra-fine!</p>
 				<div className="container blog-post-grid__newsletter px-0">
-					<div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-lg">
+					<div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
 						<picture className="lg:w-1/3 w-full p-0">
 							<source srcSet="https://via.placeholder.com/270x250.jpg/F9F9F9?text=variant-half-image" media="(min-width: 992px)" />
 							<img src="https://via.placeholder.com/345x120.jpg/F9F9F9?text=variant-half-image" className="w-full h-full" />

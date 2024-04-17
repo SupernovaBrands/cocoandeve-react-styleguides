@@ -34,7 +34,7 @@ const ProductCarousel = (props: any) => {
 	} = usePrevNextButtons(emblaApi1);
 	const autoPlayClick1 = controlAutoplay(emblaApi1);
 	return (
-		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">
+		<div className="container px-0 lg:px-hg pt-2 pb-4 text-center">
 			<div className="row">
 				<div>
 					<div className="text-center">

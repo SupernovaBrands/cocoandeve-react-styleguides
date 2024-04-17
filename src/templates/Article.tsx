@@ -337,9 +337,7 @@ const Article = (props) => {
         <div className="blog-post-grid__shop-articles articleCarousel">
             <div className="container">
                 <h4 className="h1 text-center mb-1">Shop this article</h4>
-                <div className="pt-2">
-                    <ShopArticle products={PRODUCTS} />
-                </div>
+                <ShopArticle products={PRODUCTS} />
             </div>
         </div>
         <div className="blog-post-grid__recomendation mobile-wrapper my-2">
