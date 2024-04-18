@@ -24,10 +24,6 @@ const SearchBox = (props: any) => {
 	}
 
 	useEffect(() => {
-		console.log('content12', content);
-	}, []);
-
-	useEffect(() => {
 		setResult();
 	}, [keyword]);
 
@@ -36,11 +32,46 @@ const SearchBox = (props: any) => {
 	}, [props]);
 
 	async function setResult () {
-		
+		setLoading(true);
+		if (keyword.trim() === '') {
+			setLoading(false);
+		}
+		if (/^[^a-zA-Z0-9]+$/.test(keyword)) {
+			setProducts([]);
+		}
+
+		fetch(`/api/search?q=${keyword}`).then(
+			res => {
+				res?.json().then(data => {
+					console.log('searchdata', data);
+					const productsData = data?.featuredProductsResponse?.body?.data?.products?.nodes;
+					if (productsData.length > 0) {
+						getFeaturedImages().then((dataImgs) => {
+							if (dataImgs?.length > 0) {
+								const productsWithImgs = productsData.map((item) => {
+									const featuredImg = dataImgs.find((img) => img.handle === item.handle)
+									? dataImgs.find((img) => img.handle === item.handle).featured_image_url : null;
+									return {
+										...item,
+										img: featuredImg,
+									}
+								});
+								console.log('productsWithImgs', productsWithImgs);
+								setProducts(productsWithImgs);
+							}
+						});
+						
+					} else {
+						setProducts([]);
+					}
+					console.log('productsData', productsData);
+					setLoading(false);
+				})
+			}
+		)
 	}
 
 	const setContent = () => {
-		const featuredImages = getFeaturedImages();
 		if (content?.popular_keywords && content?.popular_keywords !== '') {
 			const words = content?.popular_keywords.split(',');
 			setKeywords(words);
@@ -48,27 +79,30 @@ const SearchBox = (props: any) => {
 
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
-			console.log('handles', handles);
 			{/* @ts-ignore */}
 			const pProducts = [];
 			for (let i = 0; i <= handles.length; i += 1) {
 				fetch(`/api/getProductInfo?handle=${handles[i]}`).then(
 					res => {
 						res?.json().then(data => {
-							console.log('data1', data);
 							const { product } = data;
 							if (product) {
-								const featuredImg = featuredImages.find((img) => img.handle === product.handle)
-									? featuredImages.find((img) => img.handle === product.handle).featured_image_url : null;
-								{/* @ts-ignore */}
-								pProducts.push({
-									...product,
-									featuredImgUrl: featuredImg || '',
-									url: `/products${product.handle}`,
+								
+								getFeaturedImages().then((dataImg) => {
+									const featuredImg = dataImg.find((img) => img.handle === product.handle)
+										? dataImg.find((img) => img.handle === product.handle).featured_image_url : null;
+									{/* @ts-ignore */}
+									pProducts.push({
+										...product,
+										featuredImgUrl: featuredImg,
+										url: `/products${product.handle}`,
+									});
+									{/* @ts-ignore */}
+									if (i === handles.length) setPopProducts(pProducts);
 								});
+								
 							}
-							{/* @ts-ignore */}
-							if (i === handles.length) setPopProducts(pProducts);
+							
 						});
 					}
 				);
@@ -163,19 +197,22 @@ const SearchBox = (props: any) => {
 					</div>
 				</div>
 			) : (
-				<div className="container lg:mt-2 px-g">
-					<div className="flex flex-wrap ">
-						<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-0">{products.length} results</h4>
-						<div className='w-full flex order-2 px-0 flex-wrap'>
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-4 order-4 w-full lg:w-1/4" />
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-4 order-4 w-full lg:w-1/4" />
-							<SearchProductCard title="Bali Bronzing Foam in two lines" classes="mb-4 order-4 w-full lg:w-1/4" />
+				<>
+					{keyword !== '' && products.length > 0 ? (
+						<div className="container lg:mt-2 px-g">
+							<div className="flex flex-wrap ">
+								<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-0">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+								<div className='w-full flex order-2 px-0 flex-wrap'>
+									{products.slice(0, 6).map((item) => (
+										<SearchProductCard key="s1" title={item.title} img={item.img} classes="mb-1 order-4 w-full lg:w-1/6" />
+									))}
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					) : (
+						<></>
+					)}
+				</>
 			)}
 		</div>
 	);

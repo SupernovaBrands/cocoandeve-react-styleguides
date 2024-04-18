@@ -2,7 +2,7 @@
 const SearchProductCard = (props: any) => {
 	const  { url, title, img } = props
 	return (
-		<figure className={`relative w-full lg:w-1/4 flex lg:flex-col mb-2 order-4 lg:px-g`}>
+		<figure className={`relative w-full  flex lg:flex-col mb-2 order-4 lg:px-g ${props.classes ? props.classes : 'lg:w-1/4'}`}>
 			<a href={url} className="w-1/4 lg:w-full px-0">
 				<picture>
 					<img src={img} alt="Placeholder" className="d-block w-100" />

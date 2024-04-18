@@ -129,8 +129,6 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	console.log(shippingData, 'testing');
-
 	return (
 		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={isOpen} handleClose={() => props.handleClose()} cartDrawer={true}>
 				<div className="modal-content mh-100 border-0 rounded-0">

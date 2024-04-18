@@ -1045,19 +1045,20 @@ export const processURL = () => {
 };
 
 export const getFeaturedImages = () => {
-	if (getLSWithExpiry('featuredImages')) {
-		return JSON.parse(getLSWithExpiry('featuredImages'));
-	} else {
-		fetch(`/api/getFeaturedImages`).then(
-			res => {
-				res.json().then(data => {
-					console.log('fImg', data);
-					setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
-				})
-			},
-		);
-	}
-	return [];
+	return new Promise((resolve, reject) => {
+		if (getLSWithExpiry('featuredImages')) {
+			resolve(JSON.parse(getLSWithExpiry('featuredImages')));
+		} else {
+			fetch(`/api/getFeaturedImages`).then(
+				res => {
+					res.json().then(data => {
+						setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
+						resolve(data.body);
+					})
+				},
+			);
+		}
+	});
 };
 
 export const handleVariantSubtitle = (activeShade) => {

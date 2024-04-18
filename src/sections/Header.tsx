@@ -71,11 +71,10 @@ const Header = (props: any) => {
 	}, []);
 
 	useEffect(() => {
-		console.log('ThemeSettings', ThemeSettings, searchBox);
+		// console.log('ThemeSettings', ThemeSettings, searchBox);
 		fetch(`/api/sevenDaysSalesIds`).then(
 			res => {
 				res?.json().then(data => {
-					console.log('sds', data);
 					const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
 					setSevenDaysSalesIds(ids.map((i) => parseInt(i, 10)));
 				})
