@@ -44,7 +44,7 @@ const RealResultCard = (props) => {
 			</picture>
 			<div className="px-2 pb-2 pt-0 bg-white">
 				<p className="flex justify-between items-center mb-0">
-					<FiveStars className="h-[1em] text-primary fill-primary text-lg mb-0 max-w-none" />
+					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none" />
 					<Badge badgeClasses={`bg-sh-purple text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
 				</p>
 				{storeName === 'au' ? (
@@ -52,8 +52,8 @@ const RealResultCard = (props) => {
 				) : (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc))}`)}</>
 				)}
-				<p>{parse(`${data.body}`)}</p>
-				<p className="text-underline font-weight-bold">@{data.author}</p>
+				<p className='mt-g mb-g'>{parse(`${data.body}`)}</p>
+				<p className="underline font-weight-bold mb-g font-bold">@{data.author}</p>
 			</div>
 		</div>
 	);
