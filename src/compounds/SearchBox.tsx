@@ -41,12 +41,12 @@ const SearchBox = (props: any) => {
 
 	const setContent = () => {
 		const featuredImages = getFeaturedImages();
-		if (content.popular_keywords && content.popular_keywords !== '') {
-			const words = content.popular_keywords.split(',');
+		if (content?.popular_keywords && content?.popular_keywords !== '') {
+			const words = content?.popular_keywords.split(',');
 			setKeywords(words);
 		}
 
-		if (content.search_popular_handles && content.search_popular_handles !== '') {
+		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			console.log('handles', handles);
 			const pProducts = [];
