@@ -107,7 +107,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            <hr className="collection-footer border-gray-400" />
+            <hr className="collection-footer border-gray-400 my-2" />
             <div className="container py-2 mb-2">
                 <h2 className="mb-2">About our products</h2>
                 <p className="mb-g">Treat your hair to the ultimate pamper routine, with Coco & Eve’s hair care products, straight from paradise. </p>
