@@ -2,12 +2,14 @@ import dynamic from 'next/dynamic';
 import Footer from "~/sections/Footer";
 import OurStoryTemplate from '~/templates/OurStory';
 import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { useEffect, useState } from 'react';
 // import Header from "~/sections/Header";
 // import OurStoryTemplate from "~/sections/OurStory";
 const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
 const OurStory = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const banner = {
 		tiitle: "In a (coco) nutshell? We promise unBALIevably good hair and skin ",
 		back_img: {
@@ -112,6 +114,10 @@ const OurStory = () => {
 		}
 	};
 
+	useEffect(() => {
+        setIsLoading(false);
+    }, []);
+
 	return (
 		<>
 			<Header
@@ -121,6 +127,7 @@ const OurStory = () => {
 				menuBannerQuiz={menuBannerQuiz}
 				menuBannerCode={menuBannerCode}/>
 			<OurStoryTemplate
+				isLoading={isLoading}
 				banner={banner}
 				intro={intro}
 				logo={logo}
