@@ -64,7 +64,8 @@ const ProductTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
             <Product />
 			<ProductRoutineCarousel />
 			<PDPBanner

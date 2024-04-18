@@ -26,7 +26,8 @@ const BlogFilteredTemplate = () => {
 					mainMenu={mainMenu}
 					megaMenu={megaMenu}
 					menuBannerQuiz={menuBannerQuiz}
-					menuBannerCode={menuBannerCode}/>
+					menuBannerCode={menuBannerCode}
+					dummy={true} />
 				<BlogFiltered />
 				{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 				<Footer
