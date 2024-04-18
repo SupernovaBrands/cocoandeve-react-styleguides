@@ -3,10 +3,10 @@ import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
     const { handle, listIds, dummy } = props;
-    const featuredImages = getFeaturedImages();
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
+        const featuredImages = getFeaturedImages();
         if (dummy) {
             const selected = [
                 { title: 'Title', img: 'https://via.placeholder.com/444x558', url: '/' },
