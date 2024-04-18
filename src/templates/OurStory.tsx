@@ -57,35 +57,39 @@ const OurStoryTemplate = (props: any) => {
 				)}
 			</section>
 
-			{!isLoading && (
-				<>
-				<section className="container text-center mt-5 mb-5">
-					<h2 className="mb-1">{intro.title}</h2>
-					<div dangerouslySetInnerHTML={{
-						__html: intro.description
-					}} />
-					<ImageWithText
-						src={intro.back_img_mob_1.url}
-						srcSet={intro.back_img_1.url}>
-						<h2 className="mb-2">{intro.titleintro_1}</h2>
-						<p>{intro.description_1}</p>
-					</ImageWithText>
+			<section className="container text-center mt-5 mb-5">
+				<h2 className="mb-1">{intro.title}</h2>
+				{!isLoading && (
+					<>
+						<div dangerouslySetInnerHTML={{
+							__html: intro.description
+						}} />
+						<ImageWithText
+							src={intro.back_img_mob_1.url}
+							srcSet={intro.back_img_1.url}>
+							<h2 className="mb-2">{intro.titleintro_1}</h2>
+							<p>{intro.description_1}</p>
+						</ImageWithText>
 
-					<ImageWithText
-						reverse={true}
-						src={intro.back_img_mob_2.url}
-						srcSet={intro.back_img_2.url}>
-						<h2 className="mb-2 h1">{intro.titleintro_2}</h2>
-						<p>{intro.description_2}</p>
-					</ImageWithText>
-				</section>
+						<ImageWithText
+							reverse={true}
+							src={intro.back_img_mob_2.url}
+							srcSet={intro.back_img_2.url}>
+							<h2 className="mb-2 h1">{intro.titleintro_2}</h2>
+							<p>{intro.description_2}</p>
+						</ImageWithText>
+					</>
+				)}
+			</section>
 
-				<section className="page-award-slider bg-yellow-light text-center pt-5 pb-5 overflow-hidden">
-					<div className="px-hg lg:px-g w-full lg:w-1/3 ml-auto mr-auto">
-						<h2 className="mb-1">{logo.Heading}</h2>
+			<section className="page-award-slider bg-yellow-light text-center pt-5 pb-5 overflow-hidden">
+				<div className="px-hg lg:px-g w-full lg:w-1/3 ml-auto mr-auto">
+					<h2 className="mb-1">{logo.Heading}</h2>
+					{!isLoading && (
 						<p className="ml-auto mr-auto mb-5">{logo.Description}</p>
-					</div>
-					{/* <CarouselCustom id="loop2" imgLogo={true} items={CAROUSEL} slideNumber={4} roundedControl={true} centered={false} colLgGrid={5} useRow={false} /> */}
+					)}
+				</div>
+				{!isLoading && (
 					<Carousel.Wrapper emblaApi={emblaApi} className="-mx-hg">
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 							{logo.logo.map((data, i) => {
@@ -118,9 +122,12 @@ const OurStoryTemplate = (props: any) => {
 							</NextButton>
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
-				</section>
+				)}
+			</section>
 
-				<section className="bg-body-light w-full justify-center lg:flex items-center p-0">
+
+			<section className="bg-body-light w-full justify-center lg:flex items-center p-0">
+				{!isLoading && (
 					<figure className="ml-auto lg:w-7/12 lg:basis-7/12 grow-0 p-0 relative mb-0">
 						<picture className={`relative block cursor-pointer lg:z-[2]`} onClick={() => handlOpenModal(true)}>
 							<source srcSet={videoBanner.back_img.url} media="(min-width: 992px)" />
@@ -131,16 +138,18 @@ const OurStoryTemplate = (props: any) => {
 							</div>
 						</picture>
 					</figure>
-					<div className="container px-hg lg:absolute">
-						<div className="flex flex-wrap mobile-wrapper -mx-hg lg:-mx-g px-hg">
-							<div className="px-hg lg:px-g lg:w-1/3 pt-5 pb-5">
-								<h4 className="mb-1">{videoBanner.title}</h4>
-								<h2 className="mb-1">{videoBanner.description}</h2>
-							</div>
+				)}
+				<div className="container px-hg lg:absolute">
+					<div className="flex flex-wrap mobile-wrapper -mx-hg lg:-mx-g px-hg">
+						<div className="px-hg lg:px-g lg:w-1/3 pt-5 pb-5">
+							<h4 className="mb-1">{videoBanner.title}</h4>
+							<h2 className="mb-1">{videoBanner.description}</h2>
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 
+			{!isLoading && (
 				<Modal className="modal-lg" isOpen={modal} handleClose={() => handlOpenModal(false)}>
 					<div className="relative">
 						<video ref={videoElem} controls className="rounded-[20px]" autoPlay playsInline webkit-playsinline>
@@ -151,8 +160,8 @@ const OurStoryTemplate = (props: any) => {
 						<Close className="svg--current-color w-[24px] h-[24px]" />
 					</button>
 				</Modal>
-				</>
 			)}
+
 		</>
 	);
 };
