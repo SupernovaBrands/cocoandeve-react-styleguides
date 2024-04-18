@@ -49,6 +49,7 @@ const SearchBox = (props: any) => {
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			console.log('handles', handles);
+			{/* @ts-ignore */}
 			const pProducts = [];
 			for (let i = 0; i <= handles.length; i += 1) {
 				fetch(`/api/getProductInfo?handle=${handles[i]}`).then(
@@ -59,18 +60,21 @@ const SearchBox = (props: any) => {
 							if (product) {
 								const featuredImg = featuredImages.find((img) => img.handle === product.handle)
 									? featuredImages.find((img) => img.handle === product.handle).featured_image_url : null;
+								{/* @ts-ignore */}
 								pProducts.push({
 									...product,
 									featuredImgUrl: featuredImg || '',
 									url: `/products${product.handle}`,
 								});
 							}
+							{/* @ts-ignore */}
 							if (i === handles.length) setPopProducts(pProducts);
 						});
 					}
 				);
 			}
 			setTimeout(() => {
+				{/* @ts-ignore */}
 				setPopProducts(pProducts);
 			}, 500);
 		}
@@ -133,9 +137,17 @@ const SearchBox = (props: any) => {
 						<div className='w-full lg:w-2/3 flex order-4 flex-wrap'>
 							{!dummy ? (
 									<>
-										{popProducts.length > 0 && popProducts.map((product) => (
-											<SearchProductCard title={product.title} img={product.featuredImgUrl} url={product.url} classes="mb-1 order-4 w-full lg:w-1/4" />
-										))}
+										{popProducts.length > 0 && popProducts.map((product) => {
+											{/* @ts-ignore */}
+											const { title, featuredImgUrl, url } = product;
+											return (
+												<SearchProductCard
+													title={title}
+													img={featuredImgUrl}
+													url={url} 
+													classes="mb-1 order-4 w-full lg:w-1/4" />
+											)
+										})}
 									</>
 								) : (
 									<>
