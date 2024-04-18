@@ -12,30 +12,14 @@ import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 
-const NAV_MEGA_MENU_CARD_TEMP = [
-	{
-		title: 'Bali Bronzing Foam in two lines',
-		url: '/'
-	},
-	{
-		title: 'Bali Bronzing Foam in two lines 2',
-		url: '/'
-	},
-	{
-		title: 'Bali Bronzing Foam in two lines',
-		url: '/'
-	}
-]
-
 const Header = (props: any) => {
-	const { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz } = props;
-	console.log({ annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz });
+	const { ThemeSettings, searchBox, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	
+	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -63,7 +47,6 @@ const Header = (props: any) => {
 		let scrollTop = 0;
 		const handleScroll = (e) => {
 			if (!openSearchBox) {
-				console.log('Scrolled!', window.scrollY);
 				scrollTop = window.scrollY;
 				if (scrollTop < lastScrollTop) {
 					if (scrollTop <= 0) {
@@ -85,6 +68,19 @@ const Header = (props: any) => {
 		return () => {
 		  window.removeEventListener('scroll', handleScroll);
 		};
+	}, []);
+
+	useEffect(() => {
+		console.log('ThemeSettings', ThemeSettings, searchBox);
+		fetch(`/api/sevenDaysSalesIds`).then(
+			res => {
+				res?.json().then(data => {
+					console.log('sds', data);
+					const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
+					setSevenDaysSalesIds(ids.map((i) => parseInt(i, 10)));
+				})
+			}
+		);
 	}, []);
 
 	return (
@@ -114,7 +110,7 @@ const Header = (props: any) => {
 							<BrandLogo className="lg:h-[41px]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							{megaMenu && megaMenu.map((nav) => {
+							{mainMenu && mainMenu.map((nav) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li className="nav-item pr-hg">
@@ -122,15 +118,21 @@ const Header = (props: any) => {
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
-													menus={megaMenu || []}	
-													cards={NAV_MEGA_MENU_CARD_TEMP}
+													menus={mainMenu || []}	
+													getCollectionProductsByHandle={getCollectionProductsByHandle}
+													listIds={sevenDaysSalesIds}
+													dummy={dummy}
 												/>
 											)}
 											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
 												<NavMegaMenu
 													title={nav.title}
+													handle={nav.handle.replace('/collections/', '')}
+													url={nav.handle}
 													menus={nav.rows || []}
-													cards={NAV_MEGA_MENU_CARD_TEMP}
+													getCollectionProductsByHandle={getCollectionProductsByHandle}
+													listIds={sevenDaysSalesIds}
+													dummy={dummy}
 												/>
 											)}
 										</li>
@@ -173,28 +175,6 @@ const Header = (props: any) => {
 					</div>
 				</nav>
 
-				{/*
-				<nav className="text-center mobile-secnav p-g bg-white d-lg-none">
-					<ul className="nav justify-content-center">
-						<li className="nav-item">
-							<a href="#" className="nav-link pb-0 pt-0 "><b>Shop All</b></a>
-						</li>
-						<li className="nav-item">
-							<a href="#" className="nav-link pb-0 pt-0"><b>Hair</b></a>
-						</li>
-						<li className="nav-item">
-							<a href="#" className="nav-link pb-0 pt-0"><b>Tan</b></a>
-						</li>
-						<li className="nav-item">
-							<a href="#" className="nav-link pb-0 pt-0"><b>Body</b></a>
-						</li>
-						<li className="nav-item">
-							<a href="#" className="nav-link pb-0 pt-0"><b>Value Kits</b></a>
-						</li>
-					</ul>
-				</nav>
-				*/}
-
 				<MobileMenu
 					onToggleMobileNav={onToggleMobileNav}
 					openDrawer={openDrawer}
@@ -202,7 +182,7 @@ const Header = (props: any) => {
 					menuBannerCode={menuBannerCode}
 					menuBannerQuiz={menuBannerQuiz}
 				/>
-				<SearchBox onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
+				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
 
 			</header>
 			<Cart showCart={openCartDrawer} handleClose={handleClose}/>
