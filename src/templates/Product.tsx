@@ -148,7 +148,7 @@ const Product = (props: any) => {
                     <div className="product-image-carousel__container w-full lg:w-3/5 lg:order-2 lg:sticky lg:top-[-3em]">
                         <ProductImageCarousel slides={SLIDES} bottomBadge="👻 Get 3 for 2 with code: HALLOWEEN 👻" />
                     </div>
-                    <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-2">
+                    <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-g">
                         <YotpoStar productId={4543113265187} showTotal={true} className="justify-start"/>
                         <h1 className="mb-2 lg:order-0">Sunny Honey Bali Bronzing Foam</h1>
                         <div className="mb-1">
@@ -274,7 +274,7 @@ const Product = (props: any) => {
 
                                     </ProductVariant.Variant>
                             </div>
-                            <ProductSubscription />
+                            <ProductSubscription tooltipText="Never run out of your hair must-haves, with free shipping on top of that.<br/><br/>Cancel anytime with no hassle! ❤️"/>
                             <div className="results-swatch py-2 border border-primary-light-second border-l-0 border-r-0 mb-2 flex items-center">
                                 <button type="button" className="variant-swatch variant-swatch--lg medium me-2 border border-primary before:m-[1px]" data-value="medium" data-id="32068892295203"></button>
                                 <p className="mb-0"><strong>Your perfect shade – Medium</strong> <br/> will give you subtle glow</p>
@@ -300,9 +300,9 @@ const Product = (props: any) => {
                                 <div className="klarna-icon flex items-center justify-center bg-light-yellow rounded py-1 min-w-[5.875em]">
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
-                                <div className="pl-g text-sm">
-                                    <span>4 interest-free payments of $15.70</span>
-                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                <div className="pl-g text-sm w-full">
+                                    <span className="inline-block mr-25">4 interest-free payments of $15.70</span>
+                                    <a className="text-sm" href="">Learn more</a>
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
@@ -310,8 +310,8 @@ const Product = (props: any) => {
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
-                                    <span>4 interest-free payments of $15.70</span>
-                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                    <span className="inline-block mr-25">4 interest-free payments of $15.70</span>
+                                    <a className="text-sm" href="">Learn more</a>
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
@@ -319,8 +319,8 @@ const Product = (props: any) => {
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
-                                    <span>4 interest-free payments of $15.70</span>
-                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                    <span className="inline-block mr-25">4 interest-free payments of $15.70</span>
+                                    <a className="text-sm" href="">Learn more</a>
                                 </div>
                             </div>
 
@@ -329,12 +329,12 @@ const Product = (props: any) => {
                                     <img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
-                                    <span>4 interest-free payments of $15.70</span>
-                                    <a className="text-sm ml-25" href="">Learn more</a>
+                                    <span className="inline-block mr-25">4 interest-free payments of $15.70</span>
+                                    <a className="text-sm" href="">Learn more</a>
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="free-shipping-icon flex items-center content-center bg-secondary-light rounded py-1 px-3 w-[94px]">
+                                <div className="free-shipping-icon flex items-center content-center bg-secondary-light rounded py-1 px-3 min-w-[5.875em]">
                                     <FastDelivery className="svg inline-block h-[1em]"/>
                                 </div>
                                 <div className="pl-g text-sm">
