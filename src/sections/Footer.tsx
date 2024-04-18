@@ -12,7 +12,6 @@ import Link from 'next/link';
 const Footer = (props: any) => {
     const { aboutMenu, shopMenu, helpMenu } = props;
     const [email, setEmail] = useState('');
-    console.log('helpMenu', helpMenu);
     const onSubmit = (evt) => {
         evt.preventDefault();
         console.log(email);

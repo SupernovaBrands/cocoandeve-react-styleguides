@@ -12,14 +12,14 @@ const NavMegaMenuAll = (props: any) => {
                     </div>
                     <div className="ml-3 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
                         {menus && menus.map((menu) => {
-                            if (menu.handle !== 'sale' && menu.handle !== 'all') {
+                            if (menu.handle !== '/collections/sale' && menu.handle !== '/collections/all') {
                                 return (
                                     <div className="d-flex flex-column">
-                                        <a href={`/collections/${menu.handle}`} className="block mb-2 text-lg text-body font-bold">{menu.title}</a>
+                                        <a href={menu.handle} className="block mb-2 text-lg text-body font-bold">{menu.title}</a>
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li className="mb-1 ">
-                                                    <a href={`/collections/${row.handle}`} className="text-body">{row.title}</a>
+                                                    <a href={row.handle} className="text-body">{row.title}</a>
                                                 </li>
                                             ))}
                                         </ol>

@@ -24,7 +24,8 @@ const stockistTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Stockist />
 			<Instagram className="bg-yellow-light" />
 			<Service />

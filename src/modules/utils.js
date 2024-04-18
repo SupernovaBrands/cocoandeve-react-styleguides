@@ -1045,7 +1045,18 @@ export const processURL = () => {
 };
 
 export const getFeaturedImages = () => {
-	if (getLSWithExpiry('featuredImages')) return JSON.parse(getLSWithExpiry('featuredImages'));
+	if (getLSWithExpiry('featuredImages')) {
+		return JSON.parse(getLSWithExpiry('featuredImages'));
+	} else {
+		fetch(`/api/getFeaturedImages`).then(
+			res => {
+				res.json().then(data => {
+					console.log('fImg', data);
+					setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
+				})
+			},
+		);
+	}
 	return [];
 };
 

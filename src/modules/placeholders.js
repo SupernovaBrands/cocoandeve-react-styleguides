@@ -314,3 +314,17 @@ export const helpMenu = [
         "handle": ""
     }
 ]
+
+export const searchBox = {
+    "search_enabled": true,
+    "search_input_placeholder": "Search",
+    "search_clear": "Clear",
+    "popular_keywords_heading": "Popular searched here",
+    "popular_keywords": "Mask,Shampoo,Tan,Scalp Scrub,Mitt,Bali Bod Bundle",
+    "popular_products_heading": "Popular searched products",
+    "search_result_heading": "{{total}} Results",
+    "search_footer_note": "Not what you're looking for?<br class='d-lg-none'><span class='d-none d-lg-inline'>&nbsp;</span><nobr>Check our <a href='/collections/all' class='text-underline'>shop all page</a></nobr>",
+    "search_no_result_1": "Your search for $keyword didn’t return any results. Try a new search or check out our <a href=\"/collections/all\" class=\"text-underline\">shop all page</a>.",
+    "search_popular_handles": "sunny-honey-bali-bronzing-self-tan-mousse,super-nourishing-coconut-fig-hair-masque,shampoo-conditioner-set,shower-gel",
+    "search_exclusion": "tan-masters-kit"
+}

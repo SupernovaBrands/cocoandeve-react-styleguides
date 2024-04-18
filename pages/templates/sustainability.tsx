@@ -21,7 +21,8 @@ const SustainabilityTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
         	<Sustainability />
             <Footer
 				aboutMenu={aboutMenu}

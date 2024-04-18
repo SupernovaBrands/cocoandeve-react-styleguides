@@ -25,7 +25,8 @@ const sweepstakesTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Sweepstakes />
 			<Footer
 				aboutMenu={aboutMenu}

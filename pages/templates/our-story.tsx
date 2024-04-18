@@ -15,7 +15,8 @@ const OurStory = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<OurStoryTemplate />
 			<Footer
 				aboutMenu={aboutMenu}
