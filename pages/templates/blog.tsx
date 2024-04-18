@@ -26,7 +26,8 @@ const BlogTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Blog />
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 			<Footer

@@ -31,7 +31,8 @@ const ArticleTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode} />
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Article
 				title="The 5 Rules of Hair Masking"
 				quickLinks={false}

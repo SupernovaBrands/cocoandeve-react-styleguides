@@ -22,7 +22,8 @@ const RealResultsTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode} />
+				menuBannerCode={menuBannerCode}
+				dummy={true}  />
         	<RealResults />
 			<Footer
 				aboutMenu={aboutMenu}

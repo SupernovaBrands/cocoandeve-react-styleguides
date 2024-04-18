@@ -126,7 +126,8 @@ const RealResultsTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+                dummy={true} />
         	<RangeBanner content={rangeBannerContent} />
             <RangeIntro content={rangeIntroContent} />
             <RangeProducts heading="Products"  products={PRODUCTS} />

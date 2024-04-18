@@ -25,7 +25,8 @@ const HomepageTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode} />
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
         	<Homepage />
 			<Footer
 				aboutMenu={aboutMenu}

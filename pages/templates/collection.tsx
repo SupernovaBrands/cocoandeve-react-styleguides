@@ -142,7 +142,8 @@ const CollectionTemplate = () => {
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
-				menuBannerCode={menuBannerCode}/>
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Collection products={products}/>
 			{/* <ProductCardQuiz /> */}
             <Service />
