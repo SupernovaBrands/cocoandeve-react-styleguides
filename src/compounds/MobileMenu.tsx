@@ -99,7 +99,7 @@ const MobileMenu = (props: any) => {
 				<li className="flex flex-wrap  px-g pt-g">
 					<a href="#" className="w-1/2 mb-1">Help</a>
 					<a href="#" className="w-1/2 mb-1">Track my order</a>
-					<a href="#" className="w-1/2 mb-1">Result IRL</a>
+					<a href="/pages/reviews" className="w-1/2 mb-1">Result IRL</a>
 					<a href="#" className="w-1/2 mb-1">BLog</a>
 				</li>
 			</ul>
