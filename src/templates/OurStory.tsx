@@ -44,6 +44,7 @@ const OurStoryTemplate = (props: any) => {
 		onNextButtonClick: arrowClickNext
 	} = usePrevNextButtons(emblaApi);
 	const autoPlayClick = controlAutoplay(emblaApi);
+	const logos = [...logo.logo, ...logo.logo];
 
 	return (
 		<>
@@ -60,26 +61,24 @@ const OurStoryTemplate = (props: any) => {
 			<section className="container text-center mt-5 mb-5">
 				<h2 className="mb-1">{intro.title}</h2>
 				{!isLoading && (
-					<>
-						<div dangerouslySetInnerHTML={{
-							__html: intro.description
-						}} />
-						<ImageWithText
-							src={intro.back_img_mob_1.url}
-							srcSet={intro.back_img_1.url}>
-							<h2 className="mb-2">{intro.titleintro_1}</h2>
-							<p>{intro.description_1}</p>
-						</ImageWithText>
-
-						<ImageWithText
-							reverse={true}
-							src={intro.back_img_mob_2.url}
-							srcSet={intro.back_img_2.url}>
-							<h2 className="mb-2 h1">{intro.titleintro_2}</h2>
-							<p>{intro.description_2}</p>
-						</ImageWithText>
-					</>
+					<div dangerouslySetInnerHTML={{
+						__html: intro.description
+					}} />
 				)}
+				<ImageWithText
+					src={!isLoading ? intro.back_img_mob_1.url : null}
+					srcSet={intro.back_img_1.url}>
+					<h2 className="mb-2">{intro.titleintro_1}</h2>
+					{!isLoading && <p>{intro.description_1}</p>}
+				</ImageWithText>
+
+				<ImageWithText
+					reverse={true}
+					src={!isLoading ? intro.back_img_mob_2.url : null}
+					srcSet={intro.back_img_2.url}>
+					<h2 className="mb-2">{intro.titleintro_2}</h2>
+					{!isLoading && <p>{intro.description_2}</p>}
+				</ImageWithText>
 			</section>
 
 			<section className="page-award-slider bg-yellow-light text-center pt-5 pb-5 overflow-hidden">
@@ -92,7 +91,7 @@ const OurStoryTemplate = (props: any) => {
 				{!isLoading && (
 					<Carousel.Wrapper emblaApi={emblaApi} className="-mx-hg">
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-							{logo.logo.map((data, i) => {
+							{logos.map((data, i) => {
 								const odd = Math.abs(i % 2) == 1;
 								return (
 									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:w-[20%] lg:basis-[20%] px-hg lg:px-g ${odd ? 'mt-5' : ''}`} key={data.id}>
