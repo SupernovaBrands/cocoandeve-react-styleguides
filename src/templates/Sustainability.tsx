@@ -238,7 +238,7 @@ const Sustainability = () => {
                     <div className="w-full lg:w-7/12 px-0">
                         <picture>
                             <source srcSet="https://via.placeholder.com/670x350.jpg/2596be" media="(min-width: 992px)" />
-                            <img className="w-full" alt="/" src="https://via.placeholder.com/375x440.jpg/EFADBA" />
+                            <img className="w-full" alt="/" src="https://via.placeholder.com/375x479.jpg/EFADBA?text=375 x 320" />
                         </picture>
                     </div>
                     <div className="w-full lg:w-5/12 py-4 px-g lg:px-3">
