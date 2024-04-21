@@ -17,7 +17,7 @@ import {
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import Modal from "~/components/Modal";
 
-const OurStoryTemplate = (props: any) => {
+const OurStoryTemplate = (props: { logo: any; banner: any, intro: any, videoBanner: any; isLoading: boolean }) => {
 	const { banner, intro, logo, videoBanner, isLoading } = props;
 	const videoElem = useRef(null);
 	const [modal, setModal] = useState(false);
