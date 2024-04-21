@@ -78,13 +78,13 @@ const SearchBox = (props: any) => {
 			const handles = content.search_popular_handles.split(',');
 			{/* @ts-ignore */}
 			const pProducts = [];
-			for (let i = 0; i <= handles.length; i += 1) {
-				fetch(`/api/getProductInfo?handle=${handles[i]}`).then(
-					res => {
-						res?.json().then(data => {
-							const { product } = data;
-							if (product) {
-								getFeaturedImages().then((dataImg) => {
+			getFeaturedImages().then((dataImg) => {
+				for (let i = 0; i <= handles.length; i += 1) {
+					fetch(`/api/getProductInfo?handle=${handles[i]}`).then(
+						res => {
+							res?.json().then(data => {
+								const { product } = data;
+								if (product) {
 									const featuredImg = dataImg.find((img) => img.handle === product.handle)
 										? dataImg.find((img) => img.handle === product.handle).featured_image_url : null;
 									{/* @ts-ignore */}
@@ -97,14 +97,12 @@ const SearchBox = (props: any) => {
 									}
 									{/* @ts-ignore */}
 									if (i === handles.length) setPopProducts(pProducts);
-								});
-								
-							}
-							
-						});
-					}
-				);
-			}
+								}
+							});
+						}
+					);
+				}
+			});
 			setTimeout(() => {
 				{/* @ts-ignore */}
 				setPopProducts(pProducts);
