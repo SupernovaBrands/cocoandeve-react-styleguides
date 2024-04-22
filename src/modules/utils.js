@@ -386,7 +386,11 @@ export const subscribeBluecoreRegistration = (
 	};
 
 	subscribeTiktok(email, phone);
-	return $.post(`${tSettings.apiEndpoint}/bluecore/registrations.json`, data);
+	const ajaxRequest = new XMLHttpRequest();
+	ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
+	ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	const jsonData = JSON.stringify(data);
+	return ajaxRequest.send(jsonData);
 };
 
 export const submitsToSmsBumpAPi = (phone, formId, countryPhoneCode) => {

@@ -76,12 +76,32 @@ const Modals = () => {
 	];
 
 	const MODAL_NEWSLETTER = {
-		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Rectangle_2241.png?v=1696414159',
-		srcSet: 'https://cdn.shopify.com/s/files/1/0073/5186/1332/files/newsletter-bigger-mobile.png?v=1646639302',
-		title: 'Join the club',
-		subtitle: '& get a FREE hair wrap!',
-		desc: 'Get a FREE hair wrap on your first order, plus first access to new product launches, exclusive offers, routines, and beauty tips.',
-		tc: 'Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our Privacy Policy (opt out any time). Msg &amp; data rates may apply. Consent not required for purchase.'
+		"nbp_img": {
+			"alt": "welcomepopup_2_mobile_1_764x332_crop_center.png",
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3391e840-d687-4451-4640-8a1987e58200/public"
+		},
+		"nbp_code": "",
+		"nbp_desc": "Get <b> 10% OFF*</b> your first order plus first access to new product launches, exclusive offers, expert tips and routines.",
+		"nbp_note": "Receive exclusive offers via email or recurring automated marketing messages. For more info see our <a class=\"font-weight-bold text-underline text-dark\" href=\"/pages/privacy-policy\">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.*Excludes travel size items and accessories.",
+		"nbp_img_lg": {
+			"alt": "welcomepopup_1_.Desktoppng_1428x940_crop_center.png",
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3baf7c71-89aa-481a-962d-d06e75017700/public"
+		},
+		"nbp_submit": "Submit",
+		"nbp_enabled": false,
+		"nbp_heading": "Join the club",
+		"nbp_smsbump": "7580145",
+		"floating_btn": "Want 10% off?",
+		"nbp_bg_color": "bg-yellow-light",
+		"nbp_email_ph": "Email",
+		"nbp_phone_ph": "Phone",
+		"nbp_completed": "🎉<br>Sign-up successful! ",
+		"nbp_heading_2": "& get 10% OFF*!",
+		"nbp_desc_color": "text-dark",
+		"nbp_heading_color": "text-dark",
+		"nbp_completed_desc": "Use code for your gift!",
+		"nbp_heading_2_color": "text-dark",
+		"nbp_comliance_position": "above_cta"
 	};
 
 	const MODAL_SWEEPSTAKE = {
