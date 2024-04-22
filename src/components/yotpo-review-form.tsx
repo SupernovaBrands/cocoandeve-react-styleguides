@@ -93,7 +93,7 @@ const YotpoReviewForm: FC<YotpoReviewFormProps> = ({
   };
 
   return (
-    <div id="yotpoReviewForm" className={`${activeForm === 'review' ? 'collapsed' : 'collapse hidden'} mt-3`} data-parent="#yotpoFormCollapse">
+    <div id="yotpoReviewForm" className={`${activeForm === 'review' ? 'collapsed' : 'collapse hidden'} mt-3`}>
       <div className="yotpo__review-fields flex flex-col">
         <div className="form-group mb-1">
           <h4 className="mb-2">{tStrings.yotpo.writeReview}</h4>

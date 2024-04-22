@@ -1,19 +1,19 @@
-import { Button } from '~/components/index';
+import { Button } from "../components";
 
 const AddToCartButton = (props: any) => {
     const { className, label } = props;
     return (
-        <button type="button" className={`${className ? className : 'mb-2'} sm:px-[35px] sm:py-[15px] btn-lg mx-auto lg:w-[210px!important] lg:max-width-[210px] sm:w-[165px!important] sm:max165dth-[210px] flex sm:flex-col md:flex-row bg-primary hover:bg-primary-dark text-white text-base inline-block align-middle text-center select-none border font-bold whitespace-no-wrap rounded sm:py-1 lg:py-g leading-normal no-underline px-3`}>
-            <span className="w-full block text-base text-center">{label ?? 'Add to Cart'}</span>
-        </button>
+        <Button buttonClass={`${props.className ?? ''} btn-primary border-0`}>
+            <span className='text-center'>Add to Cart</span>
+        </Button>
     );
 };
 
 const SwatchOverlay = (props) => {
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose mr-0 sm:px-[25px!important] mb-2" label="Choose Scent"/>
-            <div className="swatch-overlay w-[209px!important] flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t-lg bottom-[35px]">
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="btn-choose" label="Choose Scent"/>
+            <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded-t bottom-3">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
                         {props.swatch.style && <strong>Style: </strong>}
@@ -28,7 +28,7 @@ const SwatchOverlay = (props) => {
                         ))}
                     </ul>
                 </div>
-                <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1] mb-0"/>
+                <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1]"/>
             </div>
         </>
     );
@@ -36,7 +36,7 @@ const SwatchOverlay = (props) => {
 
 const ProductCardUpsell = (props) => {
     return (
-        <div className={`sm:min-w-[263px] w-full lg:w-1/3 ${props.item.active} product-card grow lg:px-g sm:px-hg`}>
+        <div className={`min-w-[75vw] md:min-w-[30%] lg:w-1/3 ${props.item.active} product-card grow px-hg lg:px-2 product-upsell-2`}>
             <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                 <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span>
                 <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
@@ -45,7 +45,7 @@ const ProductCardUpsell = (props) => {
                         <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 px-3 bg-pink-light align-middle" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
                     </a>
                 </picture>
-                <div className="product-card__content pb-0 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">
+                <div className="product-card__content pb-2 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">
                     <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
                         <a href="#" className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</a>
                     </p>
@@ -67,26 +67,6 @@ const ProductCardUpsell = (props) => {
                     }
                 </div>
             </div>
-            {/* <div className="item-third lg:pl-0 flex lg:hidden grow flex-col bg-pink-light relative h-full no-underline hover:no-underline hover:text-black">
-                <span className="badge badge--square bg-white absolute font-normal font-size-sm product-card__tag text-black">{props.item.nextStep}</span>
-                <picture className="ratio ratio-1x1 mx-auto my-0 lg:mx-0">
-                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" media="(min-width: 992px)" />
-                    <img className="embed-responsive-item px-3 bg-pink-light" alt="Image Alt" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671" />
-                </picture>
-                <div className="product-card__content pb-0 relative grow flex flex-col px-2 lg:px-3 bg-pink-light">
-                    <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">{props.item.nexttitle}</p>
-                    <p className="product-card__desc text-center font-normal flex flex-col">{props.item.nexttext}</p>
-                    <p className="text-center flex flex-row grow justify-content-center items-end">
-                        {props.item.comparePrice &&
-                            <span className="line-through h4 m-1">{props.item.comparePrice}</span>
-                        }
-                        <span className="text-primary h4 my-1">{props.item.price}</span>
-                    </p>
-                    <button type="button" className="product-card__button w-full mx-auto btn btn-lg add-to-cart btn-block px-0 btn-primary mb-2 text-primary">
-                        Add To Cart
-                    </button>
-                </div>
-            </div> */}
         </div>
     );
 };

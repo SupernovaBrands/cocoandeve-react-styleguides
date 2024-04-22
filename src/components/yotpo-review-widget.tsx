@@ -522,14 +522,14 @@ const YotpoReviewWidget = (props) => {
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('review')}
 								type="button"
-								buttonClass="btn-outline-primary w-full">
+								buttonClass="btn-outline-primary w-full px-0">
 									{tStrings.yotpo.writeReview}
 							</Button>
 						</div>
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('question')}
 								type="button"
-								buttonClass="btn-outline-primary w-full">
+								buttonClass="btn-outline-primary w-full px-0">
 									{tStrings.yotpo.askQuestion}
 							</Button>
 						</div>

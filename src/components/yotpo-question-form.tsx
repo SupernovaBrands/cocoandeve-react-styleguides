@@ -54,7 +54,7 @@ const YotpoQuestionForm = (props) => {
 	};
 
 	return (
-		<div id="yotpoQuestionForm" className={`${activeForm === 'question' ? 'collapsed' : 'collapse hidden'} mt-3`} data-parent="#yotpoFormCollapse">
+		<div id="yotpoQuestionForm" className={`${activeForm === 'question' ? 'collapsed' : 'collapse hidden'} mt-3`}>
 			<div className="yotpo__review-fields flex flex-col">
 				<div className="form-group mb-1">
 					<h4 className="mb-2">{tStrings.yotpo.askQuestion}</h4>
