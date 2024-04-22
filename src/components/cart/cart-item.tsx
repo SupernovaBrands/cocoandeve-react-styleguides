@@ -100,7 +100,6 @@ export default class CartItem extends React.Component {
 		// for now using settings
 		const subtitles = this.variantSubtitle(item);
 
-		console.log(item.merchandise, 'testing');
 		return (
 			<li className="cart-item" data-mod={item.modified}>
 				<figure className="flex flex-wrap py-1 mb-0 items-start -mx-2">

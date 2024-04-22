@@ -53,7 +53,7 @@ const MobileMenu = (props: any) => {
 								)}
 							</label>
 							{menu.rows.length > 0 && (
-								<ul className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[1] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
+								<ul className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
 									<li className="flex justify-between mx-g items-center py-[5px]">
 										<label onClick={() => {
 											const newStates = {...defMenuState};
@@ -99,7 +99,7 @@ const MobileMenu = (props: any) => {
 				<li className="flex flex-wrap  px-g pt-g">
 					<a href="#" className="w-1/2 mb-1">Help</a>
 					<a href="#" className="w-1/2 mb-1">Track my order</a>
-					<a href="#" className="w-1/2 mb-1">Result IRL</a>
+					<a href="/pages/reviews" className="w-1/2 mb-1">Result IRL</a>
 					<a href="#" className="w-1/2 mb-1">BLog</a>
 				</li>
 			</ul>

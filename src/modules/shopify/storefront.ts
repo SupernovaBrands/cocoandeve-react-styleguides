@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* global Cart tSettings */
 import { getSizedImageUrl } from '@shopify/theme-images';
 import {

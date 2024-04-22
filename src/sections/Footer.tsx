@@ -9,15 +9,32 @@ import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
+import {
+	encryptParam,
+	getCookie,
+} from '~/modules/utils';
+
 const Footer = (props: any) => {
     const { aboutMenu, shopMenu, helpMenu } = props;
     const [email, setEmail] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+
     const onSubmit = (evt) => {
-        evt.preventDefault();
-        console.log(email);
-    }
+		evt.preventDefault();
+        console.log('email', email);
+		const ajaxRequest = new XMLHttpRequest();
+		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
+		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		const date = new Date();
+		const tse = date.getTime();
+		const content = `{email:'${email}',time:${tse}}`;
+		const signature = encryptParam(content);
+		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand_name=cocoandeve&reg_source=footer`);
+		setSubmitted(true);
+	};
 
     const handleEmail = (e) => {
+        console.log(e.target.value);
         setEmail(e.target.value);
     }
 
@@ -30,7 +47,7 @@ const Footer = (props: any) => {
                         <p className='mb-1'>Receive exclusive offers, promotions and beauty tips via email.</p>
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
-                        <Form classes="lg:order-1" />
+                        <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
                         <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="#" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* global tSettings Cart */
 import dynamic from 'next/dynamic';
 import StorefrontApi from '~/modules/storefront-api';

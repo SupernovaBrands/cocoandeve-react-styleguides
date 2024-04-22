@@ -6,7 +6,6 @@ const NavMegaMenu = (props: any) => {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
-        const featuredImages = getFeaturedImages();
         if (dummy) {
             {/* @ts-ignore */}
             const selected = [
@@ -28,50 +27,57 @@ const NavMegaMenu = (props: any) => {
 							{ handle: 'antioxidant-glow-cream', title: 'Antioxidant Glow Cream' },
 							{ handle: 'depuff-eye-cream', title: 'Depuff Eye Cream' },
 						].forEach((item) => {
-							const featuredImg = featuredImages.find((img) => img.handle === item.handle)
-								? featuredImages.find((img) => img.handle === item.handle).featured_image_url : null;
                             {/* @ts-ignore */}
 							selected.push({
 								title: item.title,
-								img: featuredImg,
-								url: `/products/${item.handle}`,
+								handle: item.handle,
 							});
 						});
 					} else {
                         for (let i = 0; i < listIds.length; i += 1) {
-							const item = plist.find((it) => it.node.id.includes(listIds[i]));
+							const item = plist.find((it) => it.id.includes(listIds[i]));
 							if (item) {
-								const featuredImg = featuredImages.find((img) => img.handle === item.node.handle)
-									? featuredImages.find((img) => img.handle === item.node.handle).featured_image_url : null;
 								{/* @ts-ignore */}
-                                selected.push({
-									title: item.node.title,
-									img: featuredImg,
-									url: `/products/${item.node.handle}`,
-								});
+                                if (featuredImg) {
+                                    selected.push({
+                                        title: item.title,
+                                        handle: item.handle,
+                                    });
+                                }
 							}
 						}
                     }
                     if (selected.length < 3) {
 						selected = plist.map((item) => {
-							const featuredImg = featuredImages.find((img) => img.handle === item.handle)
-								? featuredImages.find((img) => img.handle === item.handle).featured_image_url : null;
 							return {
 								title: item.title,
-								img: featuredImg || item.featuredImage?.url,
-								url: `/products/${item.handle}`,
+                                handle: item.handle,
 							};
 						});
 					}
-                    {/* @ts-ignore */}
-					setProducts(selected);
+
+                    getFeaturedImages().then((data) => {
+                        if (data?.length > 0) {
+                            const selectedImgs = selected.map((item) => {
+                                const featuredImg = data.find((img) => img.handle === item.handle)
+								? data.find((img) => img.handle === item.handle).featured_image_url : null;
+                                return {
+                                    title: item.title,
+                                    img: featuredImg,
+                                    url: `/products/${item.handle}`,
+                                };
+                            })
+                            {/* @ts-ignore */}
+                            setProducts(selectedImgs.filter((i) => i.img));
+                        }
+                    })
 				});
 			}
 		)
     }, []);
 
     return (
-        <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
+        <div className={`z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em] ${products.length === 0 ? 'hidden' : ''}`}>
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex mx-5 px-3">
                     <div className="lg:w-2/5 pr-4 pl-4 mb-3">
@@ -79,15 +85,14 @@ const NavMegaMenu = (props: any) => {
                         <ol className="list-unstyled">
                             {props.menus.length > 0 && (
                                 props.menus.map((menu, i) => {
-                                    return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={`/collections/${menu.handle}`} className="h4 text-body">{menu.title}</a></li>
+                                    return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 text-body">{menu.title}</a></li>
                                 })
                             )}
                         </ol>
                     </div>
                     <div className="lg:w-3/5 pr-4 mb-3 flex flex-wrap ">
                         <span className="block mb-2 text-lg w-full px-g">Best Sellers:</span>
-                        {products.length > 0 && (
-                            products.map((card, i) => {
+                            {products.length > 0 && products.slice(0, 3).map((card, i) => {
                                 return (
                                     <figure key={`mobile-card-${i}`} className="relative w-1/3 flex lg:flex-col mb-2 lg:px-g">
                                         {/* @ts-ignore */}
@@ -103,8 +108,7 @@ const NavMegaMenu = (props: any) => {
                                         </a>
                                     </figure>
                                 )
-                            })
-                        )}
+                            })}
                     </div>
                 </div>
             </div>
