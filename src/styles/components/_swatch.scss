@@ -163,15 +163,29 @@
 	opacity: 0;
 	visibility: hidden;
 	width: calc(100% - 20px);
+
 	.button-overlay {
 		width: calc(100% + 4px);
 		margin-left: -2px;
 		margin-bottom: -26px;
 	}
+
+	.product-upsell-2 & {
+		max-width: 13.5em;
+		.button-overlay {
+			@apply -mb-12;
+			max-width: calc(13.5em + 2px);
+		}
+	}
 }
+
 .btn-choose {
 	width: calc(100% + 2px);
 	margin-left: -1px;
+
+	.product-upsell-2 & {
+		max-width: calc(13.5em + 2px);
+	}
 }
 
 .btn-choose:hover + .swatch-overlay,
