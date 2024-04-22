@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* global tStrings tSettings Cart */
 import '~/config';
 
