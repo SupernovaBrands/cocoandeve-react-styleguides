@@ -55,7 +55,7 @@ const ArticleTemplate = () => {
 				<p className="mb-3">Hair masques are generally formulated for intense nourishment and repair, and are therefore most beneficial to your mid-lengths and, especially, your dry, brittle ends! As the hair at your roots is closer to its virgin state, it doesn’t require as intensive a treatment.</p>
 				<p className="mb-3">Even if your hair is coarse and dry? It’s a good idea to avoid applying a masque to the roots if you want to maintain volume and movement. This becomes even more crucial if your locks are ultra-fine!</p>
 				<div className="container blog-post-grid__newsletter px-0">
-					<div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-lg">
+					<div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
 						<picture className="lg:w-1/3 w-full p-0">
 							<source srcSet="https://via.placeholder.com/270x250.jpg/F9F9F9?text=variant-half-image" media="(min-width: 992px)" />
 							<img src="https://via.placeholder.com/345x120.jpg/F9F9F9?text=variant-half-image" className="w-full h-full" />
@@ -63,14 +63,14 @@ const ArticleTemplate = () => {
 						<div className="lg:w-2/3 w-full p-2 lg:pe-4">
 							<h2 className="mb-1">Join the club & get 15% OFF*!</h2>
 							<p className="mb-[1rem]">Get 15% OFF* your first order, plus first access to new product launches, exclusive offers, expert tips and routines.</p>
-							<Form />
+							<Form background="bg-white" />
 							<div className="blog-post-grid__newsletter--submitted hidden form-group mb-g text-left items-center">
 								<button type="button" className="btn btn-primary btn-lg rounded-lg block d-lg-inline-block mb-0 btn--copy">
 									WELCOME
 									<Documents className="ml-25" />
 								</button>
 							</div>
-							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
+							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline text-sm">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
 						</div>
 					</div>
 				</div>

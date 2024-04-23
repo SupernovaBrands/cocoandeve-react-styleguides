@@ -93,57 +93,57 @@
 	&.girl-print-limited-edition,
 	&.girl-print {
 		&:before {
-			background-image: url('//cdn.shopify.com/s/files/1/0286/1327/9779/t/167/assets/ce-towel-girl.svg?v=182997428825652113061659081507');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/88069a9a-3a05-4302-f176-c52b97c3e200/public');
 		}
 	}
 	&.leaf-print {
 		&:before {
-			background-image: url('//cdn.shopify.com/s/files/1/0286/1327/9779/t/167/assets/ce-towel-leaf.svg?v=139574708809619257471659081502');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/61d5736c-38c5-4b30-d1a1-5f6d85240600/public');
 		}
 	}
-	/*
+
 	&.green,
 	&.grun {
 		&:before {
-			background-image: url('ce-eyemask-green.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8e677e6d-3f49-4df7-28a7-58d79e733000/public');
 		}
 	}
 	&.pink {
 		&:before {
-			background-image: url('ce-eyemask-pink.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d2aeb2be-3a56-4be5-bc1e-581fca1ff700/public');
 		}
 	}
 	&.pool-print-limited-edition,
 	&.pool-print {
 		&:before {
-			background-image: url('ce-pool-print.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e0b6a30f-b529-45de-b32f-53068da78200/public');
 			transform: rotate(10deg);
 		}
 	}
 	&.tropical-mango,
 	&.sweet-mango {
 		&:before {
-			background-image: url('scent-sweet-manggo.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ead0ba4a-1823-49c6-7849-735dbaf53400/public');
 		}
 	}
 	&.lychee-dragonfruit {
 		&:before {
-			background-image: url('scent-lychee-dragonfruit.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef6254d1-3c43-4333-cbd3-fc44204b3300/public');
 		}
 	}
 	&.mini-comb {
 		&:before {
-			background-image: url('ce-comb.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/526e0c5f-ebea-4491-eb06-a5bccac75d00/public');
 		}
 	}
 	&.shampoo-brush {
 		&:before {
-			background-image: url('ce-tangle-teaser.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6c1d87a8-1558-425d-6285-4ab1e9ee7700/public');
 		}
 	}
 	&.tangle-tamer {
 		&:before {
-			background-image: url('ce-brush.svg');
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1ddee24d-85ff-47ff-3619-d0af86b46900/public');
 		}
 	}
 	&.hot-pink {
@@ -156,7 +156,16 @@
 			background-color: #F5DADF;
 		}
 	}
-	*/
+	&.with-tangle-tamer {
+		&:before {
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0839ce31-6e3d-4c4e-c53e-64b48572c700/public');
+		}
+	}
+	&.without-tangle-tamer {
+		&:before {
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/53cff8f7-45b0-455d-a40e-0f4146fa3e00/public');
+		}
+	}
 }
 
 .swatch-overlay {

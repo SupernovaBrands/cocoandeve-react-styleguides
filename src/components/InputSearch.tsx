@@ -18,7 +18,7 @@ const InputSearch: React.FC<InputSearchProps> = ({ id, placeHolder, textButton, 
     }
 
     return (
-        <div className="relative flex items-stretch w-full mb-1">
+        <div className="relative flex items-stretch w-full">
             <span className="absolute top-1/2 -translate-y-1/2 left-1">
                 <SearchIcon className="svg w-2 fill-primary"/>
             </span>

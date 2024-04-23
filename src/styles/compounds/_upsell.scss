@@ -47,6 +47,27 @@
 			@apply text-body-color;
 		}
 	}
+
+	.product-upsell-2 {
+
+		picture::before {
+			display: block;
+			content: "";
+		}
+	
+		.ratio-1x1::before {
+			padding-top: 100%;
+		}
+
+		@screen lg {
+			.item-third {
+				&:first-child {
+					padding-left: 0;
+					margin-right: 7.5px;
+				}
+        	}
+		}
+	}
 }
 
 .product-upsell {

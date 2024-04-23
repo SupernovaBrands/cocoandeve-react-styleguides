@@ -226,7 +226,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-2"
                                     >
                                         <p className="mb-1 font-bold">
-                                            1x Sunny Honey Bali Bronzing Bundle
+                                            <span className="mr-25">1x Sunny Honey Bali Bronzing Bundle</span>
                                             <span className="product-variant__saving">Save 30%</span>
                                         </p>
                                         <p className="product-variant__description mb-1 font-size-sm">1x Masque + Brush</p>
@@ -249,12 +249,12 @@ const Product = (props: any) => {
                                         keyName="product-variant-3"
                                     >
                                         <p className="mb-1 font-bold">
-                                            Bronzing Face Drops <span className="product-variant__saving">Save 30%</span>
+                                        <span className="mr-25">Bronzing Face Drops</span><span className="product-variant__saving">Save 30%</span>
                                         </p>
                                         <ProductVariant.Notes notes={notes} />
                                     </ProductVariant.Variant>
 
-                                    <ProductVariant.Variant
+                                    {/* <ProductVariant.Variant
                                         id="1x-product-variant-shampoo-conditioner-set"
                                         inventory="10"
                                         dataID="32068892426275"
@@ -264,7 +264,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-4"
                                     >
                                         <p className="mb-1 font-bold flex items-center">
-                                            Subscription (20% OFF) <span className="product-variant__saving">Save 30%</span>
+                                            <span className="mr-25">Subscription (20% OFF)</span><span className="product-variant__saving">Save 30%</span>
                                             <a className="text-primary ms-1" data-container="body" data-toggle="popover" data-placement="top" data-content="<strong>No fuss and frizz, just good hair days ahead.</strong><br/>Keep your hair routine in check and never run out of your washday must-haves every month and free shipping on top of that.<br/><br/>Cancel anytime, and come back when you're ready. ❤️" data-html="true">
                                                 <Help className="svg svg--current-color" />
                                             </a>
@@ -272,7 +272,7 @@ const Product = (props: any) => {
                                         <p className="mb-1 font-bold ">Monthly Subscription</p>
                                         <ProductVariant.Notes notes={notes2} />
 
-                                    </ProductVariant.Variant>
+                                    </ProductVariant.Variant> */}
                             </div>
                             <ProductSubscription tooltipText="Never run out of your hair must-haves, with free shipping on top of that.<br/><br/>Cancel anytime with no hassle! ❤️"/>
                             <div className="results-swatch py-2 border border-primary-light-second border-l-0 border-r-0 mb-2 flex items-center">
@@ -297,7 +297,7 @@ const Product = (props: any) => {
                             </div>
                             <SaveResults />
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="klarna-icon flex items-center justify-center bg-light-yellow rounded py-1 min-w-[5.875em]">
+                                <div className="klarna-icon flex items-center justify-center bg-light-yellow rounded-h py-1 min-w-[5.875em] h-[2.5em]">
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm w-full">
@@ -306,7 +306,7 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="klarna-icon flex items-center justify-center bg-secondary-light rounded py-1 min-w-[5.875em]">
+                                <div className="klarna-icon flex items-center justify-center bg-secondary-light rounded-h py-1 min-w-[5.875em] h-[2.5em]">
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
@@ -315,7 +315,7 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="klarna-icon flex items-center justify-center bg-light-blue rounded py-1 min-w-[5.875em]">
+                                <div className="klarna-icon flex items-center justify-center bg-light-blue rounded-h py-1 min-w-[5.875em] h-[2.5em]">
                                     <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
@@ -325,7 +325,7 @@ const Product = (props: any) => {
                             </div>
 
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded py-1 min-w-[5.875em]">
+                                <div className="klarna-icon flex items-center justify-center bg-pink-light rounded-h py-1 min-w-[5.875em] h-[2.5em]">
                                     <img src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921" height="15px" className="inline-block align-baseline w-[68px]" alt="Klarna"/>
                                 </div>
                                 <div className="pl-g text-sm">
@@ -334,7 +334,7 @@ const Product = (props: any) => {
                                 </div>
                             </div>
                             <div className="flex items-center mb-1 lg:order-2">
-                                <div className="free-shipping-icon flex items-center content-center bg-secondary-light rounded py-1 px-3 min-w-[5.875em]">
+                                <div className="free-shipping-icon flex items-center content-center bg-secondary-light rounded-h py-1 px-3 min-w-[5.875em] h-[2.5em]">
                                     <FastDelivery className="svg inline-block h-[1em]"/>
                                 </div>
                                 <div className="pl-g text-sm">
@@ -343,7 +343,7 @@ const Product = (props: any) => {
                                 </div>
     						</div>
                         </form>
-                        <a href="/" className="pdp-banner-click no-underline lg:order-2 pdp-banner-click mb-1 w-full mt-4">
+                        <a href="/" className="pdp-banner-click no-underline lg:order-2 pdp-banner-click mb-1 w-full mt-1 lg:mt-4">
                             <picture className="">
                                 <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1557f100-0d32-4fe3-b6f1-f4634cc04900/375x" className="w-full" alt="Halloween Sale!"/>
                             </picture>

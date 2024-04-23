@@ -5,11 +5,12 @@
 		&:not(.link-search) {
 
 			&.active {
-				@apply text-body-color;
+				@apply text-primary;
 			}
 
 			&:hover {
 				text-decoration: none;
+				@apply text-primary;
 				path {
 					@apply text-primary;
 				}
