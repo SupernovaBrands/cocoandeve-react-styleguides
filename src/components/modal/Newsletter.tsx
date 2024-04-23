@@ -90,7 +90,8 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
-	})
+		console.log('data', data);
+	}, [])
 
 	const handleEmail = (e) => {
 		setEmail(e.target.value);
@@ -185,17 +186,17 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 	};
 	return (
 		<div className={`modal-content ${nbp_bg_color}`}>
-			<picture className="absolute w-full lg:h-full lg:w-auto">
+			<picture className="absolute w-full lg:h-full">
 				<source srcSet={nbp_img_lg?.url} media="(min-width: 992px)" />
-				<img src={nbp_img?.url} className="w-full lg:w-auto" />
+				<img src={nbp_img?.url} className="w-full h-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:pt-4 lg:pb-3">
 				<CloseButton handleClose={handleClose} className={nbp_heading_color} />
 				<div className="flex flex-wrap justify-end mx-0">
 					{!formCompleted && (
 						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0">
-							<h2 className={` ${nbp_heading_color || 'text-white'} h1 text-center mb-0`}>{nbp_heading}</h2>
-							<p className={` ${nbp_heading_2_color || 'text-white'} text-lg  font-weight-bold text-center mb-g font-bold leading-[1.563rem]`}>{nbp_heading_2}</p>
+							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
+							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-g font-bold leading-[1.563rem]`}>{nbp_heading_2}</p>
 							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
 							<div className="relative flex items-stretch w-full mb-0">
 								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="block w-full mb-0 bg-white" type="email" placeholder={nbp_email_ph} aria-label="email" />
@@ -205,15 +206,15 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 								<InputCountry id="modal--newsletter__country" handleCode={handleCode} activeCountry={activeCountryCode} />
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-1 -ml-[1px] bg-white border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
+							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
 							<Button type="submit" buttonClass="w-full btn-primary border-0 relative" onClick={handleForm}>{nbp_submit}</Button>
-							<p className="text-xs mt-g text-center mb-0 mx-1" dangerouslySetInnerHTML={{__html: nbp_note}} />
 						</form>
 					)}
 					{formCompleted && (
 						<div className="modal--newsletter__completed lg:w-1/2 pr-4 pl-4 flex items-center justify-center min-h-[25em]">
 							<div className="flex flex-wrap justify-center items-center">
-								<h2 className={`h1 text-center w-full ${nbp_heading_2_color || 'text-white'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
-								<h3 className={`text-center ${nbp_heading_2_color || 'text-white'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
+								<h2 className={`h1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
+								<h3 className={`text-center ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
 								{copied ? (
 									<>
 										<Button buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">COPIED</Button>
