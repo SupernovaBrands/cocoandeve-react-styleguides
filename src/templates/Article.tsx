@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 // import ProgressBar from '@/components/ProgressBar';
-import BlogNavTag from 'compounds/blog-nav-tags';
-import PostCard from "compounds/PostCard";
-import Sidebar from "sections/Sidebar";
-import ShopArticle from "sections/ShopArticle";
+import BlogNavTag from '~/compounds/blog-nav-tags';
+import PostCard from "~/compounds/PostCard";
+import Sidebar from "~/sections/Sidebar";
+import ShopArticle from "~/sections/ShopArticle";
 
 const Article = (props) => {
     const SIDEBAR_DATA = [
