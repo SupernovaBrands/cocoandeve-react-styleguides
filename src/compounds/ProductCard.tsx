@@ -60,7 +60,7 @@ const ProductCardTall = (props) => {
     const { abtestBtn } = props;
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <Link href="#" className="rounded-t bg-pink-light">
+            <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t bg-pink-light">
                 <picture className="block relative aspect-square bg-pink-light rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="w-full rounded-t" alt="Image Alt" loading="lazy" />}
@@ -78,7 +78,7 @@ const ProductCardTall = (props) => {
                     <YotpoStar productId={props.product.productId} showTotal={true} />
                 </div>
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? 'min-h-[2.5em] lg:mx-[0.625rem]' : 'px-1'}`}>
-                    <Link href="#" className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
+                    <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && (
                     <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
