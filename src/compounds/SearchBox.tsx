@@ -55,7 +55,7 @@ const SearchBox = (props: any) => {
 										featuredImgUrl: featuredImg || '',
 									}
 								});
-								setProducts(productsWithImgs);
+								setProducts(productsWithImgs.filter((item) => item.featuredImgUrl && item.featuredImgUrl !== ''));
 							}
 						});
 						
@@ -88,6 +88,7 @@ const SearchBox = (props: any) => {
 									const featuredImg = dataImg.find((img) => img.handle === product.handle)
 										? dataImg.find((img) => img.handle === product.handle).featured_image_url : null;
 									{/* @ts-ignore */}
+									console.log('featuredImg'), featuredImg;
 									if (featuredImg) {
 										pProducts.push({
 											...product,
@@ -110,10 +111,9 @@ const SearchBox = (props: any) => {
 		}
 	}
 
-	const onClickTag = (e) => {
-		const val = e.target.dataset.keyword;
+	const onClickTag = (word) => {
 		// console.log(val);
-		setKeyword(val);
+		setKeyword(word);
 	};
 
 	const onClear = () => {
@@ -161,7 +161,7 @@ const SearchBox = (props: any) => {
 						<h4 className="w-full lg:w-2/3 lg:mb-2 mb-1 font-normal order-3 lg:order-2  text-base px-0 lg:px-g">{content?.popular_products_heading}</h4>
 						<div className="w-full lg:w-1/3 order-2 mb-3">
 							{keywords && keywords.map((word) => (
-								<span className="search-panel__tag p-1 me-1 inline-block mb-1 rounded bg-gray-400 text-gray-600">{word}</span>
+								<span onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer p-1 me-1 inline-block mb-1 rounded bg-gray-400 text-gray-600">{word}</span>
 							))}
 						</div>
 						<div className='w-full lg:w-2/3 flex order-4 flex-wrap'>
@@ -170,6 +170,7 @@ const SearchBox = (props: any) => {
 										{popProducts.length > 0 && popProducts.map((product) => {
 											{/* @ts-ignore */}
 											const { title, featuredImgUrl, url } = product;
+											console.log('prod', product);
 											return (
 												<SearchProductCard
 													title={title}
@@ -200,7 +201,7 @@ const SearchBox = (props: any) => {
 								<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-0">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 								<div className='w-full flex order-2 px-0 flex-wrap'>
 									{products.slice(0, 6).map((item, index) => (
-										<SearchProductCard key="s1" title={item.title} img={item.featuredImgUrl} classes={`mb-1 order-4 w-full lg:w-1/6 ${index === 0 ? 'lg:pl-0' : ''}`} />
+										<SearchProductCard key={`s1--${index}`} title={item?.title} img={item?.featuredImgUrl} classes={`mb-1 order-4 w-full lg:w-1/6 ${index === 0 ? 'lg:pl-0' : ''}`} />
 									))}
 								</div>
 							</div>

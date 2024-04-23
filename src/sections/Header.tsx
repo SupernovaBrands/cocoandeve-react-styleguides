@@ -154,13 +154,13 @@ const Header = (props: any) => {
 							</li>
 							<li className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#javascript" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="javascript:void(0);" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
 								</a>
 								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 							</li>
 							<li className="nav-item pr-1 lg:pl-hg">
-								<a className="h4 m-0 flex font-bold" href="#javascript" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<a className="h4 m-0 flex font-bold" href="javascript:void(0);" data-cy="search-icon" onClick={onToggleSearchBox}>
 									<Search className="text-[1.375em] h-[1em]" />
 								</a>
 							</li>
