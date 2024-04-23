@@ -170,7 +170,6 @@ const SearchBox = (props: any) => {
 										{popProducts.length > 0 && popProducts.map((product) => {
 											{/* @ts-ignore */}
 											const { title, featuredImgUrl, url } = product;
-											console.log('prod', product);
 											return (
 												<SearchProductCard
 													title={title}
