@@ -2,5 +2,6 @@
 	.product-subscription {
 		background-image: url('https://supernovabrands.github.io/cocoandeve-styleguides/images/subscription-radial-backround.svg');
 		background-size: cover;
+		@apply sm:max-h-[110px] md:max-h-[120px]
 	}
 }
