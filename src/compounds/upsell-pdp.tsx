@@ -7,7 +7,7 @@ const UpsellPdp = (props) => {
                     <source srcSet="https://via.placeholder.com/274x274.jpg/EFADBA" media="(min-width: 992px)" />
                     <img src="https://via.placeholder.com/236x236.jpg/EFADBA" className="w-full" />
                 </picture>
-                <figcaption className="w-2/3 flex flex-col mx-0 justify-around lg:justify-between p-0 text-base">
+                <figcaption className="w-2/3 flex flex-col mx-0 justify-around lg:justify-between p-0 text-base sm:ml-1 lg:ml-0">
                     <span className="mt-0 mb-25 font-bold">{props.title}</span>
                     <p className="mb-25">{props.content}</p>
                     <span className="mb-25 text-primary">
