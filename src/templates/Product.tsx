@@ -227,7 +227,7 @@ const Product = (props: any) => {
                                     >
                                         <p className="mb-1 font-bold">
                                             1x Sunny Honey Bali Bronzing Bundle
-                                            <span className="product-variant__saving">Save 30%</span>
+                                            <span className="product-variant__saving ml-25">Save 30%</span>
                                         </p>
                                         <p className="product-variant__description mb-1 font-size-sm">1x Masque + Brush</p>
                                         <p className="product-variant__description mb-1 font-size-sm">1x Other items</p>
@@ -249,7 +249,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-3"
                                     >
                                         <p className="mb-1 font-bold">
-                                            Bronzing Face Drops <span className="product-variant__saving">Save 30%</span>
+                                            Bronzing Face Drops <span className="product-variant__saving ml-25">Save 30%</span>
                                         </p>
                                         <ProductVariant.Notes notes={notes} />
                                     </ProductVariant.Variant>
@@ -264,7 +264,7 @@ const Product = (props: any) => {
                                         keyName="product-variant-4"
                                     >
                                         <p className="mb-1 font-bold flex items-center">
-                                            Subscription (20% OFF) <span className="product-variant__saving">Save 30%</span>
+                                            Subscription (20% OFF) <span className="product-variant__saving ml-25">Save 30%</span>
                                             <a className="text-primary ms-1" data-container="body" data-toggle="popover" data-placement="top" data-content="<strong>No fuss and frizz, just good hair days ahead.</strong><br/>Keep your hair routine in check and never run out of your washday must-haves every month and free shipping on top of that.<br/><br/>Cancel anytime, and come back when you're ready. ❤️" data-html="true">
                                                 <Help className="svg svg--current-color" />
                                             </a>
@@ -343,7 +343,7 @@ const Product = (props: any) => {
                                 </div>
     						</div>
                         </form>
-                        <a href="/" className="pdp-banner-click no-underline lg:order-2 pdp-banner-click mb-1 w-full mt-4">
+                        <a href="/" className="pdp-banner-click no-underline lg:order-2 pdp-banner-click mb-1 w-full mt-1 lg:mt-4">
                             <picture className="">
                                 <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1557f100-0d32-4fe3-b6f1-f4634cc04900/375x" className="w-full" alt="Halloween Sale!"/>
                             </picture>
