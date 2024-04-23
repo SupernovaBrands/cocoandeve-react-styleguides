@@ -28,7 +28,7 @@ const ProductSubscription = (props) => {
                 <div className="media-body ml-0 lg:pl-0 pr-1">
                     <span className="text-primary">Save 20% off + free shipping</span><br />when you subscribe!
                     <div className="input-group w-full flex justify-left px-0 lg:px-0 relative items-center">
-                        <CheckBox labelClass="flex justify-left my-1 relative pl-3" label={`I want to subscribe`} id="subscribe" checked={false}/>
+                        <CheckBox labelClass="flex justify-left mt-1 relative pl-3" label={`I want to subscribe`} id="subscribe" checked={false}/>
                         <a className="text-primary ml-1 inline-flex relative" ref={tooltipIndicator} onClick={tooltipHandler} >
                             <Help className="svg fill-primary" />
                         </a>
