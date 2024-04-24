@@ -144,8 +144,8 @@ const Homepage = () => {
 		}
 	];
 
-	const data = {
-		"title": "Discover the Coco & Eve playground",
+	const featuredCollection = {
+		title: "Discover the Coco & Eve playground",
 		"moblie_title": "The Coco & Eve playground",
 		"text": "<p><strong>We're totally coconuts about beauty!</strong></p><p>Which is why we have combined powerful & tropical ingredients into different ranges to provide amazing results and make your life feel like a constant holiday. <br>21 beauty awards. 100% vegan. Cruelty free.</p>",
 		"range_1": {
@@ -220,7 +220,7 @@ const Homepage = () => {
             <ProductCarousel products={PRODUCTS} />
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Service />
-            <Playground content={data} />
+            <Playground featuredCollection={featuredCollection} />
 			<QuizReward />
             <Editors />
             <Instagram className="bg-pink-light" />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data }) => (
     <figure className="w-full lg:w-1/4 px-g relative mb-g">
@@ -18,17 +19,26 @@ const PlaygroundCard = ({ data }) => (
 
 const Playground = (props: any) => {
     const { featuredCollection } = props;
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
     return (
         <section className="container text-center pb-0 playground--collection-list range-banner pt-5">
-            <p className="h1 text-nowrap mb-1">{featuredCollection.title}</p>
-            <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
-            <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p>
-            <div className="flex flex-wrap -mx-hg lg:-mx-g items-center">
-                <PlaygroundCard data={featuredCollection?.range_1} />
-                <PlaygroundCard data={featuredCollection?.range_2} />
-                <PlaygroundCard data={featuredCollection?.range_3} />
-                <PlaygroundCard data={featuredCollection?.range_4} />
-            </div>
+            <h1 className="h1 text-nowrap mb-1">{featuredCollection.title}</h1>
+            {!isLoading && (
+                <>
+                    <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
+                    <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p>
+                    <div className="flex flex-wrap -mx-hg lg:-mx-g items-center">
+                        <PlaygroundCard data={featuredCollection?.range_1} />
+                        <PlaygroundCard data={featuredCollection?.range_2} />
+                        <PlaygroundCard data={featuredCollection?.range_3} />
+                        <PlaygroundCard data={featuredCollection?.range_4} />
+                    </div>
+                </>
+            )}
         </section>
     )
 };
