@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 // import ProgressBar from '@/components/ProgressBar';
 import BlogNavTag from '~/compounds/blog-nav-tags';
 import PostCard from "~/compounds/PostCard";
@@ -306,21 +307,21 @@ const Article = (props) => {
                         <h1 className="text-center mb-1">{props.title}</h1>
                         <span className={`text-left font-bold  ${props.quickLinks ? '' : 'hidden'}`}>In this article:</span>
                         <div className={`mt-1 ${props.quickLinks ? '' : 'hidden'}`}>
-                            <a href="#link-1" className="blog-post-quick-links">
+                            <Link href="#link-1" className="blog-post-quick-links">
                                 <span>Overall hair care</span>
-                            </a>
-                            <a href="#link-2" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-2" className="blog-post-quick-links">
                                 <span>Heat Styling</span>
-                            </a>
-                            <a href="#link-3" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-3" className="blog-post-quick-links">
                                 <span>Chemically processed</span>
-                            </a>
-                            <a href="#link-4" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-4" className="blog-post-quick-links">
                                 <span>Growth</span>
-                            </a>
-                            <a href="#link-5" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-5" className="blog-post-quick-links">
                                 <span>Dryness &amp; dullness</span>
-                            </a>
+                            </Link>
                         </div>
                         <picture className="block mt-2 mb-1 no-gutters__in-container">
                             <source srcSet={props.srcSet} media="(min-width: 992px)" />
