@@ -220,7 +220,7 @@ const Homepage = () => {
             <ProductCarousel products={PRODUCTS} />
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Service />
-            <Playground featuredCollection={featuredCollection} />
+            <Playground featuredCollection={featuredCollection} isStyleguide={true} />
 			<QuizReward />
             <Editors />
             <Instagram className="bg-pink-light" />

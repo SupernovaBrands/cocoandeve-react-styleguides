@@ -71,7 +71,7 @@ const data = {
 };
 const PlaygroundSection = () => {
     return (
-        <Playground content={data} />
+        <Playground content={data} isStyleguide={true} />
     );
 }
 
