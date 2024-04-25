@@ -1,13 +1,8 @@
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import Header from '~/sections/Header';
 import Article from '~/templates/Article';
 import Footer from '~/sections/Footer';
-import Twitter from '~/images/icons/twitter-square.svg';
-import Facebook from '~/images/icons/facebook-square.svg';
-import Pinterest from '~/images/icons/pinterest-square.svg';
-import Documents from '~/images/icons/documents.svg';
-import Form from "~/compounds/footer-newsletter-form";
 import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 // import Cart from "~/components/cart/cart";
 const Cart = dynamic(() => import('~/components/cart/cart'), {
@@ -19,10 +14,166 @@ const Header = dynamic(() => import('~/sections/Header'), {
 
 const ArticleTemplate = () => {
 	const [showCart, setShowCart] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const toggleCart = () => {
 		setShowCart(!showCart);
 	}
+
+	const content = {
+		"id": 698,
+		"title": "The Power of SPF Primers",
+		"handle": "how-to-apply-primer",
+		"blog_handle": "news",
+		"createdAt": null,
+		"updatedAt": "2024-02-19T04:55:11.535Z",
+		"content": "<div style=\"text-align: center;\">&nbsp;</div>\n<p><span style=\"font-weight: 400;\">Are you exhausted from layering an array of skincare and makeup products? Say goodbye to the hassle and embrace the solution: SPF primers. It's time to revolutionise your morning routine and bid farewell to rushed moments. Introducing our game-changing NEW <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\">, a must-have addition that will transform the way you prepare for the day ahead.</span></p>\n<div class=\"article-new-banner\">&nbsp;</div>\n<h2 style=\"text-align: left;\">&nbsp;</h2>\n<h2 style=\"text-align: left;\"><em><span style=\"color: #134f5c;\">What is a SPF primer?</span></em></h2>\n<p><span style=\"font-weight: 400;\">Discover the transformative power of SPF primers&mdash;a beauty secret that will revolutionise your skincare and makeup routine. We all know that SPF is an absolute must, a non-negotiable step in our daily regimen to safeguard our skin from the damaging effects of UV rays. But let's face it, diligently applying SPF can sometimes feel like a monotonous chore, especially when compared to the excitement of perfecting our makeup.</span></p>\n<p>That's where SPF primers swoop in to save the day. These remarkable multitaskers not only provide essential protection against those dreaded UV rays, but they also boast an array of benefits that go above and beyond. They effortlessly double up as the perfect base for your face, creating an ultra-smooth canvas for your foundation and other products to glide on with ease and precision. The result? A flawless, airbrushed finish that enhances your natural beauty.</p>\n<p style=\"text-align: left;\"><a href=\"https://bit.ly/CE-DPRhowtoDPRproduct-shoppdp\"><img style=\"margin-right: auto; margin-left: auto; float: none; display: block;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BENEFITS_UK_1_600x600.jpg?v=1689318990\" alt=\"Benefits of Coco and Eve Daily Radiance Primer SPF 50\"></a></p>\n<p><span style=\"font-weight: 400;\">With the introduction of our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\">, you can simplify your beauty arsenal and embark on a new era of radiant, protected skin. Prepare to be amazed as the rich, velvety texture of our primer effortlessly melts into your skin, leaving behind a luminous, dewy glow that lasts throughout the day. Its lightweight, non-greasy formula ensures comfortable wear, allowing your skin to breathe while maintaining its natural radiance. Enriched with a carefully curated combination of skin-loving ingredients, our Daily Radiance Primer takes skin defence to the next level.</span></p>\n<p>&nbsp;</p>\n<div style=\"text-align: center;\"><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"><img style=\"margin-right: -5.5px; float: none;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/isabella_c9ca15a6-1553-4431-839b-41840c177bb6_600x600.jpg?v=1689298464\" alt=\"Customer testimonial for Coco and Eve Daily Radiance Primer SPF 50 Sunscreen from Isabella\"></a></div>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"> </a></p>\n<p>&nbsp;</p>\n<h2><span style=\"color: #134f5c;\"><em>How do SPF primers work?&nbsp;</em></span></h2>\n<p><span style=\"font-weight: 400;\">Curious about how SPF primers work their magic? Let's dive into the intricacies behind this remarkable multitasker. We've poured great care into formulating our Daily Radiance Primer SPF 50 </span><span style=\"font-weight: 400;\">Sunscreen</span><span style=\"font-weight: 400;\"> to address multiple concerns and streamline your morning routine.</span></p>\n<p><span style=\"font-weight: 400;\">When it comes to sun protection, a broad spectrum coverage formula is your skin's best friend. While shielding yourself from sunburns and the risk of melanoma and other forms of skin cancer caused by UVB rays is crucial, it's equally important to combat sun-induced ageing. That's where broad spectrum coverage comes in. Our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\"> provides comprehensive protection against both UVA and UVB rays, ensuring you preserve that coveted youthful glow.</span></p>\n<div id=\"newsletterWrapper\"></div>\n<p><span style=\"font-weight: 400;\">But the benefits don't stop there. By incorporating skin-loving ingredients like Niacinamide and Antioxidants into our SPF primer, we've created a caring formula that doesn&rsquo;t just protect, but also nourishes skin. Niacinamide, hailed as a game-changer in the skincare world, boasts an impressive array of benefits. It minimises the appearance of enlarged pores, evens out skin tone, reduces the visibility of fine lines and wrinkles and banishes dullness. With Niacinamide as a key ingredient, our primer empowers you to protect, perfect and illuminate your skin all in one glorious step.</span></p>\n<p>But that's not all&mdash;our primer goes the extra mile by incorporating antioxidative properties from Vita TE' to soothe inflammation and Vita Ray-Immune to shield against environmental stressors and blue light. With this carefully crafted blend of ingredients, you can trust that our primer provides a comprehensive shield for your skin while infusing it with the nourishment it deserves.</p>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRproduct-shoppdp\"><img style=\"margin-right: auto; float: none; display: block; margin-left: auto;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HOW_TO_USE_886c018c-7b3d-4e7f-b4c2-b10f28d4bb7b_600x600.jpg?v=1689237995\" alt=\"How to use Coco and Eve Daily Radiance Primer SPF 50 Sunscreen\"></a></p>\n<h2><em><span style=\"color: #134f5c;\">How to use SPF Primers<br></span></em></h2>\n<p><span style=\"font-weight: 400;\">Mastering the art of applying SPF primers is easier than you think. We've uncovered the secret to achieving protected and perfected skin and it all comes down to finding the sweet spot in your skincare routine, right before and after applying our Daily Radiance Primer.</span></p>\n<p>Here's your game plan for achieving a flawless canvas: After moisturising, give your skin a precious two minutes to fully absorb and reap the benefits. Then, introduce the star of the show&mdash;our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer</a>. Apply it as the final step of your skincare routine, allowing it to fully absorb for a minute. This crucial step ensures that your primer works its magic and sets the stage for your makeup masterpiece. Trust us; this brief waiting time will yield remarkable results in your final look.</p>\n<p>Here's a pro-tip just for you: With the stunning glow our primer imparts, you can confidently skip the illuminator altogether. Our beauty powerhouse does it all, illuminating your skin effortlessly.</p>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Jey_18237da8-f1c4-47c8-8710-049181f48306_600x600.jpg?v=1689220353\" alt=\"Customer testimonial for Coco and Eve Daily Radiance Primer SPF 50 Sunscreen from Jey\"></a></p>\n<h2><em><span style=\"color: #134f5c;\">Final Thoughts</span></em></h2>\n<p><span style=\"font-weight: 400;\">With that said, here&rsquo;s a quick recap. Our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\"> is the perfect way to protect your skin from the sun and create a flawless makeup base. It's lightweight, non-greasy and absorbs quickly, so you can be sure that your skin will be protected and your makeup will look its best. So what are you waiting for? Add this multi-tasking hero to your routine today and start enjoying the benefits of protected and perfected skin!</span></p>\n<div style=\"text-align: center;\">&nbsp;</div>\n<p>&nbsp;</p>\n<div class=\"article-new-banner\">&nbsp;</div>\n<p>&nbsp;</p>\n<p><span style=\"color: #e06666;\">Written By: Pip Jarvis&nbsp;<br><br>Edited by:&nbsp;Iris</span></p>\n<p>&nbsp;</p>\n<p><span style=\"color: #e06666;\"><a title=\"Return to Home\" href=\"https://www.cocoandeve.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Done reading? Return to Home.</a><a style=\"color: #e06666;\" title=\"Return to Home\" href=\"https://www.cocoandeve.com/\"><br></a></span></p>",
+		"author": "Iris George",
+		"tags": "suncare, tan",
+		"summary_html": "<p><span style=\"font-weight: 400;\">Stop rushing your routine by multitasking your morning! Update test 3</span></p>",
+		"locale": "en",
+		"storePreview": true,
+		"vuid": "658ee1ff-1424-4658-b8ed-4572bee01f89",
+		"contentTypeLabel": "The Power of SPF Primers - DEV",
+		"mainId": "646",
+		"isVisibleInListView": false,
+		"BlogContentMultiStores": {
+			"dev": {
+				"body_content": "<div style=\"text-align: center;\">&nbsp;</div>\n<p><span style=\"font-weight: 400;\">Are you exhausted from layering an array of skincare and makeup products? Say goodbye to the hassle and embrace the solution: SPF primers. It's time to revolutionise your morning routine and bid farewell to rushed moments. Introducing our game-changing NEW <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\">, a must-have addition that will transform the way you prepare for the day ahead.</span></p>\n<div class=\"article-new-banner\">&nbsp;</div>\n<h2 style=\"text-align: left;\">&nbsp;</h2>\n<h2 style=\"text-align: left;\"><em><span style=\"color: #134f5c;\">What is a SPF primer?</span></em></h2>\n<p><span style=\"font-weight: 400;\">Discover the transformative power of SPF primers&mdash;a beauty secret that will revolutionise your skincare and makeup routine. We all know that SPF is an absolute must, a non-negotiable step in our daily regimen to safeguard our skin from the damaging effects of UV rays. But let's face it, diligently applying SPF can sometimes feel like a monotonous chore, especially when compared to the excitement of perfecting our makeup.</span></p>\n<p>That's where SPF primers swoop in to save the day. These remarkable multitaskers not only provide essential protection against those dreaded UV rays, but they also boast an array of benefits that go above and beyond. They effortlessly double up as the perfect base for your face, creating an ultra-smooth canvas for your foundation and other products to glide on with ease and precision. The result? A flawless, airbrushed finish that enhances your natural beauty.</p>\n<p style=\"text-align: left;\"><a href=\"https://bit.ly/CE-DPRhowtoDPRproduct-shoppdp\"><img style=\"margin-right: auto; margin-left: auto; float: none; display: block;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BENEFITS_UK_1_600x600.jpg?v=1689318990\" alt=\"Benefits of Coco and Eve Daily Radiance Primer SPF 50\"></a></p>\n<p><span style=\"font-weight: 400;\">With the introduction of our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\">, you can simplify your beauty arsenal and embark on a new era of radiant, protected skin. Prepare to be amazed as the rich, velvety texture of our primer effortlessly melts into your skin, leaving behind a luminous, dewy glow that lasts throughout the day. Its lightweight, non-greasy formula ensures comfortable wear, allowing your skin to breathe while maintaining its natural radiance. Enriched with a carefully curated combination of skin-loving ingredients, our Daily Radiance Primer takes skin defence to the next level.</span></p>\n<p>&nbsp;</p>\n<div style=\"text-align: center;\"><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"><img style=\"margin-right: -5.5px; float: none;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/isabella_c9ca15a6-1553-4431-839b-41840c177bb6_600x600.jpg?v=1689298464\" alt=\"Customer testimonial for Coco and Eve Daily Radiance Primer SPF 50 Sunscreen from Isabella\"></a></div>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"> </a></p>\n<p>&nbsp;</p>\n<h2><span style=\"color: #134f5c;\"><em>How do SPF primers work?&nbsp;</em></span></h2>\n<p><span style=\"font-weight: 400;\">Curious about how SPF primers work their magic? Let's dive into the intricacies behind this remarkable multitasker. We've poured great care into formulating our Daily Radiance Primer SPF 50 </span><span style=\"font-weight: 400;\">Sunscreen</span><span style=\"font-weight: 400;\"> to address multiple concerns and streamline your morning routine.</span></p>\n<p><span style=\"font-weight: 400;\">When it comes to sun protection, a broad spectrum coverage formula is your skin's best friend. While shielding yourself from sunburns and the risk of melanoma and other forms of skin cancer caused by UVB rays is crucial, it's equally important to combat sun-induced ageing. That's where broad spectrum coverage comes in. Our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\"> provides comprehensive protection against both UVA and UVB rays, ensuring you preserve that coveted youthful glow.</span></p>\n<div id=\"newsletterWrapper\"></div>\n<p><span style=\"font-weight: 400;\">But the benefits don't stop there. By incorporating skin-loving ingredients like Niacinamide and Antioxidants into our SPF primer, we've created a caring formula that doesn&rsquo;t just protect, but also nourishes skin. Niacinamide, hailed as a game-changer in the skincare world, boasts an impressive array of benefits. It minimises the appearance of enlarged pores, evens out skin tone, reduces the visibility of fine lines and wrinkles and banishes dullness. With Niacinamide as a key ingredient, our primer empowers you to protect, perfect and illuminate your skin all in one glorious step.</span></p>\n<p>But that's not all&mdash;our primer goes the extra mile by incorporating antioxidative properties from Vita TE' to soothe inflammation and Vita Ray-Immune to shield against environmental stressors and blue light. With this carefully crafted blend of ingredients, you can trust that our primer provides a comprehensive shield for your skin while infusing it with the nourishment it deserves.</p>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRproduct-shoppdp\"><img style=\"margin-right: auto; float: none; display: block; margin-left: auto;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/HOW_TO_USE_886c018c-7b3d-4e7f-b4c2-b10f28d4bb7b_600x600.jpg?v=1689237995\" alt=\"How to use Coco and Eve Daily Radiance Primer SPF 50 Sunscreen\"></a></p>\n<h2><em><span style=\"color: #134f5c;\">How to use SPF Primers<br></span></em></h2>\n<p><span style=\"font-weight: 400;\">Mastering the art of applying SPF primers is easier than you think. We've uncovered the secret to achieving protected and perfected skin and it all comes down to finding the sweet spot in your skincare routine, right before and after applying our Daily Radiance Primer.</span></p>\n<p>Here's your game plan for achieving a flawless canvas: After moisturising, give your skin a precious two minutes to fully absorb and reap the benefits. Then, introduce the star of the show&mdash;our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer</a>. Apply it as the final step of your skincare routine, allowing it to fully absorb for a minute. This crucial step ensures that your primer works its magic and sets the stage for your makeup masterpiece. Trust us; this brief waiting time will yield remarkable results in your final look.</p>\n<p>Here's a pro-tip just for you: With the stunning glow our primer imparts, you can confidently skip the illuminator altogether. Our beauty powerhouse does it all, illuminating your skin effortlessly.</p>\n<p><a href=\"https://bit.ly/CE-DPRhowtoDPRba-shoppdp\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Jey_18237da8-f1c4-47c8-8710-049181f48306_600x600.jpg?v=1689220353\" alt=\"Customer testimonial for Coco and Eve Daily Radiance Primer SPF 50 Sunscreen from Jey\"></a></p>\n<h2><em><span style=\"color: #134f5c;\">Final Thoughts</span></em></h2>\n<p><span style=\"font-weight: 400;\">With that said, here&rsquo;s a quick recap. Our <a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\">Daily Radiance Primer SPF 50 </a></span><a href=\"https://www.cocoandeve.com/products/daily-radiance-primer-spf50\"><span style=\"font-weight: 400;\">Sunscreen</span></a><span style=\"font-weight: 400;\"> is the perfect way to protect your skin from the sun and create a flawless makeup base. It's lightweight, non-greasy and absorbs quickly, so you can be sure that your skin will be protected and your makeup will look its best. So what are you waiting for? Add this multi-tasking hero to your routine today and start enjoying the benefits of protected and perfected skin!</span></p>\n<div style=\"text-align: center;\">&nbsp;</div>\n<p>&nbsp;</p>\n<div class=\"article-new-banner\">&nbsp;</div>\n<p>&nbsp;</p>\n<p><span style=\"color: #e06666;\">Written By: Pip Jarvis&nbsp;<br><br>Edited by:&nbsp;Iris</span></p>\n<p>&nbsp;</p>\n<p><span style=\"color: #e06666;\"><a title=\"Return to Home\" href=\"https://www.cocoandeve.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Done reading? Return to Home.</a><a style=\"color: #e06666;\" title=\"Return to Home\" href=\"https://www.cocoandeve.com/\"><br></a></span></p>",
+				"featured_image": {
+					"alt": "Feature-DRP-Why-you-need-it.jpg",
+					"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e79a990-e61d-4e24-de22-eda803380e00/public"
+				}
+			}
+		},
+		"subtitle": null,
+		"quick_links": null,
+		"shopifyCreated": null,
+		"localizations": [],
+		"upsells": null,
+		"image": {
+			"id": 5227,
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/91cf9e38-2221-4ce0-165b-60621b146700/public",
+			"alternativeText": null
+		},
+		"seo": {
+			"id": 1791,
+			"page_title": "How to Apply Primer for Best Results | Coco & Eve",
+			"meta_desc": "Mastering the art of applying SPF primers. The secret lies in finding the sweet spot in your skincare routine, right before and after applying your primer. Read on to find out more!"
+		}
+	}
+
+	const postNewsletter = {
+		"id": 27,
+		"blog_ns_title": "The repository for all things Coco & Eve!",
+		"blog_ns_desc": "We share expert tips, hacks, and blog-exclusive deals you’d definitely not want to miss! ",
+		"blog_ns_note": "Receive exclusive offers via email/SMS, for more information see our <a href=\"/pages/privacy-policy\">Privacy Policy</a>.",
+		"blog_ns_email": "Enter your email",
+		"blog_ns_btn": "Sign Me Up!",
+		"blog_ns_success": "Thanks! We've got your email!",
+		"blog_ns_disc": null,
+		"post_newsletter_enabled": true,
+		"blog_ns_image_desk": {
+			"id": 968,
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d9111994-4df4-425d-23f8-7bfa47a10500/public"
+		},
+		"blog_ns_image_mob": {
+			"id": 968,
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d9111994-4df4-425d-23f8-7bfa47a10500/public"
+		}
+	}
+
+	const popularArticles = [
+		{
+			"id": 710,
+			"link": "/blogs/news/black-friday-cyber-monday-beauty-deals",
+			"title": "Your Guide to Coco & Eve’s Black Friday Beauty Deals 2022",
+			"desc": "<p>Are you ready for our BIGGEST sale of the year!?</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/129400e6-41df-47da-471f-e89e3926a900/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/129400e6-41df-47da-471f-e89e3926a900/192x"
+		},
+		{
+			"id": 729,
+			"link": "/blogs/news/putting-coconut-oil-in-hair",
+			"title": "How to Apply Coconut Oil to Your Hair The Right Way",
+			"desc": "<p>*healthy&nbsp;hair has just entered the chat*</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcdcb41c-2ec8-4474-d2d8-63bb4c193000/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcdcb41c-2ec8-4474-d2d8-63bb4c193000/192x"
+		},
+		{
+			"id": 359,
+			"link": "/blogs/news/how-to-shower-for-a-longer-fake-tan",
+			"title": "How to Shower For A Longer Fake Tan",
+			"desc": "<p>Nail your post-tan care routine with these golden rules ✨</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f64192b5-f313-47bf-dbeb-c9b4d5311000/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f64192b5-f313-47bf-dbeb-c9b4d5311000/192x"
+		},
+		{
+			"id": 704,
+			"link": "/blogs/news/detangling-matted-hair",
+			"title": "How to Detangle Matted Hair",
+			"desc": "<p>Hellooo gorgeous, gorgeous hair 😍</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30ae607f-bd41-4537-cc08-60265a1c7400/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30ae607f-bd41-4537-cc08-60265a1c7400/192x"
+		},
+		{
+			"id": 315,
+			"link": "/blogs/news/sunburn-on-scalp",
+			"title": "Sunburn: Don't Let It Get to Your Head",
+			"desc": "<p>Soothe the burn 🧊</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f6683873-2c0a-4bde-697f-127695a6ae00/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f6683873-2c0a-4bde-697f-127695a6ae00/192x"
+		},
+		{
+			"id": 316,
+			"link": "/blogs/news/before-after-self-tanner",
+			"title": "Insider Tips for a Long Lasting Tan",
+			"desc": "<p>It's all about prep and aftercare 😉</p>",
+			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/39f0526e-f175-4b2c-a4af-414bb9cb8f00/192x",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/39f0526e-f175-4b2c-a4af-414bb9cb8f00/192x"
+		}
+	]
+
+	const recomendations = [
+		{
+			"id": 738,
+			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e71032b6-dd48-452d-6ac5-4519c7f3ec00/public",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e71032b6-dd48-452d-6ac5-4519c7f3ec00/public",
+			"title": "Why You Need This Skin Perfecting Sunscreen in Your Summer Routine",
+			"description": "<p>Prime, protect and radiate with this season's hottest must-have!</p>",
+			"tags": [
+				"suncare",
+				"skin"
+			]
+		},
+		{
+			"id": 737,
+			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f3cb2969-55f0-495c-df93-368139299100/public",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f3cb2969-55f0-495c-df93-368139299100/public",
+			"title": "Tried the TikTok aged filter? Here’s what to do next…",
+			"description": "<p><span data-mce-fragment=\"1\">Hint: It involves a head-to-toe routine featuring our SPF powerhouses!</span></p>",
+			"tags": [
+				"suncare",
+				"skin"
+			]
+		},
+		{
+			"id": 677,
+			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cd087cf-2da0-48d8-7150-1dc4ea9ed800/public",
+			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cd087cf-2da0-48d8-7150-1dc4ea9ed800/public",
+			"title": "Beauty Gift Guide: Best Beauty Gifts and Ideas for the Holidays",
+			"description": "<p>Gift-giving made easy!</p>",
+			"tags": [
+				"hair",
+				"skin",
+				"tan"
+			]
+		}
+	]
+
+	useEffect(() => {
+        setIsLoading(false);
+    }, []);
 
     return (
 		<>
@@ -33,79 +184,14 @@ const ArticleTemplate = () => {
 				menuBannerQuiz={menuBannerQuiz}
 				menuBannerCode={menuBannerCode}
 				dummy={true} />
-			<Article
-				title="The 5 Rules of Hair Masking"
-				quickLinks={false}
-				srcSet="https://via.placeholder.com/1540x800.jpg/EFADBA"
-				src="https://via.placeholder.com/828x492.jpg/EFADBA"
-			>
-				<div className="text-center mb-3 mx-3 lg:mb-4 h4">Super popular in recent years, and a lifesaver for stressed tresses during lockdown(!), hair masking is everyone’s favourite #selfcaresunday ritual.</div>
-				<h3 className="mb-1" id="link-1">1. Do it often, but not too often</h3>
-				<p className="mb-3">Hair masking once or twice a week? Good. Masking every day? Not so good. When it comes to how often – and how much – you apply, more is not always more. This is why we recommend the following frequency when using our Like A Virgin Hair Masque: 2-3 times a week for dry hair, 1-2 times weekly for normal hair, and once a week for oily hair.</p>
-				<p className="mb-3">Why can’t you use a masque more often? Well, not only can too much masking for your hair type weigh your locks down and lead to build up, it just isn’t necessary. Once your hair is nourished and hydrated enough, it won’t gain any additional benefit from another masque session. In other words? You’re basically washing product (and money) down the drain as your hair can’t absorb any more of the good stuff.</p>
-				<h3 className="mb-1" id="link-2">2. Start with a clean base</h3>
-				<p className="mb-3">While your hair’s natural oils are a wonderful thing, helping to keep your scalp healthy and hair strong, supple and shiny, you only want to apply a masque on freshly washed hair. The same principle applies here as with skincare – you need to thoroughly cleanse your skin or hair for the products you apply to absorb properly and work their magic.</p>
-				<p className="mb-3">For the best results and to avoid any unwanted greasiness or weight, you should therefore always shampoo your hair before masking. You can skip the conditioning step, though, as most hair masques act as a deep conditioner and treatment in one. Ours does!</p>
-				<picture className="flex mt-3 mb-3">
-					<source srcSet="https://via.placeholder.com/1540x800.jpg/EFADBA" media="(min-width: 992px)" />
-					<img className="w-full" src="https://via.placeholder.com/690x430.jpg/EFADBA" />
-				</picture>
-				<h3 className="mb-1" id="link-3">3. Steer clear of your roots</h3>
-				<p className="mb-3">If you think hair masques aren’t for oily hair, think again. All hair types can benefit from the use of masques, from thick and frizzy, to fine and oily-prone. However, you do need to be careful with application – especially if your hair is on the greasier end of the spectrum.</p>
-				<p className="mb-3">Hair masques are generally formulated for intense nourishment and repair, and are therefore most beneficial to your mid-lengths and, especially, your dry, brittle ends! As the hair at your roots is closer to its virgin state, it doesn’t require as intensive a treatment.</p>
-				<p className="mb-3">Even if your hair is coarse and dry? It’s a good idea to avoid applying a masque to the roots if you want to maintain volume and movement. This becomes even more crucial if your locks are ultra-fine!</p>
-				<div className="container blog-post-grid__newsletter px-0">
-					<div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
-						<picture className="lg:w-1/3 w-full p-0">
-							<source srcSet="https://via.placeholder.com/270x250.jpg/F9F9F9?text=variant-half-image" media="(min-width: 992px)" />
-							<img src="https://via.placeholder.com/345x120.jpg/F9F9F9?text=variant-half-image" className="w-full h-full" />
-						</picture>
-						<div className="lg:w-2/3 w-full p-2 lg:pe-4">
-							<h2 className="mb-1">Join the club & get 15% OFF*!</h2>
-							<p className="mb-[1rem]">Get 15% OFF* your first order, plus first access to new product launches, exclusive offers, expert tips and routines.</p>
-							<Form background="bg-white" />
-							<div className="blog-post-grid__newsletter--submitted hidden form-group mb-g text-left items-center">
-								<button type="button" className="btn btn-primary btn-lg rounded-lg block d-lg-inline-block mb-0 btn--copy">
-									WELCOME
-									<Documents className="ml-25" />
-								</button>
-							</div>
-							<p className="text-sm mb-0 text-gray-600 mt-2">Receive exclusive offers via email/SMS, for more information see our <a href="" className="text-gray-600 underline text-sm">Privacy Policy</a>. *Excludes travel size items and accessories.</p>
-						</div>
-					</div>
-				</div>
 
-				<h3 className="mb-1" id="link-4">4. Apply your hair masque evenly</h3>
-				<p className="mb-3">When using a hair masque, you want to make sure you coat every single strand to get uniform results. To do this, apply a generous amount of our Like A Virgin Hair Masque to the hair, then comb through your mid-lengths to ends with a wide-tooth comb. Or, for extra easy detangling, full coverage and zero breakage, try our Coco & Eve Tangle Tamer.</p>
-				<h3 className="mb-1" id="link-5">5. Give it time to do its thing</h3>
-				<p className="mb-3">A hair masque is not the same as shampoo or conditioner – it needs a bit more time to penetrate the strands and repair from the inside out. So, for silky soft results, apply your hair masque to towel dried hair and leave on for a minimum of 5 to 10 minutes before rinsing. Leave it longer if you have time on your hands.</p>
-				<p className="mb-3">Got thirsty hair in dire need of some serious TLC? You can also apply our nourishing fig and coconut masque to dry hair and let it soak in for at least 20 mins. Or for butter-soft results, pop on a shower cap, silk scarf or our super-cute, static-free Microfibre Hair Towel Wrap and sleep in your hair masque overnight!</p>
-				<a href="/" className="text-center block font-bold">Shop Hair</a>
-				<a href="/" className="text-center flex justify-center mt-1 mb-2">
-					<picture>
-						<source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/EDM-banner_480x480_fcfb8daa-c532-4e16-bb93-d1233fbb3549.jpg" media="(min-width: 992px)" />
-						<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/EDM-banner_480x480_fcfb8daa-c532-4e16-bb93-d1233fbb3549.jpg" className="" loading="lazy" />
-					</picture>
-				</a>
-				<time className="mb-1">23 April, 2020</time>
-				<ul className="block mb-4 mt-1 text-[1.875em]">
-					<li className="inline-block mr-[0.5rem]">
-						<a href="#" className="no-underline text-primary text-[1.875em]">
-							<Twitter className="svg fill-primary h-[1em]" />
-						</a>
-					</li>
-					<li className="inline-block mr-[0.5rem]">
-						<a href="#" className="no-underline text-primary text-[1.875em]">
-							<Facebook className="svg fill-primary h-[1em]" />
-						</a>
-					</li>
-					<li className="inline-block">
-						<a href="#" className="no-underline text-primary text-[1.875em]">
-							<Pinterest className="svg fill-primary h-[1em]" />
-						</a>
-					</li>
-				</ul>
-			</Article>
+			<Article
+				isLoading={isLoading}
+				content={content}
+				postNewsletter={postNewsletter}
+				popularArticles={popularArticles}
+				recomendations={recomendations}
+			/>
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 			<Footer
 				aboutMenu={aboutMenu}

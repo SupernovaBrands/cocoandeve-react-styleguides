@@ -61,6 +61,23 @@
 
 		&__content {
 			grid-area: content;
+			.article__content {
+				a {
+					@apply underline;
+				}
+				p {
+					@apply mb-[1rem];
+				}
+
+				h2 {
+					@apply mb-1;
+				}
+
+				img {
+					margin-right: auto !important;
+					margin-left: auto !important;;
+				}
+			}
 		}
 
 		&__comment {

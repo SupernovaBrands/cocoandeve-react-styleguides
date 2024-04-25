@@ -2,12 +2,12 @@ const FooterNewsletterForm = (props) => {
 	return (
 		<form className={`w-full ${props.classes}`} onSubmit={(e) => props.onSubmit(e)}>
 			<div className="relative flex items-stretch w-full">
-				<input type="text" className={`${props.background ? props.background : 'bg-gray-400 placeholder-gray-600' } focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none w-full px-g py-g mb-0 text-base leading-base border border-[solid] border-gray-400 text-gray-800 border-gray-200 rounded-tl rounded-bl -mr-1`} placeholder="Enter your email" aria-label="Enter your email" />
+				<input type="text" className={`${props.background ? props.background : 'bg-gray-400 placeholder-gray-600' } focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none w-full px-g py-g mb-0 text-base leading-base border border-[solid] border-gray-400 text-gray-800 border-gray-200 rounded-tl rounded-bl -mr-1`} placeholder={`${props.placeholder ? props.placeholder : 'Enter your email' }`} aria-label={`${props.placeholder ? props.placeholder : 'Enter your email' }`} />
 				<div className="input-group-append flex -ml-[1px]">
-					<button className="pl-4 pr-4 leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white  rounded" type="submit">Subscribe</button>
+					<button className="rounded-r-lg pl-4 pr-4 leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white  rounded" type="submit">{props.btnText ? props.btnText : 'Subscribe' }</button>
 				</div>
 			</div>
-			{props.submitted && (<p className="mt-1">Signup successful! Stay tuned for updates and tips on Coco&Eve.</p>)}
+			{props.submitted && (<p className="mt-1">{props.successMsg ? props.successMsg : 'Signup successful! Stay tuned for updates and tips on Coco&Eve.' }</p>)}
 		</form>
 	);
 };
