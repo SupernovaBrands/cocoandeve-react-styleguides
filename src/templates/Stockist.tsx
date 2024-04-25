@@ -77,8 +77,8 @@ const Stockist = (props: any) => {
                     </figure>
                 ))}
                 </div>
-                <h2 className="h1 mt-2 mb-1">{content.question_title}</h2>
-                <p className="lg:text-lg sm:text-sm font-normal">No worries, you can email us: <a href="mailto:hello@cocoandeve.com" className="underline lg:text-lg font-bold">hello@cocoandeve.com</a></p>
+                <h2 className="h1 mt-4 mb-1">{content.question_title}</h2>
+                <p className="lg:text-lg sm:text-sm font-normal">No worries, you can email us: <a href="mailto:wholesale@cocoandeve.com" className="underline lg:text-lg font-bold">wholesale@cocoandeve.com</a></p>
             </section>
         </>
     );
