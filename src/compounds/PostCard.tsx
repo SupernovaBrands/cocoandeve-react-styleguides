@@ -1,5 +1,6 @@
 import PostTag from "~/components/PostTag";
 import Link from "next/link";
+import parse from 'html-react-parser';
 
 type PropType = {
 	className: string
@@ -26,7 +27,7 @@ const PostCard: React.FC<PropType> = ({ className, data }) => (
 					</p>
 				)}
 				<Link href={data.handle ?? '#'} className="h2 mt-2 mb-1 block text-body">{data.title}</Link>
-				<p className="flex flex-col grow">{data.description}</p>
+				<span className="flex flex-col grow">{parse(data.description)}</span>
 				<Link href={data.handle ?? '#'} className="btn btn-outline-primary self-start hover:no-underline" aria-label={data.title}>Read more</Link>
 			</figcaption>
 		</figure>
