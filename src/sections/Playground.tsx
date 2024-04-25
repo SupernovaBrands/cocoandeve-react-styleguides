@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -33,7 +35,6 @@ const Playground = (props: any) => {
             fetch(`/api/getHomepage`).then(
                 res => {
                     res?.json().then(data => {
-                        console.log('getH', data);
                         setContent(data?.featuredCollection);
                         setIsLoading(false);
                     })

@@ -223,7 +223,7 @@ const Homepage = () => {
             <Playground featuredCollection={featuredCollection} isStyleguide={true} />
 			<QuizReward />
             <Editors />
-            <Instagram className="bg-pink-light" />
+            <Instagram className="bg-pink-light" isStyleguide={true} />
 		</>
     );
 }

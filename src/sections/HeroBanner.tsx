@@ -35,6 +35,7 @@ const SLIDES = [
 const HeroBanner = (props: any) => {
 	const { isStyleguide, slidesData } = props;
 	const [slides, setSlides] = useState(slidesData);
+	const [isLoading, setIsLoading] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
 	]);
@@ -53,10 +54,10 @@ const HeroBanner = (props: any) => {
 	}
 
 	useEffect(() => {
-		console.log('slidesData', isStyleguide, slides);
 		if (isStyleguide) {
 			setSlides(SLIDES);
 		}
+		setIsLoading(false);
 	}, []);
 
 	return (
@@ -91,12 +92,16 @@ const HeroBanner = (props: any) => {
 					</Carousel.Wrapper>
 				)}
 			</section>
-			<div className="pt-1 text-center lg:text-left container">
-				<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
-			</div>
-			<Modal className="modal-lg" isOpen={isOpen}>
-				<TermCondition handleClose={() => handleOpenModal()} />
-			</Modal>
+			{!isLoading && (
+				<>
+					<div className="pt-1 text-center lg:text-left container">
+						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
+					</div>
+					<Modal className="modal-lg" isOpen={isOpen}>
+						<TermCondition handleClose={() => handleOpenModal()} />
+					</Modal>
+				</>
+			)}
 		</>
 	);
 };

@@ -88,7 +88,6 @@ const SearchBox = (props: any) => {
 									const featuredImg = dataImg.find((img) => img.handle === product.handle)
 										? dataImg.find((img) => img.handle === product.handle).featured_image_url : null;
 									{/* @ts-ignore */}
-									console.log('featuredImg'), featuredImg;
 									if (featuredImg) {
 										pProducts.push({
 											...product,
@@ -161,7 +160,7 @@ const SearchBox = (props: any) => {
 						<h4 className="w-full lg:w-2/3 lg:mb-2 mb-1 font-normal order-3 lg:order-2  text-base px-0 lg:px-g">{content?.popular_products_heading}</h4>
 						<div className="w-full lg:w-1/3 order-2 mb-3">
 							{keywords && keywords.map((word) => (
-								<span onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer p-1 me-1 inline-block mb-1 rounded bg-gray-400 text-gray-600">{word}</span>
+								<span key={`key-${word}`} onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer p-1 me-1 inline-block mb-1 rounded bg-gray-400 text-gray-600">{word}</span>
 							))}
 						</div>
 						<div className='w-full lg:w-2/3 flex order-4 flex-wrap'>
@@ -172,6 +171,7 @@ const SearchBox = (props: any) => {
 											const { title, featuredImgUrl, url } = product;
 											return (
 												<SearchProductCard
+													key={`spc-${title}`}
 													title={title}
 													img={featuredImgUrl}
 													url={url} 
@@ -181,10 +181,10 @@ const SearchBox = (props: any) => {
 									</>
 								) : (
 									<>
-										<SearchProductCard title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-4 order-4 w-full lg:w-1/4" />
+										<SearchProductCard key={`spc-ph1`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+										<SearchProductCard key={`spc-ph2`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+										<SearchProductCard key={`spc-ph3`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+										<SearchProductCard key={`spc-ph4`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-4 order-4 w-full lg:w-1/4" />
 									</>
 								)
 							}
