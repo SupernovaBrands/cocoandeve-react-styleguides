@@ -109,10 +109,10 @@ const Header = (props: any) => {
 							<BrandLogo className="lg:h-[41px]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							{mainMenu && mainMenu.map((nav) => {
+							{mainMenu && mainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
-										<li className="nav-item pr-hg">
+										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
 											<a href={`/collections/${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
@@ -138,33 +138,33 @@ const Header = (props: any) => {
 									);
 								}
 							})}
-							<li className="nav-item px-hg">
+							<li key="line" className="nav-item px-hg">
 								<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">|</a>
 							</li>
-							<li className="nav-item px-hg">
+							<li key="result-irl" className="nav-item px-hg">
 								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">Results IRL</a>
 							</li>
 						</ul>
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
-							<li className="hidden lg:flex pr-hg">
+							<li key="bbc" className="hidden lg:flex pr-hg">
 								<a className="text-lg m-0 flex font-bold text-body" href="/pages/rewards">
 									Bali Beauty Club<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="mx-1"><g transform="scale(.15)" clip-path="url(#palm-tree-v2_svg__palmTreeV2)"><path d="M68.69 119.177s7.618-22.555-3.57-70.584L101.323 85.9s7.405-27.36-23.77-41.854l42.43.629s-12.549-24.764-46.657-13.494L103.65 2.144S73.032-3.418 60.975 27.166c0 0-11.845-32.938-42.185-26.296l29.85 29.601S21.329 15.751 0 41.596l43.708 1.402s-30.504 8.287-27.981 40.758l38.94-35.873s.607 36.727-9.976 71.31c11.795 1.838 24.032 0 24.032 0l-.032-.016z"></path></g></svg>
 								</a>
 							</li>
-							<li className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
-							<li id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="javascript:void(0);" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
+							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
+								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#!" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
 								</a>
 								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 							</li>
-							<li className="nav-item pr-1 lg:pl-hg">
-								<a className="h4 m-0 flex font-bold" href="javascript:void(0);" data-cy="search-icon" onClick={onToggleSearchBox}>
+							<li key="search" className="nav-item pr-1 lg:pl-hg">
+								<a className="h4 m-0 flex font-bold" href="#!" data-cy="search-icon" onClick={onToggleSearchBox}>
 									<Search className="text-[1.375em] h-[1em]" />
 								</a>
 							</li>
-							<li className="nav-item d-flex lg:pl-hg">
+							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
 									<CartIcon className="text-[27.5px] h-[27.5px]"/>
 									<span className="cart-drawer__count text-sm h-100 top-[50%] left-[50%] text-body -mt-[18px]">0</span>

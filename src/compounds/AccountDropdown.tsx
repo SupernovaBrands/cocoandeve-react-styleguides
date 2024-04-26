@@ -61,7 +61,7 @@ const AccountDropdown = (props) => {
                             </div>
                             <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" />
                             <div className="form-group text-center mt-2">
-                                <a href="javascript:void(0);" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</a>
+                                <a href="#!" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</a>
                             </div>
                         </form>
                     </div>

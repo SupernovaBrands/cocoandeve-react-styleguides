@@ -43,20 +43,21 @@ const RealResultCarousel = (props: any) => {
             <div className="row">
                 <div className="text-center">
                     { !props.show && (<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
-						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
-						<li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-                        <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
-                        <li><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
+						<li key={`all`}><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
+						<li key={`hair`}><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
+                        <li key={`tan`}><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
+                        <li key={`body`}><TabNav className={`py-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
                     </ul>) }
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-									{videos.map((data: any) => (
+									{videos.map((data: any, i: number) => (
 										<InstagramCard
+											key={`all-${data.url}-${i}`}
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.videoUrl}
-											author={data.author}
+											videoUrl={data.url}
+											author={data.username}
 											product={data.product}
 											url={data.url}
 										/>
@@ -67,11 +68,12 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'hair'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g lg:!transform-none">
-									{videos.map((data: any) => (
+									{videos.map((data: any, i: number) => (
 										<InstagramCard
+											key={`hair-${data.url}-${i}`}
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.videoUrl}
-											author={data.author}
+											videoUrl={data.url}
+											author={data.username}
 											product={data.product}
 											url={data.url}
 										/>
@@ -82,11 +84,12 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'tan'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g lg:!transform-none">
-									{videos.map((data: any) => (
+									{videos.map((data: any, i: number) => (
 										<InstagramCard
+											key={`tan-${data.url}-${i}`}
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.videoUrl}
-											author={data.author}
+											videoUrl={data.url}
+											author={data.username}
 											product={data.product}
 											url={data.url}
 										/>
@@ -97,11 +100,12 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'body'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
-									{videos.map((data: any) => (
+									{videos.map((data: any, i: number) => (
 										<InstagramCard
+											key={`body-${data.url}-${i}`}
 											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.videoUrl}
-											author={data.author}
+											videoUrl={data.url}
+											author={data.username}
 											product={data.product}
 											url={data.url}
 										/>
