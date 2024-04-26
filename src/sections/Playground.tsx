@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const PlaygroundCard = ({ data }) => (
     <figure className="w-full lg:w-1/4 px-g relative mb-g">
