@@ -45,7 +45,7 @@ const SwatchOverlay = (props) => {
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item, i) => (
                             <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${i === 0 ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} className={`block variant-swatch mx-auto border-2 ${ i === 0 ? 'border-primary' : 'border-white'} ${item.value} ${item.available ? '' : 'oos'}`}></span>
+                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} className={`block variant-swatch mx-auto border-2 ${ i === 0 ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
@@ -58,6 +58,9 @@ const SwatchOverlay = (props) => {
 
 const ProductCardTall = (props) => {
     const { abtestBtn } = props;
+    // if (props.product.swatch) {
+    //     console.log('true!!', props.product);
+    // }
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t bg-pink-light">

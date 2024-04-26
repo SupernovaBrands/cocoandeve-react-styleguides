@@ -25,12 +25,15 @@ const Banner = ({ data, isLoading, title }) => {
 }
 
 const Collection = (props: any) => {
-    const { store, mainBanner, universalBanner, products, about, isLoading, parentCollection, handle, preview, currentCollection } = props;
+    const { store, mainSettings, universalBanner, products, about, isLoading, mainCollections, handle, preview, currentCollection, showSpinner, childrenCollections, parentCollection } = props;
 
+    const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
+
+    const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
 
     const { universalCollectionSetting } = universalBanner;
     const {
@@ -40,7 +43,7 @@ const Collection = (props: any) => {
         enabled: universalEnabled,
     } = universalCollectionSetting.universalCollectionSetting[store];
 
-    const { collectionBanner } = mainBanner;
+    const { collectionBanner } = mainSettings;
 
     const bannerData = universalEnabled ? {
         img_mob: universalImgMob,
@@ -54,6 +57,12 @@ const Collection = (props: any) => {
     if (handle !== 'all') {
         collectionTitle = collectionTitle.replace (/^/,'Shop ');
     }
+
+    const showLoading = () => {
+        setLoading(true);
+    };
+
+    const showQuizCard = handle === 'tan' || handle === 'tan-and-spf';
 
     return (
         <>
@@ -80,67 +89,91 @@ const Collection = (props: any) => {
 
             <div className="container mt-3 px-0 lg:px-g">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
-                    {!isLoading && parentCollection.length > 0 && (
+                    {!isLoading && mainCollections.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
                             <ul className="list-unstyled border border-body p-2 w-2/3 rounded">
-                                {parentCollection.map((parent: any) => {
+                                {mainCollections.map((parent: any) => {
                                     const { collection } = parent;
+                                    console.log('collection', collection);
                                     const html = collection.title.replace('d-lg-none', 'lg:hidden');
-                                    return (<li className="mb-1">
-                                        <Link className={`hover:no-underline hover:text-primary ${handle === collection.handle ? 'text-primary' : 'text-body'}`} href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`} dangerouslySetInnerHTML={{ __html: html }} />
+                                    const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
+                                    return (
+                                    <li className="mb-1">
+                                        <Link
+                                            onClick={showLoading}
+                                            className={`hover:no-underline hover:text-primary
+                                                ${handle === collection.handle || collection.handle === parentHandle ? 'text-primary' : 'text-body'}`}
+                                            href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
+                                            dangerouslySetInnerHTML={{ __html: html }}
+                                        />
                                     </li>)
                                 })}
                             </ul>
                         </aside>
                     )}
                     <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap">
-                        <div className="flex flex-wrap w-full justify-between mb-25 lg:mb-2 lg:px-g">
+                        <div className="flex flex-wrap w-full justify-between mb-25 lg:mb-0 lg:px-g">
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {!isLoading && (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg">
-                                        <select className="custom-select p-1 rounded-lg bg-white mb-2 border border-body w-full min-h-[50px]">
+                                        <select className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]">
                                             <option>Filter by</option>
-                                            <option value="all">Shop All</option>
-                                            <option value="hair">Hair</option>
-                                            <option value="tan">Tan &amp; SPF</option>
-                                            <option value="skin">Skin</option>
-                                            <option value="body">Body</option>
-                                            <option value="kits-gifts">Kit &amp; Gifts</option>
-                                            <option value="all-accesories">All Accesories</option>
-                                        </select>
-                                        <select className="custom-select p-1 rounded-lg bg-white mb-2 border border-body hidden w-full lg:block min-h-[50px]">
-                                            <option>Filter by</option>
-                                            <option value="tan">Tan &amp; SPF</option>
-                                            <option value="hair">Hair</option>
-                                            <option value="body">Body</option>
-                                            <option value="kits-gifts">Kit &amp; Gifts</option>
-                                            <option value="all-accesories">All Accesories</option>
-                                            <option value="all">Shop All</option>
+                                            {mainCollections.map((parent: any) => {
+                                                const { collection } = parent;
+                                                const html = collection.title.replace('d-lg-none', 'lg:hidden');
+                                                return (<option value={collection.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                            })}
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select className="custom-select p-1 w-full lg:w-auto rounded-lg mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]">
-                                            <option value="Manual">Featured</option>
+                                        <select className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]">
+                                            <option value="manual">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
-                                            <option value="title-ascending">Alphabetically, A-Z</option>
-                                            <option value="title-descending">Alphabetically, Z-A</option>
                                             <option value="price-ascending">Price, low to high</option>
                                             <option value="price-descending">Price, high to low</option>
-                                            <option value="created-ascending">Date, old to new</option>
                                             <option value="created-descending">Date, new to old</option>
                                         </select>
                                     </div>
                                 </>
                             )}
+
+                            {!isLoading && handle !== 'all' && (
+                                <div className="w-full px-hg lg:px-0 mt-1 mb-1">
+                                    <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1">
+                                        {childrenCollections.length > 0 && childrenCollections.map((children) => {
+                                            const { collection } = children;
+                                            const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
+                                            return (
+                                                <Link
+                                                    href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
+                                                    className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
+                                                        ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
+                                                    onClick={showLoading}
+                                                    dangerouslySetInnerHTML={{ __html: html }}
+                                                />
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         {!isLoading && (
-                            <div className="flex flex-wrap collection-grid overflow-hidden">
+                            <div className="flex flex-wrap collection-grid overflow-hidden w-full">
+                                {(showSpinner || loading) && (
+                                    <div className="mb-3 px-hg lg:px-g text-center w-full">
+                                        <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
+                                    </div>
+                                )}
                                 {products.length > 0 && products.map((item: any, index: number) => {
-                                    return handle === 'tan' && index === 2 ? (
+                                    if (!item.src) {
+                                        item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
+                                        item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
+                                    }
+                                    return showQuizCard && index === 2 ? (
                                         <>
                                             <ProductCardQuiz />
                                             <ProductCard
