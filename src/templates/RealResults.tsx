@@ -283,7 +283,7 @@ const RealResults = () => {
 				{showMore && (
 					<div className="flex flex-wrap justify-center">
 						<div className="col text-center">
-							<a href="javascript:void(0);" className={`hover:no-underline inline-block border-2 align-middle text-center select-none font-bold whitespace-no-wrap rounded py-1 px-3 no-underline leading-tight text-base border-primary  hover:text-white bg-white hover:bg-primary ${showMore}`} onClick={loadMore}>
+							<a href="#!" className={`hover:no-underline inline-block border-2 align-middle text-center select-none font-bold whitespace-no-wrap rounded py-1 px-3 no-underline leading-tight text-base border-primary  hover:text-white bg-white hover:bg-primary ${showMore}`} onClick={loadMore}>
 								Show more reviews
 							</a>
 						</div>
@@ -310,7 +310,7 @@ const RealResults = () => {
 				<TestimonialCarousel data={testimonialItems} />
 			</div>
 			<ProductCarousel products={PRODUCTS} />
-			<Instagram className="bg-pink-light" />
+			<Instagram className="bg-pink-light" isStyleguide={true} />
 		</>
     );
 }

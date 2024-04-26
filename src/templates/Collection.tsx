@@ -37,7 +37,7 @@ const Collection = (props: any) => {
                     <aside className="w-1/4 hidden px-g lg:block">
                         <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
                         <ul className="list-unstyled border border-body p-2 w-2/3 rounded">
-                            <li><a className="text-body hover:no-underline hover:text-primary" href="javascript:void(0)">Shop All</a></li>
+                            <li><a className="text-body hover:no-underline hover:text-primary" href="#!">Shop All</a></li>
                             <li className="mb-1"><a className="text-body hover:no-underline hover:text-primary" href="">Hair</a></li>
                             <li className="mb-1"><a className="text-body hover:no-underline hover:text-primary" href="">Tan &amp; SPF</a></li>
                             <li className="mb-1"><a className="text-body hover:no-underline hover:text-primary" href="">Skin</a></li>

@@ -63,13 +63,13 @@ module.exports = {
       'light-yellow': '#F0FF5F',
       'light-blue': '#C2FAE4',
       'transparent': 'transparent',
-      'dark': '#885757',
+      'dark': '#151515',
       'ultra-dark': '#5C2323',
       'medium': '#AA7878',
       'body-light': '#f6e4ef'
     },
     fontFamily: {
-      sans: ['sofia-pro', 'sans-serif'],
+      sans: ['var(--font-sofia)'],
     },
     fontSize: {
       xs: ['0.75rem', '0.938rem'], //font size 12px, line height 15px

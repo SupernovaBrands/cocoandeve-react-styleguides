@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 // import ProgressBar from '@/components/ProgressBar';
 import BlogNavTag from '~/compounds/blog-nav-tags';
 import PostCard from "~/compounds/PostCard";
 import Sidebar from "~/sections/Sidebar";
-import ShopArticle from "sections/ShopArticle";
+// import ShopArticle from "~/sections/ShopArticle";
 import Twitter from '~/images/icons/twitter-square.svg';
 import Facebook from '~/images/icons/facebook-square.svg';
 import Pinterest from '~/images/icons/pinterest-square.svg';
@@ -40,7 +41,7 @@ const ArticleNewsLetter = (props) => {
 
 const Article = (props) => {
     const { content, isLoading, postNewsletter, popularArticles, recomendations } = props;
-    
+
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
     const month = d.toLocaleString('default', { month: 'short' });
@@ -53,7 +54,7 @@ const Article = (props) => {
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
     const bodyContent = content.BlogContentMultiStores[storeName].body_content.replace('<a', ariaLabel).replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
 
-    
+
 
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
@@ -161,19 +162,19 @@ const Article = (props) => {
                         <span className="mb-1 article__published-at">{updateDate}</span>
                         {/* <span className={`text-left font-bold  ${props.quickLinks ? '' : 'hidden'}`}>In this article:</span>
                         <div className={`mt-1 ${props.quickLinks ? '' : 'hidden'}`}>
-                            <a href="#link-1" className="blog-post-quick-links">
+                            <Link href="#link-1" className="blog-post-quick-links">
                                 <span>Overall hair care</span>
-                            </a>
-                            <a href="#link-2" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-2" className="blog-post-quick-links">
                                 <span>Heat Styling</span>
-                            </a>
-                            <a href="#link-3" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-3" className="blog-post-quick-links">
                                 <span>Chemically processed</span>
-                            </a>
-                            <a href="#link-4" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-4" className="blog-post-quick-links">
                                 <span>Growth</span>
-                            </a>
-                            <a href="#link-5" className="blog-post-quick-links">
+                            </Link>
+                            <Link href="#link-5" className="blog-post-quick-links">
                                 <span>Dryness &amp; dullness</span>
                             </a>
                         </div> */}

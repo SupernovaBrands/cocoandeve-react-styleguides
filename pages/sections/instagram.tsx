@@ -2,7 +2,7 @@ import Instagram from '~/sections/Instagram';
 
 const InstagramSection = () => {
     return (
-        <Instagram className="bg-pink-light" />
+        <Instagram className="bg-pink-light" isStyleguide={true} />
     );
 }
 
