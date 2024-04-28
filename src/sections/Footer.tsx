@@ -68,7 +68,7 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:nav-help] mt-3 lg:mt-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Help</h5>
-                        <ul className="list-unstyled">
+                        <ul className="list-unstyled mb-g">
                             {helpMenu.map((item) => (<li key={`help-${item.title}`}><a href={item.handle} className='text-body'>{item.title}</a></li>))}
                         </ul>
                     </div>
@@ -129,7 +129,7 @@ const Footer = (props: any) => {
                                 </a>
                             </div>
                             <div className='d-block'>
-                                <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency</h5>
+                                <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency111</h5>
                                 <DropdownStore direction='dropup' />
                             </div>
                         </div>
