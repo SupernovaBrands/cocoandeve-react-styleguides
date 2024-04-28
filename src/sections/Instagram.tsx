@@ -14,7 +14,6 @@ const Instagram = (props) => {
             fetch('https://cdn.cocoandeve.com/instagram/cocoandeve.json').then(
                 res => {
                     res?.json().then(data => {
-                        console.log('res', data);
                         if (data.length > 0) {
                             const dataMedia = [];
                             for (let i = 0; i < data.length; i += 1) {
