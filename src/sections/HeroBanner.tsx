@@ -6,16 +6,8 @@ import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 import Autoplay from 'embla-carousel-autoplay';
 import Modal from "~/components/Modal";
-import {
-	PrevButton,
-	NextButton,
-	usePrevNextButtons,
-	controlAutoplay,
-} from '~/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '~/images/icons/chevron-next.svg';
-import ChevronPrev from '~/images/icons/chevron-prev.svg';
-import { LazyLoadImage } from '~/components/carousel/EmblaCarouselLazyLoadImage';
 import TermCondition from '~/components/modal/TermCondition';
+import useHomepage from '../hooks/useHomepage';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -33,15 +25,13 @@ const SLIDES = [
 ];
 
 const HeroBanner = (props: any) => {
-	const { isStyleguide, slidesData } = props;
-	const [slides, setSlides] = useState(slidesData);
-	const [isLoading, setIsLoading] = useState(true);
+	const { isStyleguide } = props;
+	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
 	]);
-
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
-
+	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage();
 	useEffect(() => {
 		if (!emblaApi) return;
 		const autoplay = emblaApi?.plugins()?.autoplay;
@@ -54,16 +44,20 @@ const HeroBanner = (props: any) => {
 	}
 
 	useEffect(() => {
-		if (isStyleguide) {
-			setSlides(SLIDES);
-		}
-		setIsLoading(false);
+		setIsLoadingComp(false);
 	}, []);
+
+	let slides = [];
+	if (isStyleguide) {
+		slides = SLIDES;
+	} else {
+		slides = slideShows.filter((slide) => slide.show);
+	}
 
 	return (
 		<>
 			<section>
-				{slides && slides.length > 0 && (
+				{!isLoadingHomepage && slides && slides.length > 0 ? (
 					<Carousel.Wrapper emblaApi={emblaApi}>
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 							{slides.map((slide: any, index: number) => (
@@ -90,9 +84,11 @@ const HeroBanner = (props: any) => {
 							</ol>
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
+				) : (
+					<></>
 				)}
 			</section>
-			{!isLoading && (
+			{!isLoadingComp && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>

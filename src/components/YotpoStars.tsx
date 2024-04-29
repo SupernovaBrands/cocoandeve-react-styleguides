@@ -34,14 +34,6 @@ const YotpoStar = (props: any) => {
 	) : (<div />);
 };
 
-YotpoStar.propTypes = {
-	productId: PropTypes.number.isRequired,
-	productUrl: PropTypes.string,
-	showScore: PropTypes.bool,
-	showTotal: PropTypes.bool,
-	className: PropTypes.string,
-};
-
 YotpoStar.defaultProps = {
 	productUrl: '',
 	showScore: false,

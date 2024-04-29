@@ -28,8 +28,4 @@ const ReviewStar = (props) => {
 	);
 };
 
-ReviewStar.propTypes = {
-	score: PropTypes.number.isRequired,
-};
-
 export default ReviewStar;

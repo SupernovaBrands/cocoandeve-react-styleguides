@@ -84,8 +84,9 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData.tab1.products.map((data) => (
+									{productsData.tab1.products.map((data, index) => (
 										<ProductCard
+											key={`tab1-${index}`}
 											isFromShopify={true}
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
@@ -117,8 +118,9 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'bestsellers'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef1}>
-									{productsData.tab2.products.map((data) => (
+									{productsData.tab2.products.map((data, index) => (
 										<ProductCard
+											key={`tab2-${index}`}
 											sFromShopify={true}
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
@@ -150,8 +152,9 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
-									{productsData.tab3.products.map((data) => (
+									{productsData.tab3.products.map((data, index) => (
 										<ProductCard
+											key={`tab3-${index}`}
 											isFromShopify={true}
 											product={data}
 											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
