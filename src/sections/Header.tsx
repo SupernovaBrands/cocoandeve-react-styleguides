@@ -80,7 +80,7 @@ const Header = (props: any) => {
 
 	useEffect(() => {
 		// console.log('ThemeSettings', ThemeSettings, searchBox);
-		fetch(`/api/sevenDaysSalesIds`).then(
+		fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sevenDaysSalesIds`).then(
 			res => {
 				res?.json().then(data => {
 					const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
