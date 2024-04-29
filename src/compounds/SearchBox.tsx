@@ -80,7 +80,7 @@ const SearchBox = (props: any) => {
 			const pProducts = [];
 			getFeaturedImages().then((dataImg) => {
 				for (let i = 0; i <= handles.length; i += 1) {
-					fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getProductInfo?handle=${handles[i]}`).then(
+					fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/getProductInfo?handle=${handles[i]}`).then(
 						res => {
 							res?.json().then(data => {
 								const { product } = data;
