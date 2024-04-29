@@ -16,7 +16,7 @@ const useHomepage = () => {
     const { isPreview } = usePreview();
     let params = '';
     if (isPreview) params = '?preview=true';
-    const { data, error, isLoading } = useSWR(`${host}/homepage/sections${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
+    const { data, error, isLoading } = useSWR(`https://${host}/homepage/sections${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
     const slideShows = data?.Sections.find((comp) => comp.__component === 'section.slideshow')?.['slide_dev'] || [];
 
     return {
