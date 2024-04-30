@@ -83,7 +83,7 @@
 	}
 
 	&.dark:before {
-		@apply bg-dark;
+		@apply bg-shade-dark;
 	}
 
 	&.ultra-dark:before {
