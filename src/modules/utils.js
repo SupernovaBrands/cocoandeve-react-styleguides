@@ -1053,7 +1053,7 @@ export const getFeaturedImages = () => {
 		if (getLSWithExpiry('featuredImages')) {
 			resolve(JSON.parse(getLSWithExpiry('featuredImages')));
 		} else {
-			fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/getFeaturedImages`).then(
+			fetch(`/api/getFeaturedImages`).then(
 				res => {
 					res.json().then(data => {
 						setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
