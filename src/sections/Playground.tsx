@@ -29,7 +29,7 @@ const Playground = (props: any) => {
             setContent(featuredCollection);
             setIsLoading(false);
         } else {
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/getHomepage`).then(
+            fetch(`/api/getHomepage`).then(
                 res => {
                     res?.json().then(data => {
                         setContent(data?.featuredCollection);
