@@ -239,6 +239,80 @@ const CollectionTemplate = () => {
         setIsLoading(false);
     }, []);
 
+	const currentCollection = {
+		id: "gid://shopify/Collection/162936881187",
+		handle: "all",
+		title: "Shop All",
+		description: "",
+		image: null
+	};
+
+	const mainCollections = [
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "all",
+				title: "Shop All",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "#",
+				title: "Hair",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "#",
+				title: "Hair Benefits",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "tan-and-spf",
+				title: "Tan & SPF",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "#",
+				title: "Skincare",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "#",
+				title: "Body",
+				description: "",
+				image: null
+			}
+		},
+		{
+			collection: {
+				id: "gid://shopify/Collection/162936881187",
+				handle: "#",
+				title: "Value Sets",
+				description: "",
+				image: null
+			}
+		}
+	];
+
     return (
 		<>
         	<Header
@@ -250,12 +324,18 @@ const CollectionTemplate = () => {
 				dummy={true} />
 			<Collection
 				isLoading={isLoading}
-				store="dev"
-				mainBanner={mainBanner}
+				store={'dev'}
+				mainSettings={[]}
 				universalBanner={universalBanner}
 				products={products}
 				about={about}
-				handle="tan"
+				mainCollections={mainCollections}
+				handle={'tan-and-spf'}
+				preview={''}
+				currentCollection={currentCollection}
+				showSpinner={false}
+				childrenCollections={[]}
+				parentCollection={[]}
 				/>
             <Service />
 			<Footer

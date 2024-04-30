@@ -2,8 +2,10 @@ import Modal from "~/components/Modal";
 import Terms from "~/components/modal/Terms";
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import { Router } from "next/router";
 
 const Banner = ({ data, isLoading, title }) => {
     const { img_desk, img_mob } = data;
@@ -27,11 +29,19 @@ const Banner = ({ data, isLoading, title }) => {
 const Collection = (props: any) => {
     const { store, mainSettings, universalBanner, products, about, isLoading, mainCollections, handle, preview, currentCollection, showSpinner, childrenCollections, parentCollection } = props;
 
+    const sidebarRef = useRef(null);
+    const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
+    console.log('mainCollections', mainCollections);
 
     const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
 
@@ -58,11 +68,60 @@ const Collection = (props: any) => {
         collectionTitle = collectionTitle.replace (/^/,'Shop ');
     }
 
-    const showLoading = () => {
+    const showLoading = (e: any) => {
+        // console.log('sidebar ref', sidebarRef.current);
+        if (e.target.closest('.collection__sidebar')) {
+            const sidebarLinks = sidebarRef.current.querySelectorAll('li a');
+            sidebarLinks.forEach((el) => {
+                el.classList.remove('text-primary');
+                el.classList.add('text-body');
+            });
+            e.target.classList.remove('text-body');
+            e.target.classList.add('text-primary');
+        }
+        if (e.target.closest('.collection-grid__tags')) {
+            const tagLinks = subCatRef.current.querySelectorAll('a');
+            tagLinks.forEach((els) => {
+                els.classList.add('bg-gray-400','text-gray-600', 'hover:text-gray-600');
+                els.classList.remove('text-white', 'bg-primary', 'hover:text-white');
+            });
+            e.target.classList.add('text-white', 'bg-primary', 'hover:text-white');
+            e.target.classList.remove('bg-gray-400','text-gray-600', 'hover:text-gray-600');
+        }
         setLoading(true);
     };
 
     const showQuizCard = handle === 'tan' || handle === 'tan-and-spf';
+
+    const selectFilterChange = (e: any) => {
+        showLoading(e);
+        router.push(`/collections/${e.target.value}${preview === 'staging' ? `?preview=${preview}` : ''}`);
+    };
+    let selectFilterValue = currentCollection?.handle;
+    if (parentCollection && parentCollection.collection) {
+        selectFilterValue = parentCollection.collection.handle;
+    }
+
+    const selectSortValue = searchParams.get('sort');
+
+    const selectSortChange = (e: any) => {
+        showLoading(e);
+        router.push(pathname + '?' + createQueryString('sort', e.target.value));
+    };
+
+    const createQueryString = useCallback(
+        (name: string, value: string) => {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set(name, value);
+
+            return params.toString();
+        },
+        [searchParams]
+    );
+
+    useEffect(() => setLoading(false), [products]);
+
+    console.log('mainCollections', mainCollections);
 
     return (
         <>
@@ -92,10 +151,9 @@ const Collection = (props: any) => {
                     {!isLoading && mainCollections.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
-                            <ul className="list-unstyled border border-body p-2 w-2/3 rounded">
+                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded" ref={sidebarRef}>
                                 {mainCollections.map((parent: any) => {
                                     const { collection } = parent;
-                                    console.log('collection', collection);
                                     const html = collection.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     return (
@@ -113,14 +171,14 @@ const Collection = (props: any) => {
                         </aside>
                     )}
                     <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap">
-                        <div className="flex flex-wrap w-full justify-between mb-25 lg:mb-0 lg:px-g">
+                        <div className={`flex flex-wrap w-full justify-between mb-25 lg:mb-0 lg:px-g ${handle === 'all' ? 'lg:mb-2' : ''}`}>
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {!isLoading && (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg">
-                                        <select className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]">
+                                        <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]" defaultValue={selectFilterValue}>
                                             <option>Filter by</option>
                                             {mainCollections.map((parent: any) => {
                                                 const { collection } = parent;
@@ -130,12 +188,12 @@ const Collection = (props: any) => {
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]">
-                                            <option value="manual">Sort By</option>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={selectSortValue}>
+                                            <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
-                                            <option value="price-ascending">Price, low to high</option>
-                                            <option value="price-descending">Price, high to low</option>
-                                            <option value="created-descending">Date, new to old</option>
+                                            <option value="price-low-high">Price, low to high</option>
+                                            <option value="price-high-low">Price, high to low</option>
+                                            <option value="newest">Date, new to old</option>
                                         </select>
                                     </div>
                                 </>
@@ -143,19 +201,21 @@ const Collection = (props: any) => {
 
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
-                                    <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1">
+                                    <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
                                         {childrenCollections.length > 0 && childrenCollections.map((children) => {
                                             const { collection } = children;
-                                            const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
-                                            return (
-                                                <Link
-                                                    href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
-                                                    className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
-                                                        ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
-                                                    onClick={showLoading}
-                                                    dangerouslySetInnerHTML={{ __html: html }}
-                                                />
-                                            );
+                                            if (collection && collection.handle) {
+                                                const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
+                                                return (
+                                                    <Link
+                                                        href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
+                                                        className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
+                                                            ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
+                                                        onClick={showLoading}
+                                                        dangerouslySetInnerHTML={{ __html: html }}
+                                                    />
+                                                );
+                                            }
                                         })}
                                     </div>
                                 </div>
@@ -168,7 +228,7 @@ const Collection = (props: any) => {
                                         <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                     </div>
                                 )}
-                                {products.length > 0 && products.map((item: any, index: number) => {
+                                {products.length > 0 && sortedByAvailable.map((item: any, index: number) => {
                                     if (!item.src) {
                                         item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                         item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
