@@ -242,7 +242,7 @@ const CollectionTemplate = () => {
 	const currentCollection = {
 		id: "gid://shopify/Collection/162936881187",
 		handle: "all",
-		title: "Shop All",
+		title: "All",
 		description: "",
 		image: null
 	};
