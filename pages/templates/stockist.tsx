@@ -708,7 +708,7 @@ const stockistTemplate = () => {
 				isLoading={isLoading}
 				content={content}
 			/>
-			<Instagram className="bg-yellow-light" isStyleguide={true} />
+			<Instagram className="bg-pink-light" isStyleguide={true} />
 			<Service />
 			<Footer
 				aboutMenu={aboutMenu}
