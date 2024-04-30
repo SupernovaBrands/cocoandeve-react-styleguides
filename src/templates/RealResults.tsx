@@ -309,7 +309,7 @@ const RealResults = () => {
 			<div className='w-full bg-gray-400 my-4'>
 				<TestimonialCarousel data={testimonialItems} />
 			</div>
-			<ProductCarousel products={PRODUCTS} />
+			<ProductCarousel products={PRODUCTS} isStyleguide={true} />
 			<Instagram className="bg-pink-light" isStyleguide={true} />
 		</>
     );

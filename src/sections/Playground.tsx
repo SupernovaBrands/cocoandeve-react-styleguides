@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const PlaygroundCard = ({ data }) => (
     <figure className="w-full lg:w-1/4 px-g relative mb-g">
@@ -32,7 +29,7 @@ const Playground = (props: any) => {
             setContent(featuredCollection);
             setIsLoading(false);
         } else {
-            fetch(`/api/getHomepage`).then(
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/getHomepage`).then(
                 res => {
                     res?.json().then(data => {
                         setContent(data?.featuredCollection);

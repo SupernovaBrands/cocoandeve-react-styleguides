@@ -28,10 +28,10 @@ const MobileMenu = (props: any) => {
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
 			role="tablist" aria-multiselectable="true">
 				<li key="toggle" className="flex justify-between mx-g py-[5px]">
-					<a href="#" className="mx-auto lg:mx-0" aria-label="CocoAndEve Logo">
+					<a href="#" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<Close className="mobile-nav__close svg position-absolute right-[.9375em] h-[1em]" onClick={() => onToggleMobileNav(false)}/>
+					<Close className="mobile-nav__close svg absolute right-[.9375em] h-[1em]" onClick={() => onToggleMobileNav(false)}/>
 				</li>
 				{menuBannerCode && menuBannerCode.enable && (
 					<MenuBanner content={menuBannerCode} theme='secondary-light' />
@@ -43,7 +43,7 @@ const MobileMenu = (props: any) => {
 					return (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare">
-								<h4 className="m-0 font-weight-normal">{menu.title}</h4>
+								<h4 className="m-0 font-normal">{menu.title}</h4>
 								{menu.rows.length > 0 && (
 									<ChevronNext className="h-[1em] text-xs" onClick={() => {
 										const newStates = {...defMenuState};
@@ -65,7 +65,7 @@ const MobileMenu = (props: any) => {
 										<a href="/" className="text-body mx-auto py-1" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
 										</a>
-										<Close className="h-[1em]" src="icons/close.svg" />
+										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
 									{menu.rows.map((row) => (<li key={`row-${row.handle}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
@@ -75,9 +75,9 @@ const MobileMenu = (props: any) => {
 						</li>
 					)
 				})}
-				<li key="bali-beauty-club" className="flex px-g  py-0 border-b"><a href="" className=" m-0 pb-1 pt-2">Bali Beauty Club</a></li>
+				<li key="bali-beauty-club" className="flex px-g  py-0 border-b"><a href="" className=" m-0 pb-1 pt-2 text-body">Bali Beauty Club</a></li>
 				<li key="shopall" className="my-g p-g">
-					<a href="#" className="block rounded w-full bg-primary text-white border-[1px] border-solid border-transparent px-[1.75em] py-[.5625em] text-[1em]" data-cy="shopall-btn">Shop All</a>
+					<a href="#" className="block rounded w-full bg-primary text-white border-[1px] border-solid border-transparent px-[1.75em] py-[.5625em] text-[1em] py-g text-center font-bold" data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 text-gray-900 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry">
@@ -97,10 +97,10 @@ const MobileMenu = (props: any) => {
 					</ul>
 				</li>
 				<li key="others" className="flex flex-wrap  px-g pt-g">
-					<a href="#" className="w-1/2 mb-1">Help</a>
-					<a href="#" className="w-1/2 mb-1">Track my order</a>
-					<a href="/pages/reviews" className="w-1/2 mb-1">Result IRL</a>
-					<a href="#" className="w-1/2 mb-1">BLog</a>
+					<a href="#" className="w-1/2 mb-1 text-body">Help</a>
+					<a href="#" className="w-1/2 mb-1 text-body">Track my order</a>
+					<a href="/pages/reviews" className="w-1/2 mb-1 text-body">Result IRL</a>
+					<a href="#" className="w-1/2 mb-1 text-body">BLog</a>
 				</li>
 			</ul>
 		</nav>

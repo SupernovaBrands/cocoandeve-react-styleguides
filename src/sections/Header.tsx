@@ -71,8 +71,16 @@ const Header = (props: any) => {
 	}, []);
 
 	useEffect(() => {
+		if (openDrawer) {
+			document.body.classList.add('overflow-hidden');
+		} else {
+			document.body.classList.remove('overflow-hidden');
+		}
+	}, [openDrawer])
+
+	useEffect(() => {
 		// console.log('ThemeSettings', ThemeSettings, searchBox);
-		fetch(`/api/sevenDaysSalesIds`).then(
+		fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/sevenDaysSalesIds`).then(
 			res => {
 				res?.json().then(data => {
 					const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
@@ -105,7 +113,7 @@ const Header = (props: any) => {
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
-						<a href="/" className="inline-block pt-[.5625em] pb-[.5625em] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block pt-[11px] pb-[11px] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[41px]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
@@ -159,15 +167,15 @@ const Header = (props: any) => {
 								</a>
 								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 							</li>
-							<li key="search" className="nav-item pr-1 lg:pl-hg">
+							<li key="search" className="nav-item pr-g lg:pl-hg">
 								<a className="h4 m-0 flex font-bold" href="#!" data-cy="search-icon" onClick={onToggleSearchBox}>
-									<Search className="text-[1.375em] h-[1em]" />
+									<Search className="text-[1.5625em] lg:text-[1.375em] h-[1em]" />
 								</a>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon className="text-[27.5px] h-[27.5px]"/>
-									<span className="cart-drawer__count text-sm h-100 top-[50%] left-[50%] text-body -mt-[18px]">0</span>
+									<CartIcon className="text-[1.5625em] h-[1] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">0</span>
 								</a>
 							</li>
 						</ul>
