@@ -217,7 +217,7 @@ const Homepage = () => {
     return (
 		<>
             <HeroBanner isStyleguide={true} />
-            <ProductCarousel products={PRODUCTS} />
+            <ProductCarousel products={PRODUCTS} isStyleguide={true} />
 			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Service />
             <Playground featuredCollection={featuredCollection} isStyleguide={true} />

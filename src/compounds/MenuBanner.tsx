@@ -98,7 +98,7 @@ const MenuBanner = (props: any) => {
 
     return (
         <li className="pt-[5px] pb-0 flex justify-between mx-g mb-1" onClick={() => onBannerAction()}>
-            <figure className={`flex mb-0 items-center bg-${theme} pl-g relative py-1 my-0 rounded-tl-[.5em] rounded-bl-[.5em] w-full`}>
+            <figure className={`flex mb-0 items-center bg-${theme} pl-g relative py-1 my-0 rounded-tl-[.5em] rounded-bl-[.5em] w-[calc(100%-10px)] `}>
                 {theme === 'secondary-light' ? (
 					<Percentage className="mr-1" />
 				) : (
@@ -113,7 +113,7 @@ const MenuBanner = (props: any) => {
 						{copied ? (<span className="font-size-sm">Copied!</span>) : cta}
 					</span>
 				)}
-                {theme === 'secondary-light' && (<MenuDecorationGreen className={`absolute banner-decoration text-${theme} top-[0] -right-[10px] h-full`}/>)}
+			{theme === 'secondary-light' && (<MenuDecorationGreen className={`absolute banner-decoration text-${theme} top-[0] -right-[10px] h-full`}/>)}
                 {theme === 'pink-light' && (<MenuDecoration className={`absolute banner-decoration top-[0] text-${theme} -right-[10px] h-full`}/>)}
             </figure>
         </li>
