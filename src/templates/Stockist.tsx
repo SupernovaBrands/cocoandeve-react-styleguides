@@ -64,7 +64,7 @@ const Stockist = (props: any) => {
                         </select>
                     </div>
                 </form>
-                {parse(content.desc)}
+                {parse(content.desc.replace('text-underline', 'underline'))}
                 <h2 className="mt-4 mb-3">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></h2>
                 <hr className="lg:hidden my-3"></hr>
                 <div className="flex flex-wrap justify-center">
