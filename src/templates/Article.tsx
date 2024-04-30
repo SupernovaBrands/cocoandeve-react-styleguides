@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
-// import ProgressBar from '@/components/ProgressBar';
 import BlogNavTag from '~/compounds/blog-nav-tags';
 import PostCard from "~/compounds/PostCard";
 import Sidebar from "~/sections/Sidebar";
@@ -11,6 +9,7 @@ import Pinterest from '~/images/icons/pinterest-square.svg';
 import Form from "~/compounds/footer-newsletter-form";
 import parse from 'html-react-parser';
 import Documents from '~/images/icons/documents.svg';
+import ProgressBar from '~/components/ProgressBar';
 
 const ArticleNewsLetter = (props) => {
     const { postNewsletter } = props;
@@ -20,27 +19,45 @@ const ArticleNewsLetter = (props) => {
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
                 <picture className="lg:w-1/3 w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded rounded-tr-none rounded-br-none" />
                 </picture>
                 <div className="lg:w-2/3 w-full p-2 lg:pe-4">
                     <h2 className="mb-1">{postNewsletter.blog_ns_title}</h2>
                     <p className="mb-[1rem]">{postNewsletter.blog_ns_desc}</p>
-                    <Form background="bg-white" placeholder={postNewsletter.blog_ns_email} successMsg={postNewsletter.blog_ns_success} />
+                    <Form background="bg-white" btnText="Sign Me Up!" placeholder={postNewsletter.blog_ns_email} successMsg={postNewsletter.blog_ns_success} />
                     <div className="blog-post-grid__newsletter--submitted hidden form-group mb-g text-left items-center">
                         <button type="button" className="btn btn-primary btn-lg rounded-lg block d-lg-inline-block mb-0 btn--copy">
                             WELCOME
                             <Documents className="ml-25" />
                         </button>
                     </div>
-                    <p className="text-sm mb-0 text-gray-600 mt-2">{parse(postNewsletter.blog_ns_note)}</p>
+                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm [text-decoration-line:none!important]"'))}</p>
                 </div>
             </div>
         </div>
     );
 };
 
+const ArticlPosteBanner = (props) => {
+    const { postBannerInfo, title } = props;
+    return (
+        <div className="blog-post-banner my-2 hidden text-center">
+            {postBannerInfo.blog_banner_title && (
+                <a href={postBannerInfo.blog_banner_link} className="text-center d-block font-bold [text-decoration-line:none!important]" aria-label={`Banner Link - ${postBannerInfo.blog_banner_title}`}>{postBannerInfo.blog_banner_title}</a>
+            )}
+            <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
+                <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
+                    <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
+                    <img src={postBannerInfo.blog_banner_mobile.url} className="embed-responsive-item object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
+                </picture>
+            </a>
+        </div>
+    );
+};
+
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, popularArticles, recomendations } = props;
+    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo } = props;
+    const [offset, setOffset] = useState<any | null>(null);
 
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
@@ -54,19 +71,74 @@ const Article = (props) => {
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
     const bodyContent = content.BlogContentMultiStores[storeName].body_content.replace('<a', ariaLabel).replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
 
-
-
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
         const newsletterWrapper = document.querySelector('.newsletterWrapper');
         if (blogPostGridNewsletter && newsletterWrapper) {
-          if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
-            return;
-          }
-          newsletterWrapper.appendChild(blogPostGridNewsletter);
-          blogPostGridNewsletter.classList.remove('d-none');
+            if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
+                return;
+            }
+            newsletterWrapper.appendChild(blogPostGridNewsletter);
+            blogPostGridNewsletter.classList.remove('hidden');
         }
-      }, []);
+    }, []);
+
+    useEffect(() => {
+        const blogPostBanner = document.querySelector('.blog-post-banner');
+        const articleNewBanners = document.querySelectorAll('.article-new-banner');
+        if (blogPostBanner && articleNewBanners.length > 0) {
+            const articleBanners = document.querySelectorAll('.article-banner');
+            articleBanners.forEach(banner => banner.remove());
+            const clonedBannerExists = document.querySelector('.cloned-banner');
+            if (!clonedBannerExists) {
+                articleNewBanners.forEach(item => {
+                    const clonedBanner = blogPostBanner!.cloneNode(true) as HTMLElement;
+                    clonedBanner.classList.remove('blog-post-banner', 'hidden');
+                    clonedBanner.classList.add('cloned-banner');
+                    item.appendChild(clonedBanner);
+                });
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        const setProgress = () => {
+            const { body, documentElement: html } = document;
+
+            const height = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight,
+            );
+
+            const scrollFromTop = (html.scrollTop || body.scrollTop) + html.clientHeight;
+			const width = `${(scrollFromTop / height) * 100}%`;
+            setOffset(width)
+        }
+
+        setProgress();
+
+        window.removeEventListener('scroll', setProgress);
+        window.addEventListener('scroll', setProgress, { passive: true });
+
+        return () => window.removeEventListener('scroll', setProgress);
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            const mainHeader = document.querySelector('.main-header');
+            const progressBar = document.querySelector('.reading-proggress-bar');
+            console.log('mainHeader', mainHeader)
+            if(mainHeader && progressBar) {
+                progressBar.classList.remove('hidden');
+                mainHeader.appendChild(progressBar);
+            }
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     // const PRODUCTS = [
 	// 	{
@@ -113,37 +185,11 @@ const Article = (props) => {
 	// 		}
 	// 	}
     // ]
-    // const [offset, setOffset] = useState();
-
-    // useEffect(() => {
-    //     const setProgress = () => {
-    //         const { body, documentElement: html } = document;
-
-    //         const height = Math.max(
-    //             body.scrollHeight,
-    //             body.offsetHeight,
-    //             html.clientHeight,
-    //             html.scrollHeight,
-    //             html.offsetHeight,
-    //         );
-
-    //         const scrollFromTop = (html.scrollTop || body.scrollTop) + html.clientHeight;
-	// 		const width = `${(scrollFromTop / height) * 100}%`;
-    //         setOffset(width)
-    //     }
-
-    //     setProgress();
-
-    //     window.removeEventListener('scroll', setProgress);
-    //     window.addEventListener('scroll', setProgress, { passive: true });
-
-    //     return () => window.removeEventListener('scroll', setProgress);
-    // }, []);
 
     return (
         <>
-        {/* <ProgressBar  width={offset} /> */}
-        <div className="mobile-wrapper">
+        <div className="mobile-wrapper relative">
+            <ProgressBar width={offset} />
 		    <div className="container mt-4">
                 <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
                 {!isLoading && (
@@ -181,13 +227,16 @@ const Article = (props) => {
                         {!isLoading && (
                             <picture className="relative block mt-2 mb-1 no-gutters__in-container">
                                 <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
-                                <img className="w-100" src={featuredImageUrl} alt={featuredImageAlternativeText} />
+                                <img className="w-100" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
                             </picture>
                         )}
                         <div className="article__content">
                             {parse(bodyContent)}
                             {postNewsletter.post_newsletter_enabled && (
                                 <ArticleNewsLetter postNewsletter={postNewsletter} />
+                            )}
+                            {postBannerInfo.enables && (
+                                <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
                             )}
                             <ul className="block mb-4 mt-1">
                                 <li className="inline-block mr-[0.5rem]">
