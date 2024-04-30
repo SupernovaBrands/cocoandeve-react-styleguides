@@ -40,7 +40,7 @@ const SearchBox = (props: any) => {
 			setProducts([]);
 		}
 
-		fetch(`search?q=${keyword}`).then(
+		fetch(`/api/search?q=${keyword}`).then(
 			res => {
 				res?.json().then(data => {
 					const productsData = data?.products;
