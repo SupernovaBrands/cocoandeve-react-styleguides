@@ -139,7 +139,7 @@
       <feComposite operator="in" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <g id="ce-eyemask-green" transform="translate(-908 13167)" clip-path="url(#clip-path)">
+  <g id="ce-eyemask-green" transform="translate(-908 13167)" clipPath="url(#clip-path)">
     <circle id="Ellipse_283" data-name="Ellipse 283" cx="20" cy="20" r="20" transform="translate(908 -13167)" fill="#003b36"/>
     <g id="Group_7482" data-name="Group 7482" transform="translate(882.434 -13165.713) rotate(-22)">
       <g id="Group_7473" data-name="Group 7473" transform="translate(30.265 14.398) rotate(37)">
