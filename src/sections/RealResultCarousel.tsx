@@ -2,7 +2,7 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -60,6 +60,7 @@ const RealResultCarousel = (props: any) => {
 											author={data.username}
 											product={data.product}
 											url={data.url}
+											index={i}
 										/>
 									))}
 								</Carousel.Inner>
