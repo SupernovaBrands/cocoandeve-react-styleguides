@@ -235,7 +235,7 @@ const Sustainability = (props: any) => {
                         <Carousel.Wrapper emblaApi={emblaApi2} className="pl-1 lg:pl-0">
                             <Carousel.Inner emblaRef={emblaRef2} className="lg:!transform-none">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-2 font-bold">{data.title}</h6>
                                         <p className="mb-g">{data.body}</p>
                                     </PackagingCard>
