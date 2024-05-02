@@ -24,8 +24,6 @@ const Stockist = (props: any) => {
 		setStores(content.stockist.filter((item) => item.country_tag.includes(region)));
 	}, [region]);
 
-    console.log('stores', stores)
-
     return (
         <>
             <section className="container text-center stockist my-4">
