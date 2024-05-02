@@ -171,6 +171,20 @@ const ArticleTemplate = () => {
 		}
 	]
 
+	const postBannerInfo = {
+		"enables": true,
+		"blog_banner_link": "https://bit.ly/447MD6J",
+		"blog_banner_title": "Just Dropped: NEW Anti-Aging Tanning Serum!",
+		"blog_banner_dektop": {
+			"alt": "Tanning Serum_BLOG.jpg",
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e0e3a9a-744c-4a1b-c4ed-13218d354000/public"
+		},
+		"blog_banner_mobile": {
+			"alt": "Tanning Serum_BLOG.jpg",
+			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e0e3a9a-744c-4a1b-c4ed-13218d354000/public"
+		}
+	}
+
 	useEffect(() => {
         setIsLoading(false);
     }, []);
@@ -191,6 +205,7 @@ const ArticleTemplate = () => {
 				postNewsletter={postNewsletter}
 				popularArticles={popularArticles}
 				recomendations={recomendations}
+				postBannerInfo={postBannerInfo}
 			/>
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 			<Footer

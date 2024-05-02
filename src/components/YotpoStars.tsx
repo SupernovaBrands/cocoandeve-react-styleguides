@@ -13,8 +13,10 @@ const YotpoStar = (props: any) => {
 		fetch(`https://api-cdn.yotpo.com/products/${global.config.yotpoKey}/${props.productId}/bottomline`)
 			.then((response) => response.json())
 			.then((data) => {
-				setScore(data?.response?.bottomline?.average_score);
-				setTotal(data?.response?.bottomline?.total_reviews);
+				if (data.response && data.response.bottomline) {
+					setScore(data?.response?.bottomline?.average_score);
+					setTotal(data?.response?.bottomline?.total_reviews);
+				}
 				if (!init) {
 					setInit(true);
 				}

@@ -6,9 +6,9 @@ import { useRef } from "react";
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <Button buttonClass={`${props.className ?? ''} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm'}`}>
-            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-nowrap text-left py-[.8125em]' : 'text-center lg:text-center'}`}>{props.label ? props.label : 'Add to Cart'}</span>
-            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-right py-[.8125em]' : 'text-center lg:text-center'}`}>
+        <Button buttonClass={`${props.className ?? ''} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'}`}>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-nowrap text-left py-[.8125em]' : 'text-center lg:text-left'}`}>{props.label ? props.label : 'Add to Cart'}</span>
+            <span className={`w-full lg:w-1/2 block ${props.carousel ? 'text-right py-[.8125em]' : 'text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
@@ -45,7 +45,7 @@ const SwatchOverlay = (props) => {
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item, i) => (
                             <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${i === 0 ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} className={`block variant-swatch mx-auto border-2 ${ i === 0 ? 'border-primary' : 'border-white'} ${item.value} ${item.available ? '' : 'oos'}`}></span>
+                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} className={`block variant-swatch mx-auto border-2 ${ i === 0 ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
@@ -58,6 +58,9 @@ const SwatchOverlay = (props) => {
 
 const ProductCardTall = (props) => {
     const { abtestBtn } = props;
+    // if (props.product.swatch) {
+    //     console.log('true!!', props.product);
+    // }
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t bg-pink-light">
