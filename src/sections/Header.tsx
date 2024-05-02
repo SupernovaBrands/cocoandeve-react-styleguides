@@ -192,7 +192,7 @@ const Header = (props: any) => {
 				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
 
 			</header>
-			{/* <Cart showCart={openCartDrawer} handleClose={handleClose}/> */}
+			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}
 		</>
 	);
 };
