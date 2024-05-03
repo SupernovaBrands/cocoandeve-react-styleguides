@@ -15,6 +15,7 @@ import {
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
 import Link from 'next/link';
+
 const options: EmblaOptionsType = {
 	loop: true,
 	breakpoints: {
@@ -24,7 +25,7 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 
-	const { isStyleguide, products, tabProducts } = props;
+	const { isStyleguide, products, data } = props;
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
 	const [productsData, setProductsData] = useState({ tab1: { products: [] }, tab2: { products: [] }, tab3: { products: [] } });
@@ -37,7 +38,7 @@ const ProductCarousel = (props: any) => {
 				tab3: { products },
 			})
 		} else {
-			setProductsData(tabProducts);
+			setProductsData(data);
 		}
 	}, []);
 
@@ -84,7 +85,7 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData.tab1.products.map((data, index) => (
+									{productsData?.tab1?.products && productsData.tab1.products.map((data, index) => (
 										<ProductCard
 											key={`tab1-${index}`}
 											isFromShopify={true}
@@ -118,7 +119,7 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'bestsellers'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef1}>
-									{productsData.tab2.products.map((data, index) => (
+									{productsData?.tab2?.products && productsData.tab2.products.map((data, index) => (
 										<ProductCard
 											key={`tab2-${index}`}
 											sFromShopify={true}
@@ -152,7 +153,7 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
-									{productsData.tab3.products.map((data, index) => (
+									{productsData?.tab3?.products && productsData.tab3.products.map((data, index) => (
 										<ProductCard
 											key={`tab3-${index}`}
 											isFromShopify={true}
