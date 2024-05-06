@@ -273,7 +273,7 @@ const Sustainability = (props: any) => {
                     </div>
                 </div>
             </section>
-            <section className="py-4 lg:py-5">
+            <section className="py-4 lg:py-5 overflow-hidden">
                 <div className="container text-center">
                     <h2 className="text-center mx-5 mb-1">Like what we are doing? Shop now!</h2>
                     {!isLoading && products.products.length > 0 && (
@@ -287,6 +287,7 @@ const Sustainability = (props: any) => {
                                             button={true}
                                             carousel={true}
                                             link={data.handle}
+                                            sustainability={true}
                                         />
                                     ))}
                                 </Carousel.Inner>

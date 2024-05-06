@@ -244,7 +244,7 @@ const Collection = (props: any) => {
                                         <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                     </div>
                                 )}
-                                {products.length > 0 && sortedByAvailable.map((item: any, index: number) => {
+                                {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
                                     if (!item.src) {
                                         item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                         item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
