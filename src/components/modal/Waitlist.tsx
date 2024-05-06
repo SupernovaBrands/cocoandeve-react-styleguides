@@ -2,6 +2,7 @@ import Button from '../Button';
 import CloseButton from './CloseButton';
 
 interface WatilistData {
+	image: string
 	title: string
 	desc: string
 	date: string
@@ -21,7 +22,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => (
 		<div className="modal-body pt-0 pb-3 px-3 lg:py-5 lg:px-2">
 			<div className="flex flex-wrap items-center justify-center">
 				<div className="w-full lg:w-1/2 lg:px-g text-center">
-					<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" loading="lazy" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b653f2b3-08b7-421c-351a-3a5b70a27e00/public" />
+					{data.image &&
+						<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image} />
+					}
 				</div>
 				<div className="w-full lg:w-1/2 lg:px-g text-center mt-n1 mt-lg-0">
 					<strong className="mb-1 text-xl lg:text-2xl">{data.title}</strong>

@@ -2,6 +2,7 @@ import ProductCard from "~/compounds/ProductCard";
 
 const ProductCards = () => {
     const product1 = {
+        availableForSale: true,
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
         title: 'Like a Virgin Hair Masque',
@@ -15,6 +16,7 @@ const ProductCards = () => {
         }
     };
     const product2 = {
+        availableForSale: true,
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
         title: 'Like a Virgin Hair Masque Like a Virgin Hair Masque',
@@ -36,6 +38,7 @@ const ProductCards = () => {
         }
     };
     const product3 = {
+        availableForSale: true,
         src: 'https://via.placeholder.com/520x520/FFF2F4',
         srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
         title: 'Like a Virgin Hair Masque',
