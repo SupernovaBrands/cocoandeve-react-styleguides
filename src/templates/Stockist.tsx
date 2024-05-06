@@ -24,8 +24,6 @@ const Stockist = (props: any) => {
 		setStores(content.stockist.filter((item) => item.country_tag.includes(region)));
 	}, [region]);
 
-    console.log('stores', stores)
-
     return (
         <>
             <section className="container text-center stockist my-4">
@@ -78,7 +76,7 @@ const Stockist = (props: any) => {
                 ))}
                 </div>
                 <h2 className="h1 mt-4 mb-1">{content.question_title}</h2>
-                <p className="lg:text-lg sm:text-sm font-normal">No worries, you can email us: <a href="mailto:wholesale@cocoandeve.com" className="underline lg:text-lg font-bold">wholesale@cocoandeve.com</a></p>
+                <p className="lg:text-lg sm:text-sm font-normal mb-5">No worries, you can email us: <a href="mailto:wholesale@cocoandeve.com" className="underline lg:text-lg font-bold">wholesale@cocoandeve.com</a></p>
             </section>
         </>
     );
