@@ -130,13 +130,6 @@ const CollectionTemplate = () => {
 		}
     ];
 
-	const footerAbout = {
-		id: 4,
-		enabled: true,
-		title: "About our Hair Care Products 1",
-		content_body: "<p>Treat your hair to the ultimate pamper routine with Coco &amp; Eve&rsquo;s hair care products, straight from paradise.</p>\n<p>Explore our <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/hydrating-shampoo\">hydrating shampoo</a> and <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/hydrating-conditioner\">conditioner</a> to achieve instant gloss, shine and smoothness. <br><br>Revive and renew your scalp with our <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/clean-scalp-treatment\">scalp exfoliator</a> and discover our <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/super-nourishing-coconut-fig-hair-masque\">Like a Virgin Hair Masque </a>and Sweet Repair Hair Masque for hydrated and shiny hair! <br><br>Need a quick fix? Try our <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/leave-in-conditioner\">Leave in Conditioner</a> to instantly transform your hair.</p>\n<p>Looking to take your hair care routine to the next level? Browse our hair accessories and treat yourself to a <a class=\"text-underline\" href=\"https://us.cocoandeve.com/products/shampoo-brush\">shampoo brush</a> or hair towel wrap for some extra pampering.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
-	};
-
 	useEffect(() => {
         setIsLoading(false);
     }, []);
@@ -227,7 +220,6 @@ const CollectionTemplate = () => {
 			<Collection
 				isLoading={isLoading}
 				products={products}
-				footerAbout={footerAbout}
 				mainCollections={mainCollections}
 				handle={'tan-and-spf'}
 				currentCollection={currentCollection}
