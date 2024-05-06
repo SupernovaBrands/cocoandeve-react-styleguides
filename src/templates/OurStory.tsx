@@ -1,4 +1,3 @@
-// import CarouselCustom from "~/components/CarouselCustom";
 import ImageWithText from "~/compounds/ImageWithText";
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';

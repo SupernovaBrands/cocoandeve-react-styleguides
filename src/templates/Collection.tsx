@@ -6,11 +6,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
+import ModalWaitlist from "~/components/modal/Waitlist";
+import usePreview from "~/hooks/usePreview";
 
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
-        <figure className="w-full relative items-center px-0 mb-g">
+        <figure className="w-full relative items-center px-0 mb-0 lg:mb-g">
             {!isLoading && !bannerLoading && (
                 <picture>
                     <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
@@ -64,13 +66,19 @@ const Collection = (props: any) => {
         currentCollection,
         showSpinner,
         childrenCollections,
-        parentCollection
+        parentCollection,
+        globalSettings,
     } = props;
 
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: ''
+    });
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
@@ -79,7 +87,6 @@ const Collection = (props: any) => {
     const searchParams = useSearchParams();
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
-
     const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
 
 
@@ -142,6 +149,39 @@ const Collection = (props: any) => {
     const collectionSettings = useCollectionSettings(handle);
     const collectionSingle = useCollectionSingle(handle);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
+
+    const variantWatlist = [];
+    const waitlistProducts = sortedByAvailable.filter((item: any) => !item.availableForSale);
+    const waitlistVariants = sortedByAvailable.map((item: any) => {
+        const variantOos = item.variants.nodes.filter((node: any) => !node.availableForSale);
+        if (variantOos.length > 0) variantWatlist.push(variantOos);
+    });
+
+    let MODAL_WAITLIST = {
+        title: 'Oh coco-nuts!',
+        desc: 'Our <strong>Miracle Hair Elixir</strong>  has become a worldwide hit and we\'re struggling to keep up with the demand. But don\'t worry, we\'re on it! Sign up to join the waitlist.',
+        date: 'RESTOCKING 6th OCTOBER',
+        invalidEmail: 'Invalid Email Address',
+        email: 'Enter your email',
+        ctaText: 'Yes, notify me!',
+        image: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b653f2b3-08b7-421c-351a-3a5b70a27e00/public'
+    };
+
+    if (!globalSettings.isLoading) {
+        const { isPreview } = usePreview();
+        const store = (isPreview) ? 'dev' : 'us';
+        const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
+        const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
+        MODAL_WAITLIST = {
+            title: waitlistPopupData.waitlist_popup_form_title,
+            desc: `${waitlistData.title} ${waitlistPopupData.waitlist_popup_form_description_2}`,
+            date: '',
+            invalidEmail: waitlistPopupData.email_invalid,
+            email: waitlistPopupData.email_placeholder,
+            ctaText: waitlistPopupData.waitlist_popup_form_submit,
+            image: waitlistData.image,
+        };
+    }
 
     return (
         <>
@@ -257,6 +297,7 @@ const Collection = (props: any) => {
                                                 product={item}
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
+                                                setWaitlistData={setWaitlistData}
                                             />
                                         </>
                                     ) : (
@@ -265,6 +306,7 @@ const Collection = (props: any) => {
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
+                                            setWaitlistData={setWaitlistData}
                                         />
                                     )
                                 })}
@@ -287,6 +329,12 @@ const Collection = (props: any) => {
                         )}
                     </div>
                 </>
+            )}
+
+            {!isLoading && !globalSettings.isLoading && waitlistProducts.length > 0 && waitlistVariants.length > 0 && (
+                <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{open: false}})}>
+                    <ModalWaitlist data={MODAL_WAITLIST} handleClose={() => setWaitlistData({...waitlistData, ...{open: false}})} />
+                </Modal>
             )}
         </>
     )

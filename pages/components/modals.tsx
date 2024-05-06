@@ -40,6 +40,7 @@ const Modals = () => {
 	};
 
 	const MODAL_WAITLIST = {
+		image: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b653f2b3-08b7-421c-351a-3a5b70a27e00/public',
 		title: 'Oh coco-nuts!',
 		desc: 'Our <strong>Miracle Hair Elixir</strong>  has become a worldwide hit and we\'re struggling to keep up with the demand. But don\'t worry, we\'re on it! Sign up to join the waitlist.',
 		date: 'RESTOCKING 6th OCTOBER',
