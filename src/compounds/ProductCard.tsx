@@ -80,7 +80,7 @@ const ProductCardTall = (props) => {
                 <div className="flex justify-center mb-1">
                     <YotpoStar productId={props.product.productId} showTotal={true} />
                 </div>
-                <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? 'min-h-[2.5em] lg:mx-[0.625rem]' : 'px-1'}`}>
+                <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-1'}`}>
                     <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && (

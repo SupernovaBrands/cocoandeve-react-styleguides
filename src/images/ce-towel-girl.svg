@@ -4,7 +4,7 @@
       <circle id="Ellipse_262" data-name="Ellipse 262" cx="20" cy="20" r="20" transform="translate(2118 -11647)" fill="#02635b"/>
     </clipPath>
   </defs>
-  <g id="ce-towel-girl" transform="translate(-2118 11647)" clip-path="url(#clip-path)">
+  <g id="ce-towel-girl" transform="translate(-2118 11647)" clipPath="url(#clip-path)">
     <circle id="Ellipse_261" data-name="Ellipse 261" cx="20" cy="20" r="20" transform="translate(2118 -11647)" fill="#f5dadf"/>
     <g id="Group_7309" data-name="Group 7309" transform="translate(2116.053 -11621.25) rotate(-47)">
       <g id="Group_7251" data-name="Group 7251" transform="translate(6.79 20.305)">

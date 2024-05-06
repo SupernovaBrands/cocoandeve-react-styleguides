@@ -80,6 +80,7 @@ module.exports = {
       xl: ['1.5rem', '1.875rem'], //24px, 30px
       '2xl': ['2rem', '2.5rem'], //32px, 40px
       '3xl': ['2.625rem', '3.281rem'], //42px, 52px
+      hero: ['4.5em', '1.25em'], //72px, 90px
     },
     spacing: {
       25: '5px',
