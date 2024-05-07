@@ -74,7 +74,7 @@ const ProductCardTall = (props) => {
             }
             <div className="product-card__content pt-2 pb-0 px-1 position-relative flex-grow-1 d-flex flex-column">
                 <div className="d-flex justify-content-center mb-1">
-                    <YotpoStar productId={props.product.productId} showTotal={false} />
+                    <YotpoStar sku={props.product.variants.nodes[0].sku} productId={props.product.productId} showTotal={false} />
                 </div>
                 <p className="product-card__title flex-grow-1 d-flex flex-column justify-content-center h4 h-100 fw-normal">
                     <Link href="#" className="text-dark">{props.product.title}</Link>
