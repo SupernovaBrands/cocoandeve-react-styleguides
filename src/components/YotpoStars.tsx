@@ -1,21 +1,24 @@
 import '~/config';
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import ReviewStar from './ReviewStar';
 import Link from 'next/link';
+import { currentTime, encryptParam } from '~/modules/utils';
 
 const YotpoStar = (props: any) => {
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(0);
+	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
+	const signature = encryptParam(`{sku:'${props.sku}',time:${currentTime()}}`);
+	const localeParam = 'en';
 
 	useEffect(() => {
-		fetch(`https://api-cdn.yotpo.com/products/${global.config.yotpoKey}/${props.productId}/bottomline`)
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`)
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.response && data.response.bottomline) {
 					setScore(data?.response?.bottomline?.average_score);
-					setTotal(data?.response?.bottomline?.total_reviews);
+					setTotal(data?.response?.bottomline?.total_review);
 				}
 				if (!init) {
 					setInit(true);
