@@ -149,7 +149,7 @@ const Product = (props: any) => {
                         <ProductImageCarousel slides={SLIDES} bottomBadge="👻 Get 3 for 2 with code: HALLOWEEN 👻" />
                     </div>
                     <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-g">
-                        <YotpoStar sku={props.product.variants.nodes[0].sku} productId={4543113265187} showTotal={true} className="justify-start"/>
+                        <YotpoStar sku="CE0000072020" productId={4543113265187} showTotal={true} className="justify-start"/>
                         <h1 className="mb-2 lg:order-0">Sunny Honey Bali Bronzing Foam</h1>
                         <div className="mb-1">
                             <span className="mr-25 inline-block badge badge--sm py-hg rounded bg-secondary text-white mb-25 font-normal px-1">New</span>
