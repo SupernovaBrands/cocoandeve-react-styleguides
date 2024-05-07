@@ -58,9 +58,6 @@ const SwatchOverlay = (props) => {
 
 const ProductCardTall = (props) => {
     const { abtestBtn } = props;
-    // if (props.product.swatch) {
-    //     console.log('true!!', props.product);
-    // }
 	return !props.useCardTemplate ? (
         <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t bg-pink-light">
@@ -78,7 +75,7 @@ const ProductCardTall = (props) => {
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className="pt-1 pb-0 px-1 relative grow flex flex-col bg-pink-light rounded-b">
                 <div className="flex justify-center mb-1">
-                    <YotpoStar productId={props.product.productId} showTotal={true} />
+                    <YotpoStar sku={props.product.variants.nodes[0].sku} productId={props.product.productId} showTotal={true} />
                 </div>
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-1'}`}>
                     <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
