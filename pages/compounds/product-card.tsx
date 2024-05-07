@@ -8,6 +8,11 @@ const ProductCards = () => {
         comparePrice: '$34.90',
         price: '$24.90',
         productId: 4543113265187,
+        variants: {
+            nodes: [
+                { sku: 'CE0000072020' }
+            ]
+        }
     };
     const product2 = {
         src: 'https://via.placeholder.com/520x520/FFF2F4',
@@ -22,6 +27,11 @@ const ProductCards = () => {
             data: [
                 { id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: true},
                 { id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
+            ]
+        },
+        variants: {
+            nodes: [
+                { sku: 'CE0000072020' }
             ]
         }
     };
@@ -39,6 +49,11 @@ const ProductCards = () => {
                 { id: 32068891541539, value: 'medium', label: 'Medium', available: false},
                 { id: 32068891607075, value: 'dark', label: 'Dark', available: true},
                 { id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
+            ]
+        },
+        variants: {
+            nodes: [
+                { sku: 'CE0000072020' }
             ]
         }
     };
