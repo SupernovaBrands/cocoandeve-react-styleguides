@@ -17,7 +17,7 @@ const WaitlistButton = (props) => {
     const handleWaitlist = () => {
         props.setWaitlistData({
             open: true,
-            title: `Our <strong>${props.product.title}</strong>`,
+            title: props.product.title,
             image: props.product.src
         });
     };
@@ -63,7 +63,7 @@ const SwatchOverlay = (props) => {
     return (
         <>
             <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="btn-choose mb-1" label={props.swatch.label}/>
-            <div className="w-auto px-25 swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
+            <div className="!w-auto px-0 swatch-overlay left-25 right-25 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
                         {props.swatch.style && <strong>Style: </strong>}
