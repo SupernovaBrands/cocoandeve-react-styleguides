@@ -195,7 +195,7 @@ const Article = (props) => {
 
     return (
         <>
-        <div className="mobile-wrapper relative">
+        <div className="mobile-wrapper sm:px-hg relative">
             <ProgressBar width={offset} />
 		    <div className="container mt-4">
                 <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
@@ -209,7 +209,7 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
                     </div>
                 )}
-                <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 mb-4">
+                <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
@@ -232,9 +232,9 @@ const Article = (props) => {
                             </a>
                         </div> */}
                         {!isLoading && (
-                            <picture className="relative block mt-2 mb-1 no-gutters__in-container">
+                            <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
                                 <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
-                                <img className="w-100" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
+                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
                             </picture>
                         )}
                         <div className="article__content">
@@ -276,12 +276,12 @@ const Article = (props) => {
                 <ShopArticle products={PRODUCTS} />
             </div>
         </div> */}
-        <div className="blog-post-grid__recomendation mobile-wrapper my-2">
+        <div className="blog-post-grid__recomendation mobile-srapper bg-pink-light overflow-hidden">
             <div className="container pt-3 lg:pb-1">
                 <h3 className="text-center h1 mb-1">You might also like</h3>
-                <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
+                <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">
 					{recomendations.map((data) =>
-						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}
 				</div>
             </div>
