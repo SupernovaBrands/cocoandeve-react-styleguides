@@ -48,7 +48,7 @@ const YotpoStar = (props:any) => {
 			{props.showTotal && (
 				<span className="ml-25">
 					(
-					<a className="link-secondary underline" href={`${props.productUrl}#write-a-review`}>{total}</a>
+					<a className="link-secondary underline text-dark hover:text-primary" href={`${props.productUrl}#write-a-review`}>{total}</a>
 					)
 				</span>
 			)}

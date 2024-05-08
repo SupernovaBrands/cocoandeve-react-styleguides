@@ -1,12 +1,13 @@
 import PlusIcon from '~/images/icons/plus.svg';
 import MinusIcon from '~/images/icons/minus.svg';
-import { useState } from 'react';
+import { Component, useState } from 'react';
 
 const AccordionPDP = (props: any) => {
 	interface Accordion {
 		id: number;
 		title: string;
 		text: string;
+		component: any;
 	};
 	const { data } = props;
 	return (
@@ -19,7 +20,8 @@ const AccordionPDP = (props: any) => {
 						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[12px] w-[12px]`}/> }
 					</div>
 					<div className={`transition-all overflow-hidden ${props.openIndex === d.id ? 'duration-1000' : 'duration-75 max-h-0'}`}>
-						<div className="pt-1 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div>
+						{ d.text && <div className="pt-1 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
+						{ d.component && <div className="pt-1 pb-1 text-sm">{ d.component }</div>}
 					</div>
 				</div>
 			))}
