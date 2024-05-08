@@ -3,8 +3,8 @@ import parse from 'html-react-parser';
 
 const Stockist = (props: any) => {
     const { content, isLoading } = props;
-	const [region, setRegion] = useState('usa');
-	const [regionTitle, setRegionTitle] = useState('USA');
+	const [region, setRegion] = useState('australia');
+	const [regionTitle, setRegionTitle] = useState('Australia');
 	const [stores, setStores] = useState([]);
 
 	useEffect(() => {
@@ -26,9 +26,9 @@ const Stockist = (props: any) => {
 
     return (
         <>
-            <section className="container text-center stockist my-4">
-                <h1 className="mb-1">{content.title}</h1>
-                <form className="flex flex-wrap justify-center items-center">
+            <section className="container text-center stockist">
+                <h1 className="mb-1 mt-3">{content.title}</h1>
+                <form className="flex flex-wrap justify-center items-center lg:-mx-g sm:-mx-hg">
                     <label className="w-full md:w-auto my-1 lg:text-lg sm:=text-sm font-bold">{content.label_title}</label>
                     <div className="w-2/3 md:w-1/4 my-1 px-[5px]">
                         <select className="border-body custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
@@ -65,7 +65,7 @@ const Stockist = (props: any) => {
                 {parse(content.desc.replace('text-underline', 'underline'))}
                 <h2 className="mt-4 mb-3">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></h2>
                 <hr className="lg:hidden my-3"></hr>
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
                 {stores.map((filteredItem) => (
                     <figure key={filteredItem.id} className="m-0 w-1/2 md:w-1/3 px-g lg:px-g" data-toggle={filteredItem.country_tag}>
                         <a href={filteredItem.logo_url} className="block lg:py-g rounded" target="_blank">
