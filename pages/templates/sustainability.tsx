@@ -124,6 +124,11 @@ const SustainabilityTemplate = () => {
 						{ id: 32068891607075, value: 'dark', label: 'Dark', available: true},
 						{ id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
 					]
+				},
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
+					]
 				}
 			},
 			{
@@ -141,6 +146,11 @@ const SustainabilityTemplate = () => {
 						{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 						{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
 					]
+				},
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
+					]
 				}
 			},
 			{
@@ -151,6 +161,11 @@ const SustainabilityTemplate = () => {
 				price: '$34.90',
 				srcSet: 'https://via.placeholder.com/540x540',
 				src: 'https://via.placeholder.com/243x243',
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
+					]
+				}
 			},
 			{
 				label: 'Slide 4',
@@ -161,6 +176,11 @@ const SustainabilityTemplate = () => {
 				badgeImg: true,
 				srcSet: 'https://via.placeholder.com/540x540',
 				src: 'https://via.placeholder.com/243x243',
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
+					]
+				}
 			},
 			{
 				label: 'Slide 1',
@@ -179,6 +199,11 @@ const SustainabilityTemplate = () => {
 						{ id: 32068891607075, value: 'dark', label: 'Dark', available: true},
 						{ id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
 					]
+				},
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
+					]
 				}
 			},
 			{
@@ -195,6 +220,11 @@ const SustainabilityTemplate = () => {
 					data: [
 						{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 						{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
+					]
+				},
+				variants: {
+					nodes: [
+						{ sku: 'CE0000072020' }
 					]
 				}
 			},

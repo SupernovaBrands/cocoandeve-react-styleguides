@@ -4,13 +4,14 @@ import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
+import ModalWaitlist from "~/components/modal/Waitlist";
 
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
-        <figure className="w-full relative items-center px-0 mb-g">
+        <figure className="w-full relative items-center px-0 mb-0 lg:mb-g">
             {!isLoading && !bannerLoading && (
                 <picture>
                     <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
@@ -72,16 +73,19 @@ const Collection = (props: any) => {
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
-    const [showQuizCard, setShowQuizCard] = useState(false)
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
+    const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
     const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
-
     const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
 
 
@@ -135,6 +139,13 @@ const Collection = (props: any) => {
     const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
     const collectionSingle = useCollectionSingle(handleFooter);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
+
+    const variantWatlist = [];
+    const waitlistProducts = sortedByAvailable.filter((item: any) => !item.availableForSale);
+    sortedByAvailable.map((item: any) => {
+        const variantOos = item.variants?.nodes?.filter((node: any) => !node.availableForSale);
+        if (variantOos.length > 0) variantWatlist.push(variantOos);
+    });
 
     return (
         <>
@@ -250,6 +261,7 @@ const Collection = (props: any) => {
                                                 product={item}
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
+                                                setWaitlistData={setWaitlistData}
                                             />
                                         </>
                                     ) : (
@@ -258,6 +270,7 @@ const Collection = (props: any) => {
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
+                                            setWaitlistData={setWaitlistData}
                                         />
                                     )
                                 })}
@@ -280,6 +293,12 @@ const Collection = (props: any) => {
                         )}
                     </div>
                 </>
+            )}
+
+            {!isLoading && (waitlistProducts.length > 0 || variantWatlist.length > 0 ) && (
+                <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                </Modal>
             )}
         </>
     )
