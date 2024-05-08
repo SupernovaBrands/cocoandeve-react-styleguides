@@ -16,7 +16,6 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 const HowToCarousel = (props) => {
 
     const { videoData } = props;
-    console.log('testing', videoData)
 
     const options: EmblaOptionsType = {
         loop: true,

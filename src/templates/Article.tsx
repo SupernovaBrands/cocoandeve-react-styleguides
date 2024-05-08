@@ -66,10 +66,17 @@ const Article = (props) => {
     const updateDate = `Updated on ${month} ${day}, ${year}`;
 
     const storeName = 'dev';
-    const featuredImageUrl = content.BlogContentMultiStores[storeName].featured_image.url;
-    const featuredImageAlternativeText = content.BlogContentMultiStores[storeName].featured_image.alt;
+    let bodyContent = '';
+
+    const featuredImageUrl = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.url : '';
+    const featuredImageAlternativeText = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.alt : '';
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
-    const bodyContent = content.BlogContentMultiStores[storeName].body_content.replace('<a', ariaLabel).replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
+    if (content?.BlogContentMultiStores?.[storeName]?.body_content && typeof content.BlogContentMultiStores[storeName].body_content === 'string') {
+        bodyContent = content.BlogContentMultiStores[storeName].body_content
+            .replace('<a', ariaLabel)
+            .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
+    }
+
 
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');

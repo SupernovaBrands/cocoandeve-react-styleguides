@@ -9,18 +9,12 @@ import SvgFull from '~/images/icons/star-full.svg';
 import { encryptParam, currentTime } from '~/modules/utils';
 
 const tStrings = global.config.tStrings;
-
-// const { encryptParam, currentTime } = dynamic(() => import('~/modules/utils'), {
-//     ssr: false,
-// });
-
-// const { yotpoKey } = tSettings;
 const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 
 const { locale } = global.config.tSettings;
 const localeParam = locale.includes('en') ? 'en' : locale;
 
-const YotpoStar = (props) => {
+const YotpoStar = (props:any) => {
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(0);
@@ -28,9 +22,10 @@ const YotpoStar = (props) => {
 	const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
 
 	useEffect(() => {
-		$.get(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${productSkus}&signature=${signature}`).done(function (data) {
-			setScore(data.response.bottomline.average_score);
-			setTotal(data.response.bottomline.total_review);
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${productSkus}&signature=${signature}`).then((data) => data.json()).then((r) => {
+			const { response } = r;
+			setScore(response.bottomline.average_score);
+			setTotal(response.bottomline.total_review);
 			if (!init) {
 				setInit(true);
 			}
@@ -62,7 +57,7 @@ const YotpoStar = (props) => {
 };
 
 YotpoStar.propTypes = {
-	productId: PropTypes.number.isRequired,
+	productId: PropTypes.number,
 	productUrl: PropTypes.string,
 	showScore: PropTypes.bool,
 	showTotal: PropTypes.bool,

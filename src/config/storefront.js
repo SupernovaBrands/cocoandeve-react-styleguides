@@ -1,4 +1,4 @@
-const apiVersion = '2022-10';
+const apiVersion = '2024-04';
 const storefrontSettings = {
 	dev: {
 		storeDomain: 'dev.cocoandeve.com',

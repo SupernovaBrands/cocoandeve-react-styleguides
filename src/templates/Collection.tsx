@@ -2,7 +2,7 @@ import Modal from "~/components/Modal";
 import Terms from "~/components/modal/Terms";
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
@@ -66,6 +66,7 @@ const Collection = (props: any) => {
         showSpinner,
         childrenCollections,
         parentCollection,
+        sort,
     } = props;
 
     const sidebarRef = useRef(null);
@@ -77,6 +78,7 @@ const Collection = (props: any) => {
         title: '',
         image: ''
     });
+    const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
@@ -115,8 +117,6 @@ const Collection = (props: any) => {
         setLoading(true);
     };
 
-    const showQuizCard = handle === 'tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf';
-
     const selectFilterChange = (e: any) => {
         showLoading(e);
         router.push(`/collections/${e.target.value}`);
@@ -126,26 +126,19 @@ const Collection = (props: any) => {
         selectFilterValue = parentCollection.collection.handle;
     }
 
-    const selectSortValue = searchParams.get('sort');
-
     const selectSortChange = (e: any) => {
         showLoading(e);
-        router.push(pathname + '?' + createQueryString('sort', e.target.value));
+        router.push(`/collections/${handle}/${e.target.value}`);
     };
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString());
-            params.set(name, value);
+    useEffect(() => {
+        setShowQuizCard(handle === 'tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
+        setLoading(false);
+    }, [currentCollection]);
 
-            return params.toString();
-        },
-        [searchParams]
-    );
-
-    useEffect(() => setLoading(false), [currentCollection]);
     const collectionSettings = useCollectionSettings(handle);
-    const collectionSingle = useCollectionSingle(handle);
+    const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
+    const collectionSingle = useCollectionSingle(handleFooter);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
     const variantWatlist = [];
@@ -215,7 +208,7 @@ const Collection = (props: any) => {
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={selectSortValue}>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={sort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
                                             <option value="price-low-high">Price, low to high</option>

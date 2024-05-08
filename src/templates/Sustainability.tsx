@@ -110,7 +110,7 @@ const Sustainability = (props: any) => {
                             <img className="block w-full" alt={banner.heading} src={banner.image_mobile.url} />
                         </picture>
                     )}
-                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[40%]">{banner.heading}</h1>
+                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[40%] lg:text-[3.25em] lg:leading-[1.25em]">{banner.heading}</h1>
                 </Link>
             </section>
             <section>
