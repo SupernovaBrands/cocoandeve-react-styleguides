@@ -1,8 +1,8 @@
 const Button = (props: any) => {
-    const {id, label, type, lg, buttonClass, onClick, children} = props
+    const {id, label, type, lg, buttonClass, onClick, children, disabled} = props
     return (
-        <button onClick={onClick} id={id} type={type ?? 'button'}
-            className={`${buttonClass ?? 'btn-primary'} ${lg ?? 'btn-lg'} btn block`}>
+        <button disabled={disabled} onClick={onClick} id={id} type={type ?? 'button'}
+            className={`${buttonClass ?? 'btn-primary'} ${lg ?? 'btn-lg'} btn block ${disabled ? 'opacity-65' : ''}`}>
             {children}
         </button>
     )

@@ -18,7 +18,8 @@ const WaitlistButton = (props) => {
         props.setWaitlistData({
             open: true,
             title: props.product.title,
-            image: props.product.src
+            image: props.product.src,
+            handle: props.product.handle,
         });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
@@ -60,10 +61,11 @@ const SwatchOverlay = (props) => {
             setSwatchAvailable(false);
         }
     };
+    const firstAvailable = props.swatch.data.find((swatchData) => swatchData.available) || { id: 0 };
     return (
         <>
             <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="btn-choose mb-1" label={props.swatch.label}/>
-            <div className="!w-auto px-0 swatch-overlay left-25 right-25 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
+            <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
                         {props.swatch.style && <strong>Style: </strong>}
@@ -74,8 +76,8 @@ const SwatchOverlay = (props) => {
                     </label>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item, i) => (
-                            <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${i === 0 ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ i === 0 ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '')} ${item.available ? '' : 'oos'}`}></span>
+                            <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${firstAvailable.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ firstAvailable.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
@@ -87,6 +89,7 @@ const SwatchOverlay = (props) => {
                 {!swatchAvailable && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
                 )}
+
             </div>
         </>
     );
@@ -111,7 +114,7 @@ const ProductCardTall = (props) => {
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className="pt-1 pb-0 px-25 lg:px-1 relative grow flex flex-col bg-pink-light rounded-b">
                 <div className="flex justify-center mb-1">
-                    <YotpoStar sku={props.product.variants.nodes[0].sku} productId={props.product.productId} showTotal={true} />
+                    <YotpoStar sku={props.product?.variants?.nodes[0]?.sku} productId={props.product.productId} showTotal={true} />
                 </div>
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-0 lg:px-1'}`}>
                     <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>

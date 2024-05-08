@@ -1,6 +1,13 @@
+import { useState } from "react";
 import ProductCard from "~/compounds/ProductCard";
 
 const ProductCards = () => {
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
     const product1 = {
         availableForSale: true,
         src: 'https://via.placeholder.com/520x520/FFF2F4',
@@ -68,15 +75,18 @@ const ProductCards = () => {
                     product={product1}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                     button={true}
+                    setWaitlistData={setWaitlistData}
                 />
                 <ProductCard
                     product={product2}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                     icon={true}
+                    setWaitlistData={setWaitlistData}
                 />
                 <ProductCard
                     product={product3}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                    setWaitlistData={setWaitlistData}
                 />
             </div>
             <div className="flex flex-wrap -mx-1 lg:-mx-2">
@@ -84,15 +94,18 @@ const ProductCards = () => {
                     product={product1}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                     button={true}
+                    setWaitlistData={setWaitlistData}
                 />
                 <ProductCard
                     product={product2}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                     icon={true}
+                    setWaitlistData={setWaitlistData}
                 />
                 <ProductCard
                     product={product3}
                     className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                    setWaitlistData={setWaitlistData}
                 />
 		    </div>
 		</div>

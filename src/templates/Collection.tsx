@@ -4,7 +4,7 @@ import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
 
@@ -78,14 +78,13 @@ const Collection = (props: any) => {
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
-        image: ''
+        image: '',
+        handle: undefined,
     });
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
     const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
     const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
@@ -144,8 +143,8 @@ const Collection = (props: any) => {
 
     const variantWatlist = [];
     const waitlistProducts = sortedByAvailable.filter((item: any) => !item.availableForSale);
-    const waitlistVariants = sortedByAvailable.map((item: any) => {
-        const variantOos = item.variants.nodes.filter((node: any) => !node.availableForSale);
+    sortedByAvailable.map((item: any) => {
+        const variantOos = item.variants?.nodes?.filter((node: any) => !node.availableForSale);
         if (variantOos.length > 0) variantWatlist.push(variantOos);
     });
 
@@ -297,7 +296,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && waitlistProducts.length > 0 && waitlistVariants.length > 0 && (
+            {!isLoading && (waitlistProducts.length > 0 || variantWatlist.length > 0 ) && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                     <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>

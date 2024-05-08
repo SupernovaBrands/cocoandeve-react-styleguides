@@ -25,6 +25,11 @@ const CollectionTemplate = () => {
 			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
 			src: 'https://via.placeholder.com/243x243/FFF2F4',
 			badgeImg: false,
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
+			}
 		},
 		{
 			title: 'Like a Virgin Hair Masque',
@@ -41,6 +46,11 @@ const CollectionTemplate = () => {
 					{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 					{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
 				]
+			},
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
 			}
 		},
 		{
@@ -56,6 +66,11 @@ const CollectionTemplate = () => {
 				data: [
 					{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 					{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
+				]
+			},
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
 				]
 			}
 		},
@@ -74,6 +89,11 @@ const CollectionTemplate = () => {
 					{ id: 32068891607075, value: 'dark', label: 'Dark', available: true},
 					{ id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
 				]
+			},
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
 			}
 		},
 		{
@@ -89,6 +109,11 @@ const CollectionTemplate = () => {
 				data: [
 					{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 					{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
+				]
+			},
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
 				]
 			}
 		},
@@ -107,6 +132,11 @@ const CollectionTemplate = () => {
 					{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: false},
 					{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
 				]
+			},
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
 			}
 		},
 		{
@@ -117,6 +147,11 @@ const CollectionTemplate = () => {
 			price: '$34.90',
 			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
 			src: 'https://via.placeholder.com/243x243/FFF2F4',
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
+			}
 		},
 		{
 			label: 'Slide 4',
@@ -127,6 +162,11 @@ const CollectionTemplate = () => {
 			badgeImg: true,
 			srcSet: 'https://via.placeholder.com/540x540/FFF2F4',
 			src: 'https://via.placeholder.com/243x243/FFF2F4',
+			variants: {
+				nodes: [
+					{ sku: 'CE0000072020' }
+				]
+			}
 		}
     ];
 

@@ -172,6 +172,7 @@
 	opacity: 0;
 	visibility: hidden;
 	width: calc(100% - 20px);
+	transition: all 300ms ease-in-out;
 
 	.button-overlay {
 		width: calc(100% + 4px);
