@@ -39,99 +39,103 @@ const Instagram = (props: any) => {
     
     return (
         <section className={`instagram pt-4 pb-3 text-center ${props.className} mx-auto`}>
-            <div className="w-11/12 lg:w-2/3 text-center mx-auto pb-4 sm:px-hg">
-                <h2 className="h1 mb-1">Get social with us</h2>
-                <p className="h4 mb-1">
-                    <a href="#" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
-                </p>
-                <p className="font-normal mb-0 lg:text-lg">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
-            </div>
-            {data?.length > 0 && (
-                <div className="container instagram--feed container-fluid px-g">
-                    <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g px-hg lg:px-0">
-                        <div className="instagram--feed--left w-full p-0">
-                            <div className="flex flex-wrap m-0">
-                                <div className="w-full lg:w-2/3 p-0">
-                                    {data[0] && (
-                                        <a href={data[0].link} target="_blank"  className='block instagram--feed--link'  key={`inst1`}>
-                                            <picture>
-                                                <source srcSet={data[0].image} />
-                                                <img className="w-full img-big aspect-square object-cover" src={data[0].image} loading="lazy" />
-                                            </picture>
-                                        </a>
-                                    )}
-                                </div>
-                                <div className="w-full lg:w-1/3 p-0">
-                                    <div className="flex flex-wrap m-0 ">
-                                        {data && data.length && data.slice(1, 3).map((item, index) => (
-                                            <div className="lg:w-full w-1/2 p-0"  key={`inst2--${index}`}>
-                                                <a href={item.link} target="_blank"  className='block instagram--feed--link'>
-                                                    <picture>
-                                                        <source srcSet={item.image}/>
-                                                        <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                        ))}
+            <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
+                <div className="flex flex-wrap lg:-mx-g sm:-mx-hg">
+                    <div className="w-11/12 lg:w-7/12 text-center mx-auto pb-g sm:px-hg">
+                        <h2 className="h1 mb-1">Get social with us</h2>
+                        <p className="h4 mb-1">
+                            <a href="#" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
+                        </p>
+                        <p className="font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                    </div>
+                </div>
+                {data?.length > 0 && (
+                    <div className="p-1 pt-0 lg:p-0">
+                        <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g px-hg lg:px-0">
+                            <div className="instagram--feed--left w-full p-0">
+                                <div className="flex flex-wrap m-0">
+                                    <div className="w-full lg:w-2/3 p-0">
+                                        {data[0] && (
+                                            <a href={data[0].link} target="_blank"  className='block instagram--feed--link'  key={`inst1`}>
+                                                <picture>
+                                                    <source srcSet={data[0].image} />
+                                                    <img className="w-full img-big aspect-square object-cover" src={data[0].image} loading="lazy" />
+                                                </picture>
+                                            </a>
+                                        )}
                                     </div>
-                                </div>
-                                {data && data.length && data.slice(4, 7).map((item, index) => (
-                                    <div className="w-1/2 lg:w-1/3 p-0" key={`inst3--${index}`}>
-                                        <a href={item.link} target="_blank"  className='block instagram--feed--link'>
-                                            <picture>
-                                                <source srcSet={item.image}/>
-                                                <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
-                                            </picture>
-                                        </a>
+                                    <div className="w-full lg:w-1/3 p-0">
+                                        <div className="flex flex-wrap m-0 ">
+                                            {data && data.length && data.slice(1, 3).map((item, index) => (
+                                                <div className="lg:w-full w-1/2 p-0"  key={`inst2--${index}`}>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                        <picture>
+                                                            <source srcSet={item.image}/>
+                                                            <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
+                                                        </picture>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                ))}
+                                    {data && data.length && data.slice(4, 7).map((item, index) => (
+                                        <div className="w-1/2 lg:w-1/3 p-0" key={`inst3--${index}`}>
+                                            <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                <picture>
+                                                    <source srcSet={item.image}/>
+                                                    <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
+                                                </picture>
+                                            </a>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div className="instagram--feed--right w-full hidden p-0 md:inline-block">
-                            <div className="flex flex-wrap m-0">
-                                <div className="lg:w-1/2 p-0">
-                                    <div className="flex flex-wrap m-0">
-                                        {data && data.length && data.slice(8, 10).map((item, index) => (
-                                            <div className="lg:w-1/2 p-0"  key={`inst4--${index}`}>
-                                                <a href={item.link} target="_blank"  className='block instagram--feed--link'>
-                                                    <picture>
-                                                        <source srcSet={item.image}/>
-                                                        <img className="w-full aspect-square object-cover" src={item.image} />
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                        ))}
-                                        {data && data.length && data.slice(11, 12).map((item, index) => (
-                                            <div className="w-full p-0"  key={`inst5--${index}`}>
-                                                <a href={item.link} target="_blank"  className='block instagram--feed--link'>
-                                                    <picture>
-                                                        <source srcSet={item.image}/>
-                                                        <img className="w-full aspect-square object-cover" src={item.image} />
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                        ))}
+                            <div className="instagram--feed--right w-full hidden p-0 md:inline-block">
+                                <div className="flex flex-wrap m-0">
+                                    <div className="lg:w-1/2 p-0">
+                                        <div className="flex flex-wrap m-0">
+                                            {data && data.length && data.slice(8, 10).map((item, index) => (
+                                                <div className="lg:w-1/2 p-0"  key={`inst4--${index}`}>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                        <picture>
+                                                            <source srcSet={item.image}/>
+                                                            <img className="w-full aspect-square object-cover" src={item.image} />
+                                                        </picture>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                            {data && data.length && data.slice(11, 12).map((item, index) => (
+                                                <div className="w-full p-0"  key={`inst5--${index}`}>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                        <picture>
+                                                            <source srcSet={item.image}/>
+                                                            <img className="w-full aspect-square object-cover" src={item.image} />
+                                                        </picture>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="lg:w-1/2 p-0">
-                                    <div className="flex flex-wrap m-0 ">
-                                        {data && data.length && data.slice(13, 19).map((item, index) => (
-                                            <div className="lg:w-1/2 p-0"  key={`inst6--${index}`}>
-                                                <a href={item.link} target="_blank"  className='block instagram--feed--link'>
-                                                    <picture>
-                                                        <source srcSet={item.image}/>
-                                                        <img className="w-full aspect-square object-cover" src={item.image} />
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                        ))}
+                                    <div className="lg:w-1/2 p-0">
+                                        <div className="flex flex-wrap m-0 ">
+                                            {data && data.length && data.slice(13, 19).map((item, index) => (
+                                                <div className="lg:w-1/2 p-0"  key={`inst6--${index}`}>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                        <picture>
+                                                            <source srcSet={item.image}/>
+                                                            <img className="w-full aspect-square object-cover" src={item.image} />
+                                                        </picture>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </section>
     );
 };
