@@ -136,6 +136,7 @@ const ArticleTemplate = () => {
 
 	const recomendations = [
 		{
+			"handle": "/blogs/news/black-friday-cyber-monday-beauty-deals",
 			"id": 738,
 			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e71032b6-dd48-452d-6ac5-4519c7f3ec00/public",
 			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e71032b6-dd48-452d-6ac5-4519c7f3ec00/public",
@@ -147,6 +148,7 @@ const ArticleTemplate = () => {
 			]
 		},
 		{
+			"handle": "/blogs/news/black-friday-cyber-monday-beauty-deals",
 			"id": 737,
 			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f3cb2969-55f0-495c-df93-368139299100/public",
 			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f3cb2969-55f0-495c-df93-368139299100/public",
@@ -158,6 +160,7 @@ const ArticleTemplate = () => {
 			]
 		},
 		{
+			"handle": "/blogs/news/black-friday-cyber-monday-beauty-deals",
 			"id": 677,
 			"img": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cd087cf-2da0-48d8-7150-1dc4ea9ed800/public",
 			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cd087cf-2da0-48d8-7150-1dc4ea9ed800/public",

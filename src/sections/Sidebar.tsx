@@ -22,7 +22,7 @@ const Sidebar = ({data}) => {
 	return (
 		<aside className="blog-post-grid__sidebar lg:sticky w-full mt-2 lg:mt-0 mb-0 lg:mb-auto self-end flex lg:block flex-wrap lg:px-g sm:px-hg">
 			<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto">
-				<h2 className="mb-3 text-center lg:text-left block h1">Popular reads</h2>
+				<h2 className="mb-3 text-center lg:text-left block h1">Popular Reads</h2>
 				<Carousel.Wrapper emblaApi={emblaApi3} className="sm:min-h-[16em]">
 					<Carousel.Inner emblaRef={emblaRef3} className="lg:flex-col">
 						{GROUPED_INDEX.map((_, index) => {

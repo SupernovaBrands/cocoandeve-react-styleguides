@@ -78,6 +78,12 @@
 					margin-left: auto !important;;
 				}
 			}
+		
+			.ratio-1x1::before {
+				display: block;
+				content: "";
+				padding-top: calc(100% / 1.8461538461538463);
+			}
 		}
 
 		&__comment {
@@ -124,16 +130,6 @@
 		// 		}
 		// 	}
 		// }
-
-		// &__recomendation {
-		// 	article {
-		// 		height: 100%;
-		// 	}
-
-		// 	@include media-breakpoint-down(lg) {
-		// 		background-color: white !important;
-		// 	}
-		// }
 	}
 
 	.article__content {
@@ -150,10 +146,10 @@
 		}
 	}
 
-	// .badge-blog {
-	// 	line-height: calc-em(20, 16) !important;
-	// 	padding: calc-em(2) calc-em(8) !important;
-	// }
+	.badge-blog {
+		line-height: calc-em(20, 16) !important;
+		padding: calc-em(2) calc-em(8) !important;
+	}
 
 	.blog-nav-tags {
 		margin-bottom: calc-em(50, $unit: 1rem);
@@ -217,6 +213,13 @@
 				float: none;
 				margin: 5px;
 			}
+		}
+	}
+
+	.post-card {
+		&__tags a {
+			padding: calc-em(4, 12) calc-em(10, 12);
+			margin-right: calc-em(4, 12);
 		}
 	}
 

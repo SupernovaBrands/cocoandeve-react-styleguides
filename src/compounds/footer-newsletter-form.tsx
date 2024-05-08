@@ -4,9 +4,9 @@ const FooterNewsletterForm = (props) => {
 	return (
 		<form className={`w-full ${props.classes}`} onSubmit={(e) => props.onSubmit(e)}>
 			<div className="relative flex items-stretch w-full">
-				<input type="text" className={`${props.background ? props.background : 'bg-gray-400' } flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none px-g py-g mb-0 text-base leading-base border border-[solid] border-gray-400 text-gray-800 border-gray-200 rounded-tl-h rounded-bl-h -mr-1`} placeholder={`${props.placeholder ? props.placeholder : 'Enter your email' }`} aria-label={`${props.placeholder ? props.placeholder : 'Enter your email' }`} />
+				<input type="text" className={`${props.background ? props.background : 'bg-gray-400' } flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none px-g py-g mb-0 text-base leading-base border border-[solid] border-gray-400 text-gray-800 border-gray-200 rounded-tl rounded-bl -mr-1`} placeholder={`${props.placeholder ? props.placeholder : 'Enter your email' }`} aria-label={`${props.placeholder ? props.placeholder : 'Enter your email' }`} />
 				<div className="input-group-append flex -ml-[1px]">
-					<button className="rounded-tl-none rounded-bl-none rounded-tr-h rounded-br-h py-[9px] px-[28px] leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white rounded" type="submit">{props.btnText ? props.btnText : 'Subscribe' }</button>
+					<button className="rounded-tl-none rounded-bl-none rounded-tr rounded-br py-[9px] px-[28px] leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white rounded" type="submit">{props.btnText ? props.btnText : 'Subscribe' }</button>
 				</div>
 			</div>
 			{props.submitted && (<p className="mt-1">{props.successMsg ? props.successMsg : 'Signup successful! Stay tuned for updates and tips on Coco&Eve.' }</p>)}

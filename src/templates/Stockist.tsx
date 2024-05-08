@@ -62,19 +62,25 @@ const Stockist = (props: any) => {
                         </select>
                     </div>
                 </form>
-                {parse(content.desc.replace('text-underline', 'underline'))}
+                {!isLoading && (
+                    <>
+                        {parse(content.desc.replace('text-underline', 'underline'))}
+                    </>
+                )}
                 <h2 className="mt-4 mb-3">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></h2>
                 <hr className="lg:hidden my-3"></hr>
-                <div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
-                {stores.map((filteredItem) => (
-                    <figure key={filteredItem.id} className="m-0 w-1/2 md:w-1/3 px-g lg:px-g" data-toggle={filteredItem.country_tag}>
-                        <a href={filteredItem.logo_url} className="block lg:py-g rounded" target="_blank">
-                            <img src={filteredItem.logo.url} alt={filteredItem.logo.url} />
-                        </a>
-                        <figcaption className="h4 my-2 lg:mb-4 lg:mx-4">{filteredItem.title}</figcaption>
-                    </figure>
-                ))}
-                </div>
+                {!isLoading && (
+                    <div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
+                        {stores.map((filteredItem) => (
+                            <figure key={filteredItem.id} className="m-0 w-1/2 md:w-1/3 px-g lg:px-g" data-toggle={filteredItem.country_tag}>
+                                <a href={filteredItem.logo_url} className="block lg:py-g rounded" target="_blank">
+                                    <img src={filteredItem.logo.url} alt={filteredItem.logo.url} />
+                                </a>
+                                <figcaption className="h4 my-2 lg:mb-4 lg:mx-4">{filteredItem.title}</figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                )}
                 <h2 className="h1 mt-4 mb-1">{content.question_title}</h2>
                 <p className="lg:text-lg sm:text-sm font-normal mb-5">No worries, you can email us: <a href="mailto:wholesale@cocoandeve.com" className="underline lg:text-lg font-bold">wholesale@cocoandeve.com</a></p>
             </section>
