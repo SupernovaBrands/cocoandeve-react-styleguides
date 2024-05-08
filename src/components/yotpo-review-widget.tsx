@@ -56,7 +56,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 
-const { yotpoKey } = tSettings;
+let { yotpoKey } = tSettings;
 const localeParam = 'en';
 
 const getCustomQuestions = (productId, callback) => {
@@ -100,8 +100,9 @@ const formatDate = (serverDate) => {
 	return [day, month, year].join('/');
 };
 
-const YotpoReviewWidget = (props) => {
+const YotpoReviewWidget = (props:any) => {
 	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
+	yotpoKey = props.yotpoKey;
 
 	const {
 		productId,
@@ -485,20 +486,20 @@ const YotpoReviewWidget = (props) => {
 			{revThanks && (
 				<div className="yotpo-widget__thanks bg-white border px-2 lg:px-4 py-5 mt-2 flex flex-col items-center text-center relative">
 					<button type="button" className="close absolute text-base" onClick={() => setRevThanks(false)}>
-						<SvgClose class="svg" />
+						<SvgClose className="svg" />
 					</button>
-					<SvgHeart class="svg text-primary h1" />
+					<SvgHeart className="svg text-primary h1" />
 					<p className="h3 text-primary">{tStrings.yotpo.thanksReviewTitle}</p>
 					<p>{tStrings.yotpo.thanksReviewText}</p>
 					<div className="flex">
 						<button type="button" className="btn border-0 text-primary h2 p-0 mr-2" onClick={() => openPopup(shareFacebookUrl())}>
-							<SvgFacebook class="svg" />
+							<SvgFacebook className="svg" />
 						</button>
 						<button type="button" className="btn border-0 text-primary h2 p-0 mr-2" onClick={() => openPopup(shareTwitterUrl())}>
-							<SvgTwitter class="svg" />
+							<SvgTwitter className="svg" />
 						</button>
 						<button type="button" className="btn border-0 text-primary h2 p-0" onClick={() => openPopup(shareLinkedinUrl())}>
-							<SvgLinkedin class="svg" />
+							<SvgLinkedin className="svg" />
 						</button>
 					</div>
 				</div>
@@ -507,9 +508,9 @@ const YotpoReviewWidget = (props) => {
 			{qnaThanks && (
 				<div className="yotpo-widget__thanks bg-white border px-2 lg:px-4 py-5 mt-2 flex flex-col items-center text-center relative">
 					<button type="button" className="close absolute text-base" onClick={() => setQnaThanks(false)}>
-						<SvgClose class="svg" />
+						<SvgClose className="svg" />
 					</button>
-					<SvgHeart class="svg text-primary h1" />
+					<SvgHeart className="svg text-primary h1" />
 					<p className="h3 text-primary">{tStrings.yotpo.thanksQuestionTitle}</p>
 					<p>{tStrings.yotpo.thanksQuestionText1}</p>
 					<p className="mb-0">{tStrings.yotpo.thanksQuestionText2}</p>
@@ -946,14 +947,14 @@ const YotpoReviewWidget = (props) => {
 	);
 };
 
-YotpoReviewWidget.propTypes = {
-	productId: PropTypes.number.isRequired,
-	productName: PropTypes.string.isRequired,
-	productUrl: PropTypes.string.isRequired,
-	productImage: PropTypes.string.isRequired,
-	productDesc: PropTypes.string.isRequired,
-	productSkus: PropTypes.string.isRequired,
-	canCreate: PropTypes.bool.isRequired,
-};
+// YotpoReviewWidget.propTypes = {
+// 	productId: PropTypes.number.isRequired,
+// 	productName: PropTypes.string,
+// 	productUrl: PropTypes.string,
+// 	productImage: PropTypes.string,
+// 	productDesc: PropTypes.string,
+// 	productSkus: PropTypes.string.isRequired,
+// 	canCreate: PropTypes.bool.isRequired,
+// };
 
 export default YotpoReviewWidget;

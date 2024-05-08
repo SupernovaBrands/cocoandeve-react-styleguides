@@ -52,7 +52,13 @@ export default class QuantityBox extends React.Component {
 		e.preventDefault();
 
 		const qty = parseInt(this.state.quantity, 10);
-		this.setState({ quantity: qty + 1 });
+		this.setState(
+			{ quantity: qty + 1 },
+			() => {
+				this.debounceChangeQuantity();
+			},
+		);
+
 		/*
 		if (qty < 99) {
 			this.setState(
@@ -84,7 +90,10 @@ export default class QuantityBox extends React.Component {
 		const qty = parseInt(this.state.quantity, 10);
 		const min = this.props.allowZero ? 0 : 1;
 		this.setState(
-			{ quantity: qty - 1 >= 0 ? qty - 1 : 0 }
+			{ quantity: qty - 1 >= 0 ? qty - 1 : 0 },
+			() => {
+				this.debounceChangeQuantity();
+			},
 		);
 		/*
 		if (this.state.quantity > min) {
@@ -178,8 +187,8 @@ QuantityBox.propTypes = {
 	quantity: PropTypes.number.isRequired,
 	onChangeQuantity: PropTypes.func,
 	allowZero: PropTypes.bool,
-	productId: PropTypes.number.isRequired,
-	productStock: PropTypes.number.isRequired,
+	productId: PropTypes.number,
+	productStock: PropTypes.number,
 	isLastStock: PropTypes.bool.isRequired,
 	isPdp: PropTypes.bool,
 };

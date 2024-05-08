@@ -14,7 +14,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
 				return s.id === props.selectedSwatch ?
 					(<p key={`${s.id}-swatch-${index}`} className={`font-size-sm w-full mt-2 mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
-				: <></>;
+				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
 	);
