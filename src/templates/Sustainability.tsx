@@ -25,10 +25,18 @@ import {
 import TabNav from "~/components/TabNav";
 import TabContent from '~/components/TabContent';
 import PackagingCard from "~/components/PackagingCard";
+import Modal from "~/components/Modal";
+import ModalWaitlist from "~/components/modal/Waitlist";
 
 const Sustainability = (props: any) => {
     const [index, setIndex] = useState(0);
     const [showCart, setShowCart] = useState(false);
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
 
     const toggleCart = () => {
 		setShowCart(!showCart);
@@ -99,6 +107,13 @@ const Sustainability = (props: any) => {
             body: packaging.text_3,
         },
     ];
+
+    const variantWatlist = [];
+    const waitlistProducts = products.products.filter((item: any) => !item.availableForSale);
+    products.products.map((item: any) => {
+        const variantOos = item.variants?.nodes?.filter((node: any) => !node.availableForSale) || [];
+        if (variantOos.length > 0) variantWatlist.push(variantOos);
+    });
 
     return (
 		<>
@@ -288,6 +303,7 @@ const Sustainability = (props: any) => {
                                             carousel={true}
                                             link={data.handle}
                                             sustainability={true}
+                                            setWaitlistData={setWaitlistData}
                                         />
                                     ))}
                                 </Carousel.Inner>
@@ -315,6 +331,12 @@ const Sustainability = (props: any) => {
                     )}
                 </div>
             </section>
+
+            {!isLoading && (waitlistProducts.length > 0 || variantWatlist.length > 0) && (
+                <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                </Modal>
+            )}
 		</>
     );
 }
