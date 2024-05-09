@@ -1,8 +1,8 @@
 const PackagingCard = (props: any) => (
 	<div className={`sustainability-card ${props.className ? props.className : ''}`}>
-		<picture>
+		<picture className="embed-responsive before:pt-[58.06452%] lg:before:pt-[49.31507%] lg:max-h-[7.938rem]">
 			<source srcSet={props.srcSet} media="(min-width: 992px)" />
-			<img className="w-full" alt="Img Alt" src={props.src} loading="lazy" />
+			<img className="embed-responsive-item fit--cover" alt="Img Alt" src={props.src} loading="lazy" />
 		</picture>
 		<div className="p-2 h-full bg-primary-light">
 			{props.children}

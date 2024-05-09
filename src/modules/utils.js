@@ -1220,3 +1220,13 @@ export const handleUrl = (url) => (
 		.replace('cocoandeve.myshopify.com', window.location.hostname)
 		.replace('www.cocoandeve.com', window.location.hostname)
 );
+
+export const isWaitlist = (data = []) => {
+	const variantWatlist = [];
+    const waitlistProducts = data.filter((item) => !item.availableForSale);
+    data.map((item) => {
+        const variantOos = item.variants?.nodes?.filter((node) => !node.availableForSale) || [];
+        if (variantOos.length > 0) variantWatlist.push(variantOos);
+    });
+	return waitlistProducts.length > 0 || variantWatlist.length > 0;
+};

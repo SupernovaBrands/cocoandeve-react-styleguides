@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ReviewStar from './ReviewStar';
 import Link from 'next/link';
 import { currentTime, encryptParam } from '~/modules/utils';
+import ReviewStarSingle from './ReviewStarSingle';
 
 const YotpoStar = (props: any) => {
 	const [init, setInit] = useState(false);
@@ -28,7 +29,13 @@ const YotpoStar = (props: any) => {
 
 	return init ? (
 		<div className={`flex ${props.className}`}>
-			<ReviewStar score={score} />
+			<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
+			{props.smSingleStar && (
+				<>
+					<ReviewStarSingle className="lg:hidden" />
+					<span className="ml-25 lg:hidden">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
+				</>
+			)}
 			{props.showScore && score && <span className="ml-25">({`${score?.toFixed(0)}`})</span>}
 			{props.showTotal && (
 				<span className="ml-25">
@@ -44,6 +51,7 @@ YotpoStar.defaultProps = {
 	showScore: false,
 	showTotal: true,
 	className: '',
+	smSingleStar: false,
 };
 
 export default YotpoStar;

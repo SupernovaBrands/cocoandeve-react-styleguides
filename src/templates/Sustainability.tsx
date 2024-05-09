@@ -27,9 +27,9 @@ import TabContent from '~/components/TabContent';
 import PackagingCard from "~/components/PackagingCard";
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
+import { isWaitlist } from "~/modules/utils";
 
 const Sustainability = (props: any) => {
-    const [index, setIndex] = useState(0);
     const [showCart, setShowCart] = useState(false);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
@@ -108,13 +108,7 @@ const Sustainability = (props: any) => {
         },
     ];
 
-    const variantWatlist = [];
-    const waitlistProducts = products.products.filter((item: any) => !item.availableForSale);
-    products.products.map((item: any) => {
-        const variantOos = item.variants?.nodes?.filter((node: any) => !node.availableForSale) || [];
-        if (variantOos.length > 0) variantWatlist.push(variantOos);
-    });
-
+    const loadWaitlist = isWaitlist(products.products);
     return (
 		<>
             <section className="relative">
@@ -152,22 +146,22 @@ const Sustainability = (props: any) => {
                 {!isLoading && (
                     <div className="flex flex-wrap bg-primary-light mx-0">
                         <div className="w-full lg:w-7/12 px-0">
-                            <picture>
+                            <picture className="embed-responsive before:pt-[117.1875%] lg:before:pt-[52.23881%]">
                                 <source srcSet={imageSlider.image_desktop.url} media="(min-width: 992px)" />
-                                <img className="w-full" alt={imageSlider.heading} src={imageSlider.image_mobile.url} />
+                                <img className="embed-responsive-item fit--cover" alt={imageSlider.heading} src={imageSlider.image_mobile.url.replace('public', '828x')} />
                             </picture>
                         </div>
                         <div className="w-full lg:w-5/12 py-4 px-g lg:px-3">
                             <h3 className="mb-1">{imageSlider.slider_title}</h3>
                             <Carousel.Wrapper emblaApi={emblaApi1}>
                                 <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g">
-                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={1}>
+                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${1}`}>
                                         <p className="mb-g">{imageSlider.text_1}</p>
                                     </div>
-                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={2}>
+                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${2}`}>
                                         <p className="mb-g">{imageSlider.text_2}</p>
                                     </div>
-                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={3}>
+                                    <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${3}`}>
                                         <p className="mb-g">{imageSlider.text_3}</p>
                                     </div>
                                 </Carousel.Inner>
@@ -252,7 +246,8 @@ const Sustainability = (props: any) => {
                                 {PACKAGING.map((data) => (
                                     <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-2 font-bold">{data.title}</h6>
-                                        <p className="mb-g">{data.body}</p>
+                                        <p className="mb-g lg:mb-3">{data.body}</p>
+                                        <p className="lg:mb-5"></p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
@@ -295,10 +290,11 @@ const Sustainability = (props: any) => {
                         <>
                             <Carousel.Wrapper emblaApi={emblaApi3} className="pt-2 -mx-hg lg:mx-auto">
                                 <Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g">
-                                    {products.products.map((data: any) => (
+                                    {products.products.map((data: any, id: number) => (
                                         <ProductCard
+                                            key={`product-${id}-${data.id}`}
                                             product={data}
-                                            className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                            className="relative mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
                                             carousel={true}
                                             link={data.handle}
@@ -326,13 +322,13 @@ const Sustainability = (props: any) => {
                                     </NextButton>
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
-                            <Link href="/collection/all" className="mb-2 lg:mb-3 btn btn-lg btn-outline-primary border-2 hover:no-underline">Shop All</Link>
+                            <Link href="/collection/all" className="mb-2 lg:mb-3 btn btn-lg btn-outline-primary border-2 hover:no-underline mt-5">Shop All</Link>
                         </>
                     )}
                 </div>
             </section>
 
-            {!isLoading && (waitlistProducts.length > 0 || variantWatlist.length > 0) && (
+            {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                     <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>

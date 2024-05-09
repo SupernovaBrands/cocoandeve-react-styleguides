@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
+import { isWaitlist } from "~/modules/utils";
 
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
@@ -140,12 +141,7 @@ const Collection = (props: any) => {
     const collectionSingle = useCollectionSingle(handleFooter);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
-    const variantWatlist = [];
-    const waitlistProducts = sortedByAvailable.filter((item: any) => !item.availableForSale);
-    sortedByAvailable.map((item: any) => {
-        const variantOos = item.variants?.nodes?.filter((node: any) => !node.availableForSale);
-        if (variantOos.length > 0) variantWatlist.push(variantOos);
-    });
+    const loadWaitlist = isWaitlist(sortedByAvailable);
 
     return (
         <>
@@ -262,6 +258,7 @@ const Collection = (props: any) => {
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
                                                 setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
                                             />
                                         </>
                                     ) : (
@@ -271,6 +268,7 @@ const Collection = (props: any) => {
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
+                                            smSingleStar={true}
                                         />
                                     )
                                 })}
@@ -295,7 +293,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && (waitlistProducts.length > 0 || variantWatlist.length > 0 ) && (
+            {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                     <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
