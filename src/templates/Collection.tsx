@@ -67,7 +67,6 @@ const Collection = (props: any) => {
         childrenCollections,
         parentCollection,
         sort,
-        globalSettings,
     } = props;
 
     const sidebarRef = useRef(null);
