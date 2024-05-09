@@ -68,8 +68,8 @@ const Article = (props) => {
     const storeName = 'dev';
     let bodyContent = '';
 
-    const featuredImageUrl = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.url : '';
-    const featuredImageAlternativeText = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.alt : '';
+    const featuredImageUrl = content?.BlogContentMultiStores?.[storeName]?.featured_image?.url || '';
+    const featuredImageAlternativeText = content?.BlogContentMultiStores?.[storeName]?.featured_image?.alt || '';
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
     if (content?.BlogContentMultiStores?.[storeName]?.body_content && typeof content.BlogContentMultiStores[storeName].body_content === 'string') {
         bodyContent = content.BlogContentMultiStores[storeName].body_content
