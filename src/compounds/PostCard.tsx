@@ -15,8 +15,8 @@ const PostCard: React.FC<PropType> = ({ className, data }) => (
 				{data.img && (
 					<Link href={data.handle ?? '#'} className="relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out" aria-label={data.title}>
 						<picture>
-							{data.srcSet && (<source srcSet={data.srcSet} media="(min-width: 992px)" />)}
-							<img src={data.img} className="w-full" alt={data.title} />
+							{data.srcSet && (<source srcSet={data.srcSet} media="(min-width: 992px)" width="568" height="298"/>)}
+							<img src={data.img} className="w-full" alt={data.title} width="382" height="178"/>
 						</picture>
 					</Link>
 				)}
@@ -24,8 +24,8 @@ const PostCard: React.FC<PropType> = ({ className, data }) => (
 			<div className="post-card__tags px-3 mb-2">
 				{data.tags.length > 0 && (
 					<>
-						{data.tags.map((item: string) => (
-							<PostTag tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
+						{data.tags.map((item: string, index: number) => (
+							<PostTag key={`${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
 						))}
 					</>
 				)}
