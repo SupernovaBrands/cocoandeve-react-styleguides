@@ -3,17 +3,18 @@ type SwatchProp = {
 	hideSwatch?: boolean
 	children: React.ReactNode
 	className?: string
+	keyName?: string
 	shadeData?: any
 	selectedSwatch: string
 }
 const Swatch: React.FC<SwatchProp> = (props) => {
 	return props.hideSwatch ? <></> : (
-		<div className={`product-swatch mb-1 ${props.className}`}>
+		<div key={props.keyName} className={`product-swatch mb-1 ${props.className}`}>
 			{props.children}
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
 				return s.id === props.selectedSwatch ?
 					(<p key={`${s.id}-swatch-${index}`} className={`font-size-sm w-full mt-2 mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
-				: <></>;
+				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
 	);
@@ -40,26 +41,28 @@ const Notes: React.FC<NotesProp> = (props) => {
 
 type VariantProp = {
 	className?: string
+	onChange?: Function
 	id: string
-	inventory: string
+	inventory?: string
 	checked?: boolean
-	dataID: string
+	dataID?: string
 	subscription?: boolean
 	children: React.ReactNode
 	price: string
+	saving?: string
 	compare?: string
 	keyName?: string
 }
 
 const ProductVariant: React.FC<VariantProp> = (props) => (
 	<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
-		<input id={props.id} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
+		<input id={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
 		<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
 			{props.children}
 			<p className="mb-0 font-size-sm font-bold">
 				{props.compare && <span className="line-through text-body mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]">{props.compare}</span> }
 				<span className="text-primary mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]"> {props.price} </span>
-				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline"> (SAVE 30%) </span>}
+				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline"> {props.saving ? props.saving : '(SAVE 30%)'} </span>}
 			</p>
 		</label>
 	</div>

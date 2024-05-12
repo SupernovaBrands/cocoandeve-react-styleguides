@@ -1,4 +1,3 @@
-// import CarouselCustom from "~/components/CarouselCustom";
 import ImageWithText from "~/compounds/ImageWithText";
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -49,7 +48,7 @@ const OurStoryTemplate = (props: any) => {
 	return (
 		<>
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">
-				<h1 className="text-center absolute m-1 text-[2em] lg:text-[3.25em] text-white">{banner.tiitle}</h1>
+				<h1 className="text-center absolute m-1 text-[2em] lg:text-hero text-white">{banner.tiitle}</h1>
 				{!isLoading && (
 					<picture>
 						<source srcSet={banner.back_img.url} media="(min-width: 992px)" />
@@ -61,7 +60,7 @@ const OurStoryTemplate = (props: any) => {
 			<section className="container text-center mt-5 mb-5">
 				<h2 className="mb-1">{intro.title}</h2>
 				{!isLoading && (
-					<div dangerouslySetInnerHTML={{
+					<div className="w-full intro__text lg:w-2/3 mx-auto" dangerouslySetInnerHTML={{
 						__html: intro.description
 					}} />
 				)}

@@ -2,19 +2,21 @@ import Modal from "~/components/Modal";
 import Terms from "~/components/modal/Terms";
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-// import { Router } from "next/router";
+import { useRouter } from "next/navigation";
+import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
+import ModalWaitlist from "~/components/modal/Waitlist";
+import { isWaitlist } from "~/modules/utils";
 
-const Banner = ({ data, isLoading, title }) => {
-    const { img_desk, img_mob } = data;
+
+const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
-        <figure className="w-full relative items-center px-0 mb-g">
-            {!isLoading && (
+        <figure className="w-full relative items-center px-0 mb-0 lg:mb-g">
+            {!isLoading && !bannerLoading && (
                 <picture>
-                    <source srcSet={img_desk.url} media="(min-width: 992px)" />
-                    <img src={img_mob.url} className="w-full" alt="Collection Banner" />
+                    <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
+                    <img src={bannerData.img_mob.url} className="w-full" alt="Collection Banner" />
                 </picture>
             )}
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
@@ -26,50 +28,74 @@ const Banner = ({ data, isLoading, title }) => {
     );
 }
 
+const Banner = ({ isLoading, title, strapiBanner }) => {
+    const { universalCollectionSetting } = strapiBanner.universalBanner;
+	const {
+	    filter_handles_img_mob: universalImgMob,
+	    filter_handles_img_desk: universalImgDesk,
+	    filter_handles_img_url: universalUrl,
+	    enabled: universalEnabled,
+	} = universalCollectionSetting.universalCollectionSetting[strapiBanner.store];
+
+	const { collectionBanner } = strapiBanner.mainSettings;
+
+	const bannerData = universalEnabled ? {
+	    img_mob: universalImgMob,
+	    img_desk: universalImgDesk,
+	    url: universalUrl,
+	    enabled: universalEnabled,
+	} : collectionBanner.collectionBanner[strapiBanner.store];
+    return (
+        <>
+            {!strapiBanner.isLoading && bannerData.url === '' && <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />}
+            {!strapiBanner.isLoading && bannerData.url !== '' && (
+                <Link href={bannerData.url}>
+                    <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />
+                </Link>
+            )}
+        </>
+    );
+}
+
 const Collection = (props: any) => {
-    const { store, mainSettings, universalBanner, products, about, isLoading, mainCollections, handle, preview, currentCollection, showSpinner, childrenCollections, parentCollection } = props;
+    const {
+        products,
+        isLoading,
+        mainCollections,
+        handle,
+        currentCollection,
+        showSpinner,
+        childrenCollections,
+        parentCollection,
+        sort,
+    } = props;
 
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
+    const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
     const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
-    console.log('mainCollections', mainCollections);
-
     const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
 
-    const { universalCollectionSetting } = universalBanner;
-    const {
-        filter_handles_img_mob: universalImgMob,
-        filter_handles_img_desk: universalImgDesk,
-        filter_handles_img_url: universalUrl,
-        enabled: universalEnabled,
-    } = universalCollectionSetting.universalCollectionSetting[store];
 
-    const { collectionBanner } = mainSettings;
-
-    const bannerData = universalEnabled ? {
-        img_mob: universalImgMob,
-        img_desk: universalImgDesk,
-        url: universalUrl,
-        enabled: universalEnabled,
-    } : collectionBanner.collectionBanner[store];
-
-    const { enabled, title, content_body } = about;
     let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
     if (handle !== 'all') {
         collectionTitle = collectionTitle.replace (/^/,'Shop ');
     }
 
     const showLoading = (e: any) => {
-        // console.log('sidebar ref', sidebarRef.current);
         if (e.target.closest('.collection__sidebar')) {
             const sidebarLinks = sidebarRef.current.querySelectorAll('li a');
             sidebarLinks.forEach((el) => {
@@ -91,47 +117,36 @@ const Collection = (props: any) => {
         setLoading(true);
     };
 
-    const showQuizCard = handle === 'tan' || handle === 'tan-and-spf';
-
     const selectFilterChange = (e: any) => {
         showLoading(e);
-        router.push(`/collections/${e.target.value}${preview === 'staging' ? `?preview=${preview}` : ''}`);
+        router.push(`/collections/${e.target.value}`);
     };
     let selectFilterValue = currentCollection?.handle;
     if (parentCollection && parentCollection.collection) {
         selectFilterValue = parentCollection.collection.handle;
     }
 
-    const selectSortValue = searchParams.get('sort');
-
     const selectSortChange = (e: any) => {
         showLoading(e);
-        router.push(pathname + '?' + createQueryString('sort', e.target.value));
+        router.push(`/collections/${handle}/${e.target.value}`);
     };
 
-    const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString());
-            params.set(name, value);
+    useEffect(() => {
+        setShowQuizCard(handle === 'tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
+        setLoading(false);
+    }, [currentCollection]);
 
-            return params.toString();
-        },
-        [searchParams]
-    );
+    const collectionSettings = useCollectionSettings(handle);
+    const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
+    const collectionSingle = useCollectionSingle(handleFooter);
+    const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
-    useEffect(() => setLoading(false), [products]);
-
-    console.log('mainCollections', mainCollections);
+    const loadWaitlist = isWaitlist(sortedByAvailable);
 
     return (
         <>
-            {bannerData.enabled && bannerData.url && (
-                <Link href={bannerData.url}>
-                    <Banner data={bannerData} isLoading={isLoading} title={collectionTitle} />
-                </Link>
-            )}
-            {bannerData.enabled && !bannerData.url && (
-                <Banner data={bannerData} isLoading={isLoading} title={collectionTitle} />
+            {!collectionSettings.isLoading && (
+                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} />
             )}
 
             {!isLoading && (
@@ -152,17 +167,17 @@ const Collection = (props: any) => {
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
                             <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded" ref={sidebarRef}>
-                                {mainCollections.map((parent: any) => {
+                                {mainCollections.sort((a, b) => a.idx - b.idx).map((parent: any) => {
                                     const { collection } = parent;
                                     const html = collection.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     return (
-                                    <li className="mb-1">
+                                    <li className="mb-1" key={parent.idx}>
                                         <Link
                                             onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
                                                 ${handle === collection.handle || collection.handle === parentHandle ? 'text-primary' : 'text-body'}`}
-                                            href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
+                                            href={`/collections/${collection.handle}`}
                                             dangerouslySetInnerHTML={{ __html: html }}
                                         />
                                     </li>)
@@ -183,12 +198,12 @@ const Collection = (props: any) => {
                                             {mainCollections.map((parent: any) => {
                                                 const { collection } = parent;
                                                 const html = collection.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option value={collection.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                                return (<option key={parent.idx} value={collection.handle} dangerouslySetInnerHTML={{ __html: html }} />);
                                             })}
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={selectSortValue}>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={sort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
                                             <option value="price-low-high">Price, low to high</option>
@@ -202,13 +217,14 @@ const Collection = (props: any) => {
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
-                                        {childrenCollections.length > 0 && childrenCollections.map((children) => {
+                                        {childrenCollections.length > 0 && childrenCollections.sort((a, b) => a.idx - b.idx).map((children) => {
                                             const { collection } = children;
                                             if (collection && collection.handle) {
                                                 const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
-                                                        href={`/collections/${collection.handle}${preview === 'staging' ? `?preview=${preview}` : ''}`}
+                                                        key={children.idx}
+                                                        href={`/collections/${collection.handle}`}
                                                         className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
@@ -228,25 +244,31 @@ const Collection = (props: any) => {
                                         <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                     </div>
                                 )}
-                                {products.length > 0 && sortedByAvailable.map((item: any, index: number) => {
+                                {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
                                     if (!item.src) {
                                         item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                         item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
                                     }
                                     return showQuizCard && index === 2 ? (
                                         <>
-                                            <ProductCardQuiz />
+                                            <ProductCardQuiz key={item.id} />
                                             <ProductCard
+                                                key={item.id}
                                                 product={item}
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
                                             />
                                         </>
                                     ) : (
                                         <ProductCard
+                                            key={item.id}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
+                                            setWaitlistData={setWaitlistData}
+                                            smSingleStar={true}
                                         />
                                     )
                                 })}
@@ -257,18 +279,24 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            {enabled && (
+            {!collectionSingle.isLoading && footerAbout.enabled && (
                 <>
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
                     <div className="container py-2 mb-2">
-                        {title && <h2 className="mb-2">{title}</h2>}
+                        {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
                         {!isLoading && (
                             <div
-                                dangerouslySetInnerHTML={{ __html: content_body }}
+                                dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}
                             />
                         )}
                     </div>
                 </>
+            )}
+
+            {!isLoading && loadWaitlist && (
+                <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                </Modal>
             )}
         </>
     )

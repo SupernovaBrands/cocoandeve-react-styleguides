@@ -38,6 +38,7 @@ module.exports = {
       'primary-dark': '#B22D4B',
       'secondary': '#00635B',
       'secondary-light': '#E0F0E9',
+      'secondary-dark': '#BEDFD1',
       'sh-purple': '#993366',
       'sh-purple-light': '#FFEFFF',
       'purple-light': '#FFEFFF',
@@ -47,10 +48,12 @@ module.exports = {
       'sh-orange-light': '#FCF6E4',
       'green-light': '#00B67A',
       'yellow-light': '#f9eeca',
+      'yellow-dark': '#F4DF9C',
       'pink-light': '#FFF2F4',
       'pink-product': '#FFF4F6',
       'suncare-blue': '#3880DE',
       'skincare-orange': '#E85862',
+      'skincare-orange-dark': '#E22B38',
       'skin-peach': '#F2D4D7',
       'body-color': '#151515',
       'gray-100': '#FAF9F9',
@@ -59,6 +62,7 @@ module.exports = {
       'gray-600': '#4E4E4E',
       'gray-700': '#7B7B7B',
       'blue': '#213E7B',
+      'blue-dark': '#162A53',
       'white': '#fff',
       'light-yellow': '#F0FF5F',
       'light-blue': '#C2FAE4',
@@ -80,6 +84,7 @@ module.exports = {
       xl: ['1.5rem', '1.875rem'], //24px, 30px
       '2xl': ['2rem', '2.5rem'], //32px, 40px
       '3xl': ['2.625rem', '3.281rem'], //42px, 52px
+      hero: ['4.5em', '1.25em'], //72px, 90px
     },
     spacing: {
       25: '5px',

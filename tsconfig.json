@@ -10,7 +10,8 @@
       "~/images/*": ["images/*"],
       "~/config": ["config"],
       "~/secret": ["secret"],
-      "~/modules/*": ["modules/*"]
+      "~/modules/*": ["modules/*"],
+      "~/hooks/*": ["hooks/*"]
     },
     "target": "es5",
     "lib": [

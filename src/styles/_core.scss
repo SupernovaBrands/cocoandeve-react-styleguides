@@ -30,6 +30,21 @@
 		-webkit-animation: .75s linear infinite spinner-border;
 		@apply animate-spin
 	}
+	.embed-responsive {
+		@apply relative block w-full p-0 overflow-hidden;
+
+		&:before {
+			@apply block content-[''];
+		}
+
+		&-item {
+			@apply absolute top-0 bottom-0 left-0 right-0 w-full h-full border-0;
+		}
+
+		.fit--cover {
+			@apply object-cover;
+		}
+	}
 }
 
 @layer components {

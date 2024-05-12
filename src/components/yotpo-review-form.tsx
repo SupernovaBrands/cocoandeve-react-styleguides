@@ -187,7 +187,7 @@ const YotpoReviewForm: FC<YotpoReviewFormProps> = ({
 YotpoReviewForm.propTypes = {
   customQuestions: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  activeForm: PropTypes.string.isRequired,
+  activeForm: PropTypes.string,
 };
 
 export default YotpoReviewForm;

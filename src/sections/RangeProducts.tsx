@@ -11,6 +11,7 @@ import {
 	controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
+import { useState } from 'react';
 const options: EmblaOptionsType = {
 	loop: true,
 	breakpoints: {
@@ -29,6 +30,13 @@ const RangeProducts = (props: any) => {
 	} = usePrevNextButtons(emblaApi1);
 	const autoPlayClick1 = controlAutoplay(emblaApi1);
 
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
+
     return (
         <div className="container pt-4 lg:pt-2 px-0">
             <h2 className="text-2xl text-center mb-2 block">{heading}</h2>
@@ -39,6 +47,7 @@ const RangeProducts = (props: any) => {
                             product={data}
                             className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                             button={true}
+                            setWaitlistData={setWaitlistData}
                         />
                     ))}
                 </Carousel.Inner>

@@ -13,15 +13,10 @@ import {
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
-interface Item {
-    label: string;
-    title: string;
-    srcSet: string;
-    src: string;
-    tags: string[];
-}
+const HowToCarousel = (props) => {
 
-const HowToCarousel: React.FC = () => {
+    const { videoData } = props;
+
     const options: EmblaOptionsType = {
         loop: true,
     };
@@ -39,30 +34,6 @@ const HowToCarousel: React.FC = () => {
 
     const autoPlayClick7 = controlAutoplay(emblaApi7);
 
-    const items: Item[] = [
-        {
-            label: 'Slide 1',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['TAN', 'NEW'],
-        },
-        {
-            label: 'Slide 2',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['HAIR', 'HOT'],
-        },
-        {
-            label: 'Slide 3',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['BODY', 'FEATURED'],
-        }
-    ];
-
     const colors: Record<string, { bg: string; text: string }> = {
         new: { bg: 'bg-secondary', text: 'text-white' },
         tan: { bg: 'bg-yellow-light', text: 'text-gray-600' },
@@ -77,12 +48,12 @@ const HowToCarousel: React.FC = () => {
 			<h2 className="text-center h1 pt-2 sm:pb-2 md:pb-3 mb-0">The Ultimate How-Tos</h2>
 			<Carousel.Wrapper emblaApi={emblaApi7}>
 				<Carousel.Inner emblaRef={emblaRef7} className="lg:-mx-g">
-					{items.map((item, index) => (
+					{videoData.map((item, index) => (
 						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g">
 							<figure className="border border-secondary-light">
 								<a href="/" className="relative">
 									<picture className="w-full aspect-[4/3] m-0">
-										<img className="w-full aspect-[4/3] max-h-[11.125em] lg:max-h-[18.625em] object-cover" alt="Image Alt" loading="lazy" src="https://via.placeholder.com/375x340.jpg/EFADBA"/>
+										<img className="w-full aspect-[4/3] max-h-[11.125em] lg:max-h-[18.625em] object-cover" alt="Image Alt" loading="lazy" src={item.src}/>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 											className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 												<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
@@ -90,10 +61,10 @@ const HowToCarousel: React.FC = () => {
 									</picture>
 								</a>
 								<figcaption className="p-2">
-									{ item.tags.map((tag) =>
-										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} font-weight-normal p-25 mr-1 rounded`}>{tag}</span>
-									)}
-									<p className="h2 mt-2">5 things you’re doing wrong with your hair care routine</p>
+									{ item.tags.length > 0 ? item.tags.map((tag) =>
+										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} font-weight-normal p-25 mr-1 rounded`}>{tag.toUpperCase()}</span>
+									) : ''}
+									<p className="h2 mt-2">{item.title}</p>
 								</figcaption>
 							</figure>
 						</div>
