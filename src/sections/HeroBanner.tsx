@@ -25,13 +25,13 @@ const SLIDES = [
 ];
 
 const HeroBanner = (props: any) => {
-	const { isStyleguide } = props;
+	const { isStyleguide, region } = props;
 	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
-	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage();
+	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region);
 	useEffect(() => {
 		if (!emblaApi) return;
 		const autoplay = emblaApi?.plugins()?.autoplay;
