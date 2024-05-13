@@ -87,7 +87,7 @@ const ArticleTemplate = () => {
 		{
 			"id": 710,
 			"link": "/blogs/news/black-friday-cyber-monday-beauty-deals",
-			"title": "Your Guide to Coco & Eve’s Black Friday Beauty Deals 2022",
+			"title": "Black Friday Beauty Deals from Coco & Eve - Your Black Friday Beauty Guide",
 			"desc": "<p>Are you ready for our BIGGEST sale of the year!?</p>",
 			"src": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/129400e6-41df-47da-471f-e89e3926a900/192x",
 			"srcSet": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/129400e6-41df-47da-471f-e89e3926a900/192x"

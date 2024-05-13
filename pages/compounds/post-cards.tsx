@@ -106,19 +106,19 @@ const PostCards = () => {
 				<h1 className="mb-1">POST CARD</h1>
 				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 					{postData.map((data) =>
-						<PostCard key={data.id} className="mb-2 w-full lg:w-1/2 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/2 px-0 lg:px-g" data={data} template="blog" />
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID</h1>
 				<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 					{postData2.map((data) =>
-						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} template="blog" />
 					)}
 				</div>
 				<h1 className="mb-1">POST CARDS GRID NO IMAGE</h1>
 				<div className="flex flex-wrap mb-5 mt-2 -mx-hg lg:-mx-g">
 					{postData3.map((data) =>
-						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} template="blog" />
 					)}
 				</div>
 
@@ -126,7 +126,7 @@ const PostCards = () => {
 				<Carousel.Wrapper emblaApi={emblaApi} className="mb-4">
 					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 						{postData4.map((data) => (
-							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} template="blog" />
 						))}
 					</Carousel.Inner>
 					<Carousel.Navigation>
