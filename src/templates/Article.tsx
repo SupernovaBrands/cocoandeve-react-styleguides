@@ -48,7 +48,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_mobile.url} className="embed-responsive-item object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_mobile.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -68,8 +68,8 @@ const Article = (props) => {
     const storeName = 'dev';
     let bodyContent = '';
 
-    const featuredImageUrl = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.url : '';
-    const featuredImageAlternativeText = content.BlogContentMultiStores[storeName] ? content.BlogContentMultiStores[storeName].featured_image.alt : '';
+    const featuredImageUrl = content?.BlogContentMultiStores?.[storeName]?.featured_image?.url || '';
+    const featuredImageAlternativeText = content?.BlogContentMultiStores?.[storeName]?.featured_image?.alt || '';
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
     if (content?.BlogContentMultiStores?.[storeName]?.body_content && typeof content.BlogContentMultiStores[storeName].body_content === 'string') {
         bodyContent = content.BlogContentMultiStores[storeName].body_content
@@ -281,7 +281,7 @@ const Article = (props) => {
                 <h3 className="text-center h1 mb-1">You might also like</h3>
                 <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">
 					{recomendations.map((data) =>
-						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" template="article" data={data} />
 					)}
 				</div>
             </div>
