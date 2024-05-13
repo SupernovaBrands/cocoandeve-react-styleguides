@@ -44,7 +44,7 @@ const MobileMenu = (props: any) => {
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare">
 								<h4 className="m-0 font-normal">{menu.title}</h4>
-								{menu.rows.length > 0 && (
+								{menu.rows && menu.rows.length > 0 && (
 									<ChevronNext className="h-[1em] text-xs" onClick={() => {
 										const newStates = {...defMenuState};
 										newStates[i] = true;
@@ -52,7 +52,7 @@ const MobileMenu = (props: any) => {
 									}} />
 								)}
 							</label>
-							{menu.rows.length > 0 && (
+							{menu.rows && menu.rows.length > 0 && (
 								<ul className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 										<label onClick={() => {

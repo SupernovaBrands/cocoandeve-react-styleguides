@@ -20,7 +20,6 @@ const Header = (props: any) => {
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
-
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
