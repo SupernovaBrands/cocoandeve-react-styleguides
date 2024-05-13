@@ -7,7 +7,7 @@ const ProductBanner = (props) => {
                     {props.children}
                 </div>
             </div>
-            <div className=" w-full lg:w-1/2 px-0">
+            <div className="w-full lg:w-1/2 px-0 relative">
                 <picture className="ratio ratio-6x7 h-100">
                     <source
                         srcSet={props.srcSet}
