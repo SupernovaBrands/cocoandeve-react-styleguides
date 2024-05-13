@@ -48,6 +48,8 @@ const ProductCarousel = (props: any) => {
 		}
 	}, []);
 
+	useEffect(() => {})
+
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: false, delay: 3000 })
@@ -91,17 +93,18 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData?.tab1?.products && productsData.tab1.products.map((data, index) => (
-										<ProductCard
-											key={`tab1-${index}`}
-											isFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab1?.products && productsData.tab1.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={item.id}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
@@ -124,19 +127,20 @@ const ProductCarousel = (props: any) => {
 							</Carousel.Wrapper>
 						</TabContent>
 						<TabContent active={activeTab === 'bestsellers'}>
-							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
+							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
-									{productsData?.tab2?.products && productsData.tab2.products.map((data, index) => (
-										<ProductCard
-											key={`tab2-${index}`}
-											sFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={item.id}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
@@ -161,17 +165,18 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
-									{productsData?.tab3?.products && productsData.tab3.products.map((data, index) => (
-										<ProductCard
-											key={`tab3-${index}`}
-											isFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={item.id}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
