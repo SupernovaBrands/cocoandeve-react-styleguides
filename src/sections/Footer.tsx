@@ -135,7 +135,7 @@ const Footer = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <hr className="border-body mb-1 mt-2 lg:mt-4 lg:mb-1" />
+                <hr className="border-body mb-1 mt-2 lg:mt-4 lg:mb-1 lg:opacity-20" />
                 <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-2 lg:text-base text-sm ">© 2024 Coco&amp;Eve</p>
             </div>
         </footer>

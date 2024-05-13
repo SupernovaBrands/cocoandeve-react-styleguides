@@ -78,4 +78,8 @@
 			}
 		}
 	}
+
+	.search__carousel .carousel__container {
+		@apply flex-wrap lg:flex-nowrap;
+	}
 }

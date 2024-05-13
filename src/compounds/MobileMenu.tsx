@@ -2,8 +2,10 @@ import { useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
+import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
+import Link from 'next/link';
 
 const defMenuState = {
 	1: false,
@@ -18,6 +20,7 @@ const MobileMenu = (props: any) => {
 	const { openDrawer, onToggleMobileNav } = props;
 	const [menuStates, setMenuStates] = useState(defMenuState);
 	const [storeSelection, setStoreSelection] = useState(false);
+	const [currency, setCurrency] = useState('USD');
 	const mobileNavClick = (e) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
@@ -28,7 +31,7 @@ const MobileMenu = (props: any) => {
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
 			role="tablist" aria-multiselectable="true">
 				<li key="toggle" className="flex justify-between mx-g py-[5px]">
-					<a href="#" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
+					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
 					<Close className="mobile-nav__close svg absolute right-[.9375em] h-[1em]" onClick={() => onToggleMobileNav(false)}/>
@@ -40,16 +43,17 @@ const MobileMenu = (props: any) => {
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
 				{mainMenu.map((menu, i) => {
-					return (
+					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
-							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare">
+							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare"
+								onClick={() => {
+									const newStates = {...defMenuState};
+									newStates[i] = true;
+									setMenuStates(newStates);
+								}}>
 								<h4 className="m-0 font-normal">{menu.title}</h4>
 								{menu.rows.length > 0 && (
-									<ChevronNext className="h-[1em] text-xs" onClick={() => {
-										const newStates = {...defMenuState};
-										newStates[i] = true;
-										setMenuStates(newStates);
-									}} />
+									<ChevronNext className="h-[1em] text-xs" />
 								)}
 							</label>
 							{menu.rows.length > 0 && (
@@ -62,45 +66,55 @@ const MobileMenu = (props: any) => {
 										}}>
 											<ChevronPrev className="h-[1em]" />
 										</label>
-										<a href="/" className="text-body mx-auto py-1" aria-label="CocoAndEve Logo">
+										<Link href="/" className="text-body mx-auto py-1" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
-										</a>
+										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
 									{menu.rows.map((row) => (<li key={`row-${row.handle}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
-									<li key="shopall" className="border-b p-0"><a href={`/collections/${menu.handle}`} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></a></li>
+									<li key="shopall" className="border-b p-0">
+										<Link href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></Link>
+									</li>
 								</ul>
 							)}
 						</li>
 					)
 				})}
-				<li key="bali-beauty-club" className="flex px-g  py-0 border-b"><a href="" className=" m-0 pb-1 pt-2 text-body">Bali Beauty Club</a></li>
+				<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
+					<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">Bali Beauty Club <BeautyIcon className="ml-1 mr-1" /></a>
+				</li>
 				<li key="shopall" className="my-g p-g">
-					<a href="#" className="block rounded w-full bg-primary text-white border-[1px] border-solid border-transparent px-[1.75em] py-[.5625em] text-[1em] py-g text-center font-bold" data-cy="shopall-btn">Shop All</a>
+					<Link href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</Link>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g">
-					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 text-gray-900 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry">
-						Rest of the World (SGD)
-						<ChevronNext className={`h-[1em] text-xs ${storeSelection ? 'rotate-180' : ''}`} onClick={() => setStoreSelection(!storeSelection)} />
+					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 text-gray-900 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
+						onClick={() => setStoreSelection(!storeSelection)}>
+						{currency === 'SGD' && 'Rest of the World (SGD)'}
+						{currency === 'USD' && 'USA (USD)'}
+						{currency === 'CAD' && 'Canada (CAD)'}
+						{currency === 'AUD' && 'Canada (CAD)'}
+						{currency === 'EUR' && 'Australia (AUD)'}
+						{currency === 'SGD' && 'Europe (EUR)'}
+						{currency === 'MYR' && 'Malaysia (MYR)'}
+						<ChevronNext className={`h-[1em] text-xs ${storeSelection ? 'rotate-180' : ''}`} />
 					</h4>
-					<ul id="collapseCountry" className={`overflow-hidden list-unstyled card-body p-0 ${!storeSelection ? 'h-0' : 'h-[100px]'}`} role="tabpanel"
+					<ul id="collapseCountry" className={`overflow-hidden list-unstyled card-body p-0 ${!storeSelection ? 'h-0' : 'h-full'} before:content-[''] before:border-t before:border-t-gray-100 before:block before:mt-1`} role="tabpanel"
 						aria-labelledby="countrySelect" data-parent="#mobileMenu">
-						<li className="pt-g"><a href="#" className='text-body'>USA (USD)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>United Kingdom (GBP)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>Canada (CAD)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>Australia (AUD)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>Europe (EUR)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>Germany (EUR)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>France (EUR)</a></li>
-						<li className="pt-g"><a href="#" className='text-body'>Rest of the World (SGD)</a></li>
+						<li className="pb-25 pt-g"><a href="https://us.cocoandeve.com" className='text-body'>USA (USD)</a></li>
+						<li className="py-25"><a href="https://uk.cocoandeve.com" className='text-body'>United Kingdom (GBP)</a></li>
+						<li className="py-25"><a href="https://ca.cocoandeve.com" className='text-body'>Canada (CAD)</a></li>
+						<li className="py-25"><a href="https://au.cocoandeve.com" className='text-body'>Australia (AUD)</a></li>
+						<li className="py-25"><a href="https://eu.cocoandeve.com" className='text-body'>Europe (EUR)</a></li>
+						<li className="py-25"><a href="https://int.cocoandeve.com" className='text-body'>Rest of the World (SGD)</a></li>
+						{/* <li className="py-25"><a href="https://my.cocoandeve.com" className='text-body'>Malaysia (MYR)</a></li> */}
 					</ul>
 				</li>
-				<li key="others" className="flex flex-wrap  px-g pt-g">
-					<a href="#" className="w-1/2 mb-1 text-body">Help</a>
-					<a href="#" className="w-1/2 mb-1 text-body">Track my order</a>
-					<a href="/pages/reviews" className="w-1/2 mb-1 text-body">Result IRL</a>
-					<a href="#" className="w-1/2 mb-1 text-body">BLog</a>
+				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g">
+					<a href="https://support.cocoandeve.com/hc/en-us" className="px-hg w-1/2 mb-1 text-body">Help</a>
+					<Link href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</Link>
+					<Link href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</Link>
+					<Link href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</Link>
 				</li>
 			</ul>
 		</nav>
