@@ -202,19 +202,19 @@ const Sustainability = (props: any) => {
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
-                                        <TabContent className="mt-2" active={activeTab2 === 'formula-1'}>
+                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-1'}>
                                             <div className="mb-g" dangerouslySetInnerHTML={{
                                                 __html: formula.text_1,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2" active={activeTab2 === 'formula-2'}>
+                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-2'}>
                                             <div className="mb-g" dangerouslySetInnerHTML={{
                                                 __html: formula.text_2,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2" active={activeTab2 === 'formula-3'}>
+                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-3'}>
                                             <div dangerouslySetInnerHTML={{
-                                                __html: formula.text_3,
+                                                __html: formula.text_3.replace('h4', 'h4 class="mb-1"'),
                                             }} />
                                         </TabContent>
                                     </div>
@@ -224,7 +224,7 @@ const Sustainability = (props: any) => {
                         <div className="w-full lg:w-1/2 lg:order-1">
                             <h2 className="hidden lg:block mb-1">{formula.heading}</h2>
                             {!isLoading && (
-                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-3 w-full lg:w-3/4 p-0">
+                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-3 w-full lg:w-3/4 p-0 mb-g">
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>

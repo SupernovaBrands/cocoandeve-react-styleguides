@@ -29,8 +29,10 @@ const Header = (props: any) => {
 	}
 
 	const onToggleSearchBox = () => {
-		console.log('onToggleSearchBox');
 		setOpenSearchBox(!openSearchBox);
+		// console.log('onToggleSearchBox', openSearchBox);
+		if (!openSearchBox) document.querySelector('body').classList.add('overflow-y-hidden', 'search-panel-active');
+		else document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
 	}
 
 	const toggleAccountDropdown = () => {
@@ -91,7 +93,7 @@ const Header = (props: any) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1000] w-full ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
+			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
 				{annBar?.enabled && (
 					<AnnouncementBar
 						text={annBar.text}
@@ -120,11 +122,11 @@ const Header = (props: any) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
-											<a href={`/collections/${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
+											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
-													menus={mainMenu || []}	
+													menus={mainMenu || []}
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
@@ -167,13 +169,13 @@ const Header = (props: any) => {
 								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
-								<a className="h4 m-0 flex font-bold" href="#!" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<button type="button" className="h4 m-0 flex font-bold" data-cy="search-icon" onClick={onToggleSearchBox}>
 									<Search className="text-[1.5625em] lg:text-[1.375em] h-[1em]" />
-								</a>
+								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon className="text-[1.5625em] h-[1] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
 									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">0</span>
 								</a>
 							</li>

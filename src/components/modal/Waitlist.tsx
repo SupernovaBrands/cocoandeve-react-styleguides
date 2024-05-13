@@ -63,12 +63,12 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image.replace('592x', 'public').replace('540x', 'public')} />
 						}
 					</div>
-					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center mt-n1 mt-lg-0">
+					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 mt-lg-0">
 						{globalSettings && !globalSettings.isLoading && (
 							<>
 								{!success && (
 									<>
-										<strong className="mb-1 text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
+										<strong className="block mb-g text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
 										<p className="text-gray-600 mb-g text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
 									</>
 								)}

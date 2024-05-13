@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { isWaitlist } from "~/modules/utils";
+import Service from "~/sections/Service";
 
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
@@ -292,6 +293,8 @@ const Collection = (props: any) => {
                     </div>
                 </>
             )}
+
+            {!isLoading && handle === 'all' && <Service />}
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>

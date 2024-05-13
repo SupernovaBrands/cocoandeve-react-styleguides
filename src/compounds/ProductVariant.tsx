@@ -59,11 +59,11 @@ const ProductVariant: React.FC<VariantProp> = (props) => (
 		<input id={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
 		<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
 			{props.children}
-			<p className="mb-0 font-size-sm font-bold">
+			{!props.subscription && <p className="mb-0 font-size-sm font-bold">
 				{props.compare && <span className="line-through text-body mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]">{props.compare}</span> }
 				<span className="text-primary mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em]"> {props.price} </span>
 				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline"> {props.saving ? props.saving : '(SAVE 30%)'} </span>}
-			</p>
+			</p>}
 		</label>
 	</div>
 );
