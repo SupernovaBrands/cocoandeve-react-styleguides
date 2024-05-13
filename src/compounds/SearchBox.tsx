@@ -26,6 +26,20 @@ const SearchBox = (props: any) => {
 	const [products, setProducts] = useState([]);
 	const [popProducts, setPopProducts] = useState([]);
 	const [featuredImgs, setFeaturedImgs] = useState([]);
+	const orderHandles = [
+		'super-nourishing-coconut-fig-hair-masque',
+		'repairing-restoring-hair-mask',
+		'hydrating-shampoo',
+		'shampoo-conditioner-set',
+		'hydrating-conditioner',
+		'leave-in-conditioner',
+		'clean-scalp-treatment',
+		'miracle-elixir-hair-oil-treatment',
+		'sunny-honey-bali-bronzing-self-tan-mousse',
+		'sunny-honey-bali-bronzing-self-tan-set',
+		'bali-bae-self-tan-set',
+		'bronzing-self-tanner-drops',
+	];
 	const onChange = (e) => {
 		e.target.value;
 		setKeyword(e.target.value);
@@ -36,7 +50,41 @@ const SearchBox = (props: any) => {
 		else setContent();
 	}, [keyword]);
 
+	const tagsSort = (a, b) => {
+		const isBestSellerA = a.tags.includes('Best Sellers');
+		const isBestSellerB = b.tags.includes('Best Sellers');
+		if (isBestSellerA && !isBestSellerB) {
+			return -1;
+		}
+
+		if (!isBestSellerA && isBestSellerB) {
+			return 1;
+		}
+
+		return 0;
+	};
+
+	const handleSort = (a, b) => {
+		const indexNumA = orderHandles.indexOf(a.handle);
+		const indexNumB = orderHandles.indexOf(b.handle);
+
+		if (indexNumA >= 0 && indexNumB < 0) {
+			return -1;
+		}
+
+		if (indexNumA < 0 && indexNumB >= 0) {
+			return 1;
+		}
+
+		if (indexNumA >= 0 && indexNumB >= 0) {
+			return (indexNumA > indexNumB) ? 0 : -1;
+		}
+
+		return 0;
+	};
+
 	async function setResult () {
+		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
 		if (keyword.trim() === '') {
 			setLoading(false);
@@ -52,24 +100,43 @@ const SearchBox = (props: any) => {
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
-						const filteredByKey = productsData.filter((item) => {
-							if (item.handle === 'bali-bod-bundle-body-scrub-mask-cream') {
-								console.log('item', item);
-							}
-							const tags = item.tags.map((t: string) => t.toLowerCase());
+						const productFiltered = productsData.filter((i) => {
+							const title = i.title.toLowerCase();
+							const tags = i.tags.map((t: string) => t.toLowerCase());
 							const tagsString = tags.join(',');
-							return item.title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower);
-						})
-						const productsWithImgs = filteredByKey.map((item) => {
-							let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
-								? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
-							featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
-							return {
-								...item,
-								featuredImgUrl: featuredImg || '',
-							}
+							return (i.productType === 'HERO' || i.productType === 'BUNDLE') &&
+								(title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
+								!title.includes('vip') && exclusion.indexOf(i.handle) === -1;
 						});
-						setProducts(productsWithImgs.filter((item) => item.featuredImgUrl && item.featuredImgUrl !== ''));
+						productFiltered.sort(tagsSort);
+						productFiltered.sort(handleSort);
+						console.log('productFiltered', productFiltered);
+						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
+						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
+
+						if (uniqueFiltered.length > 0) {
+							uniqueFiltered = uniqueFiltered.map((item) => {
+								let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
+									? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
+								featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
+								return {
+									title: item.title,
+									handle: item.handle,
+									featuredImgUrl: featuredImg || '',
+									url: `/products/${item.handle}`,
+								};
+							});
+							uniqueFiltered.forEach((item, i) => {
+								if (item.handle === 'pro-youth-hair-scalp-mask') {
+									uniqueFiltered.splice(i, 1);
+									uniqueFiltered.unshift(item);
+								}
+							});
+							setProducts(uniqueFiltered);
+							setLoading(false);
+						} else {
+							setProducts([]);
+						}
 					} else {
 						setProducts([]);
 					}
@@ -218,11 +285,11 @@ const SearchBox = (props: any) => {
 							</div>
 						</div>
 					</div>
-					<p>Not what you're looking for?
-						<br className="lg:hidden" />
-						<span className="hidden lg:inline">&nbsp;</span>
-						Check our <a href="/collections/all" className="text-underline">shop all page</a>
-					</p>
+					{content?.search_footer_note && (
+						<p dangerouslySetInnerHTML={{
+							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline')
+						}} />
+					)}
 				</div>
 			)}
 		</div>
