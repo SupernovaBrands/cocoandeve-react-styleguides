@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 type PropType = {
 	className: string
 	data: any
-	template: string
+	template?: string
 }
 
 const PostCard: React.FC<PropType> = ({ className, data, template }) => (
@@ -25,8 +25,8 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 					<div className={`post-card__tags ${template === 'article' ? 'px-3' : ''} mb-2`}>
 						{data.tags.length > 0 && (
 							<>
-								{data.tags.map((item: string) => (
-									<PostTag tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
+								{data.tags.map((item: string, index: number) => (
+									<PostTag key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
 								))}
 							</>
 						)}
