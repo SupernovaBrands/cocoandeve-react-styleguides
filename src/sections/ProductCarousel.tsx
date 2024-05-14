@@ -32,23 +32,17 @@ const ProductCarousel = (props: any) => {
     });
 
 	const { isStyleguide, products, data } = props;
+	let productsData = data;
+	if (isStyleguide && !data) {
+		productsData = {
+			tab1: { products },
+			tab2: { products },
+			tab3: { products },
+		}
+	}
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
-	const [productsData, setProductsData] = useState({ tab1: { products: [] }, tab2: { products: [] }, tab3: { products: [] } });
-
-	useEffect(() => {
-		if (isStyleguide) {
-			setProductsData({
-				tab1: { products },
-				tab2: { products },
-				tab3: { products },
-			})
-		} else {
-			setProductsData(data);
-		}
-	}, []);
-
-	useEffect(() => {})
+	console.log('data', data);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
