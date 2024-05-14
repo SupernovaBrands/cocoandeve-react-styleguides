@@ -90,7 +90,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
-		console.log('data', data);
 	}, [])
 
 	const handleEmail = (e) => {

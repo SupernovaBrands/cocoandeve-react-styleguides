@@ -42,7 +42,6 @@ const ProductCarousel = (props: any) => {
 	}
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
-	console.log('data', data);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
