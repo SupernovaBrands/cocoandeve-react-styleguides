@@ -163,9 +163,9 @@ const Header = (props: any) => {
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#!" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
-								</a>
+								</button>
 								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
