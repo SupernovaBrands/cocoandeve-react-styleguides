@@ -254,9 +254,9 @@ const Collection = (props: any) => {
                                     }
                                     return showQuizCard && index === 2 ? (
                                         <>
-                                            <ProductCardQuiz key={`collection-quiz-card--${index}`} />
+                                            <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
                                             <ProductCard
-                                                key={`collection-temp-a-${item.id}`}
+                                                key={`collection-temp-${handle}-${item.id}`}
                                                 product={item}
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
@@ -266,7 +266,7 @@ const Collection = (props: any) => {
                                         </>
                                     ) : (
                                         <ProductCard
-                                            key={`collection-temp-b-${item.id}`}
+                                            key={`collection-temp-${handle}-${item.id}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
