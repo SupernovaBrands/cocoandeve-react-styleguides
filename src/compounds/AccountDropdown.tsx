@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import SocialLogin from './SocialLogin';
 import Link from 'next/link';
 import { Button } from '~/components/index';
+import { useRouter } from 'next/router';
 
 const AccountDropdown = (props) => {
     const [newsOptIn, setNewsOptIn] = useState(false);
@@ -22,9 +23,28 @@ const AccountDropdown = (props) => {
 			setValidPass(true);
 		}
 	};
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        const router = useRouter();
         e.preventDefault();
-        console.log('handle submit form dropdown');
+        // console.log('handle submit form dropdown');
+		const resp = await fetch('/api/account/create', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: emailRef.current.value,
+				password: passRef.current.value,
+				first_name: firstRef.current.value,
+				last_name: lastRef.current.value,
+				accept_marketing: newsOptIn,
+			})
+		}).then((resp) => resp.json());
+		const { customerCreate } = resp;
+		if (customerCreate.customer !== null) {
+			router.push('/account');
+		}
     };
     const handleChange = () => {
 		const firstname = firstRef?.current?.value !== '';
