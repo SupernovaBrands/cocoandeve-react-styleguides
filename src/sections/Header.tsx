@@ -13,7 +13,7 @@ import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 
 const Header = (props: any) => {
-	const { ThemeSettings, searchBox, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
