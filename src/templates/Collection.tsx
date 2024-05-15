@@ -144,8 +144,6 @@ const Collection = (props: any) => {
 
     const loadWaitlist = isWaitlist(sortedByAvailable);
 
-    console.log('showQuizCard', showQuizCard);
-
     return (
         <>
             {!collectionSettings.isLoading && (
