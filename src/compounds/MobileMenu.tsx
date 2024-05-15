@@ -76,7 +76,7 @@ const MobileMenu = (props: any) => {
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
-									{menu.rows.map((row) => (<li key={`row-${row.handle}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
+									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
 									<li key="shopall" className="border-b p-0">
 										<Link href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></Link>
 									</li>
