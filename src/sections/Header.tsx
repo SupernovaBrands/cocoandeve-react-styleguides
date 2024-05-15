@@ -11,6 +11,7 @@ import Cart from '~/components/cart/cart';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
+import { useRouter } from 'next/router';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
@@ -19,7 +20,9 @@ const Header = (props: any) => {
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
+	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
@@ -36,7 +39,8 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
-		setOpenAccountBox(!openAccountBox);
+		if (isLoggedIn) router.push('/account');
+		else setOpenAccountBox(!openAccountBox);
 	}
 
 	const handleClose = (): void => { // Add type annotation for function
@@ -89,6 +93,7 @@ const Header = (props: any) => {
 				})
 			}
 		);
+		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
 	return (
@@ -166,7 +171,7 @@ const Header = (props: any) => {
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
 								</button>
-								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
 								<button type="button" className="h4 m-0 flex font-bold" data-cy="search-icon" onClick={onToggleSearchBox}>
