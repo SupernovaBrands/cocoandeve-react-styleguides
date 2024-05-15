@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import SocialLogin from './SocialLogin';
 import Link from 'next/link';
 import { Button } from '~/components/index';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props) => {
     const [newsOptIn, setNewsOptIn] = useState(false);
