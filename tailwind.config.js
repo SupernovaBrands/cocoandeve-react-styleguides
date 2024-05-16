@@ -63,6 +63,7 @@ module.exports = {
       'gray-700': '#7B7B7B',
       'gray-800': '#494949',
       'gray-900': '#e4e4e4',
+      'gray-910': '#D1D1D1',
       'blue': '#213E7B',
       'blue-dark': '#162A53',
       'white': '#fff',
