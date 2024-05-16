@@ -89,7 +89,8 @@ const ProductCarousel = (props: any) => {
 									{productsData?.tab1?.products && productsData.tab1.products.map((item: any, index: number) => {
 										return (
 											<ProductCard
-												key={item.id}
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
 												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
@@ -125,7 +126,8 @@ const ProductCarousel = (props: any) => {
 									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
 										return (
 											<ProductCard
-												key={item.id}
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
 												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
@@ -161,7 +163,8 @@ const ProductCarousel = (props: any) => {
 									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
 										return (
 											<ProductCard
-												key={item.id}
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
 												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
