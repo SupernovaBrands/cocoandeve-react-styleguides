@@ -479,7 +479,7 @@ const YotpoReviewWidget = (props:any) => {
 				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />
-					<span className="lg:ml-1 block yotpo-widget__total lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
+					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
 			</div>
 
