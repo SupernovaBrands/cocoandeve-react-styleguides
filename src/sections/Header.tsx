@@ -13,7 +13,7 @@ import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, allData, cartCount } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -25,7 +25,9 @@ const Header = (props: any) => {
 	}
 
 	const onToggleCart = () => {
-		setOpenCartDrawer(!openDrawer);
+		console.log('onToggleCart');
+		// setOpenCartDrawer(!openDrawer);
+		props.onToggleCart();
 	}
 
 	const onToggleSearchBox = () => {
@@ -44,6 +46,7 @@ const Header = (props: any) => {
 	}
 
 	useEffect(() => {
+		console.log('allData1', allData)
 		let lastScrollTop = 0;
 		let scrollTop = 0;
 		const handleScroll = (e) => {
@@ -175,8 +178,8 @@ const Header = (props: any) => {
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">0</span>
+									<CartIcon toggleCart={onToggleCart} className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>

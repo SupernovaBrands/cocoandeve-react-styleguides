@@ -61,7 +61,7 @@ const MobileMenu = (props: any) => {
 								)}
 							</label>
 							{menu.rows && menu.rows.length > 0 && (
-								<ul className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
+								<ul key={`subsubmenu ${menu.title}`} className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 										<label onClick={() => {
 											const newStates = {...defMenuState};
@@ -76,7 +76,7 @@ const MobileMenu = (props: any) => {
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
-									{menu.rows.map((row) => (<li key={`row-${row.handle}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
+									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
 									<li key="shopall" className="border-b p-0">
 										<Link href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></Link>
 									</li>
@@ -105,12 +105,12 @@ const MobileMenu = (props: any) => {
 					</h4>
 					<ul id="collapseCountry" className={`overflow-hidden list-unstyled card-body p-0 ${!storeSelection ? 'h-0' : 'h-full'} before:content-[''] before:border-t before:border-t-gray-100 before:block before:mt-1`} role="tabpanel"
 						aria-labelledby="countrySelect" data-parent="#mobileMenu">
-						<li className="pb-25 pt-g"><a href="https://us.cocoandeve.com" className='text-body'>USA (USD)</a></li>
-						<li className="py-25"><a href="https://uk.cocoandeve.com" className='text-body'>United Kingdom (GBP)</a></li>
-						<li className="py-25"><a href="https://ca.cocoandeve.com" className='text-body'>Canada (CAD)</a></li>
-						<li className="py-25"><a href="https://au.cocoandeve.com" className='text-body'>Australia (AUD)</a></li>
-						<li className="py-25"><a href="https://eu.cocoandeve.com" className='text-body'>Europe (EUR)</a></li>
-						<li className="py-25"><a href="https://int.cocoandeve.com" className='text-body'>Rest of the World (SGD)</a></li>
+						<li key="c-us" className="pb-25 pt-g"><a href="https://us.cocoandeve.com" className='text-body'>USA (USD)</a></li>
+						<li key="c-gb" className="py-25"><a href="https://uk.cocoandeve.com" className='text-body'>United Kingdom (GBP)</a></li>
+						<li key="c-ca" className="py-25"><a href="https://ca.cocoandeve.com" className='text-body'>Canada (CAD)</a></li>
+						<li key="c-au" className="py-25"><a href="http<navs://au.cocoandeve.com" className='text-body'>Australia (AUD)</a></li>
+						<li key="c-eu" className="py-25"><a href="https://eu.cocoandeve.com" className='text-body'>Europe (EUR)</a></li>
+						<li key="c-sg" className="py-25"><a href="https://int.cocoandeve.com" className='text-body'>Rest of the World (SGD)</a></li>
 						{/* <li className="py-25"><a href="https://my.cocoandeve.com" className='text-body'>Malaysia (MYR)</a></li> */}
 					</ul>
 				</li>
