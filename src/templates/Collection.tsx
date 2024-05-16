@@ -294,7 +294,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && handle === 'all' && <Service />}
+            {!isLoading && handle === 'all' && <Service className="!text-base" />}
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
