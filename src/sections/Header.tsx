@@ -14,7 +14,7 @@ import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import { useRouter } from 'next/navigation';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, allData, cartCount } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -50,7 +50,6 @@ const Header = (props: any) => {
 	}
 
 	useEffect(() => {
-		console.log('allData1', allData)
 		let lastScrollTop = 0;
 		let scrollTop = 0;
 		const handleScroll = (e) => {
