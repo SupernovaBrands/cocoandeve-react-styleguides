@@ -9,7 +9,7 @@ import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollectio
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { isWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
-
+import { sidebar_collection_ph } from '~/modules/placeholders';
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
@@ -86,7 +86,7 @@ const Collection = (props: any) => {
 		toggle(open);
 	};
     const router = useRouter();
-    const [sidebarMenu, setSidebarMenu] = useState([]);
+    const [sidebarMenu, setSidebarMenu] = useState(sidebar_collection_ph);
     const [childMenu, setChildMenu] = useState([]);
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
