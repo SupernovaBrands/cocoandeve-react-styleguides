@@ -16,7 +16,7 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 				<Link href={data.handle ?? '#'} className={`${template === 'article' ? 'mb-2' : ''} relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
 					<picture>
 						{data.srcSet && (<source srcSet={data.srcSet} media="(min-width: 992px)" width="568" height="298"/>)}
-						<img src={data.img} className="w-full" alt={data.title} width="382" height="178"/>
+						<img src={data.img} className="w-full h-[178px] md:h-[298px]" alt={data.title} width="382" height="178"/>
 					</picture>
 				</Link>
 			)}
