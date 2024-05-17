@@ -38,7 +38,7 @@ const Instagram = (props: any) => {
     */
     
     return (
-        <section className={`instagram pt-4 pb-3 text-center ${props.className} mx-auto`}>
+        <section className={`instagram pt-4 pb-3 text-center ${props.className} mx-auto bg-pink-light`}>
             <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg">
                     <div className="w-11/12 lg:w-7/12 text-center mx-auto pb-g sm:px-hg">

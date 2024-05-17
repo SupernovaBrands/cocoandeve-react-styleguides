@@ -41,7 +41,7 @@ const Playground = (props: any) => {
 	}, []);
 
     return (
-        <section className="container text-center pb-0 playground--collection-list range-banner pt-5">
+        <section className="container text-center pb-0 playground--collection-list range-banner pt-1">
             <h1 className="h1 mb-1">{featuredCollection?.title}</h1>
             {!isLoading && (
                 <>
