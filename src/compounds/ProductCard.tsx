@@ -24,7 +24,7 @@ const WaitlistButton = (props) => {
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border-1 border-primary flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'}`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border-1 border-primary hover:border-primary-dark flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
             <Pricing props={data} />
         </Button>
     )
@@ -33,7 +33,7 @@ const WaitlistButton = (props) => {
 const AddToCartButton = (props) => {
     const { className } = props;
     return (
-        <Button buttonClass={`${props.className ?? ''} border-1 border-primary flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'}`}>
+        <Button buttonClass={`${props.className ?? ''} border-1 border-primary hover:border-primary-dark flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
             <Pricing props={props} />
         </Button>
     );
