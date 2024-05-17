@@ -13,13 +13,11 @@ const fetcher = (url: string) => {
 };
 
 const useHomepage = (region: string) => {
-    console.log('useHp', region);
     const { isPreview } = usePreview();
     let params = '';
-    if (isPreview && !region) params = '?preview=true';
+    if (isPreview && region === 'dev') params = '?preview=true';
     const { data, error, isLoading } = useSWR(`https://${host}/homepage/sections${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
     const slideShows = data?.Sections.find((comp) => comp.__component === 'section.slideshow')?.[`slide_${region}` || 'slide_dev'] || [];
-
     return {
         error,
         isLoading,

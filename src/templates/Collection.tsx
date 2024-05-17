@@ -224,7 +224,7 @@ const Collection = (props: any) => {
                                                 const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
-                                                        key={children.idx}
+                                                        key={`tags--${children.idx}`}
                                                         href={`/collections/${collection.handle}`}
                                                         className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
@@ -252,9 +252,9 @@ const Collection = (props: any) => {
                                     }
                                     return showQuizCard && index === 2 ? (
                                         <>
-                                            <ProductCardQuiz key={item.id} />
+                                            <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
                                             <ProductCard
-                                                key={item.id}
+                                                key={`collection-temp-${handle}-${item.id}`}
                                                 product={item}
                                                 className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                                 button={true}
@@ -264,7 +264,7 @@ const Collection = (props: any) => {
                                         </>
                                     ) : (
                                         <ProductCard
-                                            key={item.id}
+                                            key={`collection-temp-${handle}-${item.id}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
@@ -294,7 +294,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && handle === 'all' && <Service />}
+            {!isLoading && handle === 'all' && <Service className="!text-base" />}
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>

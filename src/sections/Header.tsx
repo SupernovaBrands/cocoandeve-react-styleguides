@@ -11,22 +11,26 @@ import Cart from '~/components/cart/cart';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
+import { useRouter } from 'next/navigation';
 
 const Header = (props: any) => {
-	const { ThemeSettings, searchBox, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
-
+	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
 
 	const onToggleCart = () => {
-		setOpenCartDrawer(!openDrawer);
+		console.log('onToggleCart');
+		// setOpenCartDrawer(!openDrawer);
+		props.onToggleCart();
 	}
 
 	const onToggleSearchBox = () => {
@@ -37,7 +41,8 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
-		setOpenAccountBox(!openAccountBox);
+		if (isLoggedIn) router.push('/account');
+		else setOpenAccountBox(!openAccountBox);
 	}
 
 	const handleClose = (): void => { // Add type annotation for function
@@ -90,6 +95,7 @@ const Header = (props: any) => {
 				})
 			}
 		);
+		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
 	return (
@@ -164,10 +170,10 @@ const Header = (props: any) => {
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#!" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
-								</a>
-								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+								</button>
+								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
 								<button type="button" className="h4 m-0 flex font-bold" data-cy="search-icon" onClick={onToggleSearchBox}>
@@ -176,8 +182,8 @@ const Header = (props: any) => {
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">0</span>
+									<CartIcon toggleCart={onToggleCart} className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>

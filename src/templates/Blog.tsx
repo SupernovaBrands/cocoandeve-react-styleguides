@@ -33,9 +33,9 @@ const Blog = (props) => {
 	const autoPlayClick = controlAutoplay(emblaApi);
 
 	return (
-		<div className="mobile-wrapper">
-			<div className="container mt-4">
-			<h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
+		<div className="mobile-wrapper mt-3 lg:mt-5">
+			<div className="container">
+				<h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
                 {!isLoading && (
                     <div className="blog-nav-tags mb-4 flex mt-2">
                         <BlogNavTag href="/blogs/news" title="ALL" active={true} />
@@ -49,7 +49,7 @@ const Blog = (props) => {
 				<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
 					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 						{postData.map((data) => (
-							<PostCard key={data.id} className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+							<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
 						))}
 					</Carousel.Inner>
 					<Carousel.Navigation>
@@ -57,7 +57,7 @@ const Blog = (props) => {
 							onClick={() => autoPlayClick(arrowClickPrev)}
 							className="lg:-left-[1.25em] w-[auto] text-primary"
 						>
-							<span className="bg-white -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+							<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 								<ChevronPrev className="w-g h-g svg--current-color" />
 							</span>
 						</PrevButton>
@@ -65,7 +65,7 @@ const Blog = (props) => {
 							onClick={() => autoPlayClick(arrowClickNext)}
 							className="lg:-right-[1.25em] w-[auto] text-primary"
 						>
-							<span className="bg-white -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+							<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 								<ChevronNext className="w-g h-g svg--current-color" />
 							</span>
 						</NextButton>
@@ -75,7 +75,7 @@ const Blog = (props) => {
 					<ArticleRecommendation popularArticles={popularArticles} />
 					<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 						{articles.map((data) =>
-							<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
+							<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" template="blog" data={data} />
 						)}
 					</div>
 				</div>
@@ -85,9 +85,9 @@ const Blog = (props) => {
 						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
 					)}
 				</div> */}
-				<div className="w-100 text-center mb-4">
+				{/* <div className="w-100 text-center mb-4">
                 	<Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline">Load more posts</Link>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import ChevronDown from '~/images/icons/chevron-down.svg';
 
 const InputCountry = (props: any) => {
+	const [defaultVal, setDefaultVal] = useState<string>('SG');
 	const onSelecChange = (e) => {
 		const code = e.target.options[e.target.selectedIndex].dataset.code;
 		props.handleCode(code);
@@ -10,7 +12,7 @@ const InputCountry = (props: any) => {
 			<label htmlFor={props.id} className="input-group-addon border-0 relative py-g px-2 mb-1 block appearance-none bg-white rounded rounded-tr-none rounded-br-none h-[3.125rem] w-[5.063rem] lg:w-[5.688rem]">
 				<span className={`absolute items-center ${props.className ?? ''}`}>+{props.activeCountry}</span>
 				<ChevronDown className="w-[0.75rem] h-[0.75rem] right-25 absolute top-[50%] -translate-y-[50%]" />
-				<select id={props.id} className="inline-block h-[3.125rem] w-full align-middle opacity-0" onChange={onSelecChange}>
+				<select id={props.id} className="inline-block h-[3.125rem] w-full align-middle opacity-0" onChange={onSelecChange} defaultValue={defaultVal}>
 					<option value="" disabled>Select Country</option>
 					<option value="KH" data-code="855">Cambodia</option>
 					<option value="HK" data-code="852">Hong Kong</option>

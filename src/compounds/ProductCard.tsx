@@ -75,8 +75,8 @@ const SwatchOverlay = (props) => {
                         <span ref={swatchLabel} data-swatch-label>{props.swatch.data[0].label}</span>
                     </label>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
-                        {props.swatch.data.length > 0 && props.swatch.data.map((item, i) => (
-                            <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${firstAvailable.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                        {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i) => (
+                            <li key={`swatch-card-${item.id}`} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${firstAvailable.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
                                 <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ firstAvailable.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
@@ -98,7 +98,7 @@ const SwatchOverlay = (props) => {
 const ProductCardTall = (props) => {
     const { abtestBtn, smSingleStar } = props;
 	return !props.useCardTemplate ? (
-        <div className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
+        <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="!pt-2 rounded-t bg-pink-light">
                 <picture className="embed-responsive before:pt-[100%] block relative aspect-square bg-pink-light rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
@@ -132,7 +132,7 @@ const ProductCardTall = (props) => {
             </div>
         </div>
 	) : (
-		<div className={`${props.className} carousel-item ${props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+		<div key={props.keyName} className={`${props.className} carousel-item ${props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
 			<img className="img-fluid" src={`//via.placeholder.com/600x400?text=${props.product.label}`} alt={`slide ${props.product.index}`}/>
 		</div>
 	);

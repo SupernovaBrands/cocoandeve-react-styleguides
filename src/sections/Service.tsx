@@ -2,7 +2,7 @@ import Stars from '~/images/icons/two-line-stars.svg';
 import WinnerAward from '~/images/icons/winner-award.svg';
 import MoneyBack from '~/images/icons/moneyback.svg';
 
-const Service = () => {
+const Service = (props: any) => {
 	const SERVICES = [
 		{ id: 'stars', label: `39,792 stars <br class="hidden lg:block"> <span class="hidden lg:inline">Customer</span> Reviews`},
 		{ id: 'winner-award', label: 'Award-winning <br>beauty'},
@@ -20,7 +20,7 @@ const Service = () => {
 									{list.id === 'winner-award' && <WinnerAward className="text-body" />}
 									{list.id === 'money-back' && <MoneyBack className="text-body" />}
 								</i>
-								<p className="title text-sm lg:text-base mb-0">{list.label.split('<br>').map((item) => (
+								<p className={`title text-sm lg:text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
 									<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
 								))}</p>
 							</li>

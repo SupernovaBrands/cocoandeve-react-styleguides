@@ -21,12 +21,14 @@ const tStrings = global.config.tStrings;
 interface Props {
     showCart: boolean;
     handleClose: () => void;
+	cartCount: number;
 }
 
 const Cart: React.FC<Props> = (props) => {
+	const { showCart, cartCount } = props;
 	// const storeApi = new storefrontApi();
-	const [isOpen, setOpen] = useState(props.showCart);
-	const [itemCount, setItemCount] = useState(0);
+	const [isOpen, setOpen] = useState(showCart);
+	const [itemCount, setItemCount] = useState(cartCount);
 	const [loadingInit, setLoadingInit] = useState(true);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
@@ -79,6 +81,9 @@ const Cart: React.FC<Props> = (props) => {
 			setDiscountMeter({...discountMeter});
 			setShippingMeter({...shippingMeter});
 			setItemCount(e.totalQuantity);
+			setLoadingInit(false);
+		}).catch(() => {
+			console.log('get cart fail');
 			setLoadingInit(false);
 		});
 	}, []);

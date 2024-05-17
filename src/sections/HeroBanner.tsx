@@ -31,7 +31,7 @@ const HeroBanner = (props: any) => {
 		Autoplay({ playOnInit: true, delay: 3000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
-	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region);
+	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region || 'dev');
 	useEffect(() => {
 		if (!emblaApi) return;
 		const autoplay = emblaApi?.plugins()?.autoplay;

@@ -42,7 +42,7 @@ const Playground = (props: any) => {
 
     return (
         <section className="container text-center pb-0 playground--collection-list range-banner pt-5">
-            <h1 className="h1 text-nowrap mb-1">{featuredCollection?.title}</h1>
+            <h1 className="h1 mb-1">{featuredCollection?.title}</h1>
             {!isLoading && (
                 <>
                     <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
