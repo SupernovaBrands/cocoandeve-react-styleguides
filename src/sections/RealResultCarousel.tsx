@@ -36,7 +36,6 @@ const RealResultCarousel = (props: any) => {
 	]);
 
 	const { videos } = props;
-	console.log('videos', videos);
 
 	return (
 		<div className="instagram-reels container my-3 lg:my-4 text-center">
