@@ -523,6 +523,7 @@ const YotpoReviewWidget = (props:any) => {
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('review')}
 								type="button"
+								lg={false}
 								buttonClass="btn-outline-primary w-full px-0">
 									{tStrings.yotpo.writeReview}
 							</Button>
@@ -530,6 +531,7 @@ const YotpoReviewWidget = (props:any) => {
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('question')}
 								type="button"
+								lg={false}
 								buttonClass="btn-outline-primary w-full px-0">
 									{tStrings.yotpo.askQuestion}
 							</Button>
@@ -564,7 +566,7 @@ const YotpoReviewWidget = (props:any) => {
 							<input
 								type="text"
 								name="free_text_search"
-								className="block appearance-none w-full py-1 px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l outline-none mb-0"
+								className="block appearance-none w-full py-g px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l-h outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
@@ -612,7 +614,7 @@ const YotpoReviewWidget = (props:any) => {
 
 						<div className="flex flex-wrap mt-1 -mx-1">
 							<div className="w-1/2 lg:w-1/4 px-1">
-								<select className="custom-select my-1" name="scores" onChange={() => { onFilterChange(); }}>
+								<select className="custom-select my-1 border-dark" name="scores" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.rating}</option>
 									<option value="5">5 Stars</option>
 									<option value="4">4 Stars</option>
@@ -622,14 +624,14 @@ const YotpoReviewWidget = (props:any) => {
 								</select>
 							</div>
 							<div className="w-1/2 lg:w-1/4 px-1">
-								<select className="custom-select my-1" name="pictured" onChange={() => { onFilterChange(); }}>
+								<select className="custom-select my-1 border-dark" name="pictured" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.imageVideo}</option>
 									<option value="true">{tStrings.yotpo.withImageVideo}</option>
 								</select>
 							</div>
 							{customFilter.map((q) => q.filter !== '' && (
 								<div key={q.slug} className="w-1/2 lg:w-1/4 px-1">
-									<select className="custom-select my-1" name={q.slug} onChange={() => { onFilterChange(); }}>
+									<select className="custom-select my-1 border-dark" name={q.slug} onChange={() => { onFilterChange(); }}>
 										<option value="">{q.filter}</option>
 										{q.options.map((o) => (
 											<option key={o} value={o}>{o.replace('/', ' / ')}</option>
