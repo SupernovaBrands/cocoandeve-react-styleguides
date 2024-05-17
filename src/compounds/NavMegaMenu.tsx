@@ -17,65 +17,71 @@ const NavMegaMenu = (props: any) => {
             {/* @ts-ignore */}
             setProducts(selected);
         }
-        fetch(`/api/collectionProducts?handle=${handle}`).then(
-			res => {
-				res?.json().then(data => {
-                    const plist = data?.products;
-                    let selected = [];
-					if (handle === 'skin' || handle === 'skincare') {
-						[
-							{ handle: 'double-cleanser-set', title: 'Double Cleanser Set' },
-							{ handle: 'antioxidant-glow-cream', title: 'Antioxidant Glow Cream' },
-							{ handle: 'depuff-eye-cream', title: 'Depuff Eye Cream' },
-						].forEach((item) => {
-                            {/* @ts-ignore */}
-							selected.push({
-								title: item.title,
-								handle: item.handle,
-							});
-						});
-					} else {
-                        for (let i = 0; i < listIds.length; i += 1) {
-							const item = plist.find((it) => it.id.includes(listIds[i]));
-							if (item) {
-								{/* @ts-ignore */}
-                                if (featuredImg) {
+        if (handle) {
+            fetch(`/api/collectionProducts?handle=${handle}`).then(
+                res => {
+                    try {
+                        res?.json().then(data => {
+                            const plist = data?.products;
+                            let selected = [];
+                            if (handle === 'skin' || handle === 'skincare') {
+                                [
+                                    { handle: 'double-cleanser-set', title: 'Double Cleanser Set' },
+                                    { handle: 'antioxidant-glow-cream', title: 'Antioxidant Glow Cream' },
+                                    { handle: 'depuff-eye-cream', title: 'Depuff Eye Cream' },
+                                ].forEach((item) => {
+                                    {/* @ts-ignore */}
                                     selected.push({
                                         title: item.title,
                                         handle: item.handle,
                                     });
+                                });
+                            } else {
+                                for (let i = 0; i < listIds.length; i += 1) {
+                                    const item = plist.find((it) => it.id.includes(listIds[i]));
+                                    if (item) {
+                                        {/* @ts-ignore */}
+                                        selected.push({
+                                            title: item.title,
+                                            handle: item.handle,
+                                        });
+                                    }
                                 }
-							}
-						}
-                    }
-                    if (selected.length < 3) {
-						selected = plist.map((item) => {
-							return {
-								title: item.title,
-                                handle: item.handle,
-							};
-						});
-					}
+                            }
+                            if (selected.length < 3) {
+                                selected = plist.map((item) => {
+                                    return {
+                                        title: item.title,
+                                        handle: item.handle,
+                                    };
+                                });
+                            }
 
-                    getFeaturedImages().then((data) => {
-                        if (data?.length > 0) {
-                            const selectedImgs = selected.map((item) => {
-                                const featuredImg = data.find((img) => img.handle === item.handle)
-								? data.find((img) => img.handle === item.handle).featured_image_url : null;
-                                return {
-                                    title: item.title,
-                                    img: featuredImg,
-                                    url: `/products/${item.handle}`,
-                                };
+                            getFeaturedImages().then((data) => {
+                                if (data?.length > 0) {
+                                    const selectedImgs = selected.map((item) => {
+                                        const featuredImg = data.find((img) => img.handle === item.handle)
+                                        ? data.find((img) => img.handle === item.handle).featured_image_url : null;
+                                        return {
+                                            title: item.title,
+                                            img: featuredImg,
+                                            url: `/products/${item.handle}`,
+                                        };
+                                    })
+                                    {/* @ts-ignore */}
+                                    setProducts(selectedImgs.filter((i) => i.img));
+                                    setIsLoading(false);
+                                }
                             })
-                            {/* @ts-ignore */}
-                            setProducts(selectedImgs.filter((i) => i.img));
-                            setIsLoading(false);
-                        }
-                    })
-				});
-			}
-		)
+                        });
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+            )
+        } else {
+            setIsLoading(false);
+        }
     }, []);
 
     return (

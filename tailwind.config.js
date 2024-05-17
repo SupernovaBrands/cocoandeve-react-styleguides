@@ -61,6 +61,8 @@ module.exports = {
       'gray-500': '#A3A3A3',
       'gray-600': '#4E4E4E',
       'gray-700': '#7B7B7B',
+      'gray-800': '#494949',
+      'gray-900': '#e4e4e4',
       'blue': '#213E7B',
       'blue-dark': '#162A53',
       'white': '#fff',
@@ -71,7 +73,8 @@ module.exports = {
       'shade-dark': '#885757',
       'ultra-dark': '#5C2323',
       'medium': '#AA7878',
-      'body-light': '#f6e4ef'
+      'body-light': '#f6e4ef',
+      'placeholder': '#cecece',
     },
     fontFamily: {
       sans: ['var(--font-sofia)'],

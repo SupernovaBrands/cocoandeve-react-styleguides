@@ -32,21 +32,16 @@ const ProductCarousel = (props: any) => {
     });
 
 	const { isStyleguide, products, data } = props;
+	let productsData = data;
+	if (isStyleguide && !data) {
+		productsData = {
+			tab1: { products },
+			tab2: { products },
+			tab3: { products },
+		}
+	}
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
-	const [productsData, setProductsData] = useState({ tab1: { products: [] }, tab2: { products: [] }, tab3: { products: [] } });
-
-	useEffect(() => {
-		if (isStyleguide) {
-			setProductsData({
-				tab1: { products },
-				tab2: { products },
-				tab3: { products },
-			})
-		} else {
-			setProductsData(data);
-		}
-	}, []);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
@@ -91,17 +86,19 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData?.tab1?.products && productsData.tab1.products.map((data, index) => (
-										<ProductCard
-											key={`tab1-${index}`}
-											isFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab1?.products && productsData.tab1.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
@@ -124,19 +121,21 @@ const ProductCarousel = (props: any) => {
 							</Carousel.Wrapper>
 						</TabContent>
 						<TabContent active={activeTab === 'bestsellers'}>
-							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
+							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
-									{productsData?.tab2?.products && productsData.tab2.products.map((data, index) => (
-										<ProductCard
-											key={`tab2-${index}`}
-											sFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
@@ -161,17 +160,19 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
-									{productsData?.tab3?.products && productsData.tab3.products.map((data, index) => (
-										<ProductCard
-											key={`tab3-${index}`}
-											isFromShopify={true}
-											product={data}
-											className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-											button={true}
-											carousel={true}
-											setWaitlistData={setWaitlistData}
-										/>
-									))}
+									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
+										return (
+											<ProductCard
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={true}
+											/>
+										)
+									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
@@ -193,7 +194,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<Link href="#" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
+						<Link href="/collections/all" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
 					</div>
 				</div>
 			</div>

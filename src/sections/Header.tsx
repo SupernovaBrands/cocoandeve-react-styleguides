@@ -7,35 +7,35 @@ import BrandLogo from '~/images/ce-logo.svg';
 import Account from '~/images/icons/account.svg';
 import Search from '~/images/icons/search-thin.svg';
 import CartIcon from '~/images/icons/cart.svg';
-import Cart from '~/components/cart/cart';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
+import { useRouter } from 'next/navigation';
 
 const Header = (props: any) => {
-	const { ThemeSettings, searchBox, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
-
+	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
 
-	const onToggleCart = () => {
-		setOpenCartDrawer(!openDrawer);
-	}
-
 	const onToggleSearchBox = () => {
-		console.log('onToggleSearchBox');
 		setOpenSearchBox(!openSearchBox);
+		// console.log('onToggleSearchBox', openSearchBox);
+		if (!openSearchBox) document.querySelector('body').classList.add('overflow-y-hidden', 'search-panel-active');
+		else document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
 	}
 
 	const toggleAccountDropdown = () => {
-		setOpenAccountBox(!openAccountBox);
+		if (isLoggedIn) router.push('/account');
+		else setOpenAccountBox(!openAccountBox);
 	}
 
 	const handleClose = (): void => { // Add type annotation for function
@@ -88,11 +88,12 @@ const Header = (props: any) => {
 				})
 			}
 		);
+		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
 	return (
 		<>
-			<header className={`main-header z-[1000] w-full ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
+			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
 				{annBar?.enabled && (
 					<AnnouncementBar
 						text={annBar.text}
@@ -121,11 +122,11 @@ const Header = (props: any) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
-											<a href={`/collections/${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
+											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
-													menus={mainMenu || []}	
+													menus={mainMenu || []}
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
@@ -162,20 +163,20 @@ const Header = (props: any) => {
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<a onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" href="#!" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
-								</a>
-								<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+								</button>
+								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
-								<a className="h4 m-0 flex font-bold" href="#!" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<button type="button" className="h4 m-0 flex font-bold" data-cy="search-icon" onClick={onToggleSearchBox}>
 									<Search className="text-[1.5625em] lg:text-[1.375em] h-[1em]" />
-								</a>
+								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon className="text-[1.5625em] h-[1] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">0</span>
+								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
+									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>

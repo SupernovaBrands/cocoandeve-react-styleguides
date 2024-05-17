@@ -1,14 +1,22 @@
-import dynamic from 'next/dynamic';
+import useEmblaCarousel from 'embla-carousel-react';
+import { EmblaOptionsType } from 'embla-carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import Loading from '~/images/icons/loading.svg';
 import Search from '~/images/icons/search-thin.svg';
 import SearchProductCard from './SearchProductCard';
 import { getFeaturedImages } from '~/modules/utils';
-
-const CarouselScroll = dynamic(() => import('~/components/CarouselScroll'), {
-	ssr: false,
-});
+import PopularProducts from './SearchPopular';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import {
+	PrevButton,
+	NextButton,
+	usePrevNextButtons,
+	controlAutoplay,
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const SearchBox = (props: any) => {
 	const { content, dummy } = props;
@@ -17,21 +25,66 @@ const SearchBox = (props: any) => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [popProducts, setPopProducts] = useState([]);
-	const [clearDisabled, setClearDisabled] = useState(true);
+	const [featuredImgs, setFeaturedImgs] = useState([]);
+	const orderHandles = [
+		'super-nourishing-coconut-fig-hair-masque',
+		'repairing-restoring-hair-mask',
+		'hydrating-shampoo',
+		'shampoo-conditioner-set',
+		'hydrating-conditioner',
+		'leave-in-conditioner',
+		'clean-scalp-treatment',
+		'miracle-elixir-hair-oil-treatment',
+		'sunny-honey-bali-bronzing-self-tan-mousse',
+		'sunny-honey-bali-bronzing-self-tan-set',
+		'bali-bae-self-tan-set',
+		'bronzing-self-tanner-drops',
+	];
 	const onChange = (e) => {
 		e.target.value;
 		setKeyword(e.target.value);
 	}
 
 	useEffect(() => {
-		setResult();
+		if (keyword !== '') setResult();
+		else setContent();
 	}, [keyword]);
 
-	useEffect(() => {
-		setContent();
-	}, [props]);
+	const tagsSort = (a, b) => {
+		const isBestSellerA = a.tags.includes('Best Sellers');
+		const isBestSellerB = b.tags.includes('Best Sellers');
+		if (isBestSellerA && !isBestSellerB) {
+			return -1;
+		}
+
+		if (!isBestSellerA && isBestSellerB) {
+			return 1;
+		}
+
+		return 0;
+	};
+
+	const handleSort = (a, b) => {
+		const indexNumA = orderHandles.indexOf(a.handle);
+		const indexNumB = orderHandles.indexOf(b.handle);
+
+		if (indexNumA >= 0 && indexNumB < 0) {
+			return -1;
+		}
+
+		if (indexNumA < 0 && indexNumB >= 0) {
+			return 1;
+		}
+
+		if (indexNumA >= 0 && indexNumB >= 0) {
+			return (indexNumA > indexNumB) ? 0 : -1;
+		}
+
+		return 0;
+	};
 
 	async function setResult () {
+		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
 		if (keyword.trim() === '') {
 			setLoading(false);
@@ -45,20 +98,45 @@ const SearchBox = (props: any) => {
 				res?.json().then(data => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
-						getFeaturedImages().then((dataImgs) => {
-							if (dataImgs?.length > 0) {
-								const productsWithImgs = productsData.map((item) => {
-									const featuredImg = dataImgs.find((img) => img.handle === item.handle)
-									? dataImgs.find((img) => img.handle === item.handle).featured_image_url : null;
-									return {
-										...item,
-										featuredImgUrl: featuredImg || '',
-									}
-								});
-								setProducts(productsWithImgs.filter((item) => item.featuredImgUrl && item.featuredImgUrl !== ''));
-							}
+						const keywordLower = keyword.toLowerCase();
+						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
+						const productFiltered = productsData.filter((i) => {
+							const title = i.title.toLowerCase();
+							const tags = i.tags.map((t: string) => t.toLowerCase());
+							const tagsString = tags.join(',');
+							return (i.productType === 'HERO' || i.productType === 'BUNDLE') &&
+								(title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
+								!title.includes('vip') && exclusion.indexOf(i.handle) === -1;
 						});
-						
+						productFiltered.sort(tagsSort);
+						productFiltered.sort(handleSort);
+						console.log('productFiltered', productFiltered);
+						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
+						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
+
+						if (uniqueFiltered.length > 0) {
+							uniqueFiltered = uniqueFiltered.map((item) => {
+								let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
+									? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
+								featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
+								return {
+									title: item.title,
+									handle: item.handle,
+									featuredImgUrl: featuredImg || '',
+									url: `/products/${item.handle}`,
+								};
+							});
+							uniqueFiltered.forEach((item, i) => {
+								if (item.handle === 'pro-youth-hair-scalp-mask') {
+									uniqueFiltered.splice(i, 1);
+									uniqueFiltered.unshift(item);
+								}
+							});
+							setProducts(uniqueFiltered);
+							setLoading(false);
+						} else {
+							setProducts([]);
+						}
 					} else {
 						setProducts([]);
 					}
@@ -68,7 +146,7 @@ const SearchBox = (props: any) => {
 		)
 	}
 
-	const setContent = () => {
+	const setContent = async () => {
 		if (content?.popular_keywords && content?.popular_keywords !== '') {
 			const words = content?.popular_keywords.split(',');
 			setKeywords(words);
@@ -76,140 +154,143 @@ const SearchBox = (props: any) => {
 
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
-			{/* @ts-ignore */}
 			const pProducts = [];
-			getFeaturedImages().then((dataImg) => {
-				for (let i = 0; i <= handles.length; i += 1) {
-					fetch(`/api/getProductInfo?handle=${handles[i]}`).then(
-						res => {
-							res?.json().then(data => {
-								const { product } = data;
-								if (product) {
-									const featuredImg = dataImg.find((img) => img.handle === product.handle)
-										? dataImg.find((img) => img.handle === product.handle).featured_image_url : null;
-									{/* @ts-ignore */}
-									if (featuredImg) {
-										pProducts.push({
-											...product,
-											featuredImgUrl: featuredImg,
-											url: `/products${product.handle}`,
-										});
-									}
-									{/* @ts-ignore */}
-									if (i === handles.length) setPopProducts(pProducts);
-								}
-							});
-						}
-					);
+			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
+			const popProducts = await Promise.all(pInfos);
+			popProducts.map((data) => {
+				const { product } = data;
+				if (product) {
+					const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
+						? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
+					if (featuredImg) {
+						pProducts.push({
+							...product,
+							featuredImgUrl: featuredImg,
+							url: `/products/${product.handle}`,
+						});
+					}
 				}
 			});
-			setTimeout(() => {
-				{/* @ts-ignore */}
-				setPopProducts(pProducts);
-			}, 500);
+			if (pProducts.length > 0) setPopProducts(pProducts);
 		}
 	}
 
 	const onClickTag = (word) => {
-		// console.log(val);
 		setKeyword(word);
-	};
-
-	const onClear = () => {
-		// console.log('onClear');
-		setClearDisabled(false);
-		setKeyword('');
 	};
 
 	useEffect(() => {
 		if (keyword !== '') {
-			setClearDisabled(false);
 			setResult();
 		} else {
-			setClearDisabled(true);
 			setProducts([]);
 		}
 	}, [keyword]);
 
+	useEffect(() => {
+		getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
+	}, []);
+
+	useEffect(() => {
+		setContent();
+	}, [featuredImgs]);
+
+	const options: EmblaOptionsType = {
+		loop: false,
+		slidesToScroll: 2,
+		active: false,
+		breakpoints: {
+			'(min-width: 768px)': { active: true },
+		},
+	};
+	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options}, [
+		Autoplay({ playOnInit: false, delay: 3000 })
+	]);
+	const {
+		prevBtnDisabled: prevDisabled8,
+		nextBtnDisabled: nextDisabled8,
+		onPrevButtonClick: arrowClickPrev8,
+		onNextButtonClick: arrowClickNext8
+	} = usePrevNextButtons(emblaApi8);
+	const autoPlayClick8 = controlAutoplay(emblaApi8);
 
 	return (
-		<div className={`z-[1000] search-panel w-100 overflow-hidden bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
-			<div className="border-b border-gray-400 w-100 border-t">
+		<div className={`z-[1020] search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
+			<div className="border-b border-gray-400 w-full border-t">
 				<div className="bg-white px-g">
 					<div className="container relative flex items-center px-0 lg:px-g">
-						<Search className="absolute text-lg mb-0 z-[1000] h-[1em]" />
+						<Search className="absolute h2 mb-0 z-[1000] h-[1em]" />
 						<input type="text" placeholder={content?.search_input_placeholder} name="q" className="w-full py-2 pl-4 lg:pl-4 border-0 focus:outline-none" aria-label="search" onChange={onChange} value={keyword} />
-						<span className="search-panel__clear absolute items-center disabled right-[3em] opacity-50" role="button" onClick={() => setKeyword('')}>{content?.search_clear}</span>
-						<span className="search-panel__close absolute items-center font-bold flex right-1" role="button">
+						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-50' : ''}`} role="button" onClick={() => setKeyword('')}>{content?.search_clear}</span>
+						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button">
 							<Close className="h-[1em]" onClick={() => props.onToggleSearchBox()} />
 						</span>
 					</div>
 				</div>
 			</div>
-			<div className="py-3 container hidden">
-				<p className="font-bold">0 results</p>
-				<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1}} />
-			</div>
-			<div className="search-panel__loading py-3 container hidden text-center">
-				<Loading className="svg text-primary" />
-			</div>
-			{keyword === '' ? (
-				<div className="container px-g lg:px-g pt-3">
-					<div className="flex flex-wrap ">
-						<h4 className="w-full lg:w-1/3 lg:mb-2 font-normal order-1  text-base px-0 mb-1">{content?.popular_keywords_heading}</h4>
-						<h4 className="w-full lg:w-2/3 lg:mb-2 mb-1 font-normal order-3 lg:order-2  text-base px-0 lg:px-g">{content?.popular_products_heading}</h4>
-						<div className="w-full lg:w-1/3 order-2 mb-3">
-							{keywords && keywords.map((word) => (
-								<span key={`key-${word}`} onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer p-1 me-1 inline-block mb-1 rounded bg-gray-400 text-gray-600">{word}</span>
-							))}
-						</div>
-						<div className='w-full lg:w-2/3 flex order-4 flex-wrap'>
-							{!dummy ? (
-									<>
-										{popProducts.length > 0 && popProducts.map((product) => {
-											{/* @ts-ignore */}
-											const { title, featuredImgUrl, url } = product;
-											return (
-												<SearchProductCard
-													key={`spc-${title}`}
-													title={title}
-													img={featuredImgUrl}
-													url={url} 
-													classes="mb-1 order-4 w-full lg:w-1/4" />
-											)
-										})}
-									</>
-								) : (
-									<>
-										<SearchProductCard key={`spc-ph1`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard key={`spc-ph2`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard key={`spc-ph3`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-										<SearchProductCard key={`spc-ph4`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-4 order-4 w-full lg:w-1/4" />
-									</>
-								)
-							}
-							
+			{!loading && keyword !== '' && products.length <= 0 && (
+				<div className="py-3 container">
+					<p className="font-bold mb-g">0 results</p>
+					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
+				</div>
+			)}
+			{loading && (
+				<div className="search-panel__loading py-3 container text-center">
+					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
+				</div>
+			)}
+			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts}/>}
+
+			{!loading && keyword !== '' && products.length > 0 && (
+				<div className="container lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
+					<div className="flex flex-wrap lg:-mx-g">
+						<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+						<div className="container flex flex-wrap order-2 search__carousel px-0">
+							<div className="container px-0 lg:px-g">
+								<Carousel.Wrapper emblaApi={emblaApi8} className="lg:w-full">
+									<Carousel.Inner emblaRef={emblaRef8} className="lg:-mx-g">
+										{products.map((item, index) => (
+											<SearchProductCard
+												url={item.handle}
+												key={`s1--${index}`}
+												title={item?.title}
+												img={item?.featuredImgUrl}
+												classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/6 lg:basis-1/6 px-hg lg:px-g"
+											/>
+										))}
+									</Carousel.Inner>
+									{products.length > 6 && (
+										<Carousel.Navigation>
+											<PrevButton
+												onClick={() => autoPlayClick8(arrowClickPrev8)}
+												disabled={prevDisabled8}
+												className={`hidden lg:flex lg:right-[3%] lg:left-auto lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body ${prevDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
+											>
+												<span className="bg-white w-2 h-2 absolute z-[-1] flex justify-center items-center">
+													<ChevronPrev className="w-g h-g svg--current-color" />
+												</span>
+											</PrevButton>
+											<NextButton
+												onClick={() => autoPlayClick8(arrowClickNext8)}
+												disabled={nextDisabled8}
+												className={`hidden lg:flex lg:right-0 lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body ${nextDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
+											>
+												<span className="bg-white w-2 h-2 absolute z-[-1] flex justify-center items-center">
+													<ChevronNext className="w-g h-g svg--current-color" />
+												</span>
+											</NextButton>
+										</Carousel.Navigation>
+									)}
+								</Carousel.Wrapper>
+							</div>
 						</div>
 					</div>
-				</div>
-			) : (
-				<>
-					{keyword !== '' && products.length > 0 ? (
-						<div className="container lg:mt-2 px-g lg:mb-2">
-							<div className="flex flex-wrap ">
-								<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-0">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
-								<div className='w-full flex order-2 px-0 flex-wrap'>
-									{products.slice(0, 6).map((item, index) => (
-										<SearchProductCard key={`s1--${index}`} title={item?.title} img={item?.featuredImgUrl} classes={`mb-1 order-4 w-full lg:w-1/6 ${index === 0 ? 'lg:pl-0' : ''}`} />
-									))}
-								</div>
-							</div>
-							<p>Not what you're looking for?<span className="d-none d-lg-inline">&nbsp;</span>Check our <a href="/collections/all" className="text-underline">shop all page</a></p>
-						</div>
-					) : (
-						<></>
+					{content?.search_footer_note && (
+						<p dangerouslySetInnerHTML={{
+							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline')
+						}} />
 					)}
-				</>
+				</div>
 			)}
 		</div>
 	);

@@ -22,7 +22,7 @@ const ReviewStar = (props) => {
 	}
 
 	return (
-		<div className="flex">
+		<div className={`${props.className}`}>
 			{stars}
 		</div>
 	);

@@ -60,15 +60,15 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 				<div className="flex flex-wrap items-center justify-center">
 					<div className="w-full lg:w-1/2 lg:px-g text-center">
 						{data.image &&
-							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image} />
+							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image.replace('592x', 'public').replace('540x', 'public')} />
 						}
 					</div>
-					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center mt-n1 mt-lg-0">
+					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 mt-lg-0">
 						{globalSettings && !globalSettings.isLoading && (
 							<>
 								{!success && (
 									<>
-										<strong className="mb-1 text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
+										<strong className="block mb-g text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
 										<p className="text-gray-600 mb-g text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
 									</>
 								)}
@@ -92,7 +92,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
 									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full mb-1 bg-white text-gray-800" aria-label="waitlistPopupInput" />
 									{formError && <small className="mt-1">{waitlistPopupData.email_invalid}</small>}
-									<Button disabled={success} type="submit" className="btn-primary w-full rounded font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
+									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full rounded font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
 								</div>
 							</>
 						)}

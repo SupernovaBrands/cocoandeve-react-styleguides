@@ -16,6 +16,10 @@
 }
 
 @layer utilities {
+	.revert-layer {
+		height: revert-layer;
+	}
+
 	.no-underline {
 		text-decoration: none;
 	}
@@ -29,6 +33,24 @@
 		border-radius: 50%;
 		-webkit-animation: .75s linear infinite spinner-border;
 		@apply animate-spin
+	}
+	.embed-responsive {
+		@apply relative block w-full p-0 overflow-hidden;
+
+		&:before {
+			@apply block content-[''];
+		}
+
+		&-item {
+			@apply absolute top-0 bottom-0 left-0 right-0 w-full h-full border-0;
+		}
+
+		.fit--cover {
+			@apply object-cover;
+		}
+	}
+	.search-panel-active:before {
+		@apply content-[''] h-full bg-[#000] z-[1020] w-full opacity-50 fixed;
 	}
 }
 

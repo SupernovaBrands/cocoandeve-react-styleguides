@@ -12,13 +12,12 @@ const fetcher = (url: string) => {
     return axios.get(url, { headers }).then(res => res.data)
 };
 
-const useHomepage = () => {
+const useHomepage = (region: string) => {
     const { isPreview } = usePreview();
     let params = '';
-    if (isPreview) params = '?preview=true';
+    if (isPreview && region === 'dev') params = '?preview=true';
     const { data, error, isLoading } = useSWR(`https://${host}/homepage/sections${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
-    const slideShows = data?.Sections.find((comp) => comp.__component === 'section.slideshow')?.['slide_dev'] || [];
-
+    const slideShows = data?.Sections.find((comp) => comp.__component === 'section.slideshow')?.[`slide_${region}` || 'slide_dev'] || [];
     return {
         error,
         isLoading,
