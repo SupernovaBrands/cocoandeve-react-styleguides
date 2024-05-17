@@ -37,7 +37,7 @@ const RealResultCard = (props) => {
 	const titleDesc = `aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
 
 	return (
-		<div className="w-full lg:w-1/3 lg:inline-block px-g">
+		<div className="w-full lg:w-1/3 lg:inline-block px-g result-card">
 			<picture className="embed-responsive rounded-tl-lg rounded-br-0 rounded-tr-lg rounded-bl-0 overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
@@ -45,7 +45,7 @@ const RealResultCard = (props) => {
 			<div className="px-2 pb-2 pt-0 bg-white">
 				<p className="flex justify-between items-center mb-0">
 					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none" />
-					<Badge badgeClasses={`bg-sh-purple text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
+					<Badge badgeClasses={`text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
 				</p>
 				{storeName === 'au' ? (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc)) && (data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50'))}`)}</>
