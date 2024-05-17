@@ -53,26 +53,49 @@ const AccountDropdown = (props) => {
 		const email = emailRef?.current?.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailRef?.current?.value);
         setAllowSubmit(firstname && lastname && pass && email && tosAgree);
 	};
+
+    // Login Customer
+    const handleLoginSubmit = async (e) => {
+		const router = useRouter();
+        e.preventDefault();
+		const respLogin = await fetch('/api/account/login', {
+			method: 'POST',
+			body: JSON.stringify({
+				email: emailRef.current.value,
+				password: passRef.current.value
+			})
+		}).then((resp) => resp.json());
+		const { customerAccessTokenCreate } = respLogin;
+		if (customerAccessTokenCreate.customerAccessToken) {
+			router.push('/account');
+		}
+	};
+    const handleLoginChange = () => {
+		const pass = passRef?.current?.value !== '';
+		const email = emailRef?.current?.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailRef?.current?.value);
+		setAllowSubmit(pass && email);
+	};
     useEffect(() => {
 		handleChange();
+        handleLoginChange();
 	}, [tosAgree]);
     return (
         <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex'>
-                        <form id="dropdown__login" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
+                        <form onSubmit={handleLoginSubmit} id="dropdown__login" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
                             <p className="font-bold text-center px-2 mb-2">Earn and redeem points from purchases</p>
                             <SocialLogin idSuffix={'loginDropdown'} />
                             <p className="text-center auth-buttons mb-g">or login with email</p>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
-                                <input type="email" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none" id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
+                                <input ref={emailRef} onChange={handleLoginChange} type="email" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none" id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
-                                <input type="password" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
+                                <input ref={passRef} onChange={handleLoginChange} type="password" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" disabled value="Log In" />
+                            <Button type="submit" buttonClass="btn-primary w-full border-0 py-1 mt-1" disabled={!allowSubmit}>Log In</Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
                                     <button type="button" className="text-underline text-primary underline">Forgot your password?</button>

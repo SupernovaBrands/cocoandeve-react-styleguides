@@ -260,12 +260,12 @@ const CollectionTemplate = () => {
 			<Collection
 				isLoading={isLoading}
 				products={products}
-				mainCollections={mainCollections}
 				handle={'tan-and-spf'}
 				currentCollection={currentCollection}
 				showSpinner={false}
-				childrenCollections={[]}
 				parentCollection={[]}
+				subHandles='hair,shampoo-conditioner,treatments,hair-styling,hair-accessories'
+				mainCollectionHandles='all,hair,hair-benefits,tan-and-spf,skincare,body,kits-gifts'
 				/>
             <Service />
 			<Footer

@@ -42,7 +42,7 @@ const YotpoStar = (props:any) => {
 			</span>
 		</div>
 	) : (
-		<div className={`flex ${props.extraClass}`}>
+		<div className={`flex ${props.extraClass} mb-2 md:mb-1`}>
 			<ReviewStar score={score} />
 			{props.showScore && <span className="ml-25">{`${score ? score.toFixed(1) : 0} stars`}</span>}
 			{props.showTotal && (

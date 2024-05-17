@@ -13,7 +13,7 @@ import Service from "~/sections/Service";
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
-        <figure className="w-full relative items-center px-0 mb-0 lg:mb-g">
+        <figure className="w-full relative items-center px-0 mb-0">
             {!isLoading && !bannerLoading && (
                 <picture>
                     <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
@@ -62,11 +62,11 @@ const Collection = (props: any) => {
     const {
         products,
         isLoading,
-        mainCollections,
+        mainCollectionHandles,
         handle,
         currentCollection,
         showSpinner,
-        childrenCollections,
+        subHandles,
         parentCollection,
         sort,
     } = props;
@@ -86,9 +86,11 @@ const Collection = (props: any) => {
 		toggle(open);
 	};
     const router = useRouter();
+    const [sidebarMenu, setSidebarMenu] = useState([]);
+    const [childMenu, setChildMenu] = useState([]);
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
-    const mainCollHandles = mainCollections.map((coll) => coll.collection.handle);
+    const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
 
     let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
@@ -144,6 +146,16 @@ const Collection = (props: any) => {
 
     const loadWaitlist = isWaitlist(sortedByAvailable);
 
+    useEffect(() => {
+        fetch(`/api/collectionInfo?${new URLSearchParams({
+			parentHandle: mainCollectionHandles,
+            childrenHandle: subHandles
+		})}`).then((res) => res.json()).then((data) => {
+            setSidebarMenu(data.parents);
+            setChildMenu(data.childrens);
+        });
+    }, [handle]);
+
     return (
         <>
             {!collectionSettings.isLoading && (
@@ -164,21 +176,20 @@ const Collection = (props: any) => {
 
             <div className="container mt-3 px-0 lg:px-g">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
-                    {!isLoading && mainCollections.length > 0 && (
+                    {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
                             <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded" ref={sidebarRef}>
-                                {mainCollections.sort((a, b) => a.idx - b.idx).map((parent: any) => {
-                                    const { collection } = parent;
-                                    const html = collection.title.replace('d-lg-none', 'lg:hidden');
+                                {sidebarMenu.map((parent: any) => {
+                                    const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     return (
-                                    <li className="mb-1" key={parent.idx}>
+                                    <li className="mb-1" key={`sidebarr--${parent.handle}`}>
                                         <Link
                                             onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
-                                                ${handle === collection.handle || collection.handle === parentHandle ? 'text-primary' : 'text-body'}`}
-                                            href={`/collections/${collection.handle}`}
+                                                ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
+                                            href={`/collections/${parent.handle}`}
                                             dangerouslySetInnerHTML={{ __html: html }}
                                         />
                                     </li>)
@@ -196,10 +207,9 @@ const Collection = (props: any) => {
                                     <div className="w-1/2 lg:hidden px-hg">
                                         <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]" defaultValue={selectFilterValue}>
                                             <option>Filter by</option>
-                                            {mainCollections.map((parent: any) => {
-                                                const { collection } = parent;
-                                                const html = collection.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option key={parent.idx} value={collection.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                            {sidebarMenu.map((parent: any) => {
+                                                const html = parent.title.replace('d-lg-none', 'lg:hidden');
+                                                return (<option key={`collection--filter-${parent.handle}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
                                             })}
                                         </select>
                                     </div>
@@ -218,16 +228,15 @@ const Collection = (props: any) => {
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
-                                        {childrenCollections.length > 0 && childrenCollections.sort((a, b) => a.idx - b.idx).map((children) => {
-                                            const { collection } = children;
-                                            if (collection && collection.handle) {
-                                                const html = mainCollHandles.includes(collection.handle) ? 'All' : collection.title.replace('d-lg-none', 'lg:hidden');
+                                        {childMenu.length > 0 && childMenu.map((children) => {
+                                            if (children && children.handle) {
+                                                const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
-                                                        key={`tags--${children.idx}`}
-                                                        href={`/collections/${collection.handle}`}
+                                                        key={`tags--${children.handle}`}
+                                                        href={`/collections/${children.handle}`}
                                                         className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
-                                                            ${collection.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
+                                                            ${children.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: html }}
                                                     />
@@ -238,31 +247,20 @@ const Collection = (props: any) => {
                                 </div>
                             )}
                         </div>
-                        {!isLoading && (
-                            <div className="flex flex-wrap collection-grid overflow-hidden w-full">
-                                {(showSpinner || loading) && (
-                                    <div className="mb-3 px-hg lg:px-g text-center w-full">
-                                        <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
-                                    </div>
-                                )}
-                                {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
-                                    if (!item.src) {
-                                        item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
-                                        item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
-                                    }
-                                    return showQuizCard && index === 2 ? (
-                                        <>
-                                            <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
-                                            <ProductCard
-                                                key={`collection-temp-${handle}-${item.id}`}
-                                                product={item}
-                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                                button={true}
-                                                setWaitlistData={setWaitlistData}
-                                                smSingleStar={true}
-                                            />
-                                        </>
-                                    ) : (
+                        <div className="flex flex-wrap collection-grid overflow-hidden w-full">
+                            {(showSpinner || loading) && (
+                                <div className="mb-3 px-hg lg:px-g text-center w-full">
+                                    <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
+                                </div>
+                            )}
+                            {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
+                                if (!item.src) {
+                                    item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
+                                    item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
+                                }
+                                return showQuizCard && index === 2 ? (
+                                    <>
+                                        <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
                                         <ProductCard
                                             key={`collection-temp-${handle}-${item.id}`}
                                             product={item}
@@ -271,11 +269,20 @@ const Collection = (props: any) => {
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
                                         />
-                                    )
-                                })}
-                                {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
-                            </div>
-                        )}
+                                    </>
+                                ) : (
+                                    <ProductCard
+                                        key={`collection-temp-${handle}-${item.id}`}
+                                        product={item}
+                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                        button={true}
+                                        setWaitlistData={setWaitlistData}
+                                        smSingleStar={true}
+                                    />
+                                )
+                            })}
+                            {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,7 +301,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && handle === 'all' && <Service />}
+            {!isLoading && handle === 'all' && <Service className="!text-base" />}
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
