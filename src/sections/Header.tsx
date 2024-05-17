@@ -7,7 +7,6 @@ import BrandLogo from '~/images/ce-logo.svg';
 import Account from '~/images/icons/account.svg';
 import Search from '~/images/icons/search-thin.svg';
 import CartIcon from '~/images/icons/cart.svg';
-import Cart from '~/components/cart/cart';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
@@ -25,12 +24,6 @@ const Header = (props: any) => {
 	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
-	}
-
-	const onToggleCart = () => {
-		console.log('onToggleCart');
-		// setOpenCartDrawer(!openDrawer);
-		props.onToggleCart();
 	}
 
 	const onToggleSearchBox = () => {
@@ -181,8 +174,8 @@ const Header = (props: any) => {
 								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={onToggleCart}>
-									<CartIcon toggleCart={onToggleCart} className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
+								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
+									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
 									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">{cartCount || 0}</span>
 								</a>
 							</li>

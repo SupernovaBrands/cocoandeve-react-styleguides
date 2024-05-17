@@ -114,7 +114,7 @@ const RealResultCarousel = (props: any) => {
 								</Carousel.Inner>
 							</Carousel.Wrapper>
 						</TabContent>
-						<Link href="#" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5 mt-3">See All Results</Link>
+						<Link href="/pages/reviews" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5 mt-3">See All Results</Link>
                     </div>
                 </div>
 			</div>
