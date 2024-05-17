@@ -28,7 +28,7 @@ const InputCountry = (props: any) => {
 					<option value="PH" data-code="63">Philippines</option>
 					<option value="RE" data-code="262">Réunion</option>
 					<option value="RU" data-code="7">Russia</option>
-					<option value="SG" data-code="65" selected>Singapore</option>
+					<option value="SG" data-code="65">Singapore</option>
 					<option value="LK" data-code="94">Sri Lanka</option>
 					<option value="TW" data-code="886">Taiwan</option>
 					<option value="TR" data-code="90">Turkey</option>

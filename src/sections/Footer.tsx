@@ -48,7 +48,7 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
                         <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
-                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="#" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
+                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>

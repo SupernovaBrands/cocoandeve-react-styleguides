@@ -22,14 +22,15 @@ interface Props {
     showCart: boolean;
     handleClose: () => void;
 	cartCount: number;
+	isLoading?: boolean;
+	styleguide?: boolean;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartCount } = props;
 	// const storeApi = new storefrontApi();
-	const [isOpen, setOpen] = useState(showCart);
 	const [itemCount, setItemCount] = useState(cartCount);
-	const [loadingInit, setLoadingInit] = useState(true);
+	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, subtotalPrice: 0,
@@ -70,28 +71,26 @@ const Cart: React.FC<Props> = (props) => {
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
 	useEffect(() => {
-		setLoadingInit(true);
-		getCart().then((e: CartData) => {
-			const { discountData, shippingData, shippingMeter, discountMeter } = e;
-			setCart(e);
-			discountData.code = discountData.code === null ? '' : discountData.code;
-			shippingMeter.enabled = true;
-			// setShippingData({...shippingData});
-			setDiscountData({...discountData});
-			setDiscountMeter({...discountMeter});
-			setShippingMeter({...shippingMeter});
-			setItemCount(e.totalQuantity);
-			setLoadingInit(false);
-		}).catch(() => {
-			console.log('get cart fail');
-			setLoadingInit(false);
-		});
+		if (props.styleguide) {
+			setLoadingInit(true);
+			getCart().then((e: CartData) => {
+				const { discountData, shippingData, shippingMeter, discountMeter } = e;
+				setCart(e);
+				discountData.code = discountData.code === null ? '' : discountData.code;
+				shippingMeter.enabled = true;
+				// setShippingData({...shippingData});
+				setDiscountData({...discountData});
+				setDiscountMeter({...discountMeter});
+				setShippingMeter({...shippingMeter});
+				setItemCount(e.totalQuantity);
+				setLoadingInit(false);
+			}).catch(() => {
+				console.log('get cart fail');
+				setLoadingInit(false);
+			});
+		}
 	}, []);
 
-
-	useEffect(() => {
-		setOpen(props.showCart);
-	}, [props.showCart])
 
 	const onApplyDiscountCode = () => {
 
@@ -135,7 +134,7 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	return (
-		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={isOpen} handleClose={() => props.handleClose()} cartDrawer={true}>
+		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true}>
 				<div className="modal-content mh-100 border-0 rounded-0">
 					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden max-h-[100vh]">
 						<div className="container flex flex-col align-stretch text-center pt-2 px-g lg:px-3">

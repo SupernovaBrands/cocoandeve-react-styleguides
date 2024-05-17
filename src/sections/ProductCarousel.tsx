@@ -194,7 +194,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<Link href="#" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
+						<Link href="/collections/all" className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
 					</div>
 				</div>
 			</div>
