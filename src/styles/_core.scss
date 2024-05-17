@@ -16,6 +16,10 @@
 }
 
 @layer utilities {
+	.revert-layer {
+		height: revert-layer;
+	}
+
 	.no-underline {
 		text-decoration: none;
 	}
