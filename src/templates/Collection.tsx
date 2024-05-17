@@ -90,7 +90,7 @@ const Collection = (props: any) => {
     const [childMenu, setChildMenu] = useState([]);
 
     const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
-    const mainCollHandles = mainCollectionHandles.split(',');
+    const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
 
     let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
@@ -148,13 +148,13 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         fetch(`/api/collectionInfo?${new URLSearchParams({
-			parentHandle: mainCollHandles.join(','),
+			parentHandle: mainCollectionHandles,
             childrenHandle: subHandles
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
             setChildMenu(data.childrens);
         });
-    }, [products]);
+    }, [handle]);
 
     return (
         <>
