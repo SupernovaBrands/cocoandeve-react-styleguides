@@ -92,7 +92,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
@@ -130,7 +130,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
@@ -168,7 +168,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-5 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}

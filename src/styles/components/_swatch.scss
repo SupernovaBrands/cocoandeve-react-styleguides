@@ -182,9 +182,15 @@
 
 	.product-upsell-2 & {
 		max-width: 13.5em;
+		@apply sm:w-[164px] md:w-[216px] bottom-2;
+
 		.button-overlay {
-			@apply -mb-12;
+			@apply mb-0;
 			max-width: calc(13.5em + 2px);
+		}
+
+		.btn-choose:hover {
+			opacity:0;
 		}
 	}
 }
