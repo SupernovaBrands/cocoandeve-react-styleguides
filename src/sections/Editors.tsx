@@ -40,8 +40,8 @@ const Editors = () => {
         }
     ];
     return (
-        <section className="list-logo container mb-g lg:my-4 overflow-scroll lg:overflow-hidden px-g">
-            <ul className="list-unstyled flex -mx-hg lg:-mx-g items-center lg:justify-between lg:px-g flex-nowrap mb-0 lg:py-1 ">
+        <section className="list-logo container mb-g lg:my-4 overflow-scroll lg:overflow-hidden px-g pb-1 lg:pb-0">
+            <ul className="list-unstyled flex -mx-hg lg:-mx-g items-center lg:justify-between lg:px-g flex-nowrap mb-0 py-1 ">
                 <li className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1 h4">Featured in:</li>
                 {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
             </ul>
