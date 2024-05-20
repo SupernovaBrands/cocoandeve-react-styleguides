@@ -25,10 +25,12 @@ interface Props {
 	styleguide?: boolean;
 	cartData: any;
 	strapiCartSetting: any;
+	onUpdateCart: (item: any, qty: number) => void;
+	onDeleteLine: (lineId: string) => void;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartCount, cartData, itemCount } = props;
+	const { showCart, cartCount, cartData, itemCount, onUpdateCart, onDeleteLine } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -163,12 +165,26 @@ const Cart: React.FC<Props> = (props) => {
 				return model;
 			});
 			data.items = data.items.reverse();
-			console.log('in model', data);
-			if (data.items) {
+		}
 
-			}
+		const subtotalTemp = calculateSubTotal(cartData.items);
+		console.log('subtotalTemp', subtotalTemp);
+		if (cartData.items) {
+			cartData.subtotalPrice = calculateSubTotal(cartData.items);
 		}
 		return data;
+	}
+
+	const calculateSubTotal = (items: Array<any>) => {
+		let subTotal = 0;
+		if (items && items.length > 0) {
+			items.forEach((item) => {
+				if (!item.isManualGwp) {
+					subTotal += item.comparePrice ? item.comparePrice * item.quantity : item.originalPrice * item.quantity;
+				}
+			});
+		}
+		return subTotal;
 	}
 
 	const onApplyDiscountCode = () => {
@@ -191,12 +207,51 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeQuantity = () => {
+	const onChangeQuantity = (item, qty, callback) => {
+		console.log(item, qty);
+		let newQty = qty;
+		let lastStock = false;
+		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
+			newQty = item.merchandise.quantityAvailable;
+			lastStock = true;
+		}
+		setLastStockKey('');
+		const quantity = parseInt(newQty, 10);
+		const relativeItems = cart.items.filter((itm) => itm.merchandise.id === item.merchandise.id);
 
+		if (relativeItems.length > 1) {
+			let currentRelativeQuantity = 0;
+			relativeItems.forEach((it) => { currentRelativeQuantity += it.quantity; });
+			if (item.quantity < quantity) {
+				currentRelativeQuantity += quantity - item.quantity;
+			} else if (item.quantity > quantity) {
+				currentRelativeQuantity -= item.quantity - quantity;
+			}
+
+			const relativeDiscounted = relativeItems.find((it) => it.discountAllocations.length);
+			const relativeRegular = relativeItems.find((it) => it.discountAllocations.length === 0);
+
+			const lines = [
+				{ id: relativeDiscounted.id, quantity: 0 },
+				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
+			];
+
+			console.log('on change cartData', cartData);
+		} else {
+			console.log('item', item);
+			/*
+			const data = {
+				quantity: qty,
+				lineId, variantId, quantity, attributes
+			}
+			*/
+			onUpdateCart(item, qty);
+		}
 	}
 
-	const onRemoveItem = () => {
-
+	const onRemoveItem = (item: any) => {
+		console.log('on remove', item);
+		onDeleteLine(item.id);
 	}
 
 	const getId = (shopifyId: string) => {
