@@ -24,12 +24,13 @@ interface Props {
 	cartCount: number;
 	isLoading?: boolean;
 	styleguide?: boolean;
+	cartData: any;
+	strapiCartSetting: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartCount } = props;
+	const { showCart, cartCount, cartData, itemCount } = props;
 	// const storeApi = new storefrontApi();
-	const [itemCount, setItemCount] = useState(cartCount);
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
@@ -73,24 +74,86 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (props.styleguide) {
 			setLoadingInit(true);
-			getCart().then((e: CartData) => {
-				const { discountData, shippingData, shippingMeter, discountMeter } = e;
-				setCart(e);
-				discountData.code = discountData.code === null ? '' : discountData.code;
-				shippingMeter.enabled = true;
-				// setShippingData({...shippingData});
-				setDiscountData({...discountData});
-				setDiscountMeter({...discountMeter});
-				setShippingMeter({...shippingMeter});
-				setItemCount(e.totalQuantity);
-				setLoadingInit(false);
-			}).catch(() => {
-				console.log('get cart fail');
-				setLoadingInit(false);
-			});
 		}
 	}, []);
 
+	useEffect(() => {
+		console.log('on props change 1', cartData);
+		if (cartData) {
+			const modelizedCart = cartModel(cartData);
+			setCart({ ...modelizedCart });
+			console.log('modelizedCart', modelizedCart);
+		}
+	}, [cartData, itemCount]);
+
+	useEffect(() => {
+		console.log('cart state', cart);
+	}, [cart]);
+
+	const cartModel = (cart: any) => {
+		let data = { ...cart };
+		if (data && data.lines && data.lines.edges) {
+			let currentTotal = 0;
+			// eslint-disable-next-line no-return-assign
+			data.lines.edges.forEach((item) => currentTotal += item.node.quantity);
+
+			data.items = data.lines.edges.map((item) => {
+				const { node } = item;
+				node.isManualGwp = false;
+				node.isAutoGwp = false;
+				const checkAttributes = node.attributes.find((i) => i.key === '_campaign_type' && i.value === 'manual_gwp');
+				if (checkAttributes) {
+					node.isManualGwp = true;
+					if (currentTotal === data.totalQuantity) { data.totalQuantity -= node.quantity; }
+				}
+				const autoAttributes = node.attributes.find((i) => i.key === '_campaign_type' && i.value === 'auto_gwp');
+				if (autoAttributes) {
+					node.isAutoGwp = true;
+				}
+
+				node.diffPriceBundle = 0;
+				node.comparePrice = 0;
+				node.originalPrice = parseFloat(node.cost.amountPerQuantity.amount) * 100;
+				if (node.cost && node.cost.compareAtAmountPerQuantity) {
+					if (node.sellingPlanAllocation && node.merchandise.compareAtPrice && node.merchandise.compareAtPrice.amount) {
+						node.comparePrice = parseFloat(node.merchandise.compareAtPrice.amount) * 100;
+						node.diffPriceBundle = node.comparePrice - node.originalPrice;
+					} else {
+						node.comparePrice = parseFloat(node.cost.compareAtAmountPerQuantity.amount) * 100;
+						node.diffPriceBundle = node.comparePrice - node.originalPrice;
+					}
+				}
+				node.isFreeItem = node.cost.totalAmount.amount === '0.0';
+				node.swatches = this.getVariantOptions(node);
+				node.variants = node.merchandise.product.variants.edges.map((variant) => variant.node);
+				node.selectedSwatch = node.merchandise.selectedOptions.filter((opt) => opt.name.toLowerCase() !== 'size').map((opt) => opt.value);
+
+				node.showPreorderNotif = false;
+				node.showPreorderNotif_2 = false;
+				node.showPreorderNotif_3 = false;
+				node.featuredImageUrl = featuredImages.find((img) => img.handle === node.merchandise.product.handle)
+					? featuredImages.find((img) => img.handle === node.merchandise.product.handle).featured_image_url : null;
+
+				node.totalDiscountAmount = 0;
+				if (node.discountAllocations && node.discountAllocations.length) {
+					node.discountAllocations.forEach((discount) => {
+						node.totalDiscountAmount += (parseFloat(discount.discountedAmount.amount) * 100) / node.quantity;
+					});
+				}
+				node.priceAfterDiscounted = node.originalPrice - node.totalDiscountAmount;
+
+				return node;
+			});
+			data.items = data.items.reverse();
+			console.log('in model', data);
+			if (data.items) {
+
+			}
+			
+			return data;
+		}
+
+	}
 
 	const onApplyDiscountCode = () => {
 
@@ -199,7 +262,7 @@ const Cart: React.FC<Props> = (props) => {
 							<form
 								id="cart-drawer-form"
 								className="container px-g lg:px-3 cart-drawer__form"
-								action={cart.checkoutUrl.replace('www', 'us')}
+								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
 								onKeyDown={handleKeyDown}
