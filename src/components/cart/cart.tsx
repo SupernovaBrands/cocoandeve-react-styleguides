@@ -11,9 +11,8 @@ import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
-// import storefrontApi from "~/modules/storefront-api";
-import { getCart } from '../../modules/shopify/cart';
 import { CartData } from "./types";
+import useProductImages from "~/hooks/useProductImages";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -24,12 +23,13 @@ interface Props {
 	cartCount: number;
 	isLoading?: boolean;
 	styleguide?: boolean;
+	cartData: any;
+	strapiCartSetting: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartCount } = props;
+	const { showCart, cartCount, cartData, itemCount } = props;
 	// const storeApi = new storefrontApi();
-	const [itemCount, setItemCount] = useState(cartCount);
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
@@ -70,27 +70,106 @@ const Cart: React.FC<Props> = (props) => {
 	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
+	const { data: productImages } = useProductImages();
+
 	useEffect(() => {
 		if (props.styleguide) {
 			setLoadingInit(true);
-			getCart().then((e: CartData) => {
-				const { discountData, shippingData, shippingMeter, discountMeter } = e;
-				setCart(e);
-				discountData.code = discountData.code === null ? '' : discountData.code;
-				shippingMeter.enabled = true;
-				// setShippingData({...shippingData});
-				setDiscountData({...discountData});
-				setDiscountMeter({...discountMeter});
-				setShippingMeter({...shippingMeter});
-				setItemCount(e.totalQuantity);
-				setLoadingInit(false);
-			}).catch(() => {
-				console.log('get cart fail');
-				setLoadingInit(false);
-			});
 		}
 	}, []);
 
+	useEffect(() => {
+		if (cartData) {
+			const modelizedCart = cartModel(cartData);
+			setCart({ ...modelizedCart });
+			console.log('modelizedCart', modelizedCart);
+		}
+	}, [cartData, itemCount]);
+
+	const getVariantOptions = (item: any) => {
+		const { merchandise: { product: { options } } } = item;
+		const swatches = options.filter((opt) => opt.name.toLowerCase().includes('color')
+			|| opt.name.toLowerCase().includes('style')
+			|| opt.name.toLowerCase().includes('scent')
+			|| opt.name.toLowerCase().includes('tangle tamer')).map((opt) => {
+			let { name } = opt;
+			if (name.toLowerCase().includes('drops') || name.toLowerCase().includes('foam') || name.toLowerCase().includes('color')) {
+				name = 'Shade';
+			} else if (name.toLowerCase().includes('style')) {
+				name = 'Style';
+			} else if (name.toLowerCase().includes('scent')) {
+				name = 'Scent';
+			} else if (name.toLowerCase().includes('tangle tamer')) {
+				// tangle tamer text already applied from variant name, so its set to empty
+				name = '';
+			}
+			return { ...opt, name };
+		});
+
+		return swatches;
+	}
+
+	const cartModel = (cart: any) => {
+		let data = { ...cart };
+		if (data && data.lines) {
+			let currentTotal = 0;
+			// eslint-disable-next-line no-return-assign
+			data.lines.forEach((item) => currentTotal += item.quantity);
+
+			data.items = data.lines.map((item: any) => {
+				const model = {...item};
+				model.isManualGwp = false;
+				model.isAutoGwp = false;
+				const checkAttributes = item.attributes.find((i) => i.key === '_campaign_type' && i.value === 'manual_gwp');
+				if (checkAttributes) {
+					model.isManualGwp = true;
+					if (currentTotal === data.totalQuantity) { data.totalQuantity -= model.quantity; }
+				}
+				const autoAttributes = model.attributes.find((i) => i.key === '_campaign_type' && i.value === 'auto_gwp');
+				if (autoAttributes) {
+					model.isAutoGwp = true;
+				}
+
+				model.diffPriceBundle = 0;
+				model.comparePrice = 0;
+				model.originalPrice = parseFloat(item.cost.amountPerQuantity.amount) * 100;
+				if (item.cost && item.cost.compareAtAmountPerQuantity) {
+					if (item.sellingPlanAllocation && item.merchandise.compareAtPrice && item.merchandise.compareAtPrice.amount) {
+						model.comparePrice = parseFloat(item.merchandise.compareAtPrice.amount) * 100;
+						model.diffPriceBundle = model.comparePrice - model.originalPrice;
+					} else {
+						model.comparePrice = parseFloat(item.cost.compareAtAmountPerQuantity.amount) * 100;
+						model.diffPriceBundle = model.comparePrice - model.originalPrice;
+					}
+				}
+				model.isFreeItem = item.cost.totalAmount.amount === '0.0';
+				model.swatches = getVariantOptions(item);
+				model.variants = item.merchandise.product.variants.edges.map((variant) => variant.node);
+				model.selectedSwatch = item.merchandise.selectedOptions.filter((opt) => opt.name.toLowerCase() !== 'size').map((opt) => opt.value);
+
+				model.showPreorderNotif = false;
+				model.showPreorderNotif_2 = false;
+				model.showPreorderNotif_3 = false;
+				model.featuredImageUrl = productImages.find((img: any) => img.handle === item.merchandise.product.handle)
+					? productImages.find((img) => img.handle === item.merchandise.product.handle).featured_image_url : null;
+				model.totalDiscountAmount = 0;
+				if (model.discountAllocations && model.discountAllocations.length) {
+					model.discountAllocations.forEach((discount) => {
+						model.totalDiscountAmount += (parseFloat(model.discountedAmount.amount) * 100) / model.quantity;
+					});
+				}
+				model.priceAfterDiscounted = model.originalPrice - model.totalDiscountAmount;
+
+				return model;
+			});
+			data.items = data.items.reverse();
+			console.log('in model', data);
+			if (data.items) {
+
+			}
+		}
+		return data;
+	}
 
 	const onApplyDiscountCode = () => {
 
@@ -199,7 +278,7 @@ const Cart: React.FC<Props> = (props) => {
 							<form
 								id="cart-drawer-form"
 								className="container px-g lg:px-3 cart-drawer__form"
-								action={cart.checkoutUrl.replace('www', 'us')}
+								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
 								onKeyDown={handleKeyDown}
