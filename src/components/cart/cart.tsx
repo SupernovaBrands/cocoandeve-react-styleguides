@@ -304,8 +304,7 @@ const Cart: React.FC<Props> = (props) => {
 								<div className="text-primary spinner-border" role="status" />
 							</div>
 						)}
-
-						{!loadingInit && (itemCount === 0 ? (
+						{!loadingInit && (!cart.itemCount || itemCount === 0 ? (
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
