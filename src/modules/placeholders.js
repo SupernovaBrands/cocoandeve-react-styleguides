@@ -556,3 +556,34 @@ export const instagram_ph = [
         "thumbnail_640_url": "https://scontent.cdninstagram.com/v/t51.29350-15/434616874_814087600767899_4301220121611353593_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=18de74&_nc_ohc=wB-58Zk43k4Q7kNvgGR8vax&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfDQ7rJU_9rvTibzwuto5GHF79FHp8YgsMLXwbSjRQgKeA&oe=662FD160"
     }
 ];
+
+export const sidebar_collection_ph = [
+    {
+        "title": "Shop All",
+        "handle": "all"
+    },
+    {
+        "title": "Hair",
+        "handle": "hair"
+    },
+    {
+        "title": "<br class=\"d-lg-none\">Hair Benefits",
+        "handle": "hair-benefits"
+    },
+    {
+        "title": "Tan <br class=\"d-lg-none\">  & SPF",
+        "handle": "tan-and-spf"
+    },
+    {
+        "title": "Skincare",
+        "handle": "skincare"
+    },
+    {
+        "title": "Body",
+        "handle": "body"
+    },
+    {
+        "title": "Value <br class=\"d-lg-none\"> Sets",
+        "handle": "kits-gifts"
+    }
+]

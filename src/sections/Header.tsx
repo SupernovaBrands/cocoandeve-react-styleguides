@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import AnnouncementBar from '~/components/AnnouncementBar';
 import NavMegaMenu from '~/compounds/NavMegaMenu';
 import MobileMenu from '~/compounds/MobileMenu';
@@ -11,6 +10,7 @@ import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import { useRouter } from 'next/navigation';
+import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
@@ -157,26 +157,27 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a className="text-lg m-0 flex font-bold text-body" href="/pages/rewards">
-									Bali Beauty Club<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="mx-1"><g transform="scale(.15)" clipPath="url(#palm-tree-v2_svg__palmTreeV2)"><path d="M68.69 119.177s7.618-22.555-3.57-70.584L101.323 85.9s7.405-27.36-23.77-41.854l42.43.629s-12.549-24.764-46.657-13.494L103.65 2.144S73.032-3.418 60.975 27.166c0 0-11.845-32.938-42.185-26.296l29.85 29.601S21.329 15.751 0 41.596l43.708 1.402s-30.504 8.287-27.981 40.758l38.94-35.873s.607 36.727-9.976 71.31c11.795 1.838 24.032 0 24.032 0l-.032-.016z"></path></g></svg>
+								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href="/pages/rewards">
+									Bali Beauty Club
+									<PalmTree className="mx-1 h-2" />
 								</a>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
 								</button>
 								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
-								<button type="button" className="h4 m-0 flex font-bold" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<button type="button" className="h4 m-0 flex font-bold py-[6px] lg:py-hg" data-cy="search-icon" onClick={onToggleSearchBox}>
 									<Search className="text-[1.5625em] lg:text-[1.375em] h-[1em]" />
 								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<a className="flex justify-center items-center [flex-flow:column] relative" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
+								<a className="flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
 									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count text-xs h-100 top-[50%] left-[50%] text-body -mt-[17px] font-[Arial,_Helvetica,_sans-serif]">{cartCount || 0}</span>
+									<span className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] text-body h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>
