@@ -11,9 +11,8 @@ import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
-// import storefrontApi from "~/modules/storefront-api";
-import { getCart } from '../../modules/shopify/cart';
 import { CartData } from "./types";
+import useProductImages from "~/hooks/useProductImages";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -71,6 +70,8 @@ const Cart: React.FC<Props> = (props) => {
 	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
+	const { data: productImages } = useProductImages();
+
 	useEffect(() => {
 		if (props.styleguide) {
 			setLoadingInit(true);
@@ -78,7 +79,6 @@ const Cart: React.FC<Props> = (props) => {
 	}, []);
 
 	useEffect(() => {
-		console.log('on props change 1', cartData);
 		if (cartData) {
 			const modelizedCart = cartModel(cartData);
 			setCart({ ...modelizedCart });
@@ -86,73 +86,89 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData, itemCount]);
 
-	useEffect(() => {
-		console.log('cart state', cart);
-	}, [cart]);
+	const getVariantOptions = (item: any) => {
+		const { merchandise: { product: { options } } } = item;
+		const swatches = options.filter((opt) => opt.name.toLowerCase().includes('color')
+			|| opt.name.toLowerCase().includes('style')
+			|| opt.name.toLowerCase().includes('scent')
+			|| opt.name.toLowerCase().includes('tangle tamer')).map((opt) => {
+			let { name } = opt;
+			if (name.toLowerCase().includes('drops') || name.toLowerCase().includes('foam') || name.toLowerCase().includes('color')) {
+				name = 'Shade';
+			} else if (name.toLowerCase().includes('style')) {
+				name = 'Style';
+			} else if (name.toLowerCase().includes('scent')) {
+				name = 'Scent';
+			} else if (name.toLowerCase().includes('tangle tamer')) {
+				// tangle tamer text already applied from variant name, so its set to empty
+				name = '';
+			}
+			return { ...opt, name };
+		});
+
+		return swatches;
+	}
 
 	const cartModel = (cart: any) => {
 		let data = { ...cart };
-		if (data && data.lines && data.lines.edges) {
+		if (data && data.lines) {
 			let currentTotal = 0;
 			// eslint-disable-next-line no-return-assign
-			data.lines.edges.forEach((item) => currentTotal += item.node.quantity);
+			data.lines.forEach((item) => currentTotal += item.quantity);
 
-			data.items = data.lines.edges.map((item) => {
-				const { node } = item;
-				node.isManualGwp = false;
-				node.isAutoGwp = false;
-				const checkAttributes = node.attributes.find((i) => i.key === '_campaign_type' && i.value === 'manual_gwp');
+			data.items = data.lines.map((item: any) => {
+				const model = {...item};
+				model.isManualGwp = false;
+				model.isAutoGwp = false;
+				const checkAttributes = item.attributes.find((i) => i.key === '_campaign_type' && i.value === 'manual_gwp');
 				if (checkAttributes) {
-					node.isManualGwp = true;
-					if (currentTotal === data.totalQuantity) { data.totalQuantity -= node.quantity; }
+					model.isManualGwp = true;
+					if (currentTotal === data.totalQuantity) { data.totalQuantity -= model.quantity; }
 				}
-				const autoAttributes = node.attributes.find((i) => i.key === '_campaign_type' && i.value === 'auto_gwp');
+				const autoAttributes = model.attributes.find((i) => i.key === '_campaign_type' && i.value === 'auto_gwp');
 				if (autoAttributes) {
-					node.isAutoGwp = true;
+					model.isAutoGwp = true;
 				}
 
-				node.diffPriceBundle = 0;
-				node.comparePrice = 0;
-				node.originalPrice = parseFloat(node.cost.amountPerQuantity.amount) * 100;
-				if (node.cost && node.cost.compareAtAmountPerQuantity) {
-					if (node.sellingPlanAllocation && node.merchandise.compareAtPrice && node.merchandise.compareAtPrice.amount) {
-						node.comparePrice = parseFloat(node.merchandise.compareAtPrice.amount) * 100;
-						node.diffPriceBundle = node.comparePrice - node.originalPrice;
+				model.diffPriceBundle = 0;
+				model.comparePrice = 0;
+				model.originalPrice = parseFloat(item.cost.amountPerQuantity.amount) * 100;
+				if (item.cost && item.cost.compareAtAmountPerQuantity) {
+					if (item.sellingPlanAllocation && item.merchandise.compareAtPrice && item.merchandise.compareAtPrice.amount) {
+						model.comparePrice = parseFloat(item.merchandise.compareAtPrice.amount) * 100;
+						model.diffPriceBundle = model.comparePrice - model.originalPrice;
 					} else {
-						node.comparePrice = parseFloat(node.cost.compareAtAmountPerQuantity.amount) * 100;
-						node.diffPriceBundle = node.comparePrice - node.originalPrice;
+						model.comparePrice = parseFloat(item.cost.compareAtAmountPerQuantity.amount) * 100;
+						model.diffPriceBundle = model.comparePrice - model.originalPrice;
 					}
 				}
-				node.isFreeItem = node.cost.totalAmount.amount === '0.0';
-				node.swatches = this.getVariantOptions(node);
-				node.variants = node.merchandise.product.variants.edges.map((variant) => variant.node);
-				node.selectedSwatch = node.merchandise.selectedOptions.filter((opt) => opt.name.toLowerCase() !== 'size').map((opt) => opt.value);
+				model.isFreeItem = item.cost.totalAmount.amount === '0.0';
+				model.swatches = getVariantOptions(item);
+				model.variants = item.merchandise.product.variants.edges.map((variant) => variant.node);
+				model.selectedSwatch = item.merchandise.selectedOptions.filter((opt) => opt.name.toLowerCase() !== 'size').map((opt) => opt.value);
 
-				node.showPreorderNotif = false;
-				node.showPreorderNotif_2 = false;
-				node.showPreorderNotif_3 = false;
-				node.featuredImageUrl = featuredImages.find((img) => img.handle === node.merchandise.product.handle)
-					? featuredImages.find((img) => img.handle === node.merchandise.product.handle).featured_image_url : null;
-
-				node.totalDiscountAmount = 0;
-				if (node.discountAllocations && node.discountAllocations.length) {
-					node.discountAllocations.forEach((discount) => {
-						node.totalDiscountAmount += (parseFloat(discount.discountedAmount.amount) * 100) / node.quantity;
+				model.showPreorderNotif = false;
+				model.showPreorderNotif_2 = false;
+				model.showPreorderNotif_3 = false;
+				model.featuredImageUrl = productImages.find((img: any) => img.handle === item.merchandise.product.handle)
+					? productImages.find((img) => img.handle === item.merchandise.product.handle).featured_image_url : null;
+				model.totalDiscountAmount = 0;
+				if (model.discountAllocations && model.discountAllocations.length) {
+					model.discountAllocations.forEach((discount) => {
+						model.totalDiscountAmount += (parseFloat(model.discountedAmount.amount) * 100) / model.quantity;
 					});
 				}
-				node.priceAfterDiscounted = node.originalPrice - node.totalDiscountAmount;
+				model.priceAfterDiscounted = model.originalPrice - model.totalDiscountAmount;
 
-				return node;
+				return model;
 			});
 			data.items = data.items.reverse();
 			console.log('in model', data);
 			if (data.items) {
 
 			}
-			
-			return data;
 		}
-
+		return data;
 	}
 
 	const onApplyDiscountCode = () => {

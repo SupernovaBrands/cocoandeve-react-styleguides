@@ -100,6 +100,49 @@ export default class CartItem extends React.Component {
 		// for now using settings
 		const subtitles = this.variantSubtitle(item);
 
+		let featuredImageUrl = item.featuredImageUrl;
+
+		if (this.props.useShopifyVariantInfo && item.merchandise?.image?.url) {
+			featuredImageUrl = item.merchandise?.image?.url;
+		} else {
+			if (tSettings.store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e3e1c74-7d61-47fd-5a07-749bcd364900/public';
+			}
+
+			if ((tSettings.store === 'my' || tSettings.store === 'uk' || tSettings.store === 'eu' || tSettings.store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d6596e4-f344-4968-c8b9-6b2530881000/public';
+			}
+
+			if (tSettings.store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
+			}
+
+			if (tSettings.store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
+			}
+
+			if ((tSettings.store === 'uk' || tSettings.store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
+			}
+
+			if (tSettings.store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
+			}
+
+			if ((tSettings.store === 'my' || tSettings.store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b708d084-8829-4e6d-cfeb-03a24148a800/public';
+			}
+
+			if ((tSettings.store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/029c70f1-d5cf-45de-746a-891fdbd89d00/public';
+			}
+
+			if ((tSettings.store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
+				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
+			}
+		}
+
+
 		return (
 			<li className="cart-item" data-mod={item.modified}>
 				<figure className="flex flex-wrap py-1 mb-0 items-start -mx-2">
@@ -108,7 +151,11 @@ export default class CartItem extends React.Component {
 						wrapper={(children: any) => <a href={item.url} className="w-1/4 pl-2 pr-0">{children}</a>}
 					>
 						<picture className={item.isFreeItem ? 'w-1/4' : ''}>
-							<img src={item.merchandise.product.featuredImage.url} className="w-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+							{item.featuredImageUrl ? (
+								<img src={featuredImageUrl.replace('/public', '/150x')} className="w-100 object-fit-contain bg-pink-light aa" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+							) : (
+								<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-100 object-fit-contain bg-pink-light" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+							)}
 						</picture>
 					</ConditionWrapper>
 					<figcaption className="w-3/4 px-2">
