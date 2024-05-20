@@ -157,8 +157,8 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href="/pages/rewards">
-									Bali Beauty Club
+								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href={!isLoggedIn ? '/pages/rewards' : '/account/rewards'}>
+									{!isLoggedIn ? 'Bali Beauty Club' : '9999 Points'}
 									<PalmTree className="mx-1 h-2" />
 								</a>
 							</li>
