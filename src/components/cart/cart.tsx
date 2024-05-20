@@ -84,7 +84,6 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (cartData) {
 			setCart({ ...cartData });
-			console.log('cartData123', cartData);
 		}
 	}, [cartData, itemCount]);
 
