@@ -524,7 +524,7 @@ const YotpoReviewWidget = (props:any) => {
 							<Button onClick={() => handleForm('review')}
 								type="button"
 								lg={false}
-								buttonClass="btn-outline-primary w-full px-0">
+								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
 									{tStrings.yotpo.writeReview}
 							</Button>
 						</div>
@@ -532,7 +532,7 @@ const YotpoReviewWidget = (props:any) => {
 							<Button onClick={() => handleForm('question')}
 								type="button"
 								lg={false}
-								buttonClass="btn-outline-primary w-full px-0">
+								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
 									{tStrings.yotpo.askQuestion}
 							</Button>
 						</div>
@@ -551,10 +551,10 @@ const YotpoReviewWidget = (props:any) => {
 
 			<ul className="flex w-full border-primary border-b mt-3" role="tablist">
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
-					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active' : ''} nav-link border-0 text-body text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
+					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
 				</li>
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'question' ? 'border-b-[2px] border-primary' : ''}`}>
-					<a onClick={() => setActiveTab('question')} className={`${activeTab === 'question' ? 'active' : ''} nav-link border-0 text-body text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__questions-tab" aria-controls="yotpo-widget__questions" aria-selected="false">{tStrings.yotpo.questions}</a>
+					<a onClick={() => setActiveTab('question')} className={`${activeTab === 'question' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__questions-tab" aria-controls="yotpo-widget__questions" aria-selected="false">{tStrings.yotpo.questions}</a>
 				</li>
 			</ul>
 
