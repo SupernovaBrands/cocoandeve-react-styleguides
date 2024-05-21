@@ -12,6 +12,7 @@ interface LaunchWaitListProps {
     tos?: string;
     cta?: string;
     onSubmitLaunchWaitlist?: any;
+    forwardRef?: any;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
@@ -77,7 +78,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     return (
         <>
-            { !showSuccess && <div className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
+            { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
                 <h3 className="mb-1">{props.title}</h3>
                 <p className="mb-3 font-size-sm" dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
@@ -102,7 +103,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className="font-size-xs" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', '<a class="font-size-xs" href')}}></p>
+                    <p className="font-size-xs font-bold" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', '<a class="font-size-xs" href')}}></p>
                 </form>
             </div> }
 

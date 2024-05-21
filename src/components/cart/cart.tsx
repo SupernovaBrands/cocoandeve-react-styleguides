@@ -25,10 +25,13 @@ interface Props {
 	styleguide?: boolean;
 	cartData: any;
 	strapiCartSetting: any;
+	onUpdateCart: (item: any, qty: number) => void;
+	onDeleteLine: (lineId: string) => void;
+	tierDiscountSettings: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartCount, cartData, itemCount } = props;
+	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, tierDiscountSettings } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -80,96 +83,9 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (cartData) {
-			const modelizedCart = cartModel(cartData);
-			setCart({ ...modelizedCart });
-			console.log('modelizedCart', modelizedCart);
+			setCart({ ...cartData });
 		}
 	}, [cartData, itemCount]);
-
-	const getVariantOptions = (item: any) => {
-		const { merchandise: { product: { options } } } = item;
-		const swatches = options.filter((opt) => opt.name.toLowerCase().includes('color')
-			|| opt.name.toLowerCase().includes('style')
-			|| opt.name.toLowerCase().includes('scent')
-			|| opt.name.toLowerCase().includes('tangle tamer')).map((opt) => {
-			let { name } = opt;
-			if (name.toLowerCase().includes('drops') || name.toLowerCase().includes('foam') || name.toLowerCase().includes('color')) {
-				name = 'Shade';
-			} else if (name.toLowerCase().includes('style')) {
-				name = 'Style';
-			} else if (name.toLowerCase().includes('scent')) {
-				name = 'Scent';
-			} else if (name.toLowerCase().includes('tangle tamer')) {
-				// tangle tamer text already applied from variant name, so its set to empty
-				name = '';
-			}
-			return { ...opt, name };
-		});
-
-		return swatches;
-	}
-
-	const cartModel = (cart: any) => {
-		let data = { ...cart };
-		if (data && data.lines) {
-			let currentTotal = 0;
-			// eslint-disable-next-line no-return-assign
-			data.lines.forEach((item) => currentTotal += item.quantity);
-
-			data.items = data.lines.map((item: any) => {
-				const model = {...item};
-				model.isManualGwp = false;
-				model.isAutoGwp = false;
-				const checkAttributes = item.attributes.find((i) => i.key === '_campaign_type' && i.value === 'manual_gwp');
-				if (checkAttributes) {
-					model.isManualGwp = true;
-					if (currentTotal === data.totalQuantity) { data.totalQuantity -= model.quantity; }
-				}
-				const autoAttributes = model.attributes.find((i) => i.key === '_campaign_type' && i.value === 'auto_gwp');
-				if (autoAttributes) {
-					model.isAutoGwp = true;
-				}
-
-				model.diffPriceBundle = 0;
-				model.comparePrice = 0;
-				model.originalPrice = parseFloat(item.cost.amountPerQuantity.amount) * 100;
-				if (item.cost && item.cost.compareAtAmountPerQuantity) {
-					if (item.sellingPlanAllocation && item.merchandise.compareAtPrice && item.merchandise.compareAtPrice.amount) {
-						model.comparePrice = parseFloat(item.merchandise.compareAtPrice.amount) * 100;
-						model.diffPriceBundle = model.comparePrice - model.originalPrice;
-					} else {
-						model.comparePrice = parseFloat(item.cost.compareAtAmountPerQuantity.amount) * 100;
-						model.diffPriceBundle = model.comparePrice - model.originalPrice;
-					}
-				}
-				model.isFreeItem = item.cost.totalAmount.amount === '0.0';
-				model.swatches = getVariantOptions(item);
-				model.variants = item.merchandise.product.variants.edges.map((variant) => variant.node);
-				model.selectedSwatch = item.merchandise.selectedOptions.filter((opt) => opt.name.toLowerCase() !== 'size').map((opt) => opt.value);
-
-				model.showPreorderNotif = false;
-				model.showPreorderNotif_2 = false;
-				model.showPreorderNotif_3 = false;
-				model.featuredImageUrl = productImages.find((img: any) => img.handle === item.merchandise.product.handle)
-					? productImages.find((img) => img.handle === item.merchandise.product.handle).featured_image_url : null;
-				model.totalDiscountAmount = 0;
-				if (model.discountAllocations && model.discountAllocations.length) {
-					model.discountAllocations.forEach((discount) => {
-						model.totalDiscountAmount += (parseFloat(model.discountedAmount.amount) * 100) / model.quantity;
-					});
-				}
-				model.priceAfterDiscounted = model.originalPrice - model.totalDiscountAmount;
-
-				return model;
-			});
-			data.items = data.items.reverse();
-			console.log('in model', data);
-			if (data.items) {
-
-			}
-		}
-		return data;
-	}
 
 	const onApplyDiscountCode = () => {
 
@@ -191,12 +107,51 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeQuantity = () => {
+	const onChangeQuantity = (item, qty, callback) => {
+		console.log(item, qty);
+		let newQty = qty;
+		let lastStock = false;
+		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
+			newQty = item.merchandise.quantityAvailable;
+			lastStock = true;
+		}
+		setLastStockKey('');
+		const quantity = parseInt(newQty, 10);
+		const relativeItems = cart.items.filter((itm) => itm.merchandise.id === item.merchandise.id);
 
+		if (relativeItems.length > 1) {
+			let currentRelativeQuantity = 0;
+			relativeItems.forEach((it) => { currentRelativeQuantity += it.quantity; });
+			if (item.quantity < quantity) {
+				currentRelativeQuantity += quantity - item.quantity;
+			} else if (item.quantity > quantity) {
+				currentRelativeQuantity -= item.quantity - quantity;
+			}
+
+			const relativeDiscounted = relativeItems.find((it) => it.discountAllocations.length);
+			const relativeRegular = relativeItems.find((it) => it.discountAllocations.length === 0);
+
+			const lines = [
+				{ id: relativeDiscounted.id, quantity: 0 },
+				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
+			];
+
+			console.log('on change cartData', cartData);
+		} else {
+			console.log('item', item);
+			/*
+			const data = {
+				quantity: qty,
+				lineId, variantId, quantity, attributes
+			}
+			*/
+			onUpdateCart(item, qty);
+		}
 	}
 
-	const onRemoveItem = () => {
-
+	const onRemoveItem = (item: any) => {
+		console.log('on remove', item);
+		onDeleteLine(item.id);
 	}
 
 	const getId = (shopifyId: string) => {
@@ -222,7 +177,7 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{tSettings.cartDiscountMeter && !tSettings.cartDiscountMeter.enable
+							{tierDiscountSettings && !tierDiscountSettings.enable
 								&& tSettings.cartShippingMeter.enable
 								&& shippingMeter
 								&& shippingMeter.enabled
@@ -233,8 +188,8 @@ const Cart: React.FC<Props> = (props) => {
 										current={shippingMeter.current}
 									/>
 								)}
-							{tSettings.cartDiscountMeter && tSettings.cartDiscountMeter.enable && discountMeter
-								&& discountMeter.enabled && itemCount > 0 && (
+							{tierDiscountSettings && tierDiscountSettings.enable && discountMeter
+								&& discountMeter.enabled && cart?.itemCount > 0 && (
 								<CartDiscountMeter
 									target={discountMeter.target}
 									current={discountMeter.current}
@@ -249,8 +204,7 @@ const Cart: React.FC<Props> = (props) => {
 								<div className="text-primary spinner-border" role="status" />
 							</div>
 						)}
-
-						{!loadingInit && (itemCount === 0 ? (
+						{!loadingInit && (!cart.itemCount || itemCount === 0 ? (
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
