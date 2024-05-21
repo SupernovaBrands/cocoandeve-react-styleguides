@@ -27,11 +27,11 @@ interface Props {
 	strapiCartSetting: any;
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: string) => void;
-	tierDiscountSettings: any;
+	discountMeter: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, tierDiscountSettings } = props;
+	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, discountMeter } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -54,12 +54,6 @@ const Cart: React.FC<Props> = (props) => {
 		id: 12345,
 	});
 	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
-	const [discountMeter, setDiscountMeter] = useState({
-		enabled: false,
-		target: 100,
-		current: 50,
-		progressText: 'Progress discount meter'
-	})
 
 	const [shippingMeter, setShippingMeter] = useState({
 		target: 100,
@@ -86,6 +80,10 @@ const Cart: React.FC<Props> = (props) => {
 			setCart({ ...cartData });
 		}
 	}, [cartData, itemCount]);
+
+	useEffect(() => {
+		console.log('discountMeter1', discountMeter);
+	}, [discountMeter])
 
 	const onApplyDiscountCode = () => {
 
@@ -138,7 +136,6 @@ const Cart: React.FC<Props> = (props) => {
 
 			console.log('on change cartData', cartData);
 		} else {
-			console.log('item', item);
 			/*
 			const data = {
 				quantity: qty,
@@ -177,7 +174,7 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{tierDiscountSettings && !tierDiscountSettings.enable
+							{discountMeter && !discountMeter.enable
 								&& tSettings.cartShippingMeter.enable
 								&& shippingMeter
 								&& shippingMeter.enabled
@@ -188,15 +185,15 @@ const Cart: React.FC<Props> = (props) => {
 										current={shippingMeter.current}
 									/>
 								)}
-							{tierDiscountSettings && tierDiscountSettings.enable && discountMeter
-								&& discountMeter.enabled && cart?.itemCount > 0 && (
+							{discountMeter && discountMeter.enabled && discountMeter
+								&& discountMeter.enabled && cart.itemCount > 0 && (
 								<CartDiscountMeter
 									target={discountMeter.target}
 									current={discountMeter.current}
 									progressText={discountMeter.progressText}
 								/>
 							)}
-							<hr className="w-full m-0 my-1" />
+							<hr className="w-full m-0 mb-1" />
 						</div>
 
 						{loadingInit && (

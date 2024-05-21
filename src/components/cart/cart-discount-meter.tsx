@@ -19,9 +19,9 @@ const CartDiscountMeter = (props) => {
 	return (
 		<>
 			<p className="mb-1">{text}</p>
-			<div className="progress mb-3">
+			<div className="progress mb-3 bg-[#e9ecef] rounded flex overflow-hidden h-[5px]">
 				<div
-					className="progress-bar"
+					className="progress-bar flex flex-col justify-center overflow-hidden text-white text-center whitespace-nowrap bg-primary [transition:width_.6s_ease]"
 					style={{ width: `${progress}%` }}
 					role="progressbar"
 					aria-label="progress"
