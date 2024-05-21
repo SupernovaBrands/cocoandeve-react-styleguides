@@ -34,10 +34,10 @@ const RealResultCard = (props) => {
 	}
 
 	const titleEscaped = escapeHtml(data.label);
-	const titleDesc = `aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
+	const titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
 
 	return (
-		<div className="w-full lg:w-1/3 lg:inline-block px-g result-card">
+		<div className="w-full lg:w-1/3 lg:inline-block result-card">
 			<picture className="embed-responsive rounded-tl-lg rounded-br-0 rounded-tr-lg rounded-bl-0 overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />

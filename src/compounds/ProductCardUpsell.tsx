@@ -35,7 +35,7 @@ const SwatchOverlay = (props:any) => {
 
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} className="btn-choose" label={props.swatch.label}/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} className="btn-choose" label={props.swatch.label === 'Choose Tangle Tamer' ? 'Add to Cart' : props.swatch.label}/>
             <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-2 lg:px-1">
                     <label className="block mb-2 px-1">

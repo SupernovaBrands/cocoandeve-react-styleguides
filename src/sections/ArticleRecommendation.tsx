@@ -13,7 +13,7 @@ const RecommendationCard = (props) => {
 				</div>
 				
 				<figcaption className="ml-1 w-3/4 px-0">
-					<p className="h3 mb-1">{props.data.title}</p>
+					<a href={props.data.link} className="h3 mb-1 block text-body hover:text-body">{props.data.title}</a>
 					<span className="mb-0">{parse(props.data.desc)}</span>
 				</figcaption>
 			</figure>

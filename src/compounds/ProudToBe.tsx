@@ -29,7 +29,7 @@ const ProudToBe = (props:any) => {
             if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
                 setWidth(scrollEl.current.offsetWidth);
             } else {
-                const w = scrollEl.current.scrollWidth - scrollEl.current.offsetWidth;
+                const w = Math.abs(globalThis.window.innerWidth - (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
                 setWidth(w);
             }
         }

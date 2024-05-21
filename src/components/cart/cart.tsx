@@ -24,7 +24,7 @@ interface Props {
 	isLoading?: boolean;
 	styleguide?: boolean;
 	cartData: any;
-	strapiCartSetting: any;
+	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: string) => void;
 	discountMeter: any;
