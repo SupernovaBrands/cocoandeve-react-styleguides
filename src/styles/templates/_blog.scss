@@ -146,9 +146,10 @@
 		}
 	}
 
-	.badge-blog {
-		line-height: calc-em(20, 16) !important;
-		padding: calc-em(2) calc-em(8) !important;
+	.badge-blog a{
+		line-height: 1.25em;
+    	padding: .125em .5em;
+		margin-right: calc-em(4, 12);
 	}
 
 	.blog-nav-tags {

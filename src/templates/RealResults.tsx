@@ -251,8 +251,8 @@ const RealResults = () => {
 			<div className='container py-4'>
 				<div className="mb-3 flex flex-wrap  items-center justify-center">
 					<h1 className='text-center mb-2 lg:mb-3 block w-full'>Real Customers. Real Reviews</h1>
-					<label htmlFor="real-result__select" className="text-base font-normal mr-3 mb-0 h4">Filter By:</label>
-					<select id="real-result__select" className="border-body bg-gray-400 custom-select rounded-lg w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
+					<label htmlFor="real-result__select" className="text-base font-normal mr-3 mb-0 lg:text-lg">Filter By:</label>
+					<select id="real-result__select" className="border-body bg-gray-400 custom-select rounded w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
 						<option value="all" selected={true}>All</option>
 						{tabNames.length > 0 && tabNames.map((tab) => {
 							let tabtitleID = tab.toLowerCase().replace(/ /g, '-').replace('autobronzants', 'tan').replace('corps', 'body')
@@ -286,14 +286,14 @@ const RealResults = () => {
 				{showMore && (
 					<div className="flex flex-wrap justify-center">
 						<div className="col text-center">
-							<a href="#!" className={`hover:no-underline inline-block border-2 align-middle text-center select-none font-bold whitespace-no-wrap rounded py-1 px-3 no-underline leading-tight text-base border-primary  hover:text-white bg-white hover:bg-primary ${showMore}`} onClick={loadMore}>
+							<a href="#!" className={`bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn block hover:no-underline ${showMore}`} onClick={loadMore}>
 								Show more reviews
 							</a>
 						</div>
 					</div>
 				)}
 			</div>
-			<div className="pt-4 pb-2">
+			<div className="pb-2">
 				<div className="container">
 					<div className="row px-1">
 						<h2 className="h1 mb-2 w-full text-center">Coco & Eve’s Customer Reviews</h2>
