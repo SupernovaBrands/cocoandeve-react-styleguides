@@ -27,11 +27,13 @@ interface Props {
 	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: string) => void;
-	discountMeter: any;
+	discountMeter?: any;
+	handleDiscount?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, discountMeter } = props;
+	const { showCart, cartData, itemCount,
+		onUpdateCart, onDeleteLine, discountMeter, handleDiscount } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -85,8 +87,9 @@ const Cart: React.FC<Props> = (props) => {
 		console.log('discountMeter1', discountMeter);
 	}, [discountMeter])
 
-	const onApplyDiscountCode = () => {
-
+	const onApplyDiscountCode = (c:any) => {
+		console.log(c, 'testing')
+		handleDiscount(c);
 	}
 
 	const onRemoveDiscountCode = () => {
