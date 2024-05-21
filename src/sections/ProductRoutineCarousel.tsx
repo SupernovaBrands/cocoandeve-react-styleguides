@@ -5,6 +5,8 @@ import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import ProductCardUpsell from '~/compounds/ProductCardUpsell';
+import Modal from '~/components/Modal';
+import ModalWaitlist from "~/components/modal/Waitlist";
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -61,10 +63,18 @@ const ProductRoutineCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
+    const [waitlistData, setWaitlistData] = useState({
+        open: false,
+        title: '',
+        image: '',
+        handle: undefined,
+    });
+
 	return (
+        <>
         <div className="product-upsell-2 pb-5 pt-0 md:pt-5">
             <div className="container">
-                <p className="h1 w-full text-center mb-3 lg:px-g sm:px-hg">Shop the routine</p>
+                <p className="h1 w-full text-center mb-3 lg:px-g sm:px-hg">Shop the Routine</p>
                 <Carousel.Wrapper emblaApi={emblaApi1}>
                     <Carousel.Inner emblaRef={emblaRef1} className="lg:mx-g lg:!transform-none">
                         {items && items.map((data: any, index: number) => (
@@ -74,6 +84,8 @@ const ProductRoutineCarousel = (props: any) => {
                             useCarousel={true}
                             className={props.className}
                             item={data}
+                            waitlistData={waitlistData}
+                            setWaitlistData={setWaitlistData}
                             />
                         ))}
 
@@ -91,6 +103,10 @@ const ProductRoutineCarousel = (props: any) => {
                 </Carousel.Wrapper>
             </div>
         </div>
+        { <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
+            <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+        </Modal> }
+        </>
 	);
 };
 

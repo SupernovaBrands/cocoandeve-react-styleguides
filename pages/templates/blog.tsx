@@ -211,7 +211,7 @@ const BlogTemplate = () => {
 				menuBannerQuiz={menuBannerQuiz}
 				menuBannerCode={menuBannerCode}
 				dummy={true} />
-			<Blog isLoading={isLoading} postData={postData} popularArticles={popularArticles} articles={articles} videoData={videoData} />
+			<Blog isLoading={isLoading} postData={postData} popularArticles={popularArticles} articles={articles} videoData={videoData} tag="all" />
 			{/* <Cart showCart={showCart} toggleCart={toggleCart} /> */}
 			<Footer
 				aboutMenu={aboutMenu}

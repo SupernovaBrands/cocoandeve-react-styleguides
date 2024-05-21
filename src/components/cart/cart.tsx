@@ -11,9 +11,8 @@ import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
-// import storefrontApi from "~/modules/storefront-api";
-import { getCart } from '../../modules/shopify/cart';
 import { CartData } from "./types";
+import useProductImages from "~/hooks/useProductImages";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -24,12 +23,16 @@ interface Props {
 	cartCount: number;
 	isLoading?: boolean;
 	styleguide?: boolean;
+	cartData: any;
+	strapiCartSetting: any;
+	onUpdateCart: (item: any, qty: number) => void;
+	onDeleteLine: (lineId: string) => void;
+	tierDiscountSettings: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartCount } = props;
+	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, tierDiscountSettings } = props;
 	// const storeApi = new storefrontApi();
-	const [itemCount, setItemCount] = useState(cartCount);
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
@@ -70,27 +73,19 @@ const Cart: React.FC<Props> = (props) => {
 	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
+	const { data: productImages } = useProductImages();
+
 	useEffect(() => {
 		if (props.styleguide) {
 			setLoadingInit(true);
-			getCart().then((e: CartData) => {
-				const { discountData, shippingData, shippingMeter, discountMeter } = e;
-				setCart(e);
-				discountData.code = discountData.code === null ? '' : discountData.code;
-				shippingMeter.enabled = true;
-				// setShippingData({...shippingData});
-				setDiscountData({...discountData});
-				setDiscountMeter({...discountMeter});
-				setShippingMeter({...shippingMeter});
-				setItemCount(e.totalQuantity);
-				setLoadingInit(false);
-			}).catch(() => {
-				console.log('get cart fail');
-				setLoadingInit(false);
-			});
 		}
 	}, []);
 
+	useEffect(() => {
+		if (cartData) {
+			setCart({ ...cartData });
+		}
+	}, [cartData, itemCount]);
 
 	const onApplyDiscountCode = () => {
 
@@ -112,12 +107,51 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeQuantity = () => {
+	const onChangeQuantity = (item, qty, callback) => {
+		console.log(item, qty);
+		let newQty = qty;
+		let lastStock = false;
+		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
+			newQty = item.merchandise.quantityAvailable;
+			lastStock = true;
+		}
+		setLastStockKey('');
+		const quantity = parseInt(newQty, 10);
+		const relativeItems = cart.items.filter((itm) => itm.merchandise.id === item.merchandise.id);
 
+		if (relativeItems.length > 1) {
+			let currentRelativeQuantity = 0;
+			relativeItems.forEach((it) => { currentRelativeQuantity += it.quantity; });
+			if (item.quantity < quantity) {
+				currentRelativeQuantity += quantity - item.quantity;
+			} else if (item.quantity > quantity) {
+				currentRelativeQuantity -= item.quantity - quantity;
+			}
+
+			const relativeDiscounted = relativeItems.find((it) => it.discountAllocations.length);
+			const relativeRegular = relativeItems.find((it) => it.discountAllocations.length === 0);
+
+			const lines = [
+				{ id: relativeDiscounted.id, quantity: 0 },
+				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
+			];
+
+			console.log('on change cartData', cartData);
+		} else {
+			console.log('item', item);
+			/*
+			const data = {
+				quantity: qty,
+				lineId, variantId, quantity, attributes
+			}
+			*/
+			onUpdateCart(item, qty);
+		}
 	}
 
-	const onRemoveItem = () => {
-
+	const onRemoveItem = (item: any) => {
+		console.log('on remove', item);
+		onDeleteLine(item.id);
 	}
 
 	const getId = (shopifyId: string) => {
@@ -143,7 +177,7 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{tSettings.cartDiscountMeter && !tSettings.cartDiscountMeter.enable
+							{tierDiscountSettings && !tierDiscountSettings.enable
 								&& tSettings.cartShippingMeter.enable
 								&& shippingMeter
 								&& shippingMeter.enabled
@@ -154,8 +188,8 @@ const Cart: React.FC<Props> = (props) => {
 										current={shippingMeter.current}
 									/>
 								)}
-							{tSettings.cartDiscountMeter && tSettings.cartDiscountMeter.enable && discountMeter
-								&& discountMeter.enabled && itemCount > 0 && (
+							{tierDiscountSettings && tierDiscountSettings.enable && discountMeter
+								&& discountMeter.enabled && cart?.itemCount > 0 && (
 								<CartDiscountMeter
 									target={discountMeter.target}
 									current={discountMeter.current}
@@ -170,8 +204,7 @@ const Cart: React.FC<Props> = (props) => {
 								<div className="text-primary spinner-border" role="status" />
 							</div>
 						)}
-
-						{!loadingInit && (itemCount === 0 ? (
+						{!loadingInit && (!cart.itemCount || itemCount === 0 ? (
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
@@ -199,7 +232,7 @@ const Cart: React.FC<Props> = (props) => {
 							<form
 								id="cart-drawer-form"
 								className="container px-g lg:px-3 cart-drawer__form"
-								action={cart.checkoutUrl.replace('www', 'us')}
+								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
 								onKeyDown={handleKeyDown}

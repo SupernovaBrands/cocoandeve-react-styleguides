@@ -21,7 +21,7 @@ const options: EmblaOptionsType = {
 
 const Blog = (props) => {
 
-	const { isLoading, postData, popularArticles, articles, videoData } = props;
+	const { isLoading, postData, popularArticles, articles, videoData, tag } = props;
 	// carousel
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
@@ -38,48 +38,50 @@ const Blog = (props) => {
 				<h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
                 {!isLoading && (
                     <div className="blog-nav-tags mb-4 flex mt-2">
-                        <BlogNavTag href="/blogs/news" title="ALL" active={true} />
-                        <BlogNavTag href="/blogs/news/tagged/hair" title="Hair"/>
-                        <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF"/>
-                        <BlogNavTag href="/blogs/news/tagged/skin" title="Skin"/>
-                        <BlogNavTag href="/blogs/news/tagged/body" title="Body"/>
+                        <BlogNavTag href="/blogs/news" title="ALL" active={tag === 'all' ? true : false } />
+                        <BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={tag === 'hair' ? true : false }/>
+                        <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={tag === 'tan' ? true : false }/>
+                        <BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={tag === 'skin' ? true : false }/>
+                        <BlogNavTag href="/blogs/news/tagged/body" title="Body" active={tag === 'body' ? true : false }/>
                         <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
                     </div>
                 )}
-				<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
-					<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-						{postData.map((data) => (
-							<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
-						))}
-					</Carousel.Inner>
-					<Carousel.Navigation>
-						<PrevButton
-							onClick={() => autoPlayClick(arrowClickPrev)}
-							className="lg:-left-[1.25em] w-[auto] text-primary"
-						>
-							<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-								<ChevronPrev className="w-g h-g svg--current-color" />
-							</span>
-						</PrevButton>
-						<NextButton
-							onClick={() => autoPlayClick(arrowClickNext)}
-							className="lg:-right-[1.25em] w-[auto] text-primary"
-						>
-							<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-								<ChevronNext className="w-g h-g svg--current-color" />
-							</span>
-						</NextButton>
-					</Carousel.Navigation>
-				</Carousel.Wrapper>
+				{postData.length > 0 &&
+					<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
+						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+							{postData.map((data) => (
+								<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
+							))}
+						</Carousel.Inner>
+						<Carousel.Navigation>
+							<PrevButton
+								onClick={() => autoPlayClick(arrowClickPrev)}
+								className="lg:-left-[1.25em] w-[auto] text-primary"
+							>
+								<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+									<ChevronPrev className="w-g h-g svg--current-color" />
+								</span>
+							</PrevButton>
+							<NextButton
+								onClick={() => autoPlayClick(arrowClickNext)}
+								className="lg:-right-[1.25em] w-[auto] text-primary"
+							>
+								<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+									<ChevronNext className="w-g h-g svg--current-color" />
+								</span>
+							</NextButton>
+						</Carousel.Navigation>
+					</Carousel.Wrapper>
+				}
 				<div className="flex flex-wrap article-list-wrapper lg:mb-4">
-					<ArticleRecommendation popularArticles={popularArticles} />
+					{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
 					<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
 						{articles.map((data) =>
 							<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" template="blog" data={data} />
 						)}
 					</div>
 				</div>
-				<HowToCarousel videoData={videoData} />
+				{videoData.length > 0 && <HowToCarousel videoData={videoData} />}
 				{/* <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g mb-4">
 					{articles.map((data) =>
 						<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
