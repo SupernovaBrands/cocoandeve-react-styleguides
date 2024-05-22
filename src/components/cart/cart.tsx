@@ -34,10 +34,11 @@ interface Props {
 	shippingData?: any;
 	handleDiscount?: any;
 	manualGwpSetting?: any;
+	discountBanner?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount,
+	const { showCart, cartData, itemCount, discountBanner,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter, shippingData, handleDiscount, manualGwpSetting } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
@@ -270,6 +271,7 @@ const Cart: React.FC<Props> = (props) => {
 									onRemove={onRemoveDiscountCode}
 									appliedGiftCard={giftCardData}
 									onRemoveGiftCard={onRemoveGiftCard}
+									discountBanner={discountBanner}
 								/>
 								<hr />
 
