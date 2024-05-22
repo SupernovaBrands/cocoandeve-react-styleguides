@@ -30,13 +30,15 @@ interface Props {
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: string) => void;
 	discountMeter?: any;
+	shippingMeter?: any;
+	shippingData?: any;
 	handleDiscount?: any;
 	manualGwpSetting?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount,
-		onUpdateCart, onDeleteLine, discountMeter, handleDiscount, manualGwpSetting } = props;
+		onUpdateCart, onDeleteLine, discountMeter, shippingMeter, shippingData, handleDiscount, manualGwpSetting } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -53,11 +55,6 @@ const Cart: React.FC<Props> = (props) => {
 	});
 
 	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
-	const [shippingMeter, setShippingMeter] = useState({
-		target: 100,
-		current: 50,
-		enabled: true,
-	});
 
 	const [giftCardData, setGiftCardData] = useState({});
 	const [discountData, setDiscountData] = useState({
@@ -66,9 +63,6 @@ const Cart: React.FC<Props> = (props) => {
 
 	const [loadingDiscount, setLoadingDiscount] = useState(false);
 	const [shippingLineHide, setShippingLineHide] = useState(false);
-	const [shippingData, setShippingData] = useState({
-		show: true, amount: 0, freeRate: 100,
-	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
 	const { data: productImages } = useProductImages();
@@ -179,11 +173,9 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{discountMeter && !discountMeter.enable
-								&& tSettings.cartShippingMeter.enable
-								&& shippingMeter
+							{discountMeter && !discountMeter.enable && shippingMeter
 								&& shippingMeter.enabled
-								&& itemCount > 0
+								&& cart.itemCount > 0
 								&& (
 									<CartShippingMeter
 										target={shippingMeter.target}
