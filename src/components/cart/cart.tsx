@@ -75,6 +75,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (cartData) {
+			console.log('carrtData', cartData);
 			setCart({ ...cartData });
 		}
 	}, [cartData, itemCount]);
@@ -351,7 +352,7 @@ const Cart: React.FC<Props> = (props) => {
 						))}
 					</div>
 
-					{!loadingInit && itemCount > 0 && (
+					{!loadingInit && cart.itemCount > 0 && (
 						<div className="modal-footer px-g lg:px-3 py-2 fixed bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600">
 							<div className="flex flex-wrap no-gutters w-full">
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
