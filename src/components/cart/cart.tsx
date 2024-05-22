@@ -173,7 +173,7 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{discountMeter && !discountMeter.enable && shippingMeter
+							{discountMeter && !discountMeter.enabled && shippingMeter
 								&& shippingMeter.enabled
 								&& cart.itemCount > 0
 								&& (
