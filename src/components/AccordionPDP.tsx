@@ -24,9 +24,9 @@ const AccordionPDP = (props: any) => {
 						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[15px] w-[15px]`}/> }
 						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[15px] w-[15px]`}/> }
 					</div>
-					<div className={`transition-all overflow-hidden ${props.openIndex === d.id ? 'duration-1000' : 'duration-75 max-h-0'} ${index === data.length - 1 ? 'pb-3 lg:pb-0' : ''}`}>
-						{ d.text && <div className="pt-1 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
-						{ d.component && <div className="pt-1 pb-1 text-sm">{ d.component }</div>}
+					<div className={`transition-all overflow-hidden ${props.openIndex === d.id ? 'duration-1000 visible' : 'duration-75 max-h-0 invisible'} ${index === data.length - 1 ? 'pb-3 lg:pb-0' : ''}`}>
+						{ d.text && <div className="pt-0 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
+						{ d.component && <div className="pt-0 pb-1 text-sm">{ d.component }</div>}
 					</div>
 				</div>
 			))}

@@ -28,6 +28,11 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     const submitForm = (e:any) => {
         e.preventDefault();
+
+        if (email === '' && phoneNumber === '') {
+            setPhoneError(true);
+        }
+
         if (validForm) {
             props.onSubmitLaunchWaitlist({email, phoneCode, phoneNumber, fallback: () => {
                 console.log('after submit');
@@ -43,6 +48,10 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             setEmailError(true);
         } else {
             setEmailError(false);
+        }
+
+        if (email !== '' && validateEmail(email) && phoneError) {
+            setPhoneError(false);
         }
     }
 
