@@ -330,7 +330,7 @@ const Cart: React.FC<Props> = (props) => {
 									)}
 								</div>
 
-								{manualGwpSetting.enabled && (
+								{manualGwpSetting && manualGwpSetting.enabled && (
 									<>
 										<hr />
 										<CartManualGwp {...manualGwpSetting}
@@ -343,7 +343,7 @@ const Cart: React.FC<Props> = (props) => {
 									</>
 								)}
 
-								{!manualGwpSetting.enabled && <hr />}
+								{manualGwpSetting && !manualGwpSetting.enabled && <hr />}
 
 								{/* @ts-ignore */}
 								<CartExtras totalPrice={cart?.cost?.totalAmount?.amount} />
