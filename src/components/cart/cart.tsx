@@ -48,7 +48,7 @@ const Cart: React.FC<Props> = (props) => {
 	});
 	const [isLastStockKey, setLastStockKey] = useState('');
 
-	const [combineDiscount, setCombineDiscount] = useState(false);
+	const [combineDiscount, setCombineDiscount] = useState(tSettings.cartCombineDiscount);
 	const [loadingManualGwp, setloadingManualGwp] = useState({
 		loading: true,
 		id: 12345,
