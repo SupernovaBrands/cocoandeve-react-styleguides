@@ -45,6 +45,7 @@ const HeroBanner = (props: any) => {
 
 	useEffect(() => {
 		setIsLoadingComp(false);
+		console.log('hero banner loaded');
 	}, []);
 
 	let slides = [];
