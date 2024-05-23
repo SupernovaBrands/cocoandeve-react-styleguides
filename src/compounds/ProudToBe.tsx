@@ -6,6 +6,8 @@ import ToxinFree from '~/images/icons/toxin-free.svg';
 import Ethically from '~/images/icons/ethically.svg';
 import ParabenFree from '~/images/icons/paraben-free.svg';
 import Peta from '~/images/icons/peta.svg';
+import Gluten from '~/images/icons/gluten.svg';
+import Sulfate from '~/images/icons/natural-dha.svg';
 import { useRef, useEffect, useState } from 'react';
 
 const ProudToBe = (props:any) => {
@@ -35,6 +37,8 @@ const ProudToBe = (props:any) => {
         }
     }, [scrollEl]);
 
+    console.log(proudToBeArr, 'testing');
+
     return (
         <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>
@@ -43,6 +47,12 @@ const ProudToBe = (props:any) => {
                     <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
                         {proudToBeArr.includes('natural-dha') && <li className="col-2 flex items-center flex-col px-1 carousel-item active">
                             <NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span>
+                        </li>}
+                        {proudToBeArr.includes('sulfate-free') && <li className="col-2 flex items-center flex-col px-1 carousel-item active">
+                            <Sulfate className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span>
+                        </li>}
+                        {proudToBeArr.includes('gluten') && <li className="col-2 flex items-center flex-col px-1 carousel-item active">
+                            <Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span>
                         </li>}
                         {proudToBeArr.includes('vegan') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
                             <Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span>
