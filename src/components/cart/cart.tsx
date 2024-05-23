@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal";
 import SvgClose from '~/images/icons/close.svg';
@@ -11,8 +10,10 @@ import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
-import { CartData } from "./types";
 import useProductImages from "~/hooks/useProductImages";
+
+// import { CartData } from "./types";
+// import { getCookie } from "~/modules/utils";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
@@ -24,53 +25,45 @@ interface Props {
 	isLoading?: boolean;
 	styleguide?: boolean;
 	cartData: any;
-	strapiCartSetting: any;
+	itemCount?: any;
+	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: string) => void;
-	tierDiscountSettings: any;
+	discountMeter?: any;
+	shippingMeter?: any;
+	shippingData?: any;
+	handleDiscount?: any;
+	manualGwpSetting?: any;
+	discountBanner?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount, onUpdateCart, onDeleteLine, tierDiscountSettings } = props;
+	const { showCart, cartData, itemCount, discountBanner,
+		onUpdateCart, onDeleteLine, discountMeter, shippingMeter, shippingData, handleDiscount, manualGwpSetting } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, subtotalPrice: 0,
-		totalAmount: 0,
+		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
 	const [isLastStockKey, setLastStockKey] = useState('');
+
+	const [combineDiscount, setCombineDiscount] = useState(tSettings.cartCombineDiscount);
+	const [loadingManualGwp, setloadingManualGwp] = useState({
+		loading: true,
+		id: 12345,
+	});
+
+	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
+
 	const [giftCardData, setGiftCardData] = useState({});
 	const [discountData, setDiscountData] = useState({
 		isValid: false, code: '', amount: '0', isAuto: false, error: '', errorExtra: true,
 	});
 
 	const [loadingDiscount, setLoadingDiscount] = useState(false);
-	const [manualGwp, setManualGwp] = useState({...tSettings.manualGwp, selectedKey: []});
-
-	const [combineDiscount, setCombineDiscount] = useState(false);
-	const [loadingManualGwp, setloadingManualGwp] = useState({
-		loading: true,
-		id: 12345,
-	});
-	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
-	const [discountMeter, setDiscountMeter] = useState({
-		enabled: false,
-		target: 100,
-		current: 50,
-		progressText: 'Progress discount meter'
-	})
-
-	const [shippingMeter, setShippingMeter] = useState({
-		target: 100,
-		current: 50,
-		enabled: true,
-	});
-
 	const [shippingLineHide, setShippingLineHide] = useState(false);
-	const [shippingData, setShippingData] = useState({
-		show: true, amount: 0, freeRate: 100,
-	});
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
 	const { data: productImages } = useProductImages();
@@ -83,12 +76,18 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (cartData) {
+			console.log('carrtData', cartData);
 			setCart({ ...cartData });
 		}
 	}, [cartData, itemCount]);
 
-	const onApplyDiscountCode = () => {
+	useEffect(() => {
+		// console.log('discountMeter1', discountMeter);
+	}, [discountMeter])
 
+	const onApplyDiscountCode = (c:any) => {
+		console.log(c, 'testing')
+		handleDiscount(c);
 	}
 
 	const onRemoveDiscountCode = () => {
@@ -138,7 +137,6 @@ const Cart: React.FC<Props> = (props) => {
 
 			console.log('on change cartData', cartData);
 		} else {
-			console.log('item', item);
 			/*
 			const data = {
 				quantity: qty,
@@ -163,8 +161,8 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onToggleManualGwp = () => {
-
+	const onToggleManualGwp = async (id:any) => {
+		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
 	return (
@@ -177,26 +175,24 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{tierDiscountSettings && !tierDiscountSettings.enable
-								&& tSettings.cartShippingMeter.enable
-								&& shippingMeter
+							{discountMeter && !discountMeter.enabled && shippingMeter
 								&& shippingMeter.enabled
-								&& itemCount > 0
+								&& cart.itemCount > 0
 								&& (
 									<CartShippingMeter
 										target={shippingMeter.target}
 										current={shippingMeter.current}
 									/>
 								)}
-							{tierDiscountSettings && tierDiscountSettings.enable && discountMeter
-								&& discountMeter.enabled && cart?.itemCount > 0 && (
+							{discountMeter && discountMeter.enabled && discountMeter
+								&& discountMeter.enabled && cart.itemCount > 0 && (
 								<CartDiscountMeter
 									target={discountMeter.target}
 									current={discountMeter.current}
 									progressText={discountMeter.progressText}
 								/>
 							)}
-							<hr className="w-full m-0 my-1" />
+							<hr className="w-full m-0 mb-1" />
 						</div>
 
 						{loadingInit && (
@@ -240,10 +236,9 @@ const Cart: React.FC<Props> = (props) => {
 								<input type="hidden" name="checkout" value="Checkout" />
 
 								<ul className="list-unstyled border-b-[1px] pb-1">
-									{cart.items && cart.items.map((item) => !item.isManualGwp && (
-										<CartItem
-											key={item.id}
-											item={item}
+									{cart.items && cart.items.map((item) => {
+										/* @ts-ignore */
+										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
 											onChangeVariant={onChangeVariant}
 											onChangeQuantity={onChangeQuantity}
@@ -251,24 +246,10 @@ const Cart: React.FC<Props> = (props) => {
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
 										/>
-									))}
-								</ul>
 
-								{manualGwp.enabled && (
-									<>
-										<CartManualGwp
-											title={manualGwp.title}
-											maxSelected={manualGwp.maxSelected}
-											selectedKey={manualGwp.selectedKey}
-											items={manualGwp.items}
-											onAddItem={onToggleManualGwp}
-											onRemoveItem={onToggleManualGwp}
-											loading={loadingManualGwp.loading}
-											processingId={loadingManualGwp.id}
-										/>
-										<hr />
-									</>
-								)}
+										return !item.isManualGwp && cartItemComponent;
+									})}
+								</ul>
 
 								{tSettings.cartRedemption.enabled && (
 									<>
@@ -290,6 +271,7 @@ const Cart: React.FC<Props> = (props) => {
 									onRemove={onRemoveDiscountCode}
 									appliedGiftCard={giftCardData}
 									onRemoveGiftCard={onRemoveGiftCard}
+									discountBanner={discountBanner}
 								/>
 								<hr />
 
@@ -351,21 +333,35 @@ const Cart: React.FC<Props> = (props) => {
 									)}
 								</div>
 
-								<hr />
+								{manualGwpSetting && manualGwpSetting.enabled && (
+									<>
+										<hr />
+										<CartManualGwp {...manualGwpSetting}
+											onAddItem={onToggleManualGwp}
+											onRemoveItem={onToggleManualGwp}
+											loading={loadingManualGwp.loading}
+											processingId={loadingManualGwp.id}
+										/>
+										<hr />
+									</>
+								)}
 
-								<CartExtras totalPrice={cart.totalAmount} />
+								{manualGwpSetting && !manualGwpSetting.enabled && <hr />}
+
+								{/* @ts-ignore */}
+								<CartExtras totalPrice={cart?.cost?.totalAmount?.amount} />
 							</form>
 						))}
 					</div>
 
-					{!loadingInit && itemCount > 0 && (
+					{!loadingInit && cart.itemCount > 0 && (
 						<div className="modal-footer px-g lg:px-3 py-2 fixed bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600">
 							<div className="flex flex-wrap no-gutters w-full">
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true)}</strong>
 								<div className="w-full mt-1">
 									<Button buttonClass="btn-primary w-full"
-										disabled={loadingDiscount || manualGwp.loading}
+										disabled={loadingDiscount}
 										onClick={submitForm}
 										data-cy="checkout-btn"
 										>

@@ -19,7 +19,7 @@ import { kebabCase, formatMoney } from '~/modules/utils';
 // });
 
 type CartItemProps = {
-	item: any;
+	item?: any;
 	isLastStock: boolean;
 	onChangeVariant: Function;
 	onChangeQuantity: Function;
@@ -320,13 +320,3 @@ export default class CartItem extends React.Component {
 		);
 	}
 }
-
-CartItem.propTypes = {
-	item: PropTypes.object.isRequired,
-	isLastStock: PropTypes.bool.isRequired,
-	onChangeVariant: PropTypes.func.isRequired,
-	onChangeQuantity: PropTypes.func.isRequired,
-	onRemoveItem: PropTypes.func.isRequired,
-	productId: PropTypes.number.isRequired,
-	productStock: PropTypes.number.isRequired,
-};

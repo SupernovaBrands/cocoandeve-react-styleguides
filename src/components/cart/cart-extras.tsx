@@ -21,8 +21,8 @@ import SvgMoneybackEur from '~/images/icons/moneyback-eur.svg';
 //     ssr: false,
 // });
 
-let currency;
-let locale;
+let currency:any;
+let locale:any;
 if (tSettings.payment.afterpay) {
 	currency = 'USD';
 	locale = 'en_US';
@@ -42,9 +42,12 @@ const showInstallment = tSettings.payment.shoppay
 	|| tSettings.payment.afterpay
 	|| tSettings.payment.clearpay
 	|| tSettings.payment.klarna;
+interface CartExtrasProps {
+	totalPrice: number;
+}
 
 export default class CartExtras extends React.Component {
-	constructor(props) {
+	constructor(props:CartExtrasProps) {
 		super(props);
 		this.state = {
 			totalPrice: props.totalPrice,
@@ -173,11 +176,3 @@ export default class CartExtras extends React.Component {
 		);
 	}
 }
-
-CartExtras.propTypes = {
-	totalPrice: PropTypes.number,
-};
-
-CartExtras.defaultProps = {
-	totalPrice: 0,
-};

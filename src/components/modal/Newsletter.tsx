@@ -191,7 +191,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:pt-4 lg:pb-3">
 				<CloseButton handleClose={handleClose} className={nbp_heading_color} />
-				<div className="flex flex-wrap justify-end mx-0">
+				<div className="flex flex-wrap justify-end lg:-mx-g sm:-mx-hg">
 					{!formCompleted && (
 						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0">
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>

@@ -85,6 +85,29 @@
 
 }
 
+@keyframes gradient-shimmer {
+	0%{background-position: 100% 50%}
+	100%{background-position: 0% 50%}
+}
+
+.bg-shimmer {
+	background: #a3a3a3;
+	background: linear-gradient(130deg, #a3a3a3 33%, #faf9f9 50%, #a3a3a3 67%);
+	background-size: 1000% 1000%;
+	animation: gradient-shimmer 2.5s ease infinite;
+
+	img {
+		transition: opacity 0.4s linear;
+		opacity: 0;
+	}
+
+	&--loaded {
+		img {
+			opacity: 1;
+		}
+	}
+}
+
 // @charset 'UTF-8';
 
 @import 'core/functions';
