@@ -114,7 +114,7 @@ const ProductCardTall = (props) => {
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className="pt-2 pb-0 px-25 lg:px-1 relative grow flex flex-col bg-pink-light rounded-b">
                 <div className="flex justify-center mb-1">
-                    <YotpoStar smSingleStar={smSingleStar} sku={props.product?.variants?.nodes[0]?.sku} productId={props.product.productId} showTotal={true} />
+                    <YotpoStar smSingleStar={smSingleStar} sku={props.product?.variants?.nodes[0]?.sku} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-0 lg:px-0'}`}>
                     <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
