@@ -67,7 +67,7 @@ const TestimonialCarousel = (props: any) => {
 						</span>
 					</NextButton>
 					<Carousel.Navigation>
-						<ol className="carousel__dots justify-center">
+						<ol className="carousel__dots justify-center mb-0">
 							{data.map((_: any, index: number) => (
 								<li key={index} className={`border border-gray-600 ${index === idx ? ' bg-body' : ' opacity-50'}`}>
 									<DotButton
