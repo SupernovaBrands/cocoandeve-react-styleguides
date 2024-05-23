@@ -85,10 +85,10 @@ const HeroBanner = (props: any) => {
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
 				) : (
-					<></>
+					<div className='bg-shimmer pt-[111.83575%] lg:pt-[38.17708%]'></div>
 				)}
 			</section>
-			{!isLoadingComp && (
+			{isLoadingComp && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
