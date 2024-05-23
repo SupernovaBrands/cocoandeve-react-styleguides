@@ -19,6 +19,7 @@ const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 interface Props {
+	store: string;
     showCart: boolean;
     handleClose: () => void;
 	cartCount: number;
@@ -38,7 +39,7 @@ interface Props {
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount, discountBanner,
+	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter, shippingData, handleDiscount, manualGwpSetting } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
@@ -350,7 +351,7 @@ const Cart: React.FC<Props> = (props) => {
 								{manualGwpSetting && !manualGwpSetting.enabled && <hr />}
 
 								{/* @ts-ignore */}
-								<CartExtras totalPrice={cart?.cost?.totalAmount?.amount} />
+								<CartExtras totalPrice={cart?.cost?.totalAmount?.amount} store={store} />
 							</form>
 						))}
 					</div>
