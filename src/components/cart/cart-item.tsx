@@ -89,7 +89,7 @@ export default class CartItem extends React.Component {
 	}
 
 	render() {
-		const { item } = this.props;
+		const { item, store } = this.props;
 		const { editingVariant, isAccordionOpen } = this.state;
 
 		// current change
@@ -105,39 +105,39 @@ export default class CartItem extends React.Component {
 		if (this.props.useShopifyVariantInfo && item.merchandise?.image?.url) {
 			featuredImageUrl = item.merchandise?.image?.url;
 		} else {
-			if (tSettings.store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
+			if (store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e3e1c74-7d61-47fd-5a07-749bcd364900/public';
 			}
 
-			if ((tSettings.store === 'my' || tSettings.store === 'uk' || tSettings.store === 'eu' || tSettings.store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
+			if ((store === 'my' || store === 'uk' || store === 'eu' || store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d6596e4-f344-4968-c8b9-6b2530881000/public';
 			}
 
-			if (tSettings.store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
+			if (store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
 			}
 
-			if (tSettings.store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
 			}
 
-			if ((tSettings.store === 'uk' || tSettings.store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
+			if ((store === 'uk' || store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
 			}
 
-			if (tSettings.store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
+			if (store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
 			}
 
-			if ((tSettings.store === 'my' || tSettings.store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
+			if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b708d084-8829-4e6d-cfeb-03a24148a800/public';
 			}
 
-			if ((tSettings.store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
+			if ((store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/029c70f1-d5cf-45de-746a-891fdbd89d00/public';
 			}
 
-			if ((tSettings.store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
+			if ((store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
 				featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
 			}
 		}
@@ -286,8 +286,8 @@ export default class CartItem extends React.Component {
 							{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 								? (
 									<div className="flex flex-col text-right">
-										{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice)}</span>}
-										{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice)}</span>}
+										{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+										{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
 										<strong>
 											Free
 										</strong>
@@ -296,9 +296,9 @@ export default class CartItem extends React.Component {
 								: (
 									<div className="flex flex-col text-right">
 										{item.comparePrice > 0 && (
-											<span className="line-through">{formatMoney(item.comparePrice)}</span>)}
+											<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)}
 										<strong>
-											{item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice) : 'Free'}
+											{item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 											{item.recurring && (item.period)}
 										</strong>
 									</div>

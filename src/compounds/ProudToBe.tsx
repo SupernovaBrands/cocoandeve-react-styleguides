@@ -37,8 +37,6 @@ const ProudToBe = (props:any) => {
         }
     }, [scrollEl]);
 
-    console.log(proudToBeArr, 'testing');
-
     return (
         <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>

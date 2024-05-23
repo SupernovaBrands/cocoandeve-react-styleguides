@@ -36,11 +36,13 @@ interface Props {
 	handleDiscount?: any;
 	manualGwpSetting?: any;
 	discountBanner?: any;
+	removeDiscount?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
-		onUpdateCart, onDeleteLine, discountMeter, shippingMeter, shippingData, handleDiscount, manualGwpSetting } = props;
+		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -51,16 +53,11 @@ const Cart: React.FC<Props> = (props) => {
 	const [isLastStockKey, setLastStockKey] = useState('');
 
 	const [combineDiscount, setCombineDiscount] = useState(tSettings.cartCombineDiscount);
-	const [loadingManualGwp, setloadingManualGwp] = useState({
-		loading: true,
-		id: 12345,
-	});
-
 	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
 
 	const [giftCardData, setGiftCardData] = useState({});
 	const [discountData, setDiscountData] = useState({
-		isValid: false, code: '', amount: '0', isAuto: false, error: '', errorExtra: true,
+		isValid: false, code: '', amount: '0', isAuto: false, error: '', loaded: false,
 	});
 
 	const [loadingDiscount, setLoadingDiscount] = useState(false);
@@ -77,8 +74,8 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (cartData) {
-			console.log('carrtData', cartData);
 			setCart({ ...cartData });
+			setDiscountData({...cartData.discountData, loaded: true});
 		}
 	}, [cartData, itemCount]);
 
@@ -86,13 +83,12 @@ const Cart: React.FC<Props> = (props) => {
 		// console.log('discountMeter1', discountMeter);
 	}, [discountMeter])
 
-	const onApplyDiscountCode = (c:any) => {
-		console.log(c, 'testing')
-		handleDiscount(c);
+	const onApplyDiscountCode = async (c:any) => {
+		return await handleDiscount(c);
 	}
 
-	const onRemoveDiscountCode = () => {
-
+	const onRemoveDiscountCode = async () => {
+		return await removeDiscount();
 	}
 
 	const onRemoveGiftCard = () => {
@@ -158,8 +154,8 @@ const Cart: React.FC<Props> = (props) => {
 		return arrString[arrString.length - 1];
 	};
 
-	const submitForm = () => {
-
+	const submitForm = (e:any) => {
+		e.preventDefault();
 	}
 
 	const onToggleManualGwp = async (id:any) => {
@@ -209,14 +205,12 @@ const Cart: React.FC<Props> = (props) => {
 								</div>
 								<div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
-										isApplied={discountData.isValid}
+										isApplied={discountData?.isValid}
 										isEmptyCart={itemCount === 0}
-										code={discountData.code}
-										discAmount={discountData.amount}
-										isAutoDiscount={discountData.isAuto}
-										loading={loadingDiscount}
-										error={discountData.error}
-										errorExtra={discountData.errorExtra}
+										code={discountData?.code}
+										discAmount={discountData?.amount}
+										isAutoDiscount={discountData?.isAuto}
+										error={discountData?.error}
 										onApply={onApplyDiscountCode}
 										onRemove={onRemoveDiscountCode}
 										appliedGiftCard={giftCardData}
@@ -234,6 +228,7 @@ const Cart: React.FC<Props> = (props) => {
 								method="get"
 								noValidate
 								onKeyDown={handleKeyDown}
+								onSubmit={submitForm}
 							>
 								<input type="hidden" name="checkout" value="Checkout" />
 
@@ -245,6 +240,7 @@ const Cart: React.FC<Props> = (props) => {
 											onChangeVariant={onChangeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
+											store={store}
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
 										/>
@@ -261,14 +257,12 @@ const Cart: React.FC<Props> = (props) => {
 								)}
 
 								<CartDiscountForm
-									isApplied={discountData.isValid}
+									isApplied={discountData?.isValid}
 									isEmptyCart={itemCount === 0}
-									code={discountData.code}
-									discAmount={discountData.amount}
-									isAutoDiscount={discountData.isAuto}
-									loading={loadingDiscount}
-									error={discountData.error}
-									errorExtra={discountData.errorExtra}
+									code={discountData?.code}
+									discAmount={discountData?.amount}
+									isAutoDiscount={discountData?.isAuto}
+									error={discountData?.error}
 									onApply={onApplyDiscountCode}
 									onRemove={onRemoveDiscountCode}
 									appliedGiftCard={giftCardData}
@@ -305,7 +299,7 @@ const Cart: React.FC<Props> = (props) => {
 									{isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold ">Rewards</p>
-											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(discountData.amount, true)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(discountData?.amount, true)}`}</p>
 										</>
 									)}
 
@@ -341,8 +335,6 @@ const Cart: React.FC<Props> = (props) => {
 										<CartManualGwp {...manualGwpSetting}
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
-											loading={loadingManualGwp.loading}
-											processingId={loadingManualGwp.id}
 										/>
 										<hr />
 									</>
