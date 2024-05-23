@@ -66,9 +66,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 
 	return (
 		<>
-			<div className="carousel mb-1 lg:mb-2 lg:sticky lg:px-g">
+			<div className="carousel mb-1 lg:mb-2 lg:sticky aspect-ratio overflow-hidden">
 				<Carousel.Wrapper emblaApi={emblaMainApi}>
-					<Carousel.Inner emblaRef={emblaMainRef} className="lg:-mx-g">
+					<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
 						{slides.map((slide, index) => (
 							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
 								<picture className="flex items-center justify-center">
@@ -88,7 +88,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 						style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
 				</div>
 			</div>
-			<div className="carousel max-w-[90%] mx-auto hidden lg:flex items-center">
+			<div className="carousel max-w-[90%] mx-auto hidden lg:flex items-center mt-3">
 				<Carousel.Wrapper className="w-full" emblaApi={emblaMainApi}>
 					<Carousel.Inner emblaRef={emblaThumbsRef} className={`ml-1 ${slides.length > 7 ? '' : 'justify-center'}`}>
 						{slides.map((slide, index) => (
