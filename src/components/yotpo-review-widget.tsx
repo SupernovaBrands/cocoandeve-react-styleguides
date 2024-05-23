@@ -475,11 +475,11 @@ const YotpoReviewWidget = (props:any) => {
 		</div>
 	) : (
 		<>
-			<div className="flex items-center lg:justify-center mb-3">
+			<div className="flex items-center lg:justify-center leading-[1.25]">
 				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />
-					<span className="lg:ml-1 block yotpo-widget__total lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
+					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
 			</div>
 
@@ -523,14 +523,16 @@ const YotpoReviewWidget = (props:any) => {
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('review')}
 								type="button"
-								buttonClass="btn-outline-primary w-full px-0">
+								lg={false}
+								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
 									{tStrings.yotpo.writeReview}
 							</Button>
 						</div>
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('question')}
 								type="button"
-								buttonClass="btn-outline-primary w-full px-0">
+								lg={false}
+								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
 									{tStrings.yotpo.askQuestion}
 							</Button>
 						</div>
@@ -549,10 +551,10 @@ const YotpoReviewWidget = (props:any) => {
 
 			<ul className="flex w-full border-primary border-b mt-3" role="tablist">
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
-					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active' : ''} nav-link border-0 text-body text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
+					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
 				</li>
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'question' ? 'border-b-[2px] border-primary' : ''}`}>
-					<a onClick={() => setActiveTab('question')} className={`${activeTab === 'question' ? 'active' : ''} nav-link border-0 text-body text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__questions-tab" aria-controls="yotpo-widget__questions" aria-selected="false">{tStrings.yotpo.questions}</a>
+					<a onClick={() => setActiveTab('question')} className={`${activeTab === 'question' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__questions-tab" aria-controls="yotpo-widget__questions" aria-selected="false">{tStrings.yotpo.questions}</a>
 				</li>
 			</ul>
 
@@ -564,7 +566,7 @@ const YotpoReviewWidget = (props:any) => {
 							<input
 								type="text"
 								name="free_text_search"
-								className="block appearance-none w-full py-1 px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l outline-none mb-0"
+								className="block appearance-none w-full py-g px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l-h outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
@@ -612,7 +614,7 @@ const YotpoReviewWidget = (props:any) => {
 
 						<div className="flex flex-wrap mt-1 -mx-1">
 							<div className="w-1/2 lg:w-1/4 px-1">
-								<select className="custom-select my-1" name="scores" onChange={() => { onFilterChange(); }}>
+								<select className="custom-select my-1 border-dark" name="scores" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.rating}</option>
 									<option value="5">5 Stars</option>
 									<option value="4">4 Stars</option>
@@ -622,14 +624,14 @@ const YotpoReviewWidget = (props:any) => {
 								</select>
 							</div>
 							<div className="w-1/2 lg:w-1/4 px-1">
-								<select className="custom-select my-1" name="pictured" onChange={() => { onFilterChange(); }}>
+								<select className="custom-select my-1 border-dark" name="pictured" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.imageVideo}</option>
 									<option value="true">{tStrings.yotpo.withImageVideo}</option>
 								</select>
 							</div>
 							{customFilter.map((q) => q.filter !== '' && (
 								<div key={q.slug} className="w-1/2 lg:w-1/4 px-1">
-									<select className="custom-select my-1" name={q.slug} onChange={() => { onFilterChange(); }}>
+									<select className="custom-select my-1 border-dark" name={q.slug} onChange={() => { onFilterChange(); }}>
 										<option value="">{q.filter}</option>
 										{q.options.map((o) => (
 											<option key={o} value={o}>{o.replace('/', ' / ')}</option>
