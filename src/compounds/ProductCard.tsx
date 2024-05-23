@@ -99,7 +99,7 @@ const ProductCardTall = (props) => {
     const { abtestBtn, smSingleStar } = props;
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="!pt-2 rounded-t bg-pink-light">
+            <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="!pt-2 rounded-t bg-pink-light">
                 <picture className="embed-responsive before:pt-[100%] block relative aspect-square bg-pink-light rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
@@ -110,7 +110,7 @@ const ProductCardTall = (props) => {
                         </>
                     )}
                 </picture>
-            </Link>
+            </a>
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className="pt-2 pb-0 px-25 lg:px-1 relative grow flex flex-col bg-pink-light rounded-b">
                 <div className="flex justify-center mb-1">
