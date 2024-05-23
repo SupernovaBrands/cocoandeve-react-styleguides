@@ -1063,7 +1063,7 @@ export const getFeaturedImages = () => {
 			fetch(`/api/getFeaturedImages`).then(
 				res => {
 					res.json().then(data => {
-						setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
+						setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
 						resolve(data.body);
 					})
 				},
