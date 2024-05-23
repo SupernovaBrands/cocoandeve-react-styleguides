@@ -17,6 +17,7 @@ interface Props {
         code?: string;
         lastCharacters?: string;
     };
+    discountBanner: any;
     onApply: (code: string) => void;
     onRemove: () => void;
     onRemoveGiftCard: () => void;
@@ -99,8 +100,17 @@ export default class CartDiscountForm extends Component<Props, State> {
         }, 300);
     }
 
+    applyBanner = (e) => {
+		e.stopPropagation();
+		const c = this.props?.discountBanner?.code_banner_code || '';
+        console.log(c);
+		this.setState(() => ({ code: c.trim() }), () => {
+			this.props.onApply(this.state.code);
+		});
+	}
+
     render() {
-        const { isApplied, loading, isAutoDiscount, errorExtra, discAmount, appliedGiftCard } = this.props;
+        const { isApplied, loading, isAutoDiscount, errorExtra, discAmount, appliedGiftCard, discountBanner } = this.props;
         const { code } = this.state;
         const hasCode = isApplied || !!appliedGiftCard.code;
         // Assuming that SvgTag, SvgGift, and SvgCloseCircle are imported as React components
@@ -135,14 +145,16 @@ export default class CartDiscountForm extends Component<Props, State> {
                     {/* Error message */}
                     {errorExtra && <p className="small text-danger mt-1 mb-0">Custom error message</p>}
                 </div>
-                <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mb-3">
-					<SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
-					<div className="mobile-nav__banner-content pl-g flex justify-between w-full">
-						<p className="mb-0 font-size-sm">10% off on all bundles!<br />promocode: <b>AFTERPAY10</b></p>
-						<span className="flex text-primary font-bold items-center hover:cursor-pointer">Use</span>
-					</div>
-					<MenuBannerDecorative className="svg absolute banner-decoration" />
-				</div>
+                {discountBanner?.enable && (
+                    <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mb-3" onClick={this.applyBanner}>
+                        <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
+                        <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
+                            <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: discountBanner.code_banner_content}}/>
+                            <span className="flex text-primary font-bold items-center hover:cursor-pointer">Use</span>
+                        </div>
+                        <MenuBannerDecorative className="svg absolute banner-decoration" />
+                    </div>
+                )}
             </>
         );
     }

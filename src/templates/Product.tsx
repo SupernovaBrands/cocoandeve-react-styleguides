@@ -144,11 +144,11 @@ const Product = (props: any) => {
     return (
         <>
             <div className="container sm:px-0 lg:px-g mb-4 lg:mt-5">
-                <div className="flex flex-wrap items-start">
-                    <div className="product-image-carousel__container w-full lg:w-3/5 lg:order-2 lg:sticky lg:top-[-3em]">
+                <div className="row flex flex-wrap items-start lg:-mx-g">
+                    <div className="product-image-carousel__container w-full lg:w-7/12 lg:order-2 lg:sticky lg:top-[-3em] px-0 lg:px-g">
                         <ProductImageCarousel slides={SLIDES} bottomBadge="👻 Get 3 for 2 with code: HALLOWEEN 👻" />
                     </div>
-                    <div className="w-full lg:w-2/5 lg:order-3 mt-2 lg:mt-0 flex flex-col px-g">
+                    <div className="w-full lg:w-5/12 lg:order-3 mt-2 lg:mt-0 flex flex-col px-g">
                         <YotpoStar sku="CE0000072020" productId={4543113265187} showTotal={true} className="justify-start"/>
                         <h1 className="mb-2 lg:order-0">Sunny Honey Bali Bronzing Foam</h1>
                         <div className="mb-1">

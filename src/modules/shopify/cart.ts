@@ -204,7 +204,7 @@ export const getCart = (cartId = null, loadPage = false) => {
 
                 sfApi.request(dataQuery).then((res) => {
                     const { data: { data: { cartCreate: { cart: crt } } } } = res;
-                    console.log(crt, 'testing testing', res);
+                    // console.log(crt, 'testing testing', res);
                     sfApi.saveDataLocalStorage(crt);
                     resolve(cartModel(crt));
                 }).catch((error) => reject(error));

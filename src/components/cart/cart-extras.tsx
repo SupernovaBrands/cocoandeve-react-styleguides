@@ -12,17 +12,8 @@ import {
 	formatMoney,
 } from '~/modules/utils';
 
-import SvgDelivery from '~/images/icons/fast-delivery.svg';
-import SvgAwards from '~/images/icons/winner-award.svg';
-import SvgMoneyback from '~/images/icons/moneyback.svg';
-import SvgMoneybackPounds from '~/images/icons/moneyback-pounds.svg';
-import SvgMoneybackEur from '~/images/icons/moneyback-eur.svg';
-// const { assetUrl, formatMoney } = dynamic(() => import('~/modules/utils'), {
-//     ssr: false,
-// });
-
-let currency;
-let locale;
+let currency:any;
+let locale:any;
 if (tSettings.payment.afterpay) {
 	currency = 'USD';
 	locale = 'en_US';
@@ -42,11 +33,15 @@ const showInstallment = tSettings.payment.shoppay
 	|| tSettings.payment.afterpay
 	|| tSettings.payment.clearpay
 	|| tSettings.payment.klarna;
+interface CartExtrasProps {
+	totalPrice: number;
+}
 
 export default class CartExtras extends React.Component {
-	constructor(props) {
+	constructor(props:CartExtrasProps) {
 		super(props);
 		this.state = {
+			store: props.store || 'us',
 			totalPrice: props.totalPrice,
 			loading: false,
 		};
@@ -102,11 +97,11 @@ export default class CartExtras extends React.Component {
 	}
 
 	render() {
-		const { totalPrice, loading } = this.state;
-		const klarnaIns = tStrings.cart_installment_by
-			.replace('[amount]', formatMoney(Math.ceil(totalPrice / tSettings.payment.klarna_installment)))
-			.replace('[num]', tSettings.payment.klarna_installment);
-
+		const { totalPrice, loading, store } = this.state;
+		console.log('cart extra store', store, totalPrice);
+		const klarnaIns = 'or [num] interest-free installments of <b>[amount]</b> by'
+			.replace('[amount]', formatMoney(Math.ceil((totalPrice * 100) / 3)))
+			.replace('[num]', 3);
 		// Hack for Shop Pay message rerender
 		if (loading) {
 			setTimeout(() => {
@@ -114,9 +109,9 @@ export default class CartExtras extends React.Component {
 			}, 300);
 		}
 
-		const showAfterpay = (tSettings.payment.afterpay || tSettings.payment.clearpay);
-		const showShoppay = tSettings.payment.shoppay;
-		const showKlarna = tSettings.payment.klarna;
+		const showAfterpay = ['dev', 'au', 'ca'].includes(store);
+		const showShoppay = ['dev', 'us'].includes(store);
+		const showKlarna = ['dev', 'eu', 'uk'].includes(store);
 
 		return (
 			<>
@@ -138,19 +133,27 @@ export default class CartExtras extends React.Component {
 				</ul> */}
 
 				{showShoppay && (
-					<div className="text-center font-size-sm border-top mt-2 py-2" style={{ minHeight: '5.5em' }}>
+					<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
 						{!loading && (
-							<shopify-payment-terms variant-id="123" shopify-meta={`{"type":"product","variants":[{"id":123,"price":"${formatMoney(Math.ceil(totalPrice / 4))}","eligible":${totalPrice >= 5000 ? 'true' : 'false'}}],"min_price":"$50","max_price":"$3000","number_of_payment_terms":4}`} />
+							<span>
+								<span>Pay in 4 interest-free installments for orders over <b>$50</b>  with</span>
+								<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px]" alt="Shop pay logo"/>
+							</span>
 						)}
 					</div>
 				)}
 
 				{showAfterpay && (
-					<afterpay-placement ref={(r) => { this.afterpayRef = r; }} className="text-center border-top m-0 pt-2" data-locale={locale} data-currency={currency} data-amount={totalPrice / 100} data-size="sm" />
+					<div className='text-center font-size-sm border-top py-2 d-block'>
+						<span className='block'>or 4 interest-free payments of $11.50 with </span>
+						<button className='afterpay-logo brand-afterpay type-badge black-on-mint'>
+							<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" class="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/>
+						</button>
+					</div>
 				)}
 
 				{showKlarna && (
-					<p className="text-sm text-center border-top mt-2 mb-2 pt-2">
+					<p className="text-sm text-center border-top pt-2">
 						<span dangerouslySetInnerHTML={{ __html: klarnaIns }} />
 						<br />
 						<img className="mx-auto" height="15" src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921"alt="Klarna" loading="lazy" />
@@ -173,11 +176,3 @@ export default class CartExtras extends React.Component {
 		);
 	}
 }
-
-CartExtras.propTypes = {
-	totalPrice: PropTypes.number,
-};
-
-CartExtras.defaultProps = {
-	totalPrice: 0,
-};
