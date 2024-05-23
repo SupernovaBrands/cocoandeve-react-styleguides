@@ -11,7 +11,8 @@ import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
-import Link from 'next/link'; 
+import { getCustomersBalance } from '~/modules/swell/redemption';
+import Link from 'next/link';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
@@ -22,6 +23,7 @@ const Header = (props: any) => {
 	const [scrolled, setScrolled] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
+	const [userPts, setUserPts] = useState(0);
 	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -92,6 +94,12 @@ const Header = (props: any) => {
 		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
+	useEffect(() => {
+		if (isLoggedIn) {
+			fetch(`/api/account/points`).then((data) => data.json()).then((pts) => setUserPts(pts));
+		}
+	}, [isLoggedIn]);
+
 	return (
 		<>
 			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
@@ -158,8 +166,8 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href="/pages/rewards">
-									Bali Beauty Club
+								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href={!isLoggedIn ? '/pages/rewards' : '/account/rewards'}>
+									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
 								</a>
 							</li>

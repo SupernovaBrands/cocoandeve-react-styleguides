@@ -1,7 +1,7 @@
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
 import ModalNewsletter from "~/components/modal/Newsletter";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Sweepstakes from "~/components/modal/Sweepstakes";
 import CheckoutUpsell from "~/components/modal/CheckoutUpsell";
 import Button from "~/components/Button";
@@ -124,6 +124,9 @@ const Modals = () => {
 		text: 'Dont’s miss out!'
 	};
 
+	const dateRef = useRef(null);
+	const monthRef = useRef(null);
+
 
 	return (
 		<div className="container mt-4">
@@ -157,7 +160,7 @@ const Modals = () => {
 			<h1 className="mt-4 mb-1">Birthday</h1>
 			<Button lg={false} onClick={() => handlOpenModal5(true)}>Launch Modal</Button>
 			<Modal className="modal-lg" isOpen={modal5} handleClose={() => handlOpenModal5(false)}>
-				<Birthday handleClose={() => handlOpenModal5(false)} data={BIRTHDAY_DATA} />
+				<Birthday handleClose={() => handlOpenModal5(false)} data={BIRTHDAY_DATA} handleSubmit={() => handlOpenModal5(false)} dateRef={dateRef} monthRef={monthRef} />
 			</Modal>
 
 

@@ -1,0 +1,50 @@
+@layer components {
+	.account--widget {
+		p, div {
+			line-height: normal !important;
+		}
+		.yotpo-widget-instance-container:nth-child(1),
+		.yotpo-widget-instance-container:nth-child(2),
+		.yotpo-widget-instance-container:nth-child(6) {
+			display: none !important;
+		}
+
+		.yotpo-widget-referral-widget {
+			margin-top: 100px;
+		}
+
+		@screen lg {
+			.yotpo-vip-tier-container {
+				width: 30% !important;
+				margin-right: 0px !important;
+			}
+			.yotpo-widget-referral-widget {
+				margin-bottom: 100px;
+				margin-top: 0px;
+			}
+			.yotpo-widget-referral-widget .yotpo-row-desktop-text {
+				padding: 0 5px 0px 10px !important;
+				text-overflow: ellipsis;
+				max-width: 260px !important;
+				overflow: hidden;
+			}
+
+			.yotpo-widget-referral-widget .yotpo-row-desktop-text:first-child {
+				min-width: 250px;
+			}
+
+			.yotpo-widget-referral-widget .yotpo-row-display {
+				width: 352px !important;
+				justify-content: flex-start !important;
+			}
+
+			.yotpo-widget-hero-section .yotpo-text-on-background {
+				background-position: 61% !important;
+			}
+
+			.yotpo-vip-tiers-widget .yotpo-vip-tiers-progress-bar-wrapper {
+				max-width: 781px;
+			}
+		}
+	}
+}
