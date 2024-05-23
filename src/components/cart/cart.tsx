@@ -220,6 +220,7 @@ const Cart: React.FC<Props> = (props) => {
 										onRemove={onRemoveDiscountCode}
 										appliedGiftCard={giftCardData}
 										onRemoveGiftCard={onRemoveGiftCard}
+										discountBanner={discountBanner}
 									/>
 								</div>
 							</div>
