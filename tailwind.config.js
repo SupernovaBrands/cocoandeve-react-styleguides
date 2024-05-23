@@ -77,6 +77,7 @@ module.exports = {
       'medium': '#AA7878',
       'body-light': '#f6e4ef',
       'placeholder': '#cecece',
+      'account-disabled': '#f4dade',
     },
     fontFamily: {
       sans: ['var(--font-sofia)'],
