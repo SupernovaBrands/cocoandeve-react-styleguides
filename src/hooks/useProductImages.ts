@@ -14,7 +14,7 @@ const useProductImages = () => {
         imagesData = images;
     } else {
         const { data, error, isLoading } = useSWR(`/api/getFeaturedImages`, fetcher);
-        setLSWithExpiry('featuredImages', JSON.stringify(data.body), daysToTime(14));
+        setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
         imagesData = data?.body ? data?.body : [];
     }
     /*

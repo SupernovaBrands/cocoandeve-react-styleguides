@@ -220,6 +220,7 @@ const Cart: React.FC<Props> = (props) => {
 										onRemove={onRemoveDiscountCode}
 										appliedGiftCard={giftCardData}
 										onRemoveGiftCard={onRemoveGiftCard}
+										discountBanner={discountBanner}
 									/>
 								</div>
 							</div>
@@ -307,14 +308,14 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{shippingData.show && !shippingLineHide && (
+									{shippingData?.show && !shippingLineHide && (
 										<>
 											<p className="hidden lg:block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
 											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, true) : 'Free'}</p>
 										</>
 									)}
 
-									{shippingData.show && !shippingLineHide && (
+									{shippingData?.show && !shippingLineHide && (
 										<>
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
