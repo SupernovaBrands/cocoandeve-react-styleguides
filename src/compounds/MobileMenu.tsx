@@ -6,7 +6,7 @@ import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 const defMenuState = {
 	1: false,
 	2: false,
@@ -16,7 +16,7 @@ const defMenuState = {
 }
 
 const MobileMenu = (props: any) => {
-	const { mainMenu, menuBannerQuiz, menuBannerCode } = props;
+	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn } = props;
 	const { openDrawer, onToggleMobileNav } = props;
 	const [menuStates, setMenuStates] = useState(defMenuState);
 	const [storeSelection, setStoreSelection] = useState(false);
@@ -25,6 +25,15 @@ const MobileMenu = (props: any) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
 	}
+
+	const router = useRouter();
+
+	const handleAccount = () => {
+		const url = new URL(window.location.href);
+		const rewardUrl = `${url.pathname}${url.hash}`;
+		if (rewardUrl === '/account#rewards') router.refresh();
+		else window.location.href = '/account#rewards';
+	};
 
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1010] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
@@ -45,7 +54,7 @@ const MobileMenu = (props: any) => {
 				{mainMenu.map((menu, i) => {
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
-							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare"
+							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;
@@ -53,7 +62,7 @@ const MobileMenu = (props: any) => {
 								}}>
 								<h4 className="m-0 font-normal">{menu.title}</h4>
 								{menu.rows && menu.rows.length > 0 && (
-									<ChevronNext className="h-[1em] text-xs" onClick={() => {
+									<ChevronNext className="h-[1em] text-xs mb-25" onClick={() => {
 										const newStates = {...defMenuState};
 										newStates[i] = true;
 										setMenuStates(newStates);
@@ -86,7 +95,17 @@ const MobileMenu = (props: any) => {
 					)
 				})}
 				<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
-					<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">Bali Beauty Club <BeautyIcon className="ml-1 mr-1" /></a>
+					{!isLoggedIn && (
+						<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
+							{isLoggedIn ? `${userPts} Points` : 'Bali Beauty Club'} <BeautyIcon className="ml-1 mr-1" />
+							Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
+						</a>
+					)}
+					{isLoggedIn && (
+						<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
+							{userPts} Points <BeautyIcon className="ml-1 mr-1" />
+						</button>
+					)}
 				</li>
 				<li key="shopall" className="my-g p-g">
 					<Link href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</Link>
