@@ -97,7 +97,6 @@ const MobileMenu = (props: any) => {
 				<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
 					{!isLoggedIn && (
 						<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
-							{isLoggedIn ? `${userPts} Points` : 'Bali Beauty Club'} <BeautyIcon className="ml-1 mr-1" />
 							Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
 						</a>
 					)}
