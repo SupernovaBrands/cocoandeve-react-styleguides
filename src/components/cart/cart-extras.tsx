@@ -147,7 +147,7 @@ export default class CartExtras extends React.Component {
 					<div className='text-center font-size-sm border-top py-2 d-block'>
 						<span className='block'>or 4 interest-free payments of $11.50 with </span>
 						<button className='afterpay-logo brand-afterpay type-badge black-on-mint'>
-							<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" class="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/>
+							<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/>
 						</button>
 					</div>
 				)}

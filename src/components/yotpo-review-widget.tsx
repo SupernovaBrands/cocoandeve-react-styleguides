@@ -475,7 +475,7 @@ const YotpoReviewWidget = (props:any) => {
 		</div>
 	) : (
 		<>
-			<div className="flex items-center lg:justify-center mb-3">
+			<div className="flex items-center lg:justify-center leading-[1.25]">
 				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />

@@ -268,8 +268,32 @@ export const variantStyleDisplay = (style) => {
 	return { style, label, image };
 };
 
-export const formatMoney = (cents, roundedNoComma = false) => {
-	const formatString = tSettings.moneyFormat;
+export function getFormatString (store = 'us') {
+	let format = '${{amount}}';
+	switch(store) {
+		case 'int': {
+			format = 'S${{amount}}';
+			break;
+		}
+		case 'uk': {
+			format = '£{{amount}}'
+			break;
+		}
+		case 'eu': {
+			format = '{{amount}}€'
+			break;
+		}
+		case 'my': {
+			format = 'RM{{amount}}'
+			break;
+		}
+	}
+	return format;
+}
+
+
+export const formatMoney = (cents, roundedNoComma = false, store = 'us') => {
+	const formatString = getFormatString(store);
 	if (typeof cents === 'string') {
 		// eslint-disable-next-line no-param-reassign
 		cents = cents.replace('.', '');
