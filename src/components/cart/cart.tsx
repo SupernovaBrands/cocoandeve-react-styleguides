@@ -11,6 +11,7 @@ import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
 import useProductImages from "~/hooks/useProductImages";
+import Link from "next/link";
 
 // import { CartData } from "./types";
 // import { getCookie } from "~/modules/utils";
@@ -155,7 +156,9 @@ const Cart: React.FC<Props> = (props) => {
 	};
 
 	const submitForm = (e:any) => {
-		e.preventDefault();
+		// process for analytics then go to checkout page
+
+		// e.preventDefault();
 	}
 
 	const onToggleManualGwp = async (id:any) => {
@@ -354,13 +357,14 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true, store)}</strong>
 								<div className="w-full mt-1">
-									<Button buttonClass="btn-primary w-full"
+									<Link onClick={submitForm} href={cart.checkoutUrl} className="btn w-full btn-lg btn-primary">{tStrings.cart_checkout}</Link>
+									{/* <Button buttonClass="btn-primary w-full"
 										disabled={loadingDiscount}
 										onClick={submitForm}
 										data-cy="checkout-btn"
 										>
 										{tStrings.cart_checkout}
-									</Button>
+									</Button> */}
 								</div>
 							</div>
 							{tStrings.cart_shipping_at_checkout !== '' && (
