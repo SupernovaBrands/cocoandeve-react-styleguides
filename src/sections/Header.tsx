@@ -9,7 +9,7 @@ import CartIcon from '~/images/icons/cart.svg';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
-import Tooltip from '~/components/Tooltip';
+// import Tooltip from '~/components/Tooltip';
 import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
@@ -196,7 +196,7 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
-						<Tooltip tooltipShow={tooltipShow} closeTip={closeTip} />
+						{/* <Tooltip tooltipShow={tooltipShow} closeTip={closeTip} /> */}
 					</div>
 				</nav>
 				<MobileMenu
