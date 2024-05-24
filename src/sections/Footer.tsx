@@ -4,7 +4,7 @@ import PinterestSquare from '~/images/icons/pinterest-square.svg';
 import Youtube from '~/images/icons/youtube.svg';
 import Tiktok from '~/images/icons/tiktok.svg';
 import PalmTree from '~/images/icons/palm-tree.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
@@ -37,6 +37,12 @@ const Footer = (props: any) => {
         console.log(e.target.value);
         setEmail(e.target.value);
     }
+
+    useEffect(() => {
+        fetch('/api/account/auth').then((res) => res.json()).then((data) => {
+            if (data.isLoggedIn) setEmail(data.email);
+        });
+    }, []);
 
     return (
         <footer className="pt-4 pb-1">

@@ -11,8 +11,6 @@ import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
-import { getCustomersBalance } from '~/modules/swell/redemption';
-import Link from 'next/link';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
@@ -24,7 +22,6 @@ const Header = (props: any) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(0);
-	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
@@ -37,7 +34,9 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
-		if (isLoggedIn) router.push('/account');
+		if (isLoggedIn) {
+			window.location.href = '/account'
+		}
 		else setOpenAccountBox(!openAccountBox);
 	}
 
@@ -199,6 +198,8 @@ const Header = (props: any) => {
 					mainMenu={mainMenu}
 					menuBannerCode={menuBannerCode}
 					menuBannerQuiz={menuBannerQuiz}
+					userPts={userPts}
+					isLoggedIn={isLoggedIn}
 				/>
 				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
 
