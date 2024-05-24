@@ -43,8 +43,8 @@ export const CartItem = (props:CartItemProps) => {
 	const [featuredImageUrl, setFeaturedImageUrl] = useState(item?.featuredImageUrl || '');
 	const [subtitles, setSubtitles] = useState('');
 
-	const onSelectVariant = (variant: any, swatchIndex: number) => {
-		console.log(variant, swatchIndex);
+	const onSelectVariant = (variant: any, swatchIndex: number, swatchValue: any, item: any) => {
+		console.log(variant, swatchIndex, swatchValue, item);
 	}
 
 	const onRemove = () => {
@@ -234,7 +234,7 @@ export const CartItem = (props:CartItemProps) => {
 										const o = [...selectedVariant];
 										o[index] = val;
 										const variant = variants.find((vari:any) => {
-											const selectedVaries = vari.selectedOptions.filter((option) => option.name.toLowerCase() !== 'size');
+											const selectedVaries = vari.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
 											const selectedVari = selectedVaries.map((option:any) => option.value);
 											return selectedVari.join() === o.join();
 										});
@@ -247,7 +247,7 @@ export const CartItem = (props:CartItemProps) => {
 												tabIndex={-1}
 												disabled={!variant.availableForSale || editingVariant !== false}
 												aria-label={kebabCase(val)}
-												onClick={() => onSelectVariant(variant, index)}
+												onClick={() => onSelectVariant(variant, index, val, selected)}
 											/>
 										);
 									})}

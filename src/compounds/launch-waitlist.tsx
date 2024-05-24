@@ -117,7 +117,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className="font-size-xs font-bold" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', '<a class="text-xs underline" href')}}></p>
+                    <p className="font-size-xs font-bold mb-2" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', '<a class="text-xs underline" href')}}></p>
                 </form>
             </div> }
 
