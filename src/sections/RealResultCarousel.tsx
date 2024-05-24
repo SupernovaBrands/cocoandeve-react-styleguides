@@ -46,7 +46,7 @@ const RealResultCarousel = (props: any) => {
 						<li key={`all`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
 						<li key={`hair`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
                         <li key={`tan`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
-                        <li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'skincare' ? 'text-body' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
+                        <li key={`skincare`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'skincare' ? 'text-body' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
 						<li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
                     </ul>) }
                     <div className='px-hg'>

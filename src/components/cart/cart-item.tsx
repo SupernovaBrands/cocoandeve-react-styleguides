@@ -1,7 +1,4 @@
-/* global tStrings tSettings */
-// @ts-nocheck
 import '~/config';
-// import dynamic from 'next/dynamic';
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
@@ -19,7 +16,7 @@ type CartItemProps = {
 	isLastStock: boolean;
 	onChangeVariant: Function;
 	onChangeQuantity: Function;
-	onRemoveItem: Function;
+	onRemoveItem: any;
 	productId: number;
 	productStock: number;
 	useShopifyVariantInfo?: any;
@@ -37,26 +34,21 @@ export const CartItem = (props:CartItemProps) => {
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
 	const isMultiOptions = item.swatches.length > 1;
 
-	const [editingVariant, setEditingVariant] = useState(false);
+	const [hideItem, setHideItem] = useState(false);
+	const [editingVariant, setEditingVariant] = useState(null);
 	const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 	const [selectedVariant, setSelectedVariant] = useState(selectedSwatch || []);
 	const [featuredImageUrl, setFeaturedImageUrl] = useState(item?.featuredImageUrl || '');
-	const [subtitles, setSubtitles] = useState('');
+	const [subtitles, setSubtitles] = useState([]);
 
-	const onSelectVariant = (variant: any, swatchIndex: number, swatchValue: any, item: any) => {
-		console.log(variant, swatchIndex, swatchValue, item);
+	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
+		setEditingVariant(index);
+		setSelectedVariant([swatchValue]);
+		await onChangeVariant(item.id, variant.id, item.quantity);
+		setEditingVariant(null);
 	}
 
-	const onRemove = () => {
-		//@ts-ignore
-		onRemoveItem(item);
-		//@ts-ignore
-		if (item && item.properties && item.properties._swell_redemption_token) {
-			document.dispatchEvent(new CustomEvent('SwellRemoveItemToCart'));
-		}
-	}
-
-	const variantSubtitle = (item:any) => {
+	const variantSubtitle = () => {
 		let subtitles = [];
 		if (item.merchandise.product.handle === tSettings.bundleHandle1) {
 			subtitles = tSettings.bundleSubHandle1.split(',');
@@ -67,7 +59,7 @@ export const CartItem = (props:CartItemProps) => {
 		} else if (item.handle === tSettings.bundleHandle4) {
 			subtitles = tSettings.bundleSubHandle4.split(',');
 		}
-		return subtitles;
+		setSubtitles(subtitles);
 	}
 
 	const onAccordionOpen = () => {
@@ -92,7 +84,12 @@ export const CartItem = (props:CartItemProps) => {
 	}
 
 	useEffect(() => {
-		setSubtitles(variantSubtitle(item));
+		if (item) {
+			variantSubtitle();
+		}
+	}, [item]);
+
+	useEffect(() => {
 		let featuredImage = '';
 		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
 			featuredImage = item.merchandise?.image?.url;
@@ -162,7 +159,7 @@ export const CartItem = (props:CartItemProps) => {
 						{item.isFreeItem && item.originalPrice >= 0 ? (
 							<ConditionWrapper
 								condition={item.isFreeItem}
-								wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
+								wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
 							>
 								{ item.isFreeItem && (`FREE ${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
@@ -170,7 +167,7 @@ export const CartItem = (props:CartItemProps) => {
 							: (
 								<ConditionWrapper
 									condition={!item.isFreeItem}
-									wrapper={(children) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
+									wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
 								>
 									{ !item.isFreeItem && (`${productTitle(item)}`) }
 									{`${item.recurring ? ' Subscriptions' : ''}`}
@@ -184,14 +181,23 @@ export const CartItem = (props:CartItemProps) => {
 							</span>
 						)}
 					</p>
-					{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (<button className="cart-item__remove btn-unstyled text-body flex" type="button" aria-label="Remove" onClick={onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg w-[1em]" /></button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex" type="button" aria-label="Remove" onClick={onRemoveItem} data-cy="cart-remove-icon"><SvgTrash className="svg w-[1em]" /></button>)}
+					{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (
+						<button className="cart-item__remove btn-unstyled text-body flex"
+								type="button" aria-label="Remove"
+								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+									<SvgTrash className="svg w-[1em]" />
+						</button>)}
+					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+							<SvgTrash className="svg w-[1em]" />
+					</button>)}
 
 				</div>
 
 				<ConditionWrapper
 					condition={isMultiOptions}
-					wrapper={(children) => (
+					wrapper={(children:any) => (
 						<div className="pb-1">
 							<a onClick={onAccordionOpen} className={`${!isAccordionOpen ? 'collapsed' : ''} d-inline-block text-primary text-underline card-header p-0 border-b-[1px]-0 position-relative pr-2 mb-1`} data-toggle="collapse" href={`#cart-drawer__shade-${extractId(item.id)}`} role="button" aria-expanded={isAccordionOpen} aria-controls={`#cart-drawer__shade-${extractId(item.id)}`}>
 								{isAccordionOpen ? 'Hide details' : 'Show details'}
@@ -245,18 +251,18 @@ export const CartItem = (props:CartItemProps) => {
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val && 'border-2 border-primary selected'} ${!variant.availableForSale ? 'oos' : ''}`}
 												type="button"
 												tabIndex={-1}
-												disabled={!variant.availableForSale || editingVariant !== false}
+												disabled={!variant.availableForSale}
 												aria-label={kebabCase(val)}
-												onClick={() => onSelectVariant(variant, index, val, selected)}
+												onClick={() => onSelectVariant(variant, val, index)}
 											/>
 										);
 									})}
 
 									{editingVariant === index && (
-										<span className="spinner-border spinner-border-sm text-primary ml-1" role="status" />
+										<span className="spinner-border spinner-border-sm text-primary ml-1 !w-[20px] !h-[20px]" role="status" />
 									)}
 
-									<span className={editingVariant === index ? 'd-none' : 'font-size-sm'}>
+									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
 										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>
 								</p>
@@ -274,7 +280,7 @@ export const CartItem = (props:CartItemProps) => {
 						name="quantity-box"
 						editable={!item.isFreeItem}
 						quantity={item.quantity}
-						onChangeQuantity={(newQty:nymber, callback:any) => onChangeQuantity(item, newQty, callback)}
+						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 						isLastStock={isLastStock}
 						productId={productId}
 						productStock={productStock}

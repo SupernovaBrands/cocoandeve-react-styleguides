@@ -69,6 +69,7 @@ const Collection = (props: any) => {
         subHandles,
         parentCollection,
         sort,
+        addToCart,
     } = props;
 
     const sidebarRef = useRef(null);
@@ -268,6 +269,7 @@ const Collection = (props: any) => {
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
+                                            addToCart={addToCart}
                                         />
                                     </>
                                 ) : (
@@ -278,6 +280,7 @@ const Collection = (props: any) => {
                                         button={true}
                                         setWaitlistData={setWaitlistData}
                                         smSingleStar={true}
+                                        addToCart={addToCart}
                                     />
                                 )
                             })}

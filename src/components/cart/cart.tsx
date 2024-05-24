@@ -38,12 +38,13 @@ interface Props {
 	manualGwpSetting?: any;
 	discountBanner?: any;
 	removeDiscount?: any;
+	changeVariant?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -100,11 +101,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeVariant = () => {
-
-	}
-
-	const onChangeQuantity = (item, qty, callback) => {
+	const onChangeQuantity = (item:any, qty:any, callback: any) => {
 		console.log(item, qty);
 		let newQty = qty;
 		let lastStock = false;
@@ -132,21 +129,12 @@ const Cart: React.FC<Props> = (props) => {
 				{ id: relativeDiscounted.id, quantity: 0 },
 				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
 			];
-
-			console.log('on change cartData', cartData);
 		} else {
-			/*
-			const data = {
-				quantity: qty,
-				lineId, variantId, quantity, attributes
-			}
-			*/
 			onUpdateCart(item, qty);
 		}
 	}
 
 	const onRemoveItem = (item: any) => {
-		console.log('on remove', item);
 		onDeleteLine(item.id);
 	}
 
@@ -156,6 +144,7 @@ const Cart: React.FC<Props> = (props) => {
 	};
 
 	const submitForm = (e:any) => {
+		e.preventDefault();
 		// process for analytics then go to checkout page
 
 		// e.preventDefault();
@@ -240,7 +229,7 @@ const Cart: React.FC<Props> = (props) => {
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
-											onChangeVariant={onChangeVariant}
+											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
 											store={store}
