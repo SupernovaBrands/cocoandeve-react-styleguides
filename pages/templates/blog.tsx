@@ -176,6 +176,7 @@ const BlogTemplate = () => {
             title: '5 things you’re doing wrong with your hair care routine',
             srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
             src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
+			video_url: 'https://www.youtube.com/embed/eTHzoV4RhIA',
             tags: ['TAN', 'NEW'],
         },
         {
@@ -183,6 +184,7 @@ const BlogTemplate = () => {
             title: '5 things you’re doing wrong with your hair care routine',
             srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
             src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
+			video_url: 'https://www.youtube.com/embed/eTHzoV4RhIA',
             tags: ['HAIR', 'HOT'],
         },
         {
@@ -190,6 +192,7 @@ const BlogTemplate = () => {
             title: '5 things you’re doing wrong with your hair care routine',
             srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
             src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
+			video_url: 'https://www.youtube.com/embed/eTHzoV4RhIA',
             tags: ['BODY', 'FEATURED'],
         }
     ];

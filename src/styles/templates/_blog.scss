@@ -146,7 +146,12 @@
 		}
 	}
 
-	.badge-blog a{
+	.badge {
+		min-width: calc-em(54);
+	}
+
+	.badge-blog a,
+	.badge-tag {
 		line-height: 1.25em;
     	padding: .125em .5em;
 		margin-right: calc-em(4, 12);
@@ -222,6 +227,18 @@
 			padding: calc-em(4, 12) calc-em(10, 12);
 			margin-right: calc-em(4, 12);
 		}
+	}
+
+	@screen lg {
+		.blog-video-card__title {
+			min-height: calc-em(45);
+		}
+	}
+
+	.embed-responsive-16by9:before {
+		display: block;
+		content: "";
+		padding-top: 56.25%;
 	}
 
 	// .blog-back-to-top {

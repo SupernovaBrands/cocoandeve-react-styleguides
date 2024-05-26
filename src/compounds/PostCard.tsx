@@ -31,7 +31,7 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 					)}
 				</div>
 				<Link href={data.handle ?? '#'} className={`h2 ${template === 'article' ? 'px-3' : 'mt-2'} mb-1 block text-body hover:text-body`}>{data.title}</Link>
-				<div className={`${template === 'article' ? 'mt-1 px-3 mb-0 pb-1' : ''} ${template === 'blog' ? 'mb-3' : ''} flex flex-col flex-grow`}>
+				<div className={`${template === 'article' ? 'mt-1 px-3 mb-0 pb-1' : ''} ${template === 'blog' ? 'mb-[1rem]' : ''} flex flex-col flex-grow`}>
 					{data.description && (
 						parse(data.description)
 					)}
