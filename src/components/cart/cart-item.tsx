@@ -145,7 +145,7 @@ export const CartItem = (props:CartItemProps) => {
 				condition={!item.isFreeItem}
 				wrapper={(children: any) => <a href={item.url} className="w-1/4 pl-2 pr-0">{children}</a>}
 			>
-				<picture className={item.isFreeItem ? 'w-1/4' : ''}>
+				<picture className={item.isFreeItem ? 'w-1/4 pl-2 pr-0' : ''}>
 					{item.featuredImageUrl ? (
 						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-100 object-fit-contain bg-pink-light aa" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (

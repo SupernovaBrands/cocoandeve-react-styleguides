@@ -21,7 +21,7 @@ const AddToCartButton = (props: any) => {
     };
 
     return (
-        <Button disabled={!props.available} buttonClass={`${props.className ?? ''} btn-primary border-0 sm:w-[164px] md:w-[216px] px-2`} onClick={onAddItem}>
+        <Button disabled={!props.available} buttonClass={`${props.className ?? ''} btn-primary border-0 sm:w-[164px] md:w-[216px] px-2 py-g`} onClick={onAddItem}>
             { !addingItem && <span className='text-center'>
                 {props.available ? label : 'Out of Stock'}
             </span> }
@@ -79,7 +79,7 @@ const ProductCardUpsell = (props:any) => {
 
     return (
         <>
-            <div className={`min-w-[75vw] md:min-w-[30%] lg:w-1/3 ${props.item.active} product-card grow px-hg lg:px-2 product-upsell-2`}>
+            <div className={`min-w-[75vw] md:min-w-[30%] lg:w-4/12 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
                 <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                     {props.item.step && <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span> }
                     <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">

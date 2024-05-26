@@ -102,7 +102,6 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onChangeQuantity = (item:any, qty:any, callback: any) => {
-		console.log(item, qty);
 		let newQty = qty;
 		let lastStock = false;
 		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
@@ -110,28 +109,7 @@ const Cart: React.FC<Props> = (props) => {
 			lastStock = true;
 		}
 		setLastStockKey('');
-		const quantity = parseInt(newQty, 10);
-		const relativeItems = cart.items.filter((itm) => itm.merchandise.id === item.merchandise.id);
-
-		if (relativeItems.length > 1) {
-			let currentRelativeQuantity = 0;
-			relativeItems.forEach((it) => { currentRelativeQuantity += it.quantity; });
-			if (item.quantity < quantity) {
-				currentRelativeQuantity += quantity - item.quantity;
-			} else if (item.quantity > quantity) {
-				currentRelativeQuantity -= item.quantity - quantity;
-			}
-
-			const relativeDiscounted = relativeItems.find((it) => it.discountAllocations.length);
-			const relativeRegular = relativeItems.find((it) => it.discountAllocations.length === 0);
-
-			const lines = [
-				{ id: relativeDiscounted.id, quantity: 0 },
-				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
-			];
-		} else {
-			onUpdateCart(item, qty);
-		}
+		onUpdateCart(item, qty);
 	}
 
 	const onRemoveItem = (item: any) => {
