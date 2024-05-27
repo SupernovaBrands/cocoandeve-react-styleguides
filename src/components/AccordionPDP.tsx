@@ -11,8 +11,12 @@ const AccordionPDP = (props: any) => {
 	};
 	const { data } = props;
 	const onClick = (id:any) => {
-		globalThis.document.getElementById(`accordion-${id}`).scrollIntoView();
-		props.onClick(id)
+		const afterClick = () => {
+			const scrollDiv = globalThis.document.getElementById(`accordion-${id}`).offsetTop;
+			globalThis.window.scrollTo({ top: scrollDiv - 100, behavior: 'smooth'});
+		}
+
+		props.onClick(id, afterClick);
 	}
 
 	return (
