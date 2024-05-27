@@ -137,7 +137,7 @@ const Cart: React.FC<Props> = (props) => {
 				<div className="modal-content mh-100 border-0 rounded-0">
 					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden max-h-[100vh]">
 						<div className="container flex flex-col align-stretch text-center pt-2 px-g lg:px-3">
-							<h4 className="text-lg font-bold ">{tStrings.cart_drawer_title}</h4>
+							<h4 className="text-lg font-bold mb-1">{tStrings.cart_drawer_title}</h4>
 							<button type="button" className="close text-body m-0 absolute top-0 right-0 px-g" onClick={props.handleClose} aria-label="Close" data-cy="cart-close-icon">
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
@@ -171,7 +171,7 @@ const Cart: React.FC<Props> = (props) => {
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-2 leading-normal no-underline" data-cy="shop-all-btn">Shop all products</a>
+									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-2 leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								<div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
