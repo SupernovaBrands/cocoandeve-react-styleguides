@@ -5,7 +5,9 @@
 		}
 
 		.variant-swatch {
-			@apply border border-2 border-primary;
+			.selected {
+				@apply border-2 border-primary;
+			}
 		}
 
 		.manual-gwp {

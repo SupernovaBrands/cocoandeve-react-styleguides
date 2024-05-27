@@ -13,11 +13,19 @@ const WaitlistButton = (props: any) => {
 
 const AddToCartButton = (props: any) => {
     const label = props.label ? props.label : 'Add to Cart';
+    const [addingItem, setAddingItem] = useState(false);
+    const onAddItem = async () => {
+        setAddingItem(true);
+        await props.onClick(props.variantId, 1);
+        setAddingItem(false);
+    };
+
     return (
-        <Button disabled={!props.available} buttonClass={`${props.className ?? ''} btn-primary border-0 sm:w-[164px] md:w-[216px] px-2`} onClick={props.onClick}>
-            <span className='text-center'>
+        <Button disabled={!props.available} buttonClass={`${props.className ?? ''} btn-primary border-0 sm:w-[164px] md:w-[216px] px-2 py-g`} onClick={onAddItem}>
+            { !addingItem && <span className='text-center'>
                 {props.available ? label : 'Out of Stock'}
-            </span>
+            </span> }
+            { addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
         </Button>
     );
 };
@@ -25,7 +33,7 @@ const AddToCartButton = (props: any) => {
 const SwatchOverlay = (props:any) => {
     const availableSwatch = props.swatch.data.find((d:any) => d.available) || props.swatch.data[0];
     const [selectedSwatch, setSelectedSwatch] = useState(availableSwatch)
-    const { waitlistData, setWaitlistData } = props;
+    const { waitlistData, setWaitlistData, item } = props;
     const { image, title, handle } = props;
 
     const changeSwatch = (item:any) => {
@@ -50,7 +58,7 @@ const SwatchOverlay = (props:any) => {
                         ))}
                     </ul>
                 </div>
-                { selectedSwatch.available && <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1]" available={selectedSwatch.available} onClick={() => props.onClick(selectedSwatch.id, 1)}/> }
+                { selectedSwatch.available && <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1]" available={selectedSwatch.available} variantId={selectedSwatch.id} onClick={props.onClick}/> }
                 { !selectedSwatch.available && <WaitlistButton onClick={() => setWaitlistData({ ...waitlistData, open: true, title: title, image: image, handle: handle })}/> }
             </div>
         </>
@@ -71,7 +79,7 @@ const ProductCardUpsell = (props:any) => {
 
     return (
         <>
-            <div className={`min-w-[75vw] md:min-w-[30%] lg:w-1/3 ${props.item.active} product-card grow px-hg lg:px-2 product-upsell-2`}>
+            <div className={`min-w-[75vw] md:min-w-[30%] lg:w-4/12 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
                 <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                     {props.item.step && <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span> }
                     <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
@@ -94,7 +102,7 @@ const ProductCardUpsell = (props:any) => {
                                 <span className="text-primary h4 my-1">{activePrice}</span>
                         </p>
                         {!props.item.swatch && props.item.available && (
-                            <AddToCartButton comparePrice={props.item.comparePrice} price={props.item.price} onClick={() => props.item.onAddItem(props.item.id, 1)} available={props.item.available}/>
+                            <AddToCartButton {...props.item} onClick={props.item.onAddItem} variantId={props.item.id}/>
                         )}
 
                         {!props.item.swatch && !props.item.available &&

@@ -11,6 +11,7 @@ import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
 import Button from "../Button";
 import useProductImages from "~/hooks/useProductImages";
+import Link from "next/link";
 
 // import { CartData } from "./types";
 // import { getCookie } from "~/modules/utils";
@@ -37,12 +38,13 @@ interface Props {
 	manualGwpSetting?: any;
 	discountBanner?: any;
 	removeDiscount?: any;
+	changeVariant?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -99,12 +101,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeVariant = () => {
-
-	}
-
-	const onChangeQuantity = (item, qty, callback) => {
-		console.log(item, qty);
+	const onChangeQuantity = (item:any, qty:any, callback: any) => {
 		let newQty = qty;
 		let lastStock = false;
 		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
@@ -112,40 +109,10 @@ const Cart: React.FC<Props> = (props) => {
 			lastStock = true;
 		}
 		setLastStockKey('');
-		const quantity = parseInt(newQty, 10);
-		const relativeItems = cart.items.filter((itm) => itm.merchandise.id === item.merchandise.id);
-
-		if (relativeItems.length > 1) {
-			let currentRelativeQuantity = 0;
-			relativeItems.forEach((it) => { currentRelativeQuantity += it.quantity; });
-			if (item.quantity < quantity) {
-				currentRelativeQuantity += quantity - item.quantity;
-			} else if (item.quantity > quantity) {
-				currentRelativeQuantity -= item.quantity - quantity;
-			}
-
-			const relativeDiscounted = relativeItems.find((it) => it.discountAllocations.length);
-			const relativeRegular = relativeItems.find((it) => it.discountAllocations.length === 0);
-
-			const lines = [
-				{ id: relativeDiscounted.id, quantity: 0 },
-				{ id: relativeRegular.id, quantity: currentRelativeQuantity },
-			];
-
-			console.log('on change cartData', cartData);
-		} else {
-			/*
-			const data = {
-				quantity: qty,
-				lineId, variantId, quantity, attributes
-			}
-			*/
-			onUpdateCart(item, qty);
-		}
+		onUpdateCart(item, qty);
 	}
 
 	const onRemoveItem = (item: any) => {
-		console.log('on remove', item);
 		onDeleteLine(item.id);
 	}
 
@@ -156,6 +123,9 @@ const Cart: React.FC<Props> = (props) => {
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
+		// process for analytics then go to checkout page
+
+		// e.preventDefault();
 	}
 
 	const onToggleManualGwp = async (id:any) => {
@@ -237,7 +207,7 @@ const Cart: React.FC<Props> = (props) => {
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
-											onChangeVariant={onChangeVariant}
+											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
 											store={store}
@@ -354,13 +324,14 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true, store)}</strong>
 								<div className="w-full mt-1">
-									<Button buttonClass="btn-primary w-full"
+									<Link onClick={submitForm} href={cart.checkoutUrl} className="btn w-full btn-lg btn-primary">{tStrings.cart_checkout}</Link>
+									{/* <Button buttonClass="btn-primary w-full"
 										disabled={loadingDiscount}
 										onClick={submitForm}
 										data-cy="checkout-btn"
 										>
 										{tStrings.cart_checkout}
-									</Button>
+									</Button> */}
 								</div>
 							</div>
 							{tStrings.cart_shipping_at_checkout !== '' && (

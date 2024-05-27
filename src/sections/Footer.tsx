@@ -4,7 +4,7 @@ import PinterestSquare from '~/images/icons/pinterest-square.svg';
 import Youtube from '~/images/icons/youtube.svg';
 import Tiktok from '~/images/icons/tiktok.svg';
 import PalmTree from '~/images/icons/palm-tree.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
@@ -38,6 +38,12 @@ const Footer = (props: any) => {
         setEmail(e.target.value);
     }
 
+    useEffect(() => {
+        fetch('/api/account/auth').then((res) => res.json()).then((data) => {
+            if (data.isLoggedIn) setEmail(data.email);
+        });
+    }, []);
+
     return (
         <footer className="pt-4 pb-1">
             <div className="container mb-4 lg:mb-3 px-g">
@@ -48,7 +54,7 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
                         <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
-                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
+                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-base lg:text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>

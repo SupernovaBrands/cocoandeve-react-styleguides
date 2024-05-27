@@ -14,7 +14,7 @@ const YotpoStar = (props: any) => {
 	const localeParam = 'en';
 
 	useEffect(() => {
-		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`)
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`, {headers: {cache: 'force-cache'}})
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.response && data.response.bottomline) {
@@ -25,7 +25,7 @@ const YotpoStar = (props: any) => {
 					setInit(true);
 				}
 		});
-	}, [props.productId]);
+	}, [props.productId, props.sku]);
 
 	return init ? (
 		<div className={`flex ${props.className}`}>

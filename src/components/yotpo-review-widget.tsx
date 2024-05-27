@@ -566,7 +566,7 @@ const YotpoReviewWidget = (props:any) => {
 							<input
 								type="text"
 								name="free_text_search"
-								className="block appearance-none w-full py-g px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l-h outline-none mb-0"
+								className="block appearance-none w-full py-[0.875em] px-[1em] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 rounded-l-h rounded-r-none outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
@@ -574,7 +574,7 @@ const YotpoReviewWidget = (props:any) => {
 								}}
 							/>
 							<div className="input-group-append flex">
-								<button type="button" className="input-group-text bg-white  h-full rounded-0 flex justify-center items-center px-2 border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
+								<button type="button" className="input-group-text border bg-white  h-full rounded-0 flex justify-center items-center px-2 border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
 									<SvgSearch className="svg size-1em" />
 								</button>
 							</div>

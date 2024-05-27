@@ -32,7 +32,7 @@ const TestimonialCarousel = (props: any) => {
 	return (
 		<div className="container text-center">
 			<h2 className="h1 mb-0">As seen in</h2>
-			<Carousel.Wrapper emblaApi={emblaApi} className="pb-2">
+			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{data.map((item: any) => (
 						<div className="flex-grow-0 flex-shrink-0 w-full basis-full text-center" key={item.index}>
@@ -42,7 +42,6 @@ const TestimonialCarousel = (props: any) => {
 								<p className="mb-4 lg:pb-3">{item.quote}</p>
 								<picture className="block mx-auto">
 									<source srcSet={item.srcSet} media="(min-width: 992px)" />
-									<source srcSet={item.src} />
 									<img src={item.src} className="w-auto" alt={item.label} />
 								</picture>
 							</div>
