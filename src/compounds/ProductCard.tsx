@@ -144,15 +144,20 @@ const ProductCardTall = (props:any) => {
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="!pt-2 rounded-t bg-pink-light">
-                <picture className="embed-responsive before:pt-[100%] block relative aspect-square bg-pink-light rounded-t">
+            <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
+                <picture className="!pt-2 embed-responsive before:pt-[100%] block relative aspect-square rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
                     {props.showTip && (
                         <>
                             <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
                             <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
                         </>
+                    )}
+                    {props.product.imgHover && (
+                        <picture className="!pt-2 embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t img--hover hidden lg:block">
+                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                        </picture>
                     )}
                 </picture>
             </a>
@@ -174,6 +179,10 @@ const ProductCardTall = (props:any) => {
                 }
                 {!props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                )}
+
+                {!props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
+                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
             </div>
         </div>
