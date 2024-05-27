@@ -77,7 +77,7 @@ const HowToCarousel = (props) => {
 									{ item.tags.length > 0 ? item.tags.map((tag) =>
 										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
 									) : ''}
-									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body">{item.title}</a></p>
+									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 								</figcaption>
 							</figure>
 						</div>
