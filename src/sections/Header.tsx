@@ -98,7 +98,7 @@ const Header = (props: any) => {
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			fetch(`/api/account/points`).then((data) => data.json()).then((pts) => setUserPts(pts));
+			fetch(`/api/account/points`).then((data) => data.json()).then((data) => setUserPts(data.points));
 		}
 	}, [isLoggedIn]);
 
