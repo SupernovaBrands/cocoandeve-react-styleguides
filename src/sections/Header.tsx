@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount, generalSetting } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -108,8 +108,8 @@ const Header = (props: any) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
-				{annBar?.enabled && (
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`}>
+				{annBar?.enabled && !scrolled && (
 					<AnnouncementBar
 						text={annBar.text}
 						url={annBar.url}
@@ -145,6 +145,7 @@ const Header = (props: any) => {
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
+													generalSetting={generalSetting}
 												/>
 											)}
 											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
