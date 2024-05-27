@@ -70,6 +70,7 @@ const Collection = (props: any) => {
         parentCollection,
         sort,
         addToCart,
+        tcPopups,
     } = props;
 
     const sidebarRef = useRef(null);
@@ -163,14 +164,14 @@ const Collection = (props: any) => {
                 <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} />
             )}
 
-            {!isLoading && (
+            {!isLoading && tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link mt-25">
-                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">Terms and Conditions</a>
+                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy}</a>
                     </div>
 
                     <Modal className="modal" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
-                        <Terms handleClose={() => handlOpenModal(false)} />
+                        <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} />
                     </Modal>
                 </>
             )}
