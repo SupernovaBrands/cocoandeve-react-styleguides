@@ -9,11 +9,13 @@ import CartIcon from '~/images/icons/cart.svg';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
+import Tooltip from '~/components/Tooltip';
 import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz,
+		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -22,6 +24,7 @@ const Header = (props: any) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(0);
+	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
@@ -40,8 +43,8 @@ const Header = (props: any) => {
 		else setOpenAccountBox(!openAccountBox);
 	}
 
-	const handleClose = (): void => { // Add type annotation for function
-		setOpenCartDrawer(false);
+	const closeTip = () => {
+		setFlashBubble(false);
 	}
 
 	useEffect(() => {
@@ -95,14 +98,14 @@ const Header = (props: any) => {
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			fetch(`/api/account/points`).then((data) => data.json()).then((pts) => setUserPts(pts));
+			fetch(`/api/account/points`).then((data) => data.json()).then((data) => setUserPts(data.points));
 		}
 	}, [isLoggedIn]);
 
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
-				{annBar?.enabled && (
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`}>
+				{annBar?.enabled && !scrolled && (
 					<AnnouncementBar
 						text={annBar.text}
 						url={annBar.url}
@@ -117,8 +120,8 @@ const Header = (props: any) => {
 					/>
 				)}
 
-				<nav className="bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]">
-					<div className="container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between">
+				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]`}>
+					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubble ? 'relative' : ''}`}>
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
@@ -138,6 +141,7 @@ const Header = (props: any) => {
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
+													generalSetting={generalSetting}
 												/>
 											)}
 											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
@@ -189,9 +193,9 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
+						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl}/>
 					</div>
 				</nav>
-
 				<MobileMenu
 					onToggleMobileNav={onToggleMobileNav}
 					openDrawer={openDrawer}

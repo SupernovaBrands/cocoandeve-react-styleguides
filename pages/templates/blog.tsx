@@ -171,28 +171,71 @@ const BlogTemplate = () => {
 	]
 
 	const videoData = [
-        {
-            label: 'Slide 1',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['TAN', 'NEW'],
-        },
-        {
-            label: 'Slide 2',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['HAIR', 'HOT'],
-        },
-        {
-            label: 'Slide 3',
-            title: '5 things you’re doing wrong with your hair care routine',
-            srcSet: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            src: 'https://via.placeholder.com/375x340.jpg/EFADBA',
-            tags: ['BODY', 'FEATURED'],
-        }
-    ];
+		{
+			"label": 17,
+			"video_url": "https://www.youtube.com/embed/eTHzoV4RhIA",
+			"title": "How to make your tan last 7 days",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_item",
+			"tags": [
+				"tan"
+			]
+		},
+		{
+			"label": 18,
+			"video_url": "https://www.youtube.com/embed/lEx0IWLfz7c",
+			"title": "How I fixed my damaged hair in 2 weeks",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_slider",
+			"tags": [
+				"hair"
+			]
+		},
+		{
+			"label": 21,
+			"video_url": "https://www.youtube.com/embed/hRc5XjsBzbY",
+			"title": "How to self tan tricky areas",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_item",
+			"tags": [
+				"tan"
+			]
+		},
+		{
+			"label": 27,
+			"video_url": "https://www.youtube.com/embed/spRvtXohWEU",
+			"title": "Your Ultimate Coco & Eve Gift Guide for EVERYONE on your list",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_slider",
+			"tags": ""
+		},
+		{
+			"label": 28,
+			"video_url": "https://www.youtube.com/embed/eY8O73tCvCE",
+			"title": "How to Use Sweet Repair Hair Mask",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_slider",
+			"tags": [
+				"hair"
+			]
+		},
+		{
+			"label": 29,
+			"video_url": "https://www.youtube.com/embed/bSPDbjxzAFM",
+			"title": "How to Use Leave In Conditioner",
+			"srcSet": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"src": "https://via.placeholder.com/375x340.jpg/EFADBA",
+			"type": "video_item",
+			"tags": [
+				"hair"
+			]
+		}
+	]
 
     const toggleCart = () => {
 		setShowCart(!showCart);

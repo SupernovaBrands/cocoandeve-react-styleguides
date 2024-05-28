@@ -7,6 +7,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import Modal from "~/components/Modal";
+import ModalWaitlist from "~/components/modal/Waitlist";
 import {
 	PrevButton,
 	NextButton,
@@ -31,7 +33,7 @@ const ProductCarousel = (props: any) => {
         handle: undefined,
     });
 
-	const { isStyleguide, products, data } = props;
+	const { isStyleguide, products, data, addToCart } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -73,6 +75,7 @@ const ProductCarousel = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
 	return (
+		<>
 		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">
 			<h2 className="h1 text-center mb-1 lg:mb-2">Our Products</h2>
 			<div className="row">
@@ -97,6 +100,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -135,6 +139,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -173,6 +178,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -197,11 +203,15 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<Link href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
+						<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</a>
 					</div>
 				</div>
 			</div>
 		</div>
+			<Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+        	</Modal>
+		</>
 	);
 };
 

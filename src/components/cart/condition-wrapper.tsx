@@ -1,6 +1,6 @@
 const ConditionWrapper = ({
 	condition, wrapper, wrapperFalse, children,
-}) => {
+}: {condition:any, wrapper:any, wrapperFalse?:any, children:any}) => {
 	if (condition) {
 		return wrapper(children);
 	}

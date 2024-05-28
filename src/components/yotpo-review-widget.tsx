@@ -8,7 +8,6 @@ const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import $ from 'jquery';
 
 import {
@@ -19,6 +18,8 @@ import {
 	currentTime,
 	encryptParam,
 } from '~/modules/utils_v2';
+
+import { useRef } from 'react';
 
 import ReviewStar from '~/components/review-star';
 import YotpoReviewForm from '~/components/yotpo-review-form';
@@ -103,6 +104,7 @@ const formatDate = (serverDate) => {
 const YotpoReviewWidget = (props:any) => {
 	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 	yotpoKey = props.yotpoKey;
+	const reviewBox = useRef(null);
 
 	const {
 		productId,
@@ -148,7 +150,7 @@ const YotpoReviewWidget = (props:any) => {
 		setIsOpen(true);
 	}
 
-	const processPagination = (pagination) => {
+	const processPagination = (pagination:any) => {
 		const result = {
 			...pagination,
 			page: parseInt(pagination.page, 10),
@@ -293,6 +295,13 @@ const YotpoReviewWidget = (props:any) => {
 		setSelectedFilter(filter);
 	};
 
+	const moveToTop = () => {
+		if (reviewBox.current) {
+			const scrollDiv = reviewBox.current.offsetTop;
+			globalThis.window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+		}
+	}
+
 	const onRevPageChange = (page) => {
 		if (Object.keys(selectedFilter).length > 0 || selectedTopic !== '') {
 			setFiltering(true);
@@ -301,10 +310,13 @@ const YotpoReviewWidget = (props:any) => {
 			setFiltering(false);
 			getReviews(page);
 		}
+
+		moveToTop();
 	};
 
 	const onQnaPageChange = (page) => {
 		getQuestions(page);
+		moveToTop();
 	};
 
 	const onSubmitReview = (reviewData) => {
@@ -549,7 +561,7 @@ const YotpoReviewWidget = (props:any) => {
 				</div>
 			)}
 
-			<ul className="flex w-full border-primary border-b mt-3" role="tablist">
+			<ul className="flex w-full border-primary border-b mt-3" role="tablist" ref={reviewBox}>
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
 					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
 				</li>
@@ -566,7 +578,7 @@ const YotpoReviewWidget = (props:any) => {
 							<input
 								type="text"
 								name="free_text_search"
-								className="block appearance-none w-full py-g px-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-l-h outline-none mb-0"
+								className="block appearance-none w-full py-[0.875em] px-[1em] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 rounded-l-h rounded-r-none outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
@@ -574,7 +586,7 @@ const YotpoReviewWidget = (props:any) => {
 								}}
 							/>
 							<div className="input-group-append flex">
-								<button type="button" className="input-group-text bg-white  h-full rounded-0 flex justify-center items-center px-2 border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
+								<button type="button" className="input-group-text border bg-white  h-full rounded-0 flex justify-center items-center px-2 border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
 									<SvgSearch className="svg size-1em" />
 								</button>
 							</div>

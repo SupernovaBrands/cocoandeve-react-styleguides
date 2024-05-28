@@ -72,7 +72,7 @@ export default class CartDiscountForm extends Component<Props, State> {
     };
 
     onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode === 13) {
+        if (e.key === 'Enter') {
 			// @ts-ignore
             this.applyDiscount(e);
         }
@@ -108,7 +108,6 @@ export default class CartDiscountForm extends Component<Props, State> {
     applyBanner = (e:any) => {
 		e.stopPropagation();
 		const c = this.props?.discountBanner?.code_banner_code || '';
-        console.log(c);
 		this.setState(() => ({ code: c.trim(), loading: true }), async () => {
 			await this.props.onApply(this.state.code);
             this.setState({loading: false});
@@ -153,7 +152,8 @@ export default class CartDiscountForm extends Component<Props, State> {
                             <span className="mx-hg text-sm">
                                 {code?.toUpperCase()}
                             </span>
-                            <CloseIcon className="svg text-gray-100 fill-gray-500" onClick={this.removeDiscount}></CloseIcon>
+                            { !this.state.loading && <CloseIcon className="svg text-gray-100 fill-gray-500" onClick={this.removeDiscount}></CloseIcon> }
+                            { this.state.loading && <span className="spinner-border spinner-border-sm text-gray-500 ml-1 !w-[10px] !h-[10px]" role="status" /> }
                         </div>
                     </div> }
                     { !isApplied && error && <p className="text-primary text-sm mb-1">{error}</p> }
