@@ -58,7 +58,7 @@ const Footer = (props: any) => {
                     </div>
                 </div>
             </div>
-            <div className="container mt-4 px-g">
+            <div className="container mt-4 px-g lg:mt-3">
                 <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-currency"] lg:grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1.5fr_1.5fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
                     <div className="[grid-area:nav-shop] mb-g lg:mb-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
@@ -141,7 +141,7 @@ const Footer = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <hr className="border-body mb-1 mt-2 lg:mt-4 lg:mb-1 lg:opacity-20" />
+                <hr className="border-body mb-1 mt-2 lg:mt-3 lg:mb-1 lg:opacity-20" />
                 <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-2 lg:text-base text-sm ">© 2024 Coco&amp;Eve</p>
             </div>
         </footer>
