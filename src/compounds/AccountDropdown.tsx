@@ -9,22 +9,31 @@ const AccountDropdown = (props) => {
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
 	const [allowSubmit, setAllowSubmit] = useState(false);
+    const [allowLogin, setAllowLogin] = useState(false);
+    const [validEmail, setValidEmail] = useState(true);
+    const [validLoginEmail, setValidLoginEmail] = useState(true);
+    const [emptyPass, setEmptyPass] = useState(false);
     const { openAccountBox, toggleAccountDropdown } = props;
     const [activeFrame, setActiveFrame] = useState(true);
     const firstRef = useRef(null);
 	const lastRef = useRef(null);
 	const emailRef = useRef(null);
 	const passRef = useRef(null);
+
+    const loginEmailRef = useRef(null);
+    const loginPassRef = useRef(null);
+    const router = useRouter();
     const validPassword = (e) => {
 		const val = e.target.value;
 		if (val !== '') {
 			setValidPass(/^(?=[^0-9\s]*[0-9])\S{6,}$/.test(e.target.value));
+            setEmptyPass(false);
 		} else {
 			setValidPass(true);
+            setEmptyPass(true);
 		}
 	};
     const handleSubmit = async (e) => {
-        const router = useRouter();
         e.preventDefault();
         // console.log('handle submit form dropdown');
 		const resp = await fetch('/api/account/create', {
@@ -44,41 +53,52 @@ const AccountDropdown = (props) => {
 		const { customerCreate } = resp;
 		if (customerCreate.customer !== null) {
 			router.push('/account');
+            router.refresh();
 		}
     };
     const handleChange = () => {
+        const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 		const firstname = firstRef?.current?.value !== '';
 		const lastname = lastRef?.current?.value !== '';
 		const pass = passRef?.current?.value !== '' && validPass;
-		const email = emailRef?.current?.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailRef?.current?.value);
-        setAllowSubmit(firstname && lastname && pass && email && tosAgree);
+        const validE = emailRegex.test(emailRef?.current?.value);
+		const email = emailRef?.current?.value !== '' && validE;
+        setValidEmail(validE || emailRef?.current?.value === '');
+        setAllowSubmit(firstname && lastname && pass && email && tosAgree && !emptyPass);
 	};
+
+    const passFocus = () => {
+        setEmptyPass(passRef?.current?.value === '');
+    };
 
     // Login Customer
     const handleLoginSubmit = async (e) => {
-		const router = useRouter();
         e.preventDefault();
 		const respLogin = await fetch('/api/account/login', {
 			method: 'POST',
 			body: JSON.stringify({
-				email: emailRef.current.value,
-				password: passRef.current.value
+				email: loginEmailRef.current.value,
+				password: loginPassRef.current.value
 			})
 		}).then((resp) => resp.json());
 		const { customerAccessTokenCreate } = respLogin;
 		if (customerAccessTokenCreate.customerAccessToken) {
 			router.push('/account');
+            router.refresh();
 		}
 	};
     const handleLoginChange = () => {
-		const pass = passRef?.current?.value !== '';
-		const email = emailRef?.current?.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(emailRef?.current?.value);
-		setAllowSubmit(pass && email);
+        const regex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+		const pass = loginPassRef?.current?.value !== '';
+        const validRegex = regex.test(loginEmailRef?.current?.value)
+		const email = loginEmailRef?.current?.value !== '' && validRegex;
+        setValidLoginEmail(validRegex || loginEmailRef?.current?.value === '');
+		setAllowLogin(pass && email);
 	};
     useEffect(() => {
 		handleChange();
-        handleLoginChange();
 	}, [tosAgree]);
+
     return (
         <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
@@ -89,16 +109,19 @@ const AccountDropdown = (props) => {
                             <p className="text-center auth-buttons mb-g">or login with email</p>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
-                                <input ref={emailRef} onChange={handleLoginChange} type="email" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none" id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
+                                <input ref={loginEmailRef} onChange={handleLoginChange} type="email" className={`block h-[50px] font-size-sm appearance-none w-full py-1 px-2 ${!validLoginEmail ? 'mb-0' : 'mb-1'} text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none`} id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
+                                {!validLoginEmail && (
+                                    <label id="dropdownLoginFormEmail-error" className="font-size-xs text-primary" htmlFor="dropdownLoginFormEmail">Please enter a valid email address.</label>
+                                )}
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
-                                <input ref={passRef} onChange={handleLoginChange} type="password" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
+                                <input ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <Button type="submit" buttonClass="btn-primary w-full border-0 py-1 mt-1" disabled={!allowSubmit}>Log In</Button>
+                            <Button type="submit" buttonClass="btn-primary w-full border-0 py-1 mt-1" disabled={!allowLogin}>Log In</Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
-                                    <button type="button" className="text-underline text-primary underline">Forgot your password?</button>
+                                    <a href="/account/login#recover" className="text-underline text-primary underline">Forgot your password?</a>
                                     <button type="button" className="text-underline text-primary underline" onClick={() => setActiveFrame(!activeFrame)}>Sign up</button>
                                 </li>
                             </ul>
@@ -114,19 +137,28 @@ const AccountDropdown = (props) => {
                             <div className="flex flex-wrap">
                                 <div className="form-group w-1/2 pr-1 mb-1 lg:mb-2">
                                     <label htmlFor="dropdownFormFName" id="dropdownFormFNameLabel" className="sr-only">First name</label>
-                                    <input ref={firstRef} onChange={handleChange} type="text" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownFormFName" placeholder="First Name" aria-labelledby="dropdownFormFNameLabel" />
+                                    <input onFocus={passFocus} ref={firstRef} onChange={handleChange} type="text" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownFormFName" placeholder="First Name" aria-labelledby="dropdownFormFNameLabel" />
                                 </div>
                                 <div className="form-group w-1/2 pl-1 mb-1 lg:mb-2">
                                     <label htmlFor="dropdownRegisterFormLName" id="dropdownRegisterFormLNameLabel" className="sr-only">Last Name</label>
-                                    <input ref={lastRef} onChange={handleChange} type="text" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormLName" placeholder="Last Name" aria-labelledby="dropdownRegisterFormLNameLabel" />
+                                    <input onFocus={passFocus} ref={lastRef} onChange={handleChange} type="text" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormLName" placeholder="Last Name" aria-labelledby="dropdownRegisterFormLNameLabel" />
                                 </div>
                                 <div className="form-group w-full mb-1 lg:mb-2">
                                     <label htmlFor="dropdownRegisterFormEmail" id="dropdownRegisterFormEmailLabel" className="sr-only">Email</label>
-                                    <input ref={emailRef} onChange={handleChange} type="email" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormEmail" placeholder="Email" aria-labelledby="dropdownRegisterFormEmailLabel" />
+                                    <input onFocus={passFocus} ref={emailRef} onChange={handleChange} type="email" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormEmail" placeholder="Email" aria-labelledby="dropdownRegisterFormEmailLabel" />
+                                    {!validEmail && (
+                                        <label id="dropdownRegisterFormEmail-error" className="text-primary font-size-sm" htmlFor="dropdownRegisterFormEmail">Please enter a valid email address.</label>
+                                    )}
                                 </div>
                                 <div className="form-group w-full mb-1 lg:mb-2">
                                     <label htmlFor="dropdownRegisterFormPassword" id="dropdownRegisterFormPasswordLabel" className="sr-only">Password</label>
-                                    <input ref={passRef} onChange={validPassword} type="password" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormPassword" placeholder="Password" aria-labelledby="dropdownRegisterFormPasswordLabel" />
+                                    <input onFocus={passFocus} ref={passRef} onChange={validPassword} type="password" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormPassword" placeholder="Password" aria-labelledby="dropdownRegisterFormPasswordLabel" />
+                                    {!validPass && (
+                                        <label className="text-primary font-size-sm" htmlFor="CreatePassword">Please enter at least 6 characters including 1 number.</label>
+                                    )}
+                                    {validPass && emptyPass && (
+                                        <label className="text-primary font-size-sm" htmlFor="CreatePassword">This field is required.</label>
+                                    )}
                                 </div>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm mb-1 items-start">

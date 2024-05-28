@@ -52,6 +52,10 @@ const MobileMenu = (props: any) => {
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
 				{mainMenu.map((menu, i) => {
+					let title = menu.title;
+					if (menu.handle === '/collections/hair') title = 'Hair Care';
+					if (menu.handle === '/collections/body') title = 'Body Care';
+					if (menu.handle === '/collections/kits-gifts') title = 'Bundles';
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
@@ -60,7 +64,12 @@ const MobileMenu = (props: any) => {
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
-								<h4 className="m-0 font-normal">{menu.title}</h4>
+								{title.toLowerCase() === 'sale' && (
+									<a href={menu.handle} className="w-full m-0 text-body flex">{title}</a>
+								)}
+								{title.toLowerCase() !== 'sale' && (
+									<h4 className="m-0 font-normal">{title}</h4>
+								)}
 								{menu.rows && menu.rows.length > 0 && (
 									<ChevronNext className="h-[1em] text-xs mb-25" onClick={() => {
 										const newStates = {...defMenuState};
@@ -84,7 +93,7 @@ const MobileMenu = (props: any) => {
 										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
-									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
+									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{title}</h4></li>
 									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
 									<li key="shopall" className="border-b p-0">
 										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></a>

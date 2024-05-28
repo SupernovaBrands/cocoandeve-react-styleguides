@@ -16,7 +16,7 @@ const NavMegaMenuAll = (props: any) => {
                     </div>
                     <div className="ml-3 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
                         {menus && menus.map((menu) => {
-                            if (menu.handle !== '/collections/sale' && menu.handle !== '/collections/all') {
+                            if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all') {
                                 return (
                                     <div key={`menu-${menu.title}`} className="d-flex flex-column">
                                         <a href={menu.handle} className="block mb-2 text-lg text-body font-bold">{menu.title}</a>

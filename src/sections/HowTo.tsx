@@ -31,21 +31,22 @@ const HowToCarousel = (props) => {
 	};
 
     const options: EmblaOptionsType = {
-        loop: true,
-    };
+		loop: true,
+		align: 'start'
+	};
 
-    const [emblaRef7, emblaApi7] = useEmblaCarousel({ align: 'start', ...options }, [
-        Autoplay({ playOnInit: false, delay: 3000 })
-    ]);
+    const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+		Autoplay({ playOnInit: true, delay: 3000 })
+	]);
 
     const {
         prevBtnDisabled: prevDisabled7,
         nextBtnDisabled: nextDisabled7,
-        onPrevButtonClick: arrowClickPrev7,
-        onNextButtonClick: arrowClickNext7
-    } = usePrevNextButtons(emblaApi7);
+        onPrevButtonClick: arrowClickPrev,
+		onNextButtonClick: arrowClickNext
+    } = usePrevNextButtons(emblaApi);
 
-    const autoPlayClick7 = controlAutoplay(emblaApi7);
+    const autoPlayClick = controlAutoplay(emblaApi);
 
     const colors: Record<string, { bg: string; text: string }> = {
         new: { bg: 'bg-secondary', text: 'text-white' },
@@ -59,8 +60,8 @@ const HowToCarousel = (props) => {
 	return (
 		<section className="how-to no-gutters__in-container mb-4">
 			<h2 className="text-center h1 pt-2 sm:pb-2 md:pb-3 mb-0">The Ultimate “HOW TO”s</h2>
-			<Carousel.Wrapper emblaApi={emblaApi7}>
-				<Carousel.Inner emblaRef={emblaRef7} className="lg:-mx-g">
+			<Carousel.Wrapper emblaApi={emblaApi}>
+				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{videoData.map((item, index) => (
 						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
 							<figure className="border border-secondary-light">
@@ -77,7 +78,7 @@ const HowToCarousel = (props) => {
 									{ item.tags.length > 0 ? item.tags.map((tag) =>
 										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
 									) : ''}
-									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body">{item.title}</a></p>
+									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 								</figcaption>
 							</figure>
 						</div>
@@ -85,7 +86,7 @@ const HowToCarousel = (props) => {
 				</Carousel.Inner>
 				<Carousel.Navigation>
 					<PrevButton
-						onClick={() => autoPlayClick7(arrowClickPrev7)}
+						onClick={() => autoPlayClick(arrowClickPrev)}
 						disabled={prevDisabled7}
 						className="-left-hg lg:-left-g"
 					>
@@ -94,7 +95,7 @@ const HowToCarousel = (props) => {
 						</span>
 					</PrevButton>
 					<NextButton
-						onClick={() => autoPlayClick7(arrowClickNext7)}
+						onClick={() => autoPlayClick(arrowClickNext)}
 						disabled={nextDisabled7}
 						className="-right-hg lg:-right-g"
 					>

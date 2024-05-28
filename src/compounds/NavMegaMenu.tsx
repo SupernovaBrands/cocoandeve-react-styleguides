@@ -5,7 +5,7 @@ const NavMegaMenu = (props: any) => {
     const { handle, listIds, dummy } = props;
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         if (dummy) {
             {/* @ts-ignore */}
@@ -60,8 +60,14 @@ const NavMegaMenu = (props: any) => {
                             getFeaturedImages().then((data) => {
                                 if (data?.length > 0) {
                                     const selectedImgs = selected.map((item) => {
-                                        const featuredImg = data.find((img) => img.handle === item.handle)
+                                        let featuredImg = data.find((img) => img.handle === item.handle)
                                         ? data.find((img) => img.handle === item.handle).featured_image_url : null;
+
+                                        // some featured img in dev store is return null
+                                        if (featuredImg === null && item.handle === 'double-cleanser-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e5913415-4bac-4ace-98f6-d56ab1377100/public';
+                                        if (featuredImg === null && item.handle === 'honey-bliss-hair-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/17e65724-7eab-4660-02f6-055876059b00/public';
+                                        if (featuredImg === null && item.handle === 'pro-youth-shampoo-conditioner') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f1879976-1cc4-405e-4027-4950b96c8d00/public';
+
                                         return {
                                             title: item.title,
                                             img: featuredImg,
@@ -128,7 +134,7 @@ const NavMegaMenu = (props: any) => {
             </div>
         </div>
 
-    );  
+    );
 };
 
 export default NavMegaMenu;
