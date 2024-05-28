@@ -44,7 +44,7 @@ const Instagram = (props: any) => {
                     <div className="w-11/12 lg:w-7/12 text-center mx-auto pb-g sm:px-hg">
                         <h2 className="h1 mb-1">Get social with us</h2>
                         <p className="h4 mb-1">
-                            <a href="#" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
+                            <a href="https://www.instagram.com/cocoandeve" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
                         </p>
                         <p className="font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
                     </div>
@@ -78,7 +78,7 @@ const Instagram = (props: any) => {
                                             ))}
                                         </div>
                                     </div>
-                                    {data && data.length && data.slice(4, 7).map((item, index) => (
+                                    {data && data.length && data.slice(3, 6).map((item, index) => (
                                         <div className="w-1/2 lg:w-1/3 p-0" key={`inst3--${index}`}>
                                             <a href={item.link} target="_blank"  className='block instagram--feed--link'>
                                                 <picture>
@@ -94,7 +94,7 @@ const Instagram = (props: any) => {
                                 <div className="flex flex-wrap m-0">
                                     <div className="lg:w-1/2 p-0">
                                         <div className="flex flex-wrap m-0">
-                                            {data && data.length && data.slice(8, 10).map((item, index) => (
+                                            {data && data.length && data.slice(6, 8).map((item, index) => (
                                                 <div className="lg:w-1/2 p-0"  key={`inst4--${index}`}>
                                                     <a href={item.link} target="_blank"  className='block instagram--feed--link'>
                                                         <picture>
@@ -104,7 +104,7 @@ const Instagram = (props: any) => {
                                                     </a>
                                                 </div>
                                             ))}
-                                            {data && data.length && data.slice(11, 12).map((item, index) => (
+                                            {data && data.length && data.slice(8, 9).map((item, index) => (
                                                 <div className="w-full p-0"  key={`inst5--${index}`}>
                                                     <a href={item.link} target="_blank"  className='block instagram--feed--link'>
                                                         <picture>
@@ -118,7 +118,7 @@ const Instagram = (props: any) => {
                                     </div>
                                     <div className="lg:w-1/2 p-0">
                                         <div className="flex flex-wrap m-0 ">
-                                            {data && data.length && data.slice(13, 19).map((item, index) => (
+                                            {data && data.length && data.slice(9, 15).map((item, index) => (
                                                 <div className="lg:w-1/2 p-0"  key={`inst6--${index}`}>
                                                     <a href={item.link} target="_blank"  className='block instagram--feed--link'>
                                                         <picture>

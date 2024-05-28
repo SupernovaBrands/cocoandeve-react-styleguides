@@ -63,12 +63,12 @@ const HeroBanner = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 							{slides.map((slide: any, index: number) => (
 								<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
-									<div className="flex items-center justify-center">
+									<a href={slide?.slide_link || ''} className="flex items-center justify-center">
 										<picture>
 											<source srcSet={slide?.image?.url} media="(min-width: 1025px)" width="1200" height="458" />
 											<img className="block w-full" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} />
 										</picture>
-									</div>
+									</a>
 								</div>
 							))}
 						</Carousel.Inner>
@@ -89,7 +89,7 @@ const HeroBanner = (props: any) => {
 					<div className='bg-shimmer pt-[111.83575%] lg:pt-[38.17708%]'></div>
 				)}
 			</section>
-			{isLoadingComp && (
+			{!isLoadingComp && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
