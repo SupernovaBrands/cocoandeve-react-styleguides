@@ -85,7 +85,7 @@ const ProductCardUpsell = (props:any) => {
                     <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
                         <source srcSet={featuredImage} media="(min-width: 992px)" />
                         <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black">
-                            <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 px-3 bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
+                            <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
                         </a>
                     </picture>
                     <div className="product-card__content pb-2 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">

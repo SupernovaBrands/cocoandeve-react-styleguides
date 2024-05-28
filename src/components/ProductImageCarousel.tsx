@@ -24,7 +24,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 		containScroll: 'keepSnaps',
 		dragFree: true,
 		loop: true,
-		align: 'start',
+		align: 'center',
 	});
 
 	const pdpImagePrev = () => {
