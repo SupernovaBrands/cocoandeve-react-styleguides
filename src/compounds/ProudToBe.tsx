@@ -56,8 +56,8 @@ const ProudToBe = (props:any) => {
         <div className="">
                 <div className="carousel--scroll position-relative">
                     <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
-                        {proudToBeArr.map((proud:any) => (
-                            <li className="min-w-[16.6%] flex items-center flex-col px-1 carousel-item active">
+                        {proudToBeArr.map((proud:any, index: number) => (
+                            <li key={`${proud}-${index}`} className="min-w-[16.6%] flex items-center flex-col px-1 carousel-item active">
                                 {iconsData[proud]}
                             </li>
                         ))}
