@@ -88,15 +88,13 @@ const AccountDropdown = (props) => {
 			})
 		}).then((resp) => resp.json());
 		const { customerAccessTokenCreate } = respLogin;
+        let url: string = '/account/login#error'
 		if (customerAccessTokenCreate.customerAccessToken) {
-			setTimeout(() => {
-                window.location.href = '/account';
-            }, 250);
-		} else {
-            setTimeout(() => {
-                window.location.href = '/account/login#error';
-            }, 250);
-        }
+            url = '/account';
+		}
+        setTimeout(() => {
+            window.location.href = url;
+        }, 250);
 	};
     const handleLoginChange = () => {
         const regex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
