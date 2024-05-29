@@ -64,7 +64,7 @@ const HeroBanner = (props: any) => {
 							{slides.map((slide: any, index: number) => (
 								<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 									<a href={slide?.slide_link || ''} className="flex items-center justify-center">
-										<picture className='px-g'>
+										<picture className='lg:px-g'>
 											<source srcSet={slide?.image?.url} media="(min-width: 1601px)" width="1920" height="733" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1401px)" width="1600" height="611" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1201px)" width="1400" height="534" />
