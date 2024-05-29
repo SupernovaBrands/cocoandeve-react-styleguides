@@ -8,7 +8,7 @@ const AccountDropdown = (props) => {
     const [newsOptIn, setNewsOptIn] = useState(false);
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
-	const [allowSubmit, setAllowSubmit] = useState(false);
+	const [allowSubmit, setAllowSubmit] = useState(true);
     const [allowLogin, setAllowLogin] = useState(false);
     const [validEmail, setValidEmail] = useState(true);
     const [validLoginEmail, setValidLoginEmail] = useState(true);
@@ -35,26 +35,31 @@ const AccountDropdown = (props) => {
 	};
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log('handle submit form dropdown');
-		const resp = await fetch('/api/account/create', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: emailRef.current.value,
-				password: passRef.current.value,
-				first_name: firstRef.current.value,
-				last_name: lastRef.current.value,
-				accept_marketing: newsOptIn,
-			})
-		}).then((resp) => resp.json());
-		const { customerCreate } = resp;
-		if (customerCreate.customer !== null) {
-			router.push('/account');
-            router.refresh();
-		}
+
+        if (allowSubmit) {
+            const resp = await fetch('/api/account/create', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailRef.current.value,
+                    password: passRef.current.value,
+                    first_name: firstRef.current.value,
+                    last_name: lastRef.current.value,
+                    accept_marketing: newsOptIn,
+                })
+            }).then((resp) => resp.json());
+            const { customerCreate } = resp;
+            if (customerCreate.customer !== null) {
+                setTimeout(() => {
+                    window.location.href = '/account';
+                }, 250);
+            }
+        } else {
+            passFocus();
+        }
     };
     const handleChange = () => {
         const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
@@ -63,7 +68,8 @@ const AccountDropdown = (props) => {
 		const pass = passRef?.current?.value !== '' && validPass;
         const validE = emailRegex.test(emailRef?.current?.value);
 		const email = emailRef?.current?.value !== '' && validE;
-        setValidEmail(validE || emailRef?.current?.value === '');
+        if (emailRef?.current?.value && emailRef?.current?.value !== '') setValidEmail(validE);
+        else setValidEmail(true);
         setAllowSubmit(firstname && lastname && pass && email && tosAgree && !emptyPass);
 	};
 
@@ -83,9 +89,14 @@ const AccountDropdown = (props) => {
 		}).then((resp) => resp.json());
 		const { customerAccessTokenCreate } = respLogin;
 		if (customerAccessTokenCreate.customerAccessToken) {
-			router.push('/account');
-            router.refresh();
-		}
+			setTimeout(() => {
+                window.location.href = '/account';
+            }, 250);
+		} else {
+            setTimeout(() => {
+                window.location.href = '/account/login#error';
+            }, 250);
+        }
 	};
     const handleLoginChange = () => {
         const regex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -118,7 +129,7 @@ const AccountDropdown = (props) => {
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                                 <input ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <Button type="submit" buttonClass="btn-primary w-full border-0 py-1 mt-1" disabled={!allowLogin}>Log In</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''}`} disabled={!allowLogin}>Log In</Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
                                     <a href="/account/login#recover" className="text-underline text-primary underline">Forgot your password?</a>
@@ -162,17 +173,17 @@ const AccountDropdown = (props) => {
                                 </div>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm mb-1 items-start">
-                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" value={newsOptIn.toString()} className="custom-control-input" id="offers" required={true} aria-required="true" aria-invalid="true" />
+                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" />
                                 <label htmlFor="offers" className="custom-control-label lg:pl-1">Keep me up to date on news and exclusive offers</label>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">
-                                <input onChange={() => setTosAgree(!tosAgree)} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={true} aria-required="true" aria-invalid="true" />
+                                <input onChange={() => setTosAgree(!tosAgree)} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={false} aria-required="true" aria-invalid="true" />
                                 <label htmlFor="agreement" className="custom-control-label lg:pl-1">
                                 <span>By clicking here, I agree to the <Link className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</Link>, <Link className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</Link> and <Link className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</Link>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span>
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}
-                            <Button type="submit" buttonClass="btn-primary w-full border-0 py-1 mt-1" disabled={!allowSubmit}>Create Account</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''}`}>Create Account</Button>
                             <div className="form-group text-center mt-2">
                                 <button type="button" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</button>
                             </div>

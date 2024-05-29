@@ -47,6 +47,13 @@ const Header = (props: any) => {
 		setFlashBubble(false);
 	}
 
+	const redirectAccount = (e) => {
+		e.preventDefault();
+		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
+		window.location.href = url;
+		if (isLoggedIn) window.location.reload();
+	};
+
 	useEffect(() => {
 		let lastScrollTop = 0;
 		let scrollTop = 0;
@@ -133,7 +140,7 @@ const Header = (props: any) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
-											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
+											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
@@ -169,15 +176,15 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href={!isLoggedIn ? '/pages/rewards' : '/account/rewards'}>
+								<button type="button" onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary">
 									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
-								</a>
+								</button>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
-									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
+									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
