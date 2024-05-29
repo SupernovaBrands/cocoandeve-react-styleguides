@@ -41,13 +41,13 @@ const Playground = (props: any) => {
 	}, []);
 
     return (
-        <section className="container text-center pb-0 playground--collection-list range-banner pt-1">
-            <h1 className="h1 mb-1">{featuredCollection?.title}</h1>
+        <section className="container text-center pb-0 playground--collection-list range-banner pt-1 px-0">
+            <h1 className="h1 mb-1">Discover our Playground</h1>
             {!isLoading && (
                 <>
                     <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p>
-                    <div className="flex flex-wrap -mx-hg lg:-mx-g items-center">
+                    <div className="flex flex-wrap -mx-hg lg:-mx-g items-center px-hg">
                         <PlaygroundCard data={content?.range_1} />
                         <PlaygroundCard data={content?.range_2} />
                         <PlaygroundCard data={content?.range_3} />
