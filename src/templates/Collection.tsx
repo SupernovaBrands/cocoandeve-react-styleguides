@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { isWaitlist } from "~/modules/utils";
+import { getFeaturedImages, isWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 
@@ -71,8 +71,11 @@ const Collection = (props: any) => {
         sort,
         addToCart,
         tcPopups,
+        store,
+        buildProductCardModel,
     } = props;
 
+    const [featuredImg, setFeaturedImg] = useState<any>([]);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -90,10 +93,11 @@ const Collection = (props: any) => {
     const router = useRouter();
     const [sidebarMenu, setSidebarMenu] = useState(sidebar_collection_ph);
     const [childMenu, setChildMenu] = useState([]);
+    const [defaultSort, setDefaultSort] = useState(sort);
 
-    const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
+    const [collProducts, setCollProducts] = useState(products);
 
     let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
     if (handle !== 'all') {
@@ -133,7 +137,14 @@ const Collection = (props: any) => {
 
     const selectSortChange = (e: any) => {
         showLoading(e);
-        router.push(`/collections/${handle}/${e.target.value}`);
+        fetch(`/api/collectionProducts/?sort=${e.target.value}&handle=${currentCollection.handle}`).then((r) => r.json())
+            .then((data) => {
+                const { products } = data;
+                const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                setCollProducts(mapped);
+                setLoading(false);
+                setDefaultSort(e.target.value);
+            });
     };
 
     useEffect(() => {
@@ -146,17 +157,37 @@ const Collection = (props: any) => {
     const collectionSingle = useCollectionSingle(handleFooter);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
-    const loadWaitlist = isWaitlist(sortedByAvailable);
+    const loadWaitlist = isWaitlist(collProducts);
 
     useEffect(() => {
+        setLoading(true);
         fetch(`/api/collectionInfo?${new URLSearchParams({
 			parentHandle: mainCollectionHandles,
             childrenHandle: subHandles
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
             setChildMenu(data.childrens);
+            if (defaultSort !== 'featured') {
+                fetch(`/api/collectionProducts/?sort=${defaultSort}&handle=${currentCollection.handle}`).then((r) => r.json())
+                .then((data) => {
+                    const { products } = data;
+                    const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                    setCollProducts(mapped);
+                    setLoading(false);
+                });
+            }
+            setLoading(false);
         });
     }, [handle]);
+
+    useEffect(() => {
+        const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
+        setCollProducts(sortedByAvailable);
+    }, [products]);
+
+    useEffect(() => {
+        getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
+    }, []);
 
     return (
         <>
@@ -207,7 +238,7 @@ const Collection = (props: any) => {
                             {!isLoading && (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg">
-                                        <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]" defaultValue={selectFilterValue}>
+                                        <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[3.125em]" defaultValue={selectFilterValue}>
                                             <option>Filter by</option>
                                             {sidebarMenu.map((parent: any) => {
                                                 const html = parent.title.replace('d-lg-none', 'lg:hidden');
@@ -216,7 +247,7 @@ const Collection = (props: any) => {
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={sort}>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em]" defaultValue={defaultSort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
                                             <option value="price-low-high">Price, low to high</option>
@@ -255,7 +286,7 @@ const Collection = (props: any) => {
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                 </div>
                             )}
-                            {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
+                            {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 if (!item.src) {
                                     item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                     item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');

@@ -5,10 +5,11 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props) => {
+    const [regInit, setRegInit] = useState(true);
     const [newsOptIn, setNewsOptIn] = useState(false);
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
-	const [allowSubmit, setAllowSubmit] = useState(true);
+	const [allowSubmit, setAllowSubmit] = useState(false);
     const [allowLogin, setAllowLogin] = useState(false);
     const [validEmail, setValidEmail] = useState(true);
     const [validLoginEmail, setValidLoginEmail] = useState(true);
@@ -19,19 +20,20 @@ const AccountDropdown = (props) => {
 	const lastRef = useRef(null);
 	const emailRef = useRef(null);
 	const passRef = useRef(null);
+    const tos = useRef(null);
 
     const loginEmailRef = useRef(null);
     const loginPassRef = useRef(null);
     const router = useRouter();
     const validPassword = (e) => {
 		const val = e.target.value;
+        setValidPass(/^(?=[^0-9\s]*[0-9])\S{6,}$/.test(e.target.value));
 		if (val !== '') {
-			setValidPass(/^(?=[^0-9\s]*[0-9])\S{6,}$/.test(e.target.value));
             setEmptyPass(false);
 		} else {
-			setValidPass(true);
             setEmptyPass(true);
 		}
+        handleChange();
 	};
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,7 +67,7 @@ const AccountDropdown = (props) => {
         const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 		const firstname = firstRef?.current?.value !== '';
 		const lastname = lastRef?.current?.value !== '';
-		const pass = passRef?.current?.value !== '' && validPass;
+		const pass = (passRef?.current?.value !== '') && /^(?=[^0-9\s]*[0-9])\S{6,}$/.test(passRef?.current?.value);
         const validE = emailRegex.test(emailRef?.current?.value);
 		const email = emailRef?.current?.value !== '' && validE;
         if (emailRef?.current?.value && emailRef?.current?.value !== '') setValidEmail(validE);
@@ -75,6 +77,7 @@ const AccountDropdown = (props) => {
 
     const passFocus = () => {
         setEmptyPass(passRef?.current?.value === '');
+        setRegInit(false);
     };
 
     // Login Customer
@@ -104,9 +107,23 @@ const AccountDropdown = (props) => {
         setValidLoginEmail(validRegex || loginEmailRef?.current?.value === '');
 		setAllowLogin(pass && email);
 	};
+
+    const handleTos = () => {
+        setTosAgree((prev) => !prev);
+        setRegInit(false);
+    };
+
     useEffect(() => {
-		handleChange();
-	}, [tosAgree]);
+        const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+		const firstname = firstRef?.current?.value !== '';
+		const lastname = lastRef?.current?.value !== '';
+		const pass = (passRef?.current?.value !== '') && /^(?=[^0-9\s]*[0-9])\S{6,}$/.test(passRef?.current?.value);
+        const validE = emailRegex.test(emailRef?.current?.value);
+		const email = emailRef?.current?.value !== '' && validE;
+        if (emailRef?.current?.value && emailRef?.current?.value !== '') setValidEmail(validE);
+        else setValidEmail(true);
+        setAllowSubmit(firstname && lastname && pass && email && tosAgree && !emptyPass);
+    }, [tosAgree]);
 
     return (
         <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
@@ -175,13 +192,13 @@ const AccountDropdown = (props) => {
                                 <label htmlFor="offers" className="custom-control-label lg:pl-1">Keep me up to date on news and exclusive offers</label>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">
-                                <input onChange={() => setTosAgree(!tosAgree)} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={false} aria-required="true" aria-invalid="true" />
+                                <input ref={tos} onClick={handleTos} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={false} aria-required="true" aria-invalid="true" />
                                 <label htmlFor="agreement" className="custom-control-label lg:pl-1">
                                 <span>By clicking here, I agree to the <Link className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</Link>, <Link className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</Link> and <Link className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</Link>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span>
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''}`}>Create Account</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`}`} disabled={!allowSubmit}>Create Account</Button>
                             <div className="form-group text-center mt-2">
                                 <button type="button" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</button>
                             </div>

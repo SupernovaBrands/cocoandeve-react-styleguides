@@ -176,10 +176,10 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<button type="button" onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary">
+								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary hover:no-underline">
 									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
-								</button>
+								</a>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
