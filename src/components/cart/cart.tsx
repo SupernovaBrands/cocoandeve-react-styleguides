@@ -66,7 +66,7 @@ const Cart: React.FC<Props> = (props) => {
 	const [shippingLineHide, setShippingLineHide] = useState(false);
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
-	const { data: productImages } = useProductImages();
+	// const { data: productImages } = useProductImages();
 
 	useEffect(() => {
 		if (cartData) {
