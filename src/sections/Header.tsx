@@ -9,12 +9,13 @@ import CartIcon from '~/images/icons/cart.svg';
 import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
+import Tooltip from '~/components/Tooltip';
 import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
-import Link from 'next/link'; 
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, getCollectionProductsByHandle, dummy, cartCount } = props;
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz,
+		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -22,6 +23,7 @@ const Header = (props: any) => {
 	const [scrolled, setScrolled] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
+	const [userPts, setUserPts] = useState(0);
 	const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -35,13 +37,22 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
-		if (isLoggedIn) router.push('/account');
+		if (isLoggedIn) {
+			window.location.href = '/account'
+		}
 		else setOpenAccountBox(!openAccountBox);
 	}
 
-	const handleClose = (): void => { // Add type annotation for function
-		setOpenCartDrawer(false);
+	const closeTip = () => {
+		setFlashBubble(false);
 	}
+
+	const redirectAccount = (e) => {
+		e.preventDefault();
+		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
+		window.location.href = url;
+		if (isLoggedIn) window.location.reload();
+	};
 
 	useEffect(() => {
 		let lastScrollTop = 0;
@@ -92,10 +103,16 @@ const Header = (props: any) => {
 		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
+	useEffect(() => {
+		if (isLoggedIn) {
+			fetch(`/api/account/points`).then((data) => data.json()).then((data) => setUserPts(data.points));
+		}
+	}, [isLoggedIn]);
+
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full relative ${scrolled ? 'fixed top-0 shadow-md' : ''}`}>
-				{annBar?.enabled && (
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`}>
+				{annBar?.enabled && !scrolled && (
 					<AnnouncementBar
 						text={annBar.text}
 						url={annBar.url}
@@ -110,20 +127,20 @@ const Header = (props: any) => {
 					/>
 				)}
 
-				<nav className="bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]">
-					<div className="container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between">
+				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]`}>
+					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubble ? 'relative' : ''}`}>
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
-						<Link href="/" className="inline-block pt-[11px] pb-[11px] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block pt-[11px] pb-[11px] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[41px]" />
-						</Link>
+						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 							{mainMenu && mainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
-											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em]">{nav.title}</a>
+											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
@@ -131,6 +148,7 @@ const Header = (props: any) => {
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
+													generalSetting={generalSetting}
 												/>
 											)}
 											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
@@ -158,15 +176,15 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg" href="/pages/rewards">
-									Bali Beauty Club
+								<button type="button" onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary">
+									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
-								</a>
+								</button>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
-									<Account className="text-[1.375em] h-[1em] mr-[5px]" />
+									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
 							</li>
@@ -182,15 +200,17 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
+						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl}/>
 					</div>
 				</nav>
-
 				<MobileMenu
 					onToggleMobileNav={onToggleMobileNav}
 					openDrawer={openDrawer}
 					mainMenu={mainMenu}
 					menuBannerCode={menuBannerCode}
 					menuBannerQuiz={menuBannerQuiz}
+					userPts={userPts}
+					isLoggedIn={isLoggedIn}
 				/>
 				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
 

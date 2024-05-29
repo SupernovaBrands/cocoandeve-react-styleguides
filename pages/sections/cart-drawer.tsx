@@ -24,7 +24,11 @@ const CartDrawerSection = (): ReactElement => { // Add type annotation for retur
 		<div className="container">
 			<h1>Cart Drawer</h1>
 			<Button type="button" onClick={toggleCart}>Show Cart</Button>
-			<Cart showCart={show} handleClose={handleClose} styleguide={true} cartCount={0}/>
+			<Cart showCart={show} handleClose={handleClose} styleguide={true} cartCount={0}
+			store={'dev'}
+			cartData={{id: 0}} onUpdateCart={() => {}} onDeleteLine={() => {}}
+			manualGwpSetting={{id: 1}}
+			/>
 		</div>
 	);
 }

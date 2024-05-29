@@ -7,6 +7,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import Modal from "~/components/Modal";
+import ModalWaitlist from "~/components/modal/Waitlist";
 import {
 	PrevButton,
 	NextButton,
@@ -31,7 +33,7 @@ const ProductCarousel = (props: any) => {
         handle: undefined,
     });
 
-	const { isStyleguide, products, data } = props;
+	const { isStyleguide, products, data, addToCart } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -73,14 +75,15 @@ const ProductCarousel = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
 	return (
+		<>
 		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">
 			<h2 className="h1 text-center mb-1 lg:mb-2">Our Products</h2>
 			<div className="row">
 				<div>
 					<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
-						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
-						<li><TabNav className={`w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
+						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
+						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
+						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
 					</ul>
 					<div className="text-center">
 						<TabContent active={activeTab === 'new'}>
@@ -97,6 +100,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -135,6 +139,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -173,6 +178,7 @@ const ProductCarousel = (props: any) => {
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
 												carousel={true}
+												addToCart={addToCart}
 											/>
 										)
 									})}
@@ -197,11 +203,15 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<Link href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</Link>
+						<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</a>
 					</div>
 				</div>
 			</div>
 		</div>
+			<Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+        	</Modal>
+		</>
 	);
 };
 

@@ -179,10 +179,12 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 		setCookie('signup_popup', 'signup_popup', 30);
 	};
 
-	const copyCode = (code: string) => {
-		navigator.clipboard.writeText(code);
+	const copyCode = (e) => {
+		//const dataCode = e.currentTarget.getAttribute('data-code');
+		navigator.clipboard.writeText('WELCOME');
 		setCopied(true);
 	};
+
 	return (
 		<div className={`modal-content ${nbp_bg_color}`}>
 			<picture className="absolute w-full lg:h-full">
@@ -214,16 +216,12 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 							<div className="flex flex-wrap justify-center items-center">
 								<h2 className={`h1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
 								<h3 className={`text-center ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
-								{copied ? (
-									<>
-										<Button buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">COPIED</Button>
-									</>
+								{!copied ? (
+									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">
+										COPY: WELCOME <Paste className="svg--current-color ml-25" />
+									</Button>
 								) : (
-									<>
-										<Button onClick={copyCode(nbp_code)} buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">
-											COPY: {nbp_code} <Paste className="svg--current-color ml-25" />
-										</Button>
-									</>
+									<Button buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">COPIED</Button>
 								)}
 							</div>
 						</div>

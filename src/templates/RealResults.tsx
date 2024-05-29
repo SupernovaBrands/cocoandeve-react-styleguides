@@ -97,29 +97,29 @@ const testimonialItems = [
 		index: 0,
 		label: 'Slide 1',
 		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x50.png?v=1591087122',
-		src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x25.png?v=1591087122'
+		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/44e77586-f8d4-43b0-6450-9f9495994b00/400x',
+		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/44e77586-f8d4-43b0-6450-9f9495994b00/200x'
 	},
 	{
 		index: 1,
 		label: 'Slide 2',
-		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Glamour_2x_1_x50.png?v=1591087107',
-		src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Glamour_2x_1_x25.png?v=1591087107'
+		quote: 'Coco & Eve’s vegan and nourishing hair mask has a cult following online for a good reason.',
+		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4a58f90b-411c-4eb0-4aaa-b0925aa29100/400x',
+		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4a58f90b-411c-4eb0-4aaa-b0925aa29100/200x'
 	},
 	{
 		index: 2,
 		label: 'Slide 3',
 		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Harpers_Bazaar_logo_logotype_2x_65a7f362-98ec-471c-876e-f7a614a9d237_x50.png?v=1591087114',
-		src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/Harpers_Bazaar_logo_logotype_2x_65a7f362-98ec-471c-876e-f7a614a9d237_x25.png?v=1591087114'
+		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1edde7c-29d0-441b-be4a-ad0a72ebac00/400x',
+		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1edde7c-29d0-441b-be4a-ad0a72ebac00/200x'
 	},
 	{
 		index: 3,
 		label: 'Slide 4',
-		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x50.png?v=1591087122',
-		src: '//cdn.shopify.com/s/files/1/0075/2163/2309/files/The_Times_logo_wrodmark_2x_8b53f186-43fd-470b-9043-146897718362_x25.png?v=1591087122'
+		quote: 'There’s a reason this hair mask went viral on Instagram, and it’s not the pink-and-green packaging.',
+		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/43a53f0c-58f4-4751-96f6-4b93092b1900/400x',
+		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/43a53f0c-58f4-4751-96f6-4b93092b1900/200x'
 	}
 ]
 
@@ -253,7 +253,7 @@ const RealResults = () => {
 				<h1 className='text-center mb-2 lg:mb-4 block w-full'>Real Customers. Real Reviews</h1>
 				<div className="mb-3 flex flex-wrap  items-center justify-center lg:-mx-g sm:-mx-hg">
 					<label htmlFor="real-result__select" className="text-base font-normal mr-3 mb-0 lg:text-lg">Filter By:</label>
-					<select id="real-result__select" className="border-body bg-gray-400 custom-select rounded w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
+					<select id="real-result__select" className="border-body bg-white custom-select rounded w-2/5 lg:hidden" aria-labelledby="real-result__select" onChange={changeDrop}>
 						<option value="all" selected={true}>All</option>
 						{tabNames.length > 0 && tabNames.map((tab) => {
 							let tabtitleID = tab.toLowerCase().replace(/ /g, '-').replace('autobronzants', 'tan').replace('corps', 'body')
@@ -299,16 +299,16 @@ const RealResults = () => {
 				<div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
 					<ul id="real-result__yotpo-tab" className="flex-wrap list-none pl-0 mb-2 text-center flex" role="tablist">
 						<li className="nav-item" role="presentation">
-							<TabNav className={`font-normal lg:px-3 sm:px-1 w-auto block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border p-0 leading-[2.3!important] w-[5.625em] rounded-tl-[6px] rounded-br-[0] rounded-tr-[0] rounded-bl-[6px] border-body ${activeTab === 'tan' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'} `} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} />
+							<TabNav className={`font-normal lg:px-3 sm:px-1 w-auto block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border p-0 leading-[2.5!important] w-[5.625em] rounded-tl-[6px] rounded-br-[0] rounded-tr-[0] rounded-bl-[6px] border-body ${activeTab === 'tan' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'} `} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} />
 						</li>
 						<li className="nav-item" role="presentation">
-							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[5.3125em] border-body ${activeTab === 'hair' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} />
+							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.5!important] lg:w-[5.625em] sm:w-[5.3125em] border-body ${activeTab === 'hair' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} />
 						</li>
 						<li className="nav-item" role="presentation">
-							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[5.3125em] border-body ${activeTab === 'skin' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} />
+							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.5!important] lg:w-[5.625em] sm:w-[5.3125em] border-body ${activeTab === 'skin' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} />
 						</li>
 						<li className="nav-item" role="presentation">
-							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[5.3125em] border-body rounded-bl-[0] rounded-tl-[0] rounded-br-[6px] rounded-tr-[6px] ${activeTab === 'body' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} />
+							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.5!important] lg:w-[5.625em] sm:w-[5.3125em] border-body rounded-bl-[0] rounded-tl-[0] rounded-br-[6px] rounded-tr-[6px] ${activeTab === 'body' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} />
 						</li>
 					</ul>
 					<TabContent active={activeTab === 'tan'} className="px-g">

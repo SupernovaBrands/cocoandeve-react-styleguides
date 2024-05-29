@@ -26,7 +26,7 @@ const ArticleRecommendation = (props) => {
 	const { popularArticles } = props;
 
 	return (
-		<div className="w-full my-4">
+		<div className="w-full my-4 lg:mx-g">
 			<div className="bg-pink-light p-3 no-gutters__in-container mx-[-15px]">
 				<p className="h1 text-center mb-1">You may also like</p>
 				<ul className="flex flex-wrap mt-3 mb-0 lg:-mx-g sm:-mx-hg">

@@ -6,7 +6,7 @@ import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 const defMenuState = {
 	1: false,
 	2: false,
@@ -16,7 +16,7 @@ const defMenuState = {
 }
 
 const MobileMenu = (props: any) => {
-	const { mainMenu, menuBannerQuiz, menuBannerCode } = props;
+	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn } = props;
 	const { openDrawer, onToggleMobileNav } = props;
 	const [menuStates, setMenuStates] = useState(defMenuState);
 	const [storeSelection, setStoreSelection] = useState(false);
@@ -25,6 +25,15 @@ const MobileMenu = (props: any) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
 	}
+
+	const router = useRouter();
+
+	const handleAccount = () => {
+		const url = new URL(window.location.href);
+		const rewardUrl = `${url.pathname}${url.hash}`;
+		if (rewardUrl === '/account#rewards') router.refresh();
+		else window.location.href = '/account#rewards';
+	};
 
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1010] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
@@ -43,17 +52,26 @@ const MobileMenu = (props: any) => {
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
 				{mainMenu.map((menu, i) => {
+					let title = menu.title;
+					if (menu.handle === '/collections/hair') title = 'Hair Care';
+					if (menu.handle === '/collections/body') title = 'Body Care';
+					if (menu.handle === '/collections/kits-gifts') title = 'Bundles';
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
-							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2" aria-expanded="false" aria-controls="hairCare"
+							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
-								<h4 className="m-0 font-normal">{menu.title}</h4>
+								{title.toLowerCase() === 'sale' && (
+									<a href={menu.handle} className="w-full m-0 text-body flex">{title}</a>
+								)}
+								{title.toLowerCase() !== 'sale' && (
+									<h4 className="m-0 font-normal">{title}</h4>
+								)}
 								{menu.rows && menu.rows.length > 0 && (
-									<ChevronNext className="h-[1em] text-xs" onClick={() => {
+									<ChevronNext className="h-[1em] text-xs mb-25" onClick={() => {
 										const newStates = {...defMenuState};
 										newStates[i] = true;
 										setMenuStates(newStates);
@@ -75,10 +93,15 @@ const MobileMenu = (props: any) => {
 										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
-									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{menu.title}</h4></li>
-									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={`/collections/${row.handle}`} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
-									<li key="shopall" className="border-b p-0">
-										<Link href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></Link>
+									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{title}</h4></li>
+									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
+									<li key="shopall" className="p-0">
+										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
+											<strong>
+												{title === 'Bundles' && ('Shop All Bundles')}
+												{title !== 'Bundles' && (`Shop ${menu.title} Range`)}
+											</strong>
+										</a>
 									</li>
 								</ul>
 							)}
@@ -86,7 +109,16 @@ const MobileMenu = (props: any) => {
 					)
 				})}
 				<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
-					<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">Bali Beauty Club <BeautyIcon className="ml-1 mr-1" /></a>
+					{!isLoggedIn && (
+						<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
+							Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
+						</a>
+					)}
+					{isLoggedIn && (
+						<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
+							{userPts} Points <BeautyIcon className="ml-1 mr-1" />
+						</button>
+					)}
 				</li>
 				<li key="shopall" className="my-g p-g">
 					<Link href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</Link>
@@ -116,9 +148,9 @@ const MobileMenu = (props: any) => {
 				</li>
 				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g">
 					<a href="https://support.cocoandeve.com/hc/en-us" className="px-hg w-1/2 mb-1 text-body">Help</a>
-					<Link href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</Link>
-					<Link href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</Link>
-					<Link href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</Link>
+					<a href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</a>
+					<a href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</a>
+					<a href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</a>
 				</li>
 			</ul>
 		</nav>

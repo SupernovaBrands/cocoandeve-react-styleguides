@@ -4,7 +4,7 @@ import PinterestSquare from '~/images/icons/pinterest-square.svg';
 import Youtube from '~/images/icons/youtube.svg';
 import Tiktok from '~/images/icons/tiktok.svg';
 import PalmTree from '~/images/icons/palm-tree.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
@@ -38,6 +38,12 @@ const Footer = (props: any) => {
         setEmail(e.target.value);
     }
 
+    useEffect(() => {
+        fetch('/api/account/auth').then((res) => res.json()).then((data) => {
+            if (data.isLoggedIn) setEmail(data.email);
+        });
+    }, []);
+
     return (
         <footer className="pt-4 pb-1">
             <div className="container mb-4 lg:mb-3 px-g">
@@ -48,12 +54,12 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
                         <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
-                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
+                        <p className="text-base lg:text-sm mt-1 lg-mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-base lg:text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>
-            <div className="container mt-4 px-g">
-                <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-currency"] lg:grid-cols-[2fr_2fr_2fr_4fr_2fr_2fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
+            <div className="container mt-4 px-g lg:mt-3">
+                <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-currency"] lg:grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1.5fr_1.5fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
                     <div className="[grid-area:nav-shop] mb-g lg:mb-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
                         <ul className="list-unstyled">
@@ -78,16 +84,16 @@ const Footer = (props: any) => {
                             <Instagram className="h-[1.25em]" />
                         </a>
                         <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
-                            <FacebookSquare className="h-[1.25em]" />
+                            <FacebookSquare className="h-[1.25em] lg:ml-[4px]" />
                         </a>
                         <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank">
-                            <PinterestSquare className="h-[1.25em]" />
+                            <PinterestSquare className="h-[1.25em] lg:ml-[4px]" />
                         </a>
                         <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
-                            <Youtube className="h-[1.25em]" />
+                            <Youtube className="h-[1.25em] lg:ml-[4px]" />
                         </a>
                         <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank">
-                            <Tiktok className="h-[1.25em]" />
+                            <Tiktok className="h-[1.25em] lg:ml-[4px]" />
                         </a>
                     </div>
                     <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right mt-3 lg:mt-0">
@@ -135,7 +141,7 @@ const Footer = (props: any) => {
                         </div>
                     </div>
                 </div>
-                <hr className="border-body mb-1 mt-2 lg:mt-4 lg:mb-1 lg:opacity-20" />
+                <hr className="border-body mb-1 mt-2 lg:mt-3 lg:mb-1 lg:opacity-20" />
                 <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-2 lg:text-base text-sm ">© 2024 Coco&amp;Eve</p>
             </div>
         </footer>

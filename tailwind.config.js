@@ -63,6 +63,8 @@ module.exports = {
       'gray-700': '#7B7B7B',
       'gray-800': '#494949',
       'gray-900': '#e4e4e4',
+      'gray-910': '#D1D1D1',
+      'gray-920': '#e8e8e1',
       'blue': '#213E7B',
       'blue-dark': '#162A53',
       'white': '#fff',
@@ -75,6 +77,7 @@ module.exports = {
       'medium': '#AA7878',
       'body-light': '#f6e4ef',
       'placeholder': '#cecece',
+      'account-disabled': '#f4dade',
     },
     fontFamily: {
       sans: ['var(--font-sofia)'],

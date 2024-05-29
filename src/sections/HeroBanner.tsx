@@ -63,17 +63,22 @@ const HeroBanner = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 							{slides.map((slide: any, index: number) => (
 								<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
-									<div className="flex items-center justify-center">
-										<picture>
+									<a href={slide?.slide_link || ''} className="flex items-center justify-center">
+										<picture className='px-g'>
+											<source srcSet={slide?.image?.url} media="(min-width: 1601px)" width="1920" height="733" />
+											<source srcSet={slide?.image?.url} media="(min-width: 1401px)" width="1600" height="611" />
+											<source srcSet={slide?.image?.url} media="(min-width: 1201px)" width="1400" height="534" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1025px)" width="1200" height="458" />
-											<img className="block w-full" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} />
+											<source srcSet={slide?.image?.url} media="(min-width: 992px)" width="1140" height="435" />
+											<img className="block" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
 										</picture>
-									</div>
+									</a>
 								</div>
 							))}
 						</Carousel.Inner>
 						<Carousel.Navigation>
-						<ol className="carousel__dots justify-end">
+						{slides.length > 1 && (
+							<ol className="carousel__dots justify-end">
 								{slides.map((_: any, index: number) => (
 									<li key={index} className={`border border-white ${index === idx1 ? ' bg-white' : ''}`}>
 										<DotButton
@@ -83,13 +88,14 @@ const HeroBanner = (props: any) => {
 									</li>
 								))}
 							</ol>
+						)}
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
 				) : (
 					<div className='bg-shimmer pt-[111.83575%] lg:pt-[38.17708%]'></div>
 				)}
 			</section>
-			{isLoadingComp && (
+			{!isLoadingComp && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>

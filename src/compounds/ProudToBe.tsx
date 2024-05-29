@@ -6,7 +6,22 @@ import ToxinFree from '~/images/icons/toxin-free.svg';
 import Ethically from '~/images/icons/ethically.svg';
 import ParabenFree from '~/images/icons/paraben-free.svg';
 import Peta from '~/images/icons/peta.svg';
+import Gluten from '~/images/icons/gluten.svg';
+import Sulfate from '~/images/icons/natural-dha.svg';
 import { useRef, useEffect, useState } from 'react';
+
+const iconsData = {
+    'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span></>,
+    'sulfate-free': <><Sulfate className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
+    'gluten': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
+    'vegan': <><Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span></>,
+    'silicone-free': <><DimethiconeFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Silicone Free</span></>,
+    'cruelty-free': <><CrueltyFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Cruelty Free</span></>,
+    'toxin-free': <><ToxinFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Toxin-free</span></>,
+    'ethically': <><Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span></>,
+    'paraben-free': <><ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span></>,
+    'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>
+}
 
 const ProudToBe = (props:any) => {
     const { proudToBe } = props;
@@ -41,30 +56,11 @@ const ProudToBe = (props:any) => {
         <div className="">
                 <div className="carousel--scroll position-relative">
                     <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
-                        {proudToBeArr.includes('natural-dha') && <li className="col-2 flex items-center flex-col px-1 carousel-item active">
-                            <NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span>
-                        </li>}
-                        {proudToBeArr.includes('vegan') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span>
-                        </li>}
-                        {proudToBeArr.includes('silicone-free') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <DimethiconeFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Silicone Free</span>
-                        </li>}
-                        {proudToBeArr.includes('cruelty-free') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <CrueltyFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Cruelty Free</span>
-                        </li>}
-                        {proudToBeArr.includes('toxin-free') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <ToxinFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Toxin-free</span>
-                        </li>}
-                        {proudToBeArr.includes('ethically') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span>
-                        </li>}
-                        {proudToBeArr.includes('paraben-free') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span>
-                        </li>}
-                        {proudToBeArr.includes('peta') && <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                            <Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span>
-                        </li>}
+                        {proudToBeArr.map((proud:any) => (
+                            <li className="min-w-[16.6%] flex items-center flex-col px-1 carousel-item active">
+                                {iconsData[proud]}
+                            </li>
+                        ))}
                     </ul>
                     <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
                         <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{width, left}} ref={scrollThumb}></div>
