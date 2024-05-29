@@ -195,7 +195,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 				<CloseButton handleClose={handleClose} className={nbp_heading_color} />
 				<div className="flex flex-wrap justify-end lg:-mx-g sm:-mx-hg">
 					{!formCompleted && (
-						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0">
+						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
 							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-g font-bold leading-[1.563rem]`}>{nbp_heading_2}</p>
 							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
@@ -208,7 +208,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-1 -ml-[1px] bg-white border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
-							<Button type="submit" buttonClass="w-full btn-primary border-0 relative" onClick={handleForm}>{nbp_submit}</Button>
+							<Button type="submit" buttonClass="w-full btn-primary border-0 relative">{nbp_submit}</Button>
 						</form>
 					)}
 					{formCompleted && (
