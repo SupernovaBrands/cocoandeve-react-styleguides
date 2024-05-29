@@ -15,7 +15,7 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz,
-		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting } = props;
+		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting, trackEvent } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -212,7 +212,7 @@ const Header = (props: any) => {
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
 				/>
-				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
+				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}

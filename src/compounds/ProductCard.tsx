@@ -42,6 +42,7 @@ const AddToCartButton = (props:any) => {
         await addToCart({
             id: selectedVariant.id,
             quantity: 1,
+            handle: selectedVariant?.product?.handle,
         });
         setAddingItem(false);
     }
@@ -123,11 +124,32 @@ const isKit = (title:string) => {
 }
 
 const ProductCardTall = (props:any) => {
-    const { abtestBtn, smSingleStar, addToCart } = props;
+    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
-
     const { product } = props;
+
+    const trackLink = () => {
+        if (carousel) {
+            trackEvent('carousel_product', {
+                category: 'Clickout',
+                target: product.handle,
+            });
+        }
+
+        if (eventNameOnClick) {
+            trackEvent(eventNameOnClick, {
+                category: 'Clickout',
+                target: product.handle,
+            });
+        }
+
+        trackEvent('product_card_click', {
+            category: 'Clickout',
+            target: product.handle,
+        });
+    }
+
     useEffect(() => {
         if (product && product.variants) {
             if (isKit(product.title)) {
@@ -147,7 +169,7 @@ const ProductCardTall = (props:any) => {
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
+            <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
                 <picture className="!pt-2 embed-responsive before:pt-[100%] block relative aspect-square rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
@@ -163,7 +185,7 @@ const ProductCardTall = (props:any) => {
                         </picture>
                     )}
                 </picture>
-            </a>
+            </Link>
 
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className="pt-2 pb-0 px-25 lg:px-1 relative grow flex flex-col bg-pink-light rounded-b">
@@ -171,7 +193,7 @@ const ProductCardTall = (props:any) => {
                     <YotpoStar smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-0 lg:px-0'}`}>
-                    <Link href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
+                    <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>

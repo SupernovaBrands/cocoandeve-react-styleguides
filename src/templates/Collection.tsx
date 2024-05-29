@@ -73,6 +73,7 @@ const Collection = (props: any) => {
         tcPopups,
         store,
         buildProductCardModel,
+        trackEvent,
     } = props;
 
     const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -302,6 +303,8 @@ const Collection = (props: any) => {
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
                                             addToCart={addToCart}
+                                            trackEvent={trackEvent}
+                                            eventNameOnClick='collection_product_card'
                                         />
                                     </>
                                 ) : (
@@ -313,7 +316,9 @@ const Collection = (props: any) => {
                                         setWaitlistData={setWaitlistData}
                                         smSingleStar={true}
                                         addToCart={addToCart}
-                                    />
+                                        trackEvent={trackEvent}
+                                        eventNameOnClick='collection_product_card'
+                                        />
                                 )
                             })}
                             {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}

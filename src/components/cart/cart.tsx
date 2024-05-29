@@ -39,12 +39,13 @@ interface Props {
 	discountBanner?: any;
 	removeDiscount?: any;
 	changeVariant?: any;
+	trackEvent?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -115,6 +116,14 @@ const Cart: React.FC<Props> = (props) => {
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
+		try {
+			trackEvent('cart_cta', {
+				category: "Cart Drawer",
+				target: "Checkout"
+			});
+		} catch(e) {
+			console.log(e, 'error on submit checkout');
+		}
 		const location = e.target.getAttribute('href');
 		window.location.href = location;
 		// process for analytics then go to checkout page
