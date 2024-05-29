@@ -93,10 +93,15 @@ const MobileMenu = (props: any) => {
 										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
-									<li key="menuTitle" className="border-b p-0"><h4 className="px-g py-1 mb-0">{title}</h4></li>
+									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{title}</h4></li>
 									{menu.rows.map((row, index) => (<li key={`row-${row.handle}-${index}`} className="border-b p-0"><a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{row.title}</a></li>))}
-									<li key="shopall" className="border-b p-0">
-										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline"><strong>Shop All {menu.title}</strong></a>
+									<li key="shopall" className="p-0">
+										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
+											<strong>
+												{title === 'Bundles' && ('Shop All Bundles')}
+												{title !== 'Bundles' && (`Shop ${menu.title} Range`)}
+											</strong>
+										</a>
 									</li>
 								</ul>
 							)}
@@ -143,9 +148,9 @@ const MobileMenu = (props: any) => {
 				</li>
 				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g">
 					<a href="https://support.cocoandeve.com/hc/en-us" className="px-hg w-1/2 mb-1 text-body">Help</a>
-					<Link href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</Link>
-					<Link href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</Link>
-					<Link href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</Link>
+					<a href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</a>
+					<a href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</a>
+					<a href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</a>
 				</li>
 			</ul>
 		</nav>

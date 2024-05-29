@@ -138,9 +138,12 @@ const ProductCardTall = (props:any) => {
                 })
                 setSkus(single.map((node:any) => node.sku));
             }
-            setSelectedVariant(product.variants?.nodes[0] || null);
         }
     }, [product, selectedVariant]);
+
+    useEffect(() => {
+        setSelectedVariant(product?.variants?.nodes[0] || null);
+    }, []);
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>

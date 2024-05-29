@@ -66,24 +66,16 @@ const Cart: React.FC<Props> = (props) => {
 	const [shippingLineHide, setShippingLineHide] = useState(false);
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 
-	const { data: productImages } = useProductImages();
-
-	useEffect(() => {
-		if (props.styleguide) {
-			setLoadingInit(true);
-		}
-	}, []);
+	// const { data: productImages } = useProductImages();
 
 	useEffect(() => {
 		if (cartData) {
 			setCart({ ...cartData });
-			setDiscountData({...cartData.discountData, loaded: true});
+			if (cartData.disocuntData) {
+				setDiscountData({...cartData.discountData, loaded: true});
+			}
 		}
 	}, [cartData, itemCount]);
-
-	useEffect(() => {
-		// console.log('discountMeter1', discountMeter);
-	}, [discountMeter])
 
 	const onApplyDiscountCode = async (c:any) => {
 		return await handleDiscount(c);
@@ -117,12 +109,14 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const getId = (shopifyId: string) => {
-		const arrString = shopifyId.split('/');
-		return arrString[arrString.length - 1];
+		const arrString = shopifyId?.split('/');
+		return arrString ? arrString[arrString.length - 1] : '';
 	};
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
+		const location = e.target.getAttribute('href');
+		window.location.href = location;
 		// process for analytics then go to checkout page
 
 		// e.preventDefault();
@@ -324,14 +318,7 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true, store)}</strong>
 								<div className="w-full mt-1">
-									<Link onClick={submitForm} href={cart.checkoutUrl} className="btn w-full btn-lg btn-primary">{tStrings.cart_checkout}</Link>
-									{/* <Button buttonClass="btn-primary w-full"
-										disabled={loadingDiscount}
-										onClick={submitForm}
-										data-cy="checkout-btn"
-										>
-										{tStrings.cart_checkout}
-									</Button> */}
+									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
 							{tStrings.cart_shipping_at_checkout !== '' && (

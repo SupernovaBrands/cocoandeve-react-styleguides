@@ -180,8 +180,8 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 	};
 
 	const copyCode = (e) => {
-		const dataCode = e.target.dataset.code;
-		navigator.clipboard.writeText(dataCode);
+		//const dataCode = e.currentTarget.getAttribute('data-code');
+		navigator.clipboard.writeText('WELCOME');
 		setCopied(true);
 	};
 
