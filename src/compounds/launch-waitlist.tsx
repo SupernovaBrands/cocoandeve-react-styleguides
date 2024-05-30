@@ -15,12 +15,13 @@ interface LaunchWaitListProps {
     store?: string;
     onSubmitLaunchWaitlist?: any;
     forwardRef?: any;
+    loggedInEmail?: any;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const countries = countriesList;
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(props.loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneCode, setPhoneCode] = useState(countries[0].maskValue);
     const [tos, setTos] = useState(true);
@@ -97,7 +98,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className="mb-3 font-size-sm" dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail}/>
+                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={props.loggedInEmail ?? ''}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className="block mb-1 -mt-1">or</span>

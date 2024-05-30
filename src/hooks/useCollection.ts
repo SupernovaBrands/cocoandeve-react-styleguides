@@ -51,6 +51,7 @@ export const useCollectionSettings = (handle: string) => {
 	const mainSettings = data?.CollectionSettings.find((section: any) => section.__component === `collection.${handleName}-range-collection-setting`) || universalBanner;
 	let filterCollectionHandles = data?.filter_collections_handles
 	if (isPreview) filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
+	const quizSetting = data?.quiz_collection;
 
 	return {
 		error,
@@ -59,5 +60,6 @@ export const useCollectionSettings = (handle: string) => {
 		filterCollectionHandles,
 		isLoading,
 		store,
+		quizSetting,
 	}
 };

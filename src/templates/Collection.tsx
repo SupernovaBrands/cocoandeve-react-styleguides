@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { isWaitlist } from "~/modules/utils";
+import { getFeaturedImages, isWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 
@@ -71,8 +71,13 @@ const Collection = (props: any) => {
         sort,
         addToCart,
         tcPopups,
+        store,
+        buildProductCardModel,
+        trackBluecoreEvent,
+        trackEvent,
     } = props;
 
+    const [featuredImg, setFeaturedImg] = useState<any>([]);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -90,10 +95,11 @@ const Collection = (props: any) => {
     const router = useRouter();
     const [sidebarMenu, setSidebarMenu] = useState(sidebar_collection_ph);
     const [childMenu, setChildMenu] = useState([]);
+    const [defaultSort, setDefaultSort] = useState(sort);
 
-    const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
+    const [collProducts, setCollProducts] = useState(products);
 
     let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
     if (handle !== 'all') {
@@ -133,7 +139,14 @@ const Collection = (props: any) => {
 
     const selectSortChange = (e: any) => {
         showLoading(e);
-        router.push(`/collections/${handle}/${e.target.value}`);
+        fetch(`/api/collectionProducts/?sort=${e.target.value}&handle=${currentCollection.handle}`).then((r) => r.json())
+            .then((data) => {
+                const { products } = data;
+                const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                setCollProducts(mapped);
+                setLoading(false);
+                setDefaultSort(e.target.value);
+            });
     };
 
     useEffect(() => {
@@ -146,17 +159,37 @@ const Collection = (props: any) => {
     const collectionSingle = useCollectionSingle(handleFooter);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
-    const loadWaitlist = isWaitlist(sortedByAvailable);
+    const loadWaitlist = isWaitlist(collProducts);
 
     useEffect(() => {
+        setLoading(true);
         fetch(`/api/collectionInfo?${new URLSearchParams({
 			parentHandle: mainCollectionHandles,
             childrenHandle: subHandles
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
             setChildMenu(data.childrens);
+            if (defaultSort !== 'featured') {
+                fetch(`/api/collectionProducts/?sort=${defaultSort}&handle=${currentCollection.handle}`).then((r) => r.json())
+                .then((data) => {
+                    const { products } = data;
+                    const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                    setCollProducts(mapped);
+                    setLoading(false);
+                });
+            }
+            setLoading(false);
         });
     }, [handle]);
+
+    useEffect(() => {
+        const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
+        setCollProducts(sortedByAvailable);
+    }, [products]);
+
+    useEffect(() => {
+        getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
+    }, []);
 
     return (
         <>
@@ -181,12 +214,13 @@ const Collection = (props: any) => {
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
-                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded" ref={sidebarRef}>
-                                {sidebarMenu.map((parent: any) => {
+                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded lg:mb-g" ref={sidebarRef}>
+                                {sidebarMenu.map((parent: any, index:number) => {
                                     const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
+                                    const isLast = (sidebarMenu.length - 1) === index;
                                     return (
-                                    <li className="mb-1" key={`sidebarr--${parent.handle}`}>
+                                    <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <Link
                                             onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
@@ -207,16 +241,16 @@ const Collection = (props: any) => {
                             {!isLoading && (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg">
-                                        <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[50px]" defaultValue={selectFilterValue}>
+                                        <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[3.125em]" defaultValue={selectFilterValue}>
                                             <option>Filter by</option>
-                                            {sidebarMenu.map((parent: any) => {
+                                            {sidebarMenu.map((parent: any, index: number) => {
                                                 const html = parent.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option key={`collection--filter-${parent.handle}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                                return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
                                             })}
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
-                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[50px]" defaultValue={sort}>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em]" defaultValue={defaultSort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
                                             <option value="price-low-high">Price, low to high</option>
@@ -230,12 +264,12 @@ const Collection = (props: any) => {
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
-                                        {childMenu.length > 0 && childMenu.map((children) => {
+                                        {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
-                                                        key={`tags--${children.handle}`}
+                                                        key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
                                                         className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
@@ -255,34 +289,40 @@ const Collection = (props: any) => {
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                 </div>
                             )}
-                            {sortedByAvailable.length > 0 && sortedByAvailable.map((item: any, index: number) => {
+                            {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 if (!item.src) {
                                     item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                     item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
                                 }
                                 return showQuizCard && index === 2 ? (
                                     <>
-                                        <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
+                                        {!collectionSettings.isLoading && (
+                                            <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
+                                        )}
                                         <ProductCard
-                                            key={`collection-temp-${handle}-${item.id}`}
+                                            key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
                                             addToCart={addToCart}
+                                            trackEvent={trackEvent}
+                                            eventNameOnClick='collection_product_card'
                                         />
                                     </>
                                 ) : (
                                     <ProductCard
-                                        key={`collection-temp-${handle}-${item.id}`}
+                                        key={`collection-a-${handle}-${item.id}-${index}`}
                                         product={item}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                         button={true}
                                         setWaitlistData={setWaitlistData}
                                         smSingleStar={true}
                                         addToCart={addToCart}
-                                    />
+                                        trackEvent={trackEvent}
+                                        eventNameOnClick='collection_product_card'
+                                        />
                                 )
                             })}
                             {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
@@ -309,7 +349,7 @@ const Collection = (props: any) => {
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                    <ModalWaitlist trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
             )}
         </>

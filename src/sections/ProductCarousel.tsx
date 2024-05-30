@@ -33,7 +33,7 @@ const ProductCarousel = (props: any) => {
         handle: undefined,
     });
 
-	const { isStyleguide, products, data, addToCart } = props;
+	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -101,6 +101,7 @@ const ProductCarousel = (props: any) => {
 												smSingleStar={true}
 												carousel={true}
 												addToCart={addToCart}
+												trackEvent={trackEvent}
 											/>
 										)
 									})}
@@ -140,6 +141,7 @@ const ProductCarousel = (props: any) => {
 												smSingleStar={true}
 												carousel={true}
 												addToCart={addToCart}
+												trackEvent={trackEvent}
 											/>
 										)
 									})}
@@ -179,6 +181,7 @@ const ProductCarousel = (props: any) => {
 												smSingleStar={true}
 												carousel={true}
 												addToCart={addToCart}
+												trackEvent={trackEvent}
 											/>
 										)
 									})}
@@ -209,7 +212,7 @@ const ProductCarousel = (props: any) => {
 			</div>
 		</div>
 			<Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+                <ModalWaitlist data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         	</Modal>
 		</>
 	);

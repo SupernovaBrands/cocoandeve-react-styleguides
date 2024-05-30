@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AnnouncementBar from '~/components/AnnouncementBar';
 import NavMegaMenu from '~/compounds/NavMegaMenu';
 import MobileMenu from '~/compounds/MobileMenu';
@@ -15,7 +15,7 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz,
-		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting } = props;
+		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting, trackEvent } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -53,6 +53,9 @@ const Header = (props: any) => {
 		window.location.href = url;
 		if (isLoggedIn) window.location.reload();
 	};
+
+	const accountRef = useRef(null);
+
 
 	useEffect(() => {
 		let lastScrollTop = 0;
@@ -108,6 +111,19 @@ const Header = (props: any) => {
 			fetch(`/api/account/points`).then((data) => data.json()).then((data) => setUserPts(data.points));
 		}
 	}, [isLoggedIn]);
+
+
+	useEffect(() => {
+		const closeDropdown = (e) => {
+			if (openAccountBox && !accountRef.current?.contains(e.target)) {
+				setOpenAccountBox(false);
+			}
+		};
+		document.addEventListener('mousedown', closeDropdown);
+		return () => {
+		    document.removeEventListener('mousedown', closeDropdown);
+		  };
+	}, [openAccountBox]);
 
 	return (
 		<>
@@ -176,17 +192,19 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<button type="button" onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary">
+								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary hover:no-underline">
 									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
-								</button>
+								</a>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
-							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
+							<li key="account" ref={accountRef} id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
-								{!isLoggedIn && <AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />}
+								{!isLoggedIn && (
+									<AccountDropdown openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
 								<button type="button" className="h4 m-0 flex font-bold py-[6px] lg:py-hg" data-cy="search-icon" onClick={onToggleSearchBox}>
@@ -212,7 +230,7 @@ const Header = (props: any) => {
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
 				/>
-				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} openSearchBox={openSearchBox} />
+				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}

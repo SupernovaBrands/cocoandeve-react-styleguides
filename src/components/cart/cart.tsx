@@ -39,16 +39,21 @@ interface Props {
 	discountBanner?: any;
 	removeDiscount?: any;
 	changeVariant?: any;
+	trackEvent?: any;
+	tiktokEvent?: any;
+	fbqEvent?: any;
+	currency?: any;
+	user?: any;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
-		items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
+		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
@@ -115,11 +120,38 @@ const Cart: React.FC<Props> = (props) => {
 
 	const submitForm = (e:any) => {
 		e.preventDefault();
+		try {
+			trackEvent('cart_cta', {
+				category: "Cart Drawer",
+				target: "Checkout"
+			});
+
+			const cartId = cart.id.replace('gid://shopify/Cart/', '');
+			const payload = {
+				value: cart.totalAmount > 0 ? cart.totalAmount / 100 : 0,
+				currency,
+				contents: [],
+				event_id: cartId,
+			};
+
+			cart.items.forEach((item) => {
+				payload.contents.push({
+					content_id: item.merchandise.sku,
+					content_name: item.merchandise.title,
+					price: parseFloat(item.merchandise.price.amount),
+					quantity: item.quantity,
+				});
+			});
+
+			tiktokEvent('InitiateCheckout', payload, user?.email);
+			fbqEvent('track', 'InitiateCheckout');
+
+		} catch(e) {
+			console.log(e, 'error on submit checkout');
+		}
+
 		const location = e.target.getAttribute('href');
 		window.location.href = location;
-		// process for analytics then go to checkout page
-
-		// e.preventDefault();
 	}
 
 	const onToggleManualGwp = async (id:any) => {

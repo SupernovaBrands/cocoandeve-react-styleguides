@@ -14,10 +14,11 @@ interface WatilistData {
 
 type WaitlistProp = {
 	handleClose: () => void
-	data: WatilistData
+	data: WatilistData,
+	trackBluecoreEvent?: any,
 }
 
-const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
+const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEvent }) => {
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
 
@@ -31,7 +32,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
 	const wlNoOOS = [];
 	if (waitlistNonOOS && waitlistNonOOS.length > 0) {
-		waitlistNonOOS.forEach((data) => {
+		waitlistNonOOS.forEach((data:any) => {
 			const waitlistData = data?.waitlistNonOos?.waitlistNonOos?.[store];
 			if (waitlistData && waitlistData?.enabled) wlNoOOS.push(waitlistData);
 		});
@@ -40,7 +41,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 	const isNonOOs = wlNoOOS.find(
 		(item) => item.waitlist_popup_handles?.includes(data.handle),
 	);
-	const handleSubmit = (e) => {
+	const handleSubmit = (e:any) => {
 		e.preventDefault();
 		const email = inputRef.current.value;
 		if (validateEmail(email) && data.handle) {
@@ -51,6 +52,12 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data }) => {
 		} else {
 			setSuccess(false);
 			setFormError(true);
+		}
+
+		try {
+			trackBluecoreEvent(email, data.handle);
+		} catch(e) {
+			console.log(e, 'error');
 		}
 	};
 	return (

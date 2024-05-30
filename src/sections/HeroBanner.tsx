@@ -8,6 +8,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import Modal from "~/components/Modal";
 import TermCondition from '~/components/modal/TermCondition';
 import useHomepage from '../hooks/useHomepage';
+import Link from 'next/link';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -63,7 +64,7 @@ const HeroBanner = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 							{slides.map((slide: any, index: number) => (
 								<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
-									<a href={slide?.slide_link || ''} className="flex items-center justify-center">
+									<Link onClick={() => { props.trackEvent('hero_banner_click', {category: 'Clickout'}) }} href={slide?.slide_link || ''} className="flex items-center justify-center">
 										<picture className='lg:px-g'>
 											<source srcSet={slide?.image?.url} media="(min-width: 1601px)" width="1920" height="733" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1401px)" width="1600" height="611" />
@@ -72,7 +73,7 @@ const HeroBanner = (props: any) => {
 											<source srcSet={slide?.image?.url} media="(min-width: 992px)" width="1140" height="435" />
 											<img className="block" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
 										</picture>
-									</a>
+									</Link>
 								</div>
 							))}
 						</Carousel.Inner>
