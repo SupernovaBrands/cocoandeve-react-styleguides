@@ -20,8 +20,9 @@ interface LaunchWaitListProps {
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const countries = countriesList;
+    const { loggedInEmail } = props;
 
-    const [email, setEmail] = useState(props.loggedInEmail ?? '');
+    const [email, setEmail] = useState(loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneCode, setPhoneCode] = useState(countries[0].maskValue);
     const [tos, setTos] = useState(true);
@@ -39,7 +40,6 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
         if (validForm) {
             props.onSubmitLaunchWaitlist({email, phoneCode, phoneNumber, fallback: () => {
-                console.log('after submit');
                 setShowSuccess(true);
             }});
         }
@@ -91,6 +91,12 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         }
     }, [email, phoneNumber, phoneCode, tos]);
 
+    useEffect(() => {
+        if (loggedInEmail) {
+            setEmail(loggedInEmail);
+        }
+    }, [loggedInEmail]);
+
     return (
         <>
             { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
@@ -98,7 +104,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className="mb-3 font-size-sm" dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={props.loggedInEmail ?? ''}/>
+                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className="block mb-1 -mt-1">or</span>
