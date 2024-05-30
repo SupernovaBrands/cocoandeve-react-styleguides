@@ -73,6 +73,7 @@ const Collection = (props: any) => {
         tcPopups,
         store,
         buildProductCardModel,
+        trackBluecoreEvent,
         trackEvent,
     } = props;
 
@@ -348,7 +349,7 @@ const Collection = (props: any) => {
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                    <ModalWaitlist trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
             )}
         </>

@@ -21,7 +21,7 @@ interface LaunchWaitListProps {
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const countries = countriesList;
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(props.loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneCode, setPhoneCode] = useState(countries[0].maskValue);
     const [tos, setTos] = useState(true);
