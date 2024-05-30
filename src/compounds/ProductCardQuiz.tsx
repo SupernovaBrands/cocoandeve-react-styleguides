@@ -16,7 +16,7 @@ type PropType = {
 
 const ProductCardQuiz: React.FC<PropType> = ({quizSetting}) => {
 	return (
-		<a className="w-full md:w-1/3 mb-5 px-0 lg:px-g text-left lg:text-center relative">
+		<a href={quizSetting.quiz_button_url} className="w-full md:w-1/3 mb-5 px-0 lg:px-g text-left lg:text-center relative">
 			<figure className="mb-0 h-full">
 				<picture className="block m-0 h-full">
 					<source media="(min-width:768px)" srcSet={quizSetting.quiz_image_desktop.url} />
