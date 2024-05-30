@@ -125,10 +125,19 @@ const AccountDropdown = (props) => {
         setAllowSubmit(firstname && lastname && pass && email && tosAgree && !emptyPass);
     }, [tosAgree]);
 
+    const accountRef = useRef(null);
+	useEffect(() => {
+        document.addEventListener('mousedown', (e) => {
+            if (openAccountBox && !accountRef.current?.contains(e.target)) {
+                props.setOpenAccountBox(false);
+            }
+        });
+    }, []);
+
     return (
-        <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div ref={accountRef} id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
-                    <div className='flex'>
+                    <div className='flex dropdown__login__register'>
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
                             <p className="font-bold text-center px-2 mb-2">Earn and redeem points from purchases</p>
                             <SocialLogin idSuffix={'loginDropdown'} />
@@ -155,7 +164,7 @@ const AccountDropdown = (props) => {
                     </div>
                 )}
                 {!activeFrame && (
-                    <div className={`flex `}>
+                    <div className={`flex dropdown__login__register`}>
                         <form onSubmit={handleSubmit} id="dropdown__register" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
                             <p className=" font-bold  text-center px-2 mb-2">Welcome</p>
                             <SocialLogin idSuffix={'registerDropdown'} />

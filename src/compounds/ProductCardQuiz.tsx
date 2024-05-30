@@ -28,7 +28,7 @@ const ProductCardQuiz: React.FC<PropType> = ({quizSetting}) => {
 							__html: quizSetting.quiz_title
 						}}
 					/>
-					<a href={quizSetting.quiz_button_url} className="inline-block font-bold py-[13px] rounded-full border-2 border-primary lg:mb-2 px-g lg:px-4 bg-white text-primary hover:no-underline">{quizSetting.quiz_button_cta}</a>
+					<span className="inline-block font-bold py-[13px] rounded-full border-2 border-primary lg:mb-2 px-g lg:px-4 bg-white text-primary hover:no-underline">{quizSetting.quiz_button_cta}</span>
 				</figcaption>
 			</figure>
 		</a>

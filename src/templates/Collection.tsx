@@ -219,7 +219,7 @@ const Collection = (props: any) => {
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     const isLast = (sidebarMenu.length - 1) === index;
                                     return (
-                                    <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}`}>
+                                    <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <Link
                                             onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
@@ -242,9 +242,9 @@ const Collection = (props: any) => {
                                     <div className="w-1/2 lg:hidden px-hg">
                                         <select onChange={selectFilterChange} className="custom-select p-1 rounded bg-white mb-2 border border-body w-full min-h-[3.125em]" defaultValue={selectFilterValue}>
                                             <option>Filter by</option>
-                                            {sidebarMenu.map((parent: any) => {
+                                            {sidebarMenu.map((parent: any, index: number) => {
                                                 const html = parent.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option key={`collection--filter-${parent.handle}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                                return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
                                             })}
                                         </select>
                                     </div>
@@ -263,12 +263,12 @@ const Collection = (props: any) => {
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
-                                        {childMenu.length > 0 && childMenu.map((children) => {
+                                        {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
-                                                        key={`tags--${children.handle}`}
+                                                        key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
                                                         className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
@@ -299,7 +299,7 @@ const Collection = (props: any) => {
                                             <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
                                         )}
                                         <ProductCard
-                                            key={`collection-temp-${handle}-${item.id}`}
+                                            key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
@@ -312,7 +312,7 @@ const Collection = (props: any) => {
                                     </>
                                 ) : (
                                     <ProductCard
-                                        key={`collection-temp-${handle}-${item.id}`}
+                                        key={`collection-a-${handle}-${item.id}-${index}`}
                                         product={item}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                         button={true}
