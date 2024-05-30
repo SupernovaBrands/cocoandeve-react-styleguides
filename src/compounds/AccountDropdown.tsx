@@ -125,17 +125,8 @@ const AccountDropdown = (props) => {
         setAllowSubmit(firstname && lastname && pass && email && tosAgree && !emptyPass);
     }, [tosAgree]);
 
-    const accountRef = useRef(null);
-	useEffect(() => {
-        document.addEventListener('mousedown', (e) => {
-            if (openAccountBox && !accountRef.current?.contains(e.target)) {
-                props.setOpenAccountBox(false);
-            }
-        });
-    }, []);
-
     return (
-        <div ref={accountRef} id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
