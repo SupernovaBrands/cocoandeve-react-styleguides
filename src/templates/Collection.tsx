@@ -213,12 +213,13 @@ const Collection = (props: any) => {
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
-                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded" ref={sidebarRef}>
-                                {sidebarMenu.map((parent: any) => {
+                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded lg:mb-g" ref={sidebarRef}>
+                                {sidebarMenu.map((parent: any, index:number) => {
                                     const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
+                                    const isLast = (sidebarMenu.length - 1) === index;
                                     return (
-                                    <li className="mb-1" key={`sidebarr--${parent.handle}`}>
+                                    <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}`}>
                                         <Link
                                             onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
@@ -294,7 +295,9 @@ const Collection = (props: any) => {
                                 }
                                 return showQuizCard && index === 2 ? (
                                     <>
-                                        <ProductCardQuiz key={`collection-quiz-card-${handle}--${index}`} />
+                                        {!collectionSettings.isLoading && (
+                                            <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
+                                        )}
                                         <ProductCard
                                             key={`collection-temp-${handle}-${item.id}`}
                                             product={item}
