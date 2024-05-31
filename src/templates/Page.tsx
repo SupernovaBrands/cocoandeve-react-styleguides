@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 
 const Page = (props: any) => {
     const { content, isLoading } = props;
-    console.log('test', content)
+    // console.log('test', content)
     return (
         <div className="pt-4">
             <div className="container">

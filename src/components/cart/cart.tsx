@@ -44,12 +44,13 @@ interface Props {
 	fbqEvent?: any;
 	currency?: any;
 	user?: any;
+	isAuthenticated?: boolean;
 }
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
@@ -118,7 +119,7 @@ const Cart: React.FC<Props> = (props) => {
 		return arrString ? arrString[arrString.length - 1] : '';
 	};
 
-	const submitForm = (e:any) => {
+	const submitForm = async (e:any) => {
 		e.preventDefault();
 		try {
 			trackEvent('cart_cta', {
@@ -150,8 +151,20 @@ const Cart: React.FC<Props> = (props) => {
 			console.log(e, 'error on submit checkout');
 		}
 
-		const location = e.target.getAttribute('href');
-		window.location.href = location;
+		if (isAuthenticated) {
+			try {
+				const { token } = await fetch(`/api/oauth/multipass?return_to=${cart.checkoutUrl}`).then(e => e.json());
+				if (token) {
+					window.location.href = `https://${store !== 'us' ? `${store}-` : ''}cocoandeve.myshopify.com/account/login/multipass/${token}`;
+				} else {
+					window.location.href = cart.checkoutUrl;
+				}
+			} catch (e) {
+				window.location.href = cart.checkoutUrl;
+			}
+		} else {
+			window.location.href = cart.checkoutUrl;
+		}
 	}
 
 	const onToggleManualGwp = async (id:any) => {
