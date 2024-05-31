@@ -7,9 +7,9 @@ import { instagram_ph } from "~/modules/placeholders";
 
 const Instagram = (props: any) => {
     const { instagramData: data } = props;
-    console.log('instagramData1', data);
+    // console.log('instagramData1', data);
     /*
-    
+
     useEffect(() => {
         if (getCookie('new_ig_media')) {
             setData(JSON.parse(getCookie('new_ig_media_')));
@@ -31,13 +31,13 @@ const Instagram = (props: any) => {
                 }
             );
         }
-        
+
         if (props.isStyleguide) {
             setData(instagram_ph);
         }
     }, []);
     */
-    
+
     return (
         <section className={`instagram pt-4 pb-3 text-center ${props.className} mx-auto bg-pink-light`}>
             <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
