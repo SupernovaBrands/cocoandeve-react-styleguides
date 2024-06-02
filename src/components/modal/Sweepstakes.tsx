@@ -75,13 +75,13 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 	const [formCompleted, setFormCompleted] = useState(false);
 	const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
 	
-	const isMobile = (window.innerWidth < 769);
+	const isMobile = (globalThis.innerWidth < 769);
 	const styles = {
 		'background-image': isMobile ? `` : `url(${data?.sweepstakes_popup_img_lg?.url})`,
 	};
 
 	const onClose = () => {
-		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 		handleClose();
 	};
 
@@ -172,12 +172,12 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 						<div className="px-g lg:px-4 py-3 lg:py-4">
 							<div className="flex flex-wrap -mx-hg lg:-mx-g justify-end lg:mb-g mb-0">
 								<div className="hidden lg:block w-3/4 lg:w-8/12 lg:pl-0 text-center pr-0 lg:pr-g">
-									<h2 className="modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 text-gray-600" dangerouslySetInnerHTML={{ __html: data.sweepstakes_popup_desc }} />
+									<h2 className="modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
+									<p className="lg:mb-0 lg:mt-1 text-gray-600" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g">
-									<h2 className="modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 font-size-sm mb-1 text-gray-600" dangerouslySetInnerHTML={{ __html: data.sweepstakes_popup_desc }} />
+									<h2 className="modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
+									<p className="lg:mb-0 lg:mt-1 font-size-sm mb-1 text-gray-600" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 							</div>
 							<div id="waitlist-page" className="flex flex-wrap justify-end" data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
