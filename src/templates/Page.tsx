@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 
-const Stockist = (props: any) => {
+const Page = (props: any) => {
     const { content, isLoading } = props;
     console.log('test', content)
     return (
         <div className="pt-4">
             <div className="container">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
-                    <div className="lg:px-g sm:px-hg lg:w-8/12 w-full">
+                    <div className="lg:px-g sm:px-hg lg:w-8/12 w-full relative">
                         <h1 className="text-center md:mb-7 mb-5">
                             {content.title}
                         </h1>
@@ -28,4 +28,4 @@ const Stockist = (props: any) => {
     );
 };
 
-export default Stockist;
+export default Page;
