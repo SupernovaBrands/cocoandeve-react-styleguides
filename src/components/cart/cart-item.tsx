@@ -181,7 +181,7 @@ export const CartItem = (props:CartItemProps) => {
 							</span>
 						)}
 					</p>
-					{item.isFreeItem && item.properties && item.properties._swell_redemption_token && (
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e) => e.key === '_swell_redemption_token') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">

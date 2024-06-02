@@ -32,7 +32,6 @@ const ProductWaitlist = (props: any) => {
     const submitForm = (e:any) => {
         e.preventDefault();
         props.onSubmitWaitlist({email, phoneCode, phoneNumber, smsBump: data.formId, fallback: () => {
-            console.log('after submit');
             setShowSuccess(true);
         }});
     }
