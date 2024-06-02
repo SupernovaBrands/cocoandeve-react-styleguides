@@ -7,7 +7,6 @@ import { instagram_ph } from "~/modules/placeholders";
 
 const Instagram = (props: any) => {
     const { instagramData: data } = props;
-    console.log('instagramData1', data);
     /*
     
     useEffect(() => {
