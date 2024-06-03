@@ -168,15 +168,15 @@ const Header = (props: any) => {
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
-						<a href="/" className="inline-block pt-[11px] pb-[11px] lg:pt-[14.5px] lg:pb-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
-							<BrandLogo className="lg:h-[41px]" />
+						<a href="/" className="inline-block py-[11px] lg:py-[14.5px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
+							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 							{mainMenu && mainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
-										<li key={`mainMenu-${i}`} className="nav-item pr-hg">
-											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold p-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
+										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
+											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
@@ -212,7 +212,7 @@ const Header = (props: any) => {
 
 						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg hover:text-primary hover:no-underline">
+								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline">
 									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
 									<PalmTree className="mx-1 h-2" />
 								</a>
