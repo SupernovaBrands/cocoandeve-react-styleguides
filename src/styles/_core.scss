@@ -123,6 +123,22 @@
 	}
 }
 
+.yotpo-widget-loyalty-page {
+	svg {
+		display: inline;
+	}
+
+	.flexified-child.yotpo-outer-tile {
+		img {
+			display: inline;
+		}
+	}
+
+	.yotpo-title-text, .yotpo-vip-tier-name, .yotpo-headline, .yotpo-description, .yotpo-redemption-reward {
+		line-height: normal;
+	}
+}
+
 // @charset 'UTF-8';
 
 @import 'core/functions';
