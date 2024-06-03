@@ -78,6 +78,9 @@ module.exports = {
       'body-light': '#f6e4ef',
       'placeholder': '#cecece',
       'account-disabled': '#f4dade',
+      'affiliate': '#ecb9c0',
+      'affiliate-black': '#2f2f2f',
+      'affiliate-green': '#e4f5f1'
     },
     fontFamily: {
       sans: ['var(--font-sofia)'],
