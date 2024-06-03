@@ -140,12 +140,12 @@ export const CartItem = (props:CartItemProps) => {
 
 	return (
 		<li className="cart-item" data-mod={item.modified}>
-		<figure className="flex flex-wrap py-1 mb-0 items-start -mx-2">
+		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-g">
 			<ConditionWrapper
 				condition={!item.isFreeItem}
-				wrapper={(children: any) => <a href={item.url} className="w-1/4 pl-2 pr-0">{children}</a>}
+				wrapper={(children: any) => <a href={item.url} className="w-3/12 px-g">{children}</a>}
 			>
-				<picture className={item.isFreeItem ? 'w-1/4 pl-2 pr-0' : ''}>
+				<picture className={item.isFreeItem ? 'w-3/12 px-g' : ''}>
 					{item.featuredImageUrl ? (
 						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-100 object-fit-contain bg-pink-light aa" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
@@ -153,7 +153,7 @@ export const CartItem = (props:CartItemProps) => {
 					)}
 				</picture>
 			</ConditionWrapper>
-			<figcaption className="w-3/4 px-2">
+			<figcaption className="w-9/12 px-g">
 				<div className="flex items-start no-gutters justify-between">
 					<p className="mb-1 font-bold w-2/3 pl-0">
 						{item.isFreeItem && item.originalPrice >= 0 ? (
@@ -161,7 +161,7 @@ export const CartItem = (props:CartItemProps) => {
 								condition={item.isFreeItem}
 								wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
 							>
-								{ item.isFreeItem && (`FREE ${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
 						)
 							: (
@@ -181,7 +181,13 @@ export const CartItem = (props:CartItemProps) => {
 							</span>
 						)}
 					</p>
-					{item.isFreeItem && item.attributes && item.attributes.findIndex((e) => e.key === '_swell_redemption_token') > -1 && (
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && e.value === 'auto_gwp') > -1 && (
+						<button className="cart-item__remove btn-unstyled text-body flex"
+								type="button" aria-label="Remove"
+								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon">
+									<SvgTrash className="svg w-[1em]" />
+						</button>)}
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_swell_redemption_token') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">

@@ -1,5 +1,4 @@
 /* global Cart */
-import dynamic from 'next/dynamic';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -95,23 +94,6 @@ export default class QuantityBox extends React.Component {
 				this.debounceChangeQuantity();
 			},
 		);
-		/*
-		if (this.state.quantity > min) {
-			this.setState(
-				{ quantity: qty - 1 },
-				() => {
-					this.debounceChangeQuantity();
-					const inventory = this.props.productStock;
-					if (inventory) {
-						const remaining = inventory;
-						if (this.state.quantity < remaining && !this.props.isLastStock) {
-							this.setState({ lastStock: false });
-						}
-					}
-				},
-			);
-		}
-		*/
 	}
 
 	onFocus = (e) => {
@@ -153,7 +135,7 @@ export default class QuantityBox extends React.Component {
 					onClick={this.onSubtractQuantity}
 					data-cy="cart-subtract-quantity-icon"
 				>
-					<SvgMinus className="svg w-[1em]" />
+					<SvgMinus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
 				</button>
 				<input
 					type="number"
@@ -174,7 +156,7 @@ export default class QuantityBox extends React.Component {
 					onClick={this.onAddQuantity}
 					data-cy="cart-add-quantity-icon"
 				>
-					<SvgPlus className="svg w-[1em]" />
+					<SvgPlus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
 				</button>
 			</div>
 		);

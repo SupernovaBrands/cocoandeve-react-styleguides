@@ -139,6 +139,16 @@
 	}
 }
 
+afterpay-placement {
+    --messaging-font-size: 0px;
+    --logo-badge-width: 80px;
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
 // @charset 'UTF-8';
 
 @import 'core/functions';

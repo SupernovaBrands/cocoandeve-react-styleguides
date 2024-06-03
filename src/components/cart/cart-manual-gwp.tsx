@@ -69,7 +69,7 @@ const CartManualGwp = (props:any) => {
 									</picture>
 									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded" dangerouslySetInnerHTML={markText(item.price ?? '$0')} />
 								</figure>
-								<p className="grow my-1 text-base h-full">{item.label}</p>
+								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
 								<Button
 									lg={false}
 								    buttonClass="btn-outline-primary px-1"

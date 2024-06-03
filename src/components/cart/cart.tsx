@@ -9,9 +9,7 @@ import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney } from "~/modules/utils";
-import Button from "../Button";
-import useProductImages from "~/hooks/useProductImages";
-import Link from "next/link";
+import KlarnaModal from '~/components/modal/KlarnaModal';
 
 // import { CartData } from "./types";
 // import { getCookie } from "~/modules/utils";
@@ -30,7 +28,7 @@ interface Props {
 	itemCount?: any;
 	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
-	onDeleteLine: (lineId: string) => void;
+	onDeleteLine: (lineId: string, attributes: Array<any>[]) => void;
 	discountMeter?: any;
 	shippingMeter?: any;
 	shippingData?: any;
@@ -64,27 +62,27 @@ const Cart: React.FC<Props> = (props) => {
 	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
 
 	const [giftCardData, setGiftCardData] = useState({});
-	const [discountData, setDiscountData] = useState({
-		isValid: false, code: '', amount: '0', isAuto: false, error: '', loaded: false,
-	});
 
-	const [loadingDiscount, setLoadingDiscount] = useState(false);
 	const [shippingLineHide, setShippingLineHide] = useState(false);
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
+	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
 
-	// const { data: productImages } = useProductImages();
+	const handleOpenModalKlarna = () => {
+		setIsModalKlarnaOpen(false);
+    }
+
+	const setIsKlarnaOpen = (stateModal:boolean) => {
+		setIsModalKlarnaOpen(stateModal);
+	}
 
 	useEffect(() => {
 		if (cartData) {
 			setCart({ ...cartData });
-			if (cartData.disocuntData) {
-				setDiscountData({...cartData.discountData, loaded: true});
-			}
 		}
 	}, [cartData, itemCount]);
 
-	const onApplyDiscountCode = async (c:any) => {
-		return await handleDiscount(c);
+	const onApplyDiscountCode = async (c:any, updateCart = true) => {
+		return await handleDiscount(c, updateCart);
 	}
 
 	const onRemoveDiscountCode = async () => {
@@ -110,8 +108,8 @@ const Cart: React.FC<Props> = (props) => {
 		onUpdateCart(item, qty);
 	}
 
-	const onRemoveItem = (item: any) => {
-		onDeleteLine(item.id);
+	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
+		onDeleteLine(item.id, attributes);
 	}
 
 	const getId = (shopifyId: string) => {
@@ -172,6 +170,7 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	return (
+		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true}>
 				<div className="modal-content mh-100 border-0 rounded-0">
 					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden max-h-[100vh]">
@@ -198,7 +197,7 @@ const Cart: React.FC<Props> = (props) => {
 									progressText={discountMeter.progressText}
 								/>
 							)}
-							<hr className="w-full m-0 mb-1" />
+							<hr className="w-full m-0" />
 						</div>
 
 						{loadingInit && (
@@ -214,12 +213,12 @@ const Cart: React.FC<Props> = (props) => {
 								</div>
 								<div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
-										isApplied={discountData?.isValid}
+										isApplied={cartData?.discountData?.isValid}
 										isEmptyCart={itemCount === 0}
-										code={discountData?.code}
-										discAmount={discountData?.amount}
-										isAutoDiscount={discountData?.isAuto}
-										error={discountData?.error}
+										code={cartData?.discountData?.code}
+										discAmount={cartData?.discountData?.amount}
+										isAutoDiscount={cartData?.discountData?.isAuto}
+										error={cartData?.discountData?.error}
 										onApply={onApplyDiscountCode}
 										onRemove={onRemoveDiscountCode}
 										appliedGiftCard={giftCardData}
@@ -241,7 +240,7 @@ const Cart: React.FC<Props> = (props) => {
 							>
 								<input type="hidden" name="checkout" value="Checkout" />
 
-								<ul className="list-unstyled border-b-[1px] pb-1">
+								<ul className="list-unstyled border-b-[1px] pb-0">
 									{cart.items && cart.items.map((item) => {
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
@@ -266,12 +265,12 @@ const Cart: React.FC<Props> = (props) => {
 								)}
 
 								<CartDiscountForm
-									isApplied={discountData?.isValid}
+									isApplied={cartData?.discountData?.isValid}
 									isEmptyCart={itemCount === 0}
-									code={discountData?.code}
-									discAmount={discountData?.amount}
-									isAutoDiscount={discountData?.isAuto}
-									error={discountData?.error}
+									code={cartData?.discountData?.code}
+									discAmount={cartData?.discountData?.amount}
+									isAutoDiscount={cartData?.discountData?.isAuto}
+									error={cartData?.discountData?.error}
 									onApply={onApplyDiscountCode}
 									onRemove={onRemoveDiscountCode}
 									appliedGiftCard={giftCardData}
@@ -282,40 +281,40 @@ const Cart: React.FC<Props> = (props) => {
 
 								<div className="flex flex-wrap mt-2 mb-1">
 									<p className="w-2/3 mb-1 font-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
-									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, true, store)}</p>
+									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
 									{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, true, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, false, store)}`}</p>
 										</>
 									)}
 
 									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, true, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
 										</>
 									)}
 
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, true, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
 
 									{isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold ">Rewards</p>
-											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(discountData?.amount, true, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(cartData?.discountData?.amount, false, store)}`}</p>
 										</>
 									)}
 
 									{shippingData?.show && !shippingLineHide && (
 										<>
 											<p className="hidden lg:block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, true, store) : 'Free'}</p>
+											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 										</>
 									)}
 
@@ -325,7 +324,7 @@ const Cart: React.FC<Props> = (props) => {
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 												</p>
-												<p className={`mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, true, store) : 'Free'}</p>
+												<p className={`mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
 										</>
 									)}
@@ -333,7 +332,7 @@ const Cart: React.FC<Props> = (props) => {
 									{giftCardAmount > 0 && (
 										<>
 											<p className="w-2/3 mb-1  font-bold ">{tStrings.giftCard}</p>
-											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(giftCardAmount, true, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(giftCardAmount, false, store)}`}</p>
 										</>
 									)}
 								</div>
@@ -352,7 +351,7 @@ const Cart: React.FC<Props> = (props) => {
 								{manualGwpSetting && !manualGwpSetting.enabled && <hr />}
 
 								{/* @ts-ignore */}
-								<CartExtras totalPrice={cart?.cost?.totalAmount?.amount} store={store} />
+								<CartExtras totalPrice={cart.totalAmount} store={store} setIsKlarnaOpen={setIsKlarnaOpen}/>
 							</form>
 						))}
 					</div>
@@ -361,7 +360,7 @@ const Cart: React.FC<Props> = (props) => {
 						<div className="modal-footer px-g lg:px-3 py-2 fixed bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600">
 							<div className="flex flex-wrap no-gutters w-full">
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
-								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, true, store)}</strong>
+								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
 								<div className="w-full mt-1">
 									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
@@ -373,6 +372,8 @@ const Cart: React.FC<Props> = (props) => {
 					)}
 				</div>
 		</Modal>
+		<KlarnaModal isModalKlarnaOpen={isModalKlarnaOpen} handleOpenModalKlarna={handleOpenModalKlarna} setIsKlarnaOpen={setIsKlarnaOpen}/>
+		</>
 	)
 }
 
