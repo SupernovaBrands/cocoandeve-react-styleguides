@@ -48,6 +48,10 @@
 	.search-panel-active:before {
 		@apply content-[''] h-full bg-[#000] z-[1020] w-full opacity-50 fixed;
 	}
+	.polygon-path {
+		-webkit-clip-path: polygon(100% 0%,0 50%,100% 55%);
+		clip-path: polygon(100% 0%,0 50%,100% 55%);
+	}
 }
 
 @layer components {
@@ -85,6 +89,14 @@
 
 	.product-card--img:hover .img--hover {
 		@apply opacity-100 visible transition-opacity duration-200;
+	}
+
+	.affiliate--content-li ul {
+		@apply max-w-[85%];
+	}
+
+	.affiliate--content-li li {
+		@apply font-size-sm py-1 lg:py-0 lg:text-[18px] lg:leading-[24px];
 	}
 }
 
