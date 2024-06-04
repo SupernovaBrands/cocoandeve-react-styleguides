@@ -85,7 +85,7 @@ const Sustainability = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
 
-    const { banner, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store } = props;
+    const { banner, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
     const PACKAGING = [
         {
             id: 1,
@@ -322,6 +322,7 @@ const Sustainability = (props: any) => {
                                             carousel={true}
                                             link={data.handle}
                                             sustainability={true}
+                                            addToCart={addToCart}
                                             setWaitlistData={setWaitlistData}
                                         />
                                     ))}
