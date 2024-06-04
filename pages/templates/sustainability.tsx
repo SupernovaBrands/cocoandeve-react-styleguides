@@ -255,6 +255,7 @@ const SustainabilityTemplate = () => {
 				isLoading={isLoading}
 				buildProductCardModel={() => null}
 				store={'dev'}
+				addToCart={() => null}
 			/>
             <Footer
 				aboutMenu={aboutMenu}
