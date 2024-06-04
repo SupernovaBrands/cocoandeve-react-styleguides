@@ -41,37 +41,13 @@ const SearchBox = (props: any) => {
 		'bronzing-self-tanner-drops',
 	];
 
-	const debounce = (effect: any, dependencies: any, delay: any) => {
-		const callback = useCallback(effect, dependencies);
-		useEffect(() => {
-			const timeout = setTimeout(callback, delay);
-			return () => clearTimeout(timeout);
-		}, [callback, delay]);
-	};
-
 	const onChange = (e) => {
 		e.target.value;
 		setKeyword(e.target.value);
 	}
 
-	// useEffect(() => {
-	// 	if (keyword !== '') setResult();
-	// 	else setContent();
-
-	// 	try {
-	// 		if (keyword !== '') {
-	// 			trackEvent('search_keyword', {
-	// 				category: 'Search Box',
-	// 				search_term: keyword,
-	// 			});
-	// 		}
-	// 	} catch (e) {
-	// 		console.log(e);
-	// 	}
-	// }, [keyword]);
-
-	debounce(() => {
-		if (keyword !== '') setResult();
+	useEffect(() => {
+		if (keyword !== '' ) setResult();
 		else setContent();
 
 		try {
@@ -84,7 +60,7 @@ const SearchBox = (props: any) => {
 		} catch (e) {
 			console.log(e);
 		}
-	}, [keyword], 800);
+	}, [keyword]);
 
 	const tagsSort = (a, b) => {
 		const isBestSellerA = a.tags.includes('Best Sellers');
@@ -252,7 +228,7 @@ const SearchBox = (props: any) => {
 	const autoPlayClick8 = controlAutoplay(emblaApi8);
 
 	return (
-		<div className={`z-[1020] search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
+		<div className={`z-[990] search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
 			<div className="border-b border-gray-400 w-full border-t">
 				<div className="bg-white px-g">
 					<div className="container relative flex items-center px-0 lg:px-g">

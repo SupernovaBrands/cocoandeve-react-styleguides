@@ -147,7 +147,7 @@ const Header = (props: any) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`}>
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`} ref={accountRef}>
 				{annBar?.enabled && !scrolled && (
 					<AnnouncementBar
 						text={annBar.text}
@@ -210,7 +210,7 @@ const Header = (props: any) => {
 							</li>
 						</ul>
 
-						<ul className="lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
+						<ul className="basis-[30%] lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							<li key="bbc" className="hidden lg:flex pr-hg">
 								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline">
 									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
@@ -218,7 +218,7 @@ const Header = (props: any) => {
 								</a>
 							</li>
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
-							<li key="account" ref={accountRef} id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
+							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
 									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
