@@ -10,7 +10,7 @@ const DropdownStore = (props: any) => {
     return (
         <div className="lg:text-left relative">
             <div className="relative">
-                <button onClick={() => setOpen(!open)} className={`rounded-lg py-2.5 text-center inline-flex items-center after:inline-block after:ml-[0.255em] after:border-b-[0.3em] after:border-solid after:border-t-body after:border-x-[0.3em] after:border-x-transparent text-body text-base lg:text-lg font-bold lg:font-normal`} type="button">{activeCountry}</button>
+                <button onClick={() => setOpen(!open)} className={`rounded-lg py-2.5 text-center inline-flex items-center after:inline-block after:ml-[0.255em] after:border-b-[0.3em] after:border-solid after:border-t-body after:border-x-[0.3em] after:border-x-transparent text-body text-base lg:text-lg font-bold lg:font-normal lg:after:ml-[.5625em] lg:after:-mt-25`} type="button">{activeCountry}</button>
 
                 <div className={`text-left -ml-2 absolute left-0 bg-white lg:min-w-[10rem] text-base z-50 list-none rounded-[4px] [transition:all_0.3s] opacity-0 h-[0] top-[0] ${direction === 'dropup' ? '[transform:translate3d(0,_0,_0)]' : '[transform:translate3d(0,_20px,_0)]'} bottom-[0] overflow-hidden ${!open ? '' : openClasses }`}>
                     <a className={` block w-full clear-both font-normal !no-underline text-body whitespace-nowrap border px-2 py-1 ${activeCountry === 'US (USD)' ? 'bg-primary border-primary text-white hover:text-white' : 'bg-white text-body border-white'}`} href="#">USA (USD)</a>
