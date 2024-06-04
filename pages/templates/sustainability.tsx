@@ -253,6 +253,8 @@ const SustainabilityTemplate = () => {
 				imageText={imageText}
 				products={products}
 				isLoading={isLoading}
+				buildProductCardModel={() => null}
+				store={'dev'}
 			/>
             <Footer
 				aboutMenu={aboutMenu}
