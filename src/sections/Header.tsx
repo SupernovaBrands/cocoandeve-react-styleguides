@@ -152,6 +152,10 @@ const Header = (props: any) => {
 					<AnnouncementBar
 						text={annBar.text}
 						url={annBar.url}
+						text2={annBar.text2}
+						url2={annBar.url2}
+						text3={annBar.text3}
+						url3={annBar.ur3}
 						countDownStart=""
 						countDownEnd=""
 						countDownDays=""
