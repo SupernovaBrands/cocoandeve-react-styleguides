@@ -50,6 +50,7 @@ const Cart: React.FC<Props> = (props) => {
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
+	console.log(shippingData, 'testing');
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
@@ -311,10 +312,10 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{shippingData?.show && !shippingLineHide && (
+									{giftCardAmount > 0 && (
 										<>
-											<p className="hidden lg:block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+											<p className="w-2/3 mb-1  font-bold ">{tStrings.giftCard}</p>
+											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(giftCardAmount, false, store)}`}</p>
 										</>
 									)}
 
@@ -323,17 +324,27 @@ const Cart: React.FC<Props> = (props) => {
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
+													<span className="text-sm">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
 												<p className={`mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
 										</>
 									)}
-
-									{giftCardAmount > 0 && (
+									{!shippingData?.show && shippingData?.freeRate === null && (
 										<>
-											<p className="w-2/3 mb-1  font-bold ">{tStrings.giftCard}</p>
-											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(giftCardAmount, false, store)}`}</p>
+										<div className="flex lg:hidden justify-between w-full">
+											<p className="mb-1" data-cy="cart-shipping-label">
+												<strong>{`${tStrings.cart_shipping} `}</strong>
+											</p>
+											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
+										</div>
 										</>
+									)}
+
+									{shippingData?.show && shippingData?.freeRate && (
+										<p className="text-sm">
+											Shipping amount shown is a best estimate and may differ from final amount charged.
+										</p>
 									)}
 								</div>
 
