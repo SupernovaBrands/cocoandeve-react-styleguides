@@ -43,6 +43,7 @@ const AddToCartButton = (props:any) => {
             id: selectedVariant.id,
             quantity: 1,
             handle: selectedVariant?.product?.handle,
+            title: selectedVariant.title,
         });
         setAddingItem(false);
     }

@@ -50,11 +50,11 @@ const Cart: React.FC<Props> = (props) => {
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
-	console.log(shippingData, 'testing');
+	console.log(discountMeter, 'discountMeter');
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
-		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, subtotalPrice: 0,
+		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
 	const [isLastStockKey, setLastStockKey] = useState('');
@@ -294,7 +294,7 @@ const Cart: React.FC<Props> = (props) => {
 									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(discountMeter.enabled ? cart.discountLine - cart.discountTier : cart.discountLine, false, store)}`}</p>
 										</>
 									)}
 
@@ -302,6 +302,13 @@ const Cart: React.FC<Props> = (props) => {
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
+										</>
+									)}
+
+									{discountMeter.enabled > 0 && (
+										<>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
 
