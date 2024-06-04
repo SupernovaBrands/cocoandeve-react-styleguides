@@ -126,6 +126,10 @@ const AnnouncementBar = (props: any) => {
 AnnouncementBar.propTypes = {
 	text: PropTypes.string.isRequired,
 	url: PropTypes.string.isRequired,
+	text2: PropTypes.string.isRequired,
+	url2: PropTypes.string.isRequired,
+	text3: PropTypes.string.isRequired,
+	url3: PropTypes.string.isRequired,
 	countDownStart: PropTypes.string.isRequired,
 	countDownEnd: PropTypes.string.isRequired,
 	countDownDays: PropTypes.string.isRequired,
