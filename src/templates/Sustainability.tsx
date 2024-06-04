@@ -133,7 +133,6 @@ const Sustainability = (props: any) => {
         }
     }, [featuredImg]);
 
-    console.log('productCarousel', productCarousel);
     return (
 		<>
             <section className="relative">
