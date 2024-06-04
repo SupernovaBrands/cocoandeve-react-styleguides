@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+// import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 import DimethiconeFree from '~/images/icons/dimethicone-free.svg';
 import ToxinFree from '~/images/icons/toxin-free.svg';
 import ParabelFree from '~/images/icons/paraben-free.svg';
@@ -27,10 +27,12 @@ import TabContent from '~/components/TabContent';
 import PackagingCard from "~/components/PackagingCard";
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { isWaitlist } from "~/modules/utils";
+import { getFeaturedImages, isWaitlist } from "~/modules/utils";
 
 const Sustainability = (props: any) => {
     const [showCart, setShowCart] = useState(false);
+    const [productCarousel, setProductCarousel] = useState([]);
+    const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -48,7 +50,7 @@ const Sustainability = (props: any) => {
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
     }, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 5000 })
 	]);
 	const {
 		prevBtnDisabled: prevDisabled1,
@@ -61,12 +63,12 @@ const Sustainability = (props: any) => {
 
     // carousel 2
 	const [emblaRef2, emblaApi2] = useEmblaCarousel({
-        loop: true,
+        loop: false,
         align: 'start'
     }, [
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
-    const { selectedIndex: idx2, onDotButtonClick: onClick2 } = useDotButton(emblaApi2);
+    // const { selectedIndex: idx2, onDotButtonClick: onClick2 } = useDotButton(emblaApi2);
 
     // carousel 3
 	const [emblaRef3, emblaApi3] = useEmblaCarousel({
@@ -83,7 +85,7 @@ const Sustainability = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
 
-    const { banner, intro, imageSlider, formula, packaging, imageText, products, isLoading } = props;
+    const { banner, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store } = props;
     const PACKAGING = [
         {
             id: 1,
@@ -108,7 +110,30 @@ const Sustainability = (props: any) => {
         },
     ];
 
-    const loadWaitlist = isWaitlist(products.products);
+    useEffect(() => {
+        getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
+    }, []);
+
+    useEffect(() => {
+        if (products) {
+
+            const getProducts = async () => {
+                const t = [];
+                const pInfos = products.products?.split(',').map(async (handle: string) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
+                const productData = await Promise.all(pInfos);
+                productData.map((obj) => {
+                    const { product } = obj;
+                    // delete product.selectedVariant;
+                    const mapped = buildProductCardModel(store, featuredImg, product);
+                    t.push(mapped);
+                });
+                return t;
+            };
+            getProducts().then((d) => setProductCarousel(d));
+        }
+    }, [featuredImg]);
+
+    console.log('productCarousel', productCarousel);
     return (
 		<>
             <section className="relative">
@@ -230,7 +255,7 @@ const Sustainability = (props: any) => {
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Vegan className="svg block w-full mb-1 h-[32px]" />Vegan</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
                             )}
                         </div>
@@ -241,17 +266,16 @@ const Sustainability = (props: any) => {
                 <section className="pt-4 pb-4 relative">
                     <div className="container p-0 md:p-1">
                         <p className="pb-2 mb-0 h3 text-center">{packaging.heading}</p>
-                        <Carousel.Wrapper emblaApi={emblaApi2} className="pl-1 lg:pl-0">
-                            <Carousel.Inner emblaRef={emblaRef2} className="lg:!transform-none">
+                        <Carousel.Wrapper emblaApi={emblaApi2} className="">
+                            <Carousel.Inner emblaRef={emblaRef2} className="ml-1 mr-3 lg:ml-0 lg:mr-0 lg:!transform-none pr-3 lg:pr-0">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-[90.275%] basis-[90.275%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-2 font-bold">{data.title}</h6>
                                         <p className="mb-g lg:mb-3">{data.body}</p>
-                                        <p className="lg:mb-5"></p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
-                            <Carousel.Navigation>
+                            {/* <Carousel.Navigation>
                                 <ol className="carousel__dots justify-center my-2 lg:hidden static">
                                     {PACKAGING.map((_, index) => (
                                         <li key={index} className={`border border-primary ${index === idx2 ? ' bg-primary' : 'bg-white opacity-50'}`}>
@@ -262,7 +286,7 @@ const Sustainability = (props: any) => {
                                         </li>
                                     ))}
                                 </ol>
-                            </Carousel.Navigation>
+                            </Carousel.Navigation> */}
                         </Carousel.Wrapper>
                     </div>
                 </section>
@@ -285,12 +309,12 @@ const Sustainability = (props: any) => {
             </section>
             <section className="py-4 lg:py-5 overflow-hidden">
                 <div className="container text-center">
-                    <h2 className="text-center mx-5 mb-1">Like what we are doing? Shop now!</h2>
-                    {!isLoading && products.products.length > 0 && (
+                    <h2 className="text-center mx-5 mb-1">{products.heading}</h2>
+                    {!isLoading && productCarousel.length > 0 && (
                         <>
                             <Carousel.Wrapper emblaApi={emblaApi3} className="pt-2 -mx-hg lg:mx-auto">
                                 <Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g">
-                                    {products.products.map((data: any, id: number) => (
+                                    {productCarousel.map((data: any, id: number) => (
                                         <ProductCard
                                             key={`product-${id}-${data.id}`}
                                             product={data}
@@ -328,11 +352,9 @@ const Sustainability = (props: any) => {
                 </div>
             </section>
 
-            {!isLoading && loadWaitlist && (
-                <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                    <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
-                </Modal>
-            )}
+            <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+            </Modal>
 		</>
     );
 }
