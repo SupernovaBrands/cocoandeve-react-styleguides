@@ -250,7 +250,7 @@ const Header = (props: any) => {
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
 				/>
-				<SearchBox dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
+				<SearchBox openAccountBox={openAccountBox} dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}

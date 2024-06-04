@@ -19,7 +19,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const SearchBox = (props: any) => {
-	const { content, dummy, trackEvent } = props;
+	const { content, dummy, trackEvent, openAccountBox } = props;
 	const [keyword, setKeyword] = useState('');
 	const [keywords, setKeywords] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -228,7 +228,7 @@ const SearchBox = (props: any) => {
 	const autoPlayClick8 = controlAutoplay(emblaApi8);
 
 	return (
-		<div className={`z-[990] search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
+		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
 			<div className="border-b border-gray-400 w-full border-t">
 				<div className="bg-white px-g">
 					<div className="container relative flex items-center px-0 lg:px-g">
