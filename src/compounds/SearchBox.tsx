@@ -1,7 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import Loading from '~/images/icons/loading.svg';
 import Search from '~/images/icons/search-thin.svg';
@@ -40,12 +40,37 @@ const SearchBox = (props: any) => {
 		'bali-bae-self-tan-set',
 		'bronzing-self-tanner-drops',
 	];
+
+	const debounce = (effect: any, dependencies: any, delay: any) => {
+		const callback = useCallback(effect, dependencies);
+		useEffect(() => {
+			const timeout = setTimeout(callback, delay);
+			return () => clearTimeout(timeout);
+		}, [callback, delay]);
+	};
+
 	const onChange = (e) => {
 		e.target.value;
 		setKeyword(e.target.value);
 	}
 
-	useEffect(() => {
+	// useEffect(() => {
+	// 	if (keyword !== '') setResult();
+	// 	else setContent();
+
+	// 	try {
+	// 		if (keyword !== '') {
+	// 			trackEvent('search_keyword', {
+	// 				category: 'Search Box',
+	// 				search_term: keyword,
+	// 			});
+	// 		}
+	// 	} catch (e) {
+	// 		console.log(e);
+	// 	}
+	// }, [keyword]);
+
+	debounce(() => {
 		if (keyword !== '') setResult();
 		else setContent();
 
@@ -59,7 +84,7 @@ const SearchBox = (props: any) => {
 		} catch (e) {
 			console.log(e);
 		}
-	}, [keyword]);
+	}, [keyword], 800);
 
 	const tagsSort = (a, b) => {
 		const isBestSellerA = a.tags.includes('Best Sellers');
@@ -110,6 +135,7 @@ const SearchBox = (props: any) => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
+						// console.log('productsData', productsData);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
 						const productFiltered = productsData.filter((i) => {
 							const title = i.title.toLowerCase();
@@ -121,7 +147,7 @@ const SearchBox = (props: any) => {
 						});
 						productFiltered.sort(tagsSort);
 						productFiltered.sort(handleSort);
-						console.log('productFiltered', productFiltered);
+						// console.log('productFiltered', productFiltered);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
 
