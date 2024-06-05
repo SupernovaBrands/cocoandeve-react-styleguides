@@ -35,6 +35,11 @@ const RealResultCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
+	//tab 5
+	const [emblaRef5, emblaApi5] = useEmblaCarousel({ align: 'start', ...options}, [
+		Autoplay({ playOnInit: false, delay: 3000 })
+	]);
+
 	const { videos } = props;
 
 	return (
@@ -121,7 +126,7 @@ const RealResultCarousel = (props: any) => {
 						</TabContent>
 						<TabContent active={activeTab === 'body'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
+								<Carousel.Inner emblaRef={emblaRef5} className="lg:-mx-g lg:!transform-none">
 									{videos.filter((data: any) => data.category === 'body').map((data: any, i: number) => (
 										<InstagramCard
 											key={`body-${data.url}-${i}`}

@@ -118,8 +118,10 @@ const Sustainability = (props: any) => {
         if (products) {
 
             const getProducts = async () => {
+                const pArray = products.products?.split(',');
+                pArray.push(pArray.shift());
                 const t = [];
-                const pInfos = products.products?.split(',').map(async (handle: string) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
+                const pInfos = pArray.map(async (handle: string) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
                 const productData = await Promise.all(pInfos);
                 productData.map((obj) => {
                     const { product } = obj;
@@ -311,7 +313,7 @@ const Sustainability = (props: any) => {
                     <h2 className="text-center mx-5 mb-1">{products.heading}</h2>
                     {!isLoading && productCarousel.length > 0 && (
                         <>
-                            <Carousel.Wrapper emblaApi={emblaApi3} className="pt-2 -mx-hg lg:mx-auto">
+                            <Carousel.Wrapper emblaApi={emblaApi3} className="pt-2 -mx-hg lg:mx-25">
                                 <Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g">
                                     {productCarousel.map((data: any, id: number) => (
                                         <ProductCard

@@ -166,7 +166,7 @@ export default class CartDiscountForm extends Component<Props, State> {
                             { this.state.loading && <span className="spinner-border spinner-border-sm text-gray-500 ml-1 !w-[10px] !h-[10px]" role="status" /> }
                         </div>
                     </div> }
-                    { !isApplied && error && <p className="text-primary text-sm my-1">{error}</p> }
+                    { !isApplied && error && <p className="text-primary text-xs my-1">{error}</p> }
                     {discountBanner?.enable && !hasCode && (
                     <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mt-1" onClick={this.applyBanner}>
                         <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />

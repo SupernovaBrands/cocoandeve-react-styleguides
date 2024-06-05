@@ -43,6 +43,7 @@ const AddToCartButton = (props:any) => {
             id: selectedVariant.id,
             quantity: 1,
             handle: selectedVariant?.product?.handle,
+            title: selectedVariant.title,
         });
         setAddingItem(false);
     }
@@ -170,7 +171,7 @@ const ProductCardTall = (props:any) => {
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
-                <picture className="!pt-2 embed-responsive before:pt-[100%] block relative aspect-square rounded-t">
+                <picture className="!pt-2 embed-responsive before:pt-[100%] block relative rounded-t">
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
                     {props.showTip && (
@@ -192,7 +193,7 @@ const ProductCardTall = (props:any) => {
                 <div className="flex justify-center mb-1">
                     <YotpoStar smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
-                <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${!props.sustainability ?? 'min-h-[2.5em]'} lg:mx-[0.625rem]` : 'px-0 lg:px-0'}`}>
+                <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'}`}>
                     <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && selectedVariant?.availableForSale && (

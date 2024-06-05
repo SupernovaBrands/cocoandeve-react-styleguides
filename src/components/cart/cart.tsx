@@ -50,10 +50,11 @@ const Cart: React.FC<Props> = (props) => {
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
+	console.log(discountMeter, 'discountMeter');
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
-		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, subtotalPrice: 0,
+		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
 	const [isLastStockKey, setLastStockKey] = useState('');
@@ -293,7 +294,7 @@ const Cart: React.FC<Props> = (props) => {
 									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(discountMeter.enabled ? cart.discountLine - cart.discountTier : cart.discountLine, false, store)}`}</p>
 										</>
 									)}
 
@@ -304,28 +305,17 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
+									{discountMeter.enabled > 0 && (
+										<>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
+										</>
+									)}
+
 									{isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold ">Rewards</p>
 											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(cartData?.discountData?.amount, false, store)}`}</p>
-										</>
-									)}
-
-									{shippingData?.show && !shippingLineHide && (
-										<>
-											<p className="hidden lg:block w-2/3 mb-1  font-bold " data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-											<p className={`hidden lg:block w-1/3 mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
-										</>
-									)}
-
-									{shippingData?.show && !shippingLineHide && (
-										<>
-											<div className="flex lg:hidden justify-between w-full">
-												<p className="mb-1" data-cy="cart-shipping-label">
-													<strong>{`${tStrings.cart_shipping} `}</strong>
-												</p>
-												<p className={`mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
-											</div>
 										</>
 									)}
 
@@ -334,6 +324,34 @@ const Cart: React.FC<Props> = (props) => {
 											<p className="w-2/3 mb-1  font-bold ">{tStrings.giftCard}</p>
 											<p className="w-1/3 mb-1 font-bold text-right">{`-${formatMoney(giftCardAmount, false, store)}`}</p>
 										</>
+									)}
+
+									{shippingData?.show && !shippingLineHide && (
+										<>
+											<div className="flex lg:hidden justify-between w-full">
+												<p className="mb-1" data-cy="cart-shipping-label">
+													<strong>{`${tStrings.cart_shipping} `}</strong>
+													<span className="text-sm">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
+												</p>
+												<p className={`mb-1 font-bold text-right ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+											</div>
+										</>
+									)}
+									{!shippingData?.show && shippingData?.freeRate === null && (
+										<>
+										<div className="flex lg:hidden justify-between w-full">
+											<p className="mb-1" data-cy="cart-shipping-label">
+												<strong>{`${tStrings.cart_shipping} `}</strong>
+											</p>
+											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
+										</div>
+										</>
+									)}
+
+									{shippingData?.show && shippingData?.freeRate && (
+										<p className="text-sm">
+											Shipping amount shown is a best estimate and may differ from final amount charged.
+										</p>
 									)}
 								</div>
 
