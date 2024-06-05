@@ -70,9 +70,9 @@ const Affiliate = (props: any) => {
 									<div className="max-w-[30.938rem] mx-auto text-center lg:text-left">
 										<h2 className="text-[2rem] leading-[2.375rem] mt-[3.125rem] lg:mt-0 mb-2 text-[#000] lg:text-[3rem] lg:leading-[3.375rem]">{hiw.section_title}</h2>
 										<div className="max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
-											{parse(hiw.section_p.replace('<p>', '<p class="lg:text-[1.125rem] lg:leading-[1.5rem]">'))}
+											{parse(hiw.section_p.replace('<p>', '<p class="lg:text-[1.125rem] lg:leading-[1.5rem] mb-[1rem]">'))}
 										</div>
-										<div className="flex justify-center items-center badge-awards mt-4 flex-wrap">
+										<div className="flex justify-center items-center badge-awards mt-4 lg:mt-[4.375rem] flex-wrap">
 											{hiw.beauty_awards.map((award) => (
 												<div key={award.id} className="text-center mb-2 py-[.5em] px-[1em] min-w-[3.375em] grow-0 shrink-0 basis-1/4">
 													<img src={award.url.replace('public', '86x')} className="w-full max-w-[4.125rem] lg:max-w-[5.375rem]" loading="lazy" alt="" />
@@ -132,11 +132,11 @@ const Affiliate = (props: any) => {
 									<div className="max-w-[41.563rem] pt-[1.75rem] lg:pt-4 pb-4">
 										<div className="text-center lg:text-left max-w-[28.438rem]">
 											<h3 className="mx-auto mb-[0.813rem] text-base leading-[1.5rem] tracking-[.8px] max-w-[80%] font-normal lg:text-[1.5rem] lg:leading-[1.5rem] lg:mb-[2rem] lg:tracking-[1.2px]  lg:max-w-none">{content[`section_ct_step_${i + 1}`]}</h3>
-											<h2 className="mx-auto mb-g text-[1.75rem] leading-[1.875rem] max-w-[80%] lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none">{content[`section_ct_title_${i + 1}`]}</h2>
+											<h2 className={`mx-auto mb-g text-[1.75rem] leading-[1.875rem] ${i === 2 ? 'max-w-[85%]' : 'max-w-[80%]'} lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none`}>{content[`section_ct_title_${i + 1}`]}</h2>
 											{i <= 1 && (
 												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto">
 													{i === 0 && (
-														<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g border-none rounded-[6px] lg:text-[1.125rem] lg:leading-[1.5rem] lg:border lg:border-primary hover:text-white hover:no-underline'))}</>
+														<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g border-none rounded-[6px] lg:text-[1.125rem] lg:leading-[1.5rem] py-1 hover:text-white hover:no-underline'))}</>
 													)}
 													{i === 1 && (
 														<>{parse(content[`section_ct_text_${i + 1}`])}</>
@@ -144,7 +144,7 @@ const Affiliate = (props: any) => {
 												</p>
 											)}
 											{i === 2 && (
-												<div className="affiliate--content-li px-hg text-left">
+												<div className="affiliate--content-li text-left px-0">
 													{i === 2 && (
 														<>{parse(content[`section_ct_text_${i + 1}`])}</>
 													)}
