@@ -58,6 +58,13 @@ const sweepstakesTemplate = () => {
 
     return (
 		<>
+			<Header toggleCart={toggleCart}
+				annBar={annBar}
+				mainMenu={mainMenu}
+				megaMenu={megaMenu}
+				menuBannerQuiz={menuBannerQuiz}
+				menuBannerCode={menuBannerCode}
+				dummy={true} />
 			<Sweepstakes
 				isLoading={isLoading}
 				content={content}

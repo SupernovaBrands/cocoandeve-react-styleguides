@@ -694,9 +694,9 @@ const YotpoReviewWidget = (props:any) => {
 								{reviews.map((review) => (
 									<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
 										<div className="w-full lg:w-1/4 pl-0 lg:pr-2">
-											<h4 className="mb-0 flex items-center sm:inline-flex lg:flex font-bold">
+											<h4 className="h4 mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 												{review.user_name}
-												{review.verified_buyer && <SvgVerified className="svg text-xs ms-25 text-secondary size-[1em] fill-secondary" />}
+												{review.verified_buyer && <SvgVerified className="svg text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
 											</h4>
 											{review.verified_buyer && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
 											<p className="text-sm mb-1 sm:hidden lg:block">
@@ -747,7 +747,10 @@ const YotpoReviewWidget = (props:any) => {
 												</div>
 											)}
 											<div className="flex justify-end items-center mt-3">
-												<p className="text-sm mr-1 mb-0">{tStrings.yotpo.reviewHelpful}</p>
+												<p className="text-sm mb-0 flex lg:hidden mr-auto my-auto">
+													{formatDate(review.created_at)}
+												</p>
+												<p className="text-sm mr-0 mb-0 ss-awais">{tStrings.yotpo.reviewHelpful}</p>
 												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
 													<SvgThumbsUp className="svg mr-25 size-1em" />
 													{review.votes_up}

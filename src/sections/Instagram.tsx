@@ -46,11 +46,17 @@ const Instagram = (props: any) => {
                         <p className="h4 mb-1">
                             <a href="https://www.instagram.com/cocoandeve" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
                         </p>
-                        <p className="font-normal mb-0">Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</p>
+                        <p className="font-normal mb-0">
+                            {props.desc ? (
+                                <>{props.desc}</>
+                            ) : (
+                                <>Want to feature on our website or instagram? Tag us in your photos/reviews on instagram or social media using the hashtag #cocoandeve and @cocoandeve.</>
+                            )}
+                        </p>
                     </div>
                 </div>
                 {data?.length > 0 && (
-                    <div className="p-1 pt-0 lg:p-0">
+                    <div className="p-1 lg:p-0">
                         <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g px-hg lg:px-0">
                             <div className="instagram--feed--left w-full p-0">
                                 <div className="flex flex-wrap m-0">
@@ -79,7 +85,7 @@ const Instagram = (props: any) => {
                                         </div>
                                     </div>
                                     {data && data.length && data.slice(3, 6).map((item, index) => (
-                                        <div className="w-1/2 lg:w-1/3 p-0" key={`inst3--${index}`}>
+                                        <div className={`w-1/2 lg:w-1/3 p-0 ${index === 2 ? 'hidden lg:block' : ''}`} key={`inst3--${index}`}>
                                             <a href={item.link} target="_blank"  className='block instagram--feed--link'>
                                                 <picture>
                                                     <source srcSet={item.image}/>
