@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz,
+	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting, trackEvent, points, cartItems, setPoints, originalPts } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
@@ -60,7 +60,11 @@ const Header = (props: any) => {
 	useEffect(() => {
 		let lastScrollTop = 0;
 		let scrollTop = 0;
-		const handleScroll = (e) => {
+		const handleScroll = (e:any) => {
+			if (disabledScroll) {
+				return false;
+			}
+
 			if (!openSearchBox) {
 				scrollTop = window.scrollY;
 				if (scrollTop < lastScrollTop) {
