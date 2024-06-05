@@ -349,7 +349,7 @@ const Cart: React.FC<Props> = (props) => {
 									)}
 
 									{shippingData?.show && shippingData?.freeRate && (
-										<p className="text-sm">
+										<p className="text-sm lg:hidden">
 											Shipping amount shown is a best estimate and may differ from final amount charged.
 										</p>
 									)}
