@@ -75,32 +75,34 @@ const ProductRoutineCarousel = (props: any) => {
         <div className="product-upsell-2 pb-5 pt-0 md:pt-5">
             <div className="container">
                 <p className="h1 w-full text-center mb-3 lg:px-g sm:px-h1">Shop the Routine</p>
-                <Carousel.Wrapper emblaApi={emblaApi1}>
-                    <Carousel.Inner emblaRef={emblaRef1} className="lg:mx-0 lg:!transform-none">
-                        {items && items.map((data: any, index: number) => (
-                        <ProductCardUpsell
-                            key={`${index}-routine`}
-                            useCardTemplate={true}
-                            useCarousel={true}
-                            className={props.className}
-                            item={data}
-                            waitlistData={waitlistData}
-                            setWaitlistData={setWaitlistData}
-                            />
-                        ))}
+                <div className="sm:-mr-hg">
+                    <Carousel.Wrapper emblaApi={emblaApi1}>
+                        <Carousel.Inner emblaRef={emblaRef1} className="lg:mx-0 lg:!transform-none">
+                            {items && items.map((data: any, index: number) => (
+                            <ProductCardUpsell
+                                key={`${index}-routine`}
+                                useCardTemplate={true}
+                                useCarousel={true}
+                                className={props.className}
+                                item={data}
+                                waitlistData={waitlistData}
+                                setWaitlistData={setWaitlistData}
+                                />
+                            ))}
 
-                        {!items && dummyItems.map((data: any, index: number) => (
-                        <ProductCardUpsell
-                            key={`${index}-routine`}
-                            useCardTemplate={true}
-                            useCarousel={true}
-                            className={props.className}
-                            item={data}
-                            />
-                        ))}
+                            {!items && dummyItems.map((data: any, index: number) => (
+                            <ProductCardUpsell
+                                key={`${index}-routine`}
+                                useCardTemplate={true}
+                                useCarousel={true}
+                                className={props.className}
+                                item={data}
+                                />
+                            ))}
 
-                    </Carousel.Inner>
-                </Carousel.Wrapper>
+                        </Carousel.Inner>
+                    </Carousel.Wrapper>
+                </div>
             </div>
         </div>
         { <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>

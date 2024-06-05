@@ -80,7 +80,7 @@ const ProductCardUpsell = (props:any) => {
 
     return (
         <>
-            <div className={`min-w-[75vw] md:min-w-[30%] lg:w-4/12 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
+            <div className={`min-w-[80%] md:min-w-[30%] lg:w-4/12 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
                 <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                     {props.item.step && <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span> }
                     <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
@@ -89,7 +89,7 @@ const ProductCardUpsell = (props:any) => {
                             <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
                         </Link>
                     </picture>
-                    <div className="product-card__content pb-2 relative grow flex flex-col px-2 lg:px-3 bg-pink-light items-center h-full">
+                    <div className="product-card__content pb-2 relative grow flex flex-col px-hg lg:px-2 lg:px-3 bg-pink-light items-center h-full min-h-[18.75em] lg:min-h-0">
                         <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
                             <Link href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</Link>
                         </p>
