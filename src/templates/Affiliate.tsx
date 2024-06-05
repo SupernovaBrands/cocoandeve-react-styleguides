@@ -22,7 +22,7 @@ const Affiliate = (props: any) => {
 						<div className="container lg:h-full">
 							<div className="flex justify-center items-center h-full">
 								<div className="grow-0 shrink-0 basis-[40%] hidden lg:block"></div>
-								<div className="f-text pt-g text-center lg:flex-1 text-affiliate-black">
+								<div className="f-text border-t border-t-transparent text-center lg:flex-1 text-affiliate-black">
 									<h5 className="text-base tracking-[.8px] lg:text-xl lg:tracking-[1.2px]">{banner.introducing}</h5>
 									<h1 className="text-[2rem] leading-[2.25rem] mt-25 mb-1 max-w-[80%] mx-auto lg:my-2 lg:text-hero lg:leading-[4.5rem] lg:max-w-[90%]">{banner.title}</h1>
 									<h2 className="hidden lg:block text-xl font-normal mb-[2.813rem] leading-[1.5rem]">{banner.subtitle}</h2>
@@ -68,7 +68,7 @@ const Affiliate = (props: any) => {
 								</div>
 								<div className="grow-0 shrink-0 basis-full lg:basis-1/2 lg:order-1">
 									<div className="max-w-[30.938rem] mx-auto text-center lg:text-left">
-										<h2 className="text-[2rem] leading-[2.375rem] mt-[3.125rem] mb-2 text-[#000] lg:text-[3rem] lg:leading-[3.375rem]">{hiw.section_title}</h2>
+										<h2 className="text-[2rem] leading-[2.375rem] mt-[3.125rem] lg:mt-0 mb-2 text-[#000] lg:text-[3rem] lg:leading-[3.375rem]">{hiw.section_title}</h2>
 										<div className="max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
 											{parse(hiw.section_p.replace('<p>', '<p class="lg:text-[1.125rem] lg:leading-[1.5rem]">'))}
 										</div>
@@ -100,7 +100,7 @@ const Affiliate = (props: any) => {
 						<div className="flex flex-wrap justify-center benefits">
 							{[...Array(6)].map((data, i) => (
 								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/3 text-center mb-[2.188rem] lg:mb-[3.125rem]">
-									<h4 className="w-[6.25rem] h-[6.25rem] rounded-full relative mx-auto bg-affiliate-green" role="presentation">
+									<h4 className="w-[6.25rem] h-[6.25rem] inline-block rounded-full relative mx-auto bg-affiliate-green" role="presentation">
 										{i === 0 && <Benefit1 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 1 && <Benefit2 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 2 && <Benefit3 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
@@ -108,7 +108,7 @@ const Affiliate = (props: any) => {
 										{i === 4 && <Benefit5 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 5 && <Benefit6 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 									</h4>
-									<p className="font-size-sm lg:text-[1.125rem] lg:leading-[1.5rem] max-w-[80%] lg:max-w-[90%] mt-[1rem] lg:mt-2 mx-auto">
+									<p className="font-size-sm !leading-[1.14285em] lg:text-[1.125rem] lg:leading-[1.5rem] max-w-[80%] lg:max-w-[90%] mt-[1rem] lg:mt-2 mx-auto">
 										{parse(benefit[`txt_${i + 1}`])}
 									</p>
 								</div>
@@ -120,9 +120,9 @@ const Affiliate = (props: any) => {
 
 			{content && (
 				<section className="mt-3 lg:mt-0 overflow-hidden">
-					<h2 className="text-center text-[#000] mb-[2.813rem] mt-[3.125rem] text-[2rem] leading-[2.375rem] lg:mt-3 lg:text-[3rem] lg:leading-[3.625rem]">{content.section_title}</h2>
+					<h2 className="text-center text-[#000] mb-[2.813rem] mt-[1.125rem] text-[2rem] leading-[2.375rem] lg:mt-3 lg:text-[3rem] lg:leading-[3.625rem]">{content.section_title}</h2>
 					{[...Array(3)].map((idx, i) => (
-							<div key={`affiliate-content-${i}`} className="flex flex-wrap -mx-hg lg:-mx-g flex-1 justify-center">
+							<div key={`affiliate-content-${i}`} className="flex flex-wrap flex-1 justify-center">
 								{content[`section_ct_img_${i + 1}`] && (
 									<div className={`w-full lg:w-1/2 p-0 bg-[#feb1be] ${content[`section_img_pos_${i + 1}`] === 'right' ? 'lg:order-2' : ''}`}>
 										<img src={content[`section_ct_img_${i + 1}`].url} className="w-full" loading="lazy" alt="" />
@@ -136,7 +136,7 @@ const Affiliate = (props: any) => {
 											{i <= 1 && (
 												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto">
 													{i === 0 && (
-														<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g border-none rounded-[6px] lg:text-[1.125rem] lg:leading-[1.5rem] lg:border lg:border-primary'))}</>
+														<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g border-none rounded-[6px] lg:text-[1.125rem] lg:leading-[1.5rem] lg:border lg:border-primary hover:text-white hover:no-underline'))}</>
 													)}
 													{i === 1 && (
 														<>{parse(content[`section_ct_text_${i + 1}`])}</>
@@ -164,12 +164,12 @@ const Affiliate = (props: any) => {
 							<h2 className="text-[#000] my-4 text-[1.75rem] lg:text-[3rem] leading-[1.875rem] lg:leading-[3.625rem] lg:mb-5 text-center">{content.faq_heading}</h2>
 
 							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_1}</h2>
-							<div className="font-size-sm mb-4 lg:text-[1.125rem] lg:leading-[1.5rem]">
-								{parse(content.faq_content_1)}
+							<div className="mb-4">
+								{parse(content.faq_content_1.replace('<p', '<p class="font-size-sm lg:text-[1.125rem] lg:leading-[1.5rem]"'))}
 							</div>
 							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_2}</h2>
-							<div className="font-size-sm mb-4 lg:text-[1.125rem] lg:leading-[1.5rem]">
-								{parse(content.faq_content_2)}
+							<div className="mb-4">
+								{parse(content.faq_content_2.replace('<p', '<p class="font-size-sm lg:text-[1.125rem] lg:leading-[1.5rem]"'))}
 							</div>
 						</div>
 					</div>

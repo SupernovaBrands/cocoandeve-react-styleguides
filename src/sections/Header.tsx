@@ -127,23 +127,25 @@ const Header = (props: any) => {
 	}, [openAccountBox]);
 
 	useEffect(() => {
-		let ptsUsed = 0;
-		cartItems.map((item) => {
-			const attribs = item.attributes && item.attributes.find((i) => i.key === '_swell_discount_type' && i.value === 'product') || false;
-			if (attribs) {
-				// attribs.map((item) => getId(item.merchandise.id))
-				const obj = item.attributes && item.attributes.find((i) => i.key === '_swell_points_used');
-				ptsUsed += obj.value ? parseInt(obj.value, 10) : 0;
+		if (isLoggedIn) {
+			let ptsUsed = 0;
+			cartItems.map((item) => {
+				const attribs = item.attributes && item.attributes.find((i) => i.key === '_swell_discount_type' && i.value === 'product') || false;
+				if (attribs) {
+					// attribs.map((item) => getId(item.merchandise.id))
+					const obj = item.attributes && item.attributes.find((i) => i.key === '_swell_points_used');
+					ptsUsed += obj.value ? parseInt(obj.value, 10) : 0;
+				}
+			});
+			if (ptsUsed > 0) {
+				setPoints(points - ptsUsed);
+				setUserPts(points - ptsUsed);
+			} else {
+				setPoints(originalPts);
+				setUserPts(originalPts);
 			}
-		});
-		if (ptsUsed > 0) {
-			setPoints(points - ptsUsed);
-			setUserPts(points - ptsUsed);
-		} else {
-			setPoints(originalPts);
-			setUserPts(originalPts);
 		}
-	}, [cartItems]);
+	}, [cartItems, isLoggedIn]);
 
 	return (
 		<>
