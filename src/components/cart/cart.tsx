@@ -50,7 +50,7 @@ const Cart: React.FC<Props> = (props) => {
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
-	console.log(discountMeter, 'discountMeter');
+	// console.log(discountMeter, 'discountMeter');
 	const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},

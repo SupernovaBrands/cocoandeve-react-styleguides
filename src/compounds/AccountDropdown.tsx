@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
-const AccountDropdown = (props) => {
+const AccountDropdown = (props:any) => {
+    const { openAccountBox, toggleAccountDropdown, onModal } = props;
+
     const [regInit, setRegInit] = useState(true);
-    const [newsOptIn, setNewsOptIn] = useState(false);
+    const [newsOptIn, setNewsOptIn] = useState(!!onModal);
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
 	const [allowSubmit, setAllowSubmit] = useState(false);
@@ -14,7 +16,6 @@ const AccountDropdown = (props) => {
     const [validEmail, setValidEmail] = useState(true);
     const [validLoginEmail, setValidLoginEmail] = useState(true);
     const [emptyPass, setEmptyPass] = useState(false);
-    const { openAccountBox, toggleAccountDropdown } = props;
     const [activeFrame, setActiveFrame] = useState(true);
     const firstRef = useRef(null);
 	const lastRef = useRef(null);
@@ -91,13 +92,20 @@ const AccountDropdown = (props) => {
 			})
 		}).then((resp) => resp.json());
 		const { customerAccessTokenCreate } = respLogin;
-        let url: string = '/account/login#error'
-		if (customerAccessTokenCreate.customerAccessToken) {
-            url = '/account';
-		}
-        setTimeout(() => {
-            window.location.href = url;
-        }, 250);
+        if (onModal && props.userMutate) {
+            props.userMutate().then(() => {
+                props.closeModal();
+                props.callback();
+            });
+        } else {
+            let url: string = '/account/login#error'
+            if (customerAccessTokenCreate.customerAccessToken) {
+                url = '/account';
+            }
+            setTimeout(() => {
+                window.location.href = url;
+            }, 250);
+        }
 	};
     const handleLoginChange = () => {
         const regex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -126,10 +134,10 @@ const AccountDropdown = (props) => {
     }, [tosAgree]);
 
     return (
-        <div id="account-dropdown" className={`w-full lg:w-[330px] top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 fixed lg:absolute z-[1030] float-none  ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`w-full top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
-                        <form onSubmit={handleLoginSubmit} id="dropdown__login" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
+                        <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className="font-bold text-center px-2 mb-2">Earn and redeem points from purchases</p>
                             <SocialLogin idSuffix={'loginDropdown'} />
                             <p className="text-center auth-buttons mb-g">or login with email</p>
@@ -156,7 +164,7 @@ const AccountDropdown = (props) => {
                 )}
                 {!activeFrame && (
                     <div className={`flex dropdown__login__register`}>
-                        <form onSubmit={handleSubmit} id="dropdown__register" className="p-g [box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important] bg-white w-full">
+                        <form onSubmit={handleSubmit} id="dropdown__register" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className=" font-bold  text-center px-2 mb-2">Welcome</p>
                             <SocialLogin idSuffix={'registerDropdown'} />
                             <p className="mb-g text-center auth-buttons">-- or --</p>
@@ -188,13 +196,14 @@ const AccountDropdown = (props) => {
                                 </div>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm mb-1 items-start">
-                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" />
-                                <label htmlFor="offers" className="custom-control-label lg:pl-1">Keep me up to date on news and exclusive offers</label>
+                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" checked={newsOptIn} value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" />
+                                <label htmlFor="offers" className={`custom-control-label ${!onModal ? 'lg:pl-1' : ''}`}>Keep me up to date on news and exclusive offers</label>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">
                                 <input ref={tos} onClick={handleTos} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={false} aria-required="true" aria-invalid="true" />
-                                <label htmlFor="agreement" className="custom-control-label lg:pl-1">
-                                <span>By clicking here, I agree to the <Link className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</Link>, <Link className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</Link> and <Link className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</Link>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span>
+                                <label htmlFor="agreement" className={`custom-control-label ${!onModal ? 'lg:pl-1' : ''}`}>
+                                    { !onModal && <span>By clicking here, I agree to the <Link className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</Link>, <Link className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</Link> and <Link className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</Link>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span> }
+                                    { onModal && <span>By clicking here, I agree to the <Link href="/pages/terms-and-conditions" className="text-primary text-sm" target="_blank" aria-label="Terms of Use">Terms of Use</Link> and <Link className="text-primary text-sm" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</Link></span>}
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}

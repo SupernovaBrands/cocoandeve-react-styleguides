@@ -30,7 +30,7 @@ const YotpoStar = (props:any) => {
 				setInit(true);
 			}
 		});
-	}, [props.productId]);
+	}, [props.productId, productSkus]);
 
 	if (!init) return (<div />);
 	return props.hideStars ? (

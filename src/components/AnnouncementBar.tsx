@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import PropTypes from 'prop-types';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 
 const options: EmblaOptionsType = {
@@ -10,7 +9,7 @@ const options: EmblaOptionsType = {
 };
 
 const AnnouncementBar = (props: any) => {
-	console.log('annbar', props);
+	// console.log('annbar', props);
 	const {
 		text,
 		url,
@@ -122,22 +121,5 @@ const AnnouncementBar = (props: any) => {
 		</div>
 	);
 }
-
-AnnouncementBar.propTypes = {
-	text: PropTypes.string.isRequired,
-	url: PropTypes.string.isRequired,
-	text2: PropTypes.string.isRequired,
-	url2: PropTypes.string.isRequired,
-	text3: PropTypes.string.isRequired,
-	url3: PropTypes.string.isRequired,
-	countDownStart: PropTypes.string.isRequired,
-	countDownEnd: PropTypes.string.isRequired,
-	countDownDays: PropTypes.string.isRequired,
-	countDownDay: PropTypes.string.isRequired,
-	countDownHrs: PropTypes.string.isRequired,
-	countDownHr: PropTypes.string.isRequired,
-	countDownMin: PropTypes.string.isRequired,
-	countDownSec: PropTypes.string.isRequired,
-};
 
 export default AnnouncementBar;

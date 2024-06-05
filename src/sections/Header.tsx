@@ -15,13 +15,15 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
-		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl, generalSetting, trackEvent, points, cartItems, setPoints, originalPts } = props;
+		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
+		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts } = props;
+
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
 	const [openAccountBox, setOpenAccountBox] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(0);
 	const router = useRouter();
@@ -107,15 +109,12 @@ const Header = (props: any) => {
 				})
 			}
 		);
-		fetch('/api/account/auth').then((res) => res.json()).then((data) => setIsLoggedIn(data.isLoggedIn));
 	}, []);
 
 	useEffect(() => {
-		if (isLoggedIn) {
-			// fetch(`/api/account/points`).then((data) => data.json()).then((data) => setUserPts(data.points));
-			setUserPts(points);
-		}
-	}, [isLoggedIn]);
+		setIsLoggedIn(isAuthenticated);
+		setUserPts(points);
+	}, [isAuthenticated]);
 
 
 	useEffect(() => {
