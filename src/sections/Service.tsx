@@ -10,7 +10,7 @@ const Service = (props: any) => {
 	];
 	return (
 		<section className="text-center section-services-list">
-			<div className="container">
+			<div className="container mt-1">
 				<ul className="list-unstyled flex flex-wrap lg:items-center justify-center pt-1 pb-1 pl-0 lg:mx-5 mb-0 lg:mb-4 md:pt-3 md:pb-3">
 					{SERVICES.map((list, i) => {
 						return (
