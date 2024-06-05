@@ -34,7 +34,7 @@ const DeliveryReturns = (props: any) => {
     return (
 		<>
             <section>
-                <div className="container lg:max-w-[1200px] pt-2 lg:pt-2 pb-4 lg:pb-7">
+                <div className="container lg:max-w-[1200px] pt-5 lg:pt-2 pb-4 lg:pb-0">
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center lg:pb-4">
                         <h1 className="mb-1">Delivery</h1>
                     </div>
@@ -54,15 +54,17 @@ const DeliveryReturns = (props: any) => {
                             ))}
                         </div>
                     </div>
-                    <div className=" lg:px-3 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-5 border-b-[#adadad] border-b-[1px] border-b-solid">
+                    <div className=" lg:px-0 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-2 border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-2 w-full text-base">We deliver to the following countries:</h2>
-                        {pageContent?.delivery?.esc_countries_list && cols.map((col) => {
-                            if(getDataByIndex(col).length > 0) {
-                                return (<div className="w-1/2 lg:lg:w-1/5 px-hg lg:px-g pb-3">
-                                    <ul className="delivery-countries-text m-0 text-left">{getDataByIndex(col)}</ul>
-                                </div>)
-                            }
-                        })}
+                        <div className="flex justify-center w-full">
+                            {pageContent?.delivery?.esc_countries_list && cols.map((col) => {
+                                if(getDataByIndex(col).length > 0) {
+                                    return (<div className="w-1/2 lg:lg:w-[16.6%] px-hg lg:px-g pb-3">
+                                        <ul className="delivery-countries-text m-0 text-left">{getDataByIndex(col)}</ul>
+                                    </div>)
+                                }
+                            })}
+                        </div>
                     </div>
                     <div className="flex flex-col -mx-hg lg:-mx-g text-center justify-center pb-4 pt-3">
                         <h2 className="text-2xl mb-1">Didn’t find your answer?</h2>
