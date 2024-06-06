@@ -17,7 +17,7 @@ const AddToCartButton = (props: any) => {
     const [addingItem, setAddingItem] = useState(false);
     const onAddItem = async () => {
         setAddingItem(true);
-        await props.onClick(props.variantId, 1);
+        await props.onClick({ item: props.variantId, quantity: 1, title: props.title, handle: props.handle });
         setAddingItem(false);
     };
 
@@ -44,7 +44,7 @@ const SwatchOverlay = (props:any) => {
 
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} className="btn-choose" label={props.swatch.label === 'Choose Tangle Tamer' ? 'Add to Cart' : props.swatch.label}/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} className="btn-choose" label={props.swatch.label === 'Choose Tangle Tamer' ? 'Add to Cart' : props.swatch.label} title={props.title || ''}/>
             <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-2 lg:px-1">
                     <label className="block mb-2 px-1">
@@ -59,7 +59,7 @@ const SwatchOverlay = (props:any) => {
                         ))}
                     </ul>
                 </div>
-                { selectedSwatch.available && <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1]" available={selectedSwatch.available} variantId={selectedSwatch.id} onClick={props.onClick}/> }
+                { selectedSwatch.available && <AddToCartButton comparePrice={props.comparePrice} price={props.price} className="button-overlay z-[1]" available={selectedSwatch.available} variantId={selectedSwatch.id} onClick={props.onClick} title={props.title || ''}/> }
                 { !selectedSwatch.available && <WaitlistButton onClick={() => setWaitlistData({ ...waitlistData, open: true, title: title, image: image, handle: handle })}/> }
             </div>
         </>
@@ -103,7 +103,7 @@ const ProductCardUpsell = (props:any) => {
                                 <span className="text-primary h4 my-1">{activePrice}</span>
                         </p>
                         {!props.item.swatch && props.item.available && (
-                            <AddToCartButton {...props.item} onClick={props.item.onAddItem} variantId={props.item.id}/>
+                            <AddToCartButton {...props.item} onClick={props.item.onAddItem} variantId={props.item.id} title={props.title || ''}/>
                         )}
 
                         {!props.item.swatch && !props.item.available &&

@@ -87,6 +87,7 @@ const ProductRoutineCarousel = (props: any) => {
                                 item={data}
                                 waitlistData={waitlistData}
                                 setWaitlistData={setWaitlistData}
+                                title={data?.title}
                                 />
                             ))}
 
@@ -97,6 +98,7 @@ const ProductRoutineCarousel = (props: any) => {
                                 useCarousel={true}
                                 className={props.className}
                                 item={data}
+                                title={''}
                                 />
                             ))}
 
