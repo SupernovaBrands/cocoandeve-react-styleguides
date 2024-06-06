@@ -15,9 +15,11 @@ const TrackMyOrder = (props: any) => {
     const [code, setCode] = useState('');
     const [showDelivery, setShowDelivery] = useState(false);
     const [dataTracking, setDataTracking] = useState(null);
+    const [submitBtn, setSubmitbtn] = useState('Track Order');
 
     const tracking = async (e) => {
         e.preventDefault();
+        setSubmitbtn('Tracking...');
         setShowDelivery(false);
         console.log(code);
         const trackingNumber = code;
@@ -31,6 +33,7 @@ const TrackMyOrder = (props: any) => {
                 console.log('response.json();', data);
                 setShowDelivery(true);
                 setDataTracking(data?.data || null);
+                setSubmitbtn('Track Order');
             });
     }
 
@@ -44,7 +47,7 @@ const TrackMyOrder = (props: any) => {
                             <form className="form-group w-full" onSubmit={tracking}>
                                 <input placeholder="Enter your order number or tracking number" value={code} onChange={(e) => setCode(e.target.value)} className="w-full text-dark px-[15px] py-[12px] mb-[5px] text-left border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm" id="tracking_number" name="order_number" type="text" />
                                 <p className="font-size-xs text-left">To track a different order/shipment, please enter the correct order number or tracking number above.</p>
-                                <button type="submit" className='btn btn-primary w-100 block mt-g py-g w-full rounded'>Track Order</button>
+                                <button type="submit" className='btn btn-primary w-100 block mt-g py-g w-full rounded'>{submitBtn}</button>
                             </form>
                         </div>
                     </div>
@@ -52,7 +55,7 @@ const TrackMyOrder = (props: any) => {
                         <>
                             {!dataTracking?.fulfillment && !dataTracking?.order ? (
                                 <div className='w-full text-center flex justify-center'>
-                                    <p className="no_data_message mt-1 lg:max-w-[70%] text-center whitespace-nowrap">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/hc/en-us/requests/ne">contact us</a> for help.</p>
+                                    <p className="no_data_message mt-1 lg:max-w-[70%] text-center">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/hc/en-us/requests/ne" className=' whitespace-nowrap'>contact us</a> for help.</p>
                                 </div>
                             ) : (
                                 <>
@@ -66,10 +69,9 @@ const TrackMyOrder = (props: any) => {
                                             </>
                                         )}
                                     </div>
-                                    {/*
-                                    <div className='flex flex-col w-full justify-center border-b-solid border-b-[1px] border-b-[#e6e6e6] pb-1'>
-                                        <h2 className='text-base w-full mt-2 mb-1 text-center'>Order Status: {dataTracking?.status?.toUpperCase()}</h2>
-                                        <div className="track-step-container flex lg:w-[70%] lg:mx-[auto] my-[40px]">
+                                    <div className='flex flex-col w-full justify-center border-b-solid lg:border-b-[1px] border-b-[#e6e6e6] pb-1'>
+                                        <h2 className='text-base w-full mt-2 mb-0 lg:mb-1 text-center'>Order Status: {dataTracking?.status?.toUpperCase()}</h2>
+                                        <div className="track-step-container flex lg:w-[70%] lg:mx-[auto] lg:my-[40px] mt-2">
                                             <div className="track-step track-ordered active text-center flex justify-center [flex-flow:column] items-center">
                                                 <TrackConfirmed className="text-primary h-[2em]" />
                                                 <span className='block text-[12px] mt-[3px] h-[100px] bg-[url(/cdn/shop/files/track-confirmed.svg)]'>Ordered</span>
@@ -116,9 +118,8 @@ const TrackMyOrder = (props: any) => {
                                         )}
                                         
                                     </div>
-                                    */}
                                     <div className='flex flex-wrap w-full justify-center pb-[10px] lg:pt-3 lg:border-b-[1px_solid_#e6e6e6]'>
-                                        <h2 className='text-base mt-2 mb-1 text-center'>Your Order Details {dataTracking?.order?.order_number}</h2>
+                                        <h2 className='text-base mt-0 lg:mt-2 mb-1 text-center'>Your Order Details {dataTracking?.order?.order_number}</h2>
                                         <div className="w-full overflow-x-auto">
                                             <table width="100%" className='border-[1px] border-[solid] border-[#e6e6e6] border-b-[0] rounded-[5px] mx-[0] my-[40px] bg-transparent border-collapse [border-spacing:0]'>
                                                 <thead>
@@ -132,7 +133,7 @@ const TrackMyOrder = (props: any) => {
                                                 <tbody>
                                                     {dataTracking?.fulfillment?.line_items.map((item) => (
                                                         <tr>
-                                                            <td className='px-[10px] py-[25px] text-[#484848] bg-[#efefef]'>{item?.name}</td>
+                                                            <td className='px-[10px] py-[25px] text-[#484848] bg-[#efefef]'>{item?.title}</td>
                                                             <td className='px-[10px] py-[25px] text-[#484848] bg-[#efefef]'>{item?.quantity}</td>
                                                             <td className='px-[10px] py-[25px] text-[#484848] bg-[#efefef]'>{dataTracking?.order?.tracking_number}</td>
                                                             <td className='px-[10px] py-[25px] text-[#484848] bg-[#efefef]'>{dataTracking?.order?.tracking_company}</td>

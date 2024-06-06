@@ -34,7 +34,7 @@ const DeliveryReturns = (props: any) => {
     return (
 		<>
             <section>
-                <div className="container lg:max-w-[1200px] pt-5 lg:pt-2 pb-4 lg:pb-0">
+                <div className="container lg:max-w-[1200px] pt-5 lg:pt-2 pb-0 lg:pb-0">
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center lg:pb-4">
                         <h1 className="mb-1">Delivery</h1>
                     </div>
@@ -54,7 +54,7 @@ const DeliveryReturns = (props: any) => {
                             ))}
                         </div>
                     </div>
-                    <div className=" lg:px-0 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-2 border-b-[#adadad] border-b-[1px] border-b-solid">
+                    <div className=" lg:px-0 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-[15px] lg:pb-2 border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-2 w-full text-base">We deliver to the following countries:</h2>
                         <div className="flex flex-wrap justify-center w-full">
                             {pageContent?.delivery?.esc_countries_list && cols.map((col) => {
