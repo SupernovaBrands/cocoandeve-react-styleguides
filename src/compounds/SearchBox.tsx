@@ -47,8 +47,17 @@ const SearchBox = (props: any) => {
 	}
 
 	useEffect(() => {
-		if (keyword !== '' ) setResult();
-		else setContent();
+		if (keyword !== '' ) {
+			setLoading(true);
+			const delayDebounceFn = setTimeout(() => {
+				// console.log('delayed keyword', keyword);
+				setResult();
+			}, 500);
+			return () => clearTimeout(delayDebounceFn);
+		} else {
+			setContent();
+			setProducts([]);
+		}
 
 		try {
 			if (keyword !== '') {
@@ -105,15 +114,17 @@ const SearchBox = (props: any) => {
 			setProducts([]);
 		}
 
-		fetch(`/api/search?q=${keyword}`).then(
+		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(data => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
-						// console.log('productsData', productsData);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
-						const productFiltered = productsData.filter((i) => {
+						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
+							t.handle === value.handle
+						)))
+						const productFiltered = uniqueHandle.filter((i) => {
 							const title = i.title.toLowerCase();
 							const tags = i.tags.map((t: string) => t.toLowerCase());
 							const tagsString = tags.join(',');
@@ -137,10 +148,11 @@ const SearchBox = (props: any) => {
 									handle: item.handle,
 									featuredImgUrl: featuredImg || '',
 									url: `/products/${item.handle}`,
+									product: item,
 								};
 							});
 							uniqueFiltered.forEach((item, i) => {
-								if (item.handle === 'pro-youth-hair-scalp-mask') {
+								if (item.handle === 'pro-youth-hair-scalp-mask' && keyword !== 'hair') {
 									uniqueFiltered.splice(i, 1);
 									uniqueFiltered.unshift(item);
 								}
@@ -191,14 +203,6 @@ const SearchBox = (props: any) => {
 	const onClickTag = (word) => {
 		setKeyword(word);
 	};
-
-	useEffect(() => {
-		if (keyword !== '') {
-			setResult();
-		} else {
-			setProducts([]);
-		}
-	}, [keyword]);
 
 	useEffect(() => {
 		getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
@@ -301,7 +305,7 @@ const SearchBox = (props: any) => {
 					</div>
 					{content?.search_footer_note && (
 						<p dangerouslySetInnerHTML={{
-							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline')
+							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline').replace('text-underline', 'underline')
 						}} />
 					)}
 				</div>

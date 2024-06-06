@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import AutoHeight from 'embla-carousel-auto-height'
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -29,10 +30,9 @@ const AnnouncementBar = (props: any) => {
 	} = props;
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 3000 }),
+		AutoHeight()
 	]);
-
-	const [mainText, setText] = useState(text);
 	/*
 	const [showTimer, setShowTimer] = useState(false);
 	const [timerDay, setTimerDay] = useState('');
@@ -111,7 +111,7 @@ const AnnouncementBar = (props: any) => {
 		<div className={`announcement-bar  bg-primary-light w-100 px-[0] py-[0.59375em]`}>
 			<div className="container text-center font-bold">
 					<Carousel.Wrapper emblaApi={emblaApi}>
-						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
 							<a href={url} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text}</a>
 							<a href={url2} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text2}</a>
 							<a href={url3} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text3}</a>
