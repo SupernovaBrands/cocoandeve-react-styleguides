@@ -52,7 +52,7 @@ const SearchBox = (props: any) => {
 			const delayDebounceFn = setTimeout(() => {
 				// console.log('delayed keyword', keyword);
 				setResult();
-			}, 500);
+			}, 750);
 			return () => clearTimeout(delayDebounceFn);
 		} else {
 			setContent();
