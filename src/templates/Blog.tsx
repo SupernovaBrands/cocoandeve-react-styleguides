@@ -10,7 +10,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "~/components/Modal";
 import Close from '~/images/icons/close.svg';
 
@@ -52,7 +52,7 @@ const Blog = (props) => {
 
 	// carousel
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 	const {
 		onPrevButtonClick: arrowClickPrev,
@@ -69,6 +69,16 @@ const Blog = (props) => {
         featured: { bg: 'bg-gray-400', text: 'text-gray-600' },
     };
 
+	useEffect(() => {
+		if (window.location.href.includes('#how-to-tab')) {
+			setActiveFrame(!activeFrame);
+			setActive(true);
+		} else {
+			setActiveFrame(activeFrame);
+			setActive(false);
+		}
+	}, []);
+
 	return (
 		<div className="mobile-wrapper mt-3 lg:mt-5">
 			<div className="container">
@@ -80,7 +90,7 @@ const Blog = (props) => {
                         <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={active ? false : (tag === 'tan' ? true : false)}/>
                         <BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-						<a href="#how-to-tab" onClick={handlHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
+						<a href="/blogs/news#how-to-tab" onClick={handlHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
                     </div>
                 )}
 				{!activeFrame && (
