@@ -43,7 +43,7 @@ const DeliveryReturns = (props: any) => {
                         <p className="mb-1">(Including processing time)*</p>
                     </div>
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-g lg:pt-[45px] pb-0 border-b-[#adadad] border-b-[1px] border-b-solid lg:px-g">
-                        <div className="flex flex-wrap w-full pb-5 lg:pb-[110px]">
+                        <div className="flex flex-wrap w-full pb-[50px] lg:pb-[110px]">
                             {pageContent?.delivery?.times_country.map((co) => (
                                 <div className="relative max-w-full lg:w-1/4 px-hg lg:px-g w-1/2 md:mt-3 md:mb-3 mb-2">
                                     <div className="bg-[#f9eeca] p-[12px] lg:p-[24px] text-left h-full rounded">
@@ -56,7 +56,7 @@ const DeliveryReturns = (props: any) => {
                     </div>
                     <div className=" lg:px-0 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-2 border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-2 w-full text-base">We deliver to the following countries:</h2>
-                        <div className="flex justify-center w-full">
+                        <div className="flex flex-wrap justify-center w-full">
                             {pageContent?.delivery?.esc_countries_list && cols.map((col) => {
                                 if(getDataByIndex(col).length > 0) {
                                     return (<div className="w-1/2 lg:lg:w-[16.6%] px-hg lg:px-g pb-3">
@@ -67,7 +67,7 @@ const DeliveryReturns = (props: any) => {
                         </div>
                     </div>
                     <div className="flex flex-col -mx-hg lg:-mx-g text-center justify-center pb-4 pt-3">
-                        <h2 className="text-2xl mb-1">Didn’t find your answer?</h2>
+                        <h2 className="text-2xl mb-1 mx-g">Didn’t find your answer?</h2>
                         <p>No worries, you can contact us <a aria-label="Contact us here" className="text-underline" href="https://support.cocoandeve.com/hc/en-us/requests/new" title="https://support.cocoandeve.com/hc/en-us/requests/new">here</a>.</p>
                     </div>
                 </div>
