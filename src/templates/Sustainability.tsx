@@ -50,7 +50,7 @@ const Sustainability = (props: any) => {
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
     }, [
-		Autoplay({ playOnInit: true, delay: 5000 })
+		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const {
 		prevBtnDisabled: prevDisabled1,
@@ -196,17 +196,17 @@ const Sustainability = (props: any) => {
                                         <PrevButton
                                             onClick={() => autoPlayClick1(arrowClickPrev1)}
                                             disabled={prevDisabled1}
-                                            className={`${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-[1rem] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
+                                            <ChevronPrev className="w-[1rem] h-[1rem] svg--current-color" />
                                         </PrevButton>
-                                        <span>{selected + 1} of {count}</span>
+                                        <span className="px-25 lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
                                             onClick={() => autoPlayClick1(arrowClickNext1)}
                                             disabled={nextDisabled1}
-                                            className={`${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-[1rem] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
+                                            <ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
                                         </NextButton>
                                     </div>
                                 </Carousel.Navigation>
@@ -302,9 +302,9 @@ const Sustainability = (props: any) => {
                             </picture>
                         </div>
                     )}
-                    <div className="w-full lg:w-5/12 py-2 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
+                    <div className="text-body w-full lg:w-5/12 py-2 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
                         <h3 className="mb-1">{imageText.heading}</h3>
-                        {!isLoading && <p className="mb-0 text-left">{imageText.text}</p>}
+                        {!isLoading && <p className="mb-0 text-center lg:text-left">{imageText.text}</p>}
                     </div>
                 </div>
             </section>

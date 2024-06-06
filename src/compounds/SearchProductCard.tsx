@@ -27,7 +27,7 @@ const SearchProductCard = (props: any) => {
 				<form className="product-card-form flex-grow-1 flex flex-column h-full ml-g lg:ml-0 items-center">
 					<input type="hidden" name="id" value="variantId" />
 					<input type="hidden" name="quantity" value="1" />
-					<a onClick={tracking} href={`/products/${url}`} className="block font-bold text-body mb-0 mt-0 lg:mt-2">{title}</a>
+					<a onClick={tracking} href={`/products/${url}`} className="block font-bold text-body mb-0 mt-0 lg:mt-2 hover:text-body">{title}</a>
 				</form>
 			</figcaption>
 		</figure>
