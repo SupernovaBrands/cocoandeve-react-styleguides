@@ -33,7 +33,7 @@ const ProductCarousel = (props: any) => {
         handle: undefined,
     });
 
-	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent } = props;
+	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -102,6 +102,7 @@ const ProductCarousel = (props: any) => {
 												carousel={true}
 												addToCart={addToCart}
 												trackEvent={trackEvent}
+												preOrders={preOrders}
 											/>
 										)
 									})}
@@ -142,6 +143,7 @@ const ProductCarousel = (props: any) => {
 												carousel={true}
 												addToCart={addToCart}
 												trackEvent={trackEvent}
+												preOrders={preOrders}
 											/>
 										)
 									})}
@@ -182,6 +184,7 @@ const ProductCarousel = (props: any) => {
 												carousel={true}
 												addToCart={addToCart}
 												trackEvent={trackEvent}
+												preOrders={preOrders}
 											/>
 										)
 									})}

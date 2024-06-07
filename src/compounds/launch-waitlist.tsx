@@ -16,6 +16,7 @@ interface LaunchWaitListProps {
     onSubmitLaunchWaitlist?: any;
     forwardRef?: any;
     loggedInEmail?: any;
+    productCard?: boolean
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
@@ -100,23 +101,24 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     return (
         <>
             { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
-                <h3 className="mb-1">{props.title}</h3>
-                <p className="mb-3 font-size-sm" dangerouslySetInnerHTML={{__html: props.content}}></p>
+                {!props.productCard && <h3 className="mb-1">{props.title}</h3>}
+                {props.productCard && <h2 className="h1 mx-auto mb-1">{props.title}</h2>}
+                <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
                         <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className="block mb-1 -mt-1">or</span>
-                    <div className="flex flex-wrap -mx-2">
-                        <div className="flex flex-nowrap">
-                            <Select onChange={changePhoneCode} border={false} groupClass="block max-w-[28%] md:max-w-[20%] relative pl-2 pr-0" id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode}`}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder="Enter your phone number" groupClass="pr-2 pl-[30px] md:pl-[35px] w-full"/>
+                    <div className={`flex flex-wrap -mx-2`}>
+                        <div className={`flex flex-nowrap ${props.productCard ? 'w-full' : ''}`}>
+                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass="block max-w-[28%] md:max-w-[20%] relative pl-2 pr-0" id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode}`}></Select>
+                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone Number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? '' : 'pr-2 pl-[30px] md:pl-[35px]'}  w-full`}/>
                         </div>
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
                     <div className="flex flex-wrap items-center justify-center mb-2">
-                        <CheckBox onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold" href="#">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={true}/>
+                        <CheckBox borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold" href="#">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={!props.productCard}/>
                         {!tos && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className="flex flex-wrap px-2 -mx-2 mb-1 mt-1">
@@ -124,7 +126,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className="font-size-xs font-bold mb-2" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', '<a class="text-xs underline" href')}}></p>
+                    <p className="font-size-xs font-bold mb-2" dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
                 </form>
             </div> }
 

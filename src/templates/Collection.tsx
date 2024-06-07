@@ -10,6 +10,7 @@ import ModalWaitlist from "~/components/modal/Waitlist";
 import { getFeaturedImages, isWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
+import LaunchWaitList from "~/compounds/launch-waitlist";
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
@@ -30,22 +31,27 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
 }
 
 const Banner = ({ isLoading, title, strapiBanner }) => {
+
     const { universalCollectionSetting } = strapiBanner.universalBanner;
-	const {
+    const {
 	    filter_handles_img_mob: universalImgMob,
 	    filter_handles_img_desk: universalImgDesk,
 	    filter_handles_img_url: universalUrl,
 	    enabled: universalEnabled,
 	} = universalCollectionSetting.universalCollectionSetting[strapiBanner.store];
-
-	const { collectionBanner } = strapiBanner.mainSettings;
-
-	const bannerData = universalEnabled ? {
-	    img_mob: universalImgMob,
+    // by default use universal banner image
+    let bannerData = {
+        img_mob: universalImgMob,
 	    img_desk: universalImgDesk,
 	    url: universalUrl,
 	    enabled: universalEnabled,
-	} : collectionBanner.collectionBanner[strapiBanner.store];
+    };
+
+    const { collectionBanner } = strapiBanner.mainSettings;
+    if (collectionBanner && collectionBanner.collectionBanner[strapiBanner.store]?.enabled) {
+        // use specific collection banner image if its enabled
+        bannerData = collectionBanner.collectionBanner[strapiBanner.store];
+    }
     return (
         <>
             {!strapiBanner.isLoading && bannerData.url === '' && <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />}
@@ -75,6 +81,8 @@ const Collection = (props: any) => {
         buildProductCardModel,
         trackBluecoreEvent,
         trackEvent,
+        preOrders,
+        launchWL,
     } = props;
 
     const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -88,6 +96,7 @@ const Collection = (props: any) => {
         image: '',
         handle: undefined,
     });
+    const [launchWLModal, setLaunchWLModal] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
@@ -191,6 +200,26 @@ const Collection = (props: any) => {
         getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
     }, []);
 
+    const onSubmitLaunchWaitlist = ({ email, phoneCode, phoneNumber, fallback }) => {
+        const regSource = launchWL.launch_wl_popup_regsource;
+        const smsBump = launchWL.launch_wl_smsbump;
+
+        if (email) {
+            // subscribeBluecoreWaitlist(email, productStrapi?.handle, selectedVariant?.id, regSource ? regSource : `launch-item-${productStrapi.handle}`, phoneNumber, true, '');
+            // trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+        }
+
+        if (phoneNumber && phoneCode) {
+            // submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
+        }
+
+        if (typeof(fallback) === 'function') {
+            fallback();
+        }
+    }
+
+    // console.log('launchWL', launchWL);
+
     return (
         <>
             {!collectionSettings.isLoading && (
@@ -279,6 +308,15 @@ const Collection = (props: any) => {
                                                 );
                                             }
                                         })}
+                                        {childMenu.length === 0 && (
+                                            <Link
+                                                href="/collections/all"
+                                                className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
+                                                onClick={showLoading}
+                                            >
+                                                All
+                                            </Link>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -293,6 +331,10 @@ const Collection = (props: any) => {
                                 if (!item.src) {
                                     item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
                                     item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
+                                }
+                                let isLaunchWL = false;
+                                if (launchWL && launchWL?.launch_wl_handles.split(',').map((v) => v.trim()).includes(item.handle)) {
+                                    isLaunchWL = true;
                                 }
                                 return showQuizCard && index === 2 ? (
                                     <>
@@ -309,6 +351,9 @@ const Collection = (props: any) => {
                                             addToCart={addToCart}
                                             trackEvent={trackEvent}
                                             eventNameOnClick='collection_product_card'
+                                            preOrders={preOrders}
+                                            isLaunchWL={isLaunchWL}
+                                            setLaunchWLModal={setLaunchWLModal}
                                         />
                                     </>
                                 ) : (
@@ -322,7 +367,10 @@ const Collection = (props: any) => {
                                         addToCart={addToCart}
                                         trackEvent={trackEvent}
                                         eventNameOnClick='collection_product_card'
-                                        />
+                                        preOrders={preOrders}
+                                        isLaunchWL={isLaunchWL}
+                                        setLaunchWLModal={setLaunchWLModal}
+                                    />
                                 )
                             })}
                             {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
@@ -350,6 +398,25 @@ const Collection = (props: any) => {
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                     <ModalWaitlist trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                </Modal>
+            )}
+            {!isLoading && launchWL && (
+                <Modal className="modal-lg" isOpen={launchWLModal} handleClose={() => setLaunchWLModal(false)}>
+                    <LaunchWaitList
+                        title={launchWL.launch_wl_title}
+                        content={launchWL.launch_wl_subtitle}
+                        tos={launchWL.launch_wl_popup_tos}
+                        policy={launchWL.launch_wl_popup_privacy}
+                        success_msg={launchWL.launch_wl_thanks_title}
+                        success_content={launchWL.launch_wl_thanks_subtitle}
+                        cta={launchWL.launch_wl_submit}
+                        // className="lg:order-2"
+                        store={store}
+                        onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
+                        productCard={true}
+                        // forwardRef={launchWaitlist}
+                        // loggedInEmail={user?.email}
+                    />
                 </Modal>
             )}
         </>
