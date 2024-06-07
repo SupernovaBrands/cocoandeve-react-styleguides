@@ -191,9 +191,9 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 				<source srcSet={nbp_img_lg?.url} media="(min-width: 992px)" />
 				<img src={nbp_img?.url} className="w-full h-full" />
 			</picture>
-			<div className="modal-body px-0 pb-3 pt-[10em] lg:pt-4 lg:pb-3">
+			<div className="modal-body px-0 pb-3 pt-[10em] lg:py-4 px-0">
 				<CloseButton handleClose={handleClose} className={nbp_heading_color} />
-				<div className="flex flex-wrap justify-end lg:-mx-g sm:-mx-hg">
+				<div className="flex flex-wrap justify-end mx-0">
 					{!formCompleted && (
 						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
@@ -208,20 +208,20 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-1 -ml-[1px] bg-white border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
-							<Button type="submit" buttonClass="w-full btn-primary border-0 relative">{nbp_submit}</Button>
+							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative">{nbp_submit}</Button>
 						</form>
 					)}
 					{formCompleted && (
-						<div className="modal--newsletter__completed lg:w-1/2 pr-4 pl-4 flex items-center justify-center min-h-[25em]">
+						<div className="modal--newsletter__completed lg:w-1/2 px-3 lg:px-4 flex items-center justify-center min-h-[25em]">
 							<div className="flex flex-wrap justify-center items-center">
-								<h2 className={`h1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
+								<h2 className={`h1 mb-1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
 								<h3 className={`text-center ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
 								{!copied ? (
-									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">
+									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative">
 										COPY: WELCOME <Paste className="svg--current-color ml-25" />
 									</Button>
 								) : (
-									<Button buttonClass="w-full border-0 bg-white text-primary inline-flex justify-center items-center relative">COPIED</Button>
+									<Button buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative">COPIED</Button>
 								)}
 							</div>
 						</div>
