@@ -132,7 +132,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
             { showSuccess && <div className="w-full p-3 mb-3 rounded text-center bg-yellow-light">
                 <h3 className="mx-4 mx-lg-5" dangerouslySetInnerHTML={{__html: props.success_msg}}></h3>
-                <p className="font-size-sm mb-0" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
+                <p className="font-size-sm mb-0 font-bold mt-g" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
             </div> }
         </>
     );

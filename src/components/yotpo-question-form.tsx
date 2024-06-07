@@ -72,7 +72,7 @@ const YotpoQuestionForm = (props) => {
 					<textarea className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded outline-none" id="yotpoFormQuestion" value={question} onChange={(e) => setQuestion(e.target.value)} rows={5} aria-label="Question form" />
 					{errorQuestion && <small className="text-primary mb-1">{tStrings.yotpo.questionError}</small>}
 				</div>
-				<div className="flex flex-wrap mx-0 lg:mx-hg mb-3 lg:justify-end">
+				<div className="flex flex-wrap mx-0 lg:-mx-g mb-3 lg:justify-end">
 					<div className="lg:w-1/3 px-0 lg:px-g mb-1 lg:mb-0">
 						<p className="text-sm mb-1">
 							<span className="text-primary">* </span>
@@ -94,7 +94,7 @@ const YotpoQuestionForm = (props) => {
 				</div>
 				<div className="flex form-group mb-1 items-center justify-end">
 					{hasError && <small className="text-primary mr-1">{tStrings.yotpo.formError}</small>}
-					<Button type="button" className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold" onClick={onSubmitButton}>{tStrings.yotpo.submit}</Button>
+					<Button type="button" className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold w-[110px]" lg={false} onClick={onSubmitButton}>{tStrings.yotpo.submit}</Button>
 				</div>
 			</div>
 		</div>

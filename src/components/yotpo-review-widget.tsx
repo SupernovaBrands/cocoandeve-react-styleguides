@@ -1,13 +1,11 @@
-/* global tSettings tStrings */
 // @ts-nocheck
-// import dynamic from 'next/dynamic';
 import '~/config';
 import Modal from "~/components/Modal";
 
 const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
 
 import {
@@ -19,15 +17,9 @@ import {
 	encryptParam,
 } from '~/modules/utils_v2';
 
-import { useRef } from 'react';
-
 import ReviewStar from '~/components/review-star';
 import YotpoReviewForm from '~/components/yotpo-review-form';
 import Button from './Button';
-// const YotpoReviewForm = dynamic(() => import('~/components/yotpo-review-form'), {
-//     ssr: false,
-// });
-
 import YotpoQuestionForm from '~/components/yotpo-question-form';
 import SvgHeart from '~/images/icons/heart.svg';
 import SvgClose from '~/images/icons/close.svg';
@@ -40,13 +32,14 @@ import SvgThumbsUp from '~/images/icons/thumbs-up.svg';
 import SvgThumbsDown from '~/images/icons/thumbs-down.svg';
 import SvgChevronPrev from '~/images/icons/chevron-prev.svg';
 import SvgChevronNext from '~/images/icons/chevron-next.svg';
-import SvgTranslate from '~/images/icons/translate.svg';
 import SvgCloseCircle from '~/images/icons/close-rounded.svg';
+import SvgPlayIcon from '~/images/icons/play-icon.svg';
 
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
+import Script from 'next/script';
 import {
 	PrevButton,
 	NextButton,
@@ -55,6 +48,7 @@ import {
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import trialParticipants from '~/utils/trialParticipants';
 
 
 let { yotpoKey } = tSettings;
@@ -101,9 +95,17 @@ const formatDate = (serverDate) => {
 	return [day, month, year].join('/');
 };
 
+const YOTPO_CONFIG_UPLOAD = {
+	ACL: 'public-read',
+	X_AMZ_ALGORITHM: 'AWS4-HMAC-SHA256',
+	X_AMZ_META_UUID: '14365123651274',
+};
+
+
 const YotpoReviewWidget = (props:any) => {
 	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 	yotpoKey = props.yotpoKey;
+
 	const reviewBox = useRef(null);
 
 	const {
@@ -144,6 +146,9 @@ const YotpoReviewWidget = (props:any) => {
 	const [qnaThanks, setQnaThanks] = useState(false);
 
 	const [reviewModal, setReviewModal] = useState({});
+	const [videoUploading, setVideoUploading] = useState(null);
+
+	const yotpoThanksRef = useRef(null);
 
 	const handleClickImage = (review:any) => {
 		setReviewModal(review);
@@ -267,7 +272,6 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const onFilterChange = () => {
-		console.log('on filter change');
 		const form = document.getElementById('yotpoFilterForm');
 		const filter = {};
 
@@ -319,7 +323,197 @@ const YotpoReviewWidget = (props:any) => {
 		moveToTop();
 	};
 
-	const onSubmitReview = (reviewData) => {
+	const imageToBinary = (dataUrl, contentType) => {
+		const n = atob(dataUrl.split(',')[1]);
+		const r = new ArrayBuffer(n.length);
+		const o = new Uint8Array(r);
+
+		for (let i = 0; i < n.length; i += 1) o[i] = n.charCodeAt(i);
+		return new Blob([r], { type: contentType });
+	};
+
+	const getContentType = (dataUrl) => {
+		try {
+			return dataUrl.split(',')[0].split(';')[0].replace('data:', '');
+		} catch (e) {
+			return 'image/jpeg';
+		}
+	};
+
+	const getUploadImageUrlEncodedParams = (e, t, n) => {
+		const r = new FormData();
+		const contentType = getContentType(n.dataUrl);
+		const fileBinnary = imageToBinary(n.dataUrl, contentType);
+
+		r.append('key', e);
+		r.append('acl', YOTPO_CONFIG_UPLOAD.ACL);
+		r.append('Content-Type', contentType);
+		r.append('policy', t.encoded_policy);
+		r.append('x-amz-credential', t.credential);
+		r.append('x-amz-algorithm', YOTPO_CONFIG_UPLOAD.X_AMZ_ALGORITHM);
+		r.append('x-amz-date', t.date);
+		r.append('x-amz-meta-uuid', YOTPO_CONFIG_UPLOAD.X_AMZ_META_UUID);
+		r.append('x-amz-signature', t.signature);
+		r.append('file', fileBinnary);
+		return r;
+	};
+
+	const uploadToYotpoS3 = (reviewData, reviewResponse) => {
+		if (reviewData.uploaded_images) {
+			$.post('https://api.yotpo.com/s3_signature', { policy_name: 'ReviewImages', app_key: yotpoKey }).then((resp) => {
+				const { response } = resp;
+				const yotpoS3 = `https://${response.bucket}.s3.amazonaws.com/`;
+
+				const startUpload = (i) => {
+					if (reviewData.uploaded_images[i]) {
+						const dataUrl = reviewData.uploaded_images[i];
+						const type = getContentType(dataUrl);
+						const fileName = `${response.date}_${reviewResponse.creation_request_id}-${i + 1}.${type.replace('image/', '')}`;
+						const fullName = `${response.path}${fileName}`;
+						const formData = getUploadImageUrlEncodedParams(fullName, response,
+							{ dataUrl: reviewData.uploaded_images[i].dataUrl });
+						const xhr = new XMLHttpRequest();
+
+						xhr.open('POST', yotpoS3, true);
+						xhr.onreadystatechange = (res) => {
+							if (res.target.readyState === 4) {
+								const imageUrl = `${yotpoS3}${fullName}`;
+								const processImageParams = {
+									image_upload_token: reviewResponse.image_upload_token,
+									image_urls: [imageUrl],
+								};
+								$.ajax({
+									url: 'https://api-cdn.yotpo.com/images/process', method: 'POST', data: processImageParams, dataType: 'json',
+								}).done(() => startUpload(i + 1));
+							}
+						};
+						xhr.send(formData);
+					}
+				};
+
+				startUpload(0);
+			}).catch((e) => console.log(`Error: ${e}`));
+		}
+	};
+
+	const Ht = `${process.env.NEXT_PUBLIC_BASE_URL ?? 'https://headless-staging.cocoandeve.com'}/vendors/video-upload.js`;
+	const loadScript = async () => {
+		if (document.getElementById('kalturaScript')) { return Promise.resolve(); }
+		const e = document.createElement('script');
+		e.setAttribute('src', Ht);
+		e.setAttribute('async', 'true');
+		e.setAttribute('type', 'text/javascript');
+		e.setAttribute('id', 'kalturaScript');
+		document.head.appendChild(e);
+
+		return new Promise(((t) => {
+			e.onload = function () {
+				t();
+			};
+		}
+		));
+	};
+
+	const uploadVideoToKaltura = async (e, t, n, r) => {
+		await loadScript().then((async () => {
+			const o = {
+				ks: t.ks,
+				partner_id: t.partnerId,
+				metadata_profile_id: t.metadataProfileId,
+			};
+
+			const i = new window.YotpoVideoUploader.KalturaUploader(e, o, r, 'review', '');
+			i.on('fileAdded', (() => {}));
+			i.on('error', ((er) => {
+				setTimeout((() => {
+					n.error(er);
+				}
+				), 200);
+			}
+			));
+
+			i.on('complete', ((ce) => n.success && n.success(ce.submitCallback)));
+
+			i.on('progress', ((p) => n.progress && setTimeout((() => {
+				n.progress(p.percentage);
+			}
+			), 200)));
+
+			await i.upload();
+			Promise.resolve();
+		}
+		));
+	};
+
+	const getVideoSettings = () => new Promise((resolve, reject) => {
+		const waitForWidgetData = () => {
+			if (typeof window.yotpoWidgetsContainer === 'object') {
+				const wConfig = window.yotpoWidgetsContainer;
+				const data = wConfig.guids ? wConfig.guids[yotpoKey] : null;
+				if (data) {
+					const widgets = data.config.widgets;
+					const key = Object.keys(widgets)[0];
+					const content = widgets[key]?.staticContent;
+					if (content) {
+						resolve({
+							ks: content.feature_reviews_video_support_settings_ks,
+							metadataProfileId: content.feature_reviews_video_support_settings_metadata_profile_id,
+							partnerId: content.feature_reviews_video_support_settings_partner_id,
+						})
+					} else {
+						reject({});
+					}
+				} else {
+					reject({});
+				}
+			} else {
+				setTimeout(waitForWidgetData, 500);
+			}
+		}
+		waitForWidgetData();
+	});
+
+	const uploadVideos = async (videos:[], res:any) => {
+		const videoSettings = await getVideoSettings();
+		const startUpload = (vids:[], resp:any, index:number) => {
+			if (vids[index]) {
+				const video = vids[index];
+				setVideoUploading(`Uploading file ${vids[index].file.name}`);
+				uploadVideoToKaltura(video.file, videoSettings, {
+					success: (n) => {
+					// eslint-disable-next-line no-void
+						n('', void 0, void 0, 'domainKey', resp.image_upload_token, (function () {}));
+						setVideoUploading(null);
+						if (vids[index + 1]) {
+							startUpload(vids, resp, index + 1);
+						}
+					},
+					progress: (p) => {
+						if (p === '100%') {
+							setVideoUploading(null);
+						} else {
+							setVideoUploading(`Uploading ${vids[index].file.name} in progress ${p}`);
+						}
+					},
+					error: (e) => {
+						console.log('error on upload video', e);
+						setVideoUploading('Upload failed something wrong happens, please try again later');
+					},
+				}, yotpoKey);
+			}
+		};
+		startUpload(videos, res, 0);
+	};
+
+	const [loadWidgetScript, setLoadWidgetScript] = useState(false);
+
+	const onSubmitReview = (reviewData:[]) => {
+		const { uploaded_videos: uploadedVideos } = reviewData;
+		if (reviewData.uploaded_videos) {
+			// eslint-disable-next-line no-param-reassign
+			delete reviewData.uploaded_videos;
+		}
+
 		$.post('https://api-cdn.yotpo.com/v1/widget/reviews', {
 			...reviewData,
 			appkey: yotpoKey,
@@ -328,11 +522,27 @@ const YotpoReviewWidget = (props:any) => {
 			product_description: productDesc,
 			product_url: productUrl,
 			product_image_url: productImage,
-		}, function () {
+		}, function (response) {
+			if (reviewData.uploaded_images) {
+				uploadToYotpoS3(reviewData, response);
+			}
+
+			if (uploadedVideos) {
+				setLoadWidgetScript(true);
+				uploadVideos(uploadedVideos, response);
+			}
+
 			setThanksData(reviewData);
 			setRevThanks(true);
 		});
 	};
+
+	useEffect(() => {
+		if (revThanks && yotpoThanksRef.current) {
+			const scrollDiv = yotpoThanksRef.current.offsetTop;
+			globalThis.window.scrollTo({ top: scrollDiv - 100, behavior: 'smooth'});
+		}
+	}, [revThanks]);
 
 	const onSubmitQuestion = (reviewData) => {
 		$.post('https://api.yotpo.com/questions/send_confirmation_mail', {
@@ -481,12 +691,25 @@ const YotpoReviewWidget = (props:any) => {
 	const autoPlayClick7 = controlAutoplay(emblaApi7);
 
 
+	const isTrialParticipant = (review:any) => trialParticipants.find((t) => t.user === review.user_name
+	&& t.title === review.title && t.content === review.content);
+
+	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
+
+	const playVideo = (ev:any, el:any) => {
+		ev.target.classList.add('hidden');
+		const videoEl = document.getElementById(el);
+		videoEl.setAttribute('controls', 'true');
+		videoEl.play();
+	};
+
 	return !init ? (
 		<div className="flex justify-center mt-4">
 			<div className="spinner-border" role="status" aria-hidden="true" />
 		</div>
 	) : (
 		<>
+			{ loadWidgetScript && <Script src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${yotpoKey}`}/> }
 			<div className="flex items-center lg:justify-center leading-[1.25]">
 				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
@@ -496,7 +719,7 @@ const YotpoReviewWidget = (props:any) => {
 			</div>
 
 			{revThanks && (
-				<div className="yotpo-widget__thanks bg-white border px-2 lg:px-4 py-5 mt-2 flex flex-col items-center text-center relative">
+				<div id="yotpo-thanks" ref={yotpoThanksRef} className="yotpo-widget__thanks bg-white border px-2 lg:px-4 py-5 mt-2 flex flex-col items-center text-center relative">
 					<button type="button" className="close absolute text-base" onClick={() => setRevThanks(false)}>
 						<SvgClose className="svg" />
 					</button>
@@ -514,6 +737,7 @@ const YotpoReviewWidget = (props:any) => {
 							<SvgLinkedin className="svg" />
 						</button>
 					</div>
+					{ videoUploading && (<small className="text-primary mt-1">{videoUploading}</small>)}
 				</div>
 			)}
 
@@ -592,38 +816,6 @@ const YotpoReviewWidget = (props:any) => {
 							</div>
 						</div>
 
-						{/* {topics.length > 0 && (
-							<div className="input-group mt-2 lg:w-1/2 px-0">
-								{topics.map((t, index) => {
-									const key = kebabCase(t.name);
-									const selected = selectedTopic === t.name;
-									return (
-										<button
-											key={key}
-											type="button"
-											className={`${selected ? 'bg-primary' : 'bg-primary-light'} px-3 py-1 text-sm mr-1 mb-1 capitalize ${!showMoreTopics && index >= 5 ? 'hidden' : ''}`}
-											onClick={() => {
-												if (selected) {
-													setSelectedTopic('');
-												} else {
-													setSelectedTopic(t.name);
-												}
-											}}
-										>
-											{t.name}
-										</button>
-									);
-								})}
-								<button
-									type="button"
-									className={`px-3 py-1 bg-primary-light text-sm mb-1 ${showMoreTopics || topics.length < 5 ? 'hidden' : ''}`}
-									onClick={() => setShowMoreTopics(true)}
-								>
-									...
-								</button>
-							</div>
-						)} */}
-
 						<div className="flex flex-wrap mt-1 -mx-1">
 							<div className="w-1/2 lg:w-1/4 px-1">
 								<select className="custom-select my-1 border-dark" name="scores" onChange={() => { onFilterChange(); }}>
@@ -698,7 +890,9 @@ const YotpoReviewWidget = (props:any) => {
 												{review.user_name}
 												{review.verified_buyer && <SvgVerified className="svg text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
 											</h4>
-											{review.verified_buyer && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
+											{isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">Trial Participant</p>}
+											{review.verified_buyer && !isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
+
 											<p className="text-sm mb-1 sm:hidden lg:block">
 												{formatDate(review.created_at)}
 											</p>
@@ -722,7 +916,7 @@ const YotpoReviewWidget = (props:any) => {
 											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>
-											<h4 className="mb-1 mt-1 font-bold">
+											<h4 className="mb-1 mt-1 font-normal">
 												{decodeHtml(review.title)}
 											</h4>
 											<p className="mb-1">
@@ -730,18 +924,21 @@ const YotpoReviewWidget = (props:any) => {
 												{review.shortContent && review.shortContent.length > 0 && (
 													<button
 														type="button"
-														className="btn border-0 text-primary p-0 ml-25"
+														className="btn border-0 text-primary p-0 ml-25 font-normal"
 														onClick={() => { showMoreContent(review); }}
 													>
 														{review.hideContent ? tStrings.yotpo.readMore : tStrings.yotpo.readLess}
 													</button>
 												)}
 											</p>
-											{review.images_data && review.images_data.length > 0 && (
+											{(getMediaData(review).length > 0) && (
 												<div className="flex flex-nowrap w-auto overflow-auto pr-g">
-													{review.images_data.map((image:any, index:number) => (
-														<button key={image.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review) }}>
-															<img className="object-cover size-[75px]" src={image.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} />
+													{getMediaData(review).map((media:any, index:any) => (
+														<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review) }}>
+															<img className="object-cover size-[75px]" src={media.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
+															{media.video_url && (
+																<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
+															)}
 														</button>
 													))}
 												</div>
@@ -869,61 +1066,58 @@ const YotpoReviewWidget = (props:any) => {
 						<div className="modal-content mx-3 mx-lg-0 relative max-h-[50%]">
 							<div className="flex flex-wrap items-center bg-white rounded rounded-lg overflow-hidden">
 								<div className="lg:w-1/2 pr-lg-0">
-									{reviewModal.images_data.length === 1 ? (
-										<img src={reviewModal.images_data[0].image_url.replace('https:', '')} alt="Slide 1" className="block w-full" />
+									{getMediaData(reviewModal).length === 1 ? (
+										<>
+											{getMediaData(reviewModal)[0].image_url && (<img src={getMediaData(reviewModal)[0].image_url.replace('https:', '')} alt="Slide 1" className="d-block w-100" />) }
+											{getMediaData(reviewModal)[0].video_url && (
+												<div className="relative flex relative">
+													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
+														<source src={getMediaData(reviewModal)[0].video_url} type="video/mp4" />
+													</video>
+													{getMediaData(reviewModal)[0].video_url && (
+														<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${getMediaData(reviewModal)[0].id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
+													)}
+												</div>
+											)}
+										</>
 									) : (
 										<div className="relative">
-													<Carousel.Wrapper emblaApi={emblaApi7}>
-														<Carousel.Inner emblaRef={emblaRef7}>
-															{reviewModal.images_data.map((image, index) => (
-																<div key={`image-review-carousel-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
-																	<div className="flex items-center justify-center">
-																		<img className="block w-full" src={image.image_url.replace('https:', '')} alt={`slide ${index + 1}`} />
-																	</div>
-																</div>
-															))}
-														</Carousel.Inner>
-														<Carousel.Navigation>
-															<PrevButton
-																onClick={() => autoPlayClick7(arrowClickPrev7)}
-																disabled={prevDisabled7}
-															>
-																<span className="left-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center right-0 bg-pink-light">
-																	<ChevronPrev className="w-[1em] h-[1em] fill-primary" />
-																</span>
-															</PrevButton>
-															<NextButton
-																onClick={() => autoPlayClick7(arrowClickNext7)}
-																disabled={nextDisabled7}
-															>
-																<span className="right-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center bg-pink-light">
-																	<ChevronNext className="w-[1em] h-[1em] fill-primary" />
-																</span>
-															</NextButton>
-														</Carousel.Navigation>
-													</Carousel.Wrapper>
-
-											{/* <div id="carouselYotpoImage" className="carousel slide" data-ride="carousel">
-												<div className="carousel-inner">
-													{reviewModal.images_data.map((image, i) => (
-														<div key={image.id} className={`carousel-item ${(i === 0) ? 'active' : ''}`}>
-															<img src={image.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full" />
+											<Carousel.Wrapper emblaApi={emblaApi7}>
+												<Carousel.Inner emblaRef={emblaRef7}>
+													{getMediaData(reviewModal).map((media:any, i:any) => (
+														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
+															{media.image_url && (<img src={media.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full" />)}
+															{media.video_url && (
+																// eslint-disable-next-line jsx-a11y/media-has-caption
+																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
+																	<source src={media.video_url} type="video/mp4" />
+																</video>
+															)}
+															{media.video_url && (
+																<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${media.id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
+															)}
 														</div>
 													))}
-												</div>
-											</div>
-											<a className="carousel-control-prev text-primary carousel-control--background" href="#carouselYotpoImage" role="button" data-slide="prev">
-												<span className="carousel-control-prev-icon flex justify-center items-center">
-													<SvgChevronPrev className="svg size-1em" />
-												</span>
-												<span className="sr-only">Previous</span>
-											</a>
-											<a className="carousel-control-next text-primary carousel-control--background" href="#carouselYotpoImage" role="button" data-slide="next">
-												<span className="carousel-control-next-icon flex justify-center items-center">
-													<SvgChevronNext className="svg size-1em" />
-												</span>
-												<span className="sr-only">Next</span>
-											</a> */}
+												</Carousel.Inner>
+												<Carousel.Navigation>
+													<PrevButton
+														onClick={() => autoPlayClick7(arrowClickPrev7)}
+															disabled={prevDisabled7}
+														>
+															<span className="left-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center right-0 bg-pink-light">
+																<ChevronPrev className="w-[1em] h-[1em] fill-primary" />
+															</span>
+													</PrevButton>
+													<NextButton
+															onClick={() => autoPlayClick7(arrowClickNext7)}
+															disabled={nextDisabled7}
+															>
+															<span className="right-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center bg-pink-light">
+																<ChevronNext className="w-[1em] h-[1em] fill-primary" />
+															</span>
+													</NextButton>
+												</Carousel.Navigation>
+											</Carousel.Wrapper>
 										</div>
 									)}
 									<button type="button" className="close absolute flex lg:hidden right-0" aria-label="Close" onClick={() => setIsOpen(false) }>
