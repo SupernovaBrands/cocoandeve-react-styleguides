@@ -52,11 +52,6 @@ const MobileMenu = (props: any) => {
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
 				{mainMenu.map((menu, i) => {
-					let title = menu.title;
-					if (menu.handle === '/collections/hair') title = 'Hair Care';
-					if (menu.handle === '/collections/body') title = 'Body Care';
-					if (menu.handle === '/collections/kits-gifts') title = 'Bundles';
-
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
@@ -65,11 +60,11 @@ const MobileMenu = (props: any) => {
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
-								{title.toLowerCase() === 'sale' && (
-									<a href={menu.handle} className="w-full m-0 text-body flex">{title}</a>
+								{menu.title.toLowerCase() === 'sale' && (
+									<a href={menu.handle} className="w-full m-0 text-body flex">{menu.title}</a>
 								)}
-								{title.toLowerCase() !== 'sale' && (
-									<h4 className="m-0 font-normal">{title}</h4>
+								{menu.title.toLowerCase() !== 'sale' && (
+									<h4 className="m-0 font-normal">{menu.title}</h4>
 								)}
 								{menu.rows && menu.rows.length > 0 && (
 									<ChevronNext className="h-[1em] text-xs mb-25" onClick={() => {
@@ -94,7 +89,7 @@ const MobileMenu = (props: any) => {
 										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
-									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{title}</h4></li>
+									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{menu.title}</h4></li>
 									{menu.rows.map((row, index) => {
 										let title = row.title;
 										if (title.toLowerCase().includes('accessories')) title = 'Accessories';
@@ -110,8 +105,8 @@ const MobileMenu = (props: any) => {
 									<li key="shopall" className="p-0">
 										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
 											<strong>
-												{title === 'Bundles' && ('Shop All Bundles')}
-												{title !== 'Bundles' && (`Shop ${menu.title} Range`)}
+												{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
+												{menu.title !== 'Value Sets' && (`Shop ${menu.title} Range`)}
 											</strong>
 										</a>
 									</li>

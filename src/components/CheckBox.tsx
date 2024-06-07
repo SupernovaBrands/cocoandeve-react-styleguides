@@ -9,9 +9,10 @@ interface CheckBoxProps {
     labelClass?: string;
     value?: string;
     children?: any;
+    borderLight?: boolean;
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children, borderLight }) => {
     const [isChecked, setIsChecked] = useState<boolean>(checked || false);
 
     const onChangeClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,9 +27,9 @@ const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked,
             <input type="checkbox" checked={isChecked} name={name} className="hidden" id={id} onChange={onChangeClick} defaultValue={value}/>
             { label && <span
                 dangerouslySetInnerHTML={{ __html: label }}
-                className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : 'before:bg-checkbox-unchecked'}`}
+                className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`}`}
             ></span> }
-            {!label && <span className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : 'before:bg-checkbox-unchecked'}`}>{children}</span>}
+            {!label && <span className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`} `}>{children}</span>}
         </label>
     );
 };

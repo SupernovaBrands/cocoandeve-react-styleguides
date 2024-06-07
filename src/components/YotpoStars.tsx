@@ -13,7 +13,7 @@ const YotpoStar = (props: any) => {
 	const signature = encryptParam(`{sku:'${props.sku}',time:${currentTime()}}`);
 	const localeParam = 'en';
 
-	useEffect(() => {
+	const fetchStar = () => {
 		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`, {headers: {cache: 'force-cache'}})
 			.then((response) => response.json())
 			.then((data) => {
@@ -25,10 +25,18 @@ const YotpoStar = (props: any) => {
 					setInit(true);
 				}
 		});
-	}, [props.productId, props.sku]);
+	};
+
+	useEffect(() => {
+		fetchStar();
+	}, [props.sku.length]);
+
+	useEffect(() => {
+		if (total === 0 || score === 0) fetchStar();
+	}, [total, score]);
 
 	return init ? (
-		<div className={`flex ${props.className}`}>
+		<div className={`flex ${props.className}`} data-skus={props.sku}>
 			<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
 			{props.smSingleStar && (
 				<>

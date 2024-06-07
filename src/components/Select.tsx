@@ -17,12 +17,13 @@ interface SelectProps {
     placeholder: string;
     masking?: boolean;
     border?: boolean;
+    fontNormal?: boolean;
 }
 
-const Select: React.FC<SelectProps> = ({ id, options, selected, groupClass, onChange, disabled, placeholder, name, masking, border }) => {
+const Select: React.FC<SelectProps> = ({ id, options, selected, groupClass, onChange, disabled, placeholder, name, masking, border, fontNormal }) => {
     return (
         <label htmlFor={id} className={groupClass ?? 'block w-full lg:w-full pr-2 pl-2'}>
-            { masking && (<span className={`block w-full absolute appearance-none bg-select-arrow py-g px-2 mb-2 text-base leading-normal bg-gray-400 text-gray-800 ${border ? 'border' : ''} rounded-h outline-none mb-0 font-bold text-left`}>{selected}</span>) }
+            { masking && (<span className={`block w-full absolute appearance-none bg-select-arrow py-g px-2 mb-2 text-base leading-normal bg-gray-400 text-gray-800 ${border ? 'border' : ''} rounded-h outline-none mb-0 ${fontNormal ? 'font-normal' : 'font-bold'} text-left`}>{selected}</span>) }
 		    <select
                 id={id}
                 defaultValue={selected}

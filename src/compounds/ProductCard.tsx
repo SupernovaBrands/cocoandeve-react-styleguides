@@ -2,19 +2,22 @@ import Link from "next/link";
 import YotpoStar from "~/components/YotpoStars";
 import { Button } from "../components";
 import { useRef, useState, useEffect } from "react";
+import { formatMoney, getCookie } from "~/modules/utils";
 
-const Pricing = ({ props }) => (
-    <>
-        <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
-            { !props.addingItem &&  (props.label ? props.label : 'Add to Cart') }
-            { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
-        </span>
-        <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
-            {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
-            <span className="">{props.price}</span>
-        </span>
-    </>
-);
+const Pricing = ({ props }) => {
+    return (
+        <>
+            <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
+                { !props.addingItem &&  (props.label ? props.label : 'Add To Cart') }
+                { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
+            </span>
+            <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
+                {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
+                <span className="">{props.price}</span>
+            </span>
+        </>
+    )
+};
 
 const WaitlistButton = (props:any) => {
     const handleWaitlist = () => {
@@ -33,9 +36,22 @@ const WaitlistButton = (props:any) => {
     )
 };
 
+const LaunchButton = (props: any) => {
+    const handleLaunchWaitlist = () => {
+        props.setLaunchWLModal(true);
+    };
+    const data = {...props, ...{ label: 'Waitlist Me' }};
+    return (
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] lg:border-0 flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
+            <Pricing props={data} />
+        </Button>
+    )
+}
+
 const AddToCartButton = (props:any) => {
-    const { className, addToCart, selectedVariant } = props;
+    const { className, addToCart, selectedVariant, preOrders } = props;
     const [addingItem, setAddingItem] = useState(false);
+    const [ctaLabel, setCtaLabel] = useState(props.label);
 
     const onAddItem = async () => {
         setAddingItem(true);
@@ -48,9 +64,24 @@ const AddToCartButton = (props:any) => {
         setAddingItem(false);
     }
 
+    useEffect(() => {
+        if (preOrders && selectedVariant) {
+            const { group1, group2, group3 } = preOrders;
+            if (group1.enabled && selectedVariant && group1.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+                setCtaLabel(group1.cta);
+            } else if (group2.enabled && selectedVariant && group2.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+                setCtaLabel(group2.cta);
+            } else if (group3.enabled && selectedVariant && group3.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+                setCtaLabel(group3.cta);
+            } else {
+                setCtaLabel(props.label);
+            }
+        }
+    }, [selectedVariant, preOrders]);
+
     return (
         <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} border border-[transparent] lg:border-0 flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
-            <Pricing props={{...props, addingItem }}/>
+            <Pricing props={{...props, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }}/>
         </Button>
     );
 };
@@ -61,7 +92,9 @@ const SwatchOverlay = (props:any) => {
     const [swatchAvailable, setSwatchAvailable] = useState(true);
     const firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
-    const { product, addToCart } = props;
+    const { product, addToCart, preOrders } = props;
+    const [price, setPrice] = useState(props.price);
+    const [comparePrice, setComparePrice] = useState(props.comparePrice);
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
@@ -75,7 +108,7 @@ const SwatchOverlay = (props:any) => {
         swatchLabel.current.textContent = targetText;
         const available = e.target.getAttribute('data-avail');
         const id = e.target.getAttribute('data-id');
-        const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === `gid://shopify/ProductVariant/${id}`);
+        const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === id);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
         }
@@ -86,9 +119,15 @@ const SwatchOverlay = (props:any) => {
         }
     };
 
+    useEffect(() => {
+        const region = getCookie('region');
+        if (selectedVariant.compareAtPrice) setComparePrice(formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, region));
+        setPrice(formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region));
+    }, [selectedVariant]);
+
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="btn-choose mb-1" label={props.swatch.label}/>
+            <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} carousel={props.carousel} className="btn-choose mb-1" label={props.swatch.label}/>
             <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
@@ -108,10 +147,10 @@ const SwatchOverlay = (props:any) => {
                 </div>
                 {/* <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/> */}
                 {swatchAvailable && (
-                    <AddToCartButton comparePrice={props.comparePrice} price={props.price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
+                    <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
                 )}
                 {!swatchAvailable && (
-                    <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
+                    <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
                 )}
 
             </div>
@@ -121,15 +160,16 @@ const SwatchOverlay = (props:any) => {
 
 const isKit = (title:string) => {
 	const productTitle = title.toLowerCase();
-	return productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
+	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
 const ProductCardTall = (props:any) => {
-    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick } = props;
+    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, isLaunchWL } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
 
+    // if (isLaunchWL) console.log('isLaunchWL', product.handle, isLaunchWL);
     const trackLink = () => {
         if (carousel) {
             trackEvent('carousel_product', {
@@ -168,6 +208,8 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(product?.variants?.nodes[0] || null);
     }, []);
 
+    if (product.handle === 'tanning-goddess') console.log('skus', skus);
+
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
@@ -197,19 +239,23 @@ const ProductCardTall = (props:any) => {
                     <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.product.swatch && selectedVariant?.availableForSale && (
-                    <AddToCartButton comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>
+                    <AddToCartButton preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>
                 )}
 
                 {props.product.swatch && props.product.availableForSale &&
-                    <SwatchOverlay setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
+                    <SwatchOverlay preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
                 }
                 {!props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
                 {!props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
-                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                    <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
+
+                {/* {props.isLaunchWL && (
+                    <LaunchButton setLaunchWLModal={props.setLaunchWLModal} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                )} */}
             </div>
         </div>
 	) : (
