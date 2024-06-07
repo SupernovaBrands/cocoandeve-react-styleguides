@@ -55,7 +55,7 @@ const TrackMyOrder = (props: any) => {
                         <>
                             {!dataTracking?.fulfillment && !dataTracking?.order ? (
                                 <div className='w-full text-center flex justify-center'>
-                                    <p className="no_data_message lg:max-w-[70%] text-center">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/hc/en-us/requests/ne" className=' whitespace-nowrap'>contact us</a> for help.</p>
+                                    <p className="no_data_message lg:max-w-[70%] text-center mb-4 lg:mb-0">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/hc/en-us/requests/ne" className=' whitespace-nowrap'>contact us</a> for help.</p>
                                 </div>
                             ) : (
                                 <>
@@ -121,7 +121,7 @@ const TrackMyOrder = (props: any) => {
                                     <div className='flex flex-wrap w-full justify-center pb-0 lg:pt-3 lg:border-b-[1px_solid_#e6e6e6]'>
                                         <h2 className='text-base mt-0 lg:mt-2 mb-1 text-center'>Your Order Details {dataTracking?.order?.order_number}</h2>
                                         <div className="w-full overflow-x-auto">
-                                            <table width="100%" className='border-[1px] border-[solid] border-[#e6e6e6] border-b-[0] rounded-[5px] mx-[0] my-[40px] bg-transparent border-collapse [border-spacing:0]'>
+                                            <table width="100%" className='border-[1px] border-[solid] border-[#e6e6e6] border-b-[0] rounded-[5px] mx-[0] my-[40px] bg-transparent border-collapse [border-spacing:0] lg:mb-1'>
                                                 <thead>
                                                     <tr>
                                                         <th className='text-[12px] text-[#484848] p-[15px] text-left'>Product</th>
