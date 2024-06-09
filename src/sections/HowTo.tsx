@@ -59,7 +59,7 @@ const HowToCarousel = (props) => {
 
 	return (
 		<section className="how-to no-gutters__in-container mb-4">
-			<h2 className="text-center h1 pt-2 sm:pb-2 md:pb-3 mb-0">The Ultimate “HOW TO”s</h2>
+			<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{videoData.map((item, index) => (
