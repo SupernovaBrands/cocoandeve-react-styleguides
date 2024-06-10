@@ -83,6 +83,9 @@ const Collection = (props: any) => {
         trackEvent,
         preOrders,
         launchWL,
+        trackBluecoreLaunchWaitlistEvent,
+		submitsToSmsBumpAPi,
+		subscribeBluecoreWaitlist,
     } = props;
 
     const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -96,7 +99,11 @@ const Collection = (props: any) => {
         image: '',
         handle: undefined,
     });
-    const [launchWLModal, setLaunchWLModal] = useState(false);
+    const [launchWLModal, setLaunchWLModal] = useState({
+        open: false,
+        variantId: null,
+        handle: null
+    });
     const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
@@ -205,20 +212,18 @@ const Collection = (props: any) => {
         const smsBump = launchWL.launch_wl_smsbump;
 
         if (email) {
-            // subscribeBluecoreWaitlist(email, productStrapi?.handle, selectedVariant?.id, regSource ? regSource : `launch-item-${productStrapi.handle}`, phoneNumber, true, '');
-            // trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+            subscribeBluecoreWaitlist(email, launchWLModal.handle, launchWLModal.variantId, regSource ? regSource : `launch-item-${launchWLModal.handle}`, phoneNumber, true, '');
+            trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
         }
 
         if (phoneNumber && phoneCode) {
-            // submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
+            submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
         }
 
         if (typeof(fallback) === 'function') {
             fallback();
         }
     }
-
-    // console.log('launchWL', launchWL);
 
     return (
         <>
@@ -401,7 +406,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal className="modal-lg" isOpen={launchWLModal} handleClose={() => setLaunchWLModal(false)}>
+                <Modal className="modal-lg !px-hg lg:!px-0 h-full py-[28px] lg:py-0 lg:h-auto" isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}
@@ -410,12 +415,11 @@ const Collection = (props: any) => {
                         success_msg={launchWL.launch_wl_thanks_title}
                         success_content={launchWL.launch_wl_thanks_subtitle}
                         cta={launchWL.launch_wl_submit}
-                        // className="lg:order-2"
+                        className="modal-content rounded-[20px]"
                         store={store}
                         onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
                         productCard={true}
-                        // forwardRef={launchWaitlist}
-                        // loggedInEmail={user?.email}
+                        handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
                     />
                 </Modal>
             )}

@@ -38,7 +38,11 @@ const WaitlistButton = (props:any) => {
 
 const LaunchButton = (props: any) => {
     const handleLaunchWaitlist = () => {
-        props.setLaunchWLModal(true);
+        props.setLaunchWLModal({
+            open: true,
+            handle: props.product.handle,
+            variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
+        });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
     return (
@@ -208,7 +212,7 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(product?.variants?.nodes[0] || null);
     }, []);
 
-    if (product.handle === 'tanning-goddess') console.log('skus', skus);
+    // if (product.handle === 'tanning-goddess') console.log('skus', skus);
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
@@ -238,24 +242,24 @@ const ProductCardTall = (props:any) => {
                 <p className={`grow flex flex-col justify-center h-100 text-lg mb-1 ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'}`}>
                     <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
-                {!props.product.swatch && selectedVariant?.availableForSale && (
+                {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>
                 )}
 
-                {props.product.swatch && props.product.availableForSale &&
+                {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
                     <SwatchOverlay preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
                 }
-                {!props.product.availableForSale && (
+                {!props.isLaunchWL && !props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
-                {!props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
+                {!props.isLaunchWL && !props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
-                {/* {props.isLaunchWL && (
-                    <LaunchButton setLaunchWLModal={props.setLaunchWLModal} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
-                )} */}
+                {props.isLaunchWL && (
+                    <LaunchButton selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                )}
             </div>
         </div>
 	) : (

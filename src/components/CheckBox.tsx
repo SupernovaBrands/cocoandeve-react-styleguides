@@ -10,9 +10,10 @@ interface CheckBoxProps {
     value?: string;
     children?: any;
     borderLight?: boolean;
+    onClick?: any;
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children, borderLight }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children, borderLight, onClick }) => {
     const [isChecked, setIsChecked] = useState<boolean>(checked || false);
 
     const onChangeClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked,
         <label htmlFor={id} className={`${labelClass ? labelClass : 'flex justify-content-center my-1 relative pl-3'}`}>
             <input type="checkbox" checked={isChecked} name={name} className="hidden" id={id} onChange={onChangeClick} defaultValue={value}/>
             { label && <span
+                onClick={onClick}
                 dangerouslySetInnerHTML={{ __html: label }}
                 className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`}`}
             ></span> }
