@@ -91,7 +91,7 @@ const Footer = (props: any) => {
                             <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
                                 <FacebookSquare className="h-[1.25em] lg:ml-[4px]" />
                             </a>
-                            <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank">
                                 <PinterestSquare className="h-[1.25em] lg:ml-[4px]" />
                             </a>
                             <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
