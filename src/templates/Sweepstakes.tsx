@@ -1,16 +1,66 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChevronDown from '~/images/icons/chevron-down.svg';
 import CountriesOptions from "~/components/countries-options";
-import { InputFormGroup } from '~/components/index';
+import InputCountry from '~/components/InputCountry';
 import parse from 'html-react-parser';
+
+import {
+	validateEmail,
+	validatePhone,
+	getCookie,
+	setCookie,
+	submitsToSmsBumpAPi,
+	subscribeBluecoreWaitlist,
+	utmParams,
+} from '~/modules/utils';
+
+const validForm = {
+	email: false,
+	phone: false,
+};
+
+let store = 'dev';
+// let letterCodeDef = 'SG';
+let numberCodeDef = 65;
+if (store === 'us') {
+	// letterCodeDef = 'US';
+	numberCodeDef = 1;
+} else if (store === 'au') {
+	// letterCodeDef = 'AU';
+	numberCodeDef = 61;
+} else if (store === 'UK') {
+	// letterCodeDef = 'GB';
+	numberCodeDef = 44;
+} else if (store === 'ca') {
+	// letterCodeDef = 'CA';
+	numberCodeDef = 1;
+} else if (store === 'eu' || store === 'fr') {
+	// letterCodeDef = 'FR';
+	numberCodeDef = 33;
+} else if (store === 'de') {
+	// letterCodeDef = 'DE';
+	numberCodeDef = 49;
+} else if (store === 'my' || store === 'my') {
+	// letterCodeDef = 'MY';
+	numberCodeDef = 60;
+}
 
 const Sweepstakes = (props) => {
     const { content, isLoading } = props;
+    console.log('content data', content);
+    const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+    const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
+	const [phoneError, setPhoneError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid phone number' });
+    const [formCompleted, setFormCompleted] = useState(false);
     const [showCart, setShowCart] = useState(false);
     const [countryCode, setCountryCode] = useState(65);
     const [isDesktop, setIsDesktop] = useState(false);
+    const [allowSubmit, setAllowSubmit] = useState(false);
+    const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
 
     let tiktokUrl = 'https://www.tiktok.com/@coco_and_eve?lang=en';
+    const emailRef = useRef(null);
 
     const toggleCart = () => {
 		setShowCart(!showCart);
@@ -19,6 +69,81 @@ const Sweepstakes = (props) => {
     const codeChangeHandler = (selectedCode) => {
         setCountryCode(selectedCode);
     }
+
+    const handleEmail = (e) => {
+		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
+        setEmail(e.target.value);
+        setAllowSubmit(email);
+	};
+
+    const handlePhone = (e) => {
+		setPhone(e.target.value);
+	};
+
+    const handleCode = (e) => {
+		console.log(e);
+		setaActiveCountryCode(e);
+	};
+
+    const validateForm = (em, ph) => {
+		validForm.email = false;
+		validForm.phone = false;
+		if (validateEmail(em)) {
+			validForm.email = true;
+		}
+		if (validatePhone(ph)) {
+			validForm.phone = true;
+		}
+		if (validForm.email || validForm.phone) {
+			if (!validForm.email && em !== '') {
+				setEmailError({ valid: true, error: '' });
+				return false;
+			}
+			if (!validForm.phone && ph !== '' && validForm.email) {
+				setPhoneError({ valid: true, error: '' });
+				return false;
+			}
+			return true;
+		}
+		return false;
+	};
+
+    const handleForm = (e) => {
+		e.preventDefault();
+		console.log('onSubmit');
+		console.log(email, phone);
+
+		if (validateForm(email, phone)) {
+			if (validForm.email) {
+				if (!validForm.phone) {
+					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true);
+				} else {
+					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
+				}
+				setFormCompleted(true);
+			} else {
+				setEmailError({ valid: false, error: 'Please enter a valid email address' });
+			}
+		} else {
+			setEmailError({ valid: false, error: 'Please enter a valid email address' });
+			setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
+		}
+
+		if (validForm.phone) {
+			submitsToSmsBumpAPi(phone, content?.smsbump, activeCountryCode).done((resp) => {
+				// console.log('submitsToSmsBump', resp);
+				if (resp.status === 'error' && !validForm.email) {
+					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
+				} else {
+					setFormCompleted(true);
+				}
+			});
+			if (validForm.email || email === '') {
+				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
+				setFormCompleted(true);
+			}
+		}
+	}
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -55,48 +180,47 @@ const Sweepstakes = (props) => {
                 <div className="container px-0">
                     <div className="flex flex-wrap m-0 items-center place-content-end">
                         <div className="sweepstakes__content px-g lg:w-5/12 lg:order-1 lg:my-4">
-                            <form id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded-h mt-2 lg:mt-0">
-                                <h1 className="text-body mb-1">{content.heading}</h1>
-                                <p className={`${content.subheading_col} mb-[1rem]`}>{parse(`${content.subheading}`)}</p>
-                                <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
-                                    <InputFormGroup type="text" id="sweepstakes__email" placeholder="Type email here" groupClass="w-full pr-2 pl-2"></InputFormGroup>
-                                    <small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
-                                </div>
+                            {!formCompleted ? (
+                                <form onSubmit={handleForm} id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded-h mt-2 lg:mt-0">
+                                    <h1 className="text-body mb-1">{content.heading}</h1>
+                                    <p className={`${content.subheading_col} mb-[1rem]`}>{parse(`${content.subheading}`)}</p>
+                                    <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
+                                        <div className="w-full pr-2 pl-2">
+                                            <input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className="block appearance-none w-full py-g px-2 mb-2 text-base leading-normal bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2"></input>
+                                        </div>
+                                        <small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
+                                    </div>
 
-                                <div className="mb-2 text-sm">- or -</div>
-                                <div className="flex flex-wrap">
-                                    <div className="relative flex items-stretch w-full mb-g">
-                                        <label htmlFor="waitlist-phone" className="bg-gray-400 border-r max-w-[5em] px-2 text-base font-normal leading-normal text-center bg-gray-300  border-gray-100 rounded block appearance-none w-full text-gray-800  border-gray-200  pr-0 relative flex-auto min-w-[0] mb-0 rounded-tr-none rounded-br-none">
-                                            <CountriesOptions selected={countryCode} onChangeFilter={codeChangeHandler} />
-                                            <div className="flex h-full items-center border-l-gray-400">
-                                                <span className="mr-1">+{countryCode}</span>
-                                                <svg className="h-[1em] font-size-sm" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.6 22.6"><path d="M1.9 5.4l9.4 9.4 9.4-9.4 1.9 1.9-11.3 11.3L0 7.3l1.9-1.9z"></path></svg>
-                                            </div>
-                                        </label>
-                                        <input id="waitlist-phone" className="bg-gray-400 outline-none block border-none appearance-none w-full py-1 px-2 text-base leading-normal text-gray-800 border border-gray-200 rounded border-left-1 rounded-tl-none rounded-bl-none" type="tel" placeholder="Phone number" aria-label="phone" />
+                                    <div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
+                                    <div className="flex flex-wrap">
+                                        <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
+                                            <InputCountry id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} />
+                                            <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-g px-2 -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
+                                        </div>
+                                        <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
                                     </div>
-                                    <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
-                                </div>
-                                {/* <div className="flex flex-wrap items-center place-content-center my-2">
-                                    <div className="custom-control custom-checkbox relative flex-grow max-w-full flex flex-wrap items-center place-content-center">
-                                        <input type="checkbox" name="tos" className="custom-control-input" required id="sweepstakes__toc" />
-                                        <label className="custom-control-label text-sm ml-1" htmlFor="sweepstakes__toc">
-                                            I agree to <a href="#" className="text-sm">Privacy Policy & ToS</a>
-                                        </label>
+                                    {/* <div className="flex flex-wrap items-center place-content-center my-2">
+                                        <div className="custom-control custom-checkbox relative flex-grow max-w-full flex flex-wrap items-center place-content-center">
+                                            <input type="checkbox" name="tos" className="custom-control-input" required id="sweepstakes__toc" />
+                                            <label className="custom-control-label text-sm ml-1" htmlFor="sweepstakes__toc">
+                                                I agree to <a href="#" className="text-sm">Privacy Policy & ToS</a>
+                                            </label>
+                                        </div>
+                                        <small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
+                                    </div> */}
+                                    {/* <div className="hidden input-error toc-error text-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div> */}
+                                    <p className={`text-xs mb-[1rem] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} />
+                                    <div className="lg:mb-2 sm:mb-1">
+                                        <button id="sweepstakes__submit" type="submit" className="bg-primary hover:bg-primary-darken w-full rounded border border-transparent font-bold text-white py-[13px] px-[54px] btn-primary" disabled={!allowSubmit}>Sign me up!</button>
                                     </div>
-                                    <small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
-                                </div> */}
-                                {/* <div className="hidden input-error toc-error text-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div> */}
-                                <p className={`text-xs mb-[1rem] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} />
-                                <div className="mb-2">
-                                    <button id="sweepstakes__submit" type="submit" className="bg-primary hover:bg-primary-darken w-full rounded border border-transparent font-bold text-white py-[13px] px-[54px]">Sign me up!</button>
+                                </form>
+                            ) : (
+                                <div className="sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
+                                    <h2 className="h1 text-secondary mb-1">{content.thank_title}</h2>
+                                    <p className="mb-[1rem]">{content.thank_desc}</p>
+                                    <a href="/collections/all" className="btn btn-lg btn-primary btn-block w-full border-2 border border-primary">Shop Coco & Eve</a>
                                 </div>
-                            </form>
-                            <div className="hidden sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
-                                <h2 className="h1 text-secondary">Thank you!</h2>
-                                <p>Your entry has been registered! Head to Coco & Eve and do some shopping while you wait ;)</p>
-                                <a href="#" className="btn btn-lg btn-primary btn-block">Shop Coco & Eve</a>
-                            </div>
+                            )}
                             <p className={`text-xs my-2 mb-lg-0 ${content.desc_col}`} dangerouslySetInnerHTML={{ __html: content.foot_note }} />
                             <div className="social-icon flex justify-center mt-4 mb-4">
 								<a className="mx-1" href="https://www.facebook.com/cocoandeve" target="_blank" rel="noreferrer">
