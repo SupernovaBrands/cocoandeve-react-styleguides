@@ -85,20 +85,20 @@ const Footer = (props: any) => {
                     <div className="[grid-area:nav-follow] hidden lg:block text-left lg:text-right">
                         <div className="inline-block lg:text-left">
                             <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank">
-                                <Instagram className="h-[1.25em]" />
+                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank">
+                                <Instagram className="h-[1.25em] hover:fill-primary-darken" />
                             </a>
                             <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
-                                <FacebookSquare className="h-[1.25em] lg:ml-[4px]" />
+                                <FacebookSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
                             <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank">
-                                <PinterestSquare className="h-[1.25em] lg:ml-[4px]" />
+                                <PinterestSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
                             <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
-                                <Youtube className="h-[1.25em] lg:ml-[4px]" />
+                                <Youtube className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
                             <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank">
-                                <Tiktok className="h-[1.25em] lg:ml-[4px]" />
+                                <Tiktok className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
                         </div>
                     </div>
