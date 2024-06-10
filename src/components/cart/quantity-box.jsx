@@ -128,7 +128,7 @@ export default class QuantityBox extends React.Component {
 		return (
 			<div className="quantity-box flex rounded border">
 				<button
-					className="p-1 grow-0"
+					className="p-g grow-0"
 					type="button"
 					aria-label="Add Subtract"
 					disabled={!this.props.editable || this.state.prevQuantity === 0}
@@ -149,7 +149,7 @@ export default class QuantityBox extends React.Component {
 					aria-label="quantity input"
 				/>
 				<button
-					className="p-1"
+					className="p-g"
 					type="button"
 					aria-label="Add Quantity"
 					disabled={!this.props.editable || this.state.lastStock}

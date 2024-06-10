@@ -140,20 +140,20 @@ export const CartItem = (props:CartItemProps) => {
 
 	return (
 		<li className="cart-item" data-mod={item.modified}>
-		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-g">
+		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
 			<ConditionWrapper
 				condition={!item.isFreeItem}
-				wrapper={(children: any) => <a href={item.url} className="w-3/12 px-g">{children}</a>}
+				wrapper={(children: any) => <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a>}
 			>
-				<picture className={item.isFreeItem ? 'w-3/12 px-g' : ''}>
+				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-100 object-fit-contain bg-pink-light aa" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
-						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-100 object-fit-contain bg-pink-light" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
 				</picture>
 			</ConditionWrapper>
-			<figcaption className="w-9/12 px-g">
+			<figcaption className="w-9/12 px-hg lg:px-g">
 				<div className="flex items-start no-gutters justify-between">
 					<p className="mb-1 font-bold w-2/3 pl-0">
 						{item.isFreeItem && item.originalPrice >= 0 ? (
