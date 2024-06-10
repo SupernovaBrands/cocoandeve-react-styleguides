@@ -94,7 +94,7 @@ const Affiliate = (props: any) => {
 			)}
 
 			{benefit && (
-				<section className="mt-[10.625rem] lg:max-w-[52.188rem] mx-auto lg:mt-[15rem]">
+				<section className="mt-[10.625rem] lg:max-w-[52.188rem] mx-auto lg:mt-[15rem] xxl:mt-[19.375rem]">
 					<div className="container">
 						<h2 className="text-[#000] text-[2rem] lg:text-[3rem] leading-[2.375rem] lg:leading-[3.625rem] mb-4 lg:mb-[4.063rem] text-center">{benefit.section_title}</h2>
 						<div className="flex flex-wrap justify-center benefits">
