@@ -169,6 +169,7 @@ const Cart: React.FC<Props> = (props) => {
 	const onToggleManualGwp = async (id:any) => {
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
+	console.log('cart1', cart);
 
 	return (
 		<>
@@ -291,7 +292,7 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
+									{!combineDiscount && ((!cart?.discountTier && cart.discountLine > 0 || cart?.discountTier && (cart.discountLine - cart?.discountTier > 0))) && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(discountMeter.enabled ? cart.discountLine - cart.discountTier : cart.discountLine, false, store)}`}</p>
