@@ -87,7 +87,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 	const [copied, setCopied] = useState(false);
 	const [smsBump, setSmsbump] = useState('');
 	const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
-	const [isError, setError] = useState(false);
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
@@ -135,7 +134,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 		console.log(email, phone);
 		console.log('testing', validateForm(email, phone))
 		if (validateForm(email, phone)) {
-			setError(false);
 			// console.log('validForm', validForm);
 			utmParams();
 			if (validForm.email) {
@@ -144,8 +142,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 				}
 				setFormCompleted(true);
 			}
-		} else {
-			setError(true);
 		}
 
 		if (validForm.phone) {
@@ -204,11 +200,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
 							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-g font-bold leading-[1.563rem]`}>{nbp_heading_2}</p>
 							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
-							{isError && (
-								<div className="max-w-[560px] mx-auto text-left px-[12px] py-[6px] mb-2 text-[#a94442] bg-[#f2dede] border-[#ebccd1] px-g py-g">
-									Invalid email or phone.
-								</div>
-							)}
 							<div className="relative flex items-stretch w-full mb-0">
 								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="block w-full mb-0 bg-white" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
