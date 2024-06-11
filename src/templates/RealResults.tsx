@@ -135,7 +135,6 @@ const RealResults = () => {
     let store = 'us';
 
     const init = async () => {
-        console.log('REVIEWS_PH', REVIEWS_PH);
 		setTabNames(['Hair', 'Tan & SPF', 'Skin', 'Body']);
 		let sortType = 'best-seller';
 		let sortingHandles = [];
@@ -222,7 +221,6 @@ const RealResults = () => {
 	};
 
 	const changeTab = (e) => {
-        console.log('e.target.dataset.target', e.target.dataset.target);
 		filterCards(e.target.dataset.target);
         setActiveTab2(e.target.dataset.target);
 	};

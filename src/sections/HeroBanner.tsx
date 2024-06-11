@@ -46,8 +46,6 @@ const HeroBanner = (props: any) => {
 
 	useEffect(() => {
 		setIsLoadingComp(false);
-		console.log('hero banner loaded');
-		console.log('tcPopups', tcPopups, region);
 	}, []);
 
 	let slides = [];

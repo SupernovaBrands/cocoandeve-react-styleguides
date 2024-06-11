@@ -7,7 +7,6 @@ const deliveryLi = (countryName) => {
 const DeliveryReturns = (props: any) => {
     const { content } = props;
     const [pageContent, setPageContent] = useState(null);
-    console.log('content1', content?.body?.[0]?.Sections);
     const cols = [0, 1, 2, 3, 4, 5, 6];
 
     const getDataByIndex = (col) => {

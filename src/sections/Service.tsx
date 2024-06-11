@@ -18,7 +18,6 @@ const Service = (props: any) => {
 
 	const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
 	fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve&signature=${signature}`).then((data) => data.json()).then((r) => {
-		console.log('resp.response.total_reviews', );
 		setTotalReviews(r?.response?.total_reviews?.toLocaleString());
 	});
 

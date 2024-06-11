@@ -30,7 +30,6 @@ const TrackMyOrder = (props: any) => {
         fetch(`https://s-app.cocoandeve.com/track_order.json?order_number=${trackingNumber}&brand_name=cocoandeve_shopify_us&signature=${signature}`, { method: 'GET' })
             .then((response) => response.json())
             .then((data) => {
-                console.log('response.json();', data);
                 setShowDelivery(true);
                 setDataTracking(data?.data || null);
                 setSubmitbtn('Track Order');
@@ -39,7 +38,6 @@ const TrackMyOrder = (props: any) => {
 
     const tracking = async (e) => {
         e.preventDefault();
-        console.log(code);
         fetchTrack(inputRef?.current.value);
     }
 
