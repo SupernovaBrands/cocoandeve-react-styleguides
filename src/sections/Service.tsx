@@ -1,13 +1,27 @@
 import Stars from '~/images/icons/two-line-stars.svg';
 import WinnerAward from '~/images/icons/winner-award.svg';
 import MoneyBack from '~/images/icons/moneyback.svg';
+import React, { useState, useEffect } from 'react';
+
+import {
+	encryptParam,
+} from '~/modules/utils_v2';
 
 const Service = (props: any) => {
+	const [totalReviews, setTotalReviews] = useState(null);
+	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 	const SERVICES = [
-		{ id: 'stars', label: `39,025 stars <br class="hidden lg:block"> <span class="hidden lg:inline">Customer</span> Reviews`},
+		{ id: 'stars', label: `__ratings__ stars <br class="hidden lg:block"> <span class="hidden lg:inline">Customer</span> Reviews`},
 		{ id: 'winner-award', label: 'Award-winning <br>Beauty'},
 		{ id: 'money-back', label: 'Money back <br>guarantee'},
 	];
+
+	const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
+	fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve&signature=${signature}`).then((data) => data.json()).then((r) => {
+		console.log('resp.response.total_reviews', );
+		setTotalReviews(r?.response?.total_reviews?.toLocaleString());
+	});
+
 	return (
 		<section className="text-center section-services-list">
 			<div className="container mt-1">
@@ -20,9 +34,16 @@ const Service = (props: any) => {
 									{list.id === 'winner-award' && <WinnerAward className="text-body" />}
 									{list.id === 'money-back' && <MoneyBack className="text-body" />}
 								</i>
-								<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
-									<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
-								))}</p>
+								{list.id === 'stars' ? (
+									<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
+										<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item.replace('__ratings__', totalReviews) + '<br />' }}></span>
+									))}</p>
+								) : (
+									<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
+										<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
+									))}</p>
+								)}
+								
 							</li>
 						);
 					})}

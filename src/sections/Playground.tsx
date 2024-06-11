@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data }) => (
-    <figure className="w-full lg:w-1/4 px-g relative mb-g">
+    <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
         <a href={data?.button_link}>
             <picture className={`rounded block ${data?.playground_range_bg}`}>
                 <source srcSet={data?.image?.url} media="(min-width: 992px)" />
@@ -47,7 +47,7 @@ const Playground = (props: any) => {
                 <>
                     <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p>
-                    <div className="flex flex-wrap -mx-hg lg:-mx-g items-center px-hg">
+                    <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-hg">
                         <PlaygroundCard data={content?.range_1} />
                         <PlaygroundCard data={content?.range_2} />
                         <PlaygroundCard data={content?.range_3} />
