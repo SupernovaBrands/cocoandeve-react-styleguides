@@ -80,7 +80,7 @@ const Blog = (props) => {
 	}, []);
 
 	return (
-		<div className="mobile-wrapper mt-3 lg:mt-5">
+		<div className="mobile-wrapper mt-3 lg:mt-5 px-0 sm:px-hg">
 			<div className="container">
 				<h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
                 {!isLoading && (
@@ -128,7 +128,7 @@ const Blog = (props) => {
 							<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 									{postData.map((data) => (
-										<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
+										<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
 									))}
 								</Carousel.Inner>
 								<Carousel.Navigation>
@@ -153,7 +153,7 @@ const Blog = (props) => {
 						}
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4">
 							{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
-							<div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g">
+							<div className="flex flex-wrap mb-0 mt-2 -mx-g">
 								{articles.map((data) =>
 									<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" template="blog" data={data} />
 								)}

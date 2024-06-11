@@ -87,13 +87,16 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 	const [copied, setCopied] = useState(false);
 	const [smsBump, setSmsbump] = useState('');
 	const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+	const [allowSubmit, setAllowSubmit] = useState(false);
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
 	}, [])
 
 	const handleEmail = (e) => {
+		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
 		setEmail(e.target.value);
+		setAllowSubmit(email);
 	};
 
 	const handlePhone = (e) => {
@@ -131,8 +134,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 	const handleForm = (e) => {
 		e.preventDefault();
 		// console.log('onSubmit');
-		console.log(email, phone);
-		console.log('testing', validateForm(email, phone))
 		if (validateForm(email, phone)) {
 			// console.log('validForm', validForm);
 			utmParams();
@@ -209,7 +210,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-1 -ml-[1px] bg-white border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
-							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative">{nbp_submit}</Button>
+							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative" disabled={!allowSubmit}>{nbp_submit}</Button>
 						</form>
 					)}
 					{formCompleted && (

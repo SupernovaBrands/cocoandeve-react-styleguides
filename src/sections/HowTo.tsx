@@ -63,7 +63,7 @@ const HowToCarousel = (props) => {
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{videoData.map((item, index) => (
-						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
+						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-0">
 							<figure className="border border-secondary-light">
 								{!isLoading && (
 									<picture className="relative w-full aspect-[4/3] m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
