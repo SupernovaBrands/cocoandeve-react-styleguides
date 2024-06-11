@@ -19,7 +19,9 @@ const TrackMyOrder = (props: any) => {
     const [submitBtn, setSubmitbtn] = useState('Track Order');
     const inputRef = useRef(null);
 
-    const fetchTrack = (trackingNumber) => {
+    const fetchTrack = (trackingNumber: string) => {
+        setSubmitbtn('Tracking...');
+        setShowDelivery(false);
         // const trackingNumber = code;
         const date = new Date();
         const tse = date.getTime();
@@ -37,8 +39,6 @@ const TrackMyOrder = (props: any) => {
 
     const tracking = async (e) => {
         e.preventDefault();
-        setSubmitbtn('Tracking...');
-        setShowDelivery(false);
         console.log(code);
         fetchTrack(inputRef?.current.value);
     }
@@ -57,11 +57,7 @@ const TrackMyOrder = (props: any) => {
     }, [urlNum]);
 
     useEffect(() => {
-        if (code) {
-            setSubmitbtn('Tracking...');
-            setShowDelivery(false);
-            fetchTrack(code);
-        }
+        if (code) fetchTrack(code);
     },[code]);
 
     return (
