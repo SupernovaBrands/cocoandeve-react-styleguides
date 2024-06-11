@@ -26,7 +26,7 @@ const SLIDES = [
 ];
 
 const HeroBanner = (props: any) => {
-	const { isStyleguide, region } = props;
+	const { isStyleguide, region, tcPopups } = props;
 	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000 })
@@ -47,6 +47,7 @@ const HeroBanner = (props: any) => {
 	useEffect(() => {
 		setIsLoadingComp(false);
 		console.log('hero banner loaded');
+		console.log('tcPopups', tcPopups, region);
 	}, []);
 
 	let slides = [];
@@ -96,13 +97,13 @@ const HeroBanner = (props: any) => {
 					<div className='bg-shimmer pt-[111.83575%] lg:pt-[38.17708%]'></div>
 				)}
 			</section>
-			{!isLoadingComp && (
+			{!isLoadingComp && tcPopups?.enabled && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
-						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms and Conditions</a>
+						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms & Conditions</a>
 					</div>
 					<Modal className="modal-lg" isOpen={isOpen}>
-						<TermCondition handleClose={() => handleOpenModal()} />
+						<TermCondition content={tcPopups} handleClose={() => handleOpenModal()} />
 					</Modal>
 				</>
 			)}

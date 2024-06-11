@@ -280,7 +280,7 @@ const Cart: React.FC<Props> = (props) => {
 								/>
 								<hr />
 
-								<div className="flex flex-wrap mt-2 mb-1">
+								<div className="flex flex-wrap mt-3 mb-2">
 									<p className="w-2/3 mb-1 font-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
@@ -291,7 +291,7 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
+									{!combineDiscount && ((!cart?.discountTier && cart.discountLine > 0 || cart?.discountTier && (cart.discountLine - cart?.discountTier > 0))) && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(discountMeter.enabled ? cart.discountLine - cart.discountTier : cart.discountLine, false, store)}`}</p>
@@ -349,7 +349,7 @@ const Cart: React.FC<Props> = (props) => {
 									)}
 
 									{shippingData?.show && shippingData?.freeRate && (
-										<p className="text-sm lg:hidden">
+										<p className="text-sm lg:hidden mb-1">
 											Shipping amount shown is a best estimate and may differ from final amount charged.
 										</p>
 									)}

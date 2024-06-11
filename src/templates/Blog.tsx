@@ -26,7 +26,7 @@ const Blog = (props) => {
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [active, setActive] = useState(false);
-	const handlHowTo = () => {
+	const handleHowTo = () => {
 		setActiveFrame(!activeFrame);
 		setActive(true);
 	};
@@ -90,7 +90,7 @@ const Blog = (props) => {
                         <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={active ? false : (tag === 'tan' ? true : false)}/>
                         <BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-						<a href="/blogs/news#how-to-tab" onClick={handlHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
+						<a href="/blogs/news#how-to-tab" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
                     </div>
                 )}
 				{!activeFrame && (

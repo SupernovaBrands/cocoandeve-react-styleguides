@@ -25,8 +25,9 @@
 		}
 
 		.btn-primary[disabled] {
-			@apply bg-gray-500; 
-			@apply border-gray-500;
+			background-color: #a3a3a3;
+    		border-color: #a3a3a3;
+			opacity: .65;
 		}
 
 		&__content {

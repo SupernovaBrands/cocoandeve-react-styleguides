@@ -95,7 +95,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
@@ -136,7 +136,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
@@ -177,7 +177,7 @@ const ProductCarousel = (props: any) => {
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
 												product={item}
-												className="relative mb-0 lg:mb-1 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
 												button={true}
 												setWaitlistData={setWaitlistData}
 												smSingleStar={true}
@@ -209,7 +209,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-5">Shop All</a>
+						<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
 					</div>
 				</div>
 			</div>
