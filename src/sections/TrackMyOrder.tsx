@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	encryptParam,
 } from '~/modules/utils';
@@ -17,9 +17,10 @@ const TrackMyOrder = (props: any) => {
     const [showDelivery, setShowDelivery] = useState(false);
     const [dataTracking, setDataTracking] = useState(null);
     const [submitBtn, setSubmitbtn] = useState('Track Order');
+    const inputRef = useRef(null);
 
-    const fetchTrack = () => {
-        const trackingNumber = code;
+    const fetchTrack = (trackingNumber) => {
+        // const trackingNumber = code;
         const date = new Date();
         const tse = date.getTime();
         const dataString = `{tracking:'${trackingNumber}',time:${tse}}`;
@@ -39,7 +40,7 @@ const TrackMyOrder = (props: any) => {
         setSubmitbtn('Tracking...');
         setShowDelivery(false);
         console.log(code);
-        fetchTrack();
+        fetchTrack(inputRef?.current.value);
     }
 
     const searchParams = useSearchParams();
@@ -56,10 +57,11 @@ const TrackMyOrder = (props: any) => {
     }, [urlNum]);
 
     useEffect(() => {
-        console.log('code', code);
-        setSubmitbtn('Tracking...');
-        setShowDelivery(false);
-        fetchTrack();
+        if (code) {
+            setSubmitbtn('Tracking...');
+            setShowDelivery(false);
+            fetchTrack(code);
+        }
     },[code]);
 
     return (
@@ -70,7 +72,7 @@ const TrackMyOrder = (props: any) => {
                         <h1 className="block w-full mt-[10px] mx-[0] mb-[0] pt-[40px] px-[0] pb-[0] text-[20px] tracking-[.6px] bg-[#fff] uppercase leading-[1.1] text-[#484848]">TRACK MY ORDER</h1>
                         <div className="lg:w-[57%] pt-2 lg:mb-2">
                             <form className="form-group w-full" onSubmit={tracking}>
-                                <input placeholder="Enter your order number or tracking number" value={code} onChange={(e) => setCode(e.target.value)} className="w-full text-dark px-[15px] py-[12px] mb-[5px] text-left border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm" id="tracking_number" name="order_number" type="text" />
+                                <input ref={inputRef} placeholder="Enter your order number or tracking number" defaultValue={code} className="w-full text-dark px-[15px] py-[12px] mb-[5px] text-left border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm" id="tracking_number" name="order_number" type="text" />
                                 <p className="font-size-xs text-left">To track a different order/shipment, please enter the correct order number or tracking number above.</p>
                                 <button type="submit" className='mb-1 btn btn-primary w-100 block mt-g py-g w-full rounded'>{submitBtn}</button>
                             </form>
