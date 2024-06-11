@@ -9,6 +9,7 @@ import TrackTransit from '~/images/icons/track-transit.svg';
 import TrackTransitDisabled from '~/images/icons/track-transit-disabled.svg';
 import TrackDelivered from '~/images/icons/track-delivered.svg';
 import TrackDeliveredDisabled from '~/images/icons/track-delivered-disabled.svg';
+import { useSearchParams } from 'next/navigation'
 
 const TrackMyOrder = (props: any) => {
     const { store } = props;
@@ -17,11 +18,7 @@ const TrackMyOrder = (props: any) => {
     const [dataTracking, setDataTracking] = useState(null);
     const [submitBtn, setSubmitbtn] = useState('Track Order');
 
-    const tracking = async (e) => {
-        e.preventDefault();
-        setSubmitbtn('Tracking...');
-        setShowDelivery(false);
-        console.log(code);
+    const fetchTrack = () => {
         const trackingNumber = code;
         const date = new Date();
         const tse = date.getTime();
@@ -35,7 +32,35 @@ const TrackMyOrder = (props: any) => {
                 setDataTracking(data?.data || null);
                 setSubmitbtn('Track Order');
             });
+    };
+
+    const tracking = async (e) => {
+        e.preventDefault();
+        setSubmitbtn('Tracking...');
+        setShowDelivery(false);
+        console.log(code);
+        fetchTrack();
     }
+
+    const searchParams = useSearchParams();
+    const urlNum = searchParams.get('trackingNumber');
+    // console.log('number', urlNum);
+    // if (urlNum) {
+    //     setCode(urlNum);
+    // }
+
+    useEffect(() => {
+        if (urlNum) {
+            setCode(urlNum);
+        }
+    }, [urlNum]);
+
+    useEffect(() => {
+        console.log('code', code);
+        setSubmitbtn('Tracking...');
+        setShowDelivery(false);
+        fetchTrack();
+    },[code]);
 
     return (
         <>
@@ -116,7 +141,7 @@ const TrackMyOrder = (props: any) => {
                                         {dataTracking?.status === 'delivered' && (
                                             <p className='mb-1 text-center'>Your order has been delivered</p>
                                         )}
-                                        
+
                                     </div>
                                     <div className='flex flex-wrap w-full justify-center pb-0 lg:pt-3 lg:border-b-[1px_solid_#e6e6e6]'>
                                         <h2 className='text-base mt-0 lg:mt-2 mb-1 text-center'>Your Order Details {dataTracking?.order?.order_number}</h2>
