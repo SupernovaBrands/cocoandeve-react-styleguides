@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	encryptParam,
 } from '~/modules/utils';
@@ -9,6 +9,7 @@ import TrackTransit from '~/images/icons/track-transit.svg';
 import TrackTransitDisabled from '~/images/icons/track-transit-disabled.svg';
 import TrackDelivered from '~/images/icons/track-delivered.svg';
 import TrackDeliveredDisabled from '~/images/icons/track-delivered-disabled.svg';
+import { useSearchParams } from 'next/navigation'
 
 const TrackMyOrder = (props: any) => {
     const { store } = props;
@@ -16,13 +17,12 @@ const TrackMyOrder = (props: any) => {
     const [showDelivery, setShowDelivery] = useState(false);
     const [dataTracking, setDataTracking] = useState(null);
     const [submitBtn, setSubmitbtn] = useState('Track Order');
+    const inputRef = useRef(null);
 
-    const tracking = async (e) => {
-        e.preventDefault();
+    const fetchTrack = (trackingNumber: string) => {
         setSubmitbtn('Tracking...');
         setShowDelivery(false);
-        console.log(code);
-        const trackingNumber = code;
+        // const trackingNumber = code;
         const date = new Date();
         const tse = date.getTime();
         const dataString = `{tracking:'${trackingNumber}',time:${tse}}`;
@@ -35,7 +35,30 @@ const TrackMyOrder = (props: any) => {
                 setDataTracking(data?.data || null);
                 setSubmitbtn('Track Order');
             });
+    };
+
+    const tracking = async (e) => {
+        e.preventDefault();
+        console.log(code);
+        fetchTrack(inputRef?.current.value);
     }
+
+    const searchParams = useSearchParams();
+    const urlNum = searchParams.get('trackingNumber');
+    // console.log('number', urlNum);
+    // if (urlNum) {
+    //     setCode(urlNum);
+    // }
+
+    useEffect(() => {
+        if (urlNum) {
+            setCode(urlNum);
+        }
+    }, [urlNum]);
+
+    useEffect(() => {
+        if (code) fetchTrack(code);
+    },[code]);
 
     return (
         <>
@@ -45,7 +68,7 @@ const TrackMyOrder = (props: any) => {
                         <h1 className="block w-full mt-[10px] mx-[0] mb-[0] pt-[40px] px-[0] pb-[0] text-[20px] tracking-[.6px] bg-[#fff] uppercase leading-[1.1] text-[#484848]">TRACK MY ORDER</h1>
                         <div className="lg:w-[57%] pt-2 lg:mb-2">
                             <form className="form-group w-full" onSubmit={tracking}>
-                                <input placeholder="Enter your order number or tracking number" value={code} onChange={(e) => setCode(e.target.value)} className="w-full text-dark px-[15px] py-[12px] mb-[5px] text-left border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm" id="tracking_number" name="order_number" type="text" />
+                                <input ref={inputRef} placeholder="Enter your order number or tracking number" defaultValue={code} className="w-full text-dark px-[15px] py-[12px] mb-[5px] text-left border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm" id="tracking_number" name="order_number" type="text" />
                                 <p className="font-size-xs text-left">To track a different order/shipment, please enter the correct order number or tracking number above.</p>
                                 <button type="submit" className='mb-1 btn btn-primary w-100 block mt-g py-g w-full rounded'>{submitBtn}</button>
                             </form>
@@ -116,7 +139,7 @@ const TrackMyOrder = (props: any) => {
                                         {dataTracking?.status === 'delivered' && (
                                             <p className='mb-1 text-center'>Your order has been delivered</p>
                                         )}
-                                        
+
                                     </div>
                                     <div className='flex flex-wrap w-full justify-center pb-0 lg:pt-3 lg:border-b-[1px_solid_#e6e6e6]'>
                                         <h2 className='text-base mt-0 lg:mt-2 mb-1 text-center'>Your Order Details {dataTracking?.order?.order_number}</h2>
