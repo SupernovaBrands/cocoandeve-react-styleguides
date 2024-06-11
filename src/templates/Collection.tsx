@@ -86,6 +86,7 @@ const Collection = (props: any) => {
         trackBluecoreLaunchWaitlistEvent,
 		submitsToSmsBumpAPi,
 		subscribeBluecoreWaitlist,
+        loggedInEmail,
     } = props;
 
     const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -104,6 +105,7 @@ const Collection = (props: any) => {
         variantId: null,
         handle: null
     });
+    const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
@@ -406,7 +408,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal className="modal-lg !px-hg lg:!px-0 h-full py-[28px] lg:py-0 lg:h-auto" isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
+                <Modal className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full py-[28px]'} lg:py-0 lg:h-auto`} isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}
@@ -420,6 +422,8 @@ const Collection = (props: any) => {
                         onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
                         productCard={true}
                         handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
+                        loggedInEmail={loggedInEmail}
+                        setLaunchWLSuccess={setLaunchWLSuccess}
                     />
                 </Modal>
             )}
