@@ -13,7 +13,7 @@ const options: EmblaOptionsType = {
 };
 
 const ProductRoutineCarousel = (props: any) => {
-    const { items } = props;
+    const { items, store } = props;
 
     const dummyItems = [
 		{
@@ -88,6 +88,7 @@ const ProductRoutineCarousel = (props: any) => {
                                 waitlistData={waitlistData}
                                 setWaitlistData={setWaitlistData}
                                 title={data?.title}
+                                store={store}
                                 />
                             ))}
 
@@ -99,6 +100,7 @@ const ProductRoutineCarousel = (props: any) => {
                                 className={props.className}
                                 item={data}
                                 title={''}
+                                store={store}
                                 />
                             ))}
 

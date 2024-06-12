@@ -30,12 +30,13 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const [email, setEmail] = useState(loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [phoneCode, setPhoneCode] = useState(countries[0].maskValue);
-    const [tos, setTos] = useState(true);
+    const [tos, setTos] = useState(false);
+    const [tosError, setTosError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [phoneError, setPhoneError] = useState(false);
     const [validForm, setValidForm] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [tosClick, setTosClick] = useState(!props.productCard);
+    const [tosClick, setTosClick] = useState(false);
 
     const submitForm = (e:any) => {
         e.preventDefault();
@@ -46,11 +47,14 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
         if (!tosClick) {
             setTos(false);
+            setTosError(true);
             setValidForm(false);
         } else if (validForm) {
             props.onSubmitLaunchWaitlist({email, phoneCode, phoneNumber, fallback: () => {
                 setShowSuccess(true);
-                props.setLaunchWLSuccess(true);
+                if (typeof props.setLaunchWLSuccess === 'function') {
+                    props.setLaunchWLSuccess(true);
+                }
             }});
         }
     }
@@ -64,7 +68,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             setEmailError(false);
         }
 
-        if (email !== '' && validateEmail(email) && phoneError) {
+        if (email !== '' && validateEmail(email) && (phoneNumber === '' || !phoneError)) {
             setPhoneError(false);
         }
     }
@@ -73,7 +77,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         const val = e.target.value;
 
         setPhoneNumber(val);
-        if (val && val.length > 4 && !validatePhone(val)) {
+        if (val && !validatePhone(val)) {
             setPhoneError(true);
         } else {
             setPhoneError(false);
@@ -91,6 +95,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     const changeTos = (e:any) => {
         setTos(e.target.checked);
+        setTosError(!e.target.checked);
     }
 
     useEffect(() => {
@@ -138,15 +143,15 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
-                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold" href="/pages/privacy-policy">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={!props.productCard}/>
-                        {!tos && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
+                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold" href="/pages/privacy-policy">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={false}/>
+                        {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
                         <Button type="submit" buttonClass={`btn-primary w-full border-0 ${props.productCard ? 'h-[50px] border-none' : ''}`}>
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className={`font-size-xs font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-2'}`} dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
+                    <p className={`font-size-xs lg:mt-2 font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-2'}`} dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
                 </form>
             </div> }
 
