@@ -127,13 +127,17 @@ const SwatchOverlay = (props:any) => {
 
     useEffect(() => {
         const region = getCookie('region');
-        if (selectedVariant.compareAtPrice) setComparePrice(formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, region));
+        if (selectedVariant.compareAtPrice) {
+            setComparePrice(formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, region));
+        } else {
+            setComparePrice(null);
+        }
         setPrice(formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region));
     }, [selectedVariant]);
 
     return (
         <>
-            <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} carousel={props.carousel} className="btn-choose mb-1" label={props.swatch.label}/>
+            <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label}/>
             <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                     <label className="block mb-2">
@@ -171,7 +175,6 @@ const isKit = (title:string) => {
 
 const QuizResultButton = (props: any) => {
     const resultVariant = props.product.variants.nodes.find((node) => node.sku === props.sku);
-    console.log('resultVariant', resultVariant);
     // const { addToCart } = props;
     const onAddItem = async () => {
         await props.addToCart({
