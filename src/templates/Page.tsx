@@ -4,14 +4,29 @@ import parse from 'html-react-parser';
 const Page = (props: any) => {
     const { content, isLoading } = props;
     // console.log('test', content)
+    const cssGrid = `
+        .page-content p {
+            margin-bottom: 1rem;
+        }
+
+        .page-content ul {
+            list-style-type: disc;
+            padding-inline-start: 40px;
+            margin-block-end: 1em;
+        }
+        .page-content .font-italic {
+            font-style: italic;
+        }
+    `;
     return (
         <div className="pt-4">
             <div className="container">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
-                    <div className="lg:px-g sm:px-hg lg:w-8/12 w-full relative">
+                    <div className="lg:px-g sm:px-hg lg:w-8/12 w-full relative page-content">
                         <h1 className="text-center md:mb-7 mb-5">
                             {content.title}
                         </h1>
+                        <style jsx>{cssGrid}</style>
                         {parse(content.content.replace('<a class="link-color"', '<a class="link-color underline"'))}
                     </div>
                 </div>
