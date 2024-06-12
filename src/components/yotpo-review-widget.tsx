@@ -116,6 +116,7 @@ const YotpoReviewWidget = (props:any) => {
 		productDesc,
 		canCreate,
 		productSkus,
+		showButtons
 	} = props;
 
 	const [init, setInit] = useState(false);
@@ -755,7 +756,7 @@ const YotpoReviewWidget = (props:any) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className="flex flex-wrap justify-end -mx-1">
+					<div className={`flex flex-wrap justify-end -mx-1 ${showButtons === false ? 'hidden': ''}`}>
 						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
 							<Button onClick={() => handleForm('review')}
 								type="button"
@@ -785,7 +786,7 @@ const YotpoReviewWidget = (props:any) => {
 				</div>
 			)}
 
-			<ul className="flex w-full border-primary border-b mt-3" role="tablist" ref={reviewBox}>
+			<ul className="flex w-full border-[#f5dadf] border-b mt-3" role="tablist" ref={reviewBox}>
 				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
 					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
 				</li>
@@ -967,7 +968,7 @@ const YotpoReviewWidget = (props:any) => {
 					{!revLoading && revPage.totalPage > 1 && (
 						<ul className="list-unstyled flex justify-center items-center mt-2">
 							<li>
-								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 							</li>
 							{revPage.show.map((v) => (
 								<li key={v}>
@@ -975,7 +976,7 @@ const YotpoReviewWidget = (props:any) => {
 								</li>
 							))}
 							<li>
-								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
+								<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 							</li>
 						</ul>
 					)}

@@ -36,7 +36,7 @@ const HowToCarousel = (props) => {
 	};
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
     const {
