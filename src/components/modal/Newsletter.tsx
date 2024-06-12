@@ -40,6 +40,7 @@ interface NewsletterData {
 type NewsletterProp = {
 	handleClose: () => void
 	data: NewsletterData
+	store: string
 }
 
 const validForm = {
@@ -73,7 +74,7 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data }) => {
+const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 	const { nbp_img, nbp_code, nbp_desc, nbp_note, nbp_img_lg, nbp_submit, nbp_enabled, nbp_heading, nbp_smsbump, floating_btn, nbp_bg_color, nbp_email_ph, nbp_phone_ph,
 		nbp_completed, nbp_heading_2, nbp_desc_color, nbp_heading_color, nbp_completed_desc, nbp_heading_2_color, nbp_comliance_position
 	} = data;

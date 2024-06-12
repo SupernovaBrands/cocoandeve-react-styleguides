@@ -357,15 +357,17 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	const tse = date.getTime();
 	const content = `{email:'${email}',time:${tse}}`;
 	const signature = encryptParam(content);
+	const region = getCookie('region');
 
 	const data = {
 		email,
 		country,
-		brand: 'cocoandeve',
+		brand: `cocoandeve_shopify_${region || 'us'}`,
 		domain: window.location.hostname,
 		product: productId,
 		phone: phone || '',
 		signature,
+		welcome: true,
 	};
 
 	if (regSource) {
@@ -401,6 +403,8 @@ export const subscribeBluecoreRegistration = (
 	regSource = 'registration',
 ) => {
 	const country = getCookie('_shopify_country');
+	const region = getCookie('region');
+
 	const date = new Date();
 	const tse = date.getTime();
 	const content = `{email:'${email}',time:${tse}}`;
@@ -409,7 +413,7 @@ export const subscribeBluecoreRegistration = (
 	const data = {
 		email,
 		country,
-		brand: 'cocoandeve',
+		brand: `cocoandeve_shopify_${region || 'us'}`,
 		domain: window.location.hostname,
 		phone: phone || '',
 		reg_source: regSource,

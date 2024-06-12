@@ -9,13 +9,10 @@ import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
-import {
-	encryptParam,
-	getCookie,
-} from '~/modules/utils';
+import { encryptParam } from "~/modules/utils";
 
 const Footer = (props: any) => {
-    const { aboutMenu, shopMenu, helpMenu } = props;
+    const { aboutMenu, shopMenu, helpMenu, store } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
@@ -29,7 +26,7 @@ const Footer = (props: any) => {
 		const tse = date.getTime();
 		const content = `{email:'${email}',time:${tse}}`;
 		const signature = encryptParam(content);
-		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand_name=cocoandeve&reg_source=footer`);
+		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
 		setSubmitted(true);
 	};
 
