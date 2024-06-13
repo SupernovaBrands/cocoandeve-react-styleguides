@@ -40,6 +40,7 @@ module.exports = {
       'secondary': '#00635B',
       'secondary-light': '#E0F0E9',
       'secondary-dark': '#BEDFD1',
+      'secondary-darken': '#003d38',
       'sh-purple': '#993366',
       'sh-purple-light': '#FFEFFF',
       'purple-light': '#FFEFFF',
