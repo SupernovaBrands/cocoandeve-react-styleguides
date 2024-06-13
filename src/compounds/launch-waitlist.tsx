@@ -143,7 +143,9 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
-                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={false}/>
+                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" id="agreement-launch-waitlist" checked={false}>
+                            <a className="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS</a>
+                        </CheckBox>
                         {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>

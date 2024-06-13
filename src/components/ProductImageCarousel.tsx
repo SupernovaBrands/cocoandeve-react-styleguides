@@ -20,11 +20,12 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
+	const alignThumbs = slides.length > 7 ? 'center' : 'start';
 	const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
 		containScroll: 'keepSnaps',
 		dragFree: true,
 		loop: true,
-		align: 'center',
+		align: alignThumbs,
 	});
 
 	const pdpImagePrev = () => {
@@ -88,9 +89,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 						style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
 				</div>
 			</div>
-			<div className="carousel max-w-[90%] mx-auto hidden lg:flex items-center mt-3">
-				<Carousel.Wrapper className="w-full" emblaApi={emblaMainApi}>
-					<Carousel.Inner emblaRef={emblaThumbsRef} className={`ml-1 ${slides.length > 7 ? '' : 'justify-center'}`}>
+			<div className={`carousel max-w-[90%] mx-auto hidden lg:flex items-center mt-3`}>
+				<Carousel.Wrapper className={`w-full ${alignThumbs === 'center' ? 'items-center' : 'items-start -mx-g'}`} emblaApi={emblaMainApi}>
+					<Carousel.Inner emblaRef={emblaThumbsRef} className={`${slides.length > 7 ? 'ml-1 ' : 'justify-start ml-0'}`}>
 						{slides.map((slide, index) => (
 							<div className="flex-grow-0 mx-1 flex-shrink-0 w-[4.375em] basis-[4.375em] flex items-center justify-center" key={index}>
 								<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''}`} onClick={() => onThumbClick(index)}>
