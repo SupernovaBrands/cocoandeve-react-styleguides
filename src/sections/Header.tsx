@@ -113,7 +113,7 @@ const Header = (props: any) => {
 
 	useEffect(() => {
 		setIsLoggedIn(isAuthenticated);
-		if (isAuthenticated && points) setUserPts(points);
+		setUserPts(points);
 	}, [isAuthenticated]);
 
 
