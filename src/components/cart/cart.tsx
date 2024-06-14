@@ -386,9 +386,9 @@ const Cart: React.FC<Props> = (props) => {
 									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
-							{tStrings.cart_shipping_at_checkout !== '' && (
+							{/* {tStrings.cart_shipping_at_checkout !== '' && (
 								<p className="w-full p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: tStrings.cart_shipping_at_checkout }} />
-							)}
+							)} */}
 						</div>
 					)}
 				</div>

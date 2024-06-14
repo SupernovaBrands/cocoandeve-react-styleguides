@@ -17,7 +17,7 @@ const showInstallment = tSettings.payment.shoppay
 
 const CartExtrass = (props:any) => {
 	const [store] = useState(props.store);
-	const [totalPrice] = useState(props.totalPrice);
+	const [totalPrice, setTotalPrice] = useState(props.totalPrice);
 	const [loading] = useState(false);
 	const [showAfterpay, setShowAfterpay] = useState(false);
 	const [showShoppay, setShowShoppay] = useState(false);
@@ -57,7 +57,11 @@ const CartExtrass = (props:any) => {
 				.replace('[num]', 3);
 			setKlarnaInst(klarnaText);
 		}
-	}, []);
+	}, [totalPrice]);
+
+	useEffect(() => {
+		setTotalPrice(props.totalPrice);
+	}, [props.totalPrice]);
 
 	return (
 		<>
@@ -75,7 +79,7 @@ const CartExtrass = (props:any) => {
 		{showKlarna && (
 			<>
 				<p className="text-center font-size-sm border-top pt-2 flex items-center justify-center px-2 flex-wrap">
-					<span dangerouslySetInnerHTML={{ __html: klarnaIns }} />
+					<span className="block w-full" dangerouslySetInnerHTML={{ __html: klarnaIns }} />
 					<img className="mr-hg h-[15px]" height="15" src="https://cdn.shopify.com/s/files/1/0073/5186/1332/t/75/assets/logo-klarna.svg?64921"alt="Klarna" loading="lazy" />
 					<Info className="svg cursor-pointer" onClick={() => props.setIsKlarnaOpen(true)}/>
 				</p>
@@ -87,7 +91,7 @@ const CartExtrass = (props:any) => {
 			<>
 			<hr className="mt-2"/>
 			<div className='text-center font-size-sm border-top py-2 flex items-center justify-center px-2 flex-wrap'>
-				<span className='block'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
+				<span className='block w-full'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
 				<button className='afterpay-logo brand-afterpay type-badge black-on-mint'>
 					<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/>
 				</button>

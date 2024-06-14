@@ -48,11 +48,11 @@ export default class CartDiscountForm extends Component<Props, State> {
         if (this.props.code) {
             this.setState({ code: this.props.code, prevCode: this.props.code });
         }
-        const { isApplied, error } = this.props;
-        if (!isApplied && error) {
-            this.setState({code: ''});
-            this.props.onApply('', false);
-        }
+        // const { isApplied, error } = this.props;
+        // if (!isApplied && error) {
+        //     this.setState({code: ''});
+        //     this.props.onApply('', false);
+        // }
     }
 
     // static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -90,10 +90,8 @@ export default class CartDiscountForm extends Component<Props, State> {
                 const apply:any = await this.props.onApply(this.state.code, true);
                 if (apply && !apply.discountData?.isValid && apply.discountData?.error) {
                     this.props.onApply('', false);
-                    this.setState({ code: '', loading: false });
-                } else {
-                    this.setState({ code: this.state.code || '', loading: false });
                 }
+                this.setState({code: this.state.code || '', loading: false});
             });
         }
     };
@@ -117,10 +115,8 @@ export default class CartDiscountForm extends Component<Props, State> {
             const apply:any = await this.props.onApply(this.state.code, true);
             if (apply && !apply.discountData?.isValid && apply.discountData?.error) {
                 this.props.onApply('', false);
-                this.setState({code: '', loading: false});
-            } else {
-                this.setState({ code: this.state.code || '', loading: false });
             }
+            this.setState({ code: this.state.code || '', loading: false });
 		});
 	}
 
@@ -168,7 +164,7 @@ export default class CartDiscountForm extends Component<Props, State> {
                     </div> }
                     { !isApplied && error && <p className="text-primary text-xs my-1">{error}</p> }
                     {discountBanner?.enable && !hasCode && (
-                    <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mt-1" onClick={this.applyBanner}>
+                    <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer" onClick={this.applyBanner}>
                         <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                         <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
                             <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: discountBanner.code_banner_content}}/>
