@@ -143,7 +143,9 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
-                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" label={`<a class="text-sm text-body underline font-bold" href="/pages/privacy-policy">I agree to Privacy Policy & ToS<\/a>`} id="agreement-waitlist" checked={false}/>
+                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" id="agreement-launch-waitlist" checked={false}>
+                            <a className="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS</a>
+                        </CheckBox>
                         {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
@@ -160,13 +162,13 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className="font-size-sm mb-0 font-bold mt-g" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
             </div> }
             {showSuccess && props.productCard && (
-                <div className="modal-body p-3 p-lg-4 product-waitlist bg-yellow-light product-waitlist__form w-100 mb-3 text-center rounded-[20px]">
+                <div className="modal-body p-3 lg:p-4 product-waitlist bg-yellow-light product-waitlist__form w-100 text-center rounded-[20px]">
                     <CloseButton className="right-[1.563rem] lg:right-[1em]" handleClose={props.handleClose} />
                     <h2 className="h1 mx-auto mb-1">{props.title}</h2>
                     <p className="mb-2" dangerouslySetInnerHTML={{__html: props.content}}></p>
                     <div className="subscribed p-4">
                         <h2 className="h1 mb-1"><b dangerouslySetInnerHTML={{__html: props.success_msg}} /></h2>
-                        <p className="pb-2 font-bold" dangerouslySetInnerHTML={{__html: props.success_content}} />
+                        <p className="pb-2 font-bold mb-[1em]" dangerouslySetInnerHTML={{__html: props.success_content}} />
                     </div>
                 </div>
             )}

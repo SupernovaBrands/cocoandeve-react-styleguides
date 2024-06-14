@@ -16,12 +16,12 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
-		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts } = props;
+		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister } = props;
 
 	const [openDrawer, setOpenDrawer] = useState(false);
-	const [openCartDrawer, setOpenCartDrawer] = useState(false);
+	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
-	const [openAccountBox, setOpenAccountBox] = useState(false);
+	const [openAccountBox, setOpenAccountBox] = useState(openDropdownRegister);
 	const [scrolled, setScrolled] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
@@ -44,6 +44,14 @@ const Header = (props: any) => {
 		}
 		else setOpenAccountBox(!openAccountBox);
 	}
+
+	useEffect(() => {
+		setOpenAccountBox(openDropdownRegister);
+	}, [openDropdownRegister]);
+
+	useEffect(() => {
+		setOpenDropDownRegister(openAccountBox);
+	}, [openAccountBox]);
 
 	const closeTip = () => {
 		setFlashBubble(false);

@@ -31,7 +31,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked,
                 dangerouslySetInnerHTML={{ __html: label }}
                 className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`}`}
             ></span> }
-            {!label && <span className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`} `}>{children}</span>}
+            {!label && <span onClick={onClick} className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`} `}>{children}</span>}
         </label>
     );
 };

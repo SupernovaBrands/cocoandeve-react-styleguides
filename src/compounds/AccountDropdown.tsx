@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import SocialLogin from './SocialLogin';
 import Link from 'next/link';
+import { setCookie } from '~/modules/utils';
 import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
@@ -57,6 +58,9 @@ const AccountDropdown = (props:any) => {
             const { customerCreate } = resp;
             if (customerCreate.customer !== null) {
                 setTimeout(() => {
+                    if (window.location.href.includes('survey=result')) {
+                        setCookie('signedInOnResult', 'true');
+                    }
                     window.location.href = '/account';
                 }, 250);
             }
@@ -92,7 +96,7 @@ const AccountDropdown = (props:any) => {
 			})
 		}).then((resp) => resp.json());
 		const { customerAccessTokenCreate } = respLogin;
-        if (onModal && props.userMutate) {
+        if (onModal && props.userMutate && customerAccessTokenCreate && customerAccessTokenCreate.customerAccessToken) {
             props.userMutate().then(() => {
                 props.closeModal();
                 props.callback();
@@ -101,6 +105,9 @@ const AccountDropdown = (props:any) => {
             let url: string = '/account/login#error'
             if (customerAccessTokenCreate.customerAccessToken) {
                 url = '/account';
+            }
+            if (window.location.href.includes('survey=result')) {
+                setCookie('signedInOnResult', 'true');
             }
             setTimeout(() => {
                 window.location.href = url;

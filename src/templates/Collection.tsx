@@ -206,6 +206,14 @@ const Collection = (props: any) => {
     }, [products]);
 
     useEffect(() => {
+        if (launchWLModal.open) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+    }, [launchWLModal]);
+
+    useEffect(() => {
         getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
     }, []);
 
@@ -417,7 +425,7 @@ const Collection = (props: any) => {
                         success_msg={launchWL.launch_wl_thanks_title}
                         success_content={launchWL.launch_wl_thanks_subtitle}
                         cta={launchWL.launch_wl_submit}
-                        className="modal-content rounded-[20px]"
+                        className="modal-content rounded-[20px] lg:p-4"
                         store={store}
                         onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
                         productCard={true}
