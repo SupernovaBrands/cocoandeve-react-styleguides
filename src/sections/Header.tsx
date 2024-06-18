@@ -17,7 +17,6 @@ const Header = (props: any) => {
 	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister } = props;
-
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -168,7 +167,7 @@ const Header = (props: any) => {
 						text2={annBar.text2}
 						url2={annBar.url2}
 						text3={annBar.text3}
-						url3={annBar.ur3}
+						url3={annBar.url3}
 						countDownStart=""
 						countDownEnd=""
 						countDownDays=""
