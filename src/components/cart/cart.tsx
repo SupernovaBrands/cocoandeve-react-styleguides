@@ -172,8 +172,8 @@ const Cart: React.FC<Props> = (props) => {
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em]" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true}>
-				<div className="modal-content mh-100 border-0 rounded-0">
-					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden max-h-[100vh]">
+				<div className="modal-content mh-100 border-0 rounded-0 flex flex-col h-full overflow-hidden">
+					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden h-full">
 						<div className="container flex flex-col align-stretch text-center pt-2 px-g lg:px-3">
 							<h4 className="text-lg font-bold mb-1">{tStrings.cart_drawer_title}</h4>
 							<button type="button" className="close text-body m-0 absolute top-0 right-0 px-g" onClick={props.handleClose} aria-label="Close" data-cy="cart-close-icon">
@@ -329,14 +329,14 @@ const Cart: React.FC<Props> = (props) => {
 										<>
 											<>
 												<p className="hidden lg:flex w-2/3 mb-1  font-bold" data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</>
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 													<span className="text-sm">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
-												<p className={`mb-1 font-bold text-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
 										</>
 									)}
@@ -378,7 +378,7 @@ const Cart: React.FC<Props> = (props) => {
 					</div>
 
 					{!loadingInit && cart.itemCount > 0 && (
-						<div className="modal-footer px-g lg:px-3 py-2 fixed bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600">
+						<div className="modal-footer px-g lg:px-3 py-2 bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600 justify-end">
 							<div className="flex flex-wrap no-gutters w-full">
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
