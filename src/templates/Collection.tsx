@@ -88,6 +88,7 @@ const Collection = (props: any) => {
 		submitsToSmsBumpAPi,
 		subscribeBluecoreWaitlist,
         loggedInEmail,
+        squareBadge,
     } = props;
 
     const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -235,7 +236,7 @@ const Collection = (props: any) => {
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
             .then((data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p, generalSetting, squareBadge));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -274,7 +275,7 @@ const Collection = (props: any) => {
                 fetch(`/api/collectionProducts/?sort=${defaultSort}&handle=${currentCollection.handle}`).then((r) => r.json())
                 .then((data) => {
                     const { products } = data;
-                    const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p));
+                    const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p, generalSetting, squareBadge));
                     setCollProducts(mapped);
                     setLoading(false);
                 });

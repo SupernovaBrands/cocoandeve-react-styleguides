@@ -85,7 +85,7 @@ const Sustainability = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
 
-    const { banner, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
+    const { banner, generalSetting, squareBadge, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
     const PACKAGING = [
         {
             id: 1,
@@ -126,7 +126,7 @@ const Sustainability = (props: any) => {
                 productData.map((obj) => {
                     const { product } = obj;
                     // delete product.selectedVariant;
-                    const mapped = buildProductCardModel(store, featuredImg, product);
+                    const mapped = buildProductCardModel(store, featuredImg, product, generalSetting, squareBadge);
                     t.push(mapped);
                 });
                 return t;
@@ -326,6 +326,7 @@ const Sustainability = (props: any) => {
                                             sustainability={true}
                                             addToCart={addToCart}
                                             setWaitlistData={setWaitlistData}
+                                            generalSetting={generalSetting}
                                         />
                                     ))}
                                 </Carousel.Inner>
