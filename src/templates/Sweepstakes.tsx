@@ -47,7 +47,6 @@ if (store === 'us') {
 
 const Sweepstakes = (props) => {
     const { content, isLoading } = props;
-    console.log('content data', content);
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -78,6 +77,7 @@ const Sweepstakes = (props) => {
 
     const handlePhone = (e) => {
 		setPhone(e.target.value);
+		setAllowSubmit(true);
 	};
 
     const handleCode = (e) => {
@@ -218,7 +218,7 @@ const Sweepstakes = (props) => {
                                 <div className="sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
                                     <h2 className="h1 text-secondary mb-1">{content.thank_title}</h2>
                                     <p className="mb-[1rem]">{content.thank_desc}</p>
-                                    <a href="/collections/all" className="btn btn-lg btn-primary btn-block w-full border-2 border border-primary">Shop Coco & Eve</a>
+                                    <a href="/collections/all" className="btn btn-lg btn-primary btn-block hover:text-white hover:no-underline w-full border-2 border border-primary">Shop Coco & Eve</a>
                                 </div>
                             )}
                             <p className={`text-xs my-2 lg:mb-0 ${content.desc_col}`} dangerouslySetInnerHTML={{ __html: content.foot_note }} />

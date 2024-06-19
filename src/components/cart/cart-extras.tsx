@@ -54,7 +54,7 @@ const CartExtrass = (props:any) => {
 		if (['dev', 'eu', 'uk'].includes(store)) {
 			setShowKlarna(true);
 			const klarnaText = 'or [num] interest-free installments of <b>[amount]</b> by'
-				.replace('[amount]', formatMoney(Math.round(((parseFloat(totalPrice) / 3) + Number.EPSILON)), false, store))
+				.replace('[amount]', formatMoney(Math.ceil(totalPrice / 3)), false, store)
 				.replace('[num]', 3);
 			setKlarnaInst(klarnaText);
 		}

@@ -87,12 +87,21 @@ const getCustomQuestions = (productId, callback) => {
 		});
 };
 
-const formatDate = (serverDate) => {
+let formattedDate = 'dd/mm/yy';
+
+const formatDate = (serverDate, format = 'dd/mm/yy') => {
 	const d = new Date(serverDate);
 	const month = `${d.getMonth() + 1}`.padStart(2, '0');
 	const day = `${d.getDate()}`.padStart(2, '0');
 	const year = d.getFullYear();
-	return [day, month, year].join('/');
+	if (format === 'dd/mm/yy') {
+		return [day, month, year].join('/');
+	}
+	if (format === 'yyyy/mm/dd') {
+		console.log('2 yyyy/mm/dd')
+		return [year, month, day].join('/');
+	}
+	return [month, day, year].join('/');
 };
 
 const YOTPO_CONFIG_UPLOAD = {
@@ -712,7 +721,7 @@ const YotpoReviewWidget = (props:any) => {
 		<>
 			{ loadWidgetScript && <Script src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${yotpoKey}`}/> }
 			<div className="flex items-center lg:justify-center leading-[1.25]">
-				<span className="yotpo-widget__score ml-25 lg:ml-0 text-[2.8125em] sm:mr-1 md:mr-0">{score ? score.toFixed(1) : 0}</span>
+				<span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:mx-1">
 					<ReviewStar score={score} />
 					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
@@ -817,8 +826,8 @@ const YotpoReviewWidget = (props:any) => {
 							</div>
 						</div>
 
-						<div className="flex flex-wrap mt-1 -mx-1">
-							<div className="w-1/2 lg:w-1/4 px-1">
+						<div className="flex flex-wrap mt-1 lg:-mx-g sm:-mx-hg w-full">
+							<div className="w-1/2 lg:w-1/4 lg:px-g sm:px-hg">
 								<select className="custom-select my-1 border-dark" name="scores" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.rating}</option>
 									<option value="5">5 Stars</option>
@@ -828,14 +837,14 @@ const YotpoReviewWidget = (props:any) => {
 									<option value="1">1 Star</option>
 								</select>
 							</div>
-							<div className="w-1/2 lg:w-1/4 px-1">
+							<div className="w-1/2 lg:w-1/4 lg:px-g sm:px-hg">
 								<select className="custom-select my-1 border-dark" name="pictured" onChange={() => { onFilterChange(); }}>
 									<option value="">{tStrings.yotpo.imageVideo}</option>
 									<option value="true">{tStrings.yotpo.withImageVideo}</option>
 								</select>
 							</div>
 							{customFilter.map((q) => q.filter !== '' && (
-								<div key={q.slug} className="w-1/2 lg:w-1/4 px-1">
+								<div key={q.slug} className="w-1/2 lg:w-1/4 lg:px-g sm:px-hg">
 									<select className="custom-select my-1 border-dark" name={q.slug} onChange={() => { onFilterChange(); }}>
 										<option value="">{q.filter}</option>
 										{q.options.map((o) => (
@@ -895,7 +904,7 @@ const YotpoReviewWidget = (props:any) => {
 											{review.verified_buyer && !isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
 
 											<p className="text-sm mb-1 sm:hidden lg:block">
-												{formatDate(review.created_at)}
+												{formatDate(review.created_at, formattedDate)}
 											</p>
 											<div className="flex text-secondary mb-1 sm:block lg:hidden">
 												<ReviewStar score={review.score} />
@@ -925,7 +934,7 @@ const YotpoReviewWidget = (props:any) => {
 												{review.shortContent && review.shortContent.length > 0 && (
 													<button
 														type="button"
-														className="btn border-0 text-primary p-0 ml-25 font-normal"
+														className="btn border-0 text-primary p-0 ml-25 font-normal hover:underline"
 														onClick={() => { showMoreContent(review); }}
 													>
 														{review.hideContent ? tStrings.yotpo.readMore : tStrings.yotpo.readLess}
@@ -946,7 +955,7 @@ const YotpoReviewWidget = (props:any) => {
 											)}
 											<div className="flex justify-end items-center mt-3">
 												<p className="text-sm mb-0 flex lg:hidden mr-auto my-auto">
-													{formatDate(review.created_at)}
+													{formatDate(review.created_at, formattedDate)}
 												</p>
 												<p className="text-sm mr-0 mb-0 ss-awais">{tStrings.yotpo.reviewHelpful}</p>
 												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
@@ -1013,7 +1022,7 @@ const YotpoReviewWidget = (props:any) => {
 							<h4 className="mb-0 font-bold">{question.user_name}</h4>
 							<p className="text-sm mb-0">{tStrings.yotpo.verifiedReviewer}</p>
 							<p className="text-sm ml-auto mb-1">
-								{formatDate(question.created_at)}
+								{formatDate(question.created_at, formattedDate)}
 							</p>
 							<p className="font-bold mb-1">{`Q: ${decodeHtml(question.content)}`}</p>
 							<p className="text-sm">
@@ -1025,7 +1034,7 @@ const YotpoReviewWidget = (props:any) => {
 							{question.sorted_public_answers.map((answer) => (
 								<div key={answer.id} className="ml-4 mt-2 border-l pl-3">
 									<h4 className="mb-0 text-lg font-bold">{tStrings.yotpo.storeOwner}</h4>
-									<p className="text-sm">{formatDate(answer.created_at)}</p>
+									<p className="text-sm">{formatDate(answer.created_at, formattedDate)}</p>
 									<p className="mt-2 text-md" dangerouslySetInnerHTML={{ __html: `A: ${answer.content}` }}></p>
 									<div className="flex justify-end items-center mt-3">
 										<p className="text-sm mr-1 mb-0">{tStrings.yotpo.answerHelpful}</p>
@@ -1130,7 +1139,7 @@ const YotpoReviewWidget = (props:any) => {
 										<div className="flex">
 											<h4 className="mb-0 text-sm font-bold">{reviewModal.user_name}</h4>
 											{reviewModal.verified_buyer && (<span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>)}
-											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at)}</span>
+											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at, formattedDate)}</span>
 										</div>
 										<div className="flex text-secondary" />
 										<h4 className="mb-0 my-2 yotpo__modal-title">{decodeHtml(reviewModal.title)}</h4>

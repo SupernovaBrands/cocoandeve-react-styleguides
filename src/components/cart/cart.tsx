@@ -231,7 +231,7 @@ const Cart: React.FC<Props> = (props) => {
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
 								id="cart-drawer-form"
-								className="container px-g lg:px-3 cart-drawer__form"
+								className="container px-g lg:px-3 cart-drawer__form pb-g"
 								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate

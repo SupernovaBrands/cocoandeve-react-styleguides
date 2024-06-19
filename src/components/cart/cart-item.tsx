@@ -71,11 +71,15 @@ export const CartItem = (props:CartItemProps) => {
 
 	const productTitle = (item:any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
-		const { swatches } = item;
-		if (swatches.length >= 2) {
+		if (item.merchandise.title.toLowerCase() === 'default title') {
 			return item.merchandise.product.title;
 		}
-		return item.merchandise.product.title.replace('1x ', '');
+
+		const { swatches } = item;
+		if (swatches.length >= 2) {
+			return item.merchandise.title.split('/')[0];
+		}
+		return item.merchandise.title.split('/')[0].replace('1x ', '');
 	}
 
 	const extractId = (id:string) => {
