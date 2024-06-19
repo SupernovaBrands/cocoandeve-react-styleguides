@@ -190,7 +190,7 @@ const Collection = (props: any) => {
                 if (launchHandles.includes(obj.handle)) {
                     itemsWL.push(obj);
                 }
-            } else if (sort === 'price-low-high' || sort === 'price-high-low') {
+            } else {
                 if (!obj.availableForSale || !obj.sortAvailable || launchHandles.includes(obj.handle)) {
                     productUnavailable.push(obj);
                 }
@@ -198,13 +198,15 @@ const Collection = (props: any) => {
         });
         // console.log('productUnavailable', productUnavailable);
         if (itemsWL.length > 0 && sort === 'best-selling') {
-            productUnavailable.splice(5, 0, ...itemsWL);
+            const index = productUnavailable.length > 5 ? 5 : 3;
+            // console.log('iundex', index);
+            productUnavailable.splice(index, 0, ...itemsWL);
         }
 
         if (sort === 'price-low-high' || sort === 'price-high-low') {
             availableItems.sort((a: any, b: any) => {
 
-                const autoTicks = generalSetting.auto_tick_variant.split(',').map((v) => parseInt(v, 10));
+                const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10));
                 let firtsAvailableA = a.variants.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
                 let firtsAvailableB = b.variants.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
 
@@ -238,11 +240,9 @@ const Collection = (props: any) => {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
                     setCollProducts(finalSorted);
-                } else if (e.target.value === 'price-low-high' || e.target.value === 'price-high-low') {
+                } else {
                     const finalSorted = sortByAvailability(mapped, e.target.value);
                     setCollProducts(finalSorted);
-                } else {
-                    setCollProducts(mapped);
                 }
                 setLoading(false);
                 setDefaultSort(e.target.value);
@@ -250,7 +250,8 @@ const Collection = (props: any) => {
     };
 
     useEffect(() => {
-        setShowQuizCard(handle === 'tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
+        // console.log('currentCollection', currentCollection);
+        setShowQuizCard(handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
         setLoading(false);
     }, [currentCollection]);
 
@@ -486,6 +487,9 @@ const Collection = (props: any) => {
                                     />
                                 )
                             })}
+                            {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
+                                 <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                            )}
                             {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
                     </div>

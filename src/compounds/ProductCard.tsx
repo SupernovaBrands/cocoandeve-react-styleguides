@@ -101,12 +101,12 @@ const SwatchOverlay = (props:any) => {
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
 
     let firstAvailable: any;
-    const autoTicks = generalSetting.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
+    const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
     if (autoTicks && autoTicks.length > 0) {
         firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
     }
     // if (product.handle === 'super-nourishing-coconut-fig-hair-masque') console.log('selectedVariant', firstAvailable);
-    if (firstAvailable === null || !firstAvailable.availableForSale) {
+    if (firstAvailable === null || !firstAvailable?.availableForSale) {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
@@ -212,7 +212,7 @@ const ProductCardTall = (props:any) => {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
 
-    const autoTicks = generalSetting.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
+    const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
 
     // if (isLaunchWL) console.log('isLaunchWL', product.handle, isLaunchWL);
     const trackLink = () => {

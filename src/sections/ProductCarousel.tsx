@@ -33,7 +33,7 @@ const ProductCarousel = (props: any) => {
         handle: undefined,
     });
 
-	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders } = props;
+	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -103,6 +103,7 @@ const ProductCarousel = (props: any) => {
 												addToCart={addToCart}
 												trackEvent={trackEvent}
 												preOrders={preOrders}
+												generalSetting={generalSetting}
 											/>
 										)
 									})}

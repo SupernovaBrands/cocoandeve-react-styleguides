@@ -52,6 +52,10 @@
 		-webkit-clip-path: polygon(100% 0%,0 50%,100% 55%);
 		clip-path: polygon(100% 0%,0 50%,100% 55%);
 	}
+
+	.text-underline {
+		@apply underline;
+	}
 }
 
 @layer components {
