@@ -29,7 +29,7 @@ const AnnouncementBar = (props: any) => {
 	} = props;
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 }),
+		Autoplay({ playOnInit: true, delay: 3000, stopOnInteraction: false }),
 		AutoHeight()
 	]);
 	/*
