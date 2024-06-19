@@ -46,9 +46,13 @@ export const useCollectionSettings = (handle: string) => {
 		store = 'us';
 	}
 
-	const handleName = handle === 'tan' ? 'tan-and-spf' : handle;
+	let handleName = handle === 'tan-and-spf' ? 'tan' : handle;
+	handleName = handleName === 'kits-gifts' ? 'bundle': handleName;
 	const universalBanner = data?.CollectionSettings.find((section: any) => section.__component === 'collection.universal-collection-setting');
-	const mainSettings = data?.CollectionSettings.find((section: any) => section.__component === `collection.${handleName}-range-collection-setting`) || universalBanner;
+	const mainSettings = data?.CollectionSettings.find(
+		(section: any) => section.__component !== 'collection.universal-collection-setting' &&
+			(section.range_handles.split(',').includes(handle) || section.__component === `collection.${handleName}-range-collection-setting`)
+	) || universalBanner;
 	let filterCollectionHandles = data?.filter_collections_handles
 	if (isPreview) filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
 	const quizSetting = data?.quiz_collection;

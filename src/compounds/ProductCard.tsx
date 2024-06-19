@@ -96,11 +96,20 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
-    const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
-    const { product, addToCart, preOrders } = props;
+    const { product, addToCart, preOrders, generalSetting } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
+
+    let firstAvailable: any;
+    const autoTicks = generalSetting.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
+    if (autoTicks && autoTicks.length > 0) {
+        firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+    }
+    // if (product.handle === 'super-nourishing-coconut-fig-hair-masque') console.log('selectedVariant', firstAvailable);
+    if (firstAvailable === null || !firstAvailable.availableForSale) {
+        firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
+    }
+    const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
@@ -160,7 +169,7 @@ const SwatchOverlay = (props:any) => {
 
             {!props.quizResult && (
                 <>
-                    <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label}/>
+                    <AddToCartButton comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label}/>
                     <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                         <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                             <label className="block mb-2">
@@ -198,10 +207,12 @@ const isKit = (title:string) => {
 }
 
 const ProductCardTall = (props:any) => {
-    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders } = props;
+    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
+
+    const autoTicks = generalSetting.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
 
     // if (isLaunchWL) console.log('isLaunchWL', product.handle, isLaunchWL);
     const trackLink = () => {
@@ -239,10 +250,16 @@ const ProductCardTall = (props:any) => {
     }, [product, selectedVariant]);
 
     useEffect(() => {
-        setSelectedVariant(product?.variants?.nodes[0] || null);
+        let defaultVariant = null;
+        if (autoTicks && autoTicks.length > 0) {
+            defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+        }
+        if (defaultVariant === null) defaultVariant = product?.variants?.nodes[0];
+        setSelectedVariant(defaultVariant || null);
     }, []);
 
-    // if (product.handle === 'tanning-goddess') console.log('skus', skus);
+    // if (product.handle === 'double-cleanser-set') console.log('p', product);
+    // if (product.handle === 'sunny-honey-bali-bronzing-self-tan-set') console.log('p2', product);
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
@@ -277,7 +294,7 @@ const ProductCardTall = (props:any) => {
                 )}
 
                 {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
-                    <SwatchOverlay quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
+                    <SwatchOverlay generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
