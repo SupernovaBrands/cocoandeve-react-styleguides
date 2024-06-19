@@ -333,6 +333,11 @@ const Collection = (props: any) => {
         }
     }
 
+    const footerCss = `
+    .collection-footer__html p {
+        margin-bottom: 1rem;
+    }`;
+
     return (
         <>
             {!collectionSettings.isLoading && (
@@ -503,9 +508,13 @@ const Collection = (props: any) => {
                     <div className="container py-2 mb-2">
                         {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
                         {!isLoading && (
-                            <div
-                                dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}
-                            />
+                            <>
+                                <style jsx>{footerCss}</style>
+                                <div
+                                    className="collection-footer__html"
+                                    dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}
+                                />
+                            </>
                         )}
                     </div>
                 </>
