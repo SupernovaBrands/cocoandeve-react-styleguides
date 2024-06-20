@@ -1085,18 +1085,18 @@ export const processURL = () => {
 
 export const getFeaturedImages = () => {
 	return new Promise((resolve, reject) => {
-		if (getLSWithExpiry('featuredImages')) {
-			resolve(JSON.parse(getLSWithExpiry('featuredImages')));
-		} else {
+		// if (getLSWithExpiry('featuredImages')) {
+		// 	resolve(JSON.parse(getLSWithExpiry('featuredImages')));
+		// } else {
 			fetch(`/api/getFeaturedImages`).then(
 				res => {
 					res.json().then(data => {
-						setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
+						// setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
 						resolve(data.body);
 					})
 				},
 			);
-		}
+		// }
 	});
 };
 

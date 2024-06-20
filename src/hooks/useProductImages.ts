@@ -9,14 +9,14 @@ const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
 const useProductImages = () => {
     let imagesData = null;
-    if (getLSWithExpiry('featuredImages')) {
-        const images = JSON.parse(getLSWithExpiry('featuredImages'));
-        imagesData = images;
-    } else {
+    // if (getLSWithExpiry('featuredImages')) {
+    //     const images = JSON.parse(getLSWithExpiry('featuredImages'));
+    //     imagesData = images;
+    // } else {
         const { data, error, isLoading } = useSWR(`/api/getFeaturedImages`, fetcher);
-        setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
+        // setLSWithExpiry('featuredImages', JSON.stringify(data?.body || []), daysToTime(14));
         imagesData = data?.body ? data?.body : [];
-    }
+    // }
     /*
     return new Promise((resolve, reject) => {
 		if (getLSWithExpiry('featuredImages')) {
