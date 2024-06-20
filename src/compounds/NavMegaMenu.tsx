@@ -48,7 +48,7 @@ const NavMegaMenu = (props: any) => {
                                     }
                                 }
                             }
-                            if (selected.length < 3) {
+                            if (selected.length < 3 && plist) {
                                 selected = plist.map((item) => {
                                     return {
                                         title: item.title,

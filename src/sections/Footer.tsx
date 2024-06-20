@@ -64,19 +64,19 @@ const Footer = (props: any) => {
                     <div className="[grid-area:nav-shop] mb-g lg:mb-0">
                         <h5 className="mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
                         <ul className="list-unstyled">
-                            {shopMenu.map((item) => (<li key={`shop-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                            {shopMenu?.map((item) => (<li key={`shop-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-about] mb-g lg:mb-0">
                         <h5 className="mb-1 text-xl lg:text-2xl font-bold">About Us</h5>
                         <ul className="list-unstyled">
-                            {aboutMenu.map((item) => (<li key={`about-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                            {aboutMenu?.map((item) => (<li key={`about-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-help] mt-3 lg:mt-0">
                         <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Help</h5>
                         <ul className="list-unstyled mb-g">
-                            {helpMenu.map((item) => (<li key={`help-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                            {helpMenu?.map((item) => (<li key={`help-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
                         </ul>
                     </div>
                     <div className="[grid-area:nav-follow] hidden lg:block text-left lg:text-right">

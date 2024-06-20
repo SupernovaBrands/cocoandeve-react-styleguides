@@ -45,7 +45,7 @@ const ProductCarousel = (props: any) => {
 		<div className="pt-2 text-center">
 			<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                 <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
-                    {products.map((data) => (
+                    {products?.map((data) => (
                         <ProductCard
                             product={data}
                             className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 px-1 text-center"
