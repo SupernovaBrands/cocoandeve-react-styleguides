@@ -348,7 +348,7 @@ const Sustainability = (props: any) => {
                                     </NextButton>
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
-                            <Link href="/collection/all" className="mb-2 lg:mb-3 btn btn-lg btn-outline-primary border-2 hover:no-underline mt-5">Shop All</Link>
+                            <a href="/collections/all" className="mb-2 lg:mb-3 btn btn-lg btn-outline-primary border-2 hover:no-underline mt-5">Shop All</a>
                         </>
                     )}
                 </div>
