@@ -368,8 +368,8 @@ const Collection = (props: any) => {
                                     const isLast = (sidebarMenu.length - 1) === index;
                                     return (
                                     <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}-${index}`}>
-                                        <Link
-                                            onClick={showLoading}
+                                        <a
+                                            // onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
                                                 ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
                                             href={`/collections/${parent.handle}`}
