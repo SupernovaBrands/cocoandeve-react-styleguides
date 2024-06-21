@@ -20,7 +20,7 @@ import ProductCard from "~/compounds/ProductCard";
 const options: EmblaOptionsType = {
 	loop: true,
 	breakpoints: {
-		'(min-width: 992px)': { 
+		'(min-width: 992px)': {
 			align: 'start',
 			watchDrag: false,
 			duration: 40,
@@ -77,6 +77,12 @@ const ProductCarousel = (props: any) => {
 		onNextButtonClick: arrowClickNext3
 	} = usePrevNextButtons(emblaApi3);
 	const autoPlayClick3 = controlAutoplay(emblaApi3);
+
+	useEffect(() => {
+        if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
+        else document.body.classList.remove('overflow-y-hidden');
+    }, [waitlistData]);
+
 	return (
 		<>
 		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">

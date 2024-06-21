@@ -106,7 +106,21 @@ const Modals = () => {
 		src: 'https://via.placeholder.com/690x414/FFF2F4',
 		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90d9a664-debc-4d42-8de7-bf77c6f94f00/public',
 		title: 'Win $500 of products',
-		subtitle: 'and exclusive savings on our Black Friday <br />Deals and future offers!'
+		subtitle: 'and exclusive savings on our Black Friday <br />Deals and future offers!',
+		sweepstakes_popup_title: '',
+		sweepstakes_popup_desc: '',
+		sweepstakes_popup_img_lg: '',
+		sweepstakes_popup_img: '',
+		sweepstakes_foot_note: '',
+		sweepstakes_popup_email: '',
+		sweepstakes_popup_phone: '',
+		smsbump: '',
+		sweepstakes_popup_thank_title: '',
+		sweepstakes_popup_thank_title_color: '',
+		sweepstakes_popup_thank_desc: '',
+		sweepstakes_popup_thank_desc_color: '',
+		sweepstakes_popup_thank_shopnow_url: '',
+		sweepstakes_popup_thank_shopnow: '',
 	};
 
 	const BIRTHDAY_DATA = {
@@ -139,7 +153,7 @@ const Modals = () => {
 			<h1 className="mt-4 mb-1">Modal Newsletter</h1>
 			<Button lg={false} onClick={() => handlOpenModal2(true)}>Launch modal</Button>
 			<Modal className="modal-lg lg:min-w-[48.1875em]" isOpen={modal2} handleClose={() => handlOpenModal2(false)}>
-				<ModalNewsletter handleClose={() => handlOpenModal2(false)} data={MODAL_NEWSLETTER} />
+				<ModalNewsletter store={'dev'} handleClose={() => handlOpenModal2(false)} data={MODAL_NEWSLETTER} />
 			</Modal>
 
 			<h1 className="mt-4 mb-1">Sweepstakes Signup Popup</h1>

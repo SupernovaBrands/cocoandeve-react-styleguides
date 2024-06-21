@@ -81,7 +81,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 								)}
 								{success && !isNonOOs && (
 									<>
-										<p className="h1 mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
+										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back` }}
 										/>
@@ -89,7 +89,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 								)}
 								{success && isNonOOs && (
 									<>
-										<p className="h1 mb-0">{isNonOOs.waitlist_popup_form_title_thanks}</p>
+										<p className="text-xl lg:text-2xl font-bold mb-0">{isNonOOs.waitlist_popup_form_title_thanks}</p>
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back` }}
 										/>
