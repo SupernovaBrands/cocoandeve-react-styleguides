@@ -98,6 +98,8 @@ const Collection = (props: any) => {
     const [loading, setLoading] = useState(false);
     const [isOpen, toggle] = useState(false);
     const [launchHandles, setLaunchHandles] = useState([]);
+    const [initSub, setInitSub] = useState(false);
+    const [initMain, setInitMain] = useState(false);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -307,6 +309,8 @@ const Collection = (props: any) => {
 				})
 			}
 		);
+        setInitMain(parentCollection === null);
+        setInitSub(parentCollection !== null);
     }, []);
 
     useEffect(() => {
@@ -314,6 +318,11 @@ const Collection = (props: any) => {
             setLaunchHandles(launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || []);
         }
     }, [launchWL]);
+
+    useEffect(() => {
+        if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
+        else document.body.classList.remove('overflow-y-hidden');
+    }, [waitlistData]);
 
     const onSubmitLaunchWaitlist = ({ email, phoneCode, phoneNumber, fallback }) => {
         const regSource = launchWL.launch_wl_popup_regsource;
@@ -396,7 +405,7 @@ const Collection = (props: any) => {
                                             })}
                                         </select>
                                     </div>
-                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg">
+                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
                                         <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em]" defaultValue={defaultSort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
@@ -502,7 +511,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            {!collectionSingle.isLoading && footerAbout.enabled && (
+            {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
                     <div className="container py-2 mb-2">
@@ -520,7 +529,9 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && handle === 'all' && <Service className="!text-base" />}
+            {!isLoading && (handle === 'all' || initSub) && <Service className="!text-base" />}
+            {!isLoading && (handle === 'hair-benefits' || parentCollection?.collection?.handle === 'hair-benefits') && <Service className="!text-base" />}
+
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
@@ -528,7 +539,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full py-[28px]'} lg:py-0 lg:h-auto`} isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
+                <Modal className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full py-[28px]'} lg:py-0 lg:h-auto lg:mt-[1rem] lg:max-w-[43.938rem]`} isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}
@@ -537,7 +548,7 @@ const Collection = (props: any) => {
                         success_msg={launchWL.launch_wl_thanks_title}
                         success_content={launchWL.launch_wl_thanks_subtitle}
                         cta={launchWL.launch_wl_submit}
-                        className="modal-content rounded-[20px] lg:p-4"
+                        className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
                         store={store}
                         onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
                         productCard={true}

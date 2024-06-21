@@ -33,8 +33,12 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     let defaultPhoneCode = countries[0].maskValue;
     if (props.productCard) {
+        const defaultObj = { name: 'Singapore', dial_code: '+65', code: 'SG' };
+        const currCountry = getCookie('country_code');
+        const getCode = countriesCode.find((code) => code.code === currCountry) || defaultObj;
         countries = countriesRegion[store];
         defaultPhoneCode = countriesRegion[store].find((c) => c.defaultSelected).maskValue;
+        defaultPhoneCode = countriesRegion[store].find((d) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
     }
 
     const [phoneCode, setPhoneCode] = useState(defaultPhoneCode);

@@ -1,6 +1,6 @@
 // import RealResultCarousel from "~/sections/RealResultCarousel";
 import { EmblaOptionsType } from 'embla-carousel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -69,6 +69,11 @@ const ProductRoutineCarousel = (props: any) => {
         image: '',
         handle: undefined,
     });
+
+    useEffect(() => {
+        if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
+        else document.body.classList.remove('overflow-y-hidden');
+    }, [waitlistData]);
 
 	return (
         <>
