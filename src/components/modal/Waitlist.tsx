@@ -99,7 +99,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
 									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full bg-white text-gray-800" aria-label="waitlistPopupInput" />
 									{formError && <span className="mt-1 font-size-sm">{waitlistPopupData.email_invalid}</span>}
-									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
+									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
 								</div>
 							</>
 						)}

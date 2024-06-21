@@ -10,7 +10,7 @@ import SearchBox from '~/compounds/SearchBox';
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import Tooltip from '~/components/Tooltip';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
@@ -24,8 +24,8 @@ const Header = (props: any) => {
 	const [scrolled, setScrolled] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
-	const [userPts, setUserPts] = useState(0);
-	const router = useRouter();
+	const [userPts, setUserPts] = useState(points || 50);
+	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
@@ -118,10 +118,20 @@ const Header = (props: any) => {
 		);
 	}, []);
 
+	const checkingPoints = () => {
+		if (points === null || points === 0) {
+			fetch('/api/account/points').then((res) => res.json()).then((data) => setUserPts(data.points));
+		}
+	};
+
 	useEffect(() => {
 		setIsLoggedIn(isAuthenticated);
-		setUserPts(points);
+		checkingPoints();
 	}, [isAuthenticated]);
+
+	useEffect(() => {
+		checkingPoints();
+	}, [userPts]);
 
 
 	useEffect(() => {
@@ -137,7 +147,7 @@ const Header = (props: any) => {
 	}, [openAccountBox]);
 
 	useEffect(() => {
-		if (isLoggedIn) {
+		if (isLoggedIn && cartItems.length > 0) {
 			let ptsUsed = 0;
 			cartItems.map((item) => {
 				const attribs = item.attributes && item.attributes.find((i) => i.key === '_swell_discount_type' && i.value === 'product') || false;

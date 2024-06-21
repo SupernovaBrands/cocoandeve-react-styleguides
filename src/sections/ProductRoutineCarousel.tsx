@@ -114,7 +114,7 @@ const ProductRoutineCarousel = (props: any) => {
                 </div>
             </div>
         </div>
-        { <Modal className="modal-lg" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
+        { <Modal className="modal-lg lg:max-w-[43.125rem]" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
             <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         </Modal> }
         </>
