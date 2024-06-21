@@ -237,7 +237,9 @@ const ProductCardTall = (props:any) => {
     }
 
     useEffect(() => {
-        if (product && product.variants) {
+        if (product && product.productType !== 'HERO') {
+            setSkus(product.variants.nodes.map((node:any) => node.sku));
+        } else if (product && product.variants) {
             if (isKit(product.title)) {
                 setSkus(product.variants.nodes.map((node:any) => node.sku));
             } else {
