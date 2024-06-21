@@ -48,7 +48,7 @@ const validForm = {
 	phone: false,
 };
 
-let store = 'us';
+let store = 'dev';
 // let letterCodeDef = 'SG';
 let numberCodeDef = 65;
 if (store === 'us') {
@@ -195,23 +195,23 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 				<img src={nbp_img?.url} className="w-full h-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:py-4 px-0">
-				<CloseButton handleClose={handleClose} className={nbp_heading_color} />
+				<CloseButton handleClose={handleClose} className="fill-gray-600 h-[1em!important] text-sm" />
 				<div className="flex flex-wrap justify-end mx-0">
 					{!formCompleted && (
 						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
-							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-g font-bold leading-[1.563rem]`}>{nbp_heading_2}</p>
-							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
-							<div className="relative flex items-stretch w-full mb-0">
-								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="block w-full mb-0 bg-white" type="email" placeholder={nbp_email_ph} aria-label="email" />
+							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
+							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25] text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
+							<div className="relative flex items-stretch w-full mb-0 flex-wrap">
+								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
 							<p className={`text-center ${nbp_heading_color} mb-1 mt-1`}>and / or</p>
-							<div className="relative flex items-stretch w-full">
-								<InputCountry id="modal--newsletter__country" handleCode={handleCode} activeCountry={activeCountryCode} />
-								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-1 -ml-[1px] bg-white border-l-0 rounded-tl-none rounded-bl-none" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
+							<div className="relative flex items-stretch w-full flex-wrap">
+								<InputCountry id="modal--newsletter__country" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important]" />
+								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-g -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] basis-[57.5%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
-							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative" disabled={!allowSubmit}>{nbp_submit}</Button>
+							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative">{nbp_submit}</Button>
 						</form>
 					)}
 					{formCompleted && (

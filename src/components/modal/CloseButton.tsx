@@ -10,7 +10,7 @@ const CloseButton = (props: Props) => {
 	const { handleClose, className, children } = props;
 	if (!children) {
 		return (
-			<Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-base w-g h-g top-[1em] right-[1em] ${className ?? ''}`}/>
+			<Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-g h-g top-[1em] right-[1em] ${className ?? ''}`}/>
 		)
 	}
 	return (

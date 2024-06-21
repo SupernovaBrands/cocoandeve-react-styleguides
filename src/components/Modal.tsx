@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -26,6 +26,19 @@ const horizontalVariant = {
 
 const Modal = (props: any) => {
 	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding } = props;
+
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+		
+		return () => {
+			document.body.style.overflow = 'unset';
+		};
+	}, [isOpen]);
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -35,7 +48,7 @@ const Modal = (props: any) => {
 					exit={'exit'}
 					variants={modalVariant}
 					onClick={handleClose}
-					className="modal-backdrop top-0 left-0 w-full h-full z-[1040] overflow-y-scroll">
+					className="modal-backdrop top-0 left-0 w-full h-full z-[1040]">
 					{!cartDrawer && <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={modalVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
 						{children}

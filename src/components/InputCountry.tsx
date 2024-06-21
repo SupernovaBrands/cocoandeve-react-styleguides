@@ -10,8 +10,8 @@ const InputCountry = (props: any) => {
 	return (
 		<>
 			<label htmlFor={props.id} className={`input-group-addon border-0 relative py-[14px] px-[16px] mb-1 block appearance-none ${props.className ? props.className : 'bg-white'} rounded rounded-tr-none rounded-br-none h-[3.125rem] w-[5.063rem] lg:w-[5.688rem]`}>
-				<span className={`absolute items-center ${props.className ?? ''}`}>+{props.activeCountry}</span>
-				<ChevronDown className="w-[0.625em] h-[0.625em] right-[15px] absolute top-[50%] -translate-y-[50%]" />
+				<span className={`absolute items-center`}>+{props.activeCountry}</span>
+				<ChevronDown className="fill-gray-600 w-[0.75em] h-[0.75em] right-[10px] absolute top-[50%] -translate-y-[50%]" />
 				<select id={props.id} className="inline-block h-[3.125rem] w-full align-middle opacity-0" onChange={onSelecChange} defaultValue={defaultVal}>
 					<option value="" disabled>Select Country</option>
 					<option value="KH" data-code="855">Cambodia</option>
