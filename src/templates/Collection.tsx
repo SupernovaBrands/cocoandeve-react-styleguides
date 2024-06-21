@@ -406,7 +406,7 @@ const Collection = (props: any) => {
                                         </select>
                                     </div>
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
-                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em]" defaultValue={defaultSort}>
+                                        <select name="sort" onChange={selectSortChange} className="custom-select p-1 w-full lg:w-auto rounded mb-2 lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0" defaultValue={defaultSort}>
                                             <option value="featured">Sort By</option>
                                             <option value="best-selling">Best Selling</option>
                                             <option value="price-low-high">Price, low to high</option>
