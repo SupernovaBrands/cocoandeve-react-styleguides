@@ -9,11 +9,11 @@ const DEFAULT_LABEL = 'Add To Cart';
 const Pricing = ({ props }) => {
     return (
         <>
-            <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
+            <span className={`product-card-btn__text lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
                 { !props.addingItem &&  (props.label ? props.label : DEFAULT_LABEL) }
                 { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
             </span>
-            <span className={`lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
+            <span className={`product-card-btn__prices lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
@@ -86,7 +86,7 @@ const AddToCartButton = (props:any) => {
     }, [selectedVariant, preOrders]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} border border-[transparent] lg:border-0 flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] lg:border-0 flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
             <Pricing props={{...props, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }}/>
         </Button>
     );
@@ -283,11 +283,11 @@ const ProductCardTall = (props:any) => {
 
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className={`pt-2 pb-0 px-25 ${props.quizResult ? 'lg:px-2' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
-                <div className="flex justify-center mb-1">
+                <div className="review-stars__number flex justify-center mb-1">
                     <YotpoStar smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
-                <p className={`grow flex flex-col justify-center h-100 text-lg ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'}`}>
-                    <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
+                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'}`}>
+                    <Link onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card__title text-body text-base lg:text-lg hover:text-body">{props.product.title}</Link>
                 </p>
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>

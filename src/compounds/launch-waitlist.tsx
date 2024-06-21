@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { CheckBox, InputFormGroup, Select, Button } from "../components";
 import { getCookie, validateEmail, validatePhone } from '~/modules/utils';
 import countriesList from '~/modules/countriesList';
+import countriesRegion from '~/modules/countriesRegion';
 import CloseButton from '~/components/modal/CloseButton';
 import countriesCode from '~/modules/countries';
 
@@ -24,12 +25,19 @@ interface LaunchWaitListProps {
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
-    const countries = countriesList;
-    const { loggedInEmail } = props;
+    let countries = countriesList;
+    const { loggedInEmail, store } = props;
 
     const [email, setEmail] = useState(loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [phoneCode, setPhoneCode] = useState(countries[0].maskValue);
+
+    let defaultPhoneCode = countries[0].maskValue;
+    if (props.productCard) {
+        countries = countriesRegion[store];
+        defaultPhoneCode = countriesRegion[store].find((c) => c.defaultSelected).maskValue;
+    }
+
+    const [phoneCode, setPhoneCode] = useState(defaultPhoneCode);
     const [tos, setTos] = useState(false);
     const [tosError, setTosError] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -112,12 +120,6 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         }
     }, [loggedInEmail]);
 
-    useEffect(() => {
-        const currCountry = getCookie('country_code');
-        const countryData = countriesCode.find((c) => c.code === currCountry);
-        if (props.productCard && countryData) setPhoneCode(countryData.dial_code);
-    },[]);
-
     const tosClickHandle = () => {
         setTosClick(true);
     };
@@ -131,14 +133,14 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[50px] !mb-1' : ''}/>
+                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1' : ''}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
                     <div className={`flex flex-wrap ${props.productCard ? '' : '-mx-2'}`}>
                         <div className={`flex flex-nowrap ${props.productCard ? 'w-full mb-g' : ''}`}>
-                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={`block max-w-[28%] md:max-w-[20%] relative pr-0 ${props.productCard ? 'h-[50px]' : 'pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode}`} maskingClass={props.productCard ? 'h-[50px] !mb-0' : ''} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone Number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? '' : 'pr-2 pl-[30px] md:pl-[35px]'}  w-full`} inputClass={props.productCard ? 'h-[50px] !mb-0' : ''}/>
+                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={`block max-w-[28%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:max-w-[9.375rem]' : 'md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0' : ''} selectClass={props.productCard ? '!mb-0' : ''}></Select>
+                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone Number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? '' : 'pr-2 pl-3 md:pl-[2.188rem]'}  w-full`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0' : ''}/>
                         </div>
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
@@ -149,7 +151,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
-                        <Button type="submit" buttonClass={`btn-primary w-full border-0 ${props.productCard ? 'h-[50px] border-none' : ''}`}>
+                        <Button type="submit" buttonClass={`btn-primary w-full border-0 ${props.productCard ? 'h-[3.125rem] border-none' : ''}`}>
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>

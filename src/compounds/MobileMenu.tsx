@@ -51,7 +51,7 @@ const MobileMenu = (props: any) => {
 				{menuBannerQuiz && menuBannerQuiz.enable && (
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
-				{mainMenu.map((menu, i) => {
+				{mainMenu?.map((menu, i) => {
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
@@ -90,7 +90,7 @@ const MobileMenu = (props: any) => {
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{menu.title}</h4></li>
-									{menu.rows.map((row, index) => {
+									{menu.rows?.map((row, index) => {
 										let title = row.title;
 										if (title.toLowerCase().includes('accessories')) title = 'Accessories';
 										if (title === 'Face Moisturizer') title = 'Face Moisturiser';

@@ -1,36 +1,66 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BlogNavTag from '~/compounds/blog-nav-tags';
 import PostCard from "~/compounds/PostCard";
 import Sidebar from "~/sections/Sidebar";
-// import ShopArticle from "~/sections/ShopArticle";
+import ShopArticle from "~/sections/ShopArticle";
 import Twitter from '~/images/icons/twitter-square.svg';
 import Facebook from '~/images/icons/facebook-square.svg';
 import Pinterest from '~/images/icons/pinterest-square.svg';
-import Form from "~/compounds/footer-newsletter-form";
 import parse from 'html-react-parser';
-import Documents from '~/images/icons/documents.svg';
+import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
+import { encryptParam } from "~/modules/utils";
 
 const ArticleNewsLetter = (props) => {
-    const { postNewsletter } = props;
+    const { postNewsletter, store } = props;
+    const [email, setEmail] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+
+    const onSubmit = (evt) => {
+		evt.preventDefault();
+        console.log('email', email);
+		const ajaxRequest = new XMLHttpRequest();
+		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
+		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		const date = new Date();
+		const tse = date.getTime();
+		const content = `{email:'${email}',time:${tse}}`;
+		const signature = encryptParam(content);
+		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
+		setSubmitted(true);
+	};
+
+    const handleEmail = (e) => {
+        console.log(e.target.value);
+        setEmail(e.target.value);
+    }
 
     return (
-        <div className="container blog-post-grid__newsletter px-0">
+        <div className="container blog-post-grid__newsletter px-0 hidden">
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
                 <picture className="lg:w-1/3 w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
                     <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded rounded-tr-none rounded-br-none" />
                 </picture>
                 <div className="lg:w-2/3 w-full p-2 lg:pe-4">
-                    <h2 className="mb-1">{postNewsletter.blog_ns_title}</h2>
+                    <h2 className="mb-1 blog-post-grid__newsletter-title">{postNewsletter.blog_ns_title}</h2>
                     <p className="mb-[1rem]">{postNewsletter.blog_ns_desc}</p>
-                    <Form background="bg-white" btnText="Sign Me Up!" placeholder={postNewsletter.blog_ns_email} successMsg={postNewsletter.blog_ns_success} />
-                    <div className="blog-post-grid__newsletter--submitted hidden form-group mb-g text-left items-center">
-                        <button type="button" className="btn btn-primary btn-lg rounded-lg block d-lg-inline-block mb-0 btn--copy">
-                            WELCOME
-                            <Documents className="ml-25" />
-                        </button>
-                    </div>
+                    {!submitted && (
+                        <form className="w-full" onSubmit={onSubmit}>
+                            <div className="mb-2 relative flex flex-wrap w-full items-stretch">
+                                <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl rounded-bl -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
+                                <div className="input-group-append flex -ml-[1px]">
+                                    <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
+                                </div>
+                            </div>
+                        </form>
+                    )}
+                    {submitted && (
+                        <div className="blog-post-grid__newsletter--submitted form-group mb-g text-left items-center flex">
+                            <CheckCircle className="svg fill-secondary" />
+                            <span className="ml-1">{postNewsletter.blog_ns_success}</span>
+                        </div>
+                    )}
                     <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm [text-decoration-line:none!important]"'))}</p>
                 </div>
             </div>
@@ -56,8 +86,9 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo } = props;
+    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store } = props;
     const [offset, setOffset] = useState<any | null>(null);
+    const [screenLG, setScreenLG] = useState(992);
 
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
@@ -67,6 +98,7 @@ const Article = (props) => {
 
     const storeName = 'dev';
     let bodyContent = '';
+    let quickLinks = [];
 
     const featuredImageUrl = content?.BlogContentMultiStores?.[storeName]?.featured_image?.url || '';
     const featuredImageAlternativeText = content?.BlogContentMultiStores?.[storeName]?.featured_image?.alt || '';
@@ -77,6 +109,20 @@ const Article = (props) => {
             .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
     }
 
+    if (content?.quick_links) {
+        quickLinks = content.quick_links.split(',');
+    }
+
+    const handleClick = (event, href) => {
+        event.preventDefault();
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
@@ -147,51 +193,56 @@ const Article = (props) => {
         return () => clearTimeout(timer);
     }, []);
 
-    // const PRODUCTS = [
-	// 	{
-	// 		id: 1,
-	// 		src: '//via.placeholder.com/520x520/FFF2F4',
-	// 		srcSet: '//via.placeholder.com/520x520/FFF2F4',
-	// 		title: 'Sunny Honey Bronzing Bundle',
-	// 		comparePrice: '$34.90',
-	// 		price: '$24.90',
-	// 		productId: 4543113265187,
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		src: 'https://via.placeholder.com/520x520/FFF2F4',
-	// 		srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-	// 		title: 'Miracle Hair',
-	// 		comparePrice: '$34.90',
-	// 		price: '$24.90',
-	// 		productId: 4543113265187,
-	// 		swatch: {
-	// 			label: 'Choose Style',
-	// 			style: true,
-	// 			data: [
-	// 				{ id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: true},
-	// 				{ id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
-	// 			]
-	// 		}
-	// 	},
-	// 	{
-	// 		src: 'https://via.placeholder.com/520x520/FFF2F4',
-	// 		srcSet: 'https://via.placeholder.com/520x520/FFF2F4',
-	// 		title: 'Sunny Honey Bronzing Bundle',
-	// 		comparePrice: '$34.90',
-	// 		price: '$24.90',
-	// 		productId: 4543113265187,
-	// 		swatch: {
-	// 			label: 'Choose Shade',
-	// 			shade: true,
-	// 			data: [
-	// 				{ id: 32068891541539, value: 'medium', label: 'Medium', available: false},
-	// 				{ id: 32068891607075, value: 'dark', label: 'Dark', available: true},
-	// 				{ id: 32068891639843, value: 'ultra-dark', label: 'Ultra Dark', available: true},
-	// 			]
-	// 		}
-	// 	}
-    // ]
+    useEffect(() => {
+        const manipulateShops = () => {
+            const articleShops = document.querySelectorAll('.blog-post-grid__shop-articles');
+            const articleContent = document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)').length > 1 
+            ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)') 
+            : document.querySelectorAll('.article__content h3');
+            if (articleShops && articleContent.length) {
+                let targetAppend = parseInt((articleContent.length / 2).toString(), 10);
+                targetAppend = targetAppend > 1 ? targetAppend - 1 : targetAppend;
+                const targetContent = articleContent[targetAppend];
+                articleShops.forEach(articleShop => {
+                    targetContent.parentNode.insertBefore(articleShop, targetContent);
+                });
+
+                if (window.innerWidth > screenLG) {
+                    
+                    articleShops.forEach(articleShop => {
+                        articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => el.textContent = 'Add');
+                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__text').forEach(el => el.textContent = 'Waitlist');
+                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__prices .text-linethrough').forEach(el => el.remove());
+                        articleShop.querySelectorAll('.swatch-overlay > div:first-child').forEach(el => {
+                            el.classList.remove('lg:px-1');
+                            el.classList.add('lg:px-0');
+                        });
+                        articleShop.querySelectorAll('.product-card__title').forEach(el => {
+                            el.classList.replace('text-base', 'text-sm');
+                            el.classList.replace('lg:text-lg', 'text-sm');
+                            el.classList.add('[text-decoration-line:none!important]');
+                            el.classList.add('hover:[text-decoration-line:underline!important]');
+                        });
+                        articleShop.querySelectorAll('.review-stars__number').forEach(el => {
+                            el.classList.add('text-sm');
+                        });
+                        articleShop.querySelectorAll('.product-card-btn').forEach(el => {
+                            el.classList.replace('md:text-base', 'text-sm');
+                        });
+                        articleShop.querySelectorAll('.product-title__text').forEach(el => {
+                            el.classList.remove('min-h-[2.5em]');
+                            el.classList.remove('lg:min-h-[3.125em]');
+                            el.classList.remove('lg:mx-[0.625rem]');
+                        });
+                    });
+                }
+            }
+        }
+
+        const timeoutId = setTimeout(manipulateShops, 1000);
+        return () => clearTimeout(timeoutId);
+
+    }, [screenLG]);
 
     return (
         <>
@@ -213,34 +264,28 @@ const Article = (props) => {
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
-                        {/* <span className={`text-left font-bold  ${props.quickLinks ? '' : 'hidden'}`}>In this article:</span>
-                        <div className={`mt-1 ${props.quickLinks ? '' : 'hidden'}`}>
-                            <Link href="#link-1" className="blog-post-quick-links">
-                                <span>Overall hair care</span>
-                            </Link>
-                            <Link href="#link-2" className="blog-post-quick-links">
-                                <span>Heat Styling</span>
-                            </Link>
-                            <Link href="#link-3" className="blog-post-quick-links">
-                                <span>Chemically processed</span>
-                            </Link>
-                            <Link href="#link-4" className="blog-post-quick-links">
-                                <span>Growth</span>
-                            </Link>
-                            <Link href="#link-5" className="blog-post-quick-links">
-                                <span>Dryness &amp; dullness</span>
-                            </a>
-                        </div> */}
                         {!isLoading && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
                                 <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
                                 <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
                             </picture>
                         )}
+                        {quickLinks.length > 0 && (
+                            <>
+                                <span className="text-left font-bold">In this article:</span>
+                                <div className="mt-1 mb-2">
+                                    {quickLinks.map((quickLink, index) => (
+                                        <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
+                                            <span>{quickLink}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </>
+                        )}
                         <div className="article__content">
                             {parse(bodyContent)}
                             {postNewsletter.post_newsletter_enabled && (
-                                <ArticleNewsLetter postNewsletter={postNewsletter} />
+                                <ArticleNewsLetter postNewsletter={postNewsletter} store={store} />
                             )}
                             {postBannerInfo.enables && (
                                 <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
@@ -270,13 +315,13 @@ const Article = (props) => {
                 </article>
             </div>
         </div>
-        {/* <div className="blog-post-grid__shop-articles articleCarousel">
-            <div className="container">
+        <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
+            <div className="container px-0">
                 <h4 className="h1 text-center mb-1">Shop this article</h4>
-                <ShopArticle products={PRODUCTS} />
+                {!isLoading && ( <ShopArticle products={upsells} /> )}
             </div>
-        </div> */}
-        <div className="blog-post-grid__recomendation mobile-srapper bg-pink-light overflow-hidden">
+        </div>
+        <div className="blog-post-grid__recomendation mobile-srapper bg-white lg:bg-pink-light overflow-hidden">
             <div className="container pt-3 lg:pb-1">
                 <h3 className="text-center h1 mb-1">You might also like</h3>
                 <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">

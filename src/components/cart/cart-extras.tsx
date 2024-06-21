@@ -4,6 +4,7 @@ const tSettings = global.config.tSettings;
 
 import React, {useState, useEffect} from 'react';
 import Info from '~/images/icons/info.svg';
+import AfterPayIcon from '~/images/icons/afterpay.svg';
 import Script from 'next/script';
 
 import {
@@ -53,7 +54,7 @@ const CartExtrass = (props:any) => {
 		if (['dev', 'eu', 'uk'].includes(store)) {
 			setShowKlarna(true);
 			const klarnaText = 'or [num] interest-free installments of <b>[amount]</b> by'
-				.replace('[amount]', formatMoney(Math.round(((parseFloat(totalPrice) / 3) + Number.EPSILON)), false, store))
+				.replace('[amount]', formatMoney(Math.ceil(totalPrice / 3)), false, store)
 				.replace('[num]', 3);
 			setKlarnaInst(klarnaText);
 		}
@@ -93,7 +94,8 @@ const CartExtrass = (props:any) => {
 			<div className='text-center font-size-sm border-top py-2 flex items-center justify-center px-2 flex-wrap'>
 				<span className='block w-full'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
 				<button className='afterpay-logo brand-afterpay type-badge black-on-mint'>
-					<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/>
+					{/* <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/> */}
+					<AfterPayIcon className="w-[96px] bg-white"/>
 				</button>
 				<div className="afterpay-content relative">
 					<Info className="svg ml-hg cursor-pointer"/>

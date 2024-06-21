@@ -16,12 +16,15 @@ import {
 	controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
-import Link from 'next/link';
 
 const options: EmblaOptionsType = {
 	loop: true,
 	breakpoints: {
-		'(min-width: 992px)': { align: 'start' }
+		'(min-width: 992px)': { 
+			align: 'start',
+			watchDrag: false,
+			duration: 40,
+		}
 	}
 };
 
