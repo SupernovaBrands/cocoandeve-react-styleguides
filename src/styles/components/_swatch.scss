@@ -196,8 +196,7 @@
 }
 
 .btn-choose {
-	width: calc(100% + 2px);
-	margin-left: -1px;
+	width: calc(100%);
 
 	.product-upsell-2 & {
 		max-width: calc(13.5em + 2px);
