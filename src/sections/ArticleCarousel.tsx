@@ -32,8 +32,8 @@ const ArticleCarousel = (props:any) => {
 
     return <div className="hidden lg:block container mt-4 lg:pt-2 lg:mb-4">{articles.length > 0 && (<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
         <Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-            {articles.map((data:any) => (
-                <PostCard key={data.id} template="pdp" className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+            {articles.map((data:any, index:number) => (
+                <PostCard key={`${data.id}-${index}`} template="pdp" className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
             ))}
         </Carousel.Inner>
         <Carousel.Navigation>

@@ -25,7 +25,7 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 					{data.tags.length > 0 && (
 						<>
 							{data.tags.map((item: string, index: number) => (
-								<PostTag paddingClass={template === 'pdp' ? 'py-[.5em] px-[1em]' : ''} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
+								<PostTag paddingClass={template === 'pdp' ? 'py-[.5em] px-[1em] mr-[4px]' : ''} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
 							))}
 						</>
 					)}

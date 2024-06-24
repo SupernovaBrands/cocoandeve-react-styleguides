@@ -13,7 +13,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 			{props.children}
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
 				return s.id === props.selectedSwatch && !s.text.includes('Tamer') ?
-					(<p key={`${s.id}-swatch-${index}`} className={`w-full text-sm mt-2 mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
+					(<p key={`${s.id}-swatch-${index}`} className={`w-full text-sm mt-[1.2rem] mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
 				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
@@ -60,8 +60,8 @@ const ProductVariant: React.FC<VariantProp> = (props) => (
 		<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
 			{props.children}
 			{!props.subscription && <p className="mb-1 font-bold">
-				{props.compare && <span className="line-through text-body mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
-				<span className="mr-25 text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price} </span>
+				{props.compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
+				<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price} </span>
 				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {props.saving ? props.saving : '(Save 30%)'} </span>}
 			</p>}
 		</label>
