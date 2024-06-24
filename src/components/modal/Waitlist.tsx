@@ -4,6 +4,7 @@ import CloseButton from './CloseButton';
 import usePreview from '~/hooks/usePreview';
 import { useRef, useState } from 'react';
 import { subscribeBluecoreWaitlist, validateEmail } from '~/modules/utils';
+import Close from '~/images/icons/close.svg';
 
 interface WatilistData {
 	image: string|undefined
@@ -62,21 +63,22 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 	};
 	return (
 		<div className="modal-content bg-pink-light lg:px-g">
-			<CloseButton handleClose={handleClose} />
+			{/* <CloseButton handleClose={handleClose} className="!font-size-sm" /> */}
+			<Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
 			<div className="modal-body pt-0 pb-3 px-3 lg:py-5 lg:px-2">
-				<div className="flex flex-wrap items-center justify-center">
+				<div className="flex flex-wrap items-center justify-center lg:-mx-1">
 					<div className="w-full lg:w-1/2 lg:px-g text-center">
 						{data.image &&
 							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image.replace('592x', 'public').replace('540x', 'public')} />
 						}
 					</div>
-					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 mt-lg-0">
+					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 lg:mt-0">
 						{globalSettings && !globalSettings.isLoading && (
 							<>
 								{!success && (
 									<>
-										<strong className="block mb-g text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
-										<p className="text-gray-600 mb-g text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
+										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
+										<p className="text-gray-600 mb-[1rem] text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
 									</>
 								)}
 								{success && !isNonOOs && (
@@ -97,7 +99,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 								)}
 								<div className={`relative flex items-stretch w-full flex-col ${success ? 'mt-4' : 'mt-2'}`}>
 									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
-									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full bg-white text-gray-800" aria-label="waitlistPopupInput" />
+									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
 									{formError && <span className="mt-1 font-size-sm">{waitlistPopupData.email_invalid}</span>}
 									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
 								</div>

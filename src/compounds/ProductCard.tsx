@@ -9,11 +9,11 @@ const DEFAULT_LABEL = 'Add To Cart';
 const Pricing = ({ props }) => {
     return (
         <>
-            <span className={`product-card-btn__text lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
+            <span className={`border-x border-x-transparent product-card-btn__text lg:w-1/2 block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
                 { !props.addingItem &&  (props.label ? props.label : DEFAULT_LABEL) }
                 { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
             </span>
-            <span className={`product-card-btn__prices lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
+            <span className={`border-x border-x-transparent product-card-btn__prices lg:w-1/2 block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
                 <span className="">{props.price}</span>
             </span>
@@ -59,15 +59,17 @@ const AddToCartButton = (props:any) => {
     const [addingItem, setAddingItem] = useState(false);
     const [ctaLabel, setCtaLabel] = useState(props.label);
 
-    const onAddItem = async () => {
-        setAddingItem(true);
-        await addToCart({
-            id: selectedVariant.id,
-            quantity: 1,
-            handle: selectedVariant?.product?.handle,
-            title: selectedVariant.title,
-        });
-        setAddingItem(false);
+    const onAddItem = async (e) => {
+        if (typeof addToCart === 'function') {
+            setAddingItem(true);
+            await addToCart({
+                id: selectedVariant.id,
+                quantity: 1,
+                handle: selectedVariant?.product?.handle,
+                title: selectedVariant.title,
+            });
+            setAddingItem(false);
+        }
     }
 
     useEffect(() => {
@@ -169,7 +171,7 @@ const SwatchOverlay = (props:any) => {
 
             {!props.quizResult && (
                 <>
-                    <AddToCartButton comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label}/>
+                    <AddToCartButton comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label} addToCart={false}/>
                     <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                         <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                             <label className="block mb-2">

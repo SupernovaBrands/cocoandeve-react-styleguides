@@ -25,7 +25,7 @@ const horizontalVariant = {
 }
 
 const Modal = (props: any) => {
-	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding } = props;
+	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses } = props;
 
 	useEffect(() => {
 		if (isOpen) {
@@ -33,7 +33,7 @@ const Modal = (props: any) => {
 		} else {
 			document.body.style.overflow = 'unset';
 		}
-		
+
 		return () => {
 			document.body.style.overflow = 'unset';
 		};
@@ -48,7 +48,7 @@ const Modal = (props: any) => {
 					exit={'exit'}
 					variants={modalVariant}
 					onClick={handleClose}
-					className="modal-backdrop top-0 left-0 w-full h-full z-[1040]">
+					className={`modal-backdrop top-0 left-0 w-full h-full z-[1040] ${backdropClasses ?? ''}`}>
 					{!cartDrawer && <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={modalVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
 						{children}

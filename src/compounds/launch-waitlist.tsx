@@ -5,7 +5,8 @@ import countriesList from '~/modules/countriesList';
 import countriesRegion from '~/modules/countriesRegion';
 import CloseButton from '~/components/modal/CloseButton';
 import countriesCode from '~/modules/countries';
-
+import Close from '~/images/icons/close.svg';
+import ChevronDown from '~/images/icons/chevron-down.svg';
 interface LaunchWaitListProps {
     className?: string;
     title: string;
@@ -131,27 +132,59 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     return (
         <>
             { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
-                {props.productCard && <CloseButton handleClose={props.handleClose} /> }
+                {props.productCard && (
+                    // <CloseButton handleClose={props.handleClose} />
+                    <Close onClick={props.handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
+                ) }
                 {!props.productCard && <h3 className="mb-1">{props.title}</h3>}
                 {props.productCard && <h2 className="h1 mx-auto mb-1">{props.title}</h2>}
                 <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1' : ''}/>
+                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : ''}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
                     <div className={`flex flex-wrap ${props.productCard ? '' : '-mx-2'}`}>
                         <div className={`flex flex-nowrap ${props.productCard ? 'w-full mb-g' : ''}`}>
-                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={`block max-w-[28%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:max-w-[9.375rem]' : 'md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0' : ''} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone Number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? '' : 'pr-2 pl-3 md:pl-[2.188rem]'}  w-full`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0' : ''}/>
+                            {props.productCard && (
+                                <label htmlFor="select-countries" className="border border-gray-400 input-group-addon px-[1em] py-[0.875em] h-[3.125rem] form-control relative bg-gray-400 rounded-l-[4px] flex-1 grow-0 basis-auto w-[84.56px] lg:w-[150.39px]">
+                                    <span className="absolute items-center masking-select left-[1em]">{phoneCode}</span>
+                                    <ChevronDown className="h-[.75em] right-[.625em] absolute top-[50%] -translate-y-[50%] fill-[#484848] lg:border-r border-r-transparent" />
+                                    <select
+                                        id="select-countries"
+                                        defaultValue={phoneCode.replace('+', '')}
+                                        onChange={changePhoneCode}
+                                        className="opacity-0 absolute top-0 left-0 w-[84.56px] h-[3.125rem]"
+                                    >
+                                        <option value="" disabled>Select Country</option>
+                                        {countries.map((option, index) => (
+                                            <option key={`${index}-${option.value}`} value={option.value}>{option.label}</option>
+                                        ))}
+                                    </select>
+                                </label>
+                            )}
+                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={` max-w-[28%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : ''} selectClass={props.productCard ? '!mb-0' : ''}></Select>
+                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? 'flex-1 basis-auto w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1em] py-[0.875em]' : ''}/>
                         </div>
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
-                        <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" id="agreement-launch-waitlist" checked={false}>
-                            <a className="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS</a>
-                        </CheckBox>
+                        {props.productCard && (
+                            <div className="flex flex-wrap -mx-hg lg:-mx-g lg:mt-25">
+                                <div className="pl-[1.75em] pr-hg custom-control custom-checkbox col flex justify-center my-1 lg:px-g">
+                                    <input onClick={tosClickHandle} type="checkbox" onChange={changeTos} name="tos" className="custom-control-input" id="agreement-lw" />
+                                    <label className="custom-control-label font-size-sm font-bold" htmlFor="agreement-lw">
+                                        <a href="/pages/privacy-policy" className="font-size-sm text-dark underline">I agree to Privacy Policy &amp; ToS</a>
+                                    </label>
+                                </div>
+                            </div>
+                        )}
+                        {!props.productCard && (
+                            <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" id="agreement-launch-waitlist" checked={false}>
+                                <a className="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS</a>
+                            </CheckBox>
+                        )}
                         {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
@@ -168,8 +201,8 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className="font-size-sm mb-0 font-bold mt-g" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
             </div> }
             {showSuccess && props.productCard && (
-                <div className="modal-body p-3 lg:p-4 product-waitlist bg-yellow-light product-waitlist__form w-100 text-center rounded-[20px]">
-                    <CloseButton className="right-[1.563rem] lg:right-[1em]" handleClose={props.handleClose} />
+                <div className="modal-body relative p-3 lg:p-4 product-waitlist bg-yellow-light product-waitlist__form w-100 text-center rounded-[20px] border border-[#00000033] bg-clip-padding outline-0">
+                    <Close onClick={props.handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
                     <h2 className="h1 mx-auto mb-1">{props.title}</h2>
                     <p className="mb-2" dangerouslySetInnerHTML={{__html: props.content}}></p>
                     <div className="subscribed p-4">

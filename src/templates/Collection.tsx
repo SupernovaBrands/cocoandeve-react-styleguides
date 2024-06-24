@@ -539,7 +539,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full py-[28px]'} lg:py-0 lg:h-auto lg:mt-[1rem] lg:max-w-[43.938rem]`} isOpen={launchWLModal.open} handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
+                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full lg:py-[28px] my-[28px] lg:my-0 pt-[35px]'} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}
