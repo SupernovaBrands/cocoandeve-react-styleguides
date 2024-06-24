@@ -369,7 +369,7 @@ const Collection = (props: any) => {
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
-                            <span className="block collection-sidebar-label mb-1 mt-3"><strong>Category</strong></span>
+                            <span className="block collection-sidebar-label mb-1 mt-3"><strong className="text-body">Category</strong></span>
                             <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded lg:mb-g" ref={sidebarRef}>
                                 {sidebarMenu.map((parent: any, index:number) => {
                                     const html = parent.title.replace('d-lg-none', 'lg:hidden');
@@ -391,7 +391,7 @@ const Collection = (props: any) => {
                     )}
                     <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap">
                         <div className={`flex flex-wrap w-full justify-between mb-25 lg:mb-0 lg:px-g ${handle === 'all' ? 'lg:mb-2' : ''}`}>
-                            <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center"
+                            <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {!isLoading && (
