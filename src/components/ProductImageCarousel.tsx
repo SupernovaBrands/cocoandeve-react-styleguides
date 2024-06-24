@@ -30,12 +30,12 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 
 	const pdpImagePrev = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaMainApi.scrollPrev();
+		emblaThumbsApi.scrollPrev();
 	};
 
 	const pdpImageNext = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaMainApi.scrollNext();
+		emblaThumbsApi.scrollNext();
 	};
 
 	const onThumbClick = (index: number) => {

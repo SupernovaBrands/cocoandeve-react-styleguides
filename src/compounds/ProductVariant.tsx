@@ -12,7 +12,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 		<div key={props.keyName} className={`product-swatch mb-1 ${props.className}`}>
 			{props.children}
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
-				return s.id === props.selectedSwatch ?
+				return s.id === props.selectedSwatch && !s.text.includes('Tamer') ?
 					(<p key={`${s.id}-swatch-${index}`} className={`w-full text-sm mt-2 mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
 				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}

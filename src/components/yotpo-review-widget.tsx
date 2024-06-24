@@ -722,7 +722,7 @@ const YotpoReviewWidget = (props:any) => {
 			{ loadWidgetScript && <Script src={`https://cdn-widgetsrepository.yotpo.com/v1/loader/${yotpoKey}`}/> }
 			<div className="flex items-center lg:justify-center leading-[1.25]">
 				<span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
-				<div className="lg:flex lg:mx-1">
+				<div className="lg:flex lg:ml-1">
 					<ReviewStar score={score} />
 					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
@@ -765,21 +765,21 @@ const YotpoReviewWidget = (props:any) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className={`flex flex-wrap justify-end -mx-1 ${showButtons === false ? 'hidden': ''}`}>
-						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
+					<div className={`flex flex-wrap justify-end -mx-g ${showButtons === false ? 'hidden': ''}`}>
+						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('review')}
 								type="button"
 								lg={false}
 								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
-									{tStrings.yotpo.writeReview}
+									Write A Review
 							</Button>
 						</div>
-						<div className="w-1/2 md:w-1/4 xl:w-1/5 px-1">
+						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('question')}
 								type="button"
 								lg={false}
 								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
-									{tStrings.yotpo.askQuestion}
+									Ask A Question
 							</Button>
 						</div>
 					</div>
@@ -820,7 +820,7 @@ const YotpoReviewWidget = (props:any) => {
 								}}
 							/>
 							<div className="input-group-append flex">
-								<button type="button" className="input-group-text border bg-white  h-full rounded-0 flex justify-center items-center px-2 border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
+								<button type="button" className="w-[50px] max-w-[50px] max-h-[50px] input-group-text border bg-white  h-full rounded-0 flex justify-center items-center border-gray-400" aria-label="Submit search" onClick={() => onFilterChange()}>
 									<SvgSearch className="svg size-1em" />
 								</button>
 							</div>
@@ -859,7 +859,7 @@ const YotpoReviewWidget = (props:any) => {
 					<hr className="my-2"/>
 
 					{revLoading && (
-						<div className="flex justify-center mt-4 text-primary">
+						<div className="flex justify-center mt-4">
 							<div className="spinner-border " role="status" aria-hidden="true" />
 						</div>
 					)}
@@ -895,7 +895,7 @@ const YotpoReviewWidget = (props:any) => {
 							<div className="container" role="list">
 								{reviews.map((review) => (
 									<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
-										<div className="w-full lg:w-1/4 pl-0 lg:pr-2">
+										<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 											<h4 className="h4 mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 												{review.user_name}
 												{review.verified_buyer && <SvgVerified className="svg text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
@@ -922,7 +922,7 @@ const YotpoReviewWidget = (props:any) => {
 												</p>
 											))}
 										</div>
-										<div className="w-full lg:w-3/4 lg:pl-2 pr-0">
+										<div className="w-full lg:w-3/4 lg:pl-hg pr-0">
 											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>

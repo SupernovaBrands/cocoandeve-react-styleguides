@@ -13,7 +13,7 @@ import { useRef, useEffect, useState } from 'react';
 const iconsData = {
     'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span></>,
     'sulfate-free': <><Sulfate className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
-    'gluten': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
+    'gluten': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Gluten Free</span></>,
     'vegan': <><Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span></>,
     'silicone-free': <><DimethiconeFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Silicone Free</span></>,
     'cruelty-free': <><CrueltyFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Cruelty Free</span></>,
@@ -51,17 +51,23 @@ const ProudToBe = (props:any) => {
     }, [scrollEl]);
 
     return (
-        <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
+        <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>
         <div className="">
                 <div className="carousel--scroll position-relative">
-                    <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
-                        {proudToBeArr.map((proud:any, index: number) => (
-                            <li key={`${proud}-${index}`} className="min-w-[16.6%] flex items-center flex-col px-1 carousel-item active">
+                    <div className="main-box overflow-hidden -mx-hg md:-mx-g">
+                        <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
+                            {proudToBeArr.map((proud:any, index: number) =>{
+                                if (!proud) {
+                                    return <></>;
+                                }
+                                return <li key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
                                 {iconsData[proud]}
-                            </li>
-                        ))}
-                    </ul>
+                                </li>
+                                }
+                            )}
+                        </ul>
+                    </div>
                     <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
                         <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{width, left}} ref={scrollThumb}></div>
                     </div>

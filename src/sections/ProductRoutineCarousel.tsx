@@ -17,7 +17,7 @@ const ProductRoutineCarousel = (props: any) => {
 
     const dummyItems = [
 		{
-            active: "active d-lg-flex",
+            active: "active lg:flex",
             step: "Step 1",
             nextStep: "Step 2",
             title: "Deluxe Exfoliating Mitt",
@@ -28,7 +28,7 @@ const ProductRoutineCarousel = (props: any) => {
             price: "$34.90",
         },
         {
-            active: "active d-lg-flex",
+            active: "active lg:flex",
             step: "Step 2",
             nextStep: "Step 3",
             title: "Sunny Honey Bali Bronzing Bundle",
@@ -47,7 +47,7 @@ const ProductRoutineCarousel = (props: any) => {
             }
         },
         {
-            active: "active d-lg-flex",
+            active: "active lg:flex",
             step: "Step 3",
             nextStep: "Step 2",
             title: "Antioxidant Face Tanning Micromist",
@@ -77,12 +77,12 @@ const ProductRoutineCarousel = (props: any) => {
 
 	return (
         <>
-        <div className="product-upsell-2 pb-5 pt-0 md:pt-5">
-            <div className="container">
+        <div className="product-upsell-2 pb-[70px] lg:pb-5 pt-0 md:pt-5">
+            <div className="container justify-center">
                 <p className="h1 w-full text-center mb-3 lg:px-g sm:px-h1">Shop the Routine</p>
-                <div className="sm:-mr-hg">
+                <div className="container lg:mx-g w-[100vw] lg:w-full px-0 lg:px-g">
                     <Carousel.Wrapper emblaApi={emblaApi1}>
-                        <Carousel.Inner emblaRef={emblaRef1} className="lg:mx-0 lg:!transform-none">
+                        <Carousel.Inner emblaRef={emblaRef1} className="mx-0 lg:-mx-g lg:!transform-none">
                             {items && items.map((data: any, index: number) => (
                             <ProductCardUpsell
                                 key={`${index}-routine`}

@@ -82,16 +82,16 @@ const ProductCardUpsell = (props:any) => {
 
     return (
         <>
-            <div className={`min-w-[80%] md:min-w-[30%] lg:w-4/12 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
-                <div className="item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
+            <div className={`w-9/12 lg:w-4/12 min-w-[78%] lg:min-w-0 ${props.item.active} product-card grow px-hg lg:px-g product-upsell-2`}>
+                <div className="mr-[2px] item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                     {props.item.step && <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span> }
                     <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
                         <source srcSet={featuredImage} media="(min-width: 992px)" />
                         <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black">
-                            <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
+                            <img className="object-cover absolute w-[107.5%] h-[107.5%] -left-[1px] lg:left-0 lg:w-[108%] lg:h-[108%] -top-[3.8%] bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
                         </a>
                     </picture>
-                    <div className="product-card__content pb-2 relative grow flex flex-col px-hg lg:px-2 lg:px-3 bg-pink-light items-center h-full min-h-[18.75em] lg:min-h-0">
+                    <div className="product-card__content pb-2 relative grow flex flex-col px-[0.3125em] lg:px-2 lg:px-3 bg-pink-light items-center h-full min-h-[18.75em] lg:min-h-0">
                         <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
                             <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</a>
                         </p>

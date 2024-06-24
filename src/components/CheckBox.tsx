@@ -11,9 +11,10 @@ interface CheckBoxProps {
     children?: any;
     borderLight?: boolean;
     onClick?: any;
+    boxSmall?: any;
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children, borderLight, onClick }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked, labelClass, value, children, borderLight, onClick, boxSmall }) => {
     const [isChecked, setIsChecked] = useState<boolean>(checked || false);
 
     const onChangeClick = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +30,9 @@ const CheckBox: React.FC<CheckBoxProps> = ({ id, label, onChange, name, checked,
             { label && <span
                 onClick={onClick}
                 dangerouslySetInnerHTML={{ __html: label }}
-                className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`}`}
+                className={`before:content-[''] ${boxSmall ? `before:size-[15px]` : 'before:size-[17.5px]'} before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`}`}
             ></span> }
-            {!label && <span onClick={onClick} className={`before:content-[''] before:size-[17.5px] before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`} `}>{children}</span>}
+            {!label && <span onClick={onClick} className={`before:content-[''] ${boxSmall ? `before:size-[15px]` : 'before:size-[17.5px]'} before:absolute before:left-0 before:border before:inline-block before:rounded-h before:mr-1 ${isChecked ? 'before:bg-checkbox-checked before:border-primary' : `before:bg-checkbox-unchecked ${borderLight ? 'before:border-gray-500' : ''}`} `}>{children}</span>}
         </label>
     );
 };
