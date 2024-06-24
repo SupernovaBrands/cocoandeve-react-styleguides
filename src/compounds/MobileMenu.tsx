@@ -128,7 +128,7 @@ const MobileMenu = (props: any) => {
 					)}
 				</li>
 				<li key="shopall" className="my-g p-g">
-					<Link href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</Link>
+					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
