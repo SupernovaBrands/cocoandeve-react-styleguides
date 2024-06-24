@@ -201,7 +201,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 						<form className="lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0`}>{nbp_heading}</h2>
 							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
-							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25] text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
+							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25!important] text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
 							<div className="relative flex items-stretch w-full mb-0 flex-wrap">
 								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
@@ -210,7 +210,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 								<InputCountry id="modal--newsletter__country" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important]" />
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="block w-full mb-g -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] basis-[57.5%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
-							<p className="text-xs mt-g text-center mb-g mx-1" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
+							<p className="text-xs mt-g text-center mb-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs ')}} />
 							<Button type="submit" buttonClass="w-full btn-primary border-2 border-primary relative">{nbp_submit}</Button>
 						</form>
 					)}
