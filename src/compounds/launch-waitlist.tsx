@@ -141,7 +141,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props.content}}></p>
                 <form onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px]'}/>
+                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                         {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
                     </div>
                     <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
@@ -164,8 +164,8 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                     </select>
                                 </label>
                             )}
-                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={` max-w-[28%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? 'flex-1 basis-auto w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1em] py-[0.875em]' : ''}/>
+                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={`max-w-[25%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
+                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? 'flex-1 basis-auto w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                         </div>
                         { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>
