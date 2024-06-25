@@ -64,7 +64,8 @@ const Sustainability = (props: any) => {
     // carousel 2
 	const [emblaRef2, emblaApi2] = useEmblaCarousel({
         loop: false,
-        align: 'center'
+        align: 'center',
+        duration: 40,
     }, [
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
@@ -74,7 +75,11 @@ const Sustainability = (props: any) => {
 	const [emblaRef3, emblaApi3] = useEmblaCarousel({
         loop: true,
         breakpoints: {
-            '(min-width: 992px)': { align: 'start' }
+            '(min-width: 992px)': {
+                align: 'start',
+                watchDrag: false,
+			    duration: 40,
+            }
         }
     }, [
 		Autoplay({ playOnInit: false, delay: 3000 })
