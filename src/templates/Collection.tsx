@@ -154,7 +154,9 @@ const Collection = (props: any) => {
 
     const selectFilterChange = (e: any) => {
         showLoading(e);
-        router.push(`/collections/${e.target.value}`);
+        let handle = e.target.value;
+        if (e.target.value === '') handle = 'all';
+        window.location.href = `/collections/${handle}`;
     };
     let selectFilterValue = currentCollection?.handle;
     if (parentCollection && parentCollection.collection) {
@@ -347,6 +349,9 @@ const Collection = (props: any) => {
         margin-bottom: 1rem;
     }`;
 
+    /* update shop all position to the last item */
+    const [first, ...rest] = sidebarMenu;
+    const mobileDropdown = [...rest,first];
     return (
         <>
             {!collectionSettings.isLoading && (
@@ -397,9 +402,9 @@ const Collection = (props: any) => {
                             {!isLoading && (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg">
-                                        <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={selectFilterValue}>
-                                            <option>Filter by</option>
-                                            {sidebarMenu.map((parent: any, index: number) => {
+                                        <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
+                                            <option value="">Filter by</option>
+                                            {mobileDropdown.map((parent: any, index: number) => {
                                                 const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                                 return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
                                             })}
@@ -539,7 +544,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full lg:py-[28px] my-[28px] lg:my-0 pt-[35px]'} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full lg:py-[28px] lg:my-0'} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}

@@ -315,22 +315,26 @@ const Article = (props) => {
                 </article>
             </div>
         </div>
-        <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
-            <div className="container px-0">
-                <h4 className="h1 text-center mb-1">Shop this article</h4>
-                {!isLoading && ( <ShopArticle products={upsells} /> )}
+        {upsells.length > 0 && (
+            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
+                <div className="container px-0">
+                    <h4 className="h1 text-center mb-1">Shop this article</h4>
+                    {!isLoading && ( <ShopArticle products={upsells} /> )}
+                </div>
             </div>
-        </div>
-        <div className="blog-post-grid__recomendation mobile-srapper bg-white lg:bg-pink-light overflow-hidden">
-            <div className="container pt-3 lg:pb-1">
-                <h3 className="text-center h1 mb-1">You might also like</h3>
-                <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">
-					{recomendations.map((data) =>
-						<PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" template="article" data={data} />
-					)}
-				</div>
+        )}
+        {recomendations.length > 0 && (
+            <div className="blog-post-grid__recomendation mobile-srapper bg-white lg:bg-pink-light overflow-hidden">
+                <div className="container pt-3 lg:pb-1">
+                    <h3 className="text-center h1 mb-1">You might also like</h3>
+                    <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">
+                        {recomendations.map((data) =>
+                            <PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" template="article" data={data} />
+                        )}
+                    </div>
+                </div>
             </div>
-        </div>
+        )}
         </>
     );
 };
