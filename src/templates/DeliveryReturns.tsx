@@ -37,17 +37,17 @@ const DeliveryReturns = (props: any) => {
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center lg:pb-4">
                         <h1 className="mb-1">Delivery</h1>
                     </div>
-                    <div className="flex flex-col -mx-hg lg:-mx-0 text-center justify-center py-g border-b-[#adadad] border-b-[1px] border-b-solid">
+                    <div className="flex flex-col mx-0 lg:-mx-0 text-center justify-center py-g pb-[18px] lg:pb-g border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-1">Standard delivery times</h2>
                         <p className="mb-1">(Including processing time)*</p>
                     </div>
-                    <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-g lg:pt-[45px] pb-0 border-b-[#adadad] border-b-[1px] border-b-solid lg:px-g">
+                    <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-[16px] lg:pt-[45px] pb-0 border-b-[#adadad] border-b-[1px] border-b-solid lg:px-g">
                         <div className="flex flex-wrap w-full pb-[50px] lg:pb-[110px]">
                             {pageContent?.delivery?.times_country.map((co) => (
                                 <div className="relative max-w-full lg:w-1/4 px-hg lg:px-g w-1/2 md:mt-3 md:mb-3 mb-2">
                                     <div className="bg-[#f9eeca] p-[12px] lg:p-[24px] text-left h-full rounded">
                                         <h5 className="font-bold mb-1 text-lg">{co.title}</h5>
-                                        <p className="mb-[15px]">{co.desc}</p>
+                                        <p className="mb-[12px] lg:mb-[15px]">{co.desc}</p>
                                     </div>
                                 </div>
                             ))}
