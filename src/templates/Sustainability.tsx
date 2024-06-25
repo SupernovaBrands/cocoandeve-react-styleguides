@@ -64,7 +64,8 @@ const Sustainability = (props: any) => {
     // carousel 2
 	const [emblaRef2, emblaApi2] = useEmblaCarousel({
         loop: false,
-        align: 'start'
+        align: 'center',
+        duration: 40,
     }, [
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
@@ -74,7 +75,11 @@ const Sustainability = (props: any) => {
 	const [emblaRef3, emblaApi3] = useEmblaCarousel({
         loop: true,
         breakpoints: {
-            '(min-width: 992px)': { align: 'start' }
+            '(min-width: 992px)': {
+                align: 'start',
+                watchDrag: false,
+			    duration: 40,
+            }
         }
     }, [
 		Autoplay({ playOnInit: false, delay: 3000 })
@@ -197,11 +202,11 @@ const Sustainability = (props: any) => {
                                     </div>
                                 </Carousel.Inner>
                                 <Carousel.Navigation>
-                                    <div className="flex relative mx-auto lg:mx-0 mt-3 justify-center w-[5em]">
+                                    <div className="flex relative mx-auto lg:mx-0 mt-3 lg:mt-4 justify-center w-[5em]">
                                         <PrevButton
                                             onClick={() => autoPlayClick1(arrowClickPrev1)}
                                             disabled={prevDisabled1}
-                                            className={`w-[1rem] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-[1rem] lg:-ml-[2px] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
                                             <ChevronPrev className="w-[1rem] h-[1rem] svg--current-color" />
                                         </PrevButton>
@@ -209,7 +214,7 @@ const Sustainability = (props: any) => {
                                         <NextButton
                                             onClick={() => autoPlayClick1(arrowClickNext1)}
                                             disabled={nextDisabled1}
-                                            className={`w-[1rem] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-[1rem] lg:-mr-[2px] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
                                             <ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
                                         </NextButton>
@@ -222,8 +227,8 @@ const Sustainability = (props: any) => {
             </section>
             <section className="pt-5">
                 <div className="container bg-secondary-light px-g py-3 lg:p-4">
-                    <div className="flex flex-wrap">
-                        <div className="w-full lg:w-1/2 lg:order-2">
+                    <div className="flex flex-wrap lg:-mx-g">
+                        <div className="w-full lg:w-1/2 lg:order-2 lg:px-g">
                             <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
@@ -252,7 +257,7 @@ const Sustainability = (props: any) => {
                                 </>
                             )}
                         </div>
-                        <div className="w-full lg:w-1/2 lg:order-1">
+                        <div className="w-full lg:w-1/2 lg:order-1 lg:px-g">
                             <h2 className="hidden lg:block mb-1">{formula.heading}</h2>
                             {!isLoading && (
                                 <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-3 w-full lg:w-3/4 p-0 mb-g">
@@ -273,9 +278,9 @@ const Sustainability = (props: any) => {
                     <div className="container p-0 md:p-1">
                         <p className="pb-2 mb-0 h3 text-center">{packaging.heading}</p>
                         <Carousel.Wrapper emblaApi={emblaApi2} className="">
-                            <Carousel.Inner emblaRef={emblaRef2} className="ml-1 mr-3 lg:ml-0 lg:mr-0 lg:!transform-none pr-3 lg:pr-0">
+                            <Carousel.Inner emblaRef={emblaRef2} className="mx-1 lg:mx-0 lg:!transform-none">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-[90.275%] basis-[90.275%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-[79.25%] basis-[79.25%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-2 font-bold">{data.title}</h6>
                                         <p className="mb-g lg:mb-3">{data.body}</p>
                                     </PackagingCard>
