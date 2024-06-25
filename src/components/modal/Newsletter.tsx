@@ -189,7 +189,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 	};
 
 	return (
-		<div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding border border-[rgba(0, 0, 0, .2)] ${nbp_bg_color}`}>
+		<div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding ${nbp_bg_color}`}>
 			<picture className="absolute w-full lg:w-auto lg:h-full">
 				<source srcSet={nbp_img_lg?.url} media="(min-width: 992px)" />
 				<img src={nbp_img?.url} className="w-full h-full" />
