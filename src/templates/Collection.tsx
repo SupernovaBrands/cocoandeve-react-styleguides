@@ -74,6 +74,7 @@ const Collection = (props: any) => {
         showSpinner,
         subHandles,
         parentCollection,
+        collectionTitle,
         sort,
         addToCart,
         tcPopups,
@@ -125,10 +126,10 @@ const Collection = (props: any) => {
 
     const [collProducts, setCollProducts] = useState(products);
 
-    let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
-    if (handle !== 'all') {
-        collectionTitle = collectionTitle.replace (/^/,'Shop ');
-    }
+    // let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
+    // if (handle !== 'all') {
+    //     collectionTitle = collectionTitle.replace (/^/,'Shop ');
+    // }
 
     const showLoading = (e: any) => {
         if (e.target.closest('.collection__sidebar')) {
@@ -534,7 +535,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && (handle === 'all' || initSub) && <Service className="!text-base" />}
+            {!isLoading && (handle === 'all' || (initSub && parentCollection?.collection?.handle !== 'hair-benefits')) && <Service className="!text-base" />}
             {!isLoading && (handle === 'hair-benefits' || parentCollection?.collection?.handle === 'hair-benefits') && <Service className="!text-base" />}
 
 

@@ -232,7 +232,7 @@ const Sustainability = (props: any) => {
                             <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
-                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400">
+                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400 border-t border-t-transparent">
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
