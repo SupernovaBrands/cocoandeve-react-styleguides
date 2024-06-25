@@ -55,7 +55,7 @@ const DeliveryReturns = (props: any) => {
                     </div>
                     <div className=" lg:px-0 flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-3 pb-[15px] lg:pb-2 border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-2 w-full text-base">We deliver to the following countries:</h2>
-                        <div className="flex flex-wrap justify-center w-full">
+                        <div className="flex flex-wrap justify-start lg:justify-center w-full">
                             {pageContent?.delivery?.esc_countries_list && cols.map((col) => {
                                 if(getDataByIndex(col).length > 0) {
                                     return (<div className="w-1/2 lg:lg:w-[16.6%] px-hg lg:px-g pb-3">
