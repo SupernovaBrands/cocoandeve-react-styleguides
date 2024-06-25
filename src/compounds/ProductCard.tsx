@@ -290,7 +290,7 @@ const ProductCardTall = (props:any) => {
                 <div className="review-stars__number flex justify-center mb-1">
                     <YotpoStar smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
-                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'}`}>
+                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''}`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card__title text-body text-base lg:text-lg hover:text-body">{props.product.title}</a>
                 </p>
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
