@@ -131,7 +131,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     return (
         <>
-            { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 mb-3 rounded text-center ${props.className}`}>
+            { !showSuccess && <div ref={props.forwardRef} className={`product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-3'} rounded text-center ${props.className}`}>
                 {props.productCard && (
                     // <CloseButton handleClose={props.handleClose} />
                     <Close onClick={props.handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
