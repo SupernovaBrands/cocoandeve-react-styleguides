@@ -18,7 +18,6 @@ const ArticleNewsLetter = (props) => {
 
     const onSubmit = (evt) => {
 		evt.preventDefault();
-        console.log('email', email);
 		const ajaxRequest = new XMLHttpRequest();
 		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
 		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -31,7 +30,6 @@ const ArticleNewsLetter = (props) => {
 	};
 
     const handleEmail = (e) => {
-        console.log(e.target.value);
         setEmail(e.target.value);
     }
 
@@ -89,7 +87,6 @@ const Article = (props) => {
     const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store } = props;
     const [offset, setOffset] = useState<any | null>(null);
     const [screenLG, setScreenLG] = useState(992);
-
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
     const month = d.toLocaleString('default', { month: 'short' });
@@ -183,7 +180,6 @@ const Article = (props) => {
         const timer = setTimeout(() => {
             const mainHeader = document.querySelector('.main-header');
             const progressBar = document.querySelector('.reading-proggress-bar');
-            console.log('mainHeader', mainHeader)
             if(mainHeader && progressBar) {
                 progressBar.classList.remove('hidden');
                 mainHeader.appendChild(progressBar);
@@ -315,12 +311,14 @@ const Article = (props) => {
                 </article>
             </div>
         </div>
-        <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
-            <div className="container px-0">
-                <h4 className="h1 text-center mb-1">Shop this article</h4>
-                {!isLoading && ( <ShopArticle products={upsells} /> )}
+        {upsells?.length && (
+            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
+                <div className="container px-0">
+                    <h4 className="h1 text-center mb-1">Shop this article</h4>
+                    {!isLoading && ( <ShopArticle products={upsells} /> )}
+                </div>
             </div>
-        </div>
+        )}
         <div className="blog-post-grid__recomendation mobile-srapper bg-white lg:bg-pink-light overflow-hidden">
             <div className="container pt-3 lg:pb-1">
                 <h3 className="text-center h1 mb-1">You might also like</h3>
