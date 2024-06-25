@@ -47,7 +47,7 @@ const DeliveryReturns = (props: any) => {
                                 <div className="relative max-w-full lg:w-1/4 px-hg lg:px-g w-1/2 md:mt-3 md:mb-3 mb-2">
                                     <div className="bg-[#f9eeca] p-[12px] lg:p-[24px] text-left h-full rounded">
                                         <h5 className="font-bold mb-1 text-lg">{co.title}</h5>
-                                        <p className="mb-[12px]">{co.desc}</p>
+                                        <p className="mb-[15px]">{co.desc}</p>
                                     </div>
                                 </div>
                             ))}
