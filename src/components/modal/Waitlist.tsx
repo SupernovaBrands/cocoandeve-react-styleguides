@@ -72,7 +72,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image.replace('592x', 'public').replace('540x', 'public')} />
 						}
 					</div>
-					<form onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 lg:mt-0">
+					<form noValidate onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 lg:mt-0">
 						{globalSettings && !globalSettings.isLoading && (
 							<>
 								{!success && (
