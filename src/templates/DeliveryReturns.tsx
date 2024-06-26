@@ -37,7 +37,7 @@ const DeliveryReturns = (props: any) => {
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center lg:pb-4">
                         <h1 className="mb-1">Delivery</h1>
                     </div>
-                    <div className="flex flex-col mx-0 lg:-mx-0 text-center justify-center py-g pb-[18px] lg:pb-g border-b-[#adadad] border-b-[1px] border-b-solid">
+                    <div className="flex flex-col mx-0 lg:-mx-0 text-center justify-center pt-g pb-[18px] lg:pb-g border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-1">Standard delivery times</h2>
                         <p className="mb-1">(Including processing time)*</p>
                     </div>
