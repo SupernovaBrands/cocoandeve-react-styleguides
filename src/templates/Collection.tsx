@@ -535,8 +535,9 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && (handle === 'all' || (initSub && parentCollection?.collection?.handle !== 'hair-benefits')) && <Service className="!text-base" />}
+            {!isLoading && (handle === 'all' || (initSub && !['hair-benefits', 'kits-gifts'].includes(parentCollection?.collection?.handle) && handle !== 'kits-gifts')) && <Service className="!text-base" />}
             {!isLoading && (handle === 'hair-benefits' || parentCollection?.collection?.handle === 'hair-benefits') && <Service className="!text-base" />}
+            {!isLoading && (handle === 'kits-gifts' || parentCollection?.collection?.handle === 'kits-gifts') && <Service className="!text-base" />}
 
 
             {!isLoading && loadWaitlist && (
