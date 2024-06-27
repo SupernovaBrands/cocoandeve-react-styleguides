@@ -195,7 +195,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 				<img src={nbp_img?.url} className="w-full h-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:py-4 px-0">
-				<CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm w-auto" />
+				<CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm w-auto top-[16px!important]" />
 				<div className="flex flex-wrap justify-end mx-0">
 					{!formCompleted && (
 						<form className="relative lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
@@ -210,7 +210,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 								<InputCountry id="modal--newsletter__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" />
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full mb-g -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
-							<p className="text-xs mt-[16px] text-center my-[16px] mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] ')}} />
+							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] ')}} />
 							<button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base">{nbp_submit}</button>
 						</form>
 					)}
