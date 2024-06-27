@@ -226,13 +226,13 @@ const Sustainability = (props: any) => {
                 )}
             </section>
             <section className="pt-5">
-                <div className="container bg-secondary-light px-g py-3 lg:p-4">
+                <div className="container bg-secondary-light px-g py-3 lg:p-4 border-t border-t-secondary-light">
                     <div className="flex flex-wrap lg:-mx-g">
                         <div className="w-full lg:w-1/2 lg:order-2 lg:px-g">
                             <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
-                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400 border-t border-t-transparent">
+                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400">
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
