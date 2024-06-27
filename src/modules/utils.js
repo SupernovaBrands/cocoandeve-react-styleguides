@@ -389,7 +389,7 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	}
 
 	subscribeTiktok(email, phone);
-	const response = await fetch('https://6df0-158-140-162-145.ngrok-free.app/bluecore/waitlist.json', {
+	const response = await fetch('https://s-app.cocoandeve.com/bluecore/waitlist.json', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
