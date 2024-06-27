@@ -11,7 +11,7 @@
 	}
 
 	p, div {
-		@apply leading-base;
+		@apply leading-tight; // set to 1.25 instead to use 1.25rem leading-base
 	}
 }
 
