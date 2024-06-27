@@ -51,9 +51,9 @@ const Modal = (props: any) => {
 					className={`modal-backdrop top-0 left-0 w-full h-full z-[1040] ${backdropClasses ?? ''}`}>
 					{!cartDrawer && <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={modalVariant}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
-						<div onClick={(e) => e.stopPropagation()}>
+						{/* <div onClick={(e) => e.stopPropagation()}> */}
 							{children}
-						</div>
+						{/* </div> */}
 					</ModalContainer>}
 					{cartDrawer && <CartContainer className={`w-full absolute ${className} px-0`} variants={horizontalVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
