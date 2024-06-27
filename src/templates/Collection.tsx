@@ -101,6 +101,7 @@ const Collection = (props: any) => {
     const [launchHandles, setLaunchHandles] = useState([]);
     const [initSub, setInitSub] = useState(false);
     const [initMain, setInitMain] = useState(false);
+    const [height, setHeight] = useState(0);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -296,9 +297,10 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         if (launchWLModal.open) {
-            document.body.classList.add('overflow-hidden');
+            document.body.classList.add('!overflow-hidden');
+            if (window) setHeight(window.innerHeight);
         } else {
-            document.body.classList.remove('overflow-hidden');
+            document.body.classList.remove('!overflow-hidden');
         }
     }, [launchWLModal]);
 
@@ -546,7 +548,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : 'h-full lg:py-[28px] lg:my-0'} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}

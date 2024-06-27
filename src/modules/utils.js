@@ -352,7 +352,8 @@ export const addXMLRequestCallback = function (callback) {
 };
 
 export const subscribeBluecoreWaitlist = async (email, productId, variantID, regSource, phone, welcome, igHandle) => {
-	const country = getCookie('_shopify_country');
+	const countryCode = getCookie('country_code');
+	const country = countriesCode.find((c) => c.code === countryCode).name || '';
 	const date = new Date();
 	const tse = date.getTime();
 	const content = `{email:'${email}',time:${tse}}`;
@@ -362,7 +363,8 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	const data = {
 		email,
 		country,
-		brand: `cocoandeve_shopify_${region || 'us'}`,
+		brand: `cocoandeve`,
+		store: region,
 		domain: window.location.hostname,
 		product: productId,
 		phone: phone || '',
@@ -387,7 +389,7 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	}
 
 	subscribeTiktok(email, phone);
-	const response = await fetch('https://s-app.cocoandeve.com/bluecore/waitlist.json', {
+	const response = await fetch('https://6df0-158-140-162-145.ngrok-free.app/bluecore/waitlist.json', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
