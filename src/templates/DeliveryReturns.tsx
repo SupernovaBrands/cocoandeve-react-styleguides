@@ -42,7 +42,7 @@ const DeliveryReturns = (props: any) => {
                         <p className="mb-1">(Including processing time)*</p>
                     </div>
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center pt-[16px] lg:pt-[45px] pb-0 border-b-[#adadad] border-b-[1px] border-b-solid lg:px-g">
-                        <div className="flex flex-wrap w-full pb-[50px] lg:pb-[110px]">
+                        <div className="flex flex-wrap w-full pb-[50px] lg:pb-[105px]">
                             {pageContent?.delivery?.times_country.map((co) => (
                                 <div className="relative max-w-full lg:w-1/4 px-hg lg:px-g w-1/2 md:mt-3 md:mb-3 mb-2">
                                     <div className="bg-[#f9eeca] p-[12px] lg:p-[24px] text-left h-full rounded">

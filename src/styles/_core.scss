@@ -145,6 +145,10 @@
 	.yotpo-vip-current-status-text {
 		line-height: 26px;
 	}
+
+	input::-webkit-input-placeholder, input::placeholder {
+		color: rgb(117, 117, 117);
+	}
 }
 
 afterpay-placement {
