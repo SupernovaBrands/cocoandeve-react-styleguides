@@ -51,7 +51,7 @@ export const useCollectionSettings = (handle: string) => {
 	const universalBanner = data?.CollectionSettings.find((section: any) => section.__component === 'collection.universal-collection-setting');
 	const mainSettings = data?.CollectionSettings.find(
 		(section: any) => section.__component !== 'collection.universal-collection-setting' &&
-			(section.range_handles.split(',').includes(handle) || section.__component === `collection.${handleName}-range-collection-setting`)
+			(section.range_handles.split(',').map((v) => v.trim()).includes(handle) || section.__component === `collection.${handleName}-range-collection-setting`)
 	) || universalBanner;
 	let filterCollectionHandles = data?.filter_collections_handles
 	if (isPreview) filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
