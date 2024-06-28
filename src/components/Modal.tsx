@@ -25,7 +25,7 @@ const horizontalVariant = {
 }
 
 const Modal = (props: any) => {
-	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses } = props;
+	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, launchWL } = props;
 
 	useEffect(() => {
 		if (isOpen) {
@@ -39,6 +39,10 @@ const Modal = (props: any) => {
 		};
 	}, [isOpen]);
 
+	const stopPropagation = (e: any) => {
+		if (!launchWL) e.stopPropagation();
+	};
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -49,7 +53,7 @@ const Modal = (props: any) => {
 					variants={modalVariant}
 					onClick={handleClose}
 					className={`modal-backdrop top-0 left-0 w-full h-full z-[1040] ${backdropClasses ?? ''}`}>
-					{!cartDrawer && ( <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={containerVariant} onClick={(e) => e.stopPropagation()}>
+					{!cartDrawer && ( <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={containerVariant} onClick={(e) => stopPropagation(e)}>
 						{children}
 					</ModalContainer>
 					)}
