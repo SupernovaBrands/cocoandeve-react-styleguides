@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { getFeaturedImages, isWaitlist } from "~/modules/utils";
+import { getFeaturedImages, isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
@@ -87,7 +87,7 @@ const Collection = (props: any) => {
         launchWL,
         trackBluecoreLaunchWaitlistEvent,
 		submitsToSmsBumpAPi,
-		subscribeBluecoreWaitlist,
+		// subscribeBluecoreWaitlist,
         loggedInEmail,
         squareBadge,
     } = props;
