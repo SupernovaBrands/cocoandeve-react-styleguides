@@ -195,7 +195,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 				<img src={nbp_img?.url} className="w-full h-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:py-4 px-0">
-				<CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important] sm:top-[15px!important] lg:top-[16px!important]" />
+				<CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />
 				<div className="flex flex-wrap justify-end mx-0">
 					{!formCompleted && (
 						<form className="relative lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
@@ -220,7 +220,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 								<h2 className={`h1 leading-[1.25!important] mb-1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
 								<h3 className={`text-center leading-[1.25!important] ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
 								{!copied ? (
-									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-end border-2 border-white bg-white text-primary inline-flex justify-center relative">
+									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-white bg-white text-primary inline-flex justify-center relative">
 										COPY: WELCOME <Paste className="svg--current-color svg" />
 									</Button>
 								) : (
