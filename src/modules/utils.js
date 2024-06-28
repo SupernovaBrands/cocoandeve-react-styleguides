@@ -353,7 +353,7 @@ export const addXMLRequestCallback = function (callback) {
 
 export const subscribeBluecoreWaitlist = async (email, productId, variantID, regSource, phone, welcome, igHandle) => {
 	const countryCode = getCookie('country_code');
-	const country = countriesCode.find((c) => c.code === countryCode).name || '';
+	const country = countriesCode.find((c) => c.code === countryCode)?.name || '';
 	const date = new Date();
 	const tse = date.getTime();
 	const content = `{email:'${email}',time:${tse}}`;
