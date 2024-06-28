@@ -104,7 +104,16 @@
         // }
     }
 
-    .modal-content {
-        border: 1px solid rgba(0, 0, 0, .2);
+    .modal-dialog--newsletter {
+        .modal-content {
+            border: 1px solid rgba(0, 0, 0, .2);
+        }
+
+        .modal--newsletter {
+            transform: none;
+            margin: 1.75rem auto;
+            min-height: calc(100% - 3.5rem);
+        }
     }
+    
 }

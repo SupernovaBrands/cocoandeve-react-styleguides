@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { getFeaturedImages, isWaitlist } from "~/modules/utils";
+import { getFeaturedImages, isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
@@ -87,7 +87,7 @@ const Collection = (props: any) => {
         launchWL,
         trackBluecoreLaunchWaitlistEvent,
 		submitsToSmsBumpAPi,
-		subscribeBluecoreWaitlist,
+		// subscribeBluecoreWaitlist,
         loggedInEmail,
         squareBadge,
     } = props;
@@ -548,23 +548,26 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {console.log('closed?');setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
-                    <LaunchWaitList
-                        title={launchWL.launch_wl_title}
-                        content={launchWL.launch_wl_subtitle}
-                        tos={launchWL.launch_wl_popup_tos}
-                        policy={launchWL.launch_wl_popup_privacy}
-                        success_msg={launchWL.launch_wl_thanks_title}
-                        success_content={launchWL.launch_wl_thanks_subtitle}
-                        cta={launchWL.launch_wl_submit}
-                        className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
-                        store={store}
-                        onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
-                        productCard={true}
-                        handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
-                        loggedInEmail={loggedInEmail}
-                        setLaunchWLSuccess={setLaunchWLSuccess}
-                    />
+                <Modal backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                    <div className="my-[1.75rem] md:my-0" onClick={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                        <LaunchWaitList
+                            title={launchWL.launch_wl_title}
+                            content={launchWL.launch_wl_subtitle}
+                            tos={launchWL.launch_wl_popup_tos}
+                            policy={launchWL.launch_wl_popup_privacy}
+                            success_msg={launchWL.launch_wl_thanks_title}
+                            success_content={launchWL.launch_wl_thanks_subtitle}
+                            cta={launchWL.launch_wl_submit}
+                            className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
+                            store={store}
+                            onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
+                            productCard={true}
+                            handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
+                            loggedInEmail={loggedInEmail}
+                            setLaunchWLSuccess={setLaunchWLSuccess}
+                            onClickDiv={(e) => e.stopPropagation()}
+                        />
+                    </div>
                 </Modal>
             )}
         </>

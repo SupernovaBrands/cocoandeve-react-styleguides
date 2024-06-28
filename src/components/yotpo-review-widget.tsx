@@ -796,10 +796,10 @@ const YotpoReviewWidget = (props:any) => {
 			)}
 
 			<ul className="flex w-full border-[#f5dadf] border-b mt-3" role="tablist" ref={reviewBox}>
-				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
+				<li className={`nav-item text-center grow-0 pb-1 -mb-[1px] ${activeTab === 'review' ? 'border-b-[2px] border-primary' : ''}`}>
 					<a onClick={() => setActiveTab('review')} className={`${activeTab === 'review' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__reviews-tab" role="tab" aria-controls="yotpo-widget__reviews" aria-selected="true">{tStrings.yotpo.reviews}</a>
 				</li>
-				<li className={`nav-item text-center grow-0 pb-1 ${activeTab === 'question' ? 'border-b-[2px] border-primary' : ''}`}>
+				<li className={`nav-item text-center grow-0 pb-1 -mb-[1px] ${activeTab === 'question' ? 'border-b-[2px] border-primary' : ''}`}>
 					<a onClick={() => setActiveTab('question')} className={`${activeTab === 'question' ? 'active font-bold' : ''} nav-link border-0 text-body !text-dark text-decoration-none pt-0 pb-1 px-2`} id="yotpo-widget__questions-tab" aria-controls="yotpo-widget__questions" aria-selected="false">{tStrings.yotpo.questions}</a>
 				</li>
 			</ul>
@@ -812,7 +812,7 @@ const YotpoReviewWidget = (props:any) => {
 							<input
 								type="text"
 								name="free_text_search"
-								className="block appearance-none w-full py-[0.875em] px-[1em] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 rounded-l-h rounded-r-none outline-none mb-0"
+								className="block appearance-none w-full py-[15px] px-[17px] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 rounded-l-h rounded-r-none outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
@@ -957,7 +957,7 @@ const YotpoReviewWidget = (props:any) => {
 												<p className="text-sm mb-0 flex lg:hidden mr-auto my-auto">
 													{formatDate(review.created_at, formattedDate)}
 												</p>
-												<p className="text-sm mr-0 mb-0 ss-awais">{tStrings.yotpo.reviewHelpful}</p>
+												<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
 												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
 													<SvgThumbsUp className="svg mr-25 size-1em" />
 													{review.votes_up}
