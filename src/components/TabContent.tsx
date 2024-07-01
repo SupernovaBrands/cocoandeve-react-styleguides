@@ -4,7 +4,7 @@ const TabContent = (props: any) => {
     const { active, children, className } = props;
 
     return (
-        <div className={`[transition:opacity_0.15s_linear] ${active ? 'block' : 'hidden'} ${className ? className : ''}`}>{children}</div>
+        <div className={`[transition:opacity_15s_linear] ${active ? 'block' : 'hidden'} ${className ? className : ''}`}>{children}</div>
     )
 }
 
