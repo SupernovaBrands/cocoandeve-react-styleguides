@@ -49,9 +49,7 @@ const Sustainability = (props: any) => {
     // carousel 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
-    }, [
-		Autoplay({ playOnInit: true, delay: 6000 })
-	]);
+    });
 	const {
 		prevBtnDisabled: prevDisabled1,
 		nextBtnDisabled: nextDisabled1,
@@ -66,9 +64,7 @@ const Sustainability = (props: any) => {
         loop: false,
         align: 'center',
         duration: 40,
-    }, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+    });
     // const { selectedIndex: idx2, onDotButtonClick: onClick2 } = useDotButton(emblaApi2);
 
     // carousel 3
@@ -81,9 +77,7 @@ const Sustainability = (props: any) => {
 			    duration: 40,
             }
         }
-    }, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+    });
 	const {
 		onPrevButtonClick: arrowClickPrev3,
 		onNextButtonClick: arrowClickNext3
