@@ -1,5 +1,6 @@
 import Modal from "~/components/Modal";
-import Terms from "~/components/modal/Terms";
+// import Terms from "~/components/modal/Terms";
+import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import { useEffect, useRef, useState } from "react";
@@ -329,6 +330,11 @@ const Collection = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+    useEffect(() => {
+        if (isOpen) document.body.classList.add('!overflow-y-hidden');
+        else document.body.classList.remove('!overflow-y-hidden');
+    }, [isOpen]);
+
     const onSubmitLaunchWaitlist = ({ email, phoneCode, phoneNumber, fallback }) => {
         const regSource = launchWL.launch_wl_popup_regsource;
         const smsBump = launchWL.launch_wl_smsbump;
@@ -368,8 +374,9 @@ const Collection = (props: any) => {
                         <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy}</a>
                     </div>
 
-                    <Modal className="modal" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
-                        <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} />
+                    <Modal backdropClasses="lg:overflow-y-hidden" scrolledModal={true} className="modal !pl-1 !pr-[12.5px] h-full overflow-y-auto lg:!px-0 sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-[1px] md:!top-[50%] md:!-translate-y-[50%] md:flex md:items-center" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+                        {/* <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} /> */}
+                        <TermCondition content={tcPopups} handleClose={() => handlOpenModal(false)} />
                     </Modal>
                 </>
             )}
@@ -417,7 +424,7 @@ const Collection = (props: any) => {
                                     <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
                                         <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
                                             <option value="featured">Sort By</option>
-                                            <option value="best-selling">Best Selling</option>
+                                            <option value="best-selling">Best selling</option>
                                             <option value="price-low-high">Price, low to high</option>
                                             <option value="price-high-low">Price, high to low</option>
                                             <option value="newest">Date, new to old</option>
@@ -549,7 +556,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal launchWL={true} backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                <Modal scrolledModal={true} backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
                     <div className="my-[1.75rem] md:my-0" onClick={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
                         <LaunchWaitList
                             title={launchWL.launch_wl_title}

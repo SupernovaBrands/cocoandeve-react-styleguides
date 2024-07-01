@@ -158,7 +158,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                         id="select-countries"
                                         defaultValue={phoneCode.replace('+', '')}
                                         onChange={changePhoneCode}
-                                        className="opacity-0 absolute top-0 left-0 w-[84.56px] h-[3.125rem]"
+                                        className="opacity-0 absolute top-0 left-0 w-[84.56px] h-[3.125rem] lg:w-[150.39px]"
                                     >
                                         <option value="" disabled>Select Country</option>
                                         {countries.map((option, index) => (

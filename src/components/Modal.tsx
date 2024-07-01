@@ -25,7 +25,7 @@ const horizontalVariant = {
 }
 
 const Modal = (props: any) => {
-	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, launchWL } = props;
+	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, scrolledModal } = props;
 
 	useEffect(() => {
 		if (isOpen) {
@@ -40,7 +40,7 @@ const Modal = (props: any) => {
 	}, [isOpen]);
 
 	const stopPropagation = (e: any) => {
-		if (!launchWL) e.stopPropagation();
+		if (!scrolledModal) e.stopPropagation();
 	};
 
 	return (

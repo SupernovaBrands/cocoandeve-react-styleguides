@@ -258,7 +258,7 @@ const ProductCardTall = (props:any) => {
         if (autoTicks && autoTicks.length > 0) {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
         }
-        if (defaultVariant === null) defaultVariant = product?.variants?.nodes[0];
+        if (defaultVariant === null) defaultVariant = product?.variants?.nodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
         setSelectedVariant(defaultVariant || null);
     }, []);
 
