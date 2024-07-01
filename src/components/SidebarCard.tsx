@@ -13,7 +13,7 @@ const SidebarCard = ({ data }) => (
 			<h3 className="mb-1">
 				<Link href={data.link} className="text-body-color hover:text-primary font-size-md">{data.title}</Link>
 			</h3>
-			<span className="font-size-md">{parse(data.desc)}</span>
+			<span className="font-size-md">{parse(data.desc.replace(/<[^>]*>?/gm, ''))}</span>
 		</figcaption>
 	</article>
 );

@@ -51,6 +51,7 @@ const ProductCarousel = (props: any) => {
                             className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 px-1 text-center"
                             button={true}
                             carousel={true}
+                            shopArticle={true}
                             setWaitlistData={setWaitlistData}
                         />
                     ))}

@@ -98,6 +98,12 @@
 			}
 		}
 
+		&__recomendation {
+			picture {
+				padding-top: calc(100% / 828* 420);
+			}
+		}
+
 		// .blog-post-grid__newsletter {
 
 		// 	.form-control {
@@ -227,7 +233,16 @@
 			padding: calc-em(4, 12) calc-em(10, 12);
 			margin-right: calc-em(4, 12);
 		}
+
+		h3 {
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
 	}
+
+	
 
 	@screen lg {
 		.blog-video-card__title {

@@ -14,9 +14,9 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 		<figure className={`${template === 'blog' || template === 'pdp' ? 'border border-secondary-light' : 'post-card mb-4 lg:mb-0 bg-white'} h-full flex flex-col`}>
 			{data.img && (
 				<a href={data.handle ?? '#'} className={`${template === 'article' ? 'mb-2' : ''} relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
-					<picture>
+					<picture className={`${template === 'article' ? 'embed-responsive' : ''}`}>
 						{data.srcSet && (<source srcSet={data.srcSet} media="(min-width: 992px)" width="568" height="298"/>)}
-						<img src={data.img} className={`${template === 'blog' || template === 'article' ? 'w-full' : 'w-full h-[178px] md:h-[298px]'} ${template === 'pdp' ? 'w-full h-[178px] md:h-[298px]' : ''} object-cover`} alt={data.title} width="382" height="178"/>
+						<img src={data.img} className={`${template === 'blog' || template === 'article' ? 'w-full embed-responsive-item' : 'w-full h-[178px] md:h-[298px]'} ${template === 'pdp' ? 'w-full h-[178px] md:h-[298px]' : ''} object-cover`} alt={data.title} width="382" height="178"/>
 					</picture>
 				</a>
 			)}
@@ -38,8 +38,8 @@ const PostCard: React.FC<PropType> = ({ className, data, template }) => (
 						)}
 					</a> }
 					{template !== 'pdp' && data.description && (
-							parse(data.description)
-						)}
+						parse(data.description.replace(/<[^>]*>?/gm, ''))
+					)}
 				</div>
 				{template === 'blog' || template === 'pdp' ? (
 					<a href={data.handle ?? '#'} className="btn btn-outline-primary self-start hover:no-underline" aria-label={data.title}>Read more</a>
