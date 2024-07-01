@@ -303,7 +303,7 @@ const Sustainability = (props: any) => {
                 </section>
             )}
             <section className="sustainability-image-text">
-                <div className="flex flex-wrap bg-primary-light mx-0">
+                <div className="flex flex-wrap bg-primary-light mx-0 lg:items-start">
                     {!isLoading && (
                         <div className="w-full lg:w-7/12 px-0">
                             <picture>
@@ -312,7 +312,7 @@ const Sustainability = (props: any) => {
                             </picture>
                         </div>
                     )}
-                    <div className="text-body w-full lg:w-5/12 py-2 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
+                    <div className="text-body w-full lg:w-5/12 py-2 lg:py-5 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
                         <h3 className="mb-1">{imageText.heading}</h3>
                         {!isLoading && <p className="mb-0 text-center lg:text-left">{imageText.text}</p>}
                     </div>
