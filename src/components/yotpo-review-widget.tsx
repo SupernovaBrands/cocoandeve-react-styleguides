@@ -724,7 +724,7 @@ const YotpoReviewWidget = (props:any) => {
 				<span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:ml-1">
 					<ReviewStar score={score} />
-					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
+					<span className="lg:ml-1 block yotpo-widget__total mt-25 lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
 			</div>
 
@@ -765,8 +765,8 @@ const YotpoReviewWidget = (props:any) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className={`flex flex-wrap justify-end -mx-g ${showButtons === false ? 'hidden': ''}`}>
-						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
+					<div className={`flex flex-wrap justify-end -mx-hg md:-mx-g ${showButtons === false ? 'hidden': ''}`}>
+						<div className="w-1/2 md:w-2/12 px-hg md:px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('review')}
 								type="button"
 								lg={false}
@@ -774,7 +774,7 @@ const YotpoReviewWidget = (props:any) => {
 									Write A Review
 							</Button>
 						</div>
-						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
+						<div className="w-1/2 md:w-2/12 px-hg md:px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('question')}
 								type="button"
 								lg={false}

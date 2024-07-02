@@ -28,24 +28,23 @@ const ProudToBe = (props:any) => {
     const proudToBeArr = proudToBe?.split('|') || [];
     const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
-    const [width, setWidth] = useState(0);
+    const [width, setWidth] = useState('0%');
     const [left, setLeft] = useState(0);
 
     const scrolling = (e:any) => {
         const { target } = e;
         let subWidth = 0;
-        target.querySelectorAll('li').forEach((li:any) => subWidth += li.offsetWidth);
+        target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
         setLeft(e.target.scrollLeft);
     }
 
     useEffect(() => {
         if (scrollEl && scrollEl.current) {
-
             if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
                 setWidth(scrollEl.current.offsetWidth);
             } else {
-                const w = Math.abs(globalThis.window.innerWidth - (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
-                setWidth(w);
+                const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
+                setWidth(`${w}%`);
             }
         }
     }, [scrollEl]);

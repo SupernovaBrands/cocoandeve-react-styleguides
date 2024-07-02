@@ -6,6 +6,7 @@ type SwatchProp = {
 	keyName?: string
 	shadeData?: any
 	selectedSwatch: string
+	textClassName?: string
 }
 const Swatch: React.FC<SwatchProp> = (props) => {
 	return props.hideSwatch ? <></> : (
@@ -13,7 +14,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 			{props.children}
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
 				return s.id === props.selectedSwatch && !s.text.includes('Tamer') ?
-					(<p key={`${s.id}-swatch-${index}`} className={`w-full text-sm mt-[1.2rem] mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
+					(<p key={`${s.id}-swatch-${index}`} className={`${props.textClassName} w-full text-sm mt-[1.2rem] mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
 				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
@@ -23,6 +24,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 Swatch.defaultProps = {
 	hideSwatch: false,
 	className: '',
+	textClassName: '',
 }
 
 type NotesProp = {
