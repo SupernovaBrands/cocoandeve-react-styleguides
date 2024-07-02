@@ -17,7 +17,7 @@ import Close from '~/images/icons/close.svg';
 
 const HowToCarousel = (props) => {
 
-    const { videoData, isLoading } = props;
+    const { videoData, isLoading, title } = props;
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const handlOpenModal = (e) => {
@@ -59,7 +59,7 @@ const HowToCarousel = (props) => {
 
 	return (
 		<section className="how-to no-gutters__in-container mb-4">
-			<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>
+			{title && (<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>)}
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 					{videoData.map((item, index) => (
