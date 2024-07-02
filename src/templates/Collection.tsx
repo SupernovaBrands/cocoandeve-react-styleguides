@@ -374,7 +374,7 @@ const Collection = (props: any) => {
                         <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy}</a>
                     </div>
 
-                    <Modal backdropClasses="lg:overflow-y-hidden" scrolledModal={true} className="modal !pl-1 !pr-[12.5px] h-full overflow-y-auto lg:!px-0 sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-[1px] md:!top-[50%] md:!-translate-y-[50%] md:flex md:items-center" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+                    <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mb-[1.75rem]" isOpen={isOpen} handleClose={() => {console.log('clicked'); handlOpenModal(false)}}>
                         {/* <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} /> */}
                         <TermCondition content={tcPopups} handleClose={() => handlOpenModal(false)} />
                     </Modal>
@@ -551,31 +551,29 @@ const Collection = (props: any) => {
 
 
             {!isLoading && loadWaitlist && (
-                <Modal className="modal-lg lg:max-w-[43.125rem]" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+                <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                     <ModalWaitlist trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal scrolledModal={true} backdropClasses="lg:overflow-y-hidden" className={`modal-lg !px-hg lg:!px-0 ${launchWLSuccess ? '' : `h-full lg:py-[28px] lg:my-0 overflow-y-scroll sm-2:overflow-y-hidden min-h-full sm-2:min-h-0 flex items-center sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-0 md:!top-[50%] md:!-translate-y-[50%] ${height > 0 && height < 673 ? 'sm:pt-[3.85rem]' : ''}`} lg:py-0 lg:h-auto lg:max-w-[44.063rem] flex items-center`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
-                    <div className="my-[1.75rem] md:my-0" onClick={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}>
-                        <LaunchWaitList
-                            title={launchWL.launch_wl_title}
-                            content={launchWL.launch_wl_subtitle}
-                            tos={launchWL.launch_wl_popup_tos}
-                            policy={launchWL.launch_wl_popup_privacy}
-                            success_msg={launchWL.launch_wl_thanks_title}
-                            success_content={launchWL.launch_wl_thanks_subtitle}
-                            cta={launchWL.launch_wl_submit}
-                            className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
-                            store={store}
-                            onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
-                            productCard={true}
-                            handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
-                            loggedInEmail={loggedInEmail}
-                            setLaunchWLSuccess={setLaunchWLSuccess}
-                            onClickDiv={(e) => e.stopPropagation()}
-                        />
-                    </div>
+                <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[705px] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                    <LaunchWaitList
+                        title={launchWL.launch_wl_title}
+                        content={launchWL.launch_wl_subtitle}
+                        tos={launchWL.launch_wl_popup_tos}
+                        policy={launchWL.launch_wl_popup_privacy}
+                        success_msg={launchWL.launch_wl_thanks_title}
+                        success_content={launchWL.launch_wl_thanks_subtitle}
+                        cta={launchWL.launch_wl_submit}
+                        className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
+                        store={store}
+                        onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
+                        productCard={true}
+                        handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
+                        loggedInEmail={loggedInEmail}
+                        setLaunchWLSuccess={setLaunchWLSuccess}
+                        onClickDiv={(e) => e.stopPropagation()}
+                    />
                 </Modal>
             )}
         </>

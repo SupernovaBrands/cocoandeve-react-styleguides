@@ -365,7 +365,7 @@ const Sustainability = (props: any) => {
                 </div>
             </section>
 
-            <Modal className="modal-lg lg:max-w-[43.125rem]" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
+            <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                 <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
             </Modal>
 		</>

@@ -60,7 +60,7 @@ const OurStoryTemplate = (props: any) => {
 			<section className="container text-center mt-5 mb-5">
 				<h2 className="mb-1">{intro.title}</h2>
 				{!isLoading && (
-					<div className="w-full intro__text lg:w-2/3 mx-auto" dangerouslySetInnerHTML={{
+					<div className="w-full intro__text lg:w-2/3 mx-auto px-hg lg:px-g" dangerouslySetInnerHTML={{
 						__html: intro.description
 					}} />
 				)}
@@ -68,7 +68,7 @@ const OurStoryTemplate = (props: any) => {
 					src={!isLoading ? intro.back_img_mob_1.url : null}
 					srcSet={intro.back_img_1.url}>
 					<h2 className="mb-2">{intro.titleintro_1}</h2>
-					{!isLoading && <p>{intro.description_1}</p>}
+					{!isLoading && <p className="mb-[1rem]">{intro.description_1}</p>}
 				</ImageWithText>
 
 				<ImageWithText
@@ -76,7 +76,7 @@ const OurStoryTemplate = (props: any) => {
 					src={!isLoading ? intro.back_img_mob_2.url : null}
 					srcSet={intro.back_img_2.url}>
 					<h2 className="mb-2">{intro.titleintro_2}</h2>
-					{!isLoading && <p>{intro.description_2}</p>}
+					{!isLoading && <p className="mb-[1rem]">{intro.description_2}</p>}
 				</ImageWithText>
 			</section>
 

@@ -22,4 +22,8 @@
 	.modal-content {
 		@apply rounded-[1.25rem] overflow-hidden relative border-0;
 	}
+
+	.modal-dialog-centered {
+		@apply min-h-[calc(100%-3.5rem)] flex items-center my-[1.75rem];
+	}
 }

@@ -146,7 +146,7 @@ const Modals = () => {
 		<div className="container mt-4">
 			<h1 className="mb-1">Modal Waitlist</h1>
 			<Button lg={false} onClick={() => handlOpenModal(true)}>Launch modal</Button>
-			<Modal className="modal-lg lg:max-w-[43.125rem]" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
 				<ModalWaitlist data={MODAL_WAITLIST} handleClose={() => handlOpenModal(false)} />
 			</Modal>
 
@@ -158,7 +158,7 @@ const Modals = () => {
 
 			<h1 className="mt-4 mb-1">Sweepstakes Signup Popup</h1>
 			<Button lg={false} onClick={() => handlOpenModal3(true)}>Launch modal</Button>
-			<Modal className="modal-lg" isOpen={modal3} handleClose={() => handlOpenModal3(false)}>
+			<Modal className="modal-lg modal-dialog-centered" isOpen={modal3} handleClose={() => handlOpenModal3(false)}>
 				{/* <ModalWaitlist data={MODAL_WAITLIST_TEST} handleClose={() => handlOpenModal2(false)} /> */}
 				<Sweepstakes handleClose={() => handlOpenModal3(false)} data={MODAL_SWEEPSTAKE} />
 			</Modal>

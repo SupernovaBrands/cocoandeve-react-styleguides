@@ -100,7 +100,7 @@ const HeroBanner = (props: any) => {
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms & Conditions</a>
 					</div>
-					<Modal backdropClasses="lg:overflow-y-hidden" scrolledModal={true} className="modal !pl-1 !pr-[12.5px] h-full overflow-y-auto lg:!px-0 sm:!translate-y-0 sm:!-translate-x-[50%] sm:!top-[1px] md:!top-[50%] md:!-translate-y-[50%] md:flex md:items-center" isOpen={isOpen} handleClose={() => handleOpenModal()}>
+					<Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mb-[1.75rem]" isOpen={isOpen} handleClose={() => handleOpenModal()}>
 						<TermCondition content={tcPopups} handleClose={() => handleOpenModal()} />
 					</Modal>
 				</>

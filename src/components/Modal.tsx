@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Overlay = styled(motion.div)`position: fixed;`;
-const ModalContainer = styled(motion.div)`transform: translate(-50%, -50%);`;
+const ModalContainer = styled(motion.div)`transform: none;`;
 const CartContainer = styled(motion.div)`transform: translate(0, 0); height: 100vh`;
 
 const modalVariant = {
@@ -14,7 +14,7 @@ const modalVariant = {
 
 const containerVariant = {
 	initial: { top: '-50%', transition: { type: 'spring' } },
-	isOpen: { top: '50%' },
+	isOpen: { top: 'auto' },
 	exit: { top: '-50%' }
 };
 
@@ -39,10 +39,6 @@ const Modal = (props: any) => {
 		};
 	}, [isOpen]);
 
-	const stopPropagation = (e: any) => {
-		if (!scrolledModal) e.stopPropagation();
-	};
-
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -52,10 +48,13 @@ const Modal = (props: any) => {
 					exit={'exit'}
 					variants={modalVariant}
 					onClick={handleClose}
-					className={`modal-backdrop top-0 left-0 w-full h-full z-[1040] ${backdropClasses ?? ''}`}>
-					{!cartDrawer && ( <ModalContainer className={`w-full absolute top-[50%] left-[50%] ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={containerVariant} onClick={(e) => stopPropagation(e)}>
-						{children}
-					</ModalContainer>
+					className={`modal-backdrop top-0 left-0 w-[100vw] h-[100vh] z-[1040] ${backdropClasses ?? ''}`}>
+					{!cartDrawer && (
+						<div className="fixed top-0 left-0 z-[1050] w-full h-full outline-0 overflow-x-hidden overflow-y-auto" onClick={handleClose}>
+							<ModalContainer className={`relative w-auto flex items-center mx-auto ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={containerVariant} onClick={handleClose}>
+								<div className="modal-content" onClick={(e) => e.stopPropagation()}>{children}</div>
+							</ModalContainer>
+						</div>
 					)}
 					{cartDrawer && <CartContainer className={`w-full absolute ${className} px-0`} variants={horizontalVariant} onClick={(e) => e.stopPropagation()}>
 						{/* <Close onClick={handleClose} className="w-[14px] h-[14px] absolute right-[14px] top-[14px]"/> */}
