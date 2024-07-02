@@ -57,9 +57,9 @@ const Banner = ({ isLoading, title, strapiBanner }) => {
         <>
             {!strapiBanner.isLoading && bannerData.url === '' && <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />}
             {!strapiBanner.isLoading && bannerData.url !== '' && (
-                <Link href={bannerData.url}>
+                <a href={bannerData.url}>
                     <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />
-                </Link>
+                </a>
             )}
         </>
     );
