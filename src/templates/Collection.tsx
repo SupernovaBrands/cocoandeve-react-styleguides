@@ -374,7 +374,7 @@ const Collection = (props: any) => {
                         <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy}</a>
                     </div>
 
-                    <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => {console.log('clicked'); handlOpenModal(false)}}>
+                    <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
                         {/* <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} /> */}
                         <TermCondition content={tcPopups} handleClose={() => handlOpenModal(false)} />
                     </Modal>
