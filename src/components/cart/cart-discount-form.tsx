@@ -134,7 +134,7 @@ export default class CartDiscountForm extends Component<Props, State> {
                             type="text"
                             name="discount"
                             className={`field block appearance-none w-3/4 border mr-1 text-base leading-normal border rounded-h outline-none mb-0 ${code ? 'border-0 bg-gray-400' : 'focus:border-black border-black bg-white'}`}
-                            placeholder="Enter discount code"
+                            placeholder="Enter promo code here"
                             value={code}
                             onChange={this.onTextChange}
                             onKeyUp={this.onKeyUp}
@@ -144,7 +144,7 @@ export default class CartDiscountForm extends Component<Props, State> {
                         />
 						<Button
 							lg={false}
-							buttonClass={`w-1/4 px-1 ${code ? 'btn-outline-primary hover:underline' : 'border-black text-black'}`}
+							buttonClass={`w-1/4 px-1 min-w-[100px] ${code ? 'btn-outline-primary hover:underline' : 'border-black text-black'}`}
                             onClick={this.applyDiscount}
                             disabled={!code}
 							>
@@ -164,7 +164,7 @@ export default class CartDiscountForm extends Component<Props, State> {
                     </div> }
                     { !isApplied && error && <p className="text-primary text-xs my-1">{error}</p> }
                     {discountBanner?.enable && !hasCode && (
-                    <div className="discount__banner relative m-0 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer" onClick={this.applyBanner}>
+                    <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer w-[calc(100%-10px)]" onClick={this.applyBanner}>
                         <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                         <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
                             <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: discountBanner.code_banner_content}}/>
