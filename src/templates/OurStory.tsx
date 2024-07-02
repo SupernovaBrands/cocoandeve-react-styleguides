@@ -148,8 +148,8 @@ const OurStoryTemplate = (props: any) => {
 			</section>
 
 			{!isLoading && (
-				<Modal className="modal-lg" isOpen={modal} handleClose={() => handlOpenModal(false)}>
-					<div className="relative">
+				<Modal className="modal-lg modal-dialog-centered !px-0 " isOpen={modal} handleClose={() => handlOpenModal(false)}>
+					<div className="relative lg:border lg:border-[rgba(0,0,0,.2)]">
 						<video ref={videoElem} controls className="rounded-[20px]" autoPlay playsInline webkit-playsinline>
 							<source src={videoBanner.video} type="video/mp4" />
 						</video>
