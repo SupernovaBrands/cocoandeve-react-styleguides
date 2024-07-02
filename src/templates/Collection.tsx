@@ -556,7 +556,7 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[705px] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+                <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
                     <LaunchWaitList
                         title={launchWL.launch_wl_title}
                         content={launchWL.launch_wl_subtitle}
