@@ -25,7 +25,7 @@ const horizontalVariant = {
 }
 
 const Modal = (props: any) => {
-	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, scrolledModal } = props;
+	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, contentClass } = props;
 
 	useEffect(() => {
 		if (isOpen) {
@@ -52,7 +52,7 @@ const Modal = (props: any) => {
 					{!cartDrawer && (
 						<div className="fixed top-0 left-0 z-[1050] w-full h-full outline-0 overflow-x-hidden overflow-y-auto" onClick={handleClose}>
 							<ModalContainer className={`relative w-auto flex items-center mx-auto ${className} ${withoutPadding ? '' : 'px-g lg:px-0'}`} variants={containerVariant} onClick={handleClose}>
-								<div className="modal-content" onClick={(e) => e.stopPropagation()}>{children}</div>
+								<div className={`modal-content ${contentClass ?? ''}`} onClick={(e) => e.stopPropagation()}>{children}</div>
 							</ModalContainer>
 						</div>
 					)}

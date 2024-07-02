@@ -6,9 +6,9 @@ import SvgCloseCircle from '~/images/icons/close-rounded.svg';
 const KlarnaModal = (props:any) => {
     const { isModalKlarnaOpen, handleOpenModalKlarna, setIsKlarnaOpen } = props;
 
-    return (<Modal className="modal-lg px-0" withoutPadding={true} isOpen={isModalKlarnaOpen} handleClose={() => handleOpenModalKlarna()}>
-                <div className="modal-dialog modal-lg modal-dialog-centered flex justify-center" role="document">
-					<div className="modal-content mx-0 relative max-h-[50%] max-w-[480px] bg-white p-2 border">
+    return (<Modal className="modal modal-dialog-centered px-0 mx-auto" withoutPadding={true} isOpen={isModalKlarnaOpen} handleClose={() => handleOpenModalKlarna()}>
+                {/* <div className="modal-dialog modal-lg modal-dialog-centered flex justify-center" role="document"> */}
+					<div className="modal-content mx-0 relative max-h-[50%] bg-white p-2 border">
                         <div className="modal-header border-0 justify-content-center text-center">
                             <Image src="/logo-klarna-gray.svg" height="18" width="81" className="inline-block align-baseline" alt="Klarna"/>
                             <SvgCloseCircle className="svg size-[30px] svg absolute top-1 right-1" onClick={() => setIsKlarnaOpen(false) }></SvgCloseCircle>
@@ -53,7 +53,7 @@ const KlarnaModal = (props:any) => {
                             <a className="btn btn-lg bg-black text-white rounded-0 border-0 w-full mt-2 hover:text-white hover:text-underline" role="button" onClick={() => setIsKlarnaOpen(false) }>Close</a>
                         </div>
                     </div>
-                </div>
+                {/* </div> */}
         </Modal>)
 }
 
