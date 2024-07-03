@@ -170,17 +170,17 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 					</picture>
 					{!formCompleted ? (
 						<div className="px-3 lg:px-4 py-3 lg:py-4">
-							<div className="flex flex-wrap -mx-hg lg:-mx-g justify-end lg:mb-g mb-0">
+							<div className="flex flex-wrap -mx-hg lg:-mx-g justify-end lg:mb-g mb-0 ">
 								<div className="hidden lg:block w-3/4 lg:w-8/12 lg:pl-0 text-center pr-0 lg:pr-g">
 									<h2 className="modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 text-gray-600" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<p className="lg:mb-0 lg:mt-1 text-body" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
-								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g">
+								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g -mx-hg">
 									<h2 className="modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 font-size-sm mb-1 text-gray-600 px-g lg:px-0" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<p className="lg:mb-0 lg:mt-1 font-size-sm mb-1 text-body px-0  lg:px-0" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 							</div>
-							<div id="waitlist-page" className="flex flex-wrap justify-end lg:-mx-g" data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
+							<div id="waitlist-page" className="flex flex-wrap justify-end" data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
 								<form onSubmit={handleForm} id="sweepstakes-popup__form" data-page="sweeptakes" className="modal--sweepstakes__form lg:w-8/12 lg:pl-0 mt-1 lg:mt-0" data-thank-you-message="You’re in!">
 									<div className="relative flex items-stretch w-full mb-25">
 										<input value={email} onChange={handleEmail} id="sweepstakes__email" data-regsource="sweepstakes" data-page="sweepstakes" className="block w-full bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="email" placeholder={data?.sweepstakes_popup_email} />
@@ -195,7 +195,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
 									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-1 font-size-sm text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g">Register now</Button>
-									<p className="lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-sm text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
+									<p className="lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
 								</form>
 							</div>
 						</div>
