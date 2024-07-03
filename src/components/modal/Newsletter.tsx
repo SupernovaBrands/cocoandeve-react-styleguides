@@ -147,7 +147,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, smsBump, code).done((resp) => {
+			submitsToSmsBumpAPi(phone, smsBump, code).then((resp) => {
 				// console.log('submitsToSmsBump', resp);
 				if (resp.status === 'error' && !validForm.email) {
 					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });

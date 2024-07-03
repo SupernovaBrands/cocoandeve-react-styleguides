@@ -12,7 +12,7 @@ const InputCountry = (props: any) => {
 			<label htmlFor={props.id} className={`input-group-addon border border-[#f5f5f5] lg:border-r-2 relative py-[14px] px-[16px] mb-0 block appearance-none ${props.className ? props.className : 'bg-white'} rounded rounded-tr-none rounded-br-none h-[3.125rem] w-[5.063rem] lg:w-[5.688rem]`}>
 				<span className={`absolute items-center`}>+{props.activeCountry}</span>
 				<ChevronDown className={`${props.chevronCls ? props.chevronCls : 'fill-gray-600 w-[0.75em] h-[0.75em] right-[10px] absolute top-[50%] translate-y-[50%]'}`} />
-				<select id={props.id} className="inline-block h-[3.125rem] w-full align-middle opacity-0" onChange={onSelecChange} defaultValue={defaultVal}>
+				<select id={props.id} className={`${props.selectCls ? props.selectCls : '' } inline-block h-[3.125rem] w-full align-middle opacity-0`} onChange={onSelecChange} defaultValue={defaultVal}>
 					<option value="" disabled>Select Country</option>
 					<option value="KH" data-code="855">Cambodia</option>
 					<option value="HK" data-code="852">Hong Kong</option>

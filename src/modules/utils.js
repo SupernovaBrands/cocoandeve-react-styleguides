@@ -430,20 +430,23 @@ export const subscribeBluecoreRegistration = (
 	return ajaxRequest.send(jsonData);
 };
 
-export const submitsToSmsBumpAPi = (phone, formId, countryPhoneCode) => {
+export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode) => {
 	const phoneNumber = `+${countryPhoneCode}${phone.replace(/^0+/, '')}`;
 	const date = new Date();
 	const tse = date.getTime();
 	const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${tSettings.store}`}',list_id:${formId}}`;
 	const signature = encryptParam(content);
 
-	return $.ajax({
-		url: `${tSettings.apiEndpoint}/smsbump/subscribe`,
-		data: {
-			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${tSettings.store}`, signature,
-		},
+	const response = await fetch(`${tSettings.apiEndpoint}/smsbump/subscribe`, {
 		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${tSettings.store}`, signature,
+		})
 	});
+	return response.json();
 };
 
 export const submitsToSmsBump = (phone, formId, countryLetterCode = false, countryPhoneCode = null) => {

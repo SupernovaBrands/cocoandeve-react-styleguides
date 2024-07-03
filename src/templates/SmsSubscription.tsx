@@ -78,9 +78,10 @@ const SmsSubscription = (props) => {
 		e.preventDefault();
 		if (validateForm('', phone)) {
 			if (validForm.phone) {
-                subscribeBluecoreWaitlist('', '', '', 'SmsBumpLP', phone, true);;
+                subscribeBluecoreWaitlist('', '', '', 'SmsBumpLP', phone, true);
                 if (smsBump !== '') {
-                    submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).done((resp) => {
+                    submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+                        console.log('resp', resp);
                         if (resp.status === 'error') {
                             setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
                         } else if (resp.status === 'success' && resp.message === 'You have been already subscribed!') {
@@ -113,42 +114,42 @@ const SmsSubscription = (props) => {
 
     return (
         <>
-            <div className="flex w-full align-items-center">
-                <div className="sms-subscription__image w-full lg:w-2/5">
-                    <picture className="embed-responsive h-full">
+            <div className="flex w-full align-items-center flex-wrap px-0 lg:px-0">
+                <div className="sms-subscription__image w-full lg:w-[41.66667%] lg:pr-[17.5px]">
+                    <picture className="ratio ratio-1x1 relative w-auto">
                         <source srcSet={content?.image_desktop.url} media="(min-width: 992px)" />
-                        <img src={content?.image_mobile.url} className="embed-responsive-item" loading="lazy" />
+                        <img src={content?.image_mobile.url} className="object-cover w-full h-full " loading="lazy" />
                     </picture>
                 </div>
-                <div className="w-full lg:w-3/5 text-center">
+                <div className="w-full lg:w-[58.333%] text-center items-center flex px-g pb-4 lg:pb-0">
                     {!formCompleted ? (
-                        <form id="sms-subscription__form" className="sms-subscription__form" onSubmit={onSubmit}>
-                            <h1 className="sms-subscription__title mt-3 lg:mt-0 mb-0">{ formContent.title }</h1>
+                        <form id="sms-subscription__form" className="sms-subscription__form w-full" onSubmit={onSubmit}>
+                            <h1 className="sms-subscription__title mt-3 lg:mt-0 mb-0 lg:text-[46px] lg:leading-[57.5px]">{ formContent.title }</h1>
                             <p className="sms-subscription__subtitle mb-1 lg:mb-2 text-lg" dangerouslySetInnerHTML={{__html: formContent.sub_title }} />
-                            <p className="sms-subscription__description mb-3 lg:mb-4 w-full lg:w-4/5 mx-auto font-size-sm" dangerouslySetInnerHTML={{__html: formContent.description}} />
-                            <div className="w-full md:w-4/5 pr-4 pl-4 md:mx-1/6 mx-auto">
-                                <div className="flex flex-wrap">
+                            <p className="sms-subscription__description mb-3 lg:mb-4 w-full lg:w-4/5 mx-auto text-xs lg:text-sm px-hg lg:px-0" dangerouslySetInnerHTML={{__html: formContent.description}} />
+                            <div className="w-full lg:max-w-[657px] md:mx-1/6 mx-auto">
+                                <div className="flex flex-wrap px-hg lg:px-0">
                                     <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                        <InputCountry id="modal--sweepstakes__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} />
-                                        <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
+                                        <InputCountry id="modal--sweepstakes__country" chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-white mb-[0!important] !border-[1px] border-[solid] !border-[#CECECE] !rounded-tl-[3px] !rounded-bl-[3px]" handleCode={handleCode} activeCountry={activeCountryCode} />
+                                        <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-[#CECECE] active:border-[#CECECE]  focus-visible:border-[#CECECE] border-[#CECECE]  border-[1px] border-l-[none] !rounded-tr-[3px] !rounded-br-[3px] rounded-tl-[0px] rounded-bl-[0px]" type="phone" placeholder="Phone number" />
                                     </div>
                                     <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
                                 </div>
                             </div>
-                            <div className="sms-subscription__tos !text-sm px-0 mt-2 mb-3 lg:px-5 lg:max-w-[830px] text-body" dangerouslySetInnerHTML={{__html: formContent.tos}} />
+                            <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 lg:max-w-[785px] text-body">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
                             <div className="row">
                                 <div className="w-full md:w-1/2 md:mx-1/4 mx-auto">
-                                    <button type="submit" className="w-full btn btn-primary btn-block btn-lg">{formContent.cta_text}</button>
+                                    <button type="submit" className="w-full btn btn-primary btn-block btn-lg border-primary">{formContent.cta_text}</button>
                                     {!phoneError.valid && <p className="mt-1 mb-0 font-size-xs text-danger">{phoneError.error}</p>}
                                 </div>
                             </div>
                         </form>
                     ) : (
-                        <div className="sms-subscription__form-success mt-5 lg:mt-0">
-                            <h2 className="sms-subscription__title mb-3">{formContent.success_title}</h2>
+                        <div className="sms-subscription__form-success mt-5 lg:mt-0 w-full">
+                            <h2 className="sms-subscription__title mb-3 text-[32px] lg:text-[46px] leading-[40px] lg:leading-[57px]">{formContent.success_title}</h2>
                             {formContent.success_desc && (<p className="sms-subscription__success mb-4 lg:pb-4 px-6 lg:px-3">{formContent.success_desc}</p>)}
-                            <div className="col-12 lg:col-6 lg:mx-1/4 px-0 mt-6">
-                                <a href={formContent.success_link} className="btn btn-primary btn-lg btn-block">{formContent.success_cta}</a>
+                            <div className="col-12 lg:max-w-[50%] lg:mx-auto px-0 mt-6">
+                                <a href={formContent.success_link} className="btn btn-primary btn-lg btn-block w-full border-primary">{formContent.success_cta}</a>
                             </div>
                         </div>
                     )}
