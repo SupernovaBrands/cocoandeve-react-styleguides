@@ -98,9 +98,10 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { product, addToCart, preOrders, generalSetting } = props;
+    const { product, addToCart, preOrders, generalSetting, label } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
+    let labelText = '';
 
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
@@ -112,6 +113,12 @@ const SwatchOverlay = (props:any) => {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
+
+    if (label) {
+        labelText = label;
+    } else {
+        labelText = props.swatch.label;
+    }
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
@@ -171,7 +178,7 @@ const SwatchOverlay = (props:any) => {
 
             {!props.quizResult && (
                 <>
-                    <AddToCartButton comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={props.swatch.label} addToCart={false}/>
+                    <AddToCartButton comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false}/>
                     <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                         <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
                             <label className="block mb-2">
@@ -191,7 +198,7 @@ const SwatchOverlay = (props:any) => {
                         </div>
                         {/* <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/> */}
                         {swatchAvailable && (
-                            <AddToCartButton preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
+                            <AddToCartButton label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
                         )}
                         {!swatchAvailable && (
                             <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
@@ -209,7 +216,7 @@ const isKit = (title:string) => {
 }
 
 const ProductCardTall = (props:any) => {
-    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting } = props;
+    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
@@ -290,15 +297,15 @@ const ProductCardTall = (props:any) => {
                 <div className="review-stars__number flex justify-center mb-1">
                     <YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
-                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.shopArticle ? 'lg:min-h-[3.125em] ss-awais text-sm leading-[1.25]' : ''} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''}`}>
+                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.shopArticle ? 'lg:min-h-[3.125em] text-sm leading-[1.25]' : ''} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''}`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card__title text-body text-base lg:text-lg hover:text-body">{props.product.title}</a>
                 </p>
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
-                    <AddToCartButton quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart}/>
+                    <AddToCartButton quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label}/>
                 )}
 
                 {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
-                    <SwatchOverlay generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart}/>
+                    <SwatchOverlay generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
                     <WaitlistButton setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />

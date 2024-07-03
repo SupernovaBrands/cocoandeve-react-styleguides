@@ -23,8 +23,7 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 
-	const { products } = props;
-
+	const { products, addToCart, generalSetting } = props;
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -45,13 +44,18 @@ const ProductCarousel = (props: any) => {
 		<div className="pt-2 text-center">
 			<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                 <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
-                    {products?.map((data) => (
+                    {products.map((data: any, id: number) => (
                         <ProductCard
+                            key={`product-${id}-${data.id}`}
                             product={data}
+                            label='Add'
                             className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 px-1 text-center"
                             button={true}
+                            link={data.handle}
                             carousel={true}
+                            addToCart={addToCart}
                             shopArticle={true}
+                            generalSetting={generalSetting}
                             setWaitlistData={setWaitlistData}
                         />
                     ))}

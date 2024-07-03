@@ -59,7 +59,7 @@ const ArticleNewsLetter = (props) => {
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm [text-decoration-line:none!important]"'))}</p>
+                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="hover:[text-decoration-line:underline!important] text-sm [text-decoration-line:none!important]"'))}</p>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store } = props;
+    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store, addToCart, generalSetting } = props;
     const [offset, setOffset] = useState<any | null>(null);
     const [screenLG, setScreenLG] = useState(992);
     const d = new Date(content.updatedAt);
@@ -202,33 +202,56 @@ const Article = (props) => {
                 articleShops.forEach(articleShop => {
                     targetContent.parentNode.insertBefore(articleShop, targetContent);
                 });
-
+                console.log('articleShops 1', articleShops)
                 if (window.innerWidth > screenLG) {
-                    
+                    console.log('articleShops 2', articleShops)
                     articleShops.forEach(articleShop => {
-                        articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => el.textContent = 'Add');
-                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__text').forEach(el => el.textContent = 'Waitlist');
-                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__prices .text-linethrough').forEach(el => el.remove());
+                        // articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => {
+                        //     if (el) el.textContent = 'Add To Cart';
+                        // });
+                
+                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__text').forEach(el => {
+                            if (el) el.textContent = 'Waitlist';
+                        });
+                
+                        articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__prices .text-linethrough').forEach(el => {
+                            if (el && el.parentNode) {
+                                el.parentNode.removeChild(el);
+                            } else {
+                                console.warn('Element not found for removal:', el);
+                            }
+                        });
+                
                         articleShop.querySelectorAll('.swatch-overlay > div:first-child').forEach(el => {
-                            el.classList.remove('lg:px-1');
-                            el.classList.add('lg:px-0');
+                            if (el) {
+                                el.classList.remove('lg:px-1');
+                                el.classList.add('lg:px-0');
+                            }
                         });
+                
                         articleShop.querySelectorAll('.product-card__title').forEach(el => {
-                            el.classList.replace('text-base', 'text-sm');
-                            el.classList.replace('lg:text-lg', 'text-sm');
-                            el.classList.add('[text-decoration-line:none!important]');
-                            el.classList.add('hover:[text-decoration-line:underline!important]');
+                            if (el) {
+                                el.classList.replace('text-base', 'text-sm');
+                                el.classList.replace('lg:text-lg', 'text-sm');
+                                el.classList.add('[text-decoration-line:none!important]');
+                                el.classList.add('hover:[text-decoration-line:underline!important]');
+                            }
                         });
+                
                         articleShop.querySelectorAll('.review-stars__number').forEach(el => {
-                            el.classList.add('text-sm');
+                            if (el) el.classList.add('text-sm');
                         });
+                
                         articleShop.querySelectorAll('.product-card-btn').forEach(el => {
-                            el.classList.replace('md:text-base', 'text-sm');
+                            if (el) el.classList.replace('md:text-base', 'text-sm');
                         });
+                
                         articleShop.querySelectorAll('.product-title__text').forEach(el => {
-                            el.classList.remove('min-h-[2.5em]');
-                            el.classList.remove('lg:min-h-[3.125em]');
-                            el.classList.remove('lg:mx-[0.625rem]');
+                            if (el) {
+                                el.classList.remove('min-h-[2.5em]');
+                                el.classList.remove('lg:min-h-[3.125em]');
+                                el.classList.remove('lg:mx-[0.625rem]');
+                            }
                         });
                     });
                 }
@@ -315,7 +338,7 @@ const Article = (props) => {
             <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-hg">
                 <div className="container px-0">
                     <h4 className="h1 text-center mb-1">Shop this article</h4>
-                    {!isLoading && ( <ShopArticle products={upsells} /> )}
+                    {!isLoading && ( <ShopArticle products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
