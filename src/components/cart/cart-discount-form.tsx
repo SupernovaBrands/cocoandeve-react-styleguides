@@ -151,15 +151,15 @@ export default class CartDiscountForm extends Component<Props, State> {
                             {this.state.loading ? <div className="spinner-border !w-[25px] !h-[25px]" role="status" /> : 'Apply'}
 						</Button>
                     </div>
-                    { hasCode && <div className="mt-0 flex flex-col items-start mb-2">
+                    { hasCode && <div className="mt-0 flex flex-col items-start mb-25">
                         <p className="text-xs text-gray-500 mb-1">Promo code applied </p>
-                        <div className="bg-gray-100 items-center inline-flex px-1 py-g text-gray-600 rounded-h">
-                            <DiscountTag className="svg text-gray-100 fill-gray-500"></DiscountTag>
-                            <span className="mx-hg text-sm">
+                        <div className="bg-gray-100 items-center inline-flex px-1 py-[11.25px] text-[#00000080] rounded-h">
+                            <DiscountTag className="svg text-gray-100 fill-[#00000080]"></DiscountTag>
+                            <span className="mx-1 text-sm">
                                 {code?.toUpperCase()}
                             </span>
-                            { !this.state.loading && <CloseIcon className="svg text-gray-100 fill-gray-500" onClick={this.removeDiscount}></CloseIcon> }
-                            { this.state.loading && <span className="spinner-border spinner-border-sm text-gray-500 ml-1 !w-[10px] !h-[10px]" role="status" /> }
+                            { !this.state.loading && <CloseIcon className="svg text-gray-100 fill-[#00000080] mr-1" onClick={this.removeDiscount}></CloseIcon> }
+                            { this.state.loading && <span className="spinner-border spinner-border-sm text-[#00000080] mr-1 !w-[12px] !h-[12px] mr-1" role="status" /> }
                         </div>
                     </div> }
                     { !isApplied && error && <p className="text-primary text-xs my-1">{error}</p> }

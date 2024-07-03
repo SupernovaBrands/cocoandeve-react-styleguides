@@ -51,7 +51,7 @@ const Cart: React.FC<Props> = (props) => {
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 	// const storeApi = new storefrontApi();
 	// console.log(discountMeter, 'discountMeter');
-	const [loadingInit, setLoadingInit] = useState(props.isLoading);
+	// const [loadingInit, setLoadingInit] = useState(props.isLoading);
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
@@ -201,12 +201,12 @@ const Cart: React.FC<Props> = (props) => {
 							<hr className="w-full m-0" />
 						</div>
 
-						{loadingInit && (
+						{props.isLoading && (
 							<div className="flex justify-center p-2">
-								<div className="text-primary spinner-border" role="status" />
+								<div className="spinner-border" role="status" />
 							</div>
 						)}
-						{!loadingInit && (!cart.itemCount || itemCount === 0 ? (
+						{!props.isLoading && (!cart.itemCount || itemCount === 0 ? (
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
@@ -378,7 +378,7 @@ const Cart: React.FC<Props> = (props) => {
 						))}
 					</div>
 
-					{!loadingInit && cart.itemCount > 0 && (
+					{!props.isLoading && cart.itemCount > 0 && (
 						<div className="modal-footer px-g lg:px-3 py-2 bottom-0 left-0 w-full bg-white border-t-[1px] border-gray-600 justify-end">
 							<div className="flex flex-wrap no-gutters w-full">
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
