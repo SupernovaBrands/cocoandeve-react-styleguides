@@ -16,10 +16,14 @@ type PropType = {
 	bottomBadge?: string
 }
 
-const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
+const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
+	let slides = slideBoxes;
+	// if (slides.length <= 8 && slides.length > 7) {
+	// 	slides.push(slides[slides.length / 2]);
+	// }
 	const alignThumbs = slides.length > 7 ? 'center' : 'start';
 	const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
 		containScroll: 'keepSnaps',
@@ -59,10 +63,14 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 		onSelect();
 		emblaMainApi.on('select', onSelect);
 		emblaMainApi.on('reInit', onSelect);
-
 		emblaMainApi.on('select', onScroll);
 		emblaMainApi.on('reInit', onScroll);
 		emblaMainApi.on('scroll', onScroll);
+
+		if (emblaThumbsApi && slides.length > 7) {
+			emblaThumbsApi.scrollTo(4);
+		}
+
 	}, [emblaMainApi, onSelect, onScroll]);
 
 	return (
@@ -89,13 +97,13 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 						style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
 				</div>
 			</div>
-			<div className={`carousel max-w-[90%] mx-auto hidden lg:flex items-center mt-3`}>
-				<Carousel.Wrapper className={`w-full ${alignThumbs === 'center' ? 'items-center' : 'items-start -mx-g'}`} emblaApi={emblaMainApi}>
-					<Carousel.Inner emblaRef={emblaThumbsRef} className={`${slides.length > 7 ? 'ml-1 ' : 'justify-start ml-0'}`}>
+			<div className={`carousel w-full hidden lg:flex items-center mt-3 ${alignThumbs !== 'center' ? 'ml-[2rem]' : ''}`}>
+				<Carousel.Wrapper className={`w-full ${alignThumbs === 'center' ? 'items-center px-[1rem]' : 'items-start -mx-g'}`} emblaApi={emblaMainApi}>
+					<Carousel.Inner emblaRef={emblaThumbsRef} className={`${slides.length > 7 ? 'ml-2 max-w-[600px]' : 'justify-start ml-0'}`}>
 						{slides.map((slide, index) => (
-							<div className="flex-grow-0 mx-1 flex-shrink-0 w-[4.375em] basis-[4.375em] flex items-center justify-center" key={index}>
+							<div className="flex-grow-0 mx-1 flex-shrink-0 w-[68px] max-w-[70px] basis-[70px] flex items-center justify-center" key={index}>
 								<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''}`} onClick={() => onThumbClick(index)}>
-									<img src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+									<img className="w-[68px]" src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
 								</button>
 							</div>
 						))}
@@ -105,13 +113,13 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides, bottomBadge }) => {
 							<>
 								<PrevButton
 									onClick={pdpImagePrev}
-									className="-left-2 top-25 w-5 h-5 rounded-full shadow-lg text-primary bg-white"
+									className="top-[4px] w-5 h-5 rounded-full shadow-lg text-primary bg-white"
 								>
 									<ChevronPrev className="w-g h-g svg--current-color" />
 								</PrevButton>
 								<NextButton
 									onClick={pdpImageNext}
-									className="-right-2 top-25 w-5 h-5 rounded-full shadow-lg text-primary bg-white"
+									className="top-[4px] w-5 h-5 rounded-full shadow-lg text-primary bg-white"
 								>
 									<ChevronNext className="w-g h-g svg--current-color" />
 								</NextButton>

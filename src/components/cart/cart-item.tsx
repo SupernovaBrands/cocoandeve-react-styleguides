@@ -9,7 +9,7 @@ import QuantityBox from '~/components/cart/quantity-box';
 import SvgTrash from '~/images/icons/trash.svg';
 import SvgRecurring from '~/images/icons/recurring.svg';
 import SvgChevronDown from '~/images/icons/chevron-down.svg';
-import { kebabCase, formatMoney } from '~/modules/utils';
+import { capitalizeString, kebabCase, formatMoney } from '~/modules/utils';
 
 type CartItemProps = {
 	item?: any;
@@ -72,14 +72,14 @@ export const CartItem = (props:CartItemProps) => {
 	const productTitle = (item:any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
 		if (item.merchandise.title.toLowerCase() === 'default title') {
-			return item.merchandise.product.title;
+			return capitalizeString(item.merchandise.product.title);
 		}
 
 		const { swatches } = item;
 		if (swatches.length >= 2) {
-			return item.merchandise.title.split('/')[0];
+			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
-		return item.merchandise.title.split('/')[0].replace('1x ', '');
+		return capitalizeString(item.merchandise.title.split('/')[0].replace('1x ', ''));
 	}
 
 	const extractId = (id:string) => {

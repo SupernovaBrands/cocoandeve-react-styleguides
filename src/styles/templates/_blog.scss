@@ -138,6 +138,12 @@
 		// }
 	}
 
+	.article-list-wrapper {
+		.embed-responsive {
+			padding-top: calc(100% / 828* 420);
+		}
+	}
+
 	.article__content {
 		img, iframe {
 			max-width: 100%;
@@ -150,6 +156,15 @@
 				width: auto;
 			}
 		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			line-height: 1.25 !important;
+		}
 	}
 
 	// .badge {
@@ -160,7 +175,7 @@
 	.badge-tag {
 		line-height: 1.25em;
     	padding: .125em .5em;
-		margin-right: calc-em(4, 12);
+		margin-right: 0.25em;
 	}
 
 	.blog-nav-tags {

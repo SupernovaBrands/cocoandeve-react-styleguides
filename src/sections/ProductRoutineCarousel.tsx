@@ -77,7 +77,7 @@ const ProductRoutineCarousel = (props: any) => {
 
 	return (
         <>
-        <div className="product-upsell-2 pb-[70px] lg:pb-5 pt-0 md:pt-5">
+        <div className="product-upsell-2 pb-[70px] lg:pb-5 pt-0 md:pt-5 overflow-x-hidden">
             <div className="container justify-center">
                 <p className="h1 w-full text-center mb-3 lg:px-g sm:px-h1">Shop the Routine</p>
                 <div className="container lg:mx-g w-[100vw] lg:w-full px-0 lg:px-g">
@@ -114,7 +114,7 @@ const ProductRoutineCarousel = (props: any) => {
                 </div>
             </div>
         </div>
-        { <Modal className="modal-lg lg:max-w-[43.125rem]" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
+        { <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
             <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         </Modal> }
         </>

@@ -82,7 +82,7 @@ const Blog = (props) => {
 	return (
 		<div className="mobile-wrapper mt-3 lg:mt-5 px-0 sm:px-hg">
 			<div className="container">
-				<h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
+				<h1 className="text-center mb-2">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
                 {!isLoading && (
                     <div className="blog-nav-tags mb-4 flex mt-2">
                         <BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
@@ -125,27 +125,27 @@ const Blog = (props) => {
 				{activeFrame && (
 					<>
 						{postData.length > 0 &&
-							<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
+							<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel">
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
 									{postData.map((data) => (
-										<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" template="blog" data={data} />
+										<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
 									))}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
 										onClick={() => autoPlayClick(arrowClickPrev)}
-										className="lg:-left-[1.25em] w-[auto] text-primary"
+										className="lg:-left-[1.15em] sm:-left-[0.5em] w-[auto] text-primary"
 									>
 										<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-											<ChevronPrev className="w-g h-g svg--current-color" />
+											<ChevronPrev className="h-[1em] svg--current-color" />
 										</span>
 									</PrevButton>
 									<NextButton
 										onClick={() => autoPlayClick(arrowClickNext)}
-										className="lg:-right-[1.25em] w-[auto] text-primary"
+										className="sm:-right-[0.5em] lg:-right-[1.20em] w-[auto] text-primary"
 									>
 										<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-											<ChevronNext className="w-g h-g svg--current-color" />
+											<ChevronNext className="h-[1em] svg--current-color" />
 										</span>
 									</NextButton>
 								</Carousel.Navigation>
@@ -155,11 +155,11 @@ const Blog = (props) => {
 							{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
 							<div className="flex flex-wrap mb-0 mt-2 -mx-g">
 								{articles.map((data) =>
-									<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" template="blog" data={data} />
+									<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" imgClass={true} template="blog" data={data} />
 								)}
 							</div>
 						</div>
-						{videoData.length > 0 && <HowToCarousel videoData={videoData} isLoading={isLoading} />}
+						{videoData.length > 0 && <HowToCarousel title={true} videoData={videoData} isLoading={isLoading} />}
 						{/* <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g mb-4">
 							{articles.map((data) =>
 								<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />

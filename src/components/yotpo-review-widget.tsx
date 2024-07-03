@@ -724,7 +724,7 @@ const YotpoReviewWidget = (props:any) => {
 				<span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
 				<div className="lg:flex lg:ml-1">
 					<ReviewStar score={score} />
-					<span className="lg:ml-1 block yotpo-widget__total mt-hg lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
+					<span className="lg:ml-1 block yotpo-widget__total mt-25 lg:mt-0 lg:ml-1">{`${total} ${tStrings.yotpo.reviews}, ${totalQa} ${tStrings.yotpo.qnas}`}</span>
 				</div>
 			</div>
 
@@ -765,8 +765,8 @@ const YotpoReviewWidget = (props:any) => {
 
 			{!revThanks && !qnaThanks && canCreate && (
 				<div id="yotpoFormCollapse" className="mt-2">
-					<div className={`flex flex-wrap justify-end -mx-g ${showButtons === false ? 'hidden': ''}`}>
-						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
+					<div className={`flex flex-wrap justify-end -mx-hg md:-mx-g ${showButtons === false ? 'hidden': ''}`}>
+						<div className="w-1/2 md:w-2/12 px-hg md:px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('review')}
 								type="button"
 								lg={false}
@@ -774,7 +774,7 @@ const YotpoReviewWidget = (props:any) => {
 									Write A Review
 							</Button>
 						</div>
-						<div className="w-1/2 md:w-2/12 px-g md:max-w-[200px]">
+						<div className="w-1/2 md:w-2/12 px-hg md:px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('question')}
 								type="button"
 								lg={false}
@@ -1070,10 +1070,10 @@ const YotpoReviewWidget = (props:any) => {
 				</div>
 			</div>
 
-			<Modal className="modal-lg" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
+			<Modal className="modal-lg modal-dialog-centered !px-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
 				{!!reviewModal.id && (
-					<div className="modal-dialog modal-lg modal-dialog-centered" role="document">
-						<div className="modal-content mx-3 mx-lg-0 relative max-h-[50%]">
+					// <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
+						<div className="modal-content mx-2 lg:mx-0 relative max-h-[50%]">
 							<div className="flex flex-wrap items-center bg-white rounded rounded-lg overflow-hidden">
 								<div className="lg:w-1/2 pr-lg-0">
 									{getMediaData(reviewModal).length === 1 ? (
@@ -1135,7 +1135,7 @@ const YotpoReviewWidget = (props:any) => {
 									</button>
 								</div>
 								<div className="lg:w-1/2 pl-lg-0 ">
-									<div className="px-3 py-3">
+									<div className="px-2 py-3">
 										<div className="flex">
 											<h4 className="mb-0 text-sm font-bold">{reviewModal.user_name}</h4>
 											{reviewModal.verified_buyer && (<span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>)}
@@ -1161,7 +1161,7 @@ const YotpoReviewWidget = (props:any) => {
 								<SvgClose className="svg size-1em" />
 							</button>
 						</div>
-					</div>
+					// </div>
 				)}
 			</Modal>
 		</>

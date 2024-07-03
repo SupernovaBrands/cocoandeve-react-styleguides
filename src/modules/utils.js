@@ -1169,7 +1169,7 @@ export const getVideoCoverByUrl = (videoUrl, seekTo = 0.0) => new Promise((resol
 	});
 });
 
-export const capitalizeString = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+export const capitalizeString = (str) => str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 
 export const escapeHtml = (htmlString) => {
 	const div = document.createElement('div');
