@@ -50,7 +50,7 @@ const Sustainability = (props: any) => {
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
     }, [
-		Autoplay({ playOnInit: false, delay: 6000 })
+		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const {
 		prevBtnDisabled: prevDisabled1,
