@@ -193,7 +193,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 										<input value={phone} onChange={handlePhone} className="bg-clip-padding block w-full mb-1 lg:mb-2 -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="phone" placeholder={data?.sweepstakes_popup_phone} />
 									</div>
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-1 font-size-sm text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
+									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-0 font-size-sm text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g">Register now</Button>
 									<p className="lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs text-gray-600" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline font-size-sm ') }}></p>
 								</form>
@@ -201,15 +201,15 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 						</div>
 					) : (
 						<div className="px-3 lg:px-4 py-3 lg:py-4 ">
-							<div className="flex flex-wrap  justify-end">
-								<div className="sweepstakes-popup__thank-you text-center lg:w-1/2 flex-col items-center justify-center mt-1 mb-1 lg:my-[60px] text-gray-600 flex lg:px-1 lg:-me-1">
-									<div className="flex flex-wrap  justify-center lg:justify-center">
+							<div className="flex flex-wrap  justify-end lg:-mx-g">
+								<div className="sweepstakes-popup__thank-you text-center lg:w-1/2 flex-col items-center justify-center mt-1 mb-1 lg:my-[60px] text-gray-600 flex lg:px-g">
+									<div className="flex flex-wrap  justify-center lg:justify-center lg:px-g">
 										<div className="w-full">
 											<h3 className={`mb-g sweepstakes-popup__title font-bold h1 ${data.sweepstakes_popup_thank_title_color}`}>{data.sweepstakes_popup_thank_title}</h3>
 											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color}`}>{data.sweepstakes_popup_thank_desc}</p>
 										</div>
 									</div>
-									<a href={data.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary block w-100 lg:w-full border-primary">{data.sweepstakes_popup_thank_shopnow}</a>
+									<a href={data.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary block w-full border-primary">{data.sweepstakes_popup_thank_shopnow}</a>
 								</div>
 							</div>
 						</div>
