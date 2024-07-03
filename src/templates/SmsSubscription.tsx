@@ -135,7 +135,7 @@ const SmsSubscription = (props) => {
                                     <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
                                 </div>
                             </div>
-                            <div className="sms-subscription__tos !text-sm px-0 mt-2 mb-3 lg:px-5 lg:max-w-[830px]" dangerouslySetInnerHTML={{__html: formContent.tos}} />
+                            <div className="sms-subscription__tos !text-sm px-0 mt-2 mb-3 lg:px-5 lg:max-w-[830px] text-body" dangerouslySetInnerHTML={{__html: formContent.tos}} />
                             <div className="row">
                                 <div className="w-full md:w-1/2 md:mx-1/4 mx-auto">
                                     <button type="submit" className="w-full btn btn-primary btn-block btn-lg">{formContent.cta_text}</button>
