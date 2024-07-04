@@ -125,11 +125,13 @@ const SwatchOverlay = (props:any) => {
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
     const [screenLG, setScreenLG] = useState(992);
 
-    if (window.innerWidth > screenLG && label === 'Add') {
-        labelText = 'Add';
-    } else if (window.innerWidth < screenLG && label === 'Add') {
-        labelText = props.swatch.label;
-    }
+    useEffect(() => {
+        if (window.innerWidth > screenLG && label === 'Add') {
+            labelText = 'Add';
+        } else if (window.innerWidth < screenLG && label === 'Add') {
+            labelText = props.swatch.label;
+        }
+    }, [screenLG]);
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
