@@ -23,7 +23,9 @@ interface LaunchWaitListProps {
     productCard?: boolean;
     handleClose?: any;
     setLaunchWLSuccess?: any;
+    launchSubmitted?: boolean;
     onClickDiv?: (e) => {};
+    setLaunchSubmitted?: any;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
@@ -49,7 +51,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const [emailError, setEmailError] = useState(false);
     const [phoneError, setPhoneError] = useState(false);
     const [validForm, setValidForm] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(props.launchSubmitted || false);
     const [tosClick, setTosClick] = useState(false);
 
     const submitForm = (e:any) => {
@@ -68,6 +70,9 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 setShowSuccess(true);
                 if (typeof props.setLaunchWLSuccess === 'function') {
                     props.setLaunchWLSuccess(true);
+                }
+                if (props.productCard) {
+                    props.setLaunchSubmitted(true);
                 }
             }});
         }

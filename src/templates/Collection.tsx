@@ -102,7 +102,8 @@ const Collection = (props: any) => {
     const [launchHandles, setLaunchHandles] = useState([]);
     const [initSub, setInitSub] = useState(false);
     const [initMain, setInitMain] = useState(false);
-    const [height, setHeight] = useState(0);
+    // const [height, setHeight] = useState(0);
+    const [launchSubmitted, setLaunchSubmitted] = useState(false);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -299,7 +300,7 @@ const Collection = (props: any) => {
     useEffect(() => {
         if (launchWLModal.open) {
             document.body.classList.add('!overflow-hidden');
-            if (window) setHeight(window.innerHeight);
+            // if (window) setHeight(window.innerHeight);
         } else {
             document.body.classList.remove('!overflow-hidden');
         }
@@ -573,6 +574,8 @@ const Collection = (props: any) => {
                         loggedInEmail={loggedInEmail}
                         setLaunchWLSuccess={setLaunchWLSuccess}
                         onClickDiv={(e) => e.stopPropagation()}
+                        launchSubmitted={launchSubmitted}
+                        setLaunchSubmitted={setLaunchSubmitted}
                     />
                 </Modal>
             )}
