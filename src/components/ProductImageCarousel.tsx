@@ -14,16 +14,23 @@ interface ImageSlide {
 type PropType = {
 	slides: ImageSlide[]
 	bottomBadge?: string
+	activeImageIndex: number
 }
 
-const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge }) => {
-	const [selectedIndex, setSelectedIndex] = useState(0);
+const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex }) => {
+	const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
 	let slides = slideBoxes;
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
+
+	useEffect(() => {
+		setSelectedIndex(activeImageIndex);
+		onThumbClick(activeImageIndex);
+	}, [activeImageIndex]);
+
 	const alignThumbs = slides.length > 7 ? 'center' : 'start';
 	const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
 		containScroll: 'keepSnaps',

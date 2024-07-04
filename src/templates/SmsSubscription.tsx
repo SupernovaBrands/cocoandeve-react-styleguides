@@ -138,7 +138,7 @@ const SmsSubscription = (props) => {
                             </div>
                             <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 lg:max-w-[785px] text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
                             <div className="row">
-                                <div className="w-full md:w-1/2 md:mx-1/4 mx-auto">
+                                <div className="w-full md:w-1/2 md:mx-1/4 mx-auto lg:px-hg">
                                     <button type="submit" className="w-full btn btn-primary btn-block btn-lg border-primary">{formContent.cta_text}</button>
                                     {!phoneError.valid && <p className="mt-1 mb-0 font-size-xs text-danger">{phoneError.error}</p>}
                                 </div>

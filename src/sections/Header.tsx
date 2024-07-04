@@ -60,7 +60,7 @@ const Header = (props: any) => {
 		e.preventDefault();
 		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
 		window.location.href = url;
-		if (isLoggedIn) window.location.reload();
+		// if (isLoggedIn) window.location.reload();
 	};
 
 	const accountRef = useRef(null);
