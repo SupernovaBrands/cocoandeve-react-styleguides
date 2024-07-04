@@ -193,7 +193,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 										<input value={phone} onChange={handlePhone} className="bg-clip-padding block w-full mb-0 -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="phone" placeholder={data?.sweepstakes_popup_phone} />
 									</div>
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-1 mt-0 font-size-sm text-body" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm text-body" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">Register now</Button>
 									<p className="lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs text-body" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
