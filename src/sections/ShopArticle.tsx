@@ -23,7 +23,8 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 
-	const { products, addToCart, generalSetting } = props;
+	const { products, addToCart, generalSetting, label } = props;
+    console.log('test', label)
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -48,7 +49,7 @@ const ProductCarousel = (props: any) => {
                         <ProductCard
                             key={`product-${id}-${data.id}`}
                             product={data}
-                            label='Add'
+                            label={label}
                             className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:px-1 sm:px-hg text-center"
                             button={true}
                             link={data.handle}

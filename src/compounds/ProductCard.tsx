@@ -58,16 +58,6 @@ const AddToCartButton = (props:any) => {
     const { className, addToCart, selectedVariant, preOrders } = props;
     const [addingItem, setAddingItem] = useState(false);
     const [ctaLabel, setCtaLabel] = useState(props.label);
-    const [screenLG, setScreenLG] = useState(992);
-
-    useEffect(() => {
-        if (window.innerWidth > screenLG && ctaLabel === 'Add') {
-            setCtaLabel('Add');
-        } else if (window.innerWidth < screenLG && ctaLabel === 'Add') {
-            setCtaLabel('Add To Cart');
-        }
-        
-    }, [screenLG]);
 
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
@@ -94,6 +84,8 @@ const AddToCartButton = (props:any) => {
             } else {
                 setCtaLabel(props.label);
             }
+        } else {
+            setCtaLabel(props.label);
         }
     }, [selectedVariant, preOrders]);
 
@@ -111,8 +103,8 @@ const SwatchOverlay = (props:any) => {
     const { product, addToCart, preOrders, generalSetting, label } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
-    let labelText = '';
-
+    const labelText = label === 'Add' ? label : props.swatch.label;
+    
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
     if (autoTicks && autoTicks.length > 0) {
@@ -123,15 +115,6 @@ const SwatchOverlay = (props:any) => {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
-    const [screenLG, setScreenLG] = useState(992);
-
-    useEffect(() => {
-        if (window.innerWidth > screenLG && label === 'Add') {
-            labelText = 'Add';
-        } else if (window.innerWidth < screenLG && label === 'Add') {
-            labelText = props.swatch.label;
-        }
-    }, [screenLG]);
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');

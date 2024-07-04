@@ -87,6 +87,8 @@ const Article = (props) => {
     const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store, addToCart, generalSetting } = props;
     const [offset, setOffset] = useState<any | null>(null);
     const [screenLG, setScreenLG] = useState(992);
+    const [label, setLabel] = useState('');
+
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
     const month = d.toLocaleString('default', { month: 'short' });
@@ -204,9 +206,9 @@ const Article = (props) => {
                 });
                 if (window.innerWidth > screenLG) {
                     articleShops.forEach(articleShop => {
-                        // articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => {
-                        //     if (el) el.textContent = 'Add To Cart';
-                        // });
+                        articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => {
+                            if (el) setLabel('Add')
+                        });
                 
                         articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__text').forEach(el => {
                             if (el) el.textContent = 'Waitlist';
@@ -337,7 +339,7 @@ const Article = (props) => {
             <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-[1.25rem]">
                 <div className="container lg:px-0 sm:px-hg">
                     <h4 className="h1 text-center mb-1">Shop this article</h4>
-                    {!isLoading && ( <ShopArticle products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
+                    {!isLoading && ( <ShopArticle label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
