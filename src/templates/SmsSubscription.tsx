@@ -123,20 +123,20 @@ const SmsSubscription = (props) => {
                 </div>
                 <div className="w-full lg:w-[58.333%] text-center items-center flex px-g pb-4 lg:pb-0">
                     {!formCompleted ? (
-                        <form id="sms-subscription__form" className="sms-subscription__form w-full" onSubmit={onSubmit}>
+                        <form id="sms-subscription__form" className="sms-subscription__form w-full lg:pl-g" onSubmit={onSubmit}>
                             <h1 className="sms-subscription__title mt-3 lg:mt-0 mb-0 lg:text-[46px] lg:leading-[57.5px]">{ formContent.title }</h1>
                             <p className="sms-subscription__subtitle mb-1 lg:mb-2 text-lg" dangerouslySetInnerHTML={{__html: formContent.sub_title }} />
                             <p className="sms-subscription__description mb-3 lg:mb-4 w-full lg:w-4/5 mx-auto text-xs lg:text-sm px-hg lg:px-0" dangerouslySetInnerHTML={{__html: formContent.description}} />
-                            <div className="w-full lg:max-w-[657px] md:mx-1/6 mx-auto">
+                            <div className="w-full lg:max-w-[627px] md:mx-1/6 mx-auto">
                                 <div className="flex flex-wrap px-hg lg:px-0">
                                     <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                        <InputCountry id="modal--sweepstakes__country" chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-white mb-[0!important] !border-[1px] border-[solid] !border-[#CECECE] !rounded-tl-[3px] !rounded-bl-[3px]" handleCode={handleCode} activeCountry={activeCountryCode} />
+                                        <InputCountry id="modal--sweepstakes__country" chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-white mb-[0!important] !border-[1px] border-[solid] !border-[#CECECE] !rounded-tl-[3px] !rounded-bl-[3px] !lg:w-[70px] pl-1 text-[15px]" handleCode={handleCode} activeCountry={activeCountryCode} comp="sms-subs" />
                                         <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-[#CECECE] active:border-[#CECECE]  focus-visible:border-[#CECECE] border-[#CECECE]  border-[1px] border-l-[none] !rounded-tr-[3px] !rounded-br-[3px] rounded-tl-[0px] rounded-bl-[0px]" type="phone" placeholder="Phone number" />
                                     </div>
                                     <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
                                 </div>
                             </div>
-                            <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 lg:max-w-[785px] text-body">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
+                            <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 lg:max-w-[785px] text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
                             <div className="row">
                                 <div className="w-full md:w-1/2 md:mx-1/4 mx-auto">
                                     <button type="submit" className="w-full btn btn-primary btn-block btn-lg border-primary">{formContent.cta_text}</button>
@@ -145,7 +145,7 @@ const SmsSubscription = (props) => {
                             </div>
                         </form>
                     ) : (
-                        <div className="sms-subscription__form-success mt-5 lg:mt-0 w-full">
+                        <div className="sms-subscription__form-success mt-5 lg:mt-0 w-full lg:pl-g">
                             <h2 className="sms-subscription__title mb-3 text-[32px] lg:text-[46px] leading-[40px] lg:leading-[57px]">{formContent.success_title}</h2>
                             {formContent.success_desc && (<p className="sms-subscription__success mb-4 lg:pb-4 px-6 lg:px-3">{formContent.success_desc}</p>)}
                             <div className="col-12 lg:max-w-[50%] lg:mx-auto px-0 mt-6">
