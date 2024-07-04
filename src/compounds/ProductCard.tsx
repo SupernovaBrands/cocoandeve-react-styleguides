@@ -63,7 +63,7 @@ const AddToCartButton = (props:any) => {
     useEffect(() => {
         if (window.innerWidth > screenLG && ctaLabel === 'Add') {
             setCtaLabel('Add');
-        } else {
+        } else if (window.innerWidth < screenLG && ctaLabel === 'Add') {
             setCtaLabel('Add To Cart');
         }
         
@@ -123,10 +123,11 @@ const SwatchOverlay = (props:any) => {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
+    const [screenLG, setScreenLG] = useState(992);
 
-    if (label) {
-        labelText = label;
-    } else {
+    if (window.innerWidth > screenLG && label === 'Add') {
+        labelText = 'Add';
+    } else if (window.innerWidth < screenLG && label === 'Add') {
         labelText = props.swatch.label;
     }
 
