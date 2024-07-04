@@ -202,9 +202,7 @@ const Article = (props) => {
                 articleShops.forEach(articleShop => {
                     targetContent.parentNode.insertBefore(articleShop, targetContent);
                 });
-                console.log('articleShops 1', articleShops)
                 if (window.innerWidth > screenLG) {
-                    console.log('articleShops 2', articleShops)
                     articleShops.forEach(articleShop => {
                         // articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => {
                         //     if (el) el.textContent = 'Add To Cart';
@@ -217,8 +215,6 @@ const Article = (props) => {
                         articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__prices .text-linethrough').forEach(el => {
                             if (el && el.parentNode) {
                                 el.parentNode.removeChild(el);
-                            } else {
-                                console.warn('Element not found for removal:', el);
                             }
                         });
                 
