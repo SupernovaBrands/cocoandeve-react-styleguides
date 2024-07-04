@@ -49,7 +49,7 @@ const ProductCarousel = (props: any) => {
                             key={`product-${id}-${data.id}`}
                             product={data}
                             label='Add'
-                            className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 px-1 text-center"
+                            className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:px-1 sm:px-hg text-center"
                             button={true}
                             link={data.handle}
                             carousel={true}
@@ -65,7 +65,7 @@ const ProductCarousel = (props: any) => {
                         onClick={() => autoPlayClick1(arrowClickPrev1)}
                         className="lg:-left-[1.25em] lg:w-4 text-primary lg:hidden"
                     >
-                        <span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[24.5%] md:top-[6.25em] lg:top-[8.125em] left-[1.5625em]">
+                        <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[24.5%] md:top-[6.25em] lg:top-[8.125em] left-[1.5625em]">
                             <ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
                         </span>
                     </PrevButton>
@@ -73,7 +73,7 @@ const ProductCarousel = (props: any) => {
                         onClick={() => autoPlayClick1(arrowClickNext1)}
                         className="lg:-right-[1.25em] lg:w-4 text-primary lg:hidden"
                     >
-                        <span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[24.5%] md:top-[6.25em] lg:top-[8.125em] right-[1.5625em]">
+                        <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[24.5%] md:top-[6.25em] lg:top-[8.125em] right-[1.5625em]">
                             <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
                         </span>
                     </NextButton>

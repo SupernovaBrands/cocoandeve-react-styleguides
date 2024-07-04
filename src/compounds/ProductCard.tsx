@@ -58,6 +58,16 @@ const AddToCartButton = (props:any) => {
     const { className, addToCart, selectedVariant, preOrders } = props;
     const [addingItem, setAddingItem] = useState(false);
     const [ctaLabel, setCtaLabel] = useState(props.label);
+    const [screenLG, setScreenLG] = useState(992);
+
+    useEffect(() => {
+        if (window.innerWidth > screenLG && ctaLabel === 'Add') {
+            setCtaLabel('Add');
+        } else {
+            setCtaLabel('Add To Cart');
+        }
+        
+    }, [screenLG]);
 
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
@@ -297,8 +307,8 @@ const ProductCardTall = (props:any) => {
                 <div className="review-stars__number flex justify-center mb-1">
                     <YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
-                <p className={`product-title__text grow flex flex-col justify-center h-100 text-lg ${props.shopArticle ? 'lg:min-h-[3.125em] text-sm leading-[1.25]' : ''} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''}`}>
-                    <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card__title text-body text-base lg:text-lg hover:text-body">{props.product.title}</a>
+                <p className={`product-title__text grow flex flex-col justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[3.225em]' : 'min-h-[2.5em] lg:min-h-[3.125em]'} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''}`}>
+                    <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : 'lg:text-lg text-base'} product-card__title text-body hover:text-body"`}>{props.product.title}</a>
                 </p>
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label}/>

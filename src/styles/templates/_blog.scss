@@ -116,26 +116,13 @@
 		// 	}
 		// }
 
-		// &__shop-articles {
-		// 	.carousel-control-prev-icon, .carousel-control-next-icon {
-		// 		top: 28%;
-		// 		background-color: $pink-light;
-		// 	}
-
-		// 	.carousel-control-prev-icon {
-		// 		left: calc-em(25);
-		// 	}
-
-		// 	.carousel-control-next-icon {
-		// 		right: calc-em(25);
-		// 	}
-
-		// 	.carousel--centered .carousel-inner {
-		// 		@screen lg {
-		// 			transform: translateX(0);
-		// 		}
-		// 	}
-		// }
+		&__shop-articles {
+			@screen sm {
+				.review-stars__number {
+					font-size: 0.875em;
+				}
+			}
+		}
 	}
 
 	.article-list-wrapper {
