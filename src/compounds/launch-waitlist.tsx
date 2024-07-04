@@ -145,7 +145,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <form noValidate onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
                         <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
-                        {emailError && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid email address</span> }
+                        {emailError && <span className={`w-full text-primary email-error text-sm mb-g -mt-25 ${props.productCard ? 'px-2 text-left' : ''}`}>Please enter a valid email address</span> }
                     </div>
                     <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
                     <div className={`flex flex-wrap ${props.productCard ? '' : '-mx-2'}`}>
