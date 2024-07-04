@@ -48,11 +48,11 @@ export default class CartDiscountForm extends Component<Props, State> {
         if (this.props.code) {
             this.setState({ code: this.props.code, prevCode: this.props.code });
         }
-        // const { isApplied, error } = this.props;
-        // if (!isApplied && error) {
-        //     this.setState({code: ''});
-        //     this.props.onApply('', false);
-        // }
+        const { isApplied, error } = this.props;
+        if (!isApplied && error) {
+            this.setState({ code: '' });
+            this.props.onApply('', false);
+        }
     }
 
     // static getDerivedStateFromProps(nextProps: Props, prevState: State) {

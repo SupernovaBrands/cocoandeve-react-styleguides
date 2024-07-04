@@ -106,7 +106,7 @@ const Cart: React.FC<Props> = (props) => {
 			lastStock = true;
 		}
 		setLastStockKey('');
-		onUpdateCart(item, qty);
+		onUpdateCart(item, parseInt(qty));
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
