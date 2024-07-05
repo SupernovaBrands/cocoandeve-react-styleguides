@@ -144,7 +144,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode).done((resp) => {
+			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode).then((resp) => {
 				// console.log('submitsToSmsBump', resp);
 				if (resp.status === 'error' && !validForm.email) {
 					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
@@ -157,6 +157,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 				setFormCompleted(true);
 			}
 		}
+		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 	}
 
 	return (
