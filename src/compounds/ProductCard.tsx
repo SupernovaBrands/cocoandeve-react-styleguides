@@ -7,10 +7,11 @@ import { formatMoney, getCookie } from "~/modules/utils";
 const DEFAULT_LABEL = 'Add To Cart';
 
 const Pricing = ({ props }) => {
+    const label = props.btnLabel ? props.btnLabel : props.label;
     return (
         <>
             <span className={`border-x border-x-transparent product-card-btn__text lg:w-auto block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : 'w-full text-center lg:text-left'}`}>
-                { !props.addingItem &&  (props.label ? props.label : DEFAULT_LABEL) }
+                { !props.addingItem &&  (label ? label : DEFAULT_LABEL) }
                 { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
             </span>
             <span className={`border-x border-x-transparent product-card-btn__prices lg:w-auto block ${props.carousel ? 'w-1/2 text-right py-[.8125em]' : 'w-full text-center lg:text-right'}`}>
@@ -58,6 +59,7 @@ const AddToCartButton = (props:any) => {
     const { className, addToCart, selectedVariant, preOrders } = props;
     const [addingItem, setAddingItem] = useState(false);
     const [ctaLabel, setCtaLabel] = useState(props.label);
+    const btnLabel = props.label;
 
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
@@ -84,14 +86,12 @@ const AddToCartButton = (props:any) => {
             } else {
                 setCtaLabel(props.label);
             }
-        } else {
-            setCtaLabel(props.label);
         }
     }, [selectedVariant, preOrders]);
 
     return (
         <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] lg:border-0 flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
-            <Pricing props={{...props, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }}/>
+            <Pricing props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
         </Button>
     );
 };
