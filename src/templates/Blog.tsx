@@ -21,7 +21,7 @@ const options: EmblaOptionsType = {
 
 const Blog = (props) => {
 
-	const { isLoading, postData, popularArticles, articles, videoData, tag } = props;
+	const { isLoading, postData, popularArticles, videoData, tag } = props;
 	const [activeFrame, setActiveFrame] = useState(true);
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
@@ -48,6 +48,18 @@ const Blog = (props) => {
 	let videoItems = [];
 	if (videoData.length > 0) {
 		videoItems = videoData.filter(r => r.type === 'video_item');
+	}
+
+	let extendedPostData = [...postData];
+	if (extendedPostData.length < 3) {
+		const postItems = 4 - extendedPostData.length;
+		extendedPostData = extendedPostData.concat(extendedPostData.slice(0, postItems));
+	}
+
+	let extendedVideoData = [...videoData];
+	if (extendedVideoData.length < 3) {
+		const videoItems = 4 - extendedVideoData.length;
+		extendedVideoData = extendedVideoData.concat(extendedVideoData.slice(0, videoItems));
 	}
 
 	// carousel
@@ -80,7 +92,7 @@ const Blog = (props) => {
 	}, []);
 
 	return (
-		<div className="mobile-wrapper mt-3 lg:mt-5 px-0 sm:px-hg">
+		<div className="mobile-wrapper mt-3 lg:mt-5 lg:px-0 sm:px-hg">
 			<div className="container">
 				<h1 className="text-center mb-2">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
                 {!isLoading && (
@@ -95,85 +107,82 @@ const Blog = (props) => {
                 )}
 				{!activeFrame && (
 					<>
-						{videoSliders.length > 0 && <HowToCarousel videoData={videoSliders} isLoading={isLoading} />}
-						<div className="flex flex-wrap mb-0 mt-2 w-full lg:-mx-g">
-							{videoItems.map((item, index) => (
-								<div className="mb-2 w-full lg:w-1/3 px-0 lg:px-g">
-									<figure className="mb-2 no-gutters__in-container border border-secondary-light">
-										{!isLoading && (
-											<picture className="cursor-pointer embed-responsive m-0" data-src={item.video_url} onClick={handlOpenModal}>
-												<source srcSet={item.src.replace('/public', '/750x')} media="(min-width: 992px)" width="368" height="192"></source>
-												<img className="w-full h-[revert-layer]" alt="Image Alt" loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
-													className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
-														<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
-														</svg>
-											</picture>
-										)}
-										<figcaption className="p-2 ">
-											{ item.tags.length > 0 ? item.tags.map((tag) =>
-												<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
-											) : ''}
-											<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
-										</figcaption>
-									</figure>
-								</div>
-							))}
+						<div className="how-to-wrapper lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
+							{videoSliders.length > 0 && <HowToCarousel btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={videoSliders} isLoading={isLoading} />}
+							<div className="flex flex-wrap mb-0 mt-2 w-full">
+								{videoItems.map((item, index) => (
+									<div className="mb-4 lg:mb-3 w-full lg:w-1/3 sm:px-hg lg:px-g">
+										<figure className="mb-2 no-gutters__in-container border border-secondary-light lg:mx-0 sm:-mx-g">
+											{!isLoading && (
+												<picture className="cursor-pointer embed-responsive m-0" data-src={item.video_url} onClick={handlOpenModal}>
+													<source srcSet={item.src.replace('/public', '/750x')} media="(min-width: 992px)" width="368" height="192"></source>
+													<img className="w-full h-[revert-layer]" alt="Image Alt" loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
+														className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
+															<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
+															</svg>
+												</picture>
+											)}
+											<figcaption className="p-2 ">
+												{ item.tags.length > 0 ? item.tags.map((tag) =>
+													<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
+												) : ''}
+												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+											</figcaption>
+										</figure>
+									</div>
+								))}
+							</div>
 						</div>
 					</>
 				)}
 				{activeFrame && (
 					<>
-						{postData.length > 0 &&
-							<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel">
-								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-									{postData.map((data) => (
-										<PostCard key={data.id} className="flex flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
-									))}
-								</Carousel.Inner>
-								<Carousel.Navigation>
-									<PrevButton
-										onClick={() => autoPlayClick(arrowClickPrev)}
-										className="lg:-left-[1.15em] sm:-left-[0.5em] w-[auto] text-primary"
-									>
-										<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-											<ChevronPrev className="h-[1em] svg--current-color" />
-										</span>
-									</PrevButton>
-									<NextButton
-										onClick={() => autoPlayClick(arrowClickNext)}
-										className="sm:-right-[0.5em] lg:-right-[1.20em] w-[auto] text-primary"
-									>
-										<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-											<ChevronNext className="h-[1em] svg--current-color" />
-										</span>
-									</NextButton>
-								</Carousel.Navigation>
-							</Carousel.Wrapper>
-						}
-						<div className="flex flex-wrap article-list-wrapper lg:mb-4">
-							{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
-							<div className="flex flex-wrap mb-0 mt-2 -mx-g">
-								{articles.map((data) =>
-									<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" imgClass={true} template="blog" data={data} />
-								)}
-							</div>
+						<div className="container px-0">
+							{postData.length > 0 &&
+								<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
+									<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+										{extendedPostData.map((data, index) => (
+											<PostCard key={index} pictureClass="blog-carousel__image embed-responsive embed-responsive-16by9 m-0" className="flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+										))}
+									</Carousel.Inner>
+									<Carousel.Navigation>
+										<PrevButton
+											onClick={() => autoPlayClick(arrowClickPrev)}
+											className="lg:-left-[1.15em] sm:-left-[0.5em] w-[auto] text-primary"
+										>
+											<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+												<ChevronPrev className="h-[1em] svg--current-color" />
+											</span>
+										</PrevButton>
+										<NextButton
+											onClick={() => autoPlayClick(arrowClickNext)}
+											className="sm:-right-[0.5em] lg:-right-[1.20em] w-[auto] text-primary"
+										>
+											<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+												<ChevronNext className="h-[1em] svg--current-color" />
+											</span>
+										</NextButton>
+									</Carousel.Navigation>
+								</Carousel.Wrapper>
+							}
 						</div>
-						{videoData.length > 0 && <HowToCarousel title={true} videoData={videoData} isLoading={isLoading} />}
-						{/* <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g mb-4">
-							{articles.map((data) =>
-								<PostCard key={data.id} className="mb-2 w-full lg:w-1/3 px-0 lg:px-g" data={data} />
-							)}
-						</div> */}
-						{/* <div className="w-100 text-center mb-4">
-							<Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline">Load more posts</Link>
-						</div> */}
+						{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
+						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g sm:-mx-hg">	
+							<div id="topPostCard" className="flex flex-wrap mb-0 mt-2 w-full"></div>
+						</div>
+
+						<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
+							{videoData.length > 0 && <HowToCarousel btnLeft="lg:left-[-2%] sm:left-0" btnRight="lg:right-[-2%] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />}
+						</div>
+						<div id="taggedPostCard" className="article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>
+						<div id="bottomPostCard"></div>
 					</>
 				)}
 			</div>
 
 			{!isLoading && (
-				<Modal className="modal-lg p-0" isOpen={modal} handleClose={() => handlCloseModal(false)}>
+				<Modal className="modal-lg modal-dialog-centered !px-0" contentClass="w-full" isOpen={modal} handleClose={() => handlCloseModal(false)}>
 					<div className="relative block w-full overflow-hidden embed-responsive-16by9">
 						<iframe className="rounded-[20px] block absolute top-0 bottom-0 left-0 w-full h-full border-none" src={videoSrc}></iframe>
 					</div>

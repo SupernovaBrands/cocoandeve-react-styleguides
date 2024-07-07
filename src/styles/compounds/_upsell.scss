@@ -48,6 +48,14 @@
 		}
 	}
 
+	.blog-upsell {
+		picture::before {
+			padding-top: 100%;
+			display: block;
+			content: "";
+		}
+	}
+
 	.product-upsell-2 {
 
 		picture::before {

@@ -259,6 +259,20 @@
 		padding-top: 56.25%;
 	}
 
+	figure {
+		margin: 0 0 1rem;
+	}
+
+	.blog-carousel__image:before {
+		padding-top: 11.125em;
+	}
+	
+	@screen lg {
+		.blog-carousel__image:before {
+			padding-top: 18.625em;
+		}
+	}
+
 	// .blog-back-to-top {
 	// 	position: fixed;
 	// 	bottom: calc-em(20);

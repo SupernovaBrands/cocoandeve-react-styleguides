@@ -58,12 +58,12 @@ const HowToCarousel = (props) => {
     };
 
 	return (
-		<section className="how-to no-gutters__in-container mb-4">
+		<section className="how-to no-gutters__in-container w-full">
 			{title && (<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>)}
 			<Carousel.Wrapper emblaApi={emblaApi}>
-				<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
-						<div className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-0">
+						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
 							<figure className="border border-secondary-light">
 								{!isLoading && (
 									<picture className="relative w-full aspect-[4/3] m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
@@ -76,7 +76,7 @@ const HowToCarousel = (props) => {
 								)}
 								<figcaption className="p-2 ">
 									{ item.tags.length > 0 ? item.tags.map((tag) =>
-										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
+										<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} min-w-[3.375em] badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
 									) : ''}
 									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 								</figcaption>
@@ -88,18 +88,18 @@ const HowToCarousel = (props) => {
 					<PrevButton
 						onClick={() => autoPlayClick(arrowClickPrev)}
 						disabled={prevDisabled7}
-						className="-left-hg lg:-left-g"
+						className={props.btnLeft}
 					>
-						<span className="carousel__button--direction shadow-md left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
 					<NextButton
 						onClick={() => autoPlayClick(arrowClickNext)}
 						disabled={nextDisabled7}
-						className="-right-hg lg:-right-g"
+						className={props.btnRight}
 					>
-						<span className="carousel__button--direction shadow-md right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>
@@ -107,7 +107,7 @@ const HowToCarousel = (props) => {
 			</Carousel.Wrapper>
 			
 			{!isLoading && (
-				<Modal className="modal-lg p-0" isOpen={modal} handleClose={() => handlCloseModal(false)}>
+				<Modal className="modal-lg modal-dialog-centered !px-0" contentClass="w-full" isOpen={modal} handleClose={() => handlCloseModal(false)}>
 					<div className="relative block w-full overflow-hidden embed-responsive-16by9">
 						<iframe className="rounded-[20px] block absolute top-0 bottom-0 left-0 w-full h-full border-none" src={videoSrc}></iframe>
 					</div>
