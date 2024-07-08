@@ -34,16 +34,27 @@ const OurStoryTemplate = (props: any) => {
 
 	const options: EmblaOptionsType = {
 		loop: true,
+		align: 'center',
+		breakpoints: {
+            '(min-width: 992px)': {
+                align: 'start',
+                watchDrag: false,
+			    duration: 40,
+            }
+		}
 	};
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 	const {
 		onPrevButtonClick: arrowClickPrev,
 		onNextButtonClick: arrowClickNext
 	} = usePrevNextButtons(emblaApi);
 	const autoPlayClick = controlAutoplay(emblaApi);
-	const logos = [...logo.logo, ...logo.logo];
+
+	const [firstLogo, ...restLogos] = logo.logo;
+	const reorderLogos = [...restLogos,firstLogo];
+	const logos = [...reorderLogos, ...reorderLogos];
 
 	return (
 		<>
@@ -88,12 +99,12 @@ const OurStoryTemplate = (props: any) => {
 					)}
 				</div>
 				{!isLoading && (
-					<Carousel.Wrapper emblaApi={emblaApi} className="-mx-hg">
-						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+					<Carousel.Wrapper emblaApi={emblaApi} className="mx-0">
+						<Carousel.Inner emblaRef={emblaRef} className="px-0">
 							{logos.map((data, i) => {
 								const odd = Math.abs(i % 2) == 1;
 								return (
-									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:w-[20%] lg:basis-[20%] px-hg lg:px-g ${odd ? 'mt-5' : ''}`} key={data.id}>
+									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:w-[20%] lg:basis-[20%] px-hg lg:px-g ${odd ? '' : 'mt-5'}`} key={data.id}>
 										<div className="flex items-center justify-center">
 											<img className="block w-full" src={data.image.url} alt={`slide ${data.id + 1}`} />
 										</div>
@@ -104,17 +115,17 @@ const OurStoryTemplate = (props: any) => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick(arrowClickPrev)}
-								className="lg:-left-0 w-[15%] opacity-90"
+								className="-left-hg w-[15%] opacity-90"
 							>
-								<span className="carousel__button--half-rounded left-0 lg:-left-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full">
+								<span className="carousel__button--half-rounded left-0 lg:-left-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full shadow-lg">
 									<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color lg:-mr-[2em]" />
 								</span>
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick(arrowClickNext)}
-								className="lg:-right-0 w-[15%] opacity-90"
+								className="-right-hg w-[15%] opacity-90"
 							>
-								<span className="carousel__button--half-rounded right-0 lg:-right-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full">
+								<span className="carousel__button--half-rounded right-0 lg:-right-[2.5em] bg-white w-full lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full shadow-lg">
 									<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color lg:-ml-[2em]" />
 								</span>
 							</NextButton>

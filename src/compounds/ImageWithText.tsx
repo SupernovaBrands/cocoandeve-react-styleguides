@@ -21,7 +21,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = (props) => {
                 )}
             </div>
             <figcaption className="w-full lg:w-1/3 px-g lg:px-g">
-                <div className={`${!props.reverse ? 'lg:-mr-[40%]' : ''} sm:-mt-[7em] text-start lg:mt-0 p-2 lg:pt-3 lg:pb-3 bg-white ${props.reverse ? 'lg:-ml-[40%] mr-auto lg:pl-3' : ''}`}>
+                <div className={`${!props.reverse ? 'lg:-mr-[40%]' : ''} sm:-mt-[7em] text-start lg:mt-0 p-2 lg:pt-3 lg:pb-3 lg:pr-3 bg-white ${props.reverse ? 'lg:-ml-[40%] mr-auto lg:pl-3' : ''}`}>
                     {props.children}
                 </div>
             </figcaption>
