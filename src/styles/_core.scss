@@ -100,7 +100,18 @@
 	}
 
 	.affiliate--content-li li {
-		@apply font-size-sm py-1 lg:py-0 lg:text-[18px] lg:leading-[24px];
+		@apply text-sm leading-[17px] py-1 lg:py-0 lg:text-[18px] lg:leading-[24px];
+		margin-bottom: 0 !important;
+
+		@screen lg {
+			margin-bottom: 1.25rem !important;
+		}
+	}
+
+	@screen lg {
+		.affiliate--content-li li:last-child {
+			margin-bottom: 0 !important;
+		}
 	}
 }
 

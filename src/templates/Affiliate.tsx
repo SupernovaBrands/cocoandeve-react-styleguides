@@ -11,7 +11,7 @@ const Affiliate = (props: any) => {
 	return (
 		<>
 			{banner && (
-				<figure className="relative block bg-affiliate">
+				<figure className="relative block bg-affiliate mb-0">
 					<picture>
 						<source srcSet={banner.back_img.url.replace('public', '1920x')} media="(min-width: 992px)" />
 						<img src={banner.back_img_2.url.replace('public', '828x')} alt={banner.title} className="w-full" loading="lazy" />
@@ -22,8 +22,8 @@ const Affiliate = (props: any) => {
 						<div className="container lg:h-full">
 							<div className="flex justify-center items-center h-full">
 								<div className="grow-0 shrink-0 basis-[40%] hidden lg:block"></div>
-								<div className="f-text border-t border-t-transparent text-center lg:flex-1 text-affiliate-black">
-									<h5 className="text-base tracking-[.8px] lg:text-xl lg:tracking-[1.2px]">{banner.introducing}</h5>
+								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:flex-1 text-affiliate-black">
+									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
 									<h1 className="text-[2rem] leading-[2.25rem] mt-25 mb-1 max-w-[80%] mx-auto lg:my-2 lg:text-hero lg:leading-[4.5rem] lg:max-w-[90%]">{banner.title}</h1>
 									<h2 className="hidden lg:block text-xl font-normal mb-[2.813rem] leading-[1.5rem]">{banner.subtitle}</h2>
 									<h2 className="lg:hidden text-base text-[#000] font-normal mb-2">
@@ -34,7 +34,7 @@ const Affiliate = (props: any) => {
 									<a
 										href={banner.cta}
 										className="btn btn-primary block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
-											lg:w-auto rounded-none text-base border-none py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white"
+											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px] lg:border-primary"
 										>{banner.cta_label}</a>
 								</div>
 							</div>
@@ -74,7 +74,7 @@ const Affiliate = (props: any) => {
 										</div>
 										<div className="flex justify-center items-center badge-awards mt-4 lg:mt-[4.375rem] flex-wrap">
 											{hiw.beauty_awards.map((award) => (
-												<div key={award.id} className="text-center mb-2 py-[.5em] px-[1em] min-w-[3.375em] grow-0 shrink-0 basis-1/4">
+												<div key={award.id} className="text-center mb-2 py-[.5em] px-[1em] min-w-[3.375em] grow-0 shrink-0 basis-1/4 lg:flex lg:justify-center">
 													<img src={award.url.replace('public', '86x')} className="w-full max-w-[4.125rem] lg:max-w-[5.375rem]" loading="lazy" alt="" />
 												</div>
 											))}
@@ -133,20 +133,20 @@ const Affiliate = (props: any) => {
 										<div className="text-center lg:text-left max-w-[28.438rem]">
 											<h3 className="mx-auto mb-[0.813rem] text-base leading-[1.5rem] tracking-[.8px] max-w-[80%] font-normal lg:text-[1.5rem] lg:leading-[1.5rem] lg:mb-[2rem] lg:tracking-[1.2px]  lg:max-w-none">{content[`section_ct_step_${i + 1}`]}</h3>
 											<h2 className={`mx-auto mb-g text-[1.75rem] leading-[1.875rem] ${i === 2 ? 'max-w-[85%]' : 'max-w-[80%]'} lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none`}>{content[`section_ct_title_${i + 1}`]}</h2>
-											{i <= 1 && (
-												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto">
-													{i === 0 && (
-														<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g border-none rounded-[6px] lg:text-[1.125rem] lg:leading-[1.5rem] py-1 hover:text-white hover:no-underline'))}</>
-													)}
-													{i === 1 && (
-														<>{parse(content[`section_ct_text_${i + 1}`])}</>
-													)}
+											{i === 0 && (
+												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem] lg:mt-0">
+													<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g lg:mt-0 border border-primary rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]'))}</>
+												</p>
+											)}
+											{i == 1 && (
+												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem]">
+													<>{parse(content[`section_ct_text_${i + 1}`])}</>
 												</p>
 											)}
 											{i === 2 && (
-												<div className="affiliate--content-li text-left px-0">
+												<div className="affiliate--content-li text-left px-0 lg:mb-[1rem]">
 													{i === 2 && (
-														<>{parse(content[`section_ct_text_${i + 1}`])}</>
+														<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-[1.25rem]"'))}</>
 													)}
 												</div>
 											)}
@@ -158,18 +158,18 @@ const Affiliate = (props: any) => {
 				</section>
 			)}
 			{content && (
-				<section className="mt-2 mb-1 lg:mb-5 overflow-hidden">
+				<section className="mt-2 mb-1 lg:mb-4 overflow-hidden">
 					<div className="container">
 						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-2">
-							<h2 className="text-[#000] my-4 text-[1.75rem] lg:text-[3rem] leading-[1.875rem] lg:leading-[3.625rem] lg:mb-5 text-center">{content.faq_heading}</h2>
+							<h2 className="text-[#000] my-4 text-[1.75rem] lg:text-[3rem] leading-[1.875rem] lg:leading-[3.625rem] lg:mb-[60px] text-center">{content.faq_heading}</h2>
 
 							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_1}</h2>
 							<div className="mb-4">
-								{parse(content.faq_content_1.replace('<p', '<p class="font-size-sm lg:text-[1.125rem] lg:leading-[1.5rem]"'))}
+								{parse(content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
 							</div>
 							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_2}</h2>
 							<div className="mb-4">
-								{parse(content.faq_content_2.replace('<p', '<p class="font-size-sm lg:text-[1.125rem] lg:leading-[1.5rem]"'))}
+								{parse(content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
 							</div>
 						</div>
 					</div>
