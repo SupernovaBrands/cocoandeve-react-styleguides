@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import BlogNavTag from '~/compounds/blog-nav-tags';
-import PostCard from "~/compounds/PostCard";
-import Sidebar from "~/sections/Sidebar";
 import ShopArticle from "~/sections/ShopArticle";
 import Twitter from '~/images/icons/twitter-square.svg';
 import Facebook from '~/images/icons/facebook-square.svg';
@@ -344,12 +342,12 @@ const Article = (props) => {
                                 <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
                             )}
                             <ul className="block mb-4 mt-1">
-                                <li className="inline-block mr-[0.5rem]">
+                                <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${storeName}.cocoandeve.com&text=${content.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
-                                <li className="inline-block mr-[0.5rem]">
+                                <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${storeName}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]">
                                         <Facebook className="svg fill-primary h-[1em]" />
                                     </a>
@@ -362,9 +360,7 @@ const Article = (props) => {
                             </ul>
                         </div>
                     </div>
-                    {!isLoading && (
-                        <Sidebar data={popularArticles} />
-                    )}
+                    <div id="sideBarPosts"></div>
                 </article>
             </div>
         </div>

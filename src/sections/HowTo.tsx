@@ -2,7 +2,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
     PrevButton,
     NextButton,
@@ -38,6 +38,12 @@ const HowToCarousel = (props) => {
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
+
+	useEffect(() => {
+		if (emblaApi) {
+		  emblaApi.scrollTo(1);
+		}
+	  }, [emblaApi]);
 
     const {
         prevBtnDisabled: prevDisabled7,
