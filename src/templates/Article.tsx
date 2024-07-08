@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
+import BackToTop from '~/images/icons/back-to-top.svg';
 
 const ArticleNewsLetter = (props) => {
     const { postNewsletter, store } = props;
@@ -48,7 +49,7 @@ const ArticleNewsLetter = (props) => {
                             <div className="mb-2 relative flex flex-wrap w-full items-stretch">
                                 <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl rounded-bl -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                         </form>
@@ -84,8 +85,9 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, popularArticles, recomendations, postBannerInfo, upsells, store, addToCart, generalSetting } = props;
+    const { content, isLoading, postNewsletter, popularArticles, postBannerInfo, upsells, store, addToCart, generalSetting } = props;
     const [offset, setOffset] = useState<any | null>(null);
+    const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
 
@@ -115,10 +117,12 @@ const Article = (props) => {
     const handleClick = (event, href) => {
         event.preventDefault();
         const targetElement = document.querySelector(href);
-        if (targetElement) {
+        const mainContent = document.querySelector('.article__content');
+        const scrollTop = 0;
+        if (targetElement && mainContent) {
             window.scrollTo({
-                top: targetElement.offsetTop,
-                behavior: 'smooth'
+                top: targetElement.offsetTop - (mainContent.scrollTop) - scrollTop + 40,
+                behavior: 'smooth',
             });
         }
     };
@@ -264,6 +268,35 @@ const Article = (props) => {
 
     }, [screenLG]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const pageHeight = document.body.offsetHeight;
+            const windowWidth = window.innerWidth;
+            const scrollTop = window.scrollY;
+            
+            if (windowWidth >= 768 && pageHeight > 3600) {
+                if (scrollTop > 500) {
+                    setShowButton(true);
+                } else {
+                    setShowButton(false);
+                }
+            } else if (windowWidth < 768 && pageHeight > 2560) {
+                if (scrollTop > 700) {
+                    setShowButton(true);
+                } else {
+                    setShowButton(false);
+                }
+            } else {
+                setShowButton(false);
+            }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
@@ -343,16 +376,14 @@ const Article = (props) => {
                 </div>
             </div>
         )}
-        <div className="blog-post-grid__recomendation mobile-srapper bg-white lg:bg-pink-light overflow-hidden">
-            <div className="container pt-3 lg:pb-1">
-                <h3 className="text-center h1 mb-1">You might also like</h3>
-                <div className="flex flex-wrap mb-0 mt-2 -mx-hg lg:-mx-g lg:mt-3 lg:mt-3 lg:mb-4">
-                    {recomendations.map((data) =>
-                        <PostCard key={data.id} className="w-full lg:w-1/3 px-0 lg:px-g" template="article" data={data} />
-                    )}
-                </div>
-            </div>
-        </div>
+        <div id="relatedPostCard"></div>
+        {quickLinks.length > 0 && (
+            <>
+                <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <BackToTop className="svg" />
+                </a>
+            </>
+        )}
         </>
     );
 };

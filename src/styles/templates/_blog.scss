@@ -273,31 +273,35 @@
 		}
 	}
 
-	// .blog-back-to-top {
-	// 	position: fixed;
-	// 	bottom: calc-em(20);
-	// 	right: calc-em(15);
-	// 	cursor: pointer;
-	// 	z-index: $zindex-dropdown;
-	// 	opacity: 0;
-	// 	transition: opacity 0.4s ease-in;
-	// 	display: none;
+	.blog-back-to-top {
+		position: fixed;
+		bottom: calc-em(20);
+		right: calc-em(15);
+		cursor: pointer;
+		z-index: 1000;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.4s ease-in, visibility 0.4s ease-in;
+	
+		@screen lg {
+			right: calc-em(40);
+		}
+	
+		&:hover {
+			@apply text-primary;
+		}
+	
+		&.btn--show {
+			opacity: 1;
+			visibility: visible;
+		}
+		
+		.svg {
+			font-size: calc-em(40);
+		}
 
-	// 	@screen lg {
-	// 		right: calc-em(40);
-	// 	}
-
-	// 	&:hover {
-	// 		color: $primary;
-	// 	}
-
-	// 	&.btn--show {
-	// 		opacity: 1;
-	// 		display: flex;
-	// 	}
-
-	// 	.svg {
-	// 		font-size: calc-em(40);
-	// 	}
-	// }
+		.svg path {
+			fill: currentColor;
+		}
+	}
 }

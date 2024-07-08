@@ -171,10 +171,11 @@ const Blog = (props) => {
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g sm:-mx-hg">	
 							<div id="topPostCard" className="flex flex-wrap mb-0 mt-2 w-full"></div>
 						</div>
-
-						<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
-							{videoData.length > 0 && <HowToCarousel btnLeft="lg:left-[-2%] sm:left-0" btnRight="lg:right-[-2%] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />}
-						</div>
+						{videoData.length > 0 &&
+							<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
+								<HowToCarousel btnLeft="lg:left-[-2%] sm:left-0" btnRight="lg:right-[-2%] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
+							</div>
+						}
 						<div id="taggedPostCard" className="article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>
 						<div id="bottomPostCard"></div>
 					</>
