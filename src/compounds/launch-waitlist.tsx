@@ -36,6 +36,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('');
 
     let defaultPhoneCode = process.env.APP_MODE === 'staging' ? '+65' : countries[0].maskValue;
+    const [phoneCode, setPhoneCode] = useState(defaultPhoneCode);
 
     useEffect(() => {
         const defaultObj = { name: 'Singapore', dial_code: '+65', code: 'SG' };
@@ -47,7 +48,6 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         setPhoneCode(defaultPhoneCode);
     }, []);
 
-    const [phoneCode, setPhoneCode] = useState(defaultPhoneCode);
     const [tos, setTos] = useState(false);
     const [tosError, setTosError] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -174,8 +174,18 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                     </select>
                                 </label>
                             )}
-                            <Select fontNormal={props.productCard} onChange={changePhoneCode} border={false} groupClass={`max-w-[25%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`} id="select-countries" placeholder="Select Country" masking={true} options={countries} selected={`${phoneCode.replace('+', '')}`} maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`} groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`} inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
+                            <Select fontNormal={props.productCard}
+                                    onChange={changePhoneCode}
+                                    border={false}
+                                    groupClass={`max-w-[25%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`}
+                                    id="select-countries"
+                                    placeholder="Select Country"
+                                    masking={true} options={countries}
+                                    selected={`${phoneCode.replace('+', '')}`}
+                                    maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
+                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`}
+                                groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`}
+                                inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                         </div>
                         { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
                     </div>

@@ -385,7 +385,13 @@ const countriesRegion = {
 			"value": "84",
 			"label": "Vietnam",
 			"defaultSelected": false,
-		}
+		},
+		{
+			"maskValue": "+62",
+			"value": "62",
+			"label": "Indonesia",
+			"defaultSelected": false,
+		},
 	],
 };
 
