@@ -81,7 +81,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 	};
 
 	const onClose = () => {
-		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 		handleClose();
 	};
 
@@ -97,7 +97,6 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 	const handleCode = (e) => {
 		console.log(e);
 		setaActiveCountryCode(e);
-		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 	};
 
 	const validateForm = (em, ph) => {
