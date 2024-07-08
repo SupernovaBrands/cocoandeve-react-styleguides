@@ -8,7 +8,11 @@ import ParabenFree from '~/images/icons/paraben-free.svg';
 import Peta from '~/images/icons/peta.svg';
 import Gluten from '~/images/icons/gluten.svg';
 import Sulfate from '~/images/icons/natural-dha.svg';
-import { useRef, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { EmblaCarouselType } from 'embla-carousel';
+
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 const iconsData = {
     'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span></>,
@@ -26,28 +30,51 @@ const iconsData = {
 const ProudToBe = (props:any) => {
     const { proudToBe } = props;
     const proudToBeArr = proudToBe?.split('|') || [];
-    const scrollEl = useRef(null);
+    // const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
-    const [width, setWidth] = useState('0%');
-    const [left, setLeft] = useState(0);
+    const [totalSlide, setTotalSlide] = useState(0);
+	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start', dragFree: false, containScroll: 'keepSnaps' });
+	const [scrollProgress, setScrollProgress] = useState(0);
 
-    const scrolling = (e:any) => {
-        const { target } = e;
-        let subWidth = 0;
-        target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
-        setLeft(e.target.scrollLeft);
-    }
+    // const [width, setWidth] = useState('0%');
+    // const [left, setLeft] = useState(0);
+
+    // const scrolling = (e:any) => {
+    //     const { target } = e;
+    //     let subWidth = 0;
+    //     target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
+    //     setLeft(e.target.scrollLeft);
+    // }
+
+    const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
+		const progress = Math.max(0, Math.min(1, emblaMainApi.scrollProgress()));
+		setScrollProgress(progress * 100 / 2);
+	}, []);
+
+    // useEffect(() => {
+    //     if (scrollEl && scrollEl.current) {
+    //         // if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
+    //             // setWidth(scrollEl.current.offsetWidth);
+    //         // } else {
+    //             // const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
+    //             // setWidth(`${w}%`);
+    //         // }
+    //     }
+    // }, [scrollEl]);
 
     useEffect(() => {
-        if (scrollEl && scrollEl.current) {
-            if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
-                setWidth(scrollEl.current.offsetWidth);
-            } else {
-                const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
-                setWidth(`${w}%`);
-            }
+        let totalSlide = 0;
+        proudToBeArr.forEach((proud:any) => {if (proud) { totalSlide += 1}});
+        setTotalSlide(totalSlide);
+    }, []);
+
+    useEffect(() => {
+        if (emblaMainApi) {
+            emblaMainApi.on('select', onScroll);
+            emblaMainApi.on('reInit', onScroll);
+            emblaMainApi.on('scroll', onScroll);
         }
-    }, [scrollEl]);
+    }, [emblaMainApi]);
 
     return (
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
@@ -55,7 +82,19 @@ const ProudToBe = (props:any) => {
         <div className="">
                 <div className="carousel--scroll position-relative">
                     <div className="main-box overflow-hidden -mx-hg md:-mx-g">
-                        <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
+                        <Carousel.Wrapper emblaApi={emblaMainApi}>
+	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
+                                {proudToBeArr.map((proud:any, index: number) =>{
+                                    if (!proud) {
+                                        return <></>;
+                                    }
+                                    return <div key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
+                                    {iconsData[proud]}
+                                    </div>
+                                })}
+                            </Carousel.Inner>
+                        </Carousel.Wrapper>
+                        {/* <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
                                     return <></>;
@@ -65,10 +104,10 @@ const ProudToBe = (props:any) => {
                                 </li>
                                 }
                             )}
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
-                        <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{width, left}} ref={scrollThumb}></div>
+                        <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${scrollProgress}%`, width: `${ ((5 / totalSlide) * 100) - 5 }%` }} ref={scrollThumb}></div>
                     </div>
                 </div>
             </div>

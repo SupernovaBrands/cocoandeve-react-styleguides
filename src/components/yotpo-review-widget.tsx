@@ -263,7 +263,7 @@ const YotpoReviewWidget = (props:any) => {
 		$.ajax({
 			crossDomain: true,
 			contentType: 'application/json',
-			url: `${apiUrl}/reviews.json?${params}`,
+			url: `${apiUrl}/reviews.json?${params}&per=5`,
 			method: 'GET',
 			headers: {
 				'content-type': 'application/json',

@@ -160,7 +160,7 @@ const ProductWaitlist = (props: any) => {
                     <div className="flex flex-wrap items-center justify-start">
                     <div className="-mt-1 w-full">
                         <CheckBox boxSmall={true} onChange={changeTos} borderLight={true} labelClass="flex justify-content-center my-1 relative pl-[25px] font-size-sm mt-2" id="agreement-waitlist" checked={tos}>
-							<span className="text-xs">I agree to the <a className="text-xs text-body underline" href="#">Privacy Policy</a></span>
+							<span className="text-xs">I agree to the <a className="text-xs text-body underline" href="/pages/privacy-policy">Privacy Policy</a></span>
 						</CheckBox>
                         {/* {!tos && <small className="block w-full text-primary terms-error -mt-1 text-center">You have not agreed to the Privacy Policy & ToS</small>} */}
                     </div>
@@ -168,7 +168,7 @@ const ProductWaitlist = (props: any) => {
 					<div className="flex my-1">
 						<input onClick={submitForm} disabled={!validForm} className={`${!validForm ? 'opacity-[0.65]' : ''} inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full bg-primary text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[8px]`} type="button" value="Submit" />
 					</div>
-					<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-body underline" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
+					<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-body underline" target="_blank" href="/pages/privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
 				{/* </form> */}
 			</div> }
 			{ showSuccess && <div className="w-100 p-3 mb-3 rounded">
