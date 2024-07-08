@@ -115,17 +115,17 @@ const OurStoryTemplate = (props: any) => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick(arrowClickPrev)}
-								className="left-0 w-[15%] opacity-90"
+								className="left-0 w-[15%] opacity-90 lg:-left-[3em]"
 							>
-								<span className="carousel__button--half-rounded left-0 lg:-left-[2.5em] bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full shadow-lg">
+								<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full shadow-lg">
 									<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color lg:-mr-[2em]" />
 								</span>
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick(arrowClickNext)}
-								className="right-0 w-[15%] opacity-90"
+								className="right-0 w-[15%] opacity-90 lg:-right-[3em]"
 							>
-								<span className="carousel__button--half-rounded right-0 lg:-right-[2.5em] bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full shadow-lg">
+								<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full shadow-lg">
 									<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color lg:-ml-[2em]" />
 								</span>
 							</NextButton>
