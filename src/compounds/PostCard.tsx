@@ -15,7 +15,7 @@ type PropType = {
 }
 
 const PostCard: React.FC<PropType> = ({ className, data, template, imgClass, textPrimary, textClass, height, pictureClass }) => (
-	<div className={`${className}`}>
+	<article className={`${className}`}>
 		<figure className={`${template === 'article' ? 'lg:mx-0 sm:-mx-g' : ''} ${template === 'blog' || template === 'pdp' ? 'border border-secondary-light mb-[2rem !important]' : 'post-card mb-4 lg:mb-0 bg-white h-full'} flex flex-col ${height}`}>
 			{data.img && (
 				<a href={data.handle ?? '#'} className={`${template === 'article' ? 'mb-2' : ''} relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
@@ -35,7 +35,7 @@ const PostCard: React.FC<PropType> = ({ className, data, template, imgClass, tex
 						</>
 					)}
 				</div>
-				<a href={data.handle ?? '#'} className={`h2 ${template === 'article' ? 'px-3' : 'mt-2'} leading-[1.25!important] mb-1 block text-body hover:text-body hover:no-underline`}>{data.title}</a>
+				<a href={data.handle ?? '#'} className={`h2 ${template === 'article' ? 'hover:text-primary hover:underline px-3' : 'mt-2 hover:no-underline'} leading-[1.25!important] mb-1 block text-body hover:text-body`}>{data.title}</a>
 				<p className={`${template === 'article' ? 'mt-0 px-3 mb-0 pb-1' : ''} ${textClass} ${template === 'blog' ? 'mb-[1rem]' : 'sm:grow-0 lg:flex-grow'} ${textPrimary ? 'text-primary' : ''} flex flex-col ${template === 'pdp' ? 'mb-2' : ''}`}>
 					{ template === 'pdp' && <a href={data.handle ?? '#'} className="text-primary hover:text-primary-dark hover:no-underline">
 						{data.description && (
@@ -53,7 +53,7 @@ const PostCard: React.FC<PropType> = ({ className, data, template, imgClass, tex
 				)}
 			</figcaption>
 		</figure>
-	</div>
+	</article>
 );
 
 export default PostCard;

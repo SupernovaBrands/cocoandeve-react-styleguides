@@ -70,7 +70,7 @@ const ArticlPosteBanner = (props) => {
     return (
         <div className="blog-post-banner my-2 hidden text-center">
             {postBannerInfo.blog_banner_title && (
-                <a href={postBannerInfo.blog_banner_link} className="text-center d-block font-bold [text-decoration-line:none!important]" aria-label={`Banner Link - ${postBannerInfo.blog_banner_title}`}>{postBannerInfo.blog_banner_title}</a>
+                <a href={postBannerInfo.blog_banner_link} className="text-center d-block font-bold [text-decoration-line:none!important] hover:[text-decoration-line:underline!important]" aria-label={`Banner Link - ${postBannerInfo.blog_banner_title}`}>{postBannerInfo.blog_banner_title}</a>
             )}
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
@@ -293,8 +293,14 @@ const Article = (props) => {
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
-      }, []);
+    }, []);
 
+    useEffect(() => {
+        const tikTokScript = document.createElement('script');
+        tikTokScript.src = 'https://www.tiktok.com/embed.js';
+        tikTokScript.setAttribute('async', '');
+        document.body.appendChild(tikTokScript);
+    }, []);
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
