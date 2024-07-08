@@ -32,7 +32,7 @@ const ProductSubscription = (props:any) => {
                 <div className="media-body ml-0 lg:pl-0 pr-1">
                     <span className="text-primary">Save 20% off + free shipping</span><br />when you subscribe!
                     <div className="input-group w-full flex justify-left px-0 lg:px-0 relative items-center mt-1">
-                        <CheckBox onChange={onChange} labelClass="flex justify-left mt-0 relative pl-3" label={`<strong>${ productShopify.subscriptionText && productShopify.subscriptionText.value ? productShopify.subscriptionText.value : 'I want to subscribe' }</strong>`} id="subscription" checked={false}/>
+                        <CheckBox onChange={onChange} labelClass="flex justify-left mt-0 relative pl-3" label={`<strong>${ productShopify && productShopify.subscriptionText && productShopify.subscriptionText.value ? productShopify.subscriptionText.value : 'I want to subscribe' }</strong>`} id="subscription" checked={false}/>
                         <a className="text-primary ml-1 inline-flex relative" ref={tooltipIndicator} onClick={tooltipHandler} >
                             <Help className="svg fill-primary" />
                         </a>
