@@ -3,7 +3,7 @@ import CheckBox from './CheckBox';
 import Help from '~/images/icons/help.svg';
 
 const ProductSubscription = (props:any) => {
-    const { tooltipText } = props;
+    const { tooltipText, productShopify } = props;
     const [showTooltip, setShowTooltip] = useState(false);
     const tooltipIndicator = useRef(null);
     const [tooltipPosition, setTooltipPosition] = useState({top: 0, left: 0});
@@ -31,8 +31,8 @@ const ProductSubscription = (props:any) => {
             <div className="sm:-mx-2 lg:-mx-0 no-gutters__in-container items-center pl-2 mb-2 media flex product-subscription lg:rounded-sm overflow-hidden items-center">
                 <div className="media-body ml-0 lg:pl-0 pr-1">
                     <span className="text-primary">Save 20% off + free shipping</span><br />when you subscribe!
-                    <div className="input-group w-full flex justify-left px-0 lg:px-0 relative items-center">
-                        <CheckBox onChange={onChange} labelClass="flex justify-left mt-1 relative pl-3" label={`I want to subscribe`} id="subscription" checked={false}/>
+                    <div className="input-group w-full flex justify-left px-0 lg:px-0 relative items-center mt-1">
+                        <CheckBox onChange={onChange} labelClass="flex justify-left mt-0 relative pl-3" label={`<strong>${ productShopify.subscriptionText && productShopify.subscriptionText.value ? productShopify.subscriptionText.value : 'I want to subscribe' }</strong>`} id="subscription" checked={false}/>
                         <a className="text-primary ml-1 inline-flex relative" ref={tooltipIndicator} onClick={tooltipHandler} >
                             <Help className="svg fill-primary" />
                         </a>

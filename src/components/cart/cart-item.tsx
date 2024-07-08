@@ -151,9 +151,9 @@ export const CartItem = (props:CartItemProps) => {
 			>
 				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
-						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-full" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
 				</picture>
 			</ConditionWrapper>
@@ -258,7 +258,7 @@ export const CartItem = (props:CartItemProps) => {
 										return variant && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
-												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val && 'border-2 border-primary selected'} ${!variant.availableForSale ? 'oos' : ''}`}
+												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
 												type="button"
 												tabIndex={-1}
 												disabled={!variant.availableForSale}
