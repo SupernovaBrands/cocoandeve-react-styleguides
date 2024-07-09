@@ -16,7 +16,7 @@ type PropType = {
 
 const PostCard: React.FC<PropType> = ({ className, data, template, imgClass, textPrimary, textClass, height, pictureClass }) => (
 	<article className={`${className}`}>
-		<figure className={`${template === 'article' ? 'lg:mx-0 sm:-mx-g' : ''} ${template === 'blog' || template === 'pdp' ? 'border border-secondary-light mb-[2rem !important]' : 'post-card mb-4 lg:mb-0 bg-white h-full'} flex flex-col ${height}`}>
+		<figure className={`${template === 'article' ? 'lg:mx-0 sm:-mx-g' : ''} ${template === 'blog' || template === 'pdp' ? 'border border-secondary-light' : 'post-card mb-4 lg:mb-0 bg-white h-full'} h-full flex flex-col ${height}`}>
 			{data.img && (
 				<a href={data.handle ?? '#'} className={`${template === 'article' ? 'mb-2' : ''} relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
 					<picture className={`${template === 'article' || imgClass ? 'embed-responsive' : ''} ${pictureClass}`}>

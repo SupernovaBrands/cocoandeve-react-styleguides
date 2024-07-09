@@ -13,7 +13,6 @@
 		&__search {
 			grid-area: search;
 			input {
-				// height: calc(1.21429em + 1.07143em + 2px);
 				margin-bottom: 0;
 			}
 		}
@@ -104,18 +103,6 @@
 			}
 		}
 
-		// .blog-post-grid__newsletter {
-
-		// 	.form-control {
-		// 		border-radius: $border-radius-lg;
-		// 	}
-
-		// 	.input-group-append .btn {
-		// 		border-top-right-radius: $border-radius-lg;
-		// 		border-bottom-right-radius: $border-radius-lg;
-		// 	}
-		// }
-
 		&__shop-articles {
 			@screen sm {
 				.review-stars__number {
@@ -125,10 +112,14 @@
 		}
 	}
 
-	.article-list-wrapper {
+	.blog-post__cards {
 		.embed-responsive {
 			padding-top: calc(100% / 828* 420);
 		}
+	}
+
+	.blog-post__cards figure, .how-to figure {
+		margin-bottom: 1.25rem;
 	}
 
 	.article__content {
@@ -155,15 +146,12 @@
 		}
 	}
 
-	// .badge {
-	// 	min-width: calc-em(54);
-	// }
-
 	.badge-blog a,
 	.badge-tag {
 		line-height: 1.25em;
     	padding: .125em .5em;
-		margin-right: 0.25em;
+		margin-right: 0.3125em;
+		min-width: 3.375em;
 	}
 
 	.blog-nav-tags {
@@ -193,28 +181,6 @@
 		}
 
 	}
-
-	// .how-to-wrapper {
-	// 	figure svg {
-	// 		left: 0;
-	// 		right: 0;
-	// 		margin: auto;
-	// 		top: 0;
-	// 		bottom: 0;
-	// 		width: calc-em(52);
-	// 		height: calc-em(52);
-
-	// 		@screen lg {
-	// 			width: calc-em(64);
-	// 			height: calc-em(64);
-	// 		}
-	// 	}
-
-	// 	.list-unstyled figure svg {
-	// 		width: calc-em(52);
-	// 		height: calc-em(52);
-	// 	}
-	// }
 
 	.blog-post-quick-links {
 		@apply text-body-color;
@@ -257,10 +223,6 @@
 		display: block;
 		content: "";
 		padding-top: 56.25%;
-	}
-
-	figure {
-		margin: 0 0 1rem;
 	}
 
 	.blog-carousel__image:before {

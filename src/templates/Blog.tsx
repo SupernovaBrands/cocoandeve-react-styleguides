@@ -138,46 +138,46 @@ const Blog = (props) => {
 				)}
 				{activeFrame && (
 					<>
-						<div className="container px-0">
-							{postData.length > 0 &&
-								<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
-									<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
-										{extendedPostData.map((data, index) => (
-											<PostCard key={index} pictureClass="blog-carousel__image embed-responsive embed-responsive-16by9 m-0" className="flex-shrink-0 w-full basis-full px-0 lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
-										))}
-									</Carousel.Inner>
-									<Carousel.Navigation>
-										<PrevButton
-											onClick={() => autoPlayClick(arrowClickPrev)}
-											className="lg:-left-[1.15em] sm:-left-[0.5em] w-[auto] text-primary"
-										>
-											<span className="bg-pink-light -left-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-												<ChevronPrev className="h-[1em] svg--current-color" />
-											</span>
-										</PrevButton>
-										<NextButton
-											onClick={() => autoPlayClick(arrowClickNext)}
-											className="sm:-right-[0.5em] lg:-right-[1.20em] w-[auto] text-primary"
-										>
-											<span className="bg-pink-light -right-[2%] w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-												<ChevronNext className="h-[1em] svg--current-color" />
-											</span>
-										</NextButton>
-									</Carousel.Navigation>
-								</Carousel.Wrapper>
-							}
-						</div>
-						{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
-						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g sm:-mx-hg">	
-							<div id="topPostCard" className="flex flex-wrap mb-0 mt-2 w-full"></div>
+						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g sm:-mx-hg">
+							<div className="container px-0">
+								{postData.length > 0 &&
+									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
+										<Carousel.Inner emblaRef={emblaRef}>
+											{extendedPostData.map((data, index) => (
+												<PostCard key={index} pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+											))}
+										</Carousel.Inner>
+										<Carousel.Navigation>
+											<PrevButton
+												onClick={() => autoPlayClick(arrowClickPrev)}
+												className="lg:left-[1em] sm:left-[0] w-[auto] text-primary"
+											>
+												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+													<ChevronPrev className="h-[1em] svg--current-color" />
+												</span>
+											</PrevButton>
+											<NextButton
+												onClick={() => autoPlayClick(arrowClickNext)}
+												className="sm:right-[0] lg:right-[1em] w-[auto] text-primary"
+											>
+												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
+													<ChevronNext className="h-[1em] svg--current-color" />
+												</span>
+											</NextButton>
+										</Carousel.Navigation>
+									</Carousel.Wrapper>
+								}
+							</div>
+							{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
+							<div id="topPostCard" className="blog-post__cards flex flex-wrap mb-0 mt-2 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
 								<HowToCarousel btnLeft="lg:left-[-2%] sm:left-0" btnRight="lg:right-[-2%] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
 							</div>
 						}
-						<div id="taggedPostCard" className="article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>
-						<div id="bottomPostCard"></div>
+						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>
+						<div id="bottomPostCard" className="blog-post__cards"></div>
 					</>
 				)}
 			</div>
