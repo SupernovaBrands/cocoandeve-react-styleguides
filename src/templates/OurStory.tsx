@@ -44,7 +44,7 @@ const OurStoryTemplate = (props: any) => {
 		}
 	};
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 5000 })
 	]);
 	const {
 		onPrevButtonClick: arrowClickPrev,
