@@ -107,7 +107,7 @@ const Blog = (props) => {
                 )}
 				{!activeFrame && (
 					<>
-						<div className="how-to-wrapper lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
+						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
 							{videoSliders.length > 0 && <HowToCarousel btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={videoSliders} isLoading={isLoading} />}
 							<div className="flex flex-wrap mb-0 mt-2 w-full">
 								{videoItems.map((item, index) => (
@@ -150,7 +150,7 @@ const Blog = (props) => {
 										<Carousel.Navigation>
 											<PrevButton
 												onClick={() => autoPlayClick(arrowClickPrev)}
-												className="lg:left-[1em] sm:left-[0] w-[auto] text-primary"
+												className="lg:left-[1em] sm:left-[20px] w-[auto] text-primary"
 											>
 												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 													<ChevronPrev className="h-[1em] svg--current-color" />
@@ -158,7 +158,7 @@ const Blog = (props) => {
 											</PrevButton>
 											<NextButton
 												onClick={() => autoPlayClick(arrowClickNext)}
-												className="sm:right-[0] lg:right-[1em] w-[auto] text-primary"
+												className="sm:right-[20px] lg:right-[1em] w-[auto] text-primary"
 											>
 												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
 													<ChevronNext className="h-[1em] svg--current-color" />
@@ -173,7 +173,7 @@ const Blog = (props) => {
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
-								<HowToCarousel btnLeft="lg:left-[-2%] sm:left-0" btnRight="lg:right-[-2%] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
+								<HowToCarousel btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
 							</div>
 						}
 						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>

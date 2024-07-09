@@ -16,7 +16,7 @@ const RecommendationCard = (props) => {
 					<p className="h3 mb-1">
 						<a href={props.data.link} className="text-body hover:text-body">{props.data.title}</a>
 					</p>
-					<>{parse(props.data.desc)}</>
+					<>{parse(props.data.desc.replace(/<[^>]*>?/gm, ''))}</>
 				</figcaption>
 			</figure>
 		</li>
