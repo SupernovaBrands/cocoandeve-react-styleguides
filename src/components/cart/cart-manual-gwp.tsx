@@ -57,7 +57,7 @@ const CartManualGwp = (props:any) => {
 					<SvgChevronNext className="svg" />
 					<span className="hidden">Right</span>
 				</button>
-				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-1 mb-2" ref={scrollRef}>
+				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-[1rem] mb-2" ref={scrollRef}>
 					{items.map((item:any, index:number) => {
 						const isLoading = adding && processingId === item.id;
 						const isSelected = !!(selectedKey && selectedKey.find((key:any) => isItemIdInKey(key, item.id)));
@@ -67,12 +67,12 @@ const CartManualGwp = (props:any) => {
 									<picture className="block">
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded" dangerouslySetInnerHTML={markText(item.price ?? '$0')} />
+									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price ?? '$0')} />
 								</figure>
 								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
 								<Button
 									lg={false}
-								    buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary px-1 ${isSelected || isLoading ? 'bg-primary text-white hover:bg-primary' : ''}`}
+								    buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bg-primary text-white hover:bg-primary' : ''}`}
 									onClick={() => {
 										if (!adding) {
 											if (isSelected) {

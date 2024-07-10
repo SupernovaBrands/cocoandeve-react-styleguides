@@ -47,8 +47,9 @@ interface Props {
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
-		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
+		onUpdateCart, onDeleteLine, discountMeter: discountMeterData, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
+
 	// const storeApi = new storefrontApi();
 	// console.log(discountMeter, 'discountMeter');
 	// const [loadingInit, setLoadingInit] = useState(props.isLoading);
@@ -57,6 +58,12 @@ const Cart: React.FC<Props> = (props) => {
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
+
+	const [discountMeter, setDiscountMeter] = useState(discountMeterData);
+	useEffect(() => {
+		setDiscountMeter(discountMeterData);
+	}, [discountMeterData])
+
 	const [isLastStockKey, setLastStockKey] = useState('');
 
 	const [combineDiscount, setCombineDiscount] = useState(tSettings.cartCombineDiscount);
@@ -212,7 +219,7 @@ const Cart: React.FC<Props> = (props) => {
 									<p className="my-3 text-center">{tStrings.cart_empty}</p>
 									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-2 leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
-								<div className="cart-empty-discount-form container text-start hidden">
+								{/* <div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
 										isApplied={cartData?.discountData?.isValid}
 										isEmptyCart={itemCount === 0}
@@ -226,7 +233,7 @@ const Cart: React.FC<Props> = (props) => {
 										onRemoveGiftCard={onRemoveGiftCard}
 										discountBanner={discountBanner}
 									/>
-								</div>
+								</div> */}
 							</div>
 						) : (
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -277,6 +284,7 @@ const Cart: React.FC<Props> = (props) => {
 									appliedGiftCard={giftCardData}
 									onRemoveGiftCard={onRemoveGiftCard}
 									discountBanner={discountBanner}
+									cart={cartData}
 								/>
 								<hr />
 
@@ -384,7 +392,7 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
 								<div className="w-full mt-1">
-									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
+									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
 							{/* {tStrings.cart_shipping_at_checkout !== '' && (

@@ -71,7 +71,7 @@ const CartExtrass = (props:any) => {
 				{!loading && (
 					<span>
 						<span>Pay in 4 interest-free installments for orders over <b>$50</b>  with</span>
-						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px]" alt="Shop pay logo"/>
+						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px] mt-1px mr-1" alt="Shop pay logo"/>
 					</span>
 				)}
 			</div>
