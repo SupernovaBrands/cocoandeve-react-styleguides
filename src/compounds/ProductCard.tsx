@@ -104,7 +104,6 @@ const SwatchOverlay = (props:any) => {
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
     const labelText = label === 'Add' ? label : props.swatch.label;
-    
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
     if (autoTicks && autoTicks.length > 0) {
@@ -261,7 +260,8 @@ const ProductCardTall = (props:any) => {
         if (autoTicks && autoTicks.length > 0) {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
         }
-        if (defaultVariant === null) defaultVariant = product?.variants?.nodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
+        const variantNodes = product?.variants?.nodes;
+        if (defaultVariant === null && !product.swatch) defaultVariant = variantNodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
         setSelectedVariant(defaultVariant || null);
     }, []);
 
