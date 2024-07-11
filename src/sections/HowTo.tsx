@@ -20,6 +20,7 @@ const HowToCarousel = (props) => {
     const { videoData, isLoading, title } = props;
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
+	const [screenLG, setScreenLG] = useState(992);
 	const handlOpenModal = (e) => {
 		const dataSrc = e.currentTarget.getAttribute('data-src');
 		setvideoSrc(dataSrc);
@@ -40,8 +41,10 @@ const HowToCarousel = (props) => {
 	]);
 
 	useEffect(() => {
-		if (emblaApi) {
-		  emblaApi.scrollTo(1);
+		if (window.innerWidth > screenLG) {
+			if (emblaApi) {
+			emblaApi.scrollTo(1);
+			}
 		}
 	  }, [emblaApi]);
 
