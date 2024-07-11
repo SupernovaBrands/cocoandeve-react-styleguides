@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import BlogNavTag from '~/compounds/blog-nav-tags';
 import ShopArticle from "~/sections/ShopArticle";
 import Twitter from '~/images/icons/twitter-square.svg';

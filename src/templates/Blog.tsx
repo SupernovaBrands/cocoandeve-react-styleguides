@@ -26,6 +26,7 @@ const Blog = (props) => {
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [active, setActive] = useState(false);
+
 	const handleHowTo = () => {
 		setActiveFrame(!activeFrame);
 		setActive(true);
@@ -91,20 +92,32 @@ const Blog = (props) => {
 		}
 	}, []);
 
+
+	useEffect(() => {
+		const tagContainer = document.getElementById('navBlogTags');
+		let activeTag = document.querySelector('#navBlogTags a.active');
+		if (window.location.href.includes('#how-to-tab')) {
+			activeTag = document.querySelector('#how-to-nav');
+		}
+		
+		if (tagContainer && activeTag instanceof HTMLElement) {
+			const newScrollPosition = activeTag.offsetLeft + activeTag.offsetWidth / 2 - tagContainer.clientWidth / 2;
+			tagContainer.scrollLeft = newScrollPosition;
+		}
+	}, []);
+	
 	return (
 		<div className="mobile-wrapper mt-3 lg:mt-5 lg:px-0 sm:px-hg">
 			<div className="container">
 				<h1 className="text-center mb-2">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
-                {!isLoading && (
-                    <div className="blog-nav-tags mb-4 flex mt-2">
-                        <BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
-                        <BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
-                        <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={active ? false : (tag === 'tan' ? true : false)}/>
-                        <BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
-                        <BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-						<a href="/blogs/news#how-to-tab" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
-                    </div>
-                )}
+				<div className="blog-nav-tags mb-4 flex mt-2" id="navBlogTags">
+					<BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={active ? false : (tag === 'tan' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
+					<a href="/blogs/news#how-to-tab" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${tag === 'all' && active === false ? 'active' : ''} ${active ? 'active' : ''}`}>How to's</a>
+				</div>
 				{!activeFrame && (
 					<>
 						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
