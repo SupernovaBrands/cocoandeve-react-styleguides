@@ -105,7 +105,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	}
 
-	const onChangeQuantity = (item:any, qty:any, callback: any) => {
+	const onChangeQuantity = async (item:any, qty:any, callback: any) => {
 		let newQty = qty;
 		let lastStock = false;
 		if (item.merchandise.quantityAvailable <= parseInt(qty, 10)) {
@@ -113,7 +113,7 @@ const Cart: React.FC<Props> = (props) => {
 			lastStock = true;
 		}
 		setLastStockKey('');
-		onUpdateCart(item, parseInt(qty));
+		return await onUpdateCart(item, parseInt(qty));
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {

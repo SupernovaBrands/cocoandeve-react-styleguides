@@ -22,6 +22,12 @@ export default class QuantityBox extends React.Component {
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		if (prevState.updateQuantity) {
+			return {
+				quantity: nextProps.quantity,
+				updateQuantity: false,
+			}
+		}
 		if (nextProps.quantity && prevState.prevQuantity !== nextProps.quantity) {
 			if (nextProps.productStock <= nextProps.quantity) {
 				return {
@@ -118,10 +124,9 @@ export default class QuantityBox extends React.Component {
 		}
 	}
 
-	changeQuantity = () => {
-		this.props.onChangeQuantity(this.state.quantity, (newQty) => {
-			this.setState({ quantity: `${newQty}` });
-		});
+	changeQuantity = async () => {
+		await this.props.onChangeQuantity(this.state.quantity);
+		this.setState({updateQuantity: true});
 	}
 
 	render() {
