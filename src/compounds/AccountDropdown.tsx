@@ -6,7 +6,7 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, toggleAccountDropdown, onModal } = props;
+    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty } = props;
 
     const [regInit, setRegInit] = useState(true);
     const [newsOptIn, setNewsOptIn] = useState(!!onModal);
@@ -147,7 +147,9 @@ const AccountDropdown = (props:any) => {
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className="font-bold text-center px-2 mb-2">Earn and redeem points from purchases</p>
                             <SocialLogin idSuffix={'loginDropdown'} />
-                            <p className="text-center auth-buttons mb-g">or login with email</p>
+                            {swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
+                                <p className="text-center auth-buttons mb-g">or login with email</p>
+                            )}
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
                                 <input ref={loginEmailRef} onChange={handleLoginChange} type="email" className={`block h-[50px] font-size-sm appearance-none w-full py-1 px-2 ${!validLoginEmail ? 'mb-0' : 'mb-1'} text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none`} id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
