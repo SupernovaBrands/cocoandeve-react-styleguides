@@ -33,6 +33,8 @@ const MobileMenu = (props: any) => {
 		if (isLoggedIn && window.location.pathname === '/account') window.location.reload();
 	};
 
+	const enableSwellAcc = swellLoyalty && swellLoyalty.enable_cart_swell_redemption;
+
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
@@ -113,7 +115,7 @@ const MobileMenu = (props: any) => {
 						</li>
 					)
 				})}
-				{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
+				{enableSwellAcc && (
 					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
 						{!isLoggedIn && (
 							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
@@ -125,6 +127,11 @@ const MobileMenu = (props: any) => {
 								{userPts} Points <BeautyIcon className="ml-1 mr-1" />
 							</button>
 						)}
+					</li>
+				)}
+				{!enableSwellAcc && (
+					<li key="my-account" className="flex px-g py-0 border-b w-full">
+						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
 				<li key="shopall" className="my-g p-g">
