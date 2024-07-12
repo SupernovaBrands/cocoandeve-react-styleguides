@@ -47,7 +47,7 @@ interface Props {
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
-		onUpdateCart, onDeleteLine, discountMeter: discountMeterData, shippingMeter,
+		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
 
 	// const storeApi = new storefrontApi();
@@ -58,11 +58,6 @@ const Cart: React.FC<Props> = (props) => {
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
 	});
-
-	const [discountMeter, setDiscountMeter] = useState(discountMeterData);
-	useEffect(() => {
-		setDiscountMeter(discountMeterData);
-	}, [discountMeterData])
 
 	const [isLastStockKey, setLastStockKey] = useState('');
 
@@ -216,8 +211,8 @@ const Cart: React.FC<Props> = (props) => {
 						{!props.isLoading && (!cart.itemCount || itemCount === 0 ? (
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
-									<p className="my-3 text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-2 leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
+									<p className="mt-3 mb-[1.8rem] text-center">{tStrings.cart_empty}</p>
+									<a href="/collections" className="bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								{/* <div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
