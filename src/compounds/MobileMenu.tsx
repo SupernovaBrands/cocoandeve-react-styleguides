@@ -6,7 +6,6 @@ import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 const defMenuState = {
 	1: false,
 	2: false,
@@ -16,7 +15,7 @@ const defMenuState = {
 }
 
 const MobileMenu = (props: any) => {
-	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn } = props;
+	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn, swellLoyalty } = props;
 	const { openDrawer, onToggleMobileNav } = props;
 	const [menuStates, setMenuStates] = useState(defMenuState);
 	const [storeSelection, setStoreSelection] = useState(false);
@@ -26,13 +25,12 @@ const MobileMenu = (props: any) => {
 		props.onToggleMobileNav();
 	}
 
-	const router = useRouter();
-
-	const handleAccount = () => {
-		const url = new URL(window.location.href);
-		const rewardUrl = `${url.pathname}${url.hash}`;
-		if (rewardUrl === '/account#rewards') router.refresh();
-		else window.location.href = '/account#rewards';
+	const handleAccount = (e) => {
+		e.preventDefault();
+		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
+		window.location.href = url;
+		// if (isLoggedIn) window.location.reload();
+		if (isLoggedIn && window.location.pathname === '/account') window.location.reload();
 	};
 
 	return (
@@ -115,18 +113,20 @@ const MobileMenu = (props: any) => {
 						</li>
 					)
 				})}
-				<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
-					{!isLoggedIn && (
-						<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
-							Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
-						</a>
-					)}
-					{isLoggedIn && (
-						<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
-							{userPts} Points <BeautyIcon className="ml-1 mr-1" />
-						</button>
-					)}
-				</li>
+				{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
+					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
+						{!isLoggedIn && (
+							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
+								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
+							</a>
+						)}
+						{isLoggedIn && (
+							<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
+								{userPts} Points <BeautyIcon className="ml-1 mr-1" />
+							</button>
+						)}
+					</li>
+				)}
 				<li key="shopall" className="my-g p-g">
 					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
 				</li>
