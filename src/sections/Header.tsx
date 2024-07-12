@@ -14,7 +14,7 @@ import Tooltip from '~/components/Tooltip';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
-	const { searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
+	const { swellLoyalty, searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -61,6 +61,7 @@ const Header = (props: any) => {
 		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
 		window.location.href = url;
 		// if (isLoggedIn) window.location.reload();
+		if (isLoggedIn && window.location.pathname === '/account' && window.location.hash !== '#rewards') window.location.reload();
 	};
 
 	const accountRef = useRef(null);
@@ -237,12 +238,14 @@ const Header = (props: any) => {
 						</ul>
 
 						<ul className="basis-[30%] lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
-							<li key="bbc" className="hidden lg:flex pr-hg">
-								<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline">
-									{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
-									<PalmTree className="mx-1 h-2" />
-								</a>
-							</li>
+							{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
+								<li key="bbc" className="hidden lg:flex pr-hg">
+									<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline">
+										{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
+										<PalmTree className="mx-1 h-2" />
+									</a>
+								</li>
+							)}
 							<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
@@ -275,6 +278,7 @@ const Header = (props: any) => {
 					menuBannerQuiz={menuBannerQuiz}
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
+					swellLoyalty={swellLoyalty}
 				/>
 				<SearchBox openAccountBox={openAccountBox} dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
 
