@@ -5,7 +5,7 @@ const RecommendationCard = (props) => {
 		<li className="w-full lg:w-1/3 lg:px-g sm:px-hg">
 			<figure className="flex mb-[1rem]">
 				<div className="relative w-1/4 p-0 flex-[0_0_25%]">
-					<a href={props.data.link} className="blog-upsell relative block" aria-label={props.data.title}>
+					<a href={props.data.link} className="hover-overlay blog-upsell relative block" aria-label={props.data.title}>
 						<picture className="embed-responsive m-0">
 							<img src={props.data.src} alt={props.data.title} className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" />
 						</picture>

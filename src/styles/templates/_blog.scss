@@ -109,6 +109,10 @@
 					font-size: 0.875em;
 				}
 			}
+
+			.product-variant-swatch__item[data-available=""] {
+				pointer-events: none;
+			}
 		}
 	}
 
@@ -120,6 +124,15 @@
 
 	.blog-post__cards figure {
 		margin-bottom: 1.25rem;
+	}
+
+	.blog-post__cards .blog-post__card:hover {
+		text-decoration: underline !important;
+	}
+
+	.blog-post__cards .blog-card__desc {
+		@apply text-body;
+		pointer-events: none;
 	}
 
 	.how-to figure {
@@ -268,6 +281,22 @@
 
 		.svg path {
 			fill: currentColor;
+		}
+	}
+
+	.hover-overlay {
+		position: relative;
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			transition: background-color .15s ease-in-out;
+		}
+		&:hover:after {
+			background-color: rgba(255, 255, 255, 0.2);
 		}
 	}
 }

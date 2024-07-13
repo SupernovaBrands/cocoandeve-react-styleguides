@@ -7,7 +7,7 @@ import SidebarCard from '~/components/SidebarCard';
 
 const Sidebar = ({data}) => {
 	const options: EmblaOptionsType = {
-		loop: false,
+		loop: true,
 		active: true,
 		breakpoints: {
 			'(min-width: 768px)': { active: false },

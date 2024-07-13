@@ -14,23 +14,29 @@ const ArticleNewsLetter = (props) => {
     const { postNewsletter, store } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [allowSubmit, setAllowSubmit] = useState(false);
 
     const onSubmit = (evt) => {
-		evt.preventDefault();
-		const ajaxRequest = new XMLHttpRequest();
-		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
-		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		const date = new Date();
-		const tse = date.getTime();
-		const content = `{email:'${email}',time:${tse}}`;
-		const signature = encryptParam(content);
-		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
-		setSubmitted(true);
+        evt.preventDefault();
+        console.log('allowSubmit', allowSubmit)
+        if (allowSubmit) {
+            const ajaxRequest = new XMLHttpRequest();
+            ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
+            ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            const date = new Date();
+            const tse = date.getTime();
+            const content = `{email:'${email}',time:${tse}}`;
+            const signature = encryptParam(content);
+            ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
+            setSubmitted(true);
+        }
 	};
 
     const handleEmail = (e) => {
+		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
         setEmail(e.target.value);
-    }
+        setAllowSubmit(email);
+	};
 
     return (
         <div className="container blog-post-grid__newsletter px-0 hidden">
