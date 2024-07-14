@@ -21,7 +21,7 @@ const HowToCarousel = (props) => {
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [screenLG, setScreenLG] = useState(992);
-	const autoplayPluginRef = useRef(Autoplay({ playOnInit: false, delay: 3000 }));
+	const autoplayPluginRef = useRef(Autoplay({ playOnInit: false, delay: 5000 }));
 
 	const handlOpenModal = (e) => {
 		const dataSrc = e.currentTarget.getAttribute('data-src');
@@ -48,14 +48,6 @@ const HowToCarousel = (props) => {
 		autoplayPluginRef.current
 	]);
 
-	// useEffect(() => {
-	// 	if (window.innerWidth > screenLG) {
-	// 		if (emblaApi) {
-	// 			emblaApi.scrollTo(1);
-	// 		}
-	// 	}
-	// }, [emblaApi]);
-
     const {
         prevBtnDisabled: prevDisabled7,
         nextBtnDisabled: nextDisabled7,
@@ -64,7 +56,7 @@ const HowToCarousel = (props) => {
     } = usePrevNextButtons(emblaApi);
 
     const autoPlayClick = (buttonClickHandler) => {
-        if (autoplayPluginRef.current) {
+        if (autoplayPluginRef.current && window.innerWidth > screenLG) {
             autoplayPluginRef.current.play();
         }
         buttonClickHandler();
