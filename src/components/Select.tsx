@@ -28,7 +28,6 @@ const Select: React.FC<SelectProps> = ({ id, options, selected, groupClass, onCh
             { masking && (<span className={`block w-full absolute appearance-none bg-select-arrow py-g px-2 mb-2 text-base leading-normal bg-gray-400 text-gray-800 ${border ? 'border' : ''} rounded-h outline-none mb-0 ${fontNormal ? 'font-normal' : 'font-bold'} text-left ${maskingClass ? maskingClass : ''}`}>+{selected}</span>) }
 		    <select
                 id={id}
-                defaultValue={selected}
                 value={selected}
                 onChange={onChange}
                 className={`${masking ? 'opacity-0' : ''} appearance-none bg-select-arrow w-full py-g px-2 mb-2 text-base leading-normal bg-gray-400 text-gray-800 ${border ? 'border' : ''} rounded-h outline-none mb-0 ${selectClass ? selectClass : ''}`}

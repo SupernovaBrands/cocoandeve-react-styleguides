@@ -37,12 +37,10 @@ const PostCard: React.FC<PropType> = ({ className, data, template, imgClass, tex
 				</div>
 				<a href={data.handle ?? '#'} className={`h2 ${template === 'blog' ? 'blog-post__card' : ''} ${template === 'article' ? 'hover:text-primary hover:underline px-3' : 'mt-2 hover:no-underline'} leading-[1.25!important] mb-1 block text-body hover:text-body`}>{data.title}</a>
 				<a href={data.handle ?? '#'} className={`${template === 'article' ? 'mt-0 px-3 mb-0 pb-1' : ''} ${textClass} ${template === 'blog' ? 'blog-card__desc mb-[1rem]' : 'sm:grow-0 lg:flex-grow'} ${textPrimary ? 'text-primary hover:text-primary-darken hover:no-underline' : ''} flex flex-col ${template === 'pdp' ? 'mb-2' : ''}`}>
-					{ template === 'pdp' && <a href={data.handle ?? '#'} className="text-primary hover:text-primary-dark hover:no-underline">
-						{data.description && (
+					{ template === 'pdp' && data.description && (
 							parse(data.description)
 						)}
-					</a> }
-					{template !== 'pdp' && data.description && (
+					{ template !== 'pdp' && data.description && (
 						parse(data.description.replace(/<[^>]*>?/gm, ''))
 					)}
 				</a>
