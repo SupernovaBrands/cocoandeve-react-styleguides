@@ -16,6 +16,7 @@ import { useState } from 'react';
 
 const options: EmblaOptionsType = {
 	loop: true,
+    startIndex: 1,
 	breakpoints: {
 		'(min-width: 992px)': { align: 'start' }
 	}
@@ -24,7 +25,7 @@ const options: EmblaOptionsType = {
 const ProductCarousel = (props: any) => {
 
 	const { products, addToCart, generalSetting, label } = props;
-    console.log('test', label)
+    
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
