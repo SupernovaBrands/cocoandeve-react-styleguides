@@ -37,7 +37,7 @@ const YotpoStar = (props: any) => {
 
 	return init ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
-			<a href={`/products/${props?.productHandle}#write-a-review`}>
+			<a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm">
 				<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
 			</a>
 			{props.smSingleStar && (
