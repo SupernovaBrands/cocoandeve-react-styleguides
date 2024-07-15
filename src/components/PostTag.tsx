@@ -16,7 +16,7 @@ const PostTag: React.FC<PropType> = (props) => {
 	else if (tag === 'new') className = 'bg-secondary text-white hover:text-white';
 	else if (tag === 'hot') className = 'bg-primary text-white hover:text-white';
 	return (
-		<a href={`/blogs/news/tagged/${tag}`} className={`${paddingClass} inline-block badge no-underline hover:no-underline font-normal text-center inline-block rounded ${className} ${widthClass}`}>{children}</a>
+		<span className={`${paddingClass} inline-block badge no-underline hover:no-underline font-normal text-center mr-25 rounded ${className} ${widthClass}`}>{children}</span>
 	)
 };
 
