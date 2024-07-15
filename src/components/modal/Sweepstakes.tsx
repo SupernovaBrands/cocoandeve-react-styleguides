@@ -34,6 +34,7 @@ interface SweepstakesData {
 type SweepstakesProp = {
 	handleClose: () => void
 	data: SweepstakesData
+	trackBluecoreLaunchWaitlistEvent: (email: string, pageType: string) => void
 }
 
 const validForm = {
@@ -67,7 +68,7 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
+const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBluecoreLaunchWaitlistEvent }) => {
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -154,6 +155,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data }) => {
 			});
 			if (validForm.email || email === '') {
 				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
+				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
 				setFormCompleted(true);
 			}
 		}
