@@ -16,7 +16,14 @@ import Close from '~/images/icons/close.svg';
 
 const options: EmblaOptionsType = {
 	loop: true,
-	align: 'start'
+	align: 'start',
+	breakpoints: {
+		'(min-width: 992px)': {
+			align: 'start',
+			watchDrag: false,
+			duration: 40,
+		}
+	}
 };
 
 const Blog = (props) => {
@@ -99,13 +106,13 @@ const Blog = (props) => {
 		if (window.location.href.includes('#how-to-tab')) {
 			activeTag = document.querySelector('#how-to-nav');
 		}
-		
+
 		if (tagContainer && activeTag instanceof HTMLElement) {
 			const newScrollPosition = activeTag.offsetLeft + activeTag.offsetWidth / 2 - tagContainer.clientWidth / 2;
 			tagContainer.scrollLeft = newScrollPosition;
 		}
 	}, []);
-	
+
 	return (
 		<div className="mobile-wrapper mt-3 lg:mt-5 lg:px-0 sm:px-hg">
 			<div className="container">
@@ -157,7 +164,7 @@ const Blog = (props) => {
 									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
-												<PostCard key={index} pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+												<PostCard carousel={true} key={index} pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
 											))}
 										</Carousel.Inner>
 										<Carousel.Navigation>
