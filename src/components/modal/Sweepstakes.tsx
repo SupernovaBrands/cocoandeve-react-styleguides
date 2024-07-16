@@ -132,6 +132,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 			if (validForm.email) {
 				if (!validForm.phone) {
 					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true);
+					trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
