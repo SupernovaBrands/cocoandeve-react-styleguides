@@ -9,9 +9,13 @@ type waitlistProps = {
 	waitlistTitle: string;
 	waitlistTitle1: string;
 	waitlistTitle2: string;
+	waitlistTitle3: string;
+	waitlistTitle4: string;
 	formDescription: string;
 	formDescription1: string;
 	formDescription2: string;
+	formDescription3: string;
+	formDescription4: string;
 	titleThanks: string;
 	formDescriptionThanks: string;
 }
@@ -89,11 +93,15 @@ const ProductWaitlist = (props: any) => {
 			data.formId = props.vrt_cs_smsbumpid;
 			data.multiOption = true;
 			data.waitlistTitle = props.vrt_waitlist_form_title_cs;
-			data.waitlistTitle1 = props.vrt_waitlist_form_title_cs2;
-			data.waitlistTitle2 = props.vrt_waitlist_form_title_cs3;
+			data.waitlistTitle1 = props.vrt_waitlist_form_title_cs_2;
+			data.waitlistTitle2 = props.vrt_waitlist_form_title_cs_3;
+			data.waitlistTitle3 = props.vrt_waitlist_form_title_cs_4;
+			data.waitlistTitle4 = props.vrt_waitlist_form_title_cs_5;
 			data.formDescription = props.vrt_waitlist_form_description_cs;
 			data.formDescription1 = props.vrt_waitlist_form_description_cs_2;
 			data.formDescription2 = props.vrt_waitlist_form_description_cs_3;
+			data.formDescription3 = props.vrt_waitlist_form_description_cs_4;
+			data.formDescription4 = props.vrt_waitlist_form_description_cs_5;
 			data.titleThanks = props.vrt_waitlist_form_title_thanks_cs;
 			data.formDescriptionThanks = props.vrt_waitlist_form_desc_thanks_cs;
 		} else if (wlTans.includes(props.handle)) {
@@ -130,6 +138,34 @@ const ProductWaitlist = (props: any) => {
 
 		setData({...data});
 	}, []);
+
+	useEffect(() => {
+		if (props.selectedVariant) {
+			// default title & description is first message
+			data.waitlistTitle = props.vrt_waitlist_form_title_cs;
+			data.formDescription = props.vrt_waitlist_form_description_cs;
+
+			const variantId = parseInt(props.selectedVariant.id.replace('gid://shopify/ProductVariant/', ''), 10) || 0;
+			const variantIds2 = props.vrt_waitlist_form_varid_cs_2.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds3 = props.vrt_waitlist_form_varid_cs_3.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds4 = props.vrt_waitlist_form_varid_cs_4.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds5 = props.vrt_waitlist_form_varid_cs_5.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			if (variantIds2.includes(variantId)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
+				data.formDescription = props.vrt_waitlist_form_description_cs_2;
+			} else if (variantIds3.includes(variantId)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
+				data.formDescription = props.vrt_waitlist_form_description_cs_3;
+			} else if (variantIds4.includes(variantId)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
+				data.formDescription = props.vrt_waitlist_form_description_cs_4;
+			} else if (variantIds5.includes(variantId)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
+				data.formDescription = props.vrt_waitlist_form_description_cs_5;
+			}
+			setData({...data});
+		}
+	}, [props.selectedVariant]);
 
 	return (
 		<>
