@@ -95,12 +95,12 @@ const CartExtrass = (props:any) => {
 			<hr className="mt-2"/>
 			<div className='text-center font-size-sm border-top py-2 flex items-center justify-center px-2 flex-wrap'>
 				<span className='block w-full'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
-				<button className='afterpay-logo brand-afterpay type-badge black-on-mint'>
-					{/* <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/> */}
-					<AfterPayIcon className="w-[96px] bg-white"/>
-				</button>
-				<div className="afterpay-content relative">
-					{afterPayLoaded && <Info className="svg ml-hg cursor-pointer"/> }
+				<div className="afterpay-content relative flex items-center">
+					<button type="button" className='afterpay-logo brand-afterpay type-badge black-on-mint'>
+						{/* <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/> */}
+						<AfterPayIcon className="w-[96px] bg-white"/>
+					</button>
+					<Info className="svg ml-hg cursor-pointer"/>
 					<div id="cart-afterpay-line"></div>
 					<Script id="afterpay-script" src="https://js.afterpay.com/afterpay-1.x.js" onLoad={afterpayLoaded}/>
 				</div>
