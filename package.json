@@ -1,6 +1,6 @@
 {
   "name": "cocoandeve-react-styleguides",
-  "version": "0.1.321",
+  "version": "0.1.322",
   "private": true,
   "main": "src/index.js",
   "scripts": {
