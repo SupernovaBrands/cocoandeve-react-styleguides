@@ -24,6 +24,7 @@ const CartExtrass = (props:any) => {
 	const [showShoppay, setShowShoppay] = useState(false);
 	const [showKlarna, setShowKlarna] = useState(false);
 	const [klarnaIns, setKlarnaInst] = useState('');
+	const [afterPayLoaded, setAfterPayLoaded] = useState(false);
 
 	const afterpayLoaded = () => {
         const attributes2 = {
@@ -41,6 +42,7 @@ const CartExtrass = (props:any) => {
             targetSelector: '#cart-afterpay-line',
             attributes: attributes2,
         });
+		setAfterPayLoaded(true);
     }
 
 	useEffect(() => {
@@ -98,9 +100,9 @@ const CartExtrass = (props:any) => {
 					<AfterPayIcon className="w-[96px] bg-white"/>
 				</button>
 				<div className="afterpay-content relative">
-					<Info className="svg ml-hg cursor-pointer"/>
-					<Script id="afterpay-script" src="https://js.afterpay.com/afterpay-1.x.js" onLoad={afterpayLoaded}/>
+					{afterPayLoaded && <Info className="svg ml-hg cursor-pointer"/> }
 					<div id="cart-afterpay-line"></div>
+					<Script id="afterpay-script" src="https://js.afterpay.com/afterpay-1.x.js" onLoad={afterpayLoaded}/>
 				</div>
 			</div>
 			</>
