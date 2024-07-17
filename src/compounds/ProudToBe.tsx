@@ -85,12 +85,12 @@ const ProudToBe = (props:any) => {
                         <Carousel.Wrapper emblaApi={emblaMainApi}>
 	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
                                 {proudToBeArr.map((proud:any, index: number) =>{
-                                    if (!proud) {
-                                        return <></>;
+                                    if (proud) {
+                                        return <div key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
+                                        {iconsData[proud]}
+                                        </div>
                                     }
-                                    return <div key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
-                                    {iconsData[proud]}
-                                    </div>
+                                    return null;
                                 })}
                             </Carousel.Inner>
                         </Carousel.Wrapper>
