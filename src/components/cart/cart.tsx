@@ -81,7 +81,7 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (cartData) {
 			setCart({ ...cartData });
-			setCombineDiscount(true); //cartData.combineDiscount);
+			setCombineDiscount(cartData.combineDiscount);
 		}
 	}, [cartData, itemCount]);
 
