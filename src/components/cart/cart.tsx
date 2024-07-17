@@ -56,12 +56,12 @@ const Cart: React.FC<Props> = (props) => {
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
-		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}},
+		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true,
 	});
 
 	const [isLastStockKey, setLastStockKey] = useState('');
 
-	const [combineDiscount, setCombineDiscount] = useState(tSettings.cartCombineDiscount);
+	const [combineDiscount, setCombineDiscount] = useState(cart.combineDiscount);
 	const [isSwellDiscCode, setIsSwellDiscCode] = useState(false);
 
 	const [giftCardData, setGiftCardData] = useState({});
@@ -81,6 +81,7 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (cartData) {
 			setCart({ ...cartData });
+			setCombineDiscount(true); //cartData.combineDiscount);
 		}
 	}, [cartData, itemCount]);
 
@@ -301,17 +302,17 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
-										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
-										</>
-									)}
-
 									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
+										</>
+									)}
+
+									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
+										<>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
 
