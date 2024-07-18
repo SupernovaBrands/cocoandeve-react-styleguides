@@ -111,9 +111,15 @@ const AnnouncementBar = (props: any) => {
 			<div className="container text-center font-bold">
 					<Carousel.Wrapper emblaApi={emblaApi}>
 						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
-							<a href={url} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text}</a>
-							<a href={url2} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text2}</a>
-							<a href={url3} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text3}</a>
+							{text && (
+								<a href={url} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text}</a>
+							)}
+							{text2 && (
+								<a href={url2} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text2}</a>
+							)}
+							{text3 && (
+								<a href={url3} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text3}</a>
+							)}
 						</Carousel.Inner>
 					</Carousel.Wrapper>
 			</div>

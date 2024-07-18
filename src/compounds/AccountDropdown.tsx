@@ -6,10 +6,11 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty } = props;
+    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty, store } = props;
 
+    const defaultCheckedNewsOptIn = !!onModal === true ? !!onModal : !['uk', 'eu'].includes(store);
     const [regInit, setRegInit] = useState(true);
-    const [newsOptIn, setNewsOptIn] = useState(!!onModal);
+    const [newsOptIn, setNewsOptIn] = useState(defaultCheckedNewsOptIn);
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
 	const [allowSubmit, setAllowSubmit] = useState(false);
@@ -205,7 +206,7 @@ const AccountDropdown = (props:any) => {
                                 </div>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm mb-1 items-start">
-                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" checked={newsOptIn} value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" />
+                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" checked={newsOptIn} value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" defaultChecked={!['uk', 'eu'].includes(store)} />
                                 <label htmlFor="offers" className={`custom-control-label ${!onModal ? 'lg:pl-1' : ''}`}>Keep me up to date on news and exclusive offers</label>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">
