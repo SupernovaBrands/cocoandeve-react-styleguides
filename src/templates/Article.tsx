@@ -81,7 +81,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_mobile.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -202,8 +202,8 @@ const Article = (props) => {
     useEffect(() => {
         const manipulateShops = () => {
             const articleShops = document.querySelectorAll('.blog-post-grid__shop-articles');
-            const articleContent = document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)').length > 1 
-            ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)') 
+            const articleContent = document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)').length > 1
+            ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)')
             : document.querySelectorAll('.article__content h3');
             if (articleShops && articleContent.length) {
                 let targetAppend = parseInt((articleContent.length / 2).toString(), 10);
@@ -217,24 +217,24 @@ const Article = (props) => {
                         articleShop.querySelectorAll('.product-card-btn:not([data-waitlist]) .product-card-btn__text').forEach(el => {
                             if (el) setLabel('Add')
                         });
-                
+
                         articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__text').forEach(el => {
                             if (el) el.textContent = 'Waitlist';
                         });
-                
+
                         articleShop.querySelectorAll('.product-card-btn[data-waitlist] .product-card-btn__prices .text-linethrough').forEach(el => {
                             if (el && el.parentNode) {
                                 el.parentNode.removeChild(el);
                             }
                         });
-                
+
                         articleShop.querySelectorAll('.swatch-overlay > div:first-child').forEach(el => {
                             if (el) {
                                 el.classList.remove('lg:px-1');
                                 el.classList.add('lg:px-0');
                             }
                         });
-                
+
                         articleShop.querySelectorAll('.product-card__title').forEach(el => {
                             if (el) {
                                 el.classList.replace('text-base', 'text-sm');
@@ -243,18 +243,18 @@ const Article = (props) => {
                                 el.classList.add('hover:[text-decoration-line:underline!important]');
                             }
                         });
-                
+
                         articleShop.querySelectorAll('.review-stars__number').forEach(el => {
                             if (el) el.classList.add('text-sm');
                         });
-                
+
                         articleShop.querySelectorAll('.product-card-btn').forEach(el => {
                             if (el) {
                                 el.classList.replace('md:text-base', 'text-sm');
                                 el.classList.remove('lg:border-0');
                             }
                         });
-                
+
                         articleShop.querySelectorAll('.product-title__text').forEach(el => {
                             if (el) {
                                 el.classList.remove('min-h-[2.5em]');
@@ -277,7 +277,7 @@ const Article = (props) => {
             const pageHeight = document.body.offsetHeight;
             const windowWidth = window.innerWidth;
             const scrollTop = window.scrollY;
-            
+
             if (windowWidth >= 768 && pageHeight > 3600) {
                 if (scrollTop > 500) {
                     setShowButton(true);
@@ -294,7 +294,7 @@ const Article = (props) => {
                 setShowButton(false);
             }
         };
-    
+
         window.addEventListener('scroll', handleScroll);
         return () => {
           window.removeEventListener('scroll', handleScroll);
