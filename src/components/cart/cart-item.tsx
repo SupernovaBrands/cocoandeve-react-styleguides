@@ -79,7 +79,7 @@ export const CartItem = (props:CartItemProps) => {
 		if (swatches.length >= 2) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
-		return capitalizeString(item.merchandise.title.split('/')[0].replace('1x ', ''));
+		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
 	}
 
 	const extractId = (id:string) => {
