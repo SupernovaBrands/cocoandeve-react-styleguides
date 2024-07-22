@@ -24,7 +24,7 @@ const AnnouncementBar = (props: any) => {
 		textColor,
 	} = props;
 
-	const noticeTImesLabels = timerData.times_labels ? timerData.times_labels.split(':') : [];
+	const noticeTImesLabels = timerData && timerData.times_labels ? timerData.times_labels.split(':') : [];
 	const countDownDay = noticeTImesLabels[0]?.split(',')[0];
 	const countDownDays = noticeTImesLabels[0]?.split(',')[1];
 	const countDownHr = noticeTImesLabels[1]?.split(',')[0];
@@ -106,7 +106,7 @@ const AnnouncementBar = (props: any) => {
 	};
 
 	useEffect(() => {
-		if (timerData.notice_bar && isShowOnCurrentTemplate()) {
+		if (timerData && timerData.notice_bar && isShowOnCurrentTemplate()) {
 			const startAt = getUtcTime(timerData.notice_start_at);
 			const endAt = getUtcTime(timerData.notice_end_at);
 			const now = nowUtcTime();
@@ -121,7 +121,7 @@ const AnnouncementBar = (props: any) => {
 
 	return (
 		<>
-			{timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
+			{timerData && timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
 				<div className={`${scrolled ? 'hidden' : ''} px-[0] py-[0.59375em] announcement-bar announcement-bar__timer w-full ${timerData.notice_bar_timer_background ? timerData.notice_bar_timer_background : 'bg-primary-light'}`}>
 					<a href={`${timerData.notice_bar_timer_link ? timerData.notice_bar_timer_link : '#'}`} className="no-underline hover:no-underline">
 						<div className={`${timerData.notice_bar_timer_text_color ? timerData.notice_bar_timer_text_color : 'text-dark'} container text-center flex items-center justify-between lg:justify-center`}>
