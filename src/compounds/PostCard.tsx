@@ -29,11 +29,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						</picture>
 					</a>
 				)}
-				{/* <a href={data.handle ?? '#'} className=""> */}
-				<ConditionWrapper
-					condition={props.carousel}
-					wrapper={(children: any) => <a href={data.handle ?? '#'} className="hover:no-underline post-card__figcaption group">{children}</a>}
-				>
+				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow">
 					<figcaption className={`${template === 'blog' || template === 'pdp' ? 'p-2' : 'flex-grow'} flex flex-col ${textClass}`}>
 						<div className={`${template === 'article' ? 'post-card__tags px-3 mb-2 hidden' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
 							{data.tags.length > 0 && (
@@ -60,8 +56,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						)}
 						{/* content */}
 					</figcaption>
-				</ConditionWrapper>
-				{/* </a> */}
+				</a>
 			</figure>
 		</article>
 	)

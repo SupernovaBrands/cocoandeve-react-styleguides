@@ -164,7 +164,7 @@ const Blog = (props) => {
 									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
-												<PostCard carousel={true} key={index} pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+												<PostCard carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
 											))}
 										</Carousel.Inner>
 										<Carousel.Navigation>
