@@ -175,7 +175,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	return (
 		<>
-		<Modal className="modal-lg bg-white max-w-[26.875em] h-100" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-100">
+		<Modal className="modal-lg bg-white max-w-[26.875em] h-100" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
 				<div className="modal-content mh-100 border-0 rounded-0 flex flex-col h-full overflow-hidden">
 					<div className="cart-drawer modal-body mobile-wrapper pt-0 px-0 relative overflow-y-auto overflow-x-hidden h-full">
 						<div className="container flex flex-col align-stretch text-center pt-2 px-g lg:px-3">
