@@ -12,16 +12,13 @@ const options: EmblaOptionsType = {
 
 const AnnouncementBar = (props: any) => {
 	const {
-		text,
 		scrolled,
+		text,
 		text2,
 		text3,
 		url,
 		url2,
 		url3,
-		newVisitorEnabled,
-		newVisitorText,
-		newVisitorUrl,
 		timerData,
 		background,
 		textColor,
@@ -40,7 +37,6 @@ const AnnouncementBar = (props: any) => {
 		AutoHeight()
 	]);
 
-	// const [mainText, setText] = useState(text);
 	const [showTimer, setShowTimer] = useState(false);
 	const [timerDay, setTimerDay] = useState('');
 	const [timerHrs, setTimerHrs] = useState('');
