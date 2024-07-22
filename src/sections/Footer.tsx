@@ -139,7 +139,7 @@ const Footer = (props: any) => {
                             </div>
                             <div className='d-block'>
                                 <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency</h5>
-                                <DropdownStore direction='dropup' />
+                                <DropdownStore direction='dropup' store={store} />
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty } = props;
+    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty, scrolled, annBarEnabled } = props;
 
     const [regInit, setRegInit] = useState(true);
     const [newsOptIn, setNewsOptIn] = useState(!!onModal);
@@ -141,7 +141,7 @@ const AccountDropdown = (props:any) => {
     }, [tosAgree]);
 
     return (
-        <div id="account-dropdown" className={`w-full top-[6em] lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`dropdown-menu w-full ${scrolled || !annBarEnabled ? 'top-[3.53125em]' : 'top-[6em]'} lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>

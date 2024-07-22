@@ -4,7 +4,7 @@ import Homepage from '~/templates/Homepage';
 import { useState } from 'react';
 // import Header from '~/sections/Header';
 import Footer from '~/sections/Footer';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 
 // import dynamic from 'next/dynamic';
 const Header = dynamic(() => import('~/sections/Header'), {
@@ -22,6 +22,7 @@ const HomepageTemplate = () => {
 		<>
 			<Header toggleCart={toggleCart}
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

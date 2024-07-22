@@ -8,7 +8,7 @@ import RealResultCarousel from "~/sections/RealResultCarousel";
 import PdpBannerTanDifferent from '~/sections/pdp-banner-tan-different';
 import YotpoReviews from '~/components/yotpo-review-widget';
 import Footer from '~/sections/Footer';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
 });
@@ -59,8 +59,9 @@ const ProductTemplate = () => {
 	];
     return (
 		<>
-        	<Header 
+        	<Header
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

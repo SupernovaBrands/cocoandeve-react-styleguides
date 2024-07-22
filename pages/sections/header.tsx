@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 // import Header from '~/sections/Header';
 import dynamic from 'next/dynamic';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, searchBox } from '~/modules/placeholders';
+import { timerBar, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, searchBox } from '~/modules/placeholders';
 const Header = dynamic(() => import('~/sections/Header'), {
 	ssr: false,
 });
@@ -10,6 +10,7 @@ const HeaderSection = () => {
 		<>
 			<Header
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

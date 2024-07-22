@@ -3,36 +3,44 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import AutoHeight from 'embla-carousel-auto-height'
+import { useEffect, useState } from 'react';
+import parse from 'html-react-parser';
 
 const options: EmblaOptionsType = {
 	loop: true,
 };
 
 const AnnouncementBar = (props: any) => {
-	// console.log('annbar', props);
 	const {
 		text,
-		url,
+		scrolled,
 		text2,
-		url2,
 		text3,
+		url,
+		url2,
 		url3,
-		timerEnabled,
-		countDownStart,
-		countDownEnd,
-		countDownDays,
-		countDownDay,
-		countDownHrs,
-		countDownHr,
-		countDownMin,
-		countDownSec
+		newVisitorEnabled,
+		newVisitorText,
+		newVisitorUrl,
+		timerData,
+		background,
+		textColor,
 	} = props;
+
+	const noticeTImesLabels = timerData.times_labels ? timerData.times_labels.split(':') : [];
+	const countDownDay = noticeTImesLabels[0]?.split(',')[0];
+	const countDownDays = noticeTImesLabels[0]?.split(',')[1];
+	const countDownHr = noticeTImesLabels[1]?.split(',')[0];
+	const countDownHrs = noticeTImesLabels[1]?.split(',')[1];
+	const countDownMin = noticeTImesLabels[2]?.split(',')[0];
+	const countDownSec = noticeTImesLabels[3]?.split(',')[0];
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 3000, stopOnInteraction: false }),
 		AutoHeight()
 	]);
-	/*
+
+	// const [mainText, setText] = useState(text);
 	const [showTimer, setShowTimer] = useState(false);
 	const [timerDay, setTimerDay] = useState('');
 	const [timerHrs, setTimerHrs] = useState('');
@@ -52,7 +60,7 @@ const AnnouncementBar = (props: any) => {
 	};
 
 	const startCount = (endAt) => {
-		const end = new Date(endAt);
+		const end:any = new Date(endAt);
 		const second = 1000;
 		const minute = second * 60;
 		const hour = minute * 60;
@@ -60,7 +68,7 @@ const AnnouncementBar = (props: any) => {
 		let timer;
 
 		const showRemaining = () => {
-			const now = new Date();
+			const now: any = new Date();
 
 			const distance = end - now;
 			if (distance < 0) {
@@ -73,16 +81,14 @@ const AnnouncementBar = (props: any) => {
 			const minutes = Math.floor((distance % hour) / minute);
 			const seconds = Math.floor((distance % minute) / second);
 
-			let timerText = '';
-
 			if (days > 0) {
-				setTimerDay(`${days} <span>${days > 1 ? countDownDays : countDownDay}</span>`);
+				setTimerDay(`\u00a0${days}\u00a0\u00a0<span>${days > 1 ? countDownDays : countDownDay}\u00a0</span>`);
 			} else {
-				setTimerDay(-1);
+				setTimerDay('');
 			}
-			setTimerHrs(`${String(hours).padStart(2, '0')} <span>${hours > 1 ? countDownHrs : countDownHr}</span>`);
-			setTimerMin(`${String(minutes).padStart(2, '0')} <span>${countDownMin}</span>`);
-			setTimerSec(`${String(seconds).padStart(2, '0')} <span>${countDownSec}</span>`);
+			setTimerHrs(`\u00a0${String(hours).padStart(2, '0')}\u00a0\u00a0<span>${hours > 1 ? countDownHrs : countDownHr}\u00a0</span>`);
+			setTimerMin(`\u00a0${String(minutes).padStart(2, '0')}\u00a0\u00a0<span>${countDownMin}\u00a0</span>`);
+			setTimerSec(`\u00a0${String(seconds).padStart(2, '0')}\u00a0\u00a0<span>${countDownSec}\u00a0</span>`);
 		};
 
 		timer = setInterval(showRemaining, 1000);
@@ -97,27 +103,64 @@ const AnnouncementBar = (props: any) => {
 		}
 	};
 
+	const isShowOnCurrentTemplate = () => {
+		const listPage = (timerData && timerData.notice_bar_timer_certains_page) ? timerData.notice_bar_timer_certains_page.toString().split(',') : [];
+		if (listPage.length === 0) return true;
+		return listPage.includes(window.location.pathname);
+	};
+
 	useEffect(() => {
-		const startAt = getUtcTime(countDownStart);
-		const endAt = getUtcTime(countDownEnd);
-		const now = nowUtcTime();
-		starTimer(now, startAt, endAt);
-		setText(text);
+		if (timerData.notice_bar && isShowOnCurrentTemplate()) {
+			const startAt = getUtcTime(timerData.notice_start_at);
+			const endAt = getUtcTime(timerData.notice_end_at);
+			const now = nowUtcTime();
+			starTimer(now, startAt, endAt);
+		}
 	}, []);
-	*/
+
+	useEffect(() => {
+		if (showTimer) document.body.classList.add('timer-bar--show');
+		else document.body.classList.remove('timer-bar--show');
+	}, [showTimer]);
 
 	return (
-		<div className={`announcement-bar  bg-primary-light w-100 px-[0] py-[0.59375em]`}>
-			<div className="container text-center font-bold">
-					<Carousel.Wrapper emblaApi={emblaApi}>
-						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
-							<a href={url} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text}</a>
-							<a href={url2} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text2}</a>
-							<a href={url3} className='text-secondary hover:text-secondary w-full basis-full flex-grow-0 flex-shrink-0'>{text3}</a>
-						</Carousel.Inner>
-					</Carousel.Wrapper>
-			</div>
-		</div>
+		<>
+			{timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
+				<div className={`${scrolled ? 'hidden' : ''} px-[0] py-[0.59375em] announcement-bar announcement-bar__timer w-full ${timerData.notice_bar_timer_background ? timerData.notice_bar_timer_background : 'bg-primary-light'}`}>
+					<a href={`${timerData.notice_bar_timer_link ? timerData.notice_bar_timer_link : '#'}`} className="no-underline hover:no-underline">
+						<div className={`${timerData.notice_bar_timer_text_color ? timerData.notice_bar_timer_text_color : 'text-dark'} container text-center flex items-center justify-between lg:justify-center`}>
+							<span className="announcement-bar__timer__title block max-w-[45%] lg:max-w-none lg:inline mb-0 font-normal text-left font-size-sm font-size-dt-lg mr-0 lg:mr-4">{timerData.notice_text}</span>
+							<ul className={`announcement-bar__timer__countdown mb-0 font-bold ml-1 lg:ml-0 ${timerSec === '' ? 'hidden' : 'inline'}`}>
+								{timerDay !== '' && timerDay !== '-1' && (
+									<li id="timerDays" className={`list-inline-item inline-block relative mr-1 h2 mb-0 !font-normal ${timerDay === '' ? 'hidden' : ''}`}>{parse(timerDay)}</li>
+								)}
+								<li id="timerHrs" className="list-inline-item inline-block relative mr-1 h2 mb-0 !font-normal">{parse(timerHrs)}</li>
+								<li id="timerMin" className="list-inline-item inline-block relative mr-1 h2 mb-0 !font-normal">{parse(timerMin)}</li>
+								<li id="timerSec" className="list-inline-item inline-block relative h2 mb-0 !font-normal">{parse(timerSec)}</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+			) : (
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${background || 'bg-primary-light'} w-full px-[0] py-[0.59375em]`}>
+					<div className="container text-center font-bold">
+							<Carousel.Wrapper emblaApi={emblaApi}>
+								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
+									{text && (
+										<a href={url} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
+									)}
+									{text2 && (
+										<a href={url2} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
+									)}
+									{text3 && (
+										<a href={url3} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
+									)}
+								</Carousel.Inner>
+							</Carousel.Wrapper>
+					</div>
+				</div>
+			)}
+		</>
 	);
 }
 

@@ -3,7 +3,7 @@ import Footer from '~/sections/Footer';
 import Collection from '~/templates/Collection';
 import Service from "~/sections/Service";
 import { useEffect, useState } from 'react';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 
 const Header = dynamic(() => import('~/sections/Header'), {
     ssr: false,
@@ -252,6 +252,7 @@ const CollectionTemplate = () => {
 		<>
         	<Header
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

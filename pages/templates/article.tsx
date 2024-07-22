@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // import Header from '~/sections/Header';
 import Article from '~/templates/Article';
 import Footer from '~/sections/Footer';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { timerBar, annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 // import Cart from "~/components/cart/cart";
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
@@ -196,6 +196,7 @@ const ArticleTemplate = () => {
 		<>
 			<Header toggleCart={toggleCart}
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

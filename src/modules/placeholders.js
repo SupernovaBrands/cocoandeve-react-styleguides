@@ -13,6 +13,18 @@ export const annBar = {
     "textNewVisitor": "",
     "newVisitorEnabled": false
 }
+export const timerBar = {
+    "notice_bar": false,
+    "notice_text": "$5 FRENZY SALE ENDS IN",
+    "times_labels": "Day,Days:Hour,Hours:Minutes:Seconds",
+    "notice_end_at": "2024-03-05T12:00:00.000Z",
+    "notice_start_at": "2023-10-11T00:00:00.000Z",
+    "notice_bar_timer_link": "/collections/all",
+    "notice_bar_timer_background": "",
+    "notice_bar_timer_text_color": "",
+    "notice_bar_timer_certains_page": ""
+};
+
 export const mainMenu = [
     {
         "rows": [],

@@ -4,7 +4,7 @@ import RealResults from '~/templates/RealResults';
 import { useState } from 'react';
 import Header from '~/sections/Header';
 import Footer from '~/sections/Footer';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
@@ -17,8 +17,9 @@ const RealResultsTemplate = () => {
 	}
     return (
 		<>
-			<Header toggleCart={toggleCart} 
+			<Header toggleCart={toggleCart}
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

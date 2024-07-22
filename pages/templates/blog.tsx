@@ -4,7 +4,7 @@ import Footer from "~/sections/Footer";
 import Blog from "~/templates/Blog";
 // import Cart from "~/components/cart/cart";
 import { useEffect, useState } from 'react';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
@@ -249,6 +249,7 @@ const BlogTemplate = () => {
 		<>
 			<Header toggleCart={toggleCart}
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

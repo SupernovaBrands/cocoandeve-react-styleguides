@@ -6,7 +6,7 @@ import Instagram from '~/sections/Instagram';
 import Service from '~/sections/Service';
 // import Cart from "~/components/cart/cart";
 import { useEffect, useState } from 'react';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 const Cart = dynamic(() => import('~/components/cart/cart'), {
     ssr: false,
 });
@@ -699,6 +699,7 @@ const stockistTemplate = () => {
 		<>
         	<Header toggleCart={toggleCart}
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

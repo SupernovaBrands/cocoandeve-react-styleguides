@@ -14,7 +14,7 @@ import Tooltip from '~/components/Tooltip';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
-	const { swellLoyalty, searchBox, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
+	const { swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister } = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -170,23 +170,17 @@ const Header = (props: any) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md' : 'relative'}`} ref={accountRef}>
-				{annBar?.enabled && !scrolled && (
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
+				{annBar?.enabled && (
 					<AnnouncementBar
+						scrolled={scrolled}
 						text={annBar.text}
 						url={annBar.url}
 						text2={annBar.text2}
 						url2={annBar.url2}
 						text3={annBar.text3}
 						url3={annBar.url3}
-						countDownStart=""
-						countDownEnd=""
-						countDownDays=""
-						countDownDay=""
-						countDownHrs=""
-						countDownHr=""
-						countDownMin=""
-						countDownSec=""
+						timerData={timerBar}
 					/>
 				)}
 
@@ -254,7 +248,7 @@ const Header = (props: any) => {
 									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
-									<AccountDropdown swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+									<AccountDropdown annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
 								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">

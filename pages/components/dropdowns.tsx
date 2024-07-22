@@ -5,7 +5,7 @@ const Dropdowns = (props: any) => {
 		<div className="container mt-4">
 			<h1 className="mb-1">Dropdown</h1>
 			<div className="w-1/2">
-            	<DropdownStore direction='dropdown' labelClass="text-primary" />
+            	<DropdownStore store="us" direction='dropdown' labelClass="text-primary" />
 			</div>
 		</div>
 	);

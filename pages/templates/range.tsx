@@ -5,7 +5,7 @@ import Footer from '~/sections/Footer';
 import RangeBanner from '~/sections/RangeBanner';
 import RangeIntro from '~/sections/RangeIntro';
 import RangeProducts from '~/sections/RangeProducts';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 
 
 const RealResultsTemplate = () => {
@@ -153,6 +153,7 @@ const RealResultsTemplate = () => {
 		<>
 			<Header
                 annBar={annBar}
+                timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}

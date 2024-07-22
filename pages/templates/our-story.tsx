@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import Footer from "~/sections/Footer";
 import OurStoryTemplate from '~/templates/OurStory';
-import { annBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
+import { annBar, timerBar, megaMenu, mainMenu, menuBannerCode, menuBannerQuiz, shopMenu, aboutMenu, helpMenu } from '~/modules/placeholders';
 import { useEffect, useState } from 'react';
 // import Header from "~/sections/Header";
 // import OurStoryTemplate from "~/sections/OurStory";
@@ -122,6 +122,7 @@ const OurStory = () => {
 		<>
 			<Header
 				annBar={annBar}
+				timerBar={timerBar}
 				mainMenu={mainMenu}
 				megaMenu={megaMenu}
 				menuBannerQuiz={menuBannerQuiz}
