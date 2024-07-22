@@ -6,7 +6,7 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty, scrolled, annBarEnabled } = props;
+    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty, scrolled, annBarEnabled, timerData } = props;
 
     const [regInit, setRegInit] = useState(true);
     const [newsOptIn, setNewsOptIn] = useState(!!onModal);
@@ -141,15 +141,17 @@ const AccountDropdown = (props:any) => {
     }, [tosAgree]);
 
     return (
-        <div id="account-dropdown" className={`dropdown-menu w-full ${scrolled || !annBarEnabled ? 'top-[3.53125em]' : 'top-[6em]'} lg:top-[3em] right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`dropdown-menu w-full ${scrolled || !annBarEnabled ? 'top-[3.53125em]' : 'top-[6em]'} ${timerData && timerData.notice_bar ? 'lg:top-[3.5em]' : 'lg:top-[3em]'} right-0 left-auto border-0 rounded-0 pb-0 -mt-[1px] lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
-                            <p className="font-bold text-center px-2 mb-2">Earn and redeem points from purchases</p>
+                            <p className="font-bold text-center px-2 mb-2">
+                                {swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
+                                    'Earn and redeem points from purchases'
+                                )}
+                            </p>
                             <SocialLogin idSuffix={'loginDropdown'} />
-                            {swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
-                                <p className="text-center auth-buttons mb-g">or login with email</p>
-                            )}
+                            <p className="text-center auth-buttons mb-g">or login with email</p>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
                                 <input ref={loginEmailRef} onChange={handleLoginChange} type="email" className={`block h-[50px] font-size-sm appearance-none w-full py-1 px-2 ${!validLoginEmail ? 'mb-0' : 'mb-1'} text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none`} id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
