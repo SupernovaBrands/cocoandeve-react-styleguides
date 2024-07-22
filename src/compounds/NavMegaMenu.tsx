@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
-    const { handle, listIds, dummy } = props;
+    const { handle, listIds, dummy, store } = props;
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    let handleUrl = handle;
 
     useEffect(() => {
         if (dummy) {
@@ -17,14 +19,17 @@ const NavMegaMenu = (props: any) => {
             {/* @ts-ignore */}
             setProducts(selected);
         }
-        if (handle) {
-            fetch(`/api/collectionProducts?handle=${handle}`).then(
+        if (handleUrl) {
+            if (store === 'ca' && handleUrl === 'tan-and-spf') {
+                handleUrl = 'tan'
+            }
+            fetch(`/api/collectionProducts?handle=${handleUrl}`).then(
                 res => {
                     try {
                         res?.json().then(data => {
                             const plist = data?.products;
                             let selected = [];
-                            if (handle === 'skin' || handle === 'skincare') {
+                            if (handleUrl === 'skin' || handleUrl === 'skincare') {
                                 [
                                     { handle: 'double-cleanser-set', title: 'Double Cleanser Set' },
                                     { handle: 'antioxidant-glow-cream', title: 'Antioxidant Glow Cream' },
