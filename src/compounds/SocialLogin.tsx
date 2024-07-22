@@ -1,6 +1,6 @@
 const SocialLogin = (props: any) => {
-	const googleLogin = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/userinfo.profile%20https%3A//www.googleapis.com/auth/userinfo.email&access_type=offline&include_granted_scopes=true&response_type=code&state=dev&redirect_uri=${process.env.GOOGLE_REDIRECT_PATH || process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH}&client_id=449650008430-lrrbgmjrlsjfac2vq2bc02h66idqjjtu.apps.googleusercontent.com`;
-	const facebookLogin = `https://www.facebook.com/dialog/oauth?client_id=245452109181281&redirect_uri=${process.env.FACEBOOK_REDIRECT_PATH || process.env.NEXT_PUBLIC_FACEBOOK_REDIRECT_PATH}&scope=email&ret=login&state=cocoandeve_shopify_dev`
+	const googleLogin = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/userinfo.profile%20https%3A//www.googleapis.com/auth/userinfo.email&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=${process.env.GOOGLE_REDIRECT_PATH || process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH}&client_id=449650008430-lrrbgmjrlsjfac2vq2bc02h66idqjjtu.apps.googleusercontent.com`;
+	const facebookLogin = `https://www.facebook.com/dialog/oauth?client_id=245452109181281&redirect_uri=${process.env.FACEBOOK_REDIRECT_PATH || process.env.NEXT_PUBLIC_FACEBOOK_REDIRECT_PATH}&scope=email&ret=login`
 	return (
 		<div className="auth-buttons CustomerLoginForm">
 			<a className="btn btn-outline-dark mb-2 text-gray-600 bg-white btn-block flex items-center justify-center hover:no-underline hover:text-body" href={facebookLogin}>
