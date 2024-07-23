@@ -77,19 +77,21 @@ const MobileMenu = (props: any) => {
 							{menu.rows && menu.rows.length > 0 && (
 								<ul key={`subsubmenu ${menu.title}`} className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
-										<label onClick={() => {
+										<label className="mb-[.5rem]" onClick={() => {
 											const newStates = {...defMenuState};
 											newStates[i] = false;
 											setMenuStates(newStates);
 										}}>
 											<ChevronPrev className="h-[1em]" />
 										</label>
-										<Link href="/" className="text-body mx-auto py-1" aria-label="CocoAndEve Logo">
+										<Link href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
 										</Link>
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
-									<li key="menuTitle" className="border-b p-0"><h4 className="px-g pb-1 pt-2 mb-1">{menu.title}</h4></li>
+									<li key="menuTitle" className="border-b p-0">
+										<a href={menu.url} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
+									</li>
 									{menu.rows?.map((row, index) => {
 										let title = row.title;
 										if (title.toLowerCase().includes('accessories')) title = 'Accessories';
@@ -102,7 +104,7 @@ const MobileMenu = (props: any) => {
 											</li>
 										);
 									})}
-									<li key="shopall" className="p-0">
+									<li key="shopall" className="py-[.3125em] px-0">
 										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
 											<strong>
 												{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}

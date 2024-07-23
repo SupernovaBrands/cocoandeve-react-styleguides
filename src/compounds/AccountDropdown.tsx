@@ -63,6 +63,10 @@ const AccountDropdown = (props:any) => {
                     }
                     window.location.href = '/account';
                 }, 250);
+            } else {
+                setTimeout(() => {
+                    window.location.href = '/account/register#taken';
+                }, 250);
             }
         } else {
             passFocus();

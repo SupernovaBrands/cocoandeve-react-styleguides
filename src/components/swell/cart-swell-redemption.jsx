@@ -30,7 +30,7 @@ const CartSwellRedemption = (props) => {
 	const [redeemProductsDetail, setRedeemProductsDetail] = useState([]);
 	const swellRef = useRef(null);
 	const [userPts, setUserPts] = useState(0);
-	const { cartData } = props;
+	const { cartData, store } = props;
 	const [isError, setIsError] = useState(false);
 	const [swellLoading, setSwellLoading] = useState(false);
 	const SCROLL_ITEM = 151;
@@ -58,9 +58,9 @@ const CartSwellRedemption = (props) => {
 	useEffect(() => {
 		const getItemRedemptions = async () => {
 			try {
-				const redeemOptions = await getRedemptionOptions();
+				const redeemOptions = await getRedemptionOptions(store);
 				setRedeemProducts(redeemOptions);
-				const productDetails = await getRedemptionProducts();
+				const productDetails = await getRedemptionProducts(store);
 				setRedeemProductsDetail(productDetails);
 				setInit(true);
 				if (customerEmail) {
@@ -160,6 +160,7 @@ const CartSwellRedemption = (props) => {
 
 CartSwellRedemption.propTypes = {
 	cartData: PropTypes.object.isRequired,
+	store: PropTypes.string.isRequired,
 };
 
 export default CartSwellRedemption;
