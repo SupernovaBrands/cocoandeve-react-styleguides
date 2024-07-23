@@ -91,7 +91,7 @@ const ProductCardUpsell = (props:any) => {
                             <img className="object-cover absolute w-[107.5%] h-[107.5%] -left-[1px] lg:left-0 lg:w-[108%] lg:h-[108%] -top-[3.8%] bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />
                         </a>
                     </picture>
-                    <div className="product-card__content pb-2 relative grow flex flex-col px-[0.3125em] lg:px-2 lg:px-3 bg-pink-light items-center h-full min-h-[18.75em] lg:min-h-0">
+                    <div className="product-card__content pb-2 relative grow flex flex-col px-[10px] lg:px-2 lg:px-3 bg-pink-light items-center h-full min-h-[18.75em] lg:min-h-0">
                         <p className="product-card__title font-bold text-center text-black h4 w-full min-h-[2.5em] mb-1">
                             <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black font-bold lg:text-lg">{props.item.title}</a>
                         </p>
