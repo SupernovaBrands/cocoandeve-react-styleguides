@@ -478,8 +478,13 @@ export const submitsToSmsBump = (phone, formId, countryLetterCode = false, count
 };
 
 export const scrollToElement = (targetSelector, offset = -70) => {
-	if ($(targetSelector).length > 0) {
-		$('html, body').animate({ scrollTop: $(targetSelector).offset().top + offset }, 600);
+	const targetElement = document.querySelector(targetSelector);
+	if (targetElement) {
+		const topPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset;
+		window.scrollTo({
+			top: topPosition,
+			behavior: 'smooth'
+		});
 	}
 };
 

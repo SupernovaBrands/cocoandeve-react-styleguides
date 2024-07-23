@@ -213,7 +213,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color}`}>{data.sweepstakes_popup_thank_desc}</p>
 										</div>
 									</div>
-									<a href={data.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary block w-full border-primary">{data.sweepstakes_popup_thank_shopnow}</a>
+									<a href={data.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary block w-full border-primary hover:border-primary hover:text-white !no-underline">{data.sweepstakes_popup_thank_shopnow}</a>
 								</div>
 							</div>
 						</div>
