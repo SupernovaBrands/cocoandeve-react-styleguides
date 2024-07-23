@@ -129,11 +129,6 @@ const Collection = (props: any) => {
 
     const [collProducts, setCollProducts] = useState(products);
 
-    // let collectionTitle = currentCollection.title.replace('d-lg-none', 'lg:hidden');
-    // if (handle !== 'all') {
-    //     collectionTitle = collectionTitle.replace (/^/,'Shop ');
-    // }
-
     const showLoading = (e: any) => {
         if (e.target.closest('.collection__sidebar')) {
             const sidebarLinks = sidebarRef.current.querySelectorAll('li a');
@@ -205,10 +200,8 @@ const Collection = (props: any) => {
                 }
             }
         });
-        // console.log('productUnavailable', productUnavailable);
         if (itemsWL.length > 0 && sort === 'best-selling') {
             const index = productUnavailable.length > 5 ? 5 : 3;
-            // console.log('iundex', index);
             productUnavailable.splice(index, 0, ...itemsWL);
         }
 
@@ -259,7 +252,6 @@ const Collection = (props: any) => {
     };
 
     useEffect(() => {
-        // console.log('currentCollection', currentCollection);
         setShowQuizCard(handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
         setLoading(false);
     }, [currentCollection]);
@@ -300,7 +292,6 @@ const Collection = (props: any) => {
     useEffect(() => {
         if (launchWLModal.open) {
             document.body.classList.add('!overflow-hidden');
-            // if (window) setHeight(window.innerHeight);
         } else {
             document.body.classList.remove('!overflow-hidden');
         }
@@ -376,7 +367,6 @@ const Collection = (props: any) => {
                     </div>
 
                     <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
-                        {/* <Terms handleClose={() => handlOpenModal(false)} tcPopups={tcPopups} /> */}
                         <TermCondition content={tcPopups} handleClose={() => handlOpenModal(false)} />
                     </Modal>
                 </>
@@ -395,7 +385,6 @@ const Collection = (props: any) => {
                                     return (
                                     <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <a
-                                            // onClick={showLoading}
                                             className={`hover:no-underline hover:text-primary
                                                 ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
                                             href={`/collections/${parent.handle}`}
@@ -472,10 +461,6 @@ const Collection = (props: any) => {
                                 </div>
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
-                                if (!item.src) {
-                                    item.src = item.featuredImage?.url.replace('.jpg', '_320x320_crop_center.jpg');
-                                    item.srcSet = item.featuredImage?.url.replace('.jpg', '_540x540_crop_center.jpg');
-                                }
                                 let isLaunchWL = false;
                                 if (launchWL && launchWL?.launch_wl_handles.split(',').map((v) => v.trim()).includes(item.handle)) {
                                     isLaunchWL = true;

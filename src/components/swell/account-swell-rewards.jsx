@@ -17,9 +17,10 @@ const AccountSwellProductCard = dynamic(() => import('~/components/swell/account
     ssr: false,
 });
 
-const AccountSwellRewards = () => {
+const AccountSwellRewards = (props) => {
 	const { errorMsg } = tSettings.cartRedemption;
 	const customerEmail = window.customerEmail;
+	const { store } = props;
 	const [init, setInit] = useState(false);
 	const [initPts, setInitPts] = useState(false);
 	const [initCart, setInitCart] = useState(false);
@@ -49,9 +50,9 @@ const AccountSwellRewards = () => {
 	useEffect(() => {
 		const getItemRedemptions = async () => {
 			try {
-				const redeemOptionsItem = await getRedemptionOptions();
+				const redeemOptionsItem = await getRedemptionOptions(store);
 				setRedeemProducts(redeemOptionsItem);
-				const productDetails = await getRedemptionProducts();
+				const productDetails = await getRedemptionProducts(store);
 				setRedeemProductsDetail(productDetails);
 				setInit(true);
 				const custBalance = await getCustomersBalance(customerEmail);

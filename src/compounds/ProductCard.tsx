@@ -109,7 +109,6 @@ const SwatchOverlay = (props:any) => {
     if (autoTicks && autoTicks.length > 0) {
         firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
     }
-    // if (product.handle === 'super-nourishing-coconut-fig-hair-masque') console.log('selectedVariant', firstAvailable);
     if (firstAvailable === null || !firstAvailable?.availableForSale) {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
@@ -218,7 +217,6 @@ const ProductCardTall = (props:any) => {
 
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
 
-    // if (isLaunchWL) console.log('isLaunchWL', product.handle, isLaunchWL);
     const trackLink = () => {
         if (carousel) {
             trackEvent('carousel_product', {
@@ -265,15 +263,13 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(defaultVariant || null);
     }, []);
 
-    // if (product.handle === 'double-cleanser-set') console.log('p', product);
-    // if (product.handle === 'sunny-honey-bali-bronzing-self-tan-set') console.log('p2', product);
-
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
-                <picture className="!pt-2 embed-responsive before:pt-[100%] block relative rounded-t">
+                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''}`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
+
                     {props.showTip && (
                         <>
                             <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
