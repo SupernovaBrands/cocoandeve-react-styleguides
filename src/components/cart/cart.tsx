@@ -263,7 +263,7 @@ const Cart: React.FC<Props> = (props) => {
 
 								{tSettings.cartRedemption.enabled && (
 									<>
-										<CartSwellRedemption cartData={cart} />
+										<CartSwellRedemption cartData={cart} store={store} />
 										<hr className="my-2"/>
 									</>
 								)}

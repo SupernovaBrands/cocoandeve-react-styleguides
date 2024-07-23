@@ -277,7 +277,7 @@ const Header = (props: any) => {
 					isLoggedIn={isLoggedIn}
 					swellLoyalty={swellLoyalty}
 				/>
-				<SearchBox openAccountBox={openAccountBox} dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
+				<SearchBox store={store} openAccountBox={openAccountBox} dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}

@@ -1,7 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import Loading from '~/images/icons/loading.svg';
 import Search from '~/images/icons/search-thin.svg';
@@ -50,7 +50,6 @@ const SearchBox = (props: any) => {
 		if (keyword !== '' ) {
 			setLoading(true);
 			const delayDebounceFn = setTimeout(() => {
-				// console.log('delayed keyword', keyword);
 				setResult();
 			}, 750);
 			return () => clearTimeout(delayDebounceFn);
@@ -134,7 +133,6 @@ const SearchBox = (props: any) => {
 						});
 						productFiltered.sort(tagsSort);
 						productFiltered.sort(handleSort);
-						// console.log('productFiltered', productFiltered);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
 
@@ -230,6 +228,11 @@ const SearchBox = (props: any) => {
 		onNextButtonClick: arrowClickNext8
 	} = usePrevNextButtons(emblaApi8);
 	const autoPlayClick8 = controlAutoplay(emblaApi8);
+
+	useEffect(() => {
+		if (props.openSearchBox) document.body.classList.add('!overflow-y-hidden');
+		else document.body.classList.remove('!overflow-y-hidden');
+	}, [props.openSearchBox]);
 
 	return (
 		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 ${props.openSearchBox ? 'block' : 'hidden'}`}>
