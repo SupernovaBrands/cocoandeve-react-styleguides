@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { getFeaturedImages, isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
+import { isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
 import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
@@ -93,7 +93,7 @@ const Collection = (props: any) => {
         squareBadge,
     } = props;
 
-    const [featuredImg, setFeaturedImg] = useState<any>([]);
+    // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
@@ -237,7 +237,7 @@ const Collection = (props: any) => {
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
             .then((data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p, generalSetting, squareBadge));
+                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -275,7 +275,7 @@ const Collection = (props: any) => {
                 fetch(`/api/collectionProducts/?sort=${defaultSort}&handle=${currentCollection.handle}`).then((r) => r.json())
                 .then((data) => {
                     const { products } = data;
-                    const mapped = products.map((p) => buildProductCardModel(store, featuredImg, p, generalSetting, squareBadge));
+                    const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
                     setCollProducts(mapped);
                     setLoading(false);
                 });
@@ -298,7 +298,7 @@ const Collection = (props: any) => {
     }, [launchWLModal]);
 
     useEffect(() => {
-        getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
+        // getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
         fetch(`/api/sevenDaysSalesIds`).then(
 			res => {
 				res?.json().then(data => {

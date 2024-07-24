@@ -90,7 +90,7 @@ const MobileMenu = (props: any) => {
 										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
 									</li>
 									<li key="menuTitle" className="border-b p-0">
-										<a href={menu.url} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
+										<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
 									</li>
 									{menu.rows?.map((row, index) => {
 										let title = row.title;
