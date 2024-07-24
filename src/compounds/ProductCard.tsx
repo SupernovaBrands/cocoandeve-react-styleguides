@@ -214,9 +214,7 @@ const ProductCardTall = (props:any) => {
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
-
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
-
     const trackLink = () => {
         if (carousel) {
             trackEvent('carousel_product', {
@@ -240,7 +238,8 @@ const ProductCardTall = (props:any) => {
 
     useEffect(() => {
         if (product && product.productType !== 'HERO') {
-            setSkus(product.variants.nodes.map((node:any) => node.sku));
+            const skus_ = product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set') && !node.title.includes('duo')).map((node:any) => node.sku);
+            setSkus(skus_);
         } else if (product && product.variants) {
             if (isKit(product.title)) {
                 setSkus(product.variants.nodes.map((node:any) => node.sku));

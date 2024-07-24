@@ -154,6 +154,7 @@ const ProductCarousel = (props: any) => {
 												addToCart={addToCart}
 												trackEvent={trackEvent}
 												preOrders={preOrders}
+												generalSetting={generalSetting}
 											/>
 										)
 									})}
@@ -195,6 +196,7 @@ const ProductCarousel = (props: any) => {
 												addToCart={addToCart}
 												trackEvent={trackEvent}
 												preOrders={preOrders}
+												generalSetting={generalSetting}
 											/>
 										)
 									})}
