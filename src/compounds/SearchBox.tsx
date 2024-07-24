@@ -6,7 +6,7 @@ import Close from '~/images/icons/close.svg';
 import Loading from '~/images/icons/loading.svg';
 import Search from '~/images/icons/search-thin.svg';
 import SearchProductCard from './SearchProductCard';
-import { getFeaturedImages } from '~/modules/utils';
+// import { getFeaturedImages } from '~/modules/utils';
 import PopularProducts from './SearchPopular';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import {
@@ -19,13 +19,13 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const SearchBox = (props: any) => {
-	const { content, dummy, trackEvent, openAccountBox } = props;
+	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta } = props;
 	const [keyword, setKeyword] = useState('');
 	const [keywords, setKeywords] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [popProducts, setPopProducts] = useState([]);
-	const [featuredImgs, setFeaturedImgs] = useState([]);
+	// const [featuredImgs, setFeaturedImgs] = useState([]);
 	const orderHandles = [
 		'super-nourishing-coconut-fig-hair-masque',
 		'repairing-restoring-hair-mask',
@@ -138,13 +138,14 @@ const SearchBox = (props: any) => {
 
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
-								let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
-									? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
-								featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
+								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
+								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
+								// featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
+								const { img } = getFeaturedImgMeta(item);
 								return {
 									title: item.title,
 									handle: item.handle,
-									featuredImgUrl: featuredImg || '',
+									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
 								};
@@ -183,12 +184,14 @@ const SearchBox = (props: any) => {
 			popProducts.map((data) => {
 				const { product } = data;
 				if (product) {
-					const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
-						? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
-					if (featuredImg) {
+					console.log('');
+					const { img } = getFeaturedImgMeta(product);
+					// const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
+					// 	? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
+					if (img) {
 						pProducts.push({
 							...product,
-							featuredImgUrl: featuredImg,
+							featuredImgUrl: img,
 							url: `/products/${product.handle}`,
 						});
 					}
@@ -202,13 +205,13 @@ const SearchBox = (props: any) => {
 		setKeyword(word);
 	};
 
-	useEffect(() => {
-		getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
-	}, []);
+	// useEffect(() => {
+	// 	getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
+	// }, []);
 
 	useEffect(() => {
 		setContent();
-	}, [featuredImgs]);
+	}, []);
 
 	const options: EmblaOptionsType = {
 		loop: false,

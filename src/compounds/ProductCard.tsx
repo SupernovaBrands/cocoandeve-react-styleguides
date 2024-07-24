@@ -277,7 +277,7 @@ const ProductCardTall = (props:any) => {
                         </>
                     )}
                     {props.product.imgHover && (
-                        <picture className="!pt-2 embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t img--hover hidden lg:block">
+                        <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
                             {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
