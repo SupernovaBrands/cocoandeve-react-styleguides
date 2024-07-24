@@ -109,8 +109,10 @@ const Header = (props: any) => {
 		}
 	}, [openDrawer])
 
+	{/*
 	useEffect(() => {
 		// console.log('ThemeSettings', ThemeSettings, searchBox);
+		commented seven days, checked on live store its not used
 		fetch(`/api/sevenDaysSalesIds`).then(
 			res => {
 				res?.json().then(data => {
@@ -120,6 +122,7 @@ const Header = (props: any) => {
 			}
 		);
 	}, []);
+	*/}
 
 	const checkingPoints = () => {
 		if (points === null || points === 0) {

@@ -28,20 +28,40 @@ const NavMegaMenu = (props: any) => {
                     try {
                         res?.json().then(data => {
                             const plist = data?.products;
-                            // console.log('nav mmenu', data);
                             let selected = [];
                             if (handleUrl === 'skin' || handleUrl === 'skincare') {
-                                plist.filter((p) =>
-                                    p.handle === 'double-cleanser-set' || p.handle === 'antioxidant-glow-cream' || p.handle === 'depuff-eye-cream'
-                                ).forEach((item) => {
-                                    {/* @ts-ignore */}
-                                    selected.push({
-                                        title: item.title,
-                                        handle: item.handle,
-                                        featuredImage: item.featuredImage,
-                                        featuredMeta: item.featuredMeta,
-                                    });
+                                const skin1 = plist.find((p) => p.handle === 'double-cleanser-set') || null;
+                                const skin2 = plist.find((p) => p.handle === 'antioxidant-glow-cream') || null;
+                                const skin3 = plist.find((p) => p.handle === 'depuff-eye-cream') || null;
+                                if (skin1) selected.push({
+                                    title: skin1.title,
+                                    handle: skin1.handle,
+                                    featuredImage: skin1.featuredImage,
+                                    featuredMeta: skin1.featuredMeta,
                                 });
+                                if (skin2) selected.push({
+                                    title: skin2.title,
+                                    handle: skin2.handle,
+                                    featuredImage: skin2.featuredImage,
+                                    featuredMeta: skin2.featuredMeta,
+                                });
+                                if (skin3) selected.push({
+                                    title: skin3.title,
+                                    handle: skin3.handle,
+                                    featuredImage: skin3.featuredImage,
+                                    featuredMeta: skin3.featuredMeta,
+                                });
+                                // plist.filter((p) =>
+                                //     p.handle === 'double-cleanser-set' || p.handle === 'antioxidant-glow-cream' || p.handle === 'depuff-eye-cream'
+                                // ).forEach((item) => {
+                                //     {/* @ts-ignore */}
+                                //     selected.push({
+                                //         title: item.title,
+                                //         handle: item.handle,
+                                //         featuredImage: item.featuredImage,
+                                //         featuredMeta: item.featuredMeta,
+                                //     });
+                                // });
                             } else {
                                 for (let i = 0; i < listIds.length; i += 1) {
                                     const item = plist.find((it) => it.id.includes(listIds[i]));
@@ -67,7 +87,6 @@ const NavMegaMenu = (props: any) => {
                                 });
                             }
 
-                            // console.log('selected', selected);
                             const selectedWithImgs = selected.map((item) => {
                                 const { img } = getFeaturedImgMeta(item);
                                 return {
@@ -76,7 +95,7 @@ const NavMegaMenu = (props: any) => {
                                     url: `/products/${item.handle}`,
                                 };
                             });
-                            setProducts(selectedWithImgs.filter((i) => i.img));
+                            setProducts(selectedWithImgs);
                             setIsLoading(false);
 
                             // getFeaturedImages().then((data) => {
@@ -97,7 +116,8 @@ const NavMegaMenu = (props: any) => {
                             //             };
                             //         })
                             //         {/* @ts-ignore */}
-                            //         setProducts(selectedImgs.filter((i) => i.img));
+                            //         // setProducts(selectedImgs.filter((i) => i.img));
+                            //         setProducts(selectedImgs);
                             //         setIsLoading(false);
                             //     }
                             // })
