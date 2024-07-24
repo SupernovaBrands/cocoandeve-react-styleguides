@@ -94,7 +94,7 @@ export const CartItem = (props:CartItemProps) => {
 	}, [item]);
 
 	useEffect(() => {
-		let featuredImage = '';
+		let featuredImage = item?.featuredImageUrl || '';
 		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
 			featuredImage = item.merchandise?.image?.url;
 		} else {
