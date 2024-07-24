@@ -27,12 +27,10 @@ import TabContent from '~/components/TabContent';
 import PackagingCard from "~/components/PackagingCard";
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { getFeaturedImages, isWaitlist } from "~/modules/utils";
 
 const Sustainability = (props: any) => {
     const [showCart, setShowCart] = useState(false);
     const [productCarousel, setProductCarousel] = useState([]);
-    const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -116,10 +114,6 @@ const Sustainability = (props: any) => {
     ];
 
     useEffect(() => {
-        getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
-    }, []);
-
-    useEffect(() => {
         if (products) {
 
             const getProducts = async () => {
@@ -131,14 +125,14 @@ const Sustainability = (props: any) => {
                 productData.map((obj) => {
                     const { product } = obj;
                     // delete product.selectedVariant;
-                    const mapped = buildProductCardModel(store, featuredImg, product, generalSetting, squareBadge);
+                    const mapped = buildProductCardModel(store, product, generalSetting, squareBadge);
                     t.push(mapped);
                 });
                 return t;
             };
             getProducts().then((d) => setProductCarousel(d));
         }
-    }, [featuredImg]);
+    }, []);
 
     useEffect(() => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');

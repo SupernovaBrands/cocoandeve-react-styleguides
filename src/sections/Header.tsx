@@ -16,7 +16,9 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
-		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister } = props;
+		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
+		getFeaturedImgMeta
+	} = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -218,6 +220,7 @@ const Header = (props: any) => {
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
 													store={store}
+													getFeaturedImgMeta={getFeaturedImgMeta}
 												/>
 											)}
 										</li>
@@ -277,7 +280,16 @@ const Header = (props: any) => {
 					isLoggedIn={isLoggedIn}
 					swellLoyalty={swellLoyalty}
 				/>
-				<SearchBox store={store} openAccountBox={openAccountBox} dummy={dummy} content={searchBox} onToggleSearchBox={onToggleSearchBox} trackEvent={trackEvent} openSearchBox={openSearchBox} />
+				<SearchBox
+					store={store}
+					openAccountBox={openAccountBox}
+					dummy={dummy}
+					content={searchBox}
+					onToggleSearchBox={onToggleSearchBox}
+					trackEvent={trackEvent}
+					openSearchBox={openSearchBox}
+					getFeaturedImgMeta={getFeaturedImgMeta}
+				/>
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}

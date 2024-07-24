@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
-    const { handle, listIds, dummy, store } = props;
+    const { handle, listIds, dummy, store, getFeaturedImgMeta } = props;
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -28,17 +28,18 @@ const NavMegaMenu = (props: any) => {
                     try {
                         res?.json().then(data => {
                             const plist = data?.products;
+                            // console.log('nav mmenu', data);
                             let selected = [];
                             if (handleUrl === 'skin' || handleUrl === 'skincare') {
-                                [
-                                    { handle: 'double-cleanser-set', title: 'Double Cleanser Set' },
-                                    { handle: 'antioxidant-glow-cream', title: 'Antioxidant Glow Cream' },
-                                    { handle: 'depuff-eye-cream', title: 'Depuff Eye Cream' },
-                                ].forEach((item) => {
+                                plist.filter((p) =>
+                                    p.handle === 'double-cleanser-set' || p.handle === 'antioxidant-glow-cream' || p.handle === 'depuff-eye-cream'
+                                ).forEach((item) => {
                                     {/* @ts-ignore */}
                                     selected.push({
                                         title: item.title,
                                         handle: item.handle,
+                                        featuredImage: item.featuredImage,
+                                        featuredMeta: item.featuredMeta,
                                     });
                                 });
                             } else {
@@ -49,6 +50,8 @@ const NavMegaMenu = (props: any) => {
                                         selected.push({
                                             title: item.title,
                                             handle: item.handle,
+                                            featuredImage: item.featuredImage,
+                                            featuredMeta: item.featuredMeta,
                                         });
                                     }
                                 }
@@ -58,32 +61,46 @@ const NavMegaMenu = (props: any) => {
                                     return {
                                         title: item.title,
                                         handle: item.handle,
+                                        featuredImage: item.featuredImage,
+                                        featuredMeta: item.featuredMeta,
                                     };
                                 });
                             }
 
-                            getFeaturedImages().then((data) => {
-                                if (data?.length > 0) {
-                                    const selectedImgs = selected.map((item) => {
-                                        let featuredImg = data.find((img) => img.handle === item.handle)
-                                        ? data.find((img) => img.handle === item.handle).featured_image_url : null;
+                            // console.log('selected', selected);
+                            const selectedWithImgs = selected.map((item) => {
+                                const { img } = getFeaturedImgMeta(item);
+                                return {
+                                    title: item.title,
+                                    img: img || null,
+                                    url: `/products/${item.handle}`,
+                                };
+                            });
+                            setProducts(selectedWithImgs.filter((i) => i.img));
+                            setIsLoading(false);
 
-                                        // some featured img in dev store is return null
-                                        if (featuredImg === null && item.handle === 'double-cleanser-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e5913415-4bac-4ace-98f6-d56ab1377100/public';
-                                        if (featuredImg === null && item.handle === 'honey-bliss-hair-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/17e65724-7eab-4660-02f6-055876059b00/public';
-                                        if (featuredImg === null && item.handle === 'pro-youth-shampoo-conditioner') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f1879976-1cc4-405e-4027-4950b96c8d00/public';
+                            // getFeaturedImages().then((data) => {
+                            //     if (data?.length > 0) {
+                            //         const selectedImgs = selected.map((item) => {
+                            //             let featuredImg = data.find((img) => img.handle === item.handle)
+                            //             ? data.find((img) => img.handle === item.handle).featured_image_url : null;
 
-                                        return {
-                                            title: item.title,
-                                            img: featuredImg,
-                                            url: `/products/${item.handle}`,
-                                        };
-                                    })
-                                    {/* @ts-ignore */}
-                                    setProducts(selectedImgs.filter((i) => i.img));
-                                    setIsLoading(false);
-                                }
-                            })
+                            //             // some featured img in dev store is return null
+                            //             if (featuredImg === null && item.handle === 'double-cleanser-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e5913415-4bac-4ace-98f6-d56ab1377100/public';
+                            //             if (featuredImg === null && item.handle === 'honey-bliss-hair-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/17e65724-7eab-4660-02f6-055876059b00/public';
+                            //             if (featuredImg === null && item.handle === 'pro-youth-shampoo-conditioner') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f1879976-1cc4-405e-4027-4950b96c8d00/public';
+
+                            //             return {
+                            //                 title: item.title,
+                            //                 img: featuredImg,
+                            //                 url: `/products/${item.handle}`,
+                            //             };
+                            //         })
+                            //         {/* @ts-ignore */}
+                            //         setProducts(selectedImgs.filter((i) => i.img));
+                            //         setIsLoading(false);
+                            //     }
+                            // })
                         });
                     } catch (err) {
                         console.log(err);
