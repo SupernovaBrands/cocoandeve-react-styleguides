@@ -6,10 +6,10 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, toggleAccountDropdown, onModal, swellLoyalty, scrolled, annBarEnabled, timerData } = props;
-
+    const { openAccountBox, store, onModal, swellLoyalty, scrolled, annBarEnabled, timerData } = props;
+    const defaultCheckedNewsOptIn = !!onModal === true ? !!onModal : !['uk', 'eu'].includes(store);
     const [regInit, setRegInit] = useState(true);
-    const [newsOptIn, setNewsOptIn] = useState(!!onModal);
+    const [newsOptIn, setNewsOptIn] = useState(defaultCheckedNewsOptIn);
 	const [tosAgree, setTosAgree] = useState(false);
 	const [validPass, setValidPass] = useState(true);
 	const [allowSubmit, setAllowSubmit] = useState(false);
@@ -41,33 +41,43 @@ const AccountDropdown = (props:any) => {
         e.preventDefault();
 
         if (allowSubmit) {
-            const resp = await fetch('/api/account/create', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: emailRef.current.value,
-                    password: passRef.current.value,
-                    first_name: firstRef.current.value,
-                    last_name: lastRef.current.value,
-                    accept_marketing: newsOptIn,
-                })
-            }).then((resp) => resp.json());
-            const { customerCreate } = resp;
-            if (customerCreate.customer !== null) {
-                setTimeout(() => {
-                    if (window.location.href.includes('survey=result')) {
-                        setCookie('signedInOnResult', 'true');
+            const url = `https://s-app.cocoandeve.com/shopify/email?email=${encodeURIComponent(emailRef.current.value)}&brand=cocoandeve_shopify_${store}`;
+            fetch(url).then((d) => d.json()).then(async (data) => {
+                const found = data.filter((e) => e.email === emailRef.current.value);
+                if (found.length > 0) {
+                    setTimeout(() => {
+                        window.location.href = '/account/register#taken';
+                    }, 250);
+                } else {
+                    const resp = await fetch('/api/account/create', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: emailRef.current.value,
+                            password: passRef.current.value,
+                            first_name: firstRef.current.value,
+                            last_name: lastRef.current.value,
+                            accept_marketing: newsOptIn,
+                        })
+                    }).then((resp) => resp.json());
+                    const { customerCreate } = resp;
+                    if (customerCreate.customer !== null) {
+                        setTimeout(() => {
+                            if (window.location.href.includes('survey=result')) {
+                                setCookie('signedInOnResult', 'true');
+                            }
+                            window.location.href = '/account';
+                        }, 250);
+                    } else {
+                        setTimeout(() => {
+                            window.location.href = '/account/register#taken';
+                        }, 250);
                     }
-                    window.location.href = '/account';
-                }, 250);
-            } else {
-                setTimeout(() => {
-                    window.location.href = '/account/register#taken';
-                }, 250);
-            }
+                }
+            });
         } else {
             passFocus();
         }
@@ -211,7 +221,7 @@ const AccountDropdown = (props:any) => {
                                 </div>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm mb-1 items-start">
-                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" checked={newsOptIn} value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" />
+                                <input onChange={() => setNewsOptIn(!newsOptIn)} type="checkbox" name="offers" checked={newsOptIn} value={newsOptIn.toString()} className="custom-control-input" id="offers" required={false} aria-required="true" aria-invalid="true" defaultChecked={!['uk', 'eu'].includes(store)} />
                                 <label htmlFor="offers" className={`custom-control-label ${!onModal ? 'lg:pl-1' : ''}`}>Keep me up to date on news and exclusive offers</label>
                             </div>
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">

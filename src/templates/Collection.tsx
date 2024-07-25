@@ -505,9 +505,9 @@ const Collection = (props: any) => {
                                 )
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
-                                 <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                                <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
                             )}
-                            {products.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>}
+                            {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
                     </div>
                 </div>
