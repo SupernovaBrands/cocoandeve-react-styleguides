@@ -80,7 +80,7 @@ const HowToCarousel = (props) => {
 						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
 							<figure className="border border-secondary-light">
 								{!isLoading && (
-									<picture className="relative w-full aspect-[4/3] m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
+									<picture className="relative w-full block m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
 										<img className="w-full aspect-[4/3] max-h-[11.125em] lg:max-h-[18.625em] object-cover" alt="Image Alt" loading="lazy" src={item.src}/>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 											className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
