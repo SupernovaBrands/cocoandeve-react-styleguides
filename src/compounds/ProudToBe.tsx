@@ -29,9 +29,9 @@ const iconsData = {
 }
 
 const ProudToBe = (props:any) => {
-    
+
     const { proudToBe } = props;
-    console.log('proudToBe', proudToBe);
+    // console.log('proudToBe', proudToBe);
     const proudToBeArr = proudToBe?.split('|') || [];
     // const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
