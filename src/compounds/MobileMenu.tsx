@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
@@ -25,8 +25,6 @@ const MobileMenu = (props: any) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
 	}
-
-	const mobileNavRef = useRef(null);
 
 	const handleAccount = (e) => {
 		e.preventDefault();
