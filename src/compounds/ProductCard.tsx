@@ -238,7 +238,6 @@ const ProductCardTall = (props:any) => {
 
     useEffect(() => {
         if (product && product.productType !== 'HERO') {
-            console.log('product1', product);
             const skus_ = isKit(product.title)
                 ? product.variants.nodes.map((node:any) => node.sku)
                 : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set') && !node.title.includes('duo')).map((node:any) => node.sku);
