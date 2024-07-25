@@ -57,7 +57,7 @@ const Instagram = (props: any) => {
                 </div>
                 {data?.length > 0 && (
                     <div className="p-1 lg:p-0">
-                        <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g px-hg lg:px-0">
+                        <div className="flex flex-nowrap sm:p-0 sm:pb-1 md:p-1 -mx-hg lg:-mx-g px-hg lg:-px-g">
                             <div className="instagram--feed--left w-full p-0">
                                 <div className="flex flex-wrap m-0">
                                     <div className="w-full lg:w-2/3 p-0">
