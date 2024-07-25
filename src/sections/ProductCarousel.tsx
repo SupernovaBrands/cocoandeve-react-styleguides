@@ -119,7 +119,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
-										onClick={() => autoPlayClick2(arrowClickPrev2)}
+										onClick={() => emblaApi2.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">
@@ -127,7 +127,7 @@ const ProductCarousel = (props: any) => {
 										</span>
 									</PrevButton>
 									<NextButton
-										onClick={() => autoPlayClick2(arrowClickNext2)}
+										onClick={() => emblaApi2.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">
@@ -161,7 +161,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
-										onClick={() => autoPlayClick1(arrowClickPrev1)}
+										onClick={() => emblaApi1.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">
@@ -169,7 +169,7 @@ const ProductCarousel = (props: any) => {
 										</span>
 									</PrevButton>
 									<NextButton
-										onClick={() => autoPlayClick1(arrowClickNext1)}
+										onClick={() => emblaApi1.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">
@@ -203,7 +203,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
-										onClick={() => autoPlayClick3(arrowClickPrev3)}
+										onClick={() => emblaApi3.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">
@@ -211,7 +211,7 @@ const ProductCarousel = (props: any) => {
 										</span>
 									</PrevButton>
 									<NextButton
-										onClick={() => autoPlayClick3(arrowClickNext3)}
+										onClick={() => emblaApi3.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[-1] flex justify-center items-center">

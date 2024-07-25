@@ -22,14 +22,14 @@ const ArticleCarousel = (props:any) => {
 
 	const [articles, setArticles] = useState(props.articles);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: innerWidth >= screenLG, delay: 3000 })
+		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-	const {
-		onPrevButtonClick: arrowClickPrev,
-		onNextButtonClick: arrowClickNext
-	} = usePrevNextButtons(emblaApi);
-	const autoPlayClick = controlAutoplay(emblaApi);
+	// const {
+	// 	onPrevButtonClick: arrowClickPrev,
+	// 	onNextButtonClick: arrowClickNext
+	// } = usePrevNextButtons(emblaApi);
+	// const autoPlayClick = controlAutoplay(emblaApi);
 
 	const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -61,7 +61,7 @@ const ArticleCarousel = (props:any) => {
 				</Carousel.Inner>
 				<Carousel.Navigation>
 					<PrevButton
-						onClick={() => autoPlayClick(arrowClickPrev)}
+						onClick={() => emblaApi.scrollPrev()}
 						className="hidden lg:block lg:-left-[1em] w-[10%]"
 						>
 						<span className="absolute z-[-1] flex justify-center items-center bg-white w-[60px] h-[60px] rounded-full left-0 shadow-[0_.25em_.25em_#0003] top-[129px]">
@@ -69,7 +69,7 @@ const ArticleCarousel = (props:any) => {
 						</span>
 					</PrevButton>
 					<NextButton
-						onClick={() => autoPlayClick(arrowClickNext)}
+						onClick={() => emblaApi.scrollNext()}
 						className="hidden lg:block lg:-right-[1em] w-[10%]"
 						>
 						<span className="absolute z-[-1] flex justify-center items-center bg-white w-[60px] h-[60px] rounded-full right-0 shadow-[0_.25em_.25em_#0003] top-[129px]">
