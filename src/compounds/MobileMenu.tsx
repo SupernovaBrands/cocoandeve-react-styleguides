@@ -55,8 +55,8 @@ const MobileMenu = (props: any) => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			document.querySelectorAll('.subsubMenu.visible').forEach((a) => a?.scrollIntoView());
-		}, 250);
+			document.querySelectorAll('.subsubMenu.visible').forEach((a) => a?.scrollIntoView({ behavior: 'smooth' }));
+		}, 200);
 	}, [menuStates]);
 
 	return (
