@@ -238,7 +238,10 @@ const ProductCardTall = (props:any) => {
 
     useEffect(() => {
         if (product && product.productType !== 'HERO') {
-            const skus_ = product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set') && !node.title.includes('duo')).map((node:any) => node.sku);
+            console.log('product1', product);
+            const skus_ = isKit(product.title)
+                ? product.variants.nodes.map((node:any) => node.sku)
+                : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set') && !node.title.includes('duo')).map((node:any) => node.sku);
             setSkus(skus_);
         } else if (product && product.variants) {
             if (isKit(product.title)) {
