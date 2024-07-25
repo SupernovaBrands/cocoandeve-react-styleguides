@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
@@ -15,15 +15,18 @@ const defMenuState = {
 }
 
 const MobileMenu = (props: any) => {
-	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn, swellLoyalty } = props;
+	const { mainMenu, menuBannerQuiz, menuBannerCode, userPts, isLoggedIn, swellLoyalty, store } = props;
 	const { openDrawer, onToggleMobileNav } = props;
 	const [menuStates, setMenuStates] = useState(defMenuState);
 	const [storeSelection, setStoreSelection] = useState(false);
-	const [currency, setCurrency] = useState('USD');
+	let activeCurrency = 'USD';
+	const [currency, setCurrency] = useState(activeCurrency);
 	const mobileNavClick = (e) => {
 		if (e.target !== e.currentTarget) return;
 		props.onToggleMobileNav();
 	}
+
+	const mobileNavRef = useRef(null);
 
 	const handleAccount = (e) => {
 		e.preventDefault();
@@ -34,6 +37,29 @@ const MobileMenu = (props: any) => {
 	};
 
 	const enableSwellAcc = swellLoyalty && swellLoyalty.enable_cart_swell_redemption;
+
+	useEffect(() => {
+		if (store === 'ca') {
+            activeCurrency = 'CAD';
+        } else if (store === 'uk') {
+            activeCurrency = 'GBP';
+        } else if (store === 'eu') {
+            activeCurrency = 'EUR';
+        } else if (store === 'au') {
+            activeCurrency = 'AUD';
+        } else if (store === 'int') {
+            activeCurrency = 'SGD';
+        } else if (store === 'my') {
+            activeCurrency = 'MYR';
+        }
+		setCurrency(activeCurrency);
+	}, [store]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			document.querySelectorAll('.subsubMenu.visible').forEach((a) => a?.scrollIntoView());
+		}, 250);
+	}, [menuStates]);
 
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
@@ -75,7 +101,7 @@ const MobileMenu = (props: any) => {
 								)}
 							</label>
 							{menu.rows && menu.rows.length > 0 && (
-								<ul key={`subsubmenu ${menu.title}`} className={`z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 visible left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 										<label className="mb-[.5rem]" onClick={() => {
 											const newStates = {...defMenuState};
@@ -87,7 +113,12 @@ const MobileMenu = (props: any) => {
 										<Link href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
 										</Link>
-										<Close className="h-[1em]"  onClick={() => onToggleMobileNav(false)} />
+										<Close className="h-[1em]"  onClick={() => {
+											const newStates = {...defMenuState};
+											newStates[i] = false;
+											setMenuStates(newStates);
+											onToggleMobileNav(false);
+										}} />
 									</li>
 									<li key="menuTitle" className="border-b p-0">
 										<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
