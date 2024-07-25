@@ -19,8 +19,8 @@ const SearchProductCard = (props: any) => {
 		<figure className={`relative w-full flex lg:flex-col mb-2 order-4 lg:px-g ${props.classes ? props.classes : 'lg:w-1/4'}`}>
 			<a onClick={tracking} href={`/products/${url}`} className="px-hg lg:px-0 max-w-[25%] lg:max-w-none flex-none">
 				<picture>
-					<source srcSet={img.replace('/public', '/320x')} media="(min-width: 992px)" width="170" height="211" />
-					<img src={img.replace('/public', '/192x')} alt={title} className="block w-full h-[85px] lg:w-full max-h-[5.3125em] lg:max-h-none object-cover lg:h-[211px]" loading="lazy" width="96" height="85" />
+					<source srcSet={img.replace('/public', '/320x').replace('.jpg', '_320x.jpg').replace('.png', '_320x.png')} media="(min-width: 992px)" width="170" height="211" />
+					<img src={img.replace('/public', '/192x').replace('.jpg', '_192x.jpg').replace('.png', '_192x.png')} alt={title} className="block w-full h-[85px] lg:w-full max-h-[5.3125em] lg:max-h-none object-cover lg:h-[211px]" loading="lazy" width="96" height="85" />
 				</picture>
 			</a>
 			<figcaption className="flex-grow-1 flex flex-column align-self-center w-full items-center">
