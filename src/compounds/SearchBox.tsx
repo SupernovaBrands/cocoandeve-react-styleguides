@@ -151,7 +151,7 @@ const SearchBox = (props: any) => {
 								};
 							});
 							uniqueFiltered.forEach((item, i) => {
-								if (item.handle === 'pro-youth-hair-scalp-mask' && keyword !== 'hair') {
+								if (item.handle === 'pro-youth-hair-scalp-mask') {
 									uniqueFiltered.splice(i, 1);
 									uniqueFiltered.unshift(item);
 								}
@@ -297,10 +297,10 @@ const SearchBox = (props: any) => {
 											<NextButton
 												onClick={() => autoPlayClick8(arrowClickNext8)}
 												disabled={nextDisabled8}
-												className={`hidden lg:flex lg:right-0 lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body ${nextDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
+												className={`hidden lg:flex lg:right-0 lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body lg:-mr-[3px] ${nextDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
 											>
 												<span className="bg-white w-2 h-2 absolute z-[-1] flex justify-center items-center">
-													<ChevronNext className="w-g h-g svg--current-color" />
+													<ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
 												</span>
 											</NextButton>
 										</Carousel.Navigation>
