@@ -282,6 +282,7 @@ const Header = (props: any) => {
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
 					swellLoyalty={swellLoyalty}
+					store={store}
 				/>
 				<SearchBox
 					store={store}
