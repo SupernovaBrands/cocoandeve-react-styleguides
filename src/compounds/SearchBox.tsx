@@ -117,6 +117,7 @@ const SearchBox = (props: any) => {
 			res => {
 				res?.json().then(data => {
 					const productsData = data?.products;
+					console.log('productsData', productsData.filter((p) => p.handle === 'sunny-skin-spf-set'));
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
