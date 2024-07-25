@@ -34,9 +34,13 @@ const Service = (props: any) => {
 									{list.id === 'money-back' && <MoneyBack className="text-body" />}
 								</i>
 								{list.id === 'stars' ? (
-									<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
-										<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item.replace('__ratings__', totalReviews) + '<br />' }}></span>
-									))}</p>
+									<>
+										{totalReviews && (
+											<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
+												<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item.replace('__ratings__', totalReviews) + '<br />' }}></span>
+											))}</p>
+										)}
+									</>
 								) : (
 									<p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
 										<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
