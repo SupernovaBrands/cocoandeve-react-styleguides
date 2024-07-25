@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const DropdownStore = (props: any) => {
     const { direction, store } = props;
@@ -24,9 +24,24 @@ const DropdownStore = (props: any) => {
         }
         setActive(activeCountry);
     },[store]);
+
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+		const closeDropdown = (e) => {
+			if (open && !dropdownRef.current?.contains(e.target)) {
+				setOpen(false);
+			}
+		};
+		document.addEventListener('mousedown', closeDropdown);
+		return () => {
+		    document.removeEventListener('mousedown', closeDropdown);
+		  };
+	}, [open]);
+
     return (
         <div className="lg:text-left relative">
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
                 <button onClick={() => setOpen(!open)} className={`rounded-lg py-2.5 text-center inline-flex items-center after:inline-block after:ml-[0.255em] after:border-b-[0.3em] after:border-solid after:border-t-body after:border-x-[0.3em] after:border-x-transparent text-body text-base lg:text-lg font-bold lg:font-normal lg:after:ml-[.5625em] lg:after:-mt-25`} type="button">{activeCountry}</button>
 
                 <div className={`text-left -ml-2 absolute left-0 bg-white lg:min-w-[10rem] text-base z-50 list-none rounded-[4px] [transition:all_0.3s] opacity-0 h-[0] top-[0] ${direction === 'dropup' ? '[transform:translate3d(0,_0,_0)]' : '[transform:translate3d(0,_20px,_0)]'} bottom-[0] overflow-hidden ${!open ? '' : openClasses }`}>
