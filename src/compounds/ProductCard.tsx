@@ -27,7 +27,7 @@ const WaitlistButton = (props:any) => {
         props.setWaitlistData({
             open: true,
             title: props.product.title,
-            image: props.product.srcSet,
+            image: props.product.src,
             handle: props.product.handle,
         });
     };
