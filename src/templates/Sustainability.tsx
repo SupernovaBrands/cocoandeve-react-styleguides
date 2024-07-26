@@ -47,16 +47,14 @@ const Sustainability = (props: any) => {
     // carousel 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
-    }, [
-		Autoplay({ playOnInit: false, delay: 6000 })
-	]);
+    });
 	const {
 		prevBtnDisabled: prevDisabled1,
 		nextBtnDisabled: nextDisabled1,
 		onPrevButtonClick: arrowClickPrev1,
 		onNextButtonClick: arrowClickNext1
 	} = usePrevNextButtons(emblaApi1);
-	const autoPlayClick1 = controlAutoplay(emblaApi1);
+	// const autoPlayClick1 = controlAutoplay(emblaApi1);
     const { selected, count } = useSelectedSnapDisplay(emblaApi1);
 
     // carousel 2
@@ -64,9 +62,7 @@ const Sustainability = (props: any) => {
         loop: false,
         align: 'center',
         duration: 40,
-    }, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+    });
     // const { selectedIndex: idx2, onDotButtonClick: onClick2 } = useDotButton(emblaApi2);
 
     // carousel 3
@@ -198,7 +194,7 @@ const Sustainability = (props: any) => {
                                 <Carousel.Navigation>
                                     <div className="flex relative mx-auto lg:mx-0 mt-3 lg:mt-4 justify-center w-[5em]">
                                         <PrevButton
-                                            onClick={() => autoPlayClick1(arrowClickPrev1)}
+                                            onClick={arrowClickPrev1}
                                             disabled={prevDisabled1}
                                             className={`w-[1rem] lg:-ml-[2px] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
@@ -206,7 +202,7 @@ const Sustainability = (props: any) => {
                                         </PrevButton>
                                         <span className="px-25 lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
-                                            onClick={() => autoPlayClick1(arrowClickNext1)}
+                                            onClick={arrowClickNext1}
                                             disabled={nextDisabled1}
                                             className={`w-[1rem] lg:-mr-[2px] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >

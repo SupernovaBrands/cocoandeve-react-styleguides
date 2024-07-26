@@ -221,16 +221,14 @@ const SearchBox = (props: any) => {
 			'(min-width: 768px)': { active: true },
 		},
 	};
-	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options}, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options});
 	const {
 		prevBtnDisabled: prevDisabled8,
 		nextBtnDisabled: nextDisabled8,
 		onPrevButtonClick: arrowClickPrev8,
 		onNextButtonClick: arrowClickNext8
 	} = usePrevNextButtons(emblaApi8);
-	const autoPlayClick8 = controlAutoplay(emblaApi8);
+	// const autoPlayClick8 = controlAutoplay(emblaApi8);
 
 	useEffect(() => {
 		if (props.openSearchBox) document.body.classList.add('!overflow-y-hidden');
@@ -286,7 +284,7 @@ const SearchBox = (props: any) => {
 									{products.length > 6 && (
 										<Carousel.Navigation>
 											<PrevButton
-												onClick={() => autoPlayClick8(arrowClickPrev8)}
+												onClick={arrowClickPrev8}
 												disabled={prevDisabled8}
 												className={`hidden lg:flex lg:right-[3%] lg:left-auto lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body ${prevDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
 											>
@@ -295,7 +293,7 @@ const SearchBox = (props: any) => {
 												</span>
 											</PrevButton>
 											<NextButton
-												onClick={() => autoPlayClick8(arrowClickNext8)}
+												onClick={arrowClickNext8}
 												disabled={nextDisabled8}
 												className={`hidden lg:flex lg:right-0 lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body lg:-mr-[3px] ${nextDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
 											>
