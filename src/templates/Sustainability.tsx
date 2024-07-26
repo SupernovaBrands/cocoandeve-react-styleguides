@@ -170,7 +170,7 @@ const Sustainability = (props: any) => {
                         {!isLoading && (
                             <div className="px-hg lg:px-g w-full lg:w-1/2 lg:order-1">
                                 {/* <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" /> */}
-                                <Infographic />
+                                <Infographic className="w-full" />
                             </div>
                         )}
                     </div>

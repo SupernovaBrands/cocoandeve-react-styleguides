@@ -48,16 +48,17 @@ const PopularProducts = (props: any) => {
 										title={title}
 										img={featuredImageUrl}
 										url={handle}
+										popularItem={true}
 										classes="mb-1 order-4 w-full lg:w-1/4" />
 								)
 							})}
 						</>
 					) : (
 						<>
-							<SearchProductCard key={`spc-ph1`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard key={`spc-ph2`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard key={`spc-ph3`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
-							<SearchProductCard key={`spc-ph4`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-4 order-4 w-full lg:w-1/4" />
+							<SearchProductCard popularItem={true} key={`spc-ph1`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+							<SearchProductCard popularItem={true} key={`spc-ph2`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+							<SearchProductCard popularItem={true} key={`spc-ph3`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-1 order-4 w-full lg:w-1/4" />
+							<SearchProductCard popularItem={true} key={`spc-ph4`} title="Bali Bronzing Foam in two lines" img="https://via.placeholder.com/444x558" classes="mb-4 order-4 w-full lg:w-1/4" />
 						</>
 					)}
 				</div>

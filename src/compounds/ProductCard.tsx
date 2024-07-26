@@ -147,6 +147,8 @@ const SwatchOverlay = (props:any) => {
         setPrice(formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region));
     }, [selectedVariant]);
 
+    const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
+
     return (
         <>
             {props.quizResult && (() => {
@@ -180,7 +182,7 @@ const SwatchOverlay = (props:any) => {
                                 {props.swatch.shade && <strong>Shade: </strong>}
                                 {props.swatch.tangleTamer && <strong>Type: </strong>}
                                 {props.swatch.scent && <strong>Scent: </strong>}
-                                <span ref={swatchLabel} data-swatch-label>{props.swatch.data[0].label}</span>
+                                <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
                             </label>
                             <ul className="list-unstyled product-variant-swatch flex justify-center">
                                 {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
