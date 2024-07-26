@@ -109,9 +109,11 @@ const ProudToBe = (props:any) => {
                             )}
                         </ul> */}
                     </div>
-                    <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
-                        <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${scrollProgress}%`, width: `${ ((5 / totalSlide) * 100) - 5 }%` }} ref={scrollThumb}></div>
-                    </div>
+                    {proudToBeArr.length > 5 && (
+                        <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
+                            <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${scrollProgress}%`, width: `${ ((5 / totalSlide) * 100) - 5 }%` }} ref={scrollThumb}></div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
