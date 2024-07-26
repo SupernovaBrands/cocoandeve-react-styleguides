@@ -138,7 +138,7 @@ const NavMegaMenu = (props: any) => {
                 {!isLoading ? (
                     <div className="flex mx-5 px-3">
                         <div className="lg:w-2/5 pr-4 pl-4 mb-3">
-                            <a href={props.url} className="block mb-2 h4 !text-body underline">Shop {props.title}</a>
+                            <a href={props.url} className="block mb-2 h4 !text-body underline">Shop all {props.title}</a>
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
