@@ -13,6 +13,7 @@ import Link from "next/link";
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ProductCard from "~/compounds/ProductCard";
+import Infographic from '~/images/sustainability-infographic.svg';
 import {
 	PrevButton,
 	NextButton,
@@ -47,16 +48,14 @@ const Sustainability = (props: any) => {
     // carousel 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({
         loop: false,
-    }, [
-		Autoplay({ playOnInit: false, delay: 6000 })
-	]);
+    });
 	const {
 		prevBtnDisabled: prevDisabled1,
 		nextBtnDisabled: nextDisabled1,
 		onPrevButtonClick: arrowClickPrev1,
 		onNextButtonClick: arrowClickNext1
 	} = usePrevNextButtons(emblaApi1);
-	const autoPlayClick1 = controlAutoplay(emblaApi1);
+	// const autoPlayClick1 = controlAutoplay(emblaApi1);
     const { selected, count } = useSelectedSnapDisplay(emblaApi1);
 
     // carousel 2
@@ -64,9 +63,7 @@ const Sustainability = (props: any) => {
         loop: false,
         align: 'center',
         duration: 40,
-    }, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+    });
     // const { selectedIndex: idx2, onDotButtonClick: onClick2 } = useDotButton(emblaApi2);
 
     // carousel 3
@@ -139,6 +136,12 @@ const Sustainability = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+    const inlineCss = `
+        .sustainability--intro p {
+            margin-bottom: 15px;
+        }
+    `;
+
     return (
 		<>
             <section className="relative">
@@ -154,9 +157,10 @@ const Sustainability = (props: any) => {
             </section>
             <section>
                 <div className="container py-4">
-                    <div className="flex flex-wrap -mx-hg lg:-mx-g lg:py-25">
-                        <div className="w-full lg:w-1/2 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
+                    <div className="flex flex-wrap -mx-hg lg:-mx-g">
+                        <div className="sustainability--intro w-full lg:w-1/2 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
                             <h2 className="mb-1 lg:mb-2">{intro.heading}</h2>
+                            <style jsx>{inlineCss}</style>
                             {!isLoading && (
                                 <div dangerouslySetInnerHTML={{
                                     __html: intro.text,
@@ -165,7 +169,8 @@ const Sustainability = (props: any) => {
                         </div>
                         {!isLoading && (
                             <div className="px-hg lg:px-g w-full lg:w-1/2 lg:order-1">
-                                <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" />
+                                {/* <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" /> */}
+                                <Infographic className="w-full" />
                             </div>
                         )}
                     </div>
@@ -198,7 +203,7 @@ const Sustainability = (props: any) => {
                                 <Carousel.Navigation>
                                     <div className="flex relative mx-auto lg:mx-0 mt-3 lg:mt-4 justify-center w-[5em]">
                                         <PrevButton
-                                            onClick={() => autoPlayClick1(arrowClickPrev1)}
+                                            onClick={arrowClickPrev1}
                                             disabled={prevDisabled1}
                                             className={`w-[1rem] lg:-ml-[2px] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
@@ -206,7 +211,7 @@ const Sustainability = (props: any) => {
                                         </PrevButton>
                                         <span className="px-25 lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
-                                            onClick={() => autoPlayClick1(arrowClickNext1)}
+                                            onClick={arrowClickNext1}
                                             disabled={nextDisabled1}
                                             className={`w-[1rem] lg:-mr-[2px] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
                                         >
