@@ -13,6 +13,7 @@ import Link from "next/link";
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ProductCard from "~/compounds/ProductCard";
+import Infographic from '~/images/sustainability-infographic.svg';
 import {
 	PrevButton,
 	NextButton,
@@ -135,6 +136,12 @@ const Sustainability = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+    const inlineCss = `
+        .sustainability--intro p {
+            margin-bottom: 15px;
+        }
+    `;
+
     return (
 		<>
             <section className="relative">
@@ -150,9 +157,10 @@ const Sustainability = (props: any) => {
             </section>
             <section>
                 <div className="container py-4">
-                    <div className="flex flex-wrap -mx-hg lg:-mx-g lg:py-25">
-                        <div className="w-full lg:w-1/2 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
+                    <div className="flex flex-wrap -mx-hg lg:-mx-g">
+                        <div className="sustainability--intro w-full lg:w-1/2 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
                             <h2 className="mb-1 lg:mb-2">{intro.heading}</h2>
+                            <style jsx>{inlineCss}</style>
                             {!isLoading && (
                                 <div dangerouslySetInnerHTML={{
                                     __html: intro.text,
@@ -161,7 +169,8 @@ const Sustainability = (props: any) => {
                         </div>
                         {!isLoading && (
                             <div className="px-hg lg:px-g w-full lg:w-1/2 lg:order-1">
-                                <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" />
+                                {/* <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" /> */}
+                                <Infographic />
                             </div>
                         )}
                     </div>
