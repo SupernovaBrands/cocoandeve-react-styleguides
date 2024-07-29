@@ -49,34 +49,28 @@ const ProductCarousel = (props: any) => {
 	const [activeTab, setActiveTab] = useState('bestsellers');
 
 	//tab 1
-	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
-	const {
-		onPrevButtonClick: arrowClickPrev1,
-		onNextButtonClick: arrowClickNext1
-	} = usePrevNextButtons(emblaApi1);
-	const autoPlayClick1 = controlAutoplay(emblaApi1);
+	const [emblaRef1, emblaApi1] = useEmblaCarousel(options);
+	// const {
+	// 	onPrevButtonClick: arrowClickPrev1,
+	// 	onNextButtonClick: arrowClickNext1
+	// } = usePrevNextButtons(emblaApi1);
+	// const autoPlayClick1 = controlAutoplay(emblaApi1);
 
 	//tab 2
-	const [emblaRef2, emblaApi2] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
-	const {
-		onPrevButtonClick: arrowClickPrev2,
-		onNextButtonClick: arrowClickNext2
-	} = usePrevNextButtons(emblaApi2);
-	const autoPlayClick2 = controlAutoplay(emblaApi2);
+	const [emblaRef2, emblaApi2] = useEmblaCarousel(options);
+	// const {
+	// 	onPrevButtonClick: arrowClickPrev2,
+	// 	onNextButtonClick: arrowClickNext2
+	// } = usePrevNextButtons(emblaApi2);
+	// const autoPlayClick2 = controlAutoplay(emblaApi2);
 
 	//tab 3
-	const [emblaRef3, emblaApi3] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
-	const {
-		onPrevButtonClick: arrowClickPrev3,
-		onNextButtonClick: arrowClickNext3
-	} = usePrevNextButtons(emblaApi3);
-	const autoPlayClick3 = controlAutoplay(emblaApi3);
+	const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
+	// const {
+	// 	onPrevButtonClick: arrowClickPrev3,
+	// 	onNextButtonClick: arrowClickNext3
+	// } = usePrevNextButtons(emblaApi3);
+	// const autoPlayClick3 = controlAutoplay(emblaApi3);
 
 	useEffect(() => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');

@@ -218,24 +218,26 @@ const ProductCardTall = (props:any) => {
     const { product } = props;
     const autoTicks = generalSetting?.auto_tick_variant.split(',').map((v) => parseInt(v, 10)) || [];
     const trackLink = () => {
-        if (carousel) {
-            trackEvent('carousel_product', {
+        if (typeof trackEvent === 'function') {
+            if (carousel) {
+                trackEvent('carousel_product', {
+                    category: 'Clickout',
+                    target: product.handle,
+                });
+            }
+
+            if (eventNameOnClick) {
+                trackEvent(eventNameOnClick, {
+                    category: 'Clickout',
+                    target: product.handle,
+                });
+            }
+
+            trackEvent('product_card_click', {
                 category: 'Clickout',
                 target: product.handle,
             });
         }
-
-        if (eventNameOnClick) {
-            trackEvent(eventNameOnClick, {
-                category: 'Clickout',
-                target: product.handle,
-            });
-        }
-
-        trackEvent('product_card_click', {
-            category: 'Clickout',
-            target: product.handle,
-        });
     }
 
     useEffect(() => {
@@ -269,7 +271,7 @@ const ProductCardTall = (props:any) => {
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
-                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''}`}>
+                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
 
@@ -288,7 +290,7 @@ const ProductCardTall = (props:any) => {
             </a>
 
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
-            <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
+            <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : ''} ${props.carousel && !props.shopArticle ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
                 <div className="review-stars__number flex justify-center mb-1">
                     <YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                 </div>
