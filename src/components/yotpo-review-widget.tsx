@@ -958,11 +958,11 @@ const YotpoReviewWidget = (props:any) => {
 													{formatDate(review.created_at, formattedDate)}
 												</p>
 												<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
-												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
+												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 !text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
 													<SvgThumbsUp className="svg mr-25 size-1em" />
 													{review.votes_up}
 												</button>
-												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 text-body ${votes[`reviews-${review.id}`] === 'down' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'down'); }}>
+												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 !text-body ${votes[`reviews-${review.id}`] === 'down' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'down'); }}>
 													<SvgThumbsDown className="svg mr-25 size-1em" />
 													{review.votes_down + (votes[`reviews-${review.id}`] === 'down' ? 1 : 0)}
 												</button>
