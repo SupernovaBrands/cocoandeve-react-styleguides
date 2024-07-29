@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
+// import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 // import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 import DimethiconeFree from '~/images/icons/dimethicone-free.svg';
@@ -18,7 +18,7 @@ import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
-	controlAutoplay,
+	// controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import {
     useSelectedSnapDisplay
@@ -76,14 +76,12 @@ const Sustainability = (props: any) => {
 			    duration: 40,
             }
         }
-    }, [
-		Autoplay({ playOnInit: true, delay: 4000 })
-	]);
+    });
 	const {
 		onPrevButtonClick: arrowClickPrev3,
 		onNextButtonClick: arrowClickNext3
 	} = usePrevNextButtons(emblaApi3);
-	const autoPlayClick3 = controlAutoplay(emblaApi3);
+	// const autoPlayClick3 = controlAutoplay(emblaApi3);
 
     const { banner, generalSetting, squareBadge, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
     const PACKAGING = [
@@ -129,7 +127,7 @@ const Sustainability = (props: any) => {
             };
             getProducts().then((d) => setProductCarousel(d));
         }
-    }, []);
+    }, [generalSetting]);
 
     useEffect(() => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
@@ -401,7 +399,7 @@ const Sustainability = (props: any) => {
                                 </Carousel.Inner>
                                 <Carousel.Navigation>
                                     <PrevButton
-                                        onClick={() => autoPlayClick3(arrowClickPrev3)}
+                                        onClick={arrowClickPrev3}
                                         className="lg:-left-[1.25em] lg:w-4 text-primary"
                                     >
                                         <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
@@ -409,7 +407,7 @@ const Sustainability = (props: any) => {
                                         </span>
                                     </PrevButton>
                                     <NextButton
-                                        onClick={() => autoPlayClick3(arrowClickNext3)}
+                                        onClick={arrowClickNext3}
                                         className="lg:-right-[1.25em] lg:w-4 text-primary"
                                     >
                                         <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
