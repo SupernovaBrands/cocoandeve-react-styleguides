@@ -70,6 +70,12 @@ const Blog = (props) => {
 		extendedVideoData = extendedVideoData.concat(extendedVideoData.slice(0, videoItems));
 	}
 
+	let extendedVideoSliders = [...videoSliders];
+	if (extendedVideoSliders.length < 3) {
+		const slides = 4 - extendedVideoSliders.length;
+		extendedVideoSliders = extendedVideoSliders.concat(extendedVideoSliders.slice(0, slides));
+	}
+
 	// carousel
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: false, delay: 3000 })
@@ -128,7 +134,7 @@ const Blog = (props) => {
 				{!activeFrame && (
 					<>
 						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
-							{videoSliders.length > 0 && <HowToCarousel btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={videoSliders} isLoading={isLoading} />}
+							{videoSliders.length > 0 && <HowToCarousel btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} />}
 							<div className="flex flex-wrap mb-0 mt-2 w-full">
 								{videoItems.map((item, index) => (
 									<div className="mb-4 lg:mb-3 w-full lg:w-1/3 sm:px-hg lg:px-g">

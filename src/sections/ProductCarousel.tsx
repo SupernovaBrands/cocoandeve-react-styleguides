@@ -83,6 +83,9 @@ const ProductCarousel = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+	const newTabCount = productsData?.tab1?.products.length;
+	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products)
+
 	return (
 		<>
 		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">
@@ -98,7 +101,7 @@ const ProductCarousel = (props: any) => {
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData?.tab1?.products && productsData.tab1.products.map((item: any, index: number) => {
+									{productsData?.tab1?.products && newTabProducts.map((item: any, index: number) => {
 										return (
 											<ProductCard
 												key={`${activeTab}-${item.id}-${index}`}

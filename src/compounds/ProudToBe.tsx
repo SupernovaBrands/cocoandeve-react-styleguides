@@ -6,6 +6,7 @@ import ToxinFree from '~/images/icons/toxin-free.svg';
 import Ethically from '~/images/icons/ethically.svg';
 import ParabenFree from '~/images/icons/paraben-free.svg';
 import Peta from '~/images/icons/peta.svg';
+import FragranceFree from '~/images/icons/fragrance-free.svg';
 import Gluten from '~/images/icons/gluten.svg';
 import Sulfate from '~/images/icons/natural-dha.svg';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -25,7 +26,8 @@ const iconsData = {
     'toxin-free': <><ToxinFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Toxin-free</span></>,
     'ethically': <><Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span></>,
     'paraben-free': <><ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span></>,
-    'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>
+    'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>,
+    'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>
 }
 
 const ProudToBe = (props:any) => {
