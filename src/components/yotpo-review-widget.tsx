@@ -926,7 +926,7 @@ const YotpoReviewWidget = (props:any) => {
 											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>
-											<h4 className="mb-1 mt-1 font-normal">
+											<h4 className="mb-1 mt-1 font-bold lg:font-normal">
 												{decodeHtml(review.title)}
 											</h4>
 											<p className="mb-1">
