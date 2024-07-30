@@ -12,6 +12,7 @@ import Sulfate from '~/images/icons/natural-dha.svg';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import { EmblaCarouselType } from 'embla-carousel';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 import { useRef, useEffect, useState, useCallback } from 'react';
 
@@ -38,7 +39,7 @@ const ProudToBe = (props:any) => {
     // const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
     const [totalSlide, setTotalSlide] = useState(0);
-	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start', dragFree: false, containScroll: 'keepSnaps' });
+	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start', dragFree: false, containScroll: 'keepSnaps' }, [WheelGesturesPlugin()]);
 	const [scrollProgress, setScrollProgress] = useState(0);
 
     // const [width, setWidth] = useState('0%');
@@ -92,7 +93,7 @@ const ProudToBe = (props:any) => {
                                 {proudToBeArr.map((proud:any, index: number) =>{
                                     if (proud) {
                                         return <div key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
-                                        {iconsData[proud]}
+                                        {iconsData[proud.replace('peta approved', 'peta')]}
                                         </div>
                                     }
                                     return null;
