@@ -34,39 +34,39 @@ const iconsData = {
 const ProudToBe = (props:any) => {
 
     const { proudToBe } = props;
-    // console.log('proudToBe', proudToBe);
     const proudToBeArr = proudToBe?.split('|') || [];
-    // const scrollEl = useRef(null);
+    const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
     const [totalSlide, setTotalSlide] = useState(0);
-	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start', dragFree: false, containScroll: 'keepSnaps' }, [WheelGesturesPlugin()]);
+	// const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start', dragFree: false, containScroll: 'keepSnaps' }, [WheelGesturesPlugin()]);
 	const [scrollProgress, setScrollProgress] = useState(0);
+    const [preventSelection, setPreventSelection] = useState('');
 
-    // const [width, setWidth] = useState('0%');
-    // const [left, setLeft] = useState(0);
+    const [width, setWidth] = useState('0%');
+    const [left, setLeft] = useState(0);
 
-    // const scrolling = (e:any) => {
-    //     const { target } = e;
-    //     let subWidth = 0;
-    //     target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
-    //     setLeft(e.target.scrollLeft);
-    // }
+    const scrolling = (e:any) => {
+        const { target } = e;
+        let subWidth = 0;
+        target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
+        setLeft(e.target.scrollLeft);
+    }
 
-    const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
-		const progress = Math.max(0, Math.min(1, emblaMainApi.scrollProgress()));
-		setScrollProgress(progress * 100 / 2);
-	}, []);
+    // const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
+	// 	const progress = Math.max(0, Math.min(1, emblaMainApi.scrollProgress()));
+	// 	setScrollProgress(progress * 100 / 2);
+	// }, []);
 
-    // useEffect(() => {
-    //     if (scrollEl && scrollEl.current) {
-    //         // if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
-    //             // setWidth(scrollEl.current.offsetWidth);
-    //         // } else {
-    //             // const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
-    //             // setWidth(`${w}%`);
-    //         // }
-    //     }
-    // }, [scrollEl]);
+    useEffect(() => {
+        if (scrollEl && scrollEl.current) {
+            if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
+                setWidth(scrollEl.current.offsetWidth);
+            } else {
+                const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
+                setWidth(`${w}%`);
+            }
+        }
+    }, [scrollEl]);
 
     useEffect(() => {
         let totalSlide = 0;
@@ -74,13 +74,51 @@ const ProudToBe = (props:any) => {
         setTotalSlide(totalSlide);
     }, []);
 
-    useEffect(() => {
-        if (emblaMainApi) {
-            emblaMainApi.on('select', onScroll);
-            emblaMainApi.on('reInit', onScroll);
-            emblaMainApi.on('scroll', onScroll);
-        }
-    }, [emblaMainApi]);
+    // useEffect(() => {
+    //     if (emblaMainApi) {
+    //         emblaMainApi.on('select', onScroll);
+    //         emblaMainApi.on('reInit', onScroll);
+    //         emblaMainApi.on('scroll', onScroll);
+    //     }
+    // }, [emblaMainApi]);
+
+    const [isMouseDown, setIsMouseDown] = useState(false);
+    const mouseCoords = useRef({
+        startX: 0,
+        startY: 0,
+        scrollLeft: 0,
+        scrollTop: 0
+    });
+
+    const handleDragStart = (e:any) => {
+        if (!scrollEl.current) return
+        const slider = scrollEl.current;
+        const startX = e.pageX - slider.offsetLeft;
+        const startY = e.pageY - slider.offsetTop;
+        const scrollLeft = slider.scrollLeft;
+        const scrollTop = slider.scrollTop;
+        mouseCoords.current = { startX, startY, scrollLeft, scrollTop }
+        setPreventSelection('prevent-selection');
+        setIsMouseDown(true)
+    }
+    const handleDragEnd = (e) => {
+        setIsMouseDown(false);
+        setPreventSelection('');
+        if (!scrollEl.current) return
+    }
+    const handleDrag = (e:any) => {
+        if (!isMouseDown || ! scrollEl.current) return;
+        e.preventDefault();
+        const slider = scrollEl.current;
+        const x = e.pageX - slider.offsetLeft;
+        const y = e.pageY - slider.offsetTop;
+        const walkX = (x - mouseCoords.current.startX) * 1.5;
+        const walkY = (y - mouseCoords.current.startY) * 1.5;
+        slider.scrollLeft = mouseCoords.current.scrollLeft - walkX;
+        slider.scrollTop = mouseCoords.current.scrollTop - walkY;
+        setPreventSelection('prevent-selection');
+    }
+
 
     return (
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
@@ -88,7 +126,7 @@ const ProudToBe = (props:any) => {
         <div className="">
                 <div className="carousel--scroll position-relative">
                     <div className="main-box overflow-hidden -mx-hg md:-mx-g">
-                        <Carousel.Wrapper emblaApi={emblaMainApi}>
+                        {/* <Carousel.Wrapper emblaApi={emblaMainApi}>
 	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
                                 {proudToBeArr.map((proud:any, index: number) =>{
                                     if (proud) {
@@ -99,22 +137,24 @@ const ProudToBe = (props:any) => {
                                     return null;
                                 })}
                             </Carousel.Inner>
-                        </Carousel.Wrapper>
-                        {/* <ul onScroll={scrolling} ref={scrollEl} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
+                        </Carousel.Wrapper> */}
+                        <ul onScroll={scrolling} ref={scrollEl}
+                            onMouseDown={handleDragStart} onMouseUp={handleDragEnd} onMouseMove={handleDrag}
+                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden`} role="listbox">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
-                                    return <></>;
+                                    return null;
                                 }
                                 return <li key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
-                                {iconsData[proud]}
+                                {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }
                             )}
-                        </ul> */}
+                        </ul>
                     </div>
                     {proudToBeArr.length > 5 && (
                         <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
-                            <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${scrollProgress}%`, width: `${ ((5 / totalSlide) * 100) - 5 }%` }} ref={scrollThumb}></div>
+                            <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${left}%`, width: `${width}` }} ref={scrollThumb}></div>
                         </div>
                     )}
                 </div>
