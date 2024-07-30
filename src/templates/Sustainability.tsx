@@ -400,7 +400,7 @@ const Sustainability = (props: any) => {
                                 <Carousel.Navigation>
                                     <PrevButton
                                         onClick={arrowClickPrev3}
-                                        className="lg:-left-[1.25em] lg:w-4 text-primary"
+                                        className="lg:-left-[2%] lg:w-4 text-primary"
                                     >
                                         <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
                                             <ChevronPrev className="w-[16px] h-[16px] svg--current-color" />
@@ -408,7 +408,7 @@ const Sustainability = (props: any) => {
                                     </PrevButton>
                                     <NextButton
                                         onClick={arrowClickNext3}
-                                        className="lg:-right-[1.25em] lg:w-4 text-primary"
+                                        className="lg:-right-[2%] lg:w-4 text-primary"
                                     >
                                         <span className="bg-white w-4 h-4 absolute z-[-1] flex justify-center items-center top-[28%] md:top-[6.25em] lg:top-[8.125em]">
                                             <ChevronNext className="w-[16px] h-[16px] svg--current-color" />

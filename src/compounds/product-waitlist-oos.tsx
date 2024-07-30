@@ -142,24 +142,33 @@ const ProductWaitlist = (props: any) => {
 	useEffect(() => {
 		if (props.selectedVariant) {
 			// default title & description is first message
-			data.waitlistTitle = props.vrt_waitlist_form_title_cs;
-			data.formDescription = props.vrt_waitlist_form_description_cs;
+			const wlComingSoon = props.vrt_phandles_cs?.split(',') || [];
+			if (wlComingSoon.includes(props.handle)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs;
+				data.formDescription = props.vrt_waitlist_form_description_cs;
+			}
 
 			const variantId = parseInt(props.selectedVariant.id.replace('gid://shopify/ProductVariant/', ''), 10) || 0;
 			const variantIds2 = props.vrt_waitlist_form_varid_cs_2.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds3 = props.vrt_waitlist_form_varid_cs_3.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds4 = props.vrt_waitlist_form_varid_cs_4.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds5 = props.vrt_waitlist_form_varid_cs_5.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			console.log(variantId, wlComingSoon, 'hahah');
 			if (variantIds2.includes(variantId)) {
+				console.log('testing 1');
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				data.formDescription = props.vrt_waitlist_form_description_cs_2;
 			} else if (variantIds3.includes(variantId)) {
+				console.log(props, 'testing 21');
+				console.log('testing 2');
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				data.formDescription = props.vrt_waitlist_form_description_cs_3;
 			} else if (variantIds4.includes(variantId)) {
+				console.log('testing 3');
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				data.formDescription = props.vrt_waitlist_form_description_cs_4;
 			} else if (variantIds5.includes(variantId)) {
+				console.log('testing 4');
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				data.formDescription = props.vrt_waitlist_form_description_cs_5;
 			}
