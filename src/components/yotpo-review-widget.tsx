@@ -957,7 +957,7 @@ const YotpoReviewWidget = (props:any) => {
 												<p className="text-sm mb-0 flex lg:hidden mr-auto my-auto">
 													{formatDate(review.created_at, formattedDate)}
 												</p>
-												<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}aad</p>
+												<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
 												<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 !text-body ${votes[`reviews-${review.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', review.id, 'up'); }}>
 													<SvgThumbsUp className="svg mr-25 size-1em" />
 													{review.votes_up}
@@ -1130,8 +1130,8 @@ const YotpoReviewWidget = (props:any) => {
 											</Carousel.Wrapper>
 										</div>
 									)}
-									<button type="button" className="close absolute flex lg:hidden right-0" aria-label="Close" onClick={() => setIsOpen(false) }>
-										<SvgCloseCircle className="svg size-1em" />
+									<button type="button" className="close absolute flex lg:hidden top-[10px] right-[10px]" aria-label="Close" onClick={() => setIsOpen(false) }>
+										<SvgCloseCircle className="svg size-[24px]" />
 									</button>
 								</div>
 								<div className="lg:w-1/2 pl-lg-0 ">
@@ -1142,14 +1142,15 @@ const YotpoReviewWidget = (props:any) => {
 											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at, formattedDate)}</span>
 										</div>
 										<div className="flex text-secondary" />
-										<h4 className="mb-0 my-2 yotpo__modal-title">{decodeHtml(reviewModal.title)}</h4>
+										<h4 className="my-2 yotpo__modal-title">{decodeHtml(reviewModal.title)}</h4>
 										<p className="text-sm yotpo__modal-content">{reviewModal.content}</p>
 										<div className="flex justify-end items-center mt-3">
-											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'up' && 'text-primary'}`} onClick={() => { onVote('reviews', reviewModal.id, 'up'); }}>
+											<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
+											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'up' && ''}`} onClick={() => { onVote('reviews', reviewModal.id, 'up'); }}>
 												<SvgThumbsUp className="svg mr-25 size-1em" />
 												{reviewModal.votes_up + (votes[`reviews-${reviewModal.id}`] === 'up' ? 1 : 0)}
 											</button>
-											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'down' && 'text-primary'}`} onClick={() => { onVote('reviews', reviewModal.id, 'down'); }}>
+											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'down' && ''}`} onClick={() => { onVote('reviews', reviewModal.id, 'down'); }}>
 												<SvgThumbsDown className="svg mr-25 size-1em" />
 												{reviewModal.votes_down + (votes[`reviews-${reviewModal.id}`] === 'down' ? 1 : 0)}
 											</button>
