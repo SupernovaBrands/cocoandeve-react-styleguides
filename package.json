@@ -19,6 +19,7 @@
     "embla-carousel-auto-height": "8.0.0",
     "embla-carousel-autoplay": "8.0.0",
     "embla-carousel-react": "8.0.0",
+    "embla-carousel-wheel-gestures": "^8.0.1",
     "framer-motion": "^11.0.18",
     "html-react-parser": "^5.1.10",
     "jquery": "^3.6.4",
