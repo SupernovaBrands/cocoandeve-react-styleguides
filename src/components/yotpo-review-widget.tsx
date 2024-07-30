@@ -1148,11 +1148,11 @@ const YotpoReviewWidget = (props:any) => {
 											<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
 											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'up' && ''}`} onClick={() => { onVote('reviews', reviewModal.id, 'up'); }}>
 												<SvgThumbsUp className="svg mr-25 size-1em" />
-												{reviewModal.votes_up + (votes[`reviews-${reviewModal.id}`] === 'up' ? 1 : 0)}
+												{reviewModal.votes_up}
 											</button>
 											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'down' && ''}`} onClick={() => { onVote('reviews', reviewModal.id, 'down'); }}>
 												<SvgThumbsDown className="svg mr-25 size-1em" />
-												{reviewModal.votes_down + (votes[`reviews-${reviewModal.id}`] === 'down' ? 1 : 0)}
+												{reviewModal.votes_down}
 											</button>
 										</div>
 									</div>
