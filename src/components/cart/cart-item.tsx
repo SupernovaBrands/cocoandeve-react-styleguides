@@ -272,10 +272,16 @@ export const CartItem = (props:CartItemProps) => {
 										<span className="spinner-border spinner-border-sm text-primary ml-1 !w-[20px] !h-[20px]" role="status" />
 									)}
 
+									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
 										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
-									</span>
+									</span>)}
 								</p>
+								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
+									<div className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
+										{`${selected.replace(': limited edition!', '')} ${opt.name}`}
+									</div>
+								)}
 							</div>
 
 						);

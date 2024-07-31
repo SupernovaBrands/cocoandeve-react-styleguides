@@ -182,6 +182,7 @@ const SwatchOverlay = (props:any) => {
                                 {props.swatch.shade && <strong>Shade: </strong>}
                                 {props.swatch.tangleTamer && <strong>Type: </strong>}
                                 {props.swatch.scent && <strong>Scent: </strong>}
+                                {props.swatch.variant && <strong>Variant: </strong>}
                                 <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
                             </label>
                             <ul className="list-unstyled product-variant-swatch flex justify-center">
