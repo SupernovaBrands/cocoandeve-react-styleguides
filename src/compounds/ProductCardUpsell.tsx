@@ -14,7 +14,7 @@ const WaitlistButton = (props: any) => {
 
 const AddToCartButton = (props: any) => {
     let label = props.label ? props.label : 'Add To Cart';
-    label = ['dev', 'us'].includes(props.store) ? label.replace('Color', 'Colour') : label;
+    label = !['us'].includes(props.store) ? label.replace('Color', 'Colour') : label;
 
     const [addingItem, setAddingItem] = useState(false);
     const onAddItem = async () => {
