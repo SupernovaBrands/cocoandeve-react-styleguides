@@ -1130,7 +1130,7 @@ const YotpoReviewWidget = (props:any) => {
 											</Carousel.Wrapper>
 										</div>
 									)}
-									<button type="button" className="close absolute flex lg:hidden top-[10px] right-[10px]" aria-label="Close" onClick={() => setIsOpen(false) }>
+									<button type="button" className="close absolute flex lg:hidden top-[10px] right-[10px] z-40" aria-label="Close" onClick={() => setIsOpen(false) }>
 										<SvgCloseCircle className="svg size-[24px]" />
 									</button>
 								</div>
