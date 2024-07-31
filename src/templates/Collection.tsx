@@ -256,9 +256,9 @@ const Collection = (props: any) => {
         setLoading(false);
     }, [currentCollection]);
 
-    const collectionSettings = useCollectionSettings(handle);
+    const collectionSettings = useCollectionSettings(handle, store);
     const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
-    const collectionSingle = useCollectionSingle(handleFooter);
+    const collectionSingle = useCollectionSingle(handleFooter, store);
     const footerAbout = collectionSingle.collectionSingle?.about_our_products || false;
 
     const loadWaitlist = isWaitlist(collProducts);
@@ -468,7 +468,7 @@ const Collection = (props: any) => {
                                 return showQuizCard && index === 2 ? (
                                     <>
                                         {!collectionSettings.isLoading && (
-                                            <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
+                                            <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
                                         )}
                                         <ProductCard
                                             key={`collection-b-${handle}-${item.id}-${index}`}
@@ -507,7 +507,7 @@ const Collection = (props: any) => {
                                 )
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
-                                <ProductCardQuiz quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                                <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>

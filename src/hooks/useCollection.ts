@@ -12,20 +12,12 @@ const fetcher = (url: string) => {
     return axios.get(url, { headers }).then(res => res.data)
 };
 
-export const useCollectionSingle = (handle: string) => {
-	const { isPreview } = usePreview();
+export const useCollectionSingle = (handle: string, store: string) => {
+	// const { isPreview } = usePreview();
 	let params = '';
-    if (isPreview) params = '?preview=true';
+    if (store === 'dev') params = '?preview=true';
 	let { data, error, isLoading } = useSWR(`https://${host}/single-collection/${handle}${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
 	let collectionSingle: any;
-	let store: string;
-	if (isPreview) {
-		collectionSingle = data?.find((c) => c.storePreview) || {};
-		store = 'dev';
-	} else {
-		collectionSingle = data?.find((c) => c.storePreview === null) || {};
-		store = 'us';
-	}
 	return {
 		error,
 		isLoading,
@@ -34,17 +26,11 @@ export const useCollectionSingle = (handle: string) => {
 	}
 };
 
-export const useCollectionSettings = (handle: string) => {
-	const { isPreview } = usePreview();
+export const useCollectionSettings = (handle: string, store: string) => {
+	// const { isPreview } = usePreview();
     let params = '';
-    if (isPreview) params = '?preview=true';
+    if (store === 'dev') params = '?preview=true';
 	let { data, error, isLoading } = useSWR(`https://${host}/collection-settings${params}`, fetcher, { revalidateOnFocus: true, revalidateOnReconnect: true });
-	let store: string;
-	if (isPreview) {
-		store = 'dev';
-	} else {
-		store = 'us';
-	}
 
 	let handleName = handle === 'tan-and-spf' ? 'tan' : handle;
 	handleName = handleName === 'kits-gifts' ? 'bundle': handleName;
@@ -54,7 +40,7 @@ export const useCollectionSettings = (handle: string) => {
 			(section.range_handles.split(',').map((v) => v.trim()).includes(handle) || section.__component === `collection.${handleName}-range-collection-setting`)
 	) || universalBanner;
 	let filterCollectionHandles = data?.filter_collections_handles
-	if (isPreview) filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
+	filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
 	const quizSetting = data?.quiz_collection;
 
 	return {
