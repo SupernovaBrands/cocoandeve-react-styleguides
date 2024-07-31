@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const WaitlistButton = (props: any) => {
     return (
-        <Button buttonClass={`${props.className ?? ''} btn-primary border-0 w-full px-2`} onClick={props.onClick}>
+        <Button buttonClass={`${props.className ?? ''} btn-primary border-0 w-full max-w-[calc(13.5em+2px)] px-2`} onClick={props.onClick}>
             <span className='text-center'>
                 Waitlist Me
             </span>
