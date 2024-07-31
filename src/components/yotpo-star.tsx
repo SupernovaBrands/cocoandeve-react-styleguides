@@ -55,11 +55,11 @@ const YotpoStar = (props:any) => {
 	) : (
 		<div className={`flex ${props.extraClass} mb-2 md:mb-1`}>
 			<ReviewStar score={score} />
-			{props.showScore && <a className="ml-25 text-primary" onClick={scrollToWidget}>{`${score ? score.toFixed(1) : 0} stars`}</a>}
+			{props.showScore && <a className="ml-25 text-primary" onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>{`${score ? score.toFixed(1) : 0} stars`}</a>}
 			{props.showTotal && (
 				<span className="ml-25" onClick={scrollToWidget}>
 					(
-					<a className="link-secondary underline text-dark hover:text-primary" href={`${props.productUrl}#write-a-review`}>{total}</a>
+					<a className="link-secondary underline text-dark hover:text-primary" onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()} href={`${props.productUrl}#write-a-review`}>{total}</a>
 					)
 				</span>
 			)}
@@ -75,6 +75,7 @@ YotpoStar.propTypes = {
 	hideStars: PropTypes.bool,
 	extraClass: PropTypes.string,
 	productSkus: PropTypes.string.isRequired,
+	scrollToElement: PropTypes.func,
 };
 
 YotpoStar.defaultProps = {
