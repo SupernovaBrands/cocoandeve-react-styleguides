@@ -42,14 +42,12 @@ const ProudToBe = (props:any) => {
 	const [scrollProgress, setScrollProgress] = useState(0);
     const [preventSelection, setPreventSelection] = useState('');
 
-    const [width, setWidth] = useState('0%');
+    const [width, setWidth] = useState('100%');
     const [left, setLeft] = useState(0);
 
     const scrolling = (e:any) => {
-        const { target } = e;
-        let subWidth = 0;
-        target.querySelectorAll('li').forEach((li:any) => subWidth += 40) // li.offsetWidth);
-        setLeft(e.target.scrollLeft);
+        const moveLeft = e.target.scrollLeft/scrollEl.current.scrollWidth;
+        setLeft(moveLeft * (scrollEl.current.offsetWidth - 5));
     }
 
     // const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
@@ -57,21 +55,27 @@ const ProudToBe = (props:any) => {
 	// 	setScrollProgress(progress * 100 / 2);
 	// }, []);
 
-    useEffect(() => {
+    const adjustWidth = () => {
         if (scrollEl && scrollEl.current) {
             if (scrollEl.current.offsetWidth > scrollEl.current.scrollWidth) {
                 setWidth(scrollEl.current.offsetWidth);
             } else {
-                const w = Math.abs((scrollEl.current.scrollWidth - globalThis.window.innerWidth) / globalThis.window.innerWidth *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
+                const ratio = globalThis.window.innerWidth / (scrollEl.current.scrollWidth + 30); // plus 30 for padding
+                const w = Math.abs(ratio *  100) // (scrollEl.current.scrollWidth - scrollEl.current.offsetWidth));
                 setWidth(`${w}%`);
             }
         }
+    }
+
+    useEffect(() => {
+        adjustWidth();
     }, [scrollEl]);
 
     useEffect(() => {
         let totalSlide = 0;
         proudToBeArr.forEach((proud:any) => {if (proud) { totalSlide += 1}});
         setTotalSlide(totalSlide);
+        globalThis.document.addEventListener('resize', adjustWidth);
     }, []);
 
     // useEffect(() => {
@@ -154,7 +158,7 @@ const ProudToBe = (props:any) => {
                     </div>
                     {proudToBeArr.length > 5 && (
                         <div className="scrollbar lg:mt-3 lg:hidden bg-gray-400 relative h-[4px] rounded rounded-[4px] overflow-hidden -mt-1">
-                            <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${left}%`, width: `${width}` }} ref={scrollThumb}></div>
+                            <div className="scrollbar--thumb bg-gray-500 absolute h-[4px] rounded-[4px]" style={{ left: `${left}px`, width: width }} ref={scrollThumb}></div>
                         </div>
                     )}
                 </div>
