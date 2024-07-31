@@ -12,9 +12,11 @@ interface QuizSetting {
 
 type PropType = {
 	quizSetting: QuizSetting,
+	store: string
 }
 
-const ProductCardQuiz: React.FC<PropType> = ({quizSetting}) => {
+const ProductCardQuiz: React.FC<PropType> = ({quizSetting, store}) => {
+	const title = quizSetting.quiz_title;
 	return (
 		<a href={quizSetting.quiz_button_url} className="w-full md:w-1/3 mb-5 px-0 lg:px-g text-left lg:text-center relative">
 			<figure className="mb-0 h-full">
@@ -25,7 +27,7 @@ const ProductCardQuiz: React.FC<PropType> = ({quizSetting}) => {
 				<figcaption className="absolute px-2 lg:px-3 product-card--quiz__banner-bottom bottom-[50%] lg:bottom-0 left-0 right-0 transform translate-y-[50%] lg:transform-none">
 					<p className="text-primary font-size-lg font-bold mb-1 lg:mb-2"
 						dangerouslySetInnerHTML={{
-							__html: quizSetting.quiz_title
+							__html: ['us'].includes(store) ? title.replace('colour', 'color') : title,
 						}}
 					/>
 					<span className="inline-block font-bold py-[13px] rounded-full border-2 border-primary lg:mb-2 px-g lg:px-4 bg-white text-primary hover:no-underline">{quizSetting.quiz_button_cta}</span>
