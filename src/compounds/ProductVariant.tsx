@@ -54,21 +54,24 @@ type VariantProp = {
 	saving?: string
 	compare?: string
 	keyName?: string
+	isAdditional?: boolean
 }
 
-const ProductVariant: React.FC<VariantProp> = (props) => (
-	<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
-		<input id={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
-		<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
-			{props.children}
-			{!props.subscription && <p className="mb-1 font-bold">
-				{props.compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
-				<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price} </span>
-				{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {props.saving ? props.saving : '(Save 30%)'} </span>}
-			</p>}
-		</label>
-	</div>
-);
+const ProductVariant: React.FC<VariantProp> = (props) => {
+	return (
+		<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
+			<input id={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-is-additional={props.isAdditional} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
+			<label htmlFor={props.id} className={`custom-control-label before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white]`}>
+				{props.children}
+				{!props.subscription && <p className="mb-1 font-bold">
+					{props.compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
+					<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price}</span>
+					{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {props.saving ? props.saving : '(Save 30%)'} </span>}
+				</p>}
+			</label>
+		</div>
+	)
+};
 
 ProductVariant.defaultProps = {
 	subscription: false,
