@@ -21,9 +21,7 @@ const ArticleCarousel = (props:any) => {
 	};
 
 	const [articles, setArticles] = useState(props.articles);
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
 	// const {
 	// 	onPrevButtonClick: arrowClickPrev,

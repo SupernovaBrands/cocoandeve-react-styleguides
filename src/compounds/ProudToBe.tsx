@@ -33,8 +33,46 @@ const iconsData = {
 
 const ProudToBe = (props:any) => {
 
+    const iconOrders = [
+        "fragrance-free",
+        "peta approved",
+        "peta",
+        "paraben-free",
+        "ethically",
+        "gluten-free",
+        "gluten",
+        "toxin-free",
+        "cruelty-free",
+        "silicone-free",
+        "vegan",
+        "sulfate-free",
+        "natural-dha"
+    ];
+    const handleSort = (a, b) => {
+		const indexNumA = iconOrders.findIndex((item) => {
+            return item.includes(a)
+        });
+		const indexNumB = iconOrders.findIndex((item) => {
+            return item.includes(b)
+        });
+
+		if (indexNumA >= 0 && indexNumB < 0) {
+			return -1;
+		}
+
+		if (indexNumA < 0 && indexNumB >= 0) {
+			return 1;
+		}
+
+		if (indexNumA >= 0 && indexNumB >= 0) {
+			return (indexNumA > indexNumB) ? 0 : -1;
+		}
+
+		return 0;
+	};
+
     const { proudToBe } = props;
-    const proudToBeArr = proudToBe?.split('|') || [];
+    const proudToBeArr = proudToBe?.split('|').sort(handleSort).reverse() || [];
     const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
     const [totalSlide, setTotalSlide] = useState(0);
@@ -122,7 +160,6 @@ const ProudToBe = (props:any) => {
         slider.scrollTop = mouseCoords.current.scrollTop - walkY;
         setPreventSelection('prevent-selection');
     }
-
 
     return (
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
