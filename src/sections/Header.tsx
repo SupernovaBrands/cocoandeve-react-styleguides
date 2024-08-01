@@ -231,10 +231,10 @@ const Header = (props: any) => {
 								}
 							})}
 							<li key="line" className="nav-item px-hg">
-								<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">|</a>
+								<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">|</a>
 							</li>
 							<li key="result-irl" className="nav-item px-hg">
-								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em]">Results IRL</a>
+								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">Results IRL</a>
 							</li>
 						</ul>
 

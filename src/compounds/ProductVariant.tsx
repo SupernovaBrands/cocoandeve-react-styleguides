@@ -54,6 +54,7 @@ type VariantProp = {
 	saving?: string
 	compare?: string
 	keyName?: string
+	isAdditional?: any
 }
 
 const ProductVariant: React.FC<VariantProp> = (props) => (
