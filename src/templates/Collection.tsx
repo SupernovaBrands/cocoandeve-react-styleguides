@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
-import Service from "~/sections/Service";
+// import Service from "~/sections/Service";
 import { sidebar_collection_ph } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
+import CollectionServices from "~/compounds/CollectionServices";
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
@@ -533,10 +534,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && (handle === 'all' || (initSub && !['hair-benefits', 'kits-gifts'].includes(parentCollection?.collection?.handle) && handle !== 'kits-gifts')) && <Service className="!text-base" />}
-            {!isLoading && (handle === 'hair-benefits' || parentCollection?.collection?.handle === 'hair-benefits') && <Service className="!text-base" />}
-            {!isLoading && (handle === 'kits-gifts' || parentCollection?.collection?.handle === 'kits-gifts') && <Service className="!text-base" />}
-
+            {!isLoading && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>

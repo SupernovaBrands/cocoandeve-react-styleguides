@@ -10,7 +10,7 @@ const ProductBanner = (props) => {
             <div className="w-full lg:w-1/2 px-0 relative">
                 <picture className="block pt-[86%] w-full overflow-hidden">
                     <source
-                        srcSet={props.srcSet}
+                        srcSet={props.src}
                         media="(min-width: 992px)" width="1362" height="1162"/>
                     <img
                         src={props.src}
