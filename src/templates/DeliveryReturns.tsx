@@ -7,6 +7,7 @@ const deliveryLi = (countryName) => {
 const DeliveryReturns = (props: any) => {
     const { content } = props;
     const [pageContent, setPageContent] = useState(null);
+    const [pageTitle, setPageTitle] = useState('Delivery');
     const cols = [0, 1, 2, 3, 4, 5, 6];
 
     const getDataByIndex = (col) => {
@@ -28,6 +29,7 @@ const DeliveryReturns = (props: any) => {
     useEffect(() => {
         if (content?.body?.[0]?.Sections) {
             setPageContent(content?.body?.[0]?.Sections[0]);
+            setPageTitle(content?.body?.[0]?.title);
         }
     }, [content]);
     return (
@@ -35,7 +37,7 @@ const DeliveryReturns = (props: any) => {
             <section>
                 <div className="container lg:max-w-[1200px] pt-5 lg:pt-2 pb-0 lg:pb-0">
                     <div className="flex flex-wrap -mx-hg lg:-mx-g text-center justify-center lg:pb-4">
-                        <h1 className="mb-1">Delivery</h1>
+                        <h1 className="mb-1">{pageTitle}</h1>
                     </div>
                     <div className="flex flex-col mx-0 lg:-mx-0 text-center justify-center pt-g pb-[18px] lg:pb-g border-b-[#adadad] border-b-[1px] border-b-solid">
                         <h2 className="block mb-1">Standard delivery times</h2>
