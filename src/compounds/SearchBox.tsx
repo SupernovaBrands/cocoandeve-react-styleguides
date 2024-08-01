@@ -184,7 +184,7 @@ const SearchBox = (props: any) => {
 			popProducts.map((data) => {
 				const { product } = data;
 				if (product) {
-					console.log('');
+					// console.log('');
 					const { img } = getFeaturedImgMeta(product);
 					// const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
 					// 	? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
