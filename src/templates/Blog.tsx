@@ -1,6 +1,5 @@
 // import { Container, Row } from "react-bootstrap";
 import BlogNavTag from '~/compounds/blog-nav-tags';
-import ArticleRecommendation from "~/sections/ArticleRecommendation";
 import HowToCarousel from "~/sections/HowTo";
 import { EmblaOptionsType } from 'embla-carousel';
 import Carousel from "~/components/carousel/EmblaCarouselMulti";
@@ -28,11 +27,12 @@ const options: EmblaOptionsType = {
 
 const Blog = (props) => {
 
-	const { isLoading, postData, popularArticles, videoData, tag } = props;
+	const { isLoading, postData, videoData, tag, region } = props;
 	const [activeFrame, setActiveFrame] = useState(true);
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [active, setActive] = useState(false);
+	const [tanTitle, setTanTitle] = useState('');
 
 	const handleHowTo = () => {
 		setActiveFrame(!activeFrame);
@@ -119,6 +119,11 @@ const Blog = (props) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const title = region === 'ca' ? 'Tan' : 'Tan & SPF';
+		setTanTitle(title);
+	}, [region]);
+	
 	return (
 		<div className="mobile-wrapper mt-3 lg:mt-5 lg:px-0 sm:px-hg">
 			<div className="container">
@@ -126,7 +131,7 @@ const Blog = (props) => {
 				<div className="blog-nav-tags mb-4 flex mt-2" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF" active={active ? false : (tag === 'tan' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
 					<a href="/blogs/news#how-to-tab" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
@@ -150,8 +155,8 @@ const Blog = (props) => {
 												</picture>
 											)}
 											<figcaption className="p-2 ">
-												{ item.tags.length > 0 ? item.tags.map((tag) =>
-													<span className={`${colors[tag.toLowerCase()].bg} ${colors[tag.toLowerCase()].text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
+												{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
+													<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
 												) : ''}
 												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 											</figcaption>
@@ -194,7 +199,8 @@ const Blog = (props) => {
 									</Carousel.Wrapper>
 								}
 							</div>
-							{popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />}
+							{/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
+							<div id="poppularArticles"></div>
 							<div id="topPostCard" className="blog-post__cards flex flex-wrap mb-0 mt-2 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
