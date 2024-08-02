@@ -92,7 +92,6 @@ const CartExtrass = (props:any) => {
 
 		{showAfterpay && (
 			<>
-			<hr className="mt-2"/>
 			<div className='text-center font-size-sm border-top py-2 flex items-center justify-center px-2 flex-wrap'>
 				<span className='block w-full'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
 				<div className="afterpay-content relative flex items-center">
