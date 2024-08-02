@@ -19,7 +19,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const SearchBox = (props: any) => {
-	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta } = props;
+	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store } = props;
 	const [keyword, setKeyword] = useState('');
 	const [keywords, setKeywords] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -278,6 +278,7 @@ const SearchBox = (props: any) => {
 												img={item?.featuredImgUrl}
 												classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/6 lg:basis-1/6 px-hg lg:px-g"
 												trackEvent={trackEvent}
+												store={store}
 											/>
 										))}
 									</Carousel.Inner>
