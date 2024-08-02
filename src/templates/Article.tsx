@@ -89,11 +89,13 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, popularArticles, postBannerInfo, upsells, store, addToCart, generalSetting } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region } = props;
     const [offset, setOffset] = useState<any | null>(null);
     const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
+    const [tanTitle, setTanTitle] = useState('');
+    const [title, setTitle] = useState(content.title);
 
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
@@ -101,15 +103,14 @@ const Article = (props) => {
     const year = d.toLocaleString('default', { year: 'numeric' });
     const updateDate = `Updated on ${month} ${day}, ${year}`;
 
-    const storeName = 'dev';
     let bodyContent = '';
     let quickLinks = [];
 
-    const featuredImageUrl = content?.BlogContentMultiStores?.[storeName]?.featured_image?.url || '';
-    const featuredImageAlternativeText = content?.BlogContentMultiStores?.[storeName]?.featured_image?.alt || '';
+    const featuredImageUrl = content?.BlogContentMultiStores?.[store]?.featured_image?.url || '';
+    const featuredImageAlternativeText = content?.BlogContentMultiStores?.[store]?.featured_image?.alt || '';
     const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
-    if (content?.BlogContentMultiStores?.[storeName]?.body_content && typeof content.BlogContentMultiStores[storeName].body_content === 'string') {
-        bodyContent = content.BlogContentMultiStores[storeName].body_content
+    if (content?.BlogContentMultiStores?.[store]?.body_content && typeof content.BlogContentMultiStores[store].body_content === 'string') {
+        bodyContent = content.BlogContentMultiStores[store].body_content
             .replace('<a', ariaLabel)
             .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
     }
@@ -307,6 +308,16 @@ const Article = (props) => {
         tikTokScript.setAttribute('async', '');
         document.body.appendChild(tikTokScript);
     }, []);
+
+    useEffect(() => {
+		const newtitle = region === 'ca' ? 'Tan' : 'Tan & SPF';
+		setTanTitle(newtitle);
+
+        if ((region === 'int' || region === 'au' || region === 'my') && content.handle === 'how-to-deep-condition-hair') {
+            setTitle('How to Deep Condition Hair to Ditch Dryness and Frizz');
+        }
+	}, [region]);
+
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
@@ -317,7 +328,7 @@ const Article = (props) => {
                     <div className="blog-nav-tags mb-4 flex mt-2">
                         <BlogNavTag href="/blogs/news" title="ALL" active={true} />
                         <BlogNavTag href="/blogs/news/tagged/hair" title="Hair"/>
-                        <BlogNavTag href="/blogs/news/tagged/tan" title="Tan & SPF"/>
+                        <BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle}/>
                         <BlogNavTag href="/blogs/news/tagged/skin" title="Skin"/>
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body"/>
                         <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
@@ -325,7 +336,7 @@ const Article = (props) => {
                 )}
                 <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
-                        <h1 className="text-center mb-1">{content.title}</h1>
+                        <h1 className="text-center mb-1">{title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
                         {!isLoading && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
@@ -355,17 +366,17 @@ const Article = (props) => {
                             )}
                             <ul className="block mb-4 mt-1">
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${storeName}.cocoandeve.com&text=${content.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${storeName}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]">
                                         <Facebook className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block">
-                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${storeName}.cocoandeve.com&media=${featuredImageUrl}&description=${content.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Pinterest className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>

@@ -213,7 +213,7 @@ const isKit = (title:string) => {
 }
 
 const ProductCardTall = (props:any) => {
-    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label } = props;
+    const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const { product } = props;
@@ -269,12 +269,43 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(defaultVariant || null);
     }, []);
 
+    //Hardcode Product Card Images
+    let productSrcSet = props.product.srcSet;
+    let productSrc = props.product.src;
+    let productImgHover = props.product.imgHover;
+
+    if ((store === 'my' || store === 'uk') && props.product.handle === 'daily-essentials-bundle') {
+        let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+        let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e6b3d13-538a-4983-7560-c1f42e4c6400/public';
+		productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
+        productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+	}
+	if ((store === 'my' || store === 'uk') && props.product.handle === 'super-hydration-kit') {
+		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
+		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f825e183-9dac-4f2b-ee1a-bf0711f67400/public';
+        productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
+        productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+	}
+	if ((store === 'my' || store === 'uk') && props.product.handle === 'deep-condition-bundle') {
+		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
+		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6175c52d-3cd8-49e1-0c70-46254c2caa00/public';
+        productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
+        productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+	}
+    if ((store === 'my') && props.product.handle === 'sweet-repair-scalp-massager') {
+		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9e2adedd-3cc1-4e3d-8bd0-43d5b6ba0d00/public';
+        productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
+	}
+
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
-                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
-                    {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
+                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!productSrc ? 'bg-shimmer' : ''} bg-pink-light`}>
+                    {productSrcSet && <source srcSet={productSrcSet} media="(min-width: 992px)" />}
+                    {productSrc && <img src={productSrc} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -282,9 +313,9 @@ const ProductCardTall = (props:any) => {
                             <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
                         </>
                     )}
-                    {props.product.imgHover && (
+                    {productImgHover && (
                         <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
-                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                            {productImgHover && <img src={productImgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
                 </picture>

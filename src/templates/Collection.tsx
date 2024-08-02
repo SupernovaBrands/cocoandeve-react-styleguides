@@ -486,6 +486,7 @@ const Collection = (props: any) => {
                                             setLaunchWLModal={setLaunchWLModal}
                                             generalSetting={generalSetting}
                                             collectionTemplate={true}
+                                            store={store}
                                         />
                                     </>
                                 ) : (
@@ -504,6 +505,7 @@ const Collection = (props: any) => {
                                         setLaunchWLModal={setLaunchWLModal}
                                         generalSetting={generalSetting}
                                         collectionTemplate={true}
+                                        store={store}
                                     />
                                 )
                             })}
