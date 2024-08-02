@@ -436,7 +436,7 @@ module.exports = global.config = {
 		"cart_drawer_title": "Your Cart",
 		"cart_empty": "Your cart is currently empty.",
 		"cart_subtotal": "Subtotal",
-		"cart_bundle_discount": "Bundle Discount",
+		"cart_bundle_discount": "Bundle Savings",
 		"cart_discount": "Discount",
 		"cart_update_variant": "Update",
 		"cart_discount_applied": "Promo code applied",
