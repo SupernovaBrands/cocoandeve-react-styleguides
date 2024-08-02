@@ -95,7 +95,7 @@ const Collection = (props: any) => {
     } = props;
 
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
-    const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
+    const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -283,7 +283,7 @@ const Collection = (props: any) => {
             }
             setLoading(false);
         });
-    }, [handle]);
+    }, [handle, squareBadge]);
 
     useEffect(() => {
         const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
@@ -299,15 +299,18 @@ const Collection = (props: any) => {
     }, [launchWLModal]);
 
     useEffect(() => {
-        // getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
-        fetch(`/api/sevenDaysSalesIds`).then(
-			res => {
-				res?.json().then(data => {
-					const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
-					setSevenDaysSalesIds(ids.map((i) => parseInt(i, 10)));
-				})
-			}
-		);
+        // if (['dev'].includes(store)) {
+        //     // getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
+        //     fetch(`/api/sevenDaysSalesIds`).then(
+        //         res => {
+        //             res?.json().then(data => {
+        //                 const ids = data?.body?.data?.shop?.listIds?.value?.split(',') || [];
+        //                 // console.log('seven days sales', ids.map((i) => parseInt(i, 10)));
+        //                 setSevenDaysSalesIds(ids.map((i) => parseInt(i, 10)));
+        //             })
+        //         }
+        //     );
+        // }
         setInitMain(parentCollection === null);
         setInitSub(parentCollection !== null);
     }, []);
