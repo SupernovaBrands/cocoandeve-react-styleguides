@@ -96,6 +96,8 @@ const Article = (props) => {
     const [label, setLabel] = useState('');
     const [tanTitle, setTanTitle] = useState('');
     const [title, setTitle] = useState(content.title);
+    const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+    const [bodyContent, setBodyContent] = useState('');
 
     const d = new Date(content.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
@@ -103,17 +105,8 @@ const Article = (props) => {
     const year = d.toLocaleString('default', { year: 'numeric' });
     const updateDate = `Updated on ${month} ${day}, ${year}`;
 
-    let bodyContent = '';
     let quickLinks = [];
-
-    const featuredImageUrl = content?.BlogContentMultiStores?.[store]?.featured_image?.url || '';
     const featuredImageAlternativeText = content?.BlogContentMultiStores?.[store]?.featured_image?.alt || '';
-    const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
-    if (content?.BlogContentMultiStores?.[store]?.body_content && typeof content.BlogContentMultiStores[store].body_content === 'string') {
-        bodyContent = content.BlogContentMultiStores[store].body_content
-            .replace('<a', ariaLabel)
-            .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
-    }
 
     if (content?.quick_links) {
         quickLinks = content.quick_links.split(',');
@@ -131,6 +124,20 @@ const Article = (props) => {
             });
         }
     };
+
+    useEffect(() => {
+        if (content?.BlogContentMultiStores?.[region]?.featured_image?.url) {
+            const featuredImage = content?.BlogContentMultiStores?.[region]?.featured_image?.url || '';
+            setFeaturedImageUrl(featuredImage)
+        }
+        if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
+            const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
+            const body = content.BlogContentMultiStores[region].body_content
+                .replace('<a', ariaLabel)
+                .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
+            setBodyContent(body);
+        }
+    }, []);
 
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');

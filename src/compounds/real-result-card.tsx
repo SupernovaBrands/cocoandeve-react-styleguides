@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 import Badge from '~/components/Badge';
 
 const RealResultCard = (props) => {
-	const { data } = props;
+	const { data, region } = props;
 	let badgeColor = 'badge-purple';
 
 	let storeName = 'us';
@@ -29,7 +29,7 @@ const RealResultCard = (props) => {
 		badgeColor = 'bg-skincare-orange';
 	}
 
-	if (storeName === 'au' && data.label.includes('Daily Radiance Primer SPF50 Sunscreen')) {
+	if (region === 'au' && data.label.includes('Daily Radiance Primer SPF50 Sunscreen')) {
 		data.label = data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50');
 	}
 
@@ -47,7 +47,7 @@ const RealResultCard = (props) => {
 					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" />
 					<Badge badgeClasses={`text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
 				</p>
-				{storeName === 'au' ? (
+				{region === 'au' ? (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc)) && (data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50'))}`)}</>
 				) : (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc))}`)}</>
