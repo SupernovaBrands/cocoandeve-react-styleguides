@@ -33,6 +33,10 @@ const RealResultCard = (props) => {
 		data.label = data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50');
 	}
 
+	if (region === 'us' && data.label.includes('Tan Boosting Anti-Aging Body Oil SPF30')) {
+		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF30', 'Tan Boosting Anti-Aging Body Oil SPF20');
+	}
+
 	const titleEscaped = escapeHtml(data.label);
 	const titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
 
