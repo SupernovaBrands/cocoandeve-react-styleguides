@@ -268,7 +268,7 @@ const Collection = (props: any) => {
         setLoading(true);
         fetch(`/api/collectionInfo?${new URLSearchParams({
 			parentHandle: mainCollectionHandles,
-            childrenHandle: subHandles
+            childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
             setChildMenu(data.childrens);
