@@ -82,7 +82,7 @@ const ProductRoutineCarousel = (props: any) => {
                 <p className="h1 w-full text-center mb-3 lg:px-g sm:px-h1">Shop the Routine</p>
                 <div className="container lg:mx-g w-[100vw] lg:w-full px-0 lg:px-g">
                     <Carousel.Wrapper emblaApi={emblaApi1}>
-                        <Carousel.Inner emblaRef={emblaRef1} className="mx-0 lg:-mx-g lg:!transform-none">
+                        <Carousel.Inner emblaRef={emblaRef1} className="mx-0 lg:-mx-g lg:!transform-none lg:justify-center">
                             {items && items.map((data: any, index: number) => (
                             <ProductCardUpsell
                                 key={`${index}-routine`}
