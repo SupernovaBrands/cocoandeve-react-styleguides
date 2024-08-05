@@ -149,10 +149,10 @@ const ProductWaitlist = (props: any) => {
 			}
 
 			const variantId = parseInt(props.selectedVariant.id.replace('gid://shopify/ProductVariant/', ''), 10) || 0;
-			const variantIds2 = props.vrt_waitlist_form_varid_cs_2.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds3 = props.vrt_waitlist_form_varid_cs_3.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds4 = props.vrt_waitlist_form_varid_cs_4.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds5 = props.vrt_waitlist_form_varid_cs_5.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds2 = props.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds3 = props.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds4 = props.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds5 = props.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			if (variantIds2.includes(variantId)) {
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				data.formDescription = props.vrt_waitlist_form_description_cs_2;

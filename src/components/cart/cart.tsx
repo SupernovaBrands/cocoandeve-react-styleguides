@@ -347,7 +347,7 @@ const Cart: React.FC<Props> = (props) => {
 									)}
 									{!shippingData?.show && shippingData?.freeRate === null && (
 										<>
-										<div className="flex lg:hidden justify-between w-full">
+										<div className="flex justify-between w-full">
 											<p className="mb-1" data-cy="cart-shipping-label">
 												<strong>{`${tStrings.cart_shipping} `}</strong>
 											</p>
