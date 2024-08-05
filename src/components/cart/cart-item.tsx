@@ -150,6 +150,10 @@ export const CartItem = (props:CartItemProps) => {
 				item.featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
+
+			if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			}
 		}
 
 		setFeaturedImageUrl(featuredImage);
