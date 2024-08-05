@@ -41,7 +41,6 @@ export const CartDiscountForm = (props:any) => {
             discountBanner: props.discountBanner,
             hasCode: props.isApplied || !!props.appliedGiftCard.code,
         };
-
         setState(stateData);
     }, [props]);
 
@@ -104,7 +103,6 @@ export const CartDiscountForm = (props:any) => {
         if (state.applyBanner && state.code) {
             applyCodeBanner();
         }
-
         if (state.applyCode && state.code) {
             applyCode();
         }
@@ -119,7 +117,6 @@ export const CartDiscountForm = (props:any) => {
                         name="discount"
                         className={`field block appearance-none w-3/4 border mr-1 text-base leading-normal border rounded-h outline-none mb-0 ${state.code ? 'border-0 bg-gray-400' : 'focus:border-black border-black bg-white'}`}
                         placeholder="Enter promo code here"
-                        value={state.code}
                         onChange={onTextChange}
                         onKeyUp={onKeyUp}
                         onKeyDown={onKeyUp}
