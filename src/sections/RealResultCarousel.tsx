@@ -40,7 +40,7 @@ const RealResultCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-	const { videos } = props;
+	const { videos, store } = props;
 
 	return (
 		<div className="instagram-reels container my-3 lg:my-4 text-center">
@@ -50,7 +50,7 @@ const RealResultCarousel = (props: any) => {
                     { !props.show && (<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
 						<li key={`all`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
 						<li key={`hair`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-                        <li key={`tan`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
+                        <li key={`tan`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title={store === 'ca' ? 'Tan' : 'Tan & SPF'} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
                         <li key={`skincare`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'skincare' ? 'text-body' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
 						<li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
                     </ul>) }
