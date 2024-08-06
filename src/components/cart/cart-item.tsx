@@ -75,6 +75,10 @@ export const CartItem = (props:CartItemProps) => {
 			return capitalizeString(item.merchandise.product.title);
 		}
 
+		if (store === 'my' && item.merchandise.title === 'Daily Essentials Set') {
+			return capitalizeString(item.merchandise.title);
+		}
+
 		const { swatches } = item;
 		if (swatches.length >= 2) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
