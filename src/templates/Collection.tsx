@@ -364,6 +364,10 @@ const Collection = (props: any) => {
                 <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} />
             )}
 
+            {collectionSettings.isLoading && (
+                <div className="bg-shimmer pt-[53.33%] lg:pt-[19.375%]" />
+            )}
+
             {!isLoading && tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link mt-25">
