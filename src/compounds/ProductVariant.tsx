@@ -9,12 +9,15 @@ type SwatchProp = {
 	textClassName?: string
 }
 const Swatch: React.FC<SwatchProp> = (props) => {
+	const sTan = ['medium','dark','ultra-dark'];
+	const shadesTan = props.shadeData ? props.shadeData.filter((s:any) => sTan.includes(s.id)) : [];
+
 	return props.hideSwatch ? <></> : (
 		<div key={props.keyName} className={`product-swatch mb-1 ${props.className}`}>
 			{props.children}
 			{props.shadeData && props.shadeData.map((s: any, index: number) => {
 				return s.id === props.selectedSwatch && !['antioxidant glow cream', 'refill pod', 'antioxidant glow cream + refill pod'].includes(s.id) && !s.text.includes('Tamer') ?
-					(<p key={`${s.id}-swatch-${index}`} className={`${props.textClassName} w-full text-sm mt-1 lg:mt-[9px] mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
+					(<p key={`${s.id}-swatch-${index}`} className={`${props.textClassName} w-full text-sm ${shadesTan.length ? 'mt-[1.25rem] lg:mt-[1.2rem]' : 'mt-1 lg:mt-[9px]'} mb-0 swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
 				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
