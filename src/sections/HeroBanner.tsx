@@ -60,17 +60,17 @@ const HeroBanner = (props: any) => {
 			<section>
 				{!isLoadingHomepage && slides && slides.length > 0 ? (
 					<Carousel.Wrapper emblaApi={emblaApi}>
-						<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g">
+						<Carousel.Inner emblaRef={emblaRef} className="">
 							{slides.map((slide: any, index: number) => (
 								<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 									<Link onClick={() => { props.trackEvent('hero_banner_click', {category: 'Clickout'}) }} href={slide?.slide_link || ''} className="flex items-center justify-center">
-										<picture className='lg:px-g'>
+										<picture className='lg:px-g pt-[111.83575%] lg:pt-[38.17708%] relative block w-full overflow-hidden'>
 											<source srcSet={slide?.image?.url} media="(min-width: 1601px)" width="1920" height="733" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1401px)" width="1600" height="611" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1201px)" width="1400" height="534" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1025px)" width="1200" height="458" />
 											<source srcSet={slide?.image?.url} media="(min-width: 992px)" width="1140" height="435" />
-											<img className="block" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
+											<img className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
 										</picture>
 									</Link>
 								</div>
