@@ -54,7 +54,7 @@ const ArticleCarousel = (props:any) => {
 			<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
 				<Carousel.Inner emblaRef={emblaRef} className="-mx-hg lg:-mx-g">
 					{articles.map((data:any, index:number) => (
-						<PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="flex-grow-0 flex-shrink-0 w-full h-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+						<PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
 						))}
 				</Carousel.Inner>
 				<Carousel.Navigation>
