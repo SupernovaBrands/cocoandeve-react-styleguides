@@ -10,7 +10,7 @@ import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollectio
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
 // import Service from "~/sections/Service";
-import { sidebar_collection_ph } from '~/modules/placeholders';
+import { sidebar_collection_ph, sidebar_collection_ph_ca } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
 
@@ -122,7 +122,7 @@ const Collection = (props: any) => {
 		toggle(open);
 	};
     const router = useRouter();
-    const [sidebarMenu, setSidebarMenu] = useState(sidebar_collection_ph);
+    const [sidebarMenu, setSidebarMenu] = useState(store === 'ca' ? sidebar_collection_ph_ca : sidebar_collection_ph);
     const [childMenu, setChildMenu] = useState([]);
     const [defaultSort, setDefaultSort] = useState(sort);
 

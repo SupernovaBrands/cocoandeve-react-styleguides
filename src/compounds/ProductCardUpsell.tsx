@@ -85,7 +85,7 @@ const ProductCardUpsell = (props:any) => {
             <div className={`w-9/12 lg:w-4/12 min-w-[78%] lg:min-w-0 ${props.item.active} lg:max-w-[390px] product-card grow px-hg lg:px-g product-upsell-2`}>
                 <div className="mr-[2px] item-third lg:pl-0 flex grow flex-col bg-pink-light text-body relative h-full no-underline hover:no-underline hover:text-black">
                     {props.item.step && <span className="rounded p-25 top-[0.83333em] left-[2.08333em] bg-white absolute z-10 font-normal font-size-sm product-card__tag text-black">{props.item.step}</span> }
-                    <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0">
+                    <picture className="block relative w-full ratio ratio-1x1 mx-auto my-0 lg:mx-0 max-w-[9.0625em] lg:max-w-none">
                         <source srcSet={featuredImage} media="(min-width: 992px)" />
                         <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black">
                             <img className="object-cover absolute w-[107.5%] h-[107.5%] -left-[1px] lg:left-0 lg:w-[108%] lg:h-[108%] -top-[3.8%] bg-pink-light align-middle" alt={`upsell ${title}`} src={featuredImage} />

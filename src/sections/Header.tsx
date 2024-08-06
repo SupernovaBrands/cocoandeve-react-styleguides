@@ -250,9 +250,9 @@ const Header = (props: any) => {
 									<li key="empty" className="nav-item px-0 d-none d-lg-flex"><span className="h-2 border-l-2 mr-1 hidden lg:flex "></span></li>
 								</>
 							)}
-							<li key="account" id="dropdownMenuForm" className=" relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
+							<li key="account" id="dropdownMenuForm" className="relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
 								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
-									<Account className={`text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
+									<Account className={`hover:fill-primary text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
 									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
@@ -260,13 +260,13 @@ const Header = (props: any) => {
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
 								<button type="button" className="h4 m-0 flex font-bold py-[6px] lg:py-hg" data-cy="search-icon" onClick={onToggleSearchBox}>
-									<Search className="text-[1.5625em] lg:text-[1.375em] h-[1em]" />
+									<Search className={`hover:fill-primary ${openSearchBox ? 'fill-primary lg:fill-black' : ''} text-[1.5625em] lg:text-[1.375em] h-[1em]`} />
 								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<a className="flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
+								<a className="text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
 									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] text-body h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
+									<span className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>
