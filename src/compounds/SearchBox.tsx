@@ -236,7 +236,7 @@ const SearchBox = (props: any) => {
 	}, [props.openSearchBox]);
 
 	return (
-		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full lg:h-auto bg-white mt-lg-0 block transition-all duration-300 lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100' : 'left-[100%] opacity-0'}`}>
+		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-300 lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`}>
 			<div className="border-b border-gray-400 w-full border-t">
 				<div className="bg-white px-g">
 					<div className="container relative flex items-center px-0 lg:px-g">
