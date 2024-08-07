@@ -18,7 +18,6 @@ const ArticleNewsLetter = (props) => {
 
     const onSubmit = (evt) => {
         evt.preventDefault();
-        console.log('allowSubmit', allowSubmit)
         if (allowSubmit) {
             const ajaxRequest = new XMLHttpRequest();
             ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
@@ -81,7 +80,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_mobile.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
