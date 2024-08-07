@@ -274,7 +274,7 @@ const Article = (props) => {
             }
         }
 
-        const timeoutId = setTimeout(manipulateShops, 1000);
+        const timeoutId = setTimeout(manipulateShops, 2000);
         return () => clearTimeout(timeoutId);
 
     }, [screenLG, bodyContent]);

@@ -107,6 +107,10 @@
 			@screen sm {
 				.review-stars__number {
 					font-size: 0.875em;
+					svg {
+						height: 1em !important;
+						width: 1em !important;
+					}
 				}
 			}
 
