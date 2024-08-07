@@ -148,7 +148,7 @@ const Article = (props) => {
             newsletterWrapper.appendChild(blogPostGridNewsletter);
             blogPostGridNewsletter.classList.remove('hidden');
         }
-    }, []);
+    }, [postNewsletter, bodyContent]);
 
     useEffect(() => {
         const blogPostBanner = document.querySelector('.blog-post-banner');
