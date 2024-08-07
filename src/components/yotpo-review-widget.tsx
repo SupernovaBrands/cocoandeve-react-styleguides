@@ -1138,7 +1138,8 @@ const YotpoReviewWidget = (props:any) => {
 									<div className="px-2 py-3">
 										<div className="flex">
 											<h4 className="mb-0 text-sm font-bold">{reviewModal.user_name}</h4>
-											{reviewModal.verified_buyer && (<span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>)}
+											{isTrialParticipant(reviewModal) && <span className="ml-1 text-sm">Trial Participant</span>}
+											{!isTrialParticipant(reviewModal) && <span className="ml-1 text-sm">{tStrings.yotpo.verifiedBuyer}</span>}
 											<span className="ml-auto text-sm">{formatDate(reviewModal.created_at, formattedDate)}</span>
 										</div>
 										<div className="flex text-secondary" />
