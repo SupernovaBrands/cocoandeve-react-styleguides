@@ -245,14 +245,14 @@ const ProductCardTall = (props:any) => {
         if (product && product.productType !== 'HERO') {
             const skus_ = isKit(product.title)
                 ? product.variants.nodes.map((node:any) => node.sku)
-                : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set') && !node.title.includes('duo')).map((node:any) => node.sku);
+                : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
             setSkus(skus_);
         } else if (product && product.variants) {
             if (isKit(product.title)) {
                 setSkus(product.variants.nodes.map((node:any) => node.sku));
             } else {
                 const single = product.variants.nodes.filter((node:any) => {
-                    return !isKit(node.title)
+                    return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
                 })
                 setSkus(single.map((node:any) => node.sku));
             }
