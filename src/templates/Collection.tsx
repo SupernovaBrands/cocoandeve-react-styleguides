@@ -130,6 +130,30 @@ const Collection = (props: any) => {
 
     const [collProducts, setCollProducts] = useState(products);
 
+    const navigationScroll = () => {
+        console.log('running nav scroll');
+        const collectionNavTags = document.querySelector('.collection-grid__tags');
+        if (collectionNavTags) {
+            const elemsWidth = [];
+            let idx = 0;
+
+            collectionNavTags.querySelectorAll('.collection-grid__tags-link').forEach((el, i) => {
+                elemsWidth.push(el.clientWidth);
+                if (el.classList.contains('active')) {
+                    idx = i;
+                }
+            });
+            if (elemsWidth.length > 0 && idx > 1) {
+                const scrollLeft = elemsWidth.slice(0, idx).reduce((a, b) => a + b, 0);
+                collectionNavTags.scrollLeft = (scrollLeft - 20);
+            }
+        }
+    };
+
+    useEffect(() => {
+        navigationScroll();
+    }, [childMenu]);
+
     const showLoading = (e: any) => {
         if (e.target.closest('.collection__sidebar')) {
             const sidebarLinks = sidebarRef.current.querySelectorAll('li a');
@@ -441,8 +465,8 @@ const Collection = (props: any) => {
                                                     <Link
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
-                                                        className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
-                                                            ${children.handle === handle ? 'text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
+                                                        className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
+                                                            ${children.handle === handle ? 'active text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
                                                     />
