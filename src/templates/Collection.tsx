@@ -463,6 +463,7 @@ const Collection = (props: any) => {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
+                                                        scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
@@ -478,6 +479,7 @@ const Collection = (props: any) => {
                                                 href="/collections/all"
                                                 className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
                                                 onClick={showLoading}
+                                                scroll={false}
                                             >
                                                 All
                                             </Link>
