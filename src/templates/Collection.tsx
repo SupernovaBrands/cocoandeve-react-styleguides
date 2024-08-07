@@ -131,7 +131,7 @@ const Collection = (props: any) => {
     const [collProducts, setCollProducts] = useState(products);
 
     const navigationScroll = () => {
-        console.log('running nav scroll');
+        // console.log('running nav scroll');
         const collectionNavTags = document.querySelector('.collection-grid__tags');
         if (collectionNavTags) {
             const elemsWidth = [];
