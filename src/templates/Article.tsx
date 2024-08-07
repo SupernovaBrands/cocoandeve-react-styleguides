@@ -137,7 +137,7 @@ const Article = (props) => {
                 .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
             setBodyContent(body);
         }
-    }, []);
+    }, [content, region]);
 
     useEffect(() => {
         const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
@@ -167,7 +167,7 @@ const Article = (props) => {
                 });
             }
         }
-    }, []);
+    }, [postBannerInfo, bodyContent]);
 
     useEffect(() => {
         const setProgress = () => {
@@ -192,7 +192,7 @@ const Article = (props) => {
         window.addEventListener('scroll', setProgress, { passive: true });
 
         return () => window.removeEventListener('scroll', setProgress);
-    }, []);
+    }, [bodyContent]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -205,7 +205,7 @@ const Article = (props) => {
         }, 500);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [bodyContent]);
 
     useEffect(() => {
         const manipulateShops = () => {
@@ -278,7 +278,7 @@ const Article = (props) => {
         const timeoutId = setTimeout(manipulateShops, 1000);
         return () => clearTimeout(timeoutId);
 
-    }, [screenLG]);
+    }, [screenLG, bodyContent]);
 
     useEffect(() => {
         const handleScroll = () => {
