@@ -77,7 +77,7 @@ const MobileMenu = (props: any) => {
 				)}
 				{mainMenu?.map((menu, i) => {
 					return menu.handle !== '/collections/all' && (
-						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b">
+						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
 								onClick={() => {
 									const newStates = {...defMenuState};
@@ -147,7 +147,7 @@ const MobileMenu = (props: any) => {
 					)
 				})}
 				{enableSwellAcc && (
-					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full">
+					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]">
 						{!isLoggedIn && (
 							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
 								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
@@ -161,14 +161,14 @@ const MobileMenu = (props: any) => {
 					</li>
 				)}
 				{!enableSwellAcc && (
-					<li key="my-account" className="flex px-g py-0 border-b w-full">
+					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]">
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
 				<li key="shopall" className="my-g p-g">
 					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
 				</li>
-				<li key="countries" className="px-g py-1 border-b mb-g">
+				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
 						onClick={() => setStoreSelection(!storeSelection)}>
 						{currency === 'SGD' && 'Rest of the World (SGD)'}
