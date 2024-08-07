@@ -158,6 +158,7 @@ const YotpoReviewWidget = (props:any) => {
 
 	const [reviewModal, setReviewModal] = useState({});
 	const [videoUploading, setVideoUploading] = useState(null);
+	const [cssHeight, setCssHeight] = useState(true);
 
 	const yotpoThanksRef = useRef(null);
 
@@ -690,8 +691,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const [emblaRef7, emblaApi7] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 }),
-		AutoHeight()
+		Autoplay({ playOnInit: true, delay: 3000 }),
 	]);
 
 	const {
