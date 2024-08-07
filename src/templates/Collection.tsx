@@ -17,12 +17,10 @@ import CollectionServices from "~/compounds/CollectionServices";
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
         <figure className="w-full relative items-center px-0 mb-0">
-            {!isLoading && !bannerLoading && (
-                <picture>
-                    <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
-                    <img src={bannerData.img_mob.url} className="w-full" alt="Collection Banner" />
-                </picture>
-            )}
+            <picture className={`${!isLoading && !bannerLoading ? '' : 'bg-shimmer pt-[53.33%] lg:pt-[19.375%]'}`}>
+                <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
+                <img src={bannerData.img_mob.url} className="w-full" alt="Collection Banner" />
+            </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
                 <h1 className="hidden mb-0"
                     dangerouslySetInnerHTML={{ __html: title ?? 'Shop All' }}
@@ -151,7 +149,7 @@ const Collection = (props: any) => {
     };
 
     useEffect(() => {
-        navigationScroll();
+        if (childMenu.length > 0) navigationScroll();
     }, [childMenu]);
 
     const showLoading = (e: any) => {
@@ -463,6 +461,7 @@ const Collection = (props: any) => {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
+                                                        scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
@@ -478,6 +477,7 @@ const Collection = (props: any) => {
                                                 href="/collections/all"
                                                 className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
                                                 onClick={showLoading}
+                                                scroll={false}
                                             >
                                                 All
                                             </Link>
