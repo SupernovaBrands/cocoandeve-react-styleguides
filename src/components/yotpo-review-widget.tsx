@@ -39,6 +39,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Autoplay from 'embla-carousel-autoplay';
+import AutoHeight from 'embla-carousel-auto-height';
 import Script from 'next/script';
 import {
 	PrevButton,
@@ -689,7 +690,8 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const [emblaRef7, emblaApi7] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
+		Autoplay({ playOnInit: false, delay: 3000 }),
+		AutoHeight()
 	]);
 
 	const {
@@ -1093,7 +1095,7 @@ const YotpoReviewWidget = (props:any) => {
 									) : (
 										<div className="relative">
 											<Carousel.Wrapper emblaApi={emblaApi7}>
-												<Carousel.Inner emblaRef={emblaRef7}>
+												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
 															{media.image_url && (<img src={media.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full" />)}
