@@ -110,6 +110,7 @@ const ProductCarousel = (props: any) => {
 												trackEvent={trackEvent}
 												preOrders={preOrders}
 												generalSetting={generalSetting}
+												homePage={props.homePage || false}
 											/>
 										)
 									})}
@@ -152,6 +153,7 @@ const ProductCarousel = (props: any) => {
 												trackEvent={trackEvent}
 												preOrders={preOrders}
 												generalSetting={generalSetting}
+												homePage={props.homePage || false}
 											/>
 										)
 									})}
@@ -194,6 +196,7 @@ const ProductCarousel = (props: any) => {
 												trackEvent={trackEvent}
 												preOrders={preOrders}
 												generalSetting={generalSetting}
+												homePage={props.homePage || false}
 											/>
 										)
 									})}
