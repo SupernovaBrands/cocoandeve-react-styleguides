@@ -474,7 +474,7 @@ const Collection = (props: any) => {
                                         })}
                                         {childMenu.length === 0 && (
                                             <Link
-                                                href="/collections/all"
+                                                href={`/collections/${handle}`}
                                                 className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
                                                 onClick={showLoading}
                                                 scroll={false}

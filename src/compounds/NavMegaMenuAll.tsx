@@ -5,14 +5,18 @@ const NavMegaMenuAll = (props: any) => {
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex w-full">
                     <div className="max-w-[14.625em] mr-3 mb-3 px-0">
-                        <a href={generalSetting.mega_menu_shop_all_url}>
-                            <button className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full">
-                                {generalSetting.mega_menu_shop_all_label}
-                            </button>
+                        <>
+                            <a href={generalSetting.mega_menu_shop_all_url}>
+                                <button className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full">
+                                    {generalSetting.mega_menu_shop_all_label}
+                                </button>
+                            </a>
                             {generalSetting.bg_image && (
-                                <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
+                                <a href={generalSetting.mega_menu_image_url}>
+                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
+                                </a>
                             )}
-                        </a>
+                        </>
                     </div>
                     <div className="ml-3 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
                         {menus && menus.map((menu) => {
