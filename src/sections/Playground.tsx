@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data, store }) => (
     <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
-        <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan') : data?.button_link}>
+        <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
             <picture className={`rounded block ${data?.playground_range_bg}`}>
                 <source srcSet={data?.image?.url} media="(min-width: 992px)" />
                 <img className="rounded w-full" src={data?.image_mobile?.url} loading="lazy" />
