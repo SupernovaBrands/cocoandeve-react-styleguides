@@ -30,7 +30,7 @@ const PostCard: React.FC<PropType> = (props) => {
 					</a>
 				)}
 				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow">
-					<figcaption className={`${template === 'blog' || template === 'pdp' ? 'p-2' : 'flex-grow'} flex flex-col ${textClass}`}>
+					<figcaption className={`${template === 'blog' || template === 'pdp' ? 'p-2 flex-grow flex' : 'flex-grow'} flex flex-col ${textClass}`}>
 						<div className={`${template === 'article' ? 'post-card__tags px-3 mb-2 hidden' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
 							{data.tags.length > 0 && (
 								<>
@@ -50,7 +50,7 @@ const PostCard: React.FC<PropType> = (props) => {
 							)}
 						</div>
 						{template === 'blog' || template === 'pdp' ? (
-							<span className="btn btn-outline-primary self-start hover:no-underline leading-[1.25!important]" aria-label={data.title}>Read more</span>
+							<span className="btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 flex" aria-label={data.title}>Read more</span>
 						) : (
 							<span className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important]" aria-label={data.title}>Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></span>
 						)}
