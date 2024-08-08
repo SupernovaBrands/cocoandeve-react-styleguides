@@ -348,7 +348,7 @@ const Product = (props: any) => {
                                 <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1557f100-0d32-4fe3-b6f1-f4634cc04900/375x" className="w-full" alt="Halloween Sale!"/>
                             </picture>
                         </a>
-                        <a href="#" className="underline text-primary text-sm lg:order-2 mb-2" role="button">Terms and Conditions</a>
+                        <a href="#" className="underline text-primary text-sm lg:order-2 mb-2" role="button">Terms & Conditions</a>
                         {/* proud to be and accordion */}
                         <div className="proud-to-be-wrapper mb-2 mt-3 lg:mb-0 lg:order-2">
                             <h2 className="mb-0">Proud to be</h2>

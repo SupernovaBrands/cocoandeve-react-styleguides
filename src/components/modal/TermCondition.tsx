@@ -7,7 +7,7 @@ const TermCondition = (props: any) => {
 			<div className="max-w-[31em] overflow-hidden relative mx-auto">
 				<CloseButton handleClose={handleClose} className="text-body" />
 				<div className="px-3 py-3 lg:px-4 lg:py-4">
-					<h2 className="pt-1 text-left w-full pb-[1rem]">{content?.title || 'Terms and Conditions'}</h2>
+					<h2 className="pt-1 text-left w-full pb-[1rem]">{content?.title || 'Terms & Conditions'}</h2>
 					<p className="lg:max-w-[24.875em]" dangerouslySetInnerHTML={{__html: content?.body}} />
 				</div>
 			</div>

@@ -48,7 +48,7 @@ const KlarnaModal = (props:any) => {
                                 <div>
                                     <p className="text-xs text-[rgb(120,117,115)] leading-5 antialiased leading-[20px]">
                                         You must be 18+ to use this credit offer. Klarna uses soft searches with credit reference agencies. These do not affect your credit rating. Missed payments can affect your ability to use Klarna.
-                                        <a href='https://www.klarna.com/uk/terms-and-conditions' target='_blank' className='text-underline text-xs ml-25'>Terms and conditions</a>
+                                        <a href='https://www.klarna.com/uk/terms-and-conditions' target='_blank' className='text-underline text-xs ml-25'>Terms & conditions</a>
                                     </p>
                                 </div>
                             </div>
