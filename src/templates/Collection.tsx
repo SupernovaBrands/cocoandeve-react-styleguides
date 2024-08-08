@@ -294,12 +294,21 @@ const Collection = (props: any) => {
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
             setChildMenu(data.childrens);
-            if (defaultSort !== 'featured') {
-                fetch(`/api/collectionProducts/?sort=${defaultSort}&handle=${currentCollection.handle}`).then((r) => r.json())
+            if (defaultSort !== null) {
+                const sort = defaultSort === 'best-selling' ? 'featured' : defaultSort;
+                fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
                 .then((data) => {
                     const { products } = data;
                     const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
-                    setCollProducts(mapped);
+                    if (defaultSort === 'best-selling' && sevenDaysSalesIds.length > 0) {
+                        const sorted = mapped.sort(handleSevenDaysSort);
+                        const finalSorted = sortByAvailability(sorted, defaultSort);
+                        setCollProducts(finalSorted);
+                    } else {
+                        const finalSorted = sortByAvailability(mapped, defaultSort);
+                        setCollProducts(finalSorted);
+                    }
+                    // setCollProducts(mapped);
                     setLoading(false);
                 });
             }
