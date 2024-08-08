@@ -13,9 +13,8 @@ const Sidebar = ({data}) => {
 			'(min-width: 768px)': { active: false },
 		},
 	};
-	const [emblaRef3, emblaApi3] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: false, delay: 3000 })
-	]);
+	const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
+
 	const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
 	const PER_PAGE = 2;
 	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
