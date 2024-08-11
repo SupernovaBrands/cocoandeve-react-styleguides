@@ -19,41 +19,41 @@ const validForm = {
 	phone: false,
 };
 
-let store = 'dev';
+//let store = 'dev';
 // let letterCodeDef = 'SG';
-let numberCodeDef = 65;
-if (store === 'us') {
-	// letterCodeDef = 'US';
-	numberCodeDef = 1;
-} else if (store === 'au') {
-	// letterCodeDef = 'AU';
-	numberCodeDef = 61;
-} else if (store === 'UK') {
-	// letterCodeDef = 'GB';
-	numberCodeDef = 44;
-} else if (store === 'ca') {
-	// letterCodeDef = 'CA';
-	numberCodeDef = 1;
-} else if (store === 'eu' || store === 'fr') {
-	// letterCodeDef = 'FR';
-	numberCodeDef = 33;
-} else if (store === 'de') {
-	// letterCodeDef = 'DE';
-	numberCodeDef = 49;
-} else if (store === 'my' || store === 'my') {
-	// letterCodeDef = 'MY';
-	numberCodeDef = 60;
-}
+// let numberCodeDef = 65;
+// if (store === 'us') {
+// 	// letterCodeDef = 'US';
+// 	numberCodeDef = 1;
+// } else if (store === 'au') {
+// 	// letterCodeDef = 'AU';
+// 	numberCodeDef = 61;
+// } else if (store === 'UK') {
+// 	// letterCodeDef = 'GB';
+// 	numberCodeDef = 44;
+// } else if (store === 'ca') {
+// 	// letterCodeDef = 'CA';
+// 	numberCodeDef = 1;
+// } else if (store === 'eu' || store === 'fr') {
+// 	// letterCodeDef = 'FR';
+// 	numberCodeDef = 33;
+// } else if (store === 'de') {
+// 	// letterCodeDef = 'DE';
+// 	numberCodeDef = 49;
+// } else if (store === 'my' || store === 'my') {
+// 	// letterCodeDef = 'MY';
+// 	numberCodeDef = 60;
+// }
 
 const SmsSubscription = (props) => {
-    const { content } = props;
+    const { content, region } = props;
     const [phone, setPhone] = useState('');
-	const [code, setCode] = useState(numberCodeDef);
+	const [code, setCode] = useState(props.numberCodeDef);
 	const [phoneError, setPhoneError] = useState({ valid: true, error: 'Please enter valid phone number' });
 	const [formCompleted, setFormCompleted] = useState(false);
 	const [formContent, setFormContent] = useState({ tos: '', cta_text: '', title: '', sub_title: '', description: '', success_title: '', success_desc: '', success_link: '', success_cta: '' });
 	const [smsBump, setSmsbump] = useState();
-    const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+    const [activeCountryCode, setaActiveCountryCode] = useState(65);
 
     const validateForm = (em, ph) => {
 		validForm.phone = false;
@@ -107,6 +107,27 @@ const SmsSubscription = (props) => {
 		console.log(e);
 		setaActiveCountryCode(e);
 	};
+
+    useEffect(() => {
+        let numberCodeDef = 65;
+		if (region === 'us') {
+			numberCodeDef = 1;
+		} else if (region === 'au') {
+			numberCodeDef = 61;
+		} else if (region === 'UK') {
+			numberCodeDef = 44;
+		} else if (region === 'ca') {
+			numberCodeDef = 1;
+		} else if (region === 'eu' || region === 'fr') {
+			numberCodeDef = 33;
+		} else if (region === 'de') {
+			numberCodeDef = 49;
+		} else if (region === 'my' || region === 'my') {
+			numberCodeDef = 60;
+		}
+
+		setaActiveCountryCode(numberCodeDef)
+    }, [content, region]);
 
 	useEffect(() => {
 		setContent();

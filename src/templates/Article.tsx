@@ -148,7 +148,7 @@ const Article = (props) => {
             newsletterWrapper.appendChild(blogPostGridNewsletter);
             blogPostGridNewsletter.classList.remove('hidden');
         }
-    }, [postNewsletter, bodyContent]);
+    }, [postNewsletter, bodyContent, region]);
 
     useEffect(() => {
         const blogPostBanner = document.querySelector('.blog-post-banner');
@@ -344,13 +344,13 @@ const Article = (props) => {
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
-                        {!isLoading && (
+                        {!isLoading && featuredImageUrl && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
                                 <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
                                 <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
                             </picture>
                         )}
-                        {quickLinks.length > 0 && (
+                        {quickLinks?.length > 0 && (
                             <>
                                 <span className="text-left font-bold">In this article:</span>
                                 <div className="mt-1 mb-2">
@@ -364,12 +364,6 @@ const Article = (props) => {
                         )}
                         <div className="article__content">
                             {parse(bodyContent)}
-                            {postNewsletter.post_newsletter_enabled && (
-                                <ArticleNewsLetter postNewsletter={postNewsletter} store={store} />
-                            )}
-                            {postBannerInfo.enables && (
-                                <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
-                            )}
                             <ul className="block mb-4 mt-1 pl-[0!important]">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content.title}`} className="no-underline text-primary text-[1.875em]">
@@ -388,6 +382,12 @@ const Article = (props) => {
                                 </li>
                             </ul>
                         </div>
+                        {postNewsletter?.post_newsletter_enabled && (
+                            <ArticleNewsLetter postNewsletter={postNewsletter} store={region} />
+                        )}
+                        {postBannerInfo?.enables && (
+                            <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
+                        )}
                     </div>
                     <div id="sideBarPosts"></div>
                 </article>
@@ -402,7 +402,7 @@ const Article = (props) => {
             </div>
         )}
         <div id="relatedPostCard"></div>
-        {quickLinks.length > 0 && (
+        {quickLinks?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <BackToTop className="svg" />
