@@ -53,17 +53,13 @@ const YotpoStar = (props:any) => {
 			</span>
 		</div>
 	) : (
-		<div className={`flex ${props.extraClass} mb-2 md:mb-1`}>
+		<a className={`flex ${props.extraClass} mb-2 md:mb-1 hover:no-underline`} onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>
 			<ReviewStar score={score} />
-			{props.showScore && <a className="ml-25 text-primary" onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>{`${score ? score.toFixed(1) : 0} stars`}</a>}
+			{props.showScore && <span className="ml-25 text-primary hover:underline hover:text-primary-darken">{`${score ? score.toFixed(1) : 0} stars`}</span>}
 			{props.showTotal && (
-				<span className="ml-25" onClick={scrollToWidget}>
-					(
-					<a className="link-secondary underline text-dark hover:text-primary" onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()} href={`${props.productUrl}#write-a-review`}>{total}</a>
-					)
-				</span>
+				<span className="ml-25 link-secondary underline text-dark hover:text-primary" onClick={scrollToWidget}>({total})</span>
 			)}
-		</div>
+		</a>
 	);
 };
 

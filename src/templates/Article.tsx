@@ -42,7 +42,7 @@ const ArticleNewsLetter = (props) => {
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
                 <picture className="lg:w-1/3 w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded rounded-tr-none rounded-br-none" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded" />
                 </picture>
                 <div className="lg:w-2/3 w-full p-2 lg:pe-4">
                     <h2 className="mb-1 blog-post-grid__newsletter-title">{postNewsletter.blog_ns_title}</h2>
@@ -80,7 +80,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -133,6 +133,7 @@ const Article = (props) => {
             const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
             const body = content.BlogContentMultiStores[region].body_content
                 .replace('<a', ariaLabel)
+                .replace('<ul>', '<ul class="article-list">')
                 .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
             setBodyContent(body);
         }
@@ -155,7 +156,7 @@ const Article = (props) => {
         const articleNewBanners = document.querySelectorAll('.article-new-banner');
         if (blogPostBanner && articleNewBanners.length > 0) {
             const articleBanners = document.querySelectorAll('.article-banner');
-            articleBanners.forEach(banner => banner.remove());
+            articleBanners.forEach(banner => banner.classList.add('hidden'));
             const clonedBannerExists = document.querySelector('.cloned-banner');
             if (!clonedBannerExists) {
                 articleNewBanners.forEach(item => {

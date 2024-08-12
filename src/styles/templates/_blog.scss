@@ -77,10 +77,14 @@
 					margin-left: auto !important;;
 				}
 
-				ul {
+				.article-list {
 					list-style-type: disc;
 					padding-inline-start: 40px;
 					margin-block-end: 1em;
+				}
+
+				.product-variant-swatch li {
+					margin-right: 5px;
 				}
 			}
 		
