@@ -9,12 +9,11 @@ type SwatchProp = {
 	textClassName?: string
 	activeVariant?: any
 	mobileCta?: boolean
+	swatchType?: any
 }
 const Swatch: React.FC<SwatchProp> = (props) => {
 	const sTan = ['medium','dark','ultra-dark'];
 	const shadesTan = props.shadeData ? props.shadeData.filter((s:any) => sTan.includes(s.id)) : [];
-
-	console.log('swatch props', props);
 
 	return props.hideSwatch ? <></> : (
 		<div key={props.keyName} className={`product-swatch mb-1 ${props.className}`}>
