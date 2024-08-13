@@ -278,7 +278,7 @@ const Article = (props) => {
         const timeoutId = setTimeout(manipulateShops, 2000);
         return () => clearTimeout(timeoutId);
 
-    }, [screenLG, bodyContent]);
+    }, [screenLG, bodyContent, upsells]);
 
     useEffect(() => {
         const handleScroll = () => {

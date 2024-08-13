@@ -12,7 +12,7 @@ import {
 	controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -24,7 +24,8 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 
-	const { products, addToCart, generalSetting, label } = props;
+	const { addToCart, generalSetting, label } = props;
+    const [products, setProducts] = useState(props.products);
     
     const [waitlistData, setWaitlistData] = useState({
         open: false,
@@ -32,6 +33,17 @@ const ProductCarousel = (props: any) => {
         image: '',
         handle: undefined,
     });
+
+    useEffect(() => {
+        if (window.innerWidth <= 991) {
+            let extendedProducts = [...products];
+            if (extendedProducts.length < 3) {
+                const productItems = 4 - extendedProducts.length;
+                extendedProducts = extendedProducts.concat(extendedProducts.slice(0, productItems));
+                setProducts(extendedProducts);
+            }
+        }
+    }, [props.products]);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [

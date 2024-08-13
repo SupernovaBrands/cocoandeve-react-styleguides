@@ -173,7 +173,7 @@ const AccountDropdown = (props:any) => {
                                     <label id="dropdownLoginFormEmail-error" className="font-size-xs text-primary" htmlFor="dropdownLoginFormEmail">Please enter a valid email address.</label>
                                 )}
                             </div>
-                            <div className="mb-2">
+                            <div className="lg:mb-2 sm:mb-0">
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                                 <input ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>

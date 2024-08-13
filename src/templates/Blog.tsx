@@ -92,6 +92,7 @@ const Blog = (props) => {
         hair: { bg: 'bg-secondary-light', text: 'text-gray-600' },
         body: { bg: 'bg-primary-light', text: 'text-gray-600' },
         hot: { bg: 'bg-primary', text: 'text-white' },
+		suncare: { bg: 'bg-suncare-blue', text: 'text-white' },
         featured: { bg: 'bg-gray-400', text: 'text-gray-600' },
     };
 
