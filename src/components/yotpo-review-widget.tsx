@@ -652,9 +652,11 @@ const YotpoReviewWidget = (props:any) => {
 
 	useEffect(() => {
 		getTopics();
-		getCustomQuestions(productId, (qs) => {
-			setCustomQs(qs);
-		});
+		if (document.querySelector('.main-widget.yotpo-display-wrapper')) {
+			getCustomQuestions(productId, (qs) => {
+				setCustomQs(qs);
+			});
+		}
 	}, [productId]);
 
 	useEffect(() => {
