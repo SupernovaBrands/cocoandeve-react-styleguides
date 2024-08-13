@@ -52,10 +52,13 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import trialParticipants from '~/utils/trialParticipants';
 
 
-let { yotpoKey } = tSettings;
+// let { yotpoKey } = tSettings;
 const localeParam = 'en';
 
-const getCustomQuestions = (productId, callback) => {
+const getCustomQuestions = (productId, callback, yotpoKey) => {
+	if (!yotpoKey) {
+		return false;
+	}
 	$.post('https://staticw2.yotpo.com/batch/',
 		{
 			methods: JSON.stringify([{
@@ -114,7 +117,7 @@ const YOTPO_CONFIG_UPLOAD = {
 
 const YotpoReviewWidget = (props:any) => {
 	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
-	yotpoKey = props.yotpoKey;
+	const yotpoKey = props.yotpoKey;
 
 	const reviewBox = useRef(null);
 
@@ -654,7 +657,7 @@ const YotpoReviewWidget = (props:any) => {
 		getTopics();
 		getCustomQuestions(productId, (qs) => {
 			setCustomQs(qs);
-		});
+		}, yotpoKey);
 	}, [productId]);
 
 	useEffect(() => {

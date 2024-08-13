@@ -327,6 +327,7 @@ export const CartItem = (props:CartItemProps) => {
 						productStock={productStock}
 						isModified={item.modified}
 						originalQuantity={item.original_quantity}
+						allowZero={true}
 					/>
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (

@@ -26,7 +26,7 @@ const Header = (props: any) => {
 	const [scrolled, setScrolled] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
-	const [userPts, setUserPts] = useState(points || 50);
+	const [userPts, setUserPts] = useState(points || 0);
 	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);

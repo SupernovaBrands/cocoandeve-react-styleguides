@@ -94,12 +94,14 @@ export default class QuantityBox extends React.Component {
 		e.preventDefault();
 		const qty = parseInt(this.state.quantity, 10);
 		const min = this.props.allowZero ? 0 : 1;
-		this.setState(
-			{ quantity: qty - 1 >= 0 ? qty - 1 : 0 },
-			() => {
-				this.debounceChangeQuantity();
-			},
-		);
+		if (this.state.quantity > min) {
+			this.setState(
+				{ quantity: qty - 1 >= 0 ? qty - 1 : 0 },
+				() => {
+					this.debounceChangeQuantity();
+				},
+			);
+		}
 	}
 
 	onFocus = (e) => {
