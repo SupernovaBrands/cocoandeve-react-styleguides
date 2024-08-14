@@ -178,7 +178,7 @@ const SwatchOverlay = (props:any) => {
                     <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false}/>
                     <div className="!w-auto px-0 swatch-overlay left-25 lg:left-1 right-25 lg:right-1 flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t bottom-[35px]">
                         <div className="text-center w-full pt-2 lg:pb-2 pb-1 lg:px-1">
-                            <label className="block mb-2">
+                            <label className="block mb-[.625em]">
                                 {props.swatch.style && <strong>Style: </strong>}
                                 {props.swatch.shade && <strong>Shade: </strong>}
                                 {props.swatch.tangleTamer && <strong>Type: </strong>}
