@@ -237,7 +237,7 @@ const Header = (props: any) => {
 											{isLoggedIn && userPts >= 0 && (
 												`${userPts} Points`
 											)}
-											{isLoggedIn && userPts < 0 && (
+											{isLoggedIn && userPts === -1 && (
 												<div className="spinner-border !border-[3px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
 											)}
 											<PalmTree className="mx-1 h-2" />
