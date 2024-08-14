@@ -35,7 +35,7 @@ const YotpoStar = (props: any) => {
 		if (total === 0 || score === 0) fetchStar();
 	}, [total, score]);
 
-	return init ? (
+	return init && total > 0 ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm">
 				<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
