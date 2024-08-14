@@ -67,7 +67,7 @@ const ProductTemplate = () => {
 				menuBannerQuiz={menuBannerQuiz}
 				menuBannerCode={menuBannerCode}
 				dummy={true} />
-            <Product />
+            {/* <Product /> */}
 			<ProductRoutineCarousel />
 			<PDPBanner
                 background="bg-yellow-light"

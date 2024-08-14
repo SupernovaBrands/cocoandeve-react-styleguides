@@ -35,15 +35,17 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     let bgColor:string;
     const tagsLength = tags?.length || 0;
-    for (let i=0;i<=tagsLength;i++) {
-        if (tags[i] === 'Body') {
-            bgColor = 'bg-purple-light';
-        } else if (tags[i] === 'Tan') {
-            bgColor = 'bg-yellow-light';
-        } else if (tags[i] === 'Hair') {
-            bgColor = 'bg-primary-light';
-        } else {
-            bgColor = 'bg-secondary-light';
+    if (tagsLength > 0) {
+        for (let i=0;i<=tagsLength;i++) {
+            if (tags[i] === 'Body') {
+                bgColor = 'bg-purple-light';
+            } else if (tags[i] === 'Tan') {
+                bgColor = 'bg-yellow-light';
+            } else if (tags[i] === 'Hair') {
+                bgColor = 'bg-primary-light';
+            } else {
+                bgColor = 'bg-secondary-light';
+            }
         }
     }
 
