@@ -34,7 +34,8 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const { loggedInEmail, store, tags } = props;
 
     let bgColor:string;
-    for (let i=0;i<=tags.length;i++) {
+    const tagsLength = tags?.length || 0;
+    for (let i=0;i<=tagsLength;i++) {
         if (tags[i] === 'Body') {
             bgColor = 'bg-purple-light';
         } else if (tags[i] === 'Tan') {
