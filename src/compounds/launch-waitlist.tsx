@@ -26,11 +26,25 @@ interface LaunchWaitListProps {
     launchSubmitted?: boolean;
     onClickDiv?: (e) => {};
     setLaunchSubmitted?: any;
+    tags?: any;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     let countries = countriesList;
-    const { loggedInEmail, store } = props;
+    const { loggedInEmail, store, tags } = props;
+
+    let bgColor:string;
+    for (let i=0;i<=tags.length;i++) {
+        if (tags[i] === 'Body') {
+            bgColor = 'bg-purple-light';
+        } else if (tags[i] === 'Tan') {
+            bgColor = 'bg-yellow-light';
+        } else if (tags[i] === 'Hair') {
+            bgColor = 'bg-primary-light';
+        } else {
+            bgColor = 'bg-secondary-light';
+        }
+    }
 
     const [email, setEmail] = useState(loggedInEmail ?? '');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -42,9 +56,13 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         const defaultObj = { name: 'Singapore', dial_code: '+65', code: 'SG' };
         const currCountry = getCookie('country_code');
         const getCode = countriesCode.find((code) => code.code === currCountry) || defaultObj;
-        countries = countriesRegion[store];
         defaultPhoneCode = countriesRegion[store].find((c:any) => c.defaultSelected).maskValue;
-        defaultPhoneCode = countriesRegion[store].find((d:any) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
+        if (props.productCard) {
+            countries = countriesRegion[store];
+            defaultPhoneCode = countriesRegion[store].find((d:any) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
+        } else {
+            defaultPhoneCode = countries.find((d:any) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
+        }
         setPhoneCode(defaultPhoneCode);
     }, []);
 
@@ -139,7 +157,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     return (
         <>
-            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist bg-yellow-light product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-3'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
+            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist ${bgColor} product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-3'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
                 {props.productCard && (
                     // <CloseButton handleClose={props.handleClose} />
                     <button type="button" className="p-0 bg-transparent border-0 cursor-pointer top-[1em] right-[1em] absolute font-size-sm appearance-[button] leading-[1] float-right" onClick={props.handleClose} aria-label="Close" role="button">

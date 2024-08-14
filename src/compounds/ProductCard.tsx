@@ -45,6 +45,7 @@ const LaunchButton = (props: any) => {
             open: true,
             handle: props.product.handle,
             variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
+            tags: props.product.tags
         });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
