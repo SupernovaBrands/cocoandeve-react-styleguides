@@ -208,7 +208,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                 groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`}
                                 inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                         </div>
-                        { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25">Please enter a valid phone number</span> }
+                        { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25 lg:pl-3">Please enter a valid phone number</span> }
                     </div>
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
                         {props.productCard && (
@@ -237,12 +237,12 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 </form>
             </div> }
 
-            { showSuccess && !props.productCard && <div className="w-full p-3 mb-3 rounded text-center bg-yellow-light">
+            { showSuccess && !props.productCard && <div className={`w-full p-3 mb-3 rounded text-center ${bgColor}`}>
                 <h3 className="mx-4 mx-lg-5" dangerouslySetInnerHTML={{__html: props.success_msg}}></h3>
                 <p className="font-size-sm mb-0 font-bold mt-g" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
             </div> }
             {showSuccess && props.productCard && (
-                <div className="modal-body relative p-3 lg:p-4 product-waitlist bg-yellow-light product-waitlist__form w-100 text-center rounded-[20px] border border-[#00000033] bg-clip-padding outline-0">
+                <div className={`modal-body relative p-3 lg:p-4 product-waitlist ${bgColor} product-waitlist__form w-100 text-center rounded-[20px] border border-[#00000033] bg-clip-padding outline-0`}>
                     <Close onClick={props.handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
                     <h2 className="h1 mx-auto mb-1">{props.title}</h2>
                     <p className="mb-2" dangerouslySetInnerHTML={{__html: props.content}}></p>
