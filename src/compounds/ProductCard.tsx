@@ -41,12 +41,19 @@ const WaitlistButton = (props:any) => {
 
 const LaunchButton = (props: any) => {
     const handleLaunchWaitlist = () => {
-        props.setLaunchWLModal({
+        const data = {
             open: true,
             handle: props.product.handle,
             variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
             tags: props.product.tags
-        });
+        }
+        if (props.launchBox === 1) {
+            props.setLaunchWLModal(data);
+        } else if (props.launchBox === 2) {
+            props.setLaunchWLModal2(data);
+        } else if (props.launchBox === 3) {
+            props.setLaunchWLModal3(data);
+        }
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
     return (
@@ -346,7 +353,7 @@ const ProductCardTall = (props:any) => {
                 )}
 
                 {props.isLaunchWL && (
-                    <LaunchButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                    <LaunchButton launchBox={props.launchBox} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} setLaunchWLModal2={props.setLaunchWLModal2} setLaunchWLModal3={props.setLaunchWLModal3} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
                 {/* {props.quizResult && (
                     <QuizResultButton product={props.product} sku={props.quizResultSku} addToCart={addToCart} />
