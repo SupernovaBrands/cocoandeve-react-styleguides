@@ -164,7 +164,7 @@ const AccountDropdown = (props:any) => {
                                     'Earn and redeem points from purchases'
                                 )}
                             </p>
-                            <SocialLogin idSuffix={'loginDropdown'} />
+                            <SocialLogin idSuffix={'loginDropdown'} store={store}/>
                             <p className="text-center auth-buttons mb-g">or login with email</p>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
@@ -191,7 +191,7 @@ const AccountDropdown = (props:any) => {
                     <div className={`flex dropdown__login__register`}>
                         <form onSubmit={handleSubmit} id="dropdown__register" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className=" font-bold  text-center px-2 mb-2">Welcome</p>
-                            <SocialLogin idSuffix={'registerDropdown'} />
+                            <SocialLogin idSuffix={'registerDropdown'} store={store}/>
                             <p className="mb-g text-center auth-buttons">-- or --</p>
                             <div className="flex flex-wrap">
                                 <div className="form-group w-1/2 pr-1 mb-1 lg:mb-2">
