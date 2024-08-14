@@ -14,6 +14,7 @@ const Waitlist: React.FC = () => {
               success_msg="Thank you for subscribing to our waitlist!"
               success_content="We'll keep you posted on our Bronzing Face Drop launch!. We hope you're excited as much as we are."
               className="order-lg-2"
+              tags={[]}
           />
         </div>
       </div>
