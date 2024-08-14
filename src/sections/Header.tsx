@@ -16,9 +16,10 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
-		isAuthenticated, generalSetting, trackEvent, points, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta
+		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
+		getFeaturedImgMeta, checkintPoints, addingReward
 	} = props;
+
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -124,20 +125,20 @@ const Header = (props: any) => {
 	}, []);
 	*/}
 
-	const checkingPoints = () => {
-		if (points === null || points === 0) {
-			fetch('/api/account/points').then((res) => res.json()).then((data) => setUserPts(data.points));
-		}
-	};
+	// const checkingPoints = () => {
+	// 	if (points === null || points === 0) {
+	// 		fetch('/api/account/points').then((res) => res.json()).then((data) => setUserPts(data.points));
+	// 	}
+	// };
 
 	useEffect(() => {
 		setIsLoggedIn(isAuthenticated);
-		checkingPoints();
+		// checkingPoints();
 	}, [isAuthenticated]);
 
-	useEffect(() => {
-		checkingPoints();
-	}, [userPts]);
+	// useEffect(() => {
+	// 	checkingPoints();
+	// }, [userPts]);
 
 
 	useEffect(() => {
@@ -153,25 +154,14 @@ const Header = (props: any) => {
 	}, [openAccountBox]);
 
 	useEffect(() => {
-		if (isLoggedIn && cartItems.length > 0) {
-			let ptsUsed = 0;
-			cartItems.map((item) => {
-				const attribs = item.attributes && item.attributes.find((i) => i.key === '_swell_discount_type' && i.value === 'product') || false;
-				if (attribs) {
-					// attribs.map((item) => getId(item.merchandise.id))
-					const obj = item.attributes && item.attributes.find((i) => i.key === '_swell_points_used');
-					ptsUsed += obj.value ? parseInt(obj.value, 10) : 0;
-				}
-			});
-			if (ptsUsed > 0) {
-				setPoints(points - ptsUsed);
-				setUserPts(points - ptsUsed);
-			} else {
-				setPoints(originalPts);
-				setUserPts(originalPts);
-			}
-		}
-	}, [cartItems, isLoggedIn]);
+		checkintPoints(cart).then((pts) => {
+			setUserPts(pts)
+		});
+	}, [cart]);
+
+	useEffect(() => {
+		if (isLoggedIn && addingReward) setUserPts(-1);
+	}, [addingReward]);
 
 	return (
 		<>
@@ -242,8 +232,14 @@ const Header = (props: any) => {
 							{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
 								<>
 									<li key="bbc" className="hidden lg:flex pr-hg">
-										<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline">
-											{!isLoggedIn ? 'Bali Beauty Club' : `${userPts} Points`}
+										<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline lg:items-center">
+											{!isLoggedIn && 'Bali Beauty Club'}
+											{isLoggedIn && userPts >= 0 && (
+												`${userPts} Points`
+											)}
+											{isLoggedIn && userPts === -1 && (
+												<div className="spinner-border !border-[3px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
+											)}
 											<PalmTree className="mx-1 h-2" />
 										</a>
 									</li>

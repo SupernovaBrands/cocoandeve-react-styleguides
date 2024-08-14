@@ -112,7 +112,8 @@ const Collection = (props: any) => {
     const [launchWLModal, setLaunchWLModal] = useState({
         open: false,
         variantId: null,
-        handle: null
+        handle: null,
+        tags: [],
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
@@ -603,6 +604,7 @@ const Collection = (props: any) => {
                         onClickDiv={(e) => e.stopPropagation()}
                         launchSubmitted={launchSubmitted}
                         setLaunchSubmitted={setLaunchSubmitted}
+                        tags={launchWLModal.tags}
                     />
                 </Modal>
             )}
