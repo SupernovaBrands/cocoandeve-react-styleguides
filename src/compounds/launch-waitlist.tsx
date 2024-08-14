@@ -238,8 +238,8 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             </div> }
 
             { showSuccess && !props.productCard && <div className={`w-full p-3 mb-3 rounded text-center ${bgColor}`}>
-                <h3 className="mx-4 mx-lg-5" dangerouslySetInnerHTML={{__html: props.success_msg}}></h3>
-                <p className="font-size-sm mb-0 font-bold mt-g" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
+                <h3 className="mx-4 mx-lg-5 mb-[.625rem]" dangerouslySetInnerHTML={{__html: props.success_msg}}></h3>
+                <p className="font-size-sm mb-0 font-bold" dangerouslySetInnerHTML={{__html: props.success_content}}></p>
             </div> }
             {showSuccess && props.productCard && (
                 <div className={`modal-body relative p-3 lg:p-4 product-waitlist ${bgColor} product-waitlist__form w-100 text-center rounded-[20px] border border-[#00000033] bg-clip-padding outline-0`}>

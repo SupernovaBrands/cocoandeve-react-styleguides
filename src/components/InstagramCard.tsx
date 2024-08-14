@@ -38,14 +38,14 @@ const InstagramCard = (props: any) => {
             stopVideoOnMove();
         }
     }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
-    
+
     return (
         <div className={`text-left rounded ${classes}`} ref={targetRef as any}>
             <video preload="none" ref={videoRef} className="lazy-video w-full rounded mb-0 lazy-video bg-shimmer lg:min-h-[386px] min-h-[364px]" muted={true} playsInline={true} loop={true} autoPlay={false}>
                 <source src={videoUrl} type="video/mp4" />
             </video>
             <p className="font-bold mb-25 mt-1">{author}</p>
-            <a href={`/products/${product}`} className="font-size-sm text-body block"><u>{title}</u></a>
+            <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body"><u>{title}</u></a>
         </div>
     );
 };
