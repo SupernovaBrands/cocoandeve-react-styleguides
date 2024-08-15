@@ -4,13 +4,13 @@ const SearchProductCard = (props: any) => {
 	const  { url, title, img, trackEvent, store } = props;
 	let featuredImageUrl = img;
 
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && url === 'daily-essentials-bundle') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && url === 'daily-essentials-bundle') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && url === 'super-hydration-kit') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && url === 'super-hydration-kit') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && url === 'deep-condition-bundle') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && url === 'deep-condition-bundle') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 	}
 	

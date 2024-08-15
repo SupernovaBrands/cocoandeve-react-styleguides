@@ -275,21 +275,21 @@ const ProductCardTall = (props:any) => {
     let productSrc = props.product.src;
     let productImgHover = props.product.imgHover;
 
-    if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && props.product.handle === 'daily-essentials-bundle') {
+    if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'daily-essentials-bundle') {
         let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
         let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e6b3d13-538a-4983-7560-c1f42e4c6400/public';
 		productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
         productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && props.product.handle === 'super-hydration-kit') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'super-hydration-kit') {
 		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
 		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f825e183-9dac-4f2b-ee1a-bf0711f67400/public';
         productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
         productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au') && props.product.handle === 'deep-condition-bundle') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'deep-condition-bundle') {
 		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6175c52d-3cd8-49e1-0c70-46254c2caa00/public';
         productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
