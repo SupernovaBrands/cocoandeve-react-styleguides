@@ -27,11 +27,12 @@ interface LaunchWaitListProps {
     onClickDiv?: (e) => {};
     setLaunchSubmitted?: any;
     tags?: any;
+    box: number;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     let countries = countriesList;
-    const { loggedInEmail, store, tags } = props;
+    const { loggedInEmail, store, tags, box } = props;
 
     let bgColor:string;
     const tagsLength = tags?.length || 0;
@@ -47,6 +48,8 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 bgColor = 'bg-secondary-light';
             }
         }
+    } else {
+        bgColor = 'bg-yellow-light';
     }
 
     const [email, setEmail] = useState(loggedInEmail ?? '');
@@ -89,7 +92,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             setTosError(true);
             setValidForm(false);
         } else if (validForm) {
-            props.onSubmitLaunchWaitlist({email, phoneCode, phoneNumber, fallback: () => {
+            props.onSubmitLaunchWaitlist({box, email, phoneCode, phoneNumber, fallback: () => {
                 setShowSuccess(true);
                 if (typeof props.setLaunchWLSuccess === 'function') {
                     props.setLaunchWLSuccess(true);
