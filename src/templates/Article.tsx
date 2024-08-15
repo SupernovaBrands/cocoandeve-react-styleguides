@@ -394,8 +394,8 @@ const Article = (props) => {
                 </article>
             </div>
         </div>
-        {upsells?.length && (
-            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-[1.25rem]">
+        {upsells?.length > 0 && (
+            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-[1.25rem] w-full">
                 <div className="container lg:px-0 sm:px-hg">
                     <h4 className="h1 text-center mb-1">Shop this article</h4>
                     {!isLoading && ( <ShopArticle label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
