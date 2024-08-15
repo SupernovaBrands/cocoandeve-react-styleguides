@@ -548,13 +548,13 @@ const Collection = (props: any) => {
                                 let isLaunchWL = false;
                                 let launchBox = 1;
                                 if (launchWL) {
-                                    if (launchWL?.launch_wl_handles.split(',').map((v) => v.trim()).includes(item.handle)) {
+                                    if (launchWL?.launch_wl_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
                                         isLaunchWL = true;
                                         launchBox = 1;
-                                    } else if (launchWL?.launch_wl2_handles.split(',').map((v) => v.trim()).includes(item.handle)) {
+                                    } else if (launchWL?.launch_wl2_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
                                         isLaunchWL = true;
                                         launchBox = 2;
-                                    } else if (launchWL?.launch_wl3_handles.split(',').map((v) => v.trim()).includes(item.handle)) {
+                                    } else if (launchWL?.launch_wl3_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
                                         isLaunchWL = true;
                                         launchBox = 3;
                                     }
