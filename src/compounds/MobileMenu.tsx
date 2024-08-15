@@ -99,7 +99,7 @@ const MobileMenu = (props: any) => {
 								)}
 							</label>
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'}`} aria-labelledby="headingHair">
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 										<label className="mb-[.5rem]" onClick={() => {
 											const newStates = {...defMenuState};
@@ -112,9 +112,9 @@ const MobileMenu = (props: any) => {
 											<BrandLogo className="lg:h-[34px]" />
 										</Link>
 										<Close className="h-[1em]"  onClick={() => {
-											const newStates = {...defMenuState};
-											newStates[i] = false;
-											setMenuStates(newStates);
+											// const newStates = {...defMenuState};
+											// newStates[i] = false;
+											// setMenuStates(newStates);
 											onToggleMobileNav(false);
 										}} />
 									</li>
@@ -155,7 +155,13 @@ const MobileMenu = (props: any) => {
 						)}
 						{isLoggedIn && (
 							<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
-								{userPts} Points <BeautyIcon className="ml-1 mr-1" />
+								{userPts !== -1 && (
+									<>{userPts} Points <BeautyIcon className="ml-1 mr-1" /></>
+								)}
+								{userPts === -1 && (
+									<div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
+								)}
+								{/* <div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" /> */}
 							</button>
 						)}
 					</li>
@@ -174,10 +180,10 @@ const MobileMenu = (props: any) => {
 						{currency === 'SGD' && 'Rest of the World (SGD)'}
 						{currency === 'USD' && 'USA (USD)'}
 						{currency === 'CAD' && 'Canada (CAD)'}
-						{currency === 'AUD' && 'Canada (CAD)'}
-						{currency === 'EUR' && 'Australia (AUD)'}
-						{currency === 'SGD' && 'Europe (EUR)'}
+						{currency === 'AUD' && 'Australia (AUD)'}
+						{currency === 'EUR' && 'Europe (EUR)'}
 						{currency === 'MYR' && 'Malaysia (MYR)'}
+						{currency === 'GBP' && 'United Kingdom (GBP)'}
 						<ChevronNext className={`h-[1em] text-xs ${storeSelection ? 'rotate-180' : ''}`} />
 					</h4>
 					<ul id="collapseCountry" className={`overflow-hidden list-unstyled card-body p-0 ${!storeSelection ? 'h-0' : 'h-full'} before:content-[''] before:border-t before:border-t-gray-100 before:block before:mt-1`} role="tabpanel"
@@ -185,7 +191,7 @@ const MobileMenu = (props: any) => {
 						<li key="c-us" className="pb-25 pt-g"><a href="https://us.cocoandeve.com" className='text-body'>USA (USD)</a></li>
 						<li key="c-gb" className="py-25"><a href="https://uk.cocoandeve.com" className='text-body'>United Kingdom (GBP)</a></li>
 						<li key="c-ca" className="py-25"><a href="https://ca.cocoandeve.com" className='text-body'>Canada (CAD)</a></li>
-						<li key="c-au" className="py-25"><a href="http<navs://au.cocoandeve.com" className='text-body'>Australia (AUD)</a></li>
+						<li key="c-au" className="py-25"><a href="https://au.cocoandeve.com" className='text-body'>Australia (AUD)</a></li>
 						<li key="c-eu" className="py-25"><a href="https://eu.cocoandeve.com" className='text-body'>Europe (EUR)</a></li>
 						<li key="c-sg" className="py-25"><a href="https://int.cocoandeve.com" className='text-body'>Rest of the World (SGD)</a></li>
 						{/* <li className="py-25"><a href="https://my.cocoandeve.com" className='text-body'>Malaysia (MYR)</a></li> */}

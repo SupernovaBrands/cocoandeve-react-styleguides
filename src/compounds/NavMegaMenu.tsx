@@ -88,7 +88,7 @@ const NavMegaMenu = (props: any) => {
                             }
 
                             const selectedWithImgs = selected.map((item) => {
-                                const { img } = getFeaturedImgMeta(item);
+                                const { img } = getFeaturedImgMeta(item, store);
                                 return {
                                     title: item.title,
                                     img: img || null,

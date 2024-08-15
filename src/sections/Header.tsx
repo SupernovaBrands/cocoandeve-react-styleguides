@@ -232,7 +232,7 @@ const Header = (props: any) => {
 							{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
 								<>
 									<li key="bbc" className="hidden lg:flex pr-hg">
-										<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className="h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline lg:items-center">
+										<a href={`${!isLoggedIn ? '/pages/rewards' : '/account#rewards'}`} onClick={redirectAccount} className={`h4 m-0 flex !font-bold text-body py-[6px] lg:py-hg lg:leading-[1.375em] hover:text-primary hover:no-underline ${isLoggedIn && userPts === -1 ? 'lg:items-center' : ''}`}>
 											{!isLoggedIn && 'Bali Beauty Club'}
 											{isLoggedIn && userPts >= 0 && (
 												`${userPts} Points`

@@ -141,7 +141,7 @@ const SearchBox = (props: any) => {
 								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
 								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
 								// featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
-								const { img } = getFeaturedImgMeta(item);
+								const { img } = getFeaturedImgMeta(item, store);
 								return {
 									title: item.title,
 									handle: item.handle,
@@ -185,7 +185,7 @@ const SearchBox = (props: any) => {
 				const { product } = data;
 				if (product) {
 					// console.log('');
-					const { img } = getFeaturedImgMeta(product);
+					const { img } = getFeaturedImgMeta(product, store);
 					// const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
 					// 	? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
 					if (img) {
