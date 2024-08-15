@@ -2,13 +2,13 @@ import React from 'react';
 import FiveStars from '~/images/icons/five-stars.svg';
 import parse from 'html-react-parser';
 import Badge from '~/components/Badge';
+import { useEffect, useState } from 'react';
 
 const RealResultCard = (props) => {
-	const { data, region } = props;
+	const { data, region, tab } = props;
+	const [status, checkStatus] = useState(false);
+
 	let badgeColor = 'badge-purple';
-
-	let storeName = 'us';
-
 	const capitalizeString = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 	const escapeHtml = (htmlString) => {
@@ -16,6 +16,20 @@ const RealResultCard = (props) => {
 		div.appendChild(document.createTextNode(htmlString));
 		return div.innerHTML;
 	};
+	
+	const checkProduct = async (handle) => {
+		let { product } = await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json());
+		console.log('product', product)
+		if (product === null) {
+			console.log('handle', handle)
+			console.log('product data', product);
+			checkStatus(true)
+		}
+	}
+
+	if (data.handle) {
+		checkProduct(data.handle);
+	}
 
 	if (data.review_type === 'tan') {
 		badgeColor = 'bg-sh-purple';
@@ -38,7 +52,11 @@ const RealResultCard = (props) => {
 	}
 
 	const titleEscaped = escapeHtml(data.label);
-	const titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
+	let titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
+
+	if (status) {
+		data.label = data.label.replace(`<a href="/products/${data.handle}"`, `<a href="/collections/${tab}"`);
+	}
 
 	return (
 		<div className="w-full lg:w-1/3 lg:inline-block result-card sm:px-hg lg:px-g">

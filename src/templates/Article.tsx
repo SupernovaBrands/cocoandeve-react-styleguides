@@ -94,11 +94,11 @@ const Article = (props) => {
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
     const [tanTitle, setTanTitle] = useState('');
-    const [title, setTitle] = useState(content.title);
+    const [title, setTitle] = useState(content?.title);
     const [featuredImageUrl, setFeaturedImageUrl] = useState('');
     const [bodyContent, setBodyContent] = useState('');
 
-    const d = new Date(content.updatedAt);
+    const d = new Date(content?.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
     const month = d.toLocaleString('default', { month: 'short' });
     const year = d.toLocaleString('default', { year: 'numeric' });
@@ -320,7 +320,7 @@ const Article = (props) => {
 		const newtitle = region === 'ca' ? 'Tan' : 'Tan & SPF';
 		setTanTitle(newtitle);
 
-        if ((region === 'int' || region === 'au' || region === 'my') && content.handle === 'how-to-deep-condition-hair') {
+        if ((region === 'int' || region === 'au' || region === 'my') && content?.handle === 'how-to-deep-condition-hair') {
             setTitle('How to Deep Condition Hair to Ditch Dryness and Frizz');
         }
 	}, [region]);
@@ -367,7 +367,7 @@ const Article = (props) => {
                             {parse(bodyContent)}
                             <ul className="block mb-4 mt-1 pl-[0!important]">
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
@@ -377,7 +377,7 @@ const Article = (props) => {
                                     </a>
                                 </li>
                                 <li className="inline-block">
-                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Pinterest className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
