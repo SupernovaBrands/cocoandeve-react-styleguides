@@ -60,7 +60,7 @@ export const CartDiscountForm = (props:any) => {
 
     const applyDiscount = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
-        if (state.code && !state.loading) {
+        if (state.code && state.code?.trim() !== '' && !state.loading) {
             setState({ ...state, code: state.code.trim(), loading: true, applyCode: true });
         }
     };
