@@ -34,6 +34,7 @@ const Header = (props: any) => {
 	}
 
 	const onToggleSearchBox = () => {
+		setOpenAccountBox(false);
 		setOpenSearchBox(!openSearchBox);
 		// console.log('onToggleSearchBox', openSearchBox);
 		if (!openSearchBox) document.querySelector('body').classList.add('overflow-y-hidden', 'search-panel-active');
@@ -41,6 +42,7 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
+		onToggleSearchBox();
 		if (isLoggedIn) {
 			window.location.href = '/account'
 		}
