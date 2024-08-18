@@ -42,11 +42,12 @@ const Header = (props: any) => {
 	}
 
 	const toggleAccountDropdown = () => {
-		onToggleSearchBox();
 		if (isLoggedIn) {
 			window.location.href = '/account'
 		}
 		else setOpenAccountBox(!openAccountBox);
+		setOpenSearchBox(false);
+		document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
 	}
 
 	useEffect(() => {
