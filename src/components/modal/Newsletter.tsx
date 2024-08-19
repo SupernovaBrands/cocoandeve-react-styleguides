@@ -87,7 +87,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 	const [formCompleted, setFormCompleted] = useState(false);
 	const [copied, setCopied] = useState(false);
 	const [smsBump, setSmsbump] = useState('');
-	const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+	const [activeCountryCode, setaActiveCountryCode] = useState(65);
 	const [allowSubmit, setAllowSubmit] = useState(false);
 
 	useEffect(() => {
@@ -187,6 +187,27 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 		navigator.clipboard.writeText('WELCOME');
 		setCopied(true);
 	};
+
+	useEffect(() => {
+        let numberCodeDef = 65;
+		if (store === 'us') {
+			numberCodeDef = 1;
+		} else if (store === 'au') {
+			numberCodeDef = 61;
+		} else if (store === 'UK') {
+			numberCodeDef = 44;
+		} else if (store === 'ca') {
+			numberCodeDef = 1;
+		} else if (store === 'eu' || store === 'fr') {
+			numberCodeDef = 33;
+		} else if (store === 'de') {
+			numberCodeDef = 49;
+		} else if (store === 'my' || store === 'my') {
+			numberCodeDef = 60;
+		}
+
+		setaActiveCountryCode(numberCodeDef)
+    }, [store]);
 
 	return (
 		<div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding ${nbp_bg_color}`}>
