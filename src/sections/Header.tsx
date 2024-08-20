@@ -34,6 +34,7 @@ const Header = (props: any) => {
 	}
 
 	const onToggleSearchBox = () => {
+		setOpenAccountBox(false);
 		setOpenSearchBox(!openSearchBox);
 		// console.log('onToggleSearchBox', openSearchBox);
 		if (!openSearchBox) document.querySelector('body').classList.add('overflow-y-hidden', 'search-panel-active');
@@ -45,6 +46,8 @@ const Header = (props: any) => {
 			window.location.href = '/account'
 		}
 		else setOpenAccountBox(!openAccountBox);
+		setOpenSearchBox(false);
+		document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
 	}
 
 	useEffect(() => {
