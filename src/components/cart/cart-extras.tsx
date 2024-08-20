@@ -68,6 +68,7 @@ const CartExtrass = (props:any) => {
 
 	return (
 		<>
+		{props.showTopHr && (showShoppay || showKlarna || showAfterpay) && <hr />}
 		{showShoppay && (
 			<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
 				{!loading && (
