@@ -55,7 +55,7 @@ export default class QuantityBox extends React.Component {
 
 	onAddQuantity = (e) => {
 		e.preventDefault();
-
+		this.props.setLoadingItem(true);
 		const qty = parseInt(this.state.quantity, 10);
 		this.setState(
 			{ quantity: qty + 1 },
@@ -92,6 +92,7 @@ export default class QuantityBox extends React.Component {
 
 	onSubtractQuantity = (e) => {
 		e.preventDefault();
+		this.props.setLoadingItem(true);
 		const qty = parseInt(this.state.quantity, 10);
 		const min = this.props.allowZero ? 0 : 1;
 		if (this.state.quantity > min) {
@@ -108,6 +109,7 @@ export default class QuantityBox extends React.Component {
 	}
 
 	onChangeQuantity = (e) => {
+		this.props.setLoadingItem(true);
 		const { target: { value }, nativeEvent } = e;
 		const qty = parseInt(value, 10);
 		if (nativeEvent.data === 'e') return;
@@ -129,6 +131,7 @@ export default class QuantityBox extends React.Component {
 	changeQuantity = async () => {
 		await this.props.onChangeQuantity(this.state.quantity);
 		this.setState({updateQuantity: true});
+		this.props.setLoadingItem(false);
 	}
 
 	render() {
@@ -138,11 +141,11 @@ export default class QuantityBox extends React.Component {
 					className="p-[16px] grow-0"
 					type="button"
 					aria-label="Add Subtract"
-					disabled={!this.props.editable || this.state.prevQuantity === 0}
+					disabled={!this.props.editable || this.state.prevQuantity === 0 || this.props.loadingItem}
 					onClick={this.onSubtractQuantity}
 					data-cy="cart-subtract-quantity-icon"
 				>
-					<SvgMinus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
+					<SvgMinus className={`svg w-[1em] ${!this.props.editable || this.props.loadingItem ? 'fill-gray-500' : ''}`} />
 				</button>
 				<input
 					type="number"
@@ -154,16 +157,17 @@ export default class QuantityBox extends React.Component {
 					onFocus={this.onFocus}
 					readOnly={!this.props.editable}
 					aria-label="quantity input"
+					disabled={this.props.loadingItem}
 				/>
 				<button
 					className="p-[16px]"
 					type="button"
 					aria-label="Add Quantity"
-					disabled={!this.props.editable || this.state.lastStock}
+					disabled={!this.props.editable || this.state.lastStock || this.props.loadingItem}
 					onClick={this.onAddQuantity}
 					data-cy="cart-add-quantity-icon"
 				>
-					<SvgPlus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
+					<SvgPlus className={`svg w-[1em] ${!this.props.editable || this.props.loadingItem ? 'fill-gray-500' : ''}`} />
 				</button>
 			</div>
 		);

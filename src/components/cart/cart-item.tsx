@@ -40,12 +40,15 @@ export const CartItem = (props:CartItemProps) => {
 	const [selectedVariant, setSelectedVariant] = useState(selectedSwatch || []);
 	const [featuredImageUrl, setFeaturedImageUrl] = useState(item?.featuredImageUrl || '');
 	const [subtitles, setSubtitles] = useState([]);
+	const [loadingItem, setLoadingItem] = useState(false);
 
 	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
+		setLoadingItem(true);
 		setEditingVariant(index);
 		setSelectedVariant([swatchValue]);
 		await onChangeVariant(item.id, variant.id, item.quantity);
 		setEditingVariant(null);
+		setLoadingItem(false);
 	}
 
 	const variantSubtitle = () => {
@@ -288,7 +291,7 @@ export const CartItem = (props:CartItemProps) => {
 												tabIndex={-1}
 												disabled={!variant.availableForSale}
 												aria-label={kebabCase(val)}
-												onClick={() => selectedVariant[0] !== val ? onSelectVariant(variant, val, index) : null }
+												onClick={() => selectedVariant[0] !== val && !loadingItem ? onSelectVariant(variant, val, index) : null }
 											/>
 										);
 									})}
@@ -298,14 +301,27 @@ export const CartItem = (props:CartItemProps) => {
 									)}
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
-									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
-									</span>)}
+										<>
+											{loadingItem && (<span className="font-size-sm"> - Loading...</span>)}
+											{!loadingItem && (
+												<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
+													{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
+												</span>
+											)}
+										</>
+									)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
-									<div className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{`${selected.replace(': limited edition!', '')} ${opt.name}`}
-									</div>
+									<>
+										{loadingItem && (
+											<span className="font-size-sm">Loading...</span>
+										)}
+										{!loadingItem && (
+											<div className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
+												{`${selected.replace(': limited edition!', '')} ${opt.name}`}
+											</div>
+										)}
+									</>
 								)}
 							</div>
 
@@ -328,6 +344,8 @@ export const CartItem = (props:CartItemProps) => {
 						isModified={item.modified}
 						originalQuantity={item.original_quantity}
 						allowZero={true}
+						setLoadingItem={setLoadingItem}
+						loadingItem={loadingItem}
 					/>
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
