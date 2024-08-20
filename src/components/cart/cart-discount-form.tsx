@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component, ChangeEvent, KeyboardEvent } from 'react';
+import React, { useState, useEffect, Component, ChangeEvent, KeyboardEvent, useRef } from 'react';
 import Button from '../Button';
 import SvgPercent from '~/images/icons/percent-square.svg';
 import MenuBannerDecorative from '~/images/icons/menu-banner-decoration.svg';
@@ -21,6 +21,7 @@ export const CartDiscountForm = (props:any) => {
     };
 
     const [state, setState] = useState(stateData);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         const { isApplied, error } = props;
@@ -70,6 +71,7 @@ export const CartDiscountForm = (props:any) => {
         setState({...state, loading: true});
         await props.onRemove();
         setState({...state, loading: false, code: '', isApplied: false, error: ''});
+        if (inputRef) inputRef.current.value = '';
     };
 
     const removeGiftCard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -113,6 +115,7 @@ export const CartDiscountForm = (props:any) => {
             <div className="py-g cart-drawer__discount-form">
                 <div className={`${state.hasCode ? 'hidden' : 'flex'} flex-nowrap py-0`}>
                     <input
+                        ref={inputRef}
                         type="text"
                         name="discount"
                         className={`field block appearance-none w-3/4 border mr-1 text-base leading-normal border rounded-h outline-none mb-0 ${state.code ? 'border-0 bg-gray-400' : 'focus:border-black border-black bg-white'}`}
