@@ -348,7 +348,7 @@ const Article = (props) => {
                         {!isLoading && featuredImageUrl && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
                                 <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
-                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content.title} />
+                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content?.title} />
                             </picture>
                         )}
                         {quickLinks?.length > 0 && (
@@ -387,7 +387,7 @@ const Article = (props) => {
                             <ArticleNewsLetter postNewsletter={postNewsletter} store={region} />
                         )}
                         {postBannerInfo?.enables && (
-                            <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content.title} />
+                            <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
                     <div id="sideBarPosts"></div>
