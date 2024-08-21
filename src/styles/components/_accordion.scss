@@ -51,4 +51,18 @@
         }
     }
 
+    .accordion-content {
+        overflow: hidden;
+        max-height: 0;
+        -webkit-transition: max-height 365ms ease-in-out;
+        -moz-transition: max-height 365ms ease-in-out;
+        -ms-transition: max-height 365ms ease-in-out;
+        -o-transition: max-height 365ms ease-in-out;
+        transition: max-height 365ms ease-in-out;
+
+        &--open {
+            height: auto;
+            max-height: 2000px;
+        }
+    }
 }
