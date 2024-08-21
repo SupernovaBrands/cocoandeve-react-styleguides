@@ -1,6 +1,8 @@
 import Stars from '~/images/icons/two-line-stars.svg';
 import WinnerAward from '~/images/icons/winner-award.svg';
 import MoneyBack from '~/images/icons/moneyback.svg';
+import MoneyBackPounds from '~/images/icons/moneyback-pounds.svg';
+import MoneyBackEur from '~/images/icons/moneyback-eur.svg';
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -21,6 +23,18 @@ const Service = (props: any) => {
 		setTotalReviews(r?.response?.total_reviews?.toLocaleString());
 	});
 
+	const moneyBackIcon = (store = 'us') => {
+		if (store === 'uk') {
+			return <MoneyBackPounds className="text-body" />
+		} else if (store === 'eu') {
+			return <MoneyBackEur className="text-body" />
+		} else {
+			return <MoneyBack className="text-body" />
+		}
+	};
+
+	const icon = moneyBackIcon(props.store);
+
 	return (
 		<section className="text-center section-services-list">
 			<div className="container mt-1">
@@ -31,7 +45,7 @@ const Service = (props: any) => {
 								<i className="inline-flex flex-wrap h1 mb-2">
 									{list.id === 'stars' && <Stars className="text-body" />}
 									{list.id === 'winner-award' && <WinnerAward className="text-body" />}
-									{list.id === 'money-back' && <MoneyBack className="text-body" />}
+									{list.id === 'money-back' && <>{icon}</>}
 								</i>
 								{list.id === 'stars' ? (
 									<>
@@ -46,7 +60,7 @@ const Service = (props: any) => {
 										<span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
 									))}</p>
 								)}
-								
+
 							</li>
 						);
 					})}
