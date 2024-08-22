@@ -218,6 +218,7 @@ const Article = (props) => {
                 targetAppend = targetAppend > 1 ? targetAppend - 1 : targetAppend;
                 const targetContent = articleContent[targetAppend];
                 articleShops.forEach(articleShop => {
+                    articleShop.classList.remove('w-full');
                     targetContent.parentNode.insertBefore(articleShop, targetContent);
                 });
                 if (window.innerWidth > screenLG) {
