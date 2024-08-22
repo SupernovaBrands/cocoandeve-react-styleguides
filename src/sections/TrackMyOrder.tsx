@@ -97,7 +97,7 @@ const TrackMyOrder = (props: any) => {
                                                 <TrackConfirmed className="text-primary h-[2em]" />
                                                 <span className='leading-tight block text-[12px] mt-[3px] h-[75px] bg-[url(/cdn/shop/files/track-confirmed.svg)]'>Ordered</span>
                                             </div>
-                                            <div className="track-line w-1/5 mt-[5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
+                                            <div className="track-line w-1/5 mt-[5%] lg:mt-[2.5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
                                             <div className="track-step track-pickup active text-center flex justify-center [flex-flow:column] items-center">
                                                 {!dataTracking?.status || dataTracking?.status === 'initial' ? (
                                                     <TrackPickupDisabled className="text-primary h-[2em]" />
@@ -106,7 +106,7 @@ const TrackMyOrder = (props: any) => {
                                                 )}
                                                 <span className='leading-tight block text-[12px] mt-[3px] h-[75px]'>Pick Up</span>
                                             </div>
-                                            <div className="track-line w-1/5 mt-[5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
+                                            <div className="track-line w-1/5 mt-[5%] lg:mt-[2.5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
                                             <div className="track-step track-intransit active text-center flex justify-center [flex-flow:column] items-center">
                                                 {!dataTracking?.status || dataTracking?.status === 'initial' || dataTracking?.status === 'pickup' ? (
                                                     <TrackTransitDisabled className="text-primary h-[2em]" />
@@ -115,7 +115,7 @@ const TrackMyOrder = (props: any) => {
                                                 )}
                                                 <span className='leading-tight block text-[12px] mt-[3px] h-[75px]'>In Transit</span>
                                             </div>
-                                            <div className="track-line w-1/5 mt-[5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
+                                            <div className="track-line w-1/5 mt-[5%] lg:mt-[2.5%] block mx-[auto] my-[0] h-[2px] bg-[#d1d1d1]"></div>
                                             <div className="track-step track-delivered active text-center flex justify-center [flex-flow:column] items-center">
                                                 {!dataTracking?.status || dataTracking?.status === 'initial' || dataTracking?.status === 'pickup' || dataTracking?.status === 'intransit' ? (
                                                     <TrackDeliveredDisabled className="text-primary h-[2em]" />

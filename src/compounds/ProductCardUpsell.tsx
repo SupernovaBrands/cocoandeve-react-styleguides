@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "../components";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const WaitlistButton = (props: any) => {
     return (
@@ -18,9 +18,11 @@ const AddToCartButton = (props: any) => {
 
     const [addingItem, setAddingItem] = useState(false);
     const onAddItem = async () => {
-        setAddingItem(true);
-        await props.onClick({ item: props.variantId, quantity: 1, title: props.title, handle: props.handle });
-        setAddingItem(false);
+        if (typeof props.onClick === 'function') {
+            setAddingItem(true);
+            await props.onClick({ item: props.variantId, quantity: 1, title: props.title, handle: props.handle });
+            setAddingItem(false);
+        }
     };
 
     return (
@@ -38,25 +40,28 @@ const SwatchOverlay = (props:any) => {
     const [selectedSwatch, setSelectedSwatch] = useState(availableSwatch)
     const { waitlistData, setWaitlistData, item } = props;
     const { image, title, handle, store } = props;
+    const swatchLabel = useRef(null);
 
-    const changeSwatch = (item:any) => {
+    const changeSwatch = (item:any, e: any) => {
         setSelectedSwatch(item);
         props.onChangeSwatch(item);
+        const targetText = e.target.getAttribute('data-val');
+        if (swatchLabel) swatchLabel.current.textContent = targetText;
     }
 
     return (
         <>
-            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} store={store} className="btn-choose" label={props.swatch.label === 'Choose Tangle Tamer' ? 'Add To Cart' : props.swatch.label} title={props.title || ''}/>
+            <AddToCartButton comparePrice={props.comparePrice} price={props.price} available={true} store={store} className="btn-choose" label={props.swatch.label} title={props.title || ''}/>
             <div className="swatch-overlay flex-col items-center justify-end pb-0 absolute bg-white px-0 border border-primary rounded">
                 <div className="text-center w-full pt-2 lg:pb-2 pb-2 lg:px-1">
                     <label className="block mb-2 px-1">
-                        {props.swatch.title && <strong>{props.swatch.title}: </strong>}
-                        <span data-swatch-label>{props.swatch.data[0]?.label}</span>
+                        {props.swatch.title && <strong>{props.swatch.title.replace('Tangle Tamer', 'Type')}: </strong>}
+                        <span ref={swatchLabel} data-swatch-label>{props.swatch.data[0]?.label}</span>
                     </label>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:number) => (
-                            <li key={item.id} onClick={() => changeSwatch(item)} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${selectedSwatch.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span data-id={item.id} data-val={item.label} className={`before:m-[1px] block variant-swatch mx-auto ${ selectedSwatch.id === item.id ? 'border border-primary' : ''} ${item.value} ${item.available ? '' : 'oos'}`}></span>
+                            <li key={item.id} className={`w-1/4 product-variant-swatch__item ${item.available ? 'available' : ''} ${selectedSwatch.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                                <span onClick={(e) => changeSwatch(item, e)} data-id={item.id} data-val={item.label} className={`before:m-[1px] block variant-swatch mx-auto ${ selectedSwatch.id === item.id ? 'border border-primary' : ''} ${item.value} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
