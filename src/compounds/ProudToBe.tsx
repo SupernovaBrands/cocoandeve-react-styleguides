@@ -181,7 +181,7 @@ const ProudToBe = (props:any) => {
                         </Carousel.Wrapper> */}
                         <ul onScroll={scrolling} ref={scrollEl}
                             onMouseDown={handleDragStart} onMouseUp={handleDragEnd} onMouseMove={handleDrag}
-                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden`} role="listbox">
+                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden`} role="listbox">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
                                     return null;

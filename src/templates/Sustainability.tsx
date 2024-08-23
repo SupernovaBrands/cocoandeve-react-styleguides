@@ -119,9 +119,11 @@ const Sustainability = (props: any) => {
                 const productData = await Promise.all(pInfos);
                 productData.map((obj) => {
                     const { product } = obj;
-                    // delete product.selectedVariant;
-                    const mapped = buildProductCardModel(store, product, generalSetting, squareBadge);
-                    t.push(mapped);
+                    if (product) {
+                        // delete product.selectedVariant;
+                        const mapped = buildProductCardModel(store, product, generalSetting, squareBadge);
+                        t.push(mapped);
+                    }
                 });
                 return t;
             };
