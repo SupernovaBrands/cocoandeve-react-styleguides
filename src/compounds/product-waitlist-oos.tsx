@@ -212,7 +212,7 @@ const ProductWaitlist = (props: any) => {
 			</div> }
 			{ showSuccess && <div className="w-100 p-3 mb-3 rounded">
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.titleThanks ?? 'YOU`LL HEAR FROM US SOON'}</p>
-				{/* <p className="font-size-sm mb-0">{data.formDescriptionThanks}</p> */}
+				<p className="font-size-sm mb-2">{data.formDescriptionThanks || ''}</p>
 				<a href="/collections/all" className="btn btn-primary btn-lg w-full hover:bg-primary-dark py-[13px] no-underline hover:text-white hover:no-underline">Shop other products</a>
 			</div> }
 		</>
