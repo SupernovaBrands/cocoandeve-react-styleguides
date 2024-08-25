@@ -133,7 +133,7 @@ const Article = (props) => {
             const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
             const body = content.BlogContentMultiStores[region].body_content
                 .replace('<a', ariaLabel)
-                .replace('<ul>', '<ul class="article-list">')
+                .replace(/<ul>/g, '<ul class="article-list">')
                 .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
             setBodyContent(body);
         }
