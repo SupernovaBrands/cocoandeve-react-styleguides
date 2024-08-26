@@ -477,7 +477,7 @@ const Collection = (props: any) => {
                             </ul>
                         </aside>
                     )}
-                    <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap">
+                    <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap items-start">
                         <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
@@ -537,6 +537,7 @@ const Collection = (props: any) => {
                                     </div>
                                 </div>
                             )}
+                            {collProducts.length <= 0 && !isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
                         <div className="flex flex-wrap collection-grid overflow-hidden w-full">
                             {(showSpinner || loading) && (
