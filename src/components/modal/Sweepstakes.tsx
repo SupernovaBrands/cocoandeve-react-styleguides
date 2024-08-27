@@ -35,6 +35,7 @@ type SweepstakesProp = {
 	handleClose: () => void
 	data: SweepstakesData
 	trackBluecoreLaunchWaitlistEvent: (email: string, pageType: string) => void
+	store: string
 }
 
 const validForm = {
@@ -68,14 +69,13 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBluecoreLaunchWaitlistEvent }) => {
+const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBluecoreLaunchWaitlistEvent, store }) => {
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
 	const [phoneError, setPhoneError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid phone number' });
 	const [formCompleted, setFormCompleted] = useState(false);
 	const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
-	
 	const isMobile = (globalThis.innerWidth < 769);
 	const styles = {
 		'background-image': isMobile ? `` : `url(${data?.sweepstakes_popup_img_lg?.url})`,
@@ -163,6 +163,27 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 	}
 
+	useEffect(() => {
+        let numberCodeDef = 65;
+		if (store === 'us') {
+			numberCodeDef = 1;
+		} else if (store === 'au') {
+			numberCodeDef = 61;
+		} else if (store === 'uk') {
+			numberCodeDef = 44;
+		} else if (store === 'ca') {
+			numberCodeDef = 1;
+		} else if (store === 'eu' || store === 'fr') {
+			numberCodeDef = 33;
+		} else if (store === 'de') {
+			numberCodeDef = 49;
+		} else if (store === 'my' || store === 'my') {
+			numberCodeDef = 60;
+		}
+
+		setaActiveCountryCode(numberCodeDef)
+    }, [store]);
+
 	return (
 		<>
 			{/* @ts-ignore */}
@@ -193,7 +214,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 									<input type="checkbox" name="tos" className="hidden" value="true" checked />
 									<div className="text-center mb-25 sweepstakes-popup__separator text-secondary">and / or</div>
 									<div className="relative flex items-stretch w-full flex-wrap mb-[5px]">
-										<InputCountry id="modal--sweepstakes__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" handleCode={handleCode} activeCountry={activeCountryCode} />
+										<InputCountry store={store} id="modal--sweepstakes__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" handleCode={handleCode} activeCountry={activeCountryCode} />
 										<input value={phone} onChange={handlePhone} className="bg-clip-padding block w-full mb-0 -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%] active:border-[#ffffff] focus:border-[#ffffff] border-[#ffffff]" type="phone" placeholder={data?.sweepstakes_popup_phone} />
 									</div>
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}

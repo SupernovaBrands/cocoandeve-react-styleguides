@@ -105,7 +105,6 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 	};
 
 	const handleCode = (e) => {
-		console.log(e);
 		setaActiveCountryCode(e);
 	};
 
@@ -228,7 +227,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 							</div>
 							<p className={`text-center mb-1 mt-1`}>and / or</p>
 							<div className="relative flex items-stretch w-full flex-wrap">
-								<InputCountry id="modal--newsletter__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" />
+								<InputCountry store={store} id="modal--newsletter__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" />
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full mb-g -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] font-bold underline ')}} />
