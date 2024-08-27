@@ -377,7 +377,6 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         if (launchWL) {
-            console.log('launchWL', launchWL);
             setLaunchHandles(launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || []);
         }
     }, [launchWL]);

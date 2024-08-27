@@ -388,8 +388,11 @@ const Cart: React.FC<Props> = (props) => {
 									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
-							{['us','eu','uk','ca'].includes(store) && (
+							{['us','uk','ca'].includes(store) && (
 								<p className="w-full p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: tStrings.cart_shipping_at_checkout }} />
+							)}
+							{['eu'].includes(store) && (
+								<p className="w-full p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: 'Shipping calculated at checkout' }} />
 							)}
 						</div>
 					)}
