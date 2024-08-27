@@ -26,12 +26,13 @@ const ProductCarousel = (props: any) => {
 
 	const { addToCart, generalSetting, label } = props;
     const [products, setProducts] = useState(props.products);
-    
+
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
 
     useEffect(() => {

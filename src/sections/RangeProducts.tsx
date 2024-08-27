@@ -35,6 +35,7 @@ const RangeProducts = (props: any) => {
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
 
     return (
