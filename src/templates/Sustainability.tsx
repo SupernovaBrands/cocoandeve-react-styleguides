@@ -37,6 +37,7 @@ const Sustainability = (props: any) => {
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
 
     const toggleCart = () => {

@@ -29,6 +29,7 @@ const WaitlistButton = (props:any) => {
             title: props.product.title,
             image: props.product.src,
             handle: props.product.handle,
+            date: props.selectedVariant?.waitlistPopupDate?.value || ''
         });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
@@ -345,11 +346,11 @@ const ProductCardTall = (props:any) => {
                     <SwatchOverlay sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
-                    <WaitlistButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                    <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
                 {!props.isLaunchWL && !props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
-                    <WaitlistButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
+                    <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} />
                 )}
 
                 {props.isLaunchWL && (

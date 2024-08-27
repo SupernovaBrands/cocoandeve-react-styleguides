@@ -108,6 +108,7 @@ const Collection = (props: any) => {
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
     const [launchWLModal, setLaunchWLModal] = useState({
         open: false,
