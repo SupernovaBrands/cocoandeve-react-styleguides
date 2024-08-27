@@ -9,7 +9,7 @@ const QuizReward = (props: any) => {
 						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a51bcbe7-e43e-4762-4a41-916d00416b00/1140x" media="(min-width: 992px)" />
 						<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56f87000-b2e4-4813-a00f-d7a0eee86c00/828x" loading="lazy" />
 					</picture>
-					<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
+					<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
 						<p className="text-lg lg:text-2xl mb-g mb-lg-2 font-bold">Tan Quiz</p>
 						<p className="text-sm mb-g lg:mb-2">Find the perfect solution for your skin’s needs <br className="hidden lg:block"/>in just a few steps</p>
 						<a href="/pages/self-tan-quiz" className="inline-block align-middle text-center select-none border py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-g lg:px-5 font-bold">Take the Quiz</a>
