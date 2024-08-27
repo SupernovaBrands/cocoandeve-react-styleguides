@@ -33,7 +33,7 @@ const Birthday: React.FC<BirthdayProp> = ({handleClose, data, handleSubmit, date
 						</div>
 						<div className="relative flex flex-wrap items-stretch mb-1 w-7/12 lg:w-1/2 pl-0">
 							<select ref={monthRef} className="custom-select" defaultValue="">
-								<option value="">Select</option>
+								<option value="">Month</option>
 		                        <option value="1">January</option>
                                 <option value="2">February</option>
                                 <option value="3">March</option>
