@@ -280,7 +280,7 @@ export function getFormatString (store = 'us') {
 			break;
 		}
 		case 'eu': {
-			format = '{{amount}}€'
+			format = '{{amount_with_comma_separator}}€'
 			break;
 		}
 		case 'my': {
