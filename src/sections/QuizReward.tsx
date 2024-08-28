@@ -23,7 +23,7 @@ const QuizReward = (props: any) => {
 						</picture>
 						<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
 							<p className="text-lg lg:text-2xl mb-g mb-lg-2 font-bold">Rewards Program</p>
-							<p className="text-sm mb-g lg:mb-2">Sign up for our reward program and stack up your <br className="hidden lg:block"/>points for free product.</p>
+							<p className="text-sm mb-g lg:mb-2">Sign up for our reward program and stack up your <br className="hidden lg:block"/>points for free product</p>
 							<a href="/pages/rewards" className="inline-block align-middle text-center select-none border py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-g lg:px-5 font-bold">Join Now</a>
 						</figcaption>
 					</figure>
