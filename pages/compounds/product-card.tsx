@@ -7,6 +7,7 @@ const ProductCards = () => {
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
     const product1 = {
         availableForSale: true,

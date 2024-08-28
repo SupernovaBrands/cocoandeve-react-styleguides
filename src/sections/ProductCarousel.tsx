@@ -34,6 +34,7 @@ const ProductCarousel = (props: any) => {
         title: '',
         image: '',
         handle: undefined,
+		date: '',
     });
 
 	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;

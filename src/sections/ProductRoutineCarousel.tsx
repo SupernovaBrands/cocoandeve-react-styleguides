@@ -68,6 +68,7 @@ const ProductRoutineCarousel = (props: any) => {
         title: '',
         image: '',
         handle: undefined,
+        date: '',
     });
 
     useEffect(() => {
