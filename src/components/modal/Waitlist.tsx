@@ -92,6 +92,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
+										{data.date && data.date !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										)}
 									</>
 								)}
 								{success && isNonOOs && (
@@ -100,6 +103,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
+										{data.date && data.date !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										)}
 									</>
 								)}
 								<div className={`relative flex items-stretch w-full flex-col ${success ? 'mt-4' : 'mt-2'}`}>
