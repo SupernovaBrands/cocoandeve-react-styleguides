@@ -11,7 +11,7 @@ interface WatilistData {
 	open: boolean
 	title: string
 	handle: string|undefined
-	date: string
+	date?: string
 }
 
 type WaitlistProp = {
@@ -81,7 +81,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
 										<p className="text-gray-600 mb-[1rem] text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
 
-										{data.date !== '' && (
+										{data.date && data.date !== '' && (
 											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
 										)}
 									</>
