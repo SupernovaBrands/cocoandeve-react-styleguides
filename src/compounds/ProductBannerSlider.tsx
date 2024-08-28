@@ -72,6 +72,7 @@ const ProductBannerSlider = (props) => {
 	};
 
 	const slideMove = (e) => {
+        e.preventDefault();
 		if (clicked) {
 			let pos = 0;
 			pos = getCursorPos(e);
@@ -88,6 +89,7 @@ const ProductBannerSlider = (props) => {
 	};
 
 	const handleMouseMove = (event) => {
+        event.preventDefault();
 		if (clicked) {
 			/*
 			const rect = event.target.getBoundingClientRect();
