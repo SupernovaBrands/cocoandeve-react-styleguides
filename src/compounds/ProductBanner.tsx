@@ -4,7 +4,6 @@ import ProductBannerSlider from './ProductBannerSlider';
 const ProductBanner = (props: any) => {
     const { contentData } = props;
     const [comparisonImages, setComparisonImages] = useState(null);
-    console.log('bannerImageText', contentData);
 
     useEffect(() => {
         const { first_image, second_image } = contentData;
