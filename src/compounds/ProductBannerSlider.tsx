@@ -108,7 +108,7 @@ const ProductBannerSlider = (props) => {
 	return (
 		<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden" style={{ ...wrapperHeight }}>
 			<div className="absolute w-full h-full overflow-hidden">
-				<img src={props?.first_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+				<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 			</div>
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
@@ -130,7 +130,7 @@ const ProductBannerSlider = (props) => {
 				</span>
 			</div>
 			<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay">
-				<img src={props?.second_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+				<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 			</div>
 		</div>
 	);
