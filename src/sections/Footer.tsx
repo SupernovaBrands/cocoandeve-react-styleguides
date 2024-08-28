@@ -18,7 +18,7 @@ const Footer = (props: any) => {
 
     const onSubmit = (evt) => {
 		evt.preventDefault();
-        console.log('email', email);
+        // console.log('email', email);
 		const ajaxRequest = new XMLHttpRequest();
 		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
 		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -28,6 +28,22 @@ const Footer = (props: any) => {
 		const signature = encryptParam(content);
 		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
 		setSubmitted(true);
+        try {
+            // @ts-ignore
+            if (typeof globalThis.window.ttq) {
+                // @ts-ignore
+                globalThis.window.ttq.identify({ email });
+                // @ts-ignore
+                globalThis.window.ttq.instance('CC3JF1JC77U9MSBJLS5G').track('Subscribe');
+            }
+            // @ts-ignore
+            if (typeof globalThis.window.fbq) {
+                //@ts-ignore
+                globalThis.window.fbq('track', 'Lead');
+            }
+        } catch(e){
+            console.log(e);
+        }
 	};
 
     const handleEmail = (e) => {

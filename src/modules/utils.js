@@ -423,6 +423,13 @@ export const subscribeBluecoreRegistration = (
 	};
 
 	subscribeTiktok(email, phone);
+	try {
+		if (typeof window.fbq) {
+			window.fbq('track', 'Lead');
+		}
+	} catch (e) {
+		console.log(e);
+	}
 	const ajaxRequest = new XMLHttpRequest();
 	ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
 	ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
