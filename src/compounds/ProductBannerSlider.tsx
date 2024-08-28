@@ -24,7 +24,7 @@ const ProductBannerSlider = (props) => {
 			});
 		};
 
-		compareImages(compOverlay);
+		compareImages();
 
 		setTimeout(() => {
 			if (window.innerWidth < 768) {
@@ -113,7 +113,7 @@ const ProductBannerSlider = (props) => {
 			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 			<div
 				ref={compSlider}
-				className="img-slider absolute flex justify-center align-center"
+				className="img-slider absolute flex justify-center items-center"
 				style={{ ...sliderStyle }}
 				onMouseDown={slideReady}
 				onMouseUp={slideFinish}
@@ -130,7 +130,7 @@ const ProductBannerSlider = (props) => {
 				</span>
 			</div>
 			<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay">
-				<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+				<img src={props?.second_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 			</div>
 		</div>
 	);
