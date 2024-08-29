@@ -107,35 +107,37 @@ const ProductBannerSlider = (props) => {
 		initComparisons();
 	}, []);
 
-	return (
-		<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden" style={{ ...wrapperHeight }}>
-			<div className="absolute w-full h-full overflow-hidden">
-				<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+	return <>
+		{wrapperHeight && (
+			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden" style={{ ...wrapperHeight }}>
+				<div className="absolute w-full h-full overflow-hidden">
+					<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+				</div>
+				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+				<div
+					ref={compSlider}
+					className="img-slider absolute flex justify-center items-center"
+					style={{ ...sliderStyle }}
+					onMouseDown={slideReady}
+					onMouseUp={slideFinish}
+					onMouseMove={slideMove}
+					onTouchStart={slideReady}
+					onTouchEnd={slideFinish}
+					onTouchMove={slideMove}
+				>
+					<span className="rounded-full bg-white mr-1">
+						<ChevronPrev className="chevron-prev text-white" />
+					</span>
+					<span className="rounded-full bg-white ml-1">
+						<ChevronNext className="chevron-next text-white" />
+					</span>
+				</div>
+				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay">
+					<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+				</div>
 			</div>
-			{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-			<div
-				ref={compSlider}
-				className="img-slider absolute flex justify-center items-center"
-				style={{ ...sliderStyle }}
-				onMouseDown={slideReady}
-				onMouseUp={slideFinish}
-				onMouseMove={slideMove}
-				onTouchStart={slideReady}
-				onTouchEnd={slideFinish}
-				onTouchMove={slideMove}
-			>
-				<span className="rounded-full bg-white mr-1">
-					<ChevronPrev className="chevron-prev text-white" />
-				</span>
-				<span className="rounded-full bg-white ml-1">
-					<ChevronNext className="chevron-next text-white" />
-				</span>
-			</div>
-			<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay">
-				<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
-			</div>
-		</div>
-	);
+		)}
+	</>
 };
 
 export default ProductBannerSlider;
