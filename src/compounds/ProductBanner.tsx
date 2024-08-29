@@ -6,8 +6,11 @@ const ProductBanner = (props: any) => {
     const [comparisonImages, setComparisonImages] = useState(null);
 
     useEffect(() => {
-        if (contentData?.first_image?.url && contentData?.second_image?.url) {
-            setComparisonImages({ first_image: contentData?.first_image, second_image: contentData?.second_image });
+        if (contentData) {
+            const { first_image, second_image } = contentData;
+            if (first_image?.url && second_image?.url) {
+                setComparisonImages({ first_image, second_image });
+            }
         }
     }, []);
 	return (

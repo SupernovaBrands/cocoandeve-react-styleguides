@@ -791,6 +791,62 @@ const trialParticipants = [
 		score: '5',
 		content: 'This gel scrub was really easy to use and smelled amazing. I was really happy with the product and will definitely add it to my skincare routine. It leaves my skin really smooth and soft right after the first use.',
 	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-18",
+		title: "Gentle on the scalp, amazing results! 💖",
+		user: "Lisa Gowers",
+		score: "5",
+		content: "Another fantastic range from Coco & Eve! I have loved using these products and I love the feel of my hair after using them. They smell amazing and have been super gentle on my scalp while giving fantastic results! "
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-18",
+		title: "Strengthened my thinning hair!",
+		user: "Savita Mehmi",
+		score: "5",
+		content: "A great range for thinning hair that really helps strengthen your hair follicles and boost volume and density!"
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-14",
+		title: "Incredible volume boost 🌟",
+		user: "Melissa Rhodes",
+		score: "5",
+		content: "The shampoo and conditioner clean my hair beautifully while keeping it hydrated and giving it more volume. As for the entire range, I’ve noticed my hair has grown faster and feels denser, especially around my hairline and baby hairs. I’m also seeing less hair loss when brushing. The scent is pleasant but not too overpowering. Overall, these products have truly helped with my hair’s volume and growth!"
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-13",
+		title: "Half an inch of growth in a MONTH",
+		user: "Victoria Smith",
+		score: "5",
+		content: "My hair condition before using the boost therapy range wasn’t the greatest. Since using it, my hair has noticeably grown at least half an inch as my roots are coming through from recently having it coloured. I’m happy with the products - my hair condition is much better than it was. I give this range a 10/10 star rating! "
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-1",
+		title: "Did not disappoint!",
+		user: "Hannah",
+		score: "5",
+		content: "The boost therapy treatment is an amazing product. Coco & Eve always delivers and this is no exception!"
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-1",
+		title: "IT WORKS",
+		user: "Tayla Fletcher",
+		score: "5",
+		content: "Baby hairs coming through! It works!"
+	},
+	{
+		sku: "CE0004162020,CE0004172020,CE0005392020",
+		date: "2024-8-16",
+		title: "Stronger, shinier hair ✨",
+		user: "Sigita Curtis",
+		score: "4",
+		content: "Overall, this range is lovely to use. My hair feels and looks better, stronger, and shinier."
+	},
 ];
 
 export default trialParticipants;

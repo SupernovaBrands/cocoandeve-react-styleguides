@@ -17,7 +17,7 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey
 	} = props;
 
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -66,6 +66,9 @@ const Header = (props: any) => {
 		e.preventDefault();
 		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
 		window.location.href = url;
+		if (isLoggedIn && typeof setAccountPage === 'function' && accountPageKey) {
+			setAccountPage(accountPageKey.REWARDS);
+		}
 		// if (isLoggedIn) window.location.reload();
 		if (isLoggedIn && window.location.pathname === '/account' && window.location.hash !== '#rewards') window.location.reload();
 	};
