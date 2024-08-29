@@ -404,7 +404,7 @@ export const subscribeBluecoreRegistration = (
 	phone,
 	regSource = 'registration',
 ) => {
-	const country = getCookie('_shopify_country');
+	const country = getCookie('country_code');
 	const region = getCookie('region');
 
 	const date = new Date();
@@ -415,7 +415,8 @@ export const subscribeBluecoreRegistration = (
 	const data = {
 		email,
 		country,
-		brand: `cocoandeve_shopify_${region || 'us'}`,
+		store: region,
+		brand: 'cocoandeve',
 		domain: window.location.hostname,
 		phone: phone || '',
 		reg_source: regSource,
@@ -432,7 +433,7 @@ export const subscribeBluecoreRegistration = (
 	}
 	const ajaxRequest = new XMLHttpRequest();
 	ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
-	ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	ajaxRequest.setRequestHeader('Content-type', 'application/json');
 	const jsonData = JSON.stringify(data);
 	return ajaxRequest.send(jsonData);
 };

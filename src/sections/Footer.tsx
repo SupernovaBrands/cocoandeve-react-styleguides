@@ -9,7 +9,7 @@ import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
-import { encryptParam } from "~/modules/utils";
+import { encryptParam, getCookie } from "~/modules/utils";
 
 const Footer = (props: any) => {
     const { aboutMenu, shopMenu, helpMenu, store } = props;
@@ -26,7 +26,7 @@ const Footer = (props: any) => {
 		const tse = date.getTime();
 		const content = `{email:'${email}',time:${tse}}`;
 		const signature = encryptParam(content);
-		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
+		ajaxRequest.send(`signature=${signature}&email=${email}&country=${getCookie('country_code')}&store=${store}&brand=cocoandeve&reg_source=footer`);
 		setSubmitted(true);
         try {
             // @ts-ignore
