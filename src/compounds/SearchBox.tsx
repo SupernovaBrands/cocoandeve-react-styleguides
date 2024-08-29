@@ -125,10 +125,10 @@ const SearchBox = (props: any) => {
 						)))
 						const productFiltered = uniqueHandle.filter((i) => {
 							const title = i.title.toLowerCase();
-							const tags = i.tags.map((t: string) => t.toLowerCase());
-							const tagsString = tags.join(',');
+							// const tags = i.tags.map((t: string) => t.toLowerCase());
+							// const tagsString = tags.join(',');
 							return (i.productType === 'HERO' || i.productType === 'BUNDLE') &&
-								(title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
+								// (title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
 								!title.includes('vip') && exclusion.indexOf(i.handle) === -1;
 						});
 						productFiltered.sort(tagsSort);
