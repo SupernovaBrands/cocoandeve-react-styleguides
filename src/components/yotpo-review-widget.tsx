@@ -38,7 +38,7 @@ import SvgPlayIcon from '~/images/icons/play-icon.svg';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
-import Autoplay from 'embla-carousel-autoplay';
+// import Autoplay from 'embla-carousel-autoplay';
 import AutoHeight from 'embla-carousel-auto-height';
 import Script from 'next/script';
 import {
@@ -693,9 +693,7 @@ const YotpoReviewWidget = (props:any) => {
 		loop: true,
 	};
 
-	const [emblaRef7, emblaApi7] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 }),
-	]);
+	const [emblaRef7, emblaApi7] = useEmblaCarousel(options);
 
 	const {
 		prevBtnDisabled: prevDisabled7,
@@ -703,7 +701,7 @@ const YotpoReviewWidget = (props:any) => {
 		onPrevButtonClick: arrowClickPrev7,
 		onNextButtonClick: arrowClickNext7
 	} = usePrevNextButtons(emblaApi7);
-	const autoPlayClick7 = controlAutoplay(emblaApi7);
+	// const autoPlayClick7 = controlAutoplay(emblaApi7);
 
 
 	const isTrialParticipant = (review:any) => trialParticipants.find((t) => t.user === review.user_name
@@ -1116,7 +1114,7 @@ const YotpoReviewWidget = (props:any) => {
 												</Carousel.Inner>
 												<Carousel.Navigation>
 													<PrevButton
-														onClick={() => autoPlayClick7(arrowClickPrev7)}
+														onClick={arrowClickPrev7}
 															disabled={prevDisabled7}
 														>
 															<span className="left-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center right-0 bg-pink-light">
@@ -1124,7 +1122,7 @@ const YotpoReviewWidget = (props:any) => {
 															</span>
 													</PrevButton>
 													<NextButton
-															onClick={() => autoPlayClick7(arrowClickNext7)}
+															onClick={arrowClickNext7}
 															disabled={nextDisabled7}
 															>
 															<span className="right-0 w-[2.5em] h-[2.5em] absolute z-[-1] flex justify-center items-center bg-pink-light">
