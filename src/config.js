@@ -442,7 +442,7 @@ module.exports = global.config = {
 		"cart_discount_applied": "Promo code applied",
 		"cart_discount_applied_empty_cart": "Promo code applied. You got your 20% OFF! Now shop away 🛍",
 		"cart_shipping": "Shipping",
-		"cart_shipping_at_checkout": "Shipping & taxes calculated at checkout",
+		"cart_shipping_at_checkout": "Taxes calculated at checkout",
 		"cart_coupon_txt": "",
 		"cart_discount_text": "Apply a promo code",
 		"cart_discount_input": "Enter promo code here",
