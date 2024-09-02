@@ -339,7 +339,7 @@ const Cart: React.FC<Props> = (props) => {
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
-													<span className="text-sm">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
+													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
 												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
@@ -354,12 +354,6 @@ const Cart: React.FC<Props> = (props) => {
 											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
 										</div>
 										</>
-									)}
-
-									{shippingData?.show && shippingData?.freeRate && (
-										<p className="text-sm lg:hidden mb-1">
-											Shipping amount shown is a best estimate and may differ from final amount charged.
-										</p>
 									)}
 								</div>
 								{manualGwpSetting && manualGwpSetting.enabled && (
