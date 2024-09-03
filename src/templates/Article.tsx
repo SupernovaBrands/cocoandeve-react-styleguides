@@ -89,7 +89,6 @@ const ArticlPosteBanner = (props) => {
 
 const Article = (props) => {
     const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg } = props;
-    console.log('region1', region);
     let body = '';
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
@@ -98,9 +97,7 @@ const Article = (props) => {
             .replace(/<ul>/g, '<ul class="article-list">')
             .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
     }
-    console.log('featuredImg', featuredImg);
     const featuredImageProp = content?.BlogContentMultiStores?.[region]?.featured_image;
-    console.log('featuredImageProp', featuredImageProp);
 
     const [offset, setOffset] = useState<any | null>(null);
     const [showButton, setShowButton] = useState(false);
