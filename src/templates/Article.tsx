@@ -88,14 +88,27 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg } = props;
+    console.log('region1', region);
+    let body = '';
+    if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
+        const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
+        body = content.BlogContentMultiStores[region].body_content
+            .replace('<a', ariaLabel)
+            .replace(/<ul>/g, '<ul class="article-list">')
+            .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
+    }
+    console.log('featuredImg', featuredImg);
+    const featuredImageProp = content?.BlogContentMultiStores?.[region]?.featured_image;
+    console.log('featuredImageProp', featuredImageProp);
+
     const [offset, setOffset] = useState<any | null>(null);
     const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
     const [tanTitle, setTanTitle] = useState('');
     const [title, setTitle] = useState(content?.title);
-    const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+    const [featuredImageUrl, setFeaturedImageUrl] = useState(featuredImg);
     const [bodyContent, setBodyContent] = useState('');
 
     const d = new Date(content?.updatedAt);
@@ -344,12 +357,12 @@ const Article = (props) => {
                 )}
                 <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
-                        <h1 className="text-center mb-1">{title}</h1>
+                        <h1 className="text-center mb-1">{content?.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
-                        {!isLoading && featuredImageUrl && (
+                        {featuredImg && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
-                                <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
-                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content?.title} />
+                                <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url} alt={featuredImg?.alt || ''} title={content?.title} />
                             </picture>
                         )}
                         {quickLinks?.length > 0 && (
