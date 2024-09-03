@@ -847,6 +847,22 @@ const trialParticipants = [
 		score: "4",
 		content: "Overall, this range is lovely to use. My hair feels and looks better, stronger, and shinier."
 	},
+	{
+		sku: "CE0004572020",
+		date: "2024-8-14",
+		title: "Noticeable difference in growth 💯 ",
+		user: "Melissa Rhodes",
+		score: "5",
+		content: "The hair density serum is very lightweight, so it doesn’t weigh your hair down. What it has helped with the most is growth on my hairline and baby hairs, as well as reducing the amount of hair loss I have when brushing my hair. The entire range has a pleasant smell but aren’t too overpowering. Overall, I really like these products and do believe they have helped with the volume and growth of my hair."
+	  },
+	  {
+		sku: "CE0004572020",
+		date: "2024-8-13",
+		title: "Half an inch of growth in a MONTH",
+		user: "Victoria Smith",
+		score: "4",
+		content: "My hair condition before using the boost therapy range wasn’t the greatest. Since using it, my hair has noticeably grown at least half an inch as my roots are coming through from recently having it coloured. I’m happy with the products - my hair condition is much better than it was. I give this range a 10/10 star rating!"
+	  }
 ];
 
 export default trialParticipants;
