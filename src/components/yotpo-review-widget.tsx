@@ -1111,7 +1111,7 @@ const YotpoReviewWidget = (props:any) => {
 												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
-															{media.image_url && (<img src={media.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full" />)}
+															{media.image_url && (<img src={media.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />)}
 															{media.video_url && (
 																// eslint-disable-next-line jsx-a11y/media-has-caption
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
