@@ -29,7 +29,7 @@ const HeroBanner = (props: any) => {
 	const { isStyleguide, region, tcPopups } = props;
 	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
 	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region || 'dev');

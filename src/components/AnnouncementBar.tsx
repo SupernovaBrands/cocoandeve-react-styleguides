@@ -33,7 +33,7 @@ const AnnouncementBar = (props: any) => {
 	const countDownSec = noticeTImesLabels[3]?.split(',')[0];
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000, stopOnInteraction: false }),
+		Autoplay({ playOnInit: true, delay: 4000, stopOnInteraction: false }),
 		AutoHeight()
 	]);
 
