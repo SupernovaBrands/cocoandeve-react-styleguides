@@ -146,7 +146,7 @@ const Sustainability = (props: any) => {
     return (
 		<>
             <section className="relative">
-                <Link href="#">
+                <a href="#">
                     {!isLoading && (
                         <picture>
                             <source srcSet={banner.image_desktop.url} media="(min-width: 992px)" />
@@ -154,7 +154,7 @@ const Sustainability = (props: any) => {
                         </picture>
                     )}
                     <h1 className="absolute text-white m-auto w-full text-center px-g top-[40%] lg:text-[3.25em] lg:leading-[1.25em]">{banner.heading}</h1>
-                </Link>
+                </a>
             </section>
             <section>
                 <div className="container py-4">
