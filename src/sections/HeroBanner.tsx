@@ -29,7 +29,7 @@ const HeroBanner = (props: any) => {
 	const { isStyleguide, region, tcPopups } = props;
 	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
 	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region || 'dev');
@@ -70,7 +70,7 @@ const HeroBanner = (props: any) => {
 											<source srcSet={slide?.image?.url} media="(min-width: 1201px)" width="1400" height="534" />
 											<source srcSet={slide?.image?.url} media="(min-width: 1025px)" width="1200" height="458" />
 											<source srcSet={slide?.image?.url} media="(min-width: 992px)" width="1140" height="435" />
-											<img className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
+											<img className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full test-awais" src={slide?.mobile_image?.url} alt={`slide ${index + 1}`} width="414" height="926" />
 										</picture>
 									</Link>
 								</div>
