@@ -108,9 +108,9 @@ const MobileMenu = (props: any) => {
 										}}>
 											<ChevronPrev className="h-[1em]" />
 										</label>
-										<Link href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
+										<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
-										</Link>
+										</a>
 										<Close className="h-[1em]"  onClick={() => {
 											// const newStates = {...defMenuState};
 											// newStates[i] = false;
