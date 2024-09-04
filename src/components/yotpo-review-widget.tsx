@@ -701,7 +701,6 @@ const YotpoReviewWidget = (props:any) => {
 
 	useEffect(() => {
 		if (emblaApi7) {
-			emblaApi7.
 			emblaApi7.scrollTo(initialReviewImage);
 		}
 	}, [emblaApi7]);
