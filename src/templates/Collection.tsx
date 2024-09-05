@@ -32,13 +32,22 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
 
 const Banner = ({ isLoading, title, strapiBanner }) => {
 
-    const { universalCollectionSetting } = strapiBanner.universalBanner;
-    const {
-	    filter_handles_img_mob: universalImgMob,
-	    filter_handles_img_desk: universalImgDesk,
-	    filter_handles_img_url: universalUrl,
-	    enabled: universalEnabled,
-	} = universalCollectionSetting.universalCollectionSetting[strapiBanner.store];
+    const universalCollectionSetting = strapiBanner?.universalBanner?.universalCollectionSetting || null;
+    // console.log('universalCollectionSetting', universalCollectionSetting);
+    // const {
+	//     filter_handles_img_mob: universalImgMob,
+	//     filter_handles_img_desk: universalImgDesk,
+	//     filter_handles_img_url: universalUrl,
+	//     enabled: universalEnabled,
+	// } = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store];
+
+    const universalData = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store] || null;
+
+    const universalImgMob = universalData?.filter_handles_img_mob || null;
+    const universalImgDesk = universalData?.filter_handles_img_desk || null;
+    const universalUrl = universalData?.filter_handles_img_url || null;
+    const universalEnabled = universalData?.enabled || false;
+
     // by default use universal banner image
     let bannerData = {
         img_mob: universalImgMob,
