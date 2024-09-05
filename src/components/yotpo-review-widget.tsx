@@ -726,7 +726,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	return !init ? (
-		<div className="flex justify-center mt-4">
+		<div className="flex justify-center mt-4 w-full">
 			<div className="spinner-border" role="status" aria-hidden="true" />
 		</div>
 	) : (
