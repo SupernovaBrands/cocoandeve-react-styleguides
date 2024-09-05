@@ -172,7 +172,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 ) }
                 {!props.productCard && <h3 className="mb-1">{props.title}</h3>}
                 {props.productCard && <h2 className="h1 mx-auto mb-1">{props.title}</h2>}
-                <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props.content}}></p>
+                <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props?.content}}></p>
                 <form noValidate onSubmit={submitForm} data-pdp="false" data-product-id="product-id">
                     <div className="flex flex-wrap -mx-2">
                         <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
@@ -248,7 +248,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <div className={`modal-body relative p-3 lg:p-4 product-waitlist ${bgColor} product-waitlist__form w-100 text-center rounded-[20px] border border-[#00000033] bg-clip-padding outline-0`}>
                     <Close onClick={props.handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
                     <h2 className="h1 mx-auto mb-1">{props.title}</h2>
-                    <p className="mb-2" dangerouslySetInnerHTML={{__html: props.content}}></p>
+                    <p className="mb-2" dangerouslySetInnerHTML={{__html: props?.content}}></p>
                     <div className="subscribed p-4">
                         <h2 className="h1 mb-1"><b dangerouslySetInnerHTML={{__html: props.success_msg}} /></h2>
                         <p className="pb-2 font-bold mb-[1em]" dangerouslySetInnerHTML={{__html: props.success_content}} />

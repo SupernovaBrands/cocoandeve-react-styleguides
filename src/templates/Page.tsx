@@ -27,7 +27,7 @@ const Page = (props: any) => {
                             {content.title}
                         </h1>
                         <style jsx>{cssGrid}</style>
-                        {parse(content.content.replace('<a class="link-color"', '<a class="link-color underline"'))}
+                        {parse(content?.content.replace('<a class="link-color"', '<a class="link-color underline"'))}
                     </div>
                 </div>
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
