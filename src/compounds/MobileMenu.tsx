@@ -5,7 +5,6 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
-import Link from 'next/link';
 const defMenuState = {
 	1: false,
 	2: false,
@@ -67,7 +66,9 @@ const MobileMenu = (props: any) => {
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<Close className="mobile-nav__close svg absolute right-[.9375em] h-[1em]" onClick={() => onToggleMobileNav(false)}/>
+					<button type="button" onClick={() => onToggleMobileNav(false)} className={`mobile-nav__close svg absolute -mt-[25px] right-[0] pt-[25px] pr-[15px] pb-[40px] pl-[25px]`}>
+						<Close onClick={() => onToggleMobileNav(false)} className='svg w-[1em] h-[1em]' />
+					</button>
 				</li>
 				{menuBannerCode && menuBannerCode.enable && (
 					<MenuBanner content={menuBannerCode} theme='secondary-light' />
@@ -101,22 +102,24 @@ const MobileMenu = (props: any) => {
 							{menu.rows && menu.rows.length > 0 && (
 								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby="headingHair">
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
-										<label className="mb-[.5rem]" onClick={() => {
+										<button type="button" className="p-[20px] mb-0 -ml-[20px]" onClick={() => {
 											const newStates = {...defMenuState};
 											newStates[i] = false;
 											setMenuStates(newStates);
 										}}>
 											<ChevronPrev className="h-[1em]" />
-										</label>
+										</button>
 										<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
 										</a>
-										<Close className="h-[1em]"  onClick={() => {
-											// const newStates = {...defMenuState};
-											// newStates[i] = false;
-											// setMenuStates(newStates);
-											onToggleMobileNav(false);
-										}} />
+										<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]'>
+											<Close className="h-[1em]"  onClick={() => {
+												// const newStates = {...defMenuState};
+												// newStates[i] = false;
+												// setMenuStates(newStates);
+												onToggleMobileNav(false);
+											}} />
+										</button>
 									</li>
 									<li key="menuTitle" className="border-b p-0">
 										<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
