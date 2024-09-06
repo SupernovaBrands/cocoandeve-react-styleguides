@@ -119,6 +119,7 @@ const AccountDropdown = (props:any) => {
             props.userMutate().then(() => {
                 props.closeModal();
                 props.callback();
+                setLoadingLogin(false);
             });
         } else {
             let url: string = '/account/login#error'
