@@ -18,6 +18,8 @@ const AccountDropdown = (props:any) => {
     const [validLoginEmail, setValidLoginEmail] = useState(true);
     const [emptyPass, setEmptyPass] = useState(false);
     const [activeFrame, setActiveFrame] = useState(true);
+    const [loadingLogin, setLoadingLogin] = useState(false);
+    const [loadingCreate, setLoadingCreate] = useState(false);
     const firstRef = useRef(null);
 	const lastRef = useRef(null);
 	const emailRef = useRef(null);
@@ -41,6 +43,7 @@ const AccountDropdown = (props:any) => {
         e.preventDefault();
 
         if (allowSubmit) {
+            setLoadingCreate(true);
             const url = `https://s-app.cocoandeve.com/shopify/email?email=${encodeURIComponent(emailRef.current.value)}&brand=cocoandeve_shopify_${store}`;
             fetch(url).then((d) => d.json()).then(async (data) => {
                 const found = data.filter((e) => e.email === emailRef.current.value);
@@ -102,6 +105,8 @@ const AccountDropdown = (props:any) => {
     // Login Customer
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        setAllowLogin(false);
+        setLoadingLogin(true);
 		const respLogin = await fetch('/api/account/login', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -177,7 +182,10 @@ const AccountDropdown = (props:any) => {
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                                 <input ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''}`} disabled={!allowLogin}>Log In</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''} ${loadingLogin ? '!opacity-70' : ''}`} disabled={!allowLogin}>
+                                {!loadingLogin && 'Log In'}
+                                {loadingLogin && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
+                            </Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
                                     <a href="/account/login#recover" className="text-underline text-primary underline">Forgot your password?</a>
@@ -232,7 +240,10 @@ const AccountDropdown = (props:any) => {
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`}`} disabled={!allowSubmit}>Create Account</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`} ${loadingCreate ? '!opacity-70' : ''}`} disabled={!allowSubmit}>
+                                {!loadingCreate && 'Create Account'}
+                                {loadingCreate && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
+                            </Button>
                             <div className="form-group text-center mt-2">
                                 <button type="button" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</button>
                             </div>
