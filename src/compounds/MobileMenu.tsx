@@ -5,7 +5,6 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
-import Link from 'next/link';
 const defMenuState = {
 	1: false,
 	2: false,
@@ -67,7 +66,9 @@ const MobileMenu = (props: any) => {
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<Close className="mobile-nav__close svg absolute right-[.9375em] h-[1em]" onClick={() => onToggleMobileNav(false)}/>
+					<button type="button" onClick={() => onToggleMobileNav(false)} className={`mobile-nav__close svg absolute right-[.9375em] h-[1em]`}>
+						<Close onClick={() => onToggleMobileNav(false)} className='svg w-[1em] h-[1em]' />
+					</button>
 				</li>
 				{menuBannerCode && menuBannerCode.enable && (
 					<MenuBanner content={menuBannerCode} theme='secondary-light' />
