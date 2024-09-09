@@ -118,24 +118,28 @@ const Collection = (props: any) => {
         image: '',
         handle: undefined,
         date: '',
+        productId: null,
     });
     const [launchWLModal, setLaunchWLModal] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLModal2, setLaunchWLModal2] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLModal3, setLaunchWLModal3] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
@@ -675,6 +679,7 @@ const Collection = (props: any) => {
                             launchSubmitted={launchSubmitted}
                             setLaunchSubmitted={setLaunchSubmitted}
                             tags={launchWLModal.tags}
+                            launchModalData={launchWLModal}
                         />
                     </Modal>
                     <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal2.open} handleClose={() => {setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}}>
@@ -698,6 +703,7 @@ const Collection = (props: any) => {
                             launchSubmitted={launchSubmitted}
                             setLaunchSubmitted={setLaunchSubmitted}
                             tags={launchWLModal2.tags}
+                            launchModalData={launchWLModal2}
                         />
                     </Modal>
                     <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal3.open} handleClose={() => {setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}}>
@@ -721,6 +727,7 @@ const Collection = (props: any) => {
                             launchSubmitted={launchSubmitted}
                             setLaunchSubmitted={setLaunchSubmitted}
                             tags={launchWLModal3.tags}
+                            launchModalData={launchWLModal3}
                         />
                     </Modal>
                 </>
