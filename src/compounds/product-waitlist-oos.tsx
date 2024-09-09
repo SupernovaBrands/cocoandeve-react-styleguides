@@ -172,7 +172,7 @@ const ProductWaitlist = (props: any) => {
 
 	return (
 		<>
-			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-3 mb-3 rounded-lg bg-pink-light">
+			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-3 mb-3 rounded-lg bg-pink-light" data-product-id={props.productId}>
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p>
 				<p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p>
 				{/* <form data-pdp="false" data-product-id="product-id"> */}
