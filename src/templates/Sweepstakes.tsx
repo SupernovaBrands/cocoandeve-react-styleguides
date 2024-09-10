@@ -46,7 +46,7 @@ if (store === 'us') {
 }
 
 const Sweepstakes = (props) => {
-    const { content, isLoading } = props;
+    const { content, store } = props;
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -57,6 +57,7 @@ const Sweepstakes = (props) => {
     const [isDesktop, setIsDesktop] = useState(false);
     const [allowSubmit, setAllowSubmit] = useState(false);
     const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+	const [social, setSocial] = useState('');
 
     let tiktokUrl = 'https://www.tiktok.com/@coco_and_eve?lang=en';
     const emailRef = useRef(null);
@@ -108,6 +109,10 @@ const Sweepstakes = (props) => {
 		return false;
 	};
 
+	const handleSocial = (e) => {
+		setSocial(e.target.value);
+	};
+
     const handleForm = (e) => {
 		e.preventDefault();
 		console.log('onSubmit');
@@ -116,7 +121,7 @@ const Sweepstakes = (props) => {
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
 				if (!validForm.phone) {
-					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true);
+					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true, social);
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
@@ -139,11 +144,32 @@ const Sweepstakes = (props) => {
 				}
 			});
 			if (validForm.email || email === '') {
-				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
+				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true, social);
 				setFormCompleted(true);
 			}
 		}
 	}
+
+	useEffect(() => {
+        let numberCodeDef = 65;
+		if (store === 'us') {
+			numberCodeDef = 1;
+		} else if (store === 'au') {
+			numberCodeDef = 61;
+		} else if (store === 'UK') {
+			numberCodeDef = 44;
+		} else if (store === 'ca') {
+			numberCodeDef = 1;
+		} else if (store === 'eu' || store === 'fr') {
+			numberCodeDef = 33;
+		} else if (store === 'de') {
+			numberCodeDef = 49;
+		} else if (store === 'my' || store === 'my') {
+			numberCodeDef = 60;
+		}
+
+		setaActiveCountryCode(numberCodeDef)
+    }, [store]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -184,6 +210,13 @@ const Sweepstakes = (props) => {
                                 <form onSubmit={handleForm} id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded-h mt-2 lg:mt-0">
                                     <h1 className="text-body mb-1">{content.heading}</h1>
                                     <p className={`${content.subheading_col} mb-[1rem]`}>{parse(`${content.subheading}`)}</p>
+									{content.social_en && (
+										<div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
+											<div className="w-full pr-2 pl-2">
+												<input className="block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2 sweepstakes__social-media" type="text" onChange={handleSocial} placeholder={content.social_ph} />
+											</div>
+										</div>
+									)}
                                     <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
                                         <div className="w-full pr-2 pl-2">
                                             <input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className="block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2"></input>
@@ -194,7 +227,7 @@ const Sweepstakes = (props) => {
                                     <div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
                                     <div className="flex flex-wrap">
                                         <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                            <InputCountry id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} />
+                                            <InputCountry id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />
                                             <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
                                         </div>
                                         <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
