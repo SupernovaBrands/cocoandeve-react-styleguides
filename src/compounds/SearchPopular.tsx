@@ -3,7 +3,7 @@ import SearchProductCard from "./SearchProductCard";
 const PopularProducts = (props: any) => {
 	const { content, keywords, onClickTag, dummy, popProducts, store } = props;
 	return (
-		<div className="container px-g lg:px-g pt-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
+		<div className="search--popular container px-g lg:px-g pt-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 			<div className="flex flex-wrap lg:-mx-g">
 				<h4 className="w-full lg:w-1/3 lg:mb-2 font-normal order-1 text-base px-0 lg:px-g mb-1">{content?.popular_keywords_heading}</h4>
 				<h4 className="w-full lg:w-2/3 lg:mb-2 mb-1 font-normal order-3 lg:order-2 text-gray-600 text-base px-0 lg:px-g">{content?.popular_products_heading}</h4>
