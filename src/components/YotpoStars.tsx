@@ -15,10 +15,9 @@ const YotpoStar = (props: any) => {
 
 	const fetchStar = () => {
 		// console.log('fetchStar');
-		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`, {headers: {cache: 'force-cache'}})
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`)
 			.then((response) => response.json())
 			.then((data) => {
-				// console.log('fetchStar2');
 				if (data.response && data.response.bottomline) {
 					setScore(data?.response?.bottomline?.average_score);
 					setTotal(data?.response?.bottomline?.total_review);
@@ -31,7 +30,6 @@ const YotpoStar = (props: any) => {
 	
 	// console.log('props.sku123');
 	useEffect(() => {
-		console.log('props.sku', props.sku);
 		if (props.sku.length > 0 && !init) fetchStar();
 	}, []);
 
