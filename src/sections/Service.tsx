@@ -18,10 +18,12 @@ const Service = (props: any) => {
 		{ id: 'money-back', label: 'Money back <br>guarantee'},
 	];
 
-	const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
-	fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve&signature=${signature}`).then((data) => data.json()).then((r) => {
-		setTotalReviews(r?.response?.total_reviews?.toLocaleString());
-	});
+	useEffect(() => {
+		const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
+		fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve&signature=${signature}`).then((data) => data.json()).then((r) => {
+			setTotalReviews(r?.response?.total_reviews?.toLocaleString());
+		});
+	}, [])
 
 	const moneyBackIcon = (store = 'us') => {
 		if (store === 'uk') {
