@@ -271,6 +271,7 @@ const ProductCardTall = (props:any) => {
     }, [product, selectedVariant]);
 
     useEffect(() => {
+        console.log('product-card');
         let defaultVariant = null;
         if (autoTicks && autoTicks.length > 0) {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
@@ -335,7 +336,7 @@ const ProductCardTall = (props:any) => {
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : ''} ${props.carousel && !props.shopArticle ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
                 <div className="review-stars__number flex justify-center mb-1">
-                    <YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
+                    {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
                 </div>
                 <p className={`product-title__text grow flex flex-col justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''}`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : 'lg:text-lg text-base'} product-card__title text-body hover:text-body"`}>{props.product.title}</a>
