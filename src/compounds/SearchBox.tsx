@@ -25,6 +25,7 @@ const SearchBox = (props: any) => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [popProducts, setPopProducts] = useState([]);
+	const [init, setInit] = useState(false);
 	// const [featuredImgs, setFeaturedImgs] = useState([]);
 	const orderHandles = [
 		'super-nourishing-coconut-fig-hair-masque',
@@ -53,9 +54,10 @@ const SearchBox = (props: any) => {
 				setResult();
 			}, 750);
 			return () => clearTimeout(delayDebounceFn);
-		} else {
+		} else if (!init){
 			setContent();
 			setProducts([]);
+			setInit(true);
 		}
 
 		try {
@@ -208,10 +210,6 @@ const SearchBox = (props: any) => {
 	// useEffect(() => {
 	// 	getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
 	// }, []);
-
-	useEffect(() => {
-		setContent();
-	}, []);
 
 	const options: EmblaOptionsType = {
 		loop: false,
