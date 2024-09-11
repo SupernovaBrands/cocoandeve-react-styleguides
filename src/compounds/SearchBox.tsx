@@ -249,7 +249,7 @@ const SearchBox = (props: any) => {
 				</div>
 			</div>
 			{!loading && keyword !== '' && products.length <= 0 && (
-				<div className="py-3 container">
+				<div className="py-3 container search--not-found">
 					<p className="font-bold mb-g">0 results</p>
 					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
 				</div>
@@ -262,9 +262,9 @@ const SearchBox = (props: any) => {
 			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts}/>}
 
 			{!loading && keyword !== '' && products.length > 0 && (
-				<div className="container lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
+				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 					<div className="flex flex-wrap lg:-mx-g">
-						<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
 								<Carousel.Wrapper emblaApi={emblaApi8} className="lg:w-full">
@@ -308,7 +308,7 @@ const SearchBox = (props: any) => {
 						</div>
 					</div>
 					{content?.search_footer_note && (
-						<p dangerouslySetInnerHTML={{
+						<p className="search--notes" dangerouslySetInnerHTML={{
 							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline').replace('text-underline', 'underline')
 						}} />
 					)}
