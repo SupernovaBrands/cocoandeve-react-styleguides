@@ -23,7 +23,7 @@ const NavMegaMenu = (props: any) => {
             if (store === 'ca' && handleUrl === 'tan-and-spf') {
                 handleUrl = 'tan'
             }
-            fetch(`/api/collectionProducts?handle=${handleUrl}`).then(
+            fetch(`/api/collectionProducts?handle=${handleUrl}`, {cache: 'force-cache'}).then(
                 res => {
                     try {
                         res?.json().then(data => {
