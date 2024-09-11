@@ -116,6 +116,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(data => {
+					console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
@@ -269,7 +270,7 @@ const SearchBox = (props: any) => {
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
 								<Carousel.Wrapper emblaApi={emblaApi8} className="lg:w-full">
-									<Carousel.Inner emblaRef={emblaRef8} className="lg:-mx-g">
+									<Carousel.Inner emblaRef={emblaRef8} className={`lg:-mx-g ${products.length <= 6 ? '!transition-none !transform-none' : ''}`}>
 										{products.map((item, index) => (
 											<SearchProductCard
 												url={item.handle}
