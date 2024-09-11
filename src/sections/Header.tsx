@@ -172,8 +172,9 @@ const Header = (props: any) => {
 	return (
 		<>
 			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
-				{annBar?.enabled && (
+				{(annBar?.enabled || (!annBar.loaded && !annBar.enabled)) && (
 					<AnnouncementBar
+						loaded={annBar?.loaded}
 						scrolled={scrolled}
 						text={annBar.text}
 						url={annBar.url}
