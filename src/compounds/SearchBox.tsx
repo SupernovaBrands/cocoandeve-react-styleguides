@@ -308,7 +308,7 @@ const SearchBox = (props: any) => {
 						</div>
 					</div>
 					{content?.search_footer_note && (
-						<p className="search--notes" dangerouslySetInnerHTML={{
+						<p className="search--notes px-hg lg:px-0" dangerouslySetInnerHTML={{
 							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline').replace('text-underline', 'underline')
 						}} />
 					)}
