@@ -441,7 +441,9 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <Sidebar data={popArticles} />
+                    {popArticles?.length && (
+                        <Sidebar data={popArticles} />
+                    )}
                 </article>
             </div>
         </div>
