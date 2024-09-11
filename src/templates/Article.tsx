@@ -9,6 +9,7 @@ import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
 import BackToTop from '~/images/icons/back-to-top.svg';
+import Sidebar from "~/sections/Sidebar";
 
 import {
 	validateEmail,
@@ -127,7 +128,7 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles } = props;
     let body = '';
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
@@ -440,7 +441,7 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <div id="sideBarPosts"></div>
+                    <Sidebar data={popArticles} />
                 </article>
             </div>
         </div>
