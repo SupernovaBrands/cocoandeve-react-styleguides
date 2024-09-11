@@ -56,7 +56,7 @@ const Banner = ({ isLoading, title, strapiBanner }) => {
 	    enabled: universalEnabled,
     };
 
-    const { collectionBanner } = strapiBanner.mainSettings;
+    const collectionBanner = strapiBanner.mainSettings?.collectionBanner;
     if (collectionBanner && collectionBanner.collectionBanner[strapiBanner.store]?.enabled) {
         // use specific collection banner image if its enabled
         bannerData = collectionBanner.collectionBanner[strapiBanner.store];
