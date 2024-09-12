@@ -9,7 +9,8 @@ import TrackTransit from '~/images/icons/track-transit.svg';
 import TrackTransitDisabled from '~/images/icons/track-transit-disabled.svg';
 import TrackDelivered from '~/images/icons/track-delivered.svg';
 import TrackDeliveredDisabled from '~/images/icons/track-delivered-disabled.svg';
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
+import { getCookie } from "~/modules/utils";
 
 const TrackMyOrder = (props: any) => {
     const { store } = props;
@@ -27,7 +28,8 @@ const TrackMyOrder = (props: any) => {
         const tse = date.getTime();
         const dataString = `{tracking:'${trackingNumber}',time:${tse}}`;
         const signature = encryptParam(dataString);
-        fetch(`https://s-app.cocoandeve.com/track_order.json?order_number=${trackingNumber}&brand_name=cocoandeve_shopify_us&signature=${signature}`, { method: 'GET' })
+        const storeBrand = `cocoandeve_shopify_${getCookie('region')}`;
+        fetch(`https://s-app.cocoandeve.com/track_order.json?order_number=${trackingNumber}&brand_name=${storeBrand}&signature=${signature}`, { method: 'GET' })
             .then((response) => response.json())
             .then((data) => {
                 setShowDelivery(true);
