@@ -7,14 +7,19 @@ import Autoplay from 'embla-carousel-autoplay';
 import ProductCardUpsell from '~/compounds/ProductCardUpsell';
 import Modal from '~/components/Modal';
 import ModalWaitlist from "~/components/modal/Waitlist";
+// import LaunchWaitList from '~/compounds/launch-waitlist';
+// import { subscribeBluecoreWaitlist } from '~/modules/utils';
+import LaunchWaitlistModals from './LaunchWaitlistModals';
+import { checkLaunchWLBox } from '~/modules/utils';
 
 const options: EmblaOptionsType = {
 	loop: true,
 };
 
 const ProductRoutineCarousel = (props: any) => {
-    const { items, store } = props;
+    const { items, store, launchWL, loggedInEmail, trackBluecoreLaunchWaitlistEvent, submitsToSmsBumpAPi } = props;
 
+    const [launchSubmitted, setLaunchSubmitted] = useState(false);
     const dummyItems = [
 		{
             active: "active lg:flex",
@@ -71,6 +76,30 @@ const ProductRoutineCarousel = (props: any) => {
         date: '',
     });
 
+    const [launchWLModal, setLaunchWLModal] = useState({
+        open: false,
+        variantId: null,
+        handle: null,
+        tags: [],
+        productId: null,
+    });
+    const [launchWLModal2, setLaunchWLModal2] = useState({
+        open: false,
+        variantId: null,
+        handle: null,
+        tags: [],
+        productId: null,
+    });
+    const [launchWLModal3, setLaunchWLModal3] = useState({
+        open: false,
+        variantId: null,
+        handle: null,
+        tags: [],
+        productId: null,
+    });
+
+    const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
+
     useEffect(() => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
         else document.body.classList.remove('overflow-y-hidden');
@@ -84,19 +113,27 @@ const ProductRoutineCarousel = (props: any) => {
                 <div className="container lg:mx-g w-[100vw] lg:w-full px-0 lg:px-g">
                     <Carousel.Wrapper emblaApi={emblaApi1}>
                         <Carousel.Inner emblaRef={emblaRef1} className="mx-0 lg:-mx-g lg:!transform-none lg:justify-center">
-                            {items && items.map((data: any, index: number) => (
-                            <ProductCardUpsell
-                                key={`${index}-routine`}
-                                useCardTemplate={true}
-                                useCarousel={true}
-                                className={props.className}
-                                item={data}
-                                waitlistData={waitlistData}
-                                setWaitlistData={setWaitlistData}
-                                title={data?.title}
-                                store={store}
-                                />
-                            ))}
+                            {items && items.map((data: any, index: number) => {
+                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, data.handle);
+                                return (
+                                    <ProductCardUpsell
+                                        key={`${index}-routine`}
+                                        useCardTemplate={true}
+                                        useCarousel={true}
+                                        className={props.className}
+                                        item={data}
+                                        waitlistData={waitlistData}
+                                        setWaitlistData={setWaitlistData}
+                                        title={data?.title}
+                                        store={store}
+                                        isLaunchWL={isLaunchWL}
+                                        launchBox={launchBox}
+                                        setLaunchWLModal={setLaunchWLModal}
+                                        setLaunchWLModal2={setLaunchWLModal2}
+                                        setLaunchWLModal3={setLaunchWLModal3}
+                                        />
+                                )
+                            })}
 
                             {!items && dummyItems.map((data: any, index: number) => (
                             <ProductCardUpsell
@@ -107,6 +144,11 @@ const ProductRoutineCarousel = (props: any) => {
                                 item={data}
                                 title={''}
                                 store={store}
+                                isLaunchWL={false}
+                                launchBox={1}
+                                setLaunchWLModal={setLaunchWLModal}
+                                setLaunchWLModal2={setLaunchWLModal2}
+                                setLaunchWLModal3={setLaunchWLModal3}
                                 />
                             ))}
 
@@ -118,7 +160,26 @@ const ProductRoutineCarousel = (props: any) => {
         { <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
             <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         </Modal> }
-        </>
+
+        {launchWL && (
+            <LaunchWaitlistModals
+                launchWL={launchWL}
+                store={store}
+                setLaunchWLModal={setLaunchWLModal}
+                setLaunchWLModal2={setLaunchWLModal2}
+                setLaunchWLModal3={setLaunchWLModal3}
+                launchWLModal={launchWLModal}
+                launchWLModal2={launchWLModal2}
+                launchWLModal3={launchWLModal3}
+                loggedInEmail={loggedInEmail}
+                setLaunchWLSuccess={setLaunchWLSuccess}
+                launchSubmitted={launchSubmitted}
+                setLaunchSubmitted={setLaunchSubmitted}
+                trackBluecoreLaunchWaitlistEvent={trackBluecoreLaunchWaitlistEvent}
+                submitsToSmsBumpAPi={submitsToSmsBumpAPi}
+            />
+        )}
+    </>
 	);
 };
 

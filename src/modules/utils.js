@@ -1276,3 +1276,21 @@ export const isWaitlist = (data = []) => {
     });
 	return waitlistProducts.length > 0 || variantWatlist.length > 0;
 };
+
+export const checkLaunchWLBox = (launchWL, handle) => {
+	let isLaunchWL = false;
+	let launchBox = 1;
+	if (launchWL) {
+		if (launchWL?.launch_wl_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 1;
+		} else if (launchWL?.launch_wl2_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 2;
+		} else if (launchWL?.launch_wl3_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 3;
+		}
+    }
+	return { isLaunchWL, launchBox };
+}
