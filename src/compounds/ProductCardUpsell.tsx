@@ -127,7 +127,7 @@ const ProductCardUpsell = (props:any) => {
                         </p>
                         <p className="product-card__desc text-center font-normal flex flex-col mb-[1rem]">
                             <a href={`/products/${handle}`} className="no-underline hover:no-underline text-black hover:text-black">{props.item.text}</a>
-                        </p>s
+                        </p>
                         <p className="text-center flex flex-row grow justify-center items-end mb-[1rem]">
                                 {activeComparePrice &&
                                     <span className="line-through h4 m-1">{activeComparePrice}</span>
