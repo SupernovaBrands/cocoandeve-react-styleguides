@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "../components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const WaitlistButton = (props: any) => {
     return (
@@ -73,8 +73,33 @@ const SwatchOverlay = (props:any) => {
     );
 };
 
+const LaunchButton = (props: any) => {
+    const handleLaunchWaitlist = (e) => {
+        e.preventDefault();
+        const data = {
+            open: true,
+            handle: props.product.handle,
+            variantId: props.product.id,
+            tags: props.product.tags,
+            productId: props.product.productId,
+        }
+        if (props.launchBox === 1) {
+            props.setLaunchWLModal(data);
+        } else if (props.launchBox === 2) {
+            props.setLaunchWLModal2(data);
+        } else if (props.launchBox === 3) {
+            props.setLaunchWLModal3(data);
+        }
+    };
+    return (
+        <Button type="button" buttonClass={`${props.className ?? ''} btn-primary border-0 sm:w-[164px] md:w-[216px] px-2 py-g`} onClick={handleLaunchWaitlist}>
+            Waitlist Me
+        </Button>
+    )
+}
+
 const ProductCardUpsell = (props:any) => {
-    const { store, item: { image, title, handle, price, comparePrice }, waitlistData, setWaitlistData } = props;
+    const { store, item: { image, title, handle, price, comparePrice }, waitlistData, setWaitlistData, isLaunchWL, launchBox, setLaunchWLModal, setLaunchWLModal2, setLaunchWLModal3 } = props;
     const featuredImage = image || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/products/MasqueTravelSize_614x614.jpg?v=1644810671'
 
     const [activePrice, setPrice] = useState(price);
@@ -109,16 +134,19 @@ const ProductCardUpsell = (props:any) => {
                                 }
                                 <span className="text-primary h4 my-1">{activePrice}</span>
                         </p>
-                        {!props.item.swatch && props.item.available && (
+                        {!isLaunchWL && !props.item.swatch && props.item.available && (
                             <AddToCartButton {...props.item} store={store} onClick={props.item.onAddItem} variantId={props.item.id} title={props.title || ''}/>
                         )}
 
-                        {!props.item.swatch && !props.item.available &&
+                        {!isLaunchWL && !props.item.swatch && !props.item.available &&
                             <WaitlistButton onClick={() => setWaitlistData({ ...waitlistData, open: true, title: title, image: image, handle: handle })}/> }
 
-                        {props.item.swatch &&
+                        {!isLaunchWL && props.item.swatch &&
                             <SwatchOverlay setWaitlistData={setWaitlistData} store={store} waitlistData={waitlistData} onChangeSwatch={onChangeSwatch} {...props.item} onClick={props.item.onAddItem}/>
                         }
+                        {isLaunchWL && (
+                            <LaunchButton product={props.item} launchBox={launchBox} setLaunchWLModal={setLaunchWLModal} setLaunchWLModal2={setLaunchWLModal2} setLaunchWLModal3={setLaunchWLModal3} />
+                        )}
                     </div>
                 </div>
             </div>
