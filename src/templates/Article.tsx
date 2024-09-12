@@ -139,7 +139,7 @@ const Article = (props) => {
     }
     const featuredImageProp = content?.BlogContentMultiStores?.[region]?.featured_image;
 
-    const [offset, setOffset] = useState<any | null>(null);
+    const [offset, setOffset] = useState<any | null>('6%');
     const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
