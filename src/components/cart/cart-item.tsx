@@ -138,19 +138,19 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'daily-essentials-bundle') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'super-hydration-kit') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'super-hydration-kit') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'deep-condition-bundle') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'deep-condition-bundle') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'detox-nourish-set') {
 				item.featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
