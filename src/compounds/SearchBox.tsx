@@ -181,7 +181,7 @@ const SearchBox = (props: any) => {
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			const pProducts = [];
-			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}`, {cache: 'force-cache'}).then((r) => r.json()));
+			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, {cache: 'force-cache'}).then((r) => r.json()));
 			const popProducts = await Promise.all(pInfos);
 			popProducts.map((data) => {
 				const { product } = data;
