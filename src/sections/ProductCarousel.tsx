@@ -78,6 +78,10 @@ const ProductCarousel = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+	useEffect(() => {
+		console.log('ProductCarousel2');
+	}, [])
+
 	const newTabCount = productsData?.tab1?.products.length;
 	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products)
 
