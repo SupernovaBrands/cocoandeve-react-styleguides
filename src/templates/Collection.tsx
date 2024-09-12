@@ -19,8 +19,8 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
         <figure className="w-full relative items-center px-0 mb-0">
             <picture className={`${!isLoading && !bannerLoading ? '' : 'bg-shimmer pt-[53.33%] lg:pt-[19.375%]'}`}>
-                <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
-                <img src={bannerData.img_mob.url} className="w-full" alt="Collection Banner" />
+                <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
+                <img src={bannerData?.img_mob?.url} className="w-full" alt="Collection Banner" />
             </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
                 <h1 className="hidden mb-0"
