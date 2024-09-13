@@ -3,6 +3,7 @@ import Modal from "~/components/Modal";
 import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
+import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -100,7 +101,6 @@ const Collection = (props: any) => {
         loggedInEmail,
         squareBadge,
     } = props;
-
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
@@ -451,7 +451,7 @@ const Collection = (props: any) => {
                 <div className="bg-shimmer pt-[53.33%] lg:pt-[19.375%]" />
             )}
 
-            {!isLoading && tcPopups?.enabled_collection && (
+            {tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link mt-25">
                         <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
@@ -491,26 +491,39 @@ const Collection = (props: any) => {
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
-                            {!isLoading && (
+                            {collectionSettings.isLoading || loading ? (
                                 <>
-                                    <div className="w-1/2 lg:hidden px-hg">
-                                        <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
-                                            <option value="">Filter by</option>
-                                            {mobileDropdown.map((parent: any, index: number) => {
-                                                const html = parent.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
-                                            })}
-                                        </select>
+                                    <div className="w-1/2 lg:hidden px-hg mb-2 lg:hidden">
+                                        <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
-                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
-                                        <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
-                                            <option value="featured">Sort By</option>
-                                            <option value="best-selling">Best selling</option>
-                                            <option value="price-low-high">Price, low to high</option>
-                                            <option value="price-high-low">Price, high to low</option>
-                                            <option value="newest">Date, new to old</option>
-                                        </select>
+                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 mb-2 lg:hidden">
+                                        <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
+                                </>
+                            ) : (
+                                <>
+                                    {!isLoading && (
+                                        <>
+                                            <div className="w-1/2 lg:hidden px-hg">
+                                                <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
+                                                    <option value="">Filter by</option>
+                                                    {mobileDropdown.map((parent: any, index: number) => {
+                                                        const html = parent.title.replace('d-lg-none', 'lg:hidden');
+                                                        return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
+                                                <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
+                                                    <option value="featured">Sort By</option>
+                                                    <option value="best-selling">Best selling</option>
+                                                    <option value="price-low-high">Price, low to high</option>
+                                                    <option value="price-high-low">Price, high to low</option>
+                                                    <option value="newest">Date, new to old</option>
+                                                </select>
+                                            </div>
+                                        </>
+                                    )}
                                 </>
                             )}
 
@@ -546,13 +559,31 @@ const Collection = (props: any) => {
                                     </div>
                                 </div>
                             )}
-                            {collProducts.length <= 0 && !isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
+                            {collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
                         <div className="flex flex-wrap collection-grid overflow-hidden w-full">
-                            {(showSpinner || loading) && (
-                                <div className="mb-3 px-hg lg:px-g text-center w-full">
-                                    <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
-                                </div>
+                            {(showSpinner || loading || collectionSettings.isLoading) && (
+                                <>
+                                    <div className="mb-3 px-hg lg:px-g text-center w-full hidden lg:block">
+                                        <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
+                                    </div>
+                                    <ProductCardLoading
+                                        key={`collection-b-loading-1`}
+                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                    />
+                                    <ProductCardLoading
+                                        key={`collection-b-loading-2`}
+                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                    />
+                                    <ProductCardLoading
+                                        key={`collection-b-loading-3`}
+                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                    />
+                                    <ProductCardLoading
+                                        key={`collection-b-loading-4`}
+                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                    />
+                                </>
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 let isLaunchWL = false;
