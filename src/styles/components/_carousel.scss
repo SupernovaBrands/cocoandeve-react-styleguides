@@ -56,6 +56,25 @@
 					@apply -right-[0.5em];
 				}
 			}
+
+			&__editor .carousel__button {
+
+				span {
+					@apply bg-white top-[-15px] w-5 h-5 rounded-full shadow-lg;
+				}
+
+				svg {
+					@apply w-g h-g;
+				}
+
+				&--prev span {
+					@apply -left-[0.5em];
+				}
+
+				&--next span {
+					@apply -right-[0.5em];
+				}
+			}
 		}
 
 		&__lazy-load__spinner {
