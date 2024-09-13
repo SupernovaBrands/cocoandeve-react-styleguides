@@ -1,6 +1,46 @@
 import Testimonial from '~/sections/Testimonial';
+import { EmblaOptionsType } from 'embla-carousel';
+import { useEffect, useState } from 'react';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import {
+	PrevButton,
+	NextButton,
+	usePrevNextButtons,
+	controlAutoplay,
+} from '~/components/carousel/EmblaCarouselArrowButtons';
+
+const options: EmblaOptionsType = {
+	loop: false,
+	breakpoints: {
+		'(min-width: 992px)': {
+			align: 'start',
+			watchDrag: false,
+			duration: 40,
+		}
+	}
+};
 
 const Editors = () => {
+    const [emblaRef, emblaApi] = useEmblaCarousel(options);
+    const [prevShow, setPrevShow] = useState(false);
+    const [nextShow, setNextShow] = useState(true);
+
+    const onNext = () => {
+        emblaApi.scrollNext()
+        setNextShow(emblaApi.canScrollNext());
+        setPrevShow(emblaApi.canScrollPrev());
+    };
+
+    const onPrev = () => {
+        emblaApi.scrollPrev()
+        setPrevShow(emblaApi.canScrollPrev());
+        setNextShow(emblaApi.canScrollNext());
+    }
+
     const DATA = [
         {
             id: 1,
@@ -37,14 +77,52 @@ const Editors = () => {
             srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21469fa-4de6-48d2-d1ba-ed4afbb5ae00/public',
             src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21469fa-4de6-48d2-d1ba-ed4afbb5ae00/public',
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
+        },
+        {
+            id: 8,
+            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d13f6da2-b104-4fb0-c635-7fe1a09ce600/public',
+            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d13f6da2-b104-4fb0-c635-7fe1a09ce600/public',
+            size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
+        },
+        {
+            id: 9,
+            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a0a4f933-9b0a-42fa-9007-5c4c5ae52700/public',
+            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a0a4f933-9b0a-42fa-9007-5c4c5ae52700/public',
+            size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         }
     ];
     return (
-        <section className="list-logo container mb-g lg:my-4 overflow-scroll lg:overflow-hidden px-g pb-1 lg:pb-0">
-            <ul className="list-unstyled flex -mx-hg lg:-mx-g items-center lg:justify-between lg:px-g flex-nowrap mb-0 py-1 ">
-                <li className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1 h4">Featured in:</li>
-                {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
-            </ul>
+        <section className="list-logo container mb-g lg:my-[50px] px-g pb-1 lg:pb-0">
+            <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor">
+                    <Carousel.Inner emblaRef={emblaRef} className='items-center'>
+                        <figure className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1">
+                            Featured in:
+                        </figure>
+                        {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
+                    </Carousel.Inner>
+                    <Carousel.Navigation>
+                        {prevShow && (
+                            <PrevButton
+                                onClick={() => onPrev() }
+                                className="lg:w-auto lg:h-0 hidden lg:flex"
+                            >
+                                <span className="absolute z-[-1] flex justify-center items-center">
+                                    <ChevronPrev className="svg--current-color" />
+                                </span>
+                            </PrevButton>
+                        )}
+                        {nextShow && (
+                            <NextButton
+                                onClick={() => onNext() }
+                                className="lg:w-auto lg:h-0 hidden lg:flex"
+                            >
+                                <span className="absolute z-[-1] flex justify-center items-center">
+                                    <ChevronNext className="svg--current-color" />
+                                </span>
+                            </NextButton>
+                        )}
+                    </Carousel.Navigation>
+                </Carousel.Wrapper>
         </section>
     )
 }
