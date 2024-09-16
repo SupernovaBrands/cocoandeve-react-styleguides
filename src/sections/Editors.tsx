@@ -15,6 +15,7 @@ import {
 
 const options: EmblaOptionsType = {
 	loop: false,
+    dragFree: true,
 	breakpoints: {
 		'(min-width: 992px)': {
 			align: 'start',
@@ -92,37 +93,37 @@ const Editors = () => {
         }
     ];
     return (
-        <section className="list-logo container mb-g lg:my-[50px] px-g pb-1 lg:pb-0">
-            <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor">
-                    <Carousel.Inner emblaRef={emblaRef} className='items-center'>
-                        <figure className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1">
-                            Featured in:
-                        </figure>
-                        {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
-                    </Carousel.Inner>
-                    <Carousel.Navigation>
-                        {prevShow && (
-                            <PrevButton
-                                onClick={() => onPrev() }
-                                className="lg:w-auto lg:h-0 hidden lg:flex"
-                            >
-                                <span className="absolute z-[-1] flex justify-center items-center">
-                                    <ChevronPrev className="svg--current-color" />
-                                </span>
-                            </PrevButton>
-                        )}
-                        {nextShow && (
-                            <NextButton
-                                onClick={() => onNext() }
-                                className="lg:w-auto lg:h-0 hidden lg:flex"
-                            >
-                                <span className="absolute z-[-1] flex justify-center items-center">
-                                    <ChevronNext className="svg--current-color" />
-                                </span>
-                            </NextButton>
-                        )}
-                    </Carousel.Navigation>
-                </Carousel.Wrapper>
+        <section className="list-logo container mb-g lg:my-[50px] px-2 lg:px-g pb-1 lg:pb-0">
+            <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor lg:pl-3">
+                <Carousel.Inner emblaRef={emblaRef} className='items-center'>
+                    <figure className="w-auto flex grow-0 shrink-0 px-hg lg:px-g basis-auto lg:grid lg:grid-cols-1">
+                        Featured in:
+                    </figure>
+                    {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
+                </Carousel.Inner>
+                <Carousel.Navigation>
+                    {prevShow && (
+                        <PrevButton
+                            onClick={() => onPrev() }
+                            className="lg:w-auto lg:h-0 hidden lg:flex"
+                        >
+                            <span className="absolute z-[-1] flex justify-center items-center">
+                                <ChevronPrev className="svg--current-color" />
+                            </span>
+                        </PrevButton>
+                    )}
+                    {nextShow && (
+                        <NextButton
+                            onClick={() => onNext() }
+                            className="lg:w-auto lg:h-0 hidden lg:flex"
+                        >
+                            <span className="absolute z-[-1] flex justify-center items-center">
+                                <ChevronNext className="svg--current-color" />
+                            </span>
+                        </NextButton>
+                    )}
+                </Carousel.Navigation>
+            </Carousel.Wrapper>
         </section>
     )
 }
