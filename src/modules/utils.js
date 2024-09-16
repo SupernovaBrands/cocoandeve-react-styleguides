@@ -389,6 +389,10 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	}
 
 	subscribeTiktok(email, phone);
+	if (typeof globalThis.window.fbq === 'function') {
+		globalThis.window.fbq('track', 'Lead');
+	}
+
 	const response = await fetch('https://s-app.cocoandeve.com/bluecore/waitlist.json', {
 		method: 'POST',
 		headers: {
