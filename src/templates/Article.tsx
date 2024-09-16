@@ -9,7 +9,6 @@ import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
 import BackToTop from '~/images/icons/back-to-top.svg';
-import Sidebar from "~/sections/Sidebar";
 
 import {
 	validateEmail,
@@ -441,9 +440,7 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    {popArticles?.length && (
-                        <Sidebar data={popArticles} />
-                    )}
+                    <div id="sideBarPosts"></div>
                 </article>
             </div>
         </div>
