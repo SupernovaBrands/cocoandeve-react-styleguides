@@ -9,6 +9,7 @@ import Peta from '~/images/icons/peta.svg';
 import FragranceFree from '~/images/icons/fragrance-free.svg';
 import Gluten from '~/images/icons/gluten.svg';
 import Sulfate from '~/images/icons/natural-dha.svg';
+import Phthalates from '~/images/icons/phthalates.svg';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import { EmblaCarouselType } from 'embla-carousel';
@@ -28,7 +29,8 @@ const iconsData = {
     'ethically': <><Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span></>,
     'paraben-free': <><ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span></>,
     'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>,
-    'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>
+    'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>,
+    'phthlates': <><Phthalates className="svg h-[1.625em]"/><span className="text-center flex-grow-1 font-size-sm mt-1">Phthalates Free</span></>
 }
 
 const ProudToBe = (props:any) => {
@@ -46,7 +48,8 @@ const ProudToBe = (props:any) => {
         "silicone-free",
         "vegan",
         "sulfate-free",
-        "natural-dha"
+        "natural-dha",
+        "phthlates-free"
     ];
     const handleSort = (a, b) => {
 		const indexNumA = iconOrders.findIndex((item) => {

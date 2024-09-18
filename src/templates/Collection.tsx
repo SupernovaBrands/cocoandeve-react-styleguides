@@ -443,10 +443,10 @@ const Collection = (props: any) => {
                             />
                             {collectionSettings.isLoading || loading ? (
                                 <>
-                                    <div className="w-1/2 lg:hidden px-hg mb-2 lg:hidden">
+                                    <div className="w-1/2 lg:hidden px-hg lg:hidden">
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
-                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 mb-2 lg:hidden">
+                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 lg:hidden">
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
                                 </>
