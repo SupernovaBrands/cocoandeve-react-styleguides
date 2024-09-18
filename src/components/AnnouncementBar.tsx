@@ -22,6 +22,7 @@ const AnnouncementBar = (props: any) => {
 		timerData,
 		background,
 		textColor,
+		loaded,
 	} = props;
 
 	const noticeTImesLabels = timerData && timerData.times_labels ? timerData.times_labels.split(':') : [];
@@ -33,7 +34,7 @@ const AnnouncementBar = (props: any) => {
 	const countDownSec = noticeTImesLabels[3]?.split(',')[0];
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 4000, stopOnInteraction: false }),
+		Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false }),
 		AutoHeight()
 	]);
 
@@ -118,6 +119,9 @@ const AnnouncementBar = (props: any) => {
 		if (showTimer) document.body.classList.add('timer-bar--show');
 		else document.body.classList.remove('timer-bar--show');
 	}, [showTimer]);
+	const bg = background ? background : 'primary-light';
+	const lineColor = loaded ? `${textColor || 'text-secondary hover:text-secondary'}` : `text-primary-light hover:text-primary-light`;
+	const bgColor = loaded ? `${background || 'bg-primary-light'}` : 'bg-primary-light';
 
 	return (
 		<>
@@ -138,18 +142,18 @@ const AnnouncementBar = (props: any) => {
 					</a>
 				</div>
 			) : (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${background || 'bg-primary-light'} w-full px-[0] py-[0.59375em]`}>
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
 									{text && (
-										<a href={url} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
+										<a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
 									)}
 									{text2 && (
-										<a href={url2} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
+										<a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
 									)}
 									{text3 && (
-										<a href={url3} className={`${textColor || 'text-secondary hover:text-secondary'} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
+										<a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
 									)}
 								</Carousel.Inner>
 							</Carousel.Wrapper>

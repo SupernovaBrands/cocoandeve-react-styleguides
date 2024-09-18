@@ -127,7 +127,7 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles } = props;
     let body = '';
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
@@ -138,7 +138,7 @@ const Article = (props) => {
     }
     const featuredImageProp = content?.BlogContentMultiStores?.[region]?.featured_image;
 
-    const [offset, setOffset] = useState<any | null>(null);
+    const [offset, setOffset] = useState<any | null>('6%');
     const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
