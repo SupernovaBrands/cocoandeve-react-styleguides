@@ -168,8 +168,8 @@ const ProudToBe = (props:any) => {
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>
         <div className="">
-                <div className="carousel--scroll position-relative lg:pr-hg">
-                    <div className="main-box overflow-hidden -mx-hg md:-mx-g">
+                <div className="carousel--scroll position-relative md:px-0 md:overflow-x-hidden">
+                    <div className="main-box overflow-hidden -mx-hg xl:-mx-g">
                         {/* <Carousel.Wrapper emblaApi={emblaMainApi}>
 	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
                                 {proudToBeArr.map((proud:any, index: number) =>{
