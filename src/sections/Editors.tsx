@@ -96,7 +96,7 @@ const Editors = () => {
         <section className="list-logo container mb-g lg:my-[50px] px-2 lg:px-g pb-1 lg:pb-0">
             <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor lg:pl-3">
                 <Carousel.Inner emblaRef={emblaRef} className='items-center'>
-                    <figure className="w-auto flex grow-0 shrink-0 pl-0 pr-hg lg:pl-0 lg:pr-g text-[16px] lg:text-[20px] basis-auto lg:grid lg:grid-cols-1 font-bold lg:font-normal">
+                    <figure className="w-auto flex grow-0 shrink-0 pl-0 pr-hg lg:pl-0 lg:pr-g text-[16px] lg:text-[20px] basis-auto lg:grid lg:grid-cols-1 font-normal">
                         Featured in:
                     </figure>
                     {DATA.map((logo) => <Testimonial key={logo.id} data={logo} />)}
