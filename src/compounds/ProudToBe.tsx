@@ -30,12 +30,13 @@ const iconsData = {
     'paraben-free': <><ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span></>,
     'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>,
     'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>,
-    'phthlates': <><Phthalates className="svg h-[1.625em]"/><span className="text-center flex-grow-1 font-size-sm mt-1">Phthalates Free</span></>
+    'phthlates-free': <><Phthalates className="svg h-[1.625em]"/><span className="text-center flex-grow-1 font-size-sm mt-1">Phthalates Free</span></>
 }
 
 const ProudToBe = (props:any) => {
 
     const iconOrders = [
+        "phthlates-free",
         "fragrance-free",
         "peta approved",
         "peta",
@@ -49,7 +50,6 @@ const ProudToBe = (props:any) => {
         "vegan",
         "sulfate-free",
         "natural-dha",
-        "phthlates-free"
     ];
     const handleSort = (a, b) => {
 		const indexNumA = iconOrders.findIndex((item) => {
