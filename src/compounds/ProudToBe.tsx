@@ -168,8 +168,8 @@ const ProudToBe = (props:any) => {
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>
         <div className="">
-                <div className="carousel--scroll position-relative md:px-0 md:overflow-x-hidden">
-                    <div className="main-box overflow-hidden -mx-hg xl:-mx-g">
+                <div className="carousel--scroll position-relative md:overflow-hidden">
+                    <div className="main-box overflow-hidden -mx-hg md:-mx-1">
                         {/* <Carousel.Wrapper emblaApi={emblaMainApi}>
 	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
                                 {proudToBeArr.map((proud:any, index: number) =>{
@@ -189,7 +189,7 @@ const ProudToBe = (props:any) => {
                                 if (!proud) {
                                     return null;
                                 }
-                                return <li key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
+                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${index === 0 ? 'md:flex-1' : 'md:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
                                 {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }
