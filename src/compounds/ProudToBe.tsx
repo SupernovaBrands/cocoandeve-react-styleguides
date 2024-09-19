@@ -36,20 +36,20 @@ const iconsData = {
 const ProudToBe = (props:any) => {
 
     const iconOrders = [
-        "phthlates-free",
-        "fragrance-free",
-        "peta approved",
-        "peta",
-        "paraben-free",
-        "ethically",
-        "gluten-free",
-        "gluten",
-        "toxin-free",
-        "cruelty-free",
-        "silicone-free",
-        "vegan",
-        "sulfate-free",
         "natural-dha",
+        "sulfate-free",
+        "vegan",
+        "silicone-free",
+        "cruelty-free",
+        "toxin-free",
+        "gluten",
+        "gluten-free",
+        "ethically",
+        "paraben-free",
+        "peta",
+        "peta approved",
+        "fragrance-free",
+        "phthlates-free"
     ];
     const handleSort = (a, b) => {
 		const indexNumA = iconOrders.findIndex((item) => {
@@ -75,7 +75,7 @@ const ProudToBe = (props:any) => {
 	};
 
     const { proudToBe } = props;
-    const proudToBeArr = proudToBe?.split('|').sort(handleSort).reverse() || [];
+    const proudToBeArr = proudToBe?.split('|').sort(handleSort) || [];
     const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
     const [totalSlide, setTotalSlide] = useState(0);
