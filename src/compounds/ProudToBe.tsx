@@ -189,7 +189,7 @@ const ProudToBe = (props:any) => {
                                 if (!proud) {
                                     return null;
                                 }
-                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${index === 0 ? 'md:flex-1' : 'md:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
+                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
                                 {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }
