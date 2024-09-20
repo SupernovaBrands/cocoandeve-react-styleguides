@@ -271,7 +271,7 @@ const ProductCardTall = (props:any) => {
     }, [product, selectedVariant]);
 
     useEffect(() => {
-        console.log('product-card');
+        // console.log('product-card');
         let defaultVariant = null;
         if (autoTicks && autoTicks.length > 0) {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;

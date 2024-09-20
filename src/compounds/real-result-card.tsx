@@ -16,13 +16,13 @@ const RealResultCard = (props) => {
 		div.appendChild(document.createTextNode(htmlString));
 		return div.innerHTML;
 	};
-	
+
 	const checkProduct = async (handle) => {
 		let { product } = await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json());
-		console.log('product', product)
+		// console.log('product', product)
 		if (product === null) {
-			console.log('handle', handle)
-			console.log('product data', product);
+			// console.log('handle', handle)
+			// console.log('product data', product);
 			checkStatus(true)
 		}
 	}
