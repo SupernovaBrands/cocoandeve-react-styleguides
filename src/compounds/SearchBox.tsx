@@ -118,7 +118,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(data => {
-					console.log(data, 'testing');
+					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();

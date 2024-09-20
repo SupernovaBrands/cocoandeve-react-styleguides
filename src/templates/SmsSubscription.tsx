@@ -81,7 +81,7 @@ const SmsSubscription = (props) => {
                 subscribeBluecoreWaitlist('', '', '', 'SmsBumpLP', phone, true);
                 if (smsBump !== '') {
                     submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
-                        console.log('resp', resp);
+                        // console.log('resp', resp);
                         if (resp.status === 'error') {
                             setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
                         } else if (resp.status === 'success' && resp.message === 'You have been already subscribed!') {
@@ -97,14 +97,14 @@ const SmsSubscription = (props) => {
 
     const setContent = () => {
 		if (content) {
-            console.log(content);
+            // console.log(content);
 			setFormContent(content);
 			// if (content[`sms_id_${store}`]) setSmsbump(parseInt(content[`sms_id_${store}`], 10));
 		}
 	};
 
     const handleCode = (e) => {
-		console.log(e);
+		// console.log(e);
 		setaActiveCountryCode(e);
 	};
 

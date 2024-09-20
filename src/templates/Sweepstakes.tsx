@@ -82,7 +82,7 @@ const Sweepstakes = (props) => {
 	};
 
     const handleCode = (e) => {
-		console.log(e);
+		// console.log(e);
 		setaActiveCountryCode(e);
 	};
 
@@ -115,8 +115,8 @@ const Sweepstakes = (props) => {
 
     const handleForm = (e) => {
 		e.preventDefault();
-		console.log('onSubmit');
-		console.log(email, phone);
+		// console.log('onSubmit');
+		// console.log(email, phone);
 
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
@@ -179,7 +179,7 @@ const Sweepstakes = (props) => {
 
             handleResize();
             window.addEventListener('resize', handleResize);
-            
+
             return () => {
                 window.removeEventListener('resize', handleResize);
             };
@@ -192,7 +192,7 @@ const Sweepstakes = (props) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'top',
 	};
-	
+
 	const backgroundStyleDesktop = {
 		backgroundImage: `url(${content.sweepstakes_lg.url})`,
 		backgroundSize: 'cover',
