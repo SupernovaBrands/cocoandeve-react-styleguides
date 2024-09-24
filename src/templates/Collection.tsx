@@ -32,7 +32,7 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     );
 }
 
-const Banner = ({ isLoading, title, strapiBanner }) => {
+const Banner = ({ isLoading, title, strapiBanner, singleBanner }) => {
 
     const universalCollectionSetting = strapiBanner?.universalBanner?.universalCollectionSetting || null;
     // console.log('universalCollectionSetting', universalCollectionSetting);
@@ -62,6 +62,15 @@ const Banner = ({ isLoading, title, strapiBanner }) => {
     if (collectionBanner && collectionBanner.collectionBanner[strapiBanner.store]?.enabled) {
         // use specific collection banner image if its enabled
         bannerData = collectionBanner.collectionBanner[strapiBanner.store];
+    }
+
+    if (singleBanner?.desktop && singleBanner?.mobile) {
+        bannerData = {
+            img_mob: singleBanner?.mobile,
+            img_desk: singleBanner?.desktop,
+            url: singleBanner?.url,
+            enabled: true,
+        };
     }
     return (
         <>
@@ -101,6 +110,7 @@ const Collection = (props: any) => {
 		// subscribeBluecoreWaitlist,
         loggedInEmail,
         squareBadge,
+        singleBanner,
     } = props;
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
@@ -394,7 +404,7 @@ const Collection = (props: any) => {
     return (
         <>
             {!collectionSettings.isLoading && (
-                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} />
+                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} singleBanner={singleBanner} />
             )}
 
             {collectionSettings.isLoading && (
