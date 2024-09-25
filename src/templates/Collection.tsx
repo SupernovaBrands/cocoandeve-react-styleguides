@@ -451,7 +451,7 @@ const Collection = (props: any) => {
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
-                            {collectionSettings.isLoading || loading ? (
+                            {/* {collectionSettings.isLoading || loading ? (
                                 <>
                                     <div className="w-1/2 lg:hidden px-hg lg:hidden">
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
@@ -460,7 +460,7 @@ const Collection = (props: any) => {
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
                                 </>
-                            ) : (
+                            ) : ( */}
                                 <>
                                     {!isLoading && (
                                         <>
@@ -485,7 +485,7 @@ const Collection = (props: any) => {
                                         </>
                                     )}
                                 </>
-                            )}
+                            {/* )} */}
 
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
