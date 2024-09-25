@@ -122,69 +122,69 @@ const DeliveryReturns = (props: any) => {
                                     {isDesktop ? (
                                         <>
                                             <ul className="w-[30%] delivery-countries-text m-0 text-left text-sm lg:block hidden">
-                                                <li className="flex"><Austria className="mr-[7px] mt-[2px]" />Austria</li>
-                                                <li className="flex"><Belgium className="mr-[7px] mt-[2px]" />Belgium</li>
-                                                <li className="flex"><Bulgaria className="mr-[7px] mt-[2px]" />Bulgaria</li>
-                                                <li className="flex"><Croatia className="mr-[7px] mt-[2px]" />Croatia</li>
-                                                <li className="flex"><Czech className="mr-[7px] mt-[2px]" />Czech Republic</li>
-                                                <li className="flex"><Denmark className="mr-[7px] mt-[2px]" />Denmark</li>
-                                                <li className="flex"><Estonia className="mr-[7px] mt-[2px]" />Estonia</li>
-                                                <li className="flex"><Finland className="mr-[7px] mt-[2px]" />Finland</li>
-                                                <li className="flex"><France className="mr-[7px] mt-[2px]" />France</li>
-                                                <li className="flex"><Germany className="mr-[7px] mt-[2px]" />Germany</li>
+                                                <li className="flex"><Austria className="mr-[7px] mt-[1px]" />Austria</li>
+                                                <li className="flex"><Belgium className="mr-[7px] mt-[1px]" />Belgium</li>
+                                                <li className="flex"><Bulgaria className="mr-[7px] mt-[1px]" />Bulgaria</li>
+                                                <li className="flex"><Croatia className="mr-[7px] mt-[1px]" />Croatia</li>
+                                                <li className="flex"><Czech className="mr-[7px] mt-[1px]" />Czech Republic</li>
+                                                <li className="flex"><Denmark className="mr-[7px] mt-[1px]" />Denmark</li>
+                                                <li className="flex"><Estonia className="mr-[7px] mt-[1px]" />Estonia</li>
+                                                <li className="flex"><Finland className="mr-[7px] mt-[1px]" />Finland</li>
+                                                <li className="flex"><France className="mr-[7px] mt-[1px]" />France</li>
+                                                <li className="flex"><Germany className="mr-[7px] mt-[1px]" />Germany</li>
                                             </ul>
                                             <ul className="w-[30%] delivery-countries-text m-0 text-left text-sm lg:block hidden">
-                                                <li className="flex"><Greece className="mr-[7px] mt-[2px]" />Greece</li>
-                                                <li className="flex"><Hungary className="mr-[7px] mt-[2px]" />Hungary</li>
-                                                <li className="flex"><Ireland className="mr-[7px] mt-[2px]" />Ireland</li>
-                                                <li className="flex"><Italy className="mr-[7px] mt-[2px]" />Italy</li>
-                                                <li className="flex"><Latvia className="mr-[7px] mt-[2px]" />Latvia</li>
-                                                <li className="flex"><Luxembourg className="mr-[7px] mt-[2px]" />Luxembourg</li>
-                                                <li className="flex"><Monaco className="mr-[7px] mt-[2px]" />Monaco</li>
-                                                <li className="flex"><Netherlands className="mr-[7px] mt-[2px]" />Netherlands</li>
-                                                <li className="flex"><Poland className="mr-[7px] mt-[2px]" />Poland</li>
+                                                <li className="flex"><Greece className="mr-[7px] mt-[1px]" />Greece</li>
+                                                <li className="flex"><Hungary className="mr-[7px] mt-[1px]" />Hungary</li>
+                                                <li className="flex"><Ireland className="mr-[7px] mt-[1px]" />Ireland</li>
+                                                <li className="flex"><Italy className="mr-[7px] mt-[1px]" />Italy</li>
+                                                <li className="flex"><Latvia className="mr-[7px] mt-[1px]" />Latvia</li>
+                                                <li className="flex"><Luxembourg className="mr-[7px] mt-[1px]" />Luxembourg</li>
+                                                <li className="flex"><Monaco className="mr-[7px] mt-[1px]" />Monaco</li>
+                                                <li className="flex"><Netherlands className="mr-[7px] mt-[1px]" />Netherlands</li>
+                                                <li className="flex"><Poland className="mr-[7px] mt-[1px]" />Poland</li>
                                             </ul>
                                             <ul className="w-[30%] delivery-countries-text m-0 text-left text-sm lg:block hidden">
-                                                <li className="flex"><Portugal className="mr-[7px] mt-[2px]" />Portugal</li>
-                                                <li className="flex"><Slovakia className="mr-[7px] mt-[2px]" />Slovakia</li>
-                                                <li className="flex"><Slovenia className="mr-[7px] mt-[2px]" />Slovenia</li>
-                                                <li className="flex"><Spain className="mr-[7px] mt-[2px]" />Spain</li>
-                                                <li className="flex"><Sweden className="mr-[7px] mt-[2px]" />Sweden</li>
-                                                <li className="flex"><Switzerland className="mr-[7px] mt-[2px]" />Switzerland</li>
-                                                <li className="flex"><UnitedKingdom className="mr-[7px] mt-[2px]" />United Kingdom</li>
+                                                <li className="flex"><Portugal className="mr-[7px] mt-[1px]" />Portugal</li>
+                                                <li className="flex"><Slovakia className="mr-[7px] mt-[1px]" />Slovakia</li>
+                                                <li className="flex"><Slovenia className="mr-[7px] mt-[1px]" />Slovenia</li>
+                                                <li className="flex"><Spain className="mr-[7px] mt-[1px]" />Spain</li>
+                                                <li className="flex"><Sweden className="mr-[7px] mt-[1px]" />Sweden</li>
+                                                <li className="flex"><Switzerland className="mr-[7px] mt-[1px]" />Switzerland</li>
+                                                <li className="flex"><UnitedKingdom className="mr-[7px] mt-[1px]" />United Kingdom</li>
                                             </ul>
                                         </>
                                     ) : (
                                         <>
                                             <ul className="w-1/2 delivery-countries-text m-0 text-left text-sm lg:hidden block">
-                                                <li className="flex"><Austria className="mr-[7px] mt-[2px]" />Austria</li>
-                                                <li className="flex"><Belgium className="mr-[7px] mt-[2px]" />Belgium</li>
-                                                <li className="flex"><Bulgaria className="mr-[7px] mt-[2px]" />Bulgaria</li>
-                                                <li className="flex"><Croatia className="mr-[7px] mt-[2px]" />Croatia</li>
-                                                <li className="flex"><Czech className="mr-[7px] mt-[2px]" />Czech Republic</li>
-                                                <li className="flex"><Denmark className="mr-[7px] mt-[2px]" />Denmark</li>
-                                                <li className="flex"><Estonia className="mr-[7px] mt-[2px]" />Estonia</li>
-                                                <li className="flex"><Finland className="mr-[7px] mt-[2px]" />Finland</li>
-                                                <li className="flex"><France className="mr-[7px] mt-[2px]" />France</li>
-                                                <li className="flex"><Germany className="mr-[7px] mt-[2px]" />Germany</li>
-                                                <li className="flex"><Greece className="mr-[7px] mt-[2px]" />Greece</li>
-                                                <li className="flex"><Hungary className="mr-[7px] mt-[2px]" />Hungary</li>
-                                                <li className="flex"><Ireland className="mr-[7px] mt-[2px]" />Ireland</li>
+                                                <li className="flex"><Austria className="mr-[7px] mt-[1px]" />Austria</li>
+                                                <li className="flex"><Belgium className="mr-[7px] mt-[1px]" />Belgium</li>
+                                                <li className="flex"><Bulgaria className="mr-[7px] mt-[1px]" />Bulgaria</li>
+                                                <li className="flex"><Croatia className="mr-[7px] mt-[1px]" />Croatia</li>
+                                                <li className="flex"><Czech className="mr-[7px] mt-[1px]" />Czech Republic</li>
+                                                <li className="flex"><Denmark className="mr-[7px] mt-[1px]" />Denmark</li>
+                                                <li className="flex"><Estonia className="mr-[7px] mt-[1px]" />Estonia</li>
+                                                <li className="flex"><Finland className="mr-[7px] mt-[1px]" />Finland</li>
+                                                <li className="flex"><France className="mr-[7px] mt-[1px]" />France</li>
+                                                <li className="flex"><Germany className="mr-[7px] mt-[1px]" />Germany</li>
+                                                <li className="flex"><Greece className="mr-[7px] mt-[1px]" />Greece</li>
+                                                <li className="flex"><Hungary className="mr-[7px] mt-[1px]" />Hungary</li>
+                                                <li className="flex"><Ireland className="mr-[7px] mt-[1px]" />Ireland</li>
                                             </ul>
                                             <ul className="w-1/2 delivery-countries-text m-0 text-left text-sm lg:hidden block">
-                                            <li className="flex"><Italy className="mr-[7px] mt-[2px]" />Italy</li>
-                                                <li className="flex"><Latvia className="mr-[7px] mt-[2px]" />Latvia</li>
-                                                <li className="flex"><Luxembourg className="mr-[7px] mt-[2px]" />Luxembourg</li>
-                                                <li className="flex"><Monaco className="mr-[7px] mt-[2px]" />Monaco</li>
-                                                <li className="flex"><Netherlands className="mr-[7px] mt-[2px]" />Netherlands</li>
-                                                <li className="flex"><Poland className="mr-[7px] mt-[2px]" />Poland</li>
-                                                <li className="flex"><Portugal className="mr-[7px] mt-[2px]" />Portugal</li>
-                                                <li className="flex"><Slovakia className="mr-[7px] mt-[2px]" />Slovakia</li>
-                                                <li className="flex"><Slovenia className="mr-[7px] mt-[2px]" />Slovenia</li>
-                                                <li className="flex"><Spain className="mr-[7px] mt-[2px]" />Spain</li>
-                                                <li className="flex"><Sweden className="mr-[7px] mt-[2px]" />Sweden</li>
-                                                <li className="flex"><Switzerland className="mr-[7px] mt-[2px]" />Switzerland</li>
-                                                <li className="flex"><UnitedKingdom className="mr-[7px] mt-[2px]" />United Kingdom</li>
+                                            <li className="flex"><Italy className="mr-[7px] mt-[1px]" />Italy</li>
+                                                <li className="flex"><Latvia className="mr-[7px] mt-[1px]" />Latvia</li>
+                                                <li className="flex"><Luxembourg className="mr-[7px] mt-[1px]" />Luxembourg</li>
+                                                <li className="flex"><Monaco className="mr-[7px] mt-[1px]" />Monaco</li>
+                                                <li className="flex"><Netherlands className="mr-[7px] mt-[1px]" />Netherlands</li>
+                                                <li className="flex"><Poland className="mr-[7px] mt-[1px]" />Poland</li>
+                                                <li className="flex"><Portugal className="mr-[7px] mt-[1px]" />Portugal</li>
+                                                <li className="flex"><Slovakia className="mr-[7px] mt-[1px]" />Slovakia</li>
+                                                <li className="flex"><Slovenia className="mr-[7px] mt-[1px]" />Slovenia</li>
+                                                <li className="flex"><Spain className="mr-[7px] mt-[1px]" />Spain</li>
+                                                <li className="flex"><Sweden className="mr-[7px] mt-[1px]" />Sweden</li>
+                                                <li className="flex"><Switzerland className="mr-[7px] mt-[1px]" />Switzerland</li>
+                                                <li className="flex"><UnitedKingdom className="mr-[7px] mt-[1px]" />United Kingdom</li>
                                             </ul>
                                         </>
                                     )}
@@ -193,25 +193,25 @@ const DeliveryReturns = (props: any) => {
                             <div className="lg:w-1/5 sm:w-1/2 px-hg lg:px-g pb-3">
                                 <h5 className="font-bold mb-1 text-md text-left">Asia</h5>
                                 <ul className="delivery-countries-text m-0 text-left text-sm">
-                                    <li className="flex"><China className="mr-[7px] mt-[2px]" />China <br className="block lg:hidden"/>(Hong Kong, Macao)</li>
-                                    <li className="flex"><Malaysia className="mr-[7px] mt-[2px]" />Malaysia</li>
-                                    <li className="flex"><Philippines className="mr-[7px] mt-[2px]" />Philippines</li>
-                                    <li className="flex"><Singapore className="mr-[7px] mt-[2px]" />Singapore</li>
+                                    <li className="flex"><China className="mr-[7px] mt-[1px]" />China <br className="block lg:hidden"/>(Hong Kong, Macao)</li>
+                                    <li className="flex"><Malaysia className="mr-[7px] mt-[1px]" />Malaysia</li>
+                                    <li className="flex"><Philippines className="mr-[7px] mt-[1px]" />Philippines</li>
+                                    <li className="flex"><Singapore className="mr-[7px] mt-[1px]" />Singapore</li>
 
                                 </ul>
                             </div>
                             <div className="lg:w-1/5 sm:w-1/2 px-hg lg:px-g pb-3">
                                 <h5 className="font-bold mb-1 text-md text-left">Oceania</h5>
                                 <ul className="delivery-countries-text m-0 text-left text-sm">
-                                    <li className="flex"><Australia className="mr-[7px] mt-[2px]" />Australia</li>
-                                    <li className="flex"><NewZealand className="mr-[7px] mt-[2px]" />New Zealand</li>
+                                    <li className="flex"><Australia className="mr-[7px] mt-[1px]" />Australia</li>
+                                    <li className="flex"><NewZealand className="mr-[7px] mt-[1px]" />New Zealand</li>
                                 </ul>
                             </div>
                             <div className="lg:w-1/5 w-full px-hg lg:px-g pb-3">
                                 <h5 className="font-bold mb-1 text-md text-left">North America</h5>
                                 <ul className="delivery-countries-text m-0 text-left text-sm">
-                                    <li className="flex"><Canada className="mr-[7px] mt-[2px]" />Canada</li>
-                                    <li className="flex"><USA className="mr-[7px] mt-[2px]" />United States</li>
+                                    <li className="flex"><Canada className="mr-[7px] mt-[1px]" />Canada</li>
+                                    <li className="flex"><USA className="mr-[7px] mt-[1px]" />United States</li>
                                 </ul>
                             </div>
                         </div>
