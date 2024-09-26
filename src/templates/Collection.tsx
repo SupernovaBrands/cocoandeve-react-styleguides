@@ -21,7 +21,7 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
         <figure className="w-full relative items-center px-0 mb-0">
             <picture className={`${!isLoading && !bannerLoading ? '' : 'bg-shimmer pt-[53.33%] lg:pt-[19.375%]'}`}>
                 <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
-                <img src={bannerData?.img_mob?.url} className="w-full" alt="Collection Banner" />
+                <img src={bannerData?.img_mob?.url} className="w-full" alt="Collection Banner" width="375" height="200"/>
             </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
                 <h1 className="hidden mb-0"
@@ -532,9 +532,6 @@ const Collection = (props: any) => {
                         <div className="flex flex-wrap collection-grid overflow-hidden w-full">
                             {(showSpinner || loading || collectionSettings.isLoading) && (
                                 <>
-                                    <div className="mb-3 px-hg lg:px-g text-center w-full hidden lg:block">
-                                        <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
-                                    </div>
                                     <ProductCardLoading
                                         key={`collection-b-loading-1`}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
