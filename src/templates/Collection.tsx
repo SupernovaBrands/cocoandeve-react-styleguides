@@ -451,14 +451,23 @@ const Collection = (props: any) => {
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
-                            {/* {collectionSettings.isLoading || loading ? (
+                            {collectionSettings.isLoading || loading || showSpinner ? (
                                 <>
-                                    <div className="w-1/2 lg:hidden px-hg lg:hidden">
+                                    <div className={`w-1/2 px-hg lg:hidden ${handle === 'all' ? 'mb-2' : ''}`}>
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
-                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 lg:hidden">
+                                    <div className={`w-1/2 lg:w-2/5 items-center justify-end px-hg lg:pr-0 lg:hidden ${handle === 'all' ? 'mb-2' : ''}`}>
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
+                                    {handle !== 'all' && (
+                                        <div className="w-full px-hg lg:px-0 mt-1 mb-1">
+                                            <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1">
+                                                <a className="collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline text-white bg-primary hover:text-white">
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
                                 </>
                             ) : ( */}
                                 <>
@@ -485,9 +494,8 @@ const Collection = (props: any) => {
                                         </>
                                     )}
                                 </>
-                            {/* )} */}
-
-                            {!isLoading && handle !== 'all' && (
+                            )}
+                            {!isLoading && !loading && !showSpinner && !collectionSettings.isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
