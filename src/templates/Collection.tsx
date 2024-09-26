@@ -537,15 +537,15 @@ const Collection = (props: any) => {
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                     />
                                     <ProductCardLoading
-                                        key={`collection-b-loading-2`}
+                                        key={`collection-b-loading-1`}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                     />
                                     <ProductCardLoading
-                                        key={`collection-b-loading-3`}
+                                        key={`collection-b-loading-1`}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                     />
                                     <ProductCardLoading
-                                        key={`collection-b-loading-4`}
+                                        key={`collection-b-loading-1`}
                                         className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                     />
                                 </>
