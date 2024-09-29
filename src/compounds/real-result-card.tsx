@@ -31,15 +31,22 @@ const RealResultCard = (props) => {
 		checkProduct(data.handle);
 	}
 
-	if (data.review_type === 'tan') {
+	let review_type = data.review_type;
+
+	if (data.review_type.includes(',')) {
+		const reviewTypes = data.review_type.split(',').map(type => type.trim());
+		review_type = reviewTypes[0];
+	}
+
+	if (review_type === 'tan') {
 		badgeColor = 'bg-sh-purple';
-	} else if (data.review_type === 'hair') {
+	} else if (review_type === 'hair') {
 		badgeColor = 'bg-secondary';
-	} else if (data.review_type === 'body') {
+	} else if (review_type === 'body') {
 		badgeColor = 'bg-blue';
-	} else if (data.review_type === 'suncare') {
+	} else if (review_type === 'suncare') {
 		badgeColor = 'bg-suncare-blue';
-	} else if (data.review_type === 'skin') {
+	} else if (review_type === 'skin') {
 		badgeColor = 'bg-skincare-orange';
 	}
 
@@ -67,7 +74,7 @@ const RealResultCard = (props) => {
 			<div className="px-2 pb-2 pt-0 bg-white">
 				<p className="flex justify-between items-center mb-0">
 					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" />
-					<Badge badgeClasses={`text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
+					<Badge badgeClasses={`text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(review_type || '')}</Badge>
 				</p>
 				{region === 'au' ? (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc)) && (data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50'))}`)}</>
