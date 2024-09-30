@@ -265,7 +265,7 @@ const YotpoReviewWidget = (props:any) => {
 		};
 
 		const params = objectToQueryString(dataJson);
-
+		if (selectedFilter?.free_text_search.includes('%')) selectedFilter.free_text_search = encodeURIComponent(selectedFilter.free_text_search);
 		$.ajax({
 			crossDomain: true,
 			contentType: 'application/json',
@@ -293,7 +293,6 @@ const YotpoReviewWidget = (props:any) => {
 
 		const text = form.querySelector('input[name="free_text_search"]').value;
 		if (text) filter.free_text_search = text;
-
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
@@ -871,7 +870,7 @@ const YotpoReviewWidget = (props:any) => {
 					<hr className="my-2"/>
 
 					{revLoading && (
-						<div className="flex justify-center mt-4">
+						<div className="flex justify-center mt-4 ab">
 							<div className="spinner-border " role="status" aria-hidden="true" />
 						</div>
 					)}
