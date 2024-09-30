@@ -446,7 +446,7 @@ const Collection = (props: any) => {
                             </ul>
                         </aside>
                     )}
-                    <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap items-start">
+                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
@@ -462,7 +462,7 @@ const Collection = (props: any) => {
                                     {handle !== 'all' && (
                                         <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                             <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1">
-                                                <a className="collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline text-white bg-primary hover:text-white">
+                                                <a className="invisible collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline text-white bg-primary hover:text-white">
                                                     All
                                                 </a>
                                             </div>
@@ -529,26 +529,11 @@ const Collection = (props: any) => {
                             )}
                             {collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
-                        <div className="flex flex-wrap collection-grid overflow-hidden w-full">
-                            {(showSpinner || loading || collectionSettings.isLoading) && (
-                                <>
-                                    <ProductCardLoading
-                                        key={`collection-b-loading-1`}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                    />
-                                    <ProductCardLoading
-                                        key={`collection-b-loading-1`}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                    />
-                                    <ProductCardLoading
-                                        key={`collection-b-loading-1`}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                    />
-                                    <ProductCardLoading
-                                        key={`collection-b-loading-1`}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                    />
-                                </>
+                        <div className={`flex flex-wrap collection-grid overflow-hidden w-full`}>
+                            {(showSpinner || loading) && (
+                                <div className="mb-3 px-hg lg:px-g text-center w-full hidden lg:block">
+                                    <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
+                                </div>
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
