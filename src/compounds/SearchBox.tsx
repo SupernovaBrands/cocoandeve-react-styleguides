@@ -254,7 +254,7 @@ const SearchBox = (props: any) => {
 					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
 				</div>
 			)}
-			{loading && (
+			{loading && keyword !== '' && (
 				<div className="search-panel__loading py-3 container text-center">
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
