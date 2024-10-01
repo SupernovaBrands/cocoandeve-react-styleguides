@@ -25,6 +25,7 @@ const CartManualGwp = (props:any) => {
 			setShowScroll(true);
 		}
 	}, [props])
+	
 
 	const scroll = (direction:any) => {
 		const el = scrollRef.current;
@@ -68,7 +69,7 @@ const CartManualGwp = (props:any) => {
 					</>
 				)}
 				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-[1rem] mb-2" ref={scrollRef}>
-					{items.map((item:any, index:number) => {
+					{items?.filter((item) => item?.variantId !== '' && item?.handle !== '')?.map((item:any, index:number) => {
 						const isLoading = adding && processingId === item.id;
 						const isSelected = !!(selectedKey && selectedKey.find((key:any) => isItemIdInKey(key, item.id)));
 						return (
