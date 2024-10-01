@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { isItemIdInKey } from '~/modules/utils';
 
@@ -19,6 +19,12 @@ const CartManualGwp = (props:any) => {
 		onAddItem,
 		onRemoveItem,
 	} = props;
+	
+	useEffect(() => {
+		if (items?.length > 3) {
+			setShowScroll(true);
+		}
+	}, [props])
 
 	const scroll = (direction:any) => {
 		const el = scrollRef.current;
@@ -49,14 +55,18 @@ const CartManualGwp = (props:any) => {
 			<div className="manual-gwp relative mt-2">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
-				<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
-					<SvgChevronPrev className="svg" />
-					<span className="hidden">Left</span>
-				</button>
-				<button className={`absolute btn-unstyled text-primary manual-gwp__right ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('right')}>
-					<SvgChevronNext className="svg" />
-					<span className="hidden">Right</span>
-				</button>
+				{showScroll && (
+					<>
+						<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
+							<SvgChevronPrev className="svg" />
+							<span className="hidden">Left</span>
+						</button>
+						<button className={`absolute btn-unstyled text-primary manual-gwp__right ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('right')}>
+							<SvgChevronNext className="svg" />
+							<span className="hidden">Right</span>
+						</button>
+					</>
+				)}
 				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-[1rem] mb-2" ref={scrollRef}>
 					{items.map((item:any, index:number) => {
 						const isLoading = adding && processingId === item.id;
