@@ -4,7 +4,7 @@ const NavMegaMenuAll = (props: any) => {
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex w-full">
-                    <div className="max-w-[14.625em] mr-2 mb-3 px-0">
+                    <div className="max-w-[14.625em] mr-3 mb-3 px-0">
                         <>
                             <a href={generalSetting.mega_menu_shop_all_url}>
                                 <button className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full">
@@ -18,9 +18,9 @@ const NavMegaMenuAll = (props: any) => {
                             )}
                         </>
                     </div>
-                    <div className="ml-1 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
+                    <div className="ml-3 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
                         {menus && menus.map((menu) => {
-                            if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all') {
+                            if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
                                 return (
                                     <div key={`menu-${menu.title}`} className="d-flex flex-column">
                                         <a href={menu.handle} className="block mb-2 text-lg text-body font-bold">{menu.title}</a>
