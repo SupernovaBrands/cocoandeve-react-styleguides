@@ -77,6 +77,7 @@ const MobileMenu = (props: any) => {
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
 				{mainMenu?.map((menu, i) => {
+					const hasRow = menu.rows;
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
@@ -85,10 +86,13 @@ const MobileMenu = (props: any) => {
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
-								{menu.rows && menu.rows.length === 0 && (
-									<a href={menu.handle} className="w-full m-0 text-body flex">{menu.title}</a>
+								{(menu.rows && menu.rows.length === 0 && menu.title.toLowerCase() !== 'sale') && (
+									<a href={menu.handle} className="w-full m-0 text-body flex s">{menu.title}</a>
 								)}
-								{menu.rows && menu.rows.length > 0 && (
+								{menu.title.toLowerCase() === 'sale' && (
+									<a href={menu.handle} className="w-full m-0 text-body flex s">{menu.title}</a>
+								)}
+								{menu.rows && menu.rows.length > 0 && menu.title.toLowerCase() !== 'sale' && (
 									<h4 className="m-0 font-normal">{menu.title}</h4>
 								)}
 								{menu.rows && menu.rows.length > 0 && (
