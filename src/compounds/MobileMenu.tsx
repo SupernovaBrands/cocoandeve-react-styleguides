@@ -85,10 +85,10 @@ const MobileMenu = (props: any) => {
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
-								{menu.title.toLowerCase() === 'sale' && (
+								{menu.rows && menu.rows.length === 0 && (
 									<a href={menu.handle} className="w-full m-0 text-body flex">{menu.title}</a>
 								)}
-								{menu.title.toLowerCase() !== 'sale' && (
+								{menu.rows && menu.rows.length > 0 && (
 									<h4 className="m-0 font-normal">{menu.title}</h4>
 								)}
 								{menu.rows && menu.rows.length > 0 && (
