@@ -27,11 +27,9 @@ const ProductBannerSlider = (props) => {
 		compareImages();
 
 		setTimeout(() => {
-			if (window.innerWidth < 768) {
-				const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
-				if (imgHeight) setWrapperHeight({ minHeight: `${imgHeight}px` });
-			}
-		}, 500);
+			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
+			 if (imgHeight) setWrapperHeight({ minHeight: `${imgHeight}px` });
+		}, 500); 
 	};
 
 	const getCursorPos = (el) => {
