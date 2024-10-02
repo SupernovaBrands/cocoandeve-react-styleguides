@@ -18,6 +18,8 @@ const AccountDropdown = (props:any) => {
     const [validLoginEmail, setValidLoginEmail] = useState(true);
     const [emptyPass, setEmptyPass] = useState(false);
     const [activeFrame, setActiveFrame] = useState(true);
+    const [loadingLogin, setLoadingLogin] = useState(false);
+    const [loadingCreate, setLoadingCreate] = useState(false);
     const firstRef = useRef(null);
 	const lastRef = useRef(null);
 	const emailRef = useRef(null);
@@ -41,6 +43,7 @@ const AccountDropdown = (props:any) => {
         e.preventDefault();
 
         if (allowSubmit) {
+            setLoadingCreate(true);
             const url = `https://s-app.cocoandeve.com/shopify/email?email=${encodeURIComponent(emailRef.current.value)}&brand=cocoandeve_shopify_${store}`;
             fetch(url).then((d) => d.json()).then(async (data) => {
                 const found = data.filter((e) => e.email === emailRef.current.value);
@@ -102,6 +105,8 @@ const AccountDropdown = (props:any) => {
     // Login Customer
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        setAllowLogin(false);
+        setLoadingLogin(true);
 		const respLogin = await fetch('/api/account/login', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -114,6 +119,7 @@ const AccountDropdown = (props:any) => {
             props.userMutate().then(() => {
                 props.closeModal();
                 props.callback();
+                setLoadingLogin(false);
             });
         } else {
             let url: string = '/account/login#error'
@@ -177,7 +183,10 @@ const AccountDropdown = (props:any) => {
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                                 <input ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''}`} disabled={!allowLogin}>Log In</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''} ${loadingLogin ? '!opacity-70' : ''}`} disabled={!allowLogin}>
+                                {!loadingLogin && 'Log In'}
+                                {loadingLogin && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
+                            </Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
                                     <a href="/account/login#recover" className="text-underline text-primary underline">Forgot your password?</a>
@@ -227,12 +236,15 @@ const AccountDropdown = (props:any) => {
                             <div className="custom-control custom-checkbox flex justify-start text-sm items-start">
                                 <input ref={tos} onClick={handleTos} type="checkbox" name="agreement" value={tosAgree.toString()} className="custom-control-input" id="agreement" required={false} aria-required="true" aria-invalid="true" />
                                 <label htmlFor="agreement" className={`custom-control-label ${!onModal ? 'lg:pl-1' : ''}`}>
-                                    { !onModal && <span>By clicking here, I agree to the <Link className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</Link>, <Link className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</Link> and <Link className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</Link>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span> }
-                                    { onModal && <span>By clicking here, I agree to the <Link href="/pages/terms-and-conditions" className="text-primary text-sm" target="_blank" aria-label="Terms of Use">Terms of Use</Link> and <Link className="text-primary text-sm" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</Link></span>}
+                                    { !onModal && <span>By clicking here, I agree to the <a className="font-size-sm" href="/pages/terms-and-conditions">Terms of Use</a>, <a className="font-size-sm" href="/pages/privacy-policy">Privacy Policy</a> and <a className="font-size-sm" href="/pages/bali-beauty-club-terms-and-conditions">Bali Beauty Club Terms and Conditions</a>.&nbsp; By opening an account you will be signed up to the Bali Beauty Club.&nbsp; You may opt out at any time, see Bali Beauty Club Terms and Conditions for details</span> }
+                                    { onModal && <span>By clicking here, I agree to the <a href="/pages/terms-and-conditions" className="text-primary text-sm" target="_blank" aria-label="Terms of Use">Terms of Use</a> and <a className="text-primary text-sm" target="_blank" href="/pages/privacy-policy-new" aria-label="Privacy Policy">Privacy Policy</a></span>}
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`}`} disabled={!allowSubmit}>Create Account</Button>
+                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`} ${loadingCreate ? '!opacity-70' : ''}`} disabled={!allowSubmit}>
+                                {!loadingCreate && 'Create Account'}
+                                {loadingCreate && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
+                            </Button>
                             <div className="form-group text-center mt-2">
                                 <button type="button" className="underline text-primary" onClick={() => setActiveFrame(!activeFrame)}>Back to Login</button>
                             </div>

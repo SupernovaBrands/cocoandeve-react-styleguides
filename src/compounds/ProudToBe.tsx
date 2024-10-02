@@ -9,6 +9,7 @@ import Peta from '~/images/icons/peta.svg';
 import FragranceFree from '~/images/icons/fragrance-free.svg';
 import Gluten from '~/images/icons/gluten.svg';
 import Sulfate from '~/images/icons/natural-dha.svg';
+import Phthalates from '~/images/icons/phthalates.svg';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import { EmblaCarouselType } from 'embla-carousel';
@@ -28,25 +29,27 @@ const iconsData = {
     'ethically': <><Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span></>,
     'paraben-free': <><ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span></>,
     'peta': <><Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span></>,
-    'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>
+    'fragrance-free': <><FragranceFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Fragrance Free</span></>,
+    'phthalates-free': <><Phthalates className="svg h-[1.625em]"/><span className="text-center flex-grow-1 font-size-sm mt-1">Phthalates Free</span></>
 }
 
 const ProudToBe = (props:any) => {
 
     const iconOrders = [
-        "fragrance-free",
-        "peta approved",
-        "peta",
-        "paraben-free",
-        "ethically",
-        "gluten-free",
-        "gluten",
-        "toxin-free",
-        "cruelty-free",
-        "silicone-free",
-        "vegan",
+        "natural-dha",
         "sulfate-free",
-        "natural-dha"
+        "vegan",
+        "silicone-free",
+        "cruelty-free",
+        "toxin-free",
+        "gluten",
+        "gluten-free",
+        "ethically",
+        "paraben-free",
+        "peta",
+        "peta approved",
+        "fragrance-free",
+        "phthalates-free"
     ];
     const handleSort = (a, b) => {
 		const indexNumA = iconOrders.findIndex((item) => {
@@ -72,7 +75,7 @@ const ProudToBe = (props:any) => {
 	};
 
     const { proudToBe } = props;
-    const proudToBeArr = proudToBe?.split('|').sort(handleSort).reverse() || [];
+    const proudToBeArr = proudToBe?.split('|').sort(handleSort) || [];
     const scrollEl = useRef(null);
     const scrollThumb = useRef(null);
     const [totalSlide, setTotalSlide] = useState(0);
@@ -165,8 +168,8 @@ const ProudToBe = (props:any) => {
         <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
         <h2 className="mb-0">Proud to be</h2>
         <div className="">
-                <div className="carousel--scroll position-relative">
-                    <div className="main-box overflow-hidden -mx-hg md:-mx-g">
+                <div className="carousel--scroll position-relative md:overflow-hidden">
+                    <div className="main-box overflow-hidden -mx-hg md:-mx-1">
                         {/* <Carousel.Wrapper emblaApi={emblaMainApi}>
 	        				<Carousel.Inner emblaRef={emblaMainRef} className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-2 md:pb-0 md:mb-1">
                                 {proudToBeArr.map((proud:any, index: number) =>{
@@ -186,7 +189,7 @@ const ProudToBe = (props:any) => {
                                 if (!proud) {
                                     return null;
                                 }
-                                return <li key={`${proud}-${index}`} className="flex flex-[0_0_19%] md:flex-[0_0_16.67%] items-center flex-col px-1 carousel-item active">
+                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
                                 {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }

@@ -8,8 +8,8 @@ const UpsellPdp = (props) => {
                     <img src="https://via.placeholder.com/236x236.jpg/EFADBA" className="w-full" />
                 </picture>
                 <figcaption className="w-2/3 flex flex-col mx-0 justify-around lg:justify-between p-0 text-base sm:ml-1 lg:ml-0">
-                    <span className="mt-0 mb-25 font-bold">{props.title}</span>
-                    <p className="mb-25">{props.content}</p>
+                    <span className="mt-0 mb-25 font-bold">{props?.title}</span>
+                    <p className="mb-25">{props?.content}</p>
                     <span className="mb-25 text-primary">
                         <span className="line-through text-body mr-25 whitespace-no-wrap">{props.comparePrice}</span>
                         <span className="font-bold mr-25 whitespace-no-wrap">{props.price}</span>

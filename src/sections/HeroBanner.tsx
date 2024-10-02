@@ -27,9 +27,8 @@ const SLIDES = [
 
 const HeroBanner = (props: any) => {
 	const { isStyleguide, region, tcPopups } = props;
-	const [isLoadingComp, setIsLoadingComp] = useState(true);
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 })
+		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
 	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region || 'dev');
@@ -43,10 +42,6 @@ const HeroBanner = (props: any) => {
 	const handleOpenModal = () => {
 		setIsOpen(!isOpen);
 	}
-
-	useEffect(() => {
-		setIsLoadingComp(false);
-	}, []);
 
 	let slides = [];
 	if (isStyleguide) {
@@ -95,7 +90,7 @@ const HeroBanner = (props: any) => {
 					<div className='bg-shimmer pt-[111.83575%] lg:pt-[38.17708%]'></div>
 				)}
 			</section>
-			{!isLoadingComp && tcPopups?.enabled && (
+			{tcPopups?.enabled && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
 						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms & Conditions</a>

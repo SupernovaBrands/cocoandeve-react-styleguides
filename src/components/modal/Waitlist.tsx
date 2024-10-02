@@ -12,6 +12,7 @@ interface WatilistData {
 	title: string
 	handle: string|undefined
 	date?: string
+	productId?: any
 }
 
 type WaitlistProp = {
@@ -73,7 +74,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 							<img alt="Waitlist Popup" className="waitlist-popup-image mx-auto w-full max-w-[15.625rem] md:max-w-none" src={data.image.replace('592x', 'public').replace('540x', 'public')} />
 						}
 					</div>
-					<form noValidate onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 lg:mt-0">
+					<form noValidate onSubmit={handleSubmit} className="w-full lg:w-1/2 lg:px-g text-center -mt-1 lg:mt-0" data-product-id={data?.productId}>
 						{globalSettings && !globalSettings.isLoading && (
 							<>
 								{!success && (
@@ -92,6 +93,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
+										{data.date && data.date !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										)}
 									</>
 								)}
 								{success && isNonOOs && (
@@ -100,9 +104,12 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
+										{data.date && data.date !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										)}
 									</>
 								)}
-								<div className={`relative flex items-stretch w-full flex-col ${success ? 'mt-4' : 'mt-2'}`}>
+								<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
 									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
 									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
 									{formError && <span className="mt-1 font-size-sm text-primary">{waitlistPopupData.email_invalid}</span>}

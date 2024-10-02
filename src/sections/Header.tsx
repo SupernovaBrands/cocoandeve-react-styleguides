@@ -17,7 +17,7 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey
 	} = props;
 
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -66,6 +66,9 @@ const Header = (props: any) => {
 		e.preventDefault();
 		const url = !isLoggedIn ? '/pages/rewards' : '/account#rewards';
 		window.location.href = url;
+		if (isLoggedIn && typeof setAccountPage === 'function' && accountPageKey) {
+			setAccountPage(accountPageKey.REWARDS);
+		}
 		// if (isLoggedIn) window.location.reload();
 		if (isLoggedIn && window.location.pathname === '/account' && window.location.hash !== '#rewards') window.location.reload();
 	};
@@ -169,8 +172,9 @@ const Header = (props: any) => {
 	return (
 		<>
 			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
-				{annBar?.enabled && (
+				{(annBar?.enabled || (!annBar.loaded && !annBar.enabled)) && (
 					<AnnouncementBar
+						loaded={annBar?.loaded}
 						scrolled={scrolled}
 						text={annBar.text}
 						url={annBar.url}
@@ -184,10 +188,10 @@ const Header = (props: any) => {
 
 				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]`}>
 					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubble ? 'relative' : ''}`}>
-						<button className="text-lg border-0 [flex-basis:30%] lg:hidden" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
+						<button className="text-lg border-0 [flex-basis:30%] lg:hidden h-[40px]" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
-						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:15%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">

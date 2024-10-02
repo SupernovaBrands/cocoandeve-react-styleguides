@@ -6,7 +6,7 @@ import { InputSearch } from '~/components/index';
 
 const BlogFiltered = (props) => {
     const onSearchChange = (e) => {
-        console.log(e, 'on Search Change Page');
+        // console.log(e, 'on Search Change Page');
     }
     const SIDEBAR_DATA = [
 		{

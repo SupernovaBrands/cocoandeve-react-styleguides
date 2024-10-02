@@ -87,7 +87,6 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	};
 
 	const handleEmail = (e) => {
-		console.log(e.target);
 		setEmail(e.target.value);
 	};
 
@@ -96,7 +95,6 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	};
 
 	const handleCode = (e) => {
-		console.log(e);
 		setaActiveCountryCode(e);
 	};
 
@@ -125,8 +123,6 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 
 	const handleForm = (e) => {
 		e.preventDefault();
-		console.log('onSubmit');
-		console.log(email, phone);
 
 		if (validateForm(email, phone)) {
 			if (validForm.email) {

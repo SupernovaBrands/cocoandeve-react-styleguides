@@ -29,7 +29,8 @@ const WaitlistButton = (props:any) => {
             title: props.product.title,
             image: props.product.src,
             handle: props.product.handle,
-            date: props.selectedVariant?.waitlistPopupDate?.value || ''
+            date: props.selectedVariant?.waitlistPopupDate?.value || '',
+            productId: props.product?.id?.replace('gid://shopify/Product/', ''),
         });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
@@ -46,7 +47,8 @@ const LaunchButton = (props: any) => {
             open: true,
             handle: props.product.handle,
             variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
-            tags: props.product.tags
+            tags: props.product.tags,
+            productId: props.product?.id?.replace('gid://shopify/Product/', ''),
         }
         if (props.launchBox === 1) {
             props.setLaunchWLModal(data);
@@ -269,6 +271,7 @@ const ProductCardTall = (props:any) => {
     }, [product, selectedVariant]);
 
     useEffect(() => {
+        // console.log('product-card');
         let defaultVariant = null;
         if (autoTicks && autoTicks.length > 0) {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
@@ -283,21 +286,21 @@ const ProductCardTall = (props:any) => {
     let productSrc = props.product.src;
     let productImgHover = props.product.imgHover;
 
-    if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'daily-essentials-bundle') {
+    if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && props.product.handle === 'daily-essentials-bundle') {
         let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
         let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e6b3d13-538a-4983-7560-c1f42e4c6400/public';
 		productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
         productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'super-hydration-kit') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && props.product.handle === 'super-hydration-kit') {
 		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
 		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f825e183-9dac-4f2b-ee1a-bf0711f67400/public';
         productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 		productSrc = img.includes('imagedelivery.net') ? img.replace('public', '592x') : img.replace('.jpg', '_384x.jpg').replace('.png', '_384x.png');
         productImgHover = imgHover.includes('imagedelivery.net') ? imgHover.replace('public', '540x') : imgHover.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && props.product.handle === 'deep-condition-bundle') {
+	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && props.product.handle === 'deep-condition-bundle') {
 		let img = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 		let imgHover = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6175c52d-3cd8-49e1-0c70-46254c2caa00/public';
         productSrcSet = img.includes('imagedelivery.net') ? img.replace('public', '540x') : img.replace('.jpg', '_540x.jpg').replace('.png', '_540x.png');
@@ -333,7 +336,7 @@ const ProductCardTall = (props:any) => {
             { props.product.badgeText && (<span className="min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] bg-white absolute font-normal text-sm text-body top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em]">{props.product.badgeText}</span>) }
             <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : ''} ${props.carousel && !props.shopArticle ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
                 <div className="review-stars__number flex justify-center mb-1">
-                    <YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
+                    {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
                 </div>
                 <p className={`product-title__text grow flex flex-col justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''}`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : 'lg:text-lg text-base'} product-card__title text-body hover:text-body"`}>{props.product.title}</a>

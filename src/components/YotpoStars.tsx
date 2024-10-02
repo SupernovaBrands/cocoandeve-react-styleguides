@@ -14,7 +14,8 @@ const YotpoStar = (props: any) => {
 	const localeParam = 'en';
 
 	const fetchStar = () => {
-		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`, {headers: {cache: 'force-cache'}})
+		// console.log('fetchStar');
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}&signature=${signature}`)
 			.then((response) => response.json())
 			.then((data) => {
 				if (data.response && data.response.bottomline) {
@@ -26,13 +27,14 @@ const YotpoStar = (props: any) => {
 				}
 		});
 	};
+	
+	// console.log('props.sku123');
+	useEffect(() => {
+		if (props.sku.length > 0 && !init) fetchStar();
+	}, []);
 
 	useEffect(() => {
-		fetchStar();
-	}, [props.sku.length]);
-
-	useEffect(() => {
-		if (total === 0 || score === 0) fetchStar();
+		// if (total === 0 || score === 0) fetchStar();
 	}, [total, score]);
 
 	return init && total > 0 ? (

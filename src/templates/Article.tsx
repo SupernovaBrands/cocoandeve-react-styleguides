@@ -10,14 +10,50 @@ import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
 import BackToTop from '~/images/icons/back-to-top.svg';
 
+import {
+	validateEmail,
+    subscribeBluecoreRegistration,
+} from '~/modules/utils';
+
+const validForm = {
+	email: false,
+	phone: false,
+};
+
 const ArticleNewsLetter = (props) => {
     const { postNewsletter, store } = props;
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
     const [submitted, setSubmitted] = useState(false);
     const [allowSubmit, setAllowSubmit] = useState(false);
 
+    const validateForm = (em) => {
+		validForm.email = false;
+		if (validateEmail(em)) {
+			validForm.email = true;
+		}
+		if (validForm.email) {
+			setEmailError({ valid: true, error: '' });
+			return true;
+		} else {
+            setEmailError({ valid: false, error: 'Please enter valid email' });
+        }
+		return false;
+	};
+
     const onSubmit = (evt) => {
         evt.preventDefault();
+
+        if (validateForm(email) && allowSubmit) {
+			// console.log('validForm', validForm);
+			if (validForm.email) {
+				if (!validForm.phone) {
+					subscribeBluecoreRegistration(email, '');
+				}
+				setSubmitted(true);
+			}
+		}
+        /*
         if (allowSubmit) {
             const ajaxRequest = new XMLHttpRequest();
             ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
@@ -29,9 +65,11 @@ const ArticleNewsLetter = (props) => {
             ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
             setSubmitted(true);
         }
+        */
 	};
 
     const handleEmail = (e) => {
+        setEmailError({ valid: true, error: ''});
 		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
         setEmail(e.target.value);
         setAllowSubmit(email);
@@ -48,13 +86,14 @@ const ArticleNewsLetter = (props) => {
                     <h2 className="mb-1 blog-post-grid__newsletter-title">{postNewsletter.blog_ns_title}</h2>
                     <p className="mb-[1rem]">{postNewsletter.blog_ns_desc}</p>
                     {!submitted && (
-                        <form className="w-full" onSubmit={onSubmit}>
-                            <div className="mb-2 relative flex flex-wrap w-full items-stretch">
+                        <form className="w-full mb-2" onSubmit={onSubmit}>
+                            <div className=" relative flex flex-wrap w-full items-stretch">
                                 <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl rounded-bl -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
                                     <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
+                            {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
                         </form>
                     )}
                     {submitted && (
@@ -88,14 +127,24 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region } = props;
-    const [offset, setOffset] = useState<any | null>(null);
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles } = props;
+    let body = '';
+    if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
+        const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
+        body = content.BlogContentMultiStores[region].body_content
+            .replace('<a', ariaLabel)
+            .replace(/<ul>/g, '<ul class="article-list">')
+            .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
+    }
+    const featuredImageProp = content?.BlogContentMultiStores?.[region]?.featured_image;
+
+    const [offset, setOffset] = useState<any | null>('6%');
     const [showButton, setShowButton] = useState(false);
     const [screenLG, setScreenLG] = useState(992);
     const [label, setLabel] = useState('');
     const [tanTitle, setTanTitle] = useState('');
     const [title, setTitle] = useState(content?.title);
-    const [featuredImageUrl, setFeaturedImageUrl] = useState('');
+    const [featuredImageUrl, setFeaturedImageUrl] = useState(featuredImg);
     const [bodyContent, setBodyContent] = useState('');
 
     const d = new Date(content?.updatedAt);
@@ -344,12 +393,12 @@ const Article = (props) => {
                 )}
                 <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
-                        <h1 className="text-center mb-1">{title}</h1>
+                        <h1 className="text-center mb-1">{content?.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
-                        {!isLoading && featuredImageUrl && (
+                        {featuredImg && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
-                                <source srcSet={featuredImageUrl} media="(min-width: 992px)" />
-                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImageUrl} alt={featuredImageAlternativeText} title={content?.title} />
+                                <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url} alt={featuredImg?.alt || ''} title={content?.title} />
                             </picture>
                         )}
                         {quickLinks?.length > 0 && (

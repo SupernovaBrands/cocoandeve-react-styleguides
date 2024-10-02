@@ -3,7 +3,7 @@ import SearchProductCard from "./SearchProductCard";
 const PopularProducts = (props: any) => {
 	const { content, keywords, onClickTag, dummy, popProducts, store } = props;
 	return (
-		<div className="container px-g lg:px-g pt-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
+		<div className="search--popular container px-g lg:px-g pt-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 			<div className="flex flex-wrap lg:-mx-g">
 				<h4 className="w-full lg:w-1/3 lg:mb-2 font-normal order-1 text-base px-0 lg:px-g mb-1">{content?.popular_keywords_heading}</h4>
 				<h4 className="w-full lg:w-2/3 lg:mb-2 mb-1 font-normal order-3 lg:order-2 text-gray-600 text-base px-0 lg:px-g">{content?.popular_products_heading}</h4>
@@ -29,6 +29,9 @@ const PopularProducts = (props: any) => {
 								}
 								if (store === 'int' && handle === 'hair-revival-set') {
 									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f8c59cc-00b2-4c2e-29bb-7a84435cdd00/public';
+								}
+								if (store === 'my' && handle === 'hair-revival-set') {
+									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c28d622f-45cc-49ce-d5c2-0dbd6c1f9100/public';
 								}
 								if (['my', 'uk', 'eu', 'au'].includes(store) && handle === 'clean-slate-set') {
 									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d6596e4-f344-4968-c8b9-6b2530881000/public';

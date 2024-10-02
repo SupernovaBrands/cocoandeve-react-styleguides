@@ -17,8 +17,8 @@ const BirthdayPopup = (props) => {
                     <img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Mobile_29349535-f982-4299-8c2c-ce6aa5b74ae7.png" className="w-100" />
                 </picture>
                 <form className="birthday-popup__form col-lg-6 pt-lg-5 pb-5">
-                    <h2 className="birthday-popup__title h1 text-center mb-1 pe-lg-g">{props.title}</h2>
-                    <p className="font-size-sm mb-3 text-center pe-lg-g px-g">{props.content}</p>
+                    <h2 className="birthday-popup__title h1 text-center mb-1 pe-lg-g">{props?.title}</h2>
+                    <p className="font-size-sm mb-3 text-center pe-lg-g px-g">{props?.content}</p>
                     <div className="row px-g">
                         <div className="input-group form-group col-5 col-lg-6 ps-0">
                             <input className="form-control" type="number" placeholder="Date" required="" />

@@ -25,6 +25,7 @@ const SearchBox = (props: any) => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [popProducts, setPopProducts] = useState([]);
+	const [init, setInit] = useState(false);
 	// const [featuredImgs, setFeaturedImgs] = useState([]);
 	const orderHandles = [
 		'super-nourishing-coconut-fig-hair-masque',
@@ -53,9 +54,10 @@ const SearchBox = (props: any) => {
 				setResult();
 			}, 750);
 			return () => clearTimeout(delayDebounceFn);
-		} else {
+		} else if (!init){
 			setContent();
 			setProducts([]);
+			setInit(true);
 		}
 
 		try {
@@ -116,6 +118,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(data => {
+					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
@@ -125,10 +128,10 @@ const SearchBox = (props: any) => {
 						)))
 						const productFiltered = uniqueHandle.filter((i) => {
 							const title = i.title.toLowerCase();
-							const tags = i.tags.map((t: string) => t.toLowerCase());
-							const tagsString = tags.join(',');
+							// const tags = i.tags.map((t: string) => t.toLowerCase());
+							// const tagsString = tags.join(',');
 							return (i.productType === 'HERO' || i.productType === 'BUNDLE') &&
-								(title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
+								// (title.toLowerCase().includes(keywordLower) || tagsString.includes(keywordLower)) &&
 								!title.includes('vip') && exclusion.indexOf(i.handle) === -1;
 						});
 						productFiltered.sort(tagsSort);
@@ -179,7 +182,7 @@ const SearchBox = (props: any) => {
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			const pProducts = [];
-			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
+			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, {cache: 'force-cache'}).then((r) => r.json()));
 			const popProducts = await Promise.all(pInfos);
 			popProducts.map((data) => {
 				const { product } = data;
@@ -208,10 +211,6 @@ const SearchBox = (props: any) => {
 	// useEffect(() => {
 	// 	getFeaturedImages().then((dataImg) => setFeaturedImgs(dataImg));
 	// }, []);
-
-	useEffect(() => {
-		setContent();
-	}, []);
 
 	const options: EmblaOptionsType = {
 		loop: false,
@@ -250,12 +249,12 @@ const SearchBox = (props: any) => {
 				</div>
 			</div>
 			{!loading && keyword !== '' && products.length <= 0 && (
-				<div className="py-3 container">
+				<div className="py-3 container search--not-found">
 					<p className="font-bold mb-g">0 results</p>
 					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
 				</div>
 			)}
-			{loading && (
+			{loading && keyword !== '' && (
 				<div className="search-panel__loading py-3 container text-center">
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
@@ -263,13 +262,13 @@ const SearchBox = (props: any) => {
 			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts}/>}
 
 			{!loading && keyword !== '' && products.length > 0 && (
-				<div className="container lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
+				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 					<div className="flex flex-wrap lg:-mx-g">
-						<h4 className="container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
 								<Carousel.Wrapper emblaApi={emblaApi8} className="lg:w-full">
-									<Carousel.Inner emblaRef={emblaRef8} className="lg:-mx-g">
+									<Carousel.Inner emblaRef={emblaRef8} className={`lg:-mx-g ${products.length <= 6 ? '!transition-none !transform-none' : ''}`}>
 										{products.map((item, index) => (
 											<SearchProductCard
 												url={item.handle}
@@ -309,7 +308,7 @@ const SearchBox = (props: any) => {
 						</div>
 					</div>
 					{content?.search_footer_note && (
-						<p dangerouslySetInnerHTML={{
+						<p className="search--notes px-hg lg:px-0" dangerouslySetInnerHTML={{
 							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline').replace('text-underline', 'underline')
 						}} />
 					)}

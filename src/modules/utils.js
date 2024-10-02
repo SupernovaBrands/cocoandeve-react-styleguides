@@ -280,7 +280,7 @@ export function getFormatString (store = 'us') {
 			break;
 		}
 		case 'eu': {
-			format = '{{amount}}€'
+			format = '{{amount_with_comma_separator}}€'
 			break;
 		}
 		case 'my': {
@@ -389,6 +389,10 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 	}
 
 	subscribeTiktok(email, phone);
+	if (typeof globalThis.window.fbq === 'function') {
+		globalThis.window.fbq('track', 'Lead');
+	}
+
 	const response = await fetch('https://s-app.cocoandeve.com/bluecore/waitlist.json', {
 		method: 'POST',
 		headers: {
@@ -404,7 +408,7 @@ export const subscribeBluecoreRegistration = (
 	phone,
 	regSource = 'registration',
 ) => {
-	const country = getCookie('_shopify_country');
+	const country = getCookie('country_code');
 	const region = getCookie('region');
 
 	const date = new Date();
@@ -415,7 +419,8 @@ export const subscribeBluecoreRegistration = (
 	const data = {
 		email,
 		country,
-		brand: `cocoandeve_shopify_${region || 'us'}`,
+		store: region,
+		brand: 'cocoandeve',
 		domain: window.location.hostname,
 		phone: phone || '',
 		reg_source: regSource,
@@ -423,18 +428,25 @@ export const subscribeBluecoreRegistration = (
 	};
 
 	subscribeTiktok(email, phone);
+	try {
+		if (typeof window.fbq) {
+			window.fbq('track', 'Lead');
+		}
+	} catch (e) {
+		console.log(e);
+	}
 	const ajaxRequest = new XMLHttpRequest();
 	ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
-	ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	ajaxRequest.setRequestHeader('Content-type', 'application/json');
 	const jsonData = JSON.stringify(data);
 	return ajaxRequest.send(jsonData);
 };
 
 export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode) => {
-	const phoneNumber = `+${countryPhoneCode}${phone.replace(/^0+/, '')}`;
+	const phoneNumber = countryPhoneCode ? `+${countryPhoneCode}${phone.replace(/^0+/, '')}` : phone;
 	const date = new Date();
 	const tse = date.getTime();
-	const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${tSettings.store}`}',list_id:${formId}}`;
+	const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${getCookie('region')}`}',list_id:${formId}}`;
 	const signature = encryptParam(content);
 
 	const response = await fetch(`${tSettings.apiEndpoint}/smsbump/subscribe`, {
@@ -443,7 +455,7 @@ export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode) => {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${tSettings.store}`, signature,
+			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${getCookie('region')}`, signature,
 		})
 	});
 	return response.json();
@@ -1268,3 +1280,21 @@ export const isWaitlist = (data = []) => {
     });
 	return waitlistProducts.length > 0 || variantWatlist.length > 0;
 };
+
+export const checkLaunchWLBox = (launchWL, handle) => {
+	let isLaunchWL = false;
+	let launchBox = 1;
+	if (launchWL) {
+		if (launchWL?.launch_wl_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 1;
+		} else if (launchWL?.launch_wl2_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 2;
+		} else if (launchWL?.launch_wl3_handles?.split(',')?.map((v) => v.trim())?.includes(handle)) {
+			isLaunchWL = true;
+			launchBox = 3;
+		}
+    }
+	return { isLaunchWL, launchBox };
+}

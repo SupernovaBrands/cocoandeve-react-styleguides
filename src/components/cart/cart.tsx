@@ -339,7 +339,7 @@ const Cart: React.FC<Props> = (props) => {
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
-													<span className="text-sm">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
+													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
 												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
@@ -354,12 +354,6 @@ const Cart: React.FC<Props> = (props) => {
 											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
 										</div>
 										</>
-									)}
-
-									{shippingData?.show && shippingData?.freeRate && (
-										<p className="text-sm lg:hidden mb-1">
-											Shipping amount shown is a best estimate and may differ from final amount charged.
-										</p>
 									)}
 								</div>
 								{manualGwpSetting && manualGwpSetting.enabled && (
@@ -388,11 +382,8 @@ const Cart: React.FC<Props> = (props) => {
 									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
-							{['us','uk','ca'].includes(store) && (
+							{['us','ca'].includes(store) && (
 								<p className="w-full p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: tStrings.cart_shipping_at_checkout }} />
-							)}
-							{['eu'].includes(store) && (
-								<p className="w-full p-0 text-center mt-1" dangerouslySetInnerHTML={{ __html: 'Shipping calculated at checkout' }} />
 							)}
 						</div>
 					)}

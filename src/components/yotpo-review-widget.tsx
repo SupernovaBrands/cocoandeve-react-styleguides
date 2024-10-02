@@ -102,7 +102,6 @@ const formatDate = (serverDate, format = 'dd/mm/yy') => {
 		return [day, month, year].join('/');
 	}
 	if (format === 'yyyy/mm/dd') {
-		console.log('2 yyyy/mm/dd')
 		return [year, month, day].join('/');
 	}
 	return [month, day, year].join('/');
@@ -162,12 +161,14 @@ const YotpoReviewWidget = (props:any) => {
 	const [reviewModal, setReviewModal] = useState({});
 	const [videoUploading, setVideoUploading] = useState(null);
 	const [cssHeight, setCssHeight] = useState(true);
+	const [initialReviewImage, setInitialReviewImage] = useState(0);
 
 	const yotpoThanksRef = useRef(null);
 
-	const handleClickImage = (review:any) => {
+	const handleClickImage = (review:any, index:number) => {
 		setReviewModal(review);
 		setIsOpen(true);
+		setInitialReviewImage(index);
 	}
 
 	const processPagination = (pagination:any) => {
@@ -694,8 +695,15 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const [emblaRef7, emblaApi7] = useEmblaCarousel(options, [
-		Autoplay({ playOnInit: true, delay: 3000 }),
+		Autoplay({ playOnInit: false, delay: 3000 }),
+		AutoHeight(),
 	]);
+
+	useEffect(() => {
+		if (emblaApi7) {
+			emblaApi7.scrollTo(initialReviewImage);
+		}
+	}, [emblaApi7]);
 
 	const {
 		prevBtnDisabled: prevDisabled7,
@@ -719,7 +727,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	return !init ? (
-		<div className="flex justify-center mt-4">
+		<div className="flex justify-center mt-4 w-full">
 			<div className="spinner-border" role="status" aria-hidden="true" />
 		</div>
 	) : (
@@ -949,11 +957,13 @@ const YotpoReviewWidget = (props:any) => {
 											{(getMediaData(review).length > 0) && (
 												<div className="flex flex-nowrap w-auto overflow-auto pr-g">
 													{getMediaData(review).map((media:any, index:any) => (
-														<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review) }}>
+														<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review, index) }}>
 															<img className="object-cover size-[75px]" src={media.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
 															{media.video_url && (
 																<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 															)}
+															{/* preloade image for modal, to make it fast load when popup opened */}
+															<img rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
 														</button>
 													))}
 												</div>
@@ -1083,7 +1093,7 @@ const YotpoReviewWidget = (props:any) => {
 								<div className="lg:w-1/2 pr-lg-0">
 									{getMediaData(reviewModal).length === 1 ? (
 										<>
-											{getMediaData(reviewModal)[0].image_url && (<img src={getMediaData(reviewModal)[0].image_url.replace('https:', '')} alt="Slide 1" className="d-block w-100" />) }
+											{getMediaData(reviewModal)[0].image_url && (<img src={getMediaData(reviewModal)[0].image_url?.replace('https:', '')} alt="Slide 1" className="d-block w-100" />) }
 											{getMediaData(reviewModal)[0].video_url && (
 												<div className="relative flex relative">
 													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
@@ -1101,7 +1111,7 @@ const YotpoReviewWidget = (props:any) => {
 												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
-															{media.image_url && (<img src={media.image_url.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full" />)}
+															{media.image_url && (<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />)}
 															{media.video_url && (
 																// eslint-disable-next-line jsx-a11y/media-has-caption
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>

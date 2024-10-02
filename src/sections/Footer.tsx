@@ -9,7 +9,7 @@ import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 import Link from 'next/link';
 
-import { encryptParam } from "~/modules/utils";
+import { encryptParam, getCookie } from "~/modules/utils";
 
 const Footer = (props: any) => {
     const { aboutMenu, shopMenu, helpMenu, store } = props;
@@ -18,7 +18,7 @@ const Footer = (props: any) => {
 
     const onSubmit = (evt) => {
 		evt.preventDefault();
-        console.log('email', email);
+        // console.log('email', email);
 		const ajaxRequest = new XMLHttpRequest();
 		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
 		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -26,12 +26,28 @@ const Footer = (props: any) => {
 		const tse = date.getTime();
 		const content = `{email:'${email}',time:${tse}}`;
 		const signature = encryptParam(content);
-		ajaxRequest.send(`signature=${signature}&email=${email}&country=&brand=cocoandeve_shopify_${store || 'us'}&reg_source=footer`);
+		ajaxRequest.send(`signature=${signature}&email=${email}&country=${getCookie('country_code')}&store=${store}&brand=cocoandeve&reg_source=footer`);
 		setSubmitted(true);
+        try {
+            // @ts-ignore
+            if (typeof globalThis.window.ttq) {
+                // @ts-ignore
+                globalThis.window.ttq.identify({ email });
+                // @ts-ignore
+                globalThis.window.ttq.instance('CC3JF1JC77U9MSBJLS5G').track('Subscribe');
+            }
+            // @ts-ignore
+            if (typeof globalThis.window.fbq) {
+                //@ts-ignore
+                globalThis.window.fbq('track', 'Lead');
+            }
+        } catch(e){
+            console.log(e);
+        }
 	};
 
     const handleEmail = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setEmail(e.target.value);
     }
 
@@ -55,7 +71,7 @@ const Footer = (props: any) => {
                     </div>
                     <div className="[grid-area:newsletter-form] flex flex-wrap">
                         <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
-                        <p className="text-base lg:text-sm mt-1 lg:mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <Link href="/pages/privacy-policy" className="text-black text-base lg:text-sm underline">Privacy Policy</Link> for more information about how we use your data.</p>
+                        <p className="text-base lg:text-sm mt-1 lg:mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <a href="/pages/privacy-policy" className="text-black text-base lg:text-sm underline">Privacy Policy</a> for more information about how we use your data.</p>
                     </div>
                 </div>
             </div>

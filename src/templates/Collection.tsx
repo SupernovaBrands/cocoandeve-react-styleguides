@@ -3,23 +3,25 @@ import Modal from "~/components/Modal";
 import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
+import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import { isWaitlist, subscribeBluecoreWaitlist } from "~/modules/utils";
+import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import Service from "~/sections/Service";
 import { sidebar_collection_ph, sidebar_collection_ph_ca } from '~/modules/placeholders';
 import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
+import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
 
 const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     return (
         <figure className="w-full relative items-center px-0 mb-0">
             <picture className={`${!isLoading && !bannerLoading ? '' : 'bg-shimmer pt-[53.33%] lg:pt-[19.375%]'}`}>
-                <source srcSet={bannerData.img_desk.url} media="(min-width: 992px)" />
-                <img src={bannerData.img_mob.url} className="w-full" alt="Collection Banner" />
+                <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
+                <img src={bannerData?.img_mob?.url} className="w-full" alt="Collection Banner" width="375" height="200"/>
             </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
                 <h1 className="hidden mb-0"
@@ -30,15 +32,24 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     );
 }
 
-const Banner = ({ isLoading, title, strapiBanner }) => {
+const Banner = ({ isLoading, title, strapiBanner, singleBanner }) => {
 
-    const { universalCollectionSetting } = strapiBanner.universalBanner;
-    const {
-	    filter_handles_img_mob: universalImgMob,
-	    filter_handles_img_desk: universalImgDesk,
-	    filter_handles_img_url: universalUrl,
-	    enabled: universalEnabled,
-	} = universalCollectionSetting.universalCollectionSetting[strapiBanner.store];
+    const universalCollectionSetting = strapiBanner?.universalBanner?.universalCollectionSetting || null;
+    // console.log('universalCollectionSetting', universalCollectionSetting);
+    // const {
+	//     filter_handles_img_mob: universalImgMob,
+	//     filter_handles_img_desk: universalImgDesk,
+	//     filter_handles_img_url: universalUrl,
+	//     enabled: universalEnabled,
+	// } = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store];
+
+    const universalData = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store] || null;
+
+    const universalImgMob = universalData?.filter_handles_img_mob || null;
+    const universalImgDesk = universalData?.filter_handles_img_desk || null;
+    const universalUrl = universalData?.filter_handles_img_url || null;
+    const universalEnabled = universalData?.enabled || false;
+
     // by default use universal banner image
     let bannerData = {
         img_mob: universalImgMob,
@@ -47,10 +58,19 @@ const Banner = ({ isLoading, title, strapiBanner }) => {
 	    enabled: universalEnabled,
     };
 
-    const { collectionBanner } = strapiBanner.mainSettings;
+    const collectionBanner = strapiBanner.mainSettings?.collectionBanner;
     if (collectionBanner && collectionBanner.collectionBanner[strapiBanner.store]?.enabled) {
         // use specific collection banner image if its enabled
         bannerData = collectionBanner.collectionBanner[strapiBanner.store];
+    }
+
+    if (singleBanner?.desktop && singleBanner?.mobile) {
+        bannerData = {
+            img_mob: singleBanner?.mobile,
+            img_desk: singleBanner?.desktop,
+            url: singleBanner?.url,
+            enabled: true,
+        };
     }
     return (
         <>
@@ -90,8 +110,8 @@ const Collection = (props: any) => {
 		// subscribeBluecoreWaitlist,
         loggedInEmail,
         squareBadge,
+        singleBanner,
     } = props;
-
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
@@ -109,24 +129,28 @@ const Collection = (props: any) => {
         image: '',
         handle: undefined,
         date: '',
+        productId: null,
     });
     const [launchWLModal, setLaunchWLModal] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLModal2, setLaunchWLModal2] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLModal3, setLaunchWLModal3] = useState({
         open: false,
         variantId: null,
         handle: null,
         tags: [],
+        productId: null,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
@@ -336,30 +360,6 @@ const Collection = (props: any) => {
     }, [products]);
 
     useEffect(() => {
-        if (launchWLModal.open) {
-            document.body.classList.add('!overflow-hidden');
-        } else {
-            document.body.classList.remove('!overflow-hidden');
-        }
-    }, [launchWLModal]);
-
-    useEffect(() => {
-        if (launchWLModal2.open) {
-            document.body.classList.add('!overflow-hidden');
-        } else {
-            document.body.classList.remove('!overflow-hidden');
-        }
-    }, [launchWLModal2]);
-
-    useEffect(() => {
-        if (launchWLModal3.open) {
-            document.body.classList.add('!overflow-hidden');
-        } else {
-            document.body.classList.remove('!overflow-hidden');
-        }
-    }, [launchWLModal3]);
-
-    useEffect(() => {
         // if (['dev'].includes(store)) {
         //     // getFeaturedImages().then((dataImg) => setFeaturedImg(dataImg));
         //     fetch(`/api/sevenDaysSalesIds`).then(
@@ -392,37 +392,6 @@ const Collection = (props: any) => {
         else document.body.classList.remove('!overflow-y-hidden');
     }, [isOpen]);
 
-    const onSubmitLaunchWaitlist = ({ box, email, phoneCode, phoneNumber, fallback }) => {
-        let regSource = launchWL.launch_wl_popup_regsource;
-        let smsBump = launchWL.launch_wl_smsbump;
-        let variantId = launchWLModal.variantId;
-        let handle = launchWLModal.handle;
-        if (box === 2) {
-            regSource = launchWL.launch_wl2_popup_regsource;
-            smsBump = launchWL.launch_wl2_smsbump;
-            variantId = launchWLModal2.variantId;
-            handle = launchWLModal2.handle;
-        } else if (box === 3) {
-            regSource = launchWL.launch_wl3_popup_regsource;
-            smsBump = launchWL.launch_wl3_smsbump;
-            variantId = launchWLModal3.variantId;
-            handle = launchWLModal3.handle;
-        }
-
-        if (email) {
-            subscribeBluecoreWaitlist(email, handle, variantId, regSource ? regSource : `launch-item-${handle}`, phoneNumber, true, '');
-            trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
-        }
-
-        if (phoneNumber && phoneCode) {
-            submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
-        }
-
-        if (typeof(fallback) === 'function') {
-            fallback();
-        }
-    }
-
     const footerCss = `
     .collection-footer__html p {
         margin-bottom: 1rem;
@@ -435,14 +404,14 @@ const Collection = (props: any) => {
     return (
         <>
             {!collectionSettings.isLoading && (
-                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} />
+                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} singleBanner={singleBanner} />
             )}
 
             {collectionSettings.isLoading && (
                 <div className="bg-shimmer pt-[53.33%] lg:pt-[19.375%]" />
             )}
 
-            {!isLoading && tcPopups?.enabled_collection && (
+            {tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link mt-25">
                         <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
@@ -477,35 +446,56 @@ const Collection = (props: any) => {
                             </ul>
                         </aside>
                     )}
-                    <div className="w-full lg:w-3/4 collection-template__products flex flex-wrap items-start">
+                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
-                            {!isLoading && (
+                            {collectionSettings.isLoading || loading || showSpinner ? (
                                 <>
-                                    <div className="w-1/2 lg:hidden px-hg">
-                                        <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
-                                            <option value="">Filter by</option>
-                                            {mobileDropdown.map((parent: any, index: number) => {
-                                                const html = parent.title.replace('d-lg-none', 'lg:hidden');
-                                                return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
-                                            })}
-                                        </select>
+                                    <div className={`w-1/2 px-hg lg:hidden ${handle === 'all' ? 'mb-2' : ''}`}>
+                                        <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
-                                    <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
-                                        <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
-                                            <option value="featured">Sort By</option>
-                                            <option value="best-selling">Best selling</option>
-                                            <option value="price-low-high">Price, low to high</option>
-                                            <option value="price-high-low">Price, high to low</option>
-                                            <option value="newest">Date, new to old</option>
-                                        </select>
+                                    <div className={`w-1/2 lg:w-2/5 items-center justify-end px-hg lg:pr-0 lg:hidden ${handle === 'all' ? 'mb-2' : ''}`}>
+                                        <div className="bg-shimmer pt-[50px] rounded"></div>
                                     </div>
+                                    {handle !== 'all' && (
+                                        <div className="w-full px-hg lg:px-0 mt-1 mb-1">
+                                            <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1">
+                                                <a className="invisible collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline text-white bg-primary hover:text-white">
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    {!isLoading && (
+                                        <>
+                                            <div className="w-1/2 lg:hidden px-hg">
+                                                <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
+                                                    <option value="">Filter by</option>
+                                                    {mobileDropdown.map((parent: any, index: number) => {
+                                                        const html = parent.title.replace('d-lg-none', 'lg:hidden');
+                                                        return (<option key={`collection--filter-${parent.handle}-${index}`} value={parent.handle} dangerouslySetInnerHTML={{ __html: html }} />);
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
+                                                <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
+                                                    <option value="featured">Sort By</option>
+                                                    <option value="best-selling">Best selling</option>
+                                                    <option value="price-low-high">Price, low to high</option>
+                                                    <option value="price-high-low">Price, high to low</option>
+                                                    <option value="newest">Date, new to old</option>
+                                                </select>
+                                            </div>
+                                        </>
+                                    )}
                                 </>
                             )}
-
-                            {!isLoading && handle !== 'all' && (
+                            {!isLoading && !loading && !showSpinner && !collectionSettings.isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
@@ -537,29 +527,16 @@ const Collection = (props: any) => {
                                     </div>
                                 </div>
                             )}
-                            {collProducts.length <= 0 && !isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
+                            {collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
-                        <div className="flex flex-wrap collection-grid overflow-hidden w-full">
+                        <div className={`flex flex-wrap collection-grid overflow-hidden w-full`}>
                             {(showSpinner || loading) && (
-                                <div className="mb-3 px-hg lg:px-g text-center w-full">
+                                <div className="mb-3 px-hg lg:px-g text-center w-full hidden lg:block">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                 </div>
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
-                                let isLaunchWL = false;
-                                let launchBox = 1;
-                                if (launchWL) {
-                                    if (launchWL?.launch_wl_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
-                                        isLaunchWL = true;
-                                        launchBox = 1;
-                                    } else if (launchWL?.launch_wl2_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
-                                        isLaunchWL = true;
-                                        launchBox = 2;
-                                    } else if (launchWL?.launch_wl3_handles?.split(',')?.map((v) => v.trim())?.includes(item.handle)) {
-                                        isLaunchWL = true;
-                                        launchBox = 3;
-                                    }
-                                }
+                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return showQuizCard && index === 2 ? (
                                     <>
                                         {!collectionSettings.isLoading && (
@@ -644,77 +621,22 @@ const Collection = (props: any) => {
                 </Modal>
             )}
             {!isLoading && launchWL && (
-                <>
-                    <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
-                        <LaunchWaitList
-                            title={launchWL.launch_wl_title}
-                            content={launchWL.launch_wl_subtitle}
-                            tos={launchWL.launch_wl_popup_tos}
-                            policy={launchWL.launch_wl_popup_privacy}
-                            success_msg={launchWL.launch_wl_thanks_title}
-                            success_content={launchWL.launch_wl_thanks_subtitle}
-                            cta={launchWL.launch_wl_submit}
-                            className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
-                            store={store}
-                            onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
-                            box={1}
-                            productCard={true}
-                            handleClose={() => setLaunchWLModal({...launchWLModal, ...{ open: false }})}
-                            loggedInEmail={loggedInEmail}
-                            setLaunchWLSuccess={setLaunchWLSuccess}
-                            onClickDiv={(e) => e.stopPropagation()}
-                            launchSubmitted={launchSubmitted}
-                            setLaunchSubmitted={setLaunchSubmitted}
-                            tags={launchWLModal.tags}
-                        />
-                    </Modal>
-                    <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal2.open} handleClose={() => {setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}}>
-                        <LaunchWaitList
-                            title={launchWL.launch_wl2_title || ''}
-                            content={launchWL.launch_wl2_subtitle || ''}
-                            tos={launchWL.launch_wl2_popup_tos || ''}
-                            policy={launchWL.launch_wl2_popup_privacy || ''}
-                            success_msg={launchWL.launch_wl2_thanks_title || ''}
-                            success_content={launchWL.launch_wl2_thanks_subtitle || ''}
-                            cta={launchWL.launch_wl2_submit}
-                            className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
-                            store={store}
-                            onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
-                            box={2}
-                            productCard={true}
-                            handleClose={() => setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}
-                            loggedInEmail={loggedInEmail}
-                            setLaunchWLSuccess={setLaunchWLSuccess}
-                            onClickDiv={(e) => e.stopPropagation()}
-                            launchSubmitted={launchSubmitted}
-                            setLaunchSubmitted={setLaunchSubmitted}
-                            tags={launchWLModal2.tags}
-                        />
-                    </Modal>
-                    <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal3.open} handleClose={() => {setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}}>
-                        <LaunchWaitList
-                            title={launchWL.launch_wl3_title || ''}
-                            content={launchWL.launch_wl3_subtitle || ''}
-                            tos={launchWL.launch_wl3_popup_tos || ''}
-                            policy={launchWL.launch_wl3_popup_privacy || ''}
-                            success_msg={launchWL.launch_wl3_thanks_title || ''}
-                            success_content={launchWL.launch_wl3_thanks_subtitle || ''}
-                            cta={launchWL.launch_wl3_submit}
-                            className="modal-content rounded-[20px] lg:p-4 lg:mb-0 lg:min-h-[34.75rem] border border-[#00000033] bg-clip-padding outline-0"
-                            store={store}
-                            onSubmitLaunchWaitlist={onSubmitLaunchWaitlist}
-                            box={3}
-                            productCard={true}
-                            handleClose={() => setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}
-                            loggedInEmail={loggedInEmail}
-                            setLaunchWLSuccess={setLaunchWLSuccess}
-                            onClickDiv={(e) => e.stopPropagation()}
-                            launchSubmitted={launchSubmitted}
-                            setLaunchSubmitted={setLaunchSubmitted}
-                            tags={launchWLModal3.tags}
-                        />
-                    </Modal>
-                </>
+                <LaunchWaitlistModals
+                    launchWL={launchWL}
+                    store={store}
+                    setLaunchWLModal={setLaunchWLModal}
+                    setLaunchWLModal2={setLaunchWLModal2}
+                    setLaunchWLModal3={setLaunchWLModal3}
+                    launchWLModal={launchWLModal}
+                    launchWLModal2={launchWLModal2}
+                    launchWLModal3={launchWLModal3}
+                    loggedInEmail={loggedInEmail}
+                    setLaunchWLSuccess={setLaunchWLSuccess}
+                    launchSubmitted={launchSubmitted}
+                    setLaunchSubmitted={setLaunchSubmitted}
+                    trackBluecoreLaunchWaitlistEvent={trackBluecoreLaunchWaitlistEvent}
+                    submitsToSmsBumpAPi={submitsToSmsBumpAPi}
+                />
             )}
         </>
     )
