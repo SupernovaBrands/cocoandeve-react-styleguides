@@ -85,12 +85,12 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	return (
 		<>
-			<div className="lg:w-1/12 lg:order-2 lg:sticky lg:top-[-3em] px-0 lg:px-0 hidde lg:block">
+			<div className="lg:w-1/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-0 hidde lg:block">
 				<div className={`carousel w-full hidden lg:flex items-center mt-[25px] `}>
-					<Carousel.Wrapper className={`w-full flex flex-col max-h-[510px] items-center`} emblaApi={emblaThumbsApi}>
-						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col items-center`}>
+					<Carousel.Wrapper className={`w-full flex flex-col items-center`} emblaApi={emblaThumbsApi}>
+						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[510px]`}>
 							{slides.map((slide, index) => (
-								<div className={`flex-grow-0 flex-shrink-0 w-[70px] max-w-[70px] basis-[70px] flex items-center justify-center ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
+								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
 									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)}>
 										<img className="w-[70px] rounded" src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
 									</button>
@@ -98,7 +98,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							))}
 						</Carousel.Inner>
 						<Carousel.Navigation>
-							{slides.length > 7 && (
+							{slides.length > 7 && (	
 								<>
 									<PrevButton
 										onClick={pdpImagePrev}
@@ -118,7 +118,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 					</Carousel.Wrapper>
 				</div>
 			</div>
-			<div className="product-image-carousel__container w-full lg:w-6/12 lg:order-2 lg:sticky lg:top-[-3em] px-0 lg:px-g">
+			<div className="product-image-carousel__container w-full lg:w-6/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-g">
 				<div className="carousel mb-1 lg:mb-2 lg:sticky aspect-ratio overflow-hidden">
 					<Carousel.Wrapper emblaApi={emblaMainApi}>
 						<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
