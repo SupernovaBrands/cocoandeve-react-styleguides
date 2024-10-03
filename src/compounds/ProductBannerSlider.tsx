@@ -25,11 +25,12 @@ const ProductBannerSlider = (props) => {
 		};
 
 		compareImages();
-
+		/*
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
 			 if (imgHeight) setWrapperHeight({ minHeight: `${imgHeight}px` });
 		}, 500); 
+		*/
 	};
 
 	const getCursorPos = (el) => {
@@ -107,14 +108,22 @@ const ProductBannerSlider = (props) => {
 
 	return <>
 		{wrapperHeight && (
-			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden" style={{ ...wrapperHeight }}>
-				<div className="absolute w-full h-full overflow-hidden">
+			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden">
+				<picture className="block pt-[86%] w-full overflow-hidden">
+					<source
+						srcSet={props?.second_image?.url}
+						media="(min-width: 992px)" width="1362" height="1162"/>
+					<img
+						src={props.src}
+						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414"/>
+				</picture>
+				<div className="absolute w-full h-full overflow-hidden top-0">
 					<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</div>
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 				<div
 					ref={compSlider}
-					className="img-slider absolute flex justify-center items-center"
+					className="img-slider absolute flex justify-center items-center top-0"
 					style={{ ...sliderStyle }}
 					onMouseDown={slideReady}
 					onMouseUp={slideFinish}
@@ -130,7 +139,7 @@ const ProductBannerSlider = (props) => {
 						<ChevronNext className="chevron-next text-white" />
 					</span>
 				</div>
-				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay">
+				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay top-0">
 					<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</div>
 			</div>
