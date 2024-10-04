@@ -48,6 +48,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 	const handleSubmit = (e:any) => {
 		e.preventDefault();
 		const email = inputRef.current.value;
+
 		if (validateEmail(email) && data.handle) {
 			const regSource = isNonOOs ? 'launch_waitlist' : 'waitlist';
 			subscribeBluecoreWaitlist(email, data.handle, '', `${regSource}_${data.handle}`, '', true);
@@ -60,8 +61,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 
 		try {
 			if (data) {
-				trackBluecoreEvent(email, data.handle);
-				bluecoreProductWaitlist(email, data.title, data.productId);
+				bluecoreProductWaitlist({email, productTitle: data.title, productId: data.productId });
 			}
 		} catch(e) {
 			console.log(e, 'error');
