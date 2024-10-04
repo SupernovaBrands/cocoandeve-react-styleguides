@@ -19,9 +19,10 @@ type WaitlistProp = {
 	handleClose: () => void
 	data: WatilistData,
 	trackBluecoreEvent?: any,
+	bluecoreProductWaitlist?: any,
 }
 
-const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEvent }) => {
+const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist }) => {
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
 
@@ -58,7 +59,10 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 		}
 
 		try {
-			trackBluecoreEvent(email, data.handle);
+			if (data) {
+				trackBluecoreEvent(email, data.handle);
+				bluecoreProductWaitlist(email, data.title, data.productId);
+			}
 		} catch(e) {
 			console.log(e, 'error');
 		}

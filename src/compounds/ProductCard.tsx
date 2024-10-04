@@ -24,13 +24,14 @@ const Pricing = ({ props, collectionTemplate }) => {
 
 const WaitlistButton = (props:any) => {
     const handleWaitlist = () => {
+        // console.log('set waitlist data', props);
         props.setWaitlistData({
             open: true,
             title: props.product.title,
             image: props.product.src,
             handle: props.product.handle,
             date: props.selectedVariant?.waitlistPopupDate?.value || '',
-            productId: props.product?.id?.replace('gid://shopify/Product/', ''),
+            productId: props.selectedVariant?.id?.replace('gid://shopify/ProductVariant/', ''),
         });
     };
     const data = {...props, ...{ label: 'Waitlist Me' }};
@@ -48,7 +49,7 @@ const LaunchButton = (props: any) => {
             handle: props.product.handle,
             variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
             tags: props.product.tags,
-            productId: props.product?.id?.replace('gid://shopify/Product/', ''),
+            productId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''), // props.product?.id?.replace('gid://shopify/Product/', ''),
         }
         if (props.launchBox === 1) {
             props.setLaunchWLModal(data);
