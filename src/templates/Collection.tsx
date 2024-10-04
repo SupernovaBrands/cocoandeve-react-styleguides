@@ -102,6 +102,7 @@ const Collection = (props: any) => {
         store,
         buildProductCardModel,
         trackBluecoreEvent,
+        bluecoreProductWaitlist,
         trackEvent,
         preOrders,
         launchWL,
@@ -618,7 +619,7 @@ const Collection = (props: any) => {
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                    <ModalWaitlist trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                    <ModalWaitlist bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
             )}
             {!isLoading && launchWL && (
