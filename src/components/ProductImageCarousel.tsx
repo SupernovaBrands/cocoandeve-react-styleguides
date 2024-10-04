@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrowButtons';
-import ChevronNext from '~/images/icons/chevron-next.svg';
-import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import ChevronNext from '~/images/icons/chevron-down.svg';
+import ChevronPrev from '~/images/icons/chevron-up.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 
 interface ImageSlide {
@@ -31,21 +31,24 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 		onThumbClick(activeImageIndex);
 	}, [activeImageIndex]);
 
-	const alignThumbs = slides.length > 7 ? 'center' : 'start';
 	const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
-		containScroll: 'keepSnaps',
+		align: 'start',
 		dragFree: true,
 		loop: true,
-		align: alignThumbs,
+		axis: 'y',
 	});
 
 	const pdpImagePrev = () => {
+		console.log('pdpImagePrev', emblaThumbsApi);
 		if (!emblaMainApi || !emblaThumbsApi) return;
+		console.log('2');
 		emblaThumbsApi.scrollPrev();
 	};
 
 	const pdpImageNext = () => {
+		console.log('pdpImageNext', emblaThumbsApi);
 		if (!emblaMainApi || !emblaThumbsApi) return;
+		console.log('1');
 		emblaThumbsApi.scrollNext();
 	};
 
@@ -82,58 +85,62 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	return (
 		<>
-			<div className="carousel mb-1 lg:mb-2 lg:sticky aspect-ratio overflow-hidden">
-				<Carousel.Wrapper emblaApi={emblaMainApi}>
-					<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
-						{slides.map((slide, index) => (
-							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
-								<picture className="flex items-center justify-center">
-									<source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
-									<img className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
-								</picture>
-							</div>
-						))}
-					</Carousel.Inner>
-					{bottomBadge && (<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">{bottomBadge}</span>)}
-				</Carousel.Wrapper>
-			</div>
-			<div className="px-g lg:hidden">
-				<div className="carousel__progress bg-gray-400">
-					<div
-						className="carousel__progress--scroll bg-gray-500"
-						style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
+			<div className="lg:w-1/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-0 hidde lg:block">
+				<div className={`carousel w-full hidden lg:flex items-center mt-[25px] `}>
+					<Carousel.Wrapper className={`w-full flex flex-col items-center`} emblaApi={emblaThumbsApi}>
+						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[510px]`}>
+							{slides.map((slide, index) => (
+								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
+									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)}>
+										<img className="w-[70px] rounded" src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+									</button>
+								</div>
+							))}
+						</Carousel.Inner>
+						<Carousel.Navigation>
+							{slides.length > 7 && (	
+								<>
+									<PrevButton
+										onClick={pdpImagePrev}
+										className="w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto top-[-25px]"
+									>
+										<ChevronPrev className="w-g h-g svg--current-color" />
+									</PrevButton>
+									<NextButton
+										onClick={pdpImageNext}
+										className="mt-auto w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto bottom-[-25px]"
+									>
+										<ChevronNext className="w-g h-g svg--current-color" />
+									</NextButton>
+								</>
+							)}
+						</Carousel.Navigation>
+					</Carousel.Wrapper>
 				</div>
 			</div>
-			<div className={`carousel w-full hidden lg:flex items-center mt-3 ${alignThumbs !== 'center' ? 'ml-[2rem]' : ''}`}>
-				<Carousel.Wrapper className={`w-full ${alignThumbs === 'center' ? 'items-center px-[1rem]' : 'items-start -mx-g'}`} emblaApi={emblaMainApi}>
-					<Carousel.Inner emblaRef={emblaThumbsRef} className={`${slides.length > 7 ? 'ml-2 max-w-[600px]' : 'justify-start ml-0'}`}>
-						{slides.map((slide, index) => (
-							<div className="flex-grow-0 mx-1 flex-shrink-0 w-[68px] max-w-[70px] basis-[70px] flex items-center justify-center" key={index}>
-								<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''}`} onClick={() => onThumbClick(index)}>
-									<img className="w-[68px]" src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
-								</button>
-							</div>
-						))}
-					</Carousel.Inner>
-					<Carousel.Navigation>
-						{slides.length > 7 && (
-							<>
-								<PrevButton
-									onClick={pdpImagePrev}
-									className="top-[4px] w-5 h-5 rounded-full shadow-lg text-primary bg-white"
-								>
-									<ChevronPrev className="w-g h-g svg--current-color" />
-								</PrevButton>
-								<NextButton
-									onClick={pdpImageNext}
-									className="top-[4px] w-5 h-5 rounded-full shadow-lg text-primary bg-white"
-								>
-									<ChevronNext className="w-g h-g svg--current-color" />
-								</NextButton>
-							</>
-						)}
-					</Carousel.Navigation>
-				</Carousel.Wrapper>
+			<div className="product-image-carousel__container w-full lg:w-6/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-g">
+				<div className="carousel mb-1 lg:mb-2 lg:sticky aspect-ratio overflow-hidden">
+					<Carousel.Wrapper emblaApi={emblaMainApi}>
+						<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
+							{slides.map((slide, index) => (
+								<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
+									<picture className="flex items-center justify-center">
+										<source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
+										<img className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
+									</picture>
+								</div>
+							))}
+						</Carousel.Inner>
+						{bottomBadge && (<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">{bottomBadge}</span>)}
+					</Carousel.Wrapper>
+				</div>
+				<div className="px-g lg:hidden">
+					<div className="carousel__progress bg-gray-400">
+						<div
+							className="carousel__progress--scroll bg-gray-500"
+							style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
+					</div>
+				</div>
 			</div>
 		</>
 	);
