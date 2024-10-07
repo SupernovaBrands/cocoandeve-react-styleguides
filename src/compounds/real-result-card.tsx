@@ -31,16 +31,41 @@ const RealResultCard = (props) => {
 		checkProduct(data.handle);
 	}
 
-	if (data.review_type === 'tan') {
-		badgeColor = 'bg-sh-purple';
-	} else if (data.review_type === 'hair') {
-		badgeColor = 'bg-secondary';
-	} else if (data.review_type === 'body') {
-		badgeColor = 'bg-blue';
-	} else if (data.review_type === 'suncare') {
-		badgeColor = 'bg-suncare-blue';
-	} else if (data.review_type === 'skin') {
-		badgeColor = 'bg-skincare-orange';
+	let review_type = data.review_type;
+
+	let badges = [];
+
+	if (data.review_type.includes(',')) {
+		const reviewTypes = data.review_type.split(',').map(type => type.trim());
+		reviewTypes.forEach(type => {
+			let badgeColor = '';
+			if (type === 'tan') {
+				badgeColor = 'bg-sh-purple';
+			} else if (type === 'hair') {
+				badgeColor = 'bg-secondary';
+			} else if (type === 'body') {
+				badgeColor = 'bg-blue';
+			} else if (type === 'suncare') {
+				badgeColor = 'bg-suncare-blue';
+			} else if (type === 'skin') {
+				badgeColor = 'bg-skincare-orange';
+			}
+			if (badgeColor) {
+				badges.push({ color: badgeColor, type: type });
+			}
+		});
+	} else {
+		if (review_type === 'tan') {
+			badges.push({ color: 'bg-sh-purple', type: review_type });
+		} else if (review_type === 'hair') {
+			badges.push({ color: 'bg-secondary', type: review_type });
+		} else if (review_type === 'body') {
+			badges.push({ color: 'bg-blue', type: review_type });
+		} else if (review_type === 'suncare') {
+			badges.push({ color: 'bg-suncare-blue', type: review_type });
+		} else if (review_type === 'skin') {
+			badges.push({ color: 'bg-skincare-orange', type: review_type });
+		}
 	}
 
 	if (region === 'au' && data.label.includes('Daily Radiance Primer SPF50 Sunscreen')) {
@@ -65,10 +90,16 @@ const RealResultCard = (props) => {
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
 			<div className="px-2 pb-2 pt-0 bg-white">
-				<p className="flex justify-between items-center mb-0">
+				<div className="flex justify-between items-center mb-0">
 					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" />
-					<Badge badgeClasses={`text-white mb-1 mt-1 ${badgeColor}`}>{capitalizeString(data.review_type || '')}</Badge>
-				</p>
+					<p>
+						{badges.map((badge, index) => (
+							<Badge key={index} badgeClasses={`text-white mb-1 mt-1 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
+								{capitalizeString(badge.type)}
+							</Badge>
+						))}
+					</p>
+				</div>
 				{region === 'au' ? (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc)) && (data.label.replace('Daily Radiance Primer SPF50 Sunscreen', 'Daily Radiance Primer SPF 50'))}`)}</>
 				) : (
