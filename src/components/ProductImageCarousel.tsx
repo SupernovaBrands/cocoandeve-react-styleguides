@@ -88,7 +88,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 			<div className="lg:w-1/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-0 hidde lg:block">
 				<div className={`carousel w-full hidden lg:flex items-center mt-[25px] `}>
 					<Carousel.Wrapper className={`w-full flex flex-col items-center`} emblaApi={emblaThumbsApi}>
-						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[510px]`}>
+						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[520px]`}>
 							{slides.map((slide, index) => (
 								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
 									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)}>
