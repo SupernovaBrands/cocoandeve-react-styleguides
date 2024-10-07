@@ -33,7 +33,7 @@ const ArticleCarousel = (props:any) => {
 
 	const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
 		const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
-		setScrollProgress(progress * 100 / 2);
+		setScrollProgress(progress * 100 / 1.5);
 	}, []);
 
 	useEffect(() => {
