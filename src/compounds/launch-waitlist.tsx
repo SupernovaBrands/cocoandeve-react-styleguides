@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { CheckBox, InputFormGroup, Select, Button } from "../components";
-import { getCookie, validateEmail, validatePhone } from '~/modules/utils';
+import { getCookie, setCookie, validateEmail, validatePhone } from '~/modules/utils';
 import countriesList from '~/modules/countriesList';
 import countriesRegion from '~/modules/countriesRegion';
 import CloseButton from '~/components/modal/CloseButton';
@@ -29,6 +29,7 @@ interface LaunchWaitListProps {
     tags?: any;
     box: number;
     launchModalData?: any;
+    handle?: string;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
@@ -71,6 +72,11 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             defaultPhoneCode = countries.find((d:any) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
         }
         setPhoneCode(defaultPhoneCode);
+        if (props?.launchModalData?.handle && getCookie(`launch_waitlist_${props?.launchModalData?.handle}`) === 'true') {
+			setShowSuccess(true);
+		} else {
+            setShowSuccess(false);
+        }
     }, []);
 
     const [tos, setTos] = useState(false);
@@ -95,6 +101,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         } else if (validForm) {
             props.onSubmitLaunchWaitlist({box, email, phoneCode, phoneNumber, fallback: () => {
                 setShowSuccess(true);
+                if (props?.launchModalData?.handle) setCookie(`launch_waitlist_${props.launchModalData.handle}`, true, 1);
                 if (typeof props.setLaunchWLSuccess === 'function') {
                     props.setLaunchWLSuccess(true);
                 }

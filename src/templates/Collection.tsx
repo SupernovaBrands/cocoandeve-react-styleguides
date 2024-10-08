@@ -452,7 +452,7 @@ const Collection = (props: any) => {
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
-                            {collectionSettings.isLoading || loading || showSpinner ? (
+                            {/* {collectionSettings.isLoading || loading ? (
                                 <>
                                     <div className={`w-1/2 px-hg lg:hidden ${handle === 'all' ? 'mb-2' : ''}`}>
                                         <div className="bg-shimmer pt-[50px] rounded"></div>
@@ -495,8 +495,9 @@ const Collection = (props: any) => {
                                         </>
                                     )}
                                 </>
-                            )}
-                            {!isLoading && !loading && !showSpinner && !collectionSettings.isLoading && handle !== 'all' && (
+                            {/* )} */}
+
+                            {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
