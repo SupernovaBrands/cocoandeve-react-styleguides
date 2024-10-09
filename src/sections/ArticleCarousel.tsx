@@ -33,7 +33,7 @@ const ArticleCarousel = (props:any) => {
 
 	const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
 		const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
-		setScrollProgress(progress * 100 / 2);
+		setScrollProgress(progress * 100 / 1.5);
 	}, []);
 
 	useEffect(() => {
@@ -54,8 +54,8 @@ const ArticleCarousel = (props:any) => {
 			<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
 				<Carousel.Inner emblaRef={emblaRef} className="-mx-hg lg:-mx-g">
 					{articles.map((data:any, index:number) => (
-						<PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="flex-grow-0 flex-shrink-0 w-full basis-full px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
-						))}
+						<PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="flex-grow-0 flex-shrink-0 basis-[91.5%] w-[91.5%] px-hg lg:px-g lg:w-1/2 lg:basis-1/2" data={data} />
+					))}
 				</Carousel.Inner>
 				<Carousel.Navigation>
 					<PrevButton
