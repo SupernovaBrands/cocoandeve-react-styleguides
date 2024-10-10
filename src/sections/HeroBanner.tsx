@@ -26,12 +26,11 @@ const SLIDES = [
 ];
 
 const HeroBanner = (props: any) => {
-	const { isStyleguide, region, tcPopups } = props;
+	const { isStyleguide, region, tcPopups, slideData } = props;
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 6000 })
 	]);
 	const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
-	const { data, slideShows, isLoading: isLoadingHomepage } = useHomepage(region || 'dev');
 	useEffect(() => {
 		if (!emblaApi) return;
 		const autoplay = emblaApi?.plugins()?.autoplay;
@@ -47,13 +46,13 @@ const HeroBanner = (props: any) => {
 	if (isStyleguide) {
 		slides = SLIDES;
 	} else {
-		slides = slideShows.filter((slide) => slide.show);
+		slides = slideData?.[`slide_${region}`]?.filter((slide: any) => slide.show) || [];
 	}
 
 	return (
 		<>
 			<section>
-				{!isLoadingHomepage && slides && slides.length > 0 ? (
+				{slides && slides.length > 0 ? (
 					<Carousel.Wrapper emblaApi={emblaApi}>
 						<Carousel.Inner emblaRef={emblaRef} className="">
 							{slides.map((slide: any, index: number) => (
