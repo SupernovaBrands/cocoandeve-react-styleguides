@@ -2,9 +2,13 @@ import useGlobalSettings from '~/hooks/useGlobalSettings';
 import Button from '../Button';
 import CloseButton from './CloseButton';
 import usePreview from '~/hooks/usePreview';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { subscribeBluecoreWaitlist, validateEmail } from '~/modules/utils';
 import Close from '~/images/icons/close.svg';
+import {
+	getCookie,
+	setCookie,
+} from '~/modules/utils';
 
 interface WatilistData {
 	image: string|undefined
@@ -54,6 +58,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 			subscribeBluecoreWaitlist(email, data.handle, '', `${regSource}_${data.handle}`, '', true);
 			setSuccess(true);
 			setFormError(false);
+			setCookie(`waitlist_${data.handle}`, true, 1);
 		} else {
 			setSuccess(false);
 			setFormError(true);
@@ -67,8 +72,14 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 			console.log(e, 'error');
 		}
 	};
+
+	useEffect(() => {
+		if (getCookie(`waitlist_${data.handle}`)) {
+			setSuccess(true);
+		}
+	}, [])
 	return (
-		<div className="modal-content bg-pink-light lg:px-g">
+		<div className="modal-content bg-pink-light lg:px-g test">
 			{/* <CloseButton handleClose={handleClose} className="!font-size-sm" /> */}
 			<Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[14px] h-[14px] top-[1em] right-[1em]`}/>
 			<div className="modal-body pt-0 pb-3 px-3 lg:py-5 lg:px-2">

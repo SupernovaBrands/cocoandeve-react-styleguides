@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import CountriesOptions from "~/components/countries-options";
 import CheckBox from "~/components/CheckBox";
 import { validateEmail, validatePhone } from "~/modules/utils";
+import {
+	getCookie,
+	setCookie,
+} from '~/modules/utils';
 
 type waitlistProps = {
 	multiOption: boolean;
@@ -37,6 +41,7 @@ const ProductWaitlist = (props: any) => {
         e.preventDefault();
         props.onSubmitWaitlist({email, phoneCode, phoneNumber, smsBump: data.formId, fallback: () => {
             setShowSuccess(true);
+			setCookie(`waitlist_${props.handle}`, true, 1);
         }});
     }
 
@@ -137,6 +142,10 @@ const ProductWaitlist = (props: any) => {
 		}
 
 		setData({...data});
+
+		if (getCookie(`waitlist_${props.handle}`)) {
+			setShowSuccess(true);
+		}
 	}, []);
 
 	useEffect(() => {
