@@ -87,3 +87,17 @@
 		}
 	}
 }
+
+.product-side-upsell {
+    .relative.mb-5.flex {
+        .badge {
+            left: 16px;
+        }
+    }
+
+	.relative.mb-5.flex:first-child {
+        .badge {
+            left: 8px;
+        }
+    }
+}

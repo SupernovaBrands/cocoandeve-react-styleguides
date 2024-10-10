@@ -1,6 +1,6 @@
 // import RealResultCarousel from "~/sections/RealResultCarousel";
-import { EmblaOptionsType } from 'embla-carousel';
-import { useEffect, useState } from 'react';
+import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
+import { useEffect, useState, useCallback } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -14,56 +14,15 @@ import LaunchWaitlistModals from './LaunchWaitlistModals';
 import { checkLaunchWLBox } from '~/modules/utils';
 
 const options: EmblaOptionsType = {
-	loop: true,
+	loop: false,
+    dragFree: true,
 };
 
 const SideProductRoutineCarousel = (props: any) => {
     const { items, store, launchWL, loggedInEmail, trackBluecoreLaunchWaitlistEvent, submitsToSmsBumpAPi, trackEvent, addToCart, generalSetting, buildProductCardModel, badgeData } = props;
     const [launchSubmitted, setLaunchSubmitted] = useState(false);
     const [finalItems, setFinalItems] = useState([]);
-    const dummyItems = [
-		{
-            active: "active lg:flex",
-            step: "Step 1",
-            nextStep: "Step 2",
-            title: "Deluxe Exfoliating Mitt",
-            text: "Exfoliates and lifts dead skin cells to preps skin for the perfect, streak-free self-tan",
-            nexttitle: "Sunny Honey Bali Bronzing Bundle",
-            nexttext: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones!",
-            comparePrice: "$44.90",
-            price: "$34.90",
-        },
-        {
-            active: "active lg:flex",
-            step: "Step 2",
-            nextStep: "Step 3",
-            title: "Sunny Honey Bali Bronzing Bundle",
-            text: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones!",
-            nexttitle: "Sunny Honey Bali Bronzing Bundle",
-            nexttext: "Innovative micromist technology allows for an even, hands-free face-tanning experience for a flawless, long-lasting glow.",
-            comparePrice: "$44.90",
-            price: "$34.90",
-            swatch: {
-                label: 'Choose Style',
-                style: true,
-                data: [
-                    { id: 32068891607075, value: 'girl-print', label: 'Girl Print: Limited edition!', available: true},
-                    { id: 32068891639843, value: 'leaf-print', label: 'Leaf Print', available: true},
-                ]
-            }
-        },
-        {
-            active: "active lg:flex",
-            step: "Step 3",
-            nextStep: "Step 2",
-            title: "Antioxidant Face Tanning Micromist",
-            text: "Innovative micromist technology allows for an even, hands-free face-tanning experience for a flawless, long-lasting glow.",
-            nexttitle: "Sunny Honey Bali Bronzing Bundle",
-            nexttext: "Perfects and bronzes skin with a gorgeous self-tan without the bad tan smells, and orange tones! ",
-            comparePrice: "$44.90",
-            price: "$34.90",
-        }
-	];
+    const [scrollProgress, setScrollProgress] = useState(0);
 
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options}, [
 		Autoplay({ playOnInit: false, delay: 3000 })
@@ -101,6 +60,17 @@ const SideProductRoutineCarousel = (props: any) => {
 
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
 
+    const onScroll = useCallback((emblaApi1: EmblaCarouselType) => {
+		const progress = Math.max(0, Math.min(1, emblaApi1.scrollProgress()));
+		setScrollProgress(progress * 70);
+	}, []);
+
+    useEffect(() => {
+		if (!emblaApi1) return;
+		emblaApi1.on('reInit', onScroll);
+		emblaApi1.on('scroll', onScroll);
+	}, [emblaApi1, onScroll]);
+
     useEffect(() => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
         else document.body.classList.remove('overflow-y-hidden');
@@ -117,7 +87,6 @@ const SideProductRoutineCarousel = (props: any) => {
                 variants: { nodes },
             }
         })
-        console.log('mappedNodes', mappedNodes); 
         const cardModel = mappedNodes?.filter((item) => item.availableForSale)?.map((r:any) => buildProductCardModel(store, r, generalSetting, badgeData)) || [];
         const cardModelmapped = cardModel.map((i) => {
             const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, label, id, imgHover } = i;
@@ -136,7 +105,6 @@ const SideProductRoutineCarousel = (props: any) => {
                 imgHover,
             }
         })
-        console.log('cardModelmapped', cardModelmapped);
         setFinalItems(cardModelmapped || []);
         // const { products } = items;
         // const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
@@ -144,7 +112,7 @@ const SideProductRoutineCarousel = (props: any) => {
 
 	return (
         <>
-        <div className="product-upsell-2 lg:pb-5 pt-0 md:pt-5">
+        <div className="product-side-upsell lg:pb-1 pt-0 md:pt-5">
             <div className="w-full justify-center px-0">
                 <p className="h2 w-full mb-3 ">Shop the Routine</p>
                 <div className="mx-0">
@@ -156,7 +124,7 @@ const SideProductRoutineCarousel = (props: any) => {
                                     <ProductCard
                                         key={`${index}-side-routine`}
                                         product={data}
-                                        className={`relative mb-5 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_175px] pl-0 pr-hg' : 'flex-[0_0_165px] pr-hg pl-hg'}`}
+                                        className={`relative mb-1 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_172.5px] pl-0 pr-hg' : 'flex-[0_0_180px] pr-hg pl-hg'}`}
                                         button={true}
                                         setWaitlistData={setWaitlistData}
                                         smSingleStar={true}
@@ -179,6 +147,15 @@ const SideProductRoutineCarousel = (props: any) => {
 
                         </Carousel.Inner>
                     </Carousel.Wrapper>
+                    {finalItems.length > 0 && (
+                        <div className="px-0">
+                            <div className="carousel__progress bg-gray-400">
+                                <div
+                                    className="carousel__progress--scroll bg-gray-500"
+                                    style={{ left: `${scrollProgress}%`, width: `${((1 / finalItems.length) * 100) + 2.5}%` }} />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
