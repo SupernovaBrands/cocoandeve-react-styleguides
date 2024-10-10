@@ -2,7 +2,7 @@ import CloseButton from '~/components/modal/CloseButton';
 import InputCountry from '~/components/InputCountry';
 import Button from '~/components/Button';
 import Paste from '~/images/icons/paste.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
 	validateEmail,
 	validatePhone,
@@ -89,6 +89,13 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 	const [smsBump, setSmsbump] = useState('');
 	const [activeCountryCode, setaActiveCountryCode] = useState(65);
 	const [allowSubmit, setAllowSubmit] = useState(false);
+	const emailRef = useRef(null);
+
+	useEffect(() => {
+        if (emailRef.current) {
+            emailRef.current.focus();
+        }
+    }, []);
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
@@ -223,7 +230,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
 							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25!important] text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
 							<div className="relative flex items-stretch w-full mb-0 flex-wrap">
-								<input value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
+								<input ref={emailRef} value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
 							<p className={`text-center mb-1 mt-1`}>and / or</p>
 							<div className="relative flex items-stretch w-full flex-wrap">
