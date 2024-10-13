@@ -79,7 +79,6 @@ const SideProductRoutineCarousel = (props: any) => {
     useEffect(() => {
         const mappedNodes = items.map((item) => {
             const nodes = item.variants.edges.map((variant) => {
-                console.log('variant1', variant);
                 return variant.node;
             })
             return {
@@ -112,7 +111,7 @@ const SideProductRoutineCarousel = (props: any) => {
 
 	return (
         <>
-        <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2 hidden">
+        <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2">
             <div className="w-full justify-center px-0">
                 <p className="h2 w-full mb-3 ">Shop the Routine</p>
                 <div className="mx-0">
