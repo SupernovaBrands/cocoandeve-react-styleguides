@@ -265,7 +265,7 @@ const YotpoReviewWidget = (props:any) => {
 		};
 
 		const params = objectToQueryString(dataJson);
-		if (selectedFilter?.free_text_search.includes('%')) selectedFilter.free_text_search = encodeURIComponent(selectedFilter.free_text_search);
+		if (selectedFilter?.free_text_search?.includes('%')) selectedFilter.free_text_search = encodeURIComponent(selectedFilter.free_text_search);
 		$.ajax({
 			crossDomain: true,
 			contentType: 'application/json',
