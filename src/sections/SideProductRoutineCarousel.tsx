@@ -123,7 +123,7 @@ const SideProductRoutineCarousel = (props: any) => {
                                     <ProductCard
                                         key={`${index}-side-routine`}
                                         product={data}
-                                        className={`relative mb-1 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_172.5px] pl-0 pr-hg' : 'flex-[0_0_180px] pr-hg pl-hg'}`}
+                                        className={`relative mb-1 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_172.5px] pl-0 pr-hg' : index === 2 ? 'flex-[0_0_172.5px] pr-0 pl-hg' : 'flex-[0_0_180px] pr-hg pl-hg'}`}
                                         button={true}
                                         setWaitlistData={setWaitlistData}
                                         smSingleStar={true}
