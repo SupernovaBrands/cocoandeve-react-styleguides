@@ -125,6 +125,10 @@ const AnnouncementBar = (props: any) => {
 	const lineColor = loaded ? `${textColor || 'text-secondary hover:text-secondary'}` : `text-primary-light hover:text-primary-light`;
 	const bgColor = loaded ? `${background || 'bg-primary-light'}` : 'bg-primary-light';
 
+	useEffect(() => {
+		if (!accouncementBarAbTest) document.querySelector('.accouncement-bar--original').classList.remove('hidden');;
+	}, [accouncementBarAbTest]);
+
 	return (
 		<>
 			{timerData && timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
@@ -143,35 +147,35 @@ const AnnouncementBar = (props: any) => {
 						</div>
 					</a>
 				</div>
-			) : isScrollEnabled && accouncementBarAbTest ? (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
-					<div className="announcement-bar__marquee overflow-hidden relative text-center font-bold">
-						<div className="announcement-bar__content">
-							{[...Array(4)].map((_, index) => (
-								<React.Fragment key={index}>
-									{text && (
-										<>
-											<span><a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
-										</>
-									)}
-									{text2 && (
-										<>
-											<span><a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
-										</>
-									)}
-									{text3 && (
-										<>
-											<span><a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
-										</>
-									)}
-								</React.Fragment>
-							))}
+			) : (
+				<>
+					<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] pt-[5px] hidden accouncement-bar--abtest`}>
+						<div className="announcement-bar__marquee overflow-hidden relative text-center font-bold">
+							<div className="announcement-bar__content">
+								{[...Array(4)].map((_, index) => (
+									<React.Fragment key={index}>
+										{text && (
+											<>
+												<span><a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
+											</>
+										)}
+										{text2 && (
+											<>
+												<span><a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
+											</>
+										)}
+										{text3 && (
+											<>
+												<span><a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
+											</>
+										)}
+									</React.Fragment>
+								))}
+							</div>
 						</div>
 					</div>
-				</div>
-			) : (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
-					<div className="container text-center font-bold">
+					<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em] hidden accouncement-bar--original`}>
+						<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
 									{text && (
@@ -185,8 +189,9 @@ const AnnouncementBar = (props: any) => {
 									)}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);
