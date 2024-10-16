@@ -157,6 +157,19 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 			}
 		}
 		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+
+		try {
+			// @ts-ignore
+			window.wtba = window.wtba || [];
+			// @ts-ignore
+			window.wtba.push({
+				"type": "identify",
+				"phone": phone,
+				"email": email
+			});
+		} catch (e) {
+			console.log('error wtba push');
+		}
 	}
 
 	useEffect(() => {

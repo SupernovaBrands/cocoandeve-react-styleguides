@@ -163,6 +163,20 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 			});
 			if (validForm.email) subscribeBluecoreRegistration(email, phone);
 		}
+
+		try {
+			// @ts-ignore
+			window.wtba = window.wtba || [];
+			// @ts-ignore
+			window.wtba.push({
+				"type": "identify",
+				"phone": phone,
+				"email": email
+			});
+		} catch (e) {
+			console.log('error wtba push');
+		}
+
 		/*
 		if (typeof fbq === 'function') {
 			fbq('track', 'Lead');
