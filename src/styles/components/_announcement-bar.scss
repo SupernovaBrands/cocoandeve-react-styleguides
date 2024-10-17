@@ -42,8 +42,12 @@
 			animation-play-state: paused;
 		}
 		span {
-			padding-left: calc-em(112);
-			padding-right: calc-em(112);
+			padding-left: calc-em(56);
+			padding-right: calc-em(56);
+			@screen lg {
+				padding-left: calc-em(112);
+				padding-right: calc-em(112);
+			}
 		}
 	}
 }
