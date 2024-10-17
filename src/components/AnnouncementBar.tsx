@@ -170,7 +170,7 @@ const AnnouncementBar = (props: any) => {
 					</div>
 				</div>
 			) : (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em] ${isScrollEnabled ? 'hidden': ''}`}>
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
