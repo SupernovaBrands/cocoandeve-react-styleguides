@@ -40,15 +40,18 @@ const YotpoStar = (props: any) => {
 	return init && total > 0 ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm">
-				<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
+				{!props.smSingleStarAllDevice && (
+					<ReviewStar score={score} className={`${props.smSingleStar ? 'hidden lg:flex' : 'flex'}`} />
+				)}
+				
 			</a>
 			{props.smSingleStar && (
 				<>
 					<a href={`/products/${props?.productHandle}#write-a-review`}>
-						<ReviewStarSingle className="lg:hidden" />
+						<ReviewStarSingle className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'}`} />
 					</a>
 					<a href={`/products/${props?.productHandle}#write-a-review`}>
-						<span className="ml-25 lg:hidden">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
+						<span className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'} ml-25`}>{`${score ? score.toFixed(1) : 0}/5.0`}</span>
 					</a>
 				</>
 			)}
