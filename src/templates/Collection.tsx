@@ -470,7 +470,7 @@ const Collection = (props: any) => {
                                         </div>
                                     )}
                                 </>
-                            ) : (
+                            ) : ( */}
                                 <>
                                     {!isLoading && (
                                         <>
