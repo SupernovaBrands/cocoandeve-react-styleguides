@@ -23,7 +23,6 @@ const AnnouncementBar = (props: any) => {
 		background,
 		textColor,
 		loaded,
-		accouncementBarAbTest,
 		isScrollEnabled
 	} = props;
 
@@ -143,7 +142,7 @@ const AnnouncementBar = (props: any) => {
 						</div>
 					</a>
 				</div>
-			) : isScrollEnabled && accouncementBarAbTest ? (
+			) : isScrollEnabled ? (
 				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] pt-[5px] accouncement-bar--abtest`}>
 					<div className="announcement-bar__marquee overflow-hidden relative text-center font-bold">
 						<div className="announcement-bar__content">
@@ -170,7 +169,7 @@ const AnnouncementBar = (props: any) => {
 					</div>
 				</div>
 			) : (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} ${isScrollEnabled ? 'hidden': ''} w-full px-[0] py-[0.59375em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">

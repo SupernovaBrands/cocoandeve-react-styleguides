@@ -17,7 +17,7 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, accouncementBarAbTest
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey
 	} = props;
 
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -183,7 +183,6 @@ const Header = (props: any) => {
 						text3={annBar.text3}
 						url3={annBar.url3}
 						timerData={timerBar}
-						accouncementBarAbTest={accouncementBarAbTest}
 						isScrollEnabled={annBar?.isScrollEnabled || false}
 					/>
 				)}
