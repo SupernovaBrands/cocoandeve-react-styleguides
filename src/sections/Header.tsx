@@ -183,6 +183,7 @@ const Header = (props: any) => {
 						text3={annBar.text3}
 						url3={annBar.url3}
 						timerData={timerBar}
+						isScrollEnabled={annBar?.isScrollEnabled || false}
 					/>
 				)}
 

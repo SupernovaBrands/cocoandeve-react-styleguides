@@ -830,7 +830,7 @@ const YotpoReviewWidget = (props:any) => {
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
 								onKeyPress={(e) => {
-									if (e.key === 'Enter') onFilterChange();
+									onFilterChange();
 								}}
 							/>
 							<div className="input-group-append flex">

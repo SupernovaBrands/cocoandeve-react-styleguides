@@ -3,7 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import AutoHeight from 'embla-carousel-auto-height'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 
 const options: EmblaOptionsType = {
@@ -23,6 +23,7 @@ const AnnouncementBar = (props: any) => {
 		background,
 		textColor,
 		loaded,
+		isScrollEnabled
 	} = props;
 
 	const noticeTImesLabels = timerData && timerData.times_labels ? timerData.times_labels.split(':') : [];
@@ -141,8 +142,34 @@ const AnnouncementBar = (props: any) => {
 						</div>
 					</a>
 				</div>
+			) : isScrollEnabled ? (
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] pt-[5px] accouncement-bar--abtest`}>
+					<div className="announcement-bar__marquee overflow-hidden relative text-center font-bold">
+						<div className="announcement-bar__content">
+							{[...Array(4)].map((_, index) => (
+								<React.Fragment key={index}>
+									{text && (
+										<>
+											<span><a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
+										</>
+									)}
+									{text2 && (
+										<>
+											<span><a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
+										</>
+									)}
+									{text3 && (
+										<>
+											<span><a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
+										</>
+									)}
+								</React.Fragment>
+							))}
+						</div>
+					</div>
+				</div>
 			) : (
-				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} w-full px-[0] py-[0.59375em]`}>
+				<div className={`${scrolled ? 'hidden' : ''} announcement-bar ${bgColor} ${isScrollEnabled ? 'hidden': ''} w-full px-[0] py-[0.59375em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
