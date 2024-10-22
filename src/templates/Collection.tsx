@@ -16,10 +16,10 @@ import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
 
-const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
+const Inner = ({ title, bannerData }) => {
     return (
         <figure className="w-full relative items-center px-0 mb-0">
-            <picture className={`${!isLoading && !bannerLoading ? '' : 'bg-shimmer pt-[53.33%] lg:pt-[19.375%]'}`}>
+            <picture className={``}>
                 <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
                 <img src={bannerData?.img_mob?.url} className="w-full" alt="Collection Banner" width="375" height="200"/>
             </picture>
@@ -32,52 +32,13 @@ const Inner = ({ isLoading, title, bannerData, bannerLoading }) => {
     );
 }
 
-const Banner = ({ isLoading, title, strapiBanner, singleBanner }) => {
-
-    const universalCollectionSetting = strapiBanner?.universalBanner?.universalCollectionSetting || null;
-    // console.log('universalCollectionSetting', universalCollectionSetting);
-    // const {
-	//     filter_handles_img_mob: universalImgMob,
-	//     filter_handles_img_desk: universalImgDesk,
-	//     filter_handles_img_url: universalUrl,
-	//     enabled: universalEnabled,
-	// } = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store];
-
-    const universalData = universalCollectionSetting?.universalCollectionSetting[strapiBanner.store] || null;
-
-    const universalImgMob = universalData?.filter_handles_img_mob || null;
-    const universalImgDesk = universalData?.filter_handles_img_desk || null;
-    const universalUrl = universalData?.filter_handles_img_url || null;
-    const universalEnabled = universalData?.enabled || false;
-
-    // by default use universal banner image
-    let bannerData = {
-        img_mob: universalImgMob,
-	    img_desk: universalImgDesk,
-	    url: universalUrl,
-	    enabled: universalEnabled,
-    };
-
-    const collectionBanner = strapiBanner.mainSettings?.collectionBanner;
-    if (collectionBanner && collectionBanner.collectionBanner[strapiBanner.store]?.enabled) {
-        // use specific collection banner image if its enabled
-        bannerData = collectionBanner.collectionBanner[strapiBanner.store];
-    }
-
-    if (singleBanner?.desktop && singleBanner?.mobile) {
-        bannerData = {
-            img_mob: singleBanner?.mobile,
-            img_desk: singleBanner?.desktop,
-            url: singleBanner?.url,
-            enabled: true,
-        };
-    }
+const Banner = ({ title, bannerData }) => {
     return (
         <>
-            {!strapiBanner.isLoading && bannerData.url === '' && <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />}
-            {!strapiBanner.isLoading && bannerData.url !== '' && (
+            {bannerData.url === '' && <Inner title={title} bannerData={bannerData}  />}
+            {bannerData.url !== '' && (
                 <a href={bannerData.url}>
-                    <Inner isLoading={isLoading} title={title} bannerData={bannerData} bannerLoading={strapiBanner.isLoading} />
+                    <Inner title={title} bannerData={bannerData}  />
                 </a>
             )}
         </>
@@ -111,7 +72,7 @@ const Collection = (props: any) => {
 		// subscribeBluecoreWaitlist,
         loggedInEmail,
         squareBadge,
-        singleBanner,
+        bannerData,
     } = props;
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
@@ -404,13 +365,7 @@ const Collection = (props: any) => {
 
     return (
         <>
-            {!collectionSettings.isLoading && (
-                <Banner isLoading={isLoading} title={collectionTitle} strapiBanner={collectionSettings} singleBanner={singleBanner} />
-            )}
-
-            {collectionSettings.isLoading && (
-                <div className="bg-shimmer pt-[53.33%] lg:pt-[19.375%]" />
-            )}
+            <Banner title={collectionTitle} bannerData={bannerData} />
 
             {tcPopups?.enabled_collection && (
                 <>
