@@ -183,7 +183,7 @@ const Article = (props) => {
             const body = content.BlogContentMultiStores[region].body_content
                 .replace('<a', ariaLabel)
                 .replace(/<ul>/g, '<ul class="article-list">')
-                .replace(/<ol>/g, '<ul class="ordered-list">')
+                .replace(/<ol>/g, '<ol class="ordered-list">')
                 .replace('id="newsletterWrapper"', 'class="newsletterWrapper"');
             setBodyContent(body);
         }
