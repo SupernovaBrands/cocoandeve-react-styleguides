@@ -35,8 +35,8 @@ const Inner = ({ title, bannerData }) => {
 const Banner = ({ title, bannerData }) => {
     return (
         <>
-            {bannerData.url === '' && <Inner title={title} bannerData={bannerData}  />}
-            {bannerData.url !== '' && (
+            {bannerData?.url === '' && <Inner title={title} bannerData={bannerData}  />}
+            {bannerData?.url !== '' && (
                 <a href={bannerData.url}>
                     <Inner title={title} bannerData={bannerData}  />
                 </a>
