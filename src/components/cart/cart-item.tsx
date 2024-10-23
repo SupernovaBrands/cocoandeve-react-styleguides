@@ -151,7 +151,7 @@ export const CartItem = (props:CartItemProps) => {
 			}
 
 			if ((store === 'dev' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'super-hydration-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e21df487-41c6-46f3-fa2b-b9630449eb00/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee76b291-fb34-4025-4476-e0d564560c00/public';
 			}
 
 			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'deep-condition-bundle') {
