@@ -146,8 +146,12 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'super-hydration-kit') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'us') && item.merchandise.product.handle === 'super-hydration-kit') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
+			}
+
+			if ((store === 'dev' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'super-hydration-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee76b291-fb34-4025-4476-e0d564560c00/public';
 			}
 
 			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'us') && item.merchandise.product.handle === 'deep-condition-bundle') {
