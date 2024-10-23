@@ -33,7 +33,6 @@ const Inner = ({ title, bannerData }) => {
 }
 
 const Banner = ({ title, bannerData }) => {
-    console.log('bannerData', bannerData);
     return (
         <>
             {bannerData?.url === '' && <Inner title={title} bannerData={bannerData}  />}
