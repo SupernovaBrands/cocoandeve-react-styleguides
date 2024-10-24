@@ -26,7 +26,7 @@ export const CartDiscountForm = (props:any) => {
     useEffect(() => {
         const { isApplied, error } = props;
         if (!isApplied && error) {
-            setState({ ...state, error: '' });
+            setState({ ...state, code: '', error: '' });
             props.onApply('', false);
         }
     }, []);
