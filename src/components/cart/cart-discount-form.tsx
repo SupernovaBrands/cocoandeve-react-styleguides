@@ -26,7 +26,7 @@ export const CartDiscountForm = (props:any) => {
     useEffect(() => {
         const { isApplied, error } = props;
         if (!isApplied && error) {
-            setState({ ...state, code: '' });
+            setState({ ...state, error: '' });
             props.onApply('', false);
         }
     }, []);
@@ -44,6 +44,10 @@ export const CartDiscountForm = (props:any) => {
         };
         setState(stateData);
     }, [props]);
+
+    useEffect(() => {
+        setState({ ...state, error: '' });
+    }, []);
 
     const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
