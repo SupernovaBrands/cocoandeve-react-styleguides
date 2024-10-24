@@ -364,11 +364,14 @@ export const CartItem = (props:CartItemProps) => {
 			</figcaption>
 		</figure>
 
-		{item.showPreorderNotif && (
-			<span className="d-block mb-2">{tStrings.estimated_delivery_text}</span>
+		{item.showPreorderNotif?.show && (
+			<span className="block mb-2 text-sm">{item.showPreorderNotif?.note || ''}</span>
 		)}
-		{item.showPreorderNotif_2 && (
-			<span className="d-block mb-2">{tStrings.estimated_delivery_text_2}</span>
+		{item.showPreorderNotif_2?.show && (
+			<span className="block mb-2 text-sm">{item.showPreorderNotif_2?.note}</span>
+		)}
+		{item.showPreorderNotif_3?.show && (
+			<span className="block mb-2 text-sm">{item.showPreorderNotif_3?.note}</span>
 		)}
 	</li>
 
