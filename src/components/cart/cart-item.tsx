@@ -349,10 +349,14 @@ export const CartItem = (props:CartItemProps) => {
 						)
 						: (
 							<div className="flex flex-col text-right">
-								{item.comparePrice > 0 && (
-									<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)}
+								{item.comparePrice > 0
+									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
 								<strong>
-									{item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0 
+										? formatMoney(item.priceAfterDiscounted, false, store)
+										: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+									
 									{item.recurring && (item.period)}
 								</strong>
 							</div>
