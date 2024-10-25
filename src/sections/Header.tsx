@@ -260,7 +260,7 @@ const Header = (props: any) => {
 									<Account className={`hover:fill-primary text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
-									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} toggleAccountDropdown={toggleAccountDropdown} />
+									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} />
 								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
