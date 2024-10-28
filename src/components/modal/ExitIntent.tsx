@@ -9,6 +9,7 @@ interface ExitIntentData {
 	extra_text: string
 	button_url: string
 	button_text: string
+	text_color: string
 }
 
 type ExitIntentProp = {
@@ -21,7 +22,7 @@ const ExitIntent: React.FC<ExitIntentProp> = ({ handleClose, data }) => (
 		<div className="modal-body p-0">
 			<figure className="m-0 relative">
 				<img src={data?.bg_image?.url} className="w-full" />
-				<figcaption className="absolute text-white p-3 lg:p-4 flex flex-col justify-center text-center top-0 bottom-0 right-0">
+				<figcaption className={`absolute p-3 lg:p-4 flex flex-col justify-center text-center top-0 bottom-0 right-0 ${data?.text_color ? data?.text_color : 'text-body'}`}>
 					<p className="exit-intent-popup__title font-bold mb-2 text-[1.875rem] leading-[2.344rem]" dangerouslySetInnerHTML={{ __html: data.title }} />
 					<p className="flex items-center">
 						<span className="text-lg font-bold mr-g mb-25" dangerouslySetInnerHTML={{ __html: data.upto_text }} />
