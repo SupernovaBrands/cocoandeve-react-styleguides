@@ -441,7 +441,7 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <div id="sideBarPosts"></div>
+                    <div id="sideBarPosts" className="overflow-x-hidden"></div>
                 </article>
             </div>
         </div>
