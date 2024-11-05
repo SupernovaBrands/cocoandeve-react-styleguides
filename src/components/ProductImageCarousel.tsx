@@ -17,7 +17,24 @@ type PropType = {
 	activeImageIndex: number
 }
 
+const useMediaQuery = (query) => {
+	const [matches, setMatches] = useState(false);
+  
+	useEffect(() => {
+	  const media = window.matchMedia(query);
+	  if (media.matches !== matches) {
+		setMatches(media.matches);
+	  }
+	  const listener = () => setMatches(media.matches);
+	  media.addListener(listener);
+	  return () => media.removeListener(listener);
+	}, [matches, query]);
+  
+	return matches;
+};
+
 const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex }) => {
+	const isDesktop = useMediaQuery('(min-width: 769px)');
 	const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
@@ -84,7 +101,12 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							{slides.map((slide, index) => (
 								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
 									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)}>
-										<img className="w-[70px] rounded" src={`${slide.src.replace('1140x1140', '150x150').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+										{isDesktop && (
+											<picture>
+												<source srcSet={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} media="(min-width: 769px)" />
+												<img className="w-[70px] rounded b" src={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+											</picture>
+										)}
 									</button>
 								</div>
 							))}
