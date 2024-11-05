@@ -441,13 +441,13 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <div id="sideBarPosts"></div>
+                    <div id="sideBarPosts" className="overflow-x-hidden"></div>
                 </article>
             </div>
         </div>
         {upsells?.length > 0 && (
-            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-[1.25rem] w-full">
-                <div className="container lg:px-0 sm:px-hg">
+            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
+                <div className="container lg:px-0 sm:px-0">
                     <h4 className="h1 text-center mb-1">Shop this article</h4>
                     {!isLoading && ( <ShopArticle label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
