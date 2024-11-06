@@ -78,6 +78,17 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 			setSuccess(true);
 		}
 	}, [])
+
+	useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (inputRef.current && !success) {
+                inputRef.current.focus();
+            }
+        }, 100); // Slightly delayed to allow modal rendering
+
+        return () => clearTimeout(timeoutId); // Clean up timeout on component unmount
+    }, [success]);
+
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
 			{/* <CloseButton handleClose={handleClose} className="!font-size-sm" /> */}
@@ -126,7 +137,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 								)}
 								<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
 									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
-									<input ref={inputRef} id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
+									<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
 									{formError && <span className="mt-1 font-size-sm text-primary">{waitlistPopupData.email_invalid}</span>}
 									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
 								</div>
