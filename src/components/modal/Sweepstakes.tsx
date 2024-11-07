@@ -29,6 +29,10 @@ interface SweepstakesData {
 	sweepstakes_popup_thank_desc_color: string,
 	sweepstakes_popup_thank_shopnow_url: string,
 	sweepstakes_popup_thank_shopnow: string,
+	sweepstakes_popup_title_color: string,
+	sweepstakes_popup_tos_class: string,
+	sweepstakes_text_color: string,
+	sweepstakes_foot_note_color: string,
 }
 
 type SweepstakesProp = {
@@ -80,7 +84,6 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	const styles = {
 		'background-image': isMobile ? `` : `url(${data?.sweepstakes_popup_img_lg?.url})`,
 	};
-
 	const onClose = () => {
 		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 		handleClose();
@@ -193,12 +196,12 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 						<div className="px-3 lg:px-4 py-3 lg:py-4">
 							<div className="flex flex-wrap -mx-hg lg:-mx-g justify-end lg:mb-g mb-0 ">
 								<div className="hidden lg:block w-3/4 lg:w-8/12 lg:pl-0 text-center pr-0 lg:pr-g">
-									<h2 className="modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 text-body" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<h2 className={`modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color ? data?.sweepstakes_popup_title_color  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
+									<p className={`lg:mb-0 lg:mt-1 ${data?.sweepstakes_popup_thank_desc_color ? data?.sweepstakes_popup_thank_desc_color  : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g -mx-hg">
-									<h2 className="modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 text-body">{data?.sweepstakes_popup_title}</h2>
-									<p className="lg:mb-0 lg:mt-1 font-size-sm mb-1 text-body px-0  lg:px-0" dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<h2 className={`modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color ? data?.sweepstakes_popup_title_color  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
+									<p className={`lg:mb-0 lg:mt-1 font-size-sm mb-1 ${data?.sweepstakes_popup_thank_desc_color ? data?.sweepstakes_popup_thank_desc_color  : 'text-body'} px-0  lg:px-0`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 							</div>
 							<div id="waitlist-page" className="flex flex-wrap justify-end " data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
@@ -214,9 +217,9 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 										<input value={phone} onChange={handlePhone} className="bg-clip-padding block w-full mb-0 -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%] active:border-[#ffffff] focus:border-[#ffffff] border-[#ffffff]" type="phone" placeholder={data?.sweepstakes_popup_phone} />
 									</div>
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className="hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm text-body" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">Register now</Button>
-									<p className="lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs text-body" dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
 							</div>
 						</div>
