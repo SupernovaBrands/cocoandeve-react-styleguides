@@ -230,7 +230,8 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 									</div>
 									{!emailError.valid && <span className='text-[#dc3545] text-xs block'>{emailError.error}</span>}
 									<input type="checkbox" name="tos" className="hidden" value="true" checked />
-									<div className="text-center mb-25 sweepstakes-popup__separator text-secondary">and / or</div>
+									<div className={`text-center mb-25 sweepstakes-popup__separator hidden lg:block ${data?.sweepstakes_popup_desc_color}`}>and / or</div>
+									<div className={`text-center mb-25 sweepstakes-popup__separator lg:hidden  ${data?.sweepstakes_popup_desc_color_mob}`}>and / or</div>
 									<div className="relative flex items-stretch w-full flex-wrap mb-[5px]">
 										<InputCountry store={store} id="modal--sweepstakes__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" handleCode={handleCode} activeCountry={activeCountryCode} />
 										<input value={phone} onChange={handlePhone} className="bg-clip-padding block w-full mb-0 -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%] active:border-[#ffffff] focus:border-[#ffffff] border-[#ffffff]" type="phone" placeholder={data?.sweepstakes_popup_phone} />
