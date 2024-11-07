@@ -34,6 +34,11 @@ interface SweepstakesData {
 	sweepstakes_popup_tos_class: string,
 	sweepstakes_text_color: string,
 	sweepstakes_foot_note_color: string,
+	sweepstakes_popup_title_color_mob: string,
+	sweepstakes_popup_desc_color_mob: string,
+	sweepstakes_foot_note_color_mob: string,
+	sweepstakes_popup_thank_title_color_mob: string,
+	sweepstakes_popup_thank_desc_color_mob: string,
 }
 
 type SweepstakesProp = {
@@ -196,7 +201,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 
 		setaActiveCountryCode(numberCodeDef)
     }, [store]);
-
+	console.log('content,', data);
 	return (
 		<>
 			{/* @ts-ignore */}
@@ -214,8 +219,8 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 									<p className={`lg:mb-0 lg:mt-1 ${data?.sweepstakes_popup_desc_color ? data?.sweepstakes_popup_desc_color  : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g -mx-hg">
-									<h2 className={`modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color ? data?.sweepstakes_popup_title_color  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
-									<p className={`lg:mb-0 lg:mt-1 font-size-sm mb-1 ${data?.sweepstakes_popup_desc_color ? data?.sweepstakes_popup_desc_color  : 'text-body'} px-0  lg:px-0`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<h2 className={`modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color_mob ? data?.sweepstakes_popup_title_color_mob  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
+									<p className={`lg:mb-0 lg:mt-1 font-size-sm mb-1 ${data?.sweepstakes_popup_desc_color_mob ? data?.sweepstakes_popup_desc_color_mob  : 'text-body'} px-0  lg:px-0`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 							</div>
 							<div id="waitlist-page" className="flex flex-wrap justify-end " data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
@@ -233,7 +238,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
 									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">Register now</Button>
-									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
 							</div>
 						</div>
@@ -242,9 +247,13 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 							<div className="flex flex-wrap  justify-end lg:-mx-g">
 								<div className="sweepstakes-popup__thank-you text-center lg:w-1/2 flex-col items-center justify-center mt-1 mb-1 lg:my-[60px] text-gray-600 flex lg:px-g">
 									<div className="flex flex-wrap  justify-center lg:justify-center">
-										<div className="w-full">
+										<div className="w-full lg:hidden">
 											<h3 className={`mb-g sweepstakes-popup__title font-bold h1 ${data.sweepstakes_popup_thank_title_color}`}>{data.sweepstakes_popup_thank_title}</h3>
 											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color}`}>{data.sweepstakes_popup_thank_desc}</p>
+										</div>
+										<div className="w-full hidden lg:block">
+											<h3 className={`mb-g sweepstakes-popup__title font-bold h1 ${data.sweepstakes_popup_thank_title_color_mob}`}>{data.sweepstakes_popup_thank_title}</h3>
+											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color_mob}`}>{data.sweepstakes_popup_thank_desc}</p>
 										</div>
 									</div>
 									<a href={data.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary block w-full border-primary hover:border-primary hover:text-white !no-underline">{data.sweepstakes_popup_thank_shopnow}</a>
