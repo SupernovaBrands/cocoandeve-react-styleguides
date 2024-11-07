@@ -80,14 +80,29 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 	}, [])
 
 	useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (inputRef.current && !success) {
-                inputRef.current.focus();
-            }
-        }, 100); // Slightly delayed to allow modal rendering
-
-        return () => clearTimeout(timeoutId); // Clean up timeout on component unmount
-    }, [success]);
+		const handleFocus = () => {
+			if (inputRef.current && !success) {
+				inputRef.current.focus();
+			}
+		};
+	
+		const observer = new MutationObserver(() => {
+			if (inputRef.current) {
+				handleFocus();
+				observer.disconnect();
+			}
+		});
+	
+		observer.observe(document.body, { childList: true, subtree: true });
+	
+		if (inputRef.current) {
+			handleFocus();
+		}
+	
+		return () => {
+			observer.disconnect();
+		};
+	  }, [success]);
 
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">

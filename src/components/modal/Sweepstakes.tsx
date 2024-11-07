@@ -201,7 +201,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 
 		setaActiveCountryCode(numberCodeDef)
     }, [store]);
-	console.log('content,', data);
+
 	return (
 		<>
 			{/* @ts-ignore */}
