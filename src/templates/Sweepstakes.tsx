@@ -199,7 +199,6 @@ const Sweepstakes = (props) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center',
 	};
-	console.log('content', content);
     return (
         <>
             <section className={`sweepstakes ${content?.bg_color ? content?.bg_color : 'bg-primary-light'}`} style={isDesktop ? backgroundStyleDesktop : backgroundStyle}>
