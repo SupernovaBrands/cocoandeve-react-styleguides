@@ -248,11 +248,11 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 							<div className="flex flex-wrap  justify-end lg:-mx-g">
 								<div className="sweepstakes-popup__thank-you text-center lg:w-1/2 flex-col items-center justify-center mt-1 mb-1 lg:my-[60px] text-gray-600 flex lg:px-g">
 									<div className="flex flex-wrap  justify-center lg:justify-center">
-										<div className="w-full lg:hidden">
+										<div className="w-full hidden lg:block">
 											<h3 className={`mb-g sweepstakes-popup__title font-bold h1 ${data.sweepstakes_popup_thank_title_color}`}>{data.sweepstakes_popup_thank_title}</h3>
 											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color}`}>{data.sweepstakes_popup_thank_desc}</p>
 										</div>
-										<div className="w-full hidden lg:block">
+										<div className="w-full lg:hidden">
 											<h3 className={`mb-g sweepstakes-popup__title font-bold h1 ${data.sweepstakes_popup_thank_title_color_mob}`}>{data.sweepstakes_popup_thank_title}</h3>
 											<p className={`mb-3 ${data.sweepstakes_popup_thank_desc_color_mob}`}>{data.sweepstakes_popup_thank_desc}</p>
 										</div>
