@@ -99,7 +99,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
-	}, [])
+	}, []);
 
 	// const handleEmail = (e) => {
 	// 	const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
@@ -119,35 +119,39 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 		setaActiveCountryCode(e);
 	};
 
-	const validateForm = (email) => {
-		const emailValid = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); // Simple regex for email validation
-		return { emailValid };
+	const validateForm = (email, phone) => {
+		const emailValid = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+		const isPhoneEmpty = !phone || phone.trim() === '';
+		const emailRequired = isPhoneEmpty && !email;
+		return { emailValid, emailRequired };
 	};
-
+	
 	const handleForm = (e) => {
 		e.preventDefault();
-	  	const { emailValid } = validateForm(email);
-		if (!emailValid) {
-		  	setEmailError({ valid: false, error: 'Please enter a valid email address' });
-		  	setPhoneError({ valid: true, error: '' });
+		const { emailValid, emailRequired } = validateForm(email, phone);
+		// If email is required and not valid, show email validation error
+		if (emailRequired && !emailValid) {
+			setEmailError({ valid: false, error: 'Please enter a valid email address' });
+			setPhoneError({ valid: true, error: '' });
 		} else {
-		  	setEmailError({ valid: true, error: '' });
-		  	utmParams();
-		  	if (emailValid) {
+			// Clear email error if email is valid or not required
+			setEmailError({ valid: true, error: '' });
+			// Process form submission
+			utmParams();
+			if (emailValid || !emailRequired) {
 				subscribeBluecoreRegistration(email, phone);
 				setFormCompleted(true);
-		  	}
-			
-		  	if (phone && phone !== '') {
+			}
+			if (phone && phone !== '') {
 				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
-			  		if (resp.status === 'error') {
+					if (resp.status === 'error') {
 						setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
-			  		} else {
+					} else {
 						setFormCompleted(true);
-			  		}
+					}
 				});
-		  	}
-	  
+			}
+			// Identify user data for tracking
 			try {
 				// @ts-ignore
 				window.wtba = window.wtba || [];

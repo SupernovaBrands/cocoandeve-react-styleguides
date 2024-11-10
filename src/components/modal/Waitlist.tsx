@@ -86,6 +86,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 			}
 		};
 	
+		const focusTimeout = setTimeout(handleFocus, 300);
 		const observer = new MutationObserver(() => {
 			if (inputRef.current) {
 				handleFocus();
@@ -101,6 +102,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 	
 		return () => {
 			observer.disconnect();
+			clearTimeout(focusTimeout);
 		};
 	  }, [success]);
 
