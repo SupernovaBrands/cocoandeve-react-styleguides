@@ -179,7 +179,7 @@ const Sweepstakes = (props) => {
                 <div className="container px-0">
                     <div className="flex flex-wrap m-0 items-center place-content-end">
                         <div className="sweepstakes__content px-g lg:w-5/12 lg:order-1 lg:my-4">
-                            {!formCompleted ? (
+                            {!formCompleted && activeCountryCode ? (
                                 <form onSubmit={handleForm} id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded-h mt-2 lg:mt-0">
                                     <h1 className={`${content.heading_col} mb-1`}>{content.heading}</h1>
                                     <p className={`${content.subheading_col} mb-[1rem]`}>{parse(`${content.subheading}`)}</p>
