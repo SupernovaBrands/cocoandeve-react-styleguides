@@ -121,21 +121,26 @@ const Sweepstakes = (props) => {
 	}
 
 	useEffect(() => {
-		if (store === 'us') {
+		if (store === 'us' || store === 'ca') {
+			// @ts-ignore
 			setaActiveCountryCode(1);
 		} else if (store === 'au') {
+			// @ts-ignore
 			setaActiveCountryCode(61);
 		} else if (store === 'uk') {
+			// @ts-ignore
 			setaActiveCountryCode(44);
-		} else if (store === 'ca') {
-			setaActiveCountryCode(1);
 		} else if (store === 'eu' || store === 'fr') {
+			// @ts-ignore
 			setaActiveCountryCode(33);
 		} else if (store === 'de') {
+			// @ts-ignore
 			setaActiveCountryCode(49);
 		} else if (store === 'my' || store === 'my') {
+			// @ts-ignore
 			setaActiveCountryCode(60);
 		} else {
+			// @ts-ignore
 			setaActiveCountryCode(65)
 		}
     }, [store]);
