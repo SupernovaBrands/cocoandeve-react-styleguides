@@ -18,30 +18,6 @@ const validForm = {
 
 const Sweepstakes = (props) => {
     const { content, store } = props;
-	// let letterCodeDef = 'SG';
-	let numberCodeDef = 65;
-	if (store === 'us') {
-		// letterCodeDef = 'US';
-		numberCodeDef = 1;
-	} else if (store === 'au') {
-		// letterCodeDef = 'AU';
-		numberCodeDef = 61;
-	} else if (store === 'uk') {
-		// letterCodeDef = 'GB';
-		numberCodeDef = 44;
-	} else if (store === 'ca') {
-		// letterCodeDef = 'CA';
-		numberCodeDef = 1;
-	} else if (store === 'eu') {
-		// letterCodeDef = 'FR';
-		numberCodeDef = 33;
-	} else if (store === 'de') {
-		// letterCodeDef = 'DE';
-		numberCodeDef = 49;
-	} else if (store === 'my' || store === 'my') {
-		// letterCodeDef = 'MY';
-		numberCodeDef = 60;
-	}
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -51,7 +27,7 @@ const Sweepstakes = (props) => {
     const [countryCode, setCountryCode] = useState(65);
     const [isDesktop, setIsDesktop] = useState(false);
     const [allowSubmit, setAllowSubmit] = useState(false);
-    const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+    const [activeCountryCode, setaActiveCountryCode] = useState();
 	const [social, setSocial] = useState('');
     let tiktokUrl = 'https://www.tiktok.com/@coco_and_eve?lang=en';
     const emailRef = useRef(null);
@@ -145,24 +121,23 @@ const Sweepstakes = (props) => {
 	}
 
 	useEffect(() => {
-        let numberCodeDef = 65;
 		if (store === 'us') {
-			numberCodeDef = 1;
+			setaActiveCountryCode(1);
 		} else if (store === 'au') {
-			numberCodeDef = 61;
+			setaActiveCountryCode(61);
 		} else if (store === 'uk') {
-			numberCodeDef = 44;
+			setaActiveCountryCode(44);
 		} else if (store === 'ca') {
-			numberCodeDef = 1;
+			setaActiveCountryCode(1);
 		} else if (store === 'eu' || store === 'fr') {
-			numberCodeDef = 33;
+			setaActiveCountryCode(33);
 		} else if (store === 'de') {
-			numberCodeDef = 49;
+			setaActiveCountryCode(49);
 		} else if (store === 'my' || store === 'my') {
-			numberCodeDef = 60;
+			setaActiveCountryCode(60);
+		} else {
+			setaActiveCountryCode(65)
 		}
-
-		setaActiveCountryCode(numberCodeDef)
     }, [store]);
 
     useEffect(() => {
