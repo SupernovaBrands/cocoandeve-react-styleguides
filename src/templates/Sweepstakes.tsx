@@ -193,6 +193,7 @@ const Sweepstakes = (props) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center',
 	};
+
     return (
         <>
             <section className={`sweepstakes ${content?.bg_color ? content?.bg_color : 'bg-primary-light'}`} style={isDesktop ? backgroundStyleDesktop : backgroundStyle}>
@@ -210,21 +211,28 @@ const Sweepstakes = (props) => {
 											</div>
 										</div>
 									)}
-                                    <div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
-                                        <div className="w-full pr-2 pl-2">
-                                            <input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className="block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2"></input>
-                                        </div>
-                                        <small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
-                                    </div>
 
-                                    <div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
-                                    <div className="flex flex-wrap">
-                                        <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                            <InputCountry store={store} id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />
-                                            <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
-                                        </div>
-                                        <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
-                                    </div>
+									{content.email_en && (
+										<div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
+											<div className="w-full pr-2 pl-2">
+												<input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className="block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2"></input>
+											</div>
+											<small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
+										</div>
+									)}
+
+                                    {content.email_en && content.phone_en && (
+										<div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
+									)}
+                                    {content.phone_en && (
+										<div className="flex flex-wrap">
+											<div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
+												<InputCountry store={store} id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />
+												<input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
+											</div>
+											<small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
+										</div>
+									)}
                                     {/* <div className="flex flex-wrap items-center place-content-center my-2">
                                         <div className="custom-control custom-checkbox relative flex-grow max-w-full flex flex-wrap items-center place-content-center">
                                             <input type="checkbox" name="tos" className="custom-control-input" required id="sweepstakes__toc" />
