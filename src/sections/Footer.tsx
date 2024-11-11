@@ -44,6 +44,18 @@ const Footer = (props: any) => {
         } catch(e){
             console.log(e);
         }
+
+        try {
+			// @ts-ignore
+			window.wtba = window.wtba || [];
+			// @ts-ignore
+			window.wtba.push({
+				"type": "identify",
+				"email": email
+			});
+		} catch (e) {
+			console.log('error wtba push');
+		}
 	};
 
     const handleEmail = (e) => {
