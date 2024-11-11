@@ -179,7 +179,7 @@ const Sweepstakes = (props) => {
                 <div className="container px-0">
                     <div className="flex flex-wrap m-0 items-center place-content-end">
                         <div className="sweepstakes__content px-g lg:w-5/12 lg:order-1 lg:my-4">
-                            {!formCompleted && activeCountryCode ? (
+                            {!formCompleted ? (
                                 <form onSubmit={handleForm} id="sweepstakes__form" className="px-4 py-3 bg-white text-center rounded-h mt-2 lg:mt-0">
                                     <h1 className={`${content.heading_col} mb-1`}>{content.heading}</h1>
                                     <p className={`${content.subheading_col} mb-[1rem]`}>{parse(`${content.subheading}`)}</p>
@@ -200,7 +200,7 @@ const Sweepstakes = (props) => {
                                     <div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
                                     <div className="flex flex-wrap">
                                         <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                            <InputCountry store={store} id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />
+											{activeCountryCode && <InputCountry store={store} id="modal--sweepstakes__country" className={`bg-gray-400 mb-[0!important]`} handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />}
                                             <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
                                         </div>
                                         <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
