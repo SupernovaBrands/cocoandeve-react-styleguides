@@ -18,30 +18,6 @@ const validForm = {
 
 const Sweepstakes = (props) => {
     const { content, store } = props;
-	// let letterCodeDef = 'SG';
-	let numberCodeDef = 65;
-	if (store === 'us') {
-		// letterCodeDef = 'US';
-		numberCodeDef = 1;
-	} else if (store === 'au') {
-		// letterCodeDef = 'AU';
-		numberCodeDef = 61;
-	} else if (store === 'uk') {
-		// letterCodeDef = 'GB';
-		numberCodeDef = 44;
-	} else if (store === 'ca') {
-		// letterCodeDef = 'CA';
-		numberCodeDef = 1;
-	} else if (store === 'eu') {
-		// letterCodeDef = 'FR';
-		numberCodeDef = 33;
-	} else if (store === 'de') {
-		// letterCodeDef = 'DE';
-		numberCodeDef = 49;
-	} else if (store === 'my' || store === 'my') {
-		// letterCodeDef = 'MY';
-		numberCodeDef = 60;
-	}
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -51,7 +27,7 @@ const Sweepstakes = (props) => {
     const [countryCode, setCountryCode] = useState(65);
     const [isDesktop, setIsDesktop] = useState(false);
     const [allowSubmit, setAllowSubmit] = useState(false);
-    const [activeCountryCode, setaActiveCountryCode] = useState(numberCodeDef);
+    const [activeCountryCode, setaActiveCountryCode] = useState();
 	const [social, setSocial] = useState('');
     let tiktokUrl = 'https://www.tiktok.com/@coco_and_eve?lang=en';
     const emailRef = useRef(null);
@@ -145,24 +121,28 @@ const Sweepstakes = (props) => {
 	}
 
 	useEffect(() => {
-        let numberCodeDef = 65;
-		if (store === 'us') {
-			numberCodeDef = 1;
+		if (store === 'us' || store === 'ca') {
+			// @ts-ignore
+			setaActiveCountryCode(1);
 		} else if (store === 'au') {
-			numberCodeDef = 61;
+			// @ts-ignore
+			setaActiveCountryCode(61);
 		} else if (store === 'uk') {
-			numberCodeDef = 44;
-		} else if (store === 'ca') {
-			numberCodeDef = 1;
+			// @ts-ignore
+			setaActiveCountryCode(44);
 		} else if (store === 'eu' || store === 'fr') {
-			numberCodeDef = 33;
+			// @ts-ignore
+			setaActiveCountryCode(33);
 		} else if (store === 'de') {
-			numberCodeDef = 49;
+			// @ts-ignore
+			setaActiveCountryCode(49);
 		} else if (store === 'my' || store === 'my') {
-			numberCodeDef = 60;
+			// @ts-ignore
+			setaActiveCountryCode(60);
+		} else {
+			// @ts-ignore
+			setaActiveCountryCode(65)
 		}
-
-		setaActiveCountryCode(numberCodeDef)
     }, [store]);
 
     useEffect(() => {
@@ -220,7 +200,7 @@ const Sweepstakes = (props) => {
                                     <div className="text-sm sm:mb-1 lg:mb-2">- or -</div>
                                     <div className="flex flex-wrap">
                                         <div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
-                                            <InputCountry store={store} id="modal--sweepstakes__country" className="bg-gray-400 mb-[0!important]" handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />
+											{activeCountryCode && <InputCountry store={store} id="modal--sweepstakes__country" className={`bg-gray-400 mb-[0!important]`} handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />}
                                             <input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
                                         </div>
                                         <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
