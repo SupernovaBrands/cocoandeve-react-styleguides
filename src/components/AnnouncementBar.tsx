@@ -118,17 +118,25 @@ const AnnouncementBar = (props: any) => {
 	}, []);
 
 	useEffect(() => {
+		if (timerData && timerData.notice_bar && isShowOnCurrentTemplate()) {
+			const startAt = getUtcTime(timerData.notice_start_at);
+			const endAt = getUtcTime(timerData.notice_end_at);
+			const now = nowUtcTime();
+			starTimer(now, startAt, endAt);
+		}
+	}, [props]);
+
+	useEffect(() => {
 		if (showTimer) document.body.classList.add('timer-bar--show');
 		else document.body.classList.remove('timer-bar--show');
 	}, [showTimer]);
 	const bg = background ? background : 'primary-light';
 	const lineColor = loaded ? `${textColor || 'text-secondary hover:text-secondary'}` : `text-primary-light hover:text-primary-light`;
 	const bgColor = loaded ? `${background || 'bg-primary-light'}` : 'bg-primary-light';
-
 	return (
 		<>
 			{timerData && timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
-				<div className={`${scrolled ? 'hidden' : ''} px-[0] py-[0.59375em] announcement-bar announcement-bar__timer w-full ${timerData.notice_bar_timer_background ? timerData.notice_bar_timer_background : 'bg-primary-light'}`}>
+				<div className={`${timerData?.is_sticky ? '' : scrolled ? 'hidden' : ''} px-[0] py-[0.59375em] announcement-bar announcement-bar__timer w-full ${timerData.notice_bar_timer_background ? timerData.notice_bar_timer_background : 'bg-primary-light'}`}>
 					<a href={`${timerData.notice_bar_timer_link ? timerData.notice_bar_timer_link : '#'}`} className="no-underline hover:no-underline">
 						<div className={`${timerData.notice_bar_timer_text_color ? timerData.notice_bar_timer_text_color : 'text-dark'} container text-center flex items-center justify-between lg:justify-center`}>
 							<span className="announcement-bar__timer__title block max-w-[45%] lg:max-w-none lg:inline mb-0 font-normal text-left font-size-sm font-size-dt-lg mr-0 lg:mr-4">{timerData.notice_text}</span>
