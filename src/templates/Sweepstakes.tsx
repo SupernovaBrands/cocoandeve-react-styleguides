@@ -17,7 +17,7 @@ const validForm = {
 };
 
 const Sweepstakes = (props) => {
-    const { content, store } = props;
+    const { content, store, trackBluecoreLaunchWaitlistEvent } = props;
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -95,6 +95,7 @@ const Sweepstakes = (props) => {
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
+				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
 				setFormCompleted(true);
 			} else {
 				setEmailError({ valid: false, error: 'Please enter a valid email address' });
