@@ -146,7 +146,7 @@ const SideProductRoutineCarousel = (props: any) => {
 
                         </Carousel.Inner>
                     </Carousel.Wrapper>
-                    {finalItems.length > 0 && (
+                    {finalItems.length > 2 && (
                         <div className="px-0">
                             <div className="carousel__progress bg-gray-400">
                                 <div
