@@ -18,6 +18,15 @@ const options: EmblaOptionsType = {
     dragFree: true,
 };
 
+const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ? 
+    <Carousel.Wrapper emblaApi={emblaApi1}>
+        <Carousel.Inner emblaRef={emblaRef1} className="mx-0">
+            {children}
+        </Carousel.Inner>
+    </Carousel.Wrapper>
+    : children
+)
+
 const SideProductRoutineCarousel = (props: any) => {
     const { items, store, launchWL, loggedInEmail, trackBluecoreLaunchWaitlistEvent, submitsToSmsBumpAPi, trackEvent, addToCart, generalSetting, buildProductCardModel, badgeData } = props;
     const [launchSubmitted, setLaunchSubmitted] = useState(false);
@@ -114,38 +123,36 @@ const SideProductRoutineCarousel = (props: any) => {
         <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2">
             <div className="w-full justify-center px-0">
                 <p className="h2 w-full mb-3 ">Shop the Routine</p>
-                <div className="mx-0">
-                    <Carousel.Wrapper emblaApi={emblaApi1}>
-                        <Carousel.Inner emblaRef={emblaRef1} className="mx-0">
-                            {finalItems?.length > 0 && finalItems.map((data: any, index: number) => {
-                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, data.handle);
-                                return (
-                                    <ProductCard
-                                        key={`${index}-side-routine`}
-                                        product={data}
-                                        className={`relative mb-1 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_172.5px] pl-0 pr-hg' : index === 2 ? 'flex-[0_0_172.5px] pr-0 pl-hg' : 'flex-[0_0_180px] pr-hg pl-hg'}`}
-                                        button={true}
-                                        setWaitlistData={setWaitlistData}
-                                        smSingleStar={true}
-                                        smSingleStarAllDevice={true}
-                                        addToCart={addToCart}
-                                        trackEvent={trackEvent}
-                                        eventNameOnClick='shop_routine_product_card'
-                                        isLaunchWL={isLaunchWL}
-                                        launchBox={launchBox}
-                                        setLaunchWLModal={setLaunchWLModal}
-                                        setLaunchWLModal2={setLaunchWLModal2}
-                                        setLaunchWLModal3={setLaunchWLModal3}
-                                        generalSetting={generalSetting}
-                                        collectionTemplate={true}
-                                        store={store}
-                                        sideUpsell={true}
-                                    />
-                                )
-                            })}
-
-                        </Carousel.Inner>
-                    </Carousel.Wrapper>
+                <div className={`mx-0 ${finalItems?.length <= 2 ? 'flex' : ''}`}>
+                    <WithCarousel carousel={finalItems?.length > 2} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
+                        {finalItems?.length > 0 && finalItems.map((data: any, index: number) => {
+                            const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, data.handle);
+                            return (
+                                <ProductCard
+                                    key={`${index}-side-routine`}
+                                    product={data}
+                                    className={`relative mb-1 flex flex-col w-1/2 md:w-[180px]  text-center ${index === 0 ? 'flex-[0_0_172.5px] pl-0 pr-hg' : index === 2 ? 'flex-[0_0_172.5px] pr-0 pl-hg' : 'flex-[0_0_180px] pr-hg pl-hg'}`}
+                                    button={true}
+                                    setWaitlistData={setWaitlistData}
+                                    smSingleStar={true}
+                                    smSingleStarAllDevice={true}
+                                    addToCart={addToCart}
+                                    trackEvent={trackEvent}
+                                    eventNameOnClick='shop_routine_product_card'
+                                    isLaunchWL={isLaunchWL}
+                                    launchBox={launchBox}
+                                    setLaunchWLModal={setLaunchWLModal}
+                                    setLaunchWLModal2={setLaunchWLModal2}
+                                    setLaunchWLModal3={setLaunchWLModal3}
+                                    generalSetting={generalSetting}
+                                    collectionTemplate={true}
+                                    store={store}
+                                    sideUpsell={true}
+                                />
+                            )
+                        })}
+                    </WithCarousel>
+                    
                     {finalItems.length > 2 && (
                         <div className="px-0">
                             <div className="carousel__progress bg-gray-400">
