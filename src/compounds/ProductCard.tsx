@@ -302,7 +302,7 @@ const ProductCardTall = (props:any) => {
                             <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
                         </>
                     )}
-                    {props.product.imgHover && (
+                    {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
                         <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
                             {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
                         </picture>
