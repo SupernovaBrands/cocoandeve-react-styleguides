@@ -118,7 +118,7 @@ const SideProductRoutineCarousel = (props: any) => {
         // const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
     }, []);
 
-	return (
+	return finalItems.length > 0 && (
         <>
         <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2">
             <div className="w-full justify-center px-0">
