@@ -168,7 +168,6 @@ const Header = (props: any) => {
 	useEffect(() => {
 		if (isLoggedIn && addingReward) setUserPts(-1);
 	}, [addingReward]);
-
 	return (
 		<>
 			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
@@ -185,6 +184,8 @@ const Header = (props: any) => {
 						timerData={timerBar}
 						isScrollEnabled={annBar?.isScrollEnabled || false}
 						isStickyEnabled={annBar?.isStickyEnabled || false}
+						background={annBar?.background || 'bg-primary-light'}
+						textColor={annBar?.textColor || 'text-secondary'}
 					/>
 				)}
 
