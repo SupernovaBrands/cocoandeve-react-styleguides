@@ -97,7 +97,7 @@ const SideProductRoutineCarousel = (props: any) => {
         })
         const cardModel = mappedNodes?.filter((item) => item.availableForSale)?.map((r:any) => buildProductCardModel(store, r, generalSetting, badgeData)) || [];
         const cardModelmapped = cardModel.map((i) => {
-            const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, label, id, imgHover } = i;
+            const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, badgeBgColor, badgeTextColor, label, id, imgHover } = i;
             return {
                 availableForSale,
                 title,
@@ -109,6 +109,8 @@ const SideProductRoutineCarousel = (props: any) => {
                 comparePrice,
                 variants,
                 badgeText,
+                badgeBgColor,
+			    badgeTextColor,
                 label,
                 imgHover,
             }
