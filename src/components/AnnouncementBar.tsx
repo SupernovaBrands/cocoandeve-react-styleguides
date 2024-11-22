@@ -159,17 +159,17 @@ const AnnouncementBar = (props: any) => {
 								<React.Fragment key={index}>
 									{text && (
 										<>
-											<span><a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
+											<span><a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
 										</>
 									)}
 									{text2 && (
 										<>
-											<span><a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
+											<span><a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
 										</>
 									)}
 									{text3 && (
 										<>
-											<span><a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
+											<span><a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
 										</>
 									)}
 								</React.Fragment>
@@ -183,13 +183,13 @@ const AnnouncementBar = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
 									{text && (
-										<a href={url} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
+										<a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
 									)}
 									{text2 && (
-										<a href={url2} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
+										<a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
 									)}
 									{text3 && (
-										<a href={url3} className={`${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
+										<a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
 									)}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
