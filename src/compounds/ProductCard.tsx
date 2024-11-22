@@ -310,7 +310,7 @@ const ProductCardTall = (props:any) => {
                 </picture>
             </a>
 
-            { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'text-body'} top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em] ${props.sideUpsell ? 'lg:top-[8px]' : ''}`}>{props.product.badgeText}</span>) }
+            { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em] ${props.sideUpsell ? 'lg:top-[8px]' : ''}`}>{props.product.badgeText}</span>) }
             <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : ''} ${props.carousel && !props.shopArticle ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b`}>
                 <div className="review-stars__number flex justify-center mb-1">
                     {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
