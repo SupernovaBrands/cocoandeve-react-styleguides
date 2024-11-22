@@ -297,7 +297,7 @@ const Cart: React.FC<Props> = (props) => {
 
 									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">Black Friday Savings</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
 										</>
 									)}
@@ -311,7 +311,7 @@ const Cart: React.FC<Props> = (props) => {
 
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{tStrings.cart_discount}</p>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">Black Friday Savings</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
