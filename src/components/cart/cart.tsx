@@ -48,7 +48,7 @@ interface Props {
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting } = props;
 
 	// const storeApi = new storefrontApi();
 	// console.log(discountMeter, 'discountMeter');
@@ -58,6 +58,9 @@ const Cart: React.FC<Props> = (props) => {
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
 		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true,
 	});
+
+	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
+	const bundleLabel = strapiCartSetting?.body?.cartGeneral?.drawer_bundle_discount || 'Bundle Savings';
 
 	const [isLastStockKey, setLastStockKey] = useState('');
 
@@ -290,14 +293,14 @@ const Cart: React.FC<Props> = (props) => {
 
 									{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-bundledisount-label">{tStrings.cart_bundle_discount}</p>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-bundledisount-label">{bundleLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, false, store)}`}</p>
 										</>
 									)}
 
 									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">Black Friday Savings</p>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
 										</>
 									)}
@@ -311,7 +314,7 @@ const Cart: React.FC<Props> = (props) => {
 
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">Black Friday Savings</p>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
