@@ -142,11 +142,11 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int') && item.merchandise.product.handle === 'super-hydration-kit') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'ca') && item.merchandise.product.handle === 'super-hydration-kit') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
 			}
 
@@ -154,7 +154,7 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee76b291-fb34-4025-4476-e0d564560c00/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'deep-condition-bundle') {
+			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 			}
 
@@ -165,6 +165,9 @@ export const CartItem = (props:CartItemProps) => {
 
 			if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			}
+			if (store === 'au' && item.merchandise.product.handle === 'super-hydration-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/79f9beed-c3a2-4052-86e2-eba8d6ef5400/public';
 			}
 		}
 
