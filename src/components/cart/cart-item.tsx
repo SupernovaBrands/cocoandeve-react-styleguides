@@ -166,6 +166,9 @@ export const CartItem = (props:CartItemProps) => {
 			if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 			}
+			if (store === 'au' && item.merchandise.product.handle === 'super-hydration-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/79f9beed-c3a2-4052-86e2-eba8d6ef5400/public';
+			}
 		}
 
 		setFeaturedImageUrl(featuredImage);
