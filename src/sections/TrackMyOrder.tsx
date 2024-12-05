@@ -68,6 +68,7 @@ const TrackMyOrder = (props: any) => {
                         <h1 className="block w-full mt-[10px] mx-[0] mb-[0] pt-[40px] px-[0] pb-[0] text-[20px] tracking-[.6px] bg-[#fff] uppercase leading-[1.1] text-[#484848]">TRACK MY ORDER</h1>
                         <div className="lg:w-[57%] pt-2 lg:mb-2">
                             <form className="form-group w-full" onSubmit={tracking}>
+                                <label htmlFor="tracking_number" className="sr-only">Order or Tracking Number</label>
                                 <input ref={inputRef} placeholder="Enter your order number or tracking number" defaultValue={code} className="w-full text-dark px-[15px] py-[12px] mb-[5px] border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm placeholder:text-gray-700" id="tracking_number" name="order_number" type="text" />
                                 <p className="font-size-xs text-left">To track a different order/shipment, please enter the correct order number or tracking number above.</p>
                                 <button type="submit" className='mb-1 btn btn-primary w-100 block mt-g py-g w-full rounded'>{submitBtn}</button>

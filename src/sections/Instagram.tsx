@@ -62,7 +62,7 @@ const Instagram = (props: any) => {
                                 <div className="flex flex-wrap m-0">
                                     <div className="w-full lg:w-2/3 p-0">
                                         {data[0] && (
-                                            <a href={data[0].link} target="_blank"  className='block instagram--feed--link'  key={`inst1`}>
+                                            <a href={data[0].link} target="_blank"  className='block instagram--feed--link'  key={`inst1`} aria-label="Visit Instagram profile">
                                                 <picture>
                                                     <source srcSet={data[0].image} />
                                                     <img className="w-full img-big aspect-square object-cover" src={data[0].image} loading="lazy" />
@@ -74,7 +74,7 @@ const Instagram = (props: any) => {
                                         <div className="flex flex-wrap m-0 ">
                                             {data && data.length && data.slice(1, 3).map((item, index) => (
                                                 <div className="lg:w-full w-1/2 p-0"  key={`inst2--${index}`}>
-                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image}/>
                                                             <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
@@ -86,7 +86,7 @@ const Instagram = (props: any) => {
                                     </div>
                                     {data && data.length && data.slice(3, 6).map((item, index) => (
                                         <div className={`w-1/2 lg:w-1/3 p-0 ${index === 2 ? 'hidden lg:block' : ''}`} key={`inst3--${index}`}>
-                                            <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                            <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                 <picture>
                                                     <source srcSet={item.image}/>
                                                     <img className="w-full aspect-square object-cover" src={item.image} loading="lazy" />
@@ -102,7 +102,7 @@ const Instagram = (props: any) => {
                                         <div className="flex flex-wrap m-0">
                                             {data && data.length && data.slice(6, 8).map((item, index) => (
                                                 <div className="lg:w-1/2 p-0"  key={`inst4--${index}`}>
-                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image}/>
                                                             <img className="w-full aspect-square object-cover" src={item.image} />
@@ -112,7 +112,7 @@ const Instagram = (props: any) => {
                                             ))}
                                             {data && data.length && data.slice(8, 9).map((item, index) => (
                                                 <div className="w-full p-0"  key={`inst5--${index}`}>
-                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image}/>
                                                             <img className="w-full aspect-square object-cover" src={item.image} />
@@ -126,7 +126,7 @@ const Instagram = (props: any) => {
                                         <div className="flex flex-wrap m-0 ">
                                             {data && data.length && data.slice(9, 15).map((item, index) => (
                                                 <div className="lg:w-1/2 p-0"  key={`inst6--${index}`}>
-                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link'>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image}/>
                                                             <img className="w-full aspect-square object-cover" src={item.image} />

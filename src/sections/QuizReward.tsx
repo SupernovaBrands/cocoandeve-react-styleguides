@@ -7,7 +7,7 @@ const QuizReward = (props: any) => {
 				<figure className="w-full lg:w-1/2 px-g mb-g lg:mb-0 block relative">
 					<picture className="block">
 						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a51bcbe7-e43e-4762-4a41-916d00416b00/1140x" media="(min-width: 992px)" />
-						<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56f87000-b2e4-4813-a00f-d7a0eee86c00/828x" loading="lazy" />
+						<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56f87000-b2e4-4813-a00f-d7a0eee86c00/828x" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" />
 					</picture>
 					<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
 						<p className="text-lg lg:text-2xl mb-g mb-lg-2 font-bold">Tan Quiz</p>
@@ -19,7 +19,7 @@ const QuizReward = (props: any) => {
 					<figure className="w-full lg:w-1/2 px-g mb-g lg:mb-0 block relative rounded">
 						<picture className="block">
 							<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4fe29e0c-7f31-4457-1192-4b0e9ba18400/public" media="(min-width: 992px)" />
-							<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7753bfb-0638-4c83-81c9-12ab67a3f600/828x" loading="lazy" />
+							<img className="w-full rounded" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7753bfb-0638-4c83-81c9-12ab67a3f600/828x" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
 						</picture>
 						<figcaption className="absolute left-[1.25em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-g lg:pb-0 w-3/5 lg:w-full items-center [flex-flow:column] justify-center">
 							<p className="text-lg lg:text-2xl mb-g mb-lg-2 font-bold">Rewards Program</p>

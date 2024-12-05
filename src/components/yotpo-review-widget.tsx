@@ -219,6 +219,8 @@ const YotpoReviewWidget = (props:any) => {
 		setRevLoading(false);
 	};
 
+	console.log('review testing', reviews);
+
 	const getReviews = (page = 1) => {
 		setRevLoading(true);
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
