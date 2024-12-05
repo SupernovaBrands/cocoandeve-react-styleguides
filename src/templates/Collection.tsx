@@ -60,6 +60,7 @@ const Collection = (props: any) => {
         addToCart,
         tcPopups,
         generalSetting,
+        waitlistPdpSetting,
         store,
         buildProductCardModel,
         trackBluecoreEvent,
@@ -574,7 +575,7 @@ const Collection = (props: any) => {
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                    <ModalWaitlist bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                    <ModalWaitlist store={store} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} waitlistPdp={waitlistPdpSetting} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
                 </Modal>
             )}
             {!isLoading && launchWL && (

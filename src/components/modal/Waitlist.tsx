@@ -1,6 +1,6 @@
 import useGlobalSettings from '~/hooks/useGlobalSettings';
 import Button from '../Button';
-import CloseButton from './CloseButton';
+// import CloseButton from './CloseButton';
 import usePreview from '~/hooks/usePreview';
 import { useEffect, useRef, useState } from 'react';
 import { subscribeBluecoreWaitlist, validateEmail } from '~/modules/utils';
@@ -20,22 +20,28 @@ interface WatilistData {
 }
 
 type WaitlistProp = {
+	store: string,
 	handleClose: () => void
 	data: WatilistData,
 	trackBluecoreEvent?: any,
 	bluecoreProductWaitlist?: any,
+	waitlistPdp?: any,
 }
 
-const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist }) => {
+const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdp }) => {
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
 	const { isPreview } = usePreview();
-    const store = (isPreview) ? 'dev' : 'us';
+    // const store = (isPreview) ? 'dev' : 'us';
     const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
     const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
+	const [stockDate, setStockDate] = useState(data.date);
+
+	// console.log('wl popup strapi', waitlistPopupData);
+	// console.log('pdp waitlist data strapi', waitlistPdp);
 
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
 	const wlNoOOS = [];
@@ -106,6 +112,51 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 		};
 	  }, [success]);
 
+	
+	const currId = parseInt(data.productId, 10) || 0;
+	
+	useEffect(() => {
+		const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
+		console.log('wlPdpData', wlPdpData);
+		console.log('currId', currId);
+		if (currId !== 0 && wlPdpData) {
+			const variantIds = wlPdpData.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds2 = wlPdpData.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds3 = wlPdpData.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds4 = wlPdpData.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds5 = wlPdpData.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+
+			console.log('currid', currId);
+			console.log('variant ids 1', variantIds);
+			if (variantIds.includes(currId)) {
+				console.log('1');
+				setStockDate(wlPdpData.vrt_waitlist_form_title_cs);
+			} else if (variantIds2.includes(currId)) {
+				console.log('2');
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
+				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_2);
+			} else if (variantIds3.includes(currId)) {
+				console.log('3');
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
+				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_3);
+			} else if (variantIds4.includes(currId)) {
+				console.log('4');
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
+				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_4);
+			} else if (variantIds5.includes(currId)) {
+				console.log('5');
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
+				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_5);
+			}
+		}
+	}, [data.open]);
+
+	console.log('data wl', data)
+
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
 			{/* <CloseButton handleClose={handleClose} className="!font-size-sm" /> */}
@@ -125,8 +176,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
 										<p className="text-gray-600 mb-[1rem] text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
 
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}
@@ -136,8 +187,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}
@@ -147,8 +198,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}
