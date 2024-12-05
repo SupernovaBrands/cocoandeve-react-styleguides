@@ -83,6 +83,15 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (cartData) {
+
+			// validate for OOS item in cart
+			const oosInCarts = cartData.lines.filter((line: any) => !line.merchandise.availableForSale);
+			if (oosInCarts.length > 0) {
+				oosInCarts.forEach((item: any) => {
+					onRemoveItem(item, []);
+				})
+			}
+			
 			setCart({ ...cartData });
 			setCombineDiscount(cartData.combineDiscount);
 		}
