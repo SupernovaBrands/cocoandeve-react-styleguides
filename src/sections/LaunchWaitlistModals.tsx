@@ -99,6 +99,8 @@ const LaunchWaitlistModals = (props) => {
                     setLaunchSubmitted={setLaunchSubmitted}
                     tags={launchWLModal.tags}
                     launchModalData={launchWLModal}
+                    emailShow={launchWL.email_en}
+                    phoneShow={launchWL.phone_en}
                 />
             </Modal>
             <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal2.open} handleClose={() => {setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}}>
@@ -123,6 +125,8 @@ const LaunchWaitlistModals = (props) => {
                     setLaunchSubmitted={setLaunchSubmitted}
                     tags={launchWLModal2.tags}
                     launchModalData={launchWLModal2}
+                    emailShow={launchWL.email_en2}
+                    phoneShow={launchWL.phone_en2}
                 />
             </Modal>
             <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal3.open} handleClose={() => {setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}}>
@@ -147,6 +151,8 @@ const LaunchWaitlistModals = (props) => {
                     setLaunchSubmitted={setLaunchSubmitted}
                     tags={launchWLModal3.tags}
                     launchModalData={launchWLModal3}
+                    emailShow={launchWL.email_en3}
+                    phoneShow={launchWL.phone_en3}
                 />
             </Modal>
         </>

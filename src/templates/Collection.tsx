@@ -99,6 +99,8 @@ const Collection = (props: any) => {
         handle: null,
         tags: [],
         productId: null,
+        emailShow: true,
+        phoneShow: true,
     });
     const [launchWLModal2, setLaunchWLModal2] = useState({
         open: false,
@@ -106,6 +108,8 @@ const Collection = (props: any) => {
         handle: null,
         tags: [],
         productId: null,
+        emailShow: true,
+        phoneShow: true,
     });
     const [launchWLModal3, setLaunchWLModal3] = useState({
         open: false,
@@ -113,6 +117,8 @@ const Collection = (props: any) => {
         handle: null,
         tags: [],
         productId: null,
+        emailShow: true,
+        phoneShow: true,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
