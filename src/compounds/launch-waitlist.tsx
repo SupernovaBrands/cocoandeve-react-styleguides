@@ -30,6 +30,8 @@ interface LaunchWaitListProps {
     box: number;
     launchModalData?: any;
     handle?: string;
+    emailShow?: boolean;
+    phoneShow?: boolean;
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
@@ -179,48 +181,54 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                     </button>
                 ) }
                 {!props.productCard && <h3 className="mb-1">{props.title}</h3>}
-                {props.productCard && <h2 className="h1 mx-auto mb-1">{props.title}</h2>}
+                {props.productCard && <h2 className="h1 mx-auto mb-1 a">{props.title}</h2>}
                 <p className={`${props.productCard ? 'mb-2' : 'mb-3 font-size-sm'}`} dangerouslySetInnerHTML={{__html: props?.content}}></p>
                 <form noValidate onSubmit={submitForm} data-pdp="false" data-product-id={props.launchModalData?.productId}>
-                    <div className="flex flex-wrap -mx-2">
-                        <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
-                        {emailError && <span className={`w-full text-primary email-error text-sm mb-g -mt-25 ${props.productCard ? 'px-2 text-left' : ''}`}>Please enter a valid email address</span> }
-                    </div>
-                    <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
-                    <div className={`flex flex-wrap ${props.productCard ? '' : '-mx-2'}`}>
-                        <div className={`flex flex-nowrap ${props.productCard ? 'w-full mb-g' : ''}`}>
-                            {props.productCard && (
-                                <label htmlFor="select-countries" className="border border-gray-400 input-group-addon px-[1em] py-[0.875em] h-[3.125rem] form-control relative bg-gray-400 rounded-l-[4px] shrink grow basis-auto w-[1%] lg:border-r-[2px] lg:border-r-transparent">
-                                    <span className="absolute items-center masking-select left-[1em]">{phoneCode}</span>
-                                    <ChevronDown className="h-[.75em] right-[.625em] absolute top-[50%] -translate-y-[50%] fill-[#484848]" />
-                                    <select
-                                        id="select-countries"
-                                        defaultValue={phoneCode.replace('+', '')}
-                                        onChange={changePhoneCode}
-                                        className="opacity-0 absolute top-0 left-0 w-[84.56px] h-[3.125rem] lg:w-[150.39px]"
-                                    >
-                                        <option value="" disabled>Select Country</option>
-                                        {countries.map((option, index) => (
-                                            <option key={`${index}-${option.value}`} value={option.value}>{option.label}</option>
-                                        ))}
-                                    </select>
-                                </label>
-                            )}
-                            <Select fontNormal={props.productCard}
-                                    onChange={changePhoneCode}
-                                    border={false}
-                                    groupClass={`max-w-[25%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`}
-                                    id="select-countries"
-                                    placeholder="Select Country"
-                                    masking={true} options={countries}
-                                    selected={`${phoneCode.replace('+', '')}`}
-                                    maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                            <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`}
-                                groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`}
-                                inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
+                    {props.emailShow && (
+                        <div className="flex flex-wrap -mx-2">
+                            <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
+                            {emailError && <span className={`w-full text-primary email-error text-sm mb-g -mt-25 ${props.productCard ? 'px-2 text-left' : ''}`}>Please enter a valid email address</span> }
                         </div>
-                        { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25 lg:pl-3">Please enter a valid phone number</span> }
-                    </div>
+                    )}
+                    {props.emailShow && props.phoneShow && (
+                        <span className={`block mb-1 ${props.productCard ? 'font-bold' : '-mt-1'}`}>or</span>
+                    )}
+                    {props.phoneShow && (
+                        <div className={`flex flex-wrap ${props.productCard ? '' : '-mx-2'}`}>
+                            <div className={`flex flex-nowrap ${props.productCard ? 'w-full mb-g' : ''}`}>
+                                {props.productCard && (
+                                    <label htmlFor="select-countries" className="border border-gray-400 input-group-addon px-[1em] py-[0.875em] h-[3.125rem] form-control relative bg-gray-400 rounded-l-[4px] shrink grow basis-auto w-[1%] lg:border-r-[2px] lg:border-r-transparent">
+                                        <span className="absolute items-center masking-select left-[1em]">{phoneCode}</span>
+                                        <ChevronDown className="h-[.75em] right-[.625em] absolute top-[50%] -translate-y-[50%] fill-[#484848]" />
+                                        <select
+                                            id="select-countries"
+                                            defaultValue={phoneCode.replace('+', '')}
+                                            onChange={changePhoneCode}
+                                            className="opacity-0 absolute top-0 left-0 w-[84.56px] h-[3.125rem] lg:w-[150.39px]"
+                                        >
+                                            <option value="" disabled>Select Country</option>
+                                            {countries.map((option, index) => (
+                                                <option key={`${index}-${option.value}`} value={option.value}>{option.label}</option>
+                                            ))}
+                                        </select>
+                                    </label>
+                                )}
+                                <Select fontNormal={props.productCard}
+                                        onChange={changePhoneCode}
+                                        border={false}
+                                        groupClass={`max-w-[25%] relative pr-0 ${props.productCard ? 'h-[3.125rem] md:min-w-[9.375rem] hidden' : 'block md:max-w-[20%] pl-2'}`}
+                                        id="select-countries"
+                                        placeholder="Select Country"
+                                        masking={true} options={countries}
+                                        selected={`${phoneCode.replace('+', '')}`}
+                                        maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
+                                <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`}
+                                    groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`}
+                                    inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
+                            </div>
+                            { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25 lg:pl-3">Please enter a valid phone number</span> }
+                        </div>
+                    )}
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
                         {props.productCard && (
                             <div className="flex flex-wrap -mx-hg lg:-mx-g lg:mt-25">
