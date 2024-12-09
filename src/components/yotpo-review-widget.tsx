@@ -920,9 +920,14 @@ const YotpoReviewWidget = (props:any) => {
 											<p className="text-sm mb-1 sm:hidden lg:block">
 												{formatDate(review.created_at, formattedDate)}
 											</p>
-											<div className="flex text-secondary mb-1 sm:block lg:hidden">
+											<div className="flex text-secondary mt-1 sm:block lg:hidden">
 												<ReviewStar score={review.score} />
 											</div>
+											{review?.products?.length > 0 && (
+												<a className="mb-1 mt-1 block underline lg:hidden sm:block" href={`/products/${review?.products[0]?.slug}`}>
+													{review?.products[0]?.name}
+												</a>
+											)}
 											{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
 												<p key={kebabCase(field[0])} className="text-sm mb-0">
 													<strong>
@@ -940,6 +945,11 @@ const YotpoReviewWidget = (props:any) => {
 											<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
 												<ReviewStar score={review.score} />
 											</div>
+											{review?.products?.length > 0 && (
+												<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`/products/${review?.products[0]?.slug}`}>
+													{review?.products[0]?.name}
+												</a>
+											)}
 											<h4 className="mb-1 mt-1 font-bold lg:font-normal">
 												{decodeHtml(review.title)}
 											</h4>

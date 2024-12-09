@@ -264,12 +264,18 @@ const Article = (props) => {
             ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)') 
             : document.querySelectorAll('.article__content h3');
             if (articleShops && articleContent.length) {
+                const shopArticles = content.BlogContentMultiStores[region].body_content.includes('id="shop-articles"');
                 let targetAppend = parseInt((articleContent.length / 2).toString(), 10);
                 targetAppend = targetAppend > 1 ? targetAppend - 1 : targetAppend;
                 const targetContent = articleContent[targetAppend];
                 articleShops.forEach(articleShop => {
                     articleShop.classList.remove('w-full');
-                    targetContent.parentNode.insertBefore(articleShop, targetContent);
+                    if (shopArticles) {
+                        const shopArticlesDiv = document.getElementById(`shop-articles`);
+                        shopArticlesDiv.append(articleShop);
+                    } else {
+                        targetContent.parentNode.insertBefore(articleShop, targetContent);
+                    }
                 });
                 if (window.innerWidth > screenLG) {
                     articleShops.forEach(articleShop => {
