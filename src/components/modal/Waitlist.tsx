@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 import useGlobalSettings from '~/hooks/useGlobalSettings';
 import Button from '../Button';
 // import CloseButton from './CloseButton';
@@ -31,6 +32,7 @@ type WaitlistProp = {
 const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdp }) => {
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
+	const [restockType, setRestockType] = useState(null);
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
@@ -40,8 +42,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
     const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
 	const [stockDate, setStockDate] = useState(data.date);
 
-	// console.log('wl popup strapi', waitlistPopupData);
-	// console.log('pdp waitlist data strapi', waitlistPdp);
+	// console.log('pdp waitlist data strapi', waitlistPopupData);
 
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
 	const wlNoOOS = [];
@@ -117,8 +118,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	
 	useEffect(() => {
 		const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
-		console.log('wlPdpData', wlPdpData);
-		console.log('currId', currId);
+		// console.log('wl pdp data', wlPdpData);
 		if (currId !== 0 && wlPdpData) {
 			const variantIds = wlPdpData.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = wlPdpData.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
@@ -126,36 +126,40 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 			const variantIds4 = wlPdpData.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds5 = wlPdpData.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 
-			console.log('currid', currId);
-			console.log('variant ids 1', variantIds);
 			if (variantIds.includes(currId)) {
-				console.log('1');
 				setStockDate(wlPdpData.vrt_waitlist_form_title_cs);
+				setRestockType(wlPdpData?.vrt_waitlist_restock_type || null);
 			} else if (variantIds2.includes(currId)) {
-				console.log('2');
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
 				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_2);
+				setRestockType(wlPdpData?.vrt_waitlist_restock_type_2 || null);
 			} else if (variantIds3.includes(currId)) {
-				console.log('3');
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
 				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_3);
+				setRestockType(wlPdpData?.vrt_waitlist_restock_type_3 || null);
 			} else if (variantIds4.includes(currId)) {
-				console.log('4');
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
 				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_4);
+				setRestockType(wlPdpData?.vrt_waitlist_restock_type_4 || null);
 			} else if (variantIds5.includes(currId)) {
-				console.log('5');
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
 				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_5);
+				setRestockType(wlPdpData?.vrt_waitlist_restock_type_5 || null);
 			}
 		}
 	}, [data.open]);
 
-	console.log('data wl', data)
+	// useEffect(() => {
+	// 	if (waitlistPopupData) {
+	// 		setFormDescription(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)
+	// 	}
+	// }, [waitlistPopupData]);
+
+	console.log('restockType', restockType);
 
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
@@ -174,7 +178,11 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 								{!success && (
 									<>
 										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
-										<p className="text-gray-600 mb-[1rem] text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
+										<p className="text-gray-600 mb-[1rem] text-base">
+											{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
+											{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
+											{restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)}
+										</p>
 
 										{stockDate && stockDate !== '' && (
 											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
@@ -184,9 +192,10 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 								{success && !isNonOOs && (
 									<>
 										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
-										<p className="text-gray-600"
-											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
-										/>
+										<p className="text-gray-600">
+											{restockType === null && parse(`${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!`)}
+											{['yes', 'no'].includes(restockType) && ('in the meantime.. sit back, relax, hair masque & chill!')}
+										</p>
 										{stockDate && stockDate !== '' && (
 											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
