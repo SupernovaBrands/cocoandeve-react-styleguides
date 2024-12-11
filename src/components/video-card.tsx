@@ -5,7 +5,7 @@ const VideoCard = (props: any) => {
         <figure className="video-card mb-4 px-lg-2">
             <picture className="block relative w-full">
                 <source srcSet={props.item.srcSet} media="(min-width: 992px)" />
-                <img src={props.item.src} alt="Placeholder" className="block w-full" />
+                <img src={props.item.src} alt={props.item.title} className="block w-full" />
                 <Play className="svg" fill="white" />
             </picture>
             {props.item.title && (

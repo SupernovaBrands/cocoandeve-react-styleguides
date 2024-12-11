@@ -6,10 +6,8 @@ const NavMegaMenuAll = (props: any) => {
                 <div className="flex w-full">
                     <div className="max-w-[14.625em] mr-3 mb-3 px-0">
                         <>
-                            <a href={generalSetting.mega_menu_shop_all_url}>
-                                <button className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full">
-                                    {generalSetting.mega_menu_shop_all_label}
-                                </button>
+                            <a href={generalSetting.mega_menu_shop_all_url} className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full hover:no-underline hover:text-primary block" aria-label={generalSetting.mega_menu_shop_all_label}>
+                                {generalSetting.mega_menu_shop_all_label}
                             </a>
                             {generalSetting.bg_image && (
                                 <a href={generalSetting.mega_menu_image_url}>
@@ -23,15 +21,15 @@ const NavMegaMenuAll = (props: any) => {
                             if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
                                 return (
                                     <div key={`menu-${menu.title}`} className="d-flex flex-column">
-                                        <a href={menu.handle} className="block mb-2 text-lg text-body font-bold">{menu.title}</a>
+                                        <a href={menu.handle} className="block mb-2 text-lg text-body font-bold" aria-label={menu.title}>{menu.title}</a>
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={row.handle} className="text-body">{row.title}</a>
+                                                    <a href={row.handle} className="text-body" aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
                                             {menu.handle !== '/collections/kits-gifts' && (
-                                                <li><a href={menu.handle} className="text-body font-bold">Shop {menu.title} Range</a></li>
+                                                <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>Shop {menu.title} Range</a></li>
                                             )}
                                         </ol>
                                     </div>

@@ -110,19 +110,19 @@ const Footer = (props: any) => {
                     <div className="[grid-area:nav-follow] hidden lg:block text-left lg:text-right">
                         <div className="inline-block lg:text-left">
                             <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank" aria-label="Instagram">
                                 <Instagram className="h-[1.25em] hover:fill-primary-darken" />
                             </a>
-                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
                                 <FacebookSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
-                            <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
                                 <PinterestSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
-                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
                                 <Youtube className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
-                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank" aria-label="Tiktok">
                                 <Tiktok className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
                             </a>
                         </div>
@@ -130,38 +130,38 @@ const Footer = (props: any) => {
                     <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right mt-3 lg:mt-0">
                         <div className='[grid-area:nav-follow] mt-3 mb-2 lg:my-0 hidden inline-block text-left'>
                             <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank">
+                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank" aria-label="Instagram">
                                 <Instagram className="h-[1.25em]" />
                             </a>
-                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
                                 <FacebookSquare className="h-[1.25em]" />
                             </a>
-                            <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
                                 <PinterestSquare className="h-[1.25em]" />
                             </a>
-                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
                                 <Youtube className="h-[1.25em]" />
                             </a>
-                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank">
+                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank" aria-label="Tiktok">
                                 <Tiktok className="h-[1.25em]" />
                             </a>
                         </div>
                         <div className='[grid-area:nav-currency] lg:my-0 text-left inline-block mb-2'>
                             <div className='mb-2 lg:my-0 lg:hidden text-left'>
                                 <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                                <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank">
+                                <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank" aria-label="Instagram">
                                     <Instagram className="h-[1em]" />
                                 </a>
-                                <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank">
+                                <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
                                     <FacebookSquare className="ml-[4px] h-[1em]" />
                                 </a>
-                                <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank">
+                                <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
                                     <PinterestSquare className="ml-[4px] h-[1em]" />
                                 </a>
-                                <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank">
+                                <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
                                     <Youtube className="ml-[4px] h-[1em]" />
                                 </a>
-                                <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex" target="_blank">
+                                <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex" target="_blank" aria-label="Tiktok">
                                     <Tiktok className="ml-[4px] h-[1em]" />
                                 </a>
                             </div>

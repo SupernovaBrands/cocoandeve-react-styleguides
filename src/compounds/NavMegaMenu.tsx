@@ -156,7 +156,7 @@ const NavMegaMenu = (props: any) => {
                                             <a href={card.url} className="px-0 !no-underline flex-none max-w-none">
                                                 <picture>
                                                     {/* @ts-ignore */}
-                                                    <img src={card.img} alt="Placeholder" className="block w-100 object-cover max-h-[none]" />
+                                                    <img src={card.img} alt={card.title} className="block w-100 object-cover max-h-[none]" />
                                                 </picture>
                                                 <figcaption className="flex-grow-1 d-flex flex-column ml-g lg:ml-0 align-self-center">
                                                     {/* @ts-ignore */}

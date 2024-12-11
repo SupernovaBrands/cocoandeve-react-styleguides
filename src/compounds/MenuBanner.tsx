@@ -97,7 +97,7 @@ const MenuBanner = (props: any) => {
 	const twoLines = line1.length > 28;
 
     return (
-        <li className="pt-[5px] pb-0 flex justify-between mx-g mb-1" onClick={() => onBannerAction()}>
+        <li className="pt-[5px] pb-0 flex justify-between mx-g mb-1" onClick={() => onBannerAction()} role="presentation">
             <figure className={`flex mb-0 items-center bg-${theme} pl-g relative py-1 my-0 rounded-tl-[.5em] rounded-bl-[.5em] w-[calc(100%-10px)] `}>
                 {theme === 'secondary-light' ? (
 					<Percentage className="mr-1" />

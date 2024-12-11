@@ -257,7 +257,7 @@ const Header = (props: any) => {
 								</>
 							)}
 							<li key="account" id="dropdownMenuForm" className="relative dropdown--account pl-1 mr-1 lg:mr-0 lg:pr-hg">
-								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false">
+								<button onClick={toggleAccountDropdown} className="nav-link h4 m-0 d-flex text-uppercase font-bold py-[6px] lg:py-hg" data-cy="account-icon" aria-haspopup="true" aria-expanded="false" aria-label="Account">
 									<Account className={`hover:fill-primary text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
@@ -265,7 +265,7 @@ const Header = (props: any) => {
 								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
-								<button type="button" className="h4 m-0 flex font-bold py-[6px] lg:py-hg" data-cy="search-icon" onClick={onToggleSearchBox}>
+								<button type="button" className="h4 m-0 flex font-bold py-[6px] lg:py-hg" data-cy="search-icon" onClick={onToggleSearchBox} aria-label="Search">
 									<Search className={`hover:fill-primary ${openSearchBox ? 'fill-primary lg:fill-black' : ''} text-[1.5625em] lg:text-[1.375em] h-[1em]`} />
 								</button>
 							</li>
