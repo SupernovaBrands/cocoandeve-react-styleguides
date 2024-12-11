@@ -241,8 +241,8 @@ const SearchBox = (props: any) => {
 					<div className="container relative flex items-center px-0 lg:px-g">
 						<Search className="absolute h2 mb-0 z-[1000] h-[1em]" />
 						<input type="text" placeholder={content?.search_input_placeholder} name="q" className="w-full py-2 pl-4 lg:pl-4 border-0 focus:outline-none" aria-label="search" onChange={onChange} value={keyword} />
-						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-50' : ''}`} role="button" onClick={() => setKeyword('')}>{content?.search_clear}</span>
-						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button">
+						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-50' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
+						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button" aria-label="Close search">
 							<Close className="h-[1em]" onClick={() => props.onToggleSearchBox()} />
 						</span>
 					</div>
