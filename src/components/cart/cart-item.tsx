@@ -179,7 +179,7 @@ export const CartItem = (props:CartItemProps) => {
 	}, [selectedSwatch]);
 
 	return (
-		<li className="cart-item" data-mod={item.modified}>
+		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
 			<ConditionWrapper
 				condition={!item.isFreeItem}
