@@ -117,38 +117,38 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	const currId = parseInt(data.productId, 10) || 0;
 	
 	useEffect(() => {
-		const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
+		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
 		// console.log('wl pdp data', wlPdpData);
-		if (currId !== 0 && wlPdpData) {
-			const variantIds = wlPdpData.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds2 = wlPdpData.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds3 = wlPdpData.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds4 = wlPdpData.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			const variantIds5 = wlPdpData.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+		if (currId !== 0 && waitlistPdp !== null) {
+			const variantIds = waitlistPdp.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds2 = waitlistPdp.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds3 = waitlistPdp.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds4 = waitlistPdp.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds5 = waitlistPdp.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 
 			if (variantIds.includes(currId)) {
-				setStockDate(wlPdpData.vrt_waitlist_form_title_cs);
-				setRestockType(wlPdpData?.vrt_waitlist_restock_type || null);
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type || null);
 			} else if (variantIds2.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
-				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_2);
-				setRestockType(wlPdpData?.vrt_waitlist_restock_type_2 || null);
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_2);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_2 || null);
 			} else if (variantIds3.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
-				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_3);
-				setRestockType(wlPdpData?.vrt_waitlist_restock_type_3 || null);
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_3);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_3 || null);
 			} else if (variantIds4.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
-				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_4);
-				setRestockType(wlPdpData?.vrt_waitlist_restock_type_4 || null);
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_4);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_4 || null);
 			} else if (variantIds5.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
-				setStockDate(wlPdpData.vrt_waitlist_form_title_cs_5);
-				setRestockType(wlPdpData?.vrt_waitlist_restock_type_5 || null);
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_5);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_5 || null);
 			}
 		}
 	}, [data.open]);
