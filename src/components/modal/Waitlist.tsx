@@ -159,7 +159,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	// 	}
 	// }, [waitlistPopupData]);
 
-	console.log('restockType', restockType);
+	// console.log('restockType', restockType);
 
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">

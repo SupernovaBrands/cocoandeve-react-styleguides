@@ -37,7 +37,7 @@ const SideProductRoutineCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-    console.log('props waitlistPdpSetting', waitlistPdpSetting);
+    // console.log('props waitlistPdpSetting', waitlistPdpSetting);
 
     const [waitlistData, setWaitlistData] = useState({
         open: false,
