@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getCookie } from "~/modules/utils";
 const SocialLogin = (props: any) => {
-	const [googleLogin, setGoogleLogin] = useState('');
-	const [facebookLogin, setFacebookLogin] = useState('');
+	const [googleLogin, setGoogleLogin] = useState(`#`);
+	const [facebookLogin, setFacebookLogin] = useState(`#`);
 
 	useEffect(() => {
 		let storeRegion = props.store;

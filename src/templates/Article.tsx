@@ -264,12 +264,18 @@ const Article = (props) => {
             ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)') 
             : document.querySelectorAll('.article__content h3');
             if (articleShops && articleContent.length) {
+                const shopArticles = content.BlogContentMultiStores[region].body_content.includes('id="shop-articles"');
                 let targetAppend = parseInt((articleContent.length / 2).toString(), 10);
                 targetAppend = targetAppend > 1 ? targetAppend - 1 : targetAppend;
                 const targetContent = articleContent[targetAppend];
                 articleShops.forEach(articleShop => {
                     articleShop.classList.remove('w-full');
-                    targetContent.parentNode.insertBefore(articleShop, targetContent);
+                    if (shopArticles) {
+                        const shopArticlesDiv = document.getElementById(`shop-articles`);
+                        shopArticlesDiv.append(articleShop);
+                    } else {
+                        targetContent.parentNode.insertBefore(articleShop, targetContent);
+                    }
                 });
                 if (window.innerWidth > screenLG) {
                     articleShops.forEach(articleShop => {
@@ -399,7 +405,7 @@ const Article = (props) => {
                         {featuredImg && (
                             <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
                                 <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url} alt={featuredImg?.alt || ''} title={content?.title} />
+                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
                             </picture>
                         )}
                         {quickLinks?.length > 0 && (

@@ -100,14 +100,14 @@ const Affiliate = (props: any) => {
 						<div className="flex flex-wrap justify-center benefits">
 							{[...Array(6)].map((data, i) => (
 								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/3 text-center mb-[2.188rem] lg:mb-[3.125rem]">
-									<h4 className="w-[6.25rem] h-[6.25rem] inline-block rounded-full relative mx-auto bg-affiliate-green" role="presentation">
+									<div className="w-[6.25rem] h-[6.25rem] inline-block rounded-full relative mx-auto bg-affiliate-green" role="presentation">
 										{i === 0 && <Benefit1 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 1 && <Benefit2 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 2 && <Benefit3 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 3 && <Benefit4 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 4 && <Benefit5 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 5 && <Benefit6 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-									</h4>
+									</div>
 									<p className="text-[.875rem] leading-[1.14285em] lg:text-[1.125rem] lg:leading-[1.5rem] max-w-[80%] lg:max-w-[90%] mt-[1rem] lg:mt-2 mx-auto">
 										{parse(benefit[`txt_${i + 1}`])}
 									</p>

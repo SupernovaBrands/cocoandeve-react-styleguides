@@ -62,7 +62,7 @@ const MobileMenu = (props: any) => {
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
 			role="tablist" aria-multiselectable="true">
-				<li key="toggle" className="flex justify-between mx-g py-[5px]">
+				<li key="toggle" className="flex justify-between mx-g py-[5px]" role="presentation">
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
@@ -79,7 +79,7 @@ const MobileMenu = (props: any) => {
 				{mainMenu?.map((menu, i) => {
 					const hasRow = menu.rows;
 					return menu.handle !== '/collections/all' && (
-						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]">
+						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
 							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
 								onClick={() => {
 									const newStates = {...defMenuState};
@@ -154,7 +154,7 @@ const MobileMenu = (props: any) => {
 					)
 				})}
 				{enableSwellAcc && (
-					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]">
+					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 						{!isLoggedIn && (
 							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
 								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
@@ -174,14 +174,14 @@ const MobileMenu = (props: any) => {
 					</li>
 				)}
 				{!enableSwellAcc && (
-					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]">
+					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
-				<li key="shopall" className="my-g p-g">
+				<li key="shopall" className="my-g p-g" role="presentation">
 					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
 				</li>
-				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]">
+				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
 						onClick={() => setStoreSelection(!storeSelection)}>
 						{currency === 'SGD' && 'Rest of the World (SGD)'}
@@ -204,7 +204,7 @@ const MobileMenu = (props: any) => {
 						{/* <li className="py-25"><a href="https://my.cocoandeve.com" className='text-body'>Malaysia (MYR)</a></li> */}
 					</ul>
 				</li>
-				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g">
+				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g" role="presentation">
 					<a href="https://support.cocoandeve.com/hc/en-us" className="px-hg w-1/2 mb-1 text-body">Help</a>
 					<a href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</a>
 					<a href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</a>
