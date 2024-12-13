@@ -28,7 +28,7 @@ const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ?
 )
 
 const SideProductRoutineCarousel = (props: any) => {
-    const { items, store, launchWL, loggedInEmail, trackBluecoreLaunchWaitlistEvent, submitsToSmsBumpAPi, trackEvent, addToCart, generalSetting, buildProductCardModel, badgeData } = props;
+    const { waitlistPdpSetting, items, store, launchWL, loggedInEmail, trackBluecoreLaunchWaitlistEvent, submitsToSmsBumpAPi, trackEvent, addToCart, generalSetting, buildProductCardModel, badgeData } = props;
     const [launchSubmitted, setLaunchSubmitted] = useState(false);
     const [finalItems, setFinalItems] = useState([]);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -36,6 +36,8 @@ const SideProductRoutineCarousel = (props: any) => {
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options}, [
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
+
+    // console.log('props waitlistPdpSetting', waitlistPdpSetting);
 
     const [waitlistData, setWaitlistData] = useState({
         open: false,
@@ -168,7 +170,7 @@ const SideProductRoutineCarousel = (props: any) => {
             </div>
         </div>
         { <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, open: false })}>
-            <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+            <ModalWaitlist store={store} waitlistPdp={waitlistPdpSetting} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         </Modal> }
 
         {launchWL && (

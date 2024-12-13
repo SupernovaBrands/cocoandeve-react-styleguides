@@ -1,6 +1,7 @@
+import parse from 'html-react-parser';
 import useGlobalSettings from '~/hooks/useGlobalSettings';
 import Button from '../Button';
-import CloseButton from './CloseButton';
+// import CloseButton from './CloseButton';
 import usePreview from '~/hooks/usePreview';
 import { useEffect, useRef, useState } from 'react';
 import { subscribeBluecoreWaitlist, validateEmail } from '~/modules/utils';
@@ -20,22 +21,28 @@ interface WatilistData {
 }
 
 type WaitlistProp = {
+	store: string,
 	handleClose: () => void
 	data: WatilistData,
 	trackBluecoreEvent?: any,
 	bluecoreProductWaitlist?: any,
+	waitlistPdp?: any,
 }
 
-const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist }) => {
+const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdp }) => {
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
+	const [restockType, setRestockType] = useState(null);
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
 	const { isPreview } = usePreview();
-    const store = (isPreview) ? 'dev' : 'us';
+    // const store = (isPreview) ? 'dev' : 'us';
     const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
     const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
+	const [stockDate, setStockDate] = useState(data.date);
+
+	// console.log('pdp waitlist data strapi', waitlistPopupData);
 
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
 	const wlNoOOS = [];
@@ -106,6 +113,54 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 		};
 	  }, [success]);
 
+	
+	const currId = parseInt(data.productId, 10) || 0;
+	
+	useEffect(() => {
+		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
+		// console.log('wl pdp data', wlPdpData);
+		if (currId !== 0 && waitlistPdp !== null) {
+			const variantIds = waitlistPdp.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds2 = waitlistPdp.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds3 = waitlistPdp.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds4 = waitlistPdp.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+			const variantIds5 = waitlistPdp.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
+
+			if (variantIds.includes(currId)) {
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type || null);
+			} else if (variantIds2.includes(currId)) {
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_2);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_2 || null);
+			} else if (variantIds3.includes(currId)) {
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_3);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_3 || null);
+			} else if (variantIds4.includes(currId)) {
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_4);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_4 || null);
+			} else if (variantIds5.includes(currId)) {
+				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
+				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
+				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_5);
+				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_5 || null);
+			}
+		}
+	}, [data.open]);
+
+	// useEffect(() => {
+	// 	if (waitlistPopupData) {
+	// 		setFormDescription(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)
+	// 	}
+	// }, [waitlistPopupData]);
+
+	// console.log('restockType', restockType);
+
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
 			{/* <CloseButton handleClose={handleClose} className="!font-size-sm" /> */}
@@ -123,21 +178,26 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 								{!success && (
 									<>
 										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
-										<p className="text-gray-600 mb-[1rem] text-base" dangerouslySetInnerHTML={{ __html: `Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}` }} />
+										<p className="text-gray-600 mb-[1rem] text-base">
+											{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
+											{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
+											{restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)}
+										</p>
 
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}
 								{success && !isNonOOs && (
 									<>
 										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
-										<p className="text-gray-600"
-											dangerouslySetInnerHTML={{ __html: `${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
-										/>
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										<p className="text-gray-600">
+											{restockType === null && parse(`${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!`)}
+											{['yes', 'no'].includes(restockType) && ('in the meantime.. sit back, relax, hair masque & chill!')}
+										</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}
@@ -147,8 +207,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ handleClose, data, trackBluecoreEven
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
-										{data.date && data.date !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{data.date}</p>
+										{stockDate && stockDate !== '' && (
+											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
 										)}
 									</>
 								)}

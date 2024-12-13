@@ -37,7 +37,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
     });
 
-	const { isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -228,7 +228,7 @@ const ProductCarousel = (props: any) => {
 			</div>
 		</div>
 			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                <ModalWaitlist data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
+                <ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         	</Modal>
 		</>
 	);

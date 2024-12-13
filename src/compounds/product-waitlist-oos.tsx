@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 import { useState, useEffect } from "react";
 import CountriesOptions from "~/components/countries-options";
 import CheckBox from "~/components/CheckBox";
@@ -33,6 +34,7 @@ const ProductWaitlist = (props: any) => {
     const [phoneCode, setPhoneCode] = useState('+65');
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [validForm, setValidForm] = useState(false);
+	const [restockType, setRestockType] = useState(null);
 
 	//@ts-ignore
 	const [data, setData] = useState<waitlistProps>({});
@@ -153,37 +155,57 @@ const ProductWaitlist = (props: any) => {
 			// default title & description is first message
 			const wlComingSoon = props.vrt_phandles_cs?.split(',') || [];
 			if (wlComingSoon.includes(props.handle)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs;
-				data.formDescription = props.vrt_waitlist_form_description_cs;
+				data.waitlistTitle = props.vrt_waitlist_form_title;
+				data.formDescription = props.vrt_waitlist_form_description;
 			}
 
+			
+
 			const variantId = parseInt(props.selectedVariant.id.replace('gid://shopify/ProductVariant/', ''), 10) || 0;
+			
+			const variantId1 = props.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = props.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds3 = props.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds4 = props.vrt_waitlist_form_varid_cs_4?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds5 = props.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
-			if (variantIds2.includes(variantId)) {
+
+			if (variantId1.includes(variantId)) {
+				data.waitlistTitle = props.vrt_waitlist_form_title_cs;
+				data.formDescription = props.vrt_waitlist_form_description_cs;
+				setRestockType(props?.vrt_waitlist_restock_type || null);
+			} else if (variantIds2.includes(variantId)) {
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				data.formDescription = props.vrt_waitlist_form_description_cs_2;
+				setRestockType(props?.vrt_waitlist_restock_type_2 || null);
 			} else if (variantIds3.includes(variantId)) {
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				data.formDescription = props.vrt_waitlist_form_description_cs_3;
+				setRestockType(props?.vrt_waitlist_restock_type_3 || null);
 			} else if (variantIds4.includes(variantId)) {
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				data.formDescription = props.vrt_waitlist_form_description_cs_4;
+				setRestockType(props?.vrt_waitlist_restock_type_4 || null);
 			} else if (variantIds5.includes(variantId)) {
 				data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				data.formDescription = props.vrt_waitlist_form_description_cs_5;
+				setRestockType(props?.vrt_waitlist_restock_type_5 || null);
+			} else {
+				setRestockType(null);
 			}
 			setData({...data});
 		}
-	}, [props.selectedVariant]);
+	}, [props.selectedVariant.id]);
 
 	return (
 		<>
 			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-3 mb-3 rounded-lg bg-pink-light" data-product-id={props.productId}>
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p>
-				<p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p>
+				{/* <p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p> */}
+				<p className="mb-2">
+					{restockType === null && parse(data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.")}
+					{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
+					{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
+				</p>
 				{/* <form data-pdp="false" data-product-id="product-id"> */}
 					{ !props.hide_phone && <><div className="row">
 						<div className="relative flex items-stretch w-full mb-g">
@@ -221,7 +243,10 @@ const ProductWaitlist = (props: any) => {
 			</div> }
 			{ showSuccess && <div className="w-100 p-3 mb-3 rounded">
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.titleThanks ?? 'YOU`LL HEAR FROM US SOON'}</p>
-				<p className="font-size-sm mb-2">{data.formDescriptionThanks || ''}</p>
+				<p className="font-size-sm mb-2">
+					{restockType === null && (data.formDescriptionThanks || '')}
+					{['yes', 'no'].includes(restockType) && 'in the meantime.. sit back, relax, hair masque & chill!'}
+				</p>
 				<a href="/collections/all" className="btn btn-primary btn-lg w-full hover:bg-primary-dark py-[13px] no-underline hover:text-white hover:no-underline">Shop other products</a>
 			</div> }
 		</>
