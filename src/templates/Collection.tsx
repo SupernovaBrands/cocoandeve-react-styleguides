@@ -75,6 +75,7 @@ const Collection = (props: any) => {
         squareBadge,
         bannerData,
     } = props;
+    console.log('waitlistPdpSetting', waitlistPdpSetting);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);

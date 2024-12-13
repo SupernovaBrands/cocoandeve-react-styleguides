@@ -84,7 +84,7 @@ const Sustainability = (props: any) => {
 	} = usePrevNextButtons(emblaApi3);
 	// const autoPlayClick3 = controlAutoplay(emblaApi3);
 
-    const { banner, generalSetting, squareBadge, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
+    const { waitlistPdpSetting, banner, generalSetting, squareBadge, intro, imageSlider, formula, packaging, imageText, products, isLoading, buildProductCardModel, store, addToCart } = props;
     const PACKAGING = [
         {
             id: 1,
@@ -426,7 +426,7 @@ const Sustainability = (props: any) => {
             </section>
 
             <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                <ModalWaitlist data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
+                <ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />
             </Modal>
 		</>
     );
