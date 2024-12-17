@@ -9,13 +9,14 @@ const CartDiscountMeter = (props) => {
 		target,
 		current,
 		progressText,
+		useQuantity,
 	} = props;
 
 	const [state, setState] = useState({ target, current, progressText, progress: 0, text: '' });
 
 	useEffect(() => {
 		const remaining = props.target - props.current;
-		const progress = remaining <= 0 ? 100 : Math.floor((current / target) * 100);
+		const progress = remaining <= 0 || useQuantity ? 100 : Math.floor((current / target) * 100);
 		const amount = formatMoney(remaining);
 		const text = remaining <= 0 ? progressText : progressText.replace('#{remaining}', amount);
 		setState({...state, progress, text})
@@ -43,12 +44,14 @@ CartDiscountMeter.propTypes = {
 	current: PropTypes.number,
 	target: PropTypes.number,
 	progressText: PropTypes.string,
+	useQuantity: PropTypes.bool,
 };
 
 CartDiscountMeter.defaultProps = {
 	current: 0,
 	target: 0,
 	progressText: 'cartShippingMeter.inProgressText',
+	useQuantity: false,
 };
 
 export default CartDiscountMeter;
