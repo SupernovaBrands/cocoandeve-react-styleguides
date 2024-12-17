@@ -169,6 +169,9 @@ export const CartItem = (props:CartItemProps) => {
 			if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8fce65c9-c57e-4401-71cd-313acd286200/public';
 			}
+			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
+			}
 		}
 
 		setFeaturedImageUrl(featuredImage);
