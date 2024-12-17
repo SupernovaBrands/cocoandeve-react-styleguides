@@ -211,6 +211,7 @@ const Cart: React.FC<Props> = (props) => {
 									target={discountMeter.target}
 									current={discountMeter.current}
 									progressText={discountMeter.progressText}
+									useQuantity={discountMeter.useQuantity}
 								/>
 							)}
 							<hr className="w-full m-0" />
