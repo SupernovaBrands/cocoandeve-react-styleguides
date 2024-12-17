@@ -185,6 +185,8 @@ const Cart: React.FC<Props> = (props) => {
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
+	// console.log('cart.tsx', discountMeter);
+
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -206,7 +208,7 @@ const Cart: React.FC<Props> = (props) => {
 									/>
 								)}
 							{discountMeter && discountMeter.enabled && discountMeter
-								&& discountMeter.enabled && discountMeter.hasValidProduct && cart.itemCount > 0 && (
+								&& discountMeter.enabled && cart.itemCount > 0 && (
 								<CartDiscountMeter
 									target={discountMeter.target}
 									current={discountMeter.current}
