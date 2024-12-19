@@ -202,7 +202,7 @@ const ProductWaitlist = (props: any) => {
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p>
 				{/* <p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p> */}
 				<p className="mb-2">
-					{restockType === null && parse(data.formDescription.replace('{{productName}}', `<strong>${props.productTitle}</strong>`) ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.")}
+					{restockType === null && parse(data.formDescription?.replace('{{productName}}', `<strong>${props.productTitle}</strong>`) ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.")}
 					{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
 					{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
 				</p>
@@ -244,7 +244,7 @@ const ProductWaitlist = (props: any) => {
 			{ showSuccess && <div className="w-100 p-3 mb-3 rounded">
 				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.titleThanks ?? 'YOU`LL HEAR FROM US SOON'}</p>
 				<p className="font-size-sm mb-2">
-					{restockType === null && parse(data.formDescriptionThanks.replace('{{productName}}', `<strong>${props.productTitle}</strong>`) || '')}
+					{restockType === null && parse(data.formDescriptionThanks?.replace('{{productName}}', `<strong>${props.productTitle}</strong>`) || '')}
 					{['yes', 'no'].includes(restockType) && 'in the meantime.. sit back, relax, hair masque & chill!'}
 				</p>
 				<a href="/collections/all" className="btn btn-primary btn-lg w-full hover:bg-primary-dark py-[13px] no-underline hover:text-white hover:no-underline">Shop other products</a>
