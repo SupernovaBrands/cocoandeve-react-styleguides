@@ -2,7 +2,7 @@ import parse from 'html-react-parser';
 import useGlobalSettings from '~/hooks/useGlobalSettings';
 import Button from '../Button';
 // import CloseButton from './CloseButton';
-import usePreview from '~/hooks/usePreview';
+// import usePreview from '~/hooks/usePreview';
 import { useEffect, useRef, useState } from 'react';
 import { subscribeBluecoreWaitlist, validateEmail } from '~/modules/utils';
 import Close from '~/images/icons/close.svg';
@@ -33,10 +33,11 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	const [formError, setFormError] = useState(false);
 	const [success, setSuccess] = useState(false);
 	const [restockType, setRestockType] = useState(null);
+	const [formDescription, setFormDescription] = useState(null);
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
-	const { isPreview } = usePreview();
+	// const { isPreview } = usePreview();
     // const store = (isPreview) ? 'dev' : 'us';
     const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
     const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
@@ -129,26 +130,33 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 			if (variantIds.includes(currId)) {
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type || null);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs);
 			} else if (variantIds2.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_2);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_2 || null);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_2);
 			} else if (variantIds3.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_3);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_3 || null);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_3);
 			} else if (variantIds4.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_4);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_4 || null);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_4);
 			} else if (variantIds5.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_5);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_5 || null);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_5);
+			} else {
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
 			}
 		}
 	}, [data.open]);
@@ -177,28 +185,32 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 							<>
 								{!success && (
 									<>
-										<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPopupData.waitlist_popup_form_title}</strong>
+										{stockDate && stockDate !== '' && (
+											<strong className="block mb-[1rem] text-xl lg:text-2xl">{stockDate}</strong>
+										)}
+										{!stockDate && (
+											<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPdp?.vrt_waitlist_form_title}</strong>
+										)}
 										<p className="text-gray-600 mb-[1rem] text-base">
 											{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
 											{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
-											{restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)}
+											{/* {restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)} */}
+											{restockType === null && parse(`${formDescription?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 										</p>
 
-										{stockDate && stockDate !== '' && (
-											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
-										)}
+										
 									</>
 								)}
 								{success && !isNonOOs && (
 									<>
 										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
 										<p className="text-gray-600">
-											{restockType === null && parse(`${waitlistPopupData.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!`)}
+											{restockType === null && parse(`${waitlistPdp?.vrt_waitlist_form_description_thanks.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 											{['yes', 'no'].includes(restockType) && ('in the meantime.. sit back, relax, hair masque & chill!')}
 										</p>
-										{stockDate && stockDate !== '' && (
+										{/* {stockDate && stockDate !== '' && (
 											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
-										)}
+										)} */}
 									</>
 								)}
 								{success && isNonOOs && (
@@ -207,9 +219,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										<p className="text-gray-600"
 											dangerouslySetInnerHTML={{ __html: `${isNonOOs.waitlist_popup_form_description_thanks} <strong>${data.title}</strong> is back!` }}
 										/>
-										{stockDate && stockDate !== '' && (
+										{/* {stockDate && stockDate !== '' && (
 											<p className="font-bold mb-[1rem] mt-2">{stockDate}</p>
-										)}
+										)} */}
 									</>
 								)}
 								<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
