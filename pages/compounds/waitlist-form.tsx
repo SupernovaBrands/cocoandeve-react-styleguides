@@ -7,7 +7,7 @@ const WaitlistForm = () => {
 			<div className="row mt-3">
 				<h2 className="mb-2">OOS Product</h2>
 				<div className="w-full lg:w-2/5">
-					<ProductWaitlist selectedVariant={false} title="Restocking Jan 2022" content="Our products have been a worldwide hit and we can't keep up with the stock. But we are on it, sign up and we will notify you when it’s available!" button="Join the waitlist" />
+					<ProductWaitlist productTitle={'Antioxidant Face Tanning Micromist'} selectedVariant={false} title="Restocking Jan 2022" content="Our products have been a worldwide hit and we can't keep up with the stock. But we are on it, sign up and we will notify you when it’s available!" button="Join the waitlist" />
 				</div>
 			</div>
 		</div>
