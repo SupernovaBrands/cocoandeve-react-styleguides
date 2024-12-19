@@ -28,10 +28,17 @@ const Header = (props: any) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(points || 0);
+	const [flashBubbleWrapper, setFlashBubbleWrapper] = useState(false);
 	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
+
+	useEffect(() => {
+		setTimeout(() => {
+			setFlashBubbleWrapper(flashBubble);
+		}, 400);
+	}, [flashBubble]);
 
 	const onToggleSearchBox = () => {
 		setOpenAccountBox(false);
@@ -190,7 +197,7 @@ const Header = (props: any) => {
 				)}
 
 				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]`}>
-					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubble ? 'relative' : ''}`}>
+					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubbleWrapper || flashBubble ? 'relative' : ''}`}>
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden h-[40px]" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
