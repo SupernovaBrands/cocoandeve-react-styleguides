@@ -119,7 +119,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	
 	useEffect(() => {
 		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
-		// console.log('wl pdp data', wlPdpData);
+		console.log('wl pdp data', waitlistPdp);
 		if (currId !== 0 && waitlistPdp !== null) {
 			const variantIds = waitlistPdp.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = waitlistPdp.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
@@ -167,7 +167,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	// 	}
 	// }, [waitlistPopupData]);
 
-	// console.log('restockType', restockType);
+	// console.log('restock', formDescription);
 
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
@@ -191,11 +191,11 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										{!stockDate && (
 											<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPdp?.vrt_waitlist_form_title}</strong>
 										)}
-										<p className="text-gray-600 mb-[1rem] text-base">
-											{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
-											{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
+										<p className="text-gray-600 mb-[1rem] text-base aa">
+											{restockType === 'yes' && parse(`Our <strong>${data.title}</strong> has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`)}
+											{restockType === 'no' && parse(`Our <strong>${data.title}</strong> has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`)}
 											{/* {restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)} */}
-											{restockType === null && parse(`${formDescription?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
+											{!['yes', 'no'].includes(restockType) && parse(`${waitlistPdp?.vrt_waitlist_form_description?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 										</p>
 
 										
@@ -205,7 +205,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 									<>
 										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
 										<p className="text-gray-600">
-											{restockType === null && parse(`${waitlistPdp?.vrt_waitlist_form_description_thanks.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
+											{!['yes', 'no'].includes(restockType) && parse(`${waitlistPdp?.vrt_waitlist_form_description_thanks.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 											{['yes', 'no'].includes(restockType) && ('in the meantime.. sit back, relax, hair masque & chill!')}
 										</p>
 										{/* {stockDate && stockDate !== '' && (
