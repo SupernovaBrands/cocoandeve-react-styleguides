@@ -195,7 +195,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 											{restockType === 'yes' && parse(`Our <strong>${data.title}</strong> has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`)}
 											{restockType === 'no' && parse(`Our <strong>${data.title}</strong> has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`)}
 											{/* {restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)} */}
-											{!['yes', 'no'].includes(restockType) && parse(`${waitlistPdp?.vrt_waitlist_form_description?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
+											{!['yes', 'no'].includes(restockType) && parse(`${formDescription?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 										</p>
 
 										
@@ -224,12 +224,14 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										)} */}
 									</>
 								)}
-								<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
-									<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
-									<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
-									{formError && <span className="mt-1 font-size-sm text-primary">{waitlistPopupData.email_invalid}</span>}
-									<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
-								</div>
+								{restockType !== 'no' && (
+									<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
+										<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
+										<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
+										{formError && <span className="mt-1 font-size-sm text-primary">{waitlistPopupData.email_invalid}</span>}
+										<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit}</Button>
+									</div>
+								)}
 							</>
 						)}
 					</form>
