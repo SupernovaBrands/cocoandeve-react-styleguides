@@ -34,6 +34,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	const [success, setSuccess] = useState(false);
 	const [restockType, setRestockType] = useState(null);
 	const [formDescription, setFormDescription] = useState(null);
+	const [formTitle, setFormTitle] = useState(null);
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
@@ -119,7 +120,6 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	
 	useEffect(() => {
 		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
-		console.log('wl pdp data', waitlistPdp);
 		if (currId !== 0 && waitlistPdp !== null) {
 			const variantIds = waitlistPdp.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = waitlistPdp.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
@@ -131,43 +131,42 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs);
 			} else if (variantIds2.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_2;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_2);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_2 || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_2);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs_2);
 			} else if (variantIds3.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_3;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_3);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_3 || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_3);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs_3);
 			} else if (variantIds4.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_4;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_4);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_4 || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_4);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs_4);
 			} else if (variantIds5.includes(currId)) {
 				// data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
 				// data.formDescription = props.vrt_waitlist_form_description_cs_5;
 				setStockDate(waitlistPdp.vrt_waitlist_form_title_cs_5);
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_5 || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_5);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs_5);
 			} else {
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
 			}
+		} else {
+			setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
 		}
 	}, [data.open]);
-
-	// useEffect(() => {
-	// 	if (waitlistPopupData) {
-	// 		setFormDescription(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)
-	// 	}
-	// }, [waitlistPopupData]);
-
-	// console.log('restock', formDescription);
 
 	return (
 		<div className="modal-content bg-pink-light lg:px-g test">
@@ -189,7 +188,10 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 											<strong className="block mb-[1rem] text-xl lg:text-2xl">{stockDate}</strong>
 										)}
 										{!stockDate && (
-											<strong className="block mb-[1rem] text-xl lg:text-2xl">{waitlistPdp?.vrt_waitlist_form_title}</strong>
+											<strong className="block mb-[1rem] text-xl lg:text-2xl">
+												{/* {waitlistPdp?.vrt_waitlist_form_title} */}
+												{['no'].includes(restockType) && (formTitle === null || formTitle === '') ? 'OUT OF STOCK' : waitlistPdp?.vrt_waitlist_form_title}
+											</strong>
 										)}
 										<p className="text-gray-600 mb-[1rem] text-base aa">
 											{restockType === 'yes' && parse(`Our <strong>${data.title}</strong> has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`)}
