@@ -233,7 +233,7 @@ const ProductWaitlist = (props: any) => {
 						<div className="flex flex-wrap items-center justify-start">
 						<div className="-mt-1 w-full">
 							<CheckBox boxSmall={true} onChange={changeTos} borderLight={true} labelClass="flex justify-content-center my-1 relative pl-[25px] font-size-sm mt-2" id="agreement-waitlist" checked={tos}>
-								<span className="text-xs">I agree to the <a className="text-xs text-body underline" href="/pages/privacy-policy">Privacy Policy</a></span>
+								<span className="text-xs">I agree to the <a className="text-xs text-body underline" href="/pages/privacy-policy" target="_blank">Privacy Policy</a></span>
 							</CheckBox>
 							{/* {!tos && <small className="block w-full text-primary terms-error -mt-1 text-center">You have not agreed to the Privacy Policy & ToS</small>} */}
 						</div>
