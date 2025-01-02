@@ -205,7 +205,10 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 								)}
 								{success && !isNonOOs && (
 									<>
-										<p className="text-xl lg:text-2xl font-bold mb-0">{waitlistPopupData.waitlist_popup_form_title_thanks}</p>
+										<p className="text-xl lg:text-2xl font-bold mb-0">
+											{!['yes', 'no'].includes(restockType) && parse(`${waitlistPdp?.vrt_waitlist_form_title_thanks}`)}
+											{['yes', 'no'].includes(restockType) && `YOU'LL HEAR FROM US SOON`}
+										</p>
 										<p className="text-gray-600">
 											{!['yes', 'no'].includes(restockType) && parse(`${waitlistPdp?.vrt_waitlist_form_description_thanks.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 											{['yes', 'no'].includes(restockType) && ('in the meantime.. sit back, relax, hair masque & chill!')}
