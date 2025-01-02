@@ -35,6 +35,7 @@ const ProductWaitlist = (props: any) => {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [validForm, setValidForm] = useState(false);
 	const [restockType, setRestockType] = useState(null);
+	const OOS = 'OUT OF STOCK';
 
 	//@ts-ignore
 	const [data, setData] = useState<waitlistProps>({});
@@ -170,23 +171,23 @@ const ProductWaitlist = (props: any) => {
 			const variantIds5 = props.vrt_waitlist_form_varid_cs_5?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 
 			if (variantId1.includes(variantId)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs;
+				data.waitlistTitle = props?.vrt_waitlist_restock_type === 'no' && !props.vrt_waitlist_form_title_cs ? OOS : props.vrt_waitlist_form_title_cs;
 				data.formDescription = props.vrt_waitlist_form_description_cs;
 				setRestockType(props?.vrt_waitlist_restock_type || null);
 			} else if (variantIds2.includes(variantId)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs_2;
+				data.waitlistTitle = props?.vrt_waitlist_restock_type_2 === 'no' && !props.vrt_waitlist_form_title_cs_2 ? OOS : props.vrt_waitlist_form_title_cs_2;
 				data.formDescription = props.vrt_waitlist_form_description_cs_2;
 				setRestockType(props?.vrt_waitlist_restock_type_2 || null);
 			} else if (variantIds3.includes(variantId)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs_3;
+				data.waitlistTitle = props?.vrt_waitlist_restock_type_3 === 'no' && !props.vrt_waitlist_form_title_cs_3 ? OOS : props.vrt_waitlist_form_title_cs_3;
 				data.formDescription = props.vrt_waitlist_form_description_cs_3;
 				setRestockType(props?.vrt_waitlist_restock_type_3 || null);
 			} else if (variantIds4.includes(variantId)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs_4;
+				data.waitlistTitle = props?.vrt_waitlist_form_title_cs_4 === 'no' && !props.vrt_waitlist_form_title_cs_4 ? OOS : props.vrt_waitlist_form_title_cs_4;
 				data.formDescription = props.vrt_waitlist_form_description_cs_4;
 				setRestockType(props?.vrt_waitlist_restock_type_4 || null);
 			} else if (variantIds5.includes(variantId)) {
-				data.waitlistTitle = props.vrt_waitlist_form_title_cs_5;
+				data.waitlistTitle = props?.vrt_waitlist_form_title_cs_5 === 'no' && !props.vrt_waitlist_form_title_cs_5 ? OOS : props.vrt_waitlist_form_title_cs_5;
 				data.formDescription = props.vrt_waitlist_form_description_cs_5;
 				setRestockType(props?.vrt_waitlist_restock_type_5 || null);
 			} else {
