@@ -68,7 +68,7 @@ const ProductCarousel = (props: any) => {
                                 key={`product-${id}-${data.id}`}
                                 product={data}
                                 label={label}
-                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:px-1 sm:px-hg text-center"
+                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-[28%] lg:px-1 sm:px-hg text-center"
                                 button={true}
                                 link={data.handle}
                                 carousel={true}
