@@ -44,8 +44,6 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
     const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
 	const [stockDate, setStockDate] = useState(data.date);
 
-	// console.log('pdp waitlist data strapi', waitlistPopupData);
-
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
 	const wlNoOOS = [];
 	if (waitlistNonOOS && waitlistNonOOS.length > 0) {
@@ -229,7 +227,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										)} */}
 									</>
 								)}
-								{restockType !== 'no' && (
+								{restockType !== 'no' && waitlistPopupData && (
 									<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
 										<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
 										<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
