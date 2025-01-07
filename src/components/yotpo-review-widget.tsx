@@ -946,7 +946,7 @@ const YotpoReviewWidget = (props:any) => {
 											</div>
 											{review?.products?.length > 0 && (
 												<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`/products/${review?.products[0]?.slug}`}>
-													{review?.products[0]?.name}
+													{review?.products?.filter((prod) => !prod?.slug?.includes('vip'))[0]?.name || ''}
 												</a>
 											)}
 											<h4 className="mb-1 mt-1 font-bold lg:font-normal">
