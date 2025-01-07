@@ -40,8 +40,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	const globalSettings = useGlobalSettings();
 	// const { isPreview } = usePreview();
     // const store = (isPreview) ? 'dev' : 'us';
-    const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
-    const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
+    // const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
+    // const waitlistPopupData = waitlistPopup?.waitlistPopup?.waitlistPopup[store];
 	const [stockDate, setStockDate] = useState(data.date);
 
 	const waitlistNonOOS = globalSettings?.data?.ThemeSettings.filter((setting) => setting.__component === 'theme.waitlist-non-oos');
@@ -227,12 +227,12 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										)} */}
 									</>
 								)}
-								{restockType !== 'no' && waitlistPopupData && (
+								{restockType !== 'no' && (
 									<div className={`relative flex items-stretch w-full flex-col ${success ? 'hidden mt-4' : 'mt-2'}`}>
 										<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
-										<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={waitlistPopupData.email_placeholder ?? 'Enter your email'} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
-										{formError && <span className="mt-1 font-size-sm text-primary">{waitlistPopupData.email_invalid ?? 'Invalid Email Address'}</span>}
-										<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{waitlistPopupData.waitlist_popup_form_submit ?? 'Yes, notify me!'}</Button>
+										<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={'Enter your email'} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
+										{formError && <span className="mt-1 font-size-sm text-primary">{'Invalid Email Address'}</span>}
+										<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{'Yes, notify me!'}</Button>
 									</div>
 								)}
 							</>
