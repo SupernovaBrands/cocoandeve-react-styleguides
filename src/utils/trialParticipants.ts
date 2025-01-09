@@ -864,17 +864,17 @@ const trialParticipants = [
 		content: "My hair condition before using the boost therapy range wasn’t the greatest. Since using it, my hair has noticeably grown at least half an inch as my roots are coming through from recently having it coloured. I’m happy with the products - my hair condition is much better than it was. I give this range a 10/10 star rating!"
 	  },
 	  {
-		sku: "CE0004962020",
-		date: "2024-12-26",
-		title: "Curls that bounce and shine 💃",
-		user: "Phoebe Karamihas",
-		score: "5",
-		content: "I just love the Coco & Eve Anti-Frizz Fix & Pro Shine. It gives my curls definition and bounce, and my hair feels so silky to touch. A must-have for all you curly girls!"
+		"sku": "CE0004962020",
+		"date": "2024-12-26",
+		"title": "Curls that bounce and shine",
+		"user": "Phoebe Karamihas",
+		"score": "5",
+		"content": "I just love the Coco & Eve Anti-Frizz Fix & Pro Shine. It gives my curls definition and bounce, and my hair feels so silky to touch. A must-have for all you curly girls!"
 	  },
 	  {
 		"sku": "CE0004962020",
-		"date": "2024-12-26",
-		"title": "survived heat and humidity—no frizz ☀️",
+		"date": "2024-12-25",
+		"title": "Survived heat AND humidity",
 		"user": "Michaela",
 		"score": "5",
 		"content": "The spray made brushing my hair a breeze, and my hair survived the heat and humidity of Christmas Day!"
@@ -882,7 +882,7 @@ const trialParticipants = [
 	  {
 		"sku": "CE0004962020",
 		"date": "2024-12-25",
-		"title": "the multitasker: frizz-free, heat-protected hair 💪",
+		"title": "a multitasker",
 		"user": "Savita Mehmi",
 		"score": "5",
 		"content": "A great spray that is easy to apply and helps reduce frizz. It’s great to use on both dry and damp hair. It’s also perfect before drying your hair to protect against heat damage, so it really does do a lot of work."
@@ -890,14 +890,14 @@ const trialParticipants = [
 	  {
 		"sku": "CE0004962020",
 		"date": "2024-12-25",
-		"title": "Low maintenance, high shine",
+		"title": "Low maintenance, high shine ",
 		"user": "Katie Mason",
 		"score": "5",
 		"content": "I really love this spray! I am learning to embrace the ever-evolving natural texture of my hair, and this really suits both my hair and my low-maintenance routine. I can spray this in and leave it or blow-dry—it gives the same great results. My hair feels soft and not at all weighed down, and it definitely has extra shine too."
 	  },
 	  {
 		"sku": "CE0004962020",
-		"date": "2024-12-25",
+		"date": "2024-12-26",
 		"title": "defined curls and no flyaways",
 		"user": "Kirstie",
 		"score": "5",
@@ -905,8 +905,8 @@ const trialParticipants = [
 	  },
 	  {
 		"sku": "CE0004962020",
-		"date": "2024-12-24",
-		"title": "Smooth, frizz-free locks for any occasion",
+		"date": "2024-12-25",
+		"title": "Smooth, frizz-free locks for any occasion 💕",
 		"user": "Wendy Becker",
 		"score": "5",
 		"content": "My hair smells amazing and is smooth without being greasy! I can’t wait to try it out in Mexico on an upcoming vacation. I plan to use it at night before wrapping my hair for robe curls. Sometimes I get frizzy curls, and I can see this taming my locks!"
@@ -922,7 +922,7 @@ const trialParticipants = [
 	  {
 		"sku": "CE0004962020",
 		"date": "2024-12-24",
-		"title": "shiny, frizz-free hair without the grease 💧",
+		"title": "shiny, frizz-free hair without the grease",
 		"user": "Melissa Rhodes",
 		"score": "4",
 		"content": "I really like this product. A little bit goes a long way—you don’t need to saturate your hair for it to work. If you use too much, it doesn’t make your hair greasy either. It definitely helped control the frizz in my hair and made a significant difference to its shine. Overall, a really good product that I will definitely be using again."
