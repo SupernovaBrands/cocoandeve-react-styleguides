@@ -16,6 +16,7 @@ import {
 	controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
+import ProductCardTest from '~/compounds/ProductCardTest';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -97,7 +98,23 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
 									{productsData?.tab1?.products && newTabProducts.map((item: any, index: number) => {
-										return (
+										return props.smallerTest ? (
+											<ProductCardTest
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={false}
+												carousel={true}
+												addToCart={addToCart}
+												trackEvent={trackEvent}
+												preOrders={preOrders}
+												generalSetting={generalSetting}
+												homePage={props.homePage || false}
+											/>
+										) : (
 											<ProductCard
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -140,7 +157,23 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
 									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
-										return (
+										return props.smallerTest ? (
+											<ProductCardTest
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={false}
+												carousel={true}
+												addToCart={addToCart}
+												trackEvent={trackEvent}
+												preOrders={preOrders}
+												generalSetting={generalSetting}
+												homePage={props.homePage || false}
+											/>
+										) : (
 											<ProductCard
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -183,7 +216,23 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
 									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
-										return (
+										return props.smallerTest ? (
+											<ProductCardTest
+												key={`${activeTab}-${item.id}-${index}`}
+												keyName={`${activeTab}-${item.id}-${index}`}
+												product={item}
+												className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+												button={true}
+												setWaitlistData={setWaitlistData}
+												smSingleStar={false}
+												carousel={true}
+												addToCart={addToCart}
+												trackEvent={trackEvent}
+												preOrders={preOrders}
+												generalSetting={generalSetting}
+												homePage={props.homePage || false}
+											/>
+										) : (
 											<ProductCard
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -222,7 +271,9 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
+						{!props.smallerTest && (
+							<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
+						)}
 					</div>
 				</div>
 			</div>

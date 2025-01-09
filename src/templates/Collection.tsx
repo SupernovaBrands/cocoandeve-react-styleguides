@@ -15,6 +15,7 @@ import { sidebar_collection_ph, sidebar_collection_ph_ca } from '~/modules/place
 import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
+import ProductCardTest from "~/compounds/ProductCardTest";
 
 const Inner = ({ title, bannerData }) => {
     return (
@@ -74,9 +75,11 @@ const Collection = (props: any) => {
         loggedInEmail,
         squareBadge,
         bannerData,
+        smallerTest
     } = props;
     // console.log('waitlistPdpSetting', waitlistPdpSetting);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
+    console.log('smaller ab test ', smallerTest);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
@@ -507,48 +510,98 @@ const Collection = (props: any) => {
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
                                         )}
-                                        <ProductCard
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
-                                            product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            eventNameOnClick='collection_product_card'
-                                            preOrders={preOrders}
-                                            isLaunchWL={isLaunchWL}
-                                            launchBox={launchBox}
-                                            setLaunchWLModal={setLaunchWLModal}
-                                            setLaunchWLModal2={setLaunchWLModal2}
-                                            setLaunchWLModal3={setLaunchWLModal3}
-                                            generalSetting={generalSetting}
-                                            collectionTemplate={true}
-                                            store={store}
-                                        />
+                                        {smallerTest && (
+                                            <ProductCardTest
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                        {!smallerTest && (
+                                            <ProductCard
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
                                     </>
                                 ) : (
-                                    <ProductCard
-                                        key={`collection-a-${handle}-${item.id}-${index}`}
-                                        product={item}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                        button={true}
-                                        setWaitlistData={setWaitlistData}
-                                        smSingleStar={true}
-                                        addToCart={addToCart}
-                                        trackEvent={trackEvent}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={preOrders}
-                                        isLaunchWL={isLaunchWL}
-                                        launchBox={launchBox}
-                                        setLaunchWLModal={setLaunchWLModal}
-                                        setLaunchWLModal2={setLaunchWLModal2}
-                                        setLaunchWLModal3={setLaunchWLModal3}
-                                        generalSetting={generalSetting}
-                                        collectionTemplate={true}
-                                        store={store}
-                                    />
+                                    <>
+                                        {smallerTest && (
+                                            <ProductCardTest
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                        {!smallerTest && (
+                                            <ProductCard
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                    </>
                                 )
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
