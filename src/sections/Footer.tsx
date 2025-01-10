@@ -73,6 +73,8 @@ const Footer = (props: any) => {
         (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
     ;
 
+    console.log('footer styleguide test', props.smallerTest);
+
     return (
         <footer className="pt-4 pb-1">
             <div className="container mb-4 lg:mb-3 px-g">

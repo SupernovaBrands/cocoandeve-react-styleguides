@@ -79,7 +79,7 @@ const Collection = (props: any) => {
     } = props;
     // console.log('waitlistPdpSetting', waitlistPdpSetting);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
-    console.log('smaller ab test ', smallerTest);
+    // console.log('smaller ab test ', smallerTest);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);

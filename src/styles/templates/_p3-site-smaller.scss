@@ -126,7 +126,7 @@
         }
 
         .product-title__text {
-            @apply text-left order-1 items-start justify-start;
+            @apply text-left order-1 items-start justify-start mx-0 lg:mb-25;
         }
 
         .product-card__title {
