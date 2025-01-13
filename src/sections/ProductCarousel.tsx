@@ -29,6 +29,17 @@ const options: EmblaOptionsType = {
 	}
 };
 
+const optionsAbTest: EmblaOptionsType = {
+	loop: true,
+	align: 'start',
+	breakpoints: {
+		'(min-width: 992px)': {
+			watchDrag: false,
+			duration: 40,
+		}
+	}
+}
+
 const ProductCarousel = (props: any) => {
 	const [waitlistData, setWaitlistData] = useState({
         open: false,
@@ -38,7 +49,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
     });
 
-	const { waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { smallerTest, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -49,9 +60,10 @@ const ProductCarousel = (props: any) => {
 	}
 
 	const [activeTab, setActiveTab] = useState('bestsellers');
+	const [isHomepage, setIsHomepage] = useState(false);
 
 	//tab 1
-	const [emblaRef1, emblaApi1] = useEmblaCarousel(options);
+	const [emblaRef1, emblaApi1] = useEmblaCarousel(isHomepage && smallerTest ? optionsAbTest : options);
 	// const {
 	// 	onPrevButtonClick: arrowClickPrev1,
 	// 	onNextButtonClick: arrowClickNext1
@@ -59,7 +71,7 @@ const ProductCarousel = (props: any) => {
 	// const autoPlayClick1 = controlAutoplay(emblaApi1);
 
 	//tab 2
-	const [emblaRef2, emblaApi2] = useEmblaCarousel(options);
+	const [emblaRef2, emblaApi2] = useEmblaCarousel(isHomepage && smallerTest ? optionsAbTest : options);
 	// const {
 	// 	onPrevButtonClick: arrowClickPrev2,
 	// 	onNextButtonClick: arrowClickNext2
@@ -67,7 +79,7 @@ const ProductCarousel = (props: any) => {
 	// const autoPlayClick2 = controlAutoplay(emblaApi2);
 
 	//tab 3
-	const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
+	const [emblaRef3, emblaApi3] = useEmblaCarousel(isHomepage && smallerTest ? optionsAbTest : options);
 	// const {
 	// 	onPrevButtonClick: arrowClickPrev3,
 	// 	onNextButtonClick: arrowClickNext3
@@ -80,25 +92,34 @@ const ProductCarousel = (props: any) => {
     }, [waitlistData]);
 
 	const newTabCount = productsData?.tab1?.products.length;
-	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products)
+	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
+
+	useEffect(() => {
+		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
+	}, [])
 
 	return (
 		<>
-		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center product__carousel">
+		<div className={`container px-0 lg:px-hg pt-4 pb-4 text-center product__carousel ${isHomepage ? 'product__carousel-homepage' : ''}`}>
 			<h2 className="h1 text-center mb-1 lg:mb-2">Our Products</h2>
 			<div className="row">
 				<div>
-					<ul className="product__carousel-nav list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
-						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
-						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
-					</ul>
+					<div className="product__carousel-nav-container">
+						<ul className="product__carousel-nav list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
+							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
+							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
+							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
+						</ul>
+						{isHomepage && smallerTest && (
+							<a href="/collections/all" className="hidden lg:inline mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] mb-2">Shop All</a>
+						)}
+					</div>
 					<div className="text-center">
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
 									{productsData?.tab1?.products && newTabProducts.map((item: any, index: number) => {
-										return props.smallerTest ? (
+										return smallerTest ? (
 											<ProductCardTest
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -157,7 +178,7 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
 									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
-										return props.smallerTest ? (
+										return smallerTest ? (
 											<ProductCardTest
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -216,7 +237,7 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
 									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
-										return props.smallerTest ? (
+										return smallerTest ? (
 											<ProductCardTest
 												key={`${activeTab}-${item.id}-${index}`}
 												keyName={`${activeTab}-${item.id}-${index}`}
@@ -271,8 +292,11 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						{!props.smallerTest && (
+						{!smallerTest && (
 							<a href="/collections/all" className="mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
+						)}
+						{smallerTest && isHomepage && (
+							<a href="/collections/all" className="lg:hidden mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
 						)}
 					</div>
 				</div>

@@ -15,6 +15,18 @@
         &-nav li .nav--active {
             @apply bg-primary text-white font-normal focus:text-white visited:text-white hover:text-white;
         }
+
+        @screen lg {
+            &-homepage {
+                .product__carousel-nav-container {
+                    @apply flex justify-between items-center px-g;
+                }
+                .product__carousel-nav {
+                    @apply mx-0 pb-0;
+                }
+            }
+        }
+        
     }
 
     // footer
@@ -327,5 +339,13 @@
         max-width: none !important;
         max-height: none !important;
         left: 0 !important;
+    }
+
+    .product__carousel-homepage .product-card {
+        @apply w-[47.5%] basis-[47.5%];
+
+        @screen lg {
+            @apply w-1/4 basis-1/4;
+        }
     }
 }
