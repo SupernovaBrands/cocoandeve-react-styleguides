@@ -199,7 +199,7 @@ export const CartItem = (props:CartItemProps) => {
 						{item.isFreeItem && item.originalPrice >= 0 ? (
 							<ConditionWrapper
 								condition={item.isFreeItem}
-								wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
+								wrapper={(children:any) => <span className="text-black">{children}</span>}
 							>
 								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
