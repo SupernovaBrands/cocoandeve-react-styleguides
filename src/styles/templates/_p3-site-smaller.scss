@@ -37,6 +37,9 @@
         @apply flex flex-col;
     }
     .product__reviews {
+        &-title {
+            @apply text-left lg:text-center text-xl lg:text-[2.25em];
+        }
         .review__filter-form {
             @apply flex flex-col;
         }
@@ -77,6 +80,11 @@
         .product__review-list-container,
         .review__question-right {
             @apply w-full lg:w-9/12
+        }
+
+        .product__review-list-container > hr,
+        .product__reviews-total {
+            @apply hidden;
         }
         .review__tab {
             @apply hidden;

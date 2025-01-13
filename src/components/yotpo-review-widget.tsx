@@ -822,7 +822,7 @@ const YotpoReviewWidget = (props:any) => {
 					</div>
 
 					<div className="product__review-list-container">
-						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test'} />
+						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test lg:mt-0'} />
 						<hr className="my-2"/>
 
 						{revLoading && (
@@ -858,7 +858,7 @@ const YotpoReviewWidget = (props:any) => {
 
 						{!revLoading && reviews.length > 0 && (
 							<>
-								<p className="font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
+								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
 										<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
@@ -977,7 +977,7 @@ const YotpoReviewWidget = (props:any) => {
 						<YotpoFilterForm className="hidden review__filter-form" id={`yotpoFilterForm2`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 					<div className="review__question-right">
-						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test'} />
+						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test lg:mt-0'} />
 						
 						{qnaLoading && (
 							<div className="flex justify-center mt-4">

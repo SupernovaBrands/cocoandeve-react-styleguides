@@ -6,7 +6,7 @@ const YotpoFilterForm = (props) => {
     return (
         <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
             <p className="font-bold mb-2">{tStrings.yotpo.filterReviews}</p>
-			<div className="input-group lg:w-1/2 px-0 flex flex-nowrap">
+			<div className="input-group lg:w-1/2 px-0 flex flex-nowrap py-[2px]">
                 <input
 					type="text"
 					name="free_text_search"
