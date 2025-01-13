@@ -18,6 +18,9 @@
     }
 
     // footer
+    .dropdown__store button {
+        @apply text-sm font-normal;
+    }
     .footer__newsletter-form input {
         @apply rounded-l-full text-gray-500 bg-gray-400;
     }
@@ -310,5 +313,11 @@
                 left: 0 !important;
             }
         }
+    }
+
+    .product-card__carousel img {
+        max-width: none !important;
+        max-height: none !important;
+        left: 0 !important;
     }
 }

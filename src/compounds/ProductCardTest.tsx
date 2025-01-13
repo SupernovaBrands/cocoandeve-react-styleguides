@@ -299,7 +299,7 @@ const ProductCardTest = (props:any) => {
     }, []);
 
 	return !props.useCardTemplate ? (
-        <div key={props.keyName} className={`product-card ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
+        <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
                 <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
