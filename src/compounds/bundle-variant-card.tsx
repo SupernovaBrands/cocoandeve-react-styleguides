@@ -3,6 +3,7 @@ import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
     const { bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    // console.log('set saving', saving);
     const [addingItem, setAddingItem] = useState(false);
     
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
@@ -47,24 +48,33 @@ const BundleVariantCard = (props) => {
     };
 
     const bundleImg = productStrapi?.images[productStrapi?.images.length - 1];
-    console.log('productShopify', productShopify);
     const option2 = productShopify?.options[1]?.values || [];
+    const bundleUrl = productStrapi?.bundle_handle || null;
 
     return (
         <>
         <p className="lg:text-lg font-bold mb-1">Save with Bundles</p>
-        <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px]">
+        <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
+            <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-black absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>
             <div className="float-left">
                 <figure className="flex">
-                    {/* <a href="#" className="block w-[34.7%] lg:w-[26.38%]">
-                        <img className="w-full h-full object-cover" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3ad79a5a-19b2-446e-ea5e-82a7ea5bfe00/320x" />
-                    </a> */}
-                    {bundleImg && (
+                    {bundleUrl && bundleImg && (
+                        <a href={`/products/${bundleUrl}`} className="block w-[34.7%] lg:w-[26.38%]">
+                            <img className="w-full h-full object-cover" src={bundleImg.url.replace('public', '320x')} />
+                        </a>
+                    )}
+                    
+                    {!bundleUrl && bundleImg && (
                         <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right p-1 lg:p-2 flex flex-col">
                         <div className="mb-25 lg:mb-1">
-                            <p className="text-body mb-25 block font-bold">{optionValue}</p>
+                            {!bundleUrl && <p className="text-body mb-25 block font-bold">{optionValue}</p>}
+                            {bundleUrl && (
+                                <a className="text-body mb-25 block font-bold" href={`/products/${bundleUrl}`}>
+                                    {optionValue}
+                                </a>
+                            )}
                             {variantDescriptionText && variantDescriptionText.length > 0 && (
                                 <div className="text-sm">
                                     {variantDescriptionText.map((el, i) => {

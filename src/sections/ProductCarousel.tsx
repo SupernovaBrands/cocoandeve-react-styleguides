@@ -84,11 +84,11 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center">
+		<div className="container px-0 lg:px-hg pt-4 pb-4 text-center product__carousel">
 			<h2 className="h1 text-center mb-1 lg:mb-2">Our Products</h2>
 			<div className="row">
 				<div>
-					<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
+					<ul className="product__carousel-nav list-style-none mx-auto flex flex-wrap border-b-0 text-center pb-4 lg:pb-2 justify-center">
 						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
 						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Bestsellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
 						<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
