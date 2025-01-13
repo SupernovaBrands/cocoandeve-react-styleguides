@@ -30,8 +30,13 @@
     }
 
     // pdp review
-    
+    .yotpo-widget__rating-sidebar {
+        @apply flex flex-col;
+    }
     .product__reviews {
+        .review__filter-form {
+            @apply flex flex-col;
+        }
         .review__filter-form-inputs {
             @apply mx-0 lg:-mx-g;
 

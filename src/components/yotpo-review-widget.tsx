@@ -818,11 +818,11 @@ const YotpoReviewWidget = (props:any) => {
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] flex flex-wrap ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div className="flex flex-col review__filter-sidebar">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
-						<YotpoFilterForm id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm className="review__filter-form" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 
 					<div className="product__review-list-container">
-						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'review__tab-test'} />
+						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test'} />
 						<hr className="my-2"/>
 
 						{revLoading && (
@@ -974,10 +974,10 @@ const YotpoReviewWidget = (props:any) => {
 				<div id="yotpo-widget__questions" className={`flex flex-wrap [transition:opacity_0.15s_linear] ${activeTab === 'question' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__questions-tab">
 					<div className="flex flex-col review__filter-sidebar">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
-						<YotpoFilterForm id={`yotpoFilterForm2`} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm className="hidden review__filter-form" id={`yotpoFilterForm2`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 					<div className="review__question-right">
-						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'review__tab-test'} />
+						<YotpoReviewTab setActiveTab={setActiveTab} activeTab={activeTab} reviewBox={reviewBox} className={'hidden review__tab-test'} />
 						
 						{qnaLoading && (
 							<div className="flex justify-center mt-4">

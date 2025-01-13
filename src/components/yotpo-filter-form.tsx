@@ -2,9 +2,9 @@ import SvgSearch from '~/images/icons/search.svg';
 
 const tStrings = global.config.tStrings;
 const YotpoFilterForm = (props) => {
-    const {onFilterChange, customFilter, id} = props;
+    const {onFilterChange, customFilter, id, className} = props;
     return (
-        <div id={ id ?? 'yotpoFilterForm'} className='review__filter-form'>
+        <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
             <p className="font-bold mb-2">{tStrings.yotpo.filterReviews}</p>
 			<div className="input-group lg:w-1/2 px-0 flex flex-nowrap">
                 <input
