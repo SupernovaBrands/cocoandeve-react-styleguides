@@ -38,7 +38,7 @@ const SideArticleCarousel = (props: any) => {
 		emblaApi1.on('scroll', onScroll);
 	}, [emblaApi1, onScroll]);
 
-    console.log('articleCarousel', articleCarousel);
+    // console.log('articleCarousel', articleCarousel);
 
 	return articleCarousel.length > 0 && (
         <>
