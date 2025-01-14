@@ -51,27 +51,48 @@ const BundleVariantCard = (props) => {
     const option2 = productShopify?.options[1]?.values || [];
     const bundleUrl = productStrapi?.bundle_handle || null;
 
+    // hardcoded url for selected PDPs
+    const urlTargets = {
+        'sunny-honey-bali-bronzing-self-tan-mousse': {
+            bundleUrl: 'sunny-honey-bali-bronzing-self-tan-set'
+        },
+        'super-nourishing-coconut-fig-hair-masque': {
+            bundleUrl: 'silky-hair-set'
+        },
+        'tripeptide-hair-density-serum': {
+            bundleurl: 'fine-hair-rescue-set'
+        },
+        'shampoo-conditioner-set': {
+            bundleUrl: null
+        },
+        'antioxidant-face-tanning-micromist': {
+            bundleUrl: 'tan-masters-kit'
+        },
+    };
+
+    const urlSet = urlTargets[productShopify.handle]?.bundleUrl || null;
+
     return (
         <>
-        <p className="lg:text-lg font-bold mb-1">Save with Bundles</p>
+        <p className="lg:text-lg font-bold mb-1 mt-3">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
             <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-black absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>
             <div className="float-left">
                 <figure className="flex">
-                    {bundleUrl && bundleImg && (
-                        <a href={`/products/${bundleUrl}`} className="block w-[34.7%] lg:w-[26.38%]">
+                    {urlSet && bundleImg && (
+                        <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
                             <img className="w-full h-full object-cover" src={bundleImg.url.replace('public', '320x')} />
                         </a>
                     )}
                     
-                    {!bundleUrl && bundleImg && (
+                    {!urlSet && bundleImg && (
                         <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right p-1 lg:p-2 flex flex-col">
                         <div className="mb-25 lg:mb-1">
-                            {!bundleUrl && <p className="text-body mb-25 block font-bold">{optionValue}</p>}
-                            {bundleUrl && (
-                                <a className="text-body mb-25 block font-bold" href={`/products/${bundleUrl}`}>
+                            {!urlSet && <p className="text-body mb-25 block font-bold">{optionValue}</p>}
+                            {urlSet && (
+                                <a className="text-body mb-25 block font-bold" href={`/products/${urlSet}`}>
                                     {optionValue}
                                 </a>
                             )}

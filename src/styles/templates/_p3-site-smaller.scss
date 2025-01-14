@@ -4,6 +4,9 @@
 
     // section product carousel
     .product__carousel {
+        h2 {
+            @apply text-xl;
+        }
         &-nav button {
             @apply font-normal;
         }
@@ -48,7 +51,26 @@
     .yotpo-widget__rating-sidebar {
         @apply flex flex-col;
     }
+    .review__inline-star {
+        @apply text-body;
+    }
     .product__reviews {
+        .input-group {
+            .input-group-append {
+                @apply order-1;
+
+                button {
+                    @apply bg-gray-400;
+                }
+
+                svg {
+                    @apply fill-primary;
+                }
+            }
+            input {
+                @apply order-2 pl-0;
+            }
+        }
         &-title {
             @apply text-left lg:text-center text-xl lg:text-[2.25em];
         }
@@ -103,6 +125,10 @@
         }
         .review__tab-test {
             @apply flex;
+        }
+
+        img {
+            @apply rounded-[8px]
         }
     }
 
@@ -166,6 +192,18 @@
         @apply text-lg mb-1 lg:text-2xl;
     }
 
+    .product-form .quantity-box {
+        @apply px-2;
+        
+        &__button {
+            @apply px-[12.5px];
+    
+            svg {
+                @apply w-1;
+            }
+        }
+    }
+
     .product__pricing-mb,
     .product__pricing-dt {
         @apply hidden;
@@ -212,6 +250,28 @@
 
         .product-form-submit__cta {
             @apply rounded-full
+        }
+    }
+
+    .product__banner {
+        @apply mb-4;
+
+        &-left {
+            @apply order-2;
+        }
+        &-right {
+            @apply order-1;
+        }
+
+        h2 {
+            @apply text-lg lg:text-2xl;
+        }
+
+        &-content > div {
+            @apply lg:text-base lg:mb-2;
+            b {
+                @apply lg:text-lg;
+            }
         }
     }
     

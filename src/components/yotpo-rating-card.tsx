@@ -27,7 +27,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('question')}
                     type="button"
                     lg={false}
-                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full text-sm py-1 mb-1">
+                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full text-sm py-1">
                         Ask A Question
                 </Button>
             </div>

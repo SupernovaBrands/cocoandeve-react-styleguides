@@ -8,7 +8,8 @@ import parse from 'html-react-parser';
 const DEFAULT_LABEL = 'Add To Cart';
 
 const Pricing = ({ props, collectionTemplate, showCompare }) => {
-    const label = props.btnLabel ? props.btnLabel : props.label;
+    let label = props.btnLabel ? props.btnLabel : props.label;
+    label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
     return (
         <>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto block ${props.carousel ? 'w-1/2 text-nowrap text-left py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'} `}>

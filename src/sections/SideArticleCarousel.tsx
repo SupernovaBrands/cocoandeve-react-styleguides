@@ -38,18 +38,20 @@ const SideArticleCarousel = (props: any) => {
 		emblaApi1.on('scroll', onScroll);
 	}, [emblaApi1, onScroll]);
 
+    console.log('articleCarousel', articleCarousel);
+
 	return articleCarousel.length > 0 && (
         <>
         <div className="product-side-article lg:pb-1 pt-0 md:pt-2">
             <div className="w-full justify-center px-0">
                 <div className={`mx-0 ${articleCarousel?.length <= 1 ? 'flex' : ''}`}>
-                    <WithCarousel carousel={articleCarousel?.length > 2} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
+                    <WithCarousel carousel={articleCarousel?.length > 1} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
                         {articleCarousel.map((data:any, index:number) => (
                             <PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="product__side-article flex-grow-0 flex-shrink-0 basis-[91.5%] w-[91.5%] px-hg lg:px-g lg:w-[80%] lg:basis-[80%]" data={data} />
                         ))}
                     </WithCarousel>
                     
-                    {articleCarousel.length > 2 && (
+                    {articleCarousel.length > 1 && (
                         <div className="px-0">
                             <div className="carousel__progress bg-gray-400">
                                 <div
