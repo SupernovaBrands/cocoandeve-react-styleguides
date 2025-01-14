@@ -72,7 +72,7 @@
             }
         }
         &-title {
-            @apply text-left lg:text-center text-xl lg:text-[2.25em];
+            @apply text-left lg:text-center text-xl lg:text-[2.25em] lg:mb-5;
         }
         .review__filter-form {
             @apply flex flex-col;
@@ -125,6 +125,14 @@
         }
         .review__tab-test {
             @apply flex;
+
+            li {
+                @apply mr-1 lg:mr-2;
+            }
+
+            li > a {
+                @apply px-0
+            }
         }
 
         img {
