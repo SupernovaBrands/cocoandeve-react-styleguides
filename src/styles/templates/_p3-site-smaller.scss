@@ -5,7 +5,7 @@
     // section product carousel
     .product__carousel {
         h2 {
-            @apply text-xl;
+            @apply text-xl lg:text-2xl;
         }
         &-nav button {
             @apply font-normal;
@@ -194,7 +194,7 @@
 
     .product-form .quantity-box {
         @apply px-2;
-        
+
         &__button {
             @apply px-[12.5px];
     
@@ -401,11 +401,63 @@
         left: 0 !important;
     }
 
-    .product__carousel-homepage .product-card {
-        @apply w-[47.5%] basis-[47.5%];
-
-        @screen lg {
-            @apply w-1/4 basis-1/4;
+    // homepage carousel
+    .product__carousel-homepage {
+        @apply py-3 lg:pb-0;
+        .product__carousel-nav-container a {
+            @apply mt-0 mb-3;
         }
+        h2 {
+            @apply hidden;
+        }
+        .product-card {
+            @apply w-[47.5%] basis-[47.5%];
+    
+            @screen lg {
+                @apply w-1/4 basis-1/4;
+            }
+        }
+    }
+
+    // homepage video reels
+    .instagram-reels {
+        video {
+            @apply rounded-[24px] h-[225.5px] min-h-[225.5px] lg:rounded-[32px] lg:h-[355px] lg:min-h-[355px] lg:object-cover w-full;
+        }
+
+        &__card {
+            @apply w-[47.5%] basis-[47.5%] lg:w-1/4 lg:basis-1/4;
+
+            p {
+                @apply text-sm lg:text-base;
+            }
+        }
+
+        &__button {
+            @apply inline-block lg:hidden;
+        }
+
+        &__title {
+            @apply text-xl lg:text-2xl;
+        }
+
+        &__nav {
+            @apply justify-start px-hg flex-nowrap overflow-scroll lg:overflow-hidden lg:mx-0;
+            button {
+                @apply bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2;
+
+                &.instagram-reels__nav--active {
+                    @apply font-normal bg-primary text-white;
+                }
+            }
+
+            
+        }
+        
+    }
+
+    // range banner
+    .range-banner figcaption {
+        @apply lg:top-[24px]
     }
 }
