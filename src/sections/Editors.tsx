@@ -25,7 +25,7 @@ const options: EmblaOptionsType = {
 	}
 };
 
-const Editors = () => {
+const Editors = (props) => {
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const [prevShow, setPrevShow] = useState(false);
     const [nextShow, setNextShow] = useState(true);
@@ -92,6 +92,7 @@ const Editors = () => {
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         }
     ];
+    console.log('editor props', props);
     return (
         <section className="list-logo container mb-g lg:my-[50px] px-2 lg:px-g pb-1 lg:pb-0">
             <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor lg:pl-3">
