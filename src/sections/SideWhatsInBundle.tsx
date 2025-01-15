@@ -11,20 +11,15 @@ const options: EmblaOptionsType = {
 
 const testData = [
     {
-        handle: 'sunny-honey-bali-bronzing-self-tan-mousse',
-        url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8eddcc0e-5884-40c9-f39d-46ef5b2f5c00/public',
-        title: 'Sunny Honey Bali Bronzing Foam',
+        handle: 'super-hydrating-shampoo',
+        url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1262e40f-6747-4f65-8416-249281011500/public',
+        title: 'Super Hydrating Shampoo',
     },
     {
-        handle: 'hypoallergenic-soft-velvet-mitt',
-        url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b004312e-cb0d-4f7d-7120-732c467d2f00/public',
-        title: 'Soft Velvet Tanning Mitt'
-    },
-    {
-        handle: 'deluxe-vegan-kabuki-brush',
-        url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d2c8a91c-eb2d-47ca-cf36-c7591defec00/public',
-        title: 'Deluxe Vegan Kabuki Brush'
-    },
+        handle: 'super-hydrating-cream-conditioner',
+        url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/404db1a0-56d4-4f02-9b50-5d6427d3d000/public',
+        title: 'Super Hydrating Cream Conditioner'
+    }
 ];
 
 const SingleCard = ({handle, url, title, isLast}) => {
@@ -76,8 +71,8 @@ const SideWhatsInBundle = (props: any) => {
         <div className="product-side-article lg:pb-1 pt-0 md:pt-2 mb-2">
             <p className="font-bold mb-1 lg:text-lg">What's in the bundle?</p>
             <div className="w-full justify-center px-0">
-                <div className={`mx-0 ${testData?.length <= 1 ? 'flex' : ''}`}>
-                    <WithCarousel carousel={testData?.length > 1} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
+                <div className={`mx-0 ${testData?.length <= 2 ? 'flex' : ''}`}>
+                    <WithCarousel carousel={testData?.length > 2} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
                         {testData.map((data:any, index:number, row: any) => {
                             const isLast = index + 1 === row.length ? true : false;
                             return <SingleCard handle={data.handle} url={data.url} title={data.title} isLast={isLast} />
