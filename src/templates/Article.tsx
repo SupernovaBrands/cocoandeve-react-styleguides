@@ -145,6 +145,7 @@ const Article = (props) => {
     const [tanTitle, setTanTitle] = useState('');
     const [title, setTitle] = useState(content?.title);
     const [featuredImageUrl, setFeaturedImageUrl] = useState(featuredImg);
+    const [featuredImageLink, setFeaturedImageLink] = useState(content?.BlogContentMultiStores?.[store]?.featured_image_link || '');
     const [bodyContent, setBodyContent] = useState('');
 
     const d = new Date(content?.updatedAt);
@@ -177,6 +178,10 @@ const Article = (props) => {
         if (content?.BlogContentMultiStores?.[region]?.featured_image?.url) {
             const featuredImage = content?.BlogContentMultiStores?.[region]?.featured_image?.url || '';
             setFeaturedImageUrl(featuredImage)
+        }
+        if (content?.BlogContentMultiStores?.[region]?.featured_image_link) {
+            const featuredLink = content?.BlogContentMultiStores?.[region]?.featured_image_link || '';
+            setFeaturedImageLink(featuredLink)
         }
         if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
             const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
@@ -403,10 +408,19 @@ const Article = (props) => {
                         <h1 className="text-center mb-1">{content?.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
                         {featuredImg && (
-                            <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
-                                <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
-                            </picture>
+                            featuredImageLink ? (
+                                <a href={featuredImageLink}>
+                                    <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                        <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                    </picture>
+                                </a>
+                            ) : (
+                                <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                    <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                </picture>
+                            )
                         )}
                         {quickLinks?.length > 0 && (
                             <>
