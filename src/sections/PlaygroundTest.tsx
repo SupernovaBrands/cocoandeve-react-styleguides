@@ -13,7 +13,7 @@ const PlaygroundCard = ({ data, store, imgMb, imgDt }) => (
             <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g top-[50%] -translate-y-[50%] lg:transform-none lg:top-[24px] lg:left-0 lg:right-0">
                 <p className="text-base md:text-xl font-bold text-body">{store === 'ca' ? data.Title.replace('Tan & SPF', 'Tan') : data.Title}</p>
                 <p className="font-size-sm md:text-base lg:px-g text-body text-gray-600" dangerouslySetInnerHTML={{ __html: data.text }} />
-                <span className="hidden lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 md:py-[12px] border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
+                <span className="playground__card-atc hidden lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 md:py-[12px] border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
             </figcaption>
         </a>
     </figure>

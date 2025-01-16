@@ -114,7 +114,7 @@ const ProductCarousel = (props: any) => {
 							<a href="/collections/all" className="hidden lg:inline mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] mb-2">Shop All</a>
 						)}
 					</div>
-					<div className="text-center">
+					<div className="product__carousel-body text-center">
 						<TabContent active={activeTab === 'new'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
