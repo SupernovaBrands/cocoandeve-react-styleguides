@@ -37,7 +37,7 @@ const QuizRewardTest = (props: any) => {
 
 	const icon = moneyBackIcon(props.store);
 	return (
-		<section className="container text-center mt-4 lg:mt-5 mb-1 lg:mb-0">
+		<section className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-0">
 			<p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
 			<div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
 				<figure className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative">

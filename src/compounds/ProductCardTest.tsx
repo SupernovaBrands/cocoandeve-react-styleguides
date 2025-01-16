@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { formatMoney, getCookie } from "~/modules/utils";
 import parse from 'html-react-parser';
 
-const DEFAULT_LABEL = 'Add To Cart';
+const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
 
 const Pricing = ({ props, collectionTemplate, showCompare }) => {
     let label = props.btnLabel ? props.btnLabel : props.label;

@@ -64,9 +64,9 @@ const FooterTest = (props) => {
             <div className="container lg:mb-3 px-g flex flex-wrap">
                 <div className="w-full lg:w-1/2 px-0 lg:px-g lg:pr-4">
                     <h5 className="font-bold mb-1 text-xl lg:text-2xl">Newsletter</h5>
-                    <p className="mb-1 lg:mb-3">Receive exclusive offers, promotions and beauty tips via email.</p>
+                    <p className="mb-1 lg:mb-2">Receive exclusive offers, promotions and beauty tips via email.</p>
                     <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} />
-                    <p className="text-sm mt-1 mb-1 lg:order-0 text-gray-600 mb-5 lg:mt-1 lg:mb-0">Please read our <a href="/pages/privacy-policy" className="text-sm text-body">Privacy Policy</a> for more information about how we use your data.</p>
+                    <p className="footer__newsletter-tos text-sm mt-1 mb-1 lg:order-0 text-gray-600 mb-5 lg:mt-1 lg:mb-0">Please read our <a href="/pages/privacy-policy" className="text-sm text-body">Privacy Policy</a> for more information about how we use your data.</p>
                 </div>
                 <div className="w-full lg:w-1/2 px-0 lg:px-g">
                     <div className="flex flex-wrap w-full lg:-mx-g">
@@ -143,7 +143,7 @@ const FooterTest = (props) => {
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul>
                 <hr className="block w-full border-body mb-1 mt-2 lg:mt-3 lg:mb-1 bg-gray-600 opacity-20" />
-                <p className="text-center block w-full justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
+                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
             </div>
         </footer>
     );
