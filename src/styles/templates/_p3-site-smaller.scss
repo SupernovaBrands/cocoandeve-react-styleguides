@@ -7,12 +7,19 @@
         h2 {
             @apply text-xl lg:text-2xl;
         }
+        &-body {
+            @apply px-hg lg:px-0;
+        }
         &-nav button {
             @apply font-normal;
         }
 
         &-nav li button {
-            @apply bg-gray-400 rounded-full mx-25 w-auto text-sm lg:text-lg px-2 text-gray-600;
+            @apply bg-gray-400 rounded-full mr-1 w-auto text-sm lg:text-lg px-2 text-gray-600;
+        }
+
+        &-nav li:last-child button {
+            @apply mr-0;
         }
 
         &-nav li .nav--active {
@@ -215,6 +222,9 @@
     .playground--collection-list {
         @apply pt-[25px] lg:pt-1;
     }
+    .playground__card-atc {
+        @apply lg:min-w-[205px] md:py-1;
+    }
 
     // featured in
     .list-logo {
@@ -361,6 +371,10 @@
             @apply text-left order-1 items-start justify-start mx-0 lg:mb-25 lg:min-h-[auto] lg:mb-1;
         }
 
+        .product-card__badge {
+            @apply text-xs lg:text-sm;
+        }
+
         .product-card__title {
             @apply text-sm;
             @screen lg {
@@ -371,7 +385,7 @@
         .product-card__content {
             @apply px-1 pt-0;
             @screen lg {
-                @apply px-g pt-[18px];
+                @apply px-g pt-0;
             }
         }
 
@@ -383,7 +397,7 @@
         }
 
         .review-stars__number {
-            @apply order-2 justify-start;
+            @apply order-2 justify-start lg:mb-2;
 
             svg {
                 @apply w-[12px] h-[12px];
@@ -424,6 +438,10 @@
                 .product-card-btn__text {
                     @apply whitespace-nowrap;
                 }
+            }
+
+            @screen lg {
+                @apply max-h-[none] min-h-[50px];
             }
         }
 
@@ -476,7 +494,7 @@
 
     // homepage carousel
     .product__carousel-homepage {
-        @apply py-3 lg:pb-0;
+        @apply py-3 lg:pb-0 lg:px-0;
         .product__carousel-nav-container a {
             @apply mt-0 mb-3;
         }
@@ -515,7 +533,7 @@
         }
 
         &__nav {
-            @apply justify-start px-hg flex-nowrap overflow-scroll mb-g lg:overflow-hidden lg:mx-0 ;
+            @apply justify-start px-hg flex-nowrap overflow-scroll mb-g lg:overflow-hidden lg:mx-0 lg:px-0;
             -ms-overflow-style: none;
             scrollbar-width: none;
             &::-webkit-scrollbar {
