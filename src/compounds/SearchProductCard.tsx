@@ -7,18 +7,15 @@ const SearchProductCard = (props: any) => {
 	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && url === 'daily-essentials-bundle') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 	}
-	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'ca') && url === 'super-hydration-kit') {
-		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
-	}
-	if ((store === 'dev' || store === 'au' || store === 'eu') && url === 'super-hydration-kit') {
-		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee76b291-fb34-4025-4476-e0d564560c00/public';
-	}
 	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && url === 'deep-condition-bundle') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 	}
 	if (store === 'my' && url === 'hair-revival-set') {
-		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c28d622f-45cc-49ce-d5c2-0dbd6c1f9100/public';
+		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
 	}
+	if (['uk', 'ca', 'au'].includes(store) && url === 'tan-masters-kit') {
+		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/197f3539-6c23-475f-b83b-5d6211561200/public';
+	} 
 
 	const tracking = () => {
 		trackEvent('search_product', {
