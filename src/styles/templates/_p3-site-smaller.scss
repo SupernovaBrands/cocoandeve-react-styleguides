@@ -98,6 +98,9 @@
                 @apply order-2 pl-0;
             }
         }
+        .review__not-found {
+            @apply mt-2;
+        }
         &-title {
             @apply text-left lg:text-center text-xl lg:text-[2.25em] lg:mb-5;
         }
@@ -148,10 +151,7 @@
             @apply hidden;
         }
         .review__tab {
-            @apply hidden;
-        }
-        .review__tab-test {
-            @apply flex;
+            // @apply flex;
 
             li {
                 @apply mr-1 lg:mr-2;
