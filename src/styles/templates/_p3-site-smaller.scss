@@ -513,7 +513,7 @@
     // homepage video reels
     .instagram-reels {
         video {
-            @apply rounded-[24px] h-[225.5px] min-h-[225.5px] lg:rounded-[32px] lg:h-[355px] lg:min-h-[355px] lg:object-cover w-full;
+            @apply rounded-[24px] h-[225.5px] min-h-[225.5px] lg:rounded-[32px] lg:h-[355px] lg:min-h-[355px] object-cover w-full;
         }
 
         &__card {
