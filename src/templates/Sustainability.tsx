@@ -238,31 +238,26 @@ const Sustainability = (props: any) => {
                 </div>
             </section>
             <section className="container p-0">
-                <h2 className="text-center mb-3">{imageSlider.heading}</h2>
+                <h2 className="text-center mb-g">{imageSlider.heading}</h2>
                 {!isLoading && (
                     <div className="flex flex-wrap bg-primary-light mx-0">
-                        <div className="w-full lg:w-7/12 px-0">
-                            <picture className="embed-responsive before:pt-[117.1875%] lg:before:pt-[52.23881%]">
-                                <source srcSet={imageSlider.image_desktop.url} media="(min-width: 992px)" />
-                                <img className="embed-responsive-item fit--cover" alt={imageSlider.heading} src={imageSlider.image_mobile.url.replace('public', '828x')} />
-                            </picture>
-                        </div>
-                        <div className="w-full lg:w-5/12 py-4 px-g lg:px-3">
-                            <h3 className="mb-1">{imageSlider.slider_title}</h3>
+                        
+                        <div className="w-full lg:w-5/12 py-2 px-g lg:px-3">
+                            <h3 className="mb-1 text-body">{imageSlider.slider_title}</h3>
                             <Carousel.Wrapper emblaApi={emblaApi1}>
                                 <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g">
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${1}`}>
-                                        <p className="mb-g">{imageSlider.text_1}</p>
+                                        <p className="text-body leading-[24px]">{imageSlider.text_1}</p>
                                     </div>
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${2}`}>
-                                        <p className="mb-g">{imageSlider.text_2}</p>
+                                        <p className="text-body leading-[24px]">{imageSlider.text_2}</p>
                                     </div>
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${3}`}>
-                                        <p className="mb-g">{imageSlider.text_3}</p>
+                                        <p className="text-body leading-[24px]">{imageSlider.text_3}</p>
                                     </div>
                                 </Carousel.Inner>
                                 <Carousel.Navigation>
-                                    <div className="flex relative mx-auto lg:mx-0 mt-3 lg:mt-4 justify-center w-[5em]">
+                                    <div className="flex relative mx-auto lg:mx-0 mt-[18px] lg:mt-4 justify-center w-[120px]">
                                         <PrevButton
                                             onClick={arrowClickPrev1}
                                             disabled={prevDisabled1}
@@ -270,7 +265,7 @@ const Sustainability = (props: any) => {
                                         >
                                             <ChevronPrev className="w-[1rem] h-[1rem] svg--current-color" />
                                         </PrevButton>
-                                        <span className="px-25 lg:px-0">{selected + 1} of {count}</span>
+                                        <span className="mx-1 inline-block lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
                                             onClick={arrowClickNext1}
                                             disabled={nextDisabled1}
@@ -282,10 +277,16 @@ const Sustainability = (props: any) => {
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
                         </div>
+                        <div className="w-full lg:w-7/12 px-0">
+                            <picture className="">
+                                <source srcSet={imageSlider.image_desktop.url} media="(min-width: 992px)" />
+                                <img className="w-full" alt={imageSlider.heading} src={imageSlider.image_mobile.url.replace('public', '828x')} />
+                            </picture>
+                        </div>
                     </div>
                 )}
             </section>
-            <section className="pt-5">
+            <section className="pt-4">
                 <div className="container bg-secondary-light px-g py-3 lg:p-4 border-t border-t-secondary-light">
                     <div className="flex flex-wrap lg:-mx-g">
                         <div className="w-full lg:w-1/2 lg:order-2 lg:px-g">
@@ -298,18 +299,18 @@ const Sustainability = (props: any) => {
                                         <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-1'}>
-                                            <div className="mb-g" dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-1'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_1,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-2'}>
-                                            <div className="mb-g" dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-2'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_2,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-3'}>
-                                            <div dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-3'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_3.replace('h4', 'h4 class="mb-1"'),
                                             }} />
                                         </TabContent>
@@ -320,13 +321,13 @@ const Sustainability = (props: any) => {
                         <div className="w-full lg:w-1/2 lg:order-1 lg:px-g">
                             <h2 className="hidden lg:block mb-1">{formula.heading}</h2>
                             {!isLoading && (
-                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-3 w-full lg:w-3/4 p-0 mb-g">
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
+                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-g">
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
                             )}
                         </div>
@@ -336,13 +337,14 @@ const Sustainability = (props: any) => {
             {!isLoading && (
                 <section className="pt-4 pb-4 relative">
                     <div className="container p-0 md:p-1">
-                        <p className="pb-2 mb-0 h3 text-center">{packaging.heading}</p>
-                        <Carousel.Wrapper emblaApi={emblaApi2} className="">
-                            <Carousel.Inner emblaRef={emblaRef2} className="mx-1 lg:mx-0 lg:!transform-none">
+                        <p className="pb-[1rem] mb-0 font-bold text-center text-xl">{packaging.heading}</p>
+                        <Carousel.Wrapper emblaApi={emblaApi2} className="px-0">
+                            <Carousel.Inner emblaRef={emblaRef2} className="lg:mx-0 lg:!transform-none">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-[79.25%] basis-[79.25%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
-                                        <h6 className="mb-2 font-bold">{data.title}</h6>
-                                        <p className="mb-g lg:mb-3">{data.body}</p>
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} 
+                                        className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
+                                        <h6 className="mb-25 font-bold">{data.title}</h6>
+                                        <p className="mb-0 lg:mb-3 leading-[20px]">{data.body}</p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
@@ -364,6 +366,10 @@ const Sustainability = (props: any) => {
             )}
             <section className="sustainability-image-text">
                 <div className="flex flex-wrap bg-primary-light mx-0 lg:items-start">
+                    <div className="text-body w-full lg:w-5/12 py-3 lg:py-5 flex flex-wrap content-start px-g lg:px-3 text-left lg:text-left justify-start lg:justify-start">
+                        <h3 className="mb-1 text-body">{imageText.heading}</h3>
+                        {!isLoading && <p className="mb-0 text-left text-body">{imageText.text}</p>}
+                    </div>
                     {!isLoading && (
                         <div className="w-full lg:w-7/12 px-0">
                             <picture>
@@ -372,10 +378,6 @@ const Sustainability = (props: any) => {
                             </picture>
                         </div>
                     )}
-                    <div className="text-body w-full lg:w-5/12 py-2 lg:py-5 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
-                        <h3 className="mb-1">{imageText.heading}</h3>
-                        {!isLoading && <p className="mb-0 text-center lg:text-left">{imageText.text}</p>}
-                    </div>
                 </div>
             </section>
             <section className="py-4 lg:py-5 overflow-hidden">
