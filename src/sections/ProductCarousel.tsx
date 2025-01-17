@@ -95,7 +95,7 @@ const ProductCarousel = (props: any) => {
 	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
 
 	useEffect(() => {
-		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
+		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0 || window.location.pathname.includes('/products/'));
 	}, [])
 
 	return (
