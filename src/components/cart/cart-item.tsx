@@ -164,9 +164,12 @@ export const CartItem = (props:CartItemProps) => {
 			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
-			if (['uk', 'ca', 'au', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
+			if (['uk', 'ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/197f3539-6c23-475f-b83b-5d6211561200/public';
-			} 
+			}
+			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1e49309-b768-4884-1141-c8bae6b28d00/public';
+			}
 		}
 
 		setFeaturedImageUrl(featuredImage);
