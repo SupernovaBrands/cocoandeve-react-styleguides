@@ -209,6 +209,10 @@
     // pdp side upsell
     .product-side-upsell {
 
+        &__title {
+            @apply mb-g text-center lg:text-left;
+        }
+
         .product-card__upsell picture,
         .product-card__upsell img {
             @apply rounded-t-[24px] !pt-0;
@@ -280,6 +284,10 @@
         @apply text-sm lg:text-base mb-25;
     }
 
+    .payment-banner__text {
+        @apply text-sm;
+    }
+
     .product__title {
         @apply text-lg mb-1 lg:text-2xl;
     }
@@ -310,9 +318,10 @@
     }
     
     .product-swatch__test {
+        @apply mb-[1rem] lg:mb-0;
         
         .variant-swatch {
-            @apply w-auto h-auto rounded-full me-25 py-25 flex-1 basis-auto lg:min-h-[40px] lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none;
+            @apply border-t border-b w-auto h-auto rounded-full me-25 py-[6px] flex-1 basis-auto lg:min-h-[40px] lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none;
 
             &:after {
                 @apply w-[24px] left-[12.5px] lg:w-3;
