@@ -74,9 +74,9 @@ const BundleVariantCard = (props) => {
 
     return (
         <>
-        <p className="lg:text-lg font-bold mb-1 mt-3">Save with Bundles</p>
+        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
-            <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-black absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>
+            <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>
             <div className="float-left">
                 <figure className="flex">
                     {urlSet && bundleImg && (
@@ -88,7 +88,7 @@ const BundleVariantCard = (props) => {
                     {!urlSet && bundleImg && (
                         <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
                     )}
-                    <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right p-1 lg:p-2 flex flex-col">
+                    <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-1">
                             {!urlSet && <p className="text-body mb-25 block font-bold">{optionValue}</p>}
                             {urlSet && (
@@ -106,13 +106,13 @@ const BundleVariantCard = (props) => {
                         </div>
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && (
-                                <div className="option-select relative mb-1 lg:mb-0 lg:w-auto lg:mr-25">
+                                <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
                                     <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] w-full px-2 lg:text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op}</option>)}
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 sm:text-sm py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'}`}>
+                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 sm:text-sm py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0`}>
                                 {!currentVariant.availableForSale && 'Out of Stock'}
                                 {currentVariant.availableForSale && !addingItem && (
                                     <>

@@ -1,7 +1,7 @@
 const PdpQuizBanner = (props) => {
     return (
         <a className="text-body hover:text-body hover:no-underline" href={props.quizCard.pdp_quiz_card_cta_url}>
-            <div className="relative mb-[1rem] flex max-h-[64px] lg:min-h-[97px] rounded-[24px] lg:rounded-[32px] bg-yellow-light items-center justify-between pr-2">
+            <div className="relative mb-3 lg:mb-2 flex max-h-[64px] lg:min-h-[97px] rounded-[24px] lg:rounded-[32px] bg-yellow-light items-center justify-between pr-2">
                 <div className="flex items-center">
                     <picture className="m-0 h-full rounded-l-[24px] lg:rounded-r-[32px] lg:order-2 lg:absolute lg:right-0 lg:top-0 lg:bottom-0">
                         <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/36224cd9-a27f-4723-de76-688622b56300/public" media="(min-width: 992px)" />

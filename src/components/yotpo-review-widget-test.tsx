@@ -250,8 +250,8 @@ const YotpoReviewWidgetTest = (props:any) => {
 	const getTopics = () => {
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
 		$.get(`${apiUrl}/product/custom_fields.json`, { signature, sku: productSkus, lang: localeParam }, function (data) {
-			setTopics(data.response.topics.slice(0, 24));
-			setCustomFilter(data.response.custom_fields);
+			if (data.response.topics) setTopics(data.response.topics.slice(0, 24));
+			if (data.response.custom_fields) setCustomFilter(data.response.custom_fields);
 		});
 	};
 

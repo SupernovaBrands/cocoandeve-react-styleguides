@@ -126,7 +126,7 @@ const SideProductRoutineCarousel = (props: any) => {
         <>
         <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2">
             <div className="w-full justify-center px-0">
-                <p className="h2 w-full mb-3 ">Shop the Routine</p>
+                <p className="product-side-upsell__title h2 w-full mb-3 ">Shop the Routine</p>
                 <div className={`mx-0 ${finalItems?.length <= 2 ? 'flex' : ''}`}>
                     <WithCarousel carousel={finalItems?.length > 2} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
                         {finalItems?.length > 0 && finalItems.map((data: any, index: number) => {
