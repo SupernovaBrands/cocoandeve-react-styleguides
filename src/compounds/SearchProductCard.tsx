@@ -13,9 +13,12 @@ const SearchProductCard = (props: any) => {
 	if (store === 'my' && url === 'hair-revival-set') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
 	}
-	if (['uk', 'ca', 'au', 'us'].includes(store) && url === 'tan-masters-kit') {
+	if (['uk', 'ca', 'us'].includes(store) && url === 'tan-masters-kit') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/197f3539-6c23-475f-b83b-5d6211561200/public';
-	} 
+	}
+	if (store === 'au' && url === 'tan-masters-kit') {
+		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1e49309-b768-4884-1141-c8bae6b28d00/public';
+	}
 
 	const tracking = () => {
 		trackEvent('search_product', {
