@@ -9,7 +9,7 @@ interface ImageWithTextProps {
 
 const ImageWithText: React.FC<ImageWithTextProps> = (props) => {
     return (
-        <figure className={`flex flex-wrap -mx-hg lg:-mx-g relative items-center mb-[1rem] lg:mb-2 mt-5 px-g ${props.reverse ? 'flex-row-reverse' : ''}`}>
+        <figure className={`flex flex-wrap -mx-hg lg:-mx-g relative items-center mb-[1rem] lg:mb-2 mt-5 ${props.reverse ? 'flex-row-reverse' : ''}`}>
             <div className="-z-[1] lg:order-last w-full lg:w-2/3 lg:px-g">
                 {props.src && (
                     <div className="sm:mx-0 lg:mx-0">
