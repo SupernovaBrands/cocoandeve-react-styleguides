@@ -185,6 +185,16 @@
 			line-height: 1.25 !important;
 			margin-bottom: .625rem;
 		}
+
+		h1 a,
+		h2 a,
+		h3 a,
+		h4 a,
+		h5 a,
+		h6 a {
+			font-size: inherit;
+			color: inherit;
+		}
 	}
 
 	.badge-blog a,
