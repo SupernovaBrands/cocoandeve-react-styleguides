@@ -13,7 +13,7 @@ const PlaygroundCard = ({ data, store, imgMb, imgDt }) => (
             <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g top-[50%] -translate-y-[50%] lg:transform-none lg:top-[24px] lg:left-0 lg:right-0">
                 <p className="text-base md:text-xl font-bold text-body">{store === 'ca' ? data.Title.replace('Tan & SPF', 'Tan') : data.Title}</p>
                 <p className="font-size-sm md:text-base lg:px-g text-body text-gray-600" dangerouslySetInnerHTML={{ __html: data.text }} />
-                <span className="playground__card-atc hidden lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 md:py-[12px] border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
+                <span className="playground__card-atc hidden font-normal lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 md:py-[12px] border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
             </figcaption>
         </a>
     </figure>
@@ -47,7 +47,7 @@ const PlaygroundTest = (props: any) => {
                 <>
                     {/* <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p> */}
-                    <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-hg">
+                    <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-g">
                         <PlaygroundCard store={store} data={content?.range_1}
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/public`}
                             imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/public`} />

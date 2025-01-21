@@ -46,7 +46,7 @@ const QuizRewardTest = (props: any) => {
                             <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/public" media="(min-width: 992px)" />
                             <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" />
                         </picture>
-                        <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
+                        <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                             <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">Tan Quiz</p>
                             <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body">Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps</p>
                             {/* <a href="/pages/self-tan-quiz" className="inline-block align-middle text-center select-none border py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-g lg:px-5 font-bold">Take the Quiz</a> */}
@@ -62,7 +62,7 @@ const QuizRewardTest = (props: any) => {
                                 <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/704453dd-6f76-4a3a-1c09-c72dc47c5d00/public" media="(min-width: 992px)" />
                                 <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/public" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
                             </picture>
-                            <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-1 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
+                            <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                                 <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body">Rewards Program</p>
                                 <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body">Sign up for our reward program and <br className="hidden lg:block"/>stack up your points for free product</p>
                                 {/* <a href="/pages/rewards" className="inline-block align-middle text-center select-none border py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-g lg:px-5 font-bold">Join Now</a> */}
