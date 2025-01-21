@@ -410,7 +410,11 @@
             @apply order-2 justify-start lg:mb-[1rem];
 
             svg {
-                @apply w-[12px] h-[12px];
+                @apply w-1 h-1 ml-[4px];
+
+                &:first-child {
+                    @apply ml-0;
+                }
             }
 
             .review-star__v1 {
