@@ -74,7 +74,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
             defaultPhoneCode = countries.find((d:any) => d.maskValue === getCode.dial_code)?.maskValue || defaultPhoneCode;
         }
         setPhoneCode(defaultPhoneCode);
-        if (props?.launchModalData?.handle && getCookie(`launch_waitlist_${props?.launchModalData?.handle}`) === 'true') {
+        if (props?.launchModalData?.handle && getCookie(`launch_waitlist_${store}__${props?.launchModalData?.handle}`) === 'true') {
 			setShowSuccess(true);
 		} else {
             setShowSuccess(false);
@@ -103,10 +103,10 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         } else if (validForm) {
             props.onSubmitLaunchWaitlist({box, email, phoneCode, phoneNumber, fallback: () => {
                 setShowSuccess(true);
-                if (props?.launchModalData?.handle) setCookie(`launch_waitlist_${props.launchModalData.handle}`, true, 1);
+                if (props?.launchModalData?.handle) setCookie(`launch_waitlist_${store}__${props.launchModalData.handle}`, true, 1);
                 if (typeof props.setLaunchWLSuccess === 'function') {
                     props.setLaunchWLSuccess(true);
-                }
+                } 
                 if (props.productCard) {
                     props.setLaunchSubmitted(true);
                 }
