@@ -65,7 +65,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 			subscribeBluecoreWaitlist(email, data.handle, '', `${regSource}_${data.handle}`, '', true);
 			setSuccess(true);
 			setFormError(false);
-			setCookie(`waitlist_${data.handle}`, true, 1);
+			setCookie(`waitlist_${store}__${data.handle}`, true, 1);
 		} else {
 			setSuccess(false);
 			setFormError(true);
@@ -81,7 +81,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	};
 
 	useEffect(() => {
-		if (getCookie(`waitlist_${data.handle}`)) {
+		if (getCookie(`waitlist_${store}__${data.handle}`)) {
 			setSuccess(true);
 		}
 	}, [])
