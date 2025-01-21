@@ -39,7 +39,7 @@ const InstagramTest = (props: any) => {
 
     return (
         <section className={`instagram instagram__section pt-4 pb-3 text-center ${props.className ?? ''} mx-auto bg-pink-light`}>
-            <div className="container instagram--feed container-fluid lg:px-3 sm:px-hg">
+            <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg">
                     <div className="w-11/12 lg:w-7/12 text-center mx-auto pb-g sm:px-hg instagram__caption">
                         <h2 className="h1 mb-1">Get social with us</h2>
