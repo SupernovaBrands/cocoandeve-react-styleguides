@@ -60,8 +60,8 @@ const FooterTest = (props) => {
         setEmail(e.target.value);
     }
     return (
-        <footer className="pt-4 pb-1 mb-2">
-            <div className="container lg:mb-3 px-g flex flex-wrap">
+        <footer className="pt-4 pb-[24px] lg:pb-[32px] mb-0 footer">
+            <div className="container lg:mb-0 px-g flex flex-wrap">
                 <div className="w-full lg:w-1/2 px-0 lg:px-g lg:pr-4">
                     <h5 className="font-bold mb-1 text-xl lg:text-2xl">Newsletter</h5>
                     <p className="mb-1 lg:mb-2">Receive exclusive offers, promotions and beauty tips via email.</p>
@@ -143,7 +143,7 @@ const FooterTest = (props) => {
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul>
                 <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
-                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] mb-g lg:mb-[1rem] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
+                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
             </div>
         </footer>
     );
