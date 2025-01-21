@@ -46,8 +46,8 @@ const CartExtrass = (props:any) => {
     }
 
 	useEffect(() => {
-		if (['dev', 'au', 'ca'].includes(store)) {
-			// setShowAfterpay(true);
+		if (['dev', 'us'].includes(store)) {
+			setShowAfterpay(true);
 		}
 		if (['us'].includes(store)) {
 			setShowShoppay(true);
