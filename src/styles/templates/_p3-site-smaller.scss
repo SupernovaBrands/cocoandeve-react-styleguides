@@ -20,7 +20,7 @@
         }
 
         &-nav li button {
-            @apply bg-gray-400 rounded-full mr-1 w-auto text-sm lg:text-lg px-2 text-gray-600;
+            @apply bg-gray-400 rounded-full mr-1 w-auto text-base max-h-3 lg:max-h-[45px] flex items-center lg:text-lg px-2 text-gray-600;
         }
 
         &-nav li:last-child button {
@@ -72,14 +72,6 @@
 
         &__newsletter-tos {
             @apply mb-[3.2142857142857144em] lg:mb-3;
-        }
-
-        hr {
-            @apply mt-1;
-        }
-
-        &__copyright {
-            @apply mt-g lg:mt-1 text-sm;
         }
     }
 
@@ -580,10 +572,10 @@
 
     // collection template
     .terms--link {
-        @apply container;
+        @apply container lg:mt-1;
 
         a {
-            @apply lg:px-0 lg:py-2
+            @apply lg:px-0 lg:py-2 lg:text-base;
         }
     }
     @screen lg {

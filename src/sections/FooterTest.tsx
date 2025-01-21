@@ -142,8 +142,8 @@ const FooterTest = (props) => {
                     <li className="mb-2"><a href="/pages/terms-and-conditions" className="text-body text-sm mr-2">Terms</a></li>
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul>
-                <hr className="block w-full border-body mb-1 mt-1 lg:mt-3 lg:mb-1 bg-gray-600 opacity-20" />
-                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
+                <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
+                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] mb-g lg:mb-[1rem] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
             </div>
         </footer>
     );
