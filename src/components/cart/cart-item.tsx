@@ -165,10 +165,10 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
 			if (['uk', 'ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/197f3539-6c23-475f-b83b-5d6211561200/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
 			}
 			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1e49309-b768-4884-1141-c8bae6b28d00/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
 			}
 		}
 
