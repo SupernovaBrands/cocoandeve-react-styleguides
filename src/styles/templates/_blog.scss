@@ -194,6 +194,15 @@
 		h6 a {
 			font-size: inherit;
 		}
+
+		h1 a span,
+		h2 a span,
+		h3 a span,
+		h4 a span,
+		h5 a span,
+		h6 a span {
+			color: inherit !important;
+		}
 	}
 
 	.badge-blog a,
