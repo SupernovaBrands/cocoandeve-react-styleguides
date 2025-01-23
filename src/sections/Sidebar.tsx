@@ -1,28 +1,36 @@
-import { EmblaOptionsType } from 'embla-carousel';
-import useEmblaCarousel from 'embla-carousel-react';
-import Carousel from '~/components/carousel/EmblaCarouselMulti';
-import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
-import Autoplay from 'embla-carousel-autoplay';
+// import { EmblaOptionsType } from 'embla-carousel';
+// import useEmblaCarousel from 'embla-carousel-react';
+// import Carousel from '~/components/carousel/EmblaCarouselMulti';
+// import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+// import Autoplay from 'embla-carousel-autoplay';
 import SidebarCard from '~/components/SidebarCard';
 
 const Sidebar = ({data}) => {
-	const options: EmblaOptionsType = {
-		loop: true,
-		active: true,
-		breakpoints: {
-			'(min-width: 768px)': { active: false },
-		},
-	};
-	const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
+	// const options: EmblaOptionsType = {
+	// 	loop: true,
+	// 	active: true,
+	// 	breakpoints: {
+	// 		'(min-width: 768px)': { active: false },
+	// 	},
+	// };
+	// const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
 
-	const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
+	// const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi3);
 	const PER_PAGE = 2;
-	const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
+	// const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
+	// console.log('sidebar data', data);
 	return (
-		<aside className="blog-post-grid__sidebar lg:sticky w-full mt-2 lg:mt-0 mb-0 lg:mb-auto self-end flex lg:block flex-wrap lg:px-g sm:px-hg">
-			<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto">
-				<h2 className="mb-3 text-center lg:text-left block h1">Popular Reads</h2>
-				<Carousel.Wrapper emblaApi={emblaApi3} className="sm:min-h-[16em] pb-1">
+		<aside className="blog-post-grid__sidebar lg:sticky w-full my-4 lg:mt-0 lg:mb-auto self-end flex lg:block flex-wrap">
+			<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto lg:rounded">
+				<h2 className="mb-2 lg:mb-3 text-center lg:text-left block font-bold text-xl lg:text-2xl">Popular Reads</h2>
+				<ul className="overflow-scroll no-scrollbar flex flex-nowrap px-g lg:flex-wrap lg:overflow-hidden lg:px-0">
+					{data.map((item: any, index) => 
+						<li className={`w-[92.5%] basis-[92.5%] lg:w-full lg:basis-full flex-grow-0 flex-shrink-0 ${data.length -1 === index ? '' : 'lg:mb-2'}`}>
+							<SidebarCard key={item.id} data={item} />
+						</li>
+					)}
+				</ul>
+				{/* <Carousel.Wrapper emblaApi={emblaApi3} className="sm:min-h-[16em] pb-1">
 					<Carousel.Inner emblaRef={emblaRef3} className="lg:flex-col">
 						{GROUPED_INDEX.map((_, index) => {
 							const pNum = _ + 1;
@@ -46,7 +54,7 @@ const Sidebar = ({data}) => {
 							))}
 						</ol>
 					</Carousel.Navigation>
-				</Carousel.Wrapper>
+				</Carousel.Wrapper> */}
 			</section>
 		</aside>
 	);

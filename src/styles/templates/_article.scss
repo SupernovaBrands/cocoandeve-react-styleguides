@@ -1,6 +1,18 @@
-.articleCarousel .carousel-control {
-	display: block;
-	@include media-breakpoint-up(lg) {
-		display: none;
+// .articleCarousel .carousel-control {
+// 	display: block;
+// 	@include media-breakpoint-up(lg) {
+// 		display: none;
+// 	}
+// }
+
+.blog-post-grid__content .article__content {
+	p, h1, h2, h3, h4, h5, h6 {
+		@apply px-g block;
 	}
+
+	// p img {
+	// 	margin-left: -30px !important;
+	// 	margin-right: -30px !important;
+	// 	max-width: 117.5%;
+	// }
 }
