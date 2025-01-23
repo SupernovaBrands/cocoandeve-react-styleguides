@@ -127,7 +127,7 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdpSetting } = props;
     let body = '';
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
@@ -269,7 +269,7 @@ const Article = (props) => {
             ? document.querySelectorAll('.article__content h2:not(.blog-post-grid__newsletter-title)') 
             : document.querySelectorAll('.article__content h3');
             if (articleShops && articleContent.length) {
-                const shopArticles = content.BlogContentMultiStores[region].body_content.includes('id="shop-articles"');
+                const shopArticles = content?.BlogContentMultiStores[region]?.body_content?.includes('id="shop-articles"');
                 let targetAppend = parseInt((articleContent.length / 2).toString(), 10);
                 targetAppend = targetAppend > 1 ? targetAppend - 1 : targetAppend;
                 const targetContent = articleContent[targetAppend];
@@ -469,7 +469,7 @@ const Article = (props) => {
             <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:px-0">
                     <h4 className="h1 text-center mb-1">Shop this article</h4>
-                    {!isLoading && ( <ShopArticle label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
+                    {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
