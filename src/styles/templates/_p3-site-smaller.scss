@@ -615,6 +615,9 @@
             @apply text-lg;
         }
     }
+    .collection-template__services {
+        @apply hidden;
+    }
 	.collection-template__products {
         @apply px-hg;
 
