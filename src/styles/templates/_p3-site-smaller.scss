@@ -590,10 +590,10 @@
 
     // collection template
     .terms--link {
-        @apply container lg:mt-1;
+        @apply container mt-1 pb-25;
 
         a {
-            @apply lg:px-0 lg:py-2 lg:text-base;
+            @apply lg:px-0 lg:py-2 text-base;
         }
     }
     @screen lg {
@@ -612,7 +612,7 @@
         }
 
         .collection-sidebar-label {
-            @apply text-lg;
+            @apply text-lg mt-4;
         }
     }
     .collection-template__services {
