@@ -10,7 +10,7 @@ const YotpoRatingCard = (props) => {
                 <span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
                 <div className="lg:ml-1">
                     <ReviewStar score={score} />
-                    <span className="block yotpo-widget__total mt-25">
+                    <span className="block yotpo-widget__total mt-25 font-normal text-body">
                         {`${total} ${total > 1 ? tStrings.yotpo.reviews : tStrings.yotpo.review}, ${totalQa} ${tStrings.yotpo.qnas}`}
                     </span>
                 </div>
@@ -19,7 +19,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('review')}
                     type="button"
                     lg={false}
-                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full mb-g text-sm py-1">
+                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full mb-g text-sm py-1 font-normal">
                         Write A Review
                 </Button>
             </div>
@@ -27,7 +27,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('question')}
                     type="button"
                     lg={false}
-                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full text-sm py-1">
+                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full text-sm py-1 font-normal">
                         Ask A Question
                 </Button>
             </div>

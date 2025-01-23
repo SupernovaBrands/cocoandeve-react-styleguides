@@ -62,7 +62,7 @@ const BundleVariantCard = (props) => {
         'tripeptide-hair-density-serum': {
             bundleurl: 'fine-hair-rescue-set'
         },
-        'shampoo-conditioner-set': {
+        'super-hydrating-shampoo-conditioner-set': {
             bundleUrl: null
         },
         'antioxidant-face-tanning-micromist': {
