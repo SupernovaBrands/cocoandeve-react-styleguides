@@ -613,6 +613,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
+            {smallerTest && <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />}
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
