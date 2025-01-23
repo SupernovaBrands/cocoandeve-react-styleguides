@@ -631,7 +631,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
+            {!isLoading && !smallerTest && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
