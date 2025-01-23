@@ -73,12 +73,12 @@ const HowToCarousel = (props) => {
     };
 
 	return (
-		<section className="how-to no-gutters__in-container w-full">
-			{title && (<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>)}
+		<section className="how-to no-gutters__in-container w-full px-hg">
+			{title && (<h2 className="text-center mb-g text-xl lg:text-2xl w-full">The Ultimate “HOW TO”s</h2>)}
 			<Carousel.Wrapper emblaApi={emblaApi}>
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
-						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
+						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
 							<figure className="border border-secondary-light">
 								{!isLoading && (
 									<picture className="relative w-full block m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
@@ -93,7 +93,8 @@ const HowToCarousel = (props) => {
 									{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
 										<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
 									) : ''}
-									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+									<p className="text-lg font-bold mt-2 blog-video-card__title mb-1 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body text-lg text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+									<span className="inline-block btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] font-bold">Read more</span>
 								</figcaption>
 							</figure>
 						</div>
@@ -105,7 +106,7 @@ const HowToCarousel = (props) => {
 						disabled={prevDisabled7}
 						className={props.btnLeft}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
@@ -114,7 +115,7 @@ const HowToCarousel = (props) => {
 						disabled={nextDisabled7}
 						className={props.btnRight}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>
