@@ -20,7 +20,7 @@
         }
 
         &-nav li button {
-            @apply bg-gray-400 rounded-full mr-1 w-auto text-base max-h-3 lg:max-h-[45px] flex items-center lg:text-lg px-2 text-gray-600;
+            @apply bg-gray-400 rounded-full mr-1 w-auto text-base min-h-3 max-h-3 lg:max-h-[45px] flex items-center lg:text-lg px-2 text-gray-600;
         }
 
         &-nav li:last-child button {
@@ -103,7 +103,7 @@
             @apply mt-2;
         }
         &-title {
-            @apply text-left lg:text-center text-xl lg:text-[2.25em] lg:mb-5;
+            @apply text-center text-xl lg:text-[2.25em] lg:mb-5;
         }
         .review__filter-form {
             @apply flex flex-col;
@@ -278,6 +278,14 @@
 
     .payment-banner__text {
         @apply text-sm;
+
+        b {
+            @apply block;
+        }
+    }
+
+    .proud-to-be-wrapper ul {
+        @apply mt-g;
     }
 
     .product__title {
@@ -285,7 +293,7 @@
     }
 
     .product-form .quantity-box {
-        @apply px-2;
+        @apply lg:px-2;
 
         &__button {
             @apply px-[12.5px];
@@ -342,7 +350,16 @@
         }
 
         .product-form-submit__cta {
-            @apply rounded-full
+            @apply rounded-full;
+
+            &-text,
+            &-compare {
+                @apply font-normal;
+            }
+
+            &-price {
+                @apply font-bold;
+            }
         }
     }
 
@@ -512,9 +529,6 @@
         @apply py-3 lg:pb-0 lg:px-0;
         .product__carousel-nav-container a {
             @apply mt-0 mb-3;
-        }
-        h2 {
-            @apply hidden;
         }
         .product-card {
             @apply w-[47.5%] basis-[47.5%];

@@ -956,15 +956,15 @@ const YotpoReviewWidgetTest = (props:any) => {
 						{!revLoading && revPage.totalPage > 1 && (
 							<ul className="list-unstyled flex justify-center items-center mt-2">
 								<li>
-									<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 								</li>
 								{revPage.show.map((v) => (
 									<li key={v}>
-										<button type="button" className={`text-primary btn border-0 text-primary px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
+										<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
 									</li>
 								))}
 								<li>
-									<button type="button" className={`text-primary btn border-0 text-primary px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 								</li>
 							</ul>
 						)}
@@ -1043,15 +1043,15 @@ const YotpoReviewWidgetTest = (props:any) => {
 						{!qnaLoading && qnaPage.totalPage > 1 && (
 							<ul className="list-unstyled flex justify-center items-center mt-2">
 								<li>
-									<button type="button" className={`btn border-0 text-primary px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-primary" /></button>
+									<button type="button" className={`btn border-0 text-primary py-0 px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-primary" /></button>
 								</li>
 								{qnaPage.show.map((v) => (
 									<li key={v}>
-										<button type="button" className={`btn border-0 text-primary px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
+										<button type="button" className={`btn border-0 text-primary py-0 px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
 									</li>
 								))}
 								<li>
-									<button type="button" className={`btn border-0 text-primary px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-primary" /></button>
+									<button type="button" className={`btn border-0 text-primary py-0 px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-primary" /></button>
 								</li>
 							</ul>
 						)}
