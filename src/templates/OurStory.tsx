@@ -79,7 +79,7 @@ const OurStoryTemplate = (props: any) => {
 					src={!isLoading ? intro.back_img_mob_1.url : null}
 					srcSet={intro.back_img_1.url}>
 					<h2 className="mb-[.5rem] text-lg text-body lg:text-xl">{intro.titleintro_1}</h2>
-					{!isLoading && <p className="mb-[1rem] text-body">{intro.description_1}</p>}
+					{!isLoading && <p className="text-body">{intro.description_1}</p>}
 				</ImageWithText>
 
 				<ImageWithText
@@ -99,7 +99,7 @@ const OurStoryTemplate = (props: any) => {
 					)}
 				</div>
 				{!isLoading && (
-				<div className="container">
+				<div className="container px-0">
 					<Carousel.Wrapper emblaApi={emblaApi} className="mx-0">
 						<Carousel.Inner emblaRef={emblaRef} className="px-0">
 							{logos.map((data, i) => {
@@ -115,7 +115,7 @@ const OurStoryTemplate = (props: any) => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick(arrowClickPrev)}
-								className="w-auto h-0 flex left-3"
+								className="w-auto h-0 flex left-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
 									<ChevronPrev className="svg--current-color w-[12px] h-[12px]" />
@@ -123,7 +123,7 @@ const OurStoryTemplate = (props: any) => {
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick(arrowClickNext)}
-								className="w-auto h-0 flex right-3"
+								className="w-auto h-0 flex right-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
 									<ChevronNext className="svg--current-color w-[12px] h-[12px]" />
