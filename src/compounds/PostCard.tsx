@@ -35,7 +35,7 @@ const PostCard: React.FC<PropType> = (props) => {
 							{data.tags.length > 0 && (
 								<>
 									{data.tags.map((item: string, index: number) => (
-										<PostTag widthClass={template === 'blog' ? 'min-w-[3.375em]' : ''} paddingClass={`${template === 'pdp' ? 'py-[.5em] px-[1em] mr-[4px]' : ''} ${template === 'blog' || template === 'article' ? 'py-[.125em] px-[.5em]' : ''}`} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
+										<PostTag widthClass={template === 'blog' ? 'min-w-[3.375em]' : ''} paddingClass={`${template === 'pdp' ? 'py-[.5em] px-[1em] mr-[4px]' : ''} ${template === 'blog' || template === 'article' ? 'py-[.375em] px-[.75em]' : ''}`} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
 									))}
 								</>
 							)}

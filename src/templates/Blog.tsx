@@ -182,18 +182,18 @@ const Blog = (props) => {
 										<Carousel.Navigation>
 											<PrevButton
 												onClick={() => autoPlayClick(arrowClickPrev)}
-												className="lg:left-[1em] sm:left-[20px] w-[auto] text-primary"
+												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-													<ChevronPrev className="h-[1em] svg--current-color" />
+												<span className="absolute z-[-1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
+													<ChevronPrev className="svg--current-color w-g h-g" />
 												</span>
 											</PrevButton>
 											<NextButton
 												onClick={() => autoPlayClick(arrowClickNext)}
-												className="sm:right-[20px] lg:right-[1em] w-[auto] text-primary"
+												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-													<ChevronNext className="h-[1em] svg--current-color" />
+												<span className="absolute z-[-1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
+													<ChevronNext className="svg--current-color w-g h-g" />
 												</span>
 											</NextButton>
 										</Carousel.Navigation>
@@ -201,7 +201,7 @@ const Blog = (props) => {
 								}
 							</div>
 							{/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
-							<div id="poppularArticles"></div>
+							<div id="poppularArticles" className="container"></div>
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
