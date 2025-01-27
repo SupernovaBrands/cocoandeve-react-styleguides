@@ -782,7 +782,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 			)}
 
 			{!revThanks && !qnaThanks && canCreate && (
-				<div id="yotpoFormCollapse" className="mt-2">
+				<div id="yotpoFormCollapse" className="mt-0">
 					<div className={`review__actions flex flex-wrap justify-end -mx-hg md:-mx-g ${showButtons === false ? 'hidden': ''}`}>
 						<div className="w-1/2 md:w-2/12 px-hg md:px-g md:max-w-[200px]">
 							<Button onClick={() => handleForm('review')}
@@ -813,7 +813,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 				</div>
 			)}
 
-			<div className="tab-content mt-2" id="yotpo-widget__tabContent" ref={reviewBox}>
+			<div className="tab-content mt-3" id="yotpo-widget__tabContent" ref={reviewBox}>
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] flex flex-wrap ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div className="flex flex-col review__filter-sidebar">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
@@ -882,7 +882,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 													</a>
 												)}
 												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
-													<p key={kebabCase(field[0])} className="text-sm mb-0">
+													<p key={kebabCase(field[0])} className="text-sm mb-0 product__reviews-custom-field">
 														<strong>
 															{field[0]}
 															:

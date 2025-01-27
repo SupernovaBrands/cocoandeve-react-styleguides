@@ -78,11 +78,16 @@
     // pdp review
     .yotpo-widget__rating-sidebar {
         @apply flex flex-col;
+
+        svg {
+            @apply w-[24px] h-[24px]
+        }
     }
     .review__inline-star {
         @apply text-body;
     }
     .product__reviews {
+        @apply pb-5;
         .input-group {
             .input-group-append {
                 @apply order-1;
@@ -103,7 +108,10 @@
             @apply mt-2;
         }
         &-title {
-            @apply text-center text-xl lg:text-[2.25em] lg:mb-5;
+            @apply text-center text-xl lg:text-[2.25em] lg:mb-5 mb-g;
+        }
+        &-custom-field strong {
+            @apply text-xs;
         }
         .review__filter-form {
             @apply flex flex-col;
@@ -292,14 +300,17 @@
         @apply text-lg mb-1 lg:text-2xl;
     }
 
-    .product-form .quantity-box {
-        @apply lg:px-2;
-
-        &__button {
-            @apply px-[12.5px];
+    .product-form {
+        @apply mt-[1rem];
+        .quantity-box {
+            @apply lg:px-2;
     
-            svg {
-                @apply w-1;
+            &__button {
+                @apply px-[12.5px];
+        
+                svg {
+                    @apply w-1;
+                }
             }
         }
     }
@@ -537,6 +548,11 @@
                 @apply w-1/4 basis-1/4;
             }
         }
+    }
+
+    //pdp carousel
+    .product__carousel-pdp {
+        @apply mb-4 lg:mb-5 lg:pb-4
     }
 
     // homepage video reels
