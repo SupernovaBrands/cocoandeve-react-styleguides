@@ -100,7 +100,7 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-		<div className={`container px-0 lg:px-hg pt-4 pb-4 text-center product__carousel ${isHomepage ? 'product__carousel-homepage' : ''}`}>
+		<div className={`container px-0 lg:px-hg pt-4 pb-4 text-center product__carousel ${isHomepage ? 'product__carousel-homepage' : ''} ${smallerTest && window.location.pathname.includes('/products/') ? 'product__carousel-pdp' : ''}`}>
 			{!smallerTest && (<h2 className="h1 text-center mb-1 lg:mb-2 product__carousel-title">Our Products</h2>)}
 			{smallerTest && window.location.pathname.includes('/products/') && (<h2 className="h1 text-center mb-g lg:mb-2">You may also like</h2>)}
 			<div className="row">
