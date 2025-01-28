@@ -10,9 +10,9 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ data, className }) => {
         <ol className={className ?? 'list-reset flex'}>
             {data.map((bread: { link: string; title: string; className: string }, index: number) => (
                 <React.Fragment key={index}>
-                    <li>
+                    <li className={`${bread.link ? '' : 'whitespace-nowrap overflow-hidden text-ellipsis'}`}>
                         {bread.link && (
-                            <a className={`${bread.className ?? ''} text-body cursor-pointer hover:text-primary underline`} href={bread.link}>
+                            <a className={`${bread.className ?? ''} text-body cursor-pointer hover:text-primary underline `} href={bread.link}>
                                 {bread.title}
                             </a>
                         )}
