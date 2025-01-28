@@ -818,7 +818,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 					<div className="flex flex-col review__filter-sidebar">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
                         <YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0 lg:hidden mb-3'} />
-						<YotpoFilterForm className="review__filter-form" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm className="review__filter-form flex flex-col" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 
 					<div className="product__review-list-container">
@@ -851,7 +851,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						)}
 
 						{!revLoading && reviews.length === 0 && filtering && (
-							<p className="text-center review__not-found">
+							<p className="text-center mt-2 review__not-found">
 								{tStrings.yotpo.noReviewFilter}
 							</p>
 						)}
@@ -883,7 +883,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 												)}
 												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
 													<p key={kebabCase(field[0])} className="text-sm mb-0 product__reviews-custom-field">
-														<strong>
+														<strong className="text-xs">
 															{field[0]}
 															:
 														</strong>

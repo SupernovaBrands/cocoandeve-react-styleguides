@@ -28,9 +28,9 @@ const YotpoFilterForm = (props) => {
 				</div>
 			</div>
 
-			<div className="flex flex-wrap mt-1 lg:-mx-g sm:-mx-hg w-full review__filter-form-inputs">
-				<div className="w-1/2 lg:w-1/4 lg:px-g sm:px-hg review__filter-category review__filter-category-odd">
-					<select className="rounded custom-select my-1 border-dark" name="scores" onChange={() => { onFilterChange(); }}>
+			<div className="flex flex-wrap mt-1 w-full review__filter-form-inputs mx-0 lg:-mx-g">
+				<div className="sm:px-hg w-1/2 lg:w-full pr-0 lg:px-g pl-0 pr-hg lg:px-g">
+					<select className="rounded custom-select my-1 border-0" name="scores" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.rating}</option>
 					    <option value="5">5 Stars</option>
 						<option value="4">4 Stars</option>
@@ -39,15 +39,15 @@ const YotpoFilterForm = (props) => {
 						<option value="1">1 Star</option>
 					</select>
 				</div>
-				<div className="w-1/2 lg:w-1/4 lg:px-g sm:px-hg review__filter-category">
-					<select className="rounded custom-select my-1 border-dark" name="pictured" onChange={() => { onFilterChange(); }}>
+				<div className="sm:px-hg w-1/2 lg:w-full pr-0 lg:px-g">
+					<select className="rounded custom-select my-1 border-0" name="pictured" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.imageVideo}</option>
 						<option value="true">{tStrings.yotpo.withImageVideo}</option>
 					</select>
 				</div>
 				{customFilter.map((q, i) => q.filter !== '' && (
-					<div key={q.slug} className={`w-1/2 lg:w-1/4 lg:px-g sm:px-hg review__filter-category ${i % 2 === 0 ? 'review__filter-category-odd' : ''}`}>
-						<select className="rounded custom-select my-1 border-dark" name={q.slug} onChange={() => { onFilterChange(); }}>
+					<div key={q.slug} className={`sm:px-hg w-1/2 lg:w-full pr-0 lg:px-g ${i % 2 === 0 ? 'pl-0 pr-hg lg:px-g' : ''}`}>
+						<select className="rounded custom-select my-1 border-0" name={q.slug} onChange={() => { onFilterChange(); }}>
 							<option value="">{q.filter}</option>
 							{q.options.map((o) => (
 								<option key={o} value={o}>{o.replace('/', ' / ')}</option>
