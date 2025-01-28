@@ -45,6 +45,7 @@ const Stockist = (props: any) => {
 
 	useEffect(() => {
 		setStores(content.stockist);
+        document.body.classList.add('p3-site-smaller');
 	}, []);
 
     useEffect(() => {
@@ -97,8 +98,8 @@ const Stockist = (props: any) => {
 
     return (
         <>
-            <section className="container text-center stockist">
-                <h1 className="mb-1 mt-3 text-xl lg:text-2xl">{content.title}</h1>
+            <section className="container text-center stockist px-g">
+                <h1 className="mb-25 mt-[25px] lg:mt-4 text-body text-xl lg:text-2xl">{content.title}</h1>
                 <form className="flex flex-wrap justify-center items-center -mx-25">
                     <label className="w-auto md:w-auto my-1 lg:text-lg sm:=text-sm font-bold lg:px-25">{content.label_title}</label>
                     <div className="w-auto my-1 px-[5px]">
@@ -152,7 +153,7 @@ const Stockist = (props: any) => {
                         ))}
                     </div>
                 )}
-                <div className="flex my-3 flex-wrap lg:-mx-g lg:my-5">
+                <div className="flex my-3 flex-wrap lg:-mx-g lg:my-4">
                     <div className="w-full lg:w-1/2 lg:px-g">
                         <a href="mailto:wholesale@cocoandeve.com" className="flex flex-wrap justify-between items-center bg-[#EBF7F2] rounded py-[11px] px-[24px] mb-g lg:hidden">
                             <p className="text-body text-lg font-bold">{content.question_title}</p>
@@ -172,7 +173,7 @@ const Stockist = (props: any) => {
                     <div className="w-full lg:w-1/2 lg:px-g">
                         <div className="bg-gray-100 rounded py-3 px-g lg:py-4">
                             <p className="text-center font-bold text-xl hidden lg:block mb-[24px]">Beauty Confidence</p>
-                            <ul className="list-unstyled flex flex-wrap lg:items-center justify-center pt-1 pb-1 lg:py-25 pl-0 lg:mx-5 mb-0">
+                            <ul className="list-unstyled flex flex-wrap lg:items-center justify-center pt-0 pb-0 lg:py-25 pl-0 lg:mx-5 mb-0">
                                 {SERVICES.map((list, i) => {
                                     return (
                                         <li key={i} className={`w-1/2 md:w-1/3
@@ -182,7 +183,7 @@ const Stockist = (props: any) => {
                                             ${list.id === 'winner-award' ? 'lg:order-1' : ''}
                                             ${list.id === 'money-back' ? 'lg:order-2' : ''}
                                         `}>
-                                            <i className="inline-flex flex-wrap h1 mb-2 lg:mb-[12px]">
+                                            <i className="inline-flex flex-wrap h1 mb-g lg:mb-[12px]">
                                                 {list.id === 'stars' && <Stars className="text-secondary fill-secondary" />}
                                                 {list.id === 'winner-award' && <WinnerAward className="text-body" />}
                                                 {list.id === 'delivery' && <FastDelivery className="text-secondary fill-secondary" />}
