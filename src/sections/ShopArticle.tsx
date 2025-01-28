@@ -19,9 +19,7 @@ import ModalWaitlist from "~/components/modal/Waitlist";
 const options: EmblaOptionsType = {
 	loop: true,
     startIndex: 1,
-	breakpoints: {
-		'(min-width: 992px)': { align: 'start' }
-	}
+    align: 'start'
 };
 
 const ProductCarousel = (props: any) => {
@@ -60,7 +58,7 @@ const ProductCarousel = (props: any) => {
 	const autoPlayClick1 = controlAutoplay(emblaApi1);
 	return (
         <>
-            <div className="pt-2 text-center">
+            <div className="pt-0 text-center">
                 <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                     <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
                         {products.map((data: any, id: number) => (
@@ -68,7 +66,7 @@ const ProductCarousel = (props: any) => {
                                 key={`product-${id}-${data.id}`}
                                 product={data}
                                 label={label}
-                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-[28%] lg:px-1 sm:px-hg text-center"
+                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-[47.5%] basis-[47.5%] md:w-1/4 md:basis-[28%] lg:px-1 sm:px-hg text-center"
                                 button={true}
                                 link={data.handle}
                                 carousel={true}

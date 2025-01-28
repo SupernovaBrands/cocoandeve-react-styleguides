@@ -104,6 +104,7 @@ const Blog = (props) => {
 			setActiveFrame(activeFrame);
 			setActive(false);
 		}
+		document.body.classList.add('p3-site-smaller');
 	}, []);
 
 
@@ -126,16 +127,16 @@ const Blog = (props) => {
 	}, [region]);
 	
 	return (
-		<div className="mobile-wrapper mt-3 lg:mt-5 lg:px-0 sm:px-hg">
-			<div className="container">
-				<h1 className="text-center mb-2">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
-				<div className="blog-nav-tags mb-4 flex mt-2" id="navBlogTags">
+		<div className="mobile-wrapper mt-2 lg:mt-5 lg:px-0">
+			<div className="container px-0">
+				<h1 className="text-center mb-2 text-xl lg:text-2xl">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
+				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-					<a href="/blogs/news#how-to-tab" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline sm:font-bold lg:font-normal lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
+					<a href="/blogs/news#how-to-tab" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (
 					<>
@@ -170,30 +171,30 @@ const Blog = (props) => {
 				)}
 				{activeFrame && (
 					<>
-						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g sm:-mx-hg">
+						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
 							<div className="container px-0">
 								{postData.length > 0 &&
-									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full">
+									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full pl-hg">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
-												<PostCard carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-full basis-full sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+												<PostCard carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[90%] basis-[90%] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
 											))}
 										</Carousel.Inner>
 										<Carousel.Navigation>
 											<PrevButton
 												onClick={() => autoPlayClick(arrowClickPrev)}
-												className="lg:left-[1em] sm:left-[20px] w-[auto] text-primary"
+												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-													<ChevronPrev className="h-[1em] svg--current-color" />
+												<span className="absolute z-[-1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
+													<ChevronPrev className="svg--current-color w-g h-g" />
 												</span>
 											</PrevButton>
 											<NextButton
 												onClick={() => autoPlayClick(arrowClickNext)}
-												className="sm:right-[20px] lg:right-[1em] w-[auto] text-primary"
+												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="bg-pink-light w-4 h-4 absolute z-[-1] flex justify-center items-center top-[4.313rem] lg:top-[8.063rem]">
-													<ChevronNext className="h-[1em] svg--current-color" />
+												<span className="absolute z-[-1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
+													<ChevronNext className="svg--current-color w-g h-g" />
 												</span>
 											</NextButton>
 										</Carousel.Navigation>
@@ -201,16 +202,16 @@ const Blog = (props) => {
 								}
 							</div>
 							{/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
-							<div id="poppularArticles"></div>
-							<div id="topPostCard" className="blog-post__cards flex flex-wrap mb-0 mt-2 w-full"></div>
+							<div id="poppularArticles" className="container"></div>
+							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
-							<div className="how-to-wrapper mb-4 flex flex-wrap lg:mx-0 sm:-mx-hg">
+							<div className="how-to-wrapper mb-2 flex flex-wrap">
 								<HowToCarousel btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
 							</div>
 						}
-						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-2 -mx-g"></div>
-						<div id="bottomPostCard" className="blog-post__cards"></div>
+						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-0 px-g lg:px-hg"></div>
+						<div id="bottomPostCard" className="blog-post__cards px-g"></div>
 					</>
 				)}
 			</div>

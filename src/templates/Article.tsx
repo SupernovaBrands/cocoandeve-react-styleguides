@@ -9,6 +9,7 @@ import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
 import BackToTop from '~/images/icons/back-to-top.svg';
+import Breadcrumb from '~/components/Breadcrumb';
 
 import {
 	validateEmail,
@@ -257,6 +258,9 @@ const Article = (props) => {
                 progressBar.classList.remove('hidden');
                 mainHeader.appendChild(progressBar);
             }
+            document.querySelectorAll('.article__content p img')?.forEach((img) => {
+                img.closest('p').classList.add('!px-0');
+            });
         }, 500);
 
         return () => clearTimeout(timer);
@@ -387,13 +391,32 @@ const Article = (props) => {
         }
 	}, [region]);
 
+    const dataBreadcrumb = [
+        {
+            link: '/',
+            title: 'Home',
+            className: '',
+        },
+        {
+            link: '/blogs/news',
+            title: 'Blog',
+			className: '',
+        },
+        {
+            link: null,
+            title: title,
+			className: '',
+        },
+    ];
+
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
             <ProgressBar width={offset} />
 		    <div className="container mt-4">
-                <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
-                {!isLoading && (
+                <Breadcrumb data={dataBreadcrumb} />
+                {/* <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1> */}
+                {/* {!isLoading && (
                     <div className="blog-nav-tags mb-4 flex mt-2">
                         <BlogNavTag href="/blogs/news" title="ALL" active={true} />
                         <BlogNavTag href="/blogs/news/tagged/hair" title="Hair"/>
@@ -402,11 +425,23 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body"/>
                         <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
                     </div>
-                )}
-                <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
-                    <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
+                )} */}
+                <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
+                    <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content?.title}</h1>
                         <span className="mb-1 article__published-at">{updateDate}</span>
+                        {quickLinks?.length > 0 && (
+                            <>
+                                <span className="block mt-1 text-left font-bold">In this article:</span>
+                                <div className="mt-1 mb-2">
+                                    {quickLinks.map((quickLink, index) => (
+                                        <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
+                                            <span>{quickLink}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </>
+                        )}
                         {featuredImg && (
                             featuredImageLink ? (
                                 <a href={featuredImageLink}>
@@ -422,19 +457,8 @@ const Article = (props) => {
                                 </picture>
                             )
                         )}
-                        {quickLinks?.length > 0 && (
-                            <>
-                                <span className="text-left font-bold">In this article:</span>
-                                <div className="mt-1 mb-2">
-                                    {quickLinks.map((quickLink, index) => (
-                                        <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
-                                            <span>{quickLink}</span>
-                                        </a>
-                                    ))}
-                                </div>
-                            </>
-                        )}
-                        <div className="article__content">
+                        
+                        <div className="article__content mt-4">
                             {parse(bodyContent)}
                             <ul className="block mb-4 mt-1 pl-[0!important]">
                                 <li className="inline-block mr-[0.75rem]">
@@ -461,14 +485,14 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <div id="sideBarPosts" className="overflow-x-hidden"></div>
+                    <div id="sideBarPosts" className="overflow-x-hidden -mx-hg lg:mx-0 lg:w-4/12 lg:px-g"></div>
                 </article>
             </div>
         </div>
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:px-0">
-                    <h4 className="h1 text-center mb-1">Shop this article</h4>
+                    <h4 className="font-bold text-xl lg:text-2xl text-center mb-g lg:mb-4">Shop this article</h4>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>

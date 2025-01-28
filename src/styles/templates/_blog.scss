@@ -146,9 +146,9 @@
 		}
 	}
 
-	.blog-post__cards figure {
-		margin-bottom: 1.25rem;
-	}
+	// .blog-post__cards figure {
+	// 	margin-bottom: 1.25rem;
+	// }
 
 	.blog-post__cards .blog-post__card:hover {
 		text-decoration: underline !important;
@@ -232,7 +232,7 @@
 			border-radius: calc-em(20);
 			white-space: nowrap;
 			cursor: pointer;
-			@apply text-body-color;
+			@apply text-gray-600;
 
 			&.active {
 				@apply bg-primary;

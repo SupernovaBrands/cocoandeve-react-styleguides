@@ -1,5 +1,3 @@
-
-
 .p3-site-smaller {
 
     // announcement bar
@@ -32,7 +30,6 @@
         }
 
         &-homepage {
-            
             .product__carousel-nav-container {
                 @screen lg {
                     @apply flex justify-between items-center px-g;
@@ -48,7 +45,6 @@
     }
 
     // footer
-    
     .footer {
         .dropdown__store button {
             @apply text-sm font-normal;
@@ -203,7 +199,6 @@
             }
 
         }
-        
     }
 
     // pdp side upsell
@@ -304,10 +299,10 @@
         @apply mt-[1rem];
         .quantity-box {
             @apply lg:px-2;
-    
+
             &__button {
                 @apply px-[12.5px];
-        
+
                 svg {
                     @apply w-1;
                 }
@@ -327,20 +322,20 @@
             @apply flex;
         }
     }
-    
+
     .product-swatch__test {
         @apply mb-[1rem] lg:mb-0;
-        
+
         .variant-swatch {
             @apply border-t border-b w-auto h-auto rounded-full me-25 py-[6px] flex-1 basis-auto lg:min-h-[40px] lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none;
 
             &:after {
                 @apply w-[24px] left-[12.5px] lg:w-3;
             }
-    
+
             &:before {
                 @apply h-[18px] w-[18px] top-auto left-g;
-    
+
                 @screen lg {
                     @apply h-[24px] w-[24px];
                 }
@@ -395,7 +390,6 @@
             }
         }
     }
-    
     .product-card {
         .rounded-t:not(.swatch-overlay) {
             @apply rounded-t-[2em];
@@ -511,7 +505,6 @@
         }
 
         picture {
-            
             max-width: 100% !important;
             left: 0 !important;
         }
@@ -543,7 +536,6 @@
         }
         .product-card {
             @apply w-[47.5%] basis-[47.5%];
-    
             @screen lg {
                 @apply w-1/4 basis-1/4;
             }
@@ -594,9 +586,9 @@
                 }
             }
 
-            
+
         }
-        
+
     }
 
     // range banner
