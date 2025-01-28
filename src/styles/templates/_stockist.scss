@@ -1,10 +1,10 @@
 @layer components {
 	.stockist {
-		&.container {
-			@screen lg {
-				max-width: calc-em(1000);
-			}
-		}
+		// &.container {
+		// 	@screen lg {
+		// 		max-width: calc-em(1000);
+		// 	}
+		// }
 
 		a {
 			@apply text-body-color;
@@ -17,6 +17,13 @@
 		img {
 			@screen md {
 					width: 100%;
+			}
+		}
+
+		svg {
+			@apply h-[42px] lg:h-[32px];
+			path {
+				@apply fill-secondary;
 			}
 		}
 	}
