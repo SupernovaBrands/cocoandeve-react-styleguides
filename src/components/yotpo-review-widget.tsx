@@ -292,8 +292,11 @@ const YotpoReviewWidget = (props:any) => {
 		const form = slug ? document.getElementById(`yotpoFilterForm_${slug}`) : document.getElementById('yotpoFilterForm');
 		const filter = {};
 
-		const text = form.querySelector('input[name="free_text_search"]').value;
-		if (text) filter.free_text_search = text;
+		let text = form.querySelector('input[name="free_text_search"]').value;
+		if (text) {
+			text = text.trim();
+			filter.free_text_search = text;
+		}
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
