@@ -39,7 +39,7 @@ const WaitlistButton = (props:any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px] font-normal`}>
             <Pricing collectionTemplate={props.collectionTemplate} props={data} showCompare={false} />
         </Button>
     )
@@ -65,7 +65,7 @@ const LaunchButton = (props: any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px] font-normal`}>
             <Pricing collectionTemplate={props.collectionTemplate} props={data} showCompare={false} />
         </Button>
     )
@@ -117,7 +117,7 @@ const AddToCartButton = (props:any) => {
     }, [])
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px]`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex lg:flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} lg:py-[14px] font-normal`}>
             <Pricing showCompare={true} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
         </Button>
     );
@@ -301,10 +301,10 @@ const ProductCardTest = (props:any) => {
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
-                <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[2em] product-card--img block">
+                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
+                    {props.product.src && <img src={props.product.src.replace('592x', '320x')} className={`bg-pink-light embed-responsive-item fit--cover !w-full !h-full lg:!left-0 !right-auto rounded-t-[2em] !pt-2 ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -313,21 +313,22 @@ const ProductCardTest = (props:any) => {
                         </>
                     )}
                     {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
-                        <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
-                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[2em] img--hover hidden lg:block">
+                            {props.product.imgHover && <img src={props.product.imgHover.replace('592x', '320x')} className={`embed-responsive-item fit--cover !w-full !h-full lg:!left-0 rounded-t-[2em] ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
                 </picture>
             </a>
 
-            { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.41667em] left-[1.04167em] lg:top-[.83333em] lg:left-[2.08333em] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
-            <div className={`pt-2 pb-0 ${props.sustainability ? 'px-1' : ''} ${props.carousel && !props.shopArticle ? 'px-1' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b product-card__content`}>
-                <div className="review-stars__number flex justify-center mb-1">
+            { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
+            <div className={`pt-2 pb-0 ${props.carousel && !props.shopArticle ? 'px-1 lg:px-g' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b-[2em] product-card__content`}>
+                <p className={`product-title__text grow flex flex-col text-left items-start justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+                    <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body"`}>{props.product.title}</a>
+                </p>
+                <div className="review-stars__number flex justify-start mb-1 lg:mb-[1rem]">
                     {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
                 </div>
-                <p className={`product-title__text grow flex flex-col justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : 'mb-1'} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''}`}>
-                    <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'lg:text-lg text-base'} product-card__title text-body hover:text-body"`}>{props.product.title}</a>
-                </p>
+                
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 )}

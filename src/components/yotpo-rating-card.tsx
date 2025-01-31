@@ -5,7 +5,7 @@ const tStrings = global.config.tStrings;
 const YotpoRatingCard = (props) => {
     const { score, total, totalQa, handleForm } = props;
     return (
-        <div className="yotpo-widget__rating-sidebar lg:mr-3 hidden rounded-[24px] lg:rounded-[32px] border border-gray-600 p-g lg:mb-3">
+        <div className="yotpo-widget__rating-sidebar flex flex-col lg:mr-3 rounded-[24px] lg:rounded-[32px] border border-gray-600 p-g lg:mb-3">
             <div className="items-center lg:justify-center leading-[1.25] flex mb-1">
                 <span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
                 <div className="lg:ml-1">

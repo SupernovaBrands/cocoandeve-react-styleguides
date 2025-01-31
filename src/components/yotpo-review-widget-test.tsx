@@ -818,7 +818,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 					<div className="flex flex-col review__filter-sidebar">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
                         <YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0 lg:hidden mb-3'} />
-						<YotpoFilterForm className="review__filter-form" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm className="review__filter-form flex flex-col" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 
 					<div className="product__review-list-container">
@@ -851,7 +851,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						)}
 
 						{!revLoading && reviews.length === 0 && filtering && (
-							<p className="text-center review__not-found">
+							<p className="text-center mt-2 review__not-found">
 								{tStrings.yotpo.noReviewFilter}
 							</p>
 						)}
@@ -861,7 +861,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div key={review.id} className="border-b py-4 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 												<h4 className="h4 mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 													{review.user_name}
@@ -873,7 +873,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 												<p className="text-sm mb-1 sm:hidden lg:block">
 													{formatDate(review.created_at, formattedDate)}
 												</p>
-												<div className="flex text-secondary mt-1 sm:block lg:hidden">
+												<div className="flex text-secondary mt-25 sm:block lg:hidden">
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
@@ -883,7 +883,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 												)}
 												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
 													<p key={kebabCase(field[0])} className="text-sm mb-0 product__reviews-custom-field">
-														<strong>
+														<strong className="text-xs">
 															{field[0]}
 															:
 														</strong>

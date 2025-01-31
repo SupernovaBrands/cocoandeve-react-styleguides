@@ -10,10 +10,10 @@ const PlaygroundCard = ({ data, store, imgMb, imgDt }) => (
                 <source srcSet={imgDt} media="(min-width: 992px)" />
                 <img className="rounded-[24px] lg:rounded-[32px] w-full lg:max-h-[320px]" src={imgMb} loading="lazy" />
             </picture>
-            <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g top-[50%] -translate-y-[50%] lg:transform-none lg:top-[24px] lg:left-0 lg:right-0">
+            <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g top-[50%] -translate-y-[50%] lg:transform-none lg:!top-[24px] lg:left-0 lg:right-0">
                 <p className="text-base md:text-xl font-bold text-body">{store === 'ca' ? data.Title.replace('Tan & SPF', 'Tan') : data.Title}</p>
                 <p className="font-size-sm md:text-base lg:px-g text-body text-gray-600" dangerouslySetInnerHTML={{ __html: data.text }} />
-                <span className="playground__card-atc hidden font-normal lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 md:py-[12px] border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
+                <span className="playground__card-atc hidden font-normal lg:inline-block btn btn-lg rounded-full btn-primary mt-g px-3 py-1 md:px-4 border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline lg:min-w-[12.8125em] md:py-1">{store === 'ca' ? data.button_label.replace('Tan & SPF', 'Tan') : data.button_label}</span>
             </figcaption>
         </a>
     </figure>
@@ -41,7 +41,7 @@ const PlaygroundTest = (props: any) => {
     }, []);
 
     return (
-        <section className="container text-center pb-0 playground--collection-list range-banner pt-1 px-0">
+        <section className="container text-center pb-0 playground--collection-list range-banner px-0 pt-[1.5625em] lg:pt-1">
             <h1 className="mb-1 text-xl lg:text-2xl lg:mb-3">Discover our Playground</h1>
             {!isLoading && (
                 <>

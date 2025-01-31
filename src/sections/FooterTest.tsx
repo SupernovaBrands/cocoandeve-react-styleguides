@@ -66,7 +66,7 @@ const FooterTest = (props) => {
                     <h5 className="font-bold mb-1 text-xl lg:text-2xl text-body">Newsletter</h5>
                     <p className="mb-1 lg:mb-2 text-body">Receive exclusive offers, promotions and beauty tips via email.</p>
                     <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} />
-                    <p className="footer__newsletter-tos text-sm mt-1 mb-1 lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-5 lg:mt-1 lg:mb-0">Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
+                    <p className="footer__newsletter-tos text-sm mt-1 mb-[3.2142857142857144em] lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-5 lg:mt-1 lg:mb-3">Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
                 </div>
                 <div className="w-full lg:w-1/2 px-0 lg:px-g">
                     <div className="flex flex-wrap w-full lg:-mx-g">
