@@ -20,7 +20,7 @@ const PostCard: React.FC<PropType> = (props) => {
 	const { className, data, template, imgClass, textPrimary, textClass, height, pictureClass } = props;
 	return (
 		<article className={`${className}`}>
-			<figure className={`${template === 'article' ? 'lg:mx-0 sm:-mx-g' : ''} ${template === 'blog' || template === 'pdp' ? 'border border-secondary-light' : 'post-card mb-4 lg:mb-0 bg-white h-full'} h-auto lg:h-full flex flex-col ${height} rounded`}>
+			<figure className={`${template === 'blog' || template === 'pdp' ? 'border border-secondary-light' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded`}>
 				{data.img && (
 					<a href={data.handle ?? '#'} className={`relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
 						<picture className={`${template === 'article' || imgClass ? 'embed-responsive' : ''} ${pictureClass}`}>

@@ -15,10 +15,11 @@ import ProductCard from "~/compounds/ProductCard";
 import { useState, useEffect } from 'react';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
+import ProductCardTest from '~/compounds/ProductCardTest';
 
 const options: EmblaOptionsType = {
 	loop: true,
-    startIndex: 1,
+    startIndex: 0,
     align: 'start'
 };
 
@@ -62,11 +63,11 @@ const ProductCarousel = (props: any) => {
                 <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                     <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
                         {products.map((data: any, id: number) => (
-                            <ProductCard
+                            <ProductCardTest
                                 key={`product-${id}-${data.id}`}
                                 product={data}
                                 label={label}
-                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-[47.5%] basis-[47.5%] md:w-1/4 md:basis-[28%] lg:px-1 sm:px-hg text-center"
+                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-[47.5%] basis-[47.5%] md:w-[175px] md:basis-[175px] lg:px-1 sm:px-hg text-center"
                                 button={true}
                                 link={data.handle}
                                 carousel={true}
@@ -77,7 +78,7 @@ const ProductCarousel = (props: any) => {
                             />
                         ))}
                     </Carousel.Inner>
-                    <Carousel.Navigation>
+                    {/* <Carousel.Navigation>
                         <PrevButton
                             onClick={() => autoPlayClick1(arrowClickPrev1)}
                             className="lg:-left-[1.25em] lg:w-4 text-primary lg:hidden"
@@ -94,7 +95,7 @@ const ProductCarousel = (props: any) => {
                                 <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
                             </span>
                         </NextButton>
-                    </Carousel.Navigation>
+                    </Carousel.Navigation> */}
                 </Carousel.Wrapper>
             </div>
 

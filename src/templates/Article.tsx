@@ -261,6 +261,7 @@ const Article = (props) => {
             document.querySelectorAll('.article__content p img')?.forEach((img) => {
                 img.closest('p').classList.add('!px-0');
             });
+            document.body.classList.add('p3-site-smaller');
         }, 500);
 
         return () => clearTimeout(timer);
@@ -490,14 +491,14 @@ const Article = (props) => {
             </div>
         </div>
         {upsells?.length > 0 && (
-            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
+            <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:px-0">
-                    <h4 className="font-bold text-xl lg:text-2xl text-center mb-g lg:mb-4">Shop this article</h4>
+                    <h4 className="font-bold text-xl lg:text-2xl text-center mb-g lg:!mb-4">Shop this article</h4>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
-        <div id="relatedPostCard"></div>
+        <div id="relatedPostCard" className="mb-4"></div>
         {quickLinks?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
