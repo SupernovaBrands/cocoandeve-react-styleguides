@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 const RealResultCard = (props) => {
 	const { data, region, tab } = props;
 	const [status, checkStatus] = useState(false);
+	const [reveal, setReveal] = useState(false);
 
 	let badgeColor = 'badge-purple';
 	const capitalizeString = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -83,18 +84,22 @@ const RealResultCard = (props) => {
 		data.label = data.label.replace(`<a href="/products/${data.handle}"`, `<a href="/collections/${tab}"`);
 	}
 
+	// const bodyTest = parse(`${data.body}`);
+	const MAX_CHARS = 130;
+	const isTruncated = data.body.length > MAX_CHARS;
+
 	return (
 		<div className="w-full lg:w-1/3 lg:inline-block result-card sm:px-hg lg:px-g">
 			<picture className="embed-responsive rounded-tl-lg rounded-br-0 rounded-tr-lg rounded-bl-0 overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
-			<div className="px-2 pb-2 pt-0 bg-white">
+			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2">
 				<div className="flex justify-between items-center mb-0">
 					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" />
 					<p>
 						{badges.map((badge, index) => (
-							<Badge key={index} badgeClasses={`text-white mb-1 mt-1 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
+							<Badge key={index} badgeClasses={`text-white mb-1 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
 								{capitalizeString(badge.type)}
 							</Badge>
 						))}
@@ -105,8 +110,16 @@ const RealResultCard = (props) => {
 				) : (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc))}`)}</>
 				)}
-				<p className='mt-g mb-g'>{parse(`${data.body}`)}</p>
-				<p className="underline font-weight-bold mb-g font-bold">@{data.author}</p>
+				<p className='my-g lg:hidden'>
+					{!reveal && parse(`${data.body.slice(0, MAX_CHARS)}`)}
+					{!reveal && isTruncated && ('... ')}
+					{!reveal && isTruncated && <span onClick={() => setReveal(true)} className='text-primary'>Read more</span>}
+					{reveal && parse(`${data.body}`)}
+				</p>
+				<p className={`my-g hidden lg:block ${data.body.length > 153 ? 'max-h-[80px] overflow-y-scroll small-scrollbar' : 'min-h-[80px]'}`}>
+					{parse(`${data.body}`)}
+				</p>
+				<p className="underline font-weight-bold mb-0 font-bold">@{data.author}</p>
 			</div>
 		</div>
 	);
