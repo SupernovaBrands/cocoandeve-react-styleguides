@@ -972,7 +972,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 				</div>
 
 				<div id="yotpo-widget__questions" className={`flex flex-wrap [transition:opacity_0.15s_linear] ${activeTab === 'question' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__questions-tab">
-					<div className="flex flex-col review__filter-sidebar">
+					<div className="flex flex-col review__filter-sidebar lg:pr-g">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
 					</div>
 					<div className="review__question-right">
