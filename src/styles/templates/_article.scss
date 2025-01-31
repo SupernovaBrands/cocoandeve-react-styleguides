@@ -46,6 +46,14 @@
 		.product-card-btn__prices {
 			@apply lg:py-hg lg:text-sm;
 		}
+
+		.swatch-overlay {
+			@apply lg:left-hg lg:right-hg;
+
+			.button-overlay {
+				@apply lg:-mb-[27.5px];
+			}
+		}
 	}
 
 	// p img {
