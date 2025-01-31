@@ -10,6 +10,44 @@
 		@apply px-g block lg:px-0;
 	}
 
+	.carousel__products .carousel__container {
+		@apply px-hg;
+	}
+	.carousel__products .carousel__container .product-card {
+
+		&__title {
+			@apply text-sm;
+		}
+
+		svg {
+			width: 10px !important;
+			height: 10px !important;
+		}
+		.product-title__text {
+			@apply text-sm px-0 lg:!mb-25;
+		}
+
+		&__content {
+			@apply lg:px-[8px];
+		}
+
+		.review-stars__number {
+			@apply lg:mb-12;
+		}
+
+		button {
+			@apply lg:min-h-[38px];
+			&:not(.button-overlay) {
+				@apply lg:mb-[8px];
+			}
+		}
+
+		.product-card-btn__text,
+		.product-card-btn__prices {
+			@apply lg:py-hg lg:text-sm;
+		}
+	}
+
 	// p img {
 	// 	margin-left: -30px !important;
 	// 	margin-right: -30px !important;
