@@ -861,7 +861,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div key={review.id} className="border-b py-4 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 												<h4 className="h4 mb-0 flex items-center sm:inline-flex lg:flex font-bold">
 													{review.user_name}
@@ -873,7 +873,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 												<p className="text-sm mb-1 sm:hidden lg:block">
 													{formatDate(review.created_at, formattedDate)}
 												</p>
-												<div className="flex text-secondary mt-1 sm:block lg:hidden">
+												<div className="flex text-secondary mt-25 sm:block lg:hidden">
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (

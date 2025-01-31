@@ -42,7 +42,7 @@ const SideArticleCarousel = (props: any) => {
 
 	return articleCarousel.length > 0 && (
         <>
-        <div className="product-side-article lg:pb-1 pt-0 md:pt-2">
+        <div className="product-side-article lg:pb-0 pt-0">
             <div className="w-full justify-center px-0">
                 <div className={`mx-0 ${articleCarousel?.length <= 1 ? 'flex' : ''}`}>
                     <WithCarousel carousel={articleCarousel?.length > 1} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
@@ -53,7 +53,7 @@ const SideArticleCarousel = (props: any) => {
                     
                     {articleCarousel.length > 1 && (
                         <div className="px-0">
-                            <div className="carousel__progress bg-gray-400">
+                            <div className="carousel__progress bg-gray-400 my-2 lg:my-g">
                                 <div
                                     className="carousel__progress--scroll bg-gray-500"
                                     style={{ left: `${scrollProgress}%`, width: `${((1 / articleCarousel.length) * 100) + 2.5}%` }} />

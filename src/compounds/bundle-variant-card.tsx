@@ -107,12 +107,12 @@ const BundleVariantCard = (props) => {
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
-                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] w-full px-2 lg:text-sm py-0" defaultValue={optionSelected}>
+                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op}</option>)}
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 sm:text-sm py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0`}>
+                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0`}>
                                 {!currentVariant.availableForSale && 'Out of Stock'}
                                 {currentVariant.availableForSale && !addingItem && (
                                     <>

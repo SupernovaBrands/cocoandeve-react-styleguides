@@ -130,6 +130,10 @@
 
     .product__side-article {
 
+        figcaption p.h2 {
+            @apply text-lg mb-0 lg:text-xl lg:mb-2;
+        }
+
         .btn__read-more,
         .post-card__description {
             @apply hidden;
@@ -162,14 +166,26 @@
 
         .product-card__upsell picture,
         .product-card__upsell img {
-            @apply rounded-t-[24px] !pt-0;
+            @apply rounded-t-[24px] !pt-0 !max-w-[165px] !max-h-[165px] !left-0;
+        }
+
+        .product-card__upsell {
+            @apply mb-0;
+        }
+
+        .carousel__progress {
+            @apply my-g;
         }
 
         .product-card__content {
-            @apply rounded-b-[24px];
+            @apply rounded-b-[24px] pt-1;
 
             .spinner-border {
                 @apply text-primary;
+            }
+
+            .review-star__v2 {
+                @apply text-body;
             }
         }
 
@@ -309,7 +325,7 @@
         @apply mb-4;
 
         &-left {
-            @apply order-2;
+            @apply order-2 sm:pt-[1rem] sm:pb-3 text-body;
         }
         &-right {
             @apply order-1;
