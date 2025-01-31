@@ -89,7 +89,7 @@
             @apply w-full lg:w-3/12;
 
             .input-group {
-                @apply w-full lg:pr-3;
+                @apply w-full;
             }
         }
 
@@ -99,7 +99,7 @@
 
         .product__review-list-container,
         .review__question-right {
-            @apply w-full lg:w-9/12
+            @apply w-full lg:w-9/12 lg:pl-g;
         }
 
         .product__review-list-container > hr,
