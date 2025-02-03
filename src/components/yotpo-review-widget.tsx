@@ -128,7 +128,8 @@ const YotpoReviewWidget = (props:any) => {
 		productDesc,
 		canCreate,
 		productSkus,
-		showButtons
+		showButtons,
+		slug
 	} = props;
 
 	const [init, setInit] = useState(false);
@@ -288,11 +289,14 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const onFilterChange = () => {
-		const form = document.getElementById('yotpoFilterForm');
+		const form = slug ? document.getElementById(`yotpoFilterForm_${slug}`) : document.getElementById('yotpoFilterForm');
 		const filter = {};
 
-		const text = form.querySelector('input[name="free_text_search"]').value;
-		if (text) filter.free_text_search = text;
+		let text = form.querySelector('input[name="free_text_search"]').value;
+		if (text) {
+			text = text.trim();
+			filter.free_text_search = text;
+		}
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
@@ -301,12 +305,15 @@ const YotpoReviewWidget = (props:any) => {
 
 		const crfs = [];
 		customFilter.forEach((q) => {
-			const selected = form.querySelector(`select[name='${q.slug}']`).value;
-			if (selected !== '') {
-				crfs.push({
-					custom_field_id: q.id,
-					answers: [selected],
-				});
+			const selectElement = form.querySelector(`select[name='${q.slug}']`);
+			if (selectElement) {
+				const selected = selectElement.value;
+				if (selected !== '') {
+					crfs.push({
+						custom_field_id: q.id,
+						answers: [selected],
+					});
+				}
 			}
 		});
 		if (crfs.length) filter.crfs = crfs;
@@ -820,7 +827,7 @@ const YotpoReviewWidget = (props:any) => {
 
 			<div className="tab-content mt-2" id="yotpo-widget__tabContent">
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
-					<div id="yotpoFilterForm">
+					<div id={slug ? `yotpoFilterForm_${slug}` : 'yotpoFilterForm'}>
 						<p className="font-bold mb-2">{tStrings.yotpo.filterReviews}</p>
 						<div className="input-group lg:w-1/2 px-0 flex flex-nowrap">
 							<input
