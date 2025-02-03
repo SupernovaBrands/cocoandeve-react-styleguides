@@ -75,7 +75,7 @@ const OurStoryTemplate = (props: any) => {
 			<section className="container text-center my-3 lg:my-[50px]">
 				<h2 className="mb-1 text-body lg:text-2xl">{intro.title}</h2>
 				{!isLoading && (
-					<div className="w-full text-body intro__text lg:w-2/3 mx-auto px-hg lg:px-g" dangerouslySetInnerHTML={{
+					<div className="w-full text-body intro__text lg:w-2/3 mx-auto px-hg -mb-g lg:mb-0 lg:px-g" dangerouslySetInnerHTML={{
 						__html: intro.description
 					}} />
 				)}
@@ -122,7 +122,9 @@ const OurStoryTemplate = (props: any) => {
 								className="w-auto h-0 flex left-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
-									<ChevronPrev className="svg--current-color w-[12px] h-[12px]" />
+									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
+										<path d="M10.4142 16.071L3.34318 8.99993L10.4142 1.92888L9 0.514648L0.514719 8.99993L9 17.4852L10.4142 16.071Z" fill="#151515"/>
+									</svg>
 								</span>
 							</PrevButton>
 							<NextButton
@@ -130,7 +132,9 @@ const OurStoryTemplate = (props: any) => {
 								className="w-auto h-0 flex right-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
-									<ChevronNext className="svg--current-color w-[12px] h-[12px]" />
+									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
+										<path d="M0.585767 16.071L7.65682 8.99993L0.585767 1.92888L2 0.514648L10.4853 8.99993L2 17.4852L0.585767 16.071Z" fill="#151515"/>
+									</svg>
 								</span>
 							</NextButton>
 						</Carousel.Navigation>

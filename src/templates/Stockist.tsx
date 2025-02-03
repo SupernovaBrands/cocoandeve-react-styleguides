@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 import Stars from '~/images/icons/two-line-stars.svg';
+import StarsUpdated from '~/images/icons/two-line-stars-updated.svg';
 import WinnerAward from '~/images/icons/winner-award.svg';
 import MoneyBack from '~/images/icons/moneyback.svg';
 import MoneyBackPounds from '~/images/icons/moneyback-pounds.svg';
@@ -96,6 +97,8 @@ const Stockist = (props: any) => {
 
 	const icon = moneyBackIcon(props.store);
 
+    console.log('content.desc', content.desc);
+
     return (
         <>
             <section className="container text-center stockist px-g">
@@ -103,7 +106,7 @@ const Stockist = (props: any) => {
                 <form className="flex flex-wrap justify-center items-center -mx-25">
                     <label className="w-auto md:w-auto my-1 lg:text-lg sm:=text-sm font-bold lg:px-25">{content.label_title}</label>
                     <div className="w-auto my-1 px-[5px]">
-                        <select className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select" value={region} onChange={regionChangeHandler} >
+                        <select className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
@@ -135,9 +138,7 @@ const Stockist = (props: any) => {
                     </div>
                 </form>
                 {!isLoading && (
-                    <>
-                        {parse(content.desc.replace('text-underline', 'underline'))}
-                    </>
+                    <div dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline')}} />
                 )}
                 <p className="font-bold mt-4 mb-g text-left lg:text-center lg:text-lg">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></p>
                 <hr className="hidden "></hr>
@@ -184,7 +185,12 @@ const Stockist = (props: any) => {
                                             ${list.id === 'money-back' ? 'lg:order-2' : ''}
                                         `}>
                                             <i className="inline-flex flex-wrap h1 mb-g lg:mb-[12px]">
-                                                {list.id === 'stars' && <Stars className="text-secondary fill-secondary" />}
+                                                {list.id === 'stars' && (
+                                                    <>
+                                                        <Stars className="text-secondary fill-secondary hidden lg:inline-block" />
+                                                        <StarsUpdated className="text-secondary fill-secondary lg:hidden" />
+                                                    </>
+                                                )}
                                                 {list.id === 'winner-award' && <WinnerAward className="text-body" />}
                                                 {list.id === 'delivery' && <FastDelivery className="text-secondary fill-secondary" />}
                                                 {list.id === 'money-back' && <>{icon}</>}
@@ -192,13 +198,13 @@ const Stockist = (props: any) => {
                                             {list.id === 'stars' ? (
                                                 <>
                                                     {totalReviews && (
-                                                        <p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
+                                                        <p className={`title text-base mb-25 lg:mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
                                                             <span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item.replace('__ratings__', totalReviews) + '<br />' }}></span>
                                                         ))}</p>
                                                     )}
                                                 </>
                                             ) : (
-                                                <p className={`title text-base mb-0 ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
+                                                <p className={`title text-base ${list.id == 'delivery' ? 'mb-25 lg:mb-0' : 'mb-0'} ${props.className ?? ''}`}>{list.label.split('<br>').map((item) => (
                                                     <span key={`${item}-services`} dangerouslySetInnerHTML={{ __html: item + '<br />' }}></span>
                                                 ))}</p>
                                             )}

@@ -145,6 +145,7 @@ const Sustainability = (props: any) => {
     const inlineCss = `
         .sustainability--intro p {
             margin-bottom: 15px;
+            font-weight: 400;
         }
     `;
 
@@ -274,17 +275,17 @@ const Sustainability = (props: any) => {
                                         <PrevButton
                                             onClick={arrowClickPrev1}
                                             disabled={prevDisabled1}
-                                            className={`w-[1rem] lg:-ml-[2px] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-auto lg:-ml-[2px] ${prevDisabled1 ? 'text-[#ADADAD] pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronPrev className="w-[1rem] h-[1rem] svg--current-color" />
+                                            <ChevronPrev className="w-[24px] h-[24px] svg--current-color" />
                                         </PrevButton>
                                         <span className="mx-1 inline-block lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
                                             onClick={arrowClickNext1}
                                             disabled={nextDisabled1}
-                                            className={`w-[1rem] lg:-mr-[2px] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-auto lg:-mr-[2px] ${nextDisabled1 ? 'text-[#ADADAD] pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
+                                            <ChevronNext className="w-[24px] h-[24px] svg--current-color" />
                                         </NextButton>
                                     </div>
                                 </Carousel.Navigation>
@@ -300,29 +301,29 @@ const Sustainability = (props: any) => {
                 )}
             </section>
             <section className="container pt-4 px-0 lg:px-g">
-                <div className="bg-secondary-light px-g py-3 lg:p-4 border-t border-t-secondary-light lg:rounded">
+                <div className="bg-secondary-light px-g pt-3 pb-4 lg:p-4 border-t border-t-secondary-light lg:rounded">
                     <div className="flex flex-wrap lg:-mx-g">
                         <div className="w-full lg:w-7/12 lg:order-2 lg:px-g">
                             <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
                                     <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-[#D8D8D8]">
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
-                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-1'}>
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-1'}>
                                             <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_1,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-2'}>
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-2'}>
                                             <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_2,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 lg:min-h-0" active={activeTab2 === 'formula-3'}>
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-3'}>
                                             <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_3.replace('h4', 'h4 class="mb-1"'),
                                             }} />
@@ -334,13 +335,13 @@ const Sustainability = (props: any) => {
                         <div className="w-full lg:w-5/12 lg:order-1 lg:px-g">
                             <h2 className="hidden lg:block mb-1 text-base lg:mb-3">{formula.heading}</h2>
                             {!isLoading && (
-                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-g lg:mb-0">
+                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-0">
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
                                     <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 lg:mb-0 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 lg:mb-0 flex-wrap text-center justify-center text-body"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 lg:mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
                             )}
                         </div>
@@ -357,7 +358,7 @@ const Sustainability = (props: any) => {
                                     <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} 
                                         className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-25 font-bold">{data.title}</h6>
-                                        <p className="mb-0 lg:mb-3 leading-[20px]">{data.body}</p>
+                                        <p className="mb-0 lg:mb-3 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br class="lg:hidden">environmentally-friendly'))}</p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
