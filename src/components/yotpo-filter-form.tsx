@@ -13,7 +13,7 @@ const YotpoFilterForm = (props) => {
 					className="rounded-r rounded-l-none block appearance-none w-full py-[17px] px-[17px] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 outline-none mb-0"
 					aria-label="Search reviews"
 					placeholder={`Search`}
-					onKeyPress={(e) => {
+					onChange={(e) => {
 						onFilterChange();
 					}}
 				/>
