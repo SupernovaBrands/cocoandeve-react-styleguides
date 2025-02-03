@@ -159,7 +159,7 @@ const Sustainability = (props: any) => {
                             <img className="block w-full" alt={banner.heading} src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/74515d6a-23fc-4b41-9f9a-a74e10ab3f00/public'} />
                         </picture>
                     )}
-                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[50%] -translate-y-[50%] lg:text-[3.25em] lg:leading-[1.25em]">
+                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[50%] -translate-y-[50%] lg:text-[3.25em] lg:leading-[1.25em] sm:font-[400] lg:font-bold">
                         {parse(banner.heading.replace('?', '?<br class="lg:hidden" />'))}
                     </h1>
                 </a>
