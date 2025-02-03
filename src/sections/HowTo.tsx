@@ -95,7 +95,7 @@ const HowToCarousel = (props) => {
 										// <span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-bold py-[.375em] px-[.75em] mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
 										<PostTag paddingClass="py-[.375em] px-[.75em]" key={`article-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
 									) : ''}
-									<p className="text-lg lg:text-xl font-bold mt-2 blog-video-card__title mb-1 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+									<p className="text-lg lg:text-xl font-[400] mt-2 blog-video-card__title mb-1 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 									<span className="inline-block btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded">Read more</span>
 								</figcaption>
 							</figure>

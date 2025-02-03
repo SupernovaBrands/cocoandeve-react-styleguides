@@ -308,9 +308,9 @@ const Sustainability = (props: any) => {
                             {!isLoading && (
                                 <>
                                     <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-[#D8D8D8]">
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
                                         <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-1'}>
@@ -350,15 +350,15 @@ const Sustainability = (props: any) => {
             </section>
             {!isLoading && (
                 <section className="pt-4 pb-4 relative">
-                    <div className="container p-0 md:py-1">
+                    <div className="container p-0 md:pt-1">
                         <p className="pb-[1rem] mb-0 font-bold text-center text-body text-xl lg:text-2xl">{packaging.heading}</p>
                         <Carousel.Wrapper emblaApi={emblaApi2} className="px-0">
                             <Carousel.Inner emblaRef={emblaRef2} className="lg:mx-0 lg:!transform-none">
                                 {PACKAGING.map((data) => (
                                     <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} 
                                         className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
-                                        <h6 className="mb-25 font-bold">{data.title}</h6>
-                                        <p className="mb-0 lg:mb-3 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br class="lg:hidden">environmentally-friendly'))}</p>
+                                        <h6 className="mb-25 lg:mb-[8px] font-bold">{data.title}</h6>
+                                        <p className="mb-0 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br />environmentally-friendly'))}</p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
