@@ -1,5 +1,6 @@
 import React from 'react';
 import FiveStars from '~/images/icons/five-stars.svg';
+import FiveStarsRounded from '~/images/five-stars-rounded.svg';
 import parse from 'html-react-parser';
 import Badge from '~/components/Badge';
 import { useEffect, useState } from 'react';
@@ -96,7 +97,14 @@ const RealResultCard = (props) => {
 			</picture>
 			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2">
 				<div className="flex justify-between items-center mb-0">
-					<FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" />
+					{/* <FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" /> */}
+					<div className="stars-rounded flex">
+						<FiveStarsRounded className="mr-[4px]" />
+						<FiveStarsRounded className="mr-[4px]" />
+						<FiveStarsRounded className="mr-[4px]" />
+						<FiveStarsRounded className="mr-[4px]" />
+						<FiveStarsRounded className="mr-[4px]" />
+					</div>
 					<p>
 						{badges.map((badge, index) => (
 							<Badge key={index} badgeClasses={`text-white mb-1 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
@@ -119,7 +127,7 @@ const RealResultCard = (props) => {
 				<p className={`my-g hidden lg:block ${data.body.length > 153 ? 'max-h-[80px] overflow-y-scroll small-scrollbar' : 'min-h-[80px]'}`}>
 					{parse(`${data.body}`)}
 				</p>
-				<p className="underline font-weight-bold mb-0 font-bold">@{data.author}</p>
+				<p className="font-weight-bold mb-0 font-bold">@{data.author}</p>
 			</div>
 		</div>
 	);

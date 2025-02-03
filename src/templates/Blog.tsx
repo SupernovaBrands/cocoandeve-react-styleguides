@@ -129,9 +129,9 @@ const Blog = (props) => {
 	return (
 		<div className="mobile-wrapper mt-2 lg:mt-5 lg:px-0">
 			<div className="container px-0">
-				<h1 className="text-center mb-2 text-xl lg:text-2xl">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
+				<h1 className="text-center mb-2 text-xl lg:text-2xl font-[400]">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
-					<BlogNavTag href="/blogs/news" title="ALL" active={active ? false : (tag === 'all' ? true : false)}/>
+					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
@@ -174,7 +174,7 @@ const Blog = (props) => {
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
 							<div className="container px-0">
 								{postData.length > 0 &&
-									<Carousel.Wrapper emblaApi={emblaApi} className="mb-[1rem] blog-post__carousel w-full pl-hg">
+									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
 												<PostCard carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[90%] basis-[90%] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
@@ -206,7 +206,7 @@ const Blog = (props) => {
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
-							<div className="how-to-wrapper mb-2 flex flex-wrap">
+							<div className="how-to-wrapper my-2 flex flex-wrap">
 								<HowToCarousel btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
 							</div>
 						}

@@ -97,15 +97,13 @@ const Stockist = (props: any) => {
 
 	const icon = moneyBackIcon(props.store);
 
-    console.log('content.desc', content.desc);
-
     return (
         <>
             <section className="container text-center stockist px-g">
                 <h1 className="mb-25 mt-[25px] lg:mt-4 text-body text-xl lg:text-2xl">{content.title}</h1>
                 <form className="flex flex-wrap justify-center items-center -mx-25">
                     <label className="w-auto md:w-auto my-1 lg:text-lg sm:=text-sm font-bold lg:px-25">{content.label_title}</label>
-                    <div className="w-auto my-1 px-[5px]">
+                    <div className="w-auto mt-1 mb-[1rem] lg:mb-1 px-[5px]">
                         <select className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
