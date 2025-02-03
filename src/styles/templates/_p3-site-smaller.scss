@@ -32,6 +32,10 @@
     .footer {
         .dropdown__store button {
             @apply text-sm font-normal;
+
+            &:after {
+                @apply border-b-[5px] border-l-[5px] border-r-[5px] ml-1 lg:mt-0;
+            }
         }
 
         &__newsletter-form input {
@@ -427,7 +431,7 @@
         }
 
         &__button {
-            @apply inline-block lg:hidden mt-g;
+            @apply inline-block lg:hidden mt-g px-[4em];
         }
 
         &__title {
