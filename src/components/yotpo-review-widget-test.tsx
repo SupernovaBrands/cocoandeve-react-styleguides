@@ -861,16 +861,16 @@ const YotpoReviewWidgetTest = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-b py-4 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div key={review.id} className="border-gray-600 border-b py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
-												<h4 className="h4 mb-0 flex items-center sm:inline-flex lg:flex font-bold">
+												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
 													{review.user_name}
-													{review.verified_buyer && <SvgVerified className="svg text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
+													{review.verified_buyer && <SvgVerified className="svg lg:mt-[2px] text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
 												</h4>
 												{isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">Trial Participant</p>}
 												{review.verified_buyer && !isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
 
-												<p className="text-sm mb-1 sm:hidden lg:block">
+												<p className="text-sm mb-2 sm:hidden lg:block">
 													{formatDate(review.created_at, formattedDate)}
 												</p>
 												<div className="flex text-secondary mt-25 sm:block lg:hidden">
