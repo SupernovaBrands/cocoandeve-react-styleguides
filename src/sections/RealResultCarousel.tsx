@@ -57,7 +57,7 @@ const RealResultCarousel = (props: any) => {
 							<li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
 						</ul>) }
 						{props.smallerTest && (
-							<a href="/pages/reviews" className="mb-3 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] hidden lg:inline-block">See All</a>
+							<a href="/pages/reviews" className="mb-3 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.25em] py-[.8125em] hidden lg:inline-block">See All</a>
 						)}
 					</div>
                     <div className='px-hg'>

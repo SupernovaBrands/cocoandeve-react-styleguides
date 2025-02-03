@@ -42,7 +42,7 @@ const PlaygroundTest = (props: any) => {
 
     return (
         <section className="container text-center pb-0 playground--collection-list range-banner px-0 pt-[1.5625em] lg:pt-1">
-            <h1 className="mb-1 text-xl lg:text-2xl lg:mb-3">Discover our Playground</h1>
+            <h1 className="mb-g text-xl lg:text-2xl lg:mb-3">Discover our Playground</h1>
             {!isLoading && (
                 <>
                     {/* <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
