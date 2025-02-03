@@ -63,7 +63,7 @@ const OurStoryTemplate = (props: any) => {
 	return (
 		<>
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">
-				<h1 className="text-center absolute mx-g my-1 text-xl lg:text-[3.375em] lg:leading-[1] text-white lg:mx-[10%]">{banner.tiitle}</h1>
+				<h1 className="text-center absolute mx-g my-1 text-xl lg:text-[3.375em] lg:leading-[1] text-white lg:mx-[10%] sm:font-[400] lg:font-bold">{banner.tiitle}</h1>
 				{!isLoading && (
 					<picture>
 						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a1dca008-8438-4aaf-d8ba-ad72d7668500/public" media="(min-width: 992px)" />
