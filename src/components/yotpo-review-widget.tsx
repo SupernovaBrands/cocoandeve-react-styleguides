@@ -836,7 +836,7 @@ const YotpoReviewWidget = (props:any) => {
 								className="block appearance-none w-full py-[15px] px-[17px] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 rounded-l-h rounded-r-none outline-none mb-0"
 								aria-label="Search reviews"
 								placeholder={tStrings.yotpo.searchReviews}
-								onKeyPress={(e) => {
+								onChange={(e) => {
 									onFilterChange();
 								}}
 							/>
