@@ -1,3 +1,5 @@
+
+
 .p3-site-smaller {
 
     // announcement bar
@@ -156,6 +158,7 @@
             }
 
         }
+        
     }
 
     // pdp side upsell
@@ -260,10 +263,10 @@
         @apply mt-[1rem];
         .quantity-box {
             @apply lg:px-2;
-
+    
             &__button {
                 @apply px-[12.5px];
-
+        
                 svg {
                     @apply w-1;
                 }
@@ -283,7 +286,7 @@
             @apply flex;
         }
     }
-
+    
     .product-swatch__test {
         
         .variant-swatch {
@@ -292,10 +295,10 @@
             &:after {
                 @apply w-[24px] left-[12.5px] lg:w-3;
             }
-
+    
             &:before {
                 @apply h-[18px] w-[18px] top-auto left-g;
-
+    
                 @screen lg {
                     @apply h-[24px] w-[24px];
                 }
@@ -343,6 +346,7 @@
             }
         }
     }
+    
     .product-card {
 
         .product-title__text {
@@ -457,9 +461,9 @@
                 }
             }
 
-
+            
         }
-
+        
     }
 
     // collection template
