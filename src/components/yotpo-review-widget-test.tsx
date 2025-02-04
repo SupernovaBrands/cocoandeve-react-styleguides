@@ -131,7 +131,8 @@ const YotpoReviewWidgetTest = (props:any) => {
 		productDesc,
 		canCreate,
 		productSkus,
-		showButtons
+		showButtons,
+		slug
 	} = props;
 
 	const [init, setInit] = useState(false);
@@ -291,11 +292,14 @@ const YotpoReviewWidgetTest = (props:any) => {
 	};
 
 	const onFilterChange = () => {
-		const form = document.getElementById('yotpoFilterForm');
+		const form = slug ? document.getElementById(`yotpoFilterForm_${slug}`) : document.getElementById('yotpoFilterForm');
 		const filter = {};
 
-		const text = form.querySelector('input[name="free_text_search"]').value;
-		if (text) filter.free_text_search = text;
+		let text = form.querySelector('input[name="free_text_search"]').value;
+		if (text) {
+			text = text.trim();
+			filter.free_text_search = text;
+		}
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
@@ -313,7 +317,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 			}
 		});
 		if (crfs.length) filter.crfs = crfs;
-
+		console.log('filter', filter)
 		setSelectedFilter(filter);
 	};
 
@@ -818,7 +822,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
                         <YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0 lg:hidden mb-3'} />
-						<YotpoFilterForm className="review__filter-form flex flex-col" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm className="review__filter-form flex flex-col" id={slug ? `yotpoFilterForm_${slug}` : 'yotpoFilterForm'} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 
 					<div className="product__review-list-container">
