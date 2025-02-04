@@ -144,7 +144,7 @@ const Sustainability = (props: any) => {
 
     const inlineCss = `
         .sustainability--intro p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 400;
         }
     `;
@@ -304,7 +304,7 @@ const Sustainability = (props: any) => {
                 <div className="bg-secondary-light px-g pt-3 pb-4 lg:p-4 border-t border-t-secondary-light lg:rounded">
                     <div className="flex flex-wrap lg:-mx-g">
                         <div className="w-full lg:w-7/12 lg:order-2 lg:px-g">
-                            <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
+                            <h2 className="block lg:hidden text-center lg:text-left mb-2">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
                                     <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-[#D8D8D8]">
