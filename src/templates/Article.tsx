@@ -430,7 +430,7 @@ const Article = (props) => {
                 <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content?.title}</h1>
-                        <span className="mb-1 article__published-at">{updateDate}</span>
+                        <span className="text-gray-500 mb-1 article__published-at">{updateDate}</span>
                         {quickLinks?.length > 0 && (
                             <>
                                 <span className="block mt-1 text-left font-bold">In this article:</span>
@@ -461,7 +461,7 @@ const Article = (props) => {
                         
                         <div className="article__content mt-4">
                             {parse(bodyContent)}
-                            <ul className="block mb-4 mt-1 pl-[0!important]">
+                            <ul className="px-g block mb-4 mt-1 lg:px-0">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
