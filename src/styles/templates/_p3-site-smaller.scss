@@ -382,10 +382,14 @@
                 @screen lg {
                     @apply mb-g;
                 }
+
+                @screem sm {
+                    @apply mb-[8px];
+                }
             }
 
             @screen sm {
-                @apply flex-row items-center justify-between max-h-[38px] px-g mb-[8px];
+                @apply flex-row items-center justify-between max-h-[38px] px-g;
 
                 .product-card-btn__text,
                 .product-card-btn__prices {

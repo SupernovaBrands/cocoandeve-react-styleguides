@@ -91,11 +91,11 @@ const ProductCarouselTest = (props: any) => {
 	return (
 		<>
 		<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
-			{isProduct && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
+			{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 			<div className="row">
 				<div>
-					<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center lg:px-g">
-						<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-2 justify-center">
+					<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
+						<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-2 justify-start px-hg lg:px-0">
 							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'new' ? 'text-body font-bold' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
 							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'bestsellers' ? 'text-body font-bold' : ''}`} title='Best Sellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
 							<li><TabNav className={`!leading-[2.3] w-[7.5rem] lg:w-[9.375rem] px-g hover:text-body focus:text-body visited:text-body lg:text-lg ${activeTab === 'valuesets' ? 'text-body font-bold' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
