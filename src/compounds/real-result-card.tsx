@@ -95,7 +95,7 @@ const RealResultCard = (props) => {
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
-			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2">
+			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2 lg:mb-3">
 				<div className="flex justify-between items-center mb-1">
 					{/* <FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" /> */}
 					<div className="stars-rounded flex min-h-[1rem]">
