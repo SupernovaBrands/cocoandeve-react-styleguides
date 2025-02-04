@@ -96,9 +96,9 @@ const RealResultCard = (props) => {
 				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
 			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2">
-				<div className="flex justify-between items-center mb-0">
+				<div className="flex justify-between items-center mb-1">
 					{/* <FiveStars className="h-[1em] text-primary fill-primary text-base mb-0 max-w-none h4" /> */}
-					<div className="stars-rounded flex">
+					<div className="stars-rounded flex min-h-[1rem]">
 						<FiveStarsRounded className="mr-[4px]" />
 						<FiveStarsRounded className="mr-[4px]" />
 						<FiveStarsRounded className="mr-[4px]" />
@@ -107,7 +107,7 @@ const RealResultCard = (props) => {
 					</div>
 					<p>
 						{badges.map((badge, index) => (
-							<Badge key={index} badgeClasses={`text-white mb-1 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
+							<Badge key={index} badgeClasses={`text-white mb-0 ${badge.color} ${index === 0 && badges.length > 1 ? 'mr-1' : ''}`}>
 								{capitalizeString(badge.type)}
 							</Badge>
 						))}
