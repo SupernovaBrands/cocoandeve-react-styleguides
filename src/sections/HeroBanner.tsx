@@ -78,6 +78,7 @@ const HeroBanner = (props: any) => {
 										<DotButton
 											onClick={() => onClick1(index)}
 											className="carousel__dot"
+											aria-label={`Go to slide ${index + 1}`}
 										/>
 									</li>
 								))}
@@ -92,7 +93,7 @@ const HeroBanner = (props: any) => {
 			{tcPopups?.enabled && (
 				<>
 					<div className="pt-1 text-center lg:text-left container">
-						<a className="py-2 underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms & Conditions</a>
+						<button className="underline text-primary text-sm" role="button" onClick={() => handleOpenModal()}>Terms & Conditions</button>
 					</div>
 					<Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handleOpenModal()}>
 						<TermCondition content={tcPopups} handleClose={() => handleOpenModal()} />

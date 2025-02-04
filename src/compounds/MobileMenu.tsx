@@ -80,7 +80,7 @@ const MobileMenu = (props: any) => {
 					const hasRow = menu.rows;
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
-							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-expanded="false" aria-controls="hairCare"
+							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls="hairCare"
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;

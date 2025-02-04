@@ -148,7 +148,7 @@ const Blog = (props) => {
 											{!isLoading && (
 												<picture className="cursor-pointer embed-responsive m-0" data-src={item.video_url} onClick={handlOpenModal}>
 													<source srcSet={item.src.replace('/public', '/750x')} media="(min-width: 992px)" width="368" height="192"></source>
-													<img className="w-full h-[revert-layer]" alt="Image Alt" loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
+													<img className="w-full h-[revert-layer]" alt="" loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
 													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 														className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 															<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>

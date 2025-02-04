@@ -6,7 +6,7 @@ const ProductCard = (props) => {
             <a href="#" aria-label="Product link">
                 <picture>
                     <source srcSet={props.srcSet} />
-                    <img src={props.src} className="w-100" alt="Image Alt" />
+                    <img src={props.src} className="w-100" alt="" />
                 </picture>
             </a>
             <div className="d-flex mb-1"></div>
