@@ -296,7 +296,9 @@ const YotpoReviewWidgetTest = (props:any) => {
 		const filter = {};
 
 		let text = form.querySelector('input[name="free_text_search"]').value;
-		if (text) {
+		if (text.length === 0) filter.free_text_search = '';
+
+		if (text && text.length > 0) {
 			text = text.trim();
 			filter.free_text_search = text;
 		}
