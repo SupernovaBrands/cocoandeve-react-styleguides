@@ -295,7 +295,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 		const filter = {};
 
 		const text = form.querySelector('input[name="free_text_search"]').value;
-		console.log('aaa', text);
+		// console.log('aaa', text);
 		if (text) filter.free_text_search = text;
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
@@ -322,7 +322,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 		
 		if (reviewBox.current) {
 			const container = document.querySelector('.yotpo-reviews__container');
-			console.log('container', container);
+			// console.log('container', container);
 			const scrollDiv = container?.offsetTop || reviewBox.current.offsetTop;
 			// const scrollDiv = reviewBox.current.offsetTop;
 			globalThis.window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
@@ -830,7 +830,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						<hr className="my-2"/>
 
 						{revLoading && (
-							<div className="flex justify-center mt-4 ab">
+							<div className="flex w-full justify-center mt-4 ab">
 								<div className="spinner-border " role="status" aria-hidden="true" />
 							</div>
 						)}
@@ -983,7 +983,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						<YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0'} />
 						
 						{qnaLoading && (
-							<div className="flex justify-center mt-4">
+							<div className="flex w-full justify-center mt-4">
 								<div className="spinner-border" role="status" aria-hidden="true" />
 							</div>
 						)}
