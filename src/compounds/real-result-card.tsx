@@ -118,13 +118,13 @@ const RealResultCard = (props) => {
 				) : (
 					<>{parse(`${data.label && (data.label.replace('title="', titleDesc))}`)}</>
 				)}
-				<p className='my-g lg:hidden'>
+				<p className='my-1 lg:hidden'>
 					{!reveal && parse(`${data.body.slice(0, MAX_CHARS)}`)}
 					{!reveal && isTruncated && ('... ')}
 					{!reveal && isTruncated && <span onClick={() => setReveal(true)} className='text-primary'>Read more</span>}
 					{reveal && parse(`${data.body}`)}
 				</p>
-				<p className={`my-g hidden lg:block ${data.body.length > 153 ? 'max-h-[80px] overflow-y-scroll small-scrollbar' : 'min-h-[80px]'}`}>
+				<p className={`my-1 hidden lg:block ${data.body.length > 153 ? 'max-h-[80px] overflow-y-scroll small-scrollbar' : 'min-h-[80px]'}`}>
 					{parse(`${data.body}`)}
 				</p>
 				<p className="font-weight-bold mb-0 font-bold">@{data.author}</p>
