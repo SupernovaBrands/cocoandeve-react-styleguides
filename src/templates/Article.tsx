@@ -461,7 +461,7 @@ const Article = (props) => {
                         
                         <div className="article__content mt-4">
                             {parse(bodyContent)}
-                            <ul className="px-g block mb-4 mt-1 lg:px-0">
+                            <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
