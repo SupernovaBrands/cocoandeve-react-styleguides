@@ -37,12 +37,12 @@ const HowToCarousel = (props) => {
     const options: EmblaOptionsType = {
 		loop: true,
 		align: 'start',
-		startIndex: 1,
-		breakpoints: {
-            '(max-width: 992px)': {
-                startIndex: 0,
-            }
-		}
+		startIndex: 0,
+		// breakpoints: {
+        //     '(max-width: 992px)': {
+        //         startIndex: 0,
+        //     }
+		// }
 	};
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [

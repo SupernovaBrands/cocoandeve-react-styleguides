@@ -277,10 +277,9 @@
 
 	
 
-	@screen lg {
-		.blog-video-card__title {
-			min-height: calc-em(45);
-		}
+	
+	.blog-video-card__title {
+		min-height: calc-em(45);
 	}
 
 	.embed-responsive-16by9:before {
