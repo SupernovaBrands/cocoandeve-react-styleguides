@@ -295,6 +295,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 		const filter = {};
 
 		const text = form.querySelector('input[name="free_text_search"]').value;
+		console.log('aaa', text);
 		if (text) filter.free_text_search = text;
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
@@ -318,9 +319,12 @@ const YotpoReviewWidgetTest = (props:any) => {
 	};
 
 	const moveToTop = () => {
-        // console.log('move to top', reviewBox.current);
+		
 		if (reviewBox.current) {
-			const scrollDiv = reviewBox.current.offsetTop;
+			const container = document.querySelector('.yotpo-reviews__container');
+			console.log('container', container);
+			const scrollDiv = container?.offsetTop || reviewBox.current.offsetTop;
+			// const scrollDiv = reviewBox.current.offsetTop;
 			globalThis.window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
 		}
 	}
