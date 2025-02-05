@@ -410,7 +410,7 @@ const Article = (props) => {
         },
     ];
 
-    console.log('featuredImg', featuredImg);
+    // console.log('featuredImg', featuredImg);
 
     return (
         <>
@@ -502,7 +502,7 @@ const Article = (props) => {
                 </div>
             </div>
         )}
-        <div id="relatedPostCard" className="mb-4"></div>
+        <div id="relatedPostCard" className="mb-4 lg:mb-0"></div>
         {quickLinks?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
