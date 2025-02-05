@@ -42,6 +42,10 @@
 			}
 		}
 
+		&__content {
+			@apply px-[8px];
+		}
+
 		.badge {
 			@apply rounded-[8px] lg:top-[9px] lg:left-[22.5px];
 		}
