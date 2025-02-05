@@ -119,7 +119,7 @@
 
 		&__recomendation {
 			picture {
-				padding-top: calc(100% / 828* 420);
+				padding-top: 10.9375em;
 			}
 		}
 
@@ -142,7 +142,7 @@
 
 	.blog-post__cards {
 		.embed-responsive {
-			padding-top: calc(100% / 828* 420);
+			padding-top: 10.9375em;
 		}
 	}
 
@@ -286,12 +286,12 @@
 	}
 
 	.blog-carousel__image:before {
-		padding-top: 11.125em;
+		padding-top: 10.9375em;
 	}
 	
 	@screen lg {
 		.blog-carousel__image:before {
-			padding-top: 18.625em;
+			padding-top: 18.0625em;
 		}
 	}
 

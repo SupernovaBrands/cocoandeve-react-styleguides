@@ -127,9 +127,9 @@ const Blog = (props) => {
 	}, [region]);
 	
 	return (
-		<div className="mobile-wrapper mt-2 lg:mt-5 lg:px-0">
+		<div className="mobile-wrapper mt-2 lg:mt-4 lg:px-0">
 			<div className="container px-0">
-				<h1 className="text-center mb-2 text-xl lg:text-2xl font-[400]">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
+				<h1 className="text-center mb-2 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
@@ -174,10 +174,10 @@ const Blog = (props) => {
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
 							<div className="container px-0">
 								{postData.length > 0 &&
-									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg">
+									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
-												<PostCard carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[90%] basis-[90%] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={true} template="blog" data={data} />
+												<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} />
 											))}
 										</Carousel.Inner>
 										<Carousel.Navigation>
