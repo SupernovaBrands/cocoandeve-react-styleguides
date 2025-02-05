@@ -120,7 +120,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="rounded object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -410,6 +410,8 @@ const Article = (props) => {
         },
     ];
 
+    console.log('featuredImg', featuredImg);
+
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
@@ -431,10 +433,27 @@ const Article = (props) => {
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content?.title}</h1>
                         <span className="text-gray-500 mb-1 article__published-at">{updateDate}</span>
+                        
+                        {featuredImg && (
+                            featuredImageLink ? (
+                                <a href={featuredImageLink}>
+                                    <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
+                                        <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                    </picture>
+                                </a>
+                            ) : (
+                                <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
+                                    <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                </picture>
+                            )
+                        )}
+
                         {quickLinks?.length > 0 && (
                             <>
-                                <span className="block mt-1 text-left font-bold">In this article:</span>
-                                <div className="mt-1 mb-2">
+                                <span className="block mt-1 lg:pt-g text-left font-bold text-body">In this article:</span>
+                                <div className="mt-1 mb-2 lg:mb-1 lg:pb-g text-body">
                                     {quickLinks.map((quickLink, index) => (
                                         <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
                                             <span>{quickLink}</span>
@@ -443,23 +462,8 @@ const Article = (props) => {
                                 </div>
                             </>
                         )}
-                        {featuredImg && (
-                            featuredImageLink ? (
-                                <a href={featuredImageLink}>
-                                    <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
-                                        <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
-                                    </picture>
-                                </a>
-                            ) : (
-                                <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
-                                    <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
-                                </picture>
-                            )
-                        )}
                         
-                        <div className="article__content mt-4">
+                        <div className="article__content mt-4 lg:mt-0">
                             {parse(bodyContent)}
                             <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
