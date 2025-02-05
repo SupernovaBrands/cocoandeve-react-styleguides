@@ -79,31 +79,31 @@ const ArticleNewsLetter = (props) => {
     return (
         <div className="container blog-post-grid__newsletter px-0 hidden">
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
-                <picture className="lg:w-1/3 w-full p-0">
+                <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded-tl rounded-tr lg:rounded-tr-none lg:rounded-bl" />
                 </picture>
-                <div className="lg:w-2/3 w-full p-2 lg:pe-4">
-                    <h2 className="mb-1 blog-post-grid__newsletter-title">{postNewsletter.blog_ns_title}</h2>
-                    <p className="mb-[1rem]">{postNewsletter.blog_ns_desc}</p>
+                <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full p-2 lg:px-3">
+                    <h2 className="mb-1 blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
+                    <p className="mb-[1rem] !px-0 text-body">{postNewsletter.blog_ns_desc}</p>
                     {!submitted && (
                         <form className="w-full mb-2" onSubmit={onSubmit}>
                             <div className=" relative flex flex-wrap w-full items-stretch">
                                 <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl rounded-bl -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className="py-[9px] px-[38px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded" type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                             {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
                         </form>
                     )}
                     {submitted && (
-                        <div className="blog-post-grid__newsletter--submitted form-group mb-g text-left items-center flex">
+                        <div className="blog-post-grid__newsletter--submitted form-group mb-g text-left items-center flex !px-0">
                             <CheckCircle className="svg fill-secondary" />
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="hover:[text-decoration-line:underline!important] text-sm [text-decoration-line:none!important]"'))}</p>
+                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm underline"'))}</p>
                 </div>
             </div>
         </div>

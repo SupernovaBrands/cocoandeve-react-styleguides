@@ -27,10 +27,6 @@
 			@apply text-sm px-0 lg:!mb-25;
 		}
 
-		&__content {
-			@apply lg:px-[8px];
-		}
-
 		.review-stars__number {
 			@apply lg:mb-12;
 		}
@@ -42,8 +38,12 @@
 			}
 		}
 
+		img, picture {
+			@apply rounded-t-[1.5em];
+		}
+
 		&__content {
-			@apply px-[8px];
+			@apply px-[8px] rounded-b-[1.5em];
 		}
 
 		.badge {
