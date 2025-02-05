@@ -410,7 +410,7 @@ const Article = (props) => {
         },
     ];
 
-    console.log('featuredImg', featuredImg);
+    // console.log('featuredImg', featuredImg);
 
     return (
         <>
