@@ -101,7 +101,11 @@
 			.ratio-1x1::before {
 				display: block;
 				content: "";
-				padding-top: calc(100% / 1.8461538461538463);
+				padding-top: 13.9375em;
+
+				@screen lg {
+					padding-top: 25em;
+				}
 			}
 		}
 
