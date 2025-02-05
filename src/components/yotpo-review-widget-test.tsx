@@ -324,9 +324,12 @@ const YotpoReviewWidgetTest = (props:any) => {
 	};
 
 	const moveToTop = () => {
-        // console.log('move to top', reviewBox.current);
+		
 		if (reviewBox.current) {
-			const scrollDiv = reviewBox.current.offsetTop;
+			const container = document.querySelector('.yotpo-reviews__container');
+			// console.log('container', container);
+			const scrollDiv = container?.offsetTop || reviewBox.current.offsetTop;
+			// const scrollDiv = reviewBox.current.offsetTop;
 			globalThis.window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
 		}
 	}
@@ -832,7 +835,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						<hr className="my-2"/>
 
 						{revLoading && (
-							<div className="flex justify-center mt-4 ab">
+							<div className="flex w-full justify-center mt-4 ab">
 								<div className="spinner-border " role="status" aria-hidden="true" />
 							</div>
 						)}
@@ -985,7 +988,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 						<YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0'} />
 						
 						{qnaLoading && (
-							<div className="flex justify-center mt-4">
+							<div className="flex w-full justify-center mt-4">
 								<div className="spinner-border" role="status" aria-hidden="true" />
 							</div>
 						)}
