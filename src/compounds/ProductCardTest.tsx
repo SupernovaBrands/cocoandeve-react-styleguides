@@ -301,10 +301,10 @@ const ProductCardTest = (props:any) => {
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[2em] product-card--img block">
-                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
+                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src.replace('592x', '320x')} className={`bg-pink-light embed-responsive-item fit--cover !w-full !h-full lg:!left-0 !right-auto rounded-t-[2em] ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
+                    {props.product.src && <img src={props.product.src.replace('592x', '320x')} className={`bg-pink-light embed-responsive-item fit--cover !w-full !h-full lg:!left-0 !right-auto rounded-t-[1.5em] lg:rounded-t-[2em] ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -313,8 +313,8 @@ const ProductCardTest = (props:any) => {
                         </>
                     )}
                     {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
-                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[2em] img--hover hidden lg:block">
-                            {props.product.imgHover && <img src={props.product.imgHover.replace('592x', '320x')} className={`embed-responsive-item fit--cover !w-full !h-full lg:!left-0 rounded-t-[2em] ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
+                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
+                            {props.product.imgHover && <img src={props.product.imgHover.replace('592x', '320x')} className={`embed-responsive-item fit--cover !w-full !h-full lg:!left-0 rounded-t-[1.5em] lg:rounded-t-[2em] ${props.carousel ? '!max-w-none !max-h-none !left-0' : '!max-w-[160px] lg:!max-w-full !left-[2.5px]'}`} alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
                 </picture>
