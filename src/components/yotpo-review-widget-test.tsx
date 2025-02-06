@@ -57,6 +57,7 @@ import YotpoRatingCard from './yotpo-rating-card';
 
 // let { yotpoKey } = tSettings;
 const localeParam = 'en';
+let debounceTimeout = null;
 
 const getCustomQuestions = (productId, callback, yotpoKey) => {
 	if (!yotpoKey) {
@@ -114,6 +115,13 @@ const YOTPO_CONFIG_UPLOAD = {
 	ACL: 'public-read',
 	X_AMZ_ALGORITHM: 'AWS4-HMAC-SHA256',
 	X_AMZ_META_UUID: '14365123651274',
+};
+
+const debounce = (func, delay) => {
+	return (...args) => {
+		clearTimeout(debounceTimeout);
+		debounceTimeout = setTimeout(() => func(...args), delay);
+	};
 };
 
 
@@ -291,7 +299,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 		});
 	};
 
-	const onFilterChange = () => {
+	const onFilterChange = debounce(() => {
 		const form = slug ? document.getElementById(`yotpoFilterForm_${slug}`) : document.getElementById('yotpoFilterForm');
 		const filter = {};
 
@@ -319,9 +327,8 @@ const YotpoReviewWidgetTest = (props:any) => {
 			}
 		});
 		if (crfs.length) filter.crfs = crfs;
-		console.log('filter', filter)
 		setSelectedFilter(filter);
-	};
+	}, 500);
 
 	const moveToTop = () => {
 		
