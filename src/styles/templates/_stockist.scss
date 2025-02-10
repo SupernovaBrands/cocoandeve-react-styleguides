@@ -20,11 +20,32 @@
 			}
 		}
 
-		svg {
-			@apply h-[42px] lg:h-[32px];
-			path {
-				@apply fill-secondary;
+		&__beauty-confidence {
+			ul {
+				@apply md:mb-[0.75em];
+				li {
+					@apply md:w-auto px-0 md:mx-[28px];
+				}
+			}
+
+			i {
+				@apply mb-1;
+			}
+
+			span {
+				@apply text-body;
+			}
+
+			.beauty-confidence {
+				&--container {
+					@apply p-1 lg:py-4;
+				}
+
+				&--title {
+					@apply md:mb-3;
+				}
 			}
 		}
+
 	}
 }
