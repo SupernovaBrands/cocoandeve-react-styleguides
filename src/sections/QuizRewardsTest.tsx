@@ -75,7 +75,7 @@ const QuizRewardTest = (props: any) => {
 
                 <div className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative]">
                     <div className="w-full lg:max-h-[290px] bg-gray-100 rounded-[24px] lg:rounded-[32px] text-left lg:text-center px-0 lg:py-4 py-1 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
-                        <p className="hidden lg:block lg:text-xl mb-0 lg:mb-2 font-bold text-body w-full">Beauty Confidence</p>
+                        <p className="hidden lg:block lg:text-xl mb-0 lg:mb-2 font-bold text-body w-full">Beauty With Confidence</p>
                         {/* <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body">Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps</p> */}
                         <ul className="list-unstyled flex flex-wrap items-center justify-center">
                             {SERVICES.map((list, i) => {
