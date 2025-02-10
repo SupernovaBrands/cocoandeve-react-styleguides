@@ -170,6 +170,14 @@ export const CartItem = (props:CartItemProps) => {
 			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
 			}
+
+			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/82cf1f8f-c59e-47a2-967e-26ed0e6b0500/public';
+			}
+
+			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
+			}
 		}
 
 		setFeaturedImageUrl(featuredImage);

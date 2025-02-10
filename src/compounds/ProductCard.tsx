@@ -156,7 +156,7 @@ const SwatchOverlay = (props:any) => {
         }
 
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-            handleShade(targetText)
+            handleShade(targetText.toLowerCase())
         }
     };
 
@@ -239,7 +239,7 @@ const ProductCardTall = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [shade, setShade] = useState(null);
+    const [shade, setShade] = useState('dark');
     const { product } = props;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
 
@@ -301,7 +301,7 @@ const ProductCardTall = (props:any) => {
 
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
+            <a onMouseEnter={() => setShade(null)} onMouseLeave={() => setShade(null)} onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
                 <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
                     {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
@@ -318,8 +318,8 @@ const ProductCardTall = (props:any) => {
                         </picture>
                     )}
 
-                    {shade === 'Medium' && props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
-                        <picture className={`!pt-2 embed-responsive-item fit--cover rounded-t`}>
+                    {shade === 'medium' && props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
+                        <picture className={`!pt-2 embed-responsive-item fit--cover rounded-t img--medium`}>
                             {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
