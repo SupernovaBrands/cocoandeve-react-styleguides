@@ -34,10 +34,9 @@ const OurStoryTemplate = (props: any) => {
 
 	const options: EmblaOptionsType = {
 		loop: true,
-		align: 'center',
+		align: 'start',
 		breakpoints: {
             '(min-width: 992px)': {
-                align: 'start',
                 watchDrag: false,
 			    duration: 40,
             }
@@ -103,14 +102,14 @@ const OurStoryTemplate = (props: any) => {
 					)}
 				</div>
 				{!isLoading && (
-				<div className="container px-0">
+				<div className="container px-3 lg:px-g">
 					<Carousel.Wrapper emblaApi={emblaApi} className="mx-0">
 						<Carousel.Inner emblaRef={emblaRef} className="px-0">
 							{logos.map((data, i) => {
 								return (
-									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-1/2 basis-1/2 md:w-1/4 md:basis-1/4 lg:w-[12.5%] lg:basis-[12.5%] px-hg lg:px-g`} key={data.id}>
+									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-1/3 basis-1/3 md:w-1/4 md:basis-1/4 lg:w-[12.5%] lg:basis-[12.5%] pr-hg lg:px-g`} key={data.id}>
 										<div className="flex items-center justify-center">
-											<img className="block w-full min-w-[180px] lg:min-w-[auto] lg:max-w-[120px]" src={data.image.url.replace('public', '360x')} alt={`slide ${data.id + 1}`} />
+											<img className="block w-full max-w-[96px] lg:min-w-[auto] lg:max-w-[120px]" src={data.image.url.replace('public', '360x')} alt={`slide ${data.id + 1}`} />
 										</div>
 									</div>
 								)
@@ -119,7 +118,7 @@ const OurStoryTemplate = (props: any) => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick(arrowClickPrev)}
-								className="w-auto h-0 flex left-3 top-[50%]"
+								className="hidden w-auto h-0 lg:flex left-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
 									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
@@ -129,7 +128,7 @@ const OurStoryTemplate = (props: any) => {
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick(arrowClickNext)}
-								className="w-auto h-0 flex right-3 top-[50%]"
+								className="hidden w-auto h-0 lg:flex right-3 top-[50%]"
 							>
 								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
 									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
@@ -149,7 +148,7 @@ const OurStoryTemplate = (props: any) => {
 					<div className="flex flex-wrap mobile-wrapper -mx-hg lg:-mx-g px-hg">
 						<div className="px-hg lg:pl-3 lg:pr-0 lg:w-1/3 pt-[40px] pb-[40px]">
 							<h4 className="mb-1 font-normal lg:text-lg">{videoBanner.title}</h4>
-							<h2 className="mb-0 lg:text-2xl">{videoBanner.description}</h2>
+							<h2 className="mb-0 lg:text-2xl">Meet our hair, tan, skin & body ranges!</h2>
 						</div>
 					</div>
 				</div>
