@@ -304,7 +304,7 @@ const ProductCardTall = (props:any) => {
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block">
                 <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="Image Alt" loading="lazy" />}
+                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -313,8 +313,8 @@ const ProductCardTall = (props:any) => {
                         </>
                     )}
                     {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
-                        <picture className={`!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block`}>
-                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                        <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
+                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="" loading="lazy" />}
                         </picture>
                     )}
 

@@ -57,8 +57,8 @@ const YotpoStar = (props: any) => {
 			)}
 			{props.showScore && score && <span className="ml-25">({`${score?.toFixed(0)}`})</span>}
 			{props.showTotal && (
-				<span className="ml-25 review-star__total">
-					<a href={`/products/${props?.productHandle}#write-a-review`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-body hover:text-primary underline yotpo-start__number`} aria-label="Total reviews">({total?.toFixed(0)})</a>
+				<span className="ml-25">
+					<a href={`/products/${props?.productHandle}#write-a-review`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-body hover:text-primary underline yotpo-start__number`} aria-label={`Total reviews (${total?.toFixed(0)})`}>({total?.toFixed(0)})</a>
 				</span>
 			)}
 		</div>
