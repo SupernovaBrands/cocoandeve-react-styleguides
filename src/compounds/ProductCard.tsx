@@ -119,7 +119,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { product, addToCart, preOrders, generalSetting, label } = props;
+    const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
     const labelText = label === 'Add' ? label : props.swatch.label;
@@ -153,6 +153,10 @@ const SwatchOverlay = (props:any) => {
             setSwatchAvailable(true);
         } else {
             setSwatchAvailable(false);
+        }
+
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+            handleShade(targetText)
         }
     };
 
@@ -235,8 +239,14 @@ const ProductCardTall = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
+    const [shade, setShade] = useState(null);
     const { product } = props;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+
+    const handleShade = (val) => {
+        setShade(val)
+    }
+
     const trackLink = () => {
         if (typeof trackEvent === 'function') {
             if (carousel) {
@@ -303,7 +313,13 @@ const ProductCardTall = (props:any) => {
                         </>
                     )}
                     {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
-                        <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
+                        <picture className={`!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block`}>
+                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
+                        </picture>
+                    )}
+
+                    {shade === 'Medium' && props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
+                        <picture className={`!pt-2 embed-responsive-item fit--cover rounded-t`}>
                             {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="Image Alt" loading="lazy" />}
                         </picture>
                     )}
@@ -323,7 +339,7 @@ const ProductCardTall = (props:any) => {
                 )}
 
                 {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
-                    <SwatchOverlay sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
+                    <SwatchOverlay handleShade={handleShade} store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
                     <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
