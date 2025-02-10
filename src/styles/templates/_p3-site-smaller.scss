@@ -200,7 +200,7 @@
 
     // featured in
     .list-logo {
-        @apply pt-2 lg:pt-0;
+        @apply px-g pt-2 lg:pt-0;
 
         // figure { @apply font-bold; }
     }
@@ -241,6 +241,10 @@
     // product template
     .product__tagline {
         @apply text-sm lg:text-base mb-25;
+    }
+
+    .product__banner-promo {
+        @apply hidden;
     }
 
     .payment-banner__text {
