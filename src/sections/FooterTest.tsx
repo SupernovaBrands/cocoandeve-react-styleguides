@@ -116,7 +116,7 @@ const FooterTest = (props) => {
                                 <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
                                     <FacebookSquare className="h-[1em]" />
                                 </a>
-                                <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
+                                <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
                                     <PinterestSquare className="h-[1em]" />
                                 </a>
                                 <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
@@ -143,7 +143,7 @@ const FooterTest = (props) => {
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul>
                 <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
-                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© 2025 Coco&amp;Eve</p>
+                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© {(new Date().getFullYear())} Coco&amp;Eve</p>
             </div>
         </footer>
     );
