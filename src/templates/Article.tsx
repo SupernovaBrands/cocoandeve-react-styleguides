@@ -130,6 +130,7 @@ const ArticlPosteBanner = (props) => {
 const Article = (props) => {
     const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdpSetting } = props;
     let body = '';
+    
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
         body = content.BlogContentMultiStores[region].body_content
@@ -196,36 +197,6 @@ const Article = (props) => {
     }, [content, region]);
 
     useEffect(() => {
-        const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
-        const newsletterWrapper = document.querySelector('.newsletterWrapper');
-        if (blogPostGridNewsletter && newsletterWrapper) {
-            if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
-                return;
-            }
-            newsletterWrapper.appendChild(blogPostGridNewsletter);
-            blogPostGridNewsletter.classList.remove('hidden');
-        }
-    }, [postNewsletter, bodyContent, region]);
-
-    useEffect(() => {
-        const blogPostBanner = document.querySelector('.blog-post-banner');
-        const articleNewBanners = document.querySelectorAll('.article-new-banner');
-        if (blogPostBanner && articleNewBanners.length > 0) {
-            const articleBanners = document.querySelectorAll('.article-banner');
-            articleBanners.forEach(banner => banner.classList.add('hidden'));
-            const clonedBannerExists = document.querySelector('.cloned-banner');
-            if (!clonedBannerExists) {
-                articleNewBanners.forEach(item => {
-                    const clonedBanner = blogPostBanner!.cloneNode(true) as HTMLElement;
-                    clonedBanner.classList.remove('blog-post-banner', 'hidden');
-                    clonedBanner.classList.add('cloned-banner');
-                    item.appendChild(clonedBanner);
-                });
-            }
-        }
-    }, [postBannerInfo, bodyContent]);
-
-    useEffect(() => {
         const setProgress = () => {
             const { body, documentElement: html } = document;
 
@@ -251,6 +222,41 @@ const Article = (props) => {
     }, [bodyContent]);
 
     useEffect(() => {
+        const t = setTimeout(() => {
+            const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
+            // console.log('newslette dom', blogPostGridNewsletter);
+            const newsletterWrapper = document.querySelector('.newsletterWrapper');
+            // console.log('newsletterWrapper dom', newsletterWrapper);
+            if (blogPostGridNewsletter && newsletterWrapper) {
+                if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
+                    return;
+                }
+                newsletterWrapper.appendChild(blogPostGridNewsletter);
+                blogPostGridNewsletter.classList.remove('hidden');
+            }
+        }, 1500);
+        return () => clearTimeout(t);
+    }, [postNewsletter, region]);
+
+    useEffect(() => {
+        const blogPostBanner = document.querySelector('.blog-post-banner');
+        const articleNewBanners = document.querySelectorAll('.article-new-banner');
+        if (blogPostBanner && articleNewBanners.length > 0) {
+            const articleBanners = document.querySelectorAll('.article-banner');
+            articleBanners.forEach(banner => banner.classList.add('hidden'));
+            const clonedBannerExists = document.querySelector('.cloned-banner');
+            if (!clonedBannerExists) {
+                articleNewBanners.forEach(item => {
+                    const clonedBanner = blogPostBanner!.cloneNode(true) as HTMLElement;
+                    clonedBanner.classList.remove('blog-post-banner', 'hidden');
+                    clonedBanner.classList.add('cloned-banner');
+                    item.appendChild(clonedBanner);
+                });
+            }
+        }
+    }, [postBannerInfo, bodyContent]);
+
+    useEffect(() => {
         const timer = setTimeout(() => {
             const mainHeader = document.querySelector('.main-header');
             const progressBar = document.querySelector('.reading-proggress-bar');
@@ -262,7 +268,7 @@ const Article = (props) => {
                 img.closest('p').classList.add('!px-0');
             });
             document.body.classList.add('p3-site-smaller');
-        }, 500);
+        }, 250);
 
         return () => clearTimeout(timer);
     }, [bodyContent]);
@@ -342,7 +348,7 @@ const Article = (props) => {
             }
         }
 
-        const timeoutId = setTimeout(manipulateShops, 2000);
+        const timeoutId = setTimeout(manipulateShops, 500);
         return () => clearTimeout(timeoutId);
 
     }, [screenLG, bodyContent, upsells]);
@@ -496,7 +502,7 @@ const Article = (props) => {
         </div>
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
-                <div className="container lg:px-0 sm:px-0">
+                <div className="container lg:px-0 sm:pl-0 sm:pr-g">
                     <h4 className="font-bold text-xl lg:text-2xl text-center mb-g lg:!mb-4">Shop this article</h4>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>

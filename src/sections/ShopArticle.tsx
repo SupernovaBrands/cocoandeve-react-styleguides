@@ -43,10 +43,12 @@ const ProductCarousel = (props: any) => {
             if (extendedProducts.length < 3) {
                 const productItems = 4 - extendedProducts.length;
                 extendedProducts = extendedProducts.concat(extendedProducts.slice(0, productItems));
-                setProducts(extendedProducts);
             }
+            // move first elem to last index
+            const firstEl = extendedProducts.shift();
+            setProducts([...extendedProducts, firstEl]);
         }
-    }, [props.products]);
+    }, []);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
