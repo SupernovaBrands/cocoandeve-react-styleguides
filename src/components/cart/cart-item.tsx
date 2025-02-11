@@ -172,7 +172,7 @@ export const CartItem = (props:CartItemProps) => {
 			}
 
 			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/82cf1f8f-c59e-47a2-967e-26ed0e6b0500/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
 			}
 
 			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
