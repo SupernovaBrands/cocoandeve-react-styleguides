@@ -25,7 +25,7 @@ const CartManualGwp = (props:any) => {
 			setShowScroll(true);
 		}
 	}, [props])
-	
+
 
 	const scroll = (direction:any) => {
 		const el = scrollRef.current;
