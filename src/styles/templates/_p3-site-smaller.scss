@@ -375,7 +375,8 @@
                 @apply hidden;
             }
 
-            .review-star__total a {
+            .review-star__total a,
+            .yotpo-start__number {
                 @apply text-xs;
             }
         }
