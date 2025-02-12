@@ -46,7 +46,7 @@ const RealResultCarousel = (props: any) => {
 		<div className="instagram-reels container my-3 lg:my-4 text-center">
 			<p className="instagram-reels__title h1 mb-2">Real Results</p>
             <div className="row">
-                <div className="text-center">
+                <div className="text-center instagram-reels__video-container">
 					<div className="lg:flex lg:flex-wrap lg:justify-between">
 						
 						{ !props.show && (<ul className="instagram-reels__nav list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">

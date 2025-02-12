@@ -16,6 +16,7 @@ import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
 import ProductCardTest from "~/compounds/ProductCardTest";
+import ProductCardQuizTest from "~/compounds/ProductCardQuizTest";
 
 const Inner = ({ title, bannerData }) => {
     return (
@@ -507,8 +508,15 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return showQuizCard && index === 2 ? (
                                     <>
-                                        {!collectionSettings.isLoading && (
+                                        {!smallerTest && !collectionSettings.isLoading && (
                                             <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
+                                        )}
+                                        {smallerTest && !collectionSettings.isLoading && (
+                                            <ProductCardQuizTest
+                                                className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                key={`collection-quiz-card-test-${handle}--${index}`} />
                                         )}
                                         {smallerTest && (
                                             <ProductCardTest
@@ -604,8 +612,15 @@ const Collection = (props: any) => {
                                     </>
                                 )
                             })}
-                            {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
+                            {!smallerTest && collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                            )}
+                            {smallerTest && collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
+                                <ProductCardQuizTest
+                                    className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                    key={`collection-quiz-card-test-${handle}--99`} />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
