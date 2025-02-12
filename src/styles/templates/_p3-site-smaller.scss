@@ -134,13 +134,21 @@
 
     .product__side-article {
 
-        figcaption p.h2 {
-            @apply text-lg mb-0 lg:text-xl lg:mb-2;
+        figcaption {
+            .badge {
+                @apply py-[.375em];
+            }
+            p.h2 {
+                @apply text-lg mb-[1rem];
+            }
         }
 
-        .btn__read-more,
         .post-card__description {
             @apply hidden;
+        }
+
+        .btn__read-more {
+            @apply rounded-full;
         }
 
         figure {
@@ -168,33 +176,62 @@
             @apply mb-g text-center lg:text-left;
         }
 
-        .product-card__upsell picture,
-        .product-card__upsell img {
-            @apply rounded-t-[24px] !pt-0 !max-w-[165px] !max-h-[165px] !left-0;
-        }
+        .product-card {
 
-        .product-card__upsell {
-            @apply mb-0;
+            a {
+                @apply bg-pink-light;
+            }
+
+            &__title {
+                @apply text-sm;
+            }
+
+            .product-title__text {
+                @apply lg:min-h-[54px];
+            }
+
+            .review-stars__number {
+                @apply mb-[.75em];
+            }
+
+            &__upsell {
+                @apply mb-0;
+
+                picture,
+                img {
+                    @apply rounded-t-[24px] !pt-0 !max-w-[160px] !max-h-[160px] !left-0 mx-auto;
+                }
+            }
+
+            &__content {
+                @apply rounded-b-[24px] pt-0 px-[.5rem];
+    
+                .spinner-border {
+                    @apply text-primary;
+                }
+    
+                .review-star__v2 {
+                    @apply text-body;
+                }
+
+                button {
+                    @apply text-primary bg-white border-primary lg:border min-h-[38px] py-0 font-bold;
+
+                    .product-card-btn__text,
+                    .product-card-btn__prices {
+                        @apply text-sm;
+                    }
+                    
+                    &:not(.button-overlay) {
+                        @apply lg:mb-[.5rem]
+                    }
+                }
+            }
+
         }
 
         .carousel__progress {
             @apply my-g;
-        }
-
-        .product-card__content {
-            @apply rounded-b-[24px] pt-1;
-
-            .spinner-border {
-                @apply text-primary;
-            }
-
-            .review-star__v2 {
-                @apply text-body;
-            }
-        }
-
-        .product-card__content button {
-            @apply text-primary bg-white border-primary lg:border;
         }
     }
 
@@ -247,20 +284,46 @@
         @apply hidden;
     }
 
+    .payment-banner--item {
+        @apply mb-g;
+    }
+
     .payment-banner__text {
         @apply text-sm;
 
-        b {
-            @apply block;
+        // b {
+        //     @apply block;
+        // }
+    }
+
+    .product-side-article {
+        .overflow-hidden {
+            @apply pr-g;
         }
     }
 
-    .proud-to-be-wrapper ul {
-        @apply mt-g;
+    .proud-to-be-wrapper {
+        @apply mt-1 lg:mt-4;
+        ul {
+            @apply mt-g;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                @apply hidden;
+            }
+        }
     }
 
     .product__title {
         @apply text-lg mb-1 lg:text-2xl;
+
+        &--additional{
+            @apply font-normal relative text-base inline-block text-gray-600 lg:text-lg;
+
+            &:before {
+                content:" • ";
+            }
+        }
     }
 
     .product-form {
@@ -327,6 +390,10 @@
                 @apply font-bold;
             }
         }
+    }
+
+    .product-image-carousel__container img {
+        @apply rounded;
     }
 
     .product__banner {

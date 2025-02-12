@@ -47,7 +47,7 @@ const SideArticleCarousel = (props: any) => {
                 <div className={`mx-0 ${articleCarousel?.length <= 1 ? 'flex' : ''}`}>
                     <WithCarousel carousel={articleCarousel?.length > 1} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
                         {articleCarousel.map((data:any, index:number) => (
-                            <PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="product__side-article flex-grow-0 flex-shrink-0 basis-[91.5%] w-[91.5%] px-hg lg:px-g lg:w-[80%] lg:basis-[80%]" data={data} />
+                            <PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="product__side-article flex-grow-0 flex-shrink-0 basis-[335px] w-[335px] px-hg lg:px-g lg:w-[80%] lg:basis-[80%]" data={data} />
                         ))}
                     </WithCarousel>
                     
