@@ -514,7 +514,7 @@
             background-size: 12px 8px;
         }
         .product-title__text {
-            @apply min-h-[54px] my-0 lg:min-h-4;
+            @apply my-0 lg:min-h-4 lg:mb-25;
         }
 
         .product-card {
