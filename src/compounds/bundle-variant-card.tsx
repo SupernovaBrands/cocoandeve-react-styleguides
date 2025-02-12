@@ -89,15 +89,15 @@ const BundleVariantCard = (props) => {
                         <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
-                        <div className="mb-25 lg:mb-1">
-                            {!urlSet && <p className="text-body mb-25 block font-bold">{optionValue}</p>}
+                        <div className="mb-25 lg:mb-[1rem]">
+                            {!urlSet && <p className="text-body mb-25 lg:mb-[.5rem] block font-bold">{optionValue.replace('1x ', '')}</p>}
                             {urlSet && (
-                                <a className="text-body mb-25 block font-bold" href={`/products/${urlSet}`}>
-                                    {optionValue}
+                                <a className="text-body mb-25 lg:mb-[.5rem] block font-bold" href={`/products/${urlSet}`}>
+                                    {optionValue.replace('1x ', '')}
                                 </a>
                             )}
                             {variantDescriptionText && variantDescriptionText.length > 0 && (
-                                <div className="text-sm">
+                                <div className="text-sm mb-25 lg:mb-0">
                                     {variantDescriptionText.map((el, i) => {
                                         return el !== '' && (<p key={`bundle-description-${i}`} dangerouslySetInnerHTML={{__html: el}} />);
                                     })}
@@ -107,7 +107,7 @@ const BundleVariantCard = (props) => {
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
-                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
+                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op}</option>)}
                                     </select>
                                 </div>
