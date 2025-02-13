@@ -552,7 +552,7 @@
     }
     @screen lg {
         .collection__sidebar {
-            @apply w-[202px];
+            @apply w-[202px] rounded-[2rem];
             li {
                 @apply mb-2;
 
@@ -571,6 +571,9 @@
     }
     .collection-template__services {
         @apply hidden;
+    }
+    .collection-grid__tags {
+        @apply mb-3;
     }
 	.collection-template__products {
         @apply px-hg lg:px-0;
