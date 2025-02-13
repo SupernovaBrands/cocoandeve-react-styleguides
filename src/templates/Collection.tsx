@@ -391,7 +391,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            <div className="container mt-3 px-0 lg:px-g">
+            <div className="container collection__container mt-3 px-0 lg:px-g">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
