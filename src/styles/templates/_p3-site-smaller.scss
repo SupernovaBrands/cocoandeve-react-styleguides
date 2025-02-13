@@ -277,7 +277,7 @@
 
     // product template
     .product__tagline {
-        @apply text-sm lg:text-base mb-25;
+        @apply text-sm lg:text-base mb-0;
     }
 
     .product__banner-promo {
@@ -327,7 +327,7 @@
     }
 
     .product-form {
-        @apply mt-[1rem];
+        @apply mt-[1rem] lg:mt-2;
         .quantity-box {
             @apply lg:px-2;
     
@@ -396,11 +396,36 @@
         @apply rounded;
     }
 
+    .product-banner__slider {
+        &-wrapper picture {
+            @apply pt-[12.5em] lg:pt-[31.625em];
+        }
+        &-wrapper .img-slider svg {
+            @apply h-[.5rem] lg:h-[12px];
+        }
+        &--compareimg img {
+            @apply -mt-[3.4375em];
+        }
+        &-arrow {
+            @apply p-[.5rem] lg:p-[14px];
+
+            &--left {
+                @apply mr-25 lg:mr-1;
+            }
+            &--right {
+                @apply ml-25 lg:ml-1;
+            }
+        }
+    }
+    
     .product__banner {
         @apply mb-4;
 
+        &-content div:last-child {
+            @apply mb-0
+        }
         &-left {
-            @apply order-2 sm:pt-[1rem] sm:pb-3 text-body;
+            @apply order-2 lg:order-1 sm:pt-[1rem] sm:pb-2 text-body px-2;
         }
         &-right {
             @apply order-1;
