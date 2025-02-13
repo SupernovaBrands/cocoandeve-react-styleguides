@@ -19,7 +19,7 @@ const testData = [
         handle: 'super-hydrating-cream-conditioner',
         url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/404db1a0-56d4-4f02-9b50-5d6427d3d000/public',
         title: 'Super Hydrating Cream Conditioner'
-    }
+    },
 ];
 
 const SingleCard = ({handle, url, title, isLast}) => {
@@ -79,7 +79,7 @@ const SideWhatsInBundle = (props: any) => {
                         })}
                     </WithCarousel>
                     
-                    <div className={`px-0 ${testData.length > 2 ? 'block lg:hidden' : ''} ${testData.length > 3 ? 'block' : ''} `}>
+                    <div className={`px-0 ${testData.length > 2 ? `block ${testData.length > 3 ? '' : 'lg:hidden'}` : 'hidden'} ${testData.length > 3 ? 'block lg:block' : ''} `}>
                         <div className="carousel__progress bg-gray-400">
                             <div
                                 className="carousel__progress--scroll bg-gray-500"
