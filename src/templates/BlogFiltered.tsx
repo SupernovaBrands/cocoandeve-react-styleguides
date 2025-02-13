@@ -120,7 +120,7 @@ const BlogFiltered = (props) => {
                 </div>
             </div>
             <div className="text-center mb-4">
-                <Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline">Load more posts</Link>
+                <Link href="#" className="bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn hover:no-underline rounded-full">Load more posts</Link>
             </div>
         </>
     )
