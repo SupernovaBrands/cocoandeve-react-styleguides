@@ -7,7 +7,7 @@ const ProductCardQuizTest = (props: any) => {
                     <source srcSet={props.imgDt} media="(min-width: 992px)" />
                     <img className="w-full rounded-[24px] lg:rounded-[32px]" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" />
                 </picture>
-                <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
+                <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-25 pr-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                     <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">Tan Quiz</p>
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body">Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps</p>
                     <span className="hidden lg:inline-block align-middle text-center select-none border border-primary py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-[7px] lg:px-[28px] min-w-[157px]">Take the Quiz</span>

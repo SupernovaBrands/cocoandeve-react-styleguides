@@ -29,7 +29,7 @@ const ArticleRecommendation = (props) => {
 
 	return (
 		<div className="w-full mt-4 mb-4 lg:px-0 lg:mt-5 sm:px-hg">
-			<div className="bg-pink-light px-g lg:px-3 py-3 no-gutters__in-container lg:mx-0 sm:-mx-g lg:rounded">
+			<div className="bg-pink-light px-g lg:px-3 py-3 no-gutters__in-container lg:mx-0 sm:-mx-g lg:rounded-[2rem]">
 				<p className="font-bold text-xl lg:text-2xl text-body text-center mb-2 lg:mb-3">You may also like</p>
 				<ul className="flex flex-nowrap mb-0 lg:-mx-g sm:-mx-hg overflow-scroll no-scrollbar lg:overflow-hidden">
 					{popularArticles.map((data) => (
