@@ -6,7 +6,7 @@
 // }
 
 .blog-post-grid__content .article__content {
-	p, h1, h2, h3, h4, h5, h6 {
+	p:not(.product-title__text), h1, h2, h3, h4, h5, h6 {
 		@apply px-g block lg:px-0;
 	}
 
