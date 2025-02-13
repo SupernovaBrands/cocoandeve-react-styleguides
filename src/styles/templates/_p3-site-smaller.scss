@@ -544,15 +544,18 @@
 
     // collection template
     .terms--link {
-        @apply container mt-1 pb-25;
+        @apply container mt-1 pb-25 lg:pb-0;
 
         a {
             @apply lg:px-0 lg:py-2 text-base;
         }
     }
+    .collection__container {
+        @apply lg:mt-[50px] lg:mb-[20px];
+    }
     @screen lg {
         .collection__sidebar {
-            @apply w-[202px];
+            @apply w-[202px] rounded-[2rem];
             li {
                 @apply mb-2;
 
@@ -566,11 +569,14 @@
         }
 
         .collection-sidebar-label {
-            @apply text-lg mt-4;
+            @apply text-lg mt-3;
         }
     }
     .collection-template__services {
         @apply hidden;
+    }
+    .collection-grid__tags {
+        @apply mb-3;
     }
 	.collection-template__products {
         @apply px-hg lg:px-0;
