@@ -502,7 +502,7 @@ const Article = (props) => {
         </div>
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
-                <div className="container lg:px-0 sm:pl-0 sm:pr-g">
+                <div className="container lg:px-0 sm:pl-0 sm:pr-0">
                     <h4 className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</h4>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
