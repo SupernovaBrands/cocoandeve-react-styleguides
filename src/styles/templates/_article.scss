@@ -47,7 +47,7 @@
 		}
 
 		.badge {
-			@apply rounded-[8px] lg:top-[9px] lg:left-[22.5px];
+			@apply rounded-[8px] lg:top-[9px] lg:left-[22.5px] text-xs;
 		}
 
 		.product-card-btn__text,
