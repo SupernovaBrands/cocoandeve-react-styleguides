@@ -13,6 +13,9 @@
 	.carousel__products .carousel__container {
 		@apply px-hg;
 	}
+	.carousel__products .overflow-hidden {
+		@apply pr-g lg:pr-0;
+	}
 	.carousel__products .carousel__container .product-card {
 
 		&__title {
@@ -24,7 +27,7 @@
 			height: 10px !important;
 		}
 		.product-title__text {
-			@apply text-sm px-0 lg:!mb-25;
+			@apply text-sm px-0 !mb-hg lg:!mb-[.5rem];
 		}
 
 		.review-stars__number {
@@ -39,7 +42,7 @@
 		}
 
 		img, picture {
-			@apply rounded-t-[1.5em];
+			@apply rounded-t-[1.5em] px-0;
 		}
 
 		&__content {
