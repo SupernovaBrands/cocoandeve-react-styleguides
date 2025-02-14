@@ -280,12 +280,26 @@
         @apply text-sm lg:text-base mb-0;
     }
 
+    .product__yotpo-stars {
+        @apply mb-[1rem] lg:mb-1;
+    }
+
     .product__banner-promo {
         @apply hidden;
     }
 
+    .product__accordion {
+        .accordion-item svg {
+            @apply h-[.75em] w-[.75em];
+        }
+    }
+
     .payment-banner--item {
         @apply mb-g;
+
+        svg {
+            @apply h-2;
+        }
     }
 
     .payment-banner__text {
@@ -315,7 +329,7 @@
     }
 
     .product__title {
-        @apply text-lg mb-1 lg:text-2xl;
+        @apply text-lg mb-[1rem] lg:text-2xl lg:mb-1;
 
         &--additional{
             @apply font-normal relative text-base inline-block text-gray-600 lg:text-lg;
@@ -326,8 +340,12 @@
         }
     }
 
+    .tag-boxes__empty {
+        @apply mb-0;
+    }
+
     .product-form {
-        @apply mt-[1rem] lg:mt-2;
+        @apply mt-3 lg:mt-4;
         .quantity-box {
             @apply lg:px-2;
     
@@ -419,7 +437,7 @@
     }
     
     .product__banner {
-        @apply mb-4;
+        @apply mb-4 lg:mb-5;
 
         &-content div:last-child {
             @apply mb-0
