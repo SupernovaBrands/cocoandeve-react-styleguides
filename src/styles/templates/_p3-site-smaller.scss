@@ -280,6 +280,10 @@
         @apply text-sm lg:text-base mb-0;
     }
 
+    .product__yotpo-stars {
+        @apply mb-[1rem] lg:mb-1;
+    }
+
     .product__banner-promo {
         @apply hidden;
     }
@@ -325,7 +329,7 @@
     }
 
     .product__title {
-        @apply text-lg mb-1 lg:text-2xl;
+        @apply text-lg mb-[1rem] lg:text-2xl lg:mb-1;
 
         &--additional{
             @apply font-normal relative text-base inline-block text-gray-600 lg:text-lg;
@@ -334,6 +338,10 @@
                 content:" • ";
             }
         }
+    }
+
+    .tag-boxes__empty {
+        @apply mb-0;
     }
 
     .product-form {

@@ -12,7 +12,7 @@ const PdpQuizBanner = (props) => {
                         <p className="font-bold lg:mb-25 lg:text-lg" dangerouslySetInnerHTML={{__html: `Tan Quiz`}} />
                         <div className="hidden lg:block text-sm">Find the perfect solution for your skin’s <br /> needs in just a few steps</div>
                     </div>
-                    <span className="hidden lg:inline-block hover:no-underline px-g rounded-full bg-white text-primary text-base py-[0.5rem] px-[1.65625em] border border-[2px] border-primary font-bold absolute right-2">Take the Quiz</span>
+                    <span className="hidden lg:inline-block hover:no-underline rounded-full bg-white text-primary text-base py-[0.5rem] px-[1.65625em] border border-[2px] border-primary font-bold absolute right-2">Take the Quiz</span>
                 </div>
                 <svg className="lg:hidden" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="-0.5" y="0.5" width="31" height="31" rx="15.5" transform="matrix(-1 0 0 1 31 0)" fill="white"/>
