@@ -288,7 +288,7 @@ const ProductCardTall = (props:any) => {
         }
 
         // https://app.clickup.com/t/86ergy8je
-        if (product?.variants?.nodes.length > 1 && selectedVariant?.availableForSale && !product?.variants?.nodes[1].availableForSale) {
+        if (!product.availableForSale && selectedVariant?.availableForSale) {
             selectedVariant.availableForSale = false;
         }
 
