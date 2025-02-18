@@ -590,7 +590,7 @@
         @apply container mt-1 pb-25 lg:pb-0;
 
         a {
-            @apply lg:px-0 lg:py-2 text-base;
+            @apply lg:px-0 lg:py-2 text-[.625em];
         }
     }
     .collection__container {
@@ -600,13 +600,13 @@
         .collection__sidebar {
             @apply w-[202px] rounded-[2rem];
             li {
-                @apply mb-2;
+                @apply mb-[.75em];
 
                 &:last-child {
                     @apply mb-0;
                 }
                 a {
-                    @apply text-lg
+                    @apply text-base;
                 }
             }
         }
