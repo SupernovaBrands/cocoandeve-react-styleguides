@@ -516,7 +516,10 @@ const Collection = (props: any) => {
                                                 className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
                                                 imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                                 imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                key={`collection-quiz-card-test-${handle}--${index}`} />
+                                                key={`collection-quiz-card-test-${handle}--${index}`}
+                                                quizSetting={collectionSettings.quizSetting}
+                                                store={store}
+                                                />
                                         )}
                                         {smallerTest && (
                                             <ProductCardTest
@@ -620,7 +623,10 @@ const Collection = (props: any) => {
                                     className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
                                     imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                     imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                    key={`collection-quiz-card-test-${handle}--99`} />
+                                    key={`collection-quiz-card-test-${handle}--99`}
+                                    quizSetting={collectionSettings.quizSetting}
+                                    store={store}
+                                    />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
