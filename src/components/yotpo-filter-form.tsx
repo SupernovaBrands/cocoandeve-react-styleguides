@@ -3,6 +3,7 @@ import SvgSearch from '~/images/icons/search.svg';
 const tStrings = global.config.tStrings;
 const YotpoFilterForm = (props) => {
     const {onFilterChange, customFilter, id, className} = props;
+	const hideFilters = ['age', 'skin-concerns', 'color-of-tan', 'results', 'hair-type', 'skin-tone', 'skin-tone?'];
     return (
         <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
             <p className="font-bold mb-g lg:mb-2">{tStrings.yotpo.filterReviews}</p>
@@ -30,7 +31,7 @@ const YotpoFilterForm = (props) => {
 
 			<div className="flex flex-wrap mt-g w-full review__filter-form-inputs mx-0">
 				<div className="w-1/2 lg:w-full pl-0 pr-0 pl-0 pr-1 lg:px-0">
-					<select className="rounded custom-select mb-1 border-0" name="scores" onChange={() => { onFilterChange(); }}>
+					<select className="rounded custom-select mb-1 lg:my-1 border-0" name="scores" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.rating}</option>
 					    <option value="5">5 Stars</option>
 						<option value="4">4 Stars</option>
@@ -40,12 +41,12 @@ const YotpoFilterForm = (props) => {
 					</select>
 				</div>
 				<div className="w-1/2 lg:w-full pr-0 pl-1 lg:px-0">
-					<select className="rounded custom-select mb-1 border-0" name="pictured" onChange={() => { onFilterChange(); }}>
+					<select className="rounded custom-select mb-1 lg:my-1 border-0" name="pictured" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.imageVideo}</option>
 						<option value="true">{tStrings.yotpo.withImageVideo}</option>
 					</select>
 				</div>
-				{customFilter.map((q, i) => q.filter !== '' && (
+				{customFilter.map((q, i) => q.filter !== '' && !hideFilters.includes(q.slug) && (
 					<div key={q.slug} className={`w-1/2 lg:w-full pr-0 lg:px-0 ${i % 2 === 0 ? 'pl-0 pr-1' : 'pl-1'}`}>
 						<select className="rounded custom-select my-1 border-0" name={q.slug} onChange={() => { onFilterChange(); }}>
 							<option value="">{q.filter}</option>
