@@ -378,7 +378,7 @@ const Collection = (props: any) => {
             {tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link mt-25">
-                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
+                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
                     </div>
 
                     <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
