@@ -2,8 +2,7 @@ import SvgSearch from '~/images/icons/search.svg';
 
 const tStrings = global.config.tStrings;
 const YotpoFilterForm = (props) => {
-    const {onFilterChange, customFilter, id, className} = props;
-	const hideFilters = ['age', 'skin-concerns', 'color-of-tan', 'results', 'hair-type', 'skin-tone', 'skin-tone?'];
+    const {onFilterChange, customFilter, id, className, hideFilters} = props;
     return (
         <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
             <p className="font-bold mb-g lg:mb-2">{tStrings.yotpo.filterReviews}</p>
@@ -46,7 +45,7 @@ const YotpoFilterForm = (props) => {
 						<option value="true">{tStrings.yotpo.withImageVideo}</option>
 					</select>
 				</div>
-				{customFilter.map((q, i) => q.filter !== '' && !hideFilters.includes(q.slug) && (
+				{customFilter.filter((q) => !hideFilters.includes(q.slug)).map((q, i) => q.filter !== '' && (
 					<div key={q.slug} className={`w-1/2 lg:w-full pr-0 lg:px-0 ${i % 2 === 0 ? 'pl-0 pr-1' : 'pl-1'}`}>
 						<select className="rounded custom-select my-1 border-0" name={q.slug} onChange={() => { onFilterChange(); }}>
 							<option value="">{q.filter}</option>

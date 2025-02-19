@@ -58,7 +58,7 @@ import YotpoRatingCard from './yotpo-rating-card';
 // let { yotpoKey } = tSettings;
 const localeParam = 'en';
 let debounceTimeout = null;
-
+const hideFilters = ['age', 'skin-concerns', 'color-of-tan', 'results', 'hair-type', 'skin-tone', 'skin-tone?'];
 const getCustomQuestions = (productId, callback, yotpoKey) => {
 	if (!yotpoKey) {
 		return false;
@@ -317,7 +317,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 		if (pictured) filter.pictured = pictured;
 
 		const crfs = [];
-		customFilter.forEach((q) => {
+		customFilter.filter((q) => !hideFilters.includes(q.slug)).forEach((q) => {
 			const selected = form.querySelector(`select[name='${q.slug}']`).value;
 			if (selected !== '') {
 				crfs.push({
@@ -834,7 +834,7 @@ const YotpoReviewWidgetTest = (props:any) => {
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
                         <YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0 lg:hidden mb-3'} />
-						<YotpoFilterForm className="review__filter-form flex flex-col" id={slug ? `yotpoFilterForm_${slug}` : 'yotpoFilterForm'} onFilterChange={onFilterChange} customFilter={customFilter} />
+						<YotpoFilterForm hideFilters={hideFilters} className="review__filter-form flex flex-col" id={slug ? `yotpoFilterForm_${slug}` : 'yotpoFilterForm'} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
 
 					<div className="product__review-list-container">
