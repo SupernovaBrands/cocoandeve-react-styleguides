@@ -463,6 +463,10 @@
     
     .product-card {
 
+        img {
+            @apply lg:!max-h-[calc(100%-1rem)];
+        }
+
         .product-title__text {
             @apply mx-0 lg:mb-25 mb-25 lg:my-0 min-h-[54px] lg:min-h-[auto];
         }
