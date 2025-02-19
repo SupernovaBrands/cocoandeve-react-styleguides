@@ -65,6 +65,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 		<button
 			className={`carousel__button carousel__button--prev appearance-none touch-manipulation ${className}`}
 			type="button"
+			aria-label="Previous"
 			{...restProps}
 		>
 			{children}
@@ -78,6 +79,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 		<button
 			className={`carousel__button carousel__button--next appearance-none touch-manipulation ${className}`}
 			type="button"
+			aria-label="Next"
 			{...restProps}
 		>
 			{children}

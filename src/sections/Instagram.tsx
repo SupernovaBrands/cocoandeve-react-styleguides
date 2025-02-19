@@ -65,7 +65,7 @@ const Instagram = (props: any) => {
                                             <a href={data[0].link} target="_blank"  className='block instagram--feed--link'  key={`inst1`} aria-label="Visit Instagram profile">
                                                 <picture>
                                                     <source srcSet={data[0].image} />
-                                                    <img className="w-full img-big aspect-square object-cover" src={data[0].image} loading="lazy" />
+                                                    <img className="w-full img-big aspect-square object-cover" src={data[0].image} loading="lazy" alt="" />
                                                 </picture>
                                             </a>
                                         )}
