@@ -112,6 +112,7 @@ const ProductCarousel = (props: any) => {
 												preOrders={preOrders}
 												generalSetting={generalSetting}
 												homePage={props.homePage || false}
+												store={store}
 											/>
 										)
 									})}
@@ -155,6 +156,7 @@ const ProductCarousel = (props: any) => {
 												preOrders={preOrders}
 												generalSetting={generalSetting}
 												homePage={props.homePage || false}
+												store={store}
 											/>
 										)
 									})}
@@ -198,6 +200,7 @@ const ProductCarousel = (props: any) => {
 												preOrders={preOrders}
 												generalSetting={generalSetting}
 												homePage={props.homePage || false}
+												store={store}
 											/>
 										)
 									})}

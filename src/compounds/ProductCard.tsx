@@ -119,7 +119,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { product, addToCart, preOrders, generalSetting, label } = props;
+    const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
     const labelText = label === 'Add' ? label : props.swatch.label;
@@ -153,6 +153,10 @@ const SwatchOverlay = (props:any) => {
             setSwatchAvailable(true);
         } else {
             setSwatchAvailable(false);
+        }
+
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+            handleShade(targetText.toLowerCase())
         }
     };
 
@@ -235,8 +239,16 @@ const ProductCardTall = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
+    const [shade, setShade] = useState(null);
+    const [productImage, setProductImage] = useState(props.product.src);
+    const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
     const { product } = props;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+
+    const handleShade = (val) => {
+        setShade(val)
+    }
+
     const trackLink = () => {
         if (typeof trackEvent === 'function') {
             if (carousel) {
@@ -294,12 +306,39 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(defaultVariant || null);
     }, []);
 
+    useEffect(() => {
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+            let firstAvailable: any;
+            if (autoTicks && autoTicks.length > 0) {
+                firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+            }
+            if (firstAvailable === null || !firstAvailable?.availableForSale) {
+                firstAvailable = product.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
+            }
+            setShade(firstAvailable.value)
+        }
+    }, [product]);
+
+    useEffect(() => {
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/540x';
+            if (shade === 'medium') {
+                setProductImage(medImg);
+                setProductHoverImage(darkImg)
+            } else {
+                setProductImage(darkImg);
+                setProductHoverImage(medImg)
+            }
+        }
+    }, [shade]);
+
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t product-card--img block" aria-label={props.product.title}>
                 <picture className={`!pt-2 embed-responsive before:pt-[100%] block relative rounded-t ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
-                    {props.product.srcSet && <source srcSet={props.product.srcSet} media="(min-width: 992px)" />}
-                    {props.product.src && <img src={props.product.src} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
+                    {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
+                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -307,9 +346,9 @@ const ProductCardTall = (props:any) => {
                             <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
                         </>
                     )}
-                    {props.product.imgHover && !props.product.imgHover.includes('shopify/assets/no-image') && (
+                    {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="!pt-2 embed-responsive-item fit--cover rounded-t img--hover hidden lg:block">
-                            {props.product.imgHover && <img src={props.product.imgHover} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="" loading="lazy" />}
+                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="" loading="lazy" />}
                         </picture>
                     )}
                 </picture>
@@ -328,7 +367,7 @@ const ProductCardTall = (props:any) => {
                 )}
 
                 {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
-                    <SwatchOverlay sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
+                    <SwatchOverlay handleShade={handleShade} store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
                     <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
