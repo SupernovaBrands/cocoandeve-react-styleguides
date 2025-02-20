@@ -46,14 +46,14 @@ const CartExtrass = (props:any) => {
     }
 
 	useEffect(() => {
-		if (['dev', 'au', 'ca'].includes(store)) {
-			// setShowAfterpay(true);
+		if (['dev', 'us'].includes(store)) {
+			//setShowAfterpay(true);
 		}
 		if (['us'].includes(store)) {
 			setShowShoppay(true);
 		}
 
-		if (['dev', 'eu', 'uk'].includes(store)) {
+		if (['dev'].includes(store)) {
 			setShowKlarna(true);
 			const klarnaText = 'or [num] interest-free installments of <b>[amount]</b> by'
 				.replace('[amount]', formatMoney(Math.ceil(totalPrice / 3), false, store))

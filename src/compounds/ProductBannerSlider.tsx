@@ -59,19 +59,19 @@ const ProductBannerSlider = (props) => {
 	};
 
 	const slideReady = (e) => {
-		e.preventDefault();
+		// e.preventDefault();
 		// console.log('handleMouseDown');
 		setClicked(true);
 	};
 
 	const slideFinish = (e) => {
 		// console.log('handleMouseUp');
-		e.preventDefault();
+		// e.preventDefault();
 		setClicked(false);
 	};
 
 	const slideMove = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 		if (clicked) {
 			let pos = 0;
 			pos = getCursorPos(e);
@@ -88,7 +88,7 @@ const ProductBannerSlider = (props) => {
 	};
 
 	const handleMouseMove = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 		if (clicked) {
 			/*
 			const rect = event.target.getBoundingClientRect();
@@ -123,7 +123,7 @@ const ProductBannerSlider = (props) => {
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 				<div
 					ref={compSlider}
-					className="img-slider absolute flex justify-center items-center top-0"
+					className="img-slider absolute flex justify-center items-center top-0 touch-pan-y touch-pinch-zoom"
 					style={{ ...sliderStyle }}
 					onMouseDown={slideReady}
 					onMouseUp={slideFinish}

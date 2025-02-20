@@ -127,7 +127,7 @@ export const CartItem = (props:CartItemProps) => {
 			}
 
 			if (store === 'my' && item.merchandise.product.handle === 'hair-revival-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c28d622f-45cc-49ce-d5c2-0dbd6c1f9100/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
 			}
 
 			if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
@@ -146,14 +146,6 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'ca') && item.merchandise.product.handle === 'super-hydration-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/764f5eec-ddf2-4ead-e1c6-88a0ab395200/public';
-			}
-
-			if ((store === 'dev' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'super-hydration-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee76b291-fb34-4025-4476-e0d564560c00/public';
-			}
-
 			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 			}
@@ -168,6 +160,23 @@ export const CartItem = (props:CartItemProps) => {
 			}
 			if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8fce65c9-c57e-4401-71cd-313acd286200/public';
+			}
+			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
+			}
+			if (['uk', 'ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
+			}
+			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
+			}
+
+			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
+			}
+
+			if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
 			}
 		}
 

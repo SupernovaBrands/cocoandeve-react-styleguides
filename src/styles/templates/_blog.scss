@@ -134,9 +134,9 @@
 				}
 			}
 
-			.product-variant-swatch__item[data-available=""] {
-				pointer-events: none;
-			}
+			// .product-variant-swatch__item[data-available=""] {
+			// 	pointer-events: none;
+			// }
 		}
 	}
 
@@ -184,6 +184,25 @@
 		h6 {
 			line-height: 1.25 !important;
 			margin-bottom: .625rem;
+		}
+
+		h1 a,
+		h2 a,
+		h3 a,
+		h4 a,
+		h5 a,
+		h6 a {
+			font-size: inherit;
+		}
+
+		h1 a span,
+		h2 a span,
+		h3 a span,
+		h4 a span,
+		h5 a span,
+		h6 a span,
+		p a span {
+			color: inherit !important;
 		}
 	}
 

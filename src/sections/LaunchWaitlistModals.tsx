@@ -64,7 +64,7 @@ const LaunchWaitlistModals = (props) => {
 
         if (email) {
             subscribeBluecoreWaitlist(email, handle, variantId, regSource ? regSource : `launch-item-${handle}`, phoneNumber, true, '');
-            trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+            // trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');12
         }
 
         if (phoneNumber && phoneCode) {
