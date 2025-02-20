@@ -239,7 +239,7 @@ const ProductCardTall = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [shade, setShade] = useState(null);
+    const [shade, setShade] = useState('medium');
     const [productImage, setProductImage] = useState(props.product.src);
     const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
     const { product } = props;
@@ -306,18 +306,18 @@ const ProductCardTall = (props:any) => {
         setSelectedVariant(defaultVariant || null);
     }, []);
 
-    useEffect(() => {
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-            let firstAvailable: any;
-            if (autoTicks && autoTicks.length > 0) {
-                firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-            }
-            if (firstAvailable === null || !firstAvailable?.availableForSale) {
-                firstAvailable = product.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
-            }
-            setShade(firstAvailable.value)
-        }
-    }, [product]);
+    // useEffect(() => {
+    //     if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+    //         let firstAvailable: any;
+    //         if (autoTicks && autoTicks.length > 0) {
+    //             firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+    //         }
+    //         if (firstAvailable === null || !firstAvailable?.availableForSale) {
+    //             firstAvailable = product.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
+    //         }
+    //         setShade(firstAvailable.value)
+    //     }
+    // }, [product]);
 
     useEffect(() => {
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
