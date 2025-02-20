@@ -342,7 +342,7 @@ const ProductCardTest = (props:any) => {
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
-                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
+                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-2 lg:!pt-hg" alt="" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -352,7 +352,7 @@ const ProductCardTest = (props:any) => {
                     )}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="" loading="lazy" />}
+                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt="" loading="lazy" />}
                         </picture>
                     )}
                 </picture>

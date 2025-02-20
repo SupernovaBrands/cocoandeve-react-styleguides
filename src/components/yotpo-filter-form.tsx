@@ -5,12 +5,12 @@ const YotpoFilterForm = (props) => {
     const {onFilterChange, customFilter, id, className, hideFilters} = props;
     return (
         <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
-            <p className="font-bold mb-g lg:mb-2">{tStrings.yotpo.filterReviews}</p>
+            <p className="font-bold mb-1 lg:mb-2">{tStrings.yotpo.filterReviews}</p>
 			<div className="input-group lg:w-1/2 px-0 flex flex-nowrap">
                 <input
 					type="text"
 					name="free_text_search"
-					className="rounded-r rounded-l-none block appearance-none w-full py-[17px] px-[17px] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 outline-none mb-0"
+					className="rounded-r rounded-l-none block appearance-none w-full py-1 lg:py-[17px] px-[17px] text-base leading-[1.25] bg-gray-400 text-gray-800 border-0 outline-none mb-0"
 					aria-label="Search reviews"
 					placeholder={`Search`}
 					onKeyPress={(e) => {
@@ -28,9 +28,9 @@ const YotpoFilterForm = (props) => {
 				</div>
 			</div>
 
-			<div className="flex flex-wrap mt-g w-full review__filter-form-inputs mx-0">
+			<div className="flex flex-wrap mt-1 w-full review__filter-form-inputs mx-0">
 				<div className="w-1/2 lg:w-full pl-0 pr-0 pl-0 pr-1 lg:px-0">
-					<select className="rounded custom-select mb-1 lg:my-1 border-0" name="scores" onChange={() => { onFilterChange(); }}>
+					<select className="rounded custom-select mb-0 lg:my-1 border-0 text-sm lg:text-base h-[2.5rem] lg:h-[3.125]" name="scores" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.rating}</option>
 					    <option value="5">5 Stars</option>
 						<option value="4">4 Stars</option>
@@ -40,14 +40,14 @@ const YotpoFilterForm = (props) => {
 					</select>
 				</div>
 				<div className="w-1/2 lg:w-full pr-0 pl-1 lg:px-0">
-					<select className="rounded custom-select mb-1 lg:my-1 border-0" name="pictured" onChange={() => { onFilterChange(); }}>
+					<select className="rounded custom-select mb-0 lg:my-1 border-0 text-sm lg:text-base h-[2.5rem] lg:h-[3.125]" name="pictured" onChange={() => { onFilterChange(); }}>
 						<option value="">{tStrings.yotpo.imageVideo}</option>
 						<option value="true">{tStrings.yotpo.withImageVideo}</option>
 					</select>
 				</div>
 				{customFilter.filter((q) => !hideFilters.includes(q.slug)).map((q, i) => q.filter !== '' && (
 					<div key={q.slug} className={`w-1/2 lg:w-full pr-0 lg:px-0 ${i % 2 === 0 ? 'pl-0 pr-1' : 'pl-1'}`}>
-						<select className="rounded custom-select my-1 border-0" name={q.slug} onChange={() => { onFilterChange(); }}>
+						<select className="rounded custom-select my-1 border-0 text-sm lg:text-base h-[2.5rem] lg:h-[3.125]" name={q.slug} onChange={() => { onFilterChange(); }}>
 							<option value="">{q.filter}</option>
 							{q.options.map((o) => (
 								<option key={o} value={o}>{o.replace('/', ' / ')}</option>
