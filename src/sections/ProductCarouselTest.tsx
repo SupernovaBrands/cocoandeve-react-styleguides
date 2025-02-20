@@ -121,6 +121,7 @@ const ProductCarouselTest = (props: any) => {
                                             preOrders={preOrders}
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
+											store={store}
                                         />
 									})}
 								</Carousel.Inner>
@@ -162,6 +163,7 @@ const ProductCarouselTest = (props: any) => {
                                             preOrders={preOrders}
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
+											store={store}
                                         />
 									})}
 								</Carousel.Inner>
@@ -203,6 +205,7 @@ const ProductCarouselTest = (props: any) => {
                                             preOrders={preOrders}
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
+											store={store}
                                         />
 									})}
 								</Carousel.Inner>
