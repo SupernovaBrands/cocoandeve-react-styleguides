@@ -144,6 +144,12 @@ const SwatchOverlay = (props:any) => {
     if (firstAvailable === null || !firstAvailable?.availableForSale) {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
+    if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'medium');
+        if (swatch.availableForSale) {
+            firstAvailable = swatch;
+        }
+    }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
@@ -317,19 +323,6 @@ const ProductCardTest = (props:any) => {
         setSelectedVariant(defaultVariant || null);
     }, []);
 
-    // useEffect(() => {
-    //     if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-    //         let firstAvailable: any;
-    //         if (autoTicks && autoTicks.length > 0) {
-    //             firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-    //         }
-    //         if (firstAvailable === null || !firstAvailable?.availableForSale) {
-    //             firstAvailable = product.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
-    //         }
-    //         setShade(firstAvailable.value)
-    //     }
-    // }, [product]);
-
     useEffect(() => {
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
             const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
@@ -349,7 +342,7 @@ const ProductCardTest = (props:any) => {
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block" aria-label={props.product.title}>
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
-                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] !right-auto rounded-t !pt-2" alt="" loading="lazy" />}
+                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-2 lg:!pt-hg" alt="" loading="lazy" />}
 
                     {props.showTip && (
                         <>
@@ -359,7 +352,7 @@ const ProductCardTest = (props:any) => {
                     )}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[108%] !w-[108%] !h-[108%] !top-[-4%] !left-[-4%] rounded-t" alt="" loading="lazy" />}
+                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt="" loading="lazy" />}
                         </picture>
                     )}
                 </picture>
