@@ -131,6 +131,12 @@ const SwatchOverlay = (props:any) => {
     if (firstAvailable === null || !firstAvailable?.availableForSale) {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
+    if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'medium');
+        if (swatch.availableForSale) {
+            firstAvailable = swatch;
+        }
+    }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
@@ -305,19 +311,6 @@ const ProductCardTall = (props:any) => {
         if (defaultVariant === null && !product.swatch) defaultVariant = variantNodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
         setSelectedVariant(defaultVariant || null);
     }, []);
-
-    // useEffect(() => {
-    //     if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-    //         let firstAvailable: any;
-    //         if (autoTicks && autoTicks.length > 0) {
-    //             firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-    //         }
-    //         if (firstAvailable === null || !firstAvailable?.availableForSale) {
-    //             firstAvailable = product.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
-    //         }
-    //         setShade(firstAvailable.value)
-    //     }
-    // }, [product]);
 
     useEffect(() => {
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
