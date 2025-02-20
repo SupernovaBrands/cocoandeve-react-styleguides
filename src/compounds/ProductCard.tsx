@@ -293,7 +293,6 @@ const ProductCardTall = (props:any) => {
         if (!product.availableForSale && selectedVariant?.availableForSale) {
             selectedVariant.availableForSale = false;
         }
-
     }, [product, selectedVariant]);
 
     useEffect(() => {
