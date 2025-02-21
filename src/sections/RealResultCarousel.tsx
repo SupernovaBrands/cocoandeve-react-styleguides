@@ -44,16 +44,22 @@ const RealResultCarousel = (props: any) => {
 
 	return (
 		<div className="instagram-reels container my-3 lg:my-4 text-center">
-			<p className="h1 mb-2">Real Results</p>
+			<p className="instagram-reels__title h1 mb-2">Real Results</p>
             <div className="row">
-                <div className="text-center">
-                    { !props.show && (<ul className="list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
-						<li key={`all`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
-						<li key={`hair`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-                        <li key={`tan`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'text-body' : 'text-gray-600'}`} title={store === 'ca' ? 'Tan' : 'Tan & SPF'} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
-                        <li key={`skincare`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'skincare' ? 'text-body' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
-						<li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
-                    </ul>) }
+                <div className="text-center instagram-reels__video-container">
+					<div className="lg:flex lg:flex-wrap lg:justify-between">
+						
+						{ !props.show && (<ul className="instagram-reels__nav list-style-none mx-auto flex flex-wrap border-b-0 text-center mb-3 justify-center">
+							<li key={`all`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'all' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
+							<li key={`hair`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'hair' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
+							<li key={`tan`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'tan' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title={store === 'ca' ? 'Tan' : 'Tan & SPF'} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
+							<li key={`skincare`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'skin' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
+							<li key={`body`}><TabNav className={`pt-[6px] px-g lg:text-lg ${activeTab === 'body' ? 'instagram-reels__nav--active text-body' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
+						</ul>) }
+						{props.smallerTest && (
+							<a href="/pages/reviews" className="mb-3 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.25em] py-[.8125em] hidden lg:inline-block">See All</a>
+						)}
+					</div>
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
@@ -61,7 +67,7 @@ const RealResultCarousel = (props: any) => {
 									{videos.map((data: any, i: number) => (
 										<InstagramCard
 											key={`all-${data.url}-${i}`}
-											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.url}
 											author={data.username}
 											product={data.product}
@@ -79,7 +85,7 @@ const RealResultCarousel = (props: any) => {
 									{videos.filter((data: any) => data.category === 'hair').map((data: any, i: number) => (
 										<InstagramCard
 											key={`hair-${data.url}-${i}`}
-											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.url}
 											author={data.username}
 											product={data.product}
@@ -96,7 +102,7 @@ const RealResultCarousel = (props: any) => {
 									{videos.filter((data: any) => data.category === 'tan_spf').map((data: any, i: number) => (
 										<InstagramCard
 											key={`tan-${data.url}-${i}`}
-											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.url}
 											author={data.username}
 											product={data.product}
@@ -113,7 +119,7 @@ const RealResultCarousel = (props: any) => {
 									{videos.filter((data: any) => data.category === 'skin').map((data: any, i: number) => (
 										<InstagramCard
 											key={`body-${data.url}-${i}`}
-											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.url}
 											author={data.username}
 											product={data.product}
@@ -130,7 +136,7 @@ const RealResultCarousel = (props: any) => {
 									{videos.filter((data: any) => data.category === 'body').map((data: any, i: number) => (
 										<InstagramCard
 											key={`body-${data.url}-${i}`}
-											classes="flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
 											videoUrl={data.url}
 											author={data.username}
 											product={data.product}
@@ -141,7 +147,10 @@ const RealResultCarousel = (props: any) => {
 								</Carousel.Inner>
 							</Carousel.Wrapper>
 						</TabContent>
-						<a href="/pages/reviews" className="a btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] mt-3 hidden lg:inline-block">See All Results</a>
+						<a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] mt-3 hidden lg:inline-block">
+							{props.smallerTest && 'See All'}
+							{!props.smallerTest && 'See All Results'}
+						</a>
                     </div>
                 </div>
 			</div>

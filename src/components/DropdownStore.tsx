@@ -40,7 +40,7 @@ const DropdownStore = (props: any) => {
 	}, [open]);
 
     return (
-        <div className="lg:text-left relative">
+        <div className="lg:text-left relative dropdown__store">
             <div className="relative" ref={dropdownRef}>
                 <button onClick={() => setOpen(!open)} className={`rounded-lg py-2.5 text-center inline-flex items-center after:inline-block after:ml-[0.255em] after:mb-[3px] after:border-b-[0.3em] after:border-solid after:border-t-body after:border-x-[0.3em] after:border-x-transparent text-body text-base lg:text-lg font-bold lg:font-normal lg:after:ml-[.5625em] lg:after:-mt-25 hover:underline hover:text-primary-darken`} type="button">{activeCountry}</button>
 

@@ -59,7 +59,7 @@ const OurStoryTemplate = (props: any) => {
 	return (
 		<>
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">
-				<h1 className="text-center absolute m-1 text-[2em] lg:text-hero text-white">{banner.tiitle}</h1>
+			<h1 className="text-center absolute m-1 text-[2em] lg:text-hero text-white">{banner.tiitle}</h1>
 				{!isLoading && (
 					<picture>
 						<source srcSet={banner.back_img.url} media="(min-width: 992px)" />

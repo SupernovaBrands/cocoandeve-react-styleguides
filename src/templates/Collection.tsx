@@ -15,6 +15,8 @@ import { sidebar_collection_ph, sidebar_collection_ph_ca } from '~/modules/place
 import LaunchWaitList from "~/compounds/launch-waitlist";
 import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
+import ProductCardTest from "~/compounds/ProductCardTest";
+import ProductCardQuizTest from "~/compounds/ProductCardQuizTest";
 
 const Inner = ({ title, bannerData }) => {
     return (
@@ -74,9 +76,11 @@ const Collection = (props: any) => {
         loggedInEmail,
         squareBadge,
         bannerData,
+        smallerTest
     } = props;
     // console.log('waitlistPdpSetting', waitlistPdpSetting);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
+    // console.log('smaller ab test ', smallerTest);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
@@ -387,7 +391,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            <div className="container mt-3 px-0 lg:px-g">
+            <div className="container collection__container mt-3 px-0 lg:px-g">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
@@ -504,55 +508,125 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return showQuizCard && index === 2 ? (
                                     <>
-                                        {!collectionSettings.isLoading && (
+                                        {!smallerTest && !collectionSettings.isLoading && (
                                             <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
                                         )}
-                                        <ProductCard
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
-                                            product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            eventNameOnClick='collection_product_card'
-                                            preOrders={preOrders}
-                                            isLaunchWL={isLaunchWL}
-                                            launchBox={launchBox}
-                                            setLaunchWLModal={setLaunchWLModal}
-                                            setLaunchWLModal2={setLaunchWLModal2}
-                                            setLaunchWLModal3={setLaunchWLModal3}
-                                            generalSetting={generalSetting}
-                                            collectionTemplate={true}
-                                            store={store}
-                                        />
+                                        {smallerTest && !collectionSettings.isLoading && (
+                                            <ProductCardQuizTest
+                                                className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                key={`collection-quiz-card-test-${handle}--${index}`}
+                                                quizSetting={collectionSettings.quizSetting}
+                                                store={store}
+                                                />
+                                        )}
+                                        {smallerTest && (
+                                            <ProductCardTest
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                        {!smallerTest && (
+                                            <ProductCard
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
                                     </>
                                 ) : (
-                                    <ProductCard
-                                        key={`collection-a-${handle}-${item.id}-${index}`}
-                                        product={item}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                        button={true}
-                                        setWaitlistData={setWaitlistData}
-                                        smSingleStar={true}
-                                        addToCart={addToCart}
-                                        trackEvent={trackEvent}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={preOrders}
-                                        isLaunchWL={isLaunchWL}
-                                        launchBox={launchBox}
-                                        setLaunchWLModal={setLaunchWLModal}
-                                        setLaunchWLModal2={setLaunchWLModal2}
-                                        setLaunchWLModal3={setLaunchWLModal3}
-                                        generalSetting={generalSetting}
-                                        collectionTemplate={true}
-                                        store={store}
-                                    />
+                                    <>
+                                        {smallerTest && (
+                                            <ProductCardTest
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                        {!smallerTest && (
+                                            <ProductCard
+                                                key={`collection-b-${handle}-${item.id}-${index}`}
+                                                product={item}
+                                                className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                            />
+                                        )}
+                                    </>
                                 )
                             })}
-                            {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
+                            {!smallerTest && collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                            )}
+                            {smallerTest && collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
+                                <ProductCardQuizTest
+                                    className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                    key={`collection-quiz-card-test-${handle}--99`}
+                                    quizSetting={collectionSettings.quizSetting}
+                                    store={store}
+                                    />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
@@ -560,6 +634,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
+            {smallerTest && <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />}
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
@@ -578,7 +653,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            {!isLoading && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
+            {!isLoading && !smallerTest && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
