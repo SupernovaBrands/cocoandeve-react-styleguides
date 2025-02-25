@@ -340,8 +340,11 @@
         }
     }
 
-    .tag-boxes__empty {
-        @apply mb-0;
+    .tag-boxes {
+        @apply text-sm lg:text-base;
+        &__empty {
+            @apply mb-0;
+        }
     }
 
     .product-form {
