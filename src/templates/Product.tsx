@@ -355,30 +355,30 @@ const Product = (props: any) => {
                             <div className="">
                                 <div className="carousel--scroll position-relative">
                                     <ul className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item active">
-                                        <NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <DimethiconeFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Silicone Free</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <CrueltyFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Cruelty Free</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <ToxinFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Toxin-free</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span>
-                                    </li>
-                                    <li className="col-2 flex items-center flex-col px-1 carousel-item ">
-                                        <Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span>
-                                    </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item active" aria-label="100% Natural DHA">
+                                            <NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Vegan">
+                                            <Vegan className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Vegan</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Silicone Free">
+                                            <DimethiconeFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Silicone Free</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Cruelty Free">
+                                            <CrueltyFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Cruelty Free</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Toxin-free">
+                                            <ToxinFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Toxin-free</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Ethically Sourced">
+                                            <Ethically className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Ethically Sourced</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Paraben Free">
+                                            <ParabenFree className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Paraben Free</span>
+                                        </li>
+                                        <li className="col-2 flex items-center flex-col px-1 carousel-item " aria-label="Peta Approved">
+                                            <Peta className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Peta Approved</span>
+                                        </li>
                                     </ul>
                                     <div className="scrollbar mt-1 lg:mt-3 lg:hidden bg-gray-400">
                                         <div className="scrollbar--thumb bg-gray-500"></div>

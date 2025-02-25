@@ -83,7 +83,7 @@ const HowToCarousel = (props) => {
 							<figure className="border border-secondary-light rounded-[2rem]">
 								{!isLoading && (
 									<picture className="relative w-full block m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
-										<img className="rounded-t-[2rem] w-full aspect-[4/3] max-h-[10.9375em] lg:max-h-[18.0625em] object-cover" alt="Image Alt" loading="lazy" src={item.src}/>
+										<img className="rounded-t-[2rem] w-full aspect-[4/3] max-h-[10.9375em] lg:max-h-[18.0625em] object-cover" alt="" loading="lazy" src={item.src}/>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 											className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 												<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>

@@ -15,6 +15,7 @@ const Footer = (props: any) => {
     const { aboutMenu, shopMenu, helpMenu, store } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const currentYear = new Date().getFullYear();
 
     const onSubmit = (evt) => {
 		evt.preventDefault();
@@ -173,7 +174,7 @@ const Footer = (props: any) => {
                     </div>
                 </div>
                 <hr className="border-body mb-1 mt-2 lg:mt-3 lg:mb-1 lg:opacity-20" />
-                <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© 2024 Coco&amp;Eve</p>
+                <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© {currentYear} Coco&amp;Eve</p>
             </div>
         </footer>
     );

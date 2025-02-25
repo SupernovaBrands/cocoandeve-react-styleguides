@@ -30,7 +30,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						</picture>
 					</a>
 				)}
-				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow">
+				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={data.title}>
 					<figcaption className={`${template === 'blog' || template === 'pdp' || template === 'article' ? 'p-2 flex-grow flex' : 'flex-grow'} flex flex-col ${textClass}`}>
 						<div className={`${template === 'article' ? 'badge-blog' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
 							{data.tags.length > 0 && (

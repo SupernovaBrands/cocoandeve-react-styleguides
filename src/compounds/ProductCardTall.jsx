@@ -58,7 +58,7 @@ const ProductCardTall = (props) => {
             <Link href="#" className="product-card__img-link rounded-top">
                 <picture className="d-block position-relative">
                     <source srcSet={props.product.srcSet} />
-                    <img src={props.product.src} className="w-100" alt="Image Alt" loading="lazy" />
+                    <img src={props.product.src} className="w-100" alt="" loading="lazy" />
                     {props.showTip && (
                         <>
                             <span class="product-card__image-tip position-absolute text-white font-size-xs p-1 d-none d-lg-block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
