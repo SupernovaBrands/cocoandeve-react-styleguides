@@ -19,6 +19,9 @@ const SearchProductCard = (props: any) => {
 	if (store === 'au' && url === 'tan-masters-kit') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
 	}
+	if (['au'].includes(store) && url === 'bronzing-self-tanner-drops') {
+		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
+	}
 
 	const tracking = () => {
 		trackEvent('search_product', {
