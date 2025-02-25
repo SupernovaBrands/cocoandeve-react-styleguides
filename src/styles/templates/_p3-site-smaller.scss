@@ -577,7 +577,7 @@
                 @apply hidden;
             }
             button {
-                @apply bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2;
+                @apply bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base;
 
                 &.instagram-reels__nav--active {
                     @apply font-normal bg-primary text-white;
