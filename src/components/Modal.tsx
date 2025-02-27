@@ -38,7 +38,7 @@ const Modal = (props: any) => {
 		};
 	}, [isOpen]);
 
-	if (!slideIn && modalComp === 'newsletter') {
+	if (!slideIn && (modalComp === 'newsletter' || modalComp === 'sweepstakes')) {
 		containerVariant.initial = { top: '0', transition: { type: 'spring' } };
 		containerVariant.exit = { top: '0' };
 		horizontalVariant.initial = { left: 'auto', right: '0', transition: { type: 'spring' } };
