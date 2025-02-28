@@ -137,6 +137,12 @@ const SwatchOverlay = (props:any) => {
             firstAvailable = swatch;
         }
     }
+    if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'dark');
+        if (swatch.availableForSale) {
+            firstAvailable = swatch;
+        }
+    }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
@@ -316,7 +322,7 @@ const ProductCardTall = (props:any) => {
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
             setShade('medium');
         } else if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            setShade('dark')
+            setShade('dark');
         }
     }, []);
 

@@ -150,6 +150,12 @@ const SwatchOverlay = (props:any) => {
             firstAvailable = swatch;
         }
     }
+    if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'dark');
+        if (swatch.availableForSale) {
+            firstAvailable = swatch;
+        }
+    }
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
@@ -174,7 +180,7 @@ const SwatchOverlay = (props:any) => {
             setSwatchAvailable(false);
         }
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us', 'au'].includes(store)) {
             handleShade(targetText.toLowerCase())
         }
     };
@@ -258,7 +264,7 @@ const ProductCardTest = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [shade, setShade] = useState('medium');
+    const [shade, setShade] = useState('');
     const [productImage, setProductImage] = useState(props.product.src);
     const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
     const { product } = props;
@@ -325,8 +331,28 @@ const ProductCardTest = (props:any) => {
 
     useEffect(() => {
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+            setShade('medium');
+        } else if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            setShade('dark');
+        }
+    }, []);
+
+    useEffect(() => {
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
             const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
             const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/540x';
+            if (shade === 'medium') {
+                setProductImage(medImg);
+                setProductHoverImage(darkImg)
+            } else {
+                setProductImage(darkImg);
+                setProductHoverImage(medImg)
+            }
+        }
+
+        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7288c0a-349c-4253-9723-6a17973e5900/540x';
             if (shade === 'medium') {
                 setProductImage(medImg);
                 setProductHoverImage(darkImg)
