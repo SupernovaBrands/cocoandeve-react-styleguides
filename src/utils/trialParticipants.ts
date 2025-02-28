@@ -934,6 +934,70 @@ const trialParticipants = [
 		"user": "Kathleen Kirkman",
 		"score": "4",
 		"content": "Using the bottle is so easy! With just a few quick spritzes, it coats my hair for a nice, non-frozen look and makes it shine. Plus, I absolutely love the smell!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-22",
+		"title": "The New GOAT of Self Tanners 🏆",
+		"user": "Nicole Drake",
+		"score": "5",
+		"content": "This is hands down the best self-tanner in the market I’ve ever used—and I’m an avid self-tan user whose tried them all! It gave me the deepest, most natural tan that lasted 5 days and my skin felt incredible. Plus I got so many compliments on hour 3 onwards!! \nThe way my skin felt was incredible and the color …THAT COLOR… the deepest most natural tan I have ever had. This express tan checks every single box! "
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-21",
+		"title": "no streaks, no mess, just perfection!",
+		"user": "Lenice bennett",
+		"score": "5",
+		"content": "Smells amazing, applies like a dream, and leaves no streaks! It dries within seconds, so there’s no transfer onto clothes. Even my husband noticed how lovely it applied—and he’s not easy to impress!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-20",
+		"title": "A Full Tan in Just One Hour!",
+		"user": "CATHERINE  PHELPS",
+		"score": "5",
+		"content": "I love how quick and easy this mousse is! I only had it on for an hour and was left with a full, lovely tan. I am a very pale porcelain colour without tan and had to go swimming this week. So, I put this on just over an hour before I had to go swimming. I washed it off after exactly one hour and was left with a full lovely tan. I got a lot of compliments from my friends and they said it looked great. It made me feel so much more confident at the pool. Plus, it’s super blendable if you miss a spot—love that!\n"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-19",
+		"title": "I will be buying this one forever!! 🌟",
+		"user": "Erica Parsons",
+		"score": "5",
+		"content": "This mousse is AMAZING! It was super easy to apply, gave me a beautiful deep tan in no time, and left my skin feeling soft and smooth. I got so many compliments all week—this is the only tanning mousse I’ll ever use!\n\n"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-17",
+		"title": "Natural glow & nourished skin",
+		"user": "Sam Elliston",
+		"score": "4",
+		"content": "I love how moisturising this mousse is! It goes on evenly, dries down beautifully, and smells amazing. The subtle color is perfect for a natural-looking tan without feeling sticky."
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-16",
+		"title": "TIME SAVING + GAME CHANGER",
+		"user": "Olivia Sottosanti",
+		"score": "4",
+		"content": "I love that I can get a gorgeous tan without leaving it on overnight! I have porcelain to light skin. The express formula fits perfectly into my busy day, and it gave me a confidence boost with a natural-looking glow. I was really happy that I can now use something that only takes a couple of hours of my routine. This product makes me feel great and confident! "
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-14",
+		"title": "Total game changer!",
+		"user": "Jennie Henderson",
+		"score": "4",
+		"content": "I absolutely love this mousse! The color is gorgeous and it dried fairly quickly. I’ll definitely be adding it to my routine—it’s that good!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-2-14",
+		"title": "Instant Glow & Gorgeous Scent 💖",
+		"user": "Heather Jones",
+		"score": "4",
+		"content": "The smell is amazing and the instant color was so pretty! After just a couple of hours, I had a beautiful, dark tan that I was super excited about."
 	  }
 ];
 
