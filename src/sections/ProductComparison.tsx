@@ -148,32 +148,36 @@ const ProductComparison = (props: any) => {
                                     ))}
                                 </Carousel.Inner>
                                 <Carousel.Navigation>
-                                    <PrevButton
-										onClick={() => emblaApi2.scrollPrev() }
-										className="lg:w-auto lg:h-full hidden lg:flex"
-									>
-										<span className="absolute z-[-1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
-											<ChevronPrev className="svg--current-color w-[1rem] h-[1rem]" />
-										</span>
-									</PrevButton>
-									<NextButton
-										onClick={() => emblaApi2.scrollNext() }
-										className="lg:w-auto lg:h-full hidden lg:flex"
-									>
-										<span className="absolute z-[-1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
-											<ChevronNext className="svg--current-color w-[1rem] h-[1rem]" />
-										</span>
-									</NextButton>
-                                    <ol className="carousel__dots justify-center static mt-[.5rem] mb-0">
-                                        {INIT_FINALS.slice(1).map((_, index) => (
-                                            <li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-60'} !h-[1rem] !w-[1rem]`}>
-                                                <DotButton
-                                                    onClick={() => onClick3(index)}
-                                                    className="carousel__dot"
-                                                />
-                                            </li>
-                                        ))}
-                                    </ol>
+                                    {INIT_FINALS.slice(1).length > 1 && (
+                                        <>
+                                            <PrevButton
+                                                onClick={() => emblaApi2.scrollPrev() }
+                                                className="lg:w-auto lg:h-full hidden lg:flex"
+                                            >
+                                                <span className="absolute z-[-1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                    <ChevronPrev className="svg--current-color w-[1rem] h-[1rem]" />
+                                                </span>
+                                            </PrevButton>
+                                            <NextButton
+                                                onClick={() => emblaApi2.scrollNext() }
+                                                className="lg:w-auto lg:h-full hidden lg:flex"
+                                            >
+                                                <span className="absolute z-[-1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                    <ChevronNext className="svg--current-color w-[1rem] h-[1rem]" />
+                                                </span>
+                                            </NextButton>
+                                            <ol className="carousel__dots justify-center static mt-[.5rem] mb-0">
+                                                {INIT_FINALS.slice(1).map((_, index) => (
+                                                    <li key={index} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-60'} !h-[1rem] !w-[1rem]`}>
+                                                        <DotButton
+                                                            onClick={() => onClick3(index)}
+                                                            className="carousel__dot"
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ol>
+                                        </>
+                                    )}
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
                         </div>
