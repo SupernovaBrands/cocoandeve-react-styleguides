@@ -95,7 +95,7 @@ const ProductComparison = (props: any) => {
     
     return INIT_FINALS.length > 0 && (
         <>
-            <div className="w-full justify-center px-0 lg:pt-1 lg:mb-5 lg:pb-[1.5rem]">
+            <div className="w-full justify-center px-0 pt-5 lg:pt-1 lg:mb-5 lg:pb-[1.5rem]">
                 <p className="text-2xl font-bold text-center mb-2 lg:mb-3">Haircare Range</p>
                 {/* mobile */}
                 <div className={`lg:hidden mb-[5rem] mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
