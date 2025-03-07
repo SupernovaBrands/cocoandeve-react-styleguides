@@ -36,10 +36,11 @@ type InnerProp = {
 	emblaRef: any
 	children: React.ReactNode
 	className?: string
+	innerClass?: string
 }
 const Inner: React.FC<InnerProp> = (props) => {
 	return (
-		<div className="overflow-hidden" ref={props.emblaRef}>
+		<div className={`overflow-hidden ${props.innerClass ?? ''}`} ref={props.emblaRef}>
 			<div className={`flex carousel__container ${props.className}`}>
 				{props.children}
 			</div>
