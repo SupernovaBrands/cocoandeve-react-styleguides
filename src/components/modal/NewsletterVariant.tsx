@@ -220,7 +220,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                             <span className='block text-center text-sm mb-25 lg:text-base'>UNLOCK</span>
                             <h2 className={` ${nbp_heading_color || 'text-body'} text-xl lg:text-2xl text-center mb-0 leading-[1.25!important]`}>{nbp_heading}</h2>
                             <p className={` ${nbp_heading_2_color || 'text-body'} text-lg lg:text-xl text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
-                            <p className={`font-size-sm mb-g lg:mb-[1.5rem] leading-[1.25!important] text-center text-gray-600`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
+                            <p className={`font-size-sm mb-2 lg:mb-[1.5rem] leading-[1.25!important] text-center text-gray-600`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
                             <div className="relative flex items-stretch w-full mb-0 flex-wrap mb-25">
                                 <input ref={emailRef} value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-white py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-[.5rem] border border-gray-500" type="email" placeholder={nbp_email_ph || 'Enter email here'} aria-label="email" />
                             </div>
@@ -233,7 +233,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                             {!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
                             <p className="text-xs text-gray-600 mt-g text-center mt-1 mb-2 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] font-bold underline ').replace('text-primary', 'text-gray-600').replace('font-normal', 'font-bold').replace('no-underline', 'underline')}} />
                             <button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base mb-1">Yes please</button>
-                            <button type="button" onClick={handleClose} className="relative hover:bg-primary-dark w-full border border-primary rounded bg-white py-[13px] px-[54px] text-primary font-bold align-middle block text-base">I’ll pass</button>
+                            <button type="button" onClick={handleClose} className="relative hover:bg-primary-dark w-full border border-primary rounded bg-white py-[13px] px-[54px] text-primary font-bold align-middle block text-base hover:bg-white">I’ll pass</button>
                         </form>
                     )}
                     {formCompleted && (
