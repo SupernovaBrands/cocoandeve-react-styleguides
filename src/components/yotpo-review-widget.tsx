@@ -984,7 +984,7 @@ const YotpoReviewWidget = (props:any) => {
 												<div className="flex flex-nowrap w-auto overflow-auto pr-g">
 													{getMediaData(review).map((media:any, index:any) => (
 														<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review, index) }}>
-															<img className="object-cover size-[75px]" src={media.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
+															<img className="object-cover size-[75px]" src={media.thumb_url?.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
 															{media.video_url && (
 																<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 															)}
