@@ -998,6 +998,54 @@ const trialParticipants = [
 		"user": "Heather Jones",
 		"score": "4",
 		"content": "The smell is amazing and the instant color was so pretty! After just a couple of hours, I had a beautiful, dark tan that I was super excited about."
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-3",
+		"title": "Finally, a gradual tanner that’s ticks ALL my boxes 💯",
+		"user": "Hana Beyer",
+		"score": "5",
+		"content": "This is genuinely the best gradual tanning lotion I have ever used! I absolutely love the smell, texture, and how the product size is perfect for full-body use. It makes my skin feel super soft while delivering a natural, streak-free glow—no orange, no splotches, just perfection!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-1",
+		"title": "SUPER easy to apply & FAST results",
+		"user": "Nicky Adams",
+		"score": "5",
+		"content": "I was pleasantly surprised by how quickly this product developed into a lovely deep tan. I have used gradual tanners before that take days to show results, but this one builds beautifully in just a few applications. It’s super easy to apply and leaves my skin feeling silky smooth!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-2-25",
+		"title": "I'm melanin deficient and this tan works wonders!!!!!",
+		"user": "Colleen Sylvester",
+		"score": "5",
+		"content": "As someone who’s melanin deficient, I couldn’t believe how dark my arms and legs got! This is the best-smelling, buildable self-tanner—streak-free, easy to apply and absorbs quickly with no stickiness."
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-2-21",
+		"title": "Light, fresh scent—not your typical tanner!",
+		"user": "Sarah Berthelot",
+		"score": "4",
+		"content": "I love the texture of this lotion—the light, clean scent, the smooth application, and how quickly it absorbs! The consistency is perfect, not too greasy, and it doesn’t have the typical “tanning lotion” smell. A great option for a natural, sun-kissed glow!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-2-21",
+		"title": "I like that it actually works without that unpleasant \"tan smell.\"",
+		"user": "Jordan",
+		"score": "4",
+		"content": "The Gradual Tanning Lotion is a great addition to my tanning routine!  Perfect for when I just need to get a little color and glow without the hassle of waiting and showering. No more discolored sheets and no more weird \"tan smell\". LOVE IT!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-2-20",
+		"title": "Better than leading gradual tanning lotions!",
+		"user": "Sarah McClenathan",
+		"score": "4",
+		"content": "I enjoyed using this tanning lotion because the result was noticeable after one use! The smell was light and not overpowering. I love how it gives a deeper tan than other daily tanning lotions I've tried. Will definitely be adding it to my next order!"
 	  }
 ];
 
