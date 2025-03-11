@@ -19,8 +19,8 @@ const options2: EmblaOptionsType = {
 };
 
 const ImageFigure = (props: any) => (
-    <figure className={`bg-pink-light text-center rounded lg:h-full lg:pt-4 ${props.className ?? ''}`}>
-        <figcaption className="font-bold px-g pt-g min-h-[3.125rem] lg:min-h-3 lg:flex lg:items-center lg:justify-center">{props.title}</figcaption>
+    <figure className={`bg-pink-light text-center rounded pt-g lg:h-full lg:pt-4 ${props.className ?? ''}`}>
+        <figcaption className="font-bold px-g min-h-[3.125rem] lg:min-h-3 lg:flex lg:items-center lg:justify-center">{props.title}</figcaption>
         <picture className="block px-[2.031rem] lg:mt-4 lg:px-0">
             <source srcSet={props.srcSet} media="(min-width: 992px)" />
             <img src={props.src} className="bg-pink-light w-full" alt="" loading="lazy" />
@@ -43,10 +43,10 @@ const ComparisonTable = (props: any) => {
                     <>
                         <div className="flex lg:flex-wrap lg:-mx-g lg:px-g">
                             <div className="text-sm w-[6rem] basis-[6rem] font-bold grow-0 shrink-0 lg:text-base lg:w-1/3 lg:basis-1/3 lg:text-center lg:order-2">{data.title}</div>
-                            <div className="text-sm px-g lg:px-0 lg:w-1/3 lg:text-base lg:basis-1/3 lg:text-center lg:order-1">{data.value}</div>
+                            <div className="text-[.875rem] leading-[1.125rem] px-g lg:px-0 lg:w-1/3 lg:text-base lg:basis-1/3 lg:text-center lg:order-1">{data.value}</div>
                             <div className="lg:w-1/3 lg:basis-1/3 lg:text-center hidden lg:block lg:order-3">{compare2[i].value}</div>
                         </div>
-                        {i + 1 !== row.length && <hr className="border-gray-500 block my-g" />}
+                        {i + 1 !== row.length && <hr className="border-gray-500 block my-g lg:my-[.906rem]" />}
                     </>
                 );
             })}
