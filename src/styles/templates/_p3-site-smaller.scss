@@ -466,10 +466,6 @@
     
     .product-card {
 
-        img {
-            // @apply lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!max-h-full lg:!left-0 lg:!right-0;
-        }
-
         .product-title__text {
             @apply mx-0 lg:mb-25 mb-25 lg:my-0 min-h-[54px] lg:min-h-[auto];
         }

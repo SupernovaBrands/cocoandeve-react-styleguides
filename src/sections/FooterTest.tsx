@@ -59,6 +59,27 @@ const FooterTest = (props) => {
         // console.log(e.target.value);
         setEmail(e.target.value);
     }
+    const mobileLabel = (str) => {
+        let label = '';
+        const lower = str.toLowerCase();
+        console.log('lower', lower);
+        if (lower === 'track my order') {
+            label = 'My Order';
+        } else if (lower === 'help center') {
+            label = 'Help';
+        } else if (lower === 'refund policy') {
+            label = 'Refund';
+        } else if (lower === 'privacy policy') {
+            label = 'Privacy';
+        } else if (lower === 'terms & conditions') {
+            label = 'Terms';
+        } else if (lower === 'accessibility statement') {
+            label = 'Accessibility';
+        } else {
+            return str;
+        }
+        return label;
+    };
     return (
         <footer className="pt-4 pb-[24px] lg:pb-[32px] mb-0 footer">
             <div className="container lg:mb-0 px-g flex flex-wrap">
@@ -134,6 +155,11 @@ const FooterTest = (props) => {
                     </div>
                 </div>
                 <ul className="flex flex-wrap text-sm lg:hidden">
+                    {helpMenu?.map((item) => (<li className="mb-2" key={`help-${item.title}`}>
+                        <a href={item.handle} className='text-body text-sm mr-2'>{mobileLabel(item.title)}</a>
+                    </li>))}
+                </ul>
+                {/* <ul className="flex flex-wrap text-sm lg:hidden">
                     <li className="mb-2"><a href="/pages/track-my-order" className="text-body text-sm mr-2">My Order</a></li>
                     <li className="mb-2"><a href="https://support.cocoandeve.com/hc/en-us" className="text-body text-sm mr-2">Help</a></li>
                     <li className="mb-2"><a href="/pages/delivery-returns" className="text-body text-sm mr-2">Shipping</a></li>
@@ -141,7 +167,7 @@ const FooterTest = (props) => {
                     <li className="mb-2"><a href="/pages/privacy-policy" className="text-body text-sm mr-2">Privacy</a></li>
                     <li className="mb-2"><a href="/pages/terms-and-conditions" className="text-body text-sm mr-2">Terms</a></li>
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
-                </ul>
+                </ul> */}
                 <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
                 <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© {(new Date().getFullYear())} Coco&amp;Eve</p>
             </div>
