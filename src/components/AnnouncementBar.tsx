@@ -177,7 +177,7 @@ const AnnouncementBar = (props: any) => {
 						</div>
 					</div>
 				</div>
-			) : (
+			) : text !== '' && text2 !== '' && text3 !== '' && (
 				<div className={`${isStickyEnabled ? '' : scrolled ? 'hidden' : ''} announcement-bar ${bgColor} ${isScrollEnabled ? 'hidden': ''} w-full px-[0] py-[0.59375em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
