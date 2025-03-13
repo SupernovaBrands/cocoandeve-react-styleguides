@@ -175,9 +175,24 @@ const Sweepstakes = (props) => {
 		backgroundPosition: 'center',
 	};
 
+	const bgValue = `
+        .sweepstakes__cover {
+            background-image: url(${content.sweepstakes_img.url});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        @media (min-width: 992px) {
+            .sweepstakes__cover{
+                background-image: url(${content.sweepstakes_lg.url});
+            }
+        }
+    `;
+
     return (
         <>
-            <section className={`sweepstakes ${content?.bg_color ? content?.bg_color : 'bg-primary-light'}`} style={isDesktop ? backgroundStyleDesktop : backgroundStyle}>
+			<style>{bgValue}</style>
+            <section className={`sweepstakes sweepstakes__cover ${content?.bg_color ? content?.bg_color : 'bg-primary-light'}`}>
                 <div className="container px-0">
                     <div className="flex flex-wrap m-0 items-center place-content-end">
                         <div className="sweepstakes__content px-g lg:w-5/12 lg:order-1 lg:my-4">

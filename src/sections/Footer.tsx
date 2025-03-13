@@ -3,32 +3,29 @@ import FacebookSquare from '~/images/icons/facebook-square.svg';
 import PinterestSquare from '~/images/icons/pinterest-square.svg';
 import Youtube from '~/images/icons/youtube.svg';
 import Tiktok from '~/images/icons/tiktok.svg';
-import PalmTree from '~/images/icons/palm-tree.svg';
+// import PalmTree from '~/images/icons/palm-tree.svg';
 import { useEffect, useState } from 'react';
+import { encryptParam, getCookie } from "~/modules/utils";
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
-import Link from 'next/link';
 
-import { encryptParam, getCookie } from "~/modules/utils";
-
-const Footer = (props: any) => {
-    const { aboutMenu, shopMenu, helpMenu, store } = props;
+const Footer = (props) => {
+    // console.log('footer test prop', props);
+    const { store, aboutMenu, helpMenu, shopMenu } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const currentYear = new Date().getFullYear();
-
     const onSubmit = (evt) => {
-		evt.preventDefault();
+        evt.preventDefault();
         // console.log('email', email);
-		const ajaxRequest = new XMLHttpRequest();
-		ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
-		ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		const date = new Date();
-		const tse = date.getTime();
-		const content = `{email:'${email}',time:${tse}}`;
-		const signature = encryptParam(content);
-		ajaxRequest.send(`signature=${signature}&email=${email}&country=${getCookie('country_code')}&store=${store}&brand=cocoandeve&reg_source=footer`);
-		setSubmitted(true);
+        const ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
+        ajaxRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        const date = new Date();
+        const tse = date.getTime();
+        const content = `{email:'${email}',time:${tse}}`;
+        const signature = encryptParam(content);
+        ajaxRequest.send(`signature=${signature}&email=${email}&country=${getCookie('country_code')}&store=${store}&brand=cocoandeve&reg_source=footer`);
+        setSubmitted(true);
         try {
             // @ts-ignore
             if (typeof globalThis.window.ttq) {
@@ -45,136 +42,133 @@ const Footer = (props: any) => {
         } catch(e){
             console.log(e);
         }
-
+    
         try {
-			// @ts-ignore
-			window.wtba = window.wtba || [];
-			// @ts-ignore
-			window.wtba.push({
-				"type": "identify",
-				"email": email
-			});
-		} catch (e) {
-			console.log('error wtba push');
-		}
-	};
-
+            // @ts-ignore
+            window.wtba = window.wtba || [];
+            // @ts-ignore
+            window.wtba.push({
+                "type": "identify",
+                "email": email
+            });
+        } catch (e) {
+            console.log('error wtba push');
+        }
+    };
     const handleEmail = (e) => {
         // console.log(e.target.value);
         setEmail(e.target.value);
     }
-
-    useEffect(() => {
-        fetch('/api/account/auth').then((res) => res.json()).then((data) => {
-            if (data.isLoggedIn) setEmail(data.email);
-        });
-    }, []);
-
-    const capitalize = (str, lower = false) =>
-        (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
-    ;
-
+    const mobileLabel = (str) => {
+        let label = '';
+        const lower = str.toLowerCase();
+        if (lower === 'track my order') {
+            label = 'My Order';
+        } else if (lower === 'help center') {
+            label = 'Help';
+        } else if (lower === 'refund policy') {
+            label = 'Refund';
+        } else if (lower === 'privacy policy') {
+            label = 'Privacy';
+        } else if (lower === 'terms & conditions') {
+            label = 'Terms';
+        } else if (lower === 'accessibility statement') {
+            label = 'Accessibility';
+        } else {
+            return str;
+        }
+        return label;
+    };
     return (
-        <footer className="pt-4 pb-1">
-            <div className="container mb-4 lg:mb-3 px-g">
-                <div className='lg:pb-3 grid grid-cols-[1fr] grid-rows-[auto] [grid-template-areas:"newsletter-heading"_"newsletter-form"] lg:grid-cols-[1fr_1fr] lg:[grid-template-areas:"newsletter-heading_newsletter-form"]'>
-                    <div className="[grid-area:newsletter-heading]">
-                        <h5 className="h1 mb-1 text-xl text-2xl">Newsletter</h5>
-                        <p className='mb-1'>Receive exclusive offers, promotions and beauty tips via email.</p>
-                    </div>
-                    <div className="[grid-area:newsletter-form] flex flex-wrap">
-                        <Form classes="lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email}  />
-                        <p className="text-base lg:text-sm mt-1 lg:mt-0 mb-1 lg:mb-1 lg:order-0 text-gray-600">Please read our <a href="/pages/privacy-policy" className="text-black text-base lg:text-sm underline">Privacy Policy</a> for more information about how we use your data.</p>
-                    </div>
+        <footer className="pt-4 pb-[24px] lg:pb-[32px] mb-0 footer">
+            <div className="container lg:mb-0 px-g flex flex-wrap">
+                <div className="w-full lg:w-1/2 px-0 lg:pl-0 lg:pr-4">
+                    <h5 className="font-bold mb-1 text-xl lg:text-2xl text-body">Newsletter</h5>
+                    <p className="mb-[1rem] lg:mb-2 text-body">Receive exclusive offers, promotions and beauty tips via email.</p>
+                    <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} />
+                    <p className="footer__newsletter-tos text-sm mt-1 mb-[3.2142857142857144em] lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-5 lg:mt-1 lg:mb-3">Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
                 </div>
-            </div>
-            <div className="container mt-4 px-g">
-                <div className='grid grid-cols-[1fr_1fr] grid-rows-[auto_auto_auto] [grid-template-areas:"nav-shop_nav-about"_"nav-help_nav-currency"] lg:grid-cols-[1.5fr_1.5fr_2fr_1.5fr_1.5fr_1.5fr] lg:grid-rows-[auto] lg:[grid-template-areas:"nav-shop_nav-about_nav-help_nav-banner_nav-follow_nav-currency"]'>
-                    <div className="[grid-area:nav-shop] mb-g lg:mb-0">
-                        <h5 className="mb-1 text-xl lg:text-2xl font-bold">Shop</h5>
-                        <ul className="list-unstyled">
-                            {shopMenu?.map((item) => (<li key={`shop-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                <div className="w-full lg:w-1/2 px-0 lg:pl-g">
+                    <div className="flex flex-wrap w-full lg:-mx-g">
+                        <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
+                            <li className="mb-1"><p className="text-sm text-body font-bold">Shop</p></li>
+                            {shopMenu && shopMenu.map((link) => {
+                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            })}
+                            {/* <li><a href="#" className="text-sm text-body">Hair</a></li>
+                            <li><a href="#" className="text-sm text-body">Tan & SPF</a></li>
+                            <li><a href="#" className="text-sm text-body">Skin</a></li>
+                            <li><a href="#" className="text-sm text-body">Body</a></li>
+                            <li><a href="#" className="text-sm text-body">Value Sets</a></li> */}
                         </ul>
-                    </div>
-                    <div className="[grid-area:nav-about] mb-g lg:mb-0">
-                        <h5 className="mb-1 text-xl lg:text-2xl font-bold">About Us</h5>
-                        <ul className="list-unstyled">
-                            {aboutMenu?.map((item) => (<li key={`about-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                        <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
+                            <li className="mb-1"><p className="text-sm text-body font-bold">About Us</p></li>
+                            {aboutMenu && aboutMenu.map((link) => {
+                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            })}
+                            {/* <li><a href="#" className="text-sm text-body">Our Story</a></li>
+                            <li><a href="#" className="text-sm text-body">Sustainability</a></li>
+                            <li><a href="#" className="text-sm text-body">Stockist</a></li>
+                            <li><a href="#" className="text-sm text-body">Affiliates</a></li>
+                            <li><a href="#" className="text-sm text-body">Blog</a></li>
+                            <li><a href="#" className="text-sm text-body">Careers</a></li>
+                            <li><a href="#" className="text-sm text-body">Rewards Program</a></li> */}
                         </ul>
-                    </div>
-                    <div className="[grid-area:nav-help] mt-3 lg:mt-0">
-                        <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Help</h5>
-                        <ul className="list-unstyled mb-g">
-                            {helpMenu?.map((item) => (<li key={`help-${item.title}`}><a href={item.handle} className='text-body'>{capitalize(item.title)}</a></li>))}
+                        <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
+                            <li className="mb-1"><p className="text-sm text-body font-bold">Help</p></li>
+                            {helpMenu && helpMenu.map((link) => {
+                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            })}
+                            {/* <li><a href="#" className="text-sm text-body">Track My Order</a></li>
+                            <li><a href="#" className="text-sm text-body">Help Center</a></li>
+                            <li><a href="#" className="text-sm text-body">Shipping</a></li>
+                            <li><a href="#" className="text-sm text-body">Refund Policy</a></li>
+                            <li><a href="#" className="text-sm text-body">Terms & Conditions</a></li>
+                            <li><a href="#" className="text-sm text-body">Privacy Policy</a></li>
+                            <li><a href="#" className="text-sm text-body">Accessibility Statement</a></li> */}
                         </ul>
-                    </div>
-                    <div className="[grid-area:nav-follow] hidden lg:block text-left lg:text-right">
-                        <div className="inline-block lg:text-left">
-                            <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank" aria-label="Instagram">
-                                <Instagram className="h-[1.25em] hover:fill-primary-darken" />
-                            </a>
-                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
-                                <FacebookSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
-                            </a>
-                            <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
-                                <PinterestSquare className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
-                                <Youtube className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
-                            </a>
-                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank" aria-label="Tiktok">
-                                <Tiktok className="h-[1.25em] lg:ml-[4px] hover:fill-primary-darken" />
-                            </a>
-                        </div>
-                    </div>
-                    <div className="[grid-area:nav-currency] mb-2 lg:my-0 lg:text-right mt-3 lg:mt-0">
-                        <div className='[grid-area:nav-follow] mt-3 mb-2 lg:my-0 hidden inline-block text-left'>
-                            <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
-                            <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1 " target="_blank" aria-label="Instagram">
-                                <Instagram className="h-[1.25em]" />
-                            </a>
-                            <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
-                                <FacebookSquare className="h-[1.25em]" />
-                            </a>
-                            <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
-                                <PinterestSquare className="h-[1.25em]" />
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
-                                <Youtube className="h-[1.25em]" />
-                            </a>
-                            <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex pe-1" target="_blank" aria-label="Tiktok">
-                                <Tiktok className="h-[1.25em]" />
-                            </a>
-                        </div>
-                        <div className='[grid-area:nav-currency] lg:my-0 text-left inline-block mb-2'>
-                            <div className='mb-2 lg:my-0 lg:hidden text-left'>
-                                <h5 className=" mb-1 text-xl lg:text-2xl font-bold">Follow Us</h5>
+                        <div className="footer__socials-currency w-full lg:w-auto flex lg:flex-1 lg:basis-auto inline lg:flex-col mb-2">
+                            <div className="w-1/2 lg:w-full lg:mb-3">
+                                <p className="text-sm font-bold mb-1">Follow Us</p>
                                 <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank" aria-label="Instagram">
                                     <Instagram className="h-[1em]" />
                                 </a>
                                 <a href="https://www.facebook.com/cocoandeve" className="inline-flex pe-1" target="_blank" aria-label="Facebook">
-                                    <FacebookSquare className="ml-[4px] h-[1em]" />
+                                    <FacebookSquare className="h-[1em]" />
                                 </a>
-                                <a href="https://www.pinterest.com/cocoeve0497/_shop/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
-                                    <PinterestSquare className="ml-[4px] h-[1em]" />
+                                <a href="https://www.pinterest.com/coco_and_eve/" className="inline-flex pe-1" target="_blank" aria-label="Pinterest">
+                                    <PinterestSquare className="h-[1em]" />
                                 </a>
                                 <a href="https://www.youtube.com/channel/UCVd0r8NG3Q5E9DMppEYBabA" className="inline-flex pe-1" target="_blank" aria-label="Youtube">
-                                    <Youtube className="ml-[4px] h-[1em]" />
+                                    <Youtube className="h-[1em]" />
                                 </a>
                                 <a href="https://www.tiktok.com/@coco_and_eve" className="inline-flex" target="_blank" aria-label="Tiktok">
-                                    <Tiktok className="ml-[4px] h-[1em]" />
+                                    <Tiktok className="h-[1em]" />
                                 </a>
                             </div>
-                            <div className='d-block'>
-                                <h5 className="mb-1 text-xl lg:text-2xl font-bold">Currency</h5>
+                            <div className="w-1/2 lg:w-full">
+                                <p className="text-sm font-bold mb-1">Currency</p>
                                 <DropdownStore direction='dropup' store={store} />
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr className="border-body mb-1 mt-2 lg:mt-3 lg:mb-1 lg:opacity-20" />
-                <p className="flex justify-center items-baseline mt-g lg:mt-3 mb-g lg:mb-[16px] lg:text-base text-sm ">© {currentYear} Coco&amp;Eve</p>
+                <ul className="flex flex-wrap text-sm lg:hidden">
+                    {helpMenu?.map((item) => (<li className="mb-2" key={`help-${item.title}`}>
+                        <a href={item.handle} className='text-body text-sm mr-2'>{mobileLabel(item.title)}</a>
+                    </li>))}
+                </ul>
+                {/* <ul className="flex flex-wrap text-sm lg:hidden">
+                    <li className="mb-2"><a href="/pages/track-my-order" className="text-body text-sm mr-2">My Order</a></li>
+                    <li className="mb-2"><a href="https://support.cocoandeve.com/hc/en-us" className="text-body text-sm mr-2">Help</a></li>
+                    <li className="mb-2"><a href="/pages/delivery-returns" className="text-body text-sm mr-2">Shipping</a></li>
+                    <li className="mb-2"><a href="/pages/refund-policy" className="text-body text-sm mr-2">Refund</a></li>
+                    <li className="mb-2"><a href="/pages/privacy-policy" className="text-body text-sm mr-2">Privacy</a></li>
+                    <li className="mb-2"><a href="/pages/terms-and-conditions" className="text-body text-sm mr-2">Terms</a></li>
+                    <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
+                </ul> */}
+                <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
+                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© {(new Date().getFullYear())} Coco&amp;Eve</p>
             </div>
         </footer>
     );

@@ -25,8 +25,7 @@ const horizontalVariant = {
 }
 
 const Modal = (props: any) => {
-	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, contentClass } = props;
-
+	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, contentClass, slideIn, modalComp } = props;
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = 'hidden';
@@ -39,13 +38,20 @@ const Modal = (props: any) => {
 		};
 	}, [isOpen]);
 
+	if (!slideIn && (modalComp === 'newsletter' || modalComp === 'sweepstakes')) {
+		containerVariant.initial = { top: '0', transition: { type: 'spring' } };
+		containerVariant.exit = { top: '0' };
+		horizontalVariant.initial = { left: 'auto', right: '0', transition: { type: 'spring' } };
+		horizontalVariant.exit = { left: 'auto', right: '0' }
+	}
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
 				<Overlay
+					exit={'exit'}
 					initial={'initial'}
 					animate={'isOpen'}
-					exit={'exit'}
 					variants={modalVariant}
 					onClick={handleClose}
 					className={`modal-backdrop top-0 left-0 w-[100vw] h-[100vh] z-[1040] ${backdropClasses ?? ''}`}>
