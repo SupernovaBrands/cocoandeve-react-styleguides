@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
-    // console.log('set saving', saving);
+    const { slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
     
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
@@ -47,7 +47,7 @@ const BundleVariantCard = (props) => {
         if (selectedVar) setCurrentVariant(selectedVar.node);
     };
 
-    const bundleImg = productStrapi?.images[productStrapi?.images.length - 1];
+    const bundleImg = slides[slides.length - 1];
     const option2 = productShopify?.options[1]?.values || [];
 
     const urlSet = productStrapi?.bundle_handle || null;
@@ -61,12 +61,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={bundleImg.url.replace('public', '320x')} />
+                            <img className="w-full h-full object-cover" src={bundleImg.src.replace('public', '320x')} />
                         </a>
                     )}
                     
                     {!urlSet && bundleImg && (
-                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
+                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.src.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
