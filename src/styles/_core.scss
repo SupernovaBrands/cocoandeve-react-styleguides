@@ -140,12 +140,14 @@
 		}
 	}
 
-	.hide-scrollbar {
-		-ms-overflow-style: none;
-        scrollbar-width: none;
-        &::-webkit-scrollbar {
-            @apply hidden;
-        }
+	@media (max-width: 768px) {
+		.hide-scrollbar {
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				@apply hidden;
+			}
+		}
 	}
 }
 
