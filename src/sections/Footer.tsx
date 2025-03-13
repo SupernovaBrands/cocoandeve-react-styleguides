@@ -9,7 +9,7 @@ import { encryptParam, getCookie } from "~/modules/utils";
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 
-const FooterTest = (props) => {
+const Footer = (props) => {
     // console.log('footer test prop', props);
     const { store, aboutMenu, helpMenu, shopMenu } = props;
     const [email, setEmail] = useState('');
@@ -174,4 +174,4 @@ const FooterTest = (props) => {
     );
 };
 
-export default FooterTest;
+export default Footer;

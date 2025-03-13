@@ -83,11 +83,11 @@
 		}
 
 		.product-title__text {
-			@apply mb-0;
+			@apply mb-0 lg:mb-25 lg:min-h-4;
 		}
 
 		.swatch-overlay {
-			@apply left-1 right-1 lg:left-g lg:right-g;
+			@apply left-[.5rem] right-[.5rem] lg:left-g lg:right-g;
 
 			.product-variant-swatch__item {
 				@apply w-auto lg:w-1/4;

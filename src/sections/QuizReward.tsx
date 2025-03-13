@@ -1,6 +1,6 @@
 import React from 'react';
 import BeautyConfidence from '~/components/BeautyConfidence';
-import ProductCardQuizTest from '~/compounds/ProductCardQuizTest';
+import ProductCardQuiz from '~/compounds/ProductCardQuiz';
 
 const QuizRewardTest = (props: any) => {
 	const { store } = props;
@@ -8,7 +8,7 @@ const QuizRewardTest = (props: any) => {
 		<section className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-0">
 			<p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
 			<div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
-                <ProductCardQuizTest
+                <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
                     imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                     imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/public"
