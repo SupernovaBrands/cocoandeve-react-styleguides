@@ -13,7 +13,6 @@ import {
 	NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
-// import ProductCardTest from '~/compounds/ProductCardTest';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -26,7 +25,7 @@ const options: EmblaOptionsType = {
 	}
 }
 
-const ProductCarouselTest = (props: any) => {
+const ProductCarousel = (props: any) => {
 	const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -225,4 +224,4 @@ const ProductCarouselTest = (props: any) => {
 	);
 };
 
-export default ProductCarouselTest;
+export default ProductCarousel;
