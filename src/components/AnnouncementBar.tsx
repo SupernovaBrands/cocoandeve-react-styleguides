@@ -26,7 +26,7 @@ const AnnouncementBar = (props: any) => {
 		isScrollEnabled,
 		isStickyEnabled
 	} = props;
-
+	
 	const noticeTImesLabels = timerData && timerData.times_labels ? timerData.times_labels.split(':') : [];
 	const countDownDay = noticeTImesLabels[0]?.split(',')[0];
 	const countDownDays = noticeTImesLabels[0]?.split(',')[1];
@@ -177,7 +177,7 @@ const AnnouncementBar = (props: any) => {
 						</div>
 					</div>
 				</div>
-			) : text !== '' && text2 !== '' && text3 !== '' && (
+			) : text !== '' || text2 !== '' || text3 !== '' ? (
 				<div className={`${isStickyEnabled ? '' : scrolled ? 'hidden' : ''} announcement-bar ${bgColor} ${isScrollEnabled ? 'hidden': ''} w-full px-[0] py-25 lg:py-[.5em]`}>
 					<div className="container text-center font-bold">
 							<Carousel.Wrapper emblaApi={emblaApi}>
@@ -195,7 +195,7 @@ const AnnouncementBar = (props: any) => {
 							</Carousel.Wrapper>
 					</div>
 				</div>
-			)}
+			) : (<></>)}
 		</>
 	);
 }
