@@ -15,7 +15,6 @@ import ProductCard from "~/compounds/ProductCard";
 import { useState, useEffect } from 'react';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
-import ProductCardTest from '~/compounds/ProductCardTest';
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -65,7 +64,7 @@ const ProductCarousel = (props: any) => {
                 <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                     <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
                         {products.map((data: any, id: number) => (
-                            <ProductCardTest
+                            <ProductCard
                                 key={`product-${id}-${data.id}`}
                                 product={data}
                                 label={label}
