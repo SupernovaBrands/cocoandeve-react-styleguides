@@ -50,10 +50,7 @@ const BundleVariantCard = (props) => {
     const bundleImg = productStrapi?.images[productStrapi?.images.length - 1];
     const option2 = productShopify?.options[1]?.values || [];
 
-    let urlSet = null;
-    if (productStrapi?.BundleUrlHandle) {
-        urlSet = productStrapi?.BundleUrlHandle[store] || null;
-    }
+    const urlSet = productStrapi?.bundle_handle || null;
 
     return (
         <>
