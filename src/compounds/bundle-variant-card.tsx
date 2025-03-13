@@ -50,6 +50,8 @@ const BundleVariantCard = (props) => {
     const bundleImg = productStrapi?.images[productStrapi?.images.length - 1];
     const option2 = productShopify?.options[1]?.values || [];
 
+    const urlSet = productStrapi?.bundle_handle || null;
+
     return (
         <>
         <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
@@ -57,23 +59,23 @@ const BundleVariantCard = (props) => {
             <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>
             <div className="float-left">
                 <figure className="flex">
-                    {/* {urlSet && bundleImg && (
+                    {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
                             <img className="w-full h-full object-cover" src={bundleImg.url.replace('public', '320x')} />
                         </a>
-                    )} */}
+                    )}
                     
-                    {bundleImg && (
+                    {!urlSet && bundleImg && (
                         <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
-                            <p className="text-body mb-25 lg:mb-[.5rem] block font-bold">{optionValue.replace('1x ', '')}</p>
-                            {/* {urlSet && (
+                            {!urlSet && <p className="text-body mb-25 lg:mb-[.5rem] block font-bold">{optionValue.replace('1x ', '')}</p>}
+                            {urlSet && (
                                 <a className="text-body mb-25 lg:mb-[.5rem] block font-bold" href={`/products/${urlSet}`}>
                                     {optionValue.replace('1x ', '')}
                                 </a>
-                            )} */}
+                            )}
                             {variantDescriptionText && variantDescriptionText.length > 0 && (
                                 <div className="text-sm mb-25 lg:mb-0">
                                     {variantDescriptionText.map((el, i) => {
