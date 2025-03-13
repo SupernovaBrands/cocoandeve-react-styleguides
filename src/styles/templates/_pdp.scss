@@ -1,20 +1,7 @@
 .product {
-    &__tagline {
-        @apply text-sm lg:text-base mb-0;
-    }
 
     &__yotpo-stars {
         @apply mb-[1rem] lg:mb-1;
-    }
-
-    &__banner-promo {
-        @apply hidden;
-    }
-
-    &__accordion {
-        .accordion-item svg {
-            @apply h-[.75em] w-[.75em];
-        }
     }
 
     &-side-article {
@@ -24,7 +11,6 @@
     }
 
     &__title {
-        @apply text-lg mb-[1rem] lg:text-2xl lg:mb-1;
     
         &--additional{
             @apply font-normal relative text-base inline-block text-gray-600 lg:text-lg;
