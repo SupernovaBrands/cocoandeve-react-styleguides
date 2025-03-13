@@ -14,7 +14,7 @@ const Swatch: React.FC<SwatchProp> = (props) => {
 	// const shadesTan = props.shadeData ? props.shadeData.filter((s:any) => sTan.includes(s.id)) : [];
 
 	return props.hideSwatch ? <></> : (
-		<div key={props.keyName} className={`product-swatch flex mb-[1rem] lg:mb-0 ${props.className}`}>
+		<div key={props.keyName} className={`product-swatch flex mb-[1rem] lg:mb-0 overflow-x-scroll no-scrollbar ${props.className}`}>
 			{props.children}
 			{/* {props.shadeData && props.shadeData.map((s: any, index: number) => {
 				const isPod = ['antioxidant glow cream', 'refill pod', 'antioxidant glow cream + refill pod'].includes(s.id);
