@@ -85,10 +85,10 @@ const BundleVariantCard = (props) => {
                             )}
                         </div>
                         <div className="flex flex-col lg:flex-row">
-                            {option2.length > 0 && (
+                            {option2.length > 0 && !['antioxidant-glow-cream'].includes(productShopify.handle) && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
                                     <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
-                                        {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op}</option>)}
+                                        {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>
                             )}

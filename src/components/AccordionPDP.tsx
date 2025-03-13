@@ -25,8 +25,8 @@ const AccordionPDP = (props: any) => {
 				<div key={d.id} className={`accordion-item border-t border-b border-gray-500 ${index === data.length - 1 ? 'pb-3 lg:pb-0' : ''}`}>
 					<div id={`accordion-${d.id}`} className={`cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-3 md:pt-[1.875rem] ${index === 0 ?  'pb-3' : 'pb-3'}` : 'py-3 md:py-[1.875rem]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(d.id)}>
 						<strong className="text-body no-underline">{d.title}</strong>
-						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[16px] w-[16px] mb-[3px]`}/> }
-						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[16px] w-[16px] mb-[3px]`}/> }
+						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
+						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
 					</div>
 					<div className={`accordion-content ${props.openIndex === d.id ? 'accordion-content--open' : 'accordion-content--close'}`}>
 						{ d.text && <div className="pt-0 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
