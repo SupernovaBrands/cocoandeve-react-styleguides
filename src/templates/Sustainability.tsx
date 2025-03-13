@@ -138,10 +138,6 @@ const Sustainability = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
-    useEffect(() => {
-        document.body.classList.add('p3-site-smaller');
-    }, [])
-
     const inlineCss = `
         .sustainability--intro p {
             margin-bottom: 20px;

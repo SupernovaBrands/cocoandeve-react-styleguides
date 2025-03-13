@@ -35,7 +35,6 @@ const Stockist = (props: any) => {
 
 	useEffect(() => {
 		setStores(content.stockist);
-        document.body.classList.add('p3-site-smaller');
 	}, []);
 
     useEffect(() => {
