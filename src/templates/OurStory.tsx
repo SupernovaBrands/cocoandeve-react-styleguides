@@ -55,10 +55,6 @@ const OurStoryTemplate = (props: any) => {
 	const reorderLogos = [...restLogos,firstLogo];
 	const logos = [...reorderLogos, ...reorderLogos];
 
-	useEffect(() => {
-		document.body.classList.add('p3-site-smaller');
-	}, []);
-
 	return (
 		<>
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">

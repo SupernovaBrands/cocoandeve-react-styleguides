@@ -104,7 +104,6 @@ const Blog = (props) => {
 			setActiveFrame(activeFrame);
 			setActive(false);
 		}
-		document.body.classList.add('p3-site-smaller');
 	}, []);
 
 

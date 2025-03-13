@@ -267,7 +267,6 @@ const Article = (props) => {
             document.querySelectorAll('.article__content p img')?.forEach((img) => {
                 img.closest('p').classList.add('!px-0');
             });
-            document.body.classList.add('p3-site-smaller');
         }, 250);
 
         return () => clearTimeout(timer);
