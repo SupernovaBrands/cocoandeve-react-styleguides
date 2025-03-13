@@ -52,7 +52,7 @@ const BundleVariantCard = (props) => {
 
     const urlSet = productStrapi?.bundle_handle || null;
 
-    return (
+    return currentVariant.availableForSale && (
         <>
         <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
@@ -85,7 +85,7 @@ const BundleVariantCard = (props) => {
                             )}
                         </div>
                         <div className="flex flex-col lg:flex-row">
-                            {option2.length > 0 && !['antioxidant-glow-cream'].includes(productShopify.handle) && (
+                            {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && !['antioxidant-glow-cream'].includes(productShopify.handle) && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
                                     <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
