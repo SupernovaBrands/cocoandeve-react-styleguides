@@ -31,7 +31,7 @@ export const CartItem = (props:CartItemProps) => {
 		useShopifyVariantInfo, store } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
-	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
+	let showSwatches = variants && variants.length > 1 && !item.isFreeItem;
 	const isMultiOptions = item.swatches.length > 1;
 
 	const [hideItem, setHideItem] = useState(false);
@@ -194,6 +194,10 @@ export const CartItem = (props:CartItemProps) => {
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
 	}, [selectedSwatch]);
+
+	if (['ca'].includes(store) && item.merchandise.product.handle === 'super-nourishing-coconut-fig-hair-masque') {
+		showSwatches = false;
+	}
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
