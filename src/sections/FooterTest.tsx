@@ -135,7 +135,7 @@ const FooterTest = (props) => {
                 </div>
                 <ul className="flex flex-wrap text-sm lg:hidden">
                     <li className="mb-2"><a href="/pages/track-my-order" className="text-body text-sm mr-2">My Order</a></li>
-                    <li className="mb-2"><a href="https://support.cocoandeve.com/hc/en-us" className="text-body text-sm mr-2">Help</a></li>
+                    <li className="mb-2"><a href="https://support.cocoandeve.com/en-GB" className="text-body text-sm mr-2">Help</a></li>
                     <li className="mb-2"><a href="/pages/delivery-returns" className="text-body text-sm mr-2">Shipping</a></li>
                     <li className="mb-2"><a href="/pages/refund-policy" className="text-body text-sm mr-2">Refund</a></li>
                     <li className="mb-2"><a href="/pages/privacy-policy" className="text-body text-sm mr-2">Privacy</a></li>

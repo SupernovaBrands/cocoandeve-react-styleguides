@@ -38,7 +38,7 @@ const Page = (props: any) => {
                         <h2 className="md:mb-1 mb-3">
                             Didn’t find your answer?
                         </h2>
-                        <p>No worries, you can email us <a href="https://support.cocoandeve.com/hc/en-us/requests/new" aria-label="Contact us here"><strong>here</strong></a>.</p>
+                        <p>No worries, you can email us 1 <a href="https://support.cocoandeve.com/en-GB" aria-label="Contact us here"><strong>here</strong></a>.</p>
                     </div>
                 </div>
             </div>

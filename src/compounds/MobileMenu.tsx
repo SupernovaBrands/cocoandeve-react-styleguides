@@ -205,7 +205,7 @@ const MobileMenu = (props: any) => {
 					</ul>
 				</li>
 				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g" role="presentation">
-					<a href="https://support.cocoandeve.com/hc/en-us" className="px-hg w-1/2 mb-1 text-body">Help</a>
+					<a href="https://support.cocoandeve.com/en-GB" className="px-hg w-1/2 mb-1 text-body">Help</a>
 					<a href="/pages/track-my-order" className="px-hg w-1/2 mb-1 text-body">Track my order</a>
 					<a href="/pages/reviews" className="px-hg w-1/2 mb-1 text-body">Result IRL</a>
 					<a href="/blogs/news" className="px-hg w-1/2 mb-1 text-body">Blog</a>
