@@ -149,6 +149,13 @@
 			}
 		}
 	}
+
+	@screen lg {
+		.hide-scrollbar {
+			-ms-overflow-style: thin;
+			scrollbar-width: thin;
+		}
+	}
 }
 
 @keyframes gradient-shimmer {

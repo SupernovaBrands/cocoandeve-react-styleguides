@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    const { swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
     // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
     
@@ -47,12 +47,14 @@ const BundleVariantCard = (props) => {
         if (selectedVar) setCurrentVariant(selectedVar.node);
     };
 
-    const bundleImg = slides[slides.length - 1];
-    const option2 = productShopify?.options[1]?.values || [];
+    const option2 = productShopify?.options.find(
+        (op) => currentVariant.selectedOptions.find((c) => c.name === op.name && swatchType.includes(c.name.toLowerCase()))
+    )?.values || [];
 
+    const bundleImg = slides[slides.length - 1];
     const urlSet = productStrapi?.bundle_handle || null;
 
-    return currentVariant.availableForSale && (
+    return  (
         <>
         <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
@@ -85,7 +87,7 @@ const BundleVariantCard = (props) => {
                             )}
                         </div>
                         <div className="flex flex-col lg:flex-row">
-                            {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && !['antioxidant-glow-cream'].includes(productShopify.handle) && (
+                            {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
                                     <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
