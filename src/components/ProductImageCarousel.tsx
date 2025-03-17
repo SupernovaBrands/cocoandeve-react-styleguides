@@ -112,7 +112,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							))}
 						</Carousel.Inner>
 						<Carousel.Navigation>
-							{slides.length > 7 && (	
+							{slides.length > 6 && (	
 								<>
 									<PrevButton
 										onClick={pdpImagePrev}

@@ -9,6 +9,7 @@ import CheckCircle from '~/images/icons/check-circle.svg';
 import ProgressBar from '~/components/ProgressBar';
 import { encryptParam } from "~/modules/utils";
 import BackToTop from '~/images/icons/back-to-top.svg';
+import Breadcrumb from '~/components/Breadcrumb';
 
 import {
 	validateEmail,
@@ -78,31 +79,31 @@ const ArticleNewsLetter = (props) => {
     return (
         <div className="container blog-post-grid__newsletter px-0 hidden">
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
-                <picture className="lg:w-1/3 w-full p-0">
+                <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-full rounded" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[247px] object-cover lg:h-full rounded-tl rounded-tr lg:rounded-tr-none lg:rounded-bl" />
                 </picture>
-                <div className="lg:w-2/3 w-full p-2 lg:pe-4">
-                    <h2 className="mb-1 blog-post-grid__newsletter-title">{postNewsletter.blog_ns_title}</h2>
-                    <p className="mb-[1rem]">{postNewsletter.blog_ns_desc}</p>
+                <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
+                    <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
+                    <p className="mb-g lg:!mb-[1rem] !px-0 text-body">{postNewsletter.blog_ns_desc}</p>
                     {!submitted && (
-                        <form className="w-full mb-2" onSubmit={onSubmit}>
+                        <form className="w-full mb-g lg:mb-[1rem]" onSubmit={onSubmit}>
                             <div className=" relative flex flex-wrap w-full items-stretch">
-                                <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl rounded-bl -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
+                                <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl-[2rem] rounded-bl-[2rem] -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className="py-[9px] px-[28px] relative leading-base font-bold inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-tr rounded-br" type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className="py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-full" type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                             {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
                         </form>
                     )}
                     {submitted && (
-                        <div className="blog-post-grid__newsletter--submitted form-group mb-g text-left items-center flex">
+                        <div className="blog-post-grid__newsletter--submitted form-group mb-g text-left items-center flex !px-0">
                             <CheckCircle className="svg fill-secondary" />
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-sm mb-0 text-gray-600 mt-2 mb-[0!important]">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="hover:[text-decoration-line:underline!important] text-sm [text-decoration-line:none!important]"'))}</p>
+                    <p className="text-sm text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm underline"'))}</p>
                 </div>
             </div>
         </div>
@@ -119,7 +120,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_dektop.url} className="object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="rounded object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -129,6 +130,7 @@ const ArticlPosteBanner = (props) => {
 const Article = (props) => {
     const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdpSetting } = props;
     let body = '';
+    
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
         const ariaLabel = '<a aria-describedby="articleTitleHeading" class="underline"';
         body = content.BlogContentMultiStores[region].body_content
@@ -195,36 +197,6 @@ const Article = (props) => {
     }, [content, region]);
 
     useEffect(() => {
-        const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
-        const newsletterWrapper = document.querySelector('.newsletterWrapper');
-        if (blogPostGridNewsletter && newsletterWrapper) {
-            if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
-                return;
-            }
-            newsletterWrapper.appendChild(blogPostGridNewsletter);
-            blogPostGridNewsletter.classList.remove('hidden');
-        }
-    }, [postNewsletter, bodyContent, region]);
-
-    useEffect(() => {
-        const blogPostBanner = document.querySelector('.blog-post-banner');
-        const articleNewBanners = document.querySelectorAll('.article-new-banner');
-        if (blogPostBanner && articleNewBanners.length > 0) {
-            const articleBanners = document.querySelectorAll('.article-banner');
-            articleBanners.forEach(banner => banner.classList.add('hidden'));
-            const clonedBannerExists = document.querySelector('.cloned-banner');
-            if (!clonedBannerExists) {
-                articleNewBanners.forEach(item => {
-                    const clonedBanner = blogPostBanner!.cloneNode(true) as HTMLElement;
-                    clonedBanner.classList.remove('blog-post-banner', 'hidden');
-                    clonedBanner.classList.add('cloned-banner');
-                    item.appendChild(clonedBanner);
-                });
-            }
-        }
-    }, [postBannerInfo, bodyContent]);
-
-    useEffect(() => {
         const setProgress = () => {
             const { body, documentElement: html } = document;
 
@@ -250,6 +222,41 @@ const Article = (props) => {
     }, [bodyContent]);
 
     useEffect(() => {
+        const t = setTimeout(() => {
+            const blogPostGridNewsletter = document.querySelector('.blog-post-grid__newsletter');
+            // console.log('newslette dom', blogPostGridNewsletter);
+            const newsletterWrapper = document.querySelector('.newsletterWrapper');
+            // console.log('newsletterWrapper dom', newsletterWrapper);
+            if (blogPostGridNewsletter && newsletterWrapper) {
+                if (blogPostGridNewsletter.parentNode === newsletterWrapper) {
+                    return;
+                }
+                newsletterWrapper.appendChild(blogPostGridNewsletter);
+                blogPostGridNewsletter.classList.remove('hidden');
+            }
+        }, 1500);
+        return () => clearTimeout(t);
+    }, [postNewsletter, region]);
+
+    useEffect(() => {
+        const blogPostBanner = document.querySelector('.blog-post-banner');
+        const articleNewBanners = document.querySelectorAll('.article-new-banner');
+        if (blogPostBanner && articleNewBanners.length > 0) {
+            const articleBanners = document.querySelectorAll('.article-banner');
+            articleBanners.forEach(banner => banner.classList.add('hidden'));
+            const clonedBannerExists = document.querySelector('.cloned-banner');
+            if (!clonedBannerExists) {
+                articleNewBanners.forEach(item => {
+                    const clonedBanner = blogPostBanner!.cloneNode(true) as HTMLElement;
+                    clonedBanner.classList.remove('blog-post-banner', 'hidden');
+                    clonedBanner.classList.add('cloned-banner');
+                    item.appendChild(clonedBanner);
+                });
+            }
+        }
+    }, [postBannerInfo, bodyContent]);
+
+    useEffect(() => {
         const timer = setTimeout(() => {
             const mainHeader = document.querySelector('.main-header');
             const progressBar = document.querySelector('.reading-proggress-bar');
@@ -257,7 +264,10 @@ const Article = (props) => {
                 progressBar.classList.remove('hidden');
                 mainHeader.appendChild(progressBar);
             }
-        }, 500);
+            document.querySelectorAll('.article__content p img')?.forEach((img) => {
+                img.closest('p').classList.add('!px-0');
+            });
+        }, 250);
 
         return () => clearTimeout(timer);
     }, [bodyContent]);
@@ -337,7 +347,7 @@ const Article = (props) => {
             }
         }
 
-        const timeoutId = setTimeout(manipulateShops, 2000);
+        const timeoutId = setTimeout(manipulateShops, 500);
         return () => clearTimeout(timeoutId);
 
     }, [screenLG, bodyContent, upsells]);
@@ -387,13 +397,34 @@ const Article = (props) => {
         }
 	}, [region]);
 
+    const dataBreadcrumb = [
+        {
+            link: '/',
+            title: 'Home',
+            className: '',
+        },
+        {
+            link: '/blogs/news',
+            title: 'Blog',
+			className: '',
+        },
+        {
+            link: null,
+            title: title,
+			className: '',
+        },
+    ];
+
+    // console.log('featuredImg', featuredImg);
+
     return (
         <>
         <div className="mobile-wrapper sm:px-hg relative">
             <ProgressBar width={offset} />
 		    <div className="container mt-4">
-                <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1>
-                {!isLoading && (
+                <Breadcrumb data={dataBreadcrumb} />
+                {/* <h1 className="text-center mb-2">COCO &amp; EVE BLOG</h1> */}
+                {/* {!isLoading && (
                     <div className="blog-nav-tags mb-4 flex mt-2">
                         <BlogNavTag href="/blogs/news" title="ALL" active={true} />
                         <BlogNavTag href="/blogs/news/tagged/hair" title="Hair"/>
@@ -402,30 +433,32 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body"/>
                         <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
                     </div>
-                )}
-                <article className="blog-post-grid flex flex-wrap mt-2 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
-                    <div className="blog-post-grid__content w-full lg:block lg:px-g sm:px-hg">
+                )} */}
+                <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
+                    <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 className="text-center mb-1">{content?.title}</h1>
-                        <span className="mb-1 article__published-at">{updateDate}</span>
+                        <span className="text-gray-500 mb-1 article__published-at">{updateDate}</span>
+                        
                         {featuredImg && (
                             featuredImageLink ? (
                                 <a href={featuredImageLink}>
-                                    <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                    <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
                                         <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
                                     </picture>
                                 </a>
                             ) : (
-                                <picture className="mt-2 mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
                                     <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
                                 </picture>
                             )
                         )}
+
                         {quickLinks?.length > 0 && (
                             <>
-                                <span className="text-left font-bold">In this article:</span>
-                                <div className="mt-1 mb-2">
+                                <span className="block mt-1 lg:pt-g text-left font-bold text-body">In this article:</span>
+                                <div className="mt-1 mb-2 lg:mb-1 lg:pb-g text-body">
                                     {quickLinks.map((quickLink, index) => (
                                         <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
                                             <span>{quickLink}</span>
@@ -434,9 +467,10 @@ const Article = (props) => {
                                 </div>
                             </>
                         )}
-                        <div className="article__content">
+                        
+                        <div className="article__content mt-4 lg:mt-0">
                             {parse(bodyContent)}
-                            <ul className="block mb-4 mt-1 pl-[0!important]">
+                            <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
                                         <Twitter className="svg fill-primary h-[1em]" />
@@ -461,19 +495,19 @@ const Article = (props) => {
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />
                         )}
                     </div>
-                    <div id="sideBarPosts" className="overflow-x-hidden"></div>
+                    <div id="sideBarPosts" className="overflow-x-hidden -mx-hg lg:mx-0 lg:w-4/12 lg:px-g"></div>
                 </article>
             </div>
         </div>
         {upsells?.length > 0 && (
-            <div className="blog-post-grid__shop-articles articleCarousel py-5 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
-                <div className="container lg:px-0 sm:px-0">
-                    <h4 className="h1 text-center mb-1">Shop this article</h4>
+            <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
+                <div className="container lg:px-0 sm:pl-0 sm:pr-0">
+                    <h4 className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</h4>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
-        <div id="relatedPostCard"></div>
+        <div id="relatedPostCard" className="mb-4 lg:mb-0"></div>
         {quickLinks?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>

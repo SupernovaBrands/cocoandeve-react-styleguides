@@ -366,9 +366,9 @@ const RealResults = () => {
 					</TabContent>
 				</div>
 			</div>
-			<div className='w-full bg-gray-100 mt-4 py-4'>
+			{/* <div className='w-full bg-gray-100 mt-4 py-4'>
 				<TestimonialCarousel data={testimonialItems} />
-			</div>
+			</div> */}
 			<ProductCarousel products={PRODUCTS} isStyleguide={true} />
 			<Instagram className="bg-pink-light" isStyleguide={true} />
 		</>
