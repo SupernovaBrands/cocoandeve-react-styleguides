@@ -218,7 +218,7 @@ const DeliveryReturns = (props: any) => {
                     </div>
                     <div className="flex flex-col -mx-hg lg:-mx-g text-center justify-center pb-4 pt-3">
                         <h2 className="text-2xl mb-1 mx-g">Didn’t find your answer?</h2>
-                        <p>No worries, you can contact us <a aria-label="Contact us here" className="text-underline" href="https://support.cocoandeve.com/hc/en-us/requests/new" title="https://support.cocoandeve.com/hc/en-us/requests/new">here</a>.</p>
+                        <p>No worries, you can contact us <a aria-label="Contact us here" className="text-underline" href="mailto:hello@cocoandeve.com" title="https://support.cocoandeve.com/en-GB">here</a>.</p>
                     </div>
                 </div>
             </section>

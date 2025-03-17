@@ -1002,7 +1002,7 @@ const trialParticipants = [
 	  {
 		"sku": "CE0004952020",
 		"date": "2025-3-3",
-		"title": "Finally, a gradual tanner that’s ticks ALL my boxes 💯",
+		"title": "Finally, a gradual tanner that ticks ALL my boxes 💯",
 		"user": "Hana Beyer",
 		"score": "5",
 		"content": "This is genuinely the best gradual tanning lotion I have ever used! I absolutely love the smell, texture, and how the product size is perfect for full-body use. It makes my skin feel super soft while delivering a natural, streak-free glow—no orange, no splotches, just perfection!"
