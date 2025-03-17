@@ -37,7 +37,7 @@ const ImageCard = (props: any) => (
 const ComparisonTable = (props: any) => {
     const { compare1, compare2 } = props;
     return compare1.length > 0 && compare2.length > 0 && (
-        <div className="w-full basis-full flex-grow-0 flex-shrink-0 pl-g lg:flex-1 lg:basis-6/12 lg:px-g">
+        <div className="w-full basis-full flex-grow-0 flex-shrink-0 pl-g lg:flex-1 lg:basis-6/12 lg:px-g lg:min-h-[27.5rem]">
             {compare1.map((data, i , row) => {
                 return (
                     <>
