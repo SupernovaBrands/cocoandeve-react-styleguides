@@ -92,8 +92,8 @@ const Footer = (props) => {
                     <div className="flex flex-wrap w-full lg:-mx-g">
                         <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
                             <li className="mb-1"><p className="text-sm text-body font-bold">Shop</p></li>
-                            {shopMenu && shopMenu.map((link) => {
-                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            {shopMenu && shopMenu.map((link, index) => {
+                                return <li className="mb-25" key={`footer-shop-menu-${index}`}><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
                             })}
                             {/* <li><a href="#" className="text-sm text-body">Hair</a></li>
                             <li><a href="#" className="text-sm text-body">Tan & SPF</a></li>
@@ -103,8 +103,8 @@ const Footer = (props) => {
                         </ul>
                         <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
                             <li className="mb-1"><p className="text-sm text-body font-bold">About Us</p></li>
-                            {aboutMenu && aboutMenu.map((link) => {
-                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            {aboutMenu && aboutMenu.map((link, index) => {
+                                return <li className="mb-25" key={`footer-about-menu-${index}`}><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
                             })}
                             {/* <li><a href="#" className="text-sm text-body">Our Story</a></li>
                             <li><a href="#" className="text-sm text-body">Sustainability</a></li>
@@ -116,8 +116,8 @@ const Footer = (props) => {
                         </ul>
                         <ul className="lg:px-g hidden lg:block text-sm lg:flex-1 lg:basis-auto">
                             <li className="mb-1"><p className="text-sm text-body font-bold">Help</p></li>
-                            {helpMenu && helpMenu.map((link) => {
-                                return <li className="mb-25"><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
+                            {helpMenu && helpMenu.map((link, index) => {
+                                return <li className="mb-25" key={`footer-help-menu-${index}`}><a href={link.handle} className="text-sm text-body">{link.title}</a></li>
                             })}
                             {/* <li><a href="#" className="text-sm text-body">Track My Order</a></li>
                             <li><a href="#" className="text-sm text-body">Help Center</a></li>

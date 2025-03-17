@@ -73,13 +73,12 @@ const LaunchButton = (props: any) => {
 }
 
 const AddToCartButton = (props:any) => {
-    const { className, addToCart, selectedVariant, preOrders, sideUpsell, trackEvent, swatchOverlayBtn } = props;
+    const { className, addToCart, selectedVariant, preOrders, sideUpsell, trackEvent } = props;
     const [addingItem, setAddingItem] = useState(false);
     const [ctaLabel, setCtaLabel] = useState(props.label);
     const btnLabel = props.label;
 
     const onAddItem = async (e) => {
-        console.log('typeof swatchOverlayBtn', swatchOverlayBtn);
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
@@ -218,7 +217,7 @@ const SwatchOverlay = (props:any) => {
 
             {!props.quizResult && (
                 <>
-                    <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} swatchOverlayBtn={true} />
+                    <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
                     <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : 'left-[8px] lg:left-1 right-[8px] lg:right-1 bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t`}>
                         <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
                             <label className="block mb-[.625em]">
