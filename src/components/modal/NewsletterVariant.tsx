@@ -217,10 +217,12 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                     <BrandLogo className="lg:h-[2.578rem] mb-3 w-[5rem] lg:w-[6.25rem] " />
                     {!formCompleted && (
                         <form className="relative" onSubmit={handleForm}>
-                            <span className='block text-center text-sm mb-25 lg:text-base'>UNLOCK</span>
-                            <h2 className={` ${nbp_heading_color || 'text-body'} text-xl lg:text-2xl text-center mb-0 leading-[1.25!important]`}>{nbp_heading}</h2>
-                            <p className={` ${nbp_heading_2_color || 'text-body'} text-lg lg:text-xl text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
-                            <p className={`font-size-sm mb-2 lg:mb-[1.5rem] leading-[1.25!important] text-center text-gray-600`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
+                            {/* <span className='block text-center text-sm mb-25 lg:text-base'>UNLOCK</span> */}
+                            <h2 className={` ${nbp_heading_color || 'text-body'} text-lg lg:text-xl text-center mb-0 leading-[1.25!important]`}>{nbp_heading}</h2>
+                            <p className={` ${nbp_heading_2_color || 'text-body'} text-lg lg:text-xl text-center mb-[1rem] font-bold leading-[1.25]`} dangerouslySetInnerHTML={{__html: nbp_heading_2.replace('10% OFF*', `<span class="text-xl lg:text-2xl">10% OFF*</span>`)}} />
+                            <p className={`font-size-sm mb-2 lg:mb-[1.5rem] leading-[1.25!important] text-center text-gray-600`}>
+                                Get <strong>10% OFF*</strong> your first order plus priority access to new product launches, exclusive offers, expert tips and routines!
+                            </p>
                             <div className="relative flex items-stretch w-full mb-0 flex-wrap mb-25">
                                 <input ref={emailRef} value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-white py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-[.5rem] border border-gray-500" type="email" placeholder={nbp_email_ph || 'Enter email here'} aria-label="email" />
                             </div>
@@ -239,11 +241,13 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                     {formCompleted && (
                         <div className="modal--newsletter__completed flex items-center justify-center">
                             <div className="flex flex-wrap justify-center items-center">
-                                <h2 className={`text-xl lg:text-2xl leading-[1.25!important] mb-1 lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
-                                <h3 className={`font-normal text-center leading-[1.25!important] px-3 lg:px-5 ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
+                                <h2 className={`text-lg lg:text-xl leading-[1.25!important] mb-1 lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`}>
+                                You've successfully signed up! 🎉
+                                </h2>
+                                <h3 className={`text-lg font-normal text-center leading-[1.25!important] px-3 lg:px-5 ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
                                 {!copied ? (
                                     <Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative">
-                                        COPY: WELCOME <Paste className="ml-25 svg--current-color svg" />
+                                        CODE: WELCOME <Paste className="ml-25 svg--current-color svg" />
                                     </Button>
                                 ) : (
                                     <Button buttonClass="w-full border-2 border-primary bg-primary text-white inline-flex justify-center items-center relative">COPIED</Button>
