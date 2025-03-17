@@ -79,7 +79,7 @@ const TrackMyOrder = (props: any) => {
                         <>
                             {!dataTracking?.fulfillment && !dataTracking?.order ? (
                                 <div className='w-full text-center flex justify-center'>
-                                    <p className="no_data_message lg:max-w-[70%] text-center mb-4 lg:mb-0">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/hc/en-us/requests/new" className=' whitespace-nowrap'>contact us</a> for help.</p>
+                                    <p className="no_data_message lg:max-w-[70%] text-center mb-4 lg:mb-0">We are not able to find tracking details. If you have just placed the order, please allow two business days for the order to be fulfilled. You will receive a shipping notification email once the order is shipped. Otherwise, please <a href="https://support.cocoandeve.com/en-GB" className=' whitespace-nowrap'>contact us</a> for help.</p>
                                 </div>
                             ) : (
                                 <>
