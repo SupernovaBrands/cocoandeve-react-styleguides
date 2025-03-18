@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import parse from 'html-react-parser';
 import useEmblaCarousel from 'embla-carousel-react';
 // import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
@@ -139,7 +140,8 @@ const Sustainability = (props: any) => {
 
     const inlineCss = `
         .sustainability--intro p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
     `;
 
@@ -149,18 +151,20 @@ const Sustainability = (props: any) => {
                 <a href="#">
                     {!isLoading && (
                         <picture>
-                            <source srcSet={banner.image_desktop.url} media="(min-width: 992px)" />
-                            <img className="block w-full" alt={banner.heading} src={banner.image_mobile.url} />
+                            <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9c8325ca-bc01-4944-bb71-232923db6200/public'} media="(min-width: 992px)" />
+                            <img className="block w-full" alt={banner.heading} src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/74515d6a-23fc-4b41-9f9a-a74e10ab3f00/public'} />
                         </picture>
                     )}
-                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[40%] lg:text-[3.25em] lg:leading-[1.25em]">{banner.heading}</h1>
+                    <h1 className="absolute text-white m-auto w-full text-center px-g top-[50%] -translate-y-[50%] lg:text-[3.25em] lg:leading-[1.25em] sm:font-[400] lg:font-bold">
+                        {parse(banner.heading.replace('?', '?<br class="lg:hidden" />'))}
+                    </h1>
                 </a>
             </section>
             <section>
-                <div className="container py-4">
+                <div className="container py-4 lg:py-4">
                     <div className="flex flex-wrap -mx-hg lg:-mx-g">
-                        <div className="sustainability--intro w-full lg:w-1/2 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
-                            <h2 className="mb-1 lg:mb-2">{intro.heading}</h2>
+                        <div className="sustainability--intro w-full lg:w-7/12 lg:basis-7/12 lg:order-2 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-g">
+                            <h2 className="mb-1 lg:mb-2 text-body text-xl lg:text-2xl">{intro.heading}</h2>
                             <style jsx>{inlineCss}</style>
                             {!isLoading && (
                                 <div dangerouslySetInnerHTML={{
@@ -169,10 +173,10 @@ const Sustainability = (props: any) => {
                             )}
                         </div>
                         {!isLoading && (
-                            <div className="px-hg lg:px-g w-full lg:w-1/2 lg:order-1">
+                            <div className="px-hg lg:px-g w-full lg:w-5/12 lg:basis-5/12 lg:order-1 my-25 lg:my-0">
                                 {/* <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef81873c-3fbf-406f-62dd-e2a050ceab00/public" className="w-full" alt="Thoughtful at every step" /> */}
                                 {/* <Infographic className="w-full" /> */}
-                                <svg className="w-full" width="581" height="456" viewBox="0 0 581 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {/* <svg className="w-[75%] mx-auto lg:w-full" width="581" height="456" viewBox="0 0 581 456" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0)">
                                         <path d="M325.154 286.674C325.54 286.836 325.955 286.919 326.374 286.917C326.863 286.917 327.438 286.81 328.091 286.513C329.816 285.727 331.329 283.985 332.294 282.661C333.673 280.751 334.755 278.641 335.504 276.403C336.272 274.08 336.046 271.921 334.898 270.622C334.192 269.827 333.209 269.469 332.26 269.669C331.115 269.912 330.448 270.854 329.602 272.046C328.777 273.209 327.751 274.656 326.077 275.877C323.911 277.456 322.811 280.118 323.138 282.998C323.238 283.888 323.636 286.028 325.154 286.674ZM326.614 281.534C326.696 280.703 327.026 279.544 328.131 278.738C330.253 277.191 331.566 275.354 332.434 274.127C332.392 274.522 332.306 274.911 332.178 275.286C331.479 277.397 330.32 279.549 328.993 281.191C328.027 282.386 327.219 283.006 326.745 283.252C326.599 282.692 326.554 282.11 326.614 281.534Z" fill="#00635B"/>
                                         <path d="M352.751 225.48C346.505 210.638 334.777 198.822 320.045 192.53C312.466 189.3 304.417 187.663 296.12 187.663C285.258 187.647 274.588 190.545 265.205 196.059C264.803 196.295 264.511 196.682 264.393 197.135C264.275 197.588 264.34 198.069 264.574 198.474C264.808 198.878 265.192 199.173 265.642 199.292C266.091 199.411 266.569 199.345 266.971 199.11C275.783 193.933 285.863 191.196 296.123 191.196C297.37 191.196 298.606 191.236 299.832 191.315C298.193 192.484 296.895 193.971 295.634 195.418C294.317 196.928 292.956 198.489 291.176 199.734C289.723 200.749 287.671 201.48 285.687 202.188C283.915 202.819 282.242 203.416 280.873 204.23C279.882 204.821 278.667 205.835 277.703 206.875C276.332 208.354 275.563 209.749 275.425 211.022C275.301 212.146 275.67 213.178 276.465 213.936C277.816 215.22 279.843 214.658 280.511 214.473C281.685 214.148 283.003 213.579 284.396 212.978C286.254 212.175 288.178 211.346 289.625 211.163C291.314 210.945 293.551 211.881 295.917 212.872C298.902 214.123 302.284 215.538 305.944 215.296C309.785 215.041 312.195 217.123 313.092 218.984C313.608 220.055 313.479 220.719 313.398 220.81C312.765 221.331 312.166 221.194 310.287 220.413C308.469 219.658 306.206 218.719 303.466 219.569L303.297 219.622C302.21 219.96 300.721 220.422 299.335 220.565C298.128 220.69 297.278 220.536 296.941 220.133C296.411 219.498 296.354 219.111 296.257 218.465C296.136 217.665 295.972 216.57 294.925 215.35C293.498 213.687 290.573 213.399 286.231 214.494C282.743 215.373 278.828 217.07 275.753 219.033C272.862 220.82 270.381 222.943 268.376 225.344C266.273 227.863 264.731 230.647 263.794 233.617C262.814 236.724 262.683 240.507 263.444 243.739C263.887 245.623 264.612 247.261 265.597 248.606C266.746 250.172 268.214 251.298 269.961 251.953C272.192 252.789 274.344 252.19 276.243 251.663C277.347 251.356 278.389 251.066 279.34 251.072C285.472 251.112 288.632 256.133 289.972 259.122C291.824 263.261 292.195 267.604 292.587 272.202C292.768 274.323 292.955 276.514 293.299 278.71C293.875 282.393 295.05 287.552 298.592 289.83C299.733 290.567 301.006 290.933 302.397 290.933C303.275 290.924 304.146 290.794 304.988 290.545C308.13 289.645 310.44 287.866 312.05 285.104C312.437 284.441 312.782 283.766 313.12 283.113C313.751 281.88 314.348 280.716 315.142 279.76C315.846 278.913 316.742 278.185 317.692 277.414C318.368 276.867 319.061 276.302 319.719 275.666C322.153 273.319 322.679 270.722 322.873 268.492C322.937 267.745 322.94 266.977 322.942 266.234C322.946 264.714 322.95 263.278 323.449 262.206C324.451 260.051 326.711 257.646 328.896 255.319C330.824 253.265 332.645 251.326 333.752 249.44C335.696 246.125 334.678 243.993 333.482 242.787C331.971 241.265 330.08 241.384 328.414 241.49C327.115 241.572 325.772 241.657 324.208 241.171C321.4 240.299 319.912 237.583 319.275 236.041C318.543 234.269 318.292 232.631 318.261 231.502C318.433 231.805 318.602 232.119 318.745 232.385C319.456 233.705 320.34 235.348 321.661 236.722C323.289 238.415 325.279 239.363 327.574 239.54C331.295 239.827 333.926 238.553 335.34 237.868C337.221 236.957 338.359 235.816 338.818 234.379C339.486 232.288 338.434 230.347 337.666 228.933C337.524 228.671 337.339 228.329 337.205 228.045C337.585 228.049 338.166 228.301 339.104 229.276C340.529 230.757 342.095 233.252 343.752 235.892C346.639 240.492 349.886 245.666 354.062 248.362C354.07 248.77 354.075 249.178 354.075 249.588C354.075 281.784 328.076 307.977 296.119 307.977C283.327 307.977 271.349 303.791 261.636 296.562C259.783 292.483 259.358 287.868 258.909 282.99C258.544 279.019 258.166 274.91 256.964 270.957C255.576 266.394 253.259 262.686 249.881 259.623C249.711 259.464 249.511 259.342 249.293 259.262C249.075 259.182 248.843 259.146 248.611 259.157C248.38 259.168 248.152 259.225 247.943 259.325C247.733 259.425 247.545 259.566 247.39 259.74C247.235 259.914 247.115 260.117 247.039 260.337C246.962 260.558 246.929 260.792 246.943 261.025C246.957 261.258 247.016 261.487 247.118 261.697C247.22 261.907 247.362 262.094 247.536 262.248C254.021 268.128 254.7 275.506 255.42 283.316C255.697 286.323 255.979 289.392 256.628 292.374C246.435 282.819 240.001 269.883 238.503 255.937C238.278 253.828 238.165 251.708 238.166 249.586C238.166 248.6 238.19 247.6 238.239 246.619C238.323 244.914 238.48 243.224 238.708 241.55C242.228 240.9 245.353 239.478 248.01 237.314C250.83 235.017 252.986 232.006 254.419 228.365C256.39 223.352 256.82 217.546 255.658 211.575C254.446 205.343 251.535 199.28 247.242 194.044C247.056 193.818 246.816 193.641 246.545 193.531C246.274 193.421 245.98 193.381 245.689 193.415C245.399 193.449 245.122 193.556 244.883 193.725C244.644 193.894 244.45 194.121 244.321 194.385C243.104 196.853 240.74 199.726 238.239 202.768C235.163 206.505 231.676 210.742 229.232 215.479C228.068 217.744 227.34 220.209 227.087 222.746C226.809 225.441 227.045 228.165 227.781 230.771C227.84 230.998 227.944 231.21 228.086 231.396C228.228 231.582 228.405 231.738 228.607 231.854C228.809 231.971 229.032 232.045 229.263 232.074C229.494 232.102 229.728 232.084 229.952 232.02C230.176 231.957 230.385 231.849 230.568 231.703C230.75 231.557 230.901 231.376 231.013 231.17C231.125 230.965 231.195 230.739 231.22 230.505C231.244 230.272 231.222 230.036 231.155 229.812C229.954 225.528 230.387 220.897 232.342 217.108C234.614 212.706 237.974 208.623 240.937 205.024C242.852 202.695 244.694 200.459 246.093 198.322C252.563 207.367 254.568 218.411 251.161 227.069C248.965 232.651 244.818 236.392 239.344 237.803C240.381 232.695 242.1 227.752 244.455 223.109C244.56 222.902 244.623 222.677 244.642 222.445C244.66 222.214 244.633 221.981 244.562 221.76C244.491 221.54 244.378 221.335 244.228 221.158C244.079 220.982 243.896 220.836 243.691 220.731C243.486 220.625 243.262 220.561 243.033 220.543C242.803 220.524 242.572 220.552 242.353 220.623C242.134 220.695 241.931 220.809 241.755 220.959C241.58 221.11 241.436 221.294 241.331 221.5C237.408 229.251 235.161 237.752 234.737 246.442C234.685 247.482 234.659 248.541 234.659 249.586C234.659 251.016 234.709 252.453 234.806 253.882C233.366 251.849 231.72 249.973 229.894 248.282C229.698 248.102 229.502 247.926 229.306 247.753C229.117 240.151 225.716 234.341 219.679 231.346C217.596 230.314 215.261 229.651 212.733 229.375C210.272 229.107 207.679 229.211 205.025 229.684C199.579 230.655 194.195 233.11 189.456 236.783C189.224 236.963 189.041 237.198 188.922 237.467C188.804 237.736 188.754 238.031 188.777 238.324C188.801 238.618 188.897 238.901 189.057 239.147C189.216 239.394 189.435 239.596 189.692 239.736C191.715 240.837 194.062 242.94 196.547 245.165C199.624 247.922 203.113 251.047 207.068 253.296C208.975 254.377 211.069 255.085 213.237 255.381C214.067 255.498 214.904 255.557 215.742 255.557C217.222 255.556 218.697 255.374 220.134 255.017C220.58 254.9 220.961 254.611 221.196 254.212C221.432 253.814 221.502 253.338 221.393 252.888C221.283 252.438 221.002 252.049 220.61 251.806C220.219 251.562 219.748 251.484 219.299 251.587C215.708 252.475 211.877 251.977 208.79 250.221C205.16 248.157 201.821 245.165 198.874 242.526C197.064 240.905 195.324 239.346 193.641 238.107C201.819 232.649 211.406 231.18 218.129 234.515C222.202 236.535 224.718 240.08 225.524 244.872C224.973 244.516 224.413 244.179 223.844 243.863C221.324 242.473 218.616 241.46 215.806 240.856C215.581 240.807 215.348 240.803 215.122 240.844C214.895 240.886 214.679 240.972 214.486 241.097C214.292 241.223 214.125 241.386 213.994 241.576C213.863 241.767 213.771 241.982 213.722 242.208C213.673 242.435 213.669 242.669 213.71 242.897C213.751 243.125 213.837 243.343 213.961 243.538C214.086 243.733 214.248 243.901 214.437 244.033C214.626 244.165 214.839 244.259 215.064 244.308C219.818 245.345 223.778 247.437 227.527 250.889C230.944 254.037 233.201 257.624 234.493 260.079C235.856 262.669 236.464 264.584 236.512 264.737C238.159 271.341 240.885 277.624 244.576 283.328C250.15 291.986 257.786 299.101 266.789 304.023C275.792 308.945 285.875 311.518 296.119 311.507C304.415 311.507 312.464 309.87 320.043 306.64C334.775 300.347 346.503 288.532 352.75 273.689C355.957 266.051 357.582 257.942 357.582 249.583C357.582 241.225 355.957 233.115 352.751 225.48ZM346.713 234C344.957 231.201 343.298 228.553 341.62 226.813C340.59 225.742 339.602 225.062 338.601 224.732C337.316 224.309 336.011 224.474 334.828 225.209C334.797 225.228 334.767 225.249 334.737 225.27C333.728 225.989 333.321 227.134 333.62 228.411C333.796 229.164 334.183 229.872 334.586 230.624C335.101 231.573 335.684 232.65 335.478 233.297C335.335 233.743 334.745 234.236 333.817 234.686C332.622 235.264 330.621 236.233 327.838 236.019C324.546 235.765 323.099 233.075 321.822 230.701C321.315 229.76 320.836 228.869 320.261 228.198C319.082 226.823 317.833 226.78 316.995 226.986C316.196 227.182 314.842 227.96 314.752 230.977C314.682 233.316 315.344 236.119 316.523 238.476C318.076 241.581 320.375 243.681 323.168 244.546C325.344 245.222 327.166 245.106 328.624 245.015C330.062 244.924 330.639 244.923 330.997 245.285C331.259 245.548 331.697 245.99 330.728 247.643C329.822 249.187 328.132 250.987 326.343 252.892C323.967 255.422 321.51 258.038 320.269 260.708C319.44 262.488 319.434 264.474 319.429 266.227C319.429 266.927 319.425 267.588 319.373 268.187C319.171 270.509 318.606 271.845 317.289 273.117C316.737 273.649 316.128 274.143 315.483 274.666C314.447 275.51 313.377 276.383 312.45 277.496C311.406 278.751 310.692 280.147 310 281.496C309.673 282.136 309.363 282.739 309.025 283.319C307.863 285.312 306.322 286.496 304.028 287.151C302.585 287.564 301.423 287.468 300.475 286.858C298.736 285.738 297.485 282.811 296.758 278.161C296.435 276.09 296.252 273.963 296.077 271.9C295.677 267.209 295.263 262.358 293.164 257.671C291.855 254.748 290.024 252.293 287.871 250.573C285.377 248.581 282.514 247.562 279.362 247.541C277.926 247.532 276.597 247.901 275.311 248.259C273.724 248.7 272.352 249.081 271.183 248.643C266.317 246.821 265.701 239.235 267.135 234.687C268.721 229.659 272.34 225.284 277.599 222.035L277.622 222.021C280.346 220.28 283.827 218.76 286.934 217.956C290.639 216.997 292.092 217.479 292.275 217.657C292.659 218.105 292.701 218.382 292.792 218.991C292.92 219.842 293.095 221.007 294.26 222.404C296.727 225.358 301.674 223.822 304.332 222.994L304.501 222.942C306.039 222.465 307.455 223.055 308.956 223.676C309.913 224.073 310.904 224.485 311.949 224.612C313.32 224.778 314.554 224.418 315.62 223.542C317.04 222.372 317.378 220.255 316.501 218.014C315.809 216.247 314.479 214.65 312.756 213.52C310.745 212.201 308.311 211.595 305.717 211.767C302.877 211.957 300.026 210.762 297.267 209.607C294.459 208.43 291.805 207.318 289.186 207.655C287.252 207.903 285.101 208.831 283.02 209.729C281.951 210.192 280.937 210.629 280.078 210.915C279.714 211.044 279.34 211.141 278.959 211.204C279.066 210.882 279.369 210.292 280.102 209.466C280.972 208.485 282.038 207.639 282.661 207.268C283.736 206.627 285.252 206.086 286.859 205.514C289.061 204.728 291.338 203.917 293.177 202.632C295.309 201.141 296.883 199.337 298.27 197.745C301.199 194.385 303.32 191.953 309.351 192.727C333.091 198.331 351.26 218.678 353.782 243.62C351.165 241.088 348.835 237.377 346.713 234Z" fill="#00635B"/>
@@ -231,85 +235,92 @@ const Sustainability = (props: any) => {
                                             <rect width="54" height="54" fill="white" transform="translate(375.43 348)"/>
                                         </clipPath>
                                     </defs>
-                                </svg>
+                                </svg> */}
+
+                                <picture className="">
+                                    <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/83ca8477-6853-4e0c-5da1-6397476d2a00/public'} media="(min-width: 992px)" />
+                                    <img className="w-[60%] mx-auto lg:w-full" alt={'Sustainability Infographic'} src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/fffabaea-d734-462a-85b5-69fb6f9c2800/828x'} />
+                                </picture>
+
                             </div>
                         )}
                     </div>
                 </div>
             </section>
-            <section className="container p-0">
-                <h2 className="text-center mb-3">{imageSlider.heading}</h2>
+            <section className="container p-0 lg:px-g">
+                <h2 className="text-center mb-[1rem] lg:mb-3 text-body text-body text-xl lg:text-2xl">{imageSlider.heading}</h2>
                 {!isLoading && (
-                    <div className="flex flex-wrap bg-primary-light mx-0">
-                        <div className="w-full lg:w-7/12 px-0">
-                            <picture className="embed-responsive before:pt-[117.1875%] lg:before:pt-[52.23881%]">
-                                <source srcSet={imageSlider.image_desktop.url} media="(min-width: 992px)" />
-                                <img className="embed-responsive-item fit--cover" alt={imageSlider.heading} src={imageSlider.image_mobile.url.replace('public', '828x')} />
-                            </picture>
-                        </div>
-                        <div className="w-full lg:w-5/12 py-4 px-g lg:px-3">
-                            <h3 className="mb-1">{imageSlider.slider_title}</h3>
+                    <div className="flex flex-wrap bg-primary-light mx-0 lg:rounded">
+                        
+                        <div className="w-full lg:w-[calc(100%-501px)] lg:basis-[calc(100%-501px)] py-2 px-g lg:px-3 lg:py-4">
+                            <h3 className="mb-1 text-body">{imageSlider.slider_title}</h3>
                             <Carousel.Wrapper emblaApi={emblaApi1}>
                                 <Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g">
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${1}`}>
-                                        <p className="mb-g">{imageSlider.text_1}</p>
+                                        <p className="text-body leading-[24px] lg:leading-[20px]">{imageSlider.text_1}</p>
                                     </div>
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${2}`}>
-                                        <p className="mb-g">{imageSlider.text_2}</p>
+                                        <p className="text-body leading-[24px] lg:leading-[20px]">{imageSlider.text_2}</p>
                                     </div>
                                     <div className="flex-grow-0 flex-shrink-0 w-full basis-full lg:px-g" key={`slider-${3}`}>
-                                        <p className="mb-g">{imageSlider.text_3}</p>
+                                        <p className="text-body leading-[24px] lg:leading-[20px]">{imageSlider.text_3}</p>
                                     </div>
                                 </Carousel.Inner>
                                 <Carousel.Navigation>
-                                    <div className="flex relative mx-auto lg:mx-0 mt-3 lg:mt-4 justify-center w-[5em]">
+                                    <div className="flex relative mx-auto lg:mx-0 mt-[18px] lg:mt-4 justify-center w-[120px]">
                                         <PrevButton
                                             onClick={arrowClickPrev1}
                                             disabled={prevDisabled1}
-                                            className={`w-[1rem] lg:-ml-[2px] ${prevDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-auto lg:-ml-[2px] ${prevDisabled1 ? 'text-[#ADADAD] pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronPrev className="w-[1rem] h-[1rem] svg--current-color" />
+                                            <ChevronPrev className="w-[24px] h-[24px] svg--current-color" />
                                         </PrevButton>
-                                        <span className="px-25 lg:px-0">{selected + 1} of {count}</span>
+                                        <span className="mx-1 inline-block lg:px-0">{selected + 1} of {count}</span>
                                         <NextButton
                                             onClick={arrowClickNext1}
                                             disabled={nextDisabled1}
-                                            className={`w-[1rem] lg:-mr-[2px] ${nextDisabled1 ? 'text-gray-600 pointer-events-none' : 'text-primary'}`}
+                                            className={`w-auto lg:-mr-[2px] ${nextDisabled1 ? 'text-[#ADADAD] pointer-events-none' : 'text-primary'}`}
                                         >
-                                            <ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
+                                            <ChevronNext className="w-[24px] h-[24px] svg--current-color" />
                                         </NextButton>
                                     </div>
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
                         </div>
+                        <div className="w-full lg:w-[501px] lg:basis-[501px] px-0">
+                            <picture className="">
+                                <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e8be003-16ad-42fc-cfa7-b81ee699c500/public'} media="(min-width: 992px)" />
+                                <img className="w-full lg:rounded-r" alt={imageSlider.heading} src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f61a1920-e234-469c-77f8-f9a93a136300/828x'} />
+                            </picture>
+                        </div>
                     </div>
                 )}
             </section>
-            <section className="pt-5">
-                <div className="container bg-secondary-light px-g py-3 lg:p-4 border-t border-t-secondary-light">
+            <section className="container pt-4 px-0 lg:px-g">
+                <div className="bg-secondary-light px-g pt-3 pb-4 lg:p-4 border-t border-t-secondary-light lg:rounded">
                     <div className="flex flex-wrap lg:-mx-g">
-                        <div className="w-full lg:w-1/2 lg:order-2 lg:px-g">
-                            <h2 className="block lg:hidden text-center lg:text-left mb-1">{formula.heading}</h2>
+                        <div className="w-full lg:w-7/12 lg:order-2 lg:px-g">
+                            <h2 className="block lg:hidden text-center lg:text-left mb-2">{formula.heading}</h2>
                             {!isLoading && (
                                 <>
-                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-gray-400">
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
-                                        <li className="text-center"><TabNav className={`-mb-[1px] pt-0 pb-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
+                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start border-b border-[#D8D8D8]">
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] pt-0 pb-25 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'border-secondary border-b-2 hover:text-body' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-1'}>
-                                            <div className="mb-g" dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-1'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_1,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-2'}>
-                                            <div className="mb-g" dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-2'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_2,
                                             }}/>
                                         </TabContent>
-                                        <TabContent className="mt-2 min-h-[16em] lg:min-h-0" active={activeTab2 === 'formula-3'}>
-                                            <div dangerouslySetInnerHTML={{
+                                        <TabContent className="mt-2 lg:mt-3 lg:min-h-0" active={activeTab2 === 'formula-3'}>
+                                            <div className="text-body" dangerouslySetInnerHTML={{
                                                 __html: formula.text_3.replace('h4', 'h4 class="mb-1"'),
                                             }} />
                                         </TabContent>
@@ -317,16 +328,16 @@ const Sustainability = (props: any) => {
                                 </>
                             )}
                         </div>
-                        <div className="w-full lg:w-1/2 lg:order-1 lg:px-g">
-                            <h2 className="hidden lg:block mb-1">{formula.heading}</h2>
+                        <div className="w-full lg:w-5/12 lg:order-1 lg:px-g">
+                            <h2 className="hidden lg:block mb-1 text-base lg:mb-3">{formula.heading}</h2>
                             {!isLoading && (
-                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-3 w-full lg:w-3/4 p-0 mb-g">
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
+                                <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-0">
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
+                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><CrueltyFree className="svg block w-full mb-1 h-[32px]"/>Cruelty Free</li>
+                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
                             )}
                         </div>
@@ -335,14 +346,15 @@ const Sustainability = (props: any) => {
             </section>
             {!isLoading && (
                 <section className="pt-4 pb-4 relative">
-                    <div className="container p-0 md:p-1">
-                        <p className="pb-2 mb-0 h3 text-center">{packaging.heading}</p>
-                        <Carousel.Wrapper emblaApi={emblaApi2} className="">
-                            <Carousel.Inner emblaRef={emblaRef2} className="mx-1 lg:mx-0 lg:!transform-none">
+                    <div className="container p-0 md:pt-1">
+                        <p className="pb-[1rem] mb-0 font-bold text-center text-body text-xl lg:text-2xl">{packaging.heading}</p>
+                        <Carousel.Wrapper emblaApi={emblaApi2} className="px-0">
+                            <Carousel.Inner emblaRef={emblaRef2} className="lg:mx-0 lg:!transform-none">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} className="flex-grow-0 flex-shrink-0 w-[79.25%] basis-[79.25%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
-                                        <h6 className="mb-2 font-bold">{data.title}</h6>
-                                        <p className="mb-g lg:mb-3">{data.body}</p>
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} 
+                                        className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
+                                        <h6 className="mb-25 lg:mb-[8px] font-bold">{data.title}</h6>
+                                        <p className="mb-0 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br />environmentally-friendly'))}</p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>
@@ -362,23 +374,23 @@ const Sustainability = (props: any) => {
                     </div>
                 </section>
             )}
-            <section className="sustainability-image-text">
-                <div className="flex flex-wrap bg-primary-light mx-0 lg:items-start">
+            <section className="sustainability-image-text container mb-4 lg:mb-4 px-0 lg:px-g">
+                <div className="flex flex-wrap bg-primary-light mx-0 lg:items-start lg:rounded">
+                    <div className="text-body w-full lg:w-[calc(100%-501px)] lg:basis-[calc(100%-501px)] py-3 lg:py-4 flex flex-wrap content-start px-g lg:px-3 text-left lg:text-left justify-start lg:justify-start">
+                        <h3 className="mb-1 text-body">{imageText.heading}</h3>
+                        {!isLoading && <p className="mb-0 text-left text-body">{imageText.text}</p>}
+                    </div>
                     {!isLoading && (
-                        <div className="w-full lg:w-7/12 px-0">
+                        <div className="w-full lg:w-[501px] lg:basis-[501px] px-0">
                             <picture>
-                                <source srcSet={imageText.image_desktop.url} media="(min-width: 992px)" />
-                                <img className="fit--cover w-full" alt="/" src={imageText.image_mobile.url} />
+                                <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c9beac67-aea7-4ba5-5608-e64d56941b00/public'} media="(min-width: 992px)" />
+                                <img className="fit--cover w-full lg:rounded-r" alt="/" src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1f7d5af0-479c-4954-0afd-b7fa55cdf500/public'} />
                             </picture>
                         </div>
                     )}
-                    <div className="text-body w-full lg:w-5/12 py-2 lg:py-5 flex flex-wrap content-center px-g lg:px-3 text-center lg:text-left justify-center lg:justify-start">
-                        <h3 className="mb-1">{imageText.heading}</h3>
-                        {!isLoading && <p className="mb-0 text-center lg:text-left">{imageText.text}</p>}
-                    </div>
                 </div>
             </section>
-            <section className="py-4 lg:py-5 overflow-hidden">
+            {/* <section className="py-4 lg:py-5 overflow-hidden">
                 <div className="container text-center">
                     <h2 className="text-center mx-5 mb-1">{products.heading}</h2>
                     {!isLoading && productCarousel.length > 0 && (
@@ -423,7 +435,7 @@ const Sustainability = (props: any) => {
                         </>
                     )}
                 </div>
-            </section>
+            </section> */}
 
             <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                 <ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})} />

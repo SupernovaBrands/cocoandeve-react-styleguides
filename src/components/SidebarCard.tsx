@@ -2,11 +2,11 @@ import Link from "next/link";
 import parse from 'html-react-parser';
 
 const SidebarCard = ({ data }) => (
-	<article className="post-card flex mb-3">
-		<a href={data.link} className="shrink-0 mr-1">
+	<article className="post-card flex mb-0 mr-g lg:mr-0">
+		<a href={data.link} className="shrink-0 mr-g">
 			<picture>
 				<source srcSet={data.srcSet} media="(min-width: 992px)" />
-				<img src={data.src} loading="lazy" alt={data.alt} width={96} height={96} />
+				<img src={data.src} className="rounded" loading="lazy" alt={data.alt} width={96} height={96} />
 			</picture>
 		</a>
 		<figcaption className="flex flex-col">

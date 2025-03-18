@@ -1,10 +1,10 @@
 @layer components {
 	.stockist {
-		&.container {
-			@screen lg {
-				max-width: calc-em(1000);
-			}
-		}
+		// &.container {
+		// 	@screen lg {
+		// 		max-width: calc-em(1000);
+		// 	}
+		// }
 
 		a {
 			@apply text-body-color;
@@ -19,5 +19,33 @@
 					width: 100%;
 			}
 		}
+
+		&__beauty-confidence {
+			ul {
+				@apply md:mb-[0.75em];
+				li {
+					@apply md:w-auto px-0 md:mx-[28px];
+				}
+			}
+
+			i {
+				@apply mb-1;
+			}
+
+			span {
+				@apply text-body;
+			}
+
+			.beauty-confidence {
+				&--container {
+					@apply p-1 lg:py-4;
+				}
+
+				&--title {
+					@apply md:mb-3;
+				}
+			}
+		}
+
 	}
 }

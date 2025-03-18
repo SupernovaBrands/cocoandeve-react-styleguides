@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
-    // console.log('set saving', saving);
+    const { swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
     
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
@@ -47,32 +47,14 @@ const BundleVariantCard = (props) => {
         if (selectedVar) setCurrentVariant(selectedVar.node);
     };
 
-    const bundleImg = productStrapi?.images[productStrapi?.images.length - 1];
-    const option2 = productShopify?.options[1]?.values || [];
-    const bundleUrl = productStrapi?.bundle_handle || null;
+    const option2 = productShopify?.options.find(
+        (op) => currentVariant.selectedOptions.find((c) => c.name === op.name && swatchType.includes(c.name.toLowerCase()))
+    )?.values || [];
 
-    // hardcoded url for selected PDPs
-    const urlTargets = {
-        'sunny-honey-bali-bronzing-self-tan-mousse': {
-            bundleUrl: 'sunny-honey-bali-bronzing-self-tan-set'
-        },
-        'super-nourishing-coconut-fig-hair-masque': {
-            bundleUrl: 'silky-hair-set'
-        },
-        'tripeptide-hair-density-serum': {
-            bundleurl: 'fine-hair-rescue-set'
-        },
-        'super-hydrating-shampoo-conditioner-set': {
-            bundleUrl: null
-        },
-        'antioxidant-face-tanning-micromist': {
-            bundleUrl: 'tan-masters-kit'
-        },
-    };
+    const bundleImg = slides[slides.length - 1];
+    const urlSet = productStrapi?.bundle_handle || null;
 
-    const urlSet = urlTargets[productShopify.handle]?.bundleUrl || null;
-
-    return (
+    return  (
         <>
         <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
@@ -81,12 +63,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={bundleImg.url.replace('public', '320x')} />
+                            <img className="w-full h-full object-cover" src={bundleImg.src.replace('public', '320x')} />
                         </a>
                     )}
                     
                     {!urlSet && bundleImg && (
-                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.url.replace('public', '320x')} />    
+                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.src.replace('public', '320x')} />    
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
@@ -105,10 +87,10 @@ const BundleVariantCard = (props) => {
                             )}
                         </div>
                         <div className="flex flex-col lg:flex-row">
-                            {option2.length > 0 && (
+                            {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25">
                                     <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
-                                        {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op}</option>)}
+                                        {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>
                             )}
