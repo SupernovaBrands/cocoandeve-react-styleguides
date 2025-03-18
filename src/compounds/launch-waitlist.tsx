@@ -173,7 +173,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
 
     return (
         <>
-            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist ${bgColor} product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-3'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
+            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist ${bgColor} product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-0'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
                 {props.productCard && (
                     // <CloseButton handleClose={props.handleClose} />
                     <button type="button" className="p-0 bg-transparent border-0 cursor-pointer top-[1em] right-[1em] absolute font-size-sm appearance-[button] leading-[1] float-right" onClick={props.handleClose} aria-label="Close" role="button">
