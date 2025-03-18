@@ -119,7 +119,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
     };
 
     const validateForm = (email, phone) => {
-        const emailValid = email && /^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+        const emailValid = email && /^[a-zA-Z0-9](?!.*\.\.)[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
         const isPhoneEmpty = !phone || phone.trim() === '';
         const emailRequired = isPhoneEmpty;
         return { emailValid, emailRequired };
