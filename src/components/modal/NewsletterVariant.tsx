@@ -199,6 +199,10 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
         setaActiveCountryCode(numberCodeDef)
     }, [store]);
 
+    useEffect(() => {
+        if (email === '') setEmailError({ valid: true, error: '' });
+    }, [email]);
+
     return (
         <div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding bg-pink-light`}>
             {/* <picture className="absolute w-full lg:w-auto lg:h-full">
@@ -244,7 +248,9 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                                 <h2 className={`text-base lg:text-lg leading-[1.25!important] mb-[.25rem] lg:mb-[.5rem] lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`}>
                                 You've successfully signed up! 🎉
                                 </h2>
-                                <h3 className={`text-2xl lg:text-[40px] leading-[40px!important] text-center leading-[1.25!important] px-3 lg:px-5 ${nbp_heading_2_color || 'text-body'} mb-2 lg:mb-[1.5rem]`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
+                                <h3 className={`text-2xl lg:text-[40px] leading-[40px!important] text-center leading-[1.25!important] px-2 lg:px-4 ${nbp_heading_2_color || 'text-body'} mb-2 lg:mb-[1.5rem]`}>
+                                    Use code below for 10% OFF
+                                </h3>
                                 {!copied ? (
                                     <Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative">
                                         Code: WELCOME <Paste className="ml-g svg--current-color svg" />
