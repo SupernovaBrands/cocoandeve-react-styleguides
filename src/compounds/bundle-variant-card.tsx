@@ -2,31 +2,42 @@ import { useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, selectedVariant, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    const { swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
     // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
-    
+
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
-    
+
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
-            const id = currentVariant.bundleId ? `gid://shopify/ProductVariant/${currentVariant.bundleId?.value}` : currentVariant.id;
             setAddingItem(true);
+            let activeProduct = productShopify;
+            const id = currentVariant.bundleId ? `gid://shopify/ProductVariant/${currentVariant.bundleId?.value}` : currentVariant.id;
+            try {
+                if (currentVariant.bundleId) {
+                    const productBundle = await fetch(`/api/getVariantInfo?variant=${currentVariant.bundleId.value}`);
+                    const productBundleJson = await productBundle.json();
+                    const { node: bundle } = productBundleJson;
+                    activeProduct = bundle?.product;
+                }
+            } catch {
+                console.log('something wrong on fetching bundle');
+            }
+
             await addToCart({
                 id,
                 quantity: 1,
-                handle: productShopify?.handle,
-                title: productShopify.title,
+                handle: activeProduct?.handle,
+                title: activeProduct?.title,
             });
             if (typeof trackEvent === 'function') {
                 try {
                     trackEvent('pdp', {
                         category: "Add to Cart",
                         target: "add_to_cart_pdp",
-                        product: productShopify?.handle,
+                        product: activeProduct?.handle,
                     });
-        
-                    addToCartAnalytics(cart.id, productShopify?.handle, selectedVariant?.id, currency, 1);
+                    addToCartAnalytics(cart.id, activeProduct?.handle, id, currency, 1);
                 } catch (e:any) {
                     console.log('error', e);
                 }
@@ -66,9 +77,9 @@ const BundleVariantCard = (props) => {
                             <img className="w-full h-full object-cover" src={bundleImg.src.replace('public', '320x')} />
                         </a>
                     )}
-                    
+
                     {!urlSet && bundleImg && (
-                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.src.replace('public', '320x')} />    
+                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.src.replace('public', '320x')} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
