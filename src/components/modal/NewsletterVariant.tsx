@@ -214,7 +214,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                 </CloseButton>
 
                 <div className="flex flex-wrap flex-col justify-center items-center mx-0">
-                    <BrandLogo className="lg:h-[2.578rem] mb-3 w-[5rem] lg:w-[6.25rem] lg:mb-4" />
+                    <BrandLogo className={`lg:h-[2.578rem] ${formCompleted ? 'mb-[25px]' : 'mb-3'} w-[5rem] lg:w-[6.25rem] lg:mb-4`} />
                     {!formCompleted && (
                         <form className="relative" onSubmit={handleForm}>
                             {/* <span className='block text-center text-sm mb-25 lg:text-base'>UNLOCK</span> */}
@@ -244,10 +244,10 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                                 <h2 className={`text-base lg:text-lg leading-[1.25!important] mb-[.25rem] lg:mb-[.5rem] lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`}>
                                 You've successfully signed up! 🎉
                                 </h2>
-                                <h3 className={`text-2xl lg:text-[40px] leading-[40px!important] text-center leading-[1.25!important] px-3 lg:px-5 ${nbp_heading_2_color || 'text-body'} mb-[.75rem] lg:mb-[1.5rem]`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
+                                <h3 className={`text-2xl lg:text-[40px] leading-[40px!important] text-center leading-[1.25!important] px-3 lg:px-5 ${nbp_heading_2_color || 'text-body'} mb-2 lg:mb-[1.5rem]`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
                                 {!copied ? (
                                     <Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative">
-                                        CODE: WELCOME <Paste className="ml-25 lg:ml-[.5rem] svg--current-color svg" />
+                                        Code: WELCOME <Paste className="ml-g svg--current-color svg" />
                                     </Button>
                                 ) : (
                                     <Button buttonClass="w-full border-2 border-primary bg-primary text-white inline-flex justify-center items-center relative">COPIED</Button>
