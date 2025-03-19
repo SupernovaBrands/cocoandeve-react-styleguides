@@ -56,11 +56,9 @@ const ComparisonTable = (props: any) => {
 };
 
 const ProductComparison = (props: any) => {
-    console.log('props', props);
     const { mainCompare, productsCompare } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
-    // const [finalItems, setFinalItems] = useState(INIT_FINALS);
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
     const [comparison2, setComparison2] = useState(productsCompare[0]?.tableData || []);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -132,9 +130,10 @@ const ProductComparison = (props: any) => {
                         <Carousel.Wrapper emblaApi={emblaApi3} className={''}>
                             <Carousel.Inner emblaRef={emblaRef3} innerClass={'pr-g'} className={'mx-0'}>
                                 {INIT_FINALS?.length > 0 && INIT_FINALS.map((data: any, index: number) => {
+                                    const tableKeys = comparison1.map((c) => c.title);
                                     return <ComparisonTable
                                         key={`compare-table-scroll-${index}`}
-                                        compare1={data.tableData} compare2={data.tableData}
+                                        compare1={data.tableData.filter((c1) => tableKeys.includes(c1.title))} compare2={data.tableData.filter((c2) => tableKeys.includes(c2.title))}
                                     />
                                 })}
                             </Carousel.Inner>
