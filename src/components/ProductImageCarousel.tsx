@@ -144,6 +144,12 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 									</picture>
 								</div>
 							))}
+							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length + 1}>
+								<video width="320" height="240" controls className="w-full h-auto max-w-full">
+									<source src="https://cdn.shopify.com/videos/c/o/v/4e85c84998f44cce9cac507b6f3843a8.mp4" type="video/mp4" />
+									Your browser does not support the video tag.
+								</video>
+							</div>
 						</Carousel.Inner>
 						{bottomBadge && (<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">{bottomBadge}</span>)}
 					</Carousel.Wrapper>
