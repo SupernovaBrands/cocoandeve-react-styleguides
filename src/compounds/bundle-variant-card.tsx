@@ -105,7 +105,7 @@ const BundleVariantCard = (props) => {
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0`}>
+                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale ? '!justify-center' : ''}`}>
                                 {!currentVariant.availableForSale && 'Out of Stock'}
                                 {currentVariant.availableForSale && !addingItem && (
                                     <>
