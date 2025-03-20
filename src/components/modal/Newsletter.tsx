@@ -128,15 +128,16 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 	};
 
 	const validateForm = (email, phone) => {
-		const emailValid = email && /^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+		const emailValid = /^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+		const phoneValid = /^(?:\+?\d{1,3}[-.\s]?)?(?:\(\d{1,4}\)|\d{1,4})[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(phone);
 		const isPhoneEmpty = !phone || phone.trim() === '';
 		const emailRequired = isPhoneEmpty;
-		return { emailValid, emailRequired };
+		return { emailValid, emailRequired, phoneValid };
 	};
 	
 	const handleForm = (e) => {
 		e.preventDefault();
-		const { emailValid, emailRequired } = validateForm(email, phone);
+		const { emailValid, emailRequired, phoneValid } = validateForm(email, phone);
 		// If email is required and not valid, show email validation error
 		if (emailRequired && !emailValid) {
 			setEmailError({ valid: false, error: 'Please enter a valid email address' });
@@ -148,9 +149,9 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 			utmParams();
 			if (emailValid || !emailRequired) {
 				subscribeBluecoreRegistration(email, phone);
-				setFormCompleted(true);
+				if (emailValid) setFormCompleted(true);
 			}
-			if (phone && phone !== '') {
+			if (phone && phone !== '' && phoneValid) {
 				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
 					if (resp.status === 'error') {
 						setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
@@ -158,6 +159,8 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 						setFormCompleted(true);
 					}
 				});
+			} else {
+				setPhoneError({ valid: false, error: 'Please enter valid phone number' });
 			}
 			// Identify user data for tracking
 			try {
