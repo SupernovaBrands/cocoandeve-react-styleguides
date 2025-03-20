@@ -126,7 +126,7 @@
 
 .product-banner__slider {
     &-wrapper picture {
-        @apply pt-[20.0em] lg:pt-[31.625em];
+        @apply lg:pt-[31.625em];
     }
     &-wrapper .img-slider svg {
         @apply h-[.5rem] lg:h-[12px];
