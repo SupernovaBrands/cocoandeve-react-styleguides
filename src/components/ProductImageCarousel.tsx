@@ -5,6 +5,7 @@ import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrow
 import ChevronNext from '~/images/icons/chevron-down.svg';
 import ChevronPrev from '~/images/icons/chevron-up.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import Play from '~/images/icons/play.svg';
 
 interface ImageSlide {
 	id: number
@@ -15,6 +16,7 @@ type PropType = {
 	slides: ImageSlide[]
 	bottomBadge?: string
 	activeImageIndex: number
+	videoStackUrl: string
 }
 
 const useMediaQuery = (query) => {
@@ -33,7 +35,7 @@ const useMediaQuery = (query) => {
 	return matches;
 };
 
-const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex }) => {
+const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex, videoStackUrl }) => {
 	const isDesktop = useMediaQuery('(min-width: 769px)');
 	const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 	const [scrollProgress, setScrollProgress] = useState(0);
@@ -42,7 +44,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
-
+	console.log('vide url', videoStackUrl);
 	useEffect(() => {
 		setSelectedIndex(activeImageIndex);
 		onThumbClick(activeImageIndex);
@@ -110,6 +112,23 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 									</button>
 								</div>
 							))}
+							{videoStackUrl && (
+								<div className={` max-w-[70px] flex flex-[0_0_70px] my-1 rounded relative`} key={slides.length}>
+									<button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)}>
+										{isDesktop && (
+											<>
+												<picture>
+													<source srcSet={`${slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
+													<img className="w-[70px] rounded b" src={`${slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
+												</picture>
+												<div className="absolute inset-0 flex items-center justify-center">
+													<Play className="svg fill-gray-100 h-[2.4em] fill-sm" />
+												</div>
+											</>
+										)}
+									</button>
+								</div>
+							)}
 						</Carousel.Inner>
 						<Carousel.Navigation>
 							{slides.length > 6 && (	
@@ -144,12 +163,14 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 									</picture>
 								</div>
 							))}
-							<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length + 1}>
-								<video width="320" height="240" controls className="w-full h-auto max-w-full">
-									<source src="https://cdn.shopify.com/videos/c/o/v/4e85c84998f44cce9cac507b6f3843a8.mp4" type="video/mp4" />
-									Your browser does not support the video tag.
-								</video>
-							</div>
+							{videoStackUrl && (
+								<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
+									<video width="320" height="240" controls className="w-full h-auto max-w-full">
+										<source src={videoStackUrl} type="video/mp4" />
+										Your browser does not support the video tag.
+									</video>
+								</div>
+							)}
 						</Carousel.Inner>
 						{bottomBadge && (<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">{bottomBadge}</span>)}
 					</Carousel.Wrapper>
