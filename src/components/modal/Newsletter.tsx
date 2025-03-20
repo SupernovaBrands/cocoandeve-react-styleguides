@@ -170,7 +170,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 				console.log('error wtba push');
 			}
 
-			// setCookie('signup_popup', 'signup_popup', 30);
+			setCookie('signup_popup', 'signup_popup', 30);
 		}
 	};
 
