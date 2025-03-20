@@ -245,11 +245,11 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                     {formCompleted && (
                         <div className="modal--newsletter__completed flex items-center justify-center">
                             <div className="flex flex-wrap justify-center items-center">
-                                <h2 className={`text-base lg:text-lg leading-[1.25!important] mb-[.25rem] lg:mb-[.5rem] lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`}>
+                                <h2 className={`text-base lg:text-lg font-normal leading-[1.25!important] mb-[.25rem] lg:mb-[.5rem] lg:mb-2 text-center w-full ${nbp_heading_2_color || 'text-body'}`}>
                                 You've successfully signed up! 🎉
                                 </h2>
-                                <h3 className={`text-2xl lg:text-[40px] leading-[40px!important] text-center leading-[1.25!important] px-2 lg:px-4 ${nbp_heading_2_color || 'text-body'} mb-2 lg:mb-[1.5rem]`}>
-                                    Use code below for 10% OFF
+                                <h3 className={`text-base lg:text-lg mt-25 text-center px-2 lg:px-4 ${nbp_heading_2_color || 'text-body'} mb-2 lg:mb-[1.5rem]`}>
+                                    Use code below for <br /><span className="text-xl lg:text-2xl">10% OFF</span>
                                 </h3>
                                 {!copied ? (
                                     <Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative">
