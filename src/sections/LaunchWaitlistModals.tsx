@@ -77,7 +77,7 @@ const LaunchWaitlistModals = (props) => {
     }
 	return (
 		<>
-			<Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
+			<Modal contentClass={'w-full'} backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal.open} handleClose={() => {setLaunchWLModal({...launchWLModal, ...{ open: false }})}}>
 				<LaunchWaitList
 					title={launchWL.launch_wl_title}
 					content={launchWL.launch_wl_subtitle}
@@ -103,7 +103,7 @@ const LaunchWaitlistModals = (props) => {
                     phoneShow={launchWL.phone_en}
                 />
             </Modal>
-            <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal2.open} handleClose={() => {setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}}>
+            <Modal contentClass={'w-full'} backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal2.open} handleClose={() => {setLaunchWLModal2({...launchWLModal2, ...{ open: false }})}}>
                 <LaunchWaitList
                     title={launchWL.launch_wl2_title || ''}
                     content={launchWL.launch_wl2_subtitle || ''}
@@ -129,7 +129,7 @@ const LaunchWaitlistModals = (props) => {
                     phoneShow={launchWL.phone_en2}
                 />
             </Modal>
-            <Modal backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal3.open} handleClose={() => {setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}}>
+            <Modal contentClass={'w-full'} backdropClasses="md:overflow-y-hidden" className={`modal-lg max-w-[44.063rem] !px-hg lg:!px-0 modal-dialog-centered`} isOpen={launchWLModal3.open} handleClose={() => {setLaunchWLModal3({...launchWLModal3, ...{ open: false }})}}>
                 <LaunchWaitList
                     title={launchWL.launch_wl3_title || ''}
                     content={launchWL.launch_wl3_subtitle || ''}
