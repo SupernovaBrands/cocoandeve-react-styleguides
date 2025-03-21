@@ -35,17 +35,17 @@ const ImageCard = (props: any) => (
 );
 
 const ComparisonTable = (props: any) => {
-    const { compare1, compare2 } = props;
+    const { compare1, compare2, dataSource } = props;
+    console.log('compare1', compare1);
     return compare1.length > 0 && compare2.length > 0 && (
         <div className="w-full basis-full flex-grow-0 flex-shrink-0 pl-g lg:flex-1 lg:basis-6/12 lg:px-g lg:min-h-[27.5rem]">
             {compare1.map((data, i , row) => {
-                const compare2Value = compare2.find((c) => c.title === data.title) || null;
-                return compare2Value && (
+                return (
                     <div key={`table-display-${i}`}>
                         <div className="flex lg:flex-wrap lg:-mx-g lg:px-g">
                             <div className="text-sm w-[6rem] basis-[6rem] font-bold grow-0 shrink-0 lg:text-base lg:w-1/3 lg:basis-1/3 lg:text-center lg:order-2">{data.title}</div>
                             <div className="text-[.875rem] leading-[1.125rem] px-g lg:px-0 lg:w-1/3 lg:text-base lg:basis-1/3 lg:text-center lg:order-1">{data.value}</div>
-                            <div className="lg:w-1/3 lg:basis-1/3 lg:text-center hidden lg:block lg:order-3">{compare2Value.value}</div>
+                            <div className="lg:w-1/3 lg:basis-1/3 lg:text-center hidden lg:block lg:order-3">{compare2[i].value}</div>
                         </div>
                         {i + 1 !== row.length && <hr className="border-gray-500 block my-g lg:my-[.906rem]" />}
                     </div>
@@ -68,6 +68,7 @@ const ProductComparison = (props: any) => {
     const [emblaRef3, emblaApi3] = useEmblaCarousel({ align: 'start', ...options });
 
     const onScroll = useCallback((emblaApi1: EmblaCarouselType) => {
+        // console.log('scrolling?', emblaApi1.);
 		setScrollProgress(((1 / INIT_FINALS.length) * 100) * emblaApi1.selectedScrollSnap());
         // setComparison1(INIT_FINALS[emblaApi1.selectedScrollSnap()]?.tableData || 0);
 	}, []);
@@ -95,6 +96,12 @@ const ProductComparison = (props: any) => {
         if (emblaApi2) {
             emblaApi2.on('reInit', onScroll2);
 		    emblaApi2.on('scroll', onScroll2);
+            emblaApi2.on('select', () => {
+                if (!emblaApi2) return;
+                console.log('selected desktop', emblaApi2.selectedScrollSnap());
+                const itemSel = emblaApi2.selectedScrollSnap();
+                setComparison2(productsCompare[itemSel]?.tableData || []);
+            })
         }
         if (emblaApi3) {
             emblaApi3.on('reInit', onScroll3);
@@ -106,7 +113,7 @@ const ProductComparison = (props: any) => {
         }
 	}, [emblaApi1, onScroll, emblaApi2, onScroll2, emblaApi3, onScroll3]);
     
-    return INIT_FINALS.length > 0 && (
+    return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
             <div className="w-full justify-center px-0 pt-5 lg:pt-1 lg:mb-5 lg:pb-[1.5rem]">
                 <p className="text-2xl font-bold text-center mb-2 lg:mb-3">Haircare Range</p>
@@ -132,8 +139,9 @@ const ProductComparison = (props: any) => {
                                 {INIT_FINALS?.length > 0 && INIT_FINALS.map((data: any, index: number) => {
                                     const tableKeys = comparison1.map((c) => c.title);
                                     return <ComparisonTable
+                                        dataSource={'mobile'}
                                         key={`compare-table-scroll-${index}`}
-                                        compare1={data.tableData.filter((c1) => tableKeys.includes(c1.title))} compare2={data.tableData.filter((c2) => tableKeys.includes(c2.title))}
+                                        compare1={data?.tableData || []} compare2={data?.tableData || []}
                                     />
                                 })}
                             </Carousel.Inner>
@@ -161,7 +169,7 @@ const ProductComparison = (props: any) => {
                                 srcSet={INIT_FINALS[0].src}
                                 title={INIT_FINALS[0].title}
                             />
-                            <ComparisonTable compare1={comparison1} compare2={comparison2} />
+                            <ComparisonTable compare1={comparison1} compare2={comparison2} dataSource={'desktop'} />
                             <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
                                 <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={''}>
                                     {INIT_FINALS.slice(1).map((data, index) => (
