@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrowButtons';
@@ -6,6 +6,7 @@ import ChevronNext from '~/images/icons/chevron-down.svg';
 import ChevronPrev from '~/images/icons/chevron-up.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Play from '~/images/icons/play.svg';
+import { useIsVisible } from "~/hooks/useIsVisible";
 
 interface ImageSlide {
 	id: number
@@ -44,7 +45,18 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
-	console.log('vide url', videoStackUrl);
+
+	const { isVisible, targetRef } = useIsVisible(
+        {
+            root: null,
+            rootMargin: "200px",
+            threshold: 0.1,
+        },
+        false,
+    );
+
+	const videoRef = useRef<HTMLVideoElement>(null);
+
 	useEffect(() => {
 		setSelectedIndex(activeImageIndex);
 		onThumbClick(activeImageIndex);
@@ -93,6 +105,32 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 		emblaMainApi.on('scroll', onScroll);
 
 	}, [emblaMainApi, onSelect, onScroll]);
+
+	const startVideoOnMouseMove = useCallback(async () => {
+		console.log('startVideoOnMouseMove');
+        try {
+            await videoRef.current.play();
+        } catch (e) {
+        // do nothing
+        }
+    }, []);
+
+    const stopVideoOnMove = useCallback(() => {
+        try {
+            videoRef.current.pause();
+        } catch (e) {
+        // do nothing
+        }
+    }, []);
+
+	useEffect(() => {
+		console.log('isVisible', isVisible);
+        if (isVisible) {
+            startVideoOnMouseMove();
+        } else {
+            stopVideoOnMove();
+        }
+    }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
 
 	return (
 		<>
@@ -164,8 +202,8 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 								</div>
 							))}
 							{videoStackUrl && (
-								<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
-									<video width="320" height="240" controls className="w-full h-auto max-w-full">
+								<div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
+									<video width="320" height="240" controls className="w-full h-auto max-w-full" autoPlay preload="none" ref={videoRef} >
 										<source src={videoStackUrl} type="video/mp4" />
 										Your browser does not support the video tag.
 									</video>
