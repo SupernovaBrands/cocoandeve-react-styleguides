@@ -122,9 +122,9 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
 			}
 
-			if (store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
-			}
+			// if (store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
+			// }
 
 			// if (store === 'my' && item.merchandise.product.handle === 'hair-revival-set') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';

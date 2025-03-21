@@ -27,9 +27,9 @@ const PopularProducts = (props: any) => {
 								if (store === 'eu' && handle === 'hair-revival-set') {
 									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e4131b1-37c9-4e58-7e23-d56aac5e9600/public';
 								}
-								if (store === 'int' && handle === 'hair-revival-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f8c59cc-00b2-4c2e-29bb-7a84435cdd00/public';
-								}
+								// if (store === 'int' && handle === 'hair-revival-set') {
+								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f8c59cc-00b2-4c2e-29bb-7a84435cdd00/public';
+								// }
 								// if (store === 'my' && handle === 'hair-revival-set') {
 								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c28d622f-45cc-49ce-d5c2-0dbd6c1f9100/public';
 								// }
