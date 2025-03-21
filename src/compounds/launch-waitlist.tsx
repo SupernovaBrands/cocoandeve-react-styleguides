@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, KeyboardEvent } from 'react';
 import { CheckBox, InputFormGroup, Select, Button } from "../components";
 import { getCookie, setCookie, validateEmail, validatePhone } from '~/modules/utils';
 import countriesList from '~/modules/countriesList';
@@ -81,6 +81,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         }
     }, []);
 
+    const [modified, setModified] = useState(false);
     const [tos, setTos] = useState(false);
     const [tosError, setTosError] = useState(false);
     const [emailError, setEmailError] = useState(false);
@@ -117,7 +118,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     const changeEmail = (e:any) => {
         const val = e.target.value;
         setEmail(val);
-        if (val && val.length > 2 && !validateEmail(val)) {
+        if (val && !validateEmail(val)) {
             setEmailError(true);
         } else {
             setEmailError(false);
@@ -171,9 +172,19 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         setTosClick(true);
     };
 
+    const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => setModified(true);
+
+    useEffect(() => {
+        if (modified && !tosClick) {
+            setTosError(true);
+        } else {
+            setTosError(false);
+        }
+    }, [modified]);
+
     return (
         <>
-            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist ${bgColor} product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-3'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
+            { !showSuccess && <div ref={props.forwardRef} className={`text-body product-waitlist ${bgColor} product-waitlist__form w-100 p-3 ${props.productCard ? '' : 'mb-0'} rounded text-center ${props.className}`} onClick={props.onClickDiv}>
                 {props.productCard && (
                     // <CloseButton handleClose={props.handleClose} />
                     <button type="button" className="p-0 bg-transparent border-0 cursor-pointer top-[1em] right-[1em] absolute font-size-sm appearance-[button] leading-[1] float-right" onClick={props.handleClose} aria-label="Close" role="button">
@@ -186,7 +197,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 <form noValidate onSubmit={submitForm} data-pdp="false" data-product-id={props.launchModalData?.productId}>
                     {props.emailShow && (
                         <div className="flex flex-wrap -mx-2">
-                            <InputFormGroup type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
+                            <InputFormGroup onKeyUp={onKeyUp} type="email" name="email" placeholder="Enter your email" groupClass="w-full pr-2 pl-2" onChange={changeEmail} value={loggedInEmail ?? ''} inputClass={props.productCard ? 'h-[3.125rem] !mb-1 px-[1em] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                             {emailError && <span className={`w-full text-primary email-error text-sm mb-g -mt-25 ${props.productCard ? 'px-2 text-left' : ''}`}>Please enter a valid email address</span> }
                         </div>
                     )}
@@ -222,11 +233,11 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                         masking={true} options={countries}
                                         selected={`${phoneCode.replace('+', '')}`}
                                         maskingClass={props.productCard ? 'h-[3.125rem] !mb-0  !opacity-0' : '!py-[13px]'} selectClass={props.productCard ? '!mb-0' : ''}></Select>
-                                <InputFormGroup onChange={changePhone} type="text" name="phone" placeholder={`${props.productCard ? 'Phone number' : 'Enter your phone number'}`}
+                                <InputFormGroup onKeyUp={onKeyUp} onChange={changePhone} type="text" name="phone" placeholder={`Phone number`}
                                     groupClass={`${props.productCard ? 'flex-1 basis-[55%] lg:basis-[57.5%] w-[1%] -ml-[1px]' : 'pr-2 pl-3 md:pl-[2.188rem] w-full'}`}
                                     inputClass={props.productCard ? 'h-[3.125rem] !mb-0 px-[1rem] py-[0.875em]' : '!py-[13px] px-[.975em]'}/>
                             </div>
-                            { phoneError && !props.productCard && <span className="w-full text-primary email-error text-sm mb-g -mt-25 lg:pl-3">Please enter a valid phone number</span> }
+                            { phoneError && <span className="w-full text-primary email-error text-sm mb-g -mt-25 lg:pl-3">Please enter a valid phone number</span> }
                         </div>
                     )}
                     <div className={`flex flex-wrap items-center justify-center ${props.productCard ? '' : 'mb-2'}`}>
@@ -252,7 +263,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className={`font-size-xs lg:mt-2 font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-2'}`} dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
+                    <p className={`font-size-xs lg:mt-2 font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-0'}`} dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
                 </form>
             </div> }
 
