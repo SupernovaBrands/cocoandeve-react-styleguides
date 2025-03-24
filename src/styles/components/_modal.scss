@@ -26,4 +26,22 @@
 	.modal-dialog-centered {
 		@apply min-h-[calc(100%-3.5rem)] flex items-center my-[1.75rem];
 	}
+
+	.modal__variant {
+		.modal-content {
+			@apply rounded-[.5rem]
+		}
+
+		.modal-body {
+			background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c639d9fc-07a5-409b-d4e1-781c97cdfd00/public');
+			background-position: bottom -1px center;
+			background-repeat: no-repeat;
+			background-size: 100%;
+
+			@screen lg {
+				background-image: url('https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7bfa6faa-7369-4b09-a0e6-86680e705000/public');
+			}
+		}
+	}
+
 }
