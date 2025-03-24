@@ -10,9 +10,9 @@ const SearchProductCard = (props: any) => {
 	if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && url === 'deep-condition-bundle') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
 	}
-	if (store === 'my' && url === 'hair-revival-set') {
-		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
-	}
+	// if (store === 'my' && url === 'hair-revival-set') {
+	// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
+	// }
 	if (['uk', 'ca', 'us'].includes(store) && url === 'tan-masters-kit') {
 		featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
 	}
