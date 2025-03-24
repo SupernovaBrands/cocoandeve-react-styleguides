@@ -710,7 +710,7 @@ const stockistTemplate = () => {
 				content={content}
 			/>
 			<Instagram className="bg-pink-light" isStyleguide={true} />
-			<Service />
+			{/* <Service /> */}
 			<Footer
 				aboutMenu={aboutMenu}
 				shopMenu={shopMenu}

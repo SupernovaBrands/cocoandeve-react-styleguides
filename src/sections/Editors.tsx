@@ -25,7 +25,7 @@ const options: EmblaOptionsType = {
 	}
 };
 
-const Editors = () => {
+const Editors = (props) => {
     const [emblaRef, emblaApi] = useEmblaCarousel(options);
     const [prevShow, setPrevShow] = useState(false);
     const [nextShow, setNextShow] = useState(true);
@@ -100,8 +100,10 @@ const Editors = () => {
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         }
     ];
+    // console.log('editor props', props);
     return (
-        <section className="list-logo container mb-g lg:my-[50px] px-2 lg:px-g pb-1 lg:pb-0">
+        <section className={`list-logo container mb-g lg:my-[50px] lg:px-g pb-1 lg:pb-0 
+        px-g pt-2 lg:pt-0 ${props.className ?? ''}`}>
             <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor lg:pl-3">
                 <Carousel.Inner emblaRef={emblaRef} className='items-center'>
                     <figure className="w-auto flex grow-0 shrink-0 pl-0 pr-hg lg:pl-0 lg:pr-g text-[16px] lg:text-[20px] basis-auto lg:grid lg:grid-cols-1 font-normal">

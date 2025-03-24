@@ -1,3 +1,4 @@
+import PostTag from "~/components/PostTag";
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
@@ -36,12 +37,12 @@ const HowToCarousel = (props) => {
     const options: EmblaOptionsType = {
 		loop: true,
 		align: 'start',
-		startIndex: 1,
-		breakpoints: {
-            '(max-width: 992px)': {
-                startIndex: 0,
-            }
-		}
+		startIndex: 0,
+		// breakpoints: {
+        //     '(max-width: 992px)': {
+        //         startIndex: 0,
+        //     }
+		// }
 	};
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
@@ -73,27 +74,29 @@ const HowToCarousel = (props) => {
     };
 
 	return (
-		<section className="how-to no-gutters__in-container w-full">
-			{title && (<h2 className="text-center h1 mb-0 h1 pb-2 lg:pb-3 pt-1 w-full">The Ultimate “HOW TO”s</h2>)}
-			<Carousel.Wrapper emblaApi={emblaApi}>
+		<section className="how-to no-gutters__in-container w-full px-0 lg:px-hg">
+			{title && (<h2 className="text-center mb-g lg:mb-3 text-xl lg:text-2xl w-full">The Ultimate “HOW TO”s</h2>)}
+			<Carousel.Wrapper emblaApi={emblaApi} className="pl-hg lg:px-g">
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
-						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
-							<figure className="border border-secondary-light">
+						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
+							<figure className="border border-secondary-light rounded-[2rem]">
 								{!isLoading && (
 									<picture className="relative w-full block m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
-										<img className="w-full aspect-[4/3] max-h-[11.125em] lg:max-h-[18.625em] object-cover" alt="" loading="lazy" src={item.src}/>
+										<img className="rounded-t-[2rem] w-full aspect-[4/3] max-h-[10.9375em] lg:max-h-[18.0625em] object-cover" alt="" loading="lazy" src={item.src}/>
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 											className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 												<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
 												</svg>
 									</picture>
 								)}
-								<figcaption className="p-2 ">
+								<figcaption className="p-2">
 									{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
-										<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
+										// <span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-bold py-[.375em] px-[.75em] mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
+										<PostTag paddingClass="py-[.375em] px-[.75em]" key={`article-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
 									) : ''}
-									<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+									<p className="text-lg lg:text-xl font-bold mt-2 blog-video-card__title mb-1 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+									<span className="inline-block btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full">Read more</span>
 								</figcaption>
 							</figure>
 						</div>
@@ -105,7 +108,7 @@ const HowToCarousel = (props) => {
 						disabled={prevDisabled7}
 						className={props.btnLeft}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center right-0 rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
@@ -114,7 +117,7 @@ const HowToCarousel = (props) => {
 						disabled={nextDisabled7}
 						className={props.btnRight}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] flex justify-center items-center rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>

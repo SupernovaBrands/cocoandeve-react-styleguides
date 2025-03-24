@@ -6,7 +6,7 @@ import Play from '~/images/icons/play.svg';
 import Close from '~/images/icons/close.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import {
 	PrevButton,
@@ -34,10 +34,9 @@ const OurStoryTemplate = (props: any) => {
 
 	const options: EmblaOptionsType = {
 		loop: true,
-		align: 'center',
+		align: 'start',
 		breakpoints: {
             '(min-width: 992px)': {
-                align: 'start',
                 watchDrag: false,
 			    duration: 40,
             }
@@ -59,54 +58,54 @@ const OurStoryTemplate = (props: any) => {
 	return (
 		<>
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">
-				<h1 className="text-center absolute m-1 text-[2em] lg:text-hero text-white">{banner.tiitle}</h1>
+				<h1 className="text-center absolute mx-g my-1 text-xl lg:text-[3.375em] lg:leading-[1] text-white lg:mx-[12.5%] sm:font-[400] lg:font-bold">{banner.tiitle}</h1>
 				{!isLoading && (
 					<picture>
-						<source srcSet={banner.back_img.url} media="(min-width: 992px)" />
-						<img src={banner.back_img_mob.url} className="w-full" alt={banner.tiitle} />
+						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a1dca008-8438-4aaf-d8ba-ad72d7668500/public" media="(min-width: 992px)" />
+						<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6d1e9527-c4f1-42dd-4229-ac48de60a500/828x" className="w-full" alt={banner.tiitle} />
 					</picture>
 				)}
 			</section>
 
-			<section className="container text-center mt-5 mb-5">
-				<h2 className="mb-1">{intro.title}</h2>
+			<section className="container text-center my-3 lg:my-[50px]">
+				<h2 className="mb-1 text-body lg:text-2xl">{intro.title}</h2>
 				{!isLoading && (
-					<div className="w-full intro__text lg:w-2/3 mx-auto px-hg lg:px-g" dangerouslySetInnerHTML={{
+					<div className="w-full text-body intro__text lg:w-2/3 mx-auto px-hg -mb-g lg:mb-0 lg:px-g" dangerouslySetInnerHTML={{
 						__html: intro.description
 					}} />
 				)}
 				<ImageWithText
-					src={!isLoading ? intro.back_img_mob_1.url : null}
-					srcSet={intro.back_img_1.url}>
-					<h2 className="mb-2">{intro.titleintro_1}</h2>
-					{!isLoading && <p className="mb-[1rem]">{intro.description_1}</p>}
+					src={!isLoading ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/342a6ea4-56aa-4b59-75b5-0bab0cd19700/public' : null}
+					srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d2fefbbc-8dcb-4782-db07-ffa713901500/public'}>
+					<h2 className="mb-[.5rem] text-lg text-body lg:text-xl">{intro.titleintro_1}</h2>
+					{!isLoading && <p className="text-body">{intro.description_1}</p>}
 				</ImageWithText>
 
 				<ImageWithText
 					reverse={true}
-					src={!isLoading ? intro.back_img_mob_2.url : null}
-					srcSet={intro.back_img_2.url}>
-					<h2 className="mb-2">{intro.titleintro_2}</h2>
-					{!isLoading && <p className="mb-[1rem]">{intro.description_2}</p>}
+					src={!isLoading ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ad271208-07c1-4920-b861-9de497293a00/public' : null}
+					srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cff9e32-7b24-4fd7-793f-fdea4fc2e600/public'}>
+					<h2 className="mb-[.5rem] text-lg text-body lg:text-xl">{intro.titleintro_2}</h2>
+					{!isLoading && <p className="mb-[1rem] lg:mb-0 text-body">{intro.description_2}</p>}
 				</ImageWithText>
 			</section>
 
-			<section className="page-award-slider bg-yellow-light text-center pt-5 pb-5 overflow-hidden">
+			<section className="page-award-slider bg-yellow-light text-center py-3 lg:py-[50px] overflow-hidden">
 				<div className="px-hg lg:px-g w-full lg:w-1/3 ml-auto mr-auto">
-					<h2 className="mb-1">{logo.Heading}</h2>
+					<h2 className="mb-1 lg:mb-g text-body lg:text-2xl">{logo.Heading}</h2>
 					{!isLoading && (
-						<p className="ml-auto mr-auto mb-5">{logo.Description}</p>
+						<p className="ml-auto mr-auto mb-g text-body lg:mb-3">{logo.Description}</p>
 					)}
 				</div>
 				{!isLoading && (
+				<div className="container px-3 lg:px-g">
 					<Carousel.Wrapper emblaApi={emblaApi} className="mx-0">
 						<Carousel.Inner emblaRef={emblaRef} className="px-0">
 							{logos.map((data, i) => {
-								const odd = Math.abs(i % 2) == 1;
 								return (
-									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-3/4 basis-3/4 md:w-1/4 md:basis-1/4 lg:w-[20%] lg:basis-[20%] px-hg lg:px-g ${odd ? '' : 'mt-5'}`} key={data.id}>
+									<div className={`carousel__slide flex-grow-0 flex-shrink-0 w-1/3 basis-1/3 md:w-1/4 md:basis-1/4 lg:w-[12.5%] lg:basis-[12.5%] pr-hg lg:px-g`} key={data.id}>
 										<div className="flex items-center justify-center">
-											<img className="block w-full" src={data.image.url} alt={`slide ${data.id + 1}`} />
+											<img className="block w-full max-w-[96px] lg:min-w-[auto] lg:max-w-[120px]" src={data.image.url.replace('public', '360x')} alt={`slide ${data.id + 1}`} />
 										</div>
 									</div>
 								)
@@ -115,47 +114,53 @@ const OurStoryTemplate = (props: any) => {
 						<Carousel.Navigation>
 							<PrevButton
 								onClick={() => autoPlayClick(arrowClickPrev)}
-								className="left-0 w-[15%] opacity-90 lg:-left-[3em]"
+								className="hidden w-auto h-0 lg:flex left-3 top-[50%]"
 							>
-								<span className="carousel__button--half-rounded left-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center right-0 rounded-tr-full rounded-br-full lg:rounded-full shadow-lg">
-									<ChevronPrev className="w-[1.625em] h-[1.625em] svg--current-color lg:-mr-[2em]" />
+								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
+									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
+										<path d="M10.4142 16.071L3.34318 8.99993L10.4142 1.92888L9 0.514648L0.514719 8.99993L9 17.4852L10.4142 16.071Z" fill="#151515"/>
+									</svg>
 								</span>
 							</PrevButton>
 							<NextButton
 								onClick={() => autoPlayClick(arrowClickNext)}
-								className="right-0 w-[15%] opacity-90 lg:-right-[3em]"
+								className="hidden w-auto h-0 lg:flex right-3 top-[50%]"
 							>
-								<span className="carousel__button--half-rounded right-0 bg-white w-[3.047em] lg:w-[6.094em] h-[6.094em] absolute z-[-1] flex justify-center items-center rounded-tl-full rounded-bl-full lg:rounded-full shadow-lg">
-									<ChevronNext className="w-[1.625em] h-[1.625em] svg--current-color lg:-ml-[2em]" />
+								<span className="absolute z-[-1] flex justify-center items-center w-5 h-5 rounded-full bg-white shadow">
+									<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
+										<path d="M0.585767 16.071L7.65682 8.99993L0.585767 1.92888L2 0.514648L10.4853 8.99993L2 17.4852L0.585767 16.071Z" fill="#151515"/>
+									</svg>
 								</span>
 							</NextButton>
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
+				</div>
 				)}
 			</section>
 
 
-			<section className="bg-body-light w-full justify-center lg:flex items-center p-0">
+			<section className="bg-pink-light w-full justify-center lg:flex items-center p-0">
+				<div className="container px-hg lg:absolute">
+					<div className="flex flex-wrap mobile-wrapper -mx-hg lg:-mx-g px-hg">
+						<div className="px-hg lg:pl-3 lg:pr-0 lg:w-1/3 pt-[40px] pb-[40px]">
+							<h4 className="mb-1 font-normal lg:text-lg">{videoBanner.title}</h4>
+							<h2 className="mb-0 lg:text-2xl">Meet our hair, tan, skin & body ranges!</h2>
+						</div>
+					</div>
+				</div>
 				{!isLoading && (
-					<figure className="ml-auto lg:w-7/12 lg:basis-7/12 grow-0 p-0 relative mb-0">
+					<figure className="ml-auto lg:w-[718px] lg:basis-[718px] grow-0 p-0 relative mb-0">
 						<picture className={`relative block cursor-pointer lg:z-[2]`} onClick={() => handlOpenModal(true)}>
-							<source srcSet={videoBanner.back_img.url} media="(min-width: 992px)" />
-							<img src={videoBanner.back_img_mob.url} className="w-full rounded-0" alt="Behind the scenes" />
-							<div className="flex items-center absolute bottom-[35px] lg:bottom-[44px] left-[32px] lg:left-[48.8893px]">
+							<source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/191aae59-800a-4906-b776-b94aded44d00/public'} media="(min-width: 992px)" />
+							<img src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2db1b4fd-acbe-45c4-e5b3-a68312dcd700/public'} className="w-full rounded-0" alt="Behind the scenes" />
+							<div className="flex items-center absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
 								<Play className="svg--current-color w-[57px] h-[57px] lg:w-[88px] lg:h-[88px] text-white " />
-								<span className="text-white font-bold text-[1.625em] lg:text-[2.75em] ml-1 lg:ml-g">Play Video</span>
+								{/* <span className="text-white font-bold text-[1.625em] lg:text-[2.75em] ml-1 lg:ml-g">Play Video</span> */}
 							</div>
 						</picture>
 					</figure>
 				)}
-				<div className="container px-hg lg:absolute">
-					<div className="flex flex-wrap mobile-wrapper -mx-hg lg:-mx-g px-hg">
-						<div className="px-hg lg:px-g lg:w-1/3 pt-5 pb-5">
-							<h4 className="mb-1">{videoBanner.title}</h4>
-							<h2 className="mb-1">{videoBanner.description}</h2>
-						</div>
-					</div>
-				</div>
+				
 			</section>
 
 			{!isLoading && (

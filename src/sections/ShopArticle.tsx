@@ -18,10 +18,8 @@ import ModalWaitlist from "~/components/modal/Waitlist";
 
 const options: EmblaOptionsType = {
 	loop: true,
-    startIndex: 1,
-	breakpoints: {
-		'(min-width: 992px)': { align: 'start' }
-	}
+    startIndex: 0,
+    align: 'start'
 };
 
 const ProductCarousel = (props: any) => {
@@ -44,10 +42,12 @@ const ProductCarousel = (props: any) => {
             if (extendedProducts.length < 3) {
                 const productItems = 4 - extendedProducts.length;
                 extendedProducts = extendedProducts.concat(extendedProducts.slice(0, productItems));
-                setProducts(extendedProducts);
             }
+            // move first elem to last index
+            const firstEl = extendedProducts.shift();
+            setProducts([...extendedProducts, firstEl]);
         }
-    }, [props.products]);
+    }, []);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options, [
@@ -60,7 +60,7 @@ const ProductCarousel = (props: any) => {
 	const autoPlayClick1 = controlAutoplay(emblaApi1);
 	return (
         <>
-            <div className="pt-2 text-center">
+            <div className="pt-0 text-center">
                 <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                     <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
                         {products.map((data: any, id: number) => (
@@ -68,7 +68,7 @@ const ProductCarousel = (props: any) => {
                                 key={`product-${id}-${data.id}`}
                                 product={data}
                                 label={label}
-                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-3/4 basis-3/4 md:w-1/4 md:basis-[28%] lg:px-1 sm:px-hg text-center"
+                                className="relative flex-grow-0 flex-shrink-0 flex flex-col w-[175px] basis-[175px] md:w-[180px] md:basis-[180px] lg:px-1 sm:px-hg text-center"
                                 button={true}
                                 link={data.handle}
                                 carousel={true}
@@ -79,7 +79,7 @@ const ProductCarousel = (props: any) => {
                             />
                         ))}
                     </Carousel.Inner>
-                    <Carousel.Navigation>
+                    {/* <Carousel.Navigation>
                         <PrevButton
                             onClick={() => autoPlayClick1(arrowClickPrev1)}
                             className="lg:-left-[1.25em] lg:w-4 text-primary lg:hidden"
@@ -96,7 +96,7 @@ const ProductCarousel = (props: any) => {
                                 <ChevronNext className="w-[16px] h-[16px] svg--current-color" />
                             </span>
                         </NextButton>
-                    </Carousel.Navigation>
+                    </Carousel.Navigation> */}
                 </Carousel.Wrapper>
             </div>
 

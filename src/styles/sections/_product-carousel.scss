@@ -1,0 +1,14 @@
+.product__carousel {
+
+    &-nav li button {
+        @apply lg:!leading-[40px] hover:text-body focus:text-body visited:text-body font-normal bg-gray-400 rounded-full mr-1 w-auto text-base min-h-3 lg:min-h-4 max-h-3 lg:max-h-[45px] items-center px-2 text-gray-600;
+    }
+
+    &-nav li:last-child button {
+        @apply mr-0;
+    }
+
+    &-nav li .nav--active {
+        @apply bg-primary text-white font-normal focus:text-white visited:text-white hover:text-white;
+    }
+}

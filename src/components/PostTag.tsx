@@ -16,7 +16,7 @@ const PostTag: React.FC<PropType> = (props) => {
 		}
 	}
 	let className = 'bg-gray-400 text-gray-600 hover:text-gray-600';
-	if (tag.toLowerCase() === 'hair') className = 'bg-secondary-light text-gray-600 hover:text-gray-600 hover:bg-secondary-dark';
+	if (tag.toLowerCase() === 'hair') className = 'bg-secondary text-white hover:text-gray-600 hover:bg-secondary-dark';
 	else if (tag.toLowerCase() === 'tan') className = 'bg-yellow-light text-gray-600 hover:text-gray-600 hover:bg-yellow-dark';
 	else if (tag.toLowerCase() === 'suncare') className = 'bg-suncare-blue text-white hover:text-white';
 	else if (tag.toLowerCase() === 'body') className = 'bg-blue text-white hover:text-white hover:bg-blue-dark';
@@ -24,7 +24,7 @@ const PostTag: React.FC<PropType> = (props) => {
 	else if (tag.toLowerCase() === 'new') className = 'bg-secondary text-white hover:text-white';
 	else if (tag.toLowerCase() === 'hot') className = 'bg-primary text-white hover:text-white';
 	return (
-		<span onClick={(e) => handleTag(e, tag)} className={`${paddingClass} cursor-pointer inline-block badge no-underline hover:no-underline font-normal text-center mr-25 rounded ${className} ${widthClass}`}>{children}</span>
+		<span onClick={(e) => handleTag(e, tag)} className={`${paddingClass} font-[400] cursor-pointer inline-block badge no-underline hover:no-underline text-center mr-25 rounded ${className} ${widthClass}`}>{children}</span>
 	)
 };
 

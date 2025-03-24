@@ -377,8 +377,8 @@ const Collection = (props: any) => {
 
             {tcPopups?.enabled_collection && (
                 <>
-                    <div className="text-left terms--link mt-25">
-                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary font-size-sm">{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
+                    <div className="text-left terms--link container mt-1 pb-25 lg:pb-0">
+                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-primary lg:px-0 lg:py-2 text-sm" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
                     </div>
 
                     <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
@@ -387,20 +387,20 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            <div className="container mt-3 px-0 lg:px-g">
+            <div className="container collection__container mt-3 px-0 lg:px-g lg:mt-[50px] lg:mb-[20px]">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
-                            <span className="block collection-sidebar-label mb-1 mt-3"><strong className="text-body">Category</strong></span>
-                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 rounded lg:mb-g" ref={sidebarRef}>
+                            <span className="block collection-sidebar-label text-lg mb-1 mt-3"><strong className="text-body">Category</strong></span>
+                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 lg:w-[202px] lg:rounded-[2rem] lg:mb-g" ref={sidebarRef}>
                                 {sidebarMenu.map((parent: any, index:number) => {
                                     const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     const isLast = (sidebarMenu.length - 1) === index;
                                     return (
-                                    <li className={`${!isLast ? 'mb-1' : ''}`} key={`sidebarr--${parent.handle}-${index}`}>
+                                    <li className={`${!isLast ? 'mb-[.75em]' : 'mb-0'}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <a
-                                            className={`hover:no-underline hover:text-primary
+                                            className={`hover:no-underline hover:text-primary text-base
                                                 ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
                                             href={`/collections/${parent.handle}`}
                                             dangerouslySetInnerHTML={{ __html: html }}
@@ -410,7 +410,7 @@ const Collection = (props: any) => {
                             </ul>
                         </aside>
                     )}
-                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px]`}>
+                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0`}>
                         <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
                             <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
@@ -438,7 +438,7 @@ const Collection = (props: any) => {
                                     {!isLoading && (
                                         <>
                                             <div className="w-1/2 lg:hidden px-hg">
-                                                <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-white ${handle === 'all' ? 'mb-2' : ''} border border-body w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
+                                                <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                     <option value="">Filter by</option>
                                                     {mobileDropdown.map((parent: any, index: number) => {
                                                         const html = parent.title.replace('d-lg-none', 'lg:hidden');
@@ -447,7 +447,7 @@ const Collection = (props: any) => {
                                                 </select>
                                             </div>
                                             <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
-                                                <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 custom-select bg-white border border-body pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
+                                                <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 bg-gray-400 border border-gray-400 pl-g lg:min-w-[154px] pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
                                                     <option value="featured">Sort By</option>
                                                     <option value="best-selling">Best selling</option>
                                                     <option value="price-low-high">Price, low to high</option>
@@ -462,7 +462,7 @@ const Collection = (props: any) => {
 
                             {!isLoading && handle !== 'all' && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
-                                    <div className="collection-grid__tags w-auto overflow-x-scroll mb-4 flex mt-1" ref={subCatRef}>
+                                    <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
@@ -505,8 +505,16 @@ const Collection = (props: any) => {
                                 return showQuizCard && index === 2 ? (
                                     <>
                                         {!collectionSettings.isLoading && (
-                                            <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--${index}`} />
+                                            <ProductCardQuiz
+                                                className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                key={`collection-quiz-card--${handle}--${index}`}
+                                                quizSetting={collectionSettings.quizSetting}
+                                                store={store}
+                                                />
                                         )}
+                                        
                                         <ProductCard
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
@@ -529,30 +537,39 @@ const Collection = (props: any) => {
                                         />
                                     </>
                                 ) : (
-                                    <ProductCard
-                                        key={`collection-a-${handle}-${item.id}-${index}`}
-                                        product={item}
-                                        className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
-                                        button={true}
-                                        setWaitlistData={setWaitlistData}
-                                        smSingleStar={true}
-                                        addToCart={addToCart}
-                                        trackEvent={trackEvent}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={preOrders}
-                                        isLaunchWL={isLaunchWL}
-                                        launchBox={launchBox}
-                                        setLaunchWLModal={setLaunchWLModal}
-                                        setLaunchWLModal2={setLaunchWLModal2}
-                                        setLaunchWLModal3={setLaunchWLModal3}
-                                        generalSetting={generalSetting}
-                                        collectionTemplate={true}
-                                        store={store}
-                                    />
+                                    <>
+                                        <ProductCard
+                                            key={`collection-b-${handle}-${item.id}-${index}`}
+                                            product={item}
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                            button={true}
+                                            setWaitlistData={setWaitlistData}
+                                            smSingleStar={true}
+                                            addToCart={addToCart}
+                                            trackEvent={trackEvent}
+                                            eventNameOnClick='collection_product_card'
+                                            preOrders={preOrders}
+                                            isLaunchWL={isLaunchWL}
+                                            launchBox={launchBox}
+                                            setLaunchWLModal={setLaunchWLModal}
+                                            setLaunchWLModal2={setLaunchWLModal2}
+                                            setLaunchWLModal3={setLaunchWLModal3}
+                                            generalSetting={generalSetting}
+                                            collectionTemplate={true}
+                                            store={store}
+                                        />
+                                    </>
                                 )
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
-                                <ProductCardQuiz store={store} quizSetting={collectionSettings.quizSetting} key={`collection-quiz-card-${handle}--99`} />
+                                <ProductCardQuiz
+                                    className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                    key={`collection-quiz-card--${handle}--99`}
+                                    quizSetting={collectionSettings.quizSetting}
+                                    store={store}
+                                    />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
@@ -560,6 +577,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
+            <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
@@ -577,8 +595,6 @@ const Collection = (props: any) => {
                     </div>
                 </>
             )}
-
-            {!isLoading && <CollectionServices handle={handle} initSub={initSub} parentCollection={parentCollection} extraClass="!text-base" mainCollectionHandles={mainCollectionHandles} subHandles={subHandles} /> }
 
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>

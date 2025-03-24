@@ -41,6 +41,7 @@ type NewsletterProp = {
 	handleClose: () => void
 	data: NewsletterData
 	store: string
+	trackEvent: any
 }
 
 const validForm = {
@@ -74,7 +75,7 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
+const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackEvent }) => {
 	const { nbp_img, nbp_code, nbp_desc, nbp_note, nbp_img_lg, nbp_submit, nbp_enabled, nbp_heading, nbp_smsbump, floating_btn, nbp_bg_color, nbp_email_ph, nbp_phone_ph,
 		nbp_completed, nbp_heading_2, nbp_desc_color, nbp_heading_color, nbp_completed_desc, nbp_heading_2_color, nbp_comliance_position
 	} = data;
@@ -99,6 +100,11 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
+		// send event to ga4
+        trackEvent('newsletter_popup_view', {
+            category: 'Newsletter Registration',
+            target: 'newsletter_popup_register',
+        });
 	}, []);
 
 	// const handleEmail = (e) => {
@@ -165,6 +171,11 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store }) => {
 				console.log('error wtba push');
 			}
 
+			// send event to ga4
+            trackEvent('newsletter_popup', {
+                category: 'Newsletter Registration',
+                target: 'newsletter_popup_register',
+            });
 			setCookie('signup_popup', 'signup_popup', 30);
 		}
 	};

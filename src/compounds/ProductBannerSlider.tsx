@@ -117,7 +117,7 @@ const ProductBannerSlider = (props) => {
 						src={props.src}
 						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414"/>
 				</picture>
-				<div className="absolute w-full h-full overflow-hidden top-0">
+				<div className="product-banner__slider--compareimg absolute w-full h-full overflow-hidden top-0">
 					<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</div>
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
@@ -132,14 +132,14 @@ const ProductBannerSlider = (props) => {
 					onTouchEnd={slideFinish}
 					onTouchMove={slideMove}
 				>
-					<span className="rounded-full bg-white mr-1">
+					<span className="product-banner__slider-arrow product-banner__slider-arrow--left rounded-full bg-white mr-1 p-[14px]">
 						<ChevronPrev className="chevron-prev text-white" />
 					</span>
-					<span className="rounded-full bg-white ml-1">
+					<span className="product-banner__slider-arrow product-banner__slider-arrow--right rounded-full bg-white ml-1 p-[14px]">
 						<ChevronNext className="chevron-next text-white" />
 					</span>
 				</div>
-				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="absolute h-auto overflow-hidden img-comp-overlay top-0">
+				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="product-banner__slider--compareimg absolute h-auto overflow-hidden img-comp-overlay top-0">
 					<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</div>
 			</div>

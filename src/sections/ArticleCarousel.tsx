@@ -49,7 +49,7 @@ const ArticleCarousel = (props:any) => {
 
 	const scrollThumb = useRef(null);
 
-    return <div className="container mt-4 lg:pt-2 lg:mb-4">
+    return <div className="container mt-4 lg:pt-2 lg:mb-4 article__carousel">
 		{articles.length > 0 && (
 			<Carousel.Wrapper emblaApi={emblaApi} className="mb-1">
 				<Carousel.Inner emblaRef={emblaRef} className="-mx-hg lg:-mx-g">
