@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    const { showLaunchWaitlist, swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
     // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
 
@@ -105,9 +105,9 @@ const BundleVariantCard = (props) => {
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale ? '!justify-center' : ''}`}>
-                                {!currentVariant.availableForSale && 'Out of Stock'}
-                                {currentVariant.availableForSale && !addingItem && (
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 bg-white text-body w-full lg:w-auto items-center product-card-btn border border-[transparent] flex lg:flex-row btn-sm btn-primary hover:bg-white rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                                {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
+                                {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>
                                         <span className="pt-[3px]">
                                             {currentVariant.compareAtPrice && <span className="line-through mr-25">{formatMoney(store, parseFloat(currentVariant.compareAtPrice.amount) * 100)}</span>}

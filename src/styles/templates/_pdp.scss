@@ -126,13 +126,13 @@
 
 .product-banner__slider {
     // &-wrapper picture {
-    //     @apply lg:pt-[31.625em];
+    //     @apply pt-[12.5em] lg:pt-[31.625em];
     // }
     &-wrapper .img-slider svg {
         @apply h-[.5rem] lg:h-[12px];
     }
     // &--compareimg img {
-    //     @apply lg:-mt-[3.4375em];
+    //     @apply -mt-[3.4375em];
     // }
     &-arrow {
         @apply p-[.5rem] lg:p-[14px];
