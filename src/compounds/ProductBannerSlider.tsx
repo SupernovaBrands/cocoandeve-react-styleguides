@@ -108,7 +108,7 @@ const ProductBannerSlider = (props) => {
 
 	return <>
 		{wrapperHeight && (
-			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden">
+			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden select-none">
 				<picture className="block pt-[86%] w-full overflow-hidden">
 					<source
 						srcSet={props?.second_image?.url}
