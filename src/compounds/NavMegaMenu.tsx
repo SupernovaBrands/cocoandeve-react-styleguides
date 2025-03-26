@@ -27,7 +27,7 @@ const NavMegaMenu = (props: any) => {
                 res => {
                     try {
                         res?.json().then(data => {
-                            const plist = handleUrl === 'skin' || handleUrl === 'skincare' ? data?.products : data?.products.filter(product => product.availableForSale);;
+                            const plist = handleUrl === 'skin' || handleUrl === 'skincare' ? data?.products : data?.products.filter(product => product.availableForSale);
                             let selected = [];
                             if (handleUrl === 'skin' || handleUrl === 'skincare') {
                                 const skin1 = plist.find((p) => p.handle === 'double-cleanser-set') || null;
