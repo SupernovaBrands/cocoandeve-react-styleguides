@@ -207,7 +207,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							))}
 							{videoStack?.video_url && (
 								<div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
-									<video width="320" height="240" controls className="w-full h-auto max-w-full" autoPlay preload="none" ref={videoRef} >
+									<video width="320" height="240" controls className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
 										<source src={videoStack?.video_url} type="video/mp4" />
 										Your browser does not support the video tag.
 									</video>
