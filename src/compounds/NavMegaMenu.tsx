@@ -23,11 +23,11 @@ const NavMegaMenu = (props: any) => {
             if (store === 'ca' && handleUrl === 'tan-and-spf') {
                 handleUrl = 'tan'
             }
-            fetch(`/api/collectionProducts?handle=${handleUrl}&region=${store}`, {cache: 'force-cache'}).then(
+            fetch(`/api/collectionProducts?handle=${handleUrl}&region=${store}`).then(
                 res => {
                     try {
                         res?.json().then(data => {
-                            const plist = data?.products;
+                            const plist = handleUrl === 'skin' || handleUrl === 'skincare' ? data?.products : data?.products.filter(product => product.availableForSale);
                             let selected = [];
                             if (handleUrl === 'skin' || handleUrl === 'skincare') {
                                 const skin1 = plist.find((p) => p.handle === 'double-cleanser-set') || null;
