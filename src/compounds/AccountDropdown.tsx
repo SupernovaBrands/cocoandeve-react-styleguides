@@ -161,7 +161,7 @@ const AccountDropdown = (props:any) => {
     }, [tosAgree]);
 
     return (
-        <div id="account-dropdown" className={`dropdown-menu w-full ${isStickyEnabled && scrolled ? 'top-[6em]' : scrolled || !annBarEnabled ? 'top-[3.53125em]' : 'top-[6em]'} ${timerData && timerData.notice_bar ? 'lg:top-[3.5em]' : 'lg:top-[3em]'} right-0 left-auto border-0 rounded-0 pb-0 ${isStickyEnabled && isScrollEnabled ? '-mt-[3px]' : '-mt-[1px]'} lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`dropdown-menu w-full ${isStickyEnabled && scrolled ? 'top-[87px]' : scrolled || !annBarEnabled ? 'top-[3.53125em]' : 'top-[87px]'} ${timerData && timerData.notice_bar ? 'lg:top-[3.5em]' : 'lg:top-[3em]'} right-0 left-auto border-0 rounded-0 pb-0 ${isStickyEnabled && isScrollEnabled ? '-mt-[3px]' : '-mt-[1px]'} lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
                         <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
