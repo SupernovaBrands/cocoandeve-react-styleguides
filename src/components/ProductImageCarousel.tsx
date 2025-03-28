@@ -76,11 +76,13 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	const pdpImagePrev = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
 		emblaThumbsApi.scrollPrev();
+		emblaMainApi.scrollPrev();
 	};
 
 	const pdpImageNext = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
 		emblaThumbsApi.scrollNext();
+		emblaMainApi.scrollNext();
 	};
 
 	const onThumbClick = (index: number) => {
