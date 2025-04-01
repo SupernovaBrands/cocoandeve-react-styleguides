@@ -19,10 +19,10 @@ const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant }) => {
             </span>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">
-                    {hideCent && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100) : props.comparePrice}
+                    {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100) : props.comparePrice}
                 </span>)}
                 <span className="">{
-                    hideCent ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100) : props.price}
+                    hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100) : props.price}
                 </span>
             </span>
         </>
