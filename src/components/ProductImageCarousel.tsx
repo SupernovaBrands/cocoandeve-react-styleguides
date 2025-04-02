@@ -50,6 +50,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
+	const slidesCount = slides.length + (videoStack?.video_thumbnail?.url ? 1 : 0);
 	const { isVisible, targetRef } = useIsVisible(
         {
             root: null,
@@ -130,7 +131,6 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
     }, []);
 
 	useEffect(() => {
-		console.log('isVisible', isVisible);
         if (isVisible) {
             startVideoOnMouseMove();
         } else {
@@ -177,18 +177,18 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 						<Carousel.Navigation>
 							{slides.length > 6 && (	
 								<>
-									<PrevButton
+									{selectedIndex !== 0 && <PrevButton
 										onClick={pdpImagePrev}
 										className="carousel__gallery-thumb w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto top-[-25px]"
 									>
 										<ChevronPrev className="w-g h-g svg--current-color" />
-									</PrevButton>
-									<NextButton
+									</PrevButton>}
+									{selectedIndex < slidesCount - 1 && <NextButton
 										onClick={pdpImageNext}
 										className="carousel__gallery-thumb mt-auto w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto bottom-[-25px]"
 									>
 										<ChevronNext className="w-g h-g svg--current-color" />
-									</NextButton>
+									</NextButton>}
 								</>
 							)}
 						</Carousel.Navigation>
