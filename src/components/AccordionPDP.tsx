@@ -22,7 +22,7 @@ const AccordionPDP = (props: any) => {
 	return (
 		<div className="border-t-0 border-b-0 md:border-t md:border-b border-gray-500 accordion w-full accordion-flush" id="accordionSimple">
 			{data.map((d: Accordion, index: number) => (
-				<div key={d.id} className={`accordion-item border-t border-b border-gray-500 ${index === data.length - 1 ? 'pb-3 lg:pb-0' : ''}`}>
+				<div key={d.id} className={`accordion-item border-t border-b border-gray-500`}>
 					<div id={`accordion-${d.id}`} className={`cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-3 md:pt-[1.875rem] ${index === 0 ?  'pb-3' : 'pb-3'}` : 'py-3 md:py-[1.875rem]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(d.id)}>
 						<strong className="text-body no-underline">{d.title}</strong>
 						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
