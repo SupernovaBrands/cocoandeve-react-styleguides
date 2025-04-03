@@ -300,25 +300,26 @@ const ProductCard = (props:any) => {
                 ? product.variants.nodes.map((node:any) => node.sku)
                 : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
             if (product.variants.nodes[0]?.reviewSku) {
-                skus_.push(product.variants.nodes[0]?.reviewSku.value);
+                setSkus([product.variants.nodes[0]?.reviewSku.value]);
+            } else {
+                setSkus(skus_);
             }
-            setSkus(skus_);
         } else if (product && product.variants) {
             if (isKit(product.title)) {
-                const kitSkus = product.variants.nodes.map((node:any) => node.sku);
                 if (product.variants.nodes[0]?.reviewSku) {
-                    kitSkus.push(product.variants.nodes[0]?.reviewSku.value);
+                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
+                } else {
+                    setSkus(product.variants.nodes.map((node:any) => node.sku));
                 }
-                setSkus(kitSkus);
             } else {
                 const single = product.variants.nodes.filter((node:any) => {
                     return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
                 })
-                const singleSkus = single.map((node:any) => node.sku);
                 if (product.variants.nodes[0]?.reviewSku) {
-                    singleSkus.push(product.variants.nodes[0]?.reviewSku.value);
+                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
+                } else {
+                    setSkus(single.map((node:any) => node.sku));
                 }
-                setSkus(singleSkus);
             }
         }
 
