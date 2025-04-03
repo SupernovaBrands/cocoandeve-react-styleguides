@@ -21,6 +21,7 @@ export const CartDiscountForm = (props:any) => {
     };
 
     const [state, setState] = useState(stateData);
+    const [discInput, setDiscInput] = useState('');
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -52,6 +53,7 @@ export const CartDiscountForm = (props:any) => {
     const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setState({ ...state, code: value });
+        setDiscInput(e.target.value);
     };
 
     const onKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -68,6 +70,9 @@ export const CartDiscountForm = (props:any) => {
         if (state.code && state.code?.trim() !== '' && !state.loading) {
             setState({ ...state, code: state.code.trim(), loading: true, applyCode: true });
         }
+        if (discInput && discInput.trim() !== '' && !state.loading) {
+            setState({ ...state, code: discInput.trim(), loading: true, applyCode: true})
+        }
     };
 
     const removeDiscount = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -76,6 +81,7 @@ export const CartDiscountForm = (props:any) => {
         await props.onRemove();
         setState({...state, loading: false, code: '', isApplied: false, error: ''});
         if (inputRef) inputRef.current.value = '';
+        setDiscInput('');
     };
 
     const removeGiftCard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -132,9 +138,9 @@ export const CartDiscountForm = (props:any) => {
                     />
                     <Button
                         lg={false}
-                        buttonClass={`w-1/4 px-1 min-w-[100px] ${state.code ? 'btn-outline-primary hover:underline hover:bg-white hover:text-primary' : 'border-black text-black'}`}
+                        buttonClass={`w-1/4 px-1 min-w-[100px] ${discInput ? 'btn-outline-primary hover:underline hover:bg-white hover:text-primary' : 'border-black text-black'}`}
                         onClick={applyDiscount}
-                        disabled={!state.code}
+                        disabled={!discInput}
                         >
                         {state.loading ? <div className="spinner-border !w-[25px] !h-[25px]" role="status" /> : 'Apply'}
                     </Button>
