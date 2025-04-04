@@ -52,8 +52,8 @@ const SideArticleCarousel = (props: any) => {
                     </WithCarousel>
                     
                     {articleCarousel.length > 1 && (
-                        <div className="px-0">
-                            <div className="carousel__progress bg-gray-400 my-2 lg:my-g">
+                        <div className="px-0 pr-g">
+                            <div className="carousel__progress bg-gray-400 my-2 lg:my-g lg:!pr-0">
                                 <div
                                     className="carousel__progress--scroll bg-gray-500"
                                     style={{ left: `${scrollProgress}%`, width: `${((1 / articleCarousel.length) * 100) + 2.5}%` }} />
