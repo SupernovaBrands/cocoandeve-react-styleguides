@@ -1,7 +1,6 @@
 import '~/config';
 import React, { useState, useEffect } from 'react';
 import ReviewStar from './ReviewStar';
-import Link from 'next/link';
 import { currentTime, encryptParam } from '~/modules/utils';
 import ReviewStarSingle from './ReviewStarSingle';
 
@@ -29,6 +28,7 @@ const YotpoStar = (props: any) => {
 	};
 	
 	// console.log('props.sku123');
+	
 	useEffect(() => {
 		if (props.sku.length > 0 && !init) fetchStar();
 	}, []);
@@ -37,13 +37,12 @@ const YotpoStar = (props: any) => {
 		// if (total === 0 || score === 0) fetchStar();
 	}, [total, score]);
 
-	return init && total > 0 ? (
+	return init ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm" aria-label="Write a review for this product">
 				{!props.smSingleStarAllDevice && (
 					<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 				)}
-				
 			</a>
 			{props.smSingleStar && (
 				<>
