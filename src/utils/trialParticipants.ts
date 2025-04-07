@@ -1046,6 +1046,102 @@ const trialParticipants = [
 		"user": "Sarah McClenathan",
 		"score": "4",
 		"content": "I enjoyed using this tanning lotion because the result was noticeable after one use! The smell was light and not overpowering. I love how it gives a deeper tan than other daily tanning lotions I've tried. Will definitely be adding it to my next order!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-4-3",
+		"title": "quick glow, no fuss!",
+		"user": "Bruna Grochot",
+		"score": "4",
+		"content": "Amazing product for a quick, natural-looking bronze! The tanning process is much faster with this and it dries quickly too."
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-3-27",
+		"title": "Deep tan in an instant—still glowing a week later ☀️",
+		"user": "Jade",
+		"score": "5",
+		"content": "I am SO impressed with this new express tan! It developed into a deep, beautiful color instantly—I only left it on for an hour before showering. A week later, and I still have a beautifully even tan! So quick and easy to use as well!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-3-31",
+		"title": "Smells amazing & feels luxurious ✨",
+		"user": "Jane Porter",
+		"score": "4",
+		"content": "Quick to apply and fast results! The express tanning antioxidant mousse smells amazing, so I can use it while getting ready to go out. It’s streak-free, leaves my skin feeling super soft and the tan looks so natural—you’ll feel like a million dollars!"
+	  },
+	  {
+		"sku": "CE0004112020",
+		"date": "2025-3-28",
+		"title": "No more 8-hour tans ❤️‍🔥",
+		"user": "Lauren Burnett",
+		"score": "5",
+		"content": "I love the speed of this tan! It’s great to have an option that gives a deep, non-orangey color in just an hour—unlike others that take 8+ hours. Perfect for last-minute plans and it smells amazing too. I’m definitely adding this to my routine—highly recommend!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-25",
+		"title": "Natural tone & no transfer!",
+		"user": "Aitana López",
+		"score": "4",
+		"content": "It doesn't stain, even when you sweat and it absorbs really quickly too! I love the natural tone it leaves—light and elegant! "
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-28",
+		"title": "Ticks ALL my boxes ✅",
+		"user": "Cat McDonnell",
+		"score": "5",
+		"content": "Works great! Looks natural, absorbs easily, smells good, isn’t greasy and didn't stain my clothes. Ticks all my boxes!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-21",
+		"title": "Easy, quick & patch-free—I'm impressed",
+		"user": "Dessy Vassileva",
+		"score": "5",
+		"content": "What I loved most is how easy it is to apply—no need for gloves or anything extra. I was also impressed by how great it smelt and felt on my skin. It was absorbed by the skin almost immediately so you don’t have to wait around for it to dry. It doesn’t leave any patches of different color like other tanning products do and as long as you don’t forget to wash your hands, you are good to go in just under 2 minutes!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-22",
+		"title": "HYDRATION + COLOR = WIN",
+		"user": "Emma Lipton",
+		"score": "5",
+		"content": "I’m obsessed with the smell of this lotion! And the tan is beautiful and even. It’s dark enough to be noticeable but light enough that I can use it often. It’s especially nice for those hard to tan areas (ankles and elbows). Not having to choose between hydration/lotion makes this tan a win! "
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-31",
+		"title": "fast, flawless & streak-free",
+		"user": "Kirsten Branderhorst",
+		"score": "4",
+		"content": "Fast tanning - love the result! Nice colour and smell with NO STREAKS"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-11",
+		"title": "Gradual glow that smells amazing!",
+		"user": "Leandra Ney",
+		"score": "5",
+		"content": "Such a great product! Goes on evenly, and love how gradual/buildable the product is! It’s so easy to use and even easier to maintain. Smells SO GOOD TOO!"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-8",
+		"title": "Golden glow, no greasiness ☀️",
+		"user": "Sarah Bilal",
+		"score": "4",
+		"content": "Absolutely loved the gradual tanning lotion! ♥️ I like that it is a slightly thinner moisturiser, it applies easily and absorbs into the skin really well. It doesn’t leave the skin feeling oily or greasy. Left my skin a beautiful golden colour and allows control over colouring. Added bonus, it smells amazing 🙌"
+	  },
+	  {
+		"sku": "CE0004952020",
+		"date": "2025-3-25",
+		"title": "Skeptic turned superfan 🤩",
+		"user": "tessa mccool",
+		"score": "5",
+		"content": "I was skeptical at first BUT I'm really impressed with the new gradual tanning lotion! I've had bad experiences with similar products in the past but after using coco and eve for three days, I had a nice sun kissed look. No transfer or streaks and it's easy to use. I am now a fan and plan on adding it to my tanning routine!"
 	  }
 ];
 
