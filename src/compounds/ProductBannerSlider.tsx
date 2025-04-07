@@ -109,13 +109,13 @@ const ProductBannerSlider = (props) => {
 	return <>
 		{wrapperHeight && (
 			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden select-none">
-				<picture className="block pt-[86%] w-full overflow-hidden">
+				<picture className="block pt-[55%] w-full overflow-hidden">
 					<source
 						srcSet={props?.second_image?.url}
 						media="(min-width: 992px)" width="1362" height="1162"/>
 					<img
 						src={props.src}
-						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414"/>
+						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</picture>
 				<div className="product-banner__slider--compareimg absolute w-full h-full overflow-hidden top-0">
 					<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
