@@ -77,7 +77,7 @@ const CartUpsell = (props:any) => {
 
     return (
         <>
-            <hr className="my-2" />
+            <hr className="mt-2 mb-4" />
             <div className="relative mb-4">
                 { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
                 { upsell.length > 1 && (
