@@ -34,7 +34,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
     });
 
-	const { waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -105,6 +105,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
+											customProductTitle={customProductTitle}
                                         />
 									})}
 								</Carousel.Inner>
@@ -147,6 +148,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
+											customProductTitle={customProductTitle}
                                         />
 									})}
 								</Carousel.Inner>
@@ -189,6 +191,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
+											customProductTitle={customProductTitle}
                                         />
 									})}
 								</Carousel.Inner>

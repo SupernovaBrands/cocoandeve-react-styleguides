@@ -74,8 +74,9 @@ const Collection = (props: any) => {
         loggedInEmail,
         squareBadge,
         bannerData,
+        customProductTitle,
     } = props;
-    // console.log('waitlistPdpSetting', waitlistPdpSetting);
+    // console.log('customProductTitlexxx', customProductTitle);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
@@ -322,7 +323,7 @@ const Collection = (props: any) => {
             }
             setLoading(false);
         });
-    }, [handle, squareBadge]);
+    }, [handle, squareBadge, customProductTitle]);
 
     useEffect(() => {
         const sortedByAvailable = products.sort((a, b) => b.availableForSale - a.availableForSale);
@@ -534,6 +535,7 @@ const Collection = (props: any) => {
                                             generalSetting={generalSetting}
                                             collectionTemplate={true}
                                             store={store}
+                                            customProductTitle={customProductTitle}
                                         />
                                     </>
                                 ) : (
@@ -557,6 +559,7 @@ const Collection = (props: any) => {
                                             generalSetting={generalSetting}
                                             collectionTemplate={true}
                                             store={store}
+                                            customProductTitle={customProductTitle}
                                         />
                                     </>
                                 )
