@@ -372,7 +372,7 @@ const ProductCard = (props:any) => {
         // }
 
         if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11f0acb0-5f8a-459e-9d31-6f706061df00/540x';
             const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
             if (shade === 'medium') {
                 setProductImage(medImg);
