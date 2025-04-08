@@ -48,6 +48,7 @@ const ProductCarousel = (props: any) => {
 
     const [isHomepage, setIsHomepage] = useState(false);
     const [isProduct, setIsProduct] = useState(false);
+	const [customTitle, setCustomTitle] = useState(customProductTitle || null);
 
 	//tab 1
 	const [emblaRef1, emblaApi1] = useEmblaCarousel(options);
@@ -69,7 +70,16 @@ const ProductCarousel = (props: any) => {
 	useEffect(() => {
         setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
         setIsProduct(window.location.pathname.includes('/products/'));
-	}, [])
+	}, []);
+
+	useEffect(() => {
+		if (isProduct && customTitle?.customTitles?.length > 0) {
+			const filtered = customTitle?.customTitles?.filter((c) => ['pdp', 'collection-pdp'].includes(c.options));
+			setCustomTitle({
+				customTitles: filtered
+			});
+		}
+	}, [isProduct]);
 
 	return (
 		<>
@@ -105,7 +115,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
-											customProductTitle={customProductTitle}
+											customProductTitle={customTitle}
                                         />
 									})}
 								</Carousel.Inner>
@@ -148,7 +158,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
-											customProductTitle={customProductTitle}
+											customProductTitle={customTitle}
                                         />
 									})}
 								</Carousel.Inner>
@@ -191,7 +201,7 @@ const ProductCarousel = (props: any) => {
                                             generalSetting={generalSetting}
                                             homePage={props.homePage || false}
 											store={store}
-											customProductTitle={customProductTitle}
+											customProductTitle={customTitle}
                                         />
 									})}
 								</Carousel.Inner>
