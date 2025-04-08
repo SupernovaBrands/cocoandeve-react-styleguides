@@ -30,7 +30,7 @@ const ImageFigure = (props: any) => (
 
 const ImageTableCard = (props: any) => {
     return (
-        <div className="pl-g w-[17.813rem] basis-[17.813rem] grow-0 shrink-0 lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g">
+        <div className="pl-0 pr-g w-[17.813rem] basis-[17.813rem] grow-0 shrink-0 lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g">
             <ImageFigure {...props} />
             {props.tableData && props.tableData.length > 0 && <ComparisonTable compare1={props.tableData} compare2={props.tableData} dataSource={'mobile2'} />}
         </div>
@@ -58,7 +58,7 @@ const ComparisonTable = (props: any) => {
 };
 
 const ProductComparison = (props: any) => {
-    const { mainCompare, productsCompare } = props;
+    const { mainCompare, productsCompare, view } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
@@ -115,109 +115,97 @@ const ProductComparison = (props: any) => {
     
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
-            <div className="w-full justify-center px-0 pt-5 lg:pt-1 lg:mb-5 lg:pb-[1.5rem]">
+            <div className="w-full justify-center px-0 pt-5 lg:pt-1 lg:mb-5 lg:pb-[1.5rem] order-2 lg:order-0">
                 <p className="text-2xl font-bold text-center mb-2 lg:mb-3">Haircare Range</p>
                 {/* mobile */}
-                <div className={`lg:hidden mb-[5rem] mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
-                    <Carousel.Wrapper emblaApi={emblaApi1} className={''}>
-                        <Carousel.Inner emblaRef={emblaRef1} innerClass={'pr-g'} className={'mx-0'}>
-                            {INIT_FINALS?.length > 0 && INIT_FINALS.map((data: any, index: number) => {
-                                return <ImageTableCard
-                                    key={`comparison-img-card-${index}`}
-                                    src={data.src}
-                                    srcSet={data.src}
-                                    title={data.title}
-                                    tableData={data.tableData}
-                                />
-                            })}
-                        </Carousel.Inner>
-                    </Carousel.Wrapper>
-                    
-                    {/* <div className="px-0 pt-g">
-                        <Carousel.Wrapper emblaApi={emblaApi3} className={''}>
-                            <Carousel.Inner emblaRef={emblaRef3} innerClass={'pr-g'} className={'mx-0'}>
+                {view === 'mobile' && (
+                    <div className={`lg:hidden mb-3 lg:mb-[5rem] -mr-g lg:mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
+                        <Carousel.Wrapper emblaApi={emblaApi1} className={''}>
+                            <Carousel.Inner emblaRef={emblaRef1} innerClass={'pr-0'} className={'mx-0'}>
                                 {INIT_FINALS?.length > 0 && INIT_FINALS.map((data: any, index: number) => {
-                                    const tableKeys = comparison1.map((c) => c.title);
-                                    return <ComparisonTable
-                                        dataSource={'mobile'}
-                                        key={`compare-table-scroll-${index}`}
-                                        compare1={data?.tableData || []} compare2={data?.tableData || []}
+                                    return <ImageTableCard
+                                        key={`comparison-img-card-${index}`}
+                                        src={data.src}
+                                        srcSet={data.src}
+                                        title={data.title}
+                                        tableData={data.tableData}
                                     />
                                 })}
                             </Carousel.Inner>
                         </Carousel.Wrapper>
-                    </div> */}
-
-                    {INIT_FINALS.length > 2 && (
-                        <div className="px-g">
-                            <div className="carousel__progress bg-gray-400">
-                                <div
-                                    draggable="true"
-                                    className="carousel__progress--scroll bg-gray-500"
-                                    style={{ left: `${scrollProgress}%`, width: `${((1 / INIT_FINALS.length) * 100)}%` }} />
+                        
+                        {INIT_FINALS.length > 2 && (
+                            <div className="px-g">
+                                <div className="carousel__progress bg-gray-400">
+                                    <div
+                                        draggable="true"
+                                        className="carousel__progress--scroll bg-gray-500"
+                                        style={{ left: `${scrollProgress}%`, width: `${((1 / INIT_FINALS.length) * 100)}%` }} />
+                                </div>
                             </div>
-                        </div>
-                    )}
-                </div>
+                        )}
+                    </div>
+                )}
 
                 {/* desktop */}
-                <div className="container hidden lg:block">
-                    <div className="-mx-g">
-                        <div className="flex w-full">
-                            <ImageTableCard
-                                src={INIT_FINALS[0].src}
-                                srcSet={INIT_FINALS[0].src}
-                                title={INIT_FINALS[0].title}
-                            />
-                            <ComparisonTable compare1={comparison1} compare2={comparison2} dataSource={'desktop'} />
-                            <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
-                                <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={''}>
-                                    {INIT_FINALS.slice(1).map((data, index) => (
-                                        <ImageFigure 
-                                            key={`img-figure-dt-${index}`}
-                                            src={data.src}
-                                            srcSet={data.src}
-                                            title={data.title}
-                                            className="w-full basis-full flex-grow-0 flex-shrink-0" />
-                                    ))}
-                                </Carousel.Inner>
-                                <Carousel.Navigation>
-                                    {INIT_FINALS.slice(1).length > 1 && (
-                                        <>
-                                            <PrevButton
-                                                onClick={() => emblaApi2.scrollPrev() }
-                                                className="lg:w-auto lg:h-full hidden lg:flex"
-                                            >
-                                                <span className="absolute z-[-1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
-                                                    <ChevronPrev className="svg--current-color w-[1rem] h-[1rem]" />
-                                                </span>
-                                            </PrevButton>
-                                            <NextButton
-                                                onClick={() => emblaApi2.scrollNext() }
-                                                className="lg:w-auto lg:h-full hidden lg:flex"
-                                            >
-                                                <span className="absolute z-[-1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
-                                                    <ChevronNext className="svg--current-color w-[1rem] h-[1rem]" />
-                                                </span>
-                                            </NextButton>
-                                            <ol className="carousel__dots justify-center static mt-[.5rem] mb-0">
-                                                {INIT_FINALS.slice(1).map((_, index) => (
-                                                    <li key={`compare-nav-${index}`} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-60'} !h-[1rem] !w-[1rem]`}>
-                                                        <DotButton
-                                                            onClick={() => onClick3(index)}
-                                                            className="carousel__dot"
-                                                        />
-                                                    </li>
-                                                ))}
-                                            </ol>
-                                        </>
-                                    )}
-                                </Carousel.Navigation>
-                            </Carousel.Wrapper>
+                {view === 'desktop' && (
+                    <div className="container hidden lg:block">
+                        <div className="-mx-g">
+                            <div className="flex w-full">
+                                <ImageTableCard
+                                    src={INIT_FINALS[0].src}
+                                    srcSet={INIT_FINALS[0].src}
+                                    title={INIT_FINALS[0].title}
+                                />
+                                <ComparisonTable compare1={comparison1} compare2={comparison2} dataSource={'desktop'} />
+                                <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
+                                    <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={''}>
+                                        {INIT_FINALS.slice(1).map((data, index) => (
+                                            <ImageFigure 
+                                                key={`img-figure-dt-${index}`}
+                                                src={data.src}
+                                                srcSet={data.src}
+                                                title={data.title}
+                                                className="w-full basis-full flex-grow-0 flex-shrink-0" />
+                                        ))}
+                                    </Carousel.Inner>
+                                    <Carousel.Navigation>
+                                        {INIT_FINALS.slice(1).length > 1 && (
+                                            <>
+                                                <PrevButton
+                                                    onClick={() => emblaApi2.scrollPrev() }
+                                                    className="lg:w-auto lg:h-full hidden lg:flex"
+                                                >
+                                                    <span className="absolute z-[-1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                        <ChevronPrev className="svg--current-color w-[1rem] h-[1rem]" />
+                                                    </span>
+                                                </PrevButton>
+                                                <NextButton
+                                                    onClick={() => emblaApi2.scrollNext() }
+                                                    className="lg:w-auto lg:h-full hidden lg:flex"
+                                                >
+                                                    <span className="absolute z-[-1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                        <ChevronNext className="svg--current-color w-[1rem] h-[1rem]" />
+                                                    </span>
+                                                </NextButton>
+                                                <ol className="carousel__dots justify-center static mt-[.5rem] mb-0">
+                                                    {INIT_FINALS.slice(1).map((_, index) => (
+                                                        <li key={`compare-nav-${index}`} className={`bg-primary ${index === idx3 ? ' opacity-1' : ' opacity-60'} !h-[1rem] !w-[1rem]`}>
+                                                            <DotButton
+                                                                onClick={() => onClick3(index)}
+                                                                className="carousel__dot"
+                                                            />
+                                                        </li>
+                                                    ))}
+                                                </ol>
+                                            </>
+                                        )}
+                                    </Carousel.Navigation>
+                                </Carousel.Wrapper>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
+                )}
             </div>
         
         </>
