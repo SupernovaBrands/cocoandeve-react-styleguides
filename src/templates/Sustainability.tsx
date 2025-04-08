@@ -382,8 +382,8 @@ const Sustainability = (props: any) => {
                     {!isLoading && (
                         <div className="w-full lg:w-[501px] lg:basis-[501px] px-0">
                             <picture>
-                                <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c9beac67-aea7-4ba5-5608-e64d56941b00/public'} media="(min-width: 992px)" />
-                                <img className="fit--cover w-full lg:rounded-r" alt="/" src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1f7d5af0-479c-4954-0afd-b7fa55cdf500/public'} />
+                                <source srcSet={imageText.image_desktop.url} media="(min-width: 992px)" />
+                                <img className="fit--cover w-full lg:rounded-r" alt="/" src={imageText.image_mobile.url} />
                             </picture>
                         </div>
                     )}
