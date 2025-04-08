@@ -179,12 +179,20 @@ export const CartItem = (props:CartItemProps) => {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
 			// }
 
-			if (['au'].includes(store) && (item.merchandise.product.handle === 'all-in-glow-set' || item.merchandise.product.handle === 'bronzing-self-tanner-drops') && selectedVariant[0].toLowerCase() === 'medium') {
+			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
 			}
 
-			if (['au'].includes(store) && (item.merchandise.product.handle === 'all-in-glow-set' || item.merchandise.product.handle === 'bronzing-self-tanner-drops') && selectedVariant[0].toLowerCase() === 'dark') {
+			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11f0acb0-5f8a-459e-9d31-6f706061df00/public';
+			}
+
+			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/public';
+			}
+
+			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'dark') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/public';
 			}
 		}
 
@@ -224,7 +232,21 @@ export const CartItem = (props:CartItemProps) => {
 							: (
 								<ConditionWrapper
 									condition={!item.isFreeItem}
-									wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
+									wrapper={(children: any) => {
+										if (item.disableCartItemLink) {
+											return (
+												<span className="text-black hover:text-primary">
+													{children}
+												</span>
+											);
+										} else {
+											return (
+												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
+													{children}
+												</a>
+											);
+										}
+									}}
 								>
 									{ !item.isFreeItem && (`${productTitle(item)}`) }
 									{`${item.recurring ? ' Subscriptions' : ''}`}
