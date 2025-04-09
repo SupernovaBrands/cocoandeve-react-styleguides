@@ -58,7 +58,7 @@ const ComparisonTable = (props: any) => {
 };
 
 const ProductComparison = (props: any) => {
-    const { mainCompare, productsCompare, view } = props;
+    const { mainCompare, productsCompare, view, wrapperClass } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
@@ -115,8 +115,8 @@ const ProductComparison = (props: any) => {
     
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
-            <div className="w-full justify-center px-0 pt-5 lg:pt-1 lg:mb-5 lg:pb-[1.5rem] order-2 lg:order-0">
-                <p className="text-2xl font-bold text-center mb-2 lg:mb-3">Haircare Range</p>
+            <div className={`w-full justify-center px-0 order-2 lg:order-0 ${wrapperClass ?? ''}`}>
+                <p className={`text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>Haircare Range</p>
                 {/* mobile */}
                 {view === 'mobile' && (
                     <div className={`lg:hidden mb-3 lg:mb-[5rem] -mr-g lg:mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
