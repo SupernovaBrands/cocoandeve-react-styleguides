@@ -73,7 +73,8 @@ const CartUpsell = (props:any) => {
     }
 
     useEffect(() => {
-    }, []);
+        setUpsells(products);
+    }, [products]);
 
     return (
         <>
