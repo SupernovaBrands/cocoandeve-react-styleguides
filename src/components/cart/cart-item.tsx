@@ -235,7 +235,7 @@ export const CartItem = (props:CartItemProps) => {
 									wrapper={(children: any) => {
 										if (item.disableCartItemLink) {
 											return (
-												<span className="text-black hover:text-primary">
+												<span className="text-black">
 													{children}
 												</span>
 											);
