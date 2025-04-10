@@ -39,7 +39,7 @@ const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ?
 )
 
 const SideWhatsInBundle = (props: any) => {
-    const { bundleItems } = props;
+    const { bundleItems, bundleItemsOrder } = props;
     const [scrollProgress, setScrollProgress] = useState(0);
 
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options}, [
@@ -57,14 +57,14 @@ const SideWhatsInBundle = (props: any) => {
 		emblaApi1.on('scroll', onScroll);
 	}, [emblaApi1, onScroll]);
 
-    // console.log('articleCarousel', articleCarousel);
+    if (bundleItemsOrder) bundleItems.sort((a, b) => bundleItemsOrder.indexOf(a.product.handle) - bundleItemsOrder.indexOf(b.product.handle));
 
 	return bundleItems.length > 0 && (
         <>
         <div className="product-side-article lg:pb-1 pt-0 md:pt-2 mb-2">
             <p className="font-bold mb-1 lg:text-lg">What's in the bundle?</p>
             <div className="w-full justify-center px-0">
-                <div className={`mx-0 ${bundleItems?.length <= 2 ? 'flex' : ''}`}>
+                <div className={`-mr-g lg:mx-0 ${bundleItems?.length <= 2 ? 'flex' : ''}`}>
                     <WithCarousel carousel={bundleItems?.length > 2} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
                         {bundleItems.map((data:any, index:number, row: any) => {
                             const isLast = index + 1 === row.length ? true : false;
