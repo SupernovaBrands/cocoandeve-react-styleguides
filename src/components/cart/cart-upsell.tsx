@@ -78,8 +78,8 @@ const CartUpsell = (props:any) => {
 
     return (
         <>
-            <hr className="mt-2 mb-4" />
-            <div className="relative mb-4">
+            <hr className="mt-2 mb-3" />
+            <div className="relative mb-3">
                 { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
                 { upsell.length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-0 w-[50px]">
@@ -101,7 +101,7 @@ const CartUpsell = (props:any) => {
                 )}
                 <div className="flex overflow-hidden mt-2 space-x-4">
                 <Carousel.Wrapper emblaApi={emblaApi} className="w-full flex flex-col">
-                    <Carousel.Inner emblaRef={emblaRef} className="flex flex-row">
+                    <Carousel.Inner emblaRef={emblaRef} className={`flex flex-row ${ upsell.length > 1 ? 'max-w-[90%]' : 'max-w-[100%]'}`}>
                         {upsell.map((item:any, index:number) => {
                             const { product } = item;
                             let variantNode = null;
@@ -115,7 +115,7 @@ const CartUpsell = (props:any) => {
                                 const variant = {...variantNode};
                                 const img = product.media.nodes[0]?.image?.url;
                                 return (
-                                    <figure key={`upsell-${index}`} className={`flex items-center space-x-2 w-full mr-2 ${ upsell.length > 1 ? 'min-w-[85%]' : 'min-w-[100%]' }`}>
+                                    <figure key={`upsell-${index}`} className={`flex items-center space-x-2 w-full mr-1 min-w-[100%]`}>
                                         <picture className="w-20 h-20 bg-pink-100">
                                             <img className="object-contain w-full h-full min-w-[125px] max-w-[116px]" src={img} alt={product.title} />
                                         </picture>
