@@ -73,3 +73,34 @@
 #gorgias-chat-container #chat-button {
     z-index: 999 !important;
 }
+
+.scrollable-gallery {
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    touch-action: pan-y pinch-zoom;
+    transition: all 0.2s;
+    will-change: transform;
+    user-select: none;
+    cursor: pointer;
+    padding: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-auto-flow: column;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+
+    .gallery__item {
+        box-sizing: border-box;
+        width: 200px;
+        height: 200px;
+        background-color: plum;
+        border: 1px solid rgb(0, 0, 0);
+    }
+}

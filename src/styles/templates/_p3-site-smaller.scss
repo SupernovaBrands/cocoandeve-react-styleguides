@@ -312,7 +312,10 @@
 
     .product-side-article {
         .overflow-hidden {
-            @apply pr-g;
+            @apply pr-g lg:pr-0;
+        }
+        .product__side-article:last-child {
+            @apply lg:pr-0
         }
     }
 
