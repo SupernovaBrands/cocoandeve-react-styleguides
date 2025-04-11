@@ -93,13 +93,13 @@
 		}
 
 		&__track-scrollbar {
-			@apply relative justify-self-end self-center w-full overflow-hidden cursor-pointer;
+			@apply relative justify-self-end self-center w-full overflow-hidden cursor-pointer touch-pan-y;
 			&:before {
 				@apply content-[''] absolute w-full top-[50%] -translate-y-[50%] border-[2px] border-gray-400;
 			}
 		}
 		&__scrollbar {
-			@apply relative w-full flex py-1 cursor-pointer;
+			@apply relative w-full flex py-1 cursor-pointer touch-pan-y;
 			&::after {
 				@apply content-[''] w-full h-[4px] bg-black;
 			}
