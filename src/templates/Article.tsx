@@ -78,10 +78,10 @@ const ArticleNewsLetter = (props) => {
 
     return (
         <div className="container blog-post-grid__newsletter px-0 hidden">
-            <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded">
+            <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-[1.5em]">
                 <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[247px] object-cover lg:h-full rounded-tl rounded-tr lg:rounded-tr-none lg:rounded-bl" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" />
                 </picture>
                 <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
                     <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
@@ -103,7 +103,7 @@ const ArticleNewsLetter = (props) => {
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-sm text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm underline"'))}</p>
+                    <p className="text-[10px] lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline"'))}</p>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 
-const Pricing = ({ props, collectionTemplate, showCompare }) => {
+const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant }) => {
     let label = props.btnLabel ? props.btnLabel : props.label;
     // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
     return (
@@ -18,8 +18,12 @@ const Pricing = ({ props, collectionTemplate, showCompare }) => {
                 { props.addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
             </span>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
-                {props.comparePrice && showCompare && (<span className="line-through mr-25 font-normal">{props.comparePrice}</span>)}
-                <span className="">{props.price}</span>
+                {props.comparePrice && (<span className="line-through mr-25 font-normal">
+                    {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100) : props.comparePrice}
+                </span>)}
+                <span className="">{
+                    hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100) : props.price}
+                </span>
             </span>
         </>
     )
@@ -41,7 +45,7 @@ const WaitlistButton = (props:any) => {
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
         <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing collectionTemplate={props.collectionTemplate} props={data} showCompare={false} />
+            <Pricing selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
 };
@@ -67,7 +71,7 @@ const LaunchButton = (props: any) => {
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
         <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing collectionTemplate={props.collectionTemplate} props={data} showCompare={false} />
+            <Pricing selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true} />
         </Button>
     )
 }
@@ -122,7 +126,7 @@ const AddToCartButton = (props:any) => {
 
     return (
         <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing showCompare={true} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
+            <Pricing selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
         </Button>
     );
 };
@@ -145,8 +149,14 @@ const SwatchOverlay = (props:any) => {
     if (firstAvailable === null || !firstAvailable?.availableForSale) {
         firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
     }
-    if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'medium');
+    // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+    //     let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'medium');
+    //     if (swatch.availableForSale) {
+    //         firstAvailable = swatch;
+    //     }
+    // }
+    if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'dark');
         if (swatch.availableForSale) {
             firstAvailable = swatch;
         }
@@ -175,7 +185,7 @@ const SwatchOverlay = (props:any) => {
             setSwatchAvailable(false);
         }
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'au'].includes(store)) {
             handleShade(targetText.toLowerCase())
         }
     };
@@ -259,7 +269,7 @@ const ProductCard = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [shade, setShade] = useState('medium');
+    const [shade, setShade] = useState('');
     const [productImage, setProductImage] = useState(props.product.src);
     const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
     const { product } = props;
@@ -295,15 +305,27 @@ const ProductCard = (props:any) => {
             const skus_ = isKit(product.title)
                 ? product.variants.nodes.map((node:any) => node.sku)
                 : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
-            setSkus(skus_);
+            if (product.variants.nodes[0]?.reviewSku) {
+                setSkus([product.variants.nodes[0]?.reviewSku.value]);
+            } else {
+                setSkus(skus_);
+            }
         } else if (product && product.variants) {
             if (isKit(product.title)) {
-                setSkus(product.variants.nodes.map((node:any) => node.sku));
+                if (product.variants.nodes[0]?.reviewSku) {
+                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
+                } else {
+                    setSkus(product.variants.nodes.map((node:any) => node.sku));
+                }
             } else {
                 const single = product.variants.nodes.filter((node:any) => {
                     return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
                 })
-                setSkus(single.map((node:any) => node.sku));
+                if (product.variants.nodes[0]?.reviewSku) {
+                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
+                } else {
+                    setSkus(single.map((node:any) => node.sku));
+                }
             }
         }
 
@@ -325,9 +347,33 @@ const ProductCard = (props:any) => {
     }, []);
 
     useEffect(() => {
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/540x';
+        // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        //     setShade('medium');
+        // } else if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+        //     setShade('dark');
+        // }
+
+        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            setShade('dark');
+        }
+    }, []);
+
+    useEffect(() => {
+        // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
+        //     const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
+        //     const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/540x';
+        //     if (shade === 'medium') {
+        //         setProductImage(medImg);
+        //         setProductHoverImage(darkImg)
+        //     } else {
+        //         setProductImage(darkImg);
+        //         setProductHoverImage(medImg)
+        //     }
+        // }
+
+        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11f0acb0-5f8a-459e-9d31-6f706061df00/540x';
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
             if (shade === 'medium') {
                 setProductImage(medImg);
                 setProductHoverImage(darkImg)
@@ -364,7 +410,7 @@ const ProductCard = (props:any) => {
                 <p className={`product-title__text text-center grow flex flex-col items-start justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center"`}>{props.product.title}</a>
                 </p>
-                <div className="review-stars__number flex justify-center mb-1 lg:mb-[1rem]">
+                <div className="review-stars__number min-h-[20px] flex justify-center mb-1 lg:mb-[1rem]">
                     {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
                 </div>
                 
