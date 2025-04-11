@@ -92,6 +92,19 @@
 			@apply opacity-100;
 		}
 
+		&__track-scrollbar {
+			@apply relative justify-self-end self-center w-full overflow-hidden cursor-pointer;
+			&:before {
+				@apply content-[''] absolute w-full top-[50%] -translate-y-[50%] border-[2px] border-gray-400;
+			}
+		}
+		&__scrollbar {
+			@apply relative w-full flex py-1 cursor-pointer;
+			&::after {
+				@apply content-[''] w-full h-[4px] bg-black;
+			}
+		}
+
 		@keyframes loading {
 			0% {
 				transform: rotate(0deg);

@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
 
 const options: EmblaOptionsType = {
 	loop: false,
@@ -11,8 +12,8 @@ const options: EmblaOptionsType = {
 };
 
 const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ? 
-    <Carousel.Wrapper emblaApi={emblaApi1}>
-        <Carousel.Inner emblaRef={emblaRef1} className="-mx-hg lg:-mx-g">
+    <Carousel.Wrapper emblaApi={emblaApi1} className={'-mr-g lg:mr-0'}>
+        <Carousel.Inner emblaRef={emblaRef1} className="">
             {children}
         </Carousel.Inner>
     </Carousel.Wrapper>
@@ -46,11 +47,24 @@ const SideArticleCarousel = (props: any) => {
             <div className="w-full justify-center px-0">
                 <div className={`mx-0 ${articleCarousel?.length <= 1 ? 'flex' : ''}`}>
                     <WithCarousel carousel={articleCarousel?.length > 1} emblaApi1={emblaApi1} emblaRef1={emblaRef1}>
-                        {articleCarousel.map((data:any, index:number) => (
-                            <PostCard key={`${data.id}-${index}`} carousel={true} template="pdp" className="product__side-article flex-grow-0 flex-shrink-0 basis-[335px] w-[335px] px-hg lg:px-g lg:w-[80%] lg:basis-[80%]" data={data} />
-                        ))}
+                        {articleCarousel.map((data:any, index:number, row: any) => {
+                            const isLast = index + 1 === row.length;
+                            return (
+                                <PostCard
+                                    key={`${data.id}-${index}`} carousel={true} template="pdp"
+                                    className={`product__side-article flex-grow-0 flex-shrink-0 basis-[335px] w-[335px] ${isLast ? '' : 'pr-hg lg:pr-g'} lg:w-[80%] lg:basis-[80%]`} data={data} />
+                            )
+                        })}
                     </WithCarousel>
-                    
+
+                    {articleCarousel.length > 1 && (
+                        <CarouselScrollbar
+                            emblaApi={emblaApi1}
+                            scrollSnaps={emblaApi1?.scrollSnapList()}
+                            className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+                        />
+                    )}
+                    {/*                     
                     {articleCarousel.length > 1 && (
                         <div className="px-0 pr-g">
                             <div className="carousel__progress bg-gray-400 my-2 lg:my-g lg:!pr-0">
@@ -59,7 +73,7 @@ const SideArticleCarousel = (props: any) => {
                                     style={{ left: `${scrollProgress}%`, width: `${((1 / articleCarousel.length) * 100) + 2.5}%` }} />
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
