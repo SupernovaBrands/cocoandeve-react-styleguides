@@ -203,12 +203,20 @@ export const CartItem = (props:CartItemProps) => {
 		setSelectedVariant(selectedSwatch);
 	}, [selectedSwatch]);
 
+	const isUpsell = (item:any) => {
+		try {
+			return item.attributes.find((props:any) => props.key === '_front_upsell');
+		} catch {
+			return null
+		}
+	}
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
 			<ConditionWrapper
 				condition={!item.isFreeItem}
-				wrapper={(children: any) => <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a>}
+				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
 			>
 				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
@@ -233,7 +241,7 @@ export const CartItem = (props:CartItemProps) => {
 								<ConditionWrapper
 									condition={!item.isFreeItem}
 									wrapper={(children: any) => {
-										if (item.disableCartItemLink) {
+										if (item.disableCartItemLink || isUpsell(item)) {
 											return (
 												<span className="text-black">
 													{children}
@@ -395,10 +403,10 @@ export const CartItem = (props:CartItemProps) => {
 									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
 									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
 								<strong>
-									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0 
+									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
 										? formatMoney(item.priceAfterDiscounted, false, store)
 										: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
-									
+
 									{item.recurring && (item.period)}
 								</strong>
 							</div>
