@@ -30,7 +30,9 @@ const CartUpsell = (props:any) => {
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
-        align: 'start'
+        align: 'start',
+        // watchDrag: false,
+        // dragFree: true,
     }, []);
 
     const prev = () => {
@@ -73,16 +75,23 @@ const CartUpsell = (props:any) => {
     }
 
     useEffect(() => {
-        setUpsells(products);
+        if (products.length > 1 && products.length < 4) {
+            setUpsells([...products, ...products]);
+        } else {
+            setUpsells(products);
+        }
     }, [products]);
 
+
+    //@ts-ignore
+    window.emblaBrow = emblaApi;
     return (
         <>
             <hr className="mt-2 mb-3" />
             <div className="relative mb-3">
                 { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
                 { upsell.length > 1 && (
-                    <div className="upsell-navigation absolute top-0 right-0 w-[50px]">
+                    <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>
                             <PrevButton
                                 onClick={() => prev()}
@@ -99,9 +108,9 @@ const CartUpsell = (props:any) => {
                         </Carousel.Navigation>
                     </div>
                 )}
-                <div className="flex overflow-hidden mt-2 space-x-4">
+                <div className={`flex overflow-hidden mt-2 space-x-4 ${upsell.length > 1 ? '-mr-g md:-mr-3' : ''}`}>
                 <Carousel.Wrapper emblaApi={emblaApi} className="w-full flex flex-col">
-                    <Carousel.Inner emblaRef={emblaRef} className={`flex flex-row ${ upsell.length > 1 ? 'max-w-[90%]' : 'max-w-[100%]'}`}>
+                    <Carousel.Inner emblaRef={emblaRef} className={`flex flex-row w-full`}>
                         {upsell.map((item:any, index:number) => {
                             const { product } = item;
                             let variantNode = null;
@@ -115,13 +124,13 @@ const CartUpsell = (props:any) => {
                                 const variant = {...variantNode};
                                 const img = product.media.nodes[0]?.image?.url;
                                 return (
-                                    <figure key={`upsell-${index}`} className={`flex items-center space-x-2 w-full mr-1 min-w-[100%]`}>
+                                    <figure key={`upsell-${index}`} className={`relative flex items-center flex-grow-0 flex-shrink-0 space-x-2 ${upsell.length === 1 ? 'w-full min-w-[100%] max-w-[100%]' : 'w-[270px] md:w-[313px] basis-[270px] md:basis-[313px] mr-1'}`}>
                                         <picture className="w-20 h-20 bg-pink-100">
-                                            <img className="object-contain w-full h-full min-w-[125px] max-w-[116px]" src={img} alt={product.title} />
+                                            <img className="block object-contain w-full h-full min-w-[98px] md:min-w-[116px] max-w-[98px] md:max-w-[116px]" src={img} alt={product.title} />
                                         </picture>
                                         <figcaption className="text-base block w-full">
                                             <p className="font-bold">
-                                                <a className="text-gray-800" href={`/products/${product.handle}`}>{product.title}</a>
+                                                <span className="text-gray-800">{product.title}</span>
                                             </p>
                                             <p className="mt-1">
                                                 {getCompareAtPrice(variant, item.percentage) && (
@@ -130,7 +139,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px]" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}
