@@ -18,14 +18,21 @@ const options2: EmblaOptionsType = {
     loop: true,
 };
 
+const ConditionalWrap = ({condition, wrap, children}) => condition ? wrap(children) : children;
+
 const ImageFigure = (props: any) => (
-    <figure className={`bg-pink-light text-center rounded pt-[1.5rem] pb-[.813rem] lg:pb-0 lg:h-full lg:pt-4 ${props.className ?? ''}`}>
-        <figcaption className="font-bold px-g min-h-[1.563rem] lg:min-h-3 lg:flex lg:items-center lg:justify-center pb-[.5rem] lg:pb-0">{props.title}</figcaption>
-        <picture className="block px-[2.031rem] lg:mt-4 lg:px-0">
-            <source srcSet={props.srcSet} media="(min-width: 992px)" />
-            <img src={props.src} className="bg-pink-light w-full" alt="" loading="lazy" />
-        </picture>
-    </figure>
+    <ConditionalWrap
+        condition={props.handle}
+        wrap={children => <a href={`/products/${props.handle}`} className={`${props.className ?? ''} lg:h-full`}>{children}</a>}
+        >
+        <figure className={`bg-pink-light text-body text-center rounded pt-[1.5rem] pb-[.813rem] lg:pb-0 lg:h-full lg:pt-4 ${props.className ?? ''}`}>
+            <figcaption className="font-bold px-g min-h-[3rem] lg:min-h-3 flex items-center justify-center pb-[.5rem] lg:pb-0">{props.title}</figcaption>
+            <picture className="block px-[2.031rem] lg:mt-4 lg:px-0">
+                <source srcSet={props.srcSet} media="(min-width: 992px)" />
+                <img src={props.src} className="bg-pink-light w-full" alt="" loading="lazy" />
+            </picture>
+        </figure>
+    </ConditionalWrap>
 );
 
 const ImageTableCard = (props: any) => {
@@ -67,7 +74,6 @@ const ProductComparison = (props: any) => {
     
     const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options});
     const [emblaRef2, emblaApi2] = useEmblaCarousel({ align: 'start', ...options2});
-    // const [emblaRef3, emblaApi3] = useEmblaCarousel({ align: 'start', ...options });
 
     const onScroll = useCallback((emblaApi1: EmblaCarouselType) => {
 		setScrollProgress(((1 / INIT_FINALS.length) * 100) * emblaApi1.selectedScrollSnap());
@@ -78,39 +84,22 @@ const ProductComparison = (props: any) => {
         setComparison2(INIT_FINALS[itemSel + 1]?.tableData || []);
 	}, []);
 
-    // const onScroll3 = useCallback((emblaApi3: EmblaCarouselType) => {
-    //     setScrollProgress(((1 / INIT_FINALS.length) * 100) * emblaApi3.selectedScrollSnap());
-	// }, []);
-
     const { selectedIndex: idx3, onDotButtonClick: onClick3 } = useDotButton(emblaApi2);
 
     useEffect(() => {
 		if (emblaApi1) {
             emblaApi1.on('reInit', onScroll);
 		    emblaApi1.on('scroll', onScroll);
-            // emblaApi1.on('select', () => {
-            //     if (!emblaApi3) return;
-            //     emblaApi3.scrollTo(emblaApi1.selectedScrollSnap());
-            // });
         }
         if (emblaApi2) {
             emblaApi2.on('reInit', onScroll2);
 		    emblaApi2.on('scroll', onScroll2);
             emblaApi2.on('select', () => {
                 if (!emblaApi2) return;
-                console.log('selected desktop', emblaApi2.selectedScrollSnap());
                 const itemSel = emblaApi2.selectedScrollSnap();
                 setComparison2(productsCompare[itemSel]?.tableData || []);
             })
         }
-        // if (emblaApi3) {
-        //     emblaApi3.on('reInit', onScroll3);
-		//     emblaApi3.on('scroll', onScroll3);
-        //     emblaApi3.on('select', () => {
-        //         if (!emblaApi1) return;
-        //         emblaApi1.scrollTo(emblaApi3.selectedScrollSnap());
-        //     })
-        // }
 	}, [emblaApi1, onScroll, emblaApi2, onScroll2]);
     
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
@@ -129,6 +118,7 @@ const ProductComparison = (props: any) => {
                                         srcSet={data.src}
                                         title={data.title}
                                         tableData={data.tableData}
+                                        handle={index > 0 ? data.handle : false}
                                     />
                                 })}
                             </Carousel.Inner>
@@ -159,13 +149,14 @@ const ProductComparison = (props: any) => {
                                 />
                                 <ComparisonTable compare1={comparison1} compare2={comparison2} dataSource={'desktop'} />
                                 <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
-                                    <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={''}>
+                                    <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={'lg:h-full'}>
                                         {INIT_FINALS.slice(1).map((data, index) => (
                                             <ImageFigure 
                                                 key={`img-figure-dt-${index}`}
                                                 src={data.src}
                                                 srcSet={data.src}
                                                 title={data.title}
+                                                handle={data.handle}
                                                 className="w-full basis-full flex-grow-0 flex-shrink-0" />
                                         ))}
                                     </Carousel.Inner>
