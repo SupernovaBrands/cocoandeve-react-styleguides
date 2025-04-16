@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
@@ -7,6 +7,8 @@ const BundleVariantCard = (props) => {
     const [addingItem, setAddingItem] = useState(false);
 
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
+
+    const [imageSrc, setImageSrc] = useState('');
 
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
@@ -56,6 +58,17 @@ const BundleVariantCard = (props) => {
         });
 
         if (selectedVar) setCurrentVariant(selectedVar.node);
+
+        if (productShopify.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            const selectedValue = e.target.value.toLowerCase();
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x';
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x';
+            if (selectedValue === 'medium') {
+                setImageSrc(medImg)
+            } else {
+                setImageSrc(darkImg)
+            }
+        }
     };
 
     const option2 = productShopify?.options.find(
@@ -64,6 +77,11 @@ const BundleVariantCard = (props) => {
 
     const bundleImg = slides[slides.length - 1];
     const urlSet = productStrapi?.bundle_handle || null;
+
+    useEffect(() =>{        
+        const src = bundleImg.src.replace('public', '320x');
+        setImageSrc(src)
+    }, [bundleImg]);
 
     return  (
         <>
@@ -74,12 +92,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={bundleImg.src.replace('public', '320x')} />
+                            <img className="w-full h-full object-cover" src={imageSrc} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={bundleImg.src.replace('public', '320x')} />
+                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">

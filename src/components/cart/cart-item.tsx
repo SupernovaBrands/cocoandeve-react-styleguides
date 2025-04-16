@@ -232,7 +232,21 @@ export const CartItem = (props:CartItemProps) => {
 							: (
 								<ConditionWrapper
 									condition={!item.isFreeItem}
-									wrapper={(children:any) => <a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">{children}</a>}
+									wrapper={(children: any) => {
+										if (item.disableCartItemLink) {
+											return (
+												<span className="text-black">
+													{children}
+												</span>
+											);
+										} else {
+											return (
+												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
+													{children}
+												</a>
+											);
+										}
+									}}
 								>
 									{ !item.isFreeItem && (`${productTitle(item)}`) }
 									{`${item.recurring ? ' Subscriptions' : ''}`}
