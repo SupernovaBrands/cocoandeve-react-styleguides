@@ -34,6 +34,14 @@ const Header = (props: any) => {
 		setOpenDrawer(!openDrawer);
 	}
 
+	const handleSearchBox = (title) => {
+		const megaMenuTitles = ['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'];
+		if (title.includes('Shop') || ['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(title) > -1) {
+			setOpenSearchBox(false);
+			document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
+		}
+	};
+
 	useEffect(() => {
 		setTimeout(() => {
 			setFlashBubbleWrapper(flashBubble);
@@ -209,7 +217,7 @@ const Header = (props: any) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
-											<a href={`${nav.handle}`} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
+											<a href={`${nav.handle}`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
