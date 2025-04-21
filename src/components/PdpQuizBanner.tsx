@@ -9,8 +9,8 @@ const PdpQuizBanner = (props) => {
                     </picture>
                     
                     <div className="lg:order-1 ml-g lg:ml-2">
-                        <p className="font-bold lg:mb-25 lg:text-lg" dangerouslySetInnerHTML={{__html: `Tan Quiz`}} />
-                        <div className="hidden lg:block text-sm">Find the perfect solution for your skin’s <br /> needs in just a few steps</div>
+                        <p className="font-bold lg:mb-25 lg:text-lg" dangerouslySetInnerHTML={{__html: `Tan Quiz<span class="lg:hidden block font-normal text-sm">Find your perfect shade</span>`}} />
+                        <div className="hidden lg:block text-sm">Find the perfect shade to match <br />your skin’s needs in 3 minutes!</div>
                     </div>
                     <span className="hidden lg:inline-block hover:no-underline rounded-full bg-white text-primary text-base py-[0.5rem] px-[1.65625em] border border-[2px] border-primary font-bold absolute right-2">Take the Quiz</span>
                 </div>

@@ -6,7 +6,7 @@
 
     &-side-article {
         .overflow-hidden {
-            @apply pr-g;
+            @apply pr-g lg:pr-0;
         }
     }
 
@@ -181,8 +181,8 @@
         .badge {
             @apply py-[.375em];
         }
-        p.h2 {
-            @apply text-lg mb-[1rem];
+        p {
+            @apply text-lg mb-[1rem] min-h-[4.688rem] lg:min-h-[auto];
         }
     }
 
