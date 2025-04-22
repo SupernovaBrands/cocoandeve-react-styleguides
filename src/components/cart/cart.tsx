@@ -5,6 +5,7 @@ import CartShippingMeter from '~/components/cart/cart-shipping-meter';
 import CartDiscountMeter from '~/components/cart/cart-discount-meter';
 import CartDiscountForm from '~/components/cart/cart-discount-form';
 import CartManualGwp from '~/components/cart/cart-manual-gwp';
+import CartUpsell from '~/components/cart/cart-upsell';
 import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
@@ -34,6 +35,8 @@ interface Props {
 	shippingData?: any;
 	handleDiscount?: any;
 	manualGwpSetting?: any;
+	cartUpsell?: any;
+	addToCart?: ({}) => void;
 	discountBanner?: any;
 	removeDiscount?: any;
 	changeVariant?: any;
@@ -48,7 +51,7 @@ interface Props {
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
-		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting } = props;
+		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting, cartUpsell, addToCart } = props;
 
 	// const storeApi = new storefrontApi();
 	// console.log(discountMeter, 'discountMeter');
@@ -91,7 +94,7 @@ const Cart: React.FC<Props> = (props) => {
 					onRemoveItem(item, []);
 				})
 			}
-			
+
 			setCart({ ...cartData });
 			setCombineDiscount(cartData.combineDiscount);
 		}
@@ -380,6 +383,10 @@ const Cart: React.FC<Props> = (props) => {
 										/>
 										<hr />
 									</>
+								)}
+
+								{cartUpsell && cartUpsell.enable && cartUpsell.items.length > 0 && (
+									<CartUpsell {...cartUpsell} addToCart={addToCart} store={store}></CartUpsell>
 								)}
 
 								{/* @ts-ignore */}
