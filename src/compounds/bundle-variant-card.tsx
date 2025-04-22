@@ -118,12 +118,12 @@ const BundleVariantCard = (props) => {
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25 border-white">
-                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[42px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
+                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 ${optUpsellButton ? 'bg-primary text-white hover:bg-primary border-primary' : 'bg-white text-body hover:bg-white border-[transparent]'}  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm btn-primary rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${optUpsellButton ? 'bg-primary text-white hover:bg-primary border-primary' : 'bg-white text-body hover:bg-white border-[transparent]'}  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm btn-primary rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
                                 {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>
@@ -132,7 +132,7 @@ const BundleVariantCard = (props) => {
                                             <span className="">{formatMoney(store, parseFloat(currentVariant.price.amount) * 100)}</span>
                                         </span>
                                         {optUpsellButton ? (
-                                            <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l">Add</span>
+                                            <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l pt-[3px]">Add</span>
                                         ) : (
                                             <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-gray-500 border-l">
                                                 <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +142,7 @@ const BundleVariantCard = (props) => {
                                         )}
                                     </>
                                 )}
-                                {currentVariant.availableForSale && addingItem && <span className="spinner-border spinner-border-sm text-body !w-[15px] !h-[15px]" role="status" />}
+                                {currentVariant.availableForSale && addingItem && <span className={`spinner-border spinner-border-sm ${optUpsellButton ? 'text-white' : 'text-body'} !w-[15px] !h-[15px]`} role="status" />}
                             </Button>
                         </div>
                     </figcaption>
