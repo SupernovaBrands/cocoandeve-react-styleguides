@@ -46,7 +46,7 @@ const RealResult = () => {
 		},
 	];
 	return (
-		<RealResultCarousel videoReviews={SLIDE_VIDEOS} videos={SLIDE_VIDEOS} />
+		<RealResultCarousel videos={SLIDE_VIDEOS} />
 	);
 };
 

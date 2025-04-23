@@ -218,7 +218,7 @@ const Homepage = () => {
 		<>
             <HeroBanner isStyleguide={true} />
             <ProductCarousel products={PRODUCTS} isStyleguide={true} />
-			<RealResultCarousel videoReviews={SLIDE_VIDEOS} videos={SLIDE_VIDEOS} />
+			<RealResultCarousel videos={SLIDE_VIDEOS} />
 			<Service />
             <Playground featuredCollection={featuredCollection} isStyleguide={true} />
 			<QuizReward />
