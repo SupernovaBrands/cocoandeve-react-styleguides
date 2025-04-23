@@ -40,12 +40,12 @@ const RealResultCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-	const { videos, store } = props;
+	const { videos, store, videoReviews } = props;
 
 	return (
 		<div className="instagram-reels container my-3 text-center px-0 lg:px-g lg:mt-5">
 			<p className="instagram-reels__title text-xl lg:text-2xl font-bold mb-2">Real Results</p>
-            <div className="row">
+			<div className="row">
                 <div className="text-center instagram-reels__video-container pl-hg lg:pl-0">
 					<div className="lg:flex lg:flex-wrap lg:justify-between">
 						
@@ -62,13 +62,13 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-									{videos.map((data: any, i: number) => (
+									{videoReviews.map((data: any, i: number) => (
 										<InstagramCard
-											key={`all-${data.url}-${i}`}
+											key={`all-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.url}
+											videoUrl={data.review_url}
 											author={data.username}
-											product={data.product}
+											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
@@ -80,14 +80,15 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'hair'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g lg:!transform-none">
-									{videos.filter((data: any) => data.category === 'hair').map((data: any, i: number) => (
+									{videoReviews.filter((data: any) => data.enabled_hair).map((data: any, i: number) => (
 										<InstagramCard
-											key={`hair-${data.url}-${i}`}
+											key={`hair-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.url}
+											videoUrl={data.review_url}
 											author={data.username}
-											product={data.product}
+											product={data.product_link}
 											url={data.url}
+											index={i}
 											title={data.title}
 										/>
 									))}
@@ -97,14 +98,15 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'tan'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g lg:!transform-none">
-									{videos.filter((data: any) => data.category === 'tan_spf').map((data: any, i: number) => (
+									{videoReviews.filter((data: any) => data.enabled_tanspf).map((data: any, i: number) => (
 										<InstagramCard
-											key={`tan-${data.url}-${i}`}
+											key={`tan-and-spf-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.url}
+											videoUrl={data.review_url}
 											author={data.username}
-											product={data.product}
+											product={data.product_link}
 											url={data.url}
+											index={i}
 											title={data.title}
 										/>
 									))}
@@ -114,14 +116,15 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'skin'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
-									{videos.filter((data: any) => data.category === 'skin').map((data: any, i: number) => (
+									{videoReviews.filter((data: any) => data.enabled_skin).map((data: any, i: number) => (
 										<InstagramCard
-											key={`body-${data.url}-${i}`}
+											key={`skin-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.url}
+											videoUrl={data.review_url}
 											author={data.username}
-											product={data.product}
+											product={data.product_link}
 											url={data.url}
+											index={i}
 											title={data.title}
 										/>
 									))}
@@ -131,14 +134,15 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'body'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef5} className="lg:-mx-g lg:!transform-none">
-									{videos.filter((data: any) => data.category === 'body').map((data: any, i: number) => (
+									{videoReviews.filter((data: any) => data.enabled_body).map((data: any, i: number) => (
 										<InstagramCard
-											key={`body-${data.url}-${i}`}
+											key={`body-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
-											videoUrl={data.url}
+											videoUrl={data.review_url}
 											author={data.username}
-											product={data.product}
+											product={data.product_link}
 											url={data.url}
+											index={i}
 											title={data.title}
 										/>
 									))}
