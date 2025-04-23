@@ -241,7 +241,7 @@ export const CartItem = (props:CartItemProps) => {
 								<ConditionWrapper
 									condition={!item.isFreeItem}
 									wrapper={(children: any) => {
-										if (item.disableCartItemLink || isUpsell(item)) {
+										if (item.disableCartItemLink || !isUpsell(item)) {
 											return (
 												<span className="text-black">
 													{children}
