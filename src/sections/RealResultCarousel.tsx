@@ -40,7 +40,7 @@ const RealResultCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-	const { videos, store, videoReviews } = props;
+	const { videos, store } = props;
 
 	return (
 		<div className="instagram-reels container my-3 text-center px-0 lg:px-g lg:mt-5">
@@ -62,7 +62,7 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
-									{videoReviews.map((data: any, i: number) => (
+									{videos.map((data: any, i: number) => (
 										<InstagramCard
 											key={`all-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
@@ -80,7 +80,7 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'hair'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g lg:!transform-none">
-									{videoReviews.filter((data: any) => data.enabled_hair).map((data: any, i: number) => (
+									{videos.filter((data: any) => data.enabled_hair).map((data: any, i: number) => (
 										<InstagramCard
 											key={`hair-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
@@ -98,7 +98,7 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'tan'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g lg:!transform-none">
-									{videoReviews.filter((data: any) => data.enabled_tanspf).map((data: any, i: number) => (
+									{videos.filter((data: any) => data.enabled_tanspf).map((data: any, i: number) => (
 										<InstagramCard
 											key={`tan-and-spf-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
@@ -116,7 +116,7 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'skin'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
-									{videoReviews.filter((data: any) => data.enabled_skin).map((data: any, i: number) => (
+									{videos.filter((data: any) => data.enabled_skin).map((data: any, i: number) => (
 										<InstagramCard
 											key={`skin-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
@@ -134,7 +134,7 @@ const RealResultCarousel = (props: any) => {
 						<TabContent active={activeTab === 'body'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
 								<Carousel.Inner emblaRef={emblaRef5} className="lg:-mx-g lg:!transform-none">
-									{videoReviews.filter((data: any) => data.enabled_body).map((data: any, i: number) => (
+									{videos.filter((data: any) => data.enabled_body).map((data: any, i: number) => (
 										<InstagramCard
 											key={`body-${data.item_id}-${i}`}
 											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
