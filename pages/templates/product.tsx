@@ -78,7 +78,7 @@ const ProductTemplate = () => {
                 <h4 className="fw-normal mb-2 mb-lg-4"><b>Dark</b><br /> For a back from vacay bronze. Ideal for medium skin tones!</h4>
                 <h4 className="fw-normal mb-0"><b>Ultra Dark</b><br /> A deep, rich tan. For deeper skin tones!</h4>
             </PDPBanner>
-			<RealResultCarousel videoReviews={SLIDE_VIDEOS} show="hair"/>
+			<RealResultCarousel videos={SLIDE_VIDEOS} show="hair"/>
 			{/* <Sustainability /> */}
 			<div className="pt-4 pb-2 bg-gray-100">
 				<div className="container">
