@@ -69,6 +69,17 @@ const BundleVariantCard = (props) => {
                 setImageSrc(darkImg)
             }
         }
+
+        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
+            const selectedValue = e.target.value.toLowerCase();
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
+            if (selectedValue === 'medium') {
+                setImageSrc(medImg)
+            } else {
+                setImageSrc(darkImg)
+            }
+        }
     };
 
     const option2 = productShopify?.options.find(
@@ -78,9 +89,20 @@ const BundleVariantCard = (props) => {
     const bundleImg = slides[slides.length - 1];
     const urlSet = productStrapi?.bundle_handle || null;
 
-    useEffect(() =>{        
-        const src = bundleImg.src.replace('public', '320x');
-        setImageSrc(src)
+    useEffect(() =>{
+        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
+            const selectedValue = currentVariant.selectedOptions[1].value.toLowerCase();
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
+            if (selectedValue === 'medium') {
+                setImageSrc(medImg)
+            } else {
+                setImageSrc(darkImg)
+            }
+        } else {
+            const src = bundleImg.src.replace('public', '320x');
+            setImageSrc(src)
+        }
     }, [bundleImg]);
 
     return  (
