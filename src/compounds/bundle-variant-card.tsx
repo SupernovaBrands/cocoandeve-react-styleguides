@@ -150,7 +150,7 @@ const BundleVariantCard = (props) => {
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>
                                         <span className="pt-[3px]">
-                                            {currentVariant.compareAtPrice && <span className="line-through mr-25">{formatMoney(store, parseFloat(currentVariant.compareAtPrice.amount) * 100)}</span>}
+                                            {currentVariant.compareAtPrice && <span className="line-through mr-25 font-normal">{formatMoney(store, parseFloat(currentVariant.compareAtPrice.amount) * 100)}</span>}
                                             <span className="">{formatMoney(store, parseFloat(currentVariant.price.amount) * 100)}</span>
                                         </span>
                                         {optUpsellButton ? (
