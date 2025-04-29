@@ -18,7 +18,7 @@ const Page = (props: any) => {
             font-style: italic;
         }
     `;
-    return (
+    return !isLoading && (
         <div className="pt-4">
             <div className="container">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
