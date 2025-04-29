@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import parse from 'html-react-parser';
 
 const Page = (props: any) => {
     const { content, isLoading, bodyContent } = props;
@@ -18,7 +17,7 @@ const Page = (props: any) => {
             font-style: italic;
         }
     `;
-    return !isLoading && (
+    return (
         <div className="pt-4">
             <div className="container">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
@@ -28,7 +27,7 @@ const Page = (props: any) => {
                         </h1>
                         <style jsx>{cssGrid}</style>
                         {/* {parse(content?.content.replace('<a class="link-color"', '<a class="link-color underline"'))} */}
-                        <div dangerouslySetInnerHTML={{
+                        <div className={`${!isLoading ? '' : 'invisible'} transition-all lg:mb-3`} dangerouslySetInnerHTML={{
 							__html: bodyContent ?? content?.content,
 						}} />
                     </div>
