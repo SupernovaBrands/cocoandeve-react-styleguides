@@ -39,6 +39,12 @@ const InstagramCard = (props: any) => {
         }
     }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
 
+    useEffect(() => {
+        if (videoRef && videoRef.current) {
+            videoRef.current.setAttribute('webkit-playsinline', 'true');
+        }
+    }, [])
+
     return (
         <div className={`text-left rounded ${classes}`} ref={targetRef as any}>
             <video preload="none" ref={videoRef} 
