@@ -74,6 +74,8 @@ const Footer = (props) => {
             label = 'Terms';
         } else if (lower === 'accessibility statement') {
             label = 'Accessibility';
+        } else if (lower === 'modern slavery policy') {
+            return 'Modern Slavery';
         } else {
             return str;
         }
