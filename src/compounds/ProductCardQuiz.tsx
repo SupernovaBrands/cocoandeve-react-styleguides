@@ -3,7 +3,7 @@ const ProductCardQuiz = (props: any) => {
     // console.log('quiz setting', props.quizSetting);
 	return (
 		<figure className={props.className ?? ''}>
-            <a href={props.quizSetting?.quiz_button_url}>
+            <a href="/pages/self-tan-quiz">
                 <picture className="block">
                     <source srcSet={props.imgDt} media="(min-width: 992px)" />
                     <img className="w-full rounded-[24px] lg:rounded-[32px]" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" />
