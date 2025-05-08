@@ -11,7 +11,7 @@ const ProductBannerSlider = (props) => {
 	const [clicked, setClicked] = useState(false);
 	const [wrapperWidth, setWrapperWidth] = useState(0);
 	const [wrapperHeight, setWrapperHeight] = useState({ minHeight: '480px' });
-	const [imgPt, setImgPt] = useState('pt-[86%]');
+	const [imgPt, setImgPt] = useState('');
 
 	const initComparisons = () => {
 		setWrapperWidth(compWrapper.current.offsetWidth);
@@ -29,8 +29,9 @@ const ProductBannerSlider = (props) => {
 		
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
-			console.log('imgHeight', compOverlay, imgHeight);
+			// console.log('imgHeight', compOverlay, imgHeight);
 			if (imgHeight < 600) setImgPt('pt-[55%]');
+			else setImgPt('pt-[86%]');
 		}, 300); 
 	};
 
