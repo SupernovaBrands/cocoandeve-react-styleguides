@@ -113,16 +113,19 @@ const AddToCartButton = (props:any) => {
             } else if (group3.enabled && selectedVariant && group3.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
                 setCtaLabel(group3.cta);
             } else {
-                setCtaLabel(props.label);
+                let ctaLabel = DEFAULT_LABEL;
+                if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
+                setCtaLabel(`${ctaLabel}`);
+                // setCtaLabel(props.label);
             }
         }
     }, [selectedVariant, preOrders]);
 
-    useEffect(() => {
-        let ctaLabel = DEFAULT_LABEL;
-        if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
-        setCtaLabel(`${ctaLabel}`);
-    }, [])
+    // useEffect(() => {
+    //     let ctaLabel = DEFAULT_LABEL;
+    //     if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
+    //     setCtaLabel(`${ctaLabel}`);
+    // }, [])
 
     return (
         <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
