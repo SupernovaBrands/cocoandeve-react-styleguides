@@ -12,6 +12,10 @@ const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant }) => {
     let label = props.btnLabel ? props.btnLabel : props.label;
     // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
     const region = getCookie('region');
+    if (selectedVariant.product.handle === 'tan-boosting-anti-aging-body-oil') {
+        console.log('pricing comp. region', region);
+        console.log('pricing comp. props', props);
+    }
     return (
         <>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-nowrap text-left py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'} `}>
