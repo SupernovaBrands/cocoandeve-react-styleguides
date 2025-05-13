@@ -10,9 +10,10 @@ const CartDiscountMeter = (props) => {
 		current,
 		progressText,
 		useQuantity,
+		items
 	} = props;
 
-	const [state, setState] = useState({ target, current, progressText, progress: 0, text: '' });
+	const [state, setState] = useState({ target, current, progressText, progress: 0, text: '', items: [] });
 
 	useEffect(() => {
 		const remaining = props.target - props.current;
@@ -22,7 +23,9 @@ const CartDiscountMeter = (props) => {
 		setState({...state, progress, text})
 	}, [props]);
 
-	return (
+	const totalDiscounted = items.reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
+
+	return totalDiscounted > 0 && (
 		<>
 			<p className="mb-1">{state.text}</p>
 			<div className="progress mb-3 bg-[#e9ecef] rounded flex overflow-hidden h-[5px]">
@@ -45,6 +48,7 @@ CartDiscountMeter.propTypes = {
 	target: PropTypes.number,
 	progressText: PropTypes.string,
 	useQuantity: PropTypes.bool,
+	items: PropTypes.array,
 };
 
 CartDiscountMeter.defaultProps = {
@@ -52,6 +56,7 @@ CartDiscountMeter.defaultProps = {
 	target: 0,
 	progressText: 'cartShippingMeter.inProgressText',
 	useQuantity: false,
+	items: [],
 };
 
 export default CartDiscountMeter;

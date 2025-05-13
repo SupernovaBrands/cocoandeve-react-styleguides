@@ -213,6 +213,7 @@ const Cart: React.FC<Props> = (props) => {
 							{discountMeter && discountMeter.enabled && discountMeter
 								&& discountMeter.enabled && cart.itemCount > 0 && discountMeter.progressText !== '' && (
 								<CartDiscountMeter
+									items={cart.items}
 									target={discountMeter.target}
 									current={discountMeter.current}
 									progressText={discountMeter.progressText}
