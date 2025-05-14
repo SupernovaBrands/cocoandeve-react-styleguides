@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 
-const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant }) => {
+const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store }) => {
     let label = props.btnLabel ? props.btnLabel : props.label;
     // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
     return (
@@ -19,10 +19,10 @@ const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant }) => {
             </span>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">
-                    {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100) : props.comparePrice}
+                    {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : props.comparePrice}
                 </span>)}
                 <span className="">{
-                    hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100) : props.price}
+                    hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : props.price}
                 </span>
             </span>
         </>
@@ -45,7 +45,7 @@ const WaitlistButton = (props:any) => {
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
         <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
+            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
 };
@@ -71,7 +71,7 @@ const LaunchButton = (props: any) => {
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
         <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true} />
+            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true} />
         </Button>
     )
 }
@@ -129,7 +129,7 @@ const AddToCartButton = (props:any) => {
 
     return (
         <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
+            <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
         </Button>
     );
 };
@@ -219,10 +219,10 @@ const SwatchOverlay = (props:any) => {
                             </div>
                         )}
                         {resultVariant.availableForSale && (
-                            <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
+                            <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
                         )}
                         {!resultVariant.availableForSale && (
-                            <WaitlistButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={resultVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
+                            <WaitlistButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={resultVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
                         )}
                     </>
                 )
@@ -230,7 +230,7 @@ const SwatchOverlay = (props:any) => {
 
             {!props.quizResult && (
                 <>
-                    <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
+                    <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
                     <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : 'left-[8px] lg:left-1 right-[8px] lg:right-1 bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t`}>
                         <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
                             <label className="block mb-[.625em]">
@@ -249,12 +249,12 @@ const SwatchOverlay = (props:any) => {
                                 ))}
                             </ul>
                         </div>
-                        {/* <AddToCartButton comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/> */}
+                        {/* <AddToCartButton store={store} comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/> */}
                         {swatchAvailable && (
-                            <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
+                            <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
                         )}
                         {!swatchAvailable && (
-                            <WaitlistButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} />
+                            <WaitlistButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} />
                         )}
                     </div>
                 </>
@@ -423,22 +423,22 @@ const ProductCard = (props:any) => {
                 </div>
                 
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
-                    <AddToCartButton sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
+                    <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 )}
 
                 {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
                     <SwatchOverlay handleShade={handleShade} store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 }
                 {!props.isLaunchWL && !props.product.availableForSale && (
-                    <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
+                    <WaitlistButton store={store} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
                 )}
 
                 {!props.isLaunchWL && !props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
-                    <WaitlistButton selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
+                    <WaitlistButton store={store} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
                 )}
 
                 {props.isLaunchWL && (
-                    <LaunchButton launchBox={props.launchBox} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} setLaunchWLModal2={props.setLaunchWLModal2} setLaunchWLModal3={props.setLaunchWLModal3} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
+                    <LaunchButton store={store} launchBox={props.launchBox} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} setLaunchWLModal2={props.setLaunchWLModal2} setLaunchWLModal3={props.setLaunchWLModal3} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
                 )}
                 {/* {props.quizResult && (
                     <QuizResultButton product={props.product} sku={props.quizResultSku} addToCart={addToCart} />
