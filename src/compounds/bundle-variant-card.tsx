@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { showLaunchWaitlist, swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency, optUpsellButton } = props;
+    const { showLaunchWaitlist, swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
     // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
 
@@ -147,7 +147,7 @@ const BundleVariantCard = (props) => {
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${optUpsellButton ? 'bg-primary text-white hover:bg-primary border-primary' : 'bg-white text-body hover:bg-white border-[transparent]'}  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm btn-primary rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base bg-primary text-white hover:bg-primary border-primary  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm btn-primary rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
                                 {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>
@@ -155,18 +155,10 @@ const BundleVariantCard = (props) => {
                                             {currentVariant.compareAtPrice && <span className="line-through mr-25 font-normal">{formatMoney(store, parseFloat(currentVariant.compareAtPrice.amount) * 100)}</span>}
                                             <span className="">{formatMoney(store, parseFloat(currentVariant.price.amount) * 100)}</span>
                                         </span>
-                                        {optUpsellButton ? (
-                                            <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l pt-[3px]">Add</span>
-                                        ) : (
-                                            <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-gray-500 border-l">
-                                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.6 5.3V8.4H3.56V5.3H0.48V3.26H3.56V0.18H5.6V3.26H8.7V5.3H5.6Z" fill="#151515"/>
-                                                </svg>
-                                            </span>
-                                        )}
+                                        <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l pt-[3px]">Add</span>
                                     </>
                                 )}
-                                {currentVariant.availableForSale && addingItem && <span className={`spinner-border spinner-border-sm ${optUpsellButton ? 'text-white' : 'text-body'} !w-[15px] !h-[15px]`} role="status" />}
+                                {currentVariant.availableForSale && addingItem && <span className={`spinner-border spinner-border-sm text-white !w-[15px] !h-[15px]`} role="status" />}
                             </Button>
                         </div>
                     </figcaption>
