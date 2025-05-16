@@ -1142,6 +1142,38 @@ const trialParticipants = [
 		"user": "tessa mccool",
 		"score": "5",
 		"content": "I was skeptical at first BUT I'm really impressed with the new gradual tanning lotion! I've had bad experiences with similar products in the past but after using coco and eve for three days, I had a nice sun kissed look. No transfer or streaks and it's easy to use. I am now a fan and plan on adding it to my tanning routine!"
+	  },
+	  {
+		"sku": "CE0005302020,CE0005312020",
+		"date": "2025-5-14",
+		"title": "Absolutely love this body oil 💕",
+		"user": "Sarah",
+		"score": "5",
+		"content": "It smells amazing, hydrates my skin to be so soft and gave me a deep tan without the sunburn. LOVE IT"
+	  },
+	  {
+		"sku": "CE0005302020,CE0005312020",
+		"date": "2025-5-13",
+		"title": "A MIRACLE PRODUCT",
+		"user": "Melissa Rhodes",
+		"score": "5",
+		"content": "It's a miracle that I got a tan without burning! I like how this oil is hydrating, it left my skin feeling silky smooth. It comes in a nice scent and with the pump applicator there is more control over the product and it does't spray everywhere. I will definitely reach for it in the future for my time in the sun!"
+	  },
+	  {
+		"sku": "CE0005302020,CE0005312020",
+		"date": "2025-5-9",
+		"title": "Gives a beautiful glow WITHOUT leaving me greasy",
+		"user": "Terra",
+		"score": "5",
+		"content": "\nI absolutely love the Tan Boosting Anti-Aging Body Oil SPF! It gave my skin a beautiful glow without feeling greasy. It’s incredibly hydrating, which is perfect for my aging skin, and the added sun protection is such a bonus. Definitely a new staple in my skincare routine!\n\n\n"
+	  },
+	  {
+		"sku": "CE0005302020,CE0005312020",
+		"date": "2025-5-3",
+		"title": "I burn so easily and this is the only thing that has ever worked!",
+		"user": "Tracey Grahl",
+		"score": "5",
+		"content": "\nI'm someone who burns easily and always has a coat of self-tan on. This is the only oil that doesn't make me burn or ruin my self-tan. Most oils make my self-tan separate but this doesn’t affect it at all. I love how it keeps me protected while allowing me to get a tan. It smells amazing and absorbs so fast, leaving a hydrated glowy finish with no residue. I have finally found my dream product.\n"
 	  }
 ];
 
