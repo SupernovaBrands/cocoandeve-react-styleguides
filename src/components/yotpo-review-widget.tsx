@@ -131,8 +131,12 @@ const YotpoReviewWidget = (props:any) => {
 		productDesc,
 		canCreate,
 		productSkus,
-		showButtons
+		showButtons,
+		template,
+		productShopifyName,
 	} = props;
+
+	console.log(template, productUrl, productName, productShopifyName, 'testing');
 
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
@@ -319,7 +323,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const moveToTop = () => {
-		
+
 		if (reviewBox.current) {
 			const container = document.querySelector('.yotpo-reviews__container');
 			// console.log('container', container);
@@ -881,8 +885,8 @@ const YotpoReviewWidget = (props:any) => {
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline lg:hidden sm:block" href={`/products/${review?.products[0]?.slug}`}>
-														{review?.products[0]?.name}
+													<a className="mb-1 mt-1 block underline lg:hidden sm:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
+														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
 												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
@@ -903,8 +907,8 @@ const YotpoReviewWidget = (props:any) => {
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`/products/${review?.products[0]?.slug}`}>
-														{review?.products[0]?.name}
+													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={``}>
+														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
 												<h4 className="mb-1 mt-1 font-bold lg:font-normal">
@@ -972,7 +976,7 @@ const YotpoReviewWidget = (props:any) => {
 								</li>
 							</ul>
 						)}
-					</div>					
+					</div>
 				</div>
 
 				<div id="yotpo-widget__questions" className={`flex flex-wrap [transition:opacity_0.15s_linear] ${activeTab === 'question' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__questions-tab">
@@ -981,7 +985,7 @@ const YotpoReviewWidget = (props:any) => {
 					</div>
 					<div className="review__question-right">
 						<YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0'} />
-						
+
 						{qnaLoading && (
 							<div className="flex w-full justify-center mt-4">
 								<div className="spinner-border" role="status" aria-hidden="true" />
@@ -1007,7 +1011,7 @@ const YotpoReviewWidget = (props:any) => {
 							</div>
 						)}
 
-						
+
 
 						{!qnaLoading && questions.length > 0 && questions.map((question) => (
 							<div key={question.id} className="pt-3 pb-4 border-b">
