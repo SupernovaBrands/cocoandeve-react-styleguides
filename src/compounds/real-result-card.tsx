@@ -78,6 +78,10 @@ const RealResultCard = (props) => {
 		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF30', 'Tan Boosting Anti-Aging Body Oil SPF20');
 	}
 
+	if (region === 'us' && data.label.includes('Tan Boosting Anti-Aging Body Oil SPF50')) {
+		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF50', 'Tan Boosting Anti-Aging Body Oil SPF45');
+	}
+
 	const titleEscaped = escapeHtml(data.label);
 	let titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
 
@@ -93,7 +97,7 @@ const RealResultCard = (props) => {
 		<div className="w-full lg:w-1/3 lg:inline-block result-card sm:px-hg lg:px-g">
 			<picture className="embed-responsive rounded-tl-lg rounded-br-0 rounded-tr-lg rounded-bl-0 overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
-				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0]" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
+				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-tl-[.5em] rounded-br-[0] rounded-tr-[.5em] rounded-bl-[0] object-top" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
 			<div className="px-2 pb-2 pt-2 bg-white border-l border-b border-r rounded-b border-l-gray-400 border-b-gray-400 border-r-gray-400 mb-2 lg:mb-3">
 				<div className="flex justify-between items-center mb-1">
