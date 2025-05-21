@@ -78,6 +78,10 @@ const RealResultCard = (props) => {
 		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF30', 'Tan Boosting Anti-Aging Body Oil SPF20');
 	}
 
+	if (region === 'us' && data.label.includes('Tan Boosting Anti-Aging Body Oil SPF50')) {
+		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF50', 'Tan Boosting Anti-Aging Body Oil SPF45');
+	}
+
 	const titleEscaped = escapeHtml(data.label);
 	let titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
 
