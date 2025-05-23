@@ -22,6 +22,7 @@ const CartExtrass = (props:any) => {
 	const [loading] = useState(false);
 	const [showAfterpay, setShowAfterpay] = useState(false);
 	const [showShoppay, setShowShoppay] = useState(false);
+	const [showAtome, setShowAtome] = useState(false);
 	const [showKlarna, setShowKlarna] = useState(false);
 	const [klarnaIns, setKlarnaInst] = useState('');
 	const [afterPayLoaded, setAfterPayLoaded] = useState(false);
@@ -46,8 +47,11 @@ const CartExtrass = (props:any) => {
     }
 
 	useEffect(() => {
-		if (['dev', 'us'].includes(store)) {
-			//setShowAfterpay(true);
+		if (['dev', 'au', 'ca', 'us'].includes(store)) {
+			setShowAfterpay(true);
+		}
+		if (['dev', 'my'].includes(store)) {
+			setShowAtome(true);
 		}
 		if (['us'].includes(store)) {
 			setShowShoppay(true);
@@ -68,13 +72,24 @@ const CartExtrass = (props:any) => {
 
 	return (
 		<>
-		{props.showTopHr && (showShoppay || showKlarna || showAfterpay) && <hr />}
+		{props.showTopHr && (showShoppay || showKlarna || showAfterpay || showAtome) && <hr />}
 		{showShoppay && (
 			<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
 				{!loading && (
 					<span>
 						<span>Pay in 4 interest-free installments for orders over <b>$50</b>  with</span>
 						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-shoppay.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px] mt-1px mr-1" alt="Shop pay logo"/>
+					</span>
+				)}
+			</div>
+		)}
+
+		{showAtome && (
+			<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
+				{!loading && (
+					<span>
+						<span>Pay in 3 payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 3) + Number.EPSILON)), false, store)} with</span>
+						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px] mt-1px mr-1" alt="Shop pay logo"/>
 					</span>
 				)}
 			</div>
