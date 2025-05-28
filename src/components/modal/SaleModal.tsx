@@ -49,11 +49,11 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
                 <CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />
                 <div className="text-center">
                     <h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em]`}>{sbp_heading}</h3>
-                    <div className="flex justify-center items-center">
-                        <h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em] leading-none`}>{sbp_percentage}</h2>
-                        <div className="flex flex-col items-start">
-                            <span className={`${sbp_percentage_color || 'text-body'} text-[4.625em] leading-none`}>%</span>
-                            <span className={`${sbp_percentage_color || 'text-body'} text-[1.75em] leading-none`}>OFF</span>
+                    <div className="flex justify-center items-center mb-2">
+                        <h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em]`}>{sbp_percentage}</h2>
+                        <div className="flex flex-col items-start gap-[10px]">
+                            <span className={`${sbp_percentage_color || 'text-body'} text-[4.375em] leading-[0.9]`}>%</span>
+                            <span className={`${sbp_percentage_color || 'text-body'} text-[1.75em] font-bold leading-[0.3]`}>OFF</span>
                         </div>
                     </div>
 
