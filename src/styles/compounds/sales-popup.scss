@@ -5,4 +5,25 @@
         }
     }
     
+    .modal--salespopup {
+        &__heading {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        &__percentage {
+            font-size: 116px;
+            line-height: 96px;
+        }
+
+        &__icon {
+            font-size: 74px;
+            line-height: 74px;
+        }
+
+        &__off {
+            font-size: 28px;
+            line-height: 22px;
+        }
+    }
 }

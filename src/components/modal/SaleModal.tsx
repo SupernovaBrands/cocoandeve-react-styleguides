@@ -47,17 +47,17 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
             </div>
             <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4">
                 <CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />
-                <div className="text-center">
-                    <h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em] mb-4`}>{sbp_heading}</h3>
-                    <div className="flex items-start justify-center mb-2 lg:mb-1">
-						<h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em]`}>{sbp_percentage}</h2>
-						<div className="flex flex-col justify-between h-[65px]">
-							<span className={`${sbp_percentage_color || 'text-body'} text-[4.625em] leading-[0]`}>%</span>
-							<span className={`${sbp_percentage_color || 'text-body'} text-[1.75em] font-bold`}>OFF</span>
+                <div className="text-center modal--salespopup">
+                    <h3 className={`${sbp_heading_color || 'text-body'} font-normal modal--salespopup__heading`}>{sbp_heading}</h3>
+                    <div className="flex items-start justify-center mb-2">
+						<h2 className={`${sbp_percentage_color || 'text-body'} modal--salespopup__percentage`}>{sbp_percentage}</h2>
+						<div className="flex flex-col">
+							<h2 className={`${sbp_percentage_color || 'text-body'} modal--salespopup__icon`}>%</h2>
+							<h2 className={`${sbp_percentage_color || 'text-body'} font-bold modal--salespopup__off`}>OFF</h2>
 						</div>
 					</div>
 
-                    <p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-g`}>{sbp_desc}</p>
+                    <p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-g leading-[1.25]`}>{sbp_desc}</p>
                     {!copied ? (
                         <Button onClick={copyCode} data-code={sbp_code} buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full">
                             Use Code: {sbp_code} <Paste className="svg--current-color svg text-primary ml-1" />
