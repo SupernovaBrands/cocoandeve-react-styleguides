@@ -38,14 +38,23 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 	};
 
 	useEffect(() => {
-		const platform = navigator.platform.toLowerCase();
-		console.log('platform', platform)
-		if (platform.includes('mac')) {
-			setPlatform('os-mac');
-		} else if (platform.includes('win')) {
-			setPlatform('os-win');
+		const userAgent = navigator.userAgent || navigator.vendor;
+		let os = 'unknown';
+
+		if (/windows/i.test(userAgent)) {
+			os = 'os-win';
+		} else if (/macintosh|mac os x/i.test(userAgent)) {
+			os = 'os-mac';
+		} else if (/iphone|ipad|ipod/i.test(userAgent)) {
+			os = 'os-ios';
+		} else if (/android/i.test(userAgent)) {
+			os = 'os-android';
 		}
+
+		setPlatform(os);
 	}, []);
+
+	console.log('platform new', platform);
 
 	return (
 		<div className={`flex w-full h-full ${sbp_bg_color} ${sbp_image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
@@ -59,11 +68,11 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
                 <CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />
                 <div className="text-center">
                     <h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em] leading-[1.25]`}>{sbp_heading}</h3>
-                    <div className={`flex items-center justify-center ${platform === 'os-win' ? 'mb-1' : ''} ${platform === 'os-mac' ? 'h-[88px] mb-2' : ''}`}>
-						<h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em] ${platform === 'os-win' ? 'leading-[96px]' : ''} ${platform === 'os-mac' ? 'leading-[1]' : ''}`}>{sbp_percentage}</h2>
+                    <div className={`flex items-center justify-center ${platform === 'os-win' || platform === 'os-android' ? 'mb-1' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'mb-2' : ''}`}>
+						<h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em] ${platform === 'os-win' || platform === 'os-android' ? 'leading-[96px]' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'h-[88px] leading-[1]' : ''}`}>{sbp_percentage}</h2>
 						<div className="flex flex-col">
-							<h2 className={`${sbp_percentage_color || 'text-body'} text-[4.625em] ${platform === 'os-win' ? 'leading-[74px]' : ''} ${platform === 'os-mac' ? 'leading-[1]' : ''}`}>%</h2>
-							<h2 className={`${sbp_percentage_color || 'text-body'} font-bold text-[1.75em] ${platform === 'os-win' ? 'leading-[22px]' : ''} ${platform === 'os-mac' ? 'leading-[0.5]' : ''}`}>OFF</h2>
+							<h2 className={`${sbp_percentage_color || 'text-body'} text-[4.625em] ${platform === 'os-win' || platform === 'os-android' ? 'leading-[74px]' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[1]' : ''}`}>%</h2>
+							<h2 className={`${sbp_percentage_color || 'text-body'} font-bold text-[1.75em] ${platform === 'os-win' || platform === 'os-android' ? 'leading-[22px]' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[0.5]' : ''}`}>OFF</h2>
 						</div>
 					</div>
 
