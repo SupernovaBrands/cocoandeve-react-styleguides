@@ -23,8 +23,10 @@ const PlaygroundTest = (props: any) => {
     const { featuredCollection, isStyleguide, store } = props;
     const [isLoading, setIsLoading] = useState(true);
     const [content, setContent] = useState(null);
+    
     useEffect(() => {
         // console.log('ThemeSettings', ThemeSettings, searchBox);
+        console.log('featuredCollection', featuredCollection);
         if (isStyleguide) {
             setContent(featuredCollection);
             setIsLoading(false);
@@ -32,6 +34,7 @@ const PlaygroundTest = (props: any) => {
             fetch(`/api/getHomepage`).then(
                 res => {
                     res?.json().then(data => {
+                        console.log('getHP', data);
                         setContent(data?.featuredCollection);
                         setIsLoading(false);
                     })

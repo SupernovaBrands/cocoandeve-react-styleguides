@@ -34,8 +34,9 @@ export const useCollectionSettings = (handle: string, store: string) => {
 
 	let handleName = handle === 'tan-and-spf' ? 'tan' : handle;
 	handleName = handleName === 'kits-gifts' ? 'bundle': handleName;
-	const universalBanner = data?.CollectionSettings.find((section: any) => section.__component === 'collection.universal-collection-setting');
-	const mainSettings = data?.CollectionSettings.find(
+	console.log('useCollectionSettings', data);
+	const universalBanner = data?.CollectionSettings?.find((section: any) => section.__component === 'collection.universal-collection-setting');
+	const mainSettings = data?.CollectionSettings?.find(
 		(section: any) => section.__component !== 'collection.universal-collection-setting' &&
 			(section.range_handles.split(',').map((v) => v.trim()).includes(handle) || section.__component === `collection.${handleName}-range-collection-setting`)
 	) || universalBanner;
