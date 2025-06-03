@@ -34,7 +34,6 @@ export const useCollectionSettings = (handle: string, store: string) => {
 
 	let handleName = handle === 'tan-and-spf' ? 'tan' : handle;
 	handleName = handleName === 'kits-gifts' ? 'bundle': handleName;
-	console.log('useCollectionSettings', data);
 	const universalBanner = data?.CollectionSettings?.find((section: any) => section.__component === 'collection.universal-collection-setting');
 	const mainSettings = data?.CollectionSettings?.find(
 		(section: any) => section.__component !== 'collection.universal-collection-setting' &&
