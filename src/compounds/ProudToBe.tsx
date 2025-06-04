@@ -18,7 +18,7 @@ import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { useRef, useEffect, useState, useCallback } from 'react';
 
 const iconsData = {
-    'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span></>,
+    'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">All Natural DHA</span></>,
     'sulfate-free': <><Sulfate className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
     'gluten': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Gluten Free</span></>,
     'gluten-free': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Gluten Free</span></>,
