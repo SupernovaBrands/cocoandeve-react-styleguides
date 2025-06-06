@@ -1181,15 +1181,15 @@ const trialParticipants = [
 		"title": "No sticky, greasy or slimy feel - the perfect body oil!",
 		"user": "Vivien Winkworth",
 		"score": 4,
-		"content": "Absorbed brilliantly into skin even when very generously applied and I was able to get dress within minutes without any worry of getting it on my clothes. It wasn’t sticky, greasy or slimy feeling which I absolutely love as this puts me off using most body products. My tan didn't fade and it left my skin feeling so soft and smooth with a healthy glow to it."
+		"content": "Absorbed brilliantly into skin even when very generously applied and I was able to get dressed within minutes without any worry of getting it on my clothes. It wasn’t sticky, greasy or slimy feeling which I absolutely love as this puts me off using most body products. My tan didn't fade and it left my skin feeling so soft and smooth with a healthy glow to it."
 	  },
 	  {
 		"sku": "CE0005102020",
 		"date": "2025-06-03",
-		"title": "Adding this to my routine, LOVE IT",
+		"title": "Adding this to my routine, love it!",
 		"user": "Samantha Richards",
 		"score": 5,
-		"content": "This product really makes you feel like you’re on vacation, the smell is beachy and fruity. The oil glides on and moisturizes my skin so well, there was not residue leftover. And it lasted all night."
+		"content": "This product really makes you feel like you’re on vacation, the smell is beachy and fruity. The oil glides on and moisturizes my skin so well, there was no residue leftover. And it lasted all night."
 	  },
 	  {
 		"sku": "CE0005102020",
@@ -1205,7 +1205,7 @@ const trialParticipants = [
 		"title": "Soft glowy skin ✨",
 		"user": "Giulia",
 		"score": 4,
-		"content": "A body oil with a sweet scent that will your skin feeling soft and glowing! Overall, a nice oil for hydrated skin."
+		"content": "A body oil with a sweet scent that will leave your skin feeling soft and glowing! Overall, a nice oil for hydrated skin."
 	  },
 	  {
 		"sku": "CE0005102020",
@@ -1245,7 +1245,7 @@ const trialParticipants = [
 		"title": "Perfect addition for summer ☀️",
 		"user": "Fidelma Harvey",
 		"score": 5,
-		"content": "This oil makes my skin feel very soft and absorbes really well, making it easy to use. It smells so good too!"
+		"content": "This oil makes my skin feel very soft and absorbs really well, making it easy to use. It smells so good too!"
 	  }
 ];
 
