@@ -75,6 +75,7 @@ const Cart: React.FC<Props> = (props) => {
 	const [shippingLineHide, setShippingLineHide] = useState(false);
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
+	const [invalidGiftsToDelete, setInvalidGiftsToDelete] = useState([]);
 
 	const handleOpenModalKlarna = () => {
 		setIsModalKlarnaOpen(false);
@@ -93,7 +94,12 @@ const Cart: React.FC<Props> = (props) => {
 				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
 				if (manualGwpItems.length > 0) {
 					manualGwpItems.forEach((item: any) => {
-						onRemoveItem(item, []);
+						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id)) {
+							onRemoveItem(item, []);
+							const newIdsToDel = [...invalidGiftsToDelete];
+							newIdsToDel.push(item);
+							setInvalidGiftsToDelete(newIdsToDel);
+						}
 					})
 				}
 			}
