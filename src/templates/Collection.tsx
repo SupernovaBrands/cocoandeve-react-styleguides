@@ -2,7 +2,7 @@ import Modal from "~/components/Modal";
 // import Terms from "~/components/modal/Terms";
 import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
-import ProductCardQuiz from "~/compounds/ProductCardQuiz";
+import BannerCard from "~/compounds/BannerCard";
 import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -506,7 +506,7 @@ const Collection = (props: any) => {
                                 return showQuizCard && index === 2 ? (
                                     <>
                                         <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
-                                            <ProductCardQuiz
+                                            <BannerCard
                                                 className="relative mb-[1.5rem] lg:mb-3"
                                                 key={`collection-bundle-card--${handle}--${index}`}
                                                 imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
@@ -518,7 +518,7 @@ const Collection = (props: any) => {
                                                 store={store}
                                                 imgAlt="Illustration of a person build items to find their perfect bundle"
                                             />
-                                            <ProductCardQuiz
+                                            <BannerCard
                                                 className="relative"
                                                 imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                                 imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2dfa2ff5-b438-41cc-956b-fe04c2190f00/public"
@@ -582,7 +582,7 @@ const Collection = (props: any) => {
                             })}
                             {collProducts.length === 2 && showQuizCard && (
                                 <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
-                                    <ProductCardQuiz
+                                    <BannerCard
                                         className="relative mb-[1.5rem] lg:mb-3"
                                         key={`collection-bundle-card--${handle}--99`}
                                         imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
@@ -594,7 +594,7 @@ const Collection = (props: any) => {
                                         store={store}
                                         imgAlt="Illustration of a person build items to find their perfect bundle"
                                     />
-                                    <ProductCardQuiz
+                                    <BannerCard
                                         className="relative"
                                         imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                         imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"

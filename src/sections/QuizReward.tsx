@@ -1,6 +1,6 @@
 import React from 'react';
 import BeautyConfidence from '~/components/BeautyConfidence';
-import ProductCardQuiz from '~/compounds/ProductCardQuiz';
+import BannerCard from '~/compounds/BannerCard';
 
 const QuizReward = (props: any) => {
 	const { store } = props;
@@ -12,7 +12,7 @@ const QuizReward = (props: any) => {
             <section className="container text-center mt-4 lg:mt-0 mb-1 lg:mb-0">
                 <p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
                 <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
-                    <ProductCardQuiz
+                    <BannerCard
                         className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
                         imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
                         imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6ac2ef18-3d2f-4c03-891d-0bb1bc6cf900/public"
@@ -23,12 +23,13 @@ const QuizReward = (props: any) => {
                         store={store}
                         imgAlt="Illustration of a person build items to find their perfect bundle"
                     />
-                    <ProductCardQuiz
+                    <BannerCard
                         title="Tan Quiz"
                         ctaLabel="Take the Quiz"
                         description={`Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps`}
                         className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
                         url="/pages/self-tan-quiz"
+                        store={store}
                         imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                         imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/public"
                         imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
