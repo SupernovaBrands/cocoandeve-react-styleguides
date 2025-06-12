@@ -83,6 +83,7 @@ const AddToCartButton = (props:any) => {
     const btnLabel = props.label;
 
     const onAddItem = async (e) => {
+        console.log('selected variant', selectedVariant);
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
@@ -90,6 +91,13 @@ const AddToCartButton = (props:any) => {
                 quantity: 1,
                 handle: selectedVariant?.product?.handle,
                 title: selectedVariant.title,
+                attributes: [{
+                    key: '_make_your_own_kit',
+                    value: 'yes'
+                },{
+                    key: '_make_your_own_kit_type',
+                    value: 'hair'
+                }]
             });
             setAddingItem(false);
             if (sideUpsell && typeof trackEvent === 'function') {
