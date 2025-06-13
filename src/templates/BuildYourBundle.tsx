@@ -18,7 +18,7 @@ const BuildYourBundle = (props: any) => {
         }
     `;
 
-    console.log('client prop', props);
+    // console.log('client prop', props);
 
     useEffect(() => {
         setRegion(props.store);
@@ -30,7 +30,7 @@ const BuildYourBundle = (props: any) => {
             <figure className="flex flex-wrap relative">
                 <picture>
 					<source media="(min-width: 992px)" srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5fed3d6a-8abb-49d7-e18c-d5fef586d800/public" />
-					<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" />
+					<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" loading="lazy" />
 				</picture>
                 <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
                     <span className="bg-black inline-block badge badge--sm py-[0.5em] leading-[1em] rounded text-white font-normal px-1">❤️ SAVE UP TO 20%</span>
