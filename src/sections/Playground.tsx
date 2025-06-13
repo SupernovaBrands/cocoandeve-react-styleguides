@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data, store, imgMb, imgDt }) => (
-    <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
+    <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g lg:mb-0">
         <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
             <picture className={`rounded-[24px] lg:rounded-[32px] block ${data?.playground_range_bg}`}>
                 <source srcSet={imgDt} media="(min-width: 992px)" />
@@ -47,7 +47,7 @@ const PlaygroundTest = (props: any) => {
                 <>
                     {/* <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p> */}
-                    <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-g">
+                    <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0">
                         <PlaygroundCard store={store} data={content?.range_1}
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/public`}
                             imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/public`} />
