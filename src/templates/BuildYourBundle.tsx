@@ -17,6 +17,8 @@ const BuildYourBundle = (props: any) => {
     const [tanSelected, setTanSelected] = useState([]);
     const [hairSelected, setHairSelected] = useState([]);
 
+    const { addToCart } = props;
+
     const cssInline = `
         .top-header {
             top: ${headerPos}px;
@@ -50,14 +52,14 @@ const BuildYourBundle = (props: any) => {
     }, [bundleSize]);
 
     useEffect(() => {
-        console.log('hairSelected', hairSelected);
+        // console.log('hairSelected', hairSelected);
         renderItems(hairSelected);
         // window.scrollTo({ top: 0, behavior: 'smooth'});
     }, [hairSelected]);
 
     useEffect(() => {
         // window.scrollTo({ top: 0, behavior: 'smooth'});
-        console.log('tanSelected', tanSelected);
+        // console.log('tanSelected', tanSelected);
         renderItems(tanSelected);
     }, [tanSelected]);
 
@@ -71,7 +73,7 @@ const BuildYourBundle = (props: any) => {
         if (document) setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
     }, [region]);
 
-    console.log('render?');
+    // console.log('render?');
     
     return (
         <div>
@@ -104,7 +106,7 @@ const BuildYourBundle = (props: any) => {
                     </li>
                     <li onClick={() => setBundleSize(5)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
                         <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 5 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>5</span>
-                        {bundleSize === 5 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}</span>}
+                        {bundleSize === 5 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
                     </li>
                 </ul>
             </div>
@@ -135,7 +137,15 @@ const BuildYourBundle = (props: any) => {
                             </div>
                         </div>
                         <div className="w-full lg:w-[calc(25%+30px)]">
-                            <YourBundleSidebar store={props.store} itemSelected={hairSelected} bundleSize={bundleSize} bundleDiscount={bundleDiscount} />
+                            <YourBundleSidebar
+                                store={props.store}
+                                setItemSelected={setHairSelected}
+                                itemSelected={hairSelected}
+                                bundleSize={bundleSize}
+                                bundleDiscount={bundleDiscount}
+                                type={activeTab}
+                                addToCart={addToCart}
+                            />
                         </div>
                     </div>
                 </TabContent>
@@ -161,7 +171,15 @@ const BuildYourBundle = (props: any) => {
                             </div>
                         </div>
                         <div className="w-full lg:w-[calc(25%+30px)]">
-                            <YourBundleSidebar store={props.store} itemSelected={tanSelected} bundleSize={bundleSize} bundleDiscount={bundleDiscount} />
+                            <YourBundleSidebar
+                                store={props.store}
+                                setItemSelected={setTanSelected}
+                                itemSelected={tanSelected}
+                                bundleSize={bundleSize}
+                                bundleDiscount={bundleDiscount}
+                                type={activeTab}
+                                addToCart={addToCart}
+                            />
                         </div>
                     </div>
                 </TabContent>

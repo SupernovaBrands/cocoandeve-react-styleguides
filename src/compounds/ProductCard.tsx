@@ -90,14 +90,7 @@ const AddToCartButton = (props:any) => {
                 id: selectedVariant.id,
                 quantity: 1,
                 handle: selectedVariant?.product?.handle,
-                title: selectedVariant.title,
-                attributes: [{
-                    key: '_make_your_own_kit',
-                    value: 'yes'
-                },{
-                    key: '_make_your_own_kit_type',
-                    value: 'hair'
-                }]
+                title: selectedVariant.title
             });
             setAddingItem(false);
             if (sideUpsell && typeof trackEvent === 'function') {

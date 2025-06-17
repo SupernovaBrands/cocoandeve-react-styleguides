@@ -1,15 +1,18 @@
 import PercentageSmall from '~/images/icons/percentage-small.svg';
 import DeliverySmall from '~/images/icons/delivery-small.svg';
 import ChevronUp from '~/images/icons/chevron-up.svg';
-import { formatMoney } from "~/modules/utils";
+import { formatMoney, getCartId } from "~/modules/utils";
 import { Button } from "../components";
 import { useEffect, useState } from 'react';
 
 const ItemCard = (props) => {
-    const { item, placeholder, store, index, bundleDiscount } = props;
+    const { item, placeholder, store, index, bundleDiscount, setItemSelected, itemSelected, setIsOpen } = props;
     const reducedPrice = item.price - (bundleDiscount / 100) * item.price;
     const editItem = (idx) => {
-        console.log('index to remove', idx);
+        const items = [...itemSelected];
+        items.splice(idx, 1);
+        setItemSelected(items);
+        setIsOpen(false);
     };
     return (
         <li className={`flex mb-[1rem] ${placeholder ? 'opacity-[.5]' : ''}`}>
@@ -35,7 +38,7 @@ const ItemCard = (props) => {
 };
 
 const YourBundleSidebar = (props: any) => {
-    const { bundleSize, bundleDiscount, itemSelected, store } = props;
+    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const [selected, setSelected] = useState(itemSelected);
@@ -70,6 +73,36 @@ const YourBundleSidebar = (props: any) => {
         // }
     }, [itemSelected, bundleSize]);
 
+    const processCheckout = async () => {
+        // const cartId = getCartId();
+        // try {
+        //     let cart:any = await addToCart(store, cartId, [{ merchandiseId, quantity: 1, attributes: [
+        //         { key: '_make_your_own_kit', value: 'yes' },
+        //         { key: '_make_your_own_kit_type', value: type }
+        //     ] }]);
+        // } catch (e) {
+        //     console.log('Error on adding cart', e);
+        // }
+    };
+
+    const testAddItems = async () => {
+        const varId = [
+            'gid://shopify/ProductVariant/32914820857891',
+            'gid://shopify/ProductVariant/39871205572643',
+            'gid://shopify/ProductVariant/32363243831331',
+            'gid://shopify/ProductVariant/40338590466083'
+        ];
+        // console.log(varId);
+        const multipleAdd = await addToCart({id: null, quantity: 1, attributes: [
+            { key: '_make_your_own_kit', value: 'yes' },
+            { key: '_make_your_own_kit_type', value: type },
+            { key: '_campaign_type', value: 'build_your_own_bundle' }
+        ], sellingPlanId: null,
+        title: null, handle: null, bubble: true, updateCart: true, ids: varId});
+
+        console.log('multiple add item resp', multipleAdd);
+    };
+
     
     const variantSelected = selected.filter((sel) => sel.id !== null);
     const originalPrice = selected.filter(it => it.id !== null && it.price).reduce((n, { price }) => n + parseInt(price, 10), 0);
@@ -100,10 +133,16 @@ const YourBundleSidebar = (props: any) => {
                     </div>
                     <ol>
                         {selected.map((item, index) => (
-                            <ItemCard bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
+                            <ItemCard setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
-                    <Button disabled={variantSelected.length !== bundleSize} buttonClass="mt-2 rounded-full border-primary bg-primary text-white w-full">{`${variantSelected.length}/${bundleSize} Selected`}</Button>
+                    <Button disabled={variantSelected.length !== bundleSize} buttonClass="mt-2 rounded-full border-primary bg-primary text-white w-full flex justify-between items-center lg:block px-g">
+                        <span>{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                        <ul className="flex lg:hidden">
+                            <li>{reducedPrice > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
+                            <li><span className="">{formatMoney(reducedPrice, false, store)}</span></li>
+                        </ul>
+                    </Button>
                     <div className="flex mt-2">
                         <DeliverySmall className="flex-[0_0_20px]" />
                         <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"><b>FREE</b> standard shipping on all orders above $50(SG)</p>
@@ -112,6 +151,7 @@ const YourBundleSidebar = (props: any) => {
                 </div>
             </div>
             <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">*Cannot be combined with other discounts or promotions. If a Build Your Own Bundle is purchased, any extra discount or promo code will be removed.</p>
+            {/* <Button onClick={testAddItems}>Add multiple items</Button> */}
         </aside>            
     );
 };

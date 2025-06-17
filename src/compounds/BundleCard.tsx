@@ -59,6 +59,8 @@ const AddToCartButton = (props:any) => {
             const ids = [];
             itemSelected.map((item) => ids.push(item.id));
             setSelected(ids);
+        } else {
+            setSelected([]);
         }
     }, [itemSelected]);
 
@@ -134,7 +136,7 @@ const AddToCartButton = (props:any) => {
     return (
         <Button disabled={disabled} onClick={onAddItem} buttonClass={`${props.className ?? ''} -mt-25 h-full lg:h-auto block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
-            {DEFAULT_LABEL}
+            {disabled ? 'Added' : DEFAULT_LABEL}
         </Button>
     );
 };
