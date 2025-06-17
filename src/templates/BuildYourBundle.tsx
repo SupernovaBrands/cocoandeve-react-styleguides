@@ -36,12 +36,14 @@ const BuildYourBundle = (props: any) => {
     }, [bundleSize]);
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
+        // window.scrollTo({ top: 0, behavior: 'smooth'});
     }, [hairSelected]);
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
+        // window.scrollTo({ top: 0, behavior: 'smooth'});
     }, [tanSelected]);
+
+    console.log('item', props);
     
     return (
         <div>
@@ -87,8 +89,8 @@ const BuildYourBundle = (props: any) => {
                 <TabContent active={activeTab === 'hair'}>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
-                            <div className="flex flex-wrap lg:-mx-g">
-                                {props.hairData.map((item, index) => 
+                            <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                {props.hairData.filter((item) => item.availableForSale).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--hair--${index}`}
                                         product={item}
@@ -122,8 +124,8 @@ const BuildYourBundle = (props: any) => {
                 <TabContent active={activeTab === 'tan'}>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
-                            <div className="flex flex-wrap lg:-mx-g">
-                                {props.tanData.map((item, index) => 
+                            <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                {props.tanData.filter((item) => item.availableForSale).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--tan--${index}`}
                                         product={item}
