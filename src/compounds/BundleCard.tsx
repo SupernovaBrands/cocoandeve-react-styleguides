@@ -1,10 +1,9 @@
 import { Button } from "../components";
 import { useRef, useState, useEffect } from "react";
 import { formatMoney, getCookie } from "~/modules/utils";
-import parse from 'html-react-parser';
 
-const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
-const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
+// const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
+const DEFAULT_LABEL = 'Add';
 
 // const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store }) => {
 //     let label = props.btnLabel ? props.btnLabel : props.label;
@@ -49,37 +48,48 @@ const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 // };
 
 const AddToCartButton = (props:any) => {
-    const { product, itemSelected, setItemSelected, addToCart, selectedVariant, preOrders, sideUpsell, trackEvent } = props;
-    const [addingItem, setAddingItem] = useState(false);
-    const [ctaLabel, setCtaLabel] = useState(props.label);
-    const btnLabel = props.label;
+    const { product, itemSelected, setItemSelected, selectedVariant, maxItem } = props;
+    // const [addingItem, setAddingItem] = useState(false);
+    // const [ctaLabel, setCtaLabel] = useState(props.label);
+    // const btnLabel = props.label;
+    const [selected, setSelected] = useState([]);
 
-    const onAddItem = async (e) => {
-        // console.log('selected variant', selectedVariant);
-        if (typeof addToCart === 'function') {
-            setAddingItem(true);
-            await addToCart({
-                id: selectedVariant.id,
-                quantity: 1,
-                handle: selectedVariant?.product?.handle,
-                title: selectedVariant.title,
-                attributes: [{
-                    key: '_make_your_own_kit',
-                    value: 'yes'
-                },{
-                    key: '_make_your_own_kit_type',
-                    value: 'hair'
-                }]
-            });
-            setAddingItem(false);
-            if (sideUpsell && typeof trackEvent === 'function') {
-                trackEvent('pdp_upsell', {
-                    category: 'Add to Cart',
-                    target: 'add_to_cart_pdp_upsell',
-                    product: selectedVariant?.product?.handle,
-                });
-            }
+    useEffect(() => {
+        if (itemSelected.length > 0) {
+            const ids = [];
+            itemSelected.map((item) => ids.push(item.id));
+            setSelected(ids);
         }
+    }, [itemSelected]);
+
+    const onAddItem = () => {
+        if (selected.includes(selectedVariant.id)) return false;
+        // const variantSelected = 
+        // console.log('selected variant', selectedVariant);
+        // if (typeof addToCart === 'function') {
+        //     setAddingItem(true);
+        //     await addToCart({
+        //         id: selectedVariant.id,
+        //         quantity: 1,
+        //         handle: selectedVariant?.product?.handle,
+        //         title: selectedVariant.title,
+        //         attributes: [{
+        //             key: '_make_your_own_kit',
+        //             value: 'yes'
+        //         },{
+        //             key: '_make_your_own_kit_type',
+        //             value: 'hair'
+        //         }]
+        //     });
+        //     setAddingItem(false);
+        //     if (sideUpsell && typeof trackEvent === 'function') {
+        //         trackEvent('pdp_upsell', {
+        //             category: 'Add to Cart',
+        //             target: 'add_to_cart_pdp_upsell',
+        //             product: selectedVariant?.product?.handle,
+        //         });
+        //     }
+        // }
         // console.log('selectedVariant', selectedVariant);
         setItemSelected((prev) => {
             const prevData = [...prev];
@@ -96,34 +106,35 @@ const AddToCartButton = (props:any) => {
         return false;
     }
 
-    useEffect(() => {
-        if (preOrders && selectedVariant) {
-            const { group1, group2, group3 } = preOrders;
-            if (group1.enabled && selectedVariant && group1.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group1.cta);
-            } else if (group2.enabled && selectedVariant && group2.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group2.cta);
-            } else if (group3.enabled && selectedVariant && group3.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group3.cta);
-            } else {
-                let ctaLabel = DEFAULT_LABEL;
-                if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
-                setCtaLabel(`${ctaLabel}`);
-                // setCtaLabel(props.label);
-            }
-        }
-    }, [selectedVariant, preOrders]);
+    // useEffect(() => {
+    //     if (preOrders && selectedVariant) {
+    //         const { group1, group2, group3 } = preOrders;
+    //         if (group1.enabled && selectedVariant && group1.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+    //             setCtaLabel(group1.cta);
+    //         } else if (group2.enabled && selectedVariant && group2.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+    //             setCtaLabel(group2.cta);
+    //         } else if (group3.enabled && selectedVariant && group3.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
+    //             setCtaLabel(group3.cta);
+    //         } else {
+    //             let ctaLabel = DEFAULT_LABEL;
+    //             if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
+    //             setCtaLabel(`${ctaLabel}`);
+    //             // setCtaLabel(props.label);
+    //         }
+    //     }
+    // }, [selectedVariant, preOrders]);
 
     // useEffect(() => {
     //     let ctaLabel = DEFAULT_LABEL;
     //     if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
     //     setCtaLabel(`${ctaLabel}`);
     // }, [])
+    const disabled = selected.includes(selectedVariant.id) || selected.length >= maxItem;
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} -mt-25 h-full block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:!px-g font-normal`}>
+        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${props.className ?? ''} -mt-25 h-full lg:h-auto block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
-            {DEFAULT_LABEL_SIDE_UPSELL}
+            {DEFAULT_LABEL}
         </Button>
     );
 };
@@ -263,13 +274,12 @@ const AddToCartButton = (props:any) => {
 // }
 
 const BundleCard = (props:any) => {
-    const { setItemSelected, itemSelected, addToCart, generalSetting, label, store } = props;
+    const { keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
     // const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
-    const [productImage, setProductImage] = useState(props.product.src);
-    const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
-    const { product } = props;
+    const [productImage, setProductImage] = useState(product.src);
+    const [productHoverImage, setProductHoverImage] = useState(product.imgHover);
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
     // const handleShade = (val) => {
     //     setShade(val)
@@ -380,19 +390,14 @@ const BundleCard = (props:any) => {
         }
     }, [shade]);
 
+    const reducedPrice = product.priceInCent - (bundleDiscount / 100) * product.priceInCent;
+
 	return (
-        <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
+        <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
+            <a href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
                     {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-g lg:!pt-hg" alt="" loading="lazy" />}
-
-                    {props.showTip && (
-                        <>
-                            <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
-                        </>
-                    )}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
                             {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt="" loading="lazy" />}
@@ -401,27 +406,28 @@ const BundleCard = (props:any) => {
                 </picture>
             </a>
 
-            { props.product.badgeText && !props.sideUpsell && !props.product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{props.product.badgeText}</span>) }
-            <div className={`pt-0 pb-25 px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
-                                
-                {!props.product.swatch && selectedVariant?.availableForSale && (
+            { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
+            <div className={`pt-0 pb-[1rem] px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
+                {!product.swatch && selectedVariant?.availableForSale && (
                     <AddToCartButton
                         product={product}
                         itemSelected={itemSelected}
                         setItemSelected={setItemSelected}
-                        store={store} 
-                        selectedVariant={selectedVariant} addToCart={addToCart} 
-                        label={label}
+                        selectedVariant={selectedVariant}
+                        maxItem={maxItem}
                     />
                 )}
 
-                <p className={`text-sm text-center min-h-[54px] px-0 lg:px-0 lg:min-h-[auto] flex flex-col justify-center`}>
-                    <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center"`}>
-                        {props.product.title}
+                <p className={`text-sm text-center min-h-[54px] px-0 lg:px-0 lg:min-h-4 flex flex-col justify-center`}>
+                    <a href={product.handle ? `/products/${product.handle}` : '#'} className={`'text-sm lg:text-base' product-card__title text-body hover:text-body w-full text-center"`}>
+                        {product.title}
                     </a>
                 </p>
-                <a href={props.product.handle ? `/products/${props.product.handle}` : '#'}>View Details</a>
-
+                <a href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm text-underline inline-block my-[.75rem]">View Details</a>
+                <div className="flex justify-center">
+                    <span className="text-gray-600 line-through">{formatMoney(product.priceInCent, false, store)}</span>
+                    <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
+                </div>
             </div>
         </div>
 	);

@@ -6,7 +6,11 @@ import { Button } from "../components";
 import { useEffect, useState } from 'react';
 
 const ItemCard = (props) => {
-    const { item, placeholder, store, index } = props;
+    const { item, placeholder, store, index, bundleDiscount } = props;
+    const reducedPrice = item.price - (bundleDiscount / 100) * item.price;
+    const editItem = (idx) => {
+        console.log('index to remove', idx);
+    };
     return (
         <li className={`flex mb-[1rem] ${placeholder ? 'opacity-[.5]' : ''}`}>
             <span className="inline-block font-bold mr-[.5rem] mt-[.5rem]">{index + 1}</span>
@@ -18,10 +22,10 @@ const ItemCard = (props) => {
                     {!placeholder && (
                         <>
                             <div className="flex mb-[.25rem]">
-                                {item.comparePrice && <span className="line-through mr-1">{formatMoney(item.comparePrice, false, store)}</span>}
-                                <span className="font-bold">{formatMoney(item.price, false, store)}</span>
+                                <span className="line-through mr-1">{formatMoney(item.price, false, store)}</span>
+                                <span className="font-bold">{formatMoney(reducedPrice, false, store)}</span>
                             </div>
-                            <span className="text-underline text-primary font-bold cursor-pointer">Edit</span>
+                            <span onClick={() => editItem(index)} className="text-underline text-primary font-bold cursor-pointer">Edit</span>
                         </>
                     )}
                 </figcaption>
@@ -66,12 +70,15 @@ const YourBundleSidebar = (props: any) => {
         // }
     }, [itemSelected, bundleSize]);
 
+    
     const variantSelected = selected.filter((sel) => sel.id !== null);
+    const originalPrice = selected.filter(it => it.id !== null && it.price).reduce((n, { price }) => n + parseInt(price, 10), 0);
+    const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
 
     return (
-        <aside className={`lg:ml-3 lg:sticky lg:top-[110px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+        <aside className={`lg:ml-[25px] lg:sticky lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
             <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
-                <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
+                <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                         <span className="font-bold lg:block">Your Bundle</span>
                         <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden">{bundleDiscount}% OFF</span>
@@ -82,18 +89,18 @@ const YourBundleSidebar = (props: any) => {
                     </div>
                 </div>
                 <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
-                    <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">$163</span>
-                    <span className="text-lg mr-[.5rem] font-bold">$139</span>
+                    {reducedPrice > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(originalPrice, false, store)}</span>}
+                    <span className="text-lg mr-[.5rem] font-bold">{formatMoney(reducedPrice, false, store)}</span>
                     <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
                 </div>
-                <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden'} bg-primary-light px-2 pt-[1rem] lg:p-0 lg:block`}>
+                <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-primary-light px-2 lg:p-0 lg:block`}>
                     <div className="flex mb-2">
                         <PercentageSmall className="flex-[0_0_20px]" />
                         <p className="ml-[.5rem] text-sm">If you add more products you hit more discount</p>
                     </div>
                     <ol>
                         {selected.map((item, index) => (
-                            <ItemCard key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
+                            <ItemCard bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
                     <Button disabled={variantSelected.length !== bundleSize} buttonClass="mt-2 rounded-full border-primary bg-primary text-white w-full">{`${variantSelected.length}/${bundleSize} Selected`}</Button>
