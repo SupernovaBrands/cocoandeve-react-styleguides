@@ -43,7 +43,7 @@ const AnnouncementBar = (props: any) => {
 	// 	opts = []
 	// }
 
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, text2 && text3 ? [
+	const [emblaRef, emblaApi] = useEmblaCarousel(options, text2 || text3 ? [
 		Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false }),
 		AutoHeight()
 	] : [
