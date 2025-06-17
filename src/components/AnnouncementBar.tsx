@@ -36,9 +36,18 @@ const AnnouncementBar = (props: any) => {
 	const countDownMin = noticeTImesLabels[2]?.split(',')[0];
 	const countDownSec = noticeTImesLabels[3]?.split(',')[0];
 
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+	// let opts = [Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false })];
+	// console.log('text2', text2);
+	// console.log('text3', text3);
+	// if (text2 && text3) {
+	// 	opts = []
+	// }
+
+	const [emblaRef, emblaApi] = useEmblaCarousel(options, text2 || text3 ? [
 		Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false }),
 		AutoHeight()
+	] : [
+		Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false }),
 	]);
 
 	const [showTimer, setShowTimer] = useState(false);
