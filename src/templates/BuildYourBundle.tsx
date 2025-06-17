@@ -4,21 +4,22 @@ import TabContent from '~/components/TabContent';
 import YourBundleSidebar from "~/compounds/YourBundleSidebar";
 import BundleCard from "~/compounds/BundleCard";
 
+const MIN_ITEM = 2;
+const MAX_ITEM = 5;
+
 const BuildYourBundle = (props: any) => {
     const [bundleSize, setBundleSize] = useState(2);
     const [bundleDiscount, setBundleDiscount] = useState(15);
     const [activeTab, setActiveTab] = useState('hair');
-    const [isStickyBar, setIsStickyBar] = useState(false);
     const [headerPos, setHeaderPos] = useState(0);
     const [region, setRegion] = useState(props.store);
 
     const [tanSelected, setTanSelected] = useState([]);
     const [hairSelected, setHairSelected] = useState([]);
 
+    const { addToCart } = props;
+
     const cssInline = `
-        header.main-header {
-            box-shadow: none !important;
-        }
         .top-header {
             top: ${headerPos}px;
         }
@@ -28,20 +29,51 @@ const BuildYourBundle = (props: any) => {
         setRegion(props.store);
     }, [region]);
 
+    const settingDiscount = (num) => {
+        if (num === 2) setBundleDiscount(10);
+        else if (num === 3) setBundleDiscount(15);
+        else if (num === 4) setBundleDiscount(18);
+        else if (num >= 5) setBundleDiscount(20);
+    };
+
+    const renderItems = (items) => {
+        if (items.length >= MIN_ITEM) {
+            setBundleSize(items.length >= MAX_ITEM ? MAX_ITEM : items.length);
+            settingDiscount(items.length);
+        } else {
+            setBundleSize(MIN_ITEM);
+            settingDiscount(MIN_ITEM);
+        }
+    };
+
     useEffect(() => {
-        if (bundleSize === 2) setBundleDiscount(10);
-        else if (bundleSize === 3) setBundleDiscount(15);
-        else if (bundleSize === 4) setBundleDiscount(18);
-        else if (bundleSize >= 5) setBundleDiscount(20);
+        setBundleSize(bundleSize >= MAX_ITEM ? MAX_ITEM : bundleSize);
+        settingDiscount(bundleSize);
     }, [bundleSize]);
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
+        // console.log('hairSelected', hairSelected);
+        renderItems(hairSelected);
+        // window.scrollTo({ top: 0, behavior: 'smooth'});
     }, [hairSelected]);
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
+        // window.scrollTo({ top: 0, behavior: 'smooth'});
+        // console.log('tanSelected', tanSelected);
+        renderItems(tanSelected);
     }, [tanSelected]);
+
+
+    useEffect(() => {
+        if (activeTab === 'hair') renderItems(hairSelected);
+        else if (activeTab === 'tan') renderItems(tanSelected);
+    }, [activeTab]);
+
+    useEffect(() => {
+        if (document) setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
+    }, [region]);
+
+    // console.log('render?');
     
     return (
         <div>
@@ -57,7 +89,7 @@ const BuildYourBundle = (props: any) => {
                     <p>Mix it. Match it. Make it yours. Customise your dream routine with Coco & Eve’s icons! <br className="hidden lg:block" />Pick your faves, stack the savings and curate it to perfection.</p>
                 </figcaption>
             </figure>
-            <div className={`top-header ${isStickyBar ? 'fixed left-0 right-0' : ''} bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle`}>
+            <div className={`sticky top-header bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1]`}>
                 <p className="text-xl font-bold mb-[.5rem]">Choose your bundle size</p>
                 <ul className="flex flex-wrap">
                     <li onClick={() => setBundleSize(2)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
@@ -74,7 +106,7 @@ const BuildYourBundle = (props: any) => {
                     </li>
                     <li onClick={() => setBundleSize(5)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
                         <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 5 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>5</span>
-                        {bundleSize === 5 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}</span>}
+                        {bundleSize === 5 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
                     </li>
                 </ul>
             </div>
@@ -87,70 +119,67 @@ const BuildYourBundle = (props: any) => {
                 <TabContent active={activeTab === 'hair'}>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
-                            <div className="flex flex-wrap lg:-mx-g">
-                                {props.hairData.map((item, index) => 
+                            <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                {props.hairData.filter((item) => item.availableForSale).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--hair--${index}`}
                                         product={item}
                                         className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
-                                        button={true}
-                                        setWaitlistData={() => {}}
-                                        addToCart={null}
-                                        trackEvent={null}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={null}
-                                        isLaunchWL={null}
-                                        launchBox={null}
-                                        setLaunchWLModal={null}
-                                        setLaunchWLModal2={null}
-                                        setLaunchWLModal3={null}
-                                        generalSetting={null}
-                                        collectionTemplate={true}
                                         store={props.store}
                                         itemSelected={hairSelected}
+                                        generalSetting={null}
                                         setItemSelected={setHairSelected}
                                         bundleDiscount={bundleDiscount}
+                                        bundleSize={bundleSize}
+                                        maxItem={MAX_ITEM}
                                     />
                                 )}
                             </div>
                         </div>
                         <div className="w-full lg:w-[calc(25%+30px)]">
-                            <YourBundleSidebar store={props.store} itemSelected={hairSelected} bundleSize={bundleSize} bundleDiscount={bundleDiscount} />
+                            <YourBundleSidebar
+                                store={props.store}
+                                setItemSelected={setHairSelected}
+                                itemSelected={hairSelected}
+                                bundleSize={bundleSize}
+                                bundleDiscount={bundleDiscount}
+                                type={activeTab}
+                                addToCart={addToCart}
+                            />
                         </div>
                     </div>
                 </TabContent>
                 <TabContent active={activeTab === 'tan'}>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
-                            <div className="flex flex-wrap lg:-mx-g">
-                                {props.tanData.map((item, index) => 
+                            <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                {props.tanData.filter((item) => item.availableForSale).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--tan--${index}`}
                                         product={item}
                                         className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
-                                        button={true}
-                                        setWaitlistData={() => {}}
-                                        addToCart={null}
-                                        trackEvent={null}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={null}
-                                        isLaunchWL={null}
-                                        launchBox={null}
-                                        setLaunchWLModal={null}
-                                        setLaunchWLModal2={null}
-                                        setLaunchWLModal3={null}
                                         generalSetting={null}
                                         collectionTemplate={true}
                                         store={props.store}
                                         itemSelected={tanSelected}
                                         setItemSelected={setTanSelected}
                                         bundleDiscount={bundleDiscount}
+                                        bundleSize={bundleSize}
+                                        maxItem={MAX_ITEM}
                                     />
                                 )}
                             </div>
                         </div>
                         <div className="w-full lg:w-[calc(25%+30px)]">
-                            <YourBundleSidebar store={props.store} itemSelected={tanSelected} bundleSize={bundleSize} bundleDiscount={bundleDiscount} />
+                            <YourBundleSidebar
+                                store={props.store}
+                                setItemSelected={setTanSelected}
+                                itemSelected={tanSelected}
+                                bundleSize={bundleSize}
+                                bundleDiscount={bundleDiscount}
+                                type={activeTab}
+                                addToCart={addToCart}
+                            />
                         </div>
                     </div>
                 </TabContent>
