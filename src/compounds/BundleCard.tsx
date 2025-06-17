@@ -415,11 +415,12 @@ const BundleCard = (props:any) => {
                     />
                 )}
 
-                <p className={`text-sm text-center min-h-[54px] px-0 lg:px-0 lg:min-h-[auto]`}>
+                <p className={`text-sm text-center min-h-[54px] px-0 lg:px-0 lg:min-h-[auto] flex flex-col justify-center`}>
                     <a href={props.product.handle ? `/products/${props.product.handle}` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center"`}>
                         {props.product.title}
                     </a>
                 </p>
+                <a href={props.product.handle ? `/products/${props.product.handle}` : '#'}>View Details</a>
 
             </div>
         </div>
