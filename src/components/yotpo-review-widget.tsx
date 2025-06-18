@@ -722,7 +722,7 @@ const YotpoReviewWidget = (props:any) => {
 	// const autoPlayClick7 = controlAutoplay(emblaApi7);
 
 
-	const isTrialParticipant = (review:any) => trialParticipants.find((t) => t.user === review.user_name
+	const isTrialParticipant = (review:any) => review.trial_participants || trialParticipants.find((t) => t.user === review.user_name
 	&& t.title === review.title && t.content === review.content);
 
 	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
