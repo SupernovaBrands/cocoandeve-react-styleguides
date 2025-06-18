@@ -150,6 +150,8 @@ const BuildYourBundle = (props: any) => {
                                 type={activeTab}
                                 addToCart={addToCart}
                                 strapiData={strapiData}
+                                maxItem={MAX_ITEM}
+                                minItem={MIN_ITEM}
                             />
                         </div>
                     </div>
@@ -185,6 +187,8 @@ const BuildYourBundle = (props: any) => {
                                 type={activeTab}
                                 addToCart={addToCart}
                                 strapiData={strapiData}
+                                maxItem={MAX_ITEM}
+                                minItem={MIN_ITEM}
                             />
                         </div>
                     </div>

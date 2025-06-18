@@ -83,7 +83,7 @@ const AddToCartButton = (props:any) => {
     const btnLabel = props.label;
 
     const onAddItem = async (e) => {
-        console.log('selected variant', selectedVariant);
+        // console.log('selected variant', selectedVariant);
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
