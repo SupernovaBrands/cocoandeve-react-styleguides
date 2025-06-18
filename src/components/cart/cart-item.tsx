@@ -219,6 +219,17 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	}
 
+	const isBundleItem = (item) => {
+		try {
+			return item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes');
+		} catch {
+			return null
+		}
+	};
+
+	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
+	const itemNotEditable = item.isFreeItem || bundleItemNotEditable;
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
@@ -275,6 +286,9 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
+						{isBundleItem(item) && isBundleItem(item)?.value && (
+							<p className="font-normal text-xs mt-25 text-primary">{isBundleItem(item)?.value}</p>
+						)}
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
@@ -288,7 +302,7 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !bundleItemNotEditable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -385,7 +399,7 @@ export const CartItem = (props:CartItemProps) => {
 				<div className="flex items-center justify-between">
 					<QuantityBox
 						name="quantity-box"
-						editable={!item.isFreeItem}
+						editable={!itemNotEditable}
 						quantity={item.quantity}
 						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 						isLastStock={isLastStock}

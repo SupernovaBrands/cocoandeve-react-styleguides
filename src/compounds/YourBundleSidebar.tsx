@@ -38,8 +38,9 @@ const ItemCard = (props) => {
 };
 
 const YourBundleSidebar = (props: any) => {
-    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart } = props;
+    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData, minItem, maxItem } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const [processing, setProcessing] = useState(false);
 
     const [selected, setSelected] = useState(itemSelected);
 
@@ -74,35 +75,42 @@ const YourBundleSidebar = (props: any) => {
     }, [itemSelected, bundleSize]);
 
     const processCheckout = async () => {
-        // const cartId = getCartId();
-        // try {
-        //     let cart:any = await addToCart(store, cartId, [{ merchandiseId, quantity: 1, attributes: [
-        //         { key: '_make_your_own_kit', value: 'yes' },
-        //         { key: '_make_your_own_kit_type', value: type }
-        //     ] }]);
-        // } catch (e) {
-        //     console.log('Error on adding cart', e);
-        // }
+        
+        if (selected.length < minItem || selected.length > maxItem) return false;
+
+        setProcessing(true);
+        const groupId = Date.now();
+        const varIds = selected.map(v => v.id.replace('gid://shopify/ProductVariant/', ''));
+        const gIds = selected.map((v, idx, row) => {
+            return {
+                merchandiseId: v.id,
+                attributes: [
+                    { key: '_campaign_type', value: 'build_your_own_bundle' },
+                    { key: '_make_your_own_kit', value: 'yes' },
+                    { key: '_make_your_own_kit_editable', value: idx === 0 ? 'yes' : 'no' },
+                    { key: '_make_your_own_kit_type', value: type },
+                    { key: '_make_your_own_kit_ids', value: varIds.join(',') },
+                    { key: '_make_your_own_kit_group', value: `${groupId}` },
+                    { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Discount - Bundle of ${row.length}`}
+                ]
+            }
+        });
+        
+        const multipleAdd = await addToCart({
+            id: null,
+            quantity: 1,
+            attributes: [],
+            sellingPlanId: null,
+            title: null,
+            handle: null,
+            bubble: true,
+            updateCart: true,
+            ids: gIds
+        });
+
+        if (multipleAdd) setItemSelected([]);
+        setProcessing(false);
     };
-
-    const testAddItems = async () => {
-        const varId = [
-            'gid://shopify/ProductVariant/32914820857891',
-            'gid://shopify/ProductVariant/39871205572643',
-            'gid://shopify/ProductVariant/32363243831331',
-            'gid://shopify/ProductVariant/40338590466083'
-        ];
-        // console.log(varId);
-        const multipleAdd = await addToCart({id: null, quantity: 1, attributes: [
-            { key: '_make_your_own_kit', value: 'yes' },
-            { key: '_make_your_own_kit_type', value: type },
-            { key: '_campaign_type', value: 'build_your_own_bundle' }
-        ], sellingPlanId: null,
-        title: null, handle: null, bubble: true, updateCart: true, ids: varId});
-
-        console.log('multiple add item resp', multipleAdd);
-    };
-
     
     const variantSelected = selected.filter((sel) => sel.id !== null);
     const originalPrice = selected.filter(it => it.id !== null && it.price).reduce((n, { price }) => n + parseInt(price, 10), 0);
@@ -113,7 +121,7 @@ const YourBundleSidebar = (props: any) => {
             <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
-                        <span className="font-bold lg:block">Your Bundle</span>
+                        <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
                         <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden">{bundleDiscount}% OFF</span>
                     </p>
                     <div className="lg:hidden flex items-center text-primary font-bold" onClick={() => setIsOpen(!isOpen)}>
@@ -129,29 +137,41 @@ const YourBundleSidebar = (props: any) => {
                 <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-primary-light px-2 lg:p-0 lg:block`}>
                     <div className="flex mb-2">
                         <PercentageSmall className="flex-[0_0_20px]" />
-                        <p className="ml-[.5rem] text-sm">If you add more products you hit more discount</p>
+                        <p className="ml-[.5rem] text-sm">{strapiData?.sidebar_desc}</p>
                     </div>
                     <ol>
                         {selected.map((item, index) => (
                             <ItemCard setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
-                    <Button disabled={variantSelected.length !== bundleSize} buttonClass="mt-2 rounded-full border-primary bg-primary text-white w-full flex justify-between items-center lg:block px-g">
-                        <span>{`${variantSelected.length}/${bundleSize} Selected`}</span>
-                        <ul className="flex lg:hidden">
-                            <li>{reducedPrice > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
-                            <li><span className="">{formatMoney(reducedPrice, false, store)}</span></li>
-                        </ul>
+                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g`}>
+                        {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
+                        {!processing && (
+                            <>
+                                <span>{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                                <ul className="flex lg:hidden">
+                                    <li>{reducedPrice > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
+                                    <li><span className="">{formatMoney(reducedPrice, false, store)}</span></li>
+                                </ul>
+                            </>
+                        )}
                     </Button>
                     <div className="flex mt-2">
                         <DeliverySmall className="flex-[0_0_20px]" />
-                        <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"><b>FREE</b> standard shipping on all orders above $50(SG)</p>
+                        <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"
+                            dangerouslySetInnerHTML={{
+                                __html: strapiData?.sidebar_shipping,
+                            }}
+                        />
                     </div>
-                    <p className="text-[#666] text-sm lg:hidden pb-4">*Cannot be combined with other discounts or promotions. If a Build Your Own Bundle is purchased, any extra discount or promo code will be removed.</p>
+                    <p className="text-[#666] text-sm lg:hidden pb-4">
+                        {strapiData?.sidebar_tos}
+                    </p>
                 </div>
             </div>
-            <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">*Cannot be combined with other discounts or promotions. If a Build Your Own Bundle is purchased, any extra discount or promo code will be removed.</p>
-            {/* <Button onClick={testAddItems}>Add multiple items</Button> */}
+            <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">
+                {strapiData?.sidebar_tos}
+            </p>
         </aside>            
     );
 };

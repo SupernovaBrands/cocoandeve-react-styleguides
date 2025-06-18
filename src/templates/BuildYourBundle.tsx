@@ -17,7 +17,7 @@ const BuildYourBundle = (props: any) => {
     const [tanSelected, setTanSelected] = useState([]);
     const [hairSelected, setHairSelected] = useState([]);
 
-    const { addToCart } = props;
+    const { addToCart, strapiData } = props;
 
     const cssInline = `
         .top-header {
@@ -73,7 +73,7 @@ const BuildYourBundle = (props: any) => {
         if (document) setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
     }, [region]);
 
-    // console.log('render?');
+    // console.log('render?', props.hairData.find((it) => it.handle === 'scalp-renewal-set'));
     
     return (
         <div>
@@ -84,13 +84,17 @@ const BuildYourBundle = (props: any) => {
 					<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" loading="lazy" />
 				</picture>
                 <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
-                    <span className="bg-black inline-block badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">❤️ SAVE UP TO 20%</span>
-                    <h1 className="text-center mt-[1rem] mb-[.5rem]">Build Your Own Bundle!</h1>
-                    <p>Mix it. Match it. Make it yours. Customise your dream routine with Coco & Eve’s icons! <br className="hidden lg:block" />Pick your faves, stack the savings and curate it to perfection.</p>
+                    <span className="bg-black inline-block badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
+                        {strapiData?.tag_text}
+                    </span>
+                    <h1 className="text-center mt-[1rem] mb-[.5rem]">{strapiData?.title_text}</h1>
+                    <p dangerouslySetInnerHTML={{
+						__html: strapiData?.desc_text,
+					}} />
                 </figcaption>
             </figure>
             <div className={`sticky top-header bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1]`}>
-                <p className="text-xl font-bold mb-[.5rem]">Choose your bundle size</p>
+                <p className="text-xl font-bold mb-[.5rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
                     <li onClick={() => setBundleSize(2)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
                         <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 2 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>2</span>
@@ -111,7 +115,7 @@ const BuildYourBundle = (props: any) => {
                 </ul>
             </div>
             <div className="container py-3 lg:py-5">
-                <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">Choose your products</p>
+                <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
                 <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
 					<li><TabNav className={`${activeTab === 'hair' ? 'text-body' : ''}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
 					<li><TabNav className={`${activeTab === 'tan' ? 'text-body' : ''}`} title={`${region === 'ca' ? 'Tan' : 'Tan & SPF'}`} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
@@ -120,7 +124,7 @@ const BuildYourBundle = (props: any) => {
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
                             <div className="flex flex-wrap lg:-mx-[.5rem]">
-                                {props.hairData.filter((item) => item.availableForSale).map((item, index) => 
+                                {props.hairData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--hair--${index}`}
                                         product={item}
@@ -145,6 +149,9 @@ const BuildYourBundle = (props: any) => {
                                 bundleDiscount={bundleDiscount}
                                 type={activeTab}
                                 addToCart={addToCart}
+                                strapiData={strapiData}
+                                maxItem={MAX_ITEM}
+                                minItem={MIN_ITEM}
                             />
                         </div>
                     </div>
@@ -153,7 +160,7 @@ const BuildYourBundle = (props: any) => {
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-[calc(75%-30px)]">
                             <div className="flex flex-wrap lg:-mx-[.5rem]">
-                                {props.tanData.filter((item) => item.availableForSale).map((item, index) => 
+                                {props.tanData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
                                     <BundleCard
                                         key={`build-your-bundle--tan--${index}`}
                                         product={item}
@@ -179,6 +186,9 @@ const BuildYourBundle = (props: any) => {
                                 bundleDiscount={bundleDiscount}
                                 type={activeTab}
                                 addToCart={addToCart}
+                                strapiData={strapiData}
+                                maxItem={MAX_ITEM}
+                                minItem={MIN_ITEM}
                             />
                         </div>
                     </div>

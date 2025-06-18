@@ -133,7 +133,7 @@ export default class QuantityBox extends React.Component {
 
 	render() {
 		return (
-			<div className="quantity-box flex rounded border">
+			<div className={`quantity-box flex rounded border ${this.props.editable ? '' : 'border-gray-500'}`}>
 				<button
 					className="quantity-box__button p-[16px] grow-0"
 					type="button"
@@ -147,7 +147,7 @@ export default class QuantityBox extends React.Component {
 				<input
 					type="number"
 					name={this.props.name}
-					className="text-body border-dark text-center text-md lg:text-lg w-[2em] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-0 p-0"
+					className={`${!this.props.editable ? 'text-gray-500 border-gray-500' : 'text-body border-dark'} text-center text-md lg:text-lg w-[2em] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-0 p-0`}
 					min={0}
 					value={this.state.quantity}
 					onChange={this.onChangeQuantity}
