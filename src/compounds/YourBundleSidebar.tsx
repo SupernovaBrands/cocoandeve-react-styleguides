@@ -38,7 +38,7 @@ const ItemCard = (props) => {
 };
 
 const YourBundleSidebar = (props: any) => {
-    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart } = props;
+    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const [selected, setSelected] = useState(itemSelected);
@@ -113,7 +113,7 @@ const YourBundleSidebar = (props: any) => {
             <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
-                        <span className="font-bold lg:block">Your Bundle</span>
+                        <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
                         <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden">{bundleDiscount}% OFF</span>
                     </p>
                     <div className="lg:hidden flex items-center text-primary font-bold" onClick={() => setIsOpen(!isOpen)}>
@@ -129,7 +129,7 @@ const YourBundleSidebar = (props: any) => {
                 <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-primary-light px-2 lg:p-0 lg:block`}>
                     <div className="flex mb-2">
                         <PercentageSmall className="flex-[0_0_20px]" />
-                        <p className="ml-[.5rem] text-sm">If you add more products you hit more discount</p>
+                        <p className="ml-[.5rem] text-sm">{strapiData?.sidebar_desc}</p>
                     </div>
                     <ol>
                         {selected.map((item, index) => (
@@ -145,13 +145,20 @@ const YourBundleSidebar = (props: any) => {
                     </Button>
                     <div className="flex mt-2">
                         <DeliverySmall className="flex-[0_0_20px]" />
-                        <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"><b>FREE</b> standard shipping on all orders above $50(SG)</p>
+                        <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"
+                            dangerouslySetInnerHTML={{
+                                __html: strapiData?.sidebar_shipping,
+                            }}
+                        />
                     </div>
-                    <p className="text-[#666] text-sm lg:hidden pb-4">*Cannot be combined with other discounts or promotions. If a Build Your Own Bundle is purchased, any extra discount or promo code will be removed.</p>
+                    <p className="text-[#666] text-sm lg:hidden pb-4">
+                        {strapiData?.sidebar_tos}
+                    </p>
                 </div>
             </div>
-            <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">*Cannot be combined with other discounts or promotions. If a Build Your Own Bundle is purchased, any extra discount or promo code will be removed.</p>
-            {/* <Button onClick={testAddItems}>Add multiple items</Button> */}
+            <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">
+                {strapiData?.sidebar_tos}
+            </p>
         </aside>            
     );
 };
