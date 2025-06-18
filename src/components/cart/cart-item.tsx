@@ -228,6 +228,7 @@ export const CartItem = (props:CartItemProps) => {
 	};
 
 	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
+	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
 	const itemNotEditable = item.isFreeItem || bundleItemNotEditable;
 
 	return (
@@ -302,7 +303,7 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && !bundleItemNotEditable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !bundleItemNotRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
