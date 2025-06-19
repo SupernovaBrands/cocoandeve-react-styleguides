@@ -96,6 +96,8 @@ const YourBundleSidebar = (props: any) => {
                 ]
             }
         });
+
+        console.log('gIds', gIds);
         
         const multipleAdd = await addToCart({
             id: null,
@@ -108,6 +110,8 @@ const YourBundleSidebar = (props: any) => {
             updateCart: true,
             ids: gIds
         });
+
+        console.log('multiple add', multipleAdd);
 
         if (multipleAdd) setItemSelected([]);
         setProcessing(false);
