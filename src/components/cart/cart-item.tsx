@@ -288,7 +288,9 @@ export const CartItem = (props:CartItemProps) => {
 							</span>
 						)}
 						{isBundleItem(item) && (
-							<p className="font-normal text-xs mt-25 text-primary">Build Your Own Bundle</p>
+							<>
+								<p className="font-normal text-xs mt-25 text-primary">Build Your Own Bundle ({item.attributes.find((props:any) => props.key === '_make_your_own_kit_discount').value}%)</p>
+							</>
 						)}
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) > -1 && (
