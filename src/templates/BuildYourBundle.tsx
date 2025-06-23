@@ -119,7 +119,7 @@ const BuildYourBundle = (props: any) => {
 				</ul>
                 <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">
-                        {props.hairData.length > 0 && (
+                        {props.hairData?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.5rem]">
@@ -155,12 +155,12 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {props.hairData.length <= 0 && <LoadingEl />}
+                        {props.hairData?.length <= 0 && <LoadingEl />}
                     </div>
                 </TabContent>
                 <TabContent active={activeTab === 1}>
                     <div className="flex flex-wrap justify-center">
-                        {props.tanData.length > 0 && (
+                        {props.tanData?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.5rem]">
@@ -197,7 +197,7 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {props.tanData.length <=0 && <LoadingEl />}
+                        {props.tanData?.length <=0 && <LoadingEl />}
                     </div>
                 </TabContent>
             </div>
