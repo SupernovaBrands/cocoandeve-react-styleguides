@@ -8,13 +8,13 @@ const MIN_ITEM = 2;
 const MAX_ITEM = 5;
 
 const BuildYourBundle = (props: any) => {
-    const [bundleSize, setBundleSize] = useState(2);
+    const [bundleSize, setBundleSize] = useState(MIN_ITEM);
     const [bundleDiscount, setBundleDiscount] = useState(15);
-    const [activeTab, setActiveTab] = useState('hair');
+    const [activeTab, setActiveTab] = useState(0);
     const [headerPos, setHeaderPos] = useState(0);
 
-    const [tanSelected, setTanSelected] = useState([]);
-    const [hairSelected, setHairSelected] = useState([]);
+    const [tab0Selected, setTab0Selected] = useState([]);
+    const [tab1Selected, setTab1Selected] = useState([]);
 
     const { addToCart, strapiData, store } = props;
 
@@ -48,20 +48,20 @@ const BuildYourBundle = (props: any) => {
 
     useEffect(() => {
         // console.log('hairSelected', hairSelected);
-        renderItems(hairSelected);
+        renderItems(tab0Selected);
         // window.scrollTo({ top: 0, behavior: 'smooth'});
-    }, [hairSelected]);
+    }, [tab0Selected]);
 
     useEffect(() => {
         // window.scrollTo({ top: 0, behavior: 'smooth'});
         // console.log('tanSelected', tanSelected);
-        renderItems(tanSelected);
-    }, [tanSelected]);
+        renderItems(tab1Selected);
+    }, [tab1Selected]);
 
 
     useEffect(() => {
-        if (activeTab === 'hair') renderItems(hairSelected);
-        else if (activeTab === 'tan') renderItems(tanSelected);
+        if (activeTab === 0) renderItems(tab0Selected);
+        else if (activeTab === 1) renderItems(tab1Selected);
     }, [activeTab]);
 
     useEffect(() => {
@@ -114,12 +114,12 @@ const BuildYourBundle = (props: any) => {
             <div className="container py-3 lg:py-5">
                 <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
                 <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
-					<li><TabNav className={`${activeTab === 'hair' ? 'text-body' : ''}`} title='Tab1 Title' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-					<li><TabNav className={`${activeTab === 'tan' ? 'text-body' : ''}`} title={`Tab2 Title`} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
+					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
+					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
 				</ul>
-                <TabContent active={activeTab === 'hair'}>
+                <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">
-                        {props.hairData && (
+                        {props.hairData.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.5rem]">
@@ -129,9 +129,9 @@ const BuildYourBundle = (props: any) => {
                                                 product={item}
                                                 className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
                                                 store={props.store}
-                                                itemSelected={hairSelected}
+                                                itemSelected={tab0Selected}
                                                 generalSetting={null}
-                                                setItemSelected={setHairSelected}
+                                                setItemSelected={setTab0Selected}
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
@@ -142,8 +142,8 @@ const BuildYourBundle = (props: any) => {
                                 <div className="w-full lg:w-[calc(25%+30px)]">
                                     <YourBundleSidebar
                                         store={props.store}
-                                        setItemSelected={setHairSelected}
-                                        itemSelected={hairSelected}
+                                        setItemSelected={setTab0Selected}
+                                        itemSelected={tab0Selected}
                                         bundleSize={bundleSize}
                                         bundleDiscount={bundleDiscount}
                                         type={activeTab}
@@ -155,12 +155,12 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {!props.hairData && <LoadingEl />}
+                        {props.hairData.length <= 0 && <LoadingEl />}
                     </div>
                 </TabContent>
-                <TabContent active={activeTab === 'tan'}>
+                <TabContent active={activeTab === 1}>
                     <div className="flex flex-wrap justify-center">
-                        {props.tanData && (
+                        {props.tanData.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.5rem]">
@@ -172,8 +172,8 @@ const BuildYourBundle = (props: any) => {
                                                 generalSetting={null}
                                                 collectionTemplate={true}
                                                 store={props.store}
-                                                itemSelected={tanSelected}
-                                                setItemSelected={setTanSelected}
+                                                itemSelected={tab1Selected}
+                                                setItemSelected={setTab1Selected}
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
@@ -184,8 +184,8 @@ const BuildYourBundle = (props: any) => {
                                 <div className="w-full lg:w-[calc(25%+30px)]">
                                     <YourBundleSidebar
                                         store={props.store}
-                                        setItemSelected={setTanSelected}
-                                        itemSelected={tanSelected}
+                                        setItemSelected={setTab1Selected}
+                                        itemSelected={tab1Selected}
                                         bundleSize={bundleSize}
                                         bundleDiscount={bundleDiscount}
                                         type={activeTab}
@@ -197,7 +197,7 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {!props.tanData && <LoadingEl />}
+                        {props.tanData.length <=0 && <LoadingEl />}
                     </div>
                 </TabContent>
             </div>

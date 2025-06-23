@@ -80,7 +80,6 @@ const YourBundleSidebar = (props: any) => {
 
         setProcessing(true);
         const groupId = Date.now();
-        const varIds = selected.map(v => v.id.replace('gid://shopify/ProductVariant/', ''));
         const gIds = selected.map((v, idx, row) => {
             return {
                 merchandiseId: v.id,
@@ -89,15 +88,13 @@ const YourBundleSidebar = (props: any) => {
                     { key: '_make_your_own_kit', value: 'yes' },
                     { key: '_make_your_own_kit_removable', value: idx === 0 ? 'yes' : 'no' },
                     { key: '_make_your_own_kit_editable', value: 'no' },
-                    { key: '_make_your_own_kit_type', value: type },
+                    { key: '_make_your_own_kit_type', value: `tab${type}` },
                     // { key: '_make_your_own_kit_ids', value: varIds.join(',') },
                     { key: '_make_your_own_kit_group', value: `${groupId}` },
                     // { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Discount - Bundle of ${row.length}`}
                 ]
             }
         });
-
-        console.log('gIds', gIds);
         
         const multipleAdd = await addToCart({
             id: null,
@@ -110,8 +107,6 @@ const YourBundleSidebar = (props: any) => {
             updateCart: true,
             ids: gIds
         });
-
-        console.log('multiple add', multipleAdd);
 
         if (multipleAdd) setItemSelected([]);
         setProcessing(false);
