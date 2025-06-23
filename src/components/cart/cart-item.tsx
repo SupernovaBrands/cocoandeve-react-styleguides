@@ -221,7 +221,7 @@ export const CartItem = (props:CartItemProps) => {
 
 	const isBundleItem = (item) => {
 		try {
-			return item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes');
+			return item.attributes.find((props:any) => props.key === '_campaign_type' && props.value === 'build_your_own_bundle');
 		} catch {
 			return null
 		}
@@ -287,8 +287,8 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
-						{isBundleItem(item) && isBundleItem(item)?.value && (
-							<p className="font-normal text-xs mt-25 text-primary">{isBundleItem(item)?.value}</p>
+						{isBundleItem(item) && (
+							<p className="font-normal text-xs mt-25 text-primary">Build Your Own Bundle</p>
 						)}
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) > -1 && (

@@ -90,9 +90,9 @@ const YourBundleSidebar = (props: any) => {
                     { key: '_make_your_own_kit_removable', value: idx === 0 ? 'yes' : 'no' },
                     { key: '_make_your_own_kit_editable', value: 'no' },
                     { key: '_make_your_own_kit_type', value: type },
-                    { key: '_make_your_own_kit_ids', value: varIds.join(',') },
+                    // { key: '_make_your_own_kit_ids', value: varIds.join(',') },
                     { key: '_make_your_own_kit_group', value: `${groupId}` },
-                    { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Discount - Bundle of ${row.length}`}
+                    // { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Discount - Bundle of ${row.length}`}
                 ]
             }
         });
