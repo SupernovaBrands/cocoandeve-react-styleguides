@@ -31,7 +31,7 @@ export const CartItem = (props:CartItemProps) => {
 		useShopifyVariantInfo, store } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
-	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
+	
 	const isMultiOptions = item.swatches.length > 1;
 
 	const [hideItem, setHideItem] = useState(false);
@@ -230,6 +230,7 @@ export const CartItem = (props:CartItemProps) => {
 	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
 	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
 	const itemNotEditable = item.isFreeItem || bundleItemNotEditable;
+	const showSwatches = variants && variants.length > 1 && !item.isFreeItem && !isBundleItem(item);
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
