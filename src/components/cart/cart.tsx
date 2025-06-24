@@ -89,7 +89,7 @@ const Cart: React.FC<Props> = (props) => {
 		if (cartData) {
 
 			// validate for OOS item in cart
-			console.log('manualGwpBuyItems', manualGwpBuyItems);
+			// console.log('manualGwpBuyItems', manualGwpBuyItems);
 			const gwpBuyItemInCarts = cartData.lines.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
 			if (gwpBuyItemInCarts.length === 0) {
 				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
