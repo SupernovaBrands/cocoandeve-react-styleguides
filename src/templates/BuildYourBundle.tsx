@@ -3,6 +3,8 @@ import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
 import YourBundleSidebar from "~/compounds/YourBundleSidebar";
 import BundleCard from "~/compounds/BundleCard";
+import Modal from "~/components/Modal";
+import ProductInfo from "~/components/modal/ProductInfo";
 
 const MIN_ITEM = 2;
 const MAX_ITEM = 5;
@@ -15,6 +17,12 @@ const BuildYourBundle = (props: any) => {
 
     const [tab0Selected, setTab0Selected] = useState([]);
     const [tab1Selected, setTab1Selected] = useState([]);
+
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null
+    });
 
     const { addToCart, strapiData, store } = props;
 
@@ -69,6 +77,11 @@ const BuildYourBundle = (props: any) => {
     }, [store]);
 
     // console.log('render?', props.hairData.find((it) => it.handle === 'scalp-renewal-set'));
+
+    useEffect(() => {
+        if (productData.open) document.body.classList.add('overflow-hidden');
+        else document.body.classList.remove('overflow-hidden');
+    }, [productData.open])
 
     const LoadingEl = () => <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3 my-3 lg:my-5" role="status" />;
     
@@ -135,6 +148,7 @@ const BuildYourBundle = (props: any) => {
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
+                                                setProductData={setProductData}
                                             />
                                         )}
                                     </div>
@@ -177,6 +191,7 @@ const BuildYourBundle = (props: any) => {
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
+                                                setProductData={setProductData}
                                             />
                                         )}
                                     </div>
@@ -201,6 +216,9 @@ const BuildYourBundle = (props: any) => {
                     </div>
                 </TabContent>
             </div>
+            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+                <ProductInfo store={store} data={productData} handleClose={() => setProductData({...productData, ...{ open: false }})} />
+            </Modal>
         </div>
     );
 };
