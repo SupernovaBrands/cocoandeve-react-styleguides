@@ -29,7 +29,7 @@ interface Props {
 	itemCount?: any;
 	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
-	onDeleteLine: (lineId: string, attributes: Array<any>[]) => void;
+	onDeleteLine: (lineId: any, attributes: Array<any>[]) => void;
 	discountMeter?: any;
 	shippingMeter?: any;
 	shippingData?: any;
@@ -89,19 +89,19 @@ const Cart: React.FC<Props> = (props) => {
 		if (cartData) {
 
 			// validate for OOS item in cart
-			console.log('manualGwpBuyItems', manualGwpBuyItems);
+			// console.log('manualGwpBuyItems', manualGwpBuyItems);
 			const gwpBuyItemInCarts = cartData.lines.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
 			if (gwpBuyItemInCarts.length === 0) {
 				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
 				if (manualGwpItems.length > 0) {
 					manualGwpItems.forEach((item: any) => {
-						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id)) {
-							if (manualGwpBuyItems !== '') onRemoveItem(item, []);
+						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id) && manualGwpBuyItems !== '') {
+							// if (manualGwpBuyItems !== '') manGwpIds.push(item.id);
 							const newIdsToDel = [...invalidGiftsToDelete];
 							newIdsToDel.push(item);
 							setInvalidGiftsToDelete(newIdsToDel);
 						}
-					})
+					});
 				}
 			}
 			const oosInCarts = cartData.lines.filter((line: any) => !line.merchandise.availableForSale);
@@ -115,6 +115,13 @@ const Cart: React.FC<Props> = (props) => {
 			setCombineDiscount(cartData.combineDiscount);
 		}
 	}, [cartData, itemCount]);
+
+	useEffect(() => {
+		if (invalidGiftsToDelete.length > 0) {
+			const manGwpIds = invalidGiftsToDelete.map((v) => v.id);
+			if (manGwpIds.length > 0) onDeleteLine(manGwpIds, []);
+		}
+	}, [invalidGiftsToDelete.length]);
 
 	const onApplyDiscountCode = async (c:any, updateCart = true) => {
 		return await handleDiscount(c, updateCart);
