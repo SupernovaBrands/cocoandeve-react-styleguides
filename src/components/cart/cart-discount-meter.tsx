@@ -23,7 +23,8 @@ const CartDiscountMeter = (props) => {
 		setState({...state, progress, text})
 	}, [props]);
 
-	const totalDiscounted = items.reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
+	const totalDiscounted = items.filter((it) => it.attributes.find((a) => a.value !== 'manual_gwp')).reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
+	console.log('totalDiscounted', totalDiscounted);
 
 	return totalDiscounted > 0 && (
 		<>
