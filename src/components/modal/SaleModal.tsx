@@ -13,7 +13,7 @@ interface SalesPopupData {
 	sbp_bg_color: string
 	sbp_desc_color: string
 	sbp_heading_color: string
-	sbp_cta_enabled: string
+	sbp_cta_enabled: boolean
 	sbp_cta_text: string
 	sbp_cta_url: string
 	sbp_percentage: string
@@ -54,7 +54,7 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 
 		setPlatform(os);
 	}, []);
-
+console.log('data', data)
 	return (
 		<div className={`flex w-full h-full ${sbp_bg_color} ${sbp_image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
             <div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
