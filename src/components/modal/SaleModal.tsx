@@ -13,6 +13,7 @@ interface SalesPopupData {
 	sbp_bg_color: string
 	sbp_desc_color: string
 	sbp_heading_color: string
+	sbp_cta_enabled: string
 	sbp_cta_text: string
 	sbp_cta_url: string
 	sbp_percentage: string
@@ -28,7 +29,7 @@ type SalePopupProp = {
 
 
 const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
-	const { sbp_img, sbp_img_lg, sbp_code, sbp_desc, sbp_enabled, sbp_heading, sbp_bg_color, sbp_desc_color, sbp_heading_color, sbp_cta_text, sbp_cta_url, sbp_percentage, sbp_image_position, sbp_percentage_color } = data;
+	const { sbp_img, sbp_img_lg, sbp_code, sbp_desc, sbp_enabled, sbp_heading, sbp_bg_color, sbp_desc_color, sbp_heading_color, sbp_cta_enabled, sbp_cta_text, sbp_cta_url, sbp_percentage, sbp_image_position, sbp_percentage_color } = data;
 	const [copied, setCopied] = useState(false);
 	const [platform, setPlatform] = useState('');
 
@@ -54,8 +55,6 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 		setPlatform(os);
 	}, []);
 
-	console.log('platform new', platform);
-
 	return (
 		<div className={`flex w-full h-full ${sbp_bg_color} ${sbp_image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
             <div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
@@ -77,13 +76,23 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 					</div>
 
                     <p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`}>{sbp_desc}</p>
-                    {!copied ? (
-                        <Button onClick={copyCode} data-code={sbp_code} buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full">
-                            Use Code: {sbp_code} <Paste className="svg--current-color svg text-primary ml-1" />
-                        </Button>
-                    ) : (
-                        <Button buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative rounded-full">COPIED</Button>
-                    )}
+                    {sbp_cta_enabled && (!copied ? (
+							<Button
+								onClick={copyCode}
+								data-code={sbp_code}
+								buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full"
+							>
+								Use Code: {sbp_code}
+								<Paste className="svg--current-color svg text-primary ml-1" />
+							</Button>
+						) : (
+							<Button
+								buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative rounded-full"
+							>
+								COPIED
+							</Button>
+						)
+					)}
                     <a href={sbp_cta_url} className="btn-lg hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-full mt-1">
                         {sbp_cta_text}
                     </a>
