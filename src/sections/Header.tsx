@@ -201,6 +201,7 @@ const Header = (props: any) => {
 						isStickyEnabled={annBar?.isStickyEnabled || false}
 						background={annBar?.background || 'bg-primary-light'}
 						textColor={annBar?.textColor || 'text-secondary'}
+						textSize={annBar?.textSize || 16}
 					/>
 				)}
 

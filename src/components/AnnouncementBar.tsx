@@ -24,7 +24,8 @@ const AnnouncementBar = (props: any) => {
 		textColor,
 		loaded,
 		isScrollEnabled,
-		isStickyEnabled
+		isStickyEnabled,
+		textSize
 	} = props;
 	
 	const noticeTImesLabels = timerData && timerData.times_labels ? timerData.times_labels.split(':') : [];
@@ -37,7 +38,7 @@ const AnnouncementBar = (props: any) => {
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [
 		Autoplay({ playOnInit: true, delay: 5000, stopOnInteraction: false }),
-		AutoHeight()
+		// AutoHeight()
 	]);
 
 	const [showTimer, setShowTimer] = useState(false);
@@ -133,6 +134,7 @@ const AnnouncementBar = (props: any) => {
 	const bg = background ? background : 'primary-light';
 	const lineColor = loaded ? `${textColor || 'text-secondary hover:text-secondary'}` : `text-primary-light hover:text-primary-light`;
 	const bgColor = loaded ? `${background || 'bg-primary-light'}` : 'bg-primary-light';
+	const fontSize = loaded ? `${`text-[${textSize}px]` || 'text-base'} lg:text-base` : '';
 	return (
 		<>
 			{timerData && timerData.notice_bar && showTimer && isShowOnCurrentTemplate() ? (
@@ -159,17 +161,17 @@ const AnnouncementBar = (props: any) => {
 								<React.Fragment key={index}>
 									{text && (
 										<>
-											<span><a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a></span>
+											<span><a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text}</a></span>
 										</>
 									)}
 									{text2 && (
 										<>
-											<span><a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a></span>
+											<span><a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text2}</a></span>
 										</>
 									)}
 									{text3 && (
 										<>
-											<span><a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a></span>
+											<span><a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text3}</a></span>
 										</>
 									)}
 								</React.Fragment>
@@ -183,13 +185,13 @@ const AnnouncementBar = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi}>
 								<Carousel.Inner emblaRef={emblaRef} className="lg:-mx-g items-start">
 									{text && (
-										<a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text}</a>
+										<a href={url} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text}</a>
 									)}
 									{text2 && (
-										<a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text2}</a>
+										<a href={url2} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text2}</a>
 									)}
 									{text3 && (
-										<a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0`}>{text3}</a>
+										<a href={url3} className={`${lineColor} hover:${lineColor} w-full basis-full flex-grow-0 flex-shrink-0 ${fontSize}`}>{text3}</a>
 									)}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
