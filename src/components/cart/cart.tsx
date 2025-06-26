@@ -225,7 +225,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		const selected = JSON.parse(getCookie('manualGwpSelected') || '[]');
-		if (manualGwpSetting.enabled && selected.length > 0) {
+		if (manualGwpSetting && manualGwpSetting.enabled && selected.length > 0) {
 			const validManuals = cart.items.filter((free:any) => free.attributes.filter((attr:any) => attr.value === 'manual_gwp') && selected.includes(getId(free.merchandise.id)));
 			if (validManuals.length > 0) {
 				let gwpAmount = 0;
