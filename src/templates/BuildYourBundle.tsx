@@ -24,7 +24,7 @@ const BuildYourBundle = (props: any) => {
         selectedVariant: null
     });
 
-    const { addToCart, strapiData, store } = props;
+    const { FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const cssInline = `
         .top-header {
@@ -217,7 +217,22 @@ const BuildYourBundle = (props: any) => {
                 </TabContent>
             </div>
             <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
-                <ProductInfo store={store} data={productData} handleClose={() => setProductData({...productData, ...{ open: false }})} />
+                <ProductInfo
+                    strapiAutomateHardcode={strapiAutomateHardcode}
+                    checkHardcodedImages={checkHardcodedImages}
+                    checkHardcodedTitles={checkHardcodedTitles}
+                    checkHardcodedVariant={checkHardcodedVariant}
+                    checkHardcodedTagline={checkHardcodedTagline}
+                    checkHardcodedFaq={checkHardcodedFaq}
+                    checkHardcodedHowToUse={checkHardcodedHowToUse}
+                    ProductSettings={ProductSettings}
+                    BenefitIngredient={BenefitIngredient}
+                    HowToUse={HowToUse}
+                    Faq={Faq}
+                    FragranceNotes={FragranceNotes}
+                    store={store}
+                    data={productData}
+                    handleClose={() => setProductData({...productData, ...{ open: false }})} />
             </Modal>
         </div>
     );
