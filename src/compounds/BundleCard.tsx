@@ -403,6 +403,11 @@ const BundleCard = (props:any) => {
         });
     };
 
+    const changeSwatch = (e) => {
+        const selectedVariant = product?.variants?.nodes.find((node) => node.id === e.target.value) || null;
+        if (selectedVariant) setSelectedVariant(selectedVariant);
+    };
+
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
@@ -419,15 +424,27 @@ const BundleCard = (props:any) => {
 
             { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
             <div className={`pt-0 pb-[1rem] px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
-                {selectedVariant?.availableForSale && (
-                    <AddToCartButton
-                        product={product}
-                        itemSelected={itemSelected}
-                        setItemSelected={setItemSelected}
-                        selectedVariant={selectedVariant}
-                        maxItem={maxItem}
-                    />
-                )}
+                <div className="flex items-center justify-center">
+                    {product.swatch && (
+                        <>
+                            {/* <strong className="block mb-25">{product.swatch.label}</strong> */}
+                            <select className="-mt-25 mr-1 rounded-full mb-g custom-select block border border-body bg-white mb-25" onChange={changeSwatch}>
+                                {product.swatch.data.map((select) => (
+                                    <option disabled={!select.availableForSale} value={select.id}>{select.value}</option>
+                                ))}
+                            </select>
+                        </>
+                    )}
+                    {selectedVariant?.availableForSale && (
+                        <AddToCartButton
+                            product={product}
+                            itemSelected={itemSelected}
+                            setItemSelected={setItemSelected}
+                            selectedVariant={selectedVariant}
+                            maxItem={maxItem}
+                        />
+                    )}
+                </div>
 
                 <p className={`text-sm text-center min-h-[54px] px-0 lg:px-0 lg:min-h-4 flex flex-col justify-center`}>
                     <a href={product.handle ? `/products/${product.handle}` : '#'} className={`'text-sm lg:text-base' product-card__title text-body hover:text-body w-full text-center"`}>

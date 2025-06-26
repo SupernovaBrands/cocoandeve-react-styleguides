@@ -21,10 +21,11 @@ const BuildYourBundle = (props: any) => {
     const [productData, setProductData] = useState({
         open: false,
         handle: null,
-        selectedVariant: null
+        selectedVariant: null,
+        tab: null
     });
 
-    const { FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+    const { buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const cssInline = `
         .top-header {
@@ -73,7 +74,11 @@ const BuildYourBundle = (props: any) => {
     }, [activeTab]);
 
     useEffect(() => {
-        if (document) setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
+        if (document) {
+            setTimeout(() => {
+                setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
+            }, 2000)
+        }
     }, [store]);
 
     // console.log('render?', props.hairData.find((it) => it.handle === 'scalp-renewal-set'));
@@ -232,6 +237,13 @@ const BuildYourBundle = (props: any) => {
                     FragranceNotes={FragranceNotes}
                     store={store}
                     data={productData}
+                    setTab1Selected={setTab1Selected}
+                    tab1Selected={tab1Selected}
+                    setTab0Selected={setTab0Selected}
+                    tab0Selected={tab0Selected}
+                    activeTab={activeTab}
+                    maxItem={MAX_ITEM}
+                    buildProductCardModel={buildProductCardModel}
                     handleClose={() => setProductData({...productData, ...{ open: false }})} />
             </Modal>
         </div>
