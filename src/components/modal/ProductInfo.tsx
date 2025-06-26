@@ -106,8 +106,8 @@ const ProductInfo = (props: any) => {
         getProductData(data.handle);
     }, [data.handle]);
 
-    console.log('product shopify', productShopify);
-    console.log('product strapi', productStrapi);
+    // console.log('product shopify', productShopify);
+    // console.log('product strapi', productStrapi);
     let slides = productStrapi?.images ? productStrapi?.images.map((image: imageProps) => {
         return { id: image.id, src: image.url || '' }
     }) : [];
