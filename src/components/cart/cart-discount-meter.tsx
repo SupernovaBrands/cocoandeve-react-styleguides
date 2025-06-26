@@ -23,7 +23,7 @@ const CartDiscountMeter = (props) => {
 		setState({...state, progress, text})
 	}, [props]);
 
-	const totalDiscounted = items.filter((it) => it.attributes.find((attr) => attr.key === '_campaign_type' && attr.value !== 'build_your_own_bundle')).reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
+	const totalDiscounted = items.filter((it) => it.attributes.find((attr) => attr.value !== 'build_your_own_bundle')).reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
 
 	return totalDiscounted > 0 && (
 		<>

@@ -276,7 +276,7 @@ const AddToCartButton = (props:any) => {
 // }
 
 const BundleCard = (props:any) => {
-    const { keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
+    const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
     // const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
@@ -394,6 +394,15 @@ const BundleCard = (props:any) => {
 
     const reducedPrice = product.priceInCent - (bundleDiscount / 100) * product.priceInCent;
 
+    const openModal = (e) => {
+        e.preventDefault();
+        setProductData({
+            open: true,
+            handle: product.handle,
+            selectedVariant: selectedVariant,
+        });
+    };
+
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
@@ -425,7 +434,9 @@ const BundleCard = (props:any) => {
                         {product.title}
                     </a>
                 </p>
-                <a href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm text-underline inline-block my-[.75rem]">View Details</a>
+                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm text-underline inline-block my-[.75rem]">
+                    View Details
+                </a>
                 <div className="flex justify-center">
                     <span className="text-gray-600 line-through">{formatMoney(product.priceInCent, false, store)}</span>
                     <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
