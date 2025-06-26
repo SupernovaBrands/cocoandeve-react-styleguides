@@ -38,7 +38,30 @@ const useMediaQuery = (query) => {
 
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
-    const { FragranceNotes, ProductSettings, checkHardcodedHowToUse, checkHardcodedFaq, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, checkHardcodedVariant, data, store, handleClose, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles } = props;
+    const {
+        FragranceNotes,
+        ProductSettings,
+        checkHardcodedHowToUse, 
+        checkHardcodedFaq, 
+        BenefitIngredient, 
+        HowToUse, 
+        Faq, 
+        checkHardcodedTagline, 
+        checkHardcodedVariant, 
+        data, 
+        maxItem,
+        store, 
+        handleClose, 
+        checkHardcodedImages, 
+        strapiAutomateHardcode, 
+        checkHardcodedTitles,
+        setTab0Selected,
+        setTab1Selected,
+        tab1Selected,
+        tab0Selected,
+        activeTab,
+        buildProductCardModel
+    } = props;
     const isDesktop = useMediaQuery('(min-width: 769px)');
     const [scrollProgress, setScrollProgress] = useState(0);
     const [productStrapi, setProductStrapi] = useState(null);
@@ -46,6 +69,7 @@ const ProductInfo = (props: any) => {
     const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 
     const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start'});
+    const [selectedVariant, setSelectedVariant] = useState(null);
     
     const { isVisible, targetRef } = useIsVisible(
         {
@@ -78,7 +102,27 @@ const ProductInfo = (props: any) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const onAddItem = () => {
-        console.log('adding item from modal');
+        
+        if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) return false;
+
+        const productModel = buildProductCardModel(store, productShopify, null, null);
+        const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
+        setItemSelected((prev) => {
+            const prevData = [...prev];
+            prevData.push({
+                src: productModel.src,
+                srcSet: productModel.srcSet,
+                title: selectedVariant.title,
+                id: selectedVariant.id,
+                price: productModel.priceInCent,
+                comparePrice: productModel.comparePriceInCent
+            });
+            return prevData;
+        });
+        setTimeout(() => {
+            handleClose();
+        }, 1500);
+        return false;
     };
 
     useEffect(() => {
@@ -255,6 +299,45 @@ const ProductInfo = (props: any) => {
             callback();
         }
 	};
+
+    // const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+
+    const [selected0, setSelected0] = useState([]);
+    const [selected1, setSelected1] = useState([]);
+    useEffect(() => {
+        if (tab0Selected.length > 0) {
+            const ids = [];
+            tab0Selected.map((item) => ids.push(item.id));
+            setSelected0(ids);
+        } else {
+            setSelected0([]);
+        }
+    }, [tab0Selected]);
+
+    useEffect(() => {
+        if (tab1Selected.length > 0) {
+            const ids = [];
+            tab1Selected.map((item) => ids.push(item.id));
+            setSelected1(ids);
+        } else {
+            setSelected1([]);
+        }
+    }, [tab1Selected]);
+
+    useEffect(() => {
+        // if (autoTicks && autoTicks.length > 0) {
+        //     defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+        // }
+        const variantNodes = productShopify?.variants?.nodes;
+        const defaultVariant = variantNodes?.sort((x, y) => y.availableForSale - x.availableForSale)[0];
+        setSelectedVariant(defaultVariant || null);
+    }, [productShopify]);
+
+    // console.log('tab 0 selected', selected);
+    // console.log('selectedVariant', selectedVariant);
+
+    const disabled = selected0.includes(selectedVariant?.id) || selected0.length >= maxItem || selected1.includes(selectedVariant?.id) || selected1.length >= maxItem;
+    console.log('');
     
     return (
         <div className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-5'}`}>
@@ -365,8 +448,8 @@ const ProductInfo = (props: any) => {
                                 )}
                             </h4>
                             { tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p> }
-                            <Button onClick={onAddItem} buttonClass={`h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
-                                Add to Cart
+                            <Button disabled={disabled} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
+                                {disabled ? 'Added' : 'Add to Cart'}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
                                 { dataAccordion.length > 0 && <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
