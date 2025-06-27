@@ -16,7 +16,7 @@ const ItemCard = (props) => {
     };
     return (
         <li className={`flex mb-[1rem] ${placeholder ? 'opacity-[.5]' : ''}`}>
-            <span className="inline-block font-bold mr-[.5rem] mt-[.5rem]">{index + 1}</span>
+            <span className="inline-block font-bold mr-[.5rem] mt-[.5rem] text-lg">{index + 1}</span>
             <figure className="flex rounded-[1rem] bg-white p-[.5rem] w-full">
                 {placeholder && <div className="w-[3rem] h-[3rem] rounded-[.5rem] bg-gray-400" />}
                 {!placeholder && <img src={item.src} width={48} height={48} className="w-[3rem] h-[3rem] rounded-[.5rem]" />}
@@ -111,6 +111,7 @@ const YourBundleSidebar = (props: any) => {
 
         if (multipleAdd) setItemSelected([]);
         setProcessing(false);
+        setIsOpen(false);
     };
     
     const variantSelected = selected.filter((sel) => sel.id !== null);
@@ -123,10 +124,10 @@ const YourBundleSidebar = (props: any) => {
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                         <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
-                        <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden">{bundleDiscount}% OFF</span>
+                        <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden h-[26px]">{bundleDiscount}% OFF</span>
                     </p>
-                    <div className="lg:hidden flex items-center text-primary font-bold" onClick={() => setIsOpen(!isOpen)}>
-                        <span className="mr-[.5rem] inline-block">View</span>
+                    <div className="lg:hidden flex items-center text-primary font-bold text-sm" onClick={() => setIsOpen(!isOpen)}>
+                        <span className="mr-[.5rem] inline-block ">View</span>
                         <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
                     </div>
                 </div>
@@ -145,7 +146,7 @@ const YourBundleSidebar = (props: any) => {
                             <ItemCard setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
-                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g`}>
+                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g font-normal lg:font-bold`}>
                         {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
                         {!processing && (
                             <>
