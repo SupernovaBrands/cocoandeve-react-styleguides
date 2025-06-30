@@ -66,7 +66,7 @@ const MobileMenu = (props: any) => {
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<button type="button" onClick={() => onToggleMobileNav(false)} className={`mobile-nav__close svg absolute -mt-[25px] right-[0] pt-[25px] pr-[15px] pb-[40px] pl-[25px]`}>
+					<button type="button" onClick={() => onToggleMobileNav(false)} className={`mobile-nav__close svg absolute -mt-[25px] right-[0] pt-[25px] pr-[15px] pb-[40px] pl-[25px]`} aria-label="Close menu">
 						<Close onClick={() => onToggleMobileNav(false)} className='svg w-[1em] h-[1em]' />
 					</button>
 				</li>
@@ -80,7 +80,7 @@ const MobileMenu = (props: any) => {
 					const hasRow = menu.rows;
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
-							<label htmlFor="headingHair" className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls="hairCare"
+							<button id={menu.title} className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls={menu.title}
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;
@@ -102,11 +102,11 @@ const MobileMenu = (props: any) => {
 										setMenuStates(newStates);
 									}} />
 								)}
-							</label>
+							</button>
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby="headingHair">
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={menu.title}>
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
-										<button type="button" className="p-[20px] mb-0 -ml-[20px]" onClick={() => {
+										<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
 											const newStates = {...defMenuState};
 											newStates[i] = false;
 											setMenuStates(newStates);
@@ -116,7 +116,7 @@ const MobileMenu = (props: any) => {
 										<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
 											<BrandLogo className="lg:h-[34px]" />
 										</a>
-										<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]'>
+										<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
 											<Close className="h-[1em]"  onClick={() => {
 												// const newStates = {...defMenuState};
 												// newStates[i] = false;

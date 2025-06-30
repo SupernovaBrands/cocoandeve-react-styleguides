@@ -113,14 +113,14 @@ const SwatchOverlay = (props:any) => {
             />
             <div className={`!w-auto px-0 swatch-overlay !left-[-1px] !right-[-1px] bottom-[-1px] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-[20px] lg:rounded-[26px]`}>
                 <div className={`text-center w-full pt-2 lg:pb-2 pb-1 lg:px-0`}>
-                    <label className="block mb-[.625em]">
+                    <div className="block mb-[.625em]">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
                         {props.swatch.tangleTamer && <strong>Type: </strong>}
                         {props.swatch.scent && <strong>Scent: </strong>}
                         {props.swatch.variant && <strong>Variant: </strong>}
                         <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
-                    </label>
+                    </div>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
                             <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-1/4'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>

@@ -481,14 +481,14 @@ const ProductInfo = (props: any) => {
                             { tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p> }
                             {data.swatch && (
                                 <>
-                                    <label className="block mb-[.625em]">
+                                    <div className="block mb-[.625em]">
                                         {data.swatch.style && <strong>Style: </strong>}
                                         {data.swatch.shade && <strong>Shade: </strong>}
                                         {data.swatch.tangleTamer && <strong>Type: </strong>}
                                         {data.swatch.scent && <strong>Scent: </strong>}
                                         {data.swatch.variant && <strong>Variant: </strong>}
                                         <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
-                                    </label>
+                                    </div>
                                     <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
                                         {data.swatch.data.length > 0 && data.swatch.data.map((item:any, i:any) => (
                                             <li key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
