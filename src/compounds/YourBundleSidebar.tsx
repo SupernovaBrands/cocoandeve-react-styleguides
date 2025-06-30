@@ -124,10 +124,12 @@ const YourBundleSidebar = (props: any) => {
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                         <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
-                        <span className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden h-[26px]">{bundleDiscount}% OFF</span>
+                        <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden h-[26px]">
+                            <span className="relative top-[1px]">{bundleDiscount}% OFF</span>
+                        </div>
                     </p>
                     <div className="lg:hidden flex items-center text-primary font-bold text-sm" onClick={() => setIsOpen(!isOpen)}>
-                        <span className="mr-[.5rem] inline-block ">View</span>
+                        <span className="mr-[.5rem] inline-block top-[2px] relative">View</span>
                         <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
                     </div>
                 </div>
