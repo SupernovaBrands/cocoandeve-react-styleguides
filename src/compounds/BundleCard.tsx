@@ -238,7 +238,7 @@ const BundleCard = (props:any) => {
                     )}
                 </div>
 
-                <p className={`text-sm text-center min-h-[70px] px-0 lg:px-0 lg:min-h-[56px] flex flex-col justify-center`}>
+                <p className={`text-sm text-center min-h-[82px] px-0 lg:px-0 lg:min-h-[56px] flex flex-col justify-center`}>
                     <a href={product.handle ? `/products/${product.handle}` : '#'} className={`text-sm lg:text-base mt-[.75rem] lg:mt-[1rem] product-card__title text-body hover:text-body w-full text-center`}>
                         {product.title}
                     </a>
