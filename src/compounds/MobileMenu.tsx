@@ -78,9 +78,10 @@ const MobileMenu = (props: any) => {
 				)}
 				{mainMenu?.map((menu, i) => {
 					const hasRow = menu.rows;
+					const m_title = menu.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
-							<button id={menu.title} className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls={menu.title}
+							<button id={m_title} className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls={menu.title}
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;
@@ -104,7 +105,7 @@ const MobileMenu = (props: any) => {
 								)}
 							</button>
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={menu.title}>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
 									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 										<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
 											const newStates = {...defMenuState};
