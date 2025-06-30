@@ -81,7 +81,7 @@ const ArticleNewsLetter = (props) => {
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-[1.5em]">
                 <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" alt="Blog article banner" />
                 </picture>
                 <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
                     <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
@@ -472,17 +472,17 @@ const Article = (props) => {
                             {parse(bodyContent)}
                             <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Twitter">
                                         <Twitter className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Facebook">
                                         <Facebook className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block">
-                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Pinterest">
                                         <Pinterest className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
