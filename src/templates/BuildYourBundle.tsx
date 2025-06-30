@@ -22,7 +22,8 @@ const BuildYourBundle = (props: any) => {
         open: false,
         handle: null,
         selectedVariant: null,
-        tab: null
+        tab: null,
+        swatch: null
     });
 
     const { buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
@@ -129,11 +130,11 @@ const BuildYourBundle = (props: any) => {
                     </li>
                 </ul>
             </div>
-            <div className="container py-3 lg:py-5">
+            <div className="container pt-3 pb-0 lg:py-5">
                 <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
                 <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
-					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
+					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px]`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
+					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px]`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
 				</ul>
                 <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">

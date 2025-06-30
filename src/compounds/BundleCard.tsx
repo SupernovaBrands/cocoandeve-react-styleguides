@@ -191,6 +191,7 @@ const BundleCard = (props:any) => {
             open: true,
             handle: product.handle,
             selectedVariant: selectedVariant,
+            swatch: product.swatch
         });
     };
 
@@ -198,7 +199,7 @@ const BundleCard = (props:any) => {
         setShade(val)
     }
 
-    if (product.handle === 'masque-towelwrap') console.log('selectedVariant?.availableForSale', selectedVariant);
+    // if (product.handle === 'masque-towelwrap') console.log('selectedVariant?.availableForSale', product);
 
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
@@ -215,7 +216,7 @@ const BundleCard = (props:any) => {
             </a>
 
             { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
-            <div className={`pt-0 pb-[1rem] px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
+            <div className={`pt-0 pb-[.5rem] lg:pb-[1rem] px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
                 <div className="flex items-center justify-center relative">
                     {product.swatch && (
                         <SwatchOverlay
@@ -242,10 +243,10 @@ const BundleCard = (props:any) => {
                         {product.title}
                     </a>
                 </p>
-                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm text-underline inline-block my-[.75rem]">
+                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm text-underline underline-offset-[4px] inline-block my-[.75rem]">
                     View Details
                 </a>
-                <div className="flex justify-center">
+                <div className="flex justify-center text-sm lg:text-base">
                     <span className="text-gray-600 line-through">{formatMoney(product.priceInCent, false, store)}</span>
                     <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
                 </div>

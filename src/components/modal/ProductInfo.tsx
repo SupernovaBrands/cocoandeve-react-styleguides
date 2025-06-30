@@ -331,13 +331,44 @@ const ProductInfo = (props: any) => {
         const variantNodes = productShopify?.variants?.nodes;
         const defaultVariant = variantNodes?.sort((x, y) => y.availableForSale - x.availableForSale)[0];
         setSelectedVariant(defaultVariant || null);
+        // const productModel = buildProductCardModel(store, productShopify, null, null);
+        // if (productShopify) setProductModel(productModel);
     }, [productShopify]);
 
     // console.log('tab 0 selected', selected);
     // console.log('selectedVariant', selectedVariant);
 
     const disabled = selected0.includes(selectedVariant?.id) || selected0.length >= maxItem || selected1.includes(selectedVariant?.id) || selected1.length >= maxItem;
-    console.log('');
+    // console.log('');
+
+    const swatchLabel = useRef(null);
+    const spanEl = useRef(null);
+    const [swatchAvailable, setSwatchAvailable] = useState(true);
+
+    const changeSwatch = (e:any) => {
+        const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
+        spanEls.forEach((span:any) => {
+            span.classList.remove('border-primary');
+            span.classList.add('border-white');
+        });
+        e.target.classList.remove('border-white');
+        e.target.classList.add('border-primary');
+        const targetText = e.target.getAttribute('data-val');
+        swatchLabel.current.textContent = targetText;
+        const available = e.target.getAttribute('data-avail');
+        const id = e.target.getAttribute('data-id');
+        const selectedSwatch = productShopify?.variants?.nodes?.find((node:any) => node.id === id);
+        if (selectedSwatch) {
+            setSelectedVariant(selectedSwatch);
+        }
+        if (available === 'true') {
+            setSwatchAvailable(true);
+        } else {
+            setSwatchAvailable(false);
+        }
+    };
+
+    // console.log('data', data.swatch);
     
     return (
         <div className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-5'}`}>
@@ -448,8 +479,29 @@ const ProductInfo = (props: any) => {
                                 )}
                             </h4>
                             { tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p> }
-                            <Button disabled={disabled} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
-                                {disabled ? 'Added' : 'Add to Cart'}
+                            {data.swatch && (
+                                <>
+                                    <label className="block mb-[.625em]">
+                                        {data.swatch.style && <strong>Style: </strong>}
+                                        {data.swatch.shade && <strong>Shade: </strong>}
+                                        {data.swatch.tangleTamer && <strong>Type: </strong>}
+                                        {data.swatch.scent && <strong>Scent: </strong>}
+                                        {data.swatch.variant && <strong>Variant: </strong>}
+                                        <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
+                                    </label>
+                                    <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
+                                        {data.swatch.data.length > 0 && data.swatch.data.map((item:any, i:any) => (
+                                            <li key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
+                            )}
+                            <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
+                                {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
+                                {disabled ? 'Added' : ''}
+                                {!disabled && selectedVariant?.availableForSale ? 'Add to Cart' : ''}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
                                 { dataAccordion.length > 0 && <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
