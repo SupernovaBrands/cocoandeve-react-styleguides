@@ -146,7 +146,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[520px]`}>
 							{slides.map((slide, index) => (
 								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
-									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)}>
+									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)} aria-label="View product thumbnail">
 										{isDesktop && (
 											<picture>
 												<source srcSet={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} media="(min-width: 769px)" />
@@ -158,7 +158,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							))}
 							{videoStack?.video_thumbnail?.url && (
 								<div className={` max-w-[70px] flex flex-[0_0_70px] my-1 rounded relative`} key={slides.length}>
-									<button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)}>
+									<button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)} aria-label="View product thumbnail">
 										{isDesktop && (
 											<>
 												<picture>

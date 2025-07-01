@@ -33,7 +33,7 @@ const ProductBanner = (props: any) => {
                                 media="(min-width: 992px)" width="1362" height="1162"/>
                             <img
                                 src={props.src}
-                                className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414"/>
+                                className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414" alt={props.alt || "Product banner image"} />
                         </picture>
                     </>
                 )}

@@ -52,7 +52,7 @@ const InstagramCard = (props: any) => {
                 <source src={videoUrl} type="video/mp4" />
             </video>
             <p className="font-bold mb-25 mt-1 text-sm lg:text-base">{author}</p>
-            <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body"><u>{title}</u></a>
+            <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body underline">{title}</a>
         </div>
     );
 };

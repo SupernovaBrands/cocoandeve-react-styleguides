@@ -117,7 +117,7 @@ const ProductBannerSlider = (props) => {
 						media="(min-width: 992px)" width="1362" height="1162"/>
 					<img
 						src={props.src}
-						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+						className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} alt={props.alt || "Product image comparison"} />
 				</picture>
 				<div className="product-banner__slider--compareimg absolute w-full h-full overflow-hidden top-0">
 					<img src={props?.second_image?.url} className="block" loading="lazy" alt="product banner 1" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
