@@ -100,9 +100,9 @@ const BuildYourBundle = (props: any) => {
 					<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" loading="lazy" />
 				</picture>
                 <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
-                    <span className="bg-black inline-block badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
-                        {strapiData?.tag_text}
-                    </span>
+                    <div className="flex items-center bg-black inline-flex badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
+                        <span className="relative top-[1px]">{strapiData?.tag_text}</span>
+                    </div>
                     <h1 className="text-center mt-[1rem] mb-[.5rem]">{strapiData?.title_text}</h1>
                     <p dangerouslySetInnerHTML={{
 						__html: strapiData?.desc_text,
@@ -133,8 +133,8 @@ const BuildYourBundle = (props: any) => {
             <div className="container pt-3 pb-0 lg:py-5">
                 <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
                 <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
-					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px]`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px]`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
+					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
+					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
 				</ul>
                 <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">
