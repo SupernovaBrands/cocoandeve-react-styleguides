@@ -20,22 +20,6 @@ type imageProps = {
     height?: number
 }
 
-const useMediaQuery = (query) => {
-	const [matches, setMatches] = useState(false);
-  
-	useEffect(() => {
-	  const media = window.matchMedia(query);
-	  if (media.matches !== matches) {
-		setMatches(media.matches);
-	  }
-	  const listener = () => setMatches(media.matches);
-	  media.addListener(listener);
-	  return () => media.removeListener(listener);
-	}, [matches, query]);
-  
-	return matches;
-};
-
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
@@ -60,7 +44,8 @@ const ProductInfo = (props: any) => {
         tab1Selected,
         tab0Selected,
         activeTab,
-        buildProductCardModel
+        buildProductCardModel,
+        useMediaQuery,
     } = props;
     const isDesktop = useMediaQuery('(min-width: 769px)');
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -379,7 +364,7 @@ const ProductInfo = (props: any) => {
                 )}
                 {productStrapi && productShopify && (
                     <>
-                        <div className="w-full lg:w-1/2 lg:pr-2 row flex flex-wrap items-start md:-mx-g lg:justify-start">
+                        <div className="w-full lg:w-1/2 lg:pr-2 row flex flex-wrap items-start md:-mx-g lg:justify-start lg:block">
                             <div className="product-image-carousel__container w-full px-0">
                                 <div className="carousel aspect-ratio overflow-hidden">
                                     <Carousel.Wrapper emblaApi={emblaMainApi} className="">
@@ -501,7 +486,7 @@ const ProductInfo = (props: any) => {
                             <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
                                 {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                 {disabled ? 'Added' : ''}
-                                {!disabled && selectedVariant?.availableForSale ? 'Add to Cart' : ''}
+                                {!disabled && selectedVariant?.availableForSale ? 'Add' : ''}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
                                 { dataAccordion.length > 0 && <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }

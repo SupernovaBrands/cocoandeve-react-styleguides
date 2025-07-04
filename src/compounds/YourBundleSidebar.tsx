@@ -1,6 +1,7 @@
 import PercentageSmall from '~/images/icons/percentage-small.svg';
 import DeliverySmall from '~/images/icons/delivery-small.svg';
 import ChevronUp from '~/images/icons/chevron-up.svg';
+import SvgTrash from '~/images/icons/trash.svg';
 import { formatMoney, getCartId } from "~/modules/utils";
 import { Button } from "../components";
 import { useEffect, useState } from 'react';
@@ -20,18 +21,26 @@ const ItemCard = (props) => {
             <figure className="flex rounded-[1rem] bg-white p-[.5rem] w-full">
                 {placeholder && <div className="w-[3rem] h-[3rem] rounded-[.5rem] bg-gray-400" />}
                 {!placeholder && <img src={item.src} width={48} height={48} className="w-[3rem] h-[3rem] rounded-[.5rem]" />}
-                <figcaption className="ml-[.5rem]">
-                    <h4 className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title}</h4>
+                <figcaption className="ml-[.5rem] flex justify-between flex-1 items-center">
+                    <div>
+                        <h4 className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title}</h4>
+                        {!placeholder && (
+                            <>
+                                <div className="flex mb-[.25rem]">
+                                    <span className="line-through mr-1">{formatMoney(item.price, false, store)}</span>
+                                    <span className="">{formatMoney(reducedPrice, false, store)}</span>
+                                </div>
+                                
+                            </>
+                        )}
+                    </div>
                     {!placeholder && (
-                        <>
-                            <div className="flex mb-[.25rem]">
-                                <span className="line-through mr-1">{formatMoney(item.price, false, store)}</span>
-                                <span className="font-bold">{formatMoney(reducedPrice, false, store)}</span>
-                            </div>
-                            <span onClick={() => editItem(index)} className="text-underline text-primary font-bold cursor-pointer">Edit</span>
-                        </>
+                        <span onClick={() => editItem(index)} className="pr-1 text-underline text-primary font-bold cursor-pointer">
+                            <SvgTrash className="svg w-[1em]" />
+                        </span>
                     )}
                 </figcaption>
+                
             </figure>
         </li>
     )
@@ -118,8 +127,21 @@ const YourBundleSidebar = (props: any) => {
     const originalPrice = selected.filter(it => it.id !== null && it.price).reduce((n, { price }) => n + parseInt(price, 10), 0);
     const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
 
+    const btnInlineStyle = `
+    .btn--sidebar-atc {
+        display: none;
+    }
+    .btn--sidebar:not([disabled]):hover .btn--sidebar-label {
+        display: none;
+    }
+    .btn--sidebar:not([disabled]):hover .btn--sidebar-atc {
+        display: inline;
+    }
+    `
+
     return (
-        <aside className={`lg:ml-[25px] lg:sticky lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+        <aside className={`lg:ml-[25px] lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+            <style>{btnInlineStyle}</style>
             <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
@@ -148,11 +170,12 @@ const YourBundleSidebar = (props: any) => {
                             <ItemCard setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
-                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g font-normal lg:font-bold`}>
+                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
                         {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
                         {!processing && (
                             <>
-                                <span>{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                                <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                                <span className="btn--sidebar-atc">Add to Cart</span>
                                 <ul className="flex lg:hidden">
                                     <li>{reducedPrice > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
                                     <li><span className="">{formatMoney(reducedPrice, false, store)}</span></li>

@@ -18,6 +18,22 @@ const BuildYourBundle = (props: any) => {
     const [tab0Selected, setTab0Selected] = useState([]);
     const [tab1Selected, setTab1Selected] = useState([]);
 
+    const useMediaQuery = (query) => {
+        const [matches, setMatches] = useState(false);
+    
+        useEffect(() => {
+        const media = window.matchMedia(query);
+        if (media.matches !== matches) {
+            setMatches(media.matches);
+        }
+        const listener = () => setMatches(media.matches);
+        media.addListener(listener);
+        return () => media.removeListener(listener);
+        }, [matches, query]);
+    
+        return matches;
+    };
+
     const [productData, setProductData] = useState({
         open: false,
         handle: null,
@@ -41,6 +57,8 @@ const BuildYourBundle = (props: any) => {
         else if (num >= 5) setBundleDiscount(20);
     };
 
+    const isDesktop = useMediaQuery('(min-width: 769px)');
+
     const renderItems = (items) => {
         if (items.length >= MIN_ITEM) {
             setBundleSize(items.length >= MAX_ITEM ? MAX_ITEM : items.length);
@@ -49,6 +67,10 @@ const BuildYourBundle = (props: any) => {
             setBundleSize(MIN_ITEM);
             settingDiscount(MIN_ITEM);
         }
+        setTimeout(() => {
+            const sidebar = document.querySelector('.container--page');
+            if (sidebar && isDesktop) sidebar.scrollIntoView({behavior: 'smooth'});
+        }, 150);
     };
 
     useEffect(() => {
@@ -57,14 +79,10 @@ const BuildYourBundle = (props: any) => {
     }, [bundleSize]);
 
     useEffect(() => {
-        // console.log('hairSelected', hairSelected);
         renderItems(tab0Selected);
-        // window.scrollTo({ top: 0, behavior: 'smooth'});
     }, [tab0Selected]);
 
     useEffect(() => {
-        // window.scrollTo({ top: 0, behavior: 'smooth'});
-        // console.log('tanSelected', tanSelected);
         renderItems(tab1Selected);
     }, [tab1Selected]);
 
@@ -109,7 +127,7 @@ const BuildYourBundle = (props: any) => {
 					}} />
                 </figcaption>
             </figure>
-            <div className={`sticky top-header bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1]`}>
+            <div className={`sticky top-header bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`}>
                 <p className="text-xl font-bold mb-[.5rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
                     <li onClick={() => setBundleSize(2)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
@@ -130,7 +148,7 @@ const BuildYourBundle = (props: any) => {
                     </li>
                 </ul>
             </div>
-            <div className="container pt-3 pb-0 lg:py-5">
+            <div className="container--page container pt-3 pb-0 lg:py-5">
                 <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
                 <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
 					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
@@ -245,6 +263,7 @@ const BuildYourBundle = (props: any) => {
                     activeTab={activeTab}
                     maxItem={MAX_ITEM}
                     buildProductCardModel={buildProductCardModel}
+                    useMediaQuery={useMediaQuery}
                     handleClose={() => setProductData({...productData, ...{ open: false }})} />
             </Modal>
         </div>
