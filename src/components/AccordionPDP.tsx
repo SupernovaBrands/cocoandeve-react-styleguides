@@ -9,6 +9,10 @@ const AccordionPDP = (props: any) => {
 		text: string;
 		component: any;
 	};
+
+	const scrollToId = (id) => {
+		globalThis.document.getElementById(`accordion-${id}`)?.scrollIntoView({ behavior: 'smooth' })
+	}
 	const { data } = props;
 	const onClick = (id:any) => {
 		const afterClick = () => {
@@ -17,13 +21,16 @@ const AccordionPDP = (props: any) => {
 		}
 
 		props.onClick(id, afterClick);
+		setTimeout(() => scrollToId(id), 150)
 	}
+
+	const scrollToView = (id) => scrollToId(id);
 
 	return (
 		<div className="border-t-0 border-b-0 md:border-t md:border-b border-gray-500 accordion w-full accordion-flush" id="accordionSimple">
 			{data.map((d: Accordion, index: number) => (
-				<div key={d.id} className={`accordion-item border-t border-b border-gray-500`}>
-					<div id={`accordion-${d.id}`} className={`cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-3 md:pt-[1.875rem] ${index === 0 ?  'pb-3' : 'pb-3'}` : 'py-3 md:py-[1.875rem]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(d.id)}>
+				<div key={d.id} className={`accordion-item scroll-mt-[10px] border-t border-b border-gray-500`} onClick={() => scrollToView(d.id)}>
+					<div id={`accordion-${d.id}`} className={`scroll-mt-[10px] cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-3 md:pt-[1.875rem] ${index === 0 ?  'pb-3' : 'pb-3'}` : 'py-3 md:py-[1.875rem]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(d.id)}>
 						<strong className="text-body no-underline">{d.title}</strong>
 						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
 						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }

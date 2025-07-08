@@ -11,6 +11,8 @@ import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrow
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import AccordionPDP from "../AccordionPDP";
+import Modal from "~/components/Modal";
+import ShippingTable from "~/components/modal/ShippingTable";
 
 type imageProps = {
     id: number,
@@ -23,6 +25,7 @@ type imageProps = {
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
+        generalSetting,
         FragranceNotes,
         ProductSettings,
         checkHardcodedHowToUse, 
@@ -236,6 +239,8 @@ const ProductInfo = (props: any) => {
     const shippingTableStore = shippingTable?.shippingTableInfo?.shippingTableInfo[store] || {};
     const shippingTableStore2 = shippingTable[`shipping_table_${store.toUpperCase()}`] || {};
 
+    const shippingTable2 = shippingTable?.shippingTableInfo?.shippingTableInfo?.[store];
+
     const fragranceNotesObject = {
         id: 'fragrance-notes',
         title: 'Fragrance Notes',
@@ -354,9 +359,40 @@ const ProductInfo = (props: any) => {
     };
 
     // console.log('data', data.swatch);
+
+    const shippingEl = useRef(null);
+    const [isTableFull, setIsTableFull] = useState(true);
+    const [isTableOpen, setTableOpen] = useState(false);
+
+    useEffect(() => {
+        if (isTableOpen) document.body.classList.add('overflow-y-hidden');
+        else document.body.classList.remove('overflow-y-hidden');
+    }, [isTableOpen]);
+
+    const handleOpenTable = () => {
+        setTableOpen(false);
+    };
+
+    useEffect(() => {
+        console.log('generalSetting', generalSetting);
+        console.log('shipping el', shippingEl.current?.querySelectorAll('a[data-toggle="modal"]'));
+        if (productStrapi && productShopify && generalSetting && shippingEl && generalSetting.shippingLine && generalSetting.shippingLine.shippingLine && generalSetting.shippingLine.shippingLine[store]) {
+            const tableLinks = shippingEl.current?.querySelectorAll('a[data-toggle="modal"]');
+            console.log('tableLinks', tableLinks);
+            if (tableLinks) {
+                tableLinks.forEach((el) => {
+                    el.addEventListener('click', () => {
+                        console.log('tableLinks open');
+                        setTableOpen(true);
+                        setIsTableFull(el.classList.contains('shipping--modal-1'));
+                    });
+                });
+            }
+        }
+    } ,[generalSetting, productShopify, productStrapi])
     
     return (
-        <div className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-5'}`}>
+        <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-5'}`}>
             {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1rem] right-[1rem]`} />}
             <div className="flex flex-wrap justify-center">
                 {(!productShopify || !productStrapi) && (
@@ -495,7 +531,14 @@ const ProductInfo = (props: any) => {
                     </>
                 )}
             </div>
+            {shippingTableStore2 && generalSetting && generalSetting.shippingLine && shippingEl && (
+                <Modal contentClass="rounded-none w-full max-w-[500px] mx-auto" backdropClasses="overflow-y-auto" className="modal modal-dialog-centered" isOpen={isTableOpen} handleClose={() => handleOpenTable()}>
+                    {/* <ShippingTable shippingTable={shippingTable2} store={store} content={generalSetting.shippingLine} handleClose={handleOpenTable} /> */}
+                    <ShippingTable shippingTableStore={shippingTableStore} isTableFull={isTableFull} shippingTable={shippingTable2} store={store} content={generalSetting.shippingLine} handleClose={handleOpenTable} />
+                </Modal>
+            )}
         </div>
+        
     );
 };
 

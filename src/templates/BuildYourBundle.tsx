@@ -108,6 +108,7 @@ const BuildYourBundle = (props: any) => {
     }, [productData.open])
 
     const LoadingEl = () => <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3 my-3 lg:my-5" role="status" />;
+    const generalSetting = ProductSettings.find((setting:any) => setting.__component === 'product.general');
     
     return (
         <div>
@@ -167,7 +168,7 @@ const BuildYourBundle = (props: any) => {
                                                 className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
                                                 store={props.store}
                                                 itemSelected={tab0Selected}
-                                                generalSetting={null}
+                                                generalSetting={generalSetting}
                                                 setItemSelected={setTab0Selected}
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
@@ -207,7 +208,7 @@ const BuildYourBundle = (props: any) => {
                                                 key={`build-your-bundle--tan--${index}`}
                                                 product={item}
                                                 className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
-                                                generalSetting={null}
+                                                generalSetting={generalSetting}
                                                 collectionTemplate={true}
                                                 store={props.store}
                                                 itemSelected={tab1Selected}
@@ -242,6 +243,7 @@ const BuildYourBundle = (props: any) => {
             </div>
             <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
                 <ProductInfo
+                    generalSetting={generalSetting}
                     strapiAutomateHardcode={strapiAutomateHardcode}
                     checkHardcodedImages={checkHardcodedImages}
                     checkHardcodedTitles={checkHardcodedTitles}
