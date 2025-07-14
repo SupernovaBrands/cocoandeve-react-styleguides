@@ -114,9 +114,9 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
 			}
 
-			if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
-			}
+			// if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
+			// }
 
 			if ((store === 'uk' || store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
@@ -142,34 +142,34 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			}
+			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			// }
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
-			}
+			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
+			// }
 
 			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
 				item.featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
 
-			if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			}
+			// if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			// }
 			if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8fce65c9-c57e-4401-71cd-313acd286200/public';
 			}
 			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
-			if (['ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
-			}
-			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
-			}
+			// if (['ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
+			// }
+			// if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
+			// }
 
 			// if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
