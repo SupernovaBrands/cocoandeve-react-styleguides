@@ -19,8 +19,15 @@ const AddToCartButton = (props:any) => {
         }
     }, [itemSelected]);
 
+    const removeObjectWithId = (arr, idToRemove) => arr.filter((obj) => obj.id !== idToRemove);
+
     const onAddItem = () => {
-        if (selected.includes(selectedVariant.id)) return false;
+        if (selected.includes(selectedVariant.id)) {
+            const currentSelected = [...itemSelected];
+            const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
+            setItemSelected(newSelected);
+            return false;
+        }
         setItemSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
@@ -36,10 +43,11 @@ const AddToCartButton = (props:any) => {
         return false;
     }
 
-    const disabled = selected.includes(selectedVariant?.id) || selected.length >= maxItem || !available;
+    // const disabled = selected.includes(selectedVariant?.id) || selected.length >= maxItem || !available;
+    const disabled = !available;
 
     return (
-        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} -mt-25 !mb-0 h-5 lg:h-auto block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
+        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} ${selected?.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''} -mt-25 !mb-0 h-5 lg:h-auto block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
             {label && `${label}`}
             {!label && (selected.includes(selectedVariant?.id) ? 'Added' : DEFAULT_LABEL)}
