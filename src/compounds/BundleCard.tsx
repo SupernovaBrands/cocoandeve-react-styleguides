@@ -1,6 +1,6 @@
 import { Button } from "../components";
 import { useRef, useState, useEffect } from "react";
-import { formatMoney, getCookie } from "~/modules/utils";
+import { formatMoney, removeObjectWithId } from "~/modules/utils";
 
 const DEFAULT_LABEL = 'Add';
 
@@ -18,8 +18,6 @@ const AddToCartButton = (props:any) => {
             setSelected([]);
         }
     }, [itemSelected]);
-
-    const removeObjectWithId = (arr, idToRemove) => arr.filter((obj) => obj.id !== idToRemove);
 
     const onAddItem = () => {
         if (selected.includes(selectedVariant.id)) {

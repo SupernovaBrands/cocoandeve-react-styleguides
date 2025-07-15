@@ -103,8 +103,9 @@ const BuildYourBundle = (props: any) => {
     // console.log('render?', props.hairData.find((it) => it.handle === 'scalp-renewal-set'));
 
     useEffect(() => {
-        if (productData.open) document.body.classList.add('overflow-hidden');
-        else document.body.classList.remove('overflow-hidden');
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
     }, [productData.open])
 
     const LoadingEl = () => <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3 my-3 lg:my-5" role="status" />;
@@ -241,7 +242,7 @@ const BuildYourBundle = (props: any) => {
                     </div>
                 </TabContent>
             </div>
-            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-start" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
                 <ProductInfo
                     generalSetting={generalSetting}
                     strapiAutomateHardcode={strapiAutomateHardcode}

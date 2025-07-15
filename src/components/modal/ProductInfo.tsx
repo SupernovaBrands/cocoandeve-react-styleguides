@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "../../components";
 import Close from '~/images/icons/close.svg';
-import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
+import { EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import { useIsVisible } from "~/hooks/useIsVisible";
@@ -13,6 +13,7 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import AccordionPDP from "../AccordionPDP";
 import Modal from "~/components/Modal";
 import ShippingTable from "~/components/modal/ShippingTable";
+import { removeObjectWithId } from "~/modules/utils";
 
 type imageProps = {
     id: number,
@@ -32,7 +33,6 @@ const ProductInfo = (props: any) => {
         checkHardcodedFaq, 
         BenefitIngredient, 
         HowToUse, 
-        Faq, 
         checkHardcodedTagline, 
         checkHardcodedVariant, 
         data, 
@@ -91,10 +91,17 @@ const ProductInfo = (props: any) => {
 
     const onAddItem = () => {
         
-        if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) return false;
+        const itemSelected = activeTab === 0 ? tab0Selected : tab1Selected;
+        const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
+        if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) {
+            const currentSelected = [...itemSelected];
+            const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
+            setItemSelected(newSelected);
+            return false;
+        }
 
         const productModel = buildProductCardModel(store, productShopify, null, null);
-        const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
+        
         setItemSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
@@ -261,12 +268,12 @@ const ProductInfo = (props: any) => {
             text: '',
             component: <HowToUse howToUse={howToUse} tags={productShopify?.tags || []} handle={productStrapi?.handle}/>
         },
-        {
-            id: 'faq',
-            title: 'FAQ',
-            text: '',
-            component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
-        }
+        // {
+        //     id: 'faq',
+        //     title: 'FAQ',
+        //     text: '',
+        //     component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
+        // }
     ];
 
     if (fragrance_notes && fragrance_notes.trim() !== '') {
@@ -328,7 +335,8 @@ const ProductInfo = (props: any) => {
     // console.log('tab 0 selected', selected);
     // console.log('selectedVariant', selectedVariant);
 
-    const disabled = selected0.includes(selectedVariant?.id) || selected0.length >= maxItem || selected1.includes(selectedVariant?.id) || selected1.length >= maxItem;
+    // const disabled = selected0.includes(selectedVariant?.id) || selected0.length >= maxItem || selected1.includes(selectedVariant?.id) || selected1.length >= maxItem;
+    const disabled = selected0.length >= maxItem || selected1.length >= maxItem;
     // console.log('');
 
     const swatchLabel = useRef(null);
@@ -374,11 +382,11 @@ const ProductInfo = (props: any) => {
     };
 
     useEffect(() => {
-        console.log('generalSetting', generalSetting);
-        console.log('shipping el', shippingEl.current?.querySelectorAll('a[data-toggle="modal"]'));
+        // console.log('generalSetting', generalSetting);
+        // console.log('shipping el', shippingEl.current?.querySelectorAll('a[data-toggle="modal"]'));
         if (productStrapi && productShopify && generalSetting && shippingEl && generalSetting.shippingLine && generalSetting.shippingLine.shippingLine && generalSetting.shippingLine.shippingLine[store]) {
             const tableLinks = shippingEl.current?.querySelectorAll('a[data-toggle="modal"]');
-            console.log('tableLinks', tableLinks);
+            // console.log('tableLinks', tableLinks);
             if (tableLinks) {
                 tableLinks.forEach((el) => {
                     el.addEventListener('click', () => {
@@ -392,8 +400,8 @@ const ProductInfo = (props: any) => {
     } ,[generalSetting, productShopify, productStrapi])
     
     return (
-        <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-5'}`}>
-            {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1rem] right-[1rem]`} />}
+        <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-[50px] lg:pt-5'}`}>
+            {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1rem] right-[1rem]`} />}
             <div className="flex flex-wrap justify-center">
                 {(!productShopify || !productStrapi) && (
                     <span className="spinner-border spinner-border-sm text-body !w-3 !h-3 lg:!w-4 lg:!h-4" role="status" />
@@ -406,7 +414,7 @@ const ProductInfo = (props: any) => {
                                     <Carousel.Wrapper emblaApi={emblaMainApi} className="">
                                         <Carousel.Inner emblaRef={emblaMainRef} innerClass="px-g lg:px-0" className="w-full">
                                             {slides.map((slide, index) => (
-                                                <div className="flex-grow-0 flex-shrink-0 basis-[230px] w-[230px] pr-25 lg:pr-0 lg:basis-full lg:w-full" key={index}>
+                                                <div className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full" key={index}>
                                                     <picture className="flex items-center justify-center">
                                                         <source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
                                                         <img height="367" width="367" fetchPriority={index > -1 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
@@ -414,7 +422,7 @@ const ProductInfo = (props: any) => {
                                                 </div>
                                             ))}
                                             {videoStack?.video_url && (
-                                                <div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[230px] w-[230px] pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
+                                                <div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
                                                     <video width="320" height="240"  className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
                                                         <source src={videoStack?.video_url} type="video/mp4" />
                                                         Your browser does not support the video tag.
@@ -519,13 +527,13 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
+                            <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                 {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                 {disabled ? 'Added' : ''}
                                 {!disabled && selectedVariant?.availableForSale ? 'Add' : ''}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                { dataAccordion.length > 0 && <AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
+                                { dataAccordion.length > 0 && <AccordionPDP isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
                             </div>
                         </div>
                     </>
