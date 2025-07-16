@@ -48,6 +48,7 @@ const InstagramCard = (props: any) => {
     return (
         <div className={`text-left rounded ${classes}`} ref={targetRef as any}>
             <video preload="none" ref={videoRef} 
+                crossOrigin="anonymous"
                 className={`${index === 0 ? 'video--first' : ''} lazy-video w-full mb-0 lazy-video bg-shimmer rounded-[1.5rem] h-[226px] min-h-[226px] lg:rounded-[2rem] lg:h-[355px] lg:min-h-[355px] object-cover`} muted={true} playsInline={true} loop={true} autoPlay={false}>
                 <source src={videoUrl} type="video/mp4" />
                 {index === 0 && <track src="https://dev.cocoandeve.com/cdn/shop/files/captions.vtt" kind="subtitles" srcLang="en" label="English" default />}
