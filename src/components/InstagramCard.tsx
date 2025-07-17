@@ -51,7 +51,7 @@ const InstagramCard = (props: any) => {
                 crossOrigin="anonymous"
                 className={`${index === 0 ? 'video--first' : ''} lazy-video w-full mb-0 lazy-video bg-shimmer rounded-[1.5rem] h-[226px] min-h-[226px] lg:rounded-[2rem] lg:h-[355px] lg:min-h-[355px] object-cover`} muted={true} playsInline={true} loop={true} autoPlay={false}>
                 <source src={videoUrl} type="video/mp4" />
-                {index === 0 && <track src="https://dev.cocoandeve.com/cdn/shop/files/captions.vtt" kind="subtitles" srcLang="en" label="English" default />}
+                {index === 0 && <track src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/captions.vtt?v=1752637151" kind="subtitles" srcLang="en" label="English" default />}
             </video>
             <p className="font-bold mb-25 mt-1 text-sm lg:text-base">{author}</p>
             <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body underline">{title}</a>
