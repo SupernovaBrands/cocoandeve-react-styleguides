@@ -212,8 +212,8 @@ const YotpoReviewWidget = (props:any) => {
 
 		const revs = [];
 		res.reviews.forEach((r) => {
-			const newR = { ...r, content: decodeHtml(r.content) };
-			if (r.content.length > 350) {
+			const newR = { ...r, content: decodeHtml(r?.content) };
+			if (r?.content.length > 350) {
 				newR.shortContent = `${r.content.slice(0, 300)}...`;
 				newR.hideContent = true;
 			}
@@ -913,7 +913,7 @@ const YotpoReviewWidget = (props:any) => {
 													{decodeHtml(review.title)}
 												</h4>
 												<p className="mb-1">
-													{review.hideContent ? review.shortContent : review.content}
+													{review.hideContent ? review.shortContent : review?.content}
 													{review.shortContent && review.shortContent.length > 0 && (
 														<button
 															type="button"
@@ -1018,7 +1018,7 @@ const YotpoReviewWidget = (props:any) => {
 								<p className="text-sm ml-auto mb-1">
 									{formatDate(question.created_at, formattedDate)}
 								</p>
-								<p className="font-bold mb-1">{`Q: ${decodeHtml(question.content)}`}</p>
+								<p className="font-bold mb-1">{`Q: ${decodeHtml(question?.content)}`}</p>
 								<p className="text-sm">
 									{tStrings.yotpo.answer}
 									{' ('}
@@ -1139,7 +1139,7 @@ const YotpoReviewWidget = (props:any) => {
 										</div>
 										<div className="flex text-secondary" />
 										<h4 className="my-2 yotpo__modal-title">{decodeHtml(reviewModal.title)}</h4>
-										<p className="text-sm yotpo__modal-content">{reviewModal.content}</p>
+										<p className="text-sm yotpo__modal-content">{reviewModal?.content}</p>
 										<div className="flex justify-end items-center mt-3">
 											<p className="text-sm mr-0 mb-0">{tStrings.yotpo.reviewHelpful}</p>
 											<button type="button" className={`btn-unstyled text-sm flex items-center mx-1 ${votes[`reviews-${reviewModal.id}`] === 'up' && ''}`} onClick={() => { onVote('reviews', reviewModal.id, 'up'); }}>
