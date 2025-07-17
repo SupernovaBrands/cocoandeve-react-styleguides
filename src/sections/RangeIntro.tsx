@@ -34,7 +34,7 @@ const RangeIntro = (props: any) => {
                                     <div className={`text-left range-collapse__toggle btn-unstyled w-full flex justify-between font-bold text-body ${openIndex === index ? '' : ''}`} onClick={() => toggleCard(index)}>
                                         <span className='mb-1 text-lg cursor-pointer'>{item.title}</span>
                                     </div>
-                                    <div dangerouslySetInnerHTML={{ __html: item.content }} className={`transition-all overflow-hidden ${openIndex === index ? 'duration-1000 max-h-screen' : 'duration-75 max-h-0'}`} />
+                                    <div dangerouslySetInnerHTML={{ __html: item?.content }} className={`transition-all overflow-hidden ${openIndex === index ? 'duration-1000 max-h-screen' : 'duration-75 max-h-0'}`} />
                                 </div>
                             ))}
                         </div>
