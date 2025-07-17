@@ -48,8 +48,38 @@ const BundleVariantCard = (props) => {
         }
     }
 
+    const hardcodeImages = {
+        'bronzing-self-tanner-drops': {
+            au: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
+            },
+        },
+        'antioxidant-glow-cream': {
+            us: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+            },
+        },
+    };
+
+    const getHardcodedImage = (handle, store, selectedValue) => {
+        const isValid =
+            (handle === 'bronzing-self-tanner-drops' && store === 'au') ||
+            (handle === 'antioxidant-glow-cream' && store === 'us');
+
+        if (!isValid) return null;
+
+        const storeImages = hardcodeImages[handle]?.[store];
+        if (!storeImages) return null;
+
+        return selectedValue === 'medium' ? storeImages.medium : storeImages.default;
+    };
+
     const onChangeOption = (e) => {
         const [optionType, optionName] = bundleKey.split(':');
+        const selectedValue = e.target.value.toLowerCase();
+
         const bundleGroup = productShopify.variants.edges.filter((node) => {
             return node.node.selectedOptions.find((op) => op.name === optionType && op.value === optionName);
         });
@@ -59,26 +89,9 @@ const BundleVariantCard = (props) => {
 
         if (selectedVar) setCurrentVariant(selectedVar.node);
 
-        if (productShopify.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const selectedValue = e.target.value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
-        }
-
-        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
-            const selectedValue = e.target.value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
+        const customImage = getHardcodedImage(productShopify.handle, store, selectedValue);
+        if (customImage) {
+            setImageSrc(customImage);
         }
     };
 
@@ -89,19 +102,15 @@ const BundleVariantCard = (props) => {
     const bundleImg = slides[slides.length - 1];
     const urlSet = productStrapi?.bundle_handle || null;
 
-    useEffect(() =>{
-        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
-            const selectedValue = currentVariant.selectedOptions[1].value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
+    useEffect(() => {
+        const selectedValue = currentVariant.selectedOptions[1]?.value.toLowerCase();
+        const customImage = getHardcodedImage(productShopify.handle, store, selectedValue);
+
+        if (customImage) {
+            setImageSrc(customImage);
         } else {
             const src = bundleImg.src.replace('public', '320x');
-            setImageSrc(src)
+            setImageSrc(src);
         }
     }, [bundleImg]);
 
