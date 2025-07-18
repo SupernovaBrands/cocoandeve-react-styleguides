@@ -288,7 +288,7 @@ const Header = (props: any) => {
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
 									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
-									<span className="cart-drawer__count text-body absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
+									<span className="cart-drawer__count text-[#000] absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
 								</a>
 							</li>
 						</ul>
