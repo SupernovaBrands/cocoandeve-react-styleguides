@@ -42,6 +42,10 @@ const InstagramCard = (props: any) => {
     useEffect(() => {
         if (videoRef && videoRef.current) {
             videoRef.current.setAttribute('webkit-playsinline', 'true');
+            const tracksLength = videoRef.current?.textTracks.length || 0;
+            for (let i = 0; i < tracksLength; i ++) {
+                videoRef.current.textTracks[i].mode = 'hidden';
+            }
         }
     }, [])
 
