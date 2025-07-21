@@ -24,9 +24,9 @@ const Inner = ({ title, bannerData }) => {
                 <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')} className="w-full" alt="Collection Banner" width="375" height="200" fetchPriority="high"/>
             </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
-                <h1 className="hidden mb-0"
+                {/* <h1 className="hidden mb-0"
                     dangerouslySetInnerHTML={{ __html: title ?? 'Shop All' }}
-                />
+                /> */}
             </figcaption>
         </figure>
     );
@@ -419,7 +419,7 @@ const Collection = (props: any) => {
                     )}
                     <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0`}>
                         <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
-                            <h2 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
+                            <h1 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
@@ -445,7 +445,7 @@ const Collection = (props: any) => {
                                     {!isLoading && (
                                         <>
                                             <div className="w-1/2 lg:hidden px-hg">
-                                                <select onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
+                                                <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                     <option value="">Filter by</option>
                                                     {mobileDropdown.map((parent: any, index: number) => {
                                                         const html = parent.title.replace('d-lg-none', 'lg:hidden');
@@ -454,7 +454,7 @@ const Collection = (props: any) => {
                                                 </select>
                                             </div>
                                             <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
-                                                <select name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 bg-gray-400 border border-gray-400 pl-g lg:min-w-[154px] pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
+                                                <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 bg-gray-400 border border-gray-400 pl-g lg:min-w-[154px] pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
                                                     <option value="featured">Sort By</option>
                                                     <option value="best-selling">Best selling</option>
                                                     <option value="price-low-high">Price, low to high</option>
