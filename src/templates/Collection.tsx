@@ -37,7 +37,7 @@ const Banner = ({ title, bannerData }) => {
         <>
             {bannerData?.url === '' && <Inner title={title} bannerData={bannerData}  />}
             {bannerData?.url !== '' && (
-                <a href={bannerData?.url}>
+                <a href={bannerData?.url} title="Collection page top banner link">
                     <Inner title={title} bannerData={bannerData}  />
                 </a>
             )}
