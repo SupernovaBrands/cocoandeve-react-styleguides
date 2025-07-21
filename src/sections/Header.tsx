@@ -298,11 +298,11 @@ const Header = (props: any) => {
 								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<button aria-haspopup="true" className={`cart-drawer__count-button text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal before:absolute before:leading-[1] before:text-xs before:lg:text-[15px] before:h-full before:top-[50%] before:left-[50%] before:h-100 before:font-[Arial,_Helvetica,_sans-serif] before:-translate-x-[50%] before:-translate-y-[7.5%] before:lg:-translate-y-[12.5%]`}
+								<a aria-haspopup="true" className={`cart-drawer__count-button text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal before:absolute before:leading-[1] before:text-xs before:lg:text-[15px] before:h-full before:top-[50%] before:left-[50%] before:h-100 before:font-[Arial,_Helvetica,_sans-serif] before:-translate-x-[50%] before:-translate-y-[7.5%] before:lg:-translate-y-[12.5%]`}
 									data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
 									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
 									{/* <span aria-hidden="true" className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span> */}
-								</button>
+								</a>
 							</li>
 						</ul>
 						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl}/>
