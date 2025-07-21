@@ -60,7 +60,7 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
             <div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
                 <picture className="w-full h-full">
                     <source srcSet={sbp_img_lg?.url} media="(min-width: 992px)" />
-                    <img src={sbp_img?.url} className="w-full h-full object-cover object-top" />
+                    <img src={sbp_img?.url} className="w-full h-full object-cover object-top" alt={`Popup of ${sbp_heading}`} />
                 </picture>
             </div>
             <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4">
