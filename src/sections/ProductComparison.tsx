@@ -71,7 +71,7 @@ const ProductComparison = (props: any) => {
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
     const [comparison2, setComparison2] = useState(productsCompare[0]?.tableData || []);
     const [scrollProgress, setScrollProgress] = useState(0);
-    
+
     const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options});
     const [emblaRef2, emblaApi2] = useEmblaCarousel({ align: 'start', ...options2});
 
@@ -101,7 +101,7 @@ const ProductComparison = (props: any) => {
             })
         }
 	}, [emblaApi1, onScroll, emblaApi2, onScroll2]);
-    
+
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
             <div className={`w-full justify-center px-0 order-2 lg:order-0 ${wrapperClass ?? ''}`}>
@@ -123,7 +123,7 @@ const ProductComparison = (props: any) => {
                                 })}
                             </Carousel.Inner>
                         </Carousel.Wrapper>
-                        
+
                         {INIT_FINALS.length > 2 && (
                             <div className="px-g">
                                 <div className="carousel__progress bg-gray-400">
@@ -151,7 +151,7 @@ const ProductComparison = (props: any) => {
                                 <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
                                     <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={'lg:h-full'}>
                                         {INIT_FINALS.slice(1).map((data, index) => (
-                                            <ImageFigure 
+                                            <ImageFigure
                                                 key={`img-figure-dt-${index}`}
                                                 src={data.src}
                                                 srcSet={data.src}
@@ -185,6 +185,7 @@ const ProductComparison = (props: any) => {
                                                             <DotButton
                                                                 onClick={() => onClick3(index)}
                                                                 className="carousel__dot"
+                                                                aria-label={`Go to slide ${index + 1}`}
                                                             />
                                                         </li>
                                                     ))}
@@ -198,7 +199,7 @@ const ProductComparison = (props: any) => {
                     </div>
                 )}
             </div>
-        
+
         </>
 	);
 };
