@@ -509,15 +509,15 @@ const Collection = (props: any) => {
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                                return index === 2 ? (
+                                return index === 2 && ( showBundleCard || showQuizCard ) ? (
                                     <>
                                         <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
                                             {showBundleCard && (
                                                 <BannerCard
-                                                    className="relative mb-[1.5rem] lg:mb-0"
+                                                    className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}
                                                     key={`collection-bundle-card--${handle}--${index}`}
                                                     imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
-                                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c748b5af-b6fb-4d6b-f331-4e9bdbc1cd00/public"
+                                                    imgDt={`${showQuizCard ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5731d9ce-4cdd-4382-fde9-9ce800118700/public' : 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c748b5af-b6fb-4d6b-f331-4e9bdbc1cd00/public'}`}
                                                     title="Build Your Bundle"
                                                     description="Mix, match & save <br />your way!"
                                                     ctaLabel="Build Now"
@@ -590,14 +590,14 @@ const Collection = (props: any) => {
                                     </>
                                 )
                             })}
-                            {collProducts.length === 2 && (
+                            {collProducts.length === 2 && ( showBundleCard || showQuizCard ) && (
                                 <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
                                     {showBundleCard && (
                                         <BannerCard
-                                            className="relative mb-[1.5rem] lg:mb-0"
+                                            className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}
                                             key={`collection-bundle-card--${handle}--99`}
                                             imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
-                                            imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c748b5af-b6fb-4d6b-f331-4e9bdbc1cd00/public"
+                                            imgDt={`${showQuizCard ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5731d9ce-4cdd-4382-fde9-9ce800118700/public' : 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c748b5af-b6fb-4d6b-f331-4e9bdbc1cd00/public'}`}
                                             title="Build Your Bundle"
                                             description="Mix, match & save <br />your way!"
                                             ctaLabel="Build Now"
