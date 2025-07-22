@@ -26,6 +26,7 @@ const InputFormGroup: React.FC<InputFormGroupProps> = ({ id, type, placeholder, 
                 disabled={disabled}
                 onChange={onChange}
                 onKeyUp={onKeyUp}
+                aria-label={`${name}`}
             ></input>
         </div>
     );
