@@ -235,13 +235,13 @@ const SearchBox = (props: any) => {
 	}, [props.openSearchBox]);
 
 	return (
-		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-500 ease-in-out lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`} role="dialog" aria-label="Search box dialog">
-			<div className="border-b border-gray-400 w-full border-t bg-white">
+		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-500 ease-in-out lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`}>
+			<div className="border-b border-gray-400 w-full border-t">
 				<div className="bg-white px-g">
-					<div className="container relative flex items-center px-0 lg:px-g bg-white">
+					<div className="container relative flex items-center px-0 lg:px-g">
 						<Search className="absolute h2 mb-0 z-[1000] h-[1em]" />
-						<input type="text" placeholder={content?.search_input_placeholder} name="q" className="placeholder:text-body bg-white w-full py-2 pl-4 lg:pl-4 border-0 focus:outline-none text-body" aria-label="search" onChange={onChange} value={keyword} />
-						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-80' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
+						<input type="text" placeholder={content?.search_input_placeholder} name="q" className="w-full py-2 pl-4 lg:pl-4 border-0 focus:outline-none" aria-label="search" onChange={onChange} value={keyword} />
+						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-50' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
 						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button" aria-label="Close search">
 							<Close className="h-[1em]" onClick={() => props.onToggleSearchBox()} />
 						</span>

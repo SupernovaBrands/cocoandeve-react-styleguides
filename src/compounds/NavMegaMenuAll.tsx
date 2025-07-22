@@ -6,11 +6,11 @@ const NavMegaMenuAll = (props: any) => {
                 <div className="flex w-full">
                     <div className="max-w-[14.625em] mr-3 mb-3 px-0">
                         <>
-                            <a aria-label="Brief description of shop all on main mega menu" href={generalSetting.mega_menu_shop_all_url} className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full hover:no-underline hover:text-primary block">
+                            <a href={generalSetting.mega_menu_shop_all_url} className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full hover:no-underline hover:text-primary block">
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
                             {generalSetting.bg_image && (
-                                <a aria-label="Brief description of shop all on featured image mega menu" href={generalSetting.mega_menu_image_url}>
+                                <a href={generalSetting.mega_menu_image_url}>
                                     <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
                                 </a>
                             )}
