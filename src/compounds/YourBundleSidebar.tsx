@@ -23,7 +23,7 @@ const ItemCard = (props) => {
                 {!placeholder && <img src={item.src} width={48} height={48} className="w-[3rem] h-[3rem] rounded-[.5rem]" />}
                 <figcaption className="ml-[.5rem] flex justify-between flex-1 items-center">
                     <div>
-                        <h4 className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title}</h4>
+                        <p className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title}</p>
                         {!placeholder && (
                             <>
                                 <div className="flex mb-[.25rem]">
@@ -140,7 +140,7 @@ const YourBundleSidebar = (props: any) => {
     `
 
     return (
-        <aside className={`lg:ml-[25px] lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+        <div className={`lg:ml-[25px] lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
             <style>{btnInlineStyle}</style>
             <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
                 <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
@@ -199,7 +199,7 @@ const YourBundleSidebar = (props: any) => {
             <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">
                 {strapiData?.sidebar_tos}
             </p>
-        </aside>            
+        </div>            
     );
 };
 

@@ -209,7 +209,7 @@ const BundleCard = (props:any) => {
 
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
+            <a aria-label={`View detail of product ${product.title}`} href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
                     {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-g lg:!pt-hg" alt="" loading="lazy" />}
@@ -249,7 +249,7 @@ const BundleCard = (props:any) => {
                         {product.title}
                     </a>
                 </p>
-                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-sm lg:text-base text-underline underline-offset-[4px] inline-block my-[.75rem]">
+                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-body text-sm lg:text-base text-underline underline-offset-[4px] inline-block my-[.75rem]">
                     View Details
                 </a>
                 <div className="flex justify-center text-sm lg:text-base">
