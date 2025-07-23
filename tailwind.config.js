@@ -53,7 +53,7 @@ module.exports = {
       'yellow-dark': '#F4DF9C',
       'pink-light': '#FFF2F4',
       'pink-product': '#FFF4F6',
-      'suncare-blue': '#3880DE',
+      'suncare-blue': '#0C53B0',
       'skincare-orange': '#E85862',
       'skincare-orange-dark': '#E22B38',
       'skin-peach': '#F2D4D7',
