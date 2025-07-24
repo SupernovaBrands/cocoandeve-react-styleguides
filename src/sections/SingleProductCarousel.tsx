@@ -26,7 +26,8 @@ const options: EmblaOptionsType = {
 }
 
 const SingleProductCarousel = (props: any) => {
-    const { customProductTitle, waitlistPdpSetting, store, isStyleguide, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+    const { waitlistPdpSetting, store, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, products } = props;
+    console.log('SingleProductCarousel', data);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -36,11 +37,6 @@ const SingleProductCarousel = (props: any) => {
     });
 
     let productsData = data;
-
-    const [activeTab, setActiveTab] = useState('bestsellers');
-
-    const [customTitle, setCustomTitle] = useState(customProductTitle || null);
-
     //tab 1
     const [emblaRef2, emblaApi2] = useEmblaCarousel(options);
 
@@ -52,13 +48,13 @@ const SingleProductCarousel = (props: any) => {
     return (
         <>
         <div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 mb-4 lg:mb-5 lg:pb-4`}>
-            <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">Always wanted to try Coco & Eve?</h2>
-            <p className='mb-g mx-4 lg:mx-0 '>Enjoy FREE mini versions of some of our bestsellers—just pay shipping.</p>
+            <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{data?.heading}</h2>
+            <p className='mb-g mx-4 lg:mx-0 '>{data?.subheading}</p>
             <div className="row">
                 <div className="product__carousel-body pl-[.5625em] lg:px-0 text-center">
                     <Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
                         <Carousel.Inner emblaRef={emblaRef2}>
-                            {productsData && productsData.map((item: any, index: number) => {
+                            {products?.length > 0 && products.map((item: any, index: number) => {
                                 return <ProductCard
                                     key={`singleCarousel-${item.id}-${index}`}
                                     keyName={`singleCarousel-${item.id}-${index}`}
@@ -74,7 +70,6 @@ const SingleProductCarousel = (props: any) => {
                                     generalSetting={generalSetting}
                                     homePage={props.homePage || false}
                                     store={store}
-                                    customProductTitle={customTitle}
                                 />
                             })}
                         </Carousel.Inner>
