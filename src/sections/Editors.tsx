@@ -71,13 +71,13 @@ const Editors = (props) => {
             alt: 'Glamour',
             size: { width: 72, height: 17, widthLg: 110, heightLg: 26 }
         },
-        {
-            id: 5,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
-            alt: 'Refinery29',
-            size: { width: 62, height: 36, widthLg: 68, heightLg: 40 }
-        },
+        // {
+        //     id: 5,
+        //     srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
+        //     src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
+        //     alt: 'Refinery29',
+        //     size: { width: 62, height: 36, widthLg: 68, heightLg: 40 }
+        // },
         {
             id: 6,
             srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21469fa-4de6-48d2-d1ba-ed4afbb5ae00/public',
