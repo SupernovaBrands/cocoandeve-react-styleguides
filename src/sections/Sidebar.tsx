@@ -20,8 +20,8 @@ const Sidebar = ({data}) => {
 	// const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
 	// console.log('sidebar data', data);
 	return (
-		<aside className="blog-post-grid__sidebar lg:sticky w-full my-4 lg:mt-0 lg:mb-auto self-end flex lg:block flex-wrap">
-			<section className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto lg:rounded">
+		<section className="blog-post-grid__sidebar lg:sticky w-full my-4 lg:mt-0 lg:mb-auto self-end flex lg:block flex-wrap">
+			<div className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto lg:rounded">
 				<h2 className="mb-2 lg:mb-3 text-center lg:text-left block font-bold text-xl lg:text-2xl">Popular Reads</h2>
 				<ul className="overflow-scroll no-scrollbar flex flex-nowrap px-g lg:flex-wrap lg:overflow-hidden lg:px-0">
 					{data.map((item: any, index) => 
@@ -55,8 +55,8 @@ const Sidebar = ({data}) => {
 						</ol>
 					</Carousel.Navigation>
 				</Carousel.Wrapper> */}
-			</section>
-		</aside>
+			</div>
+		</section>
 	);
 };
 
