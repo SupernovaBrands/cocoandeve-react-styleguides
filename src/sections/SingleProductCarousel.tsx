@@ -27,7 +27,6 @@ const options: EmblaOptionsType = {
 
 const SingleProductCarousel = (props: any) => {
     const { waitlistPdpSetting, store, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, products } = props;
-    console.log('SingleProductCarousel', data);
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -44,6 +43,18 @@ const SingleProductCarousel = (props: any) => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
+
+    const onAdd = async (variant:any) => {
+        console.log(variant);
+        const addLine = await addToCart({
+            id: variant.id,
+            quantity: 1,
+            attributes: [
+                { key: '_free_sample', value: "yes" },
+            ],
+            bubble: true,
+        });
+    }
 
     return (
         <>
@@ -64,7 +75,7 @@ const SingleProductCarousel = (props: any) => {
                                     setWaitlistData={setWaitlistData}
                                     smSingleStar={false}
                                     carousel={true}
-                                    addToCart={addToCart}
+                                    addToCart={() => onAdd(item?.variants?.nodes?.[0])}
                                     trackEvent={trackEvent}
                                     preOrders={preOrders}
                                     generalSetting={generalSetting}
