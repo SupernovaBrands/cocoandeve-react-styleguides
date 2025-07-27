@@ -27,7 +27,6 @@ const options: EmblaOptionsType = {
 
 const PageReviews = (props: any) => {
     const { store, reviewsData } = props;
-    console.log('reviews1', reviewsData);
 
     const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options});
 
