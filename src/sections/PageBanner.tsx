@@ -1,5 +1,4 @@
 const PageBanner = ({ content }) => {
-    console.log('PageBanner', content);
     return (
         <>
             <figure className="w-full relative items-center px-0 mb-0">
