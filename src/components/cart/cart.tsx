@@ -76,7 +76,6 @@ const Cart: React.FC<Props> = (props) => {
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
 	const [invalidGiftsToDelete, setInvalidGiftsToDelete] = useState([]);
-	const [manualGwpAmt, setManualGwpAmt] = useState(0);
 
 	const handleOpenModalKlarna = () => {
 		setIsModalKlarnaOpen(false);
@@ -224,22 +223,6 @@ const Cart: React.FC<Props> = (props) => {
 
 	// console.log('cart.tsx', cart.items);
 
-	useEffect(() => {
-		setTimeout(() => {
-			const selected = JSON.parse(getCookie('manualGwpSelected') || '[]');
-			if (manualGwpSetting && manualGwpSetting.enabled && selected.length > 0) {
-				const validManuals = cart.items.filter((free:any) => free.attributes.filter((attr:any) => attr.value === 'manual_gwp') && selected.includes(getId(free.merchandise.id)));
-				if (validManuals.length > 0) {
-					let gwpAmount = 0;
-					validManuals.forEach((item) => gwpAmount += item.originalPrice);
-					setManualGwpAmt(gwpAmount);
-				} else {
-					setManualGwpAmt(0);
-				}
-			}
-		}, 150);
-	}, [cart.items, manualGwpSetting]);
-
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -364,10 +347,10 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{!combineDiscount && (cart.discountLine + manualGwpAmt) > 0 && !isSwellDiscCode && (
+									{!combineDiscount && (cart.discountLine) > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine + manualGwpAmt, false, store)}`}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
 										</>
 									)}
 
