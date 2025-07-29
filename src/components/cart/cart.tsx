@@ -209,21 +209,26 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onToggleManualGwp = async (id:any) => {
+		// console.log('toggle manual gwp');
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
 	// console.log('cart.tsx', cart.items);
 
 	useEffect(() => {
-		const selected = JSON.parse(getCookie('manualGwpSelected') || '[]');
-		if (manualGwpSetting && manualGwpSetting.enabled && selected.length > 0) {
-			const validManuals = cart.items.filter((free:any) => free.attributes.filter((attr:any) => attr.value === 'manual_gwp') && selected.includes(getId(free.merchandise.id)));
-			if (validManuals.length > 0) {
-				let gwpAmount = 0;
-				validManuals.forEach((item) => gwpAmount += item.originalPrice);
-				setManualGwpAmt(gwpAmount);
+		setTimeout(() => {
+			const selected = JSON.parse(getCookie('manualGwpSelected') || '[]');
+			if (manualGwpSetting && manualGwpSetting.enabled && selected.length > 0) {
+				const validManuals = cart.items.filter((free:any) => free.attributes.filter((attr:any) => attr.value === 'manual_gwp') && selected.includes(getId(free.merchandise.id)));
+				if (validManuals.length > 0) {
+					let gwpAmount = 0;
+					validManuals.forEach((item) => gwpAmount += item.originalPrice);
+					setManualGwpAmt(gwpAmount);
+				} else {
+					setManualGwpAmt(0);
+				}
 			}
-		}
+		}, 150);
 	}, [cart.items, manualGwpSetting]);
 
 	return (
