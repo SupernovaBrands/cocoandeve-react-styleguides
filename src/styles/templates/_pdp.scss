@@ -148,6 +148,11 @@
 
 .product__banner {
     @apply mb-4 lg:mb-5;
+    
+    &--hair-concerns-solutions {
+        @apply mb-0 lg:mb-5;
+    }
+
 
     &-content div:last-child {
         @apply mb-0
