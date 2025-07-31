@@ -328,7 +328,7 @@ const HairSolution = (props: any) => {
                 </ProductBanner>
             </section>
 
-            <section className="my-3 lg:my-5 container px-0">
+            <section className="my-3 lg:my-5 container px-0 overflow-x-hidden">
                 <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">Real Results</h5>
                 <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3">
                     <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
