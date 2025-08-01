@@ -340,8 +340,8 @@ const HairSolution = (props: any) => {
                     <a href="/collections/all" className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">See All</a>
                 </div>
                 <TabContent className="" active={resultTab === 0}>
-                    <Carousel.Wrapper emblaApi={emblaApi1} className="-mx-[.25rem]">
-						<Carousel.Inner innerClass="px-g" emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
+                    <Carousel.Wrapper emblaApi={emblaApi1} className="-mx-[.25rem] carousel__products">
+						<Carousel.Inner innerClass="px-g" emblaRef={emblaRef1} className="lg:-mx-g">
 							{VIDEOS.map((data: any, i: number) => (
 								<VideoUpsellCard
 									key={`all-${data.item_id}-${i}`}
@@ -355,6 +355,25 @@ const HairSolution = (props: any) => {
 								/>
 							))}
 						</Carousel.Inner>
+                        <Carousel.Navigation>
+                            <PrevButton
+                                onClick={() => emblaApi1.scrollPrev() }
+                                className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
+                            >
+                                <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                    <ChevronPrev className="svg--current-color" />
+                                </span>
+                            </PrevButton>
+                                
+                            <NextButton
+                                onClick={() => emblaApi1.scrollNext() }
+                                className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
+                            >
+                                <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                    <ChevronNext className="svg--current-color" />
+                                </span>
+                            </NextButton>
+                        </Carousel.Navigation>
 					</Carousel.Wrapper>
                 </TabContent>
                 <TabContent className="" active={resultTab === 1}>Result tab 2</TabContent>
