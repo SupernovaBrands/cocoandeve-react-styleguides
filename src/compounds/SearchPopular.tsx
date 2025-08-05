@@ -24,9 +24,9 @@ const PopularProducts = (props: any) => {
 								// if (store === 'au' && handle === 'tan-masters-kit') {
 								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7a07e54-75c2-4834-3bfd-00bd9188a300/public';
 								// }
-								if (store === 'eu' && handle === 'hair-revival-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e4131b1-37c9-4e58-7e23-d56aac5e9600/public';
-								}
+								// if (store === 'eu' && handle === 'hair-revival-set') {
+								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e4131b1-37c9-4e58-7e23-d56aac5e9600/public';
+								// }
 								// if (store === 'int' && handle === 'hair-revival-set') {
 								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f8c59cc-00b2-4c2e-29bb-7a84435cdd00/public';
 								// }
