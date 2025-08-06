@@ -117,7 +117,7 @@ const BuildYourBundle = (props: any) => {
             <figure className="flex flex-wrap relative">
                 <picture>
 					<source media="(min-width: 992px)" srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5fed3d6a-8abb-49d7-e18c-d5fef586d800/public" />
-					<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" loading="lazy" />
+					<img alt={`Banner of ${strapiData?.title_text}`} src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30c9ade1-7c86-47bb-0203-80df6c521d00/828x" className="block w-full" loading="lazy" />
 				</picture>
                 <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
                     <div className="flex items-center bg-black inline-flex badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
@@ -179,7 +179,7 @@ const BuildYourBundle = (props: any) => {
                                         )}
                                     </div>
                                 </div>
-                                <div className="w-full lg:w-[calc(25%+30px)]">
+                                <section className="w-full lg:w-[calc(25%+30px)]">
                                     <YourBundleSidebar
                                         store={props.store}
                                         setItemSelected={setTab0Selected}
@@ -192,7 +192,7 @@ const BuildYourBundle = (props: any) => {
                                         maxItem={MAX_ITEM}
                                         minItem={MIN_ITEM}
                                     />
-                                </div>
+                                </section>
                             </>
                         )}
                         {props.hairData?.length <= 0 && <LoadingEl />}
