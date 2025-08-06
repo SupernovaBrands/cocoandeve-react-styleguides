@@ -1,5 +1,17 @@
 .product-card {
 
+
+	&__overlay-box {
+		display: none;
+	}
+
+	@screen lg {
+		&__overlay:hover .product-card__overlay-box {
+			display: block;
+			visibility: visible;
+		}
+	}
+
 	.product-title__text {
 		@apply mx-0 lg:mb-25 mb-25 lg:mt-0 min-h-[40px];
 	}
@@ -94,5 +106,5 @@
 			}
 		}
 
-	} 
+	}
 }

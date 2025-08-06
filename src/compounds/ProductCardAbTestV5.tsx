@@ -15,7 +15,7 @@ const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store, 
         <>
             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-nowrap text-left py-[.5em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'} `}>
                 { !props.addingItem &&  parse(label ? label : DEFAULT_LABEL) }
-                { props.addingItem && <span className="spinner-border spinner-border-sm text-white !w-[15px] !h-[15px] m-auto" role="status" /> }
+                { props.addingItem && <span className="spinner-border spinner-border-sm text-primary !w-[15px] !h-[15px] m-auto" role="status" /> }
             </span>
             {<span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} lg:hidden product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.5em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
                 {props.comparePrice && (<span className="line-through mr-25 font-normal">
@@ -44,7 +44,7 @@ const WaitlistButton = (props:any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto text-primary font-semibold text-primary border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} !h-[44px] !min-h-[44px] flex flex-row btn-sm md:text-base btn-primary text-white rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto text-primary font-semibold text-primary border ${props.sustainability ? '' : 'lg:border-0'} !h-[44px] !min-h-[44px] flex flex-row btn-sm md:text-base bg-white border-primary text-body rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
@@ -70,7 +70,7 @@ const LaunchButton = (props: any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary text-white text-primary font-semibold rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] border ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base bg-white border-primary text-body font-semibold rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
@@ -122,7 +122,7 @@ const AddToCartButton = (props:any) => {
     }, [selectedVariant, preOrders]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary text-white font-semibold text-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] product-card-btn border flex flex-row btn-sm md:text-base bg-white border-primary text-body font-semibold text-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }}/>
         </Button>
     );
@@ -251,7 +251,7 @@ const isKit = (title:string) => {
     return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
-const ProductCardAbTestV4 = (props:any) => {
+const ProductCardAbTestV5 = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
@@ -435,4 +435,4 @@ const ProductCardAbTestV4 = (props:any) => {
     );
 };
 
-export default ProductCardAbTestV4;
+export default ProductCardAbTestV5;
