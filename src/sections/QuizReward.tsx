@@ -9,7 +9,7 @@ const QuizReward = (props: any) => {
             <section className="container px-0 lg:px-g pt-3 lg:pt-0 pb-2 lg:pb-0 lg:my-5">
                 <BeautyConfidence parentClass="w-full px-g mb-0 lg:px-0 block" />
             </section>
-            <section className="container text-center mt-4 lg:mt-0 mb-1 lg:mb-0">
+            <section className="container text-center mt-4 lg:mt-0 mb-1 lg:mb-5">
                 <p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
                 <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                     <BannerCard
