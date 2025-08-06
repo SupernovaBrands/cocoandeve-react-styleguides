@@ -8,7 +8,6 @@ import ProductCardAbTestV4 from "~/compounds/ProductCardAbTestV4";
 import ProductCardAbTestV3 from "~/compounds/ProductCardAbTestV3";
 import ProductCardAbTestV5 from "~/compounds/ProductCardAbTestV5";
 
-import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -772,15 +771,37 @@ const Collection = (props: any) => {
                                     </>
                                 )
                             })}
-                            {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
-                                <ProductCardQuiz
-                                    className={`relative w-full md:w-1/3 px-hg mb-4 ${abtestProductCard === 'origin' ? 'lg:mb-5 lg:px-g' : 'lg:px-hg'} lg:h-full`}
-                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                    key={`collection-quiz-card--${handle}--99`}
-                                    quizSetting={collectionSettings.quizSetting}
-                                    store={store}
-                                    />
+                            {collProducts.length === 2 && ( showBundleCard || showQuizCard ) && (
+                                <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
+                                    {showBundleCard && (
+                                        <BannerCard
+                                            className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}
+                                            key={`collection-bundle-card--${handle}--99`}
+                                            imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
+                                            imgDt={`${showQuizCard ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5731d9ce-4cdd-4382-fde9-9ce800118700/public' : 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c748b5af-b6fb-4d6b-f331-4e9bdbc1cd00/public'}`}
+                                            title="Build Your Bundle"
+                                            description="Mix, match & save <br />your way!"
+                                            ctaLabel="Build Now"
+                                            url="/pages/build-your-own-bundle"
+                                            store={store}
+                                            imgAlt="Illustration of a person build items to find their perfect bundle"
+                                        />
+                                    )}
+                                    {showQuizCard && (
+                                        <BannerCard
+                                            className="relative"
+                                            imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                            imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                            key={`collection-quiz-card--${handle}--99`}
+                                            store={store}
+                                            description={collectionSettings.quizSetting?.quiz_title}
+                                            title="Tan Quiz"
+                                            ctaLabel="Take the Quiz"
+                                            url="/pages/self-tan-quiz"
+                                            imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
+                                        />
+                                    )}
+                                </div>
                             )}
 
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
