@@ -96,7 +96,22 @@ const HairSolution = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
-    // console.log('collectionProducts', data.product);
+    
+    const RESULT_VIDEOS_ALL = [{
+        title: 'Like A Virgin',
+        data: data.result?.rows?.filter((row) => row.checked1) || [],
+    }, {
+        title: 'Pro Youth',
+        data: data.result?.rows?.filter((row) => row.checked2) || [],
+    }, {
+        title: 'Sweet Repair',
+        data: data.result?.rows?.filter((row) => row.checked3) || [],
+    }, {
+        title: 'Boost Therapy',
+        data: data.result?.rows?.filter((row) => row.checked4) || [],
+    }]
+
+    // console.log('RESULT_VIDEOS_ALL', RESULT_VIDEOS_ALL);
 
     return (
         <>
@@ -269,74 +284,83 @@ const HairSolution = (props: any) => {
 
             {data.compare && (
                 <section className="lg:mb-5">
-                    <ProductBanner
-                        background="bg-pink-light"
-                        reverse={false}
-                        contentData={{
-                            first_image: data.compare?.image_right,
-                            second_image: data.compare?.image_left
-                        }}
-                        src={data.compare?.image_right?.url}
-                    >
-                        <h4 className="h1 mb-2 lg:mb-4">{data.compare.title}</h4>
-                        <p className="font-bold mb-[.25rem]">{data.compare.subtitle}</p>
-                        <p>{data.compare.description}</p>
-                    </ProductBanner>
+                    {!data.compare?.image_right?.url && (
+                        <div className="flex justify-center w-full">
+							<div className="spinner-border" role="status" aria-hidden="true" />
+						</div>
+                    )}
+                    {data.compare?.image_right?.url && (
+                        <ProductBanner
+                            background="bg-pink-light"
+                            reverse={false}
+                            contentData={{
+                                first_image: data.compare?.image_right,
+                                second_image: data.compare?.image_left
+                            }}
+                            src={data.compare?.image_right?.url}
+                        >
+                            <h4 className="h1 mb-2 lg:mb-4">{data.compare.title}</h4>
+                            <p className="font-bold mb-[.25rem]">{data.compare.subtitle}</p>
+                            <p>{data.compare.description}</p>
+                        </ProductBanner>
+                    )}
                 </section>
             )}
 
-            <section className="my-3 lg:my-5 container px-0">
-                <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">Real Results</h5>
-                <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
-                    <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
-                        <li><TabNav className={`${resultTab === 0 ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title='Like A Virgin' active={resultTab === 0} onNavChange={() => setResultTab(0)} /></li>
-                        <li><TabNav className={`${resultTab === 1 ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title='Pro Youth' active={resultTab === 1} onNavChange={() => setResultTab(1)} /></li>
-                        <li><TabNav className={`${resultTab === 2 ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title='Sweet Repair' active={resultTab === 2} onNavChange={() => setResultTab(2)} /></li>
-                        <li><TabNav className={`${resultTab === 3 ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title='Boost Therapy' active={resultTab === 3} onNavChange={() => setResultTab(3)} /></li>
-                    </ul>
-                    <a href="/collections/all" className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">See All</a>
-                </div>
-                <TabContent className="lg:px-g" active={resultTab === 0}>
-                    <Carousel.Wrapper emblaApi={resultCarousels[`emblaResult0`][1]} className="carousel__products">
-						<Carousel.Inner innerClass="px-g" emblaRef={resultCarousels[`emblaResult0`][0]} className="lg:-mx-g">
-							{VIDEOS.map((data: any, i: number) => (
-								<VideoUpsellCard
-									key={`all-${data.item_id}-${i}`}
-									classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[83.5%] basis-[83.5%] lg:w-1/4 lg:basis-1/4 mb-0 px-[.25rem]"
-									videoUrl={data.review_url}
-									author={data.username}
-									product={data.product_link}
-									url={data.url}
-									index={i}
-									title={data.title}
-								/>
-							))}
-						</Carousel.Inner>
-                        <Carousel.Navigation>
-                            <PrevButton
-                                onClick={() => resultCarousels[`emblaResult0`][1].scrollPrev() }
-                                className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-ml-2"
-                            >
-                                <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
-                                    <ChevronPrev className="svg--current-color" />
-                                </span>
-                            </PrevButton>
+            {data.result && data.compare?.image_right?.url && (
+                <section className="my-3 lg:my-5 container px-0">
+                    <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
+                    <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
+                        <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
+                            {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
+                            ))}
+                        </ul>
+                        <a href={data.result.cta_url} className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">{data.result.cta_label}</a>
+                    </div>
+                    {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
+                        <TabContent key={`result-tab-content-${index}`} className="lg:px-g" active={resultTab === index}>
+                            <Carousel.Wrapper emblaApi={resultCarousels[`emblaResult${index}`][1]} className="carousel__products">
+                                <Carousel.Inner innerClass="px-g" emblaRef={resultCarousels[`emblaResult${index}`][0]} className="lg:-mx-g">
+                                    {row.data.length > 0 && row.data.map((data: any, i: number) => (
+                                        <VideoUpsellCard
+                                            key={`all-${data.item_id}-${i}`}
+                                            classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[83.5%] basis-[83.5%] lg:w-1/4 lg:basis-1/4 mb-0 px-[.25rem]"
+                                            videoUrl={data.video_url}
+                                            author={data.title}
+                                            url={data.url}
+                                            index={i}
+                                            product={data.product}
+                                        />
+                                    ))}
+                                </Carousel.Inner>
+                                {row.data.length > 4 && (
+                                    <Carousel.Navigation>
+                                        <PrevButton
+                                            onClick={() => resultCarousels[`emblaResult${index}`][1].scrollPrev() }
+                                            className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-ml-2"
+                                        >
+                                            <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                                <ChevronPrev className="svg--current-color" />
+                                            </span>
+                                        </PrevButton>
+                                            
+                                        <NextButton
+                                            onClick={() => resultCarousels[`emblaResult${index}`][1].scrollNext() }
+                                            className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-mr-2"
+                                        >
+                                            <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                                <ChevronNext className="svg--current-color" />
+                                            </span>
+                                        </NextButton>
+                                    </Carousel.Navigation>
+                                )}
                                 
-                            <NextButton
-                                onClick={() => resultCarousels[`emblaResult0`][1].scrollNext() }
-                                className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-mr-2"
-                            >
-                                <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
-                                    <ChevronNext className="svg--current-color" />
-                                </span>
-                            </NextButton>
-                        </Carousel.Navigation>
-					</Carousel.Wrapper>
-                </TabContent>
-                <TabContent className="lg:px-g" active={resultTab === 1}>Result tab 2</TabContent>
-                <TabContent className="lg:px-g" active={resultTab === 2}>Result tab 3</TabContent>
-                <TabContent className="lg:px-g" active={resultTab === 3}>Result tab 4</TabContent>
-            </section>
+                            </Carousel.Wrapper>
+                        </TabContent>
+                    ))}
+                </section>
+            )}
             <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                 <ModalWaitlist waitlistPdp={waitlistPdp} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         	</Modal>
