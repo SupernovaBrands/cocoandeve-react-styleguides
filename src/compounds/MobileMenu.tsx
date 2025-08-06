@@ -1,10 +1,27 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
+import IconHair from '~/images/m-hair.jpg';
+import IconBeauty from '~/images/m-beauty.png';
+import IconBody from '~/images/m-body.jpg';
+import IconSkin from '~/images/m-skin.jpg';
+import IconTan from '~/images/m-tan.jpg';
+import IconValueSet from '~/images/m-value-set.jpg';
+
+const Icons = {
+	"Hair": IconHair,
+	"Body": IconBody,
+	"Skin": IconSkin,
+	"Value Sets": IconValueSet,
+	"Tan & SPF": IconTan,
+	"Tan": IconTan,
+}
+
 const defMenuState = {
 	1: false,
 	2: false,
@@ -58,6 +75,15 @@ const MobileMenu = (props: any) => {
 		}, 200);
 	}, [menuStates]);
 
+	const menuBannerBundle = {
+		cta: 'Build',
+		line1: '<strong>Build Your Bundle</strong>',
+		line2: 'Mix, match & save your way!',
+		icon: 'hearth',
+		type: 'link-to',
+		url: "/pages/build-your-own-bundle"
+	}
+
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
@@ -71,33 +97,41 @@ const MobileMenu = (props: any) => {
 					</button>
 				</li>
 				{menuBannerCode && menuBannerCode.enable && (
-					<MenuBanner content={menuBannerCode} theme='secondary-light' />
+					<MenuBanner content={menuBannerCode} theme='secondary-light' icon="percentage"/>
 				)}
 				{menuBannerQuiz && menuBannerQuiz.enable && (
-					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
+					<MenuBanner content={menuBannerQuiz} theme='pink-light' icon="sun"/>
 				)}
 				{mainMenu?.map((menu, i) => {
 					const hasRow = menu.rows;
 					const m_title = menu.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+					const icon = Icons[menu.title];
 					return menu.handle !== '/collections/all' && (
 						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
-							<button id={m_title} className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent" aria-controls={menu.title}
+							<button id={m_title} className="flex w-full relative p-0 items-center m-0 py-1 border-b border-b-transparent" aria-controls={menu.title}
 								onClick={() => {
 									const newStates = {...defMenuState};
 									newStates[i] = true;
 									setMenuStates(newStates);
 								}}>
+								{ icon && (
+									<picture className="rounded-[.5em] w-[80px] h-[40px] mr-1">
+										{/* @ts-ignore */}
+										<Image src={icon} alt={`Main Menu ${menu.title}`} className="block w-100 object-cover rounded-[.5em] w-[80px] h-[40px]" />
+									</picture>
+								)}
+
 								{(menu.rows && menu.rows.length === 0 && menu.title.toLowerCase() !== 'sale') && (
-									<a href={menu.handle} className="w-full m-0 text-body flex s">{menu.title}</a>
+									<a href={menu.handle} className="w-full m-0 text-body flex">{menu.title}</a>
 								)}
 								{menu.title.toLowerCase() === 'sale' && (
-									<a href={menu.handle} className="w-full m-0 text-body flex s">{menu.title}</a>
+									<a href={menu.handle} className="w-full m-0 text-body flex">{menu.title}</a>
 								)}
 								{menu.rows && menu.rows.length > 0 && menu.title.toLowerCase() !== 'sale' && (
 									<h4 className="m-0 font-normal">{menu.title}</h4>
 								)}
 								{menu.rows && menu.rows.length > 0 && (
-									<ChevronNext className="h-[1em] text-xs mb-25" onClick={() => {
+									<ChevronNext className="h-[1em] text-xs mb-25 ml-[auto]" onClick={() => {
 										const newStates = {...defMenuState};
 										newStates[i] = true;
 										setMenuStates(newStates);
@@ -155,11 +189,15 @@ const MobileMenu = (props: any) => {
 					)
 				})}
 				{enableSwellAcc && (
-					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+					<li key="bali-beauty-club" className="flex px-g w-full" role="presentation">
 						{!isLoggedIn && (
-							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
-								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
-							</a>
+								<a href="/pages/rewards" className="w-full m-0 py-1 text-body flex items-center">
+									<picture className="block rounded-[.5em] w-[80px] h-[40px] min-w-[80px] flex items-center bg-pink-light mr-1">
+										{/* @ts-ignore */}
+										<Image src={IconBeauty} alt={`Bali Beauty Club`} className="block w-100 object-cover w-[80px] h-[40px]" />
+									</picture>
+									Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
+								</a>
 						)}
 						{isLoggedIn && (
 							<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
@@ -179,8 +217,11 @@ const MobileMenu = (props: any) => {
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
+
+				<MenuBanner content={menuBannerBundle} theme='pink-light' icon="hearth" className="mt-2"/>
+
 				<li key="shopall" className="my-g p-g" role="presentation">
-					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
+					<a href="/collections/all" className="btn w-full btn-primary px-g py-g rounded-[2em]" data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"

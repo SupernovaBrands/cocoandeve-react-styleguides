@@ -8,11 +8,13 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
+import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
+
 import {
 	PrevButton,
 	NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
-import ProductCard from "~/compounds/ProductCard";
+import ProductCardCarousel from "~/compounds/ProductCardCarousel";
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -100,11 +102,11 @@ const ProductCarousel = (props: any) => {
 							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef2}>
 									{productsData?.tab1?.products && newTabProducts.map((item: any, index: number) => {
-										return <ProductCard
+										return <ProductCardCarousel
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={false}
@@ -138,16 +140,21 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi2}
+								scrollSnaps={emblaApi2?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+							/>
 						</TabContent>
 						<TabContent active={activeTab === 'bestsellers'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
 									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
-										return <ProductCard
+										return <ProductCardCarousel
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={false}
@@ -181,16 +188,22 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi1}
+								scrollSnaps={emblaApi1?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+							/>
 						</TabContent>
 						<TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
 									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
-										return <ProductCard
+										return <ProductCardCarousel
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={false}
@@ -224,6 +237,11 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi3}
+								scrollSnaps={emblaApi3?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+							/>
 						</TabContent>
 						<a href="/collections/all" className="lg:hidden mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
 					</div>

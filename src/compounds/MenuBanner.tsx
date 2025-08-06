@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Percentage from '~/images/icons/percentage-square.svg';
 import Sun from '~/images/icons/sun.svg';
+import Hearth from '~/images/icons/hearth.svg';
 import MenuDecoration from '~/images/icons/menu-banner-decoration.svg';
 import MenuDecorationGreen from '~/images/icons/menu-banner-decoration-green.svg';
 
 const MenuBanner = (props: any) => {
-    const { content, theme } = props;
+    const { content, theme, icon, className } = props;
     const [copied, setCopied] = useState(false);
 	const {
 		type,
@@ -96,14 +97,16 @@ const MenuBanner = (props: any) => {
 
 	const twoLines = line1.length > 28;
 
+	const icons = {
+		'hearth': <Hearth className="mr-1"/>,
+		'percentage': <Percentage className='mr-1'/>,
+		'sun': <Sun className='mr-1'/>
+	}
+
     return (
-        <li className="pt-[5px] pb-0 flex justify-between mx-g mb-1" onClick={() => onBannerAction()} role="presentation">
+        <li className={`pt-[5px] pb-0 flex justify-between mx-g mb-1 ${className}`} onClick={() => onBannerAction()} role="presentation">
             <figure className={`flex mb-0 items-center bg-${theme} pl-g relative py-1 my-0 rounded-tl-[.5em] rounded-bl-[.5em] w-[calc(100%-10px)] `}>
-                {theme === 'secondary-light' ? (
-					<Percentage className="mr-1" />
-				) : (
-					<Sun className="mr-1" />
-				)}
+				{ icon && icons[icon] }
                 <figcaption className="flex-1 text-sm">
                     <span dangerouslySetInnerHTML={{__html: line1}} /><br />
                     <span dangerouslySetInnerHTML={{__html: line2}} />

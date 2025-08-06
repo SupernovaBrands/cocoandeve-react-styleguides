@@ -44,7 +44,7 @@ const WaitlistButton = (props:any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto text-primary font-semibold text-primary border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} !h-[44px] !min-h-[44px] flex flex-row btn-sm md:text-base btn-primary text-white rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto text-primary font-semibold text-primary border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} !h-[44px] !min-h-[44px] flex flex-row btn-sm md:text-base bg-body text-white rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
@@ -70,7 +70,7 @@ const LaunchButton = (props: any) => {
     const defaultText = 'Waitlist Me';
     const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
     return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary text-white text-primary font-semibold rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base bg-body text-white text-primary font-semibold rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
@@ -122,7 +122,7 @@ const AddToCartButton = (props:any) => {
     }, [selectedVariant, preOrders]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base btn-primary text-white font-semibold text-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} w-full lg:w-auto !h-[44px] !min-h-[44px] product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base bg-body text-white font-semibold text-primary rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-2 mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-2'}`}>
             <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }}/>
         </Button>
     );
@@ -214,7 +214,7 @@ const SwatchOverlay = (props:any) => {
             {!props.quizResult && (
                 <>
                     <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
-                    <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : '!left-[0px] !lg:left-[8px] !right-[0px] !lg:right-[8px] bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t`}>
+                    <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : '!left-[0px] !lg:left-[8px] !right-[0px] !lg:right-[8px] bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-body rounded-t`}>
                         <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
                             <div className="block mb-[.625em]">
                                 {props.swatch.style && <strong>Style: </strong>}
@@ -251,7 +251,7 @@ const isKit = (title:string) => {
     return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
-const ProductCardAbTestV4 = (props:any) => {
+const ProductCardAbTestV3 = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
@@ -435,4 +435,4 @@ const ProductCardAbTestV4 = (props:any) => {
     );
 };
 
-export default ProductCardAbTestV4;
+export default ProductCardAbTestV3;

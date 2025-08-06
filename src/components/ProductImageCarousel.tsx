@@ -7,6 +7,7 @@ import ChevronPrev from '~/images/icons/chevron-up.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Play from '~/images/icons/play.svg';
 import { useIsVisible } from "~/hooks/useIsVisible";
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 interface ImageSlide {
 	id: number
@@ -27,7 +28,7 @@ type PropType = {
 
 const useMediaQuery = (query) => {
 	const [matches, setMatches] = useState(false);
-  
+
 	useEffect(() => {
 	  const media = window.matchMedia(query);
 	  if (media.matches !== matches) {
@@ -37,7 +38,7 @@ const useMediaQuery = (query) => {
 	  media.addListener(listener);
 	  return () => media.removeListener(listener);
 	}, [matches, query]);
-  
+
 	return matches;
 };
 
@@ -72,7 +73,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 		dragFree: true,
 		loop: false,
 		axis: 'y',
-	});
+	}, [WheelGesturesPlugin()]);
 
 	const pdpImagePrev = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
@@ -175,7 +176,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							)}
 						</Carousel.Inner>
 						<Carousel.Navigation>
-							{slides.length > 6 && (	
+							{slides.length > 6 && (
 								<>
 									{selectedIndex !== 0 && <PrevButton
 										onClick={pdpImagePrev}

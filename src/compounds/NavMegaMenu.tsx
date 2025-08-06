@@ -134,29 +134,29 @@ const NavMegaMenu = (props: any) => {
 
     return (
         <div className={`z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em] ${products.length === 0 ? 'hidden' : ''}`}>
-            <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
+            <div className="container container-lg pt-3 flex flex-wrap items-center justify-between px-0">
                 {!isLoading ? (
-                    <div className="flex mx-5 px-3">
-                        <div className="lg:w-2/5 pr-4 pl-4 mb-3">
-                            <a href={props.url} className="block mb-2 h4 !text-body underline">Shop all {props.title}</a>
+                    <div className="flex">
+                        <div className="lg:w-1/5 pr-4 pl-0 mb-3">
+                            <a href={props.url} className="block mb-2 !text-lg font-bold underline !text-black">Shop all {props.title}</a>
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
-                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 !text-body">{menu.title}</a></li>
+                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className={`${menu.title?.toLowerCase().includes('own bundle') ? 'font-bold' : 'font-normal'} !text-body`}>{menu.title}</a></li>
                                     })
                                 )}
                             </ol>
                         </div>
-                        <div className="lg:w-3/5 pr-4 mb-3 flex flex-wrap ">
-                            <span className="block mb-2 text-lg w-full px-g">Best Sellers:</span>
-                                {products.length > 0 && products.slice(0, 3).map((card, i) => {
+                        <div className="lg:w-4/5 mb-3 flex flex-wrap ">
+                            {/* <span className="block mb-2 text-lg w-full px-g">Best Sellers:</span> */}
+                                {products.length > 0 && products.slice(0, 4).map((card, i) => {
                                     return (
-                                        <figure key={`mobile-card-${i}`} className="relative w-1/3 flex lg:flex-col mb-2 lg:px-g">
+                                        <figure key={`mobile-card-${i}`} className="relative w-1/4 flex lg:flex-col mb-2 lg:px-25">
                                             {/* @ts-ignore */}
                                             <a href={card.url} className="px-0 !no-underline flex-none max-w-none">
-                                                <picture>
+                                                <picture className="rounded-[2em]">
                                                     {/* @ts-ignore */}
-                                                    <img src={card.img} alt={card.title} className="block w-100 object-cover max-h-[none]" />
+                                                    <img src={card.img} alt={card.title} className="rounded-[2em] block w-100 object-cover max-h-[none]" />
                                                 </picture>
                                                 <figcaption className="flex-grow-1 d-flex flex-column ml-g lg:ml-0 align-self-center">
                                                     {/* @ts-ignore */}
