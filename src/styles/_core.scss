@@ -65,7 +65,7 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
 	}
-	
+
 	/* Hide scrollbar for IE, Edge and Firefox */
 	.no-scrollbar {
 		-ms-overflow-style: none;  /* IE and Edge */
@@ -154,6 +154,10 @@
 		.hide-scrollbar {
 			-ms-overflow-style: thin;
 			scrollbar-width: thin;
+		}
+
+		.container-lg {
+			max-width: 1360px;
 		}
 	}
 }

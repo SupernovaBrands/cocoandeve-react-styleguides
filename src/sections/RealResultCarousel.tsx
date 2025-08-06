@@ -1,5 +1,6 @@
 // import RealResultCarousel from "~/sections/RealResultCarousel";
 import { EmblaOptionsType } from 'embla-carousel';
+import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
 import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
 import { useState, useEffect, useRef } from 'react';
@@ -13,6 +14,7 @@ const options: EmblaOptionsType = {
 };
 
 const RealResultCarousel = (props: any) => {
+	const { addToCart } = props;
 
 	const [activeTab, setActiveTab] = useState('all');
 	//tab 1
@@ -64,7 +66,7 @@ const RealResultCarousel = (props: any) => {
 			<div className="row">
                 <div className="text-center instagram-reels__video-container pl-hg lg:pl-0">
 					<div className="lg:flex lg:flex-wrap lg:justify-between">
-						
+
 						{ !props.show && (<ul className="instagram-reels__nav hide-scrollbar list-style-none mx-auto flex border-b-0 text-center justify-start px-hg flex-nowrap overflow-scroll mb-g lg:overflow-hidden lg:mx-0 lg:px-0">
 							<li key={`all`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'all' ? 'instagram-reels__nav--active font-normal bg-primary !text-white' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
 							<li key={`hair`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'hair' ? 'instagram-reels__nav--active font-normal bg-primary !text-white' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
@@ -77,93 +79,126 @@ const RealResultCarousel = (props: any) => {
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef1} className="lg:-mx-g lg:!transform-none">
+								<Carousel.Inner emblaRef={emblaRef1} className="lg:!transform-none">
 									{concatVideos(allTab).map((data: any, i: number) => (
 										<InstagramCard
 											key={`all-${data.item_id}-${i}`}
-											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[286px] basis-[286px] lg:w-1/4 lg:basis-1/4 mb-0 px-25 lg:!transform-none"
 											videoUrl={data.review_url}
 											author={data.username}
 											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
+											store={store}
+											addToCart={addToCart}
 										/>
 									))}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi1}
+								scrollSnaps={emblaApi1?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+								/>
 						</TabContent>
 						<TabContent active={activeTab === 'hair'}>
 							<Carousel.Wrapper emblaApi={emblaApi2} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef2} className="lg:-mx-g lg:!transform-none">
+								<Carousel.Inner emblaRef={emblaRef2} className="lg:!transform-none">
 									{concatVideos(hairTab).map((data: any, i: number) => (
 										<InstagramCard
 											key={`hair-${data.item_id}-${i}`}
-											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[286px] basis-[286px] lg:w-1/4 lg:basis-1/4 mb-0 px-25 lg:!transform-none"
 											videoUrl={data.review_url}
 											author={data.username}
 											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
+											store={store}
+											addToCart={addToCart}
 										/>
 									))}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi2}
+								scrollSnaps={emblaApi2?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+								/>
 						</TabContent>
 						<TabContent active={activeTab === 'tan'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef3} className="lg:-mx-g lg:!transform-none">
+								<Carousel.Inner emblaRef={emblaRef3} className="lg:!transform-none">
 									{concatVideos(tanSpfTab).map((data: any, i: number) => (
 										<InstagramCard
 											key={`tan-and-spf-${data.item_id}-${i}`}
-											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[286px] basis-[286px] lg:w-1/4 lg:basis-1/4 mb-0 px-25 lg:!transform-none"
 											videoUrl={data.review_url}
 											author={data.username}
 											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
+											store={store}
+											addToCart={addToCart}
 										/>
 									))}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi3}
+								scrollSnaps={emblaApi3?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+								/>
 						</TabContent>
 						<TabContent active={activeTab === 'skin'}>
 							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef4} className="lg:-mx-g lg:!transform-none">
+								<Carousel.Inner emblaRef={emblaRef4} className="lg:!transform-none">
 									{concatVideos(skinTab).map((data: any, i: number) => (
 										<InstagramCard
 											key={`skin-${data.item_id}-${i}`}
-											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[286px] basis-[286px] lg:w-1/4 lg:basis-1/4 mb-0 px-25 lg:!transform-none"
 											videoUrl={data.review_url}
 											author={data.username}
 											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
+											addToCart={addToCart}
 										/>
 									))}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi4}
+								scrollSnaps={emblaApi4?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+								/>
 						</TabContent>
 						<TabContent active={activeTab === 'body'}>
-							<Carousel.Wrapper emblaApi={emblaApi4} className="-mx-hg">
-								<Carousel.Inner emblaRef={emblaRef5} className="lg:-mx-g lg:!transform-none">
+							<Carousel.Wrapper emblaApi={emblaApi5} className="-mx-hg">
+								<Carousel.Inner emblaRef={emblaRef5} className="lg:!transform-none">
 									{concatVideos(bodyTab).map((data: any, i: number) => (
 										<InstagramCard
 											key={`body-${data.item_id}-${i}`}
-											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[175px] basis-[175px] lg:w-1/4 lg:basis-1/4 mb-0 px-hg lg:px-g lg:!transform-none"
+											classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[286px] basis-[286px] lg:w-1/4 lg:basis-1/4 mb-0 px-25 lg:!transform-none"
 											videoUrl={data.review_url}
 											author={data.username}
 											product={data.product_link}
 											url={data.url}
 											index={i}
 											title={data.title}
+											addToCart={addToCart}
 										/>
 									))}
 								</Carousel.Inner>
 							</Carousel.Wrapper>
+							<CarouselScrollbar
+								emblaApi={emblaApi5}
+								scrollSnaps={emblaApi5?.scrollSnapList()}
+								className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+								/>
 						</TabContent>
 						<a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] mt-g lg:hidden inline-block">
 						See All
