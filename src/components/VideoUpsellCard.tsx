@@ -3,7 +3,7 @@ import { useIsVisible } from "~/hooks/useIsVisible";
 import InlineProductCard from "./InlineProductCard";
 
 const VideoUpsellCard = (props: any) => {
-    const { videoUrl, author, classes, product } = props;
+    const { videoUrl, author, classes, product, generalSetting, addToCart, trackEvent, store, formatMoney } = props;
 
     const { isVisible, targetRef } = useIsVisible(
         {
@@ -61,7 +61,7 @@ const VideoUpsellCard = (props: any) => {
                 <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="descriptions" srcLang="en" label="English" default />
             </video>
             {/* <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body underline">{title}</a> */}
-            <InlineProductCard product={product} />
+            <InlineProductCard product={product} generalSetting={generalSetting} addToCart={addToCart} trackEvent={trackEvent} store={store} formatMoney={formatMoney} />
         </div>
     );
 };

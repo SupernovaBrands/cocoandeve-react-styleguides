@@ -1,5 +1,5 @@
-import { EmblaOptionsType } from 'embla-carousel';
-import { useEffect, useState } from 'react';
+import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
 import ProductBanner from '~/compounds/ProductBanner';
@@ -20,9 +20,11 @@ import { VIDEOS } from '~/modules/dummy_videos';
 import VideoUpsellCard from '~/components/VideoUpsellCard';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
+import { useSelectedSnapDisplay } from '~/components/carousel/EmblaCarouselSelected';
+import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
 
 const HairSolution = (props: any) => {
-    const { preOrderSetting, data, isLoading, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
+    const { preOrderSetting, data, formatMoney, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
     const [activeTab, setActiveTab] = useState(0);
     const [productTab, setProductTab] = useState(0);
     const [resultTab, setResultTab] = useState(0);
@@ -44,7 +46,13 @@ const HairSolution = (props: any) => {
 
     const optionsResults: EmblaOptionsType = {
         align: 'start',
-        loop: true,
+        loop: false,
+        breakpoints: {
+            '(min-width: 992px)': {
+                watchDrag: false,
+                duration: 40,
+            }
+        }
     };
 
     const [openIndex, setOpenIndex] = useState(-1);
@@ -68,7 +76,38 @@ const HairSolution = (props: any) => {
         emblaResult1: useEmblaCarousel(optionsResults),
         emblaResult2: useEmblaCarousel(optionsResults),
         emblaResult3: useEmblaCarousel(optionsResults),
+        prev0: useRef(null),
+        prev1: useRef(null),
+        prev2: useRef(null),
+        prev3: useRef(null),
+        next0: useRef(null),
+        next1: useRef(null),
+        next2: useRef(null),
+        next3: useRef(null),
     };
+
+    const { selected: selected0 } = useSelectedSnapDisplay(resultCarousels[`emblaResult0`][1]);
+    const { selected: selected1 } = useSelectedSnapDisplay(resultCarousels[`emblaResult1`][1]);
+    const { selected: selected2 } = useSelectedSnapDisplay(resultCarousels[`emblaResult2`][1]);
+    const { selected: selected3 } = useSelectedSnapDisplay(resultCarousels[`emblaResult3`][1]);
+
+    const VISIBLE_IN_SCREEN = 4;
+
+    const checkingResultNavButton = (selectedIndex, prevEl, nextEl) => {
+        if (selectedIndex !== 0) prevEl.current?.classList.remove('hidden');
+        else prevEl.current?.classList.add('hidden');
+        
+        if ((VISIBLE_IN_SCREEN + selectedIndex) >= (data?.result?.rows.length)) nextEl.current?.classList.add('hidden');
+        else nextEl.current?.classList.remove('hidden');
+    };
+
+    useEffect(() => checkingResultNavButton(selected0, resultCarousels.prev0, resultCarousels.next0), [selected0]);
+    
+    useEffect(() => checkingResultNavButton(selected1, resultCarousels.prev1, resultCarousels.next1), [selected1]);
+
+    useEffect(() => checkingResultNavButton(selected2, resultCarousels.prev2, resultCarousels.next2), [selected2]);
+
+    useEffect(() => checkingResultNavButton(selected3, resultCarousels.prev3, resultCarousels.next3), [selected3]);
 
     const productCarousels = {
         embla0: useEmblaCarousel(options),
@@ -313,7 +352,7 @@ const HairSolution = (props: any) => {
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
                             {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
-                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px] lg:!leading-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
                             ))}
                         </ul>
                         <a href={data.result.cta_url} className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">{data.result.cta_label}</a>
@@ -331,6 +370,11 @@ const HairSolution = (props: any) => {
                                             url={data.url}
                                             index={i}
                                             product={data.product}
+                                            generalSetting={generalSetting}
+                                            addToCart={addToCart}
+                                            trackEvent={trackEvent}
+                                            store={store}
+                                            formatMoney={formatMoney}
                                         />
                                     ))}
                                 </Carousel.Inner>
@@ -340,7 +384,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollPrev() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-ml-2"
                                         >
-                                            <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`prev${index}`]} className="hidden absolute z-[-1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronPrev className="svg--current-color" />
                                             </span>
                                         </PrevButton>
@@ -349,7 +393,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollNext() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-mr-2"
                                         >
-                                            <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`next${index}`]} className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronNext className="svg--current-color" />
                                             </span>
                                         </NextButton>
@@ -357,6 +401,19 @@ const HairSolution = (props: any) => {
                                 )}
                                 
                             </Carousel.Wrapper>
+                            {row.data.length > 1 && (
+                                <div className="px-g lg:px-0">
+                                    <CarouselScrollbar
+                                        emblaApi={resultCarousels[`emblaResult${index}`][1]}
+                                        scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}
+                                        className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+                                        prevArrow={resultCarousels[`prev${index}`]}
+                                        nextArrow={resultCarousels[`next${index}`]}
+                                        visibleInScreen={VISIBLE_IN_SCREEN}
+                                        carouselItemLength={row.data.length}
+                                    />
+                                </div>
+                            )}
                         </TabContent>
                     ))}
                 </section>
