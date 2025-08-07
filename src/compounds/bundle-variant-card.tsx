@@ -100,7 +100,7 @@ const BundleVariantCard = (props) => {
                 setImageSrc(darkImg)
             }
         } else {
-            const src = bundleImg.src.replace('public', '320x');
+            const src = bundleImg?.src.replace('public', '320x');
             setImageSrc(src)
         }
     }, [bundleImg]);
