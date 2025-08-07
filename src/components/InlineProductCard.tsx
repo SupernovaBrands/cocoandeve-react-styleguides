@@ -48,6 +48,7 @@ const InlineProductCard = (props: any) => {
             setSwatchOpen(true);
             return false;
         }
+        if (!selectedVariant.availableForSale) return false;
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
