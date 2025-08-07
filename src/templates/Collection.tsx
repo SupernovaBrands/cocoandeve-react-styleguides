@@ -569,7 +569,7 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-                                        {abtestProductCard === 'v2' && <ProductCardAbTestV2
+                                        {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -590,29 +590,7 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-                                        {abtestProductCard === 'v4' && <ProductCardAbTestV4
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
-                                            product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            eventNameOnClick='collection_product_card'
-                                            preOrders={preOrders}
-                                            isLaunchWL={isLaunchWL}
-                                            launchBox={launchBox}
-                                            setLaunchWLModal={setLaunchWLModal}
-                                            setLaunchWLModal2={setLaunchWLModal2}
-                                            setLaunchWLModal3={setLaunchWLModal3}
-                                            generalSetting={generalSetting}
-                                            collectionTemplate={true}
-                                            store={store}
-                                            customProductTitle={customProductTitle}
-                                        />}
-
-                                        {abtestProductCard === 'v3' && <ProductCardAbTestV3
+                                        {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -634,7 +612,7 @@ const Collection = (props: any) => {
                                             customProductTitle={customProductTitle}
                                         />}
 
-                                        {abtestProductCard === 'v5' && <ProductCardAbTestV5
+                                        {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -655,8 +633,6 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-
-
                                     </>
                                 ) : (
                                     <>
@@ -681,7 +657,7 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-                                        {abtestProductCard === 'v2' && <ProductCardAbTestV2
+                                        {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -702,29 +678,7 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-                                        {abtestProductCard === 'v4' && <ProductCardAbTestV4
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
-                                            product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            eventNameOnClick='collection_product_card'
-                                            preOrders={preOrders}
-                                            isLaunchWL={isLaunchWL}
-                                            launchBox={launchBox}
-                                            setLaunchWLModal={setLaunchWLModal}
-                                            setLaunchWLModal2={setLaunchWLModal2}
-                                            setLaunchWLModal3={setLaunchWLModal3}
-                                            generalSetting={generalSetting}
-                                            collectionTemplate={true}
-                                            store={store}
-                                            customProductTitle={customProductTitle}
-                                        />}
-
-                                        {abtestProductCard === 'v3' && <ProductCardAbTestV3
+                                        {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -746,7 +700,7 @@ const Collection = (props: any) => {
                                             customProductTitle={customProductTitle}
                                         />}
 
-                                        {abtestProductCard === 'v5' && <ProductCardAbTestV5
+                                        {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
@@ -767,7 +721,6 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />}
-
                                     </>
                                 )
                             })}
