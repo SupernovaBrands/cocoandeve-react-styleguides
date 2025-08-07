@@ -6,7 +6,7 @@ const NavMegaMenuAll = (props: any) => {
                 <div className="flex w-full">
                     <div className="max-w-[14.625em] mr-3 mb-3 px-0">
                         <>
-                            <a href={generalSetting.mega_menu_shop_all_url} className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full hover:no-underline hover:text-primary block" aria-label={generalSetting.mega_menu_shop_all_label}>
+                            <a href={generalSetting.mega_menu_shop_all_url} className="text-lg px-3 bg-gray-400 text-primary rounded border border-transparent font-bold  py-1 mb-2 w-full hover:no-underline hover:text-primary block">
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
                             {generalSetting.bg_image && (

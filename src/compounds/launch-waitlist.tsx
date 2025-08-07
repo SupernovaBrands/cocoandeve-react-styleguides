@@ -107,7 +107,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                 if (props?.launchModalData?.handle) setCookie(`launch_waitlist_${store}__${props.launchModalData.handle}`, true, 1);
                 if (typeof props.setLaunchWLSuccess === 'function') {
                     props.setLaunchWLSuccess(true);
-                } 
+                }
                 if (props.productCard) {
                     props.setLaunchSubmitted(true);
                 }

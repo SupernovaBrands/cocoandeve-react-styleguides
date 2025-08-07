@@ -81,7 +81,7 @@ const ArticleNewsLetter = (props) => {
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-[1.5em]">
                 <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" alt="Blog article banner" />
                 </picture>
                 <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
                     <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
@@ -103,7 +103,7 @@ const ArticleNewsLetter = (props) => {
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-[10px] lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline"'))}</p>
+                    <p className="text-[10px] lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline text-body"'))}</p>
                 </div>
             </div>
         </div>
@@ -149,6 +149,7 @@ const Article = (props) => {
     const [featuredImageUrl, setFeaturedImageUrl] = useState(featuredImg);
     const [featuredImageLink, setFeaturedImageLink] = useState(content?.BlogContentMultiStores?.[store]?.featured_image_link || '');
     const [bodyContent, setBodyContent] = useState('');
+    const [quickNav, setQuickNav] = useState([]);
 
     const d = new Date(content?.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
@@ -156,12 +157,12 @@ const Article = (props) => {
     const year = d.toLocaleString('default', { year: 'numeric' });
     const updateDate = `Updated on ${month} ${day}, ${year}`;
 
-    let quickLinks = [];
+    // let quickLinks = [];
     const featuredImageAlternativeText = content?.BlogContentMultiStores?.[store]?.featured_image?.alt || '';
 
-    if (content?.quick_links) {
-        quickLinks = content.quick_links.split(',');
-    }
+    // if (content?.quick_links) {
+    //     quickLinks = content.quick_links.split(',');
+    // }
 
     const handleClick = (event, href) => {
         event.preventDefault();
@@ -345,6 +346,18 @@ const Article = (props) => {
                     });
                 }
             }
+
+            const spanEls = Array.from(document.getElementsByTagName('span'));
+            spanEls.forEach((el) => {
+                // console.log('text content', el.textContent.toLowerCase());
+                if (el.textContent.toLowerCase().includes('edited by')) {
+                    el.classList.add('!text-body');
+                }
+            });
+
+            if (content?.quick_links) {
+                setQuickNav(content.quick_links.split(','));
+            }
         }
 
         const timeoutId = setTimeout(manipulateShops, 500);
@@ -386,6 +399,8 @@ const Article = (props) => {
         tikTokScript.src = 'https://www.tiktok.com/embed.js';
         tikTokScript.setAttribute('async', '');
         document.body.appendChild(tikTokScript);
+
+        
     }, []);
 
     useEffect(() => {
@@ -436,8 +451,8 @@ const Article = (props) => {
                 )} */}
                 <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
-                        <h1 className="text-center mb-1">{content?.title}</h1>
-                        <span className="text-gray-500 mb-1 article__published-at">{updateDate}</span>
+                        <h1 id="articleTitleHeading" className="text-center mb-1">{content?.title}</h1>
+                        <span className="text-body mb-1 article__published-at">{updateDate}</span>
                         
                         {featuredImg && (
                             featuredImageLink ? (
@@ -455,11 +470,11 @@ const Article = (props) => {
                             )
                         )}
 
-                        {quickLinks?.length > 0 && (
+                        {quickNav?.length > 0 && (
                             <>
                                 <span className="block mt-1 lg:pt-g text-left font-bold text-body">In this article:</span>
                                 <div className="mt-1 mb-2 lg:mb-1 lg:pb-g text-body">
-                                    {quickLinks.map((quickLink, index) => (
+                                    {quickNav.map((quickLink, index) => (
                                         <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
                                             <span>{quickLink}</span>
                                         </a>
@@ -472,17 +487,17 @@ const Article = (props) => {
                             {parse(bodyContent)}
                             <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Twitter">
                                         <Twitter className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block mr-[0.75rem]">
-                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Facebook">
                                         <Facebook className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block">
-                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]">
+                                    <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Pinterest">
                                         <Pinterest className="svg fill-primary h-[1em]" />
                                     </a>
                                 </li>
@@ -502,13 +517,13 @@ const Article = (props) => {
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:pl-0 sm:pr-0">
-                    <h4 className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</h4>
+                    <p className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</p>
                     {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}
         <div id="relatedPostCard" className="mb-4 lg:mb-0"></div>
-        {quickLinks?.length > 0 && (
+        {quickNav?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <BackToTop className="svg" />

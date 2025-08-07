@@ -174,7 +174,7 @@ const AccountDropdown = (props:any) => {
                             <p className="text-center auth-buttons mb-g">or login with email</p>
                             <div className="mb-2">
                                 <label htmlFor="dropdownLoginFormEmail" id="dropdownLoginFormEmailLabel" className="sr-only">Email</label>
-                                <input ref={loginEmailRef} onChange={handleLoginChange} type="email" className={`block h-[50px] font-size-sm appearance-none w-full py-1 px-2 ${!validLoginEmail ? 'mb-0' : 'mb-1'} text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none`} id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabelheaderDropdown" />
+                                <input ref={loginEmailRef} onChange={handleLoginChange} type="email" className={`block h-[50px] font-size-sm appearance-none w-full py-1 px-2 ${!validLoginEmail ? 'mb-0' : 'mb-1'} text-base leading-normal bg-gray-400 text-gray-800  rounded border-0 focus:outline-none`} id="dropdownLoginFormEmail" placeholder="Email" aria-labelledby="dropdownLoginFormEmailLabel" />
                                 {!validLoginEmail && (
                                     <label id="dropdownLoginFormEmail-error" className="font-size-xs text-primary" htmlFor="dropdownLoginFormEmail">Please enter a valid email address.</label>
                                 )}
