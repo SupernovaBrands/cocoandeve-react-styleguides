@@ -386,12 +386,12 @@ const Collection = (props: any) => {
 
     return (
         <>
-            <Banner title={collectionTitle} bannerData={bannerData} />
+            <Banner title={collectionTitle} bannerData={bannerData}/>
 
             {tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link container mt-1 pb-25 lg:pb-0">
-                        <a onClick={() => handlOpenModal(true)} className="px-1 py-1 underline text-body lg:px-0 lg:py-2 text-sm" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
+                        <a onClick={() => handlOpenModal(true)} className={`px-1 py-1 underline ${['black', 'white', 'grey'].includes(abtestProductCard) ? 'text-primary' : 'text-body'} lg:px-0 lg:py-2 text-sm`} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy.replace(' and ',' & ') : 'Terms & Conditions'}</a>
                     </div>
 
                     <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
@@ -405,15 +405,15 @@ const Collection = (props: any) => {
                     {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
                             <span className="block collection-sidebar-label text-lg mb-1 mt-3"><strong className="text-body">Category</strong></span>
-                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 lg:w-[202px] lg:rounded-[2rem] lg:mb-g" ref={sidebarRef}>
+                            <ul className="collection__sidebar list-unstyled border border-body p-2 w-2/3 lg:w-[202px] lg:rounded-[0.5rem] lg:mb-g" ref={sidebarRef}>
                                 {sidebarMenu.map((parent: any, index:number) => {
                                     const html = parent.title.replace('d-lg-none', 'lg:hidden');
                                     const parentHandle = parentCollection ? parentCollection?.collection?.handle : null;
                                     const isLast = (sidebarMenu.length - 1) === index;
                                     return (
-                                    <li className={`${!isLast ? 'mb-[.75em]' : 'mb-0'}`} key={`sidebarr--${parent.handle}-${index}`}>
+                                    <li className={`text-lg ${!isLast ? 'mb-[.75em]' : 'mb-0'}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <a
-                                            className={`hover:no-underline hover:text-primary text-base
+                                            className={`hover:no-underline hover:text-primary text-lg
                                                 ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
                                             href={`/collections/${parent.handle}`}
                                             dangerouslySetInnerHTML={{ __html: html }}
@@ -484,7 +484,7 @@ const Collection = (props: any) => {
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
-                                                        className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
+                                                        className={`block-inline align-middle collection-grid__tags-link lg:min-h-[44px] lg:!min-w-[63px] rounded-full text-nowrap mr-1 py-1 px-[22px] hover:no-underline
                                                             ${children.handle === handle ? 'active text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
@@ -495,7 +495,7 @@ const Collection = (props: any) => {
                                         {childMenu.length === 0 && (
                                             <Link
                                                 href={`/collections/${handle}`}
-                                                className={`rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
+                                                className={`inline-block text-center lg:min-h-[44px] lg:!min-w-[63px] rounded-full text-nowrap mr-1 py-1 px-[22px] hover:no-underline bg-gray-400 text-gray-600 hover:text-gray-600`}
                                                 onClick={showLoading}
                                                 scroll={false}
                                             >
