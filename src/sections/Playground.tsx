@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const PlaygroundCard = ({ data, store, imgMb, imgDt }) => (
+const PlaygroundCard = ({ data, store, imgMb, imgDt, imgAlt }) => (
     <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
         <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
             <picture className={`rounded-[24px] lg:rounded-[32px] block ${data?.playground_range_bg}`}>
                 <source srcSet={imgDt} media="(min-width: 992px)" />
-                <img className="rounded-[24px] lg:rounded-[32px] w-full lg:max-h-[320px]" src={imgMb} loading="lazy" />
+                <img alt={imgAlt} className="rounded-[24px] lg:rounded-[32px] w-full lg:max-h-[320px]" src={imgMb} loading="lazy" />
             </picture>
             <figcaption className="w-2/3 md:w-full text-left lg:text-center absolute px-2 md:px-3 lg:px-g top-[50%] -translate-y-[50%] lg:transform-none lg:!top-[24px] lg:left-0 lg:right-0">
                 <p className="text-base md:text-xl font-bold text-body">{store === 'ca' ? data.Title.replace('Tan & SPF', 'Tan') : data.Title}</p>
@@ -50,16 +50,24 @@ const PlaygroundTest = (props: any) => {
                     <div className="flex flex-wrap lg:-mx-g items-center px-0 lg:px-g">
                         <PlaygroundCard store={store} data={content?.range_1}
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/public`}
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/public`} />
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/public`}
+                            imgAlt={`${content?.range_1?.Title} Playground - ${content?.range_1?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                        />
                         <PlaygroundCard store={store} data={content?.range_2} 
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/df4e3bd1-7214-4b0f-a687-62f9770c3200/public`} 
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3cdbc885-e603-4a69-ec85-12133a72b800/public`} />
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3cdbc885-e603-4a69-ec85-12133a72b800/public`}
+                            imgAlt={`${content?.range_2?.Title} Playground - ${content?.range_2?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                        />
                         <PlaygroundCard store={store} data={content?.range_3} 
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e0e4d5bb-56be-4d47-7878-f7d054b02900/public`} 
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c27447c-170d-4fd6-589d-fd8e90b78200/public`} />
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c27447c-170d-4fd6-589d-fd8e90b78200/public`}
+                            imgAlt={`${content?.range_3?.Title} Playground - ${content?.range_3?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                        />
                         <PlaygroundCard store={store} data={content?.range_4} 
                             imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/46c4a841-3709-4bb0-725b-f60016eb0700/public`} 
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6cddc9d8-a879-483e-f915-df6cbd6ed900/public`} />
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6cddc9d8-a879-483e-f915-df6cbd6ed900/public`}
+                            imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                        />
                     </div>
                 </>
             )}

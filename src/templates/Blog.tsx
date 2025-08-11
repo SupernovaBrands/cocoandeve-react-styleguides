@@ -32,7 +32,7 @@ const Blog = (props) => {
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [active, setActive] = useState(false);
-	const [tanTitle, setTanTitle] = useState('');
+	const [tanTitle, setTanTitle] = useState('Tan & SPF');
 
 	const handleHowTo = () => {
 		setActiveFrame(!activeFrame);
