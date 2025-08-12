@@ -2,7 +2,7 @@ import Link from "next/link";
 import YotpoStar from "~/components/YotpoStars";
 import { Button } from "../components";
 import { useRef, useState, useEffect } from "react";
-import { formatMoney, getCookie } from "~/modules/utils";
+import { formatMoney, getCookie, getSkus } from "~/modules/utils";
 import parse from 'html-react-parser';
 
 const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
@@ -264,11 +264,6 @@ const SwatchOverlay = (props:any) => {
     );
 };
 
-const isKit = (title:string) => {
-	const productTitle = title.toLowerCase();
-	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
-}
-
 const ProductCard = (props:any) => {
     const { abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
     const [skus, setSkus] = useState([]);
@@ -305,33 +300,8 @@ const ProductCard = (props:any) => {
     }
 
     useEffect(() => {
-        if (product && product.productType !== 'HERO') {
-            const skus_ = isKit(product.title)
-                ? product.variants.nodes.map((node:any) => node.sku)
-                : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
-            if (product.variants.nodes[0]?.reviewSku) {
-                setSkus([product.variants.nodes[0]?.reviewSku.value]);
-            } else {
-                setSkus(skus_);
-            }
-        } else if (product && product.variants) {
-            if (isKit(product.title)) {
-                if (product.variants.nodes[0]?.reviewSku) {
-                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
-                } else {
-                    setSkus(product.variants.nodes.map((node:any) => node.sku));
-                }
-            } else {
-                const single = product.variants.nodes.filter((node:any) => {
-                    return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
-                })
-                if (product.variants.nodes[0]?.reviewSku) {
-                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
-                } else {
-                    setSkus(single.map((node:any) => node.sku));
-                }
-            }
-        }
+        const skus = getSkus(product);
+        setSkus(skus);
 
         // https://app.clickup.com/t/86ergy8je
         if (!product.availableForSale && selectedVariant?.availableForSale) {
