@@ -55,7 +55,7 @@ const HairSolution = (props: any) => {
         }
     };
 
-    const [openIndex, setOpenIndex] = useState(-1);
+    const [openIndex, setOpenIndex] = useState(0);
 
     const onClick = async (id:any) => {
 		const afterClick = () => {
@@ -176,7 +176,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.range && (
-                <section className="my-3 lg:my-5">
+                <section className="mt-3 mb-5 lg:my-5">
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl">{data.range.title}</h2>
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
@@ -200,7 +200,7 @@ const HairSolution = (props: any) => {
                                 elseWrap={children => (
                                     <div className={`accordion-item border-t border-b border-gray-500`}>
                                         <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center ${openIndex === index ? `pt-3 md:pt-[1.875rem] pb-3` : 'py-3 md:py-[1.875rem]'} ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
-                                            <strong className="text-body no-underline">{row.title}</strong>
+                                            <strong className="text-body no-underline leading-[17px]">{row.title}</strong>
                                             { openIndex === index && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                             { openIndex !== index && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                         </div>
@@ -243,7 +243,7 @@ const HairSolution = (props: any) => {
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
-                            <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-x-scroll lg:overflow-x-scroll hide-scrollbar lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6">
+                            <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6 ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
@@ -338,7 +338,7 @@ const HairSolution = (props: any) => {
                             }}
                             src={data.compare?.image_right?.url}
                         >
-                            <h4 className="h1 mb-2 lg:mb-4">{data.compare.title}</h4>
+                            <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">{data.compare.title}</h4>
                             <p className="font-bold mb-[.25rem]">{data.compare.subtitle}</p>
                             <p>{data.compare.description}</p>
                         </ProductBanner>
@@ -402,7 +402,7 @@ const HairSolution = (props: any) => {
                                 
                             </Carousel.Wrapper>
                             {row.data.length > 1 && (
-                                <div className="px-g lg:px-0">
+                                <div className="px-g lg:px-[.25rem]">
                                     <CarouselScrollbar
                                         emblaApi={resultCarousels[`emblaResult${index}`][1]}
                                         scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}
@@ -416,6 +416,11 @@ const HairSolution = (props: any) => {
                             )}
                         </TabContent>
                     ))}
+                    <div className="text-center lg:hidden mt-[.25rem]">
+                        <a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block">
+                            See All
+                        </a>
+                    </div>
                 </section>
             )}
             <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
