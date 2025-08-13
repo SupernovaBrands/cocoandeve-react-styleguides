@@ -176,7 +176,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.range && (
-                <section className="mt-3 mb-5 lg:my-5">
+                <section className="mt-3 mb-5 lg:mt-5 lg:mb-[120px]">
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl">{data.range.title}</h2>
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
@@ -237,7 +237,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className="my-3 lg:mt-5">
+                <section className="my-3 lg:mt-[120px]">
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
@@ -323,7 +323,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.compare && (
-                <section className="lg:mb-5">
+                <section className="lg:mb-[120px]">
                     {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
@@ -351,7 +351,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.result && data.compare?.image_right?.url && (
-                <section className="my-3 lg:my-5 container px-0">
+                <section className="my-3 lg:mb-5 lg:mt-[120px] container px-0">
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
