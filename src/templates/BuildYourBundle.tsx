@@ -110,6 +110,25 @@ const BuildYourBundle = (props: any) => {
 
     const LoadingEl = () => <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3 my-3 lg:my-5" role="status" />;
     const generalSetting = ProductSettings.find((setting:any) => setting.__component === 'product.general');
+
+    const [platform, setPlatform] = useState('');
+
+    useEffect(() => {
+		const userAgent = navigator.userAgent || navigator.vendor;
+		let os = 'unknown';
+
+		if (/windows/i.test(userAgent)) {
+			os = 'os-win';
+		} else if (/macintosh|mac os x/i.test(userAgent)) {
+			os = 'os-mac';
+		} else if (/iphone|ipad|ipod/i.test(userAgent)) {
+			os = 'os-ios';
+		} else if (/android/i.test(userAgent)) {
+			os = 'os-android';
+		}
+
+		setPlatform(os);
+	}, []);
     
     return (
         <div>
@@ -129,44 +148,46 @@ const BuildYourBundle = (props: any) => {
 					}} />
                 </figcaption>
             </figure>
-            <div className={`sticky top-header bg-secondary-light py-g flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`}>
-                <p className="text-xl font-bold mb-[.5rem]">{strapiData?.choose_size_text}</p>
+            <div className={`sticky top-header bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`}>
+                <p className="text-base lg:text-2xl font-bold mb-[.25rem] lg:mb-[1rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
-                    <li onClick={() => setBundleSize(2)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 2 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>2</span>
-                        {bundleSize === 2 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
+                    <li onClick={() => setBundleSize(2)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
+                        <span className={`${bundleSize === 2 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 2 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>2</span>
+                        {bundleSize === 2 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(3)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 3 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 3 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>3</span>
-                        {bundleSize === 3 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
+                    <li onClick={() => setBundleSize(3)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 3 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
+                        <span className={`${bundleSize === 3 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 3 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>3</span>
+                        {bundleSize === 3 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(4)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white mr-[1rem] ${bundleSize === 4 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 4 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>4</span>
-                        {bundleSize === 4 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
+                    <li onClick={() => setBundleSize(4)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 4 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
+                        <span className={`${bundleSize === 4 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 4 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>4</span>
+                        {bundleSize === 4 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(5)} className={`text-base lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`max-w-4 max-h-4 lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center px-2 py-1 cursor-pointer ${bundleSize === 5 ? 'bg-primary text-white rounded-full' : 'text-gray-600'}`}>5</span>
-                        {bundleSize === 5 && <span className="inline-block pl-[.5rem] pr-[1rem] font-bold">Save {bundleDiscount}%</span>}
+                    <li onClick={() => setBundleSize(5)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
+                        <span className={`${bundleSize === 5 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 5 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>5</span>
+                        {bundleSize === 5 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
                 </ul>
             </div>
-            <div className="container--page container pt-3 pb-0 lg:py-5">
-                <p className="text-xl lg:text-2xl font-bold text-center mb-1 lg:mb-3">{strapiData?.choose_product_text}</p>
-                <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-1 lg:pb-3 justify-center px-hg lg:px-0">
-					<li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-					<li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-4 lg:!min-h-[45px] !max-h-4 lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
-				</ul>
+            <div className="container--page container pt-3 px-[11px] lg:px-g pb-0 lg:py-5">
+                <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-[.25rem] lg:px-0 justify-between">
+                    <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3">{strapiData?.choose_product_text}</p>
+                    <ul className="product__carousel-nav list-style-none mx-0 flex flex-wrap border-b-0 text-center pb-0 lg:pb-3 justify-center px-hg lg:px-0">
+                        <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
+                        <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
+                    </ul>
+                </div>
                 <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">
                         {props.hairData?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
-                                    <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                    <div className="flex flex-wrap lg:-mx-[.25rem]">
                                         {props.hairData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
                                             <BundleCard
                                                 key={`build-your-bundle--hair--${index}`}
                                                 product={item}
-                                                className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
+                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 store={props.store}
                                                 itemSelected={tab0Selected}
                                                 generalSetting={generalSetting}
@@ -203,12 +224,12 @@ const BuildYourBundle = (props: any) => {
                         {props.tanData?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
-                                    <div className="flex flex-wrap lg:-mx-[.5rem]">
+                                    <div className="flex flex-wrap lg:-mx-[.25rem]">
                                         {props.tanData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
                                             <BundleCard
                                                 key={`build-your-bundle--tan--${index}`}
                                                 product={item}
-                                                className="relative mb-1 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-[.5rem] lg:pl-[.5rem] text-center"
+                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 generalSetting={generalSetting}
                                                 collectionTemplate={true}
                                                 store={props.store}

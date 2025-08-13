@@ -1,11 +1,13 @@
 import { Button } from "../components";
 import { useRef, useState, useEffect } from "react";
-import { formatMoney, removeObjectWithId } from "~/modules/utils";
+import { formatMoney, getSkus, removeObjectWithId } from "~/modules/utils";
+import YotpoStar from "~/components/YotpoStars";
+import Eye from '~/images/icons/eye.svg';
 
-const DEFAULT_LABEL = 'Add';
+const DEFAULT_LABEL = '<p class="inline lg:hidden">Add</p><p class="hidden lg:inline">Add to Cart</p>';
 
 const AddToCartButton = (props:any) => {
-    const { label, available, product, itemSelected, setItemSelected, selectedVariant, maxItem, className } = props;
+    const { store, reducedPrice, label, available, product, itemSelected, setItemSelected, selectedVariant, maxItem, className } = props;
     
     const [selected, setSelected] = useState([]);
 
@@ -45,10 +47,16 @@ const AddToCartButton = (props:any) => {
     const disabled = !available;
 
     return (
-        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} ${selected?.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''} -mt-25 !mb-0 h-5 lg:h-auto block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal`}>
+        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} ${selected?.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''} bg-gray-400 active:bg-gray-400 visited:bg-gray-400 hover:bg-gray-400 text-primary !mb-0 h-5 lg:h-[44px] lg:!min-h-[44px] block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:flex-col sm:text-sm flex items-center px-[.75rem] justify-between lg:!p-g lg:flex lg:min-w-[137px] lg:justify-center`}>
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
-            {label && `${label}`}
-            {!label && (selected.includes(selectedVariant?.id) ? 'Added' : DEFAULT_LABEL)}
+            {label && <span>{label}</span>}
+            {!label && (selected.includes(selectedVariant?.id) ? <span>Added</span> : <span dangerouslySetInnerHTML={{
+							__html: DEFAULT_LABEL,
+						}}/>)}
+            <div className="inline-flex justify-center text-sm lg:text-base lg:hidden">
+                <span className="font-normal line-through">{formatMoney(product.priceInCent, false, store)}</span>
+                <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
+            </div>
         </Button>
     );
 };
@@ -57,7 +65,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { maxItem, setItemSelected, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
+    const { maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
@@ -115,11 +123,13 @@ const SwatchOverlay = (props:any) => {
                 maxItem={maxItem}
                 className="btn-choose"
                 available={true}
-                label={product.swatch.label}
+                label={'Choose'}
+                reducedPrice={reducedPrice}
+                store={store}
             />
-            <div className={`!w-auto px-0 swatch-overlay !left-[-1px] !right-[-1px] bottom-[-1px] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-[20px] lg:rounded-[26px]`}>
+            <div className={`!w-auto px-0 swatch-overlay !left-[-1px] !right-[-1px] bottom-[-1px] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-gray-400 rounded-[20px] lg:rounded-[26px]`}>
                 <div className={`text-center w-full pt-2 lg:pb-2 pb-1 lg:px-0`}>
-                    <div className="block mb-[.625em]">
+                    <div className="block mb-[.625em] text-sm">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
                         {props.swatch.tangleTamer && <strong>Type: </strong>}
@@ -129,7 +139,7 @@ const SwatchOverlay = (props:any) => {
                     </div>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
-                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-1/4'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
                                 <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
@@ -142,7 +152,9 @@ const SwatchOverlay = (props:any) => {
                     selectedVariant={selectedVariant}
                     maxItem={maxItem}
                     available={swatchAvailable}
-                    label={!swatchAvailable ? 'Out of Stock' : null}
+                    label={!swatchAvailable ? 'Add' : null}
+                    reducedPrice={reducedPrice}
+                    store={store}
                 />
             </div>
         </>
@@ -151,7 +163,7 @@ const SwatchOverlay = (props:any) => {
 
 const BundleCard = (props:any) => {
     const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
-    // const [skus, setSkus] = useState([]);
+    const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
     const [productImage, setProductImage] = useState(product.src);
@@ -205,57 +217,75 @@ const BundleCard = (props:any) => {
         setShade(val)
     }
 
+    useEffect(() => {
+        const skus = getSkus(product);
+        setSkus(skus);
+    }, [product, selectedVariant]);
+
     // if (product.handle === 'masque-towelwrap') console.log('selectedVariant?.availableForSale', product);
 
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a aria-label={`View detail of product ${product.title}`} href={product.handle ? `/products/${product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
-                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+            <p role="button" aria-label={`View detail of product ${product.title}`} onClick={(e) => openModal(e)} className="cursor-pointer rounded-[1rem] lg:rounded-[2rem] product-card--img block lg:pb-[1rem]">
+                <picture className={`w-full h-full lg:h-[calc(100%+1rem)] max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-[1rem] lg:rounded-[2rem] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
-                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-g lg:!pt-hg" alt="" loading="lazy" />}
+                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-full lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-[1rem] lg:rounded-[2rem] !pt-g lg:!pt-0" alt="" loading="lazy" />}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
-                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt="" loading="lazy" />}
+                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-[1rem] lg:rounded-[2rem] img--hover hidden lg:block">
+                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] lg:!max-h-full lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-[1rem] lg:rounded-[2rem]" alt="" loading="lazy" />}
                         </picture>
                     )}
                 </picture>
-            </a>
+            </p>
 
             { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
-            <div className={`pt-0 pb-[.5rem] lg:pb-[1rem] px-[.5rem] lg:px-[1rem] relative text-center bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content`}>
-                <div className="flex items-center justify-center relative">
-                    {product.swatch && (
-                        <SwatchOverlay
-                            maxItem={maxItem}
-                            itemSelected={itemSelected}
-                            setItemSelected={setItemSelected}
-                            handleShade={handleShade} store={store} generalSetting={generalSetting} swatch={props.product.swatch} product={props.product} />
-                    )}
-                    {!product.swatch && (
-                        <AddToCartButton
-                            product={product}
-                            itemSelected={itemSelected}
-                            setItemSelected={setItemSelected}
-                            selectedVariant={selectedVariant}
-                            maxItem={maxItem}
-                            available={selectedVariant?.availableForSale}
-                            label={!selectedVariant?.availableForSale ? 'Out of Stock' : null}
-                        />
-                    )}
-                </div>
-
-                <p className={`text-sm text-center min-h-[82px] px-0 lg:px-0 lg:min-h-[56px] flex flex-col justify-center`}>
-                    <a href={product.handle ? `/products/${product.handle}` : '#'} className={`text-sm lg:text-base mt-[.75rem] lg:mt-[1rem] product-card__title text-body hover:text-body w-full text-center`}>
-                        {product.title}
-                    </a>
+            <p role="button" onClick={(e) => openModal(e)} className={`cursor-pointer inline-flex lg:min-w-[3.375em] badge rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] product-card__badge`}>
+                <span className="mr-1 hidden lg:inline">Details</span>
+                <Eye className="svg h-[1rem] w-[1rem]" />
+            </p>
+            <div className={`pt-0 relative product-card__content lg:px-[.5rem]`}>
+                <p className={`text-sm lg:text-base text-body hover:text-body w-full text-left min-h-[36px] px-0 lg:px-0 lg:min-h-[36px] flex flex-col mt-[.75rem] lg:mt-[1rem] mb-[.5rem] justify-center pr-[.5rem] lg:font-bold`}>
+                    {product.title}
                 </p>
-                <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-body text-sm lg:text-base text-underline underline-offset-[4px] inline-block my-[.75rem]">
+                <div className="flex flex-col lg:flex-row lg:justify-between">
+                    <div className="review-stars__number min-h-1 lg:min-h-[auto] flex justify-start mb-[.75rem] lg:mb-0 lg:flex-col">
+                        {skus.length > 0 && (<YotpoStar showTotal={false} smSingleStar={true} smSingleStarAllDevice={false} sku={skus.join(',')} productId={product.productId} productHandle={null} />)}
+                        <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-lg">
+                            <span className="text-gray-600 font-normal line-through">{formatMoney(product.priceInCent, false, store)}</span>
+                            <span className="font-bold ml-[.5rem]">{formatMoney(reducedPrice, false, store)}</span>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-center relative">
+                        {product.swatch && (
+                            <SwatchOverlay
+                                maxItem={maxItem}
+                                itemSelected={itemSelected}
+                                setItemSelected={setItemSelected}
+                                reducedPrice={reducedPrice}
+                                handleShade={handleShade} store={store} generalSetting={generalSetting} swatch={product.swatch} product={product} />
+                        )}
+                        {!product.swatch && (
+                            <AddToCartButton
+                                product={product}
+                                itemSelected={itemSelected}
+                                setItemSelected={setItemSelected}
+                                selectedVariant={selectedVariant}
+                                maxItem={maxItem}
+                                store={store}
+                                available={selectedVariant?.availableForSale}
+                                label={!selectedVariant?.availableForSale ? 'Out of Stock' : null}
+                                reducedPrice={reducedPrice}
+                            />
+                        )}
+                    </div>
+                </div>
+                {/* <a onClick={(e) => openModal(e)} href={product.handle ? `/products/${product.handle}` : '#'} className="font-bold text-body text-sm lg:text-base text-underline underline-offset-[4px] inline-block my-[.75rem]">
                     View Details
-                </a>
-                <div className="flex justify-center text-sm lg:text-base">
+                </a> */}
+                {/* <div className="flex justify-center text-sm lg:text-base">
                     <span className="text-gray-600 line-through">{formatMoney(product.priceInCent, false, store)}</span>
                     <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
-                </div>
+                </div> */}
             </div>
         </div>
 	);

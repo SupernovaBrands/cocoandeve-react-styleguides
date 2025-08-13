@@ -527,13 +527,13 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] lg:min-w-[300px] block lg:inline-block w-full lg:w-auto product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                            <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                 {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                 {disabled ? 'Added' : ''}
                                 {!disabled && selectedVariant?.availableForSale ? 'Add' : ''}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                { dataAccordion.length > 0 && <AccordionPDP isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
+                                { dataAccordion.length > 0 && <AccordionPDP isBundlePage={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
                             </div>
                         </div>
                     </>
