@@ -130,13 +130,13 @@ const ProductComparison = (props: any) => {
         'hair-volumising-shampoo-conditioner-set',
     ];
     if (MASKS.includes(mainCompare?.handle)) {
-        title = 'Which hair mask is for me?';
+        title = 'Which Hair Mask is for Me?';
     } else if (SHAMPOO.includes(mainCompare?.handle)) {
-        title = 'Which shampoo is for me?';
+        title = 'Which Shampoo is for Me?';
     } else if (CONDITIONER.includes(mainCompare?.handle)) {
-        title = 'Which conditioner is for me?';
+        title = 'Which Conditioner is for Me?';
     } else if (SHAMPOO_CONDITIONER.includes(mainCompare?.handle)) {
-        title = 'Which shampoo & conditioner is for me?';
+        title = 'Which Shampoo & Conditioner is for Me?';
     }
 
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
