@@ -142,7 +142,7 @@ const ProductComparison = (props: any) => {
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
             <div className={`w-full justify-center px-0 order-2 lg:order-0 ${wrapperClass ?? ''}`}>
-                <p className={`text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>{title}</p>
+                <p className={`text-lg lg:text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>{title}</p>
                 {/* mobile */}
                 {view === 'mobile' && (
                     <div className={`lg:hidden mb-3 lg:mb-[5rem] -mr-g lg:mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
