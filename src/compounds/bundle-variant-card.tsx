@@ -110,7 +110,7 @@ const BundleVariantCard = (props) => {
             setImageSrc(customImage);
         } else {
             const src = bundleImg?.src.replace('public', '320x');
-            setImageSrc(src)
+            setImageSrc(src);
         }
     }, [bundleImg]);
 
