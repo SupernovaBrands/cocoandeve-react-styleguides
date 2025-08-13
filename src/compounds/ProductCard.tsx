@@ -419,7 +419,7 @@ const ProductCard = (props:any) => {
                     </a>
                 </p>
                 <div className="review-stars__number min-h-[20px] flex justify-center mb-1 lg:mb-[1rem]">
-                    {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
+                    {skus.length > 0 && (<YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
                 </div>
                 
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (

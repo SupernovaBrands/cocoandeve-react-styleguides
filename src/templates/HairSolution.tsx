@@ -160,7 +160,7 @@ const HairSolution = (props: any) => {
                         <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
                         <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
                     </picture>
-                    <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))] xl:left-[calc(((100%-1200px)/2)+(15px))]">
+                    <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
                         <h1 className="text-xl mb-[.5rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
                                 __html: data.banner.title,
@@ -182,7 +182,7 @@ const HairSolution = (props: any) => {
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
-                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[45px]`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} /></li>    
+                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[45px] lg:!text-lg`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} /></li>    
                                 ))}
                             </ul>
                         </div>
@@ -245,10 +245,10 @@ const HairSolution = (props: any) => {
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
                             <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6 ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
-                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
+                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px] lg:!text-lg`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
                             </ul>
-                            <a href={data.product.cta_url} className="hidden lg:w-1/6 lg:basis-1/6 lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">{data.product.cta_label}</a>
+                            <a href={data.product.cta_url} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">{data.product.cta_label}</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -287,6 +287,7 @@ const HairSolution = (props: any) => {
                                                             generalSetting={generalSetting}
                                                             store={store}
                                                             customProductTitle={null}
+                                                            hideUnderline={true}
                                                         />
                                                     })}
                                                 </Carousel.Inner>
@@ -337,6 +338,9 @@ const HairSolution = (props: any) => {
                                 second_image: data.compare?.image_left
                             }}
                             src={data.compare?.image_right?.url}
+                            rightArrowClasses={'p-hg ml-1 lg:p-[11.5px]'}
+                            leftArrowClasses={'p-hg mr-1 lg:p-[11.5px]'}
+                            svgClasses={'!h-[16.97px]'}
                         >
                             <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">{data.compare.title}</h4>
                             <p className="font-bold mb-[.25rem]">{data.compare.subtitle}</p>
@@ -352,7 +356,7 @@ const HairSolution = (props: any) => {
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
                             {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
-                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px] lg:!leading-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} lg:!text-lg whitespace-nowrap lg:h-[45px] lg:!leading-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
                             ))}
                         </ul>
                         <a href={data.result.cta_url} className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">{data.result.cta_label}</a>
