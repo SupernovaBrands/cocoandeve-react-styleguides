@@ -187,7 +187,7 @@ const BuildYourBundle = (props: any) => {
                                             <BundleCard
                                                 key={`build-your-bundle--hair--${index}`}
                                                 product={item}
-                                                className="relative mb-4 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 px-[.25rem] text-center"
+                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 store={props.store}
                                                 itemSelected={tab0Selected}
                                                 generalSetting={generalSetting}
@@ -229,7 +229,7 @@ const BuildYourBundle = (props: any) => {
                                             <BundleCard
                                                 key={`build-your-bundle--tan--${index}`}
                                                 product={item}
-                                                className="relative mb-4 lg:mb-[1rem] flex flex-col w-1/2 md:w-1/3 px-[.25rem] text-center"
+                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 generalSetting={generalSetting}
                                                 collectionTemplate={true}
                                                 store={props.store}

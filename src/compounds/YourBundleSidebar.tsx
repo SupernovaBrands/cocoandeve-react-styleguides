@@ -142,16 +142,16 @@ const YourBundleSidebar = (props: any) => {
     return (
         <div className={`lg:ml-[25px] lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
             <style>{btnInlineStyle}</style>
-            <div className={`lg:bg-primary-light lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
-                <div className={`flex bg-primary-light ${isOpen ? 'static rounded-t-[2rem] pt-4 pb-[1rem]' : 'pt-2 fixed pb-[2rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
+            <div className={`lg:bg-gray-400 lg:py-4 lg:px-2 lg:rounded-[2rem] ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
+                <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[1rem]' : 'pt-g fixed pb-[1rem]'} left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                     <p className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                         <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
-                        <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem] lg:hidden h-[26px]">
+                        <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-primary-light text-body lg:bg-white rounded-[.5rem] lg:hidden h-[26px]">
                             <span className="relative top-[1px]">{bundleDiscount}% OFF</span>
                         </div>
                     </p>
                     <div className="lg:hidden flex items-center text-primary font-bold text-sm" onClick={() => setIsOpen(!isOpen)}>
-                        <span className="mr-[.5rem] inline-block top-[2px] relative">View</span>
+                        <span className="mr-[.5rem] inline-block top-[2px] relative">View ({itemSelected.length})</span>
                         <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
                     </div>
                 </div>
@@ -160,8 +160,8 @@ const YourBundleSidebar = (props: any) => {
                     <span className="text-lg mr-[.5rem] font-bold">{formatMoney(reducedPrice, false, store)}</span>
                     <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
                 </div>
-                <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-primary-light px-2 lg:p-0 lg:block`}>
-                    <div className="flex mb-2">
+                <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
+                    <div className="flex mb-2 items-center lg:items-start">
                         <PercentageSmall className="flex-[0_0_20px]" />
                         <p className="ml-[.5rem] text-sm">{strapiData?.sidebar_desc}</p>
                     </div>
