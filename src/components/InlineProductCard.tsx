@@ -149,8 +149,13 @@ const InlineProductCard = (props: any) => {
                         {selectedVariant.price && selectedVariant.price.amount && <span className="font-bold">{formatMoney(store, parseFloat(selectedVariant.price.amount) * 100)}</span>}
                     </div>
                 </div>
-                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className="h-4 w-4 button__video-upsell" type="button">
-                    {!addingItem && <PlusCircle className={`button__video-upsell-svg svg fill-primary hover:fill-primary-dark h-full w-full ${selectedVariant.availableForSale ? '' : 'opacity-[.5]'}`} />}
+                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className={`h-4 w-4 button__video-upsell rounded-full flex items-center justify-center ${addingItem ? 'bg-white' : 'bg-primary'}`} type="button">
+                    {/* {!addingItem && <PlusCircle className={`button__video-upsell-svg svg fill-primary hover:fill-primary-dark h-full w-full ${selectedVariant.availableForSale ? '' : 'opacity-[.5]'}`} />} */}
+                    {!addingItem && (
+                        <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.21453 6.82377V10.5438H3.76653V6.82377H0.0705313V4.37577H3.76653V0.679769H6.21453V4.37577H9.93453V6.82377H6.21453Z" fill="white"/>
+                        </svg>
+                    )}
                     {addingItem && <span className="spinner-border spinner-border-sm text-primary !w-4 !h-4" role="status" />}
                 </button>
             </figure>
