@@ -484,7 +484,7 @@ const Collection = (props: any) => {
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
-                                                        className={`block-inline align-middle collection-grid__tags-link lg:min-h-[44px] lg:!min-w-[63px] rounded-full text-nowrap mr-1 py-1 px-[22px] hover:no-underline
+                                                        className={`block-inline align-middle collection-grid__tags-link lg:text-lg lg:min-h-[45px] lg:!min-w-[63px] rounded-full text-nowrap mr-1 py-1 px-[22px] hover:no-underline
                                                             ${children.handle === handle ? 'active text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
