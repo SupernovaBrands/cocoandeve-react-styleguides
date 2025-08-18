@@ -19,6 +19,11 @@ type PropType = {
 
 const PostCard: React.FC<PropType> = (props) => {
 	const { className, data, template, imgClass, textPrimary, textClass, height, pictureClass, showSubtext } = props;
+	const tagText = [];
+	if (data.tags && data.tags.length > 0) {
+		data.tags.map((item: string) => tagText.push(item.charAt(0).toUpperCase() + item.slice(1)))
+	}
+	const ariaLabel = `${tagText.join(' ')} ${data.title} Read more`;
 	return (
 		<article className={`${className}`}>
 			<figure className={`border border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-[2rem]`}>
@@ -30,7 +35,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						</picture>
 					</a>
 				)}
-				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={data.title}>
+				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={ariaLabel}>
 					<figcaption className={`${template === 'blog' || template === 'pdp' || template === 'article' ? 'p-2 flex-grow flex' : 'flex-grow'} flex flex-col ${textClass}`}>
 						<div className={`${template === 'article' ? 'badge-blog' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
 							{data.tags.length > 0 && (
