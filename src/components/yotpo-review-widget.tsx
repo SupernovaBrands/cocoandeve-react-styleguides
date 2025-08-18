@@ -136,7 +136,7 @@ const YotpoReviewWidget = (props:any) => {
 		productShopifyName,
 	} = props;
 
-	console.log('productUrl', productUrl);
+	// console.log('productUrl', productUrl);
 
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);

@@ -68,7 +68,7 @@ const ProductComparison = (props: any) => {
     const { mainCompare, productsCompare, view, wrapperClass } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
-    console.log('mainCompare', mainCompare);
+    // console.log('mainCompare', mainCompare);
 
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
     const [comparison2, setComparison2] = useState(productsCompare[0]?.tableData || []);
