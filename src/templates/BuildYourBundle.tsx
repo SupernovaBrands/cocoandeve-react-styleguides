@@ -15,6 +15,9 @@ const BuildYourBundle = (props: any) => {
     const [activeTab, setActiveTab] = useState(0);
     const [headerPos, setHeaderPos] = useState(0);
 
+    const [tab1Products, setTab1Products] = useState([]);
+    const [tab2Products, setTab2Products] = useState([]);
+
     const [tab0Selected, setTab0Selected] = useState([]);
     const [tab1Selected, setTab1Selected] = useState([]);
 
@@ -42,7 +45,7 @@ const BuildYourBundle = (props: any) => {
         swatch: null
     });
 
-    const { buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+    const { tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const cssInline = `
         .top-header {
@@ -100,8 +103,6 @@ const BuildYourBundle = (props: any) => {
         }
     }, [store]);
 
-    // console.log('render?', props.hairData.find((it) => it.handle === 'scalp-renewal-set'));
-
     useEffect(() => {
         // console.log('modal detail open', productData.open);
         if (productData.open) document.body.classList.add('!overflow-hidden');
@@ -129,8 +130,18 @@ const BuildYourBundle = (props: any) => {
 
 		setPlatform(os);
 	}, []);
+
+    useEffect(() => {
+        if (hairData.length > 0) setTab1Products(hairData);
+    }, [hairData]);
+    useEffect(() => {
+        if (tanData.length > 0) setTab2Products(tanData);
+    }, [tanData]);
+
+
+    console.log('tab2Products', tab2Products);
     
-    return (
+    return strapiData ? (
         <div>
             <style>{cssInline}</style>
             <figure className="flex flex-wrap relative">
@@ -179,11 +190,11 @@ const BuildYourBundle = (props: any) => {
                 </div>
                 <TabContent active={activeTab === 0}>
                     <div className="flex flex-wrap justify-center">
-                        {props.hairData?.length > 0 && (
+                        {tab1Products?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {props.hairData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
+                                        {tab1Products.filter((item) => item && item.priceInCent > 0).map((item, index) => 
                                             <BundleCard
                                                 key={`build-your-bundle--hair--${index}`}
                                                 product={item}
@@ -216,16 +227,16 @@ const BuildYourBundle = (props: any) => {
                                 </section>
                             </>
                         )}
-                        {props.hairData?.length <= 0 && <LoadingEl />}
+                        {tab1Products?.length <= 0 && <LoadingEl />}
                     </div>
                 </TabContent>
                 <TabContent active={activeTab === 1}>
                     <div className="flex flex-wrap justify-center">
-                        {props.tanData?.length > 0 && (
+                        {tab2Products?.length > 0 && (
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {props.tanData.filter((item) => item.availableForSale && item.priceInCent > 0).map((item, index) => 
+                                        {tab2Products.filter((item) => item && item.priceInCent > 0).map((item, index) => 
                                             <BundleCard
                                                 key={`build-your-bundle--tan--${index}`}
                                                 product={item}
@@ -259,7 +270,7 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {props.tanData?.length <=0 && <LoadingEl />}
+                        {tab2Products?.length <=0 && <LoadingEl />}
                     </div>
                 </TabContent>
             </div>
@@ -291,7 +302,9 @@ const BuildYourBundle = (props: any) => {
                     handleClose={() => setProductData({...productData, ...{ open: false }})} />
             </Modal>
         </div>
-    );
+    ) : <div className="flex items-center justify-center">
+        <LoadingEl />
+    </div>;
 };
 
 export default BuildYourBundle;

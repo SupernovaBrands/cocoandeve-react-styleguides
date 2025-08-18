@@ -244,7 +244,7 @@ const BundleCard = (props:any) => {
                 <Eye className="svg h-[1rem] w-[1rem]" />
             </p>
             <div className={`pt-0 relative product-card__content lg:px-[.5rem]`}>
-                <p className={`text-sm lg:text-base text-body hover:text-body w-full text-left min-h-[36px] px-0 lg:px-0 lg:min-h-[36px] flex flex-col mt-[.75rem] lg:mt-[1rem] mb-[.5rem] justify-center pr-[.5rem] lg:font-bold`}>
+                <p role="button" onClick={(e) => openModal(e)} className={`text-sm lg:text-base text-body hover:text-body w-full text-left min-h-[36px] px-0 lg:px-0 lg:min-h-[36px] flex flex-col mt-[.75rem] lg:mt-[1rem] mb-[.5rem] justify-center pr-[.5rem] lg:font-bold`}>
                     {product.title}
                 </p>
                 <div className="flex flex-col lg:flex-row lg:justify-between">
