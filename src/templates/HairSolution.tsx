@@ -176,13 +176,13 @@ const HairSolution = (props: any) => {
             )}
 
             {data.range && (
-                <section className="mt-3 mb-5 lg:mt-5 lg:mb-[120px]">
+                <section className="mt-3 mb-5 lg:mt-5 lg:mb-5">
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl">{data.range.title}</h2>
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
-                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[45px] lg:!text-lg`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} /></li>    
+                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[40px]`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} /></li>    
                                 ))}
                             </ul>
                         </div>
@@ -228,7 +228,7 @@ const HairSolution = (props: any) => {
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className="mt-[1rem] inline-block lg:mt-[1.5rem] lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold mb-1">{row.cta_label}</a>
+                                    <a href={row.cta_url} className="mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg btn-outline-primary rounded-full no-underline hover:no-underline font-bold mb-1">{row.cta_label}</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
@@ -237,7 +237,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className="my-3 lg:mt-[120px]">
+                <section className="my-3 lg:mt-5">
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
@@ -245,7 +245,7 @@ const HairSolution = (props: any) => {
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
                             <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6 ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
-                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[45px] lg:!text-lg`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
+                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
                             </ul>
                             <a href={data.product.cta_url} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">{data.product.cta_label}</a>
@@ -323,7 +323,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.compare && (
-                <section className="lg:mb-[120px]">
+                <section className="lg:mb-5">
                     {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
@@ -351,12 +351,12 @@ const HairSolution = (props: any) => {
             )}
 
             {data.result && data.compare?.image_right?.url && (
-                <section className="my-3 lg:mb-5 lg:mt-[120px] container px-0">
+                <section className="my-3 lg:mb-5 lg:mt-5 container px-0">
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
                             {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
-                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} lg:!text-lg whitespace-nowrap lg:h-[45px] lg:!leading-[45px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
                             ))}
                         </ul>
                         <a href={data.result.cta_url} className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">{data.result.cta_label}</a>
