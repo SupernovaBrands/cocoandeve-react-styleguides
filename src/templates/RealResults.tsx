@@ -284,7 +284,7 @@ const RealResults = () => {
 				{showMore && (
 					<div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
 						<div className="col text-center">
-							<a href="#!" className={`bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn block hover:no-underline ${showMore}`} onClick={loadMore}>
+							<a role="button" href="#!" className={`bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn block hover:no-underline ${showMore}`} onClick={loadMore}>
 								Show more reviews
 							</a>
 						</div>

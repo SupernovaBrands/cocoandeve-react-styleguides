@@ -136,6 +136,8 @@ const YotpoReviewWidget = (props:any) => {
 		productShopifyName,
 	} = props;
 
+	console.log('productUrl', productUrl);
+
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(1);
@@ -904,7 +906,7 @@ const YotpoReviewWidget = (props:any) => {
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={``}>
+													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
 														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
