@@ -14,6 +14,7 @@
     "@shopify/theme-images": "^4.1.1",
     "@svgr/webpack": "^6.5.1",
     "axios": "^1.4.0",
+    "cocoandeve-react-styleguides": "github:SupernovaBrands/cocoandeve-react-styleguides#dev20250818r02",
     "crypto-js": "^4.2.0",
     "embla-carousel": "8.0.0",
     "embla-carousel-auto-height": "8.0.0",
