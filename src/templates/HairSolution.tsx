@@ -176,9 +176,13 @@ const HairSolution = (props: any) => {
             )}
 
             {data.range && (
-                <section className="mt-3 mb-5 lg:mt-5 lg:mb-5">
+                <section className="mt-3 mb-3 lg:mt-5 lg:mb-5">
                     <div className="container">
-                        <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl">{data.range.title}</h2>
+                        <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
+                            dangerouslySetInnerHTML={{
+                                __html: data.range.title,
+                            }}
+                        />
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
