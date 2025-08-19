@@ -98,7 +98,7 @@ const RealResultCard = (props) => {
 	// console.log('escaped', parse(data.label)?.props?.children);
 	
 	
-	console.log('test', children);
+	// console.log('test', children);
 	// const test = parse(data.label).toString
 
 	return (
