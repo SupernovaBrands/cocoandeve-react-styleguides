@@ -165,8 +165,8 @@ const ProudToBe = (props:any) => {
     }
 
     return (
-        <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
-        <h2 className="mb-0">Proud to be</h2>
+        <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2 mt-[0!important]">
+        {/* <h2 className="mb-0">Proud to be</h2> */}
         <div className="">
                 <div className="carousel--scroll position-relative md:overflow-hidden">
                     <div className="main-box overflow-hidden -mx-hg md:-mx-1">
@@ -184,7 +184,7 @@ const ProudToBe = (props:any) => {
                         </Carousel.Wrapper> */}
                         <ul onScroll={scrolling} ref={scrollEl}
                             onMouseDown={handleDragStart} onMouseUp={handleDragEnd} onMouseMove={handleDrag}
-                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden sm:mb-1`} role="listbox" aria-label="Carousel Items">
+                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden sm:mb-1 mt-[0!important] mb-[0!important]`} role="listbox" aria-label="Carousel Items">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
                                     return null;
