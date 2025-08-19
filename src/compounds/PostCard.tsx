@@ -23,7 +23,12 @@ const PostCard: React.FC<PropType> = (props) => {
 	if (data.tags && data.tags.length > 0) {
 		data.tags.map((item: string) => tagText.push(item.charAt(0).toUpperCase() + item.slice(1)))
 	}
-	const ariaLabel = `${tagText.join(' ')} ${data.title} Read more`;
+	
+	let descriptionText = '';
+	if (showSubtext) {
+		descriptionText = template === 'pdp' ? data.description : data.description.replace(/<[^>]*>?/gm, '');
+	}
+	const ariaLabel = `${tagText.join(' ')} ${data.title}${showSubtext ? ` ${parse(descriptionText)}` : ''} Read more`;
 	return (
 		<article className={`${className}`}>
 			<figure className={`border border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-[2rem]`}>

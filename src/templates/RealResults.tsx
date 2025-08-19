@@ -284,7 +284,7 @@ const RealResults = () => {
 				{showMore && (
 					<div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
 						<div className="col text-center">
-							<a role="button" href="#!" className={`bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn block hover:no-underline ${showMore}`} onClick={loadMore}>
+							<a role="button" tabIndex={0} href="#!" className={`bg-transparent hover:bg-primary hover:text-white border-primary text-primary btn-lg btn block hover:no-underline ${showMore}`} onClick={loadMore}>
 								Show more reviews
 							</a>
 						</div>
@@ -294,17 +294,17 @@ const RealResults = () => {
 			<div className="container">
 				<h2 className="h1 mb-2 w-full text-center">Coco & Eve’s Customer Reviews</h2>
 				<div className="flex flex-wrap justify-center lg:-mx-g sm:-mx-hg">
-					<ul id="real-result__yotpo-tab" className="flex-wrap list-none pl-0 mb-2 text-center flex" role="tablist">
-						<li className="nav-item" role="presentation">
+					<ul id="real-result__yotpo-tab" className="flex-wrap list-none pl-0 mb-2 text-center flex">
+						<li className="nav-item">
 							<TabNav className={`font-normal lg:px-2 sm:px-1 w-auto block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border p-0 leading-[2.3!important] w-[5.625em] rounded-tl-[6px] rounded-br-[0] rounded-tr-[0] rounded-bl-[6px] border-body ${activeTab === 'tan' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'} `} title='Tan & SPF' active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} />
 						</li>
-						<li className="nav-item" role="presentation">
+						<li className="nav-item">
 							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[4.625em] border-body ${activeTab === 'hair' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} />
 						</li>
-						<li className="nav-item" role="presentation">
+						<li className="nav-item">
 							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[4.625em] border-body ${activeTab === 'skin' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} />
 						</li>
-						<li className="nav-item" role="presentation">
+						<li className="nav-item">
 							<TabNav className={`font-normal block no-underline hover:no-underline lg:text-lg sm:text-[1rem] mb-0 border border-l-0 p-0 leading-[2.3!important] lg:w-[5.625em] sm:w-[4.625em] border-body rounded-bl-[0] rounded-tl-[0] rounded-br-[6px] rounded-tr-[6px] ${activeTab === 'body' ? ' bg-primary text-white hover:text-white' : 'bg-white text-body'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} />
 						</li>
 					</ul>
