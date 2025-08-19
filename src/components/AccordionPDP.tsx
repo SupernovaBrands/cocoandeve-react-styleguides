@@ -17,6 +17,7 @@ const AccordionPDP = (props: any) => {
 		}
 
 		props.onClick(id, afterClick);
+		//setTimeout(() => scrollToId(id, targetEl), 150)
 	}
 
 	return (
