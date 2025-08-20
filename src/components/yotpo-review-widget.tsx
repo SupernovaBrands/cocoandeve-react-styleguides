@@ -934,7 +934,7 @@ const YotpoReviewWidget = (props:any) => {
 																	<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 																)}
 																{/* preloade image for modal, to make it fast load when popup opened */}
-																<img rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
+																<img alt={`Review image media ${index}`} rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
 															</button>
 														))}
 													</div>
