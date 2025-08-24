@@ -48,8 +48,38 @@ const BundleVariantCard = (props) => {
         }
     }
 
+    const hardcodeImages = {
+        'bronzing-self-tanner-drops': {
+            au: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
+            },
+        },
+        'antioxidant-glow-cream': {
+            us: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+            },
+        },
+    };
+
+    const getHardcodedImage = (handle, store, selectedValue) => {
+        const isValid =
+            (handle === 'bronzing-self-tanner-drops' && store === 'au') ||
+            (handle === 'antioxidant-glow-cream' && store === 'us');
+
+        if (!isValid) return null;
+
+        const storeImages = hardcodeImages[handle]?.[store];
+        if (!storeImages) return null;
+
+        return selectedValue === 'medium' ? storeImages.medium : storeImages.default;
+    };
+
     const onChangeOption = (e) => {
         const [optionType, optionName] = bundleKey.split(':');
+        const selectedValue = e.target.value.toLowerCase();
+
         const bundleGroup = productShopify.variants.edges.filter((node) => {
             return node.node.selectedOptions.find((op) => op.name === optionType && op.value === optionName);
         });
@@ -59,26 +89,9 @@ const BundleVariantCard = (props) => {
 
         if (selectedVar) setCurrentVariant(selectedVar.node);
 
-        if (productShopify.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const selectedValue = e.target.value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
-        }
-
-        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
-            const selectedValue = e.target.value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
+        const customImage = getHardcodedImage(productShopify.handle, store, selectedValue);
+        if (customImage) {
+            setImageSrc(customImage);
         }
     };
 
@@ -89,19 +102,15 @@ const BundleVariantCard = (props) => {
     const bundleImg = slides[slides.length - 1];
     const urlSet = productStrapi?.bundle_handle || null;
 
-    useEffect(() =>{
-        if (productShopify.handle === 'antioxidant-glow-cream' && ['us'].includes(store)) {
-            const selectedValue = currentVariant.selectedOptions[1].value.toLowerCase();
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x';
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x';
-            if (selectedValue === 'medium') {
-                setImageSrc(medImg)
-            } else {
-                setImageSrc(darkImg)
-            }
+    useEffect(() => {
+        const selectedValue = currentVariant.selectedOptions[1]?.value.toLowerCase();
+        const customImage = getHardcodedImage(productShopify.handle, store, selectedValue);
+
+        if (customImage) {
+            setImageSrc(customImage);
         } else {
             const src = bundleImg.src.replace('public', '320x');
-            setImageSrc(src)
+            setImageSrc(src);
         }
     }, [bundleImg]);
 
@@ -114,12 +123,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={imageSrc} />
+                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
+                        <img alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
@@ -140,7 +149,7 @@ const BundleVariantCard = (props) => {
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
                                 <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25 border-white">
-                                    <select onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
+                                    <select aria-label="Select Bundle Option" onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>

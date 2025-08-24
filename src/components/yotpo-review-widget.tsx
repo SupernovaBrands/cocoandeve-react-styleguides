@@ -136,6 +136,8 @@ const YotpoReviewWidget = (props:any) => {
 		productShopifyName,
 	} = props;
 
+	// console.log('productUrl', productUrl);
+
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(1);
@@ -867,7 +869,7 @@ const YotpoReviewWidget = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div key={review.id} className="border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
 													{review.user_name}
@@ -905,7 +907,7 @@ const YotpoReviewWidget = (props:any) => {
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={``}>
+													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
 														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
@@ -933,7 +935,7 @@ const YotpoReviewWidget = (props:any) => {
 																	<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 																)}
 																{/* preloade image for modal, to make it fast load when popup opened */}
-																<img rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
+																<img alt={`Review image media ${index}`} rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
 															</button>
 														))}
 													</div>

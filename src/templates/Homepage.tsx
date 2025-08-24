@@ -222,7 +222,7 @@ const Homepage = () => {
 			<Service />
             <Playground featuredCollection={featuredCollection} isStyleguide={true} />
 			<QuizReward />
-            <Editors />
+            {/* <Editors /> */}
             <Instagram className="bg-pink-light" isStyleguide={true} />
 		</>
     );

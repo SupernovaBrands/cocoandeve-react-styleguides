@@ -68,10 +68,12 @@ const ProductComparison = (props: any) => {
     const { mainCompare, productsCompare, view, wrapperClass } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
+    // console.log('mainCompare', mainCompare);
+
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
     const [comparison2, setComparison2] = useState(productsCompare[0]?.tableData || []);
     const [scrollProgress, setScrollProgress] = useState(0);
-    
+
     const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options});
     const [emblaRef2, emblaApi2] = useEmblaCarousel({ align: 'start', ...options2});
 
@@ -101,11 +103,46 @@ const ProductComparison = (props: any) => {
             })
         }
 	}, [emblaApi1, onScroll, emblaApi2, onScroll2]);
-    
+
+    let title = 'Haircare Range';
+    const MASKS = [
+        'super-nourishing-coconut-fig-hair-masque',
+        'repairing-restoring-hair-mask',
+        'pro-youth-hair-scalp-mask'
+    ];
+    const SHAMPOO = [
+        'super-hydrating-shampoo',
+        'sweet-repair-repairing-restoring-shampoo',
+        'pro-youth-shampoo',
+        'hair-volumising-shampoo',
+        'clarifying-detox-shampoo',
+    ];
+    const CONDITIONER = [
+        'super-hydrating-cream-conditioner',
+        'sweet-repair-repairing-restoring-conditioner',
+        'pro-youth-conditioner',
+        'hair-volumising-conditioner',
+    ];
+    const SHAMPOO_CONDITIONER = [
+        'super-hydrating-shampoo-conditioner-set',
+        'repair-restore-shampoo-conditioner-set',
+        'pro-youth-shampoo-conditioner',
+        'hair-volumising-shampoo-conditioner-set',
+    ];
+    if (MASKS.includes(mainCompare?.handle)) {
+        title = 'Which Hair Mask is for Me?';
+    } else if (SHAMPOO.includes(mainCompare?.handle)) {
+        title = 'Which Shampoo is for Me?';
+    } else if (CONDITIONER.includes(mainCompare?.handle)) {
+        title = 'Which Conditioner is for Me?';
+    } else if (SHAMPOO_CONDITIONER.includes(mainCompare?.handle)) {
+        title = 'Which Shampoo & Conditioner is for Me?';
+    }
+
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
             <div className={`w-full justify-center px-0 order-2 lg:order-0 ${wrapperClass ?? ''}`}>
-                <p className={`text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>Haircare Range</p>
+                <p className={`text-lg lg:text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>{mainCompare?.sectionTitle !== '' ? mainCompare?.sectionTitle : title}</p>
                 {/* mobile */}
                 {view === 'mobile' && (
                     <div className={`lg:hidden mb-3 lg:mb-[5rem] -mr-g lg:mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>
@@ -123,7 +160,7 @@ const ProductComparison = (props: any) => {
                                 })}
                             </Carousel.Inner>
                         </Carousel.Wrapper>
-                        
+
                         {INIT_FINALS.length > 2 && (
                             <div className="px-g">
                                 <div className="carousel__progress bg-gray-400">
@@ -151,7 +188,7 @@ const ProductComparison = (props: any) => {
                                 <Carousel.Wrapper emblaApi={emblaApi2} className={'lg:flex-1 lg:w-3/12 lg:basis-3/12 lg:px-g'}>
                                     <Carousel.Inner emblaRef={emblaRef2} innerClass={'bg-pink-light rounded h-full'} className={'lg:h-full'}>
                                         {INIT_FINALS.slice(1).map((data, index) => (
-                                            <ImageFigure 
+                                            <ImageFigure
                                                 key={`img-figure-dt-${index}`}
                                                 src={data.src}
                                                 srcSet={data.src}
@@ -185,6 +222,7 @@ const ProductComparison = (props: any) => {
                                                             <DotButton
                                                                 onClick={() => onClick3(index)}
                                                                 className="carousel__dot"
+                                                                aria-label={`Go to slide ${index + 1}`}
                                                             />
                                                         </li>
                                                     ))}
@@ -198,7 +236,7 @@ const ProductComparison = (props: any) => {
                     </div>
                 )}
             </div>
-        
+
         </>
 	);
 };

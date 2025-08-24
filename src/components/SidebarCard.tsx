@@ -3,10 +3,10 @@ import parse from 'html-react-parser';
 
 const SidebarCard = ({ data }) => (
 	<article className="post-card flex mb-0 mr-g lg:mr-0">
-		<a href={data.link} className="shrink-0 mr-g">
+		<a href={data.link} className="shrink-0 mr-g" aria-label={`Read full article on ${data.title}`}>
 			<picture>
 				<source srcSet={data.srcSet} media="(min-width: 992px)" />
-				<img src={data.src} className="rounded" loading="lazy" alt={data.alt} width={96} height={96} />
+				<img alt={`${data.alt ?? `Featured image of ${data.title} article`}`} src={data.src} className="rounded" loading="lazy" width={96} height={96} />
 			</picture>
 		</a>
 		<figcaption className="flex flex-col">
