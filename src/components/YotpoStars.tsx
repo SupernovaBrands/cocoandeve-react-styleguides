@@ -26,9 +26,9 @@ const YotpoStar = (props: any) => {
 				}
 		});
 	};
-	
+
 	// console.log('props.sku123');
-	
+
 	useEffect(() => {
 		if (props.sku.length > 0 && !init) fetchStar();
 	}, []);
@@ -41,8 +41,8 @@ const YotpoStar = (props: any) => {
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<ConditionalWrap
                 condition={props?.productHandle}
-                wrap={children => <a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">{children}</a>}
-                elseWrap={children => <div className="text-sm">{children}</div>}
+                wrap={children => <a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-md" aria-label="Write a review for this product">{children}</a>}
+                elseWrap={children => <div className="text-md">{children}</div>}
             >
 				{!props.smSingleStarAllDevice && (
 					<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />

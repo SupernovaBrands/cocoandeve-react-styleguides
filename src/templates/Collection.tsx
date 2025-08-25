@@ -424,7 +424,7 @@ const Collection = (props: any) => {
                         </aside>
                     )}
                     <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0`}>
-                        <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
+                        <div className={`flex flex-wrap w-full justify-between ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'} ${abtestProductCard !== 'origin' ? 'lg:px-[28.5px]' : 'lg:px-g'}`}>
                             <h1 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
@@ -517,7 +517,7 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return index === 2 && ( showBundleCard || showQuizCard ) ? (
                                     <>
-                                        <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
+                                        <div className={`w-full px-hg mb-4 lg:mb-5 lg:h-full ${abtestProductCard !== 'origin' ? 'md:w-1/4 lg:pr-[28.5px] lg:pl-[28.5px]' : 'md:w-1/3 lg:px-g'}`}>
                                             {showBundleCard && (
                                                 <BannerCard
                                                     className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}
@@ -529,6 +529,7 @@ const Collection = (props: any) => {
                                                     ctaLabel="Build Now"
                                                     url="/pages/build-your-own-bundle"
                                                     store={store}
+                                                    abtestProductCard={abtestProductCard}
                                                     imgAlt="Illustration of a person build items to find their perfect bundle"
                                                 />
                                             )}
@@ -543,6 +544,7 @@ const Collection = (props: any) => {
                                                     ctaLabel="Take the Quiz"
                                                     url="/pages/self-tan-quiz"
                                                     store={store}
+                                                    abtestProductCard={abtestProductCard}
                                                     imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
                                                 />
                                             )}
@@ -572,7 +574,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -593,7 +595,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -615,7 +617,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -660,7 +662,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -681,7 +683,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -703,7 +705,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
