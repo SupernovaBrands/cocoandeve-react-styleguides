@@ -5,7 +5,7 @@ import ProductCardQuiz from '~/compounds/ProductCardQuiz';
 const QuizRewardTest = (props: any) => {
 	const { store } = props;
 	return (
-		<section className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-0">
+		<section className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-4">
 			<p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
 			<div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz

@@ -202,7 +202,7 @@ const ProductCarousel = (props: any) => {
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] text-center"
 
                                             button={true}
                                             setWaitlistData={setWaitlistData}

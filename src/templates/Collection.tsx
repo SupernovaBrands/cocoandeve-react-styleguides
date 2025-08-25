@@ -418,7 +418,7 @@ const Collection = (props: any) => {
                         </aside>
                     )}
                     <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0`}>
-                        <div className={`flex flex-wrap w-full justify-between lg:px-g ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'}`}>
+                        <div className={`flex flex-wrap w-full justify-between ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'} ${abtestProductCard !== 'origin' ? 'lg:px-[28.5px]' : 'lg:px-g'}`}>
                             <h1 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
@@ -513,11 +513,12 @@ const Collection = (props: any) => {
                                     <>
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz
-                                                className={`relative w-full md:w-1/3 px-hg mb-4 ${abtestProductCard === 'origin' ? 'lg:mb-5 lg:px-g' : 'lg:px-25'} lg:h-full`}
+                                                className={`relative w-full px-hg mb-4 ${abtestProductCard === 'origin' ? 'md:w-1/3 lg:mb-5 lg:px-g' : 'md:w-1/4 lg:px-[28.5px]'} lg:h-full`}
                                                 imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                                 imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
                                                 key={`collection-quiz-card--${handle}--${index}`}
                                                 quizSetting={collectionSettings.quizSetting}
+                                                textClassName={`${abtestProductCard === 'origin' ? '' : 'lg:!text-xs'}`}
                                                 store={store}
                                                 />
                                         )}
@@ -546,7 +547,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -567,7 +568,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -589,7 +590,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -634,7 +635,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -655,7 +656,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -677,7 +678,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hgg pl-hgg text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -700,11 +701,12 @@ const Collection = (props: any) => {
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz
-                                    className={`relative w-full md:w-1/3 px-hg mb-4 ${abtestProductCard === 'origin' ? 'lg:mb-5 lg:px-g' : 'lg:px-hg'} lg:h-full`}
+                                    className={`relative w-full px-hg mb-4 ${abtestProductCard === 'origin' ? 'md:w-1/3 lg:mb-5 lg:px-g' : 'md:w-1/4 lg:px-[28.5px]'} lg:h-full`}
                                     imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
                                     imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
                                     key={`collection-quiz-card--${handle}--99`}
                                     quizSetting={collectionSettings.quizSetting}
+                                    textClassName={`${abtestProductCard === 'origin' ? '' : 'lg:!text-xs'}`}
                                     store={store}
                                     />
                             )}
