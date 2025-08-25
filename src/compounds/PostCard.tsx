@@ -63,9 +63,9 @@ const PostCard: React.FC<PropType> = (props) => {
 							</div>
 						)}
 						{template === 'blog' || template === 'pdp' || template === 'article' ? (
-							<span className={`btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`} aria-label={data.title}>Read more</span>
+							<strong className={`btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`} aria-label={data.title}>Read more</strong>
 						) : (
-							<span className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full" aria-label={data.title}>Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></span>
+							<strong className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full" aria-label={data.title}>Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></strong>
 						)}
 						{/* content */}
 					</figcaption>

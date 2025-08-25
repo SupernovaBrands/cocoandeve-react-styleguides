@@ -850,7 +850,7 @@ const YotpoReviewWidget = (props:any) => {
 									aria-controls="yotpoReviewForm"
 									onClick={() => {
 										handleForm('review');
-										if (!canCreate) window.location.href = `${productUrl}#write-a-review`;
+										if (!canCreate) window.location.href = `${productUrl}?write-a-review=true`;
 									}}
 								>
 									{tStrings.yotpo.beFirstReview}
@@ -1003,7 +1003,7 @@ const YotpoReviewWidget = (props:any) => {
 									aria-controls="yotpoQuestionForm"
 									onClick={() => {
 										handleForm('question')
-										if (!canCreate) window.location.href = `${productUrl}#write-a-review`;
+										if (!canCreate) window.location.href = `${productUrl}?write-a-review=true`;
 									}}
 								>
 									{tStrings.yotpo.beFirstQuestion}

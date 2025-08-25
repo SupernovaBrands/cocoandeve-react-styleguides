@@ -39,17 +39,17 @@ const YotpoStar = (props: any) => {
 
 	return init ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
-			<a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm" aria-label="Write a review for this product">
+			<a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">
 				{!props.smSingleStarAllDevice && (
 					<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 				)}
 			</a>
 			{props.smSingleStar && (
 				<>
-					<a className="review-star__v2" href={`/products/${props?.productHandle}#write-a-review`} aria-label="Write a review for this product">
+					<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
 						<ReviewStarSingle className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'}`} />
 					</a>
-					<a className="review-star__v2" href={`/products/${props?.productHandle}#write-a-review`} aria-label="Write a review for this product">
+					<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
 						<span className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'} ml-25`}>{`${score ? score.toFixed(1) : 0}/5.0`}</span>
 					</a>
 				</>
@@ -57,7 +57,7 @@ const YotpoStar = (props: any) => {
 			{props.showScore && score && <span className="ml-25">({`${score?.toFixed(0)}`})</span>}
 			{props.showTotal && (
 				<span className="ml-25 review-star__total">
-					<a href={`/products/${props?.productHandle}#write-a-review`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-xs text-body hover:text-primary underline yotpo-start__number`} aria-label={`Total reviews (${total?.toFixed(0)})`}>({total?.toFixed(0)})</a>
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-xs text-body hover:text-primary underline yotpo-start__number`} aria-label={`Total reviews (${total?.toFixed(0)})`}>({total?.toFixed(0)})</a>
 				</span>
 			)}
 		</div>

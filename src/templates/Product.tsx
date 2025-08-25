@@ -354,7 +354,7 @@ const Product = (props: any) => {
                             <h2 className="mb-0">Proud to be</h2>
                             <div className="">
                                 <div className="carousel--scroll position-relative">
-                                    <ul className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 mb-1 overflow-x-auto overflow-y-hidden" role="listbox">
+                                    <ul className="[scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 mb-1 overflow-x-auto overflow-y-hidden">
                                         <li className="col-2 flex items-center flex-col px-1 carousel-item active" aria-label="100% Natural DHA">
                                             <NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span>
                                         </li>

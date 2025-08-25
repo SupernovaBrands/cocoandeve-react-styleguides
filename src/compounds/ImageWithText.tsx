@@ -15,7 +15,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = (props) => {
                     <div className="sm:mx-0 lg:mx-0">
                         <picture>
                             {props.srcSet && <source srcSet={props.srcSet} media="(min-width: 992px)" />}
-                            <img src={props.src} className={`w-full ${props.reverse ? 'lg:h-[274px]' : 'lg:h-[264px]'}`} alt="" />
+                            <img src={props.src} className={`w-full ${props.reverse ? 'lg:h-[274px]' : 'lg:h-[264px]'}`} alt={`Our story banner text`} />
                         </picture>
                     </div>
                 )}

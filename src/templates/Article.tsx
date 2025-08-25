@@ -446,7 +446,7 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle}/>
                         <BlogNavTag href="/blogs/news/tagged/skin" title="Skin"/>
                         <BlogNavTag href="/blogs/news/tagged/body" title="Body"/>
-                        <BlogNavTag href="/blogs/news#how-to-tab" title="How to's"/>
+                        <BlogNavTag href="/blogs/news?how-to-tab=true" title="How to's"/>
                     </div>
                 )} */}
                 <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
@@ -459,13 +459,13 @@ const Article = (props) => {
                                 <a href={featuredImageLink}>
                                     <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
                                         <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
                                     </picture>
                                 </a>
                             ) : (
                                 <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
                                     <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt || ''} title={content?.title} fetchPriority="high" />
+                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
                                 </picture>
                             )
                         )}

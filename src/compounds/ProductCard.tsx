@@ -405,7 +405,7 @@ const ProductCard = (props:any) => {
                     )}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt="" loading="lazy" />}
+                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt={`Product card 2nd image of ${product?.title}`} loading="lazy" />}
                         </picture>
                     )}
                 </picture>
