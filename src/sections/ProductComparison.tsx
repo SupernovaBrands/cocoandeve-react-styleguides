@@ -29,7 +29,7 @@ const ImageFigure = (props: any) => (
             <figcaption className="font-bold px-g min-h-[3rem] lg:min-h-3 flex items-center justify-center pb-[.5rem] lg:pb-0">{props.title}</figcaption>
             <picture className="block px-[2.031rem] lg:mt-4 lg:px-0">
                 <source srcSet={props.srcSet} media="(min-width: 992px)" />
-                <img src={props.src} className="bg-pink-light w-full" alt="" loading="lazy" />
+                <img src={props.src} className="bg-pink-light w-full" alt={`Compare image of ${props.title}`} loading="lazy" />
             </picture>
         </figure>
     </ConditionalWrap>

@@ -97,7 +97,7 @@ const Blog = (props) => {
     };
 
 	useEffect(() => {
-		if (window.location.href.includes('#how-to-tab')) {
+		if (window.location.href.includes('#how-to-tab') || window.location.href.includes('how-to-tab=true')) {
 			setActiveFrame(!activeFrame);
 			setActive(true);
 		} else {
@@ -110,7 +110,7 @@ const Blog = (props) => {
 	useEffect(() => {
 		const tagContainer = document.getElementById('navBlogTags');
 		let activeTag = document.querySelector('#navBlogTags a.active');
-		if (window.location.href.includes('#how-to-tab')) {
+		if (window.location.href.includes('#how-to-tab') || window.location.href.includes('how-to-tab=true')) {
 			activeTag = document.querySelector('#how-to-nav');
 		}
 
@@ -135,7 +135,7 @@ const Blog = (props) => {
 					<BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-					<a href="/blogs/news#how-to-tab" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
+					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (
 					<>
@@ -148,7 +148,7 @@ const Blog = (props) => {
 											{!isLoading && (
 												<picture className="cursor-pointer embed-responsive m-0" data-src={item.video_url} onClick={handlOpenModal}>
 													<source srcSet={item.src.replace('/public', '/750x')} media="(min-width: 992px)" width="368" height="192"></source>
-													<img className="w-full h-[revert-layer]" alt="" loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
+													<img className="w-full h-[revert-layer]" alt={``} loading="lazy" width="412" height="214" src={item.src.replace('/public', '/750x')}/>
 													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 54"
 														className="absolute text-white w-full size-[3.25em] lg:size-[4em] fill-white top-0 bottom-0 m-auto lg:w-full">
 															<path d="M27 0a27 27 0 1027 27A27 27 0 0027 0zm11.371 27.86a1.929 1.929 0 01-.866.866v.01L22.076 36.45a1.929 1.929 0 01-2.791-1.736V19.286a1.929 1.929 0 012.791-1.726L37.5 25.274a1.928 1.928 0 01.871 2.586z"></path>
@@ -159,7 +159,7 @@ const Blog = (props) => {
 												{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
 													<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
 												) : ''}
-												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a href="#" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a tabIndex={0} role="button" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 											</figcaption>
 										</figure>
 									</div>
