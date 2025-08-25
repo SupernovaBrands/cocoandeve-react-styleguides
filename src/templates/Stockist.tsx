@@ -64,7 +64,7 @@ const Stockist = (props: any) => {
                 <form className="flex flex-wrap justify-center items-center -mx-25">
                     <label className="w-auto md:w-auto my-1 lg:text-lg sm:=text-sm font-bold lg:px-25">{content.label_title}</label>
                     <div className="w-auto mt-1 mb-[1rem] lg:mb-1 px-[5px]">
-                        <select className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
+                        <select title="Change your country or region" className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
