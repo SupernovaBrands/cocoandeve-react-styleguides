@@ -423,8 +423,8 @@ const Collection = (props: any) => {
                             </ul>
                         </aside>
                     )}
-                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0`}>
-                        <div className={`flex flex-wrap w-full justify-between ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'} ${abtestProductCard !== 'origin' ? 'lg:px-[28.5px]' : 'lg:px-g'}`}>
+                    <div className={`w-full lg:w-3/4 collection-template__products flex flex-wrap items-start min-h-[400px] px-hg lg:px-0 ${abtestProductCard !== 'origin' ? 'lg:max-w-[828px]' : ''}`}>
+                        <div className={`flex flex-wrap w-full justify-between ${handle === 'all' ? 'lg:mb-2' : 'lg:mb-0'} ${abtestProductCard !== 'origin' ? 'lg:px-[16px]' : 'lg:px-g'}`}>
                             <h1 className="h1 hidden lg:block w-full lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
@@ -459,7 +459,7 @@ const Collection = (props: any) => {
                                                     })}
                                                 </select>
                                             </div>
-                                            <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
+                                            <div className={`w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 ${abtestProductCard !== 'origin' ? 'lg:max-w-[120px]' : ''}`}>
                                                 <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 bg-gray-400 border border-gray-400 pl-g lg:min-w-[154px] pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
                                                     <option value="featured">Sort By</option>
                                                     <option value="best-selling">Best selling</option>
@@ -484,7 +484,7 @@ const Collection = (props: any) => {
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
-                                                        className={`block-inline align-middle collection-grid__tags-link lg:text-lg lg:min-h-[45px] lg:!min-w-[63px] rounded-full text-nowrap mr-1 py-1 px-[22px] hover:no-underline
+                                                        className={`block-inline align-middle collection-grid__tags-link lg:text-lg lg:min-h-[45px] ${index === 0 ? 'lg:!min-w-[63px]' : '' } rounded-full text-nowrap mr-1 py-1 ${ abtestProductCard === 'origin' ? 'px-[22px]' : 'px-[20px]'} hover:no-underline
                                                             ${children.handle === handle ? 'active text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
@@ -507,7 +507,7 @@ const Collection = (props: any) => {
                             )}
                             {collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>}
                         </div>
-                        <div className={`flex flex-wrap collection-grid overflow-hidden w-full`}>
+                        <div className={`flex flex-wrap collection-grid overflow-hidden w-full ${abtestProductCard !== 'origin' ? 'lg:-mx-[5px] lg:min-w-[835px]' : ''}`}>
                             {(showSpinner || loading) && (
                                 <div className="mb-3 px-hg lg:px-g text-center w-full hidden lg:block">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
@@ -517,7 +517,7 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return index === 2 && ( showBundleCard || showQuizCard ) ? (
                                     <>
-                                        <div className={`w-full px-hg mb-4 lg:mb-5 lg:h-full ${abtestProductCard !== 'origin' ? 'md:w-1/4 lg:pr-[28.5px] lg:pl-[28.5px]' : 'md:w-1/3 lg:px-g'}`}>
+                                        <div className={`w-full px-hg mb-4 lg:mb-5 lg:h-full ${abtestProductCard !== 'origin' ? 'md:w-1/4 lg:pr-[20px] lg:pl-[20px]' : 'md:w-1/3 lg:px-g'}`}>
                                             {showBundleCard && (
                                                 <BannerCard
                                                     className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}
@@ -574,7 +574,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -595,7 +595,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -617,7 +617,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -662,7 +662,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'black' && <ProductCardAbTestV3
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -683,7 +683,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'white' && <ProductCardAbTestV5
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -705,7 +705,7 @@ const Collection = (props: any) => {
                                         {abtestProductCard === 'grey' && <ProductCardAbTestV2
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[28.5px] lg:pl-[28.5px] text-center"
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/4 pr-hgg pl-hgg lg:pr-[20px] lg:pl-[20px] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={true}
@@ -727,7 +727,7 @@ const Collection = (props: any) => {
                                 )
                             })}
                             {collProducts.length === 2 && ( showBundleCard || showQuizCard ) && (
-                                <div className="w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full">
+                                <div className={`w-full px-hg mb-4 lg:mb-5 lg:h-full ${abtestProductCard !== 'origin' ? 'md:w-1/4 lg:pr-[28.5px] lg:pl-[28.5px]' : 'md:w-1/3 lg:px-g'}`}>
                                     {showBundleCard && (
                                         <BannerCard
                                             className={`relative mb-[1.5rem] ${showQuizCard ? 'lg:mb-3' : 'lg:mb-0'}`}

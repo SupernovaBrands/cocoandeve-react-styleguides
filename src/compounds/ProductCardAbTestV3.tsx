@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { formatMoney, getCookie } from "~/modules/utils";
 import parse from 'html-react-parser';
 
-const DEFAULT_LABEL = '<span className="lg:text-sm lg:font-bold">Add</span>';
+const DEFAULT_LABEL = '<span className="lg:text-sm lg:font-normal">Add</span>';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 
 const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store, overlay = true }) => {
@@ -136,7 +136,7 @@ const SwatchOverlay = (props:any) => {
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
     let labelText = label === 'Add' ? label : props.swatch.label;
-    labelText = `<span class="lg:text-sm lg:font-bold">Add</span>`;
+    labelText = `<span class="lg:text-sm lg:font-normal">Add</span>`;
 
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
@@ -357,7 +357,7 @@ const ProductCardAbTestV3 = (props:any) => {
 
     return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card !mb-[30px] lg:!mb-[40px] ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-[1em] product-card--img block">
+            <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-[1em] product-card--img block lg:min-w-[168px]">
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-[1em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
                     {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 !pt-2 lg:!pt-hg" alt={product?.title} loading="lazy" />}
@@ -376,7 +376,7 @@ const ProductCardAbTestV3 = (props:any) => {
                 </picture>
             </a>
 
-            { props.product.badgeText && !props.sideUpsell && (<span className={`lg:ml-1 min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
+            { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-full py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-[28px] lg:top-hg ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
             <div className={`pt-[10px] lg:pt-[1rem] pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-0'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : ''} relative grow flex flex-col product-card__content ${props.collectionTemplate ? '!px-[0rem]' : ''}`}>
                 <p className={`!mb-[5px] product-title__text lg:!min-h-[30px] grow flex flex-col items-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm'} product-card__title text-body hover:text-body w-full text-left`}>
