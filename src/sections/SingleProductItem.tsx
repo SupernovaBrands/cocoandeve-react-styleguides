@@ -3,11 +3,11 @@ const SingleProductItem = (props: any) => {
     return (
         <>
             <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-4 lg:pb-4`}>
-                <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{data?.heading}</h2>
-                <p className='mb-g mx-4 lg:mx-0 '>{data?.subheading}</p>
+                <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{'Always wanted to try Coco & Eve?'}</h2>
+                <p className='mb-g mx-4 lg:mx-0 lg:mb-3'>{'Enjoy FREE mini version of some of our bestsellers—just pay shipping.'}</p>
 
                 <div className="flex mx-0 mb-0 flex-wrap lg:flex-row-reverse flex-row ">
-                    <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] pb-4 content-center py-4 px-g lg:p-0 lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
+                    <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
                         <picture className="block w-full rounded-[32px]">
                             <source
                                 srcSet={data.src_desktop}
