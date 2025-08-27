@@ -2,23 +2,32 @@ const SingleProductItem = (props: any) => {
     const { data } = props;
     return (
         <>
-            <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-4 lg:mb-5 lg:pb-4`}>
+            <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-4 lg:pb-4`}>
                 <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{data?.heading}</h2>
                 <p className='mb-g mx-4 lg:mx-0 '>{data?.subheading}</p>
 
-                <div className="flex mx-0 mb-0 flex-wrap bg-primary-light flex-col-reverse lg:flex-row ">
-                    <div className="product__banner-left w-full lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] lg:w-1/2 grid gap-x-[30px] pb-4 lg:pb-4 content-center py-4 px-g lg:pl-0 lg:pr-g">
-                        <picture className="block pt-[86%] w-full overflow-hidden rounded-[32px]">
+                <div className="flex mx-0 mb-0 flex-wrap lg:flex-row-reverse flex-row ">
+                    <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] pb-4 content-center py-4 px-g lg:p-0 lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
+                        <picture className="block w-full rounded-[32px]">
                             <source
                                 srcSet={data.src_desktop}
                                 media="(min-width: 992px)" width="1362" height="1162"/>
                             <img
                                 src={data.src_mobile}
-                                className="embed-responsive-item object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
+                                className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
                         </picture>
                     </div>
-                    <div className="product__banner-right w-full lg:w-1/2 px-0 relative">
-                        wdwe
+                    <div className="single-product-item__right text-left w-full lg:w-1/2 relative max-w-[315px] mt-[-60px] mb-0 mx-auto p-4 rounded-[32px] bg-white p-[16px] lg:mr-[-90px] lg:max-w-[570px] lg:ml-0 lg:my-[30px] lg:p-[30px]">
+                        <h2 className="h4 lg:text-xl lg:font-bold mb-[8px] block">Like A Virgin Hair Masque • 5ml</h2>
+                        <p className="text-sm mb-[8px] lg:mb-[16px]">Our best-selling self tan with a soft tanning mitt and kabuki brush for a perfect fuss-free application.</p>
+                        <ul className="text-sm  list-check ">
+                            <li className="lg:mb-[8px]">Blurs pigmentation and perfects skin.</li>
+                            <li className="lg:mb-[8px]">Tropical mango and guava scent (no biscuit smell!)</li>
+                            <li className="lg:mb-[8px]">Lightweight, non-sticky formula.</li>
+                            <li className="lg:mb-[8px]">Fast-drying and develops in just 2 hours.</li>
+                            <li>Color guide technology for an even finish.</li>
+                        </ul>
+                        <a href="/" className="btn btn-large btn-primary mt-[24px] rounded-[32px] w-full p-g">Get Offer</a>
                     </div>
                 </div>
             </div>
