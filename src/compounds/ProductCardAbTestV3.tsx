@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { formatMoney, getCookie } from "~/modules/utils";
 import parse from 'html-react-parser';
 
-const DEFAULT_LABEL = '<span className="lg:text-sm lg:font-normal">Add</span>';
+const DEFAULT_LABEL = '<span className="lg:text-sm lg:font-bold">Add</span>';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 
 const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store, overlay = true }) => {
@@ -42,9 +42,9 @@ const WaitlistButton = (props:any) => {
         });
     };
     const defaultText = 'Waitlist Me';
-    const data = {...props, ...{ label: `<span class="text-sm">Waitlist</span>` }};
+    const data = {...props, ...{ label: `<span class="text-sm font-bold">Waitlist</span>` }};
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full text-primary font-normal text-primary border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} !h-[38px] !min-h-[38px] flex flex-row btn-sm md:text-base bg-body text-white rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-1  mb-1 justify-between' : 'sm:flex-col sm:text-sm  '}`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} w-full text-primary font-bold text-primary border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} !h-[38px] !min-h-[38px] flex flex-row btn-sm md:text-base bg-body text-white rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-1  mb-1 justify-between' : 'sm:flex-col sm:text-sm  '}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
         </Button>
     )
@@ -68,7 +68,7 @@ const LaunchButton = (props: any) => {
         }
     };
     const defaultText = 'Waitlist Me';
-    const data = {...props, ...{ label: `<span class="text-sm">Waitlist</span>` }};
+    const data = {...props, ...{ label: `<span class="text-sm font-bold">Waitlist</span>` }};
     return (
         <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} w-full !h-[38px] !min-h-[38px] border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base bg-body text-white text-primary font-normal rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-1  mb-1 justify-between' : 'sm:flex-col sm:text-sm  '}`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
@@ -136,7 +136,7 @@ const SwatchOverlay = (props:any) => {
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
     let labelText = label === 'Add' ? label : props.swatch.label;
-    labelText = `<span class="lg:text-sm lg:font-normal">Add</span>`;
+    labelText = `<span class="lg:text-sm lg:font-bold">Add</span>`;
 
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
@@ -356,7 +356,7 @@ const ProductCardAbTestV3 = (props:any) => {
     const customTitle = props.customProductTitle?.customTitles?.find((row) => row.handle === product?.handle && row.enabled_item && filterIncludes.includes(row.options))?.title || null;
 
     return !props.useCardTemplate ? (
-        <div key={props.keyName} className={`product-card !mb-[30px] lg:!mb-[40px] ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
+        <div key={props.keyName} className={`product-card !mb-[30px] lg:!mb-[45px] ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-[1em] product-card--img block lg:min-w-[168px]">
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-[1em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
@@ -377,13 +377,13 @@ const ProductCardAbTestV3 = (props:any) => {
             </a>
 
             { props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-full py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-[28px] lg:top-hg ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
-            <div className={`pt-[10px] lg:pt-[1rem] pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-0'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : ''} relative grow flex flex-col product-card__content ${props.collectionTemplate ? '!px-[0rem]' : ''}`}>
-                <p className={`!mb-[5px] product-title__text lg:!min-h-[30px] grow flex flex-col items-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+            <div className={`pt-[10px] pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-0'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : ''} relative grow flex flex-col product-card__content ${props.collectionTemplate ? '!px-[0rem]' : ''}`}>
+                <p className={`!mb-[0px] product-title__text lg:!min-h-[25px] grow flex flex-col items-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm'} product-card__title text-body hover:text-body w-full text-left`}>
                         {customTitle ?? props.product.title}
                     </a>
                 </p>
-                <div className="review-stars__number min-h-[20px] flex mb-1">
+                <div className="review-stars__number min-h-[20px] flex mb-hg">
                     {skus.length > 0 && (<YotpoStar sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={false} />)}
                 </div>
                 {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
