@@ -134,11 +134,11 @@ const ProductBannerSlider = (props) => {
 					onTouchEnd={slideFinish}
 					onTouchMove={slideMove}
 				>
-					<span className="product-banner__slider-arrow product-banner__slider-arrow--left rounded-full bg-white mr-1 p-[14px]">
-						<ChevronPrev className="chevron-prev text-white" />
+					<span className={`${props.leftArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--left'} rounded-full bg-white mr-1 p-[14px]`}>
+						<ChevronPrev className={`${props.svgClasses ?? 'chevron-prev'} text-white`} />
 					</span>
-					<span className="product-banner__slider-arrow product-banner__slider-arrow--right rounded-full bg-white ml-1 p-[14px]">
-						<ChevronNext className="chevron-next text-white" />
+					<span className={`${props.rightArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--right'} rounded-full bg-white ml-1 p-[14px]`}>
+						<ChevronNext className={`${props.svgClasses ?? 'chevron-next'} text-white`} />
 					</span>
 				</div>
 				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="product-banner__slider--compareimg absolute h-auto overflow-hidden img-comp-overlay top-0">
