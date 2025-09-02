@@ -105,7 +105,7 @@ const AddToCartButton = (props:any) => {
     }
 
     useEffect(() => {
-        if (preOrders && selectedVariant) {
+        if (preOrders && selectedVariant && selectedVariant.id) {
             const { group1, group2, group3 } = preOrders;
             if (group1.enabled && selectedVariant && group1.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
                 setCtaLabel(group1.cta);
@@ -201,7 +201,7 @@ const SwatchOverlay = (props:any) => {
         } else {
             setComparePrice(null);
         }
-        setPrice(selectedVariant ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region) : formatMoney(0, false, region));
+        setPrice(selectedVariant && selectedVariant.price ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region) : formatMoney(0, false, region));
     }, [selectedVariant]);
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
