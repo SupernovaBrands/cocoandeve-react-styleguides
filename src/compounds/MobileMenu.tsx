@@ -187,8 +187,18 @@ const MobileMenu = (props: any) => {
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
+
+				<MenuBanner content={{
+					type: 'link-to',
+					url: '/pages/build-your-own-bundle',
+					cta: 'Build',
+					line1: '<b>Build Your Bundle</b>',
+					line2: 'Mix, match & save your way!',
+					icon: 'heart'
+				}} theme='pink-light' className="mt-g" />
+
 				<li key="shopall" className="my-g p-g" role="presentation">
-					<a href="/collections/all" className="btn w-full btn-primary px-g py-g" data-cy="shopall-btn">Shop All</a>
+					<a href="/collections/all" className="btn w-full btn-primary px-g py-g rounded-full" data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"

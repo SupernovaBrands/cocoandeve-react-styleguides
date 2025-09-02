@@ -138,11 +138,20 @@ const NavMegaMenu = (props: any) => {
                 {!isLoading ? (
                     <div className="flex mx-5 px-3">
                         <div className="lg:w-2/5 pr-4 pl-4 mb-3">
-                            <a href={props.url} className="block mb-2 h4 !text-body underline">Shop all {props.title}</a>
+                            <a href={props.url} className="block mb-2 h4 !text-body underline">
+                                <strong>Shop all {props.title}</strong>
+                            </a>
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
-                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 !text-body">{menu.title}</a></li>
+                                        return (
+                                            <li className=" mb-1" key={`mobile-menu-${i}`}>
+                                                <a href={menu.handle} className="h4 !text-body">
+                                                    {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
+                                                    {!menu.handle.includes('build-your-own-bundle') && menu.title}
+                                                </a>
+                                            </li>
+                                        )
                                     })
                                 )}
                             </ol>

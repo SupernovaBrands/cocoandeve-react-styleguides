@@ -1,7 +1,7 @@
 import '~/config';
 import React, { useState, useEffect } from 'react';
 import ReviewStar from './ReviewStar';
-import { currentTime, encryptParam } from '~/modules/utils';
+import { ConditionalWrap, currentTime, encryptParam } from '~/modules/utils';
 import ReviewStarSingle from './ReviewStarSingle';
 
 const YotpoStar = (props: any) => {
@@ -26,9 +26,9 @@ const YotpoStar = (props: any) => {
 				}
 		});
 	};
-	
+
 	// console.log('props.sku123');
-	
+
 	useEffect(() => {
 		if (props.sku.length > 0 && !init) fetchStar();
 	}, []);
@@ -39,11 +39,20 @@ const YotpoStar = (props: any) => {
 
 	return init ? (
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
-			<a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">
+			<ConditionalWrap
+                condition={props?.productHandle}
+                wrap={children => <a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm" aria-label="Write a review for this product">{children}</a>}
+                elseWrap={children => <div className="text-sm">{children}</div>}
+            >
 				{!props.smSingleStarAllDevice && (
 					<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 				)}
-			</a>
+			</ConditionalWrap>
+			{/* <a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm" aria-label="Write a review for this product">
+				{!props.smSingleStarAllDevice && (
+					<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
+				)}
+			</a> */}
 			{props.smSingleStar && (
 				<>
 					<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">

@@ -151,7 +151,16 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
-		onDeleteLine(item.id, attributes);
+		const isBundleItem = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit' && attribute.value === 'yes');
+		if (!isBundleItem) onDeleteLine(item.id, attributes);
+		else {
+			// delete bundle group
+			const groupId = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit_group').value || 0;
+			const itemsToDelete = cartData.items.filter((item) => item.attributes.find((att) => att.key === '_make_your_own_kit_group' && att.value === groupId))
+				.map((v) => v.id);
+			// console.log('itemsToDelete', itemsToDelete);
+			onDeleteLine(itemsToDelete, attributes);
+		}
 	}
 
 	const getId = (shopifyId: string) => {
@@ -212,7 +221,7 @@ const Cart: React.FC<Props> = (props) => {
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
-	// console.log('cart.tsx', cart.items);
+	console.log('cart.tsx', cart.items);
 
 	return (
 		<>
