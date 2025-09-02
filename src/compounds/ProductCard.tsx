@@ -200,7 +200,7 @@ const SwatchOverlay = (props:any) => {
         } else {
             setComparePrice(null);
         }
-        setPrice(formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region));
+        setPrice(selectedVariant ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region) : formatMoney(0, false, region));
     }, [selectedVariant]);
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
