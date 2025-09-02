@@ -8,26 +8,26 @@ const SingleProductItem = (props: any) => {
 
                 <div className="flex mx-0 mb-0 flex-wrap lg:flex-row-reverse flex-row ">
                     <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
-                        <picture className="block w-full rounded-[32px]">
+                        <picture className="block w-full rounded-[32px] overflow-hidden">
                             <source
-                                srcSet={data.src_desktop}
+                                srcSet={data?.img_desk?.url || null}
                                 media="(min-width: 992px)" width="1362" height="1162"/>
                             <img
-                                src={data.src_mobile}
+                                src={data?.img_mob?.url || null}
                                 className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
                         </picture>
                     </div>
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative max-w-[315px] mt-[-60px] mb-0 mx-auto p-4 rounded-[32px] bg-white p-[16px] lg:mr-[-90px] lg:max-w-[570px] lg:ml-0 lg:my-[30px] lg:p-[30px]">
-                        <h2 className="h4 lg:text-xl lg:font-bold mb-[8px] block">Like A Virgin Hair Masque • 5ml</h2>
-                        <p className="text-sm mb-[8px] lg:mb-[16px]">Our best-selling self tan with a soft tanning mitt and kabuki brush for a perfect fuss-free application.</p>
+                        <h2 className="h4 lg:text-xl lg:font-bold mb-[8px] block">{data?.product_title || ''}</h2>
+                        <p className="text-sm mb-[8px] lg:mb-[16px]">{data?.description}</p>
                         <ul className="text-sm  list-check ">
-                            <li className="lg:mb-[8px]">Blurs pigmentation and perfects skin.</li>
-                            <li className="lg:mb-[8px]">Tropical mango and guava scent (no biscuit smell!)</li>
-                            <li className="lg:mb-[8px]">Lightweight, non-sticky formula.</li>
-                            <li className="lg:mb-[8px]">Fast-drying and develops in just 2 hours.</li>
-                            <li>Color guide technology for an even finish.</li>
+                            {data?.list?.split('\n').map((li: any) => {
+                                return (
+                                    <li className="lg:mb-[8px]">{li}</li>
+                                )
+                            })}``
                         </ul>
-                        <a href="/" className="btn btn-large btn-primary mt-[24px] rounded-[32px] w-full p-g">Get Offer</a>
+                        <a href={data?.button_url} className="btn btn-large btn-primary mt-[24px] rounded-[32px] w-full p-g">{data?.button_label || ''}</a>
                     </div>
                 </div>
             </div>
