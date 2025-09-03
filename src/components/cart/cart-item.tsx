@@ -191,6 +191,10 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
 			}
 
+			if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
+			}
+
 			if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/public';
 			}
