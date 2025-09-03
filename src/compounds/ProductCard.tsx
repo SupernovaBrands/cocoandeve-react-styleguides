@@ -209,6 +209,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
+    const [hasUserSelectedSwatch, setHasUserSelectedSwatch] = useState(false);
     const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
@@ -252,6 +253,7 @@ const SwatchOverlay = (props:any) => {
         const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === id);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
+            setHasUserSelectedSwatch(true);
         }
         if (available === 'true') {
             setSwatchAvailable(true);
@@ -275,6 +277,14 @@ const SwatchOverlay = (props:any) => {
     }, [selectedVariant]);
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
+
+    useEffect(() => {
+        if (!hasUserSelectedSwatch && firstAvailable?.id === 0 && props.swatch?.data?.length > 0) {
+            const fallbackSwatch = props.swatch.data[0];
+            setSelectedVariant(fallbackSwatch);
+            setSwatchAvailable(false);
+        }
+    }, [firstAvailable, props.swatch?.data, hasUserSelectedSwatch]);
 
     return (
         <>
