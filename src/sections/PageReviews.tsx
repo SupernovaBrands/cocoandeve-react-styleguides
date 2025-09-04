@@ -1,6 +1,6 @@
 // import RealResultCarousel from "~/sections/RealResultCarousel";
-import { EmblaOptionsType } from 'embla-carousel';
-import { useEffect, useState } from 'react';
+import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
+import { useEffect, useState, useCallback } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import ChevronNext from '~/images/icons/chevron-next.svg';
@@ -11,9 +11,11 @@ import {
     NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import PageReviewCard from '~/compounds/PageReviewCard';
+import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
 
 const options: EmblaOptionsType = {
-	loop: true,
+	loop: false,
+    dragFree: true,
     align: 'start',
     breakpoints: {
         '(min-width: 992px)': { 
@@ -29,6 +31,7 @@ const PageReviews = (props: any) => {
     const { store, reviewsData } = props;
 
     const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options});
+    const [scrollProgress, setScrollProgress] = useState(0);
 
     const REVIEWS = [
         {
@@ -114,12 +117,23 @@ const PageReviews = (props: any) => {
         })
     }
 
+    const onScroll = useCallback((emblaApi1: EmblaCarouselType) => {
+        const progress = Math.max(0, Math.min(1, emblaApi1.scrollProgress()));
+        setScrollProgress(progress * 70);
+    }, []);
+
+    useEffect(() => {
+		if (!emblaApi1) return;
+		emblaApi1.on('reInit', onScroll);
+		emblaApi1.on('scroll', onScroll);
+	}, [emblaApi1, onScroll]);
+
     return <>
         {REVIEWS?.length && (
             <div className="lg:bg-gray-400 lg:pt-[60px] lg:pb-[60px]">
-                <div className='page-reviews container' >
-                    <div className='px-hg'>
-                        <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__page-reviews -mx-hg">
+                <div className='page-reviews container pt-[30px] lg:pt-[0] px-0' >
+                    <div className='px-0'>
+                        <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__page-reviews ml-g">
                             <Carousel.Inner emblaRef={emblaRef1} className="gap-[15px] lg:-mx-g ">
                                 {REVIEWS.map((data: any, i: number) => (
                                     <PageReviewCard data={data} />
@@ -146,6 +160,13 @@ const PageReviews = (props: any) => {
                         </Carousel.Wrapper>
                     </div>
                 </div>
+                <div className='px-[30px] lg:hidden'>                 
+                    <CarouselScrollbar
+                        emblaApi={emblaApi1}
+                        scrollSnaps={emblaApi1?.scrollSnapList()}
+                        className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+                    />
+                </div>   
             </div>
         )}
     </>

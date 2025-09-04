@@ -3,6 +3,7 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 
 const ProductBannerSlider = (props) => {
+	const { isPageReview } = props;
 	const compWrapper = useRef(null);
 	const compOverlay = useRef(null);
 	const compSlider = useRef(null);
@@ -29,9 +30,14 @@ const ProductBannerSlider = (props) => {
 		
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
-			// console.log('imgHeight', compOverlay, imgHeight);
-			if (imgHeight < 600) setImgPt('pt-[55%]');
-			else setImgPt('pt-[86%]');
+			console.log('imgHeight', compOverlay, imgHeight);
+			if (isPageReview && window.innerWidth < 769) {
+				setImgPt('pt-[76.6%]');
+			} else if (imgHeight < 600) {
+				setImgPt('pt-[55%]');
+			} else {
+				setImgPt('pt-[86%]');
+			}
 		}, 300); 
 	};
 

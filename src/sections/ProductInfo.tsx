@@ -135,16 +135,16 @@ const ProductInfo = (props: any) => {
                 )}
                 {ingredientsContent?.length > 0 && (
                     <div className={`flex mx-0 mb-0 flex-wrap lg:bg-yellow-light ${activeTab === 'ingredients' ? 'block' : 'hidden'} `}>
-                        <div className='container py-[50px]'>
-                            <ul className='flex gap-g flex-col lg:flex-row'>
+                        <div className='container pb-[40px] lg:pb-[50px] lg:pt-[50px]'>
+                            <ul className='flex lg:gap-g flex-col lg:flex-row'>
                                 {ingredientsContent.map((item, i) => {
                                     return (
                                         <li className={`flex-1 border-b-[#ADADAD] border-b border-solid lg:border-b-0 lg:border-t-0 ${i === 0 ? 'border-t-[#ADADAD] border-t border-solid' : ''}`}> 
                                             <div className={`heading flex justify-between lg:hidden py-3`}>
                                                 <h3 className='text-left'>{item?.title}</h3>
                                                 <div className='flex' onClick={() => onIngAccordionChange(i)}>
-                                                    <Plus className={`h-[20px] ${item.open ? 'hidden' : 'block'}`} />
-                                                    <Minus className={`h-[20px] ${!item.open ? 'hidden' : 'block'}`} />
+                                                    <Plus className={`h-[.75em] w-[.75em] mb-[3px] ${item.open ? 'hidden' : 'block'}`} />
+                                                    <Minus className={`h-[.75em] w-[.75em] mb-[3px] ${!item.open ? 'hidden' : 'block'}`} />
                                                 </div>
                                             </div>
                                             <div className={`bg-white py-[16px] lg:p-[16px] rounded-[20px] text-left lg:block ${!item.open ? 'hidden' : 'block'}`}>
