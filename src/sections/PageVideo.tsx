@@ -20,7 +20,7 @@ const PageVideo = (props: any) => {
 	};
 
     return (
-        <>
+        <div className='lg:container lg:py-[60px]'>
             <picture className="block w-full rounded-[32px]" onClick={() => handlOpenModal(true)}>
                 <source
                     srcSet={data?.img_desk?.url}
@@ -41,7 +41,7 @@ const PageVideo = (props: any) => {
                     </button>
                 </Modal>
             )}
-        </>
+        </div>
     )
 }
 
