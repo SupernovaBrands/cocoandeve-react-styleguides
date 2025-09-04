@@ -2,7 +2,7 @@ const SingleProductItem = (props: any) => {
     const { data } = props;
     return (
         <>
-            <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-0 lg:pb-4`}>
+            <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-0 lg:pb-4 lg:pt-[60px]`}>
                 <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{'Always wanted to try Coco & Eve?'}</h2>
                 <p className='mb-g mx-4 lg:mx-0 lg:mb-3'>{'Enjoy FREE mini version of some of our bestsellers—just pay shipping.'}</p>
 
@@ -19,7 +19,7 @@ const SingleProductItem = (props: any) => {
                     </div>
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative   mb-0 mx-auto   flex justify-center lg:block">
                         <div className="rounded-[32px] bg-white  p-[16px] pt-[20px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
-                            <div className="flex mb-[8px] items-center"><h2 className="h4 lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-1 text-sm">•</span> <span className="text-sm">5ml</span></div>
+                            <div className="flex mb-[8px] items-center"><h2 className="h4 lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">5ml</span></div>
                             <p className="text-sm mb-[8px] lg:mb-[16px] lg:max-w-[410px]">{data?.description}</p>
                             <ul className="text-sm  list-check page-product-list ">
                                 {data?.list?.split('\n').map((li: any) => {
