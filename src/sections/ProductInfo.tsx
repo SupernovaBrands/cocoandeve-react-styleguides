@@ -68,9 +68,20 @@ const ProductInfo = (props: any) => {
                 });
             }
         }
-        console.log('ingredient2', ingredients);
         setIngredientsContent(ingredients);
     }, [props]);
+
+    useEffect(() => {
+        if (data) {
+            const { slide1image2, slide1image3 } = how_to_use;
+            if (slide1image2?.url && slide1image3?.url) {
+                setComparisonImages({ 
+                    first_image: slide1image2,
+                    second_image: slide1image3
+                });
+            }
+        }
+    }, [activeTab])
     return (
         <>
             <div className={`px-0 text-center`}>
@@ -190,7 +201,7 @@ const ProductInfo = (props: any) => {
                             </div>
                         </div>
                         <div className="product__banner-right w-full lg:w-1/2 px-0 relative flex lg:w-1/2">
-                            {comparisonImages ? (
+                            {comparisonImages && activeTab === 'how_to_use' ? (
                                 <div className="product-banner__image w-full">
                                     <ProductBannerSlider {...comparisonImages} />
                                 </div>
