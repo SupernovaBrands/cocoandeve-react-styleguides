@@ -150,18 +150,18 @@ const ProductInfo = (props: any) => {
                             <ul className='flex lg:gap-g flex-col lg:flex-row'>
                                 {ingredientsContent.map((item, i) => {
                                     return (
-                                        <li className={`flex-1 border-b-[#ADADAD] border-b border-solid lg:border-b-0 lg:border-t-0 ${i === 0 ? 'border-t-[#ADADAD] border-t border-solid' : ''}`}> 
-                                            <div className={`heading flex justify-between lg:hidden py-3`}>
+                                        <li className={`flex-1 lg:flex grow border-b-[#ADADAD] border-b border-solid lg:border-b-0 lg:border-t-0 ${i === 0 ? 'border-t-[#ADADAD] border-t border-solid' : ''}`}> 
+                                            <div className={`heading flex grow justify-between lg:hidden py-3`}>
                                                 <h3 className='text-left'>{item?.title}</h3>
                                                 <div className='flex' onClick={() => onIngAccordionChange(i)}>
                                                     <Plus className={`h-[.75em] w-[.75em] mb-[3px] ${item.open ? 'hidden' : 'block'}`} />
                                                     <Minus className={`h-[.75em] w-[.75em] mb-[3px] ${!item.open ? 'hidden' : 'block'}`} />
                                                 </div>
                                             </div>
-                                            <div className={`bg-white py-[16px] lg:p-[16px] rounded-[20px] text-left lg:block ${!item.open ? 'hidden' : 'block'}`}>
+                                            <div className={`grow bg-white py-[16px] lg:p-[16px] rounded-[20px] text-left lg:block ${!item.open ? 'hidden' : 'block'}`}>
                                                 <img className='mb-[20px]' src={item?.image?.url} />
                                                 <h2 className='mb-1'>{item.title}</h2>
-                                                <p>{item.description}</p>
+                                                <p className='lg:flex grow'>{item.description}</p>
                                             </div>
                                         </li>
                                     )
