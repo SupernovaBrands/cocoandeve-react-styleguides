@@ -1,5 +1,23 @@
+import { useEffect, useState } from 'react';
+
 const SingleProductItem = (props: any) => {
-    const { data } = props;
+    const { data, product, addToCart } = props;
+    const [adding, setAdding] = useState(false);
+
+    const onAdd = async () => {
+        setAdding(true);
+        const addLine = await addToCart({
+            id: `gid://shopify/ProductVariant/${data.variant_id}`,
+            quantity: 1,
+            attributes: [
+                { key: '_free_sample', value: "yes" },
+            ],
+            bubble: true,
+        });
+        setAdding(false);
+        return addLine;
+    }
+
     return (
         <>
             <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-0 lg:pb-4 lg:pt-[60px]`}>
@@ -28,7 +46,13 @@ const SingleProductItem = (props: any) => {
                                     )
                                 })}
                             </ul>
-                            <a href={data?.button_url} className="btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">{data?.button_label || ''}</a>
+                            {data?.variant_id && (
+                                <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
+                                    {adding ? (
+										<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
+									) : data?.button_label}
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
