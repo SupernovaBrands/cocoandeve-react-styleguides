@@ -38,7 +38,7 @@ const ProductInfo = (props: any) => {
     const [ingredientsContent, setIngredientsContent] = useState(ingredients || []);
     console.log('ProductInfo', data);
 
-    const [activeTab, setActiveTab] = useState('benefits');
+    const [activeTab, setActiveTab] = useState('ingredients');
     const [comparisonImages, setComparisonImages] = useState({
         first_image: {
             url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/image_57.png?v=1756216902'
@@ -88,9 +88,9 @@ const ProductInfo = (props: any) => {
                 <div className="container lg:flex lg:justify-between">
                     <h2 className="container text-xl lg:text-2xl text-center mb-g lg:mb-[30px] lg:mx-0 lg:text-left">{data?.heading || 'Meet Bronzing Face Drops'}</h2>
                     <div className="lg:w-1/2 info-tabs flex gap-[8px] mb-g lg:mb-[30px] justify-center">
-                        <a onClick={() => setActiveTab('benefits')} className={`${activeTab === 'benefits' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="benefits" role="button" tabIndex={0} aria-controls="benefits" aria-selected="true">
+                        {/* <a onClick={() => setActiveTab('benefits')} className={`${activeTab === 'benefits' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="benefits" role="button" tabIndex={0} aria-controls="benefits" aria-selected="true">
                             Benefits
-                        </a>
+                        </a> */}
                         <a onClick={() => setActiveTab('ingredients')} className={`${activeTab === 'ingredients' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="ingredients" role="button" tabIndex={0} aria-controls="ingredients" aria-selected="true">
                             Ingredients
                         </a>
