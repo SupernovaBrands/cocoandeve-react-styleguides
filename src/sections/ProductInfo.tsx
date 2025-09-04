@@ -38,7 +38,7 @@ const ProductInfo = (props: any) => {
     const [ingredientsContent, setIngredientsContent] = useState(ingredients || []);
     console.log('ProductInfo', data);
 
-    const [activeTab, setActiveTab] = useState('how_to_use');
+    const [activeTab, setActiveTab] = useState('benefits');
     const [comparisonImages, setComparisonImages] = useState({
         first_image: {
             url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/image_57.png?v=1756216902'
@@ -75,8 +75,8 @@ const ProductInfo = (props: any) => {
         <>
             <div className={`px-0 text-center`}>
                 <div className="container lg:flex lg:justify-between">
-                    <h2 className="container text-xl lg:text-2xl text-center mb-g lg:mx-0 lg:text-left">{data?.heading || 'Meet Bronzing Face Drops'}</h2>
-                    <div className="lg:w-1/2 info-tabs flex gap-[8px] mb-g justify-center">
+                    <h2 className="container text-xl lg:text-2xl text-center mb-g lg:mb-[30px] lg:mx-0 lg:text-left">{data?.heading || 'Meet Bronzing Face Drops'}</h2>
+                    <div className="lg:w-1/2 info-tabs flex gap-[8px] mb-g lg:mb-[30px] justify-center">
                         <a onClick={() => setActiveTab('benefits')} className={`${activeTab === 'benefits' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="benefits" role="button" tabIndex={0} aria-controls="benefits" aria-selected="true">
                             Benefits
                         </a>
@@ -102,7 +102,7 @@ const ProductInfo = (props: any) => {
                                 </picture>
                             </div>
                             <div className='lg:max-w-[585px] lg:my-[40px] lg:w-1/2 lg:rounded-[32px] lg:px-[60px] lg:py-[40px] px-g text-white py-[16px] bg-[#BA3373] text-left'>
-                                <h2 className="mb-2 text-[20px] text-left lg:text-xl">{benefits?.heading}</h2>
+                                <h2 className="mb-2 text-[20px] text-left lg:text-[32px] lg:leading-[40px] ">{benefits?.heading}</h2>
                                 <ul>
                                     <li className='flex mb-2 items-center'>
                                         <div className='w-[40px] flex-[0_0_40px] flex justify-center mr-[15px]'>
