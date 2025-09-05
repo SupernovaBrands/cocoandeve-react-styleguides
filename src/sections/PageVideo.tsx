@@ -32,7 +32,7 @@ const PageVideo = (props: any) => {
             {data?.video_url && (
                 <Modal className="modal-lg modal-dialog-centered !px-0 " isOpen={modal} handleClose={() => handlOpenModal(false)}>
                     <div className="relative lg:border lg:border-[rgba(0,0,0,.2)]">
-                        <video ref={videoElem} controls className="rounded-[20px]" autoPlay={false} playsInline webkit-playsinline>
+                        <video ref={videoElem} controls className="rounded-[20px]" autoPlay={true} playsInline webkit-playsinline>
                             <source src={data?.video_url} type="video/mp4" />
                         </video>
                     </div>

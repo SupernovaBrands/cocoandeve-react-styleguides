@@ -161,7 +161,7 @@ const ProductInfo = (props: any) => {
                                                     {item.open && (<Minus className={`h-[.75em] w-[.75em] mb-[3px] ${!item.open ? 'hidden' : 'block'}`} />)}
                                                 </div>
                                             </div>
-                                            <div className={`accordion-content grow bg-white lg:p-[16px] lg:rounded-[20px] text-left lg:block ${!item.open ? 'accordion-content--close' : 'accordion-content--open'}`}>
+                                            <div className={`accordion-content lg:max-h-none grow bg-white lg:p-[16px] lg:rounded-[20px] text-left lg:block ${!item.open ? 'accordion-content--close' : 'accordion-content--open'}`}>
                                                 <img className='mb-[20px]' src={item?.image?.url} />
                                                 <h2 className='mb-1'>{item.title}</h2>
                                                 <p className='lg:flex grow mb-g lg:mb-0'>{item.description}</p>
