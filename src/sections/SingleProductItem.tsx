@@ -1,8 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import { DotButton, useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+
+const options: EmblaOptionsType = {
+	loop: true,
+};
 
 const SingleProductItem = (props: any) => {
-    const { data, product, addToCart } = props;
+    const { data, addToCart } = props;
     const [adding, setAdding] = useState(false);
+    const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+        Autoplay({ playOnInit: true, delay: 6000 })
+    ]);
+    const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
+    useEffect(() => {
+        if (!emblaApi) return;
+        const autoplay = emblaApi?.plugins()?.autoplay;
+        if (!autoplay) return;
+    }, [emblaApi]);
 
     const onAdd = async () => {
         setAdding(true);
@@ -25,7 +43,47 @@ const SingleProductItem = (props: any) => {
                 <p className='mb-g mx-4 lg:mx-0 lg:mb-3'>{'Enjoy FREE mini version of some of our bestsellers—just pay shipping.'}</p>
 
                 <div className="flex mx-0 mb-0 flex-wrap lg:flex-row-reverse flex-row ">
-                    <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
+                    {data?.images?.length > 0 && (
+                        <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
+                            <Carousel.Wrapper emblaApi={emblaApi}>
+                                <Carousel.Inner emblaRef={emblaRef} className="">
+                                    {data?.images?.map((image: any) => {
+                                        return (
+                                            <div key={0} className='flex-grow-0 flex-shrink-0 w-full basis-full'>
+                                                <picture className="block w-full rounded-[32px] overflow-hidden">
+                                                    <source
+                                                        srcSet={image?.desktop?.url || null}
+                                                        media="(min-width: 992px)" width="1362" height="1162"/>
+                                                    <img
+                                                        src={image?.mobile?.url || null}
+                                                        className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
+                                                </picture>
+                                            </div>
+                                        )
+                                    })}
+                                </Carousel.Inner>
+
+                                <Carousel.Navigation>
+                                    <ol className="carousel__dots justify-end">
+                                        <li key={0} className={`border border-white ${0 === idx1 ? ' bg-white' : ''}`}>
+                                            <DotButton
+                                                onClick={() => onClick1(0)}
+                                                className="carousel__dot"
+                                            />
+                                        </li>
+                                        <li key={1} className={`border border-white ${1 === idx1 ? ' bg-white' : ''}`}>
+                                            <DotButton
+                                                onClick={() => onClick1(1)}
+                                                className="carousel__dot"
+                                            />
+                                        </li>
+                                    </ol>
+                                </Carousel.Navigation>
+                            </Carousel.Wrapper>
+                        </div>
+                    )}
+                    
+                    {/* <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
                         <picture className="block w-full rounded-[32px] overflow-hidden">
                             <source
                                 srcSet={data?.img_desk?.url || null}
@@ -34,7 +92,7 @@ const SingleProductItem = (props: any) => {
                                 src={data?.img_mob?.url || null}
                                 className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
                         </picture>
-                    </div>
+                    </div> */}
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative   mb-0 mx-auto   flex justify-center lg:block">
                         <div className="rounded-[32px] bg-white  p-[16px] pt-[20px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
                             <div className="flex mb-[8px] items-center"><h2 className="h4 lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">5ml</span></div>
