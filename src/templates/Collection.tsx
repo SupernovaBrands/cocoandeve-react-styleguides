@@ -75,6 +75,7 @@ const Collection = (props: any) => {
         squareBadge,
         bannerData,
         customProductTitle,
+        abtestProductCard,
     } = props;
     // console.log('customProductTitlexxx', customProductTitle);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -562,6 +563,7 @@ const Collection = (props: any) => {
                                             collectionTemplate={true}
                                             store={store}
                                             customProductTitle={customProductTitle}
+                                            abtestProductCard={abtestProductCard}
                                         />
                                     </>
                                 ) : (
@@ -586,6 +588,7 @@ const Collection = (props: any) => {
                                             collectionTemplate={true}
                                             store={store}
                                             customProductTitle={customProductTitle}
+                                            abtestProductCard={abtestProductCard}
                                         />
                                     </>
                                 )

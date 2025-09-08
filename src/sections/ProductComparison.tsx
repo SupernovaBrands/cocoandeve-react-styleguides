@@ -29,7 +29,7 @@ const ImageFigure = (props: any) => (
             <figcaption className="font-bold px-g min-h-[3rem] lg:min-h-3 flex items-center justify-center pb-[.5rem] lg:pb-0">{props.title}</figcaption>
             <picture className="block px-[2.031rem] lg:mt-4 lg:px-0">
                 <source srcSet={props.srcSet} media="(min-width: 992px)" />
-                <img src={props.src} className="bg-pink-light w-full" alt="" loading="lazy" />
+                <img src={props.src} className="bg-pink-light w-full" alt={`Compare image of ${props.title}`} loading="lazy" />
             </picture>
         </figure>
     </ConditionalWrap>
@@ -68,6 +68,8 @@ const ProductComparison = (props: any) => {
     const { mainCompare, productsCompare, view, wrapperClass } = props;
     const INIT_FINALS = [...[mainCompare], ...productsCompare];
 
+    // console.log('mainCompare', mainCompare);
+
     const [comparison1, setComparison1] = useState(mainCompare?.tableData || []);
     const [comparison2, setComparison2] = useState(productsCompare[0]?.tableData || []);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -102,10 +104,45 @@ const ProductComparison = (props: any) => {
         }
 	}, [emblaApi1, onScroll, emblaApi2, onScroll2]);
 
+    let title = 'Haircare Range';
+    const MASKS = [
+        'super-nourishing-coconut-fig-hair-masque',
+        'repairing-restoring-hair-mask',
+        'pro-youth-hair-scalp-mask'
+    ];
+    const SHAMPOO = [
+        'super-hydrating-shampoo',
+        'sweet-repair-repairing-restoring-shampoo',
+        'pro-youth-shampoo',
+        'hair-volumising-shampoo',
+        'clarifying-detox-shampoo',
+    ];
+    const CONDITIONER = [
+        'super-hydrating-cream-conditioner',
+        'sweet-repair-repairing-restoring-conditioner',
+        'pro-youth-conditioner',
+        'hair-volumising-conditioner',
+    ];
+    const SHAMPOO_CONDITIONER = [
+        'super-hydrating-shampoo-conditioner-set',
+        'repair-restore-shampoo-conditioner-set',
+        'pro-youth-shampoo-conditioner',
+        'hair-volumising-shampoo-conditioner-set',
+    ];
+    if (MASKS.includes(mainCompare?.handle)) {
+        title = 'Which Hair Mask is for Me?';
+    } else if (SHAMPOO.includes(mainCompare?.handle)) {
+        title = 'Which Shampoo is for Me?';
+    } else if (CONDITIONER.includes(mainCompare?.handle)) {
+        title = 'Which Conditioner is for Me?';
+    } else if (SHAMPOO_CONDITIONER.includes(mainCompare?.handle)) {
+        title = 'Which Shampoo & Conditioner is for Me?';
+    }
+
     return INIT_FINALS.length > 0 && mainCompare.enabled && (
         <>
             <div className={`w-full justify-center px-0 order-2 lg:order-0 ${wrapperClass ?? ''}`}>
-                <p className={`text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>Haircare Range</p>
+                <p className={`text-lg lg:text-2xl font-bold text-center mb-2 lg:mb-3 ${view === 'mobile' ? 'lg:hidden' : 'hidden lg:block'}`}>{mainCompare?.sectionTitle !== '' ? mainCompare?.sectionTitle : title}</p>
                 {/* mobile */}
                 {view === 'mobile' && (
                     <div className={`lg:hidden mb-3 lg:mb-[5rem] -mr-g lg:mx-0 ${INIT_FINALS?.length <= 2 ? 'flex' : ''}`}>

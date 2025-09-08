@@ -83,7 +83,9 @@ const RealResultCard = (props) => {
 	}
 
 	const titleEscaped = escapeHtml(data.label);
-	let titleDesc = `className="underline" aria-label="Review @ ${data.author} for ${titleEscaped}" title="Go To Product Page - `;
+	// @ts-ignore
+	const children = parse(data.label)?.props?.children && parse(data.label)?.props?.children[1] ? parse(data.label)?.props?.children[1]?.props?.children : `Review @ ${data.author} for ${data.handle}`;
+	let titleDesc = `className="underline" aria-label="${children}" title="Go To Product Page - `;
 
 	if (status) {
 		data.label = data.label.replace(`<a href="/products/${data.handle}"`, `<a href="/collections/${tab}"`);
@@ -92,6 +94,12 @@ const RealResultCard = (props) => {
 	// const bodyTest = parse(`${data.body}`);
 	const MAX_CHARS = 130;
 	const isTruncated = data.body.length > MAX_CHARS;
+
+	// console.log('escaped', parse(data.label)?.props?.children);
+	
+	
+	// console.log('test', children);
+	// const test = parse(data.label).toString
 
 	return (
 		<div className="w-full lg:w-1/3 lg:inline-block result-card sm:px-hg lg:px-g">

@@ -281,7 +281,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 		<div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding ${nbp_bg_color}`}>
 			<picture className="absolute w-full lg:w-auto lg:h-full">
 				<source srcSet={nbp_img_lg?.url} media="(min-width: 992px)" />
-				<img src={nbp_img?.url} className="w-full h-full" />
+				<img alt={`Newsletter Banner ${nbp_heading}`} src={nbp_img?.url} className="w-full h-full" />
 			</picture>
 			<div className="modal-body px-0 pb-3 pt-[10em] lg:py-4 px-0">
 				<CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />

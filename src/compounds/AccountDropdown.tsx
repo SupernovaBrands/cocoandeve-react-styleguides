@@ -189,7 +189,7 @@ const AccountDropdown = (props:any) => {
                             </Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
-                                    <a href="/account/login#recover" className="text-underline text-primary underline">Forgot your password?</a>
+                                    <a tabIndex={0} href="/account/login?recover=true" className="text-underline text-primary underline">Forgot your password?</a>
                                     <button type="button" className="text-underline text-primary underline" onClick={() => setActiveFrame(!activeFrame)}>Sign up</button>
                                 </li>
                             </ul>
