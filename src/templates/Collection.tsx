@@ -542,7 +542,6 @@ const Collection = (props: any) => {
                                                 />
                                             )}
                                         </div>
-
                                         <ProductCard
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}

@@ -41,7 +41,7 @@ const YotpoStar = (props: any) => {
 		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<ConditionalWrap
                 condition={props?.productHandle}
-                wrap={children => <a href={`/products/${props?.productHandle}#write-a-review`} className="text-sm" aria-label="Write a review for this product">{children}</a>}
+                wrap={children => <a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">{children}</a>}
                 elseWrap={children => <div className="text-sm">{children}</div>}
             >
 				{!props.smSingleStarAllDevice && (

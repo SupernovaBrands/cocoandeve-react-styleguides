@@ -8,8 +8,8 @@ const AccordionPDP = (props: any) => {
 		title: string;
 		text: string;
 		component: any;
+		isBundlePage?: boolean;
 		children?: any;
-		isBundlePage?: boolean
 	};
 
 	const scrollToId = (id, targetEl) => {
@@ -23,7 +23,7 @@ const AccordionPDP = (props: any) => {
 		}
 
 		props.onClick(id, afterClick);
-		setTimeout(() => scrollToId(id, targetEl), 150)
+		//setTimeout(() => scrollToId(id, targetEl), 150)
 	}
 
 	const scrollToView = (id, targetEl) => scrollToId(id, targetEl);

@@ -221,7 +221,7 @@ const Cart: React.FC<Props> = (props) => {
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
-	console.log('cart.tsx', cart.items);
+	// console.log('cart.tsx', cart.items);
 
 	return (
 		<>

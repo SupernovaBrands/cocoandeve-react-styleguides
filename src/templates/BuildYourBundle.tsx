@@ -139,7 +139,8 @@ const BuildYourBundle = (props: any) => {
     }, [tanData]);
 
 
-    console.log('tab2Products', tab2Products);
+    // console.log('-----tab2Products-----', tanData);
+    // tab2Products.map((a) => console.log('a', a.title))
     
     return strapiData ? (
         <div>
