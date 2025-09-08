@@ -30,8 +30,11 @@ const ProductBannerSlider = (props) => {
 		
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
+			console.log('imgHeight', imgHeight);
 			if (isPageReview && window.innerWidth < 769) {
 				setImgPt('pt-[76.6%]');
+			} else if (isPageReview && window.innerWidth >= 769) {
+				setImgPt('pt-[55%]');
 			} else if (imgHeight < 600) {
 				setImgPt('pt-[55%]');
 			} else {

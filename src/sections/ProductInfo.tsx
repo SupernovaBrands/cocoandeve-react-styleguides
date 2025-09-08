@@ -36,7 +36,6 @@ const ProductInfo = (props: any) => {
     const { data } = props;
     const { benefits, how_to_use, ingredients } = data;
     const [ingredientsContent, setIngredientsContent] = useState(ingredients || []);
-    console.log('ProductInfo', data);
 
     const [activeTab, setActiveTab] = useState('ingredients');
     const [comparisonImages, setComparisonImages] = useState({
