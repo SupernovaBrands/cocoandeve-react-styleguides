@@ -49,7 +49,7 @@ const YotpoStar = (props:any) => {
 			<SvgFull className="svg text-primary size-[1em]" />
 			<span className="ml-25 ">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
 			<span className="ml-25">
-				<a className="underline text-nowrap" href={`${props.productUrl}#write-a-review`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
+				<a className="underline text-nowrap" href={`${props.productUrl}?write-a-review=true`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
 			</span>
 		</div>
 	) : (

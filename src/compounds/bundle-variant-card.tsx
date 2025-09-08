@@ -60,13 +60,18 @@ const BundleVariantCard = (props) => {
                 medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
                 default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
             },
+            ca: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7df2104a-c639-466a-10a7-351ffee2d800/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+            },
         },
     };
 
     const getHardcodedImage = (handle, store, selectedValue) => {
         const isValid =
             (handle === 'bronzing-self-tanner-drops' && store === 'au') ||
-            (handle === 'antioxidant-glow-cream' && store === 'us');
+            (handle === 'antioxidant-glow-cream' && store === 'us') ||
+            (handle === 'antioxidant-glow-cream' && store === 'ca');
 
         if (!isValid) return null;
 

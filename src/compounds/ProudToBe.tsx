@@ -184,12 +184,12 @@ const ProudToBe = (props:any) => {
                         </Carousel.Wrapper> */}
                         <ul onScroll={scrolling} ref={scrollEl}
                             onMouseDown={handleDragStart} onMouseUp={handleDragEnd} onMouseMove={handleDrag}
-                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-2 overflow-x-auto overflow-y-hidden sm:mb-2 mt-[0!important]`} role="listbox" aria-label="Carousel Items">
+                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-2 overflow-x-auto overflow-y-hidden sm:mb-2 mt-[0!important]`} aria-label="Carousel Items">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
                                     return null;
                                 }
-                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${proudToBeArr.length > 5 && index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`} role="option">
+                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${proudToBeArr.length > 5 && index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
                                 {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }

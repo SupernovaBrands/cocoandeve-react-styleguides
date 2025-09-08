@@ -15,7 +15,7 @@ const ProductCardLoading = (props) => {
                         <a href={`/products`} className="">
                             <SvgFull role="presentation" className={`svg hidden`} />
                         </a>
-                        <a href={`/products/${props?.productHandle}#write-a-review`} className='h-100 before:pt-[15px]'>
+                        <a href={`/products/${props?.productHandle}?write-a-review=true`} className='h-100 before:pt-[15px]'>
                             <span className="ml-25 lg:hidden text-[#a3a3a3]"></span>
                             <span className="ml-25 text-body"></span>
                         </a>
