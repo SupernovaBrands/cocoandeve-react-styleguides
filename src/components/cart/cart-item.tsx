@@ -294,7 +294,7 @@ export const CartItem = (props:CartItemProps) => {
 						)}
 						{isBundleItem(item) && (
 							<>
-								<p className="font-normal text-xs mt-25 text-primary">Build Your Own Bundle ({item.attributes.find((props:any) => props.key === '_make_your_own_kit_discount').value}%)</p>
+								<p className="font-normal text-xs mt-25 text-primary">{item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes').value}</p>
 							</>
 						)}
 					</p>
@@ -429,9 +429,16 @@ export const CartItem = (props:CartItemProps) => {
 						)
 						: (
 							<div className="flex flex-col text-right">
-								{item.comparePrice > 0
-									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+								{!isBundleItem(item) && (
+									<>
+										{item.comparePrice > 0
+										? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+										: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+									</>
+								)}
+								{isBundleItem(item) && (
+									<span className="line-through">{formatMoney(parseFloat(item.merchandise.price?.amount) * 100, false, store)}</span>
+								)}
 								<strong>
 									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
 										? formatMoney(item.priceAfterDiscounted, false, store)

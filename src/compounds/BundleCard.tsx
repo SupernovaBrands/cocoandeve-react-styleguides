@@ -35,8 +35,8 @@ const AddToCartButton = (props:any) => {
                 srcSet: product.srcSet,
                 title: selectedVariant.title,
                 id: selectedVariant.id,
-                price: product.priceInCent,
-                comparePrice: product.comparePriceInCent
+                price: selectedVariant && selectedVariant.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
+                comparePrice: selectedVariant && selectedVariant.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
             });
             return prevData;
         })
@@ -54,8 +54,13 @@ const AddToCartButton = (props:any) => {
 							__html: DEFAULT_LABEL,
 						}}/>)}
             <div className="inline-flex justify-center text-sm lg:text-base lg:hidden">
-                <span className="font-normal line-through">{formatMoney(product.priceInCent, false, store)}</span>
-                <span className="font-bold ml-[.25rem]">{formatMoney(reducedPrice, false, store)}</span>
+                <span className="font-normal line-through">
+                    {!selectedVariant && formatMoney(product.priceInCent, false, store)}
+                    {selectedVariant && selectedVariant.price && formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store)}
+                </span>
+                <span className="font-bold ml-[.25rem]">
+                    {formatMoney(reducedPrice, false, store)}
+                </span>
             </div>
         </Button>
     );
@@ -112,6 +117,7 @@ const SwatchOverlay = (props:any) => {
     };
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
+    const itemAvailable = props.swatch.data.filter((d) => d.available);
 
     return (
         <>
@@ -122,8 +128,8 @@ const SwatchOverlay = (props:any) => {
                 selectedVariant={selectedVariant}
                 maxItem={maxItem}
                 className="btn-choose"
-                available={true}
-                label={'Choose'}
+                available={itemAvailable.length > 0}
+                label={itemAvailable.length > 0 ? 'Choose' : 'Out of stock'}
                 reducedPrice={reducedPrice}
                 store={store}
             />
@@ -151,7 +157,7 @@ const SwatchOverlay = (props:any) => {
                     setItemSelected={setItemSelected}
                     selectedVariant={selectedVariant}
                     maxItem={maxItem}
-                    available={swatchAvailable}
+                    available={itemAvailable.length > 0}
                     label={!swatchAvailable ? 'Add' : null}
                     reducedPrice={reducedPrice}
                     store={store}
@@ -201,7 +207,11 @@ const BundleCard = (props:any) => {
         }
     }, [shade]);
 
-    const reducedPrice = product.priceInCent - (bundleDiscount / 100) * product.priceInCent;
+    let originalPrice = product.priceInCent;
+    if (selectedVariant && selectedVariant.price) {
+        originalPrice = parseFloat(selectedVariant.price?.amount) * 100;
+    }
+    const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
 
     const openModal = (e) => {
         e.preventDefault();
@@ -222,7 +232,7 @@ const BundleCard = (props:any) => {
         setSkus(skus);
     }, [product, selectedVariant]);
 
-    // if (product.handle === 'masque-towelwrap') console.log('selectedVariant?.availableForSale', product);
+    // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant?.availableForSale', selectedVariant);
 
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
@@ -251,7 +261,10 @@ const BundleCard = (props:any) => {
                     <div className="review-stars__number min-h-1 lg:min-h-[auto] flex justify-start mb-[.75rem] lg:mb-0 lg:flex-col">
                         {skus.length > 0 && (<YotpoStar showTotal={false} smSingleStar={true} smSingleStarAllDevice={false} sku={skus.join(',')} productId={product.productId} productHandle={null} />)}
                         <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-lg">
-                            <span className="text-gray-600 font-normal line-through">{formatMoney(product.priceInCent, false, store)}</span>
+                            <span className="text-gray-600 font-normal line-through">
+                                {!selectedVariant && formatMoney(product.priceInCent, false, store)}
+                                {selectedVariant && selectedVariant.price && (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store))}
+                            </span>
                             <span className="font-bold ml-[.5rem]">{formatMoney(reducedPrice, false, store)}</span>
                         </div>
                     </div>
