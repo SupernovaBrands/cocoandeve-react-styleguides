@@ -177,7 +177,7 @@ const ProductInfo = (props: any) => {
                     <div className={`flex flex-col-reverse lg:flex-row mx-0 mb-0 flex-wrap bg-yellow-light ${activeTab === 'how_to_use' ? 'block' : 'hidden'} `}>
                         <div className={`product__banner-left lg:w-1/2 text-left flex justify-center`}>
                             <div className={`product__banner-content lg:min-h-[420px] lg:max-w-[535px] flex justify-center flex-col`}>
-                                <h2 className="lg:text-[32px] mb-2 lg:mb-4">{how_to_use?.heading}</h2>
+                                <h2 className="lg:text-[32px] text-[20px] mb-2 lg:mb-4">{how_to_use?.heading}</h2>
                                 <ul>
                                     {how_to_use?.step1 && (
                                         <li className="flex mb-[16px]">
@@ -199,6 +199,36 @@ const ProductInfo = (props: any) => {
                                             <p className="ml-g">{how_to_use?.step3}</p>
                                         </li>
                                     )}
+                                    {how_to_use?.step4 && (
+                                        <li className="flex mb-[16px]">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">4</span>
+                                            <p className="ml-g">{how_to_use?.step4}</p>
+                                        </li>
+                                    )}
+                                    {how_to_use?.step5 && (
+                                        <li className="flex mb-[16px]">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">5</span>
+                                            <p className="ml-g">{how_to_use?.step5}</p>
+                                        </li>
+                                    )}
+                                    {how_to_use?.step6 && (
+                                        <li className="flex mb-[16px]">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">6</span>
+                                            <p className="ml-g">{how_to_use?.step6}</p>
+                                        </li>
+                                    )}
+                                    {how_to_use?.step7 && (
+                                        <li className="flex mb-[16px]">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">7</span>
+                                            <p className="ml-g">{how_to_use?.step7}</p>
+                                        </li>
+                                    )}
+                                    {how_to_use?.step8 && (
+                                        <li className="flex mb-[16px]">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">8</span>
+                                            <p className="ml-g">{how_to_use?.step8}</p>
+                                        </li>
+                                    )}
                                 </ul>
                             </div>
                         </div>
@@ -207,7 +237,7 @@ const ProductInfo = (props: any) => {
                                 <div className="product-banner__image w-full">
                                     <ProductBannerSlider {...comparisonImages} />
                                 </div>
-                            ) : (
+                            ) : ( 
                                 <>
                                     <picture className="block pt-[86%] w-full overflow-hidden">
                                         <source
