@@ -71,7 +71,10 @@
 // @import 'templates/our-story';
 // @import 'templates/product';
 // @import 'templates/p3-site-smaller';
-
+body {
+    background-color: #fff;
+    color: #000;
+}
 #gorgias-chat-container #chat-button {
     z-index: 999 !important;
 }
