@@ -95,7 +95,7 @@ const SingleProductItem = (props: any) => {
                     </div> */}
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative   mb-0 mx-auto   flex justify-center lg:block">
                         <div className="rounded-[32px] bg-white  p-[16px] pt-[20px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
-                            <div className="flex mb-[8px] items-center"><h2 className="h4 lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">5ml</span></div>
+                            <div className="flex mb-[8px] items-center"><h2 className="text-md lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">5ml</span></div>
                             <p className="text-sm mb-[8px] lg:mb-[16px] lg:max-w-[410px]">{data?.description}</p>
                             <ul className="text-sm  list-check page-product-list ">
                                 {data?.list?.split('\n').map((li: any) => {
