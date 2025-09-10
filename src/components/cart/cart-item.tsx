@@ -298,7 +298,7 @@ export const CartItem = (props:CartItemProps) => {
 							</>
 						)}
 					</p>
-					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) > -1 && (
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon">
