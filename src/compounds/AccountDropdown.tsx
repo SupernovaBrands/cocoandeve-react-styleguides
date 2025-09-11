@@ -220,7 +220,7 @@ const AccountDropdown = (props:any) => {
                                 </div>
                                 <div className="form-group w-full mb-1 lg:mb-2">
                                     <label htmlFor="dropdownRegisterFormPassword" id="dropdownRegisterFormPasswordLabel" className="sr-only">Password</label>
-                                    <input onFocus={passFocus} ref={passRef} onChange={validPassword} type="password" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormPassword" placeholder="Password" aria-labelledby="dropdownRegisterFormPasswordLabel" />
+                                    <input autoComplete="new-password" onFocus={passFocus} ref={passRef} onChange={validPassword} type="password" className="block mb-0 appearance-none w-full py-g px-1 leading-normal bg-gray-400 text-gray-800 rounded text-sm" id="dropdownRegisterFormPassword" placeholder="Password" aria-labelledby="dropdownRegisterFormPasswordLabel" />
                                     {!validPass && (
                                         <label className="text-primary font-size-sm" htmlFor="CreatePassword">Please enter at least 6 characters including 1 number.</label>
                                     )}
