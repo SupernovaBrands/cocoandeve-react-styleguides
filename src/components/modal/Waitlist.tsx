@@ -119,6 +119,65 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 	useEffect(() => {
 		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
 		if (currId !== 0 && waitlistPdp !== null) {
+			const wlTans = waitlistPdp.vrt_phandles_tans?.split(',') || [];
+			const wlWrap = waitlistPdp.vrt_phandles_wraps?.split(',') || [];
+			const wlHair = waitlistPdp.vrt_phandles_hairs?.split(',') || [];
+			const wlBody = waitlistPdp.vrt_phandles_body?.split(',') || [];
+			const wlComingSoon = waitlistPdp.vrt_phandles_cs?.split(',') || [];
+
+			
+
+			if (wlComingSoon.includes(data.handle)) {
+				// data.formId = waitlistPdp.vrt_cs_smsbumpid;
+				// data.multiOption = true;
+				// data.waitlistTitle = waitlistPdp.vrt_waitlist_form_title_cs;
+				// data.waitlistTitle1 = waitlistPdp.vrt_waitlist_form_title_cs_2;
+				// data.waitlistTitle2 = waitlistPdp.vrt_waitlist_form_title_cs_3;
+				// data.waitlistTitle3 = waitlistPdp.vrt_waitlist_form_title_cs_4;
+				// data.waitlistTitle4 = waitlistPdp.vrt_waitlist_form_title_cs_5;
+				// data.formDescription = waitlistPdp.vrt_waitlist_form_description_cs;
+				// data.formDescription1 = waitlistPdp.vrt_waitlist_form_description_cs_2;
+				// data.formDescription2 = waitlistPdp.vrt_waitlist_form_description_cs_3;
+				// data.formDescription3 = waitlistPdp.vrt_waitlist_form_description_cs_4;
+				// data.formDescription4 = waitlistPdp.vrt_waitlist_form_description_cs_5;
+				// data.titleThanks = waitlistPdp.vrt_waitlist_form_title_thanks_cs;
+				// data.formDescriptionThanks = props.vrt_waitlist_form_desc_thanks_cs;
+				setRestockType(null);
+				setFormTitle(waitlistPdp?.vrt_waitlist_form_title);
+				setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
+			} else if (wlTans.includes(data.handle)) {
+				// data.formId = waitlistPdp.vrt_tan_smsbumpid;
+				// setStockDate(waitlistPdp.vrt_waitlist_form_title);
+				// data.formDescription = waitlistPdp.vrt_waitlist_form_description;
+				// data.titleThanks = waitlistPdp.vrt_waitlist_form_title_thanks;
+				// data.formDescriptionThanks = props.vrt_waitlist_form_description_thanks;
+				setRestockType(null);
+				setFormTitle(waitlistPdp.vrt_waitlist_form_title);
+				setFormDescription(waitlistPdp.vrt_waitlist_form_description);
+			} else if (wlWrap.includes(data.handle)){
+				// data.formId = waitlistPdp.vrt_wrap_smsbumpid;
+				// data.waitlistTitle = waitlistPdp.vrt_waitlist_form_title_wrap;
+				// data.formDescription = waitlistPdp.vrt_waitlist_form_description_wrap;
+				// data.titleThanks = waitlistPdp.vrt_waitlist_form_title_thanks_wrap;
+				// data.formDescriptionThanks = waitlistPdp.vrt_waitlist_form_description_thanks_wrap;
+				setRestockType(null);
+				setFormTitle(waitlistPdp.vrt_waitlist_form_title_wrap);
+				setFormDescription(waitlistPdp.vrt_waitlist_form_description_wrap);
+			} else if (wlHair.includes(data.handle)) {
+				setRestockType(null);
+				setFormTitle(waitlistPdp.vrt_waitlist_form_title_hair);
+				setFormDescription(waitlistPdp.vrt_waitlist_form_description_hair);
+			} else if (wlBody.includes(data.handle)) {
+				// data.formId = waitlistPdp.vrt_body_smsbumpid;
+				// data.waitlistTitle = waitlistPdp.vrt_waitlist_form_title_body;
+				// data.formDescription = waitlistPdp.vrt_waitlist_form_description_body;
+				// data.titleThanks = waitlistPdp.vrt_waitlist_form_title_thanks_body;
+				// data.formDescriptionThanks = waitlistPdp.vrt_waitlist_form_description_thanks_body;
+				setRestockType(null);
+				setFormTitle(waitlistPdp.vrt_waitlist_form_title_body);
+				setFormDescription(waitlistPdp.vrt_waitlist_form_description_body);
+			}
+
 			const variantIds = waitlistPdp.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = waitlistPdp.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds3 = waitlistPdp.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
@@ -158,8 +217,6 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 				setRestockType(waitlistPdp?.vrt_waitlist_restock_type_5 || null);
 				setFormDescription(waitlistPdp?.vrt_waitlist_form_description_cs_5);
 				setFormTitle(waitlistPdp?.vrt_waitlist_form_title_cs_5);
-			} else {
-				setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
 			}
 		} else {
 			setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
@@ -183,13 +240,17 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 								{!success && (
 									<>
 										{stockDate && stockDate !== '' && (
-											<strong className="block mb-[1rem] text-xl lg:text-2xl">{stockDate}</strong>
+											// <strong className="block mb-[1rem] text-xl lg:text-2xl">{stockDate}</strong>
+											<strong className="block mb-[1rem] text-xl lg:text-2xl" dangerouslySetInnerHTML={{__html: stockDate}} />
 										)}
 										{!stockDate && (
-											<strong className="block mb-[1rem] text-xl lg:text-2xl">
-												{/* {waitlistPdp?.vrt_waitlist_form_title} */}
-												{['no'].includes(restockType) && (formTitle === null || formTitle === '') ? 'OUT OF STOCK' : waitlistPdp?.vrt_waitlist_form_title}
-											</strong>
+											// <strong className="block mb-[1rem] text-xl lg:text-2xl">
+											// 	{/* {waitlistPdp?.vrt_waitlist_form_title} */}
+											// 	{['no'].includes(restockType) && (formTitle === null || formTitle === '') ? 'OUT OF STOCK' : formTitle}
+											// </strong>
+											<strong className="block mb-[1rem] text-xl lg:text-2xl" dangerouslySetInnerHTML={{
+												__html: ['no'].includes(restockType) && (formTitle === null || formTitle === '') ? 'OUT OF STOCK' : formTitle
+											}} />
 										)}
 										<p className="text-gray-600 mb-[1rem] text-base aa">
 											{restockType === 'yes' && parse(`Our <strong>${data.title}</strong> has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`)}
@@ -197,8 +258,6 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 											{/* {restockType === null && parse(`Our <strong>${data.title}</strong> ${waitlistPopupData.waitlist_popup_form_description_2}`)} */}
 											{!['yes', 'no'].includes(restockType) && parse(`${formDescription?.replace('{{productName}}', `<strong>${data.title}</strong>`)}`)}
 										</p>
-
-										
 									</>
 								)}
 								{success && !isNonOOs && (
