@@ -231,9 +231,10 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	};
 
+	// console.log('cart item', item);
 	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
 	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
-	const itemNotEditable = item.isFreeItem || bundleItemNotEditable;
+	const itemNotEditable = item.isFreeItem || bundleItemNotEditable || item.merchandise.product.tags.includes('parentkit');
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem && !isBundleItem(item);
 
 	return (
