@@ -14,7 +14,7 @@ const InlineProductCard = (props: any) => {
             const handleClick = (event) => {
                 const isSwatch = event.target.classList.contains('swatch-wrapper-video-card')
                 || event.target.classList.contains('variant-swatch') 
-                || event.target.classList.contains('button__video-upsell') || event.target.closest('svg').classList.contains('button__video-upsell-svg');
+                || event.target.classList.contains('button__video-upsell') || event.target.closest('svg')?.classList.contains('button__video-upsell-svg');
                 // console.log('isSwatch', event.target);
                 if (isSwatch) {
                     return false;
