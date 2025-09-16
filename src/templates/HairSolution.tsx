@@ -326,7 +326,38 @@ const HairSolution = (props: any) => {
                 </section>
             )}
 
-            {data.compare && (
+            {data.product?.rows?.[productTab]?.compare && (
+                <section className="lg:mb-5">
+                    {data.product.rows[productTab].compare?.image_right?.url ? (
+                        <ProductBanner
+                            background="bg-pink-light"
+                            reverse={false}
+                            contentData={{
+                                first_image: data.product.rows[productTab].compare?.image_right,
+                                second_image: data.product.rows[productTab].compare?.image_left,
+                            }}
+                            src={data.product.rows[productTab].compare?.image_right?.url}
+                            rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
+                            leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
+                            svgClasses="!h-[16.97px]"
+                        >
+                            <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
+                                {data.product.rows[productTab].compare?.title}
+                            </h4>
+                            <p className="font-bold mb-[.25rem]">
+                                {data.product.rows[productTab].compare?.subtitle}
+                            </p>
+                            <p>{data.product.rows[productTab].compare?.description}</p>
+                        </ProductBanner>
+                    ) : (
+                        <div className="flex justify-center w-full">
+                            <div className="spinner-border" role="status" aria-hidden="true" />
+                        </div>
+                    )}
+                </section>
+            )}
+
+            {/* {data.compare && (
                 <section className="lg:mb-5">
                     {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
@@ -352,7 +383,7 @@ const HairSolution = (props: any) => {
                         </ProductBanner>
                     )}
                 </section>
-            )}
+            )} */}
 
             {data.result && data.compare?.image_right?.url && (
                 <section className="my-3 lg:mb-5 lg:mt-5 container px-0">
