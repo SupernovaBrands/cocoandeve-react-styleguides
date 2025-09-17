@@ -37,9 +37,12 @@ const ProductBannerSlider = (props) => {
 				setImgPt('pt-[55%]');
 			} else if (imgHeight < 600) {
 				setImgPt('pt-[55%]');
+			} else if (window.innerWidth > 1440) {
+				setImgPt(`pt-[${imgHeight}px]`);
 			} else {
 				setImgPt('pt-[86%]');
 			}
+			
 		}, 300); 
 	};
 	const getCursorPos = (el) => {
@@ -118,7 +121,7 @@ const ProductBannerSlider = (props) => {
 	return <>
 		{wrapperHeight && (
 			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden select-none">
-				<picture className={`block ${imgPt} w-full overflow-hidden`}>
+				<picture style={{ 'paddingTop': `${compOverlay.current?.children?.[0]?.clientHeight}px`}} className={`block a ${imgPt} w-full overflow-hidden`}>
 					<source
 						srcSet={props?.second_image?.url}
 						media="(min-width: 992px)" width="1362" height="1162"/>
