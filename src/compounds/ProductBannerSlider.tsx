@@ -120,7 +120,9 @@ const ProductBannerSlider = (props) => {
 	};
 
 	useEffect(() => {
-		initComparisons();
+		setTimeout(() => {
+			initComparisons();
+		}, 150);
 	}, []);
 
 	useEffect(() => {
