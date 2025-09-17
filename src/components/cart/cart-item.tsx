@@ -225,13 +225,24 @@ export const CartItem = (props:CartItemProps) => {
 
 	const isBundleItem = (item) => {
 		try {
-			return item.attributes.find((props:any) => props.key === '_campaign_type' && props.value === 'build_your_own_bundle');
+			return item.attributes.find((props:any) => props.key.includes('_components_'));
 		} catch {
 			return null
 		}
 	};
 
-	// console.log('cart item', item);
+	const displayChildProduct = (item) => {
+		const data = isBundleItem(item);
+		if (data && data.value) {
+			const parsed = JSON.parse(data.value) || [];
+			return parsed.length > 0 && (
+				<ul className="list-disc list-inside text-sm font-normal mt-25">{parsed.map((line, id) => <li key={id}>{line.title}</li>)}</ul>
+			)
+		} else {
+			return <></>
+		}
+	};
+
 	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
 	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
 	const itemNotEditable = item.isFreeItem || bundleItemNotEditable || item.merchandise.product.tags.includes('parentkit');
@@ -286,6 +297,7 @@ export const CartItem = (props:CartItemProps) => {
 									{`${item.recurring ? ' Subscriptions' : ''}`}
 								</ConditionWrapper>
 							)}
+						{isBundleItem(item) && displayChildProduct(item)}
 						{item.recurring && (
 							<span className="text-primary mt-1 flex font-italic text-sm font-normal">
 								<SvgRecurring className="svg mr-1" />
@@ -293,11 +305,11 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
-						{isBundleItem(item) && (
+						{/* {isBundleItem(item) && (
 							<>
 								<p className="font-normal text-xs mt-25 text-primary">{item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes').value}</p>
 							</>
-						)}
+						)} */}
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
@@ -437,9 +449,9 @@ export const CartItem = (props:CartItemProps) => {
 										: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
 									</>
 								)}
-								{isBundleItem(item) && (
+								{/* {isBundleItem(item) && (
 									<span className="line-through">{formatMoney(parseFloat(item.merchandise.price?.amount) * 100, false, store)}</span>
-								)}
+								)} */}
 								<strong>
 									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
 										? formatMoney(item.priceAfterDiscounted, false, store)
