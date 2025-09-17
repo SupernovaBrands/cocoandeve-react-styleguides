@@ -370,7 +370,7 @@ const HairSolution = (props: any) => {
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
 						</div>
-                    )} */}
+                    )}
                     {data.compare?.image_right?.url && (
                         <ProductBanner
                             background="bg-pink-light"
