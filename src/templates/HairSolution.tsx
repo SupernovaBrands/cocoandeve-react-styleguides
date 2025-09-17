@@ -366,11 +366,11 @@ const HairSolution = (props: any) => {
 
             {/* {data.compare && (
                 <section className="lg:mb-5">
-                    {!data.compare?.image_right?.url && (
+                    {/* {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
 						</div>
-                    )}
+                    )} */}
                     {data.compare?.image_right?.url && (
                         <ProductBanner
                             background="bg-pink-light"
