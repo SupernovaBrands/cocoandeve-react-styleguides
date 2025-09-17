@@ -45,7 +45,7 @@ const BuildYourBundle = (props: any) => {
         swatch: null
     });
 
-    const { tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+    const { parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const cssInline = `
         .top-header {
@@ -214,6 +214,8 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                                 <section className="w-full lg:w-[calc(25%+30px)]">
                                     <YourBundleSidebar
+                                        parentProduct={parentProduct}
+                                        updateCartAttributes={updateCartAttributes}
                                         store={props.store}
                                         setItemSelected={setTab0Selected}
                                         itemSelected={tab0Selected}
@@ -257,6 +259,8 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                                 <div className="w-full lg:w-[calc(25%+30px)]">
                                     <YourBundleSidebar
+                                        parentProduct={parentProduct}
+                                        updateCartAttributes={updateCartAttributes}
                                         store={props.store}
                                         setItemSelected={setTab1Selected}
                                         itemSelected={tab1Selected}

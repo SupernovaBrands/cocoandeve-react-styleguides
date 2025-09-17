@@ -47,7 +47,7 @@ const ItemCard = (props) => {
 };
 
 const YourBundleSidebar = (props: any) => {
-    const { bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData, minItem, maxItem } = props;
+    const { updateCartAttributes, parentProduct, bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData, minItem, maxItem } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [processing, setProcessing] = useState(false);
 
@@ -118,7 +118,26 @@ const YourBundleSidebar = (props: any) => {
             ids: gIds
         });
 
-        if (multipleAdd) setItemSelected([]);
+        if (multipleAdd) {
+
+            setItemSelected([]);
+            if (parentProduct) {
+                const attributes = [...multipleAdd.attributes, {key: '_bundle_kit_config', value: JSON.stringify(parentProduct)}]
+                // console.log('new attributes', attributes);
+                // await updateCartAttributes({store, cartId: multipleAdd.id, attributes })
+                fetch('/api/cart/updateAttributes', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        value: parentProduct,
+                        key: '_bundle_kit_config'
+                    }),
+                });
+            }
+        }
         setProcessing(false);
         setIsOpen(false);
     };
