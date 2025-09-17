@@ -21,6 +21,7 @@ const options: EmblaOptionsType = {
         '(min-width: 992px)': { 
             watchDrag: false,
             duration: 40,
+            loop: true,
         }
     }
 };
@@ -89,10 +90,6 @@ const PageReviews = (props: any) => {
 		emblaApi1.on('reInit', onScroll);
 		emblaApi1.on('scroll', onScroll);
 	}, [emblaApi1, onScroll]);
-
-    useEffect(() => {
-        console.log('reviewsData1', reviewsData);
-    }, [])
 
     return <>
         {REVIEWS?.length && (
