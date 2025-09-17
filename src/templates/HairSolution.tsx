@@ -154,6 +154,11 @@ const HairSolution = (props: any) => {
 
     return (
         <>
+            {!data.banner && (
+                <div className="flex justify-center w-full">
+					<div className="spinner-border" role="status" aria-hidden="true" />
+				</div>
+            )}
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
                     {data.banner.image_d && data.banner.image_m && (
