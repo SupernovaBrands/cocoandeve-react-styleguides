@@ -137,7 +137,7 @@ const ProductInfo = (props: any) => {
                                     <Carousel.Inner emblaRef={emblaRef1} className=" lg:!transform-none">
                                         {ingredientsContent.map((item, i) => {
                                             return (
-                                                <div key={`ing--${i}`} className={`flex-grow-0 flex-shrink-0 w-[200px] basis-[200px] lg:w-[16.6%] lg:basis-[16.6%] px-hg flex-1 flex  border-b-[#ADADAD] border-solid border-b-0 border-t-0`}> 
+                                                <div key={`ing--${i}`} className={`flex-grow-0 flex-shrink-0 w-[270px] basis-[270px] lg:w-[16.6%] lg:basis-[16.6%] px-hg flex-1 flex  border-b-[#ADADAD] border-solid border-b-0 border-t-0`}> 
                                                     <div className='max-h-none grow bg-white p-[16px] rounded-[20px] text-left lg:block'>
                                                         <img className='mb-[20px]' src={item?.image?.url} />
                                                         <h2 className='mb-1'>{item.title}</h2>
