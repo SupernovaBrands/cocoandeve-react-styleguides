@@ -156,10 +156,12 @@ const HairSolution = (props: any) => {
         <>
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
-                    <picture className={``}>
-                        <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
-                        <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
-                    </picture>
+                    {data.banner.image_d && data.banner.image_m && (
+                        <picture className={``}>
+                            <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
+                            <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
+                        </picture>
+                    )}
                     <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
                         <h1 className="text-xl mb-[.5rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -369,8 +371,8 @@ const HairSolution = (props: any) => {
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
-                                first_image: data.compare?.image_right,
-                                second_image: data.compare?.image_left
+                                first_image: data.compare?.image_left,
+                                second_image: data.compare?.image_right
                             }}
                             src={data.compare?.image_right?.url}
                             rightArrowClasses={'p-hg ml-1 lg:p-[11.5px]'}
