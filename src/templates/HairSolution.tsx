@@ -335,8 +335,8 @@ const HairSolution = (props: any) => {
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
-                                first_image: data.product.rows[productTab].compare?.image_right,
-                                second_image: data.product.rows[productTab].compare?.image_left,
+                                first_image: data.product.rows[productTab].compare?.image_left,
+                                second_image: data.product.rows[productTab].compare?.image_right,
                             }}
                             src={data.product.rows[productTab].compare?.image_right?.url}
                             rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
