@@ -150,7 +150,7 @@ const HairSolution = (props: any) => {
         data: data.result?.rows?.filter((row) => row.checked4) || [],
     }]
 
-    // console.log('RESULT_VIDEOS_ALL', RESULT_VIDEOS_ALL);
+    // console.log('data.product.rows', data.product);
 
     return (
         <>
@@ -252,7 +252,7 @@ const HairSolution = (props: any) => {
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
                             </ul>
-                            <a href={data.product.cta_url} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">{data.product.cta_label}</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">Shop Allxxx</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -320,7 +320,7 @@ const HairSolution = (props: any) => {
                             })}
                         </div>
                         <div className="text-center">
-                            <a href="/collections/all" className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
                         </div>
                     </div>
                 </section>
