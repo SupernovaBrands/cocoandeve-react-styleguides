@@ -56,7 +56,7 @@ const SingleProductItem = (props: any) => {
                                                         media="(min-width: 992px)" width="1362" height="1162"/>
                                                     <img
                                                         src={image?.mobile?.url || null}
-                                                        className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
+                                                        className="object-cover h-full w-full" loading="lazy" height="234" width="369" alt={"Product banner and comparison image"} />
                                                 </picture>
                                             </div>
                                         )
@@ -64,7 +64,7 @@ const SingleProductItem = (props: any) => {
                                 </Carousel.Inner>
 
                                 <Carousel.Navigation>
-                                    <ol className="carousel__dots justify-end">
+                                    <ol className="carousel__dots justify-end ">
                                         {data?.images?.map((image: any, index: number) => {
                                             return (<li key={`slidot-${index}`} className={`border border-white ${index === idx1 ? ' bg-white' : ''}`}>
                                                 <DotButton
