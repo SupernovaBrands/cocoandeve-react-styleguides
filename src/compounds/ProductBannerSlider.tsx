@@ -156,7 +156,7 @@ const ProductBannerSlider = (props) => {
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 				<div
 					ref={compSlider}
-					className="img-slider absolute flex justify-center items-center top-0 touch-pan-y touch-pinch-zoom"
+					className="touch-none img-slider absolute flex justify-center items-center top-0 touch-pan-y touch-pinch-zoom"
 					style={{ ...sliderStyle }}
 					onMouseDown={slideReady}
 					onMouseUp={slideFinish}
