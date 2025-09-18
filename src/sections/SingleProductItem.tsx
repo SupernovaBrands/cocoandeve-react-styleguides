@@ -13,7 +13,7 @@ const SingleProductItem = (props: any) => {
     const { data, addToCart } = props;
     const [adding, setAdding] = useState(false);
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-        Autoplay({ playOnInit: true, delay: 4000  })
+        Autoplay({ playOnInit: true, delay: 6000 })
     ]);
     const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
     useEffect(() => {
@@ -47,16 +47,16 @@ const SingleProductItem = (props: any) => {
                         <div className="single-product-item__left  w-full  lg:w-1/2 grid gap-x-[30px] content-center pt-0 pb-4 px-g lg:max-w-none lg:flex lg:flex-wrap mb-0 lg:mx-0;">
                             <Carousel.Wrapper emblaApi={emblaApi}>
                                 <Carousel.Inner emblaRef={emblaRef} className="">
-                                    {data?.images?.map((image: any, index: number) => {
+                                    {data?.images?.map((image: any) => {
                                         return (
-                                            <div key={`slid-${index}`} className='flex-grow-0 flex-shrink-0 w-full basis-full'>
+                                            <div key={0} className='flex-grow-0 flex-shrink-0 w-full basis-full'>
                                                 <picture className="block w-full rounded-[32px] overflow-hidden">
                                                     <source
                                                         srcSet={image?.desktop?.url || null}
                                                         media="(min-width: 992px)" width="1362" height="1162"/>
                                                     <img
                                                         src={image?.mobile?.url || null}
-                                                        className="object-cover h-full w-full" loading="lazy" height="234" width="369" alt={"Product banner and comparison image"} />
+                                                        className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
                                                 </picture>
                                             </div>
                                         )
@@ -64,15 +64,19 @@ const SingleProductItem = (props: any) => {
                                 </Carousel.Inner>
 
                                 <Carousel.Navigation>
-                                    <ol className="carousel__dots justify-end ">
-                                        {data?.images?.map((image: any, index: number) => {
-                                            return (<li key={`slidot-${index}`} className={`border border-white ${index === idx1 ? ' bg-white' : ''}`}>
-                                                <DotButton
-                                                    onClick={() => onClick1(index)}
-                                                    className="carousel__dot"
-                                                />
-                                            </li>)
-                                        })}
+                                    <ol className="carousel__dots justify-end">
+                                        <li key={0} className={`border border-white ${0 === idx1 ? ' bg-white' : ''}`}>
+                                            <DotButton
+                                                onClick={() => onClick1(0)}
+                                                className="carousel__dot"
+                                            />
+                                        </li>
+                                        <li key={1} className={`border border-white ${1 === idx1 ? ' bg-white' : ''}`}>
+                                            <DotButton
+                                                onClick={() => onClick1(1)}
+                                                className="carousel__dot"
+                                            />
+                                        </li>
                                     </ol>
                                 </Carousel.Navigation>
                             </Carousel.Wrapper>
@@ -91,7 +95,7 @@ const SingleProductItem = (props: any) => {
                     </div> */}
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative   mb-0 mx-auto   flex justify-center lg:block">
                         <div className="rounded-[32px] bg-white  p-[16px] pt-[20px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
-                            <div className="flex mb-[8px] items-center"><h2 className="text-md lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">{data?.after_title || ''}</span></div>
+                            <div className="flex mb-[8px] items-center"><h2 className="text-md lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">5ml</span></div>
                             <p className="text-sm mb-[8px] lg:mb-[16px] lg:max-w-[410px]">{data?.description}</p>
                             <ul className="text-sm  list-check page-product-list ">
                                 {data?.list?.split('\n').map((li: any) => {

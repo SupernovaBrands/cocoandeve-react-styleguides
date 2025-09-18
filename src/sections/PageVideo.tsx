@@ -21,16 +21,13 @@ const PageVideo = (props: any) => {
 
     return (
         <div className='lg:container lg:py-[60px] mt-4 lg:mt-0'>
-            <picture className="block w-full rounded-[32px] relative" onClick={() => handlOpenModal(true)}>
+            <picture className="block w-full rounded-[32px]" onClick={() => handlOpenModal(true)}>
                 <source
                     srcSet={data?.img_desk?.url}
                     media="(min-width: 992px)" width="1362" height="1162"/>
                 <img
                     src={data?.img_mob?.url}
                     className="object-cover h-full w-full" loading="lazy" height="357" width="414" alt={"Page Video"} />
-                <div className="flex items-center absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
-                    <Play className="svg--current-color w-[57px] h-[57px] lg:w-[88px] lg:h-[88px] text-white " />
-                </div>
             </picture>
             {data?.video_url && (
                 <Modal className="modal-lg modal-dialog-centered !px-0 " isOpen={modal} handleClose={() => handlOpenModal(false)}>
