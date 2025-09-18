@@ -405,7 +405,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollPrev() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-ml-2"
                                         >
-                                            <span ref={resultCarousels[`prev${index}`]} className="hidden absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`prev${index}`]} className="hidden absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronPrev className="svg--current-color" />
                                             </span>
                                         </PrevButton>
@@ -414,7 +414,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollNext() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-mr-2"
                                         >
-                                            <span ref={resultCarousels[`next${index}`]} className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`next${index}`]} className="absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronNext className="svg--current-color" />
                                             </span>
                                         </NextButton>
