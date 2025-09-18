@@ -13,7 +13,7 @@ const SingleProductItem = (props: any) => {
     const { data, addToCart } = props;
     const [adding, setAdding] = useState(false);
     const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-        Autoplay({ playOnInit: true, delay: 6000 })
+        Autoplay({ playOnInit: true, delay: 4000  })
     ]);
     const { selectedIndex: idx1, onDotButtonClick: onClick1 } = useDotButton(emblaApi);
     useEffect(() => {
