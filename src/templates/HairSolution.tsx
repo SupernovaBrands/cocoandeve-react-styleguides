@@ -152,6 +152,18 @@ const HairSolution = (props: any) => {
 
     // console.log('data.product.rows', data.product);
 
+    const sortByAvailability = (itemArray: any) => {
+        const availableItems = itemArray?.filter((v) => v.availableForSale) || [];
+        const oosItems = itemArray?.filter((v) => !v.availableForSale) || [];
+        const productUnavailable = [];
+        [...availableItems, ...oosItems].forEach((obj) => {
+            if (!obj.availableForSale) {
+                productUnavailable.push(obj);
+            }
+        });
+        return [...availableItems, ...productUnavailable];
+    };
+
     return (
         <>
             {data.banner && (
@@ -258,6 +270,7 @@ const HairSolution = (props: any) => {
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
                             {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((tabRow, index) => {
                                 // const e = useEmblaCarousel(options)
+                                
                                 return (
                                     <TabContent active={productTab === index} key={`tab-prooduct-content-${index}`}>
                                         <ConditionalWrap
@@ -274,7 +287,7 @@ const HairSolution = (props: any) => {
 
                                             <Carousel.Wrapper emblaApi={productCarousels[`embla${index}`][1]} className="carousel__products">
                                                 <Carousel.Inner innerClass="px-[9px] lg:px-0" emblaRef={productCarousels[`embla${index}`][0]}>
-                                                    {tabRow.products && tabRow.products.length > 0 && tabRow.products.map((item: any, index: number) => {
+                                                    {tabRow.products && tabRow.products.length > 0 && sortByAvailability(tabRow.products).map((item: any, index: number) => {
                                                         return <ProductCard
                                                             key={`${activeTab}-${item.id}-${index}`}
                                                             keyName={`${activeTab}-${item.id}-${index}`}
