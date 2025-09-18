@@ -125,6 +125,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 			const wlBody = waitlistPdp.vrt_phandles_body?.split(',') || [];
 			const wlComingSoon = waitlistPdp.vrt_phandles_cs?.split(',') || [];
 
+			setFormTitle(waitlistPdp?.vrt_waitlist_form_title);
+			setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
 			
 
 			if (wlComingSoon.includes(data.handle)) {
