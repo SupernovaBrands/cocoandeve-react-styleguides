@@ -466,8 +466,8 @@ const HairSolution = (props: any) => {
                                 )}
                                 
                             </Carousel.Wrapper>
-                            {row.data.length > 1 && (
-                                <div className={`px-g lg:px-[.25rem] ${row.data.length <= 4 ? 'lg:hidden' : ''}`}>
+                            {row.data.length > 4 && (
+                                <div className="px-g lg:px-[.25rem]">
                                     <CarouselScrollbar
                                         emblaApi={resultCarousels[`emblaResult${index}`][1]}
                                         scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}
