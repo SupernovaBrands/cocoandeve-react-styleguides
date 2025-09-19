@@ -76,14 +76,17 @@ const HairSolution = (props: any) => {
         emblaResult1: useEmblaCarousel(optionsResults),
         emblaResult2: useEmblaCarousel(optionsResults),
         emblaResult3: useEmblaCarousel(optionsResults),
+        emblaResult4: useEmblaCarousel(optionsResults),
         prev0: useRef(null),
         prev1: useRef(null),
         prev2: useRef(null),
         prev3: useRef(null),
+        prev4: useRef(null),
         next0: useRef(null),
         next1: useRef(null),
         next2: useRef(null),
         next3: useRef(null),
+        next4: useRef(null),
     };
 
     const { selected: selected0 } = useSelectedSnapDisplay(resultCarousels[`emblaResult0`][1]);
@@ -148,6 +151,9 @@ const HairSolution = (props: any) => {
     }, {
         title: 'Boost Therapy',
         data: data.result?.rows?.filter((row) => row.checked4) || [],
+    }, {
+        title: 'Bond Therapy',
+        data: data.result?.rows?.filter((row) => row.checked5) || [],
     }]
 
     // console.log('data.product.rows', data.product);
