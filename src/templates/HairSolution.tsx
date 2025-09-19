@@ -154,12 +154,19 @@ const HairSolution = (props: any) => {
 
     return (
         <>
+            {(!data.banner.image_d || !data.banner.image_m) && (
+                <div className="flex justify-center w-full mt-2 lg:mt-3">
+					<div className="spinner-border" role="status" aria-hidden="true" />
+				</div>
+            )}
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
-                    <picture className={``}>
-                        <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
-                        <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
-                    </picture>
+                    {data.banner.image_d && data.banner.image_m && (
+                        <picture className={``}>
+                            <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
+                            <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
+                        </picture>
+                    )}
                     <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
                         <h1 className="text-xl mb-[.5rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -328,18 +335,18 @@ const HairSolution = (props: any) => {
 
             {data.compare && (
                 <section className="lg:mb-5">
-                    {!data.compare?.image_right?.url && (
+                    {/* {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
 						</div>
-                    )}
+                    )} */}
                     {data.compare?.image_right?.url && (
                         <ProductBanner
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
-                                first_image: data.compare?.image_right,
-                                second_image: data.compare?.image_left
+                                first_image: data.compare?.image_left,
+                                second_image: data.compare?.image_right
                             }}
                             src={data.compare?.image_right?.url}
                             rightArrowClasses={'p-hg ml-1 lg:p-[11.5px]'}

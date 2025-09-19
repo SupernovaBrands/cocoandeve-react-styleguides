@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 
@@ -12,6 +12,21 @@ const ProductBannerSlider = (props) => {
 	const [wrapperWidth, setWrapperWidth] = useState(0);
 	const [wrapperHeight, setWrapperHeight] = useState({ minHeight: '480px' });
 	const [imgPt, setImgPt] = useState('');
+
+	const useWindowSize = () => {
+		const [size, setSize] = useState([0, 0]);
+		useLayoutEffect(() => {
+			function updateSize() {
+				setSize([window.innerWidth, window.innerHeight]);
+			}
+			window.addEventListener('resize', updateSize);
+			updateSize();
+			return () => window.removeEventListener('resize', updateSize);
+		}, []);
+		return size;
+	}
+
+	const [width, height] = useWindowSize();
 
 	const initComparisons = () => {
 		setWrapperWidth(compWrapper.current.offsetWidth);
@@ -105,10 +120,17 @@ const ProductBannerSlider = (props) => {
 	};
 
 	useEffect(() => {
-		initComparisons();
+		setTimeout(() => {
+			initComparisons();
+		}, 150);
 	}, []);
 
+	useEffect(() => {
+		initComparisons();
+	}, [width])
+
 	return <>
+		{/* <span>Window size: {width} x {height}</span> */}
 		{wrapperHeight && (
 			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden select-none">
 				<picture className={`block ${imgPt} w-full overflow-hidden`}>
@@ -125,7 +147,7 @@ const ProductBannerSlider = (props) => {
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 				<div
 					ref={compSlider}
-					className="img-slider absolute flex justify-center items-center top-0 touch-pan-y touch-pinch-zoom"
+					className="touch-none img-slider absolute flex justify-center items-center top-0"
 					style={{ ...sliderStyle }}
 					onMouseDown={slideReady}
 					onMouseUp={slideFinish}
