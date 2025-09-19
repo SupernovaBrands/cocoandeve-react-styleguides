@@ -31,7 +31,7 @@ export const CartItem = (props:CartItemProps) => {
 		useShopifyVariantInfo, store } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
-	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
+	
 	const isMultiOptions = item.swatches.length > 1;
 
 	const [hideItem, setHideItem] = useState(false);
@@ -114,13 +114,13 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
 			}
 
-			if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
-			}
+			// if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
+			// }
 
-			if ((store === 'uk' || store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
-			}
+			// if ((store === 'uk' || store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
+			// }
 
 			// if (store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
@@ -142,34 +142,34 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
 			}
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			}
+			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			// }
 
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
-			}
+			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
+			// }
 
 			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
 				item.featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
 
-			if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			}
+			// if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
+			// }
 			if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8fce65c9-c57e-4401-71cd-313acd286200/public';
 			}
 			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
 			}
-			if (['ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
-			}
-			if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
-			}
+			// if (['ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
+			// }
+			// if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
+			// }
 
 			// if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
@@ -188,6 +188,10 @@ export const CartItem = (props:CartItemProps) => {
 			}
 
 			if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
+			}
+
+			if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
 			}
 
@@ -218,6 +222,31 @@ export const CartItem = (props:CartItemProps) => {
 			return null
 		}
 	}
+
+	const isBundleItem = (item) => {
+		try {
+			return item.attributes.find((props:any) => props.key.includes('_components_'));
+		} catch {
+			return null
+		}
+	};
+
+	const displayChildProduct = (item) => {
+		const data = isBundleItem(item);
+		if (data && data.value) {
+			const parsed = JSON.parse(data.value) || [];
+			return parsed.length > 0 && (
+				<ul className="list-disc list-inside text-sm font-normal mt-25">{parsed.map((line, id) => <li key={id}>{line.title}</li>)}</ul>
+			)
+		} else {
+			return <></>
+		}
+	};
+
+	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
+	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
+	const itemNotEditable = item.isFreeItem || bundleItemNotEditable || item.merchandise.product.tags.includes('parentkit');
+	const showSwatches = variants && variants.length > 1 && !item.isFreeItem && !isBundleItem(item);
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -268,6 +297,7 @@ export const CartItem = (props:CartItemProps) => {
 									{`${item.recurring ? ' Subscriptions' : ''}`}
 								</ConditionWrapper>
 							)}
+						{isBundleItem(item) && displayChildProduct(item)}
 						{item.recurring && (
 							<span className="text-primary mt-1 flex font-italic text-sm font-normal">
 								<SvgRecurring className="svg mr-1" />
@@ -275,8 +305,13 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
+						{/* {isBundleItem(item) && (
+							<>
+								<p className="font-normal text-xs mt-25 text-primary">{item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes').value}</p>
+							</>
+						)} */}
 					</p>
-					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) > -1 && (
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon">
@@ -288,7 +323,7 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !bundleItemNotRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -385,7 +420,7 @@ export const CartItem = (props:CartItemProps) => {
 				<div className="flex items-center justify-between">
 					<QuantityBox
 						name="quantity-box"
-						editable={!item.isFreeItem}
+						editable={!itemNotEditable}
 						quantity={item.quantity}
 						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 						isLastStock={isLastStock}
@@ -407,9 +442,16 @@ export const CartItem = (props:CartItemProps) => {
 						)
 						: (
 							<div className="flex flex-col text-right">
-								{item.comparePrice > 0
-									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+								{!isBundleItem(item) && (
+									<>
+										{item.comparePrice > 0
+										? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+										: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+									</>
+								)}
+								{/* {isBundleItem(item) && (
+									<span className="line-through">{formatMoney(parseFloat(item.merchandise.price?.amount) * 100, false, store)}</span>
+								)} */}
 								<strong>
 									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
 										? formatMoney(item.priceAfterDiscounted, false, store)

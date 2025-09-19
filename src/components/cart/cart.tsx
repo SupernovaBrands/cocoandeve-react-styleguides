@@ -9,7 +9,7 @@ import CartUpsell from '~/components/cart/cart-upsell';
 import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
-import { formatMoney } from "~/modules/utils";
+import { formatMoney, getCookie } from "~/modules/utils";
 import KlarnaModal from '~/components/modal/KlarnaModal';
 
 // import { CartData } from "./types";
@@ -29,7 +29,7 @@ interface Props {
 	itemCount?: any;
 	strapiCartSetting?: any;
 	onUpdateCart: (item: any, qty: number) => void;
-	onDeleteLine: (lineId: string, attributes: Array<any>[]) => void;
+	onDeleteLine: (lineId: any, attributes: Array<any>[]) => void;
 	discountMeter?: any;
 	shippingMeter?: any;
 	shippingData?: any;
@@ -89,18 +89,19 @@ const Cart: React.FC<Props> = (props) => {
 		if (cartData) {
 
 			// validate for OOS item in cart
+			// console.log('manualGwpBuyItems', manualGwpBuyItems);
 			const gwpBuyItemInCarts = cartData.lines.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
 			if (gwpBuyItemInCarts.length === 0) {
 				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
 				if (manualGwpItems.length > 0) {
 					manualGwpItems.forEach((item: any) => {
-						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id)) {
-							onRemoveItem(item, []);
+						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id) && manualGwpBuyItems !== '') {
+							// if (manualGwpBuyItems !== '') manGwpIds.push(item.id);
 							const newIdsToDel = [...invalidGiftsToDelete];
 							newIdsToDel.push(item);
 							setInvalidGiftsToDelete(newIdsToDel);
 						}
-					})
+					});
 				}
 			}
 			const oosInCarts = cartData.lines.filter((line: any) => !line.merchandise.availableForSale);
@@ -114,6 +115,13 @@ const Cart: React.FC<Props> = (props) => {
 			setCombineDiscount(cartData.combineDiscount);
 		}
 	}, [cartData, itemCount]);
+
+	useEffect(() => {
+		if (invalidGiftsToDelete.length > 0) {
+			const manGwpIds = invalidGiftsToDelete.map((v) => v.id);
+			if (manGwpIds.length > 0) onDeleteLine(manGwpIds, []);
+		}
+	}, [invalidGiftsToDelete.length]);
 
 	const onApplyDiscountCode = async (c:any, updateCart = true) => {
 		return await handleDiscount(c, updateCart);
@@ -143,7 +151,16 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
-		onDeleteLine(item.id, attributes);
+		const isBundleItem = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit' && attribute.value === 'yes');
+		if (!isBundleItem) onDeleteLine(item.id, attributes);
+		else {
+			// delete bundle group
+			const groupId = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit_group').value || 0;
+			const itemsToDelete = cartData.items.filter((item) => item.attributes.find((att) => att.key === '_make_your_own_kit_group' && att.value === groupId))
+				.map((v) => v.id);
+			// console.log('itemsToDelete', itemsToDelete);
+			onDeleteLine(itemsToDelete, attributes);
+		}
 	}
 
 	const getId = (shopifyId: string) => {
@@ -200,10 +217,11 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onToggleManualGwp = async (id:any) => {
+		// console.log('toggle manual gwp');
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
-	// console.log('cart.tsx', discountMeter);
+	// console.log('cart.tsx', cart);
 
 	return (
 		<>
@@ -329,7 +347,7 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{!combineDiscount && cart.discountLine > 0 && !isSwellDiscCode && (
+									{!combineDiscount && (cart.discountLine) > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>

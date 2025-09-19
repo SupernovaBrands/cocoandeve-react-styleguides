@@ -49,11 +49,11 @@ const YotpoStar = (props:any) => {
 			<SvgFull className="svg text-primary size-[1em]" />
 			<span className="ml-25 ">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
 			<span className="ml-25">
-				<a className="underline text-nowrap" href={`${props.productUrl}#write-a-review`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
+				<a className="underline text-nowrap" href={`${props.productUrl}?write-a-review=true`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
 			</span>
 		</div>
 	) : (
-		<a className={`flex ${props.extraClass} mb-2 md:mb-1 hover:no-underline`} onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>
+		<a tabIndex={0} className={`flex ${props.extraClass} mb-2 md:mb-1 hover:no-underline`} onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>
 			<ReviewStar score={score} />
 			{props.showScore && <span className="ml-25 text-primary hover:underline hover:text-primary-darken review__inline-star">{`${score ? score.toFixed(1) : 0} stars`}</span>}
 			{props.showTotal && (

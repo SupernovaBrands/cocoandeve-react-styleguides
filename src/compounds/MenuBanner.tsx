@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Percentage from '~/images/icons/percentage-square.svg';
 import Sun from '~/images/icons/sun.svg';
+import HeartPink from '~/images/icons/heart-pink.svg';
 import MenuDecoration from '~/images/icons/menu-banner-decoration.svg';
 import MenuDecorationGreen from '~/images/icons/menu-banner-decoration-green.svg';
 
@@ -15,6 +16,7 @@ const MenuBanner = (props: any) => {
 		line2,
 		code,
 		product,
+		icon,
 	} = content;
 
     useEffect(() => {
@@ -97,13 +99,16 @@ const MenuBanner = (props: any) => {
 	const twoLines = line1.length > 28;
 
     return (
-        <li className="pt-[5px] pb-0 flex justify-between mx-g mb-1" onClick={() => onBannerAction()} role="presentation">
+        <li className={`pt-[5px] pb-0 flex justify-between mx-g mb-1 ${props.className ?? ''}`} onClick={() => onBannerAction()} role="presentation">
             <figure className={`flex mb-0 items-center bg-${theme} pl-g relative py-1 my-0 rounded-tl-[.5em] rounded-bl-[.5em] w-[calc(100%-10px)] `}>
-                {theme === 'secondary-light' ? (
+                {/* {theme === 'secondary-light' ? (
 					<Percentage className="mr-1" />
 				) : (
 					<Sun className="mr-1" />
-				)}
+				)} */}
+				{theme === 'secondary-light' && !icon && <Percentage className="mr-1" /> }
+				{theme === 'pink-light' && !icon && <Sun className="mr-1" /> }
+				{theme === 'pink-light' && icon === 'heart' && <HeartPink className="mr-1" /> }
                 <figcaption className="flex-1 text-sm">
                     <span dangerouslySetInnerHTML={{__html: line1}} /><br />
                     <span dangerouslySetInnerHTML={{__html: line2}} />

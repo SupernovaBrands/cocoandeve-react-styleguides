@@ -18,12 +18,12 @@ const PopularProducts = (props: any) => {
 							{popProducts.length > 0 && popProducts.map((product) => {
 								const { title, handle } = product;
 								let featuredImageUrl = product.featuredImgUrl;
-								if (store === 'au' && handle === 'daily-essentials-bundle') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
-								}
-								if (store === 'au' && handle === 'tan-masters-kit') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7a07e54-75c2-4834-3bfd-00bd9188a300/public';
-								}
+								// if (store === 'au' && handle === 'daily-essentials-bundle') {
+								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
+								// }
+								// if (store === 'au' && handle === 'tan-masters-kit') {
+								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7a07e54-75c2-4834-3bfd-00bd9188a300/public';
+								// }
 								if (store === 'eu' && handle === 'hair-revival-set') {
 									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e4131b1-37c9-4e58-7e23-d56aac5e9600/public';
 								}

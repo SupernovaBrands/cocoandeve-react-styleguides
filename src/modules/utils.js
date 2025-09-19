@@ -1298,3 +1298,44 @@ export const checkLaunchWLBox = (launchWL, handle) => {
     }
 	return { isLaunchWL, launchBox };
 }
+
+export const removeObjectWithId = (arr, idToRemove) => arr.filter((obj) => obj.id !== idToRemove);
+
+export const isKit = (title) => {
+    const productTitle = title.toLowerCase();
+    return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
+}
+
+export const getSkus = (product) => {
+	let skus = [];
+	if (product && product.productType !== 'HERO') {
+        const skus_ = isKit(product.title)
+            ? product.variants.nodes.map((node) => node.sku)
+            : product.variants.nodes.filter((node) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node) => node.sku);
+        if (product.variants.nodes[0]?.reviewSku) {
+			skus = [product.variants.nodes[0]?.reviewSku.value];
+        } else {
+			skus = skus_;
+        }
+    } else if (product && product.variants) {
+        if (isKit(product.title)) {
+            if (product.variants.nodes[0]?.reviewSku) {
+				skus = [product.variants.nodes[0]?.reviewSku.value];
+            } else {
+				skus = product.variants.nodes.map((node) => node.sku);
+            }
+        } else {
+            const single = product.variants.nodes.filter((node) => {
+                return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
+            })
+            if (product.variants.nodes[0]?.reviewSku) {
+                skus = [product.variants.nodes[0]?.reviewSku.value];
+            } else {
+                skus = single.map((node) => node.sku);
+            }
+        }
+    }
+	return skus;
+}
+
+export const ConditionalWrap = ({condition, wrap, children, elseWrap}) => condition ? wrap(children) : elseWrap(children);

@@ -22,6 +22,7 @@ export const CartDiscountForm = (props:any) => {
 
     const [state, setState] = useState(stateData);
     const [discInput, setDiscInput] = useState('');
+    const [validItemInCart, setValidItemInCart] = useState(false);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -43,6 +44,14 @@ export const CartDiscountForm = (props:any) => {
             discountBanner: props.discountBanner,
             hasCode: props.isApplied || !!props.appliedGiftCard.code,
         };
+
+        const validItems = props.cart.lines.filter((line: any) => {
+            const collections = line.merchandise.product.collections.nodes.map((item: any) => item.handle);
+            const configCollections = props.discountBanner.collection_handle?.split(',') || [];
+            const configProducts = props.discountBanner.product_handle?.split(',') || [];
+            return configProducts.includes(line.merchandise.product.handle) || configCollections.some((item: any) => collections.includes(item));
+        });
+        setValidItemInCart(validItems?.length > 0);
         setState(stateData);
     }, [props]);
 
@@ -157,7 +166,7 @@ export const CartDiscountForm = (props:any) => {
                     </div>
                 </div> }
                 { !state.isApplied && state.error && <p className="text-primary mt-1 text-[14px]">{state.error}</p> }
-                {state.discountBanner?.enable && !state.hasCode && (
+                {state.discountBanner?.enable && !state.hasCode && validItemInCart && (
                 <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer w-[calc(100%-10px)]" onClick={applyBanner}>
                     <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                     <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
