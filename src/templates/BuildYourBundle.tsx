@@ -279,7 +279,7 @@ const BuildYourBundle = (props: any) => {
                     </div>
                 </TabContent>
             </div>
-            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-start" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
                 <ProductInfo
                     generalSetting={generalSetting}
                     strapiAutomateHardcode={strapiAutomateHardcode}

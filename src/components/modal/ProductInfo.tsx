@@ -284,9 +284,9 @@ const ProductInfo = (props: any) => {
         dataAccordion = [];
     }
 
-    const [openIndex, setOpenIndex] = useState(0);
+    const [openIndex, setOpenIndex] = useState('benefits-ingredients');
 
-    const toggleCard = async (id: number, callback:any = null) => {
+    const toggleCard = async (id: any, callback:any = null) => {
         let openIndexId = id;
         if (id === openIndex) {
 			openIndexId = 0;
@@ -503,9 +503,9 @@ const ProductInfo = (props: any) => {
                         <div className="w-full px-g lg:pr-0 lg:w-1/2 lg:pl-2">
                             <h4 className="font-bold text-lg lg:text-2xl mb-[1rem] lg:mb-1 mt-25 lg:mt-0">
                                 <p className={`${additionalTitle.length > 0 ? 'pr-25 inline' : ''}`}>{productTitle}</p>
-                                {additionalTitle.length > 0 && !['BUNDLE'].includes(productStrapi.product_type) && /(\d+(?:\.\d+)?)(ml|g|oz|kg|lb)/.test(additionalTitle[0]) && (
+                                {/* {additionalTitle.length > 0 && !['BUNDLE'].includes(productStrapi.product_type) && /(\d+(?:\.\d+)?)(ml|g|oz|kg|lb)/.test(additionalTitle[0]) && (
                                     <p className="product__title--additional before:content-[''] !text-body !font-bold !text-lg lg:!text-2xl">{additionalTitle[0]}</p>
-                                )}
+                                )} */}
                             </h4>
                             { tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p> }
                             {data.swatch && (

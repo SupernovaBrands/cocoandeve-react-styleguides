@@ -254,13 +254,13 @@ const BundleCard = (props:any) => {
                 <Eye className="svg h-[1rem] w-[1rem]" />
             </p>
             <div className={`pt-0 relative product-card__content lg:px-[.5rem]`}>
-                <p role="button" onClick={(e) => openModal(e)} className={`text-sm lg:text-base text-body hover:text-body w-full text-left min-h-[36px] px-0 lg:px-0 lg:min-h-[36px] flex flex-col mt-[.75rem] lg:mt-[1rem] mb-[.5rem] justify-center pr-[.5rem] lg:font-bold`}>
+                <p role="button" onClick={(e) => openModal(e)} className={`text-sm lg:text-base text-body hover:text-body w-full text-left min-h-[52.5px] lg:min-h-[36px] px-0 lg:px-0 lg:min-h-[36px] flex flex-col mt-[.75rem] lg:mt-[1rem] mb-[.5rem] justify-center pr-[.5rem] lg:font-bold`}>
                     {product.title}
                 </p>
                 <div className="flex flex-col lg:flex-row lg:justify-between">
                     <div className="review-stars__number min-h-1 lg:min-h-[auto] flex justify-start mb-[.75rem] lg:mb-0 lg:flex-col">
                         {skus.length > 0 && (<YotpoStar showTotal={false} smSingleStar={true} smSingleStarAllDevice={false} sku={skus.join(',')} productId={product.productId} productHandle={null} />)}
-                        <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-lg">
+                        <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-[1.05rem]">
                             <span className="text-gray-600 font-normal line-through">
                                 {!selectedVariant && formatMoney(product.priceInCent, false, store)}
                                 {selectedVariant && selectedVariant.price && (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store))}
