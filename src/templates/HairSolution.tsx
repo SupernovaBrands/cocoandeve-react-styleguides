@@ -150,16 +150,35 @@ const HairSolution = (props: any) => {
         data: data.result?.rows?.filter((row) => row.checked4) || [],
     }]
 
-    // console.log('RESULT_VIDEOS_ALL', RESULT_VIDEOS_ALL);
+    // console.log('data.product.rows', data.product);
+
+    const sortByAvailability = (itemArray: any) => {
+        const availableItems = itemArray?.filter((v) => v.availableForSale) || [];
+        const oosItems = itemArray?.filter((v) => !v.availableForSale) || [];
+        const productUnavailable = [];
+        [...availableItems, ...oosItems].forEach((obj) => {
+            if (!obj.availableForSale) {
+                productUnavailable.push(obj);
+            }
+        });
+        return [...availableItems, ...productUnavailable];
+    };
 
     return (
         <>
+            {(!data.banner.image_d || !data.banner.image_m) && (
+                <div className="flex justify-center w-full mt-2 lg:mt-3">
+					<div className="spinner-border" role="status" aria-hidden="true" />
+				</div>
+            )}
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
-                    <picture className={``}>
-                        <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
-                        <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
-                    </picture>
+                    {data.banner.image_d && data.banner.image_m && (
+                        <picture className={``}>
+                            <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
+                            <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
+                        </picture>
+                    )}
                     <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
                         <h1 className="text-xl mb-[.5rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -252,12 +271,13 @@ const HairSolution = (props: any) => {
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
                             </ul>
-                            <a href={data.product.cta_url} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">{data.product.cta_label}</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">Shop All</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
                             {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((tabRow, index) => {
                                 // const e = useEmblaCarousel(options)
+                                
                                 return (
                                     <TabContent active={productTab === index} key={`tab-prooduct-content-${index}`}>
                                         <ConditionalWrap
@@ -274,7 +294,7 @@ const HairSolution = (props: any) => {
 
                                             <Carousel.Wrapper emblaApi={productCarousels[`embla${index}`][1]} className="carousel__products">
                                                 <Carousel.Inner innerClass="px-[9px] lg:px-0" emblaRef={productCarousels[`embla${index}`][0]}>
-                                                    {tabRow.products && tabRow.products.length > 0 && tabRow.products.map((item: any, index: number) => {
+                                                    {tabRow.products && tabRow.products.length > 0 && sortByAvailability(tabRow.products).map((item: any, index: number) => {
                                                         return <ProductCard
                                                             key={`${activeTab}-${item.id}-${index}`}
                                                             keyName={`${activeTab}-${item.id}-${index}`}
@@ -320,7 +340,7 @@ const HairSolution = (props: any) => {
                             })}
                         </div>
                         <div className="text-center">
-                            <a href="/collections/all" className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
                         </div>
                     </div>
                 </section>
@@ -359,18 +379,18 @@ const HairSolution = (props: any) => {
 
             {/* {data.compare && (
                 <section className="lg:mb-5">
-                    {!data.compare?.image_right?.url && (
+                    {/* {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
 						</div>
-                    )}
+                    )} */}
                     {data.compare?.image_right?.url && (
                         <ProductBanner
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
-                                first_image: data.compare?.image_right,
-                                second_image: data.compare?.image_left
+                                first_image: data.compare?.image_left,
+                                second_image: data.compare?.image_right
                             }}
                             src={data.compare?.image_right?.url}
                             rightArrowClasses={'p-hg ml-1 lg:p-[11.5px]'}
@@ -423,7 +443,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollPrev() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-ml-2"
                                         >
-                                            <span ref={resultCarousels[`prev${index}`]} className="hidden absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`prev${index}`]} className="hidden absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronPrev className="svg--current-color" />
                                             </span>
                                         </PrevButton>
@@ -432,7 +452,7 @@ const HairSolution = (props: any) => {
                                             onClick={() => resultCarousels[`emblaResult${index}`][1].scrollNext() }
                                             className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center lg:-mr-2"
                                         >
-                                            <span ref={resultCarousels[`next${index}`]} className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                            <span ref={resultCarousels[`next${index}`]} className="absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                 <ChevronNext className="svg--current-color" />
                                             </span>
                                         </NextButton>
