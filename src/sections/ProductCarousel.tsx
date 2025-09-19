@@ -43,7 +43,6 @@ const ProductCarousel = (props: any) => {
 			tab3: { products },
 		}
 	}
-
 	const [activeTab, setActiveTab] = useState('bestsellers');
 
     const [isHomepage, setIsHomepage] = useState(false);

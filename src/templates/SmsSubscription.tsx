@@ -139,7 +139,7 @@ const SmsSubscription = (props) => {
                 <div className="sms-subscription__image w-full lg:w-[41.66667%] lg:pr-[17.5px]">
                     <picture className="ratio ratio-1x1 relative w-auto">
                         <source srcSet={content?.image_desktop.url} media="(min-width: 992px)" />
-                        <img src={content?.image_mobile.url} className="object-cover w-full h-full " loading="lazy" />
+                        <img alt="Sms subscription banner image" src={content?.image_mobile.url} className="object-cover w-full h-full " loading="lazy" />
                     </picture>
                 </div>
                 <div className="w-full lg:w-[58.333%] text-center items-center flex px-g pb-4 lg:pb-0">

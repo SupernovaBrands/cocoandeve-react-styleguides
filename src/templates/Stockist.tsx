@@ -64,7 +64,7 @@ const Stockist = (props: any) => {
                 <form className="flex flex-wrap justify-center items-center -mx-25">
                     <label className="w-auto md:w-auto my-1 lg:text-lg sm:=text-sm font-bold lg:px-25">{content.label_title}</label>
                     <div className="w-auto mt-1 mb-[1rem] lg:mb-1 px-[5px]">
-                        <select className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
+                        <select title="Change your country or region" className="indent-0 border-0 min-w-[190px] lg:min-w-[auto] py-[0.875em] pr-[2em] pl-[1em] custom-select mb-0 md:ml-2 stockist__select rounded" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
@@ -96,16 +96,16 @@ const Stockist = (props: any) => {
                     </div>
                 </form>
                 {!isLoading && (
-                    <div dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline')}} />
+                    <div dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
                 )}
                 <p className="font-bold mt-4 mb-g text-left lg:text-center lg:text-lg">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></p>
                 <hr className="hidden "></hr>
                 {!isLoading && (
                     <div className="flex flex-wrap justify-center -mx-hg lg:-mx-g">
-                        {stores.map((filteredItem) => (
+                        {stores.map((filteredItem, idx) => (
                             <figure key={filteredItem.id} className="m-0 w-1/2 md:w-1/5 px-hg lg:px-g" data-toggle={filteredItem.country_tag}>
-                                <a href={filteredItem.logo_url} className="block lg:py-g rounded" target="_blank">
-                                    <img className="lg:mx-auto lg:!w-auto" src={filteredItem.logo.url} alt={filteredItem.logo.url} />
+                                <a href={filteredItem.logo_url} className="block lg:py-g rounded">
+                                    <img className="lg:mx-auto lg:!w-auto" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
                                 </a>
                                 <figcaption className="my-2 !font-normal text-base lg:text-lg text-body">{filteredItem.title}</figcaption>
                             </figure>
@@ -126,7 +126,7 @@ const Stockist = (props: any) => {
                             <p className="text-body text-xl font-bold mb-[1rem]">{content.question_title}</p>
                             <p className="text-body">No worries, you can email us:</p>
                             <a href="mailto:wholesale@cocoandeve.com" className="text-body underline lg:text-lg font-bold mb-2">wholesale@cocoandeve.com</a>
-                            <a href="mailto:wholesale@cocoandeve.com" className="btn btn-primary rounded-full min-w-[157px] border-primary !text-white font-normal hover:no-underline">Send mail</a>
+                            <a href="mailto:wholesale@cocoandeve.com" className="btn btn-primary btn--send-mail rounded-full min-w-[157px] border-primary font-normal hover:no-underline">Send mail</a>
                         </div>
                     </div>
                     <BeautyConfidence parentClass="w-full lg:w-1/2 lg:px-g stockist__beauty-confidence" />

@@ -47,5 +47,9 @@
 			}
 		}
 
+		.btn--send-mail {
+			@apply text-white focus:text-white visited:text-white hover:text-white;
+		}
+
 	}
 }

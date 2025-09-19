@@ -136,6 +136,8 @@ const YotpoReviewWidget = (props:any) => {
 		productShopifyName,
 	} = props;
 
+	// console.log('productUrl', productUrl);
+
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(1);
@@ -722,8 +724,7 @@ const YotpoReviewWidget = (props:any) => {
 	} = usePrevNextButtons(emblaApi7);
 	const autoPlayClick7 = controlAutoplay(emblaApi7);
 
-
-	const isTrialParticipant = (review:any) => trialParticipants.find((t) => t.user === review.user_name
+	const isTrialParticipant = (review:any) => review.trial_participants || trialParticipants.find((t) => t.user === review.user_name
 	&& t.title === review.title && t.content === review.content);
 
 	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
@@ -848,7 +849,7 @@ const YotpoReviewWidget = (props:any) => {
 									aria-controls="yotpoReviewForm"
 									onClick={() => {
 										handleForm('review');
-										if (!canCreate) window.location.href = `${productUrl}#write-a-review`;
+										if (!canCreate) window.location.href = `${productUrl}?write-a-review=true`;
 									}}
 								>
 									{tStrings.yotpo.beFirstReview}
@@ -867,11 +868,13 @@ const YotpoReviewWidget = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g">
+										<div key={review.id} className="border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
-													{review.user_name}
-													{review.verified_buyer && <SvgVerified className="svg lg:mt-[2px] text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:block" />}
+													<span className='items-start w-auto'>
+														<span class="whitespace-normal">{review.user_name}</span>
+														{review.verified_buyer && <SvgVerified className="svg align-text-top lg:mt-[2px] text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:inline-block" />}
+													</span>
 												</h4>
 												{isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">Trial Participant</p>}
 												{review.verified_buyer && !isTrialParticipant(review) && <p className="text-sm mb-0 sm:inline-flex lg:flex sm:ml-hg lg:ml-0">{tStrings.yotpo.verifiedBuyer}</p>}
@@ -905,7 +908,7 @@ const YotpoReviewWidget = (props:any) => {
 													<ReviewStar score={review.score} />
 												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={``}>
+													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
 														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
@@ -933,7 +936,7 @@ const YotpoReviewWidget = (props:any) => {
 																	<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 																)}
 																{/* preloade image for modal, to make it fast load when popup opened */}
-																<img rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
+																<img alt={`Review image media ${index}`} rel="preload" src={media.image_url?.replace('https:', '')} className="hidden"/>
 															</button>
 														))}
 													</div>
@@ -1001,7 +1004,7 @@ const YotpoReviewWidget = (props:any) => {
 									aria-controls="yotpoQuestionForm"
 									onClick={() => {
 										handleForm('question')
-										if (!canCreate) window.location.href = `${productUrl}#write-a-review`;
+										if (!canCreate) window.location.href = `${productUrl}?write-a-review=true`;
 									}}
 								>
 									{tStrings.yotpo.beFirstQuestion}

@@ -18,6 +18,7 @@ const AccordionPDP = (props: any) => {
 		}
 
 		props.onClick(id, afterClick);
+		//setTimeout(() => scrollToId(id, targetEl), 150)
 	}
 
 	return (
@@ -31,7 +32,7 @@ const AccordionPDP = (props: any) => {
 					</div>
 					<div className={`accordion-content ${props.openIndex === d.id ? 'accordion-content--open' : 'accordion-content--close'}`}>
 						{ d.text && <div className="pt-0 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
-						{ d.component && <div className={`pt-0 pb-3 text-sm`}>{ d.component }</div>}
+						{ d.component && <div className={`pt-0 text-sm`}>{ d.component }</div>}
 						{ d.children && <div className={`pt-0 pb-3 text-sm`}>{ d.children }</div>}
 					</div>
 				</div>

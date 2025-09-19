@@ -148,7 +148,7 @@ const CarouselScroll = (props) => {
         <div className='container mb-0 mb-lg-3'>
             {props.products.length > 0 && (
                 <div className="carousel--scroll position-relative">
-                    <div className="carousel-inner d-flex flex-nowrap row w-auto" role="listbox">
+                    <div className="carousel-inner d-flex flex-nowrap row w-auto">
                         {props.products.map((product, i) => {
                             return <SearchProductCard title={product.title} classes={`carousel-item mb-1 ${i === 0 ? 'active' : ''}`} />
                         })}

@@ -31,7 +31,7 @@ const CheckoutUpsell: React.FC<CheckoutUpsellProps> = ({ title, description, pro
 							<a href="#" className="flex-shrink-0">
 								<picture className="block">
 									<source srcSet={product.srcSet} media="(min-width: 992px)" />
-									<img src={product.src} alt="" className="w-full" />
+									<img src={product.src} alt={`Upsell product of ${product.name}`} className="w-full" />
 								</picture>
 							</a>
 							<figcaption className="flex grow flex-col pl-g text-left py-1 justify-center pr-1 lg:pr-2">

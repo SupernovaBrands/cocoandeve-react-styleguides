@@ -66,15 +66,15 @@ type VariantProp = {
 const ProductVariant: React.FC<VariantProp> = (props) => {
 	return (
 		<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
-			<input id={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-is-additional={props.isAdditional} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
-			<label htmlFor={props.id} className={`custom-control-label border-0 border-color-[#fff] before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white] before:!content-none !pl-0`}>
+			<input id={props.id} aria-label={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type="radio" name="product-variant" value={props.id} data-is-additional={props.isAdditional} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
+			<div className={`custom-control-label border-0 border-color-[#fff] before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white] before:!content-none !pl-0`}>
 				{props.children}
 				{!props.subscription && <p className="mb-1 font-bold product__pricing-dt">
 					{props.compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
 					<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price}</span>
 					{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {props.saving ? props.saving : '(Save 30%)'} </span>}
 				</p>}
-			</label>
+			</div>
 		</div>
 	)
 };
