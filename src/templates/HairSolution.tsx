@@ -481,7 +481,7 @@ const HairSolution = (props: any) => {
                             )}
                         </TabContent>
                     ))}
-                    <div className="text-center lg:hidden mt-[.25rem]">
+                    <div className="text-center lg:hidden mt-2">
                         <a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block">
                             See All
                         </a>
