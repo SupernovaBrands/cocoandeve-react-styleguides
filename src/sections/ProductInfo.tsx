@@ -2,34 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import ProductBannerSlider from '../compounds/ProductBannerSlider';
 import Plus from '~/images/icons/plus.svg';
 import Minus from '~/images/icons/minus.svg';
-
-const CONTENT_INGREDIENTS = [
-    {
-        title: 'Hyaluronic Acid',
-        text: 'Hydrates and repairs skin texture.',
-        open: false
-    },
-    {
-        title: 'Banana',
-        text: 'Hydrates and repairs skin texture.',
-        open: false
-    },
-    {
-        title: 'Coconut Water',
-        text: 'Hydrates and repairs skin texture.',
-        open: false
-    },
-    {
-        title: 'Dragon Fruit',
-        text: 'Hydrates and repairs skin texture.',
-        open: false
-    },
-    {
-        title: 'Fig',
-        text: 'Hydrates and repairs skin texture.',
-        open: false
-    }
-] 
+import { EmblaOptionsType } from 'embla-carousel';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+const options: EmblaOptionsType = {
+	loop: true,
+};
 
 const ProductInfo = (props: any) => {
     
@@ -46,6 +25,10 @@ const ProductInfo = (props: any) => {
             url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/image_57.png?v=1756216902'
         }
     });
+
+    const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options}, [
+        Autoplay({ playOnInit: false, delay: 3000 })
+    ]);
 
     const onIngAccordionChange = (i) => {
         const ingredientsContent = [...ingredients];
@@ -147,27 +130,24 @@ const ProductInfo = (props: any) => {
                     </div>
                 )}
                 {ingredientsContent?.length > 0 && (
-                    <div className={`flex mx-0 mb-0 flex-wrap lg:bg-yellow-light ${activeTab === 'ingredients' ? 'block' : 'hidden'} `}>
-                        <div className='container pb-[0px] lg:pb-[50px] lg:pt-[50px] px-g'>
-                            <ul className='flex lg:gap-g flex-col lg:flex-row'>
-                                {ingredientsContent.map((item, i) => {
-                                    return (
-                                        <li className={`flex-1 lg:flex grow border-b-[#ADADAD] border-b border-solid lg:border-b-0 lg:border-t-0 ${i === 0 ? 'border-t-[#ADADAD] border-t border-solid' : ''}`}> 
-                                            <div className={`heading flex grow justify-between lg:hidden py-3`}>
-                                                <h3 className='text-left'>{item?.title}</h3>
-                                                <div className='flex' onClick={() => onIngAccordionChange(i)}>
-                                                    {!item.open && (<Plus className={`h-[.75em] w-[.75em] mb-[3px] ${item.open ? 'hidden' : 'block'}`} />)}
-                                                    {item.open && (<Minus className={`h-[.75em] w-[.75em] mb-[3px] ${!item.open ? 'hidden' : 'block'}`} />)}
+                    <div className={`flex mx-0 mb-0 flex-wrap bg-yellow-light ${activeTab === 'ingredients' ? 'block' : 'hidden'} `}>
+                        <div className='lg:container px-0 w-full relative block pb-[50px] pt-[50px] lg:px-g pl-hg'>
+                            <ul className='px-hg'>
+                                <Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg ">
+                                    <Carousel.Inner emblaRef={emblaRef1} className=" lg:!transform-none">
+                                        {ingredientsContent.map((item, i) => {
+                                            return (
+                                                <div key={`ing--${i}`} className={`flex-grow-0 flex-shrink-0 w-[160px] basis-[160px] lg:w-[16.6%] lg:basis-[16.6%] px-hg flex-1 flex  border-b-[#ADADAD] border-solid border-b-0 border-t-0`}> 
+                                                    <div className='max-h-none grow bg-white p-[12px] lg:p-[16px] rounded-[20px] text-left lg:block'>
+                                                        <img className='mb-[20px]' src={item?.image?.url} />
+                                                        <h2 className='mb-1 text-[16px] leading-[20px] lg:text-[20px] lg:leading-[24px]'>{item.title}</h2>
+                                                        <p className='flex grow mb-0'>{item.description}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className={`accordion-content lg:max-h-none grow bg-white lg:p-[16px] lg:rounded-[20px] text-left lg:block ${!item.open ? 'accordion-content--close' : 'accordion-content--open'}`}>
-                                                <img className='mb-[20px]' src={item?.image?.url} />
-                                                <h2 className='mb-1'>{item.title}</h2>
-                                                <p className='lg:flex grow mb-g lg:mb-0'>{item.description}</p>
-                                            </div>
-                                        </li>
-                                    )
-                                })}
+                                            )
+                                        })}
+                                    </Carousel.Inner>
+                                </Carousel.Wrapper>
                             </ul>
                         </div>
                     </div>
