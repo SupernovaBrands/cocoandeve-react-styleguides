@@ -57,7 +57,7 @@ const VideoUpsellCard = (props: any) => {
                 crossOrigin="anonymous" 
                 className="lazy-video w-full mb-0 lazy-video bg-shimmer rounded-[1.5rem] h-[376px] min-h-[376px] lg:rounded-[2rem] lg:h-[376px] lg:min-h-[376px] object-cover" muted={true} playsInline={true} loop={true} autoPlay={false}>
                 <source src={videoUrl} type="video/mp4" />
-                <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="captions" srcLang="en" label="English" default />
+                <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="metadata" srcLang="en" label="English" default />
                 <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="descriptions" srcLang="en" label="English" default />
             </video>
             {/* <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body underline">{title}</a> */}

@@ -26,6 +26,15 @@ const horizontalVariant = {
 
 const Modal = (props: any) => {
 	const { handleClose, children, isOpen, className, cartDrawer, withoutPadding, backdropClasses, contentClass, slideIn, modalComp } = props;
+
+	const handleCloseWithBlur = () => {
+		handleClose();
+
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur();
+		}
+	};
+
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = 'hidden';
@@ -37,6 +46,20 @@ const Modal = (props: any) => {
 			document.body.style.overflow = 'unset';
 		};
 	}, [isOpen]);
+
+
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const handleEsc = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				handleCloseWithBlur();
+			}
+		};
+
+		window.addEventListener("keydown", handleEsc);
+		return () => window.removeEventListener("keydown", handleEsc);
+	}, [isOpen, handleClose]);
 
 	if (!slideIn && (modalComp === 'newsletter' || modalComp === 'sweepstakes')) {
 		containerVariant.initial = { top: '0', transition: { type: 'spring' } };

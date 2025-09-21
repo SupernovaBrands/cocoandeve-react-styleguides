@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 
 const ProductBannerSlider = (props) => {
+	const { isPageReview } = props;
 	const compWrapper = useRef(null);
 	const compOverlay = useRef(null);
 	const compSlider = useRef(null);
@@ -12,6 +13,21 @@ const ProductBannerSlider = (props) => {
 	const [wrapperWidth, setWrapperWidth] = useState(0);
 	const [wrapperHeight, setWrapperHeight] = useState({ minHeight: '480px' });
 	const [imgPt, setImgPt] = useState('');
+
+	const useWindowSize = () => {
+		const [size, setSize] = useState([0, 0]);
+		useLayoutEffect(() => {
+			function updateSize() {
+				setSize([window.innerWidth, window.innerHeight]);
+			}
+			window.addEventListener('resize', updateSize);
+			updateSize();
+			return () => window.removeEventListener('resize', updateSize);
+		}, []);
+		return size;
+	}
+
+	const [width, height] = useWindowSize();
 
 	const initComparisons = () => {
 		setWrapperWidth(compWrapper.current.offsetWidth);
@@ -29,12 +45,20 @@ const ProductBannerSlider = (props) => {
 		
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
-			// console.log('imgHeight', compOverlay, imgHeight);
-			if (imgHeight < 600) setImgPt('pt-[55%]');
-			else setImgPt('pt-[86%]');
+			if (isPageReview && window.innerWidth < 769) {
+				setImgPt('pt-[76.6%]');
+			} else if (isPageReview && window.innerWidth >= 769) {
+				setImgPt('pt-[55%]');
+			} else if (imgHeight < 600) {
+				setImgPt('pt-[55%]');
+			} else if (window.innerWidth > 1440) {
+				setImgPt(`pt-[${imgHeight}px]`);
+			} else {
+				setImgPt('pt-[86%]');
+			}
+			
 		}, 300); 
 	};
-
 	const getCursorPos = (el) => {
 		let x = 0;
 		const e = (el.changedTouches) ? el.changedTouches[0] : el;
@@ -105,13 +129,20 @@ const ProductBannerSlider = (props) => {
 	};
 
 	useEffect(() => {
-		initComparisons();
+		setTimeout(() => {
+			initComparisons();
+		}, 150);
 	}, []);
 
+	useEffect(() => {
+		initComparisons();
+	}, [width])
+
 	return <>
+		{/* <span>Window size: {width} x {height}</span> */}
 		{wrapperHeight && (
 			<div ref={compWrapper} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove} className="product-banner__slider-wrapper relative w-full h-full overflow-hidden select-none">
-				<picture className={`block ${imgPt} w-full overflow-hidden`}>
+				<picture style={{ 'paddingTop': `${compOverlay.current?.children?.[0]?.clientHeight}px`}} className={`block a ${imgPt} w-full overflow-hidden`}>
 					<source
 						srcSet={props?.second_image?.url}
 						media="(min-width: 992px)" width="1362" height="1162"/>
@@ -125,7 +156,7 @@ const ProductBannerSlider = (props) => {
 				{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
 				<div
 					ref={compSlider}
-					className="img-slider absolute flex justify-center items-center top-0 touch-pan-y touch-pinch-zoom"
+					className="touch-none img-slider absolute flex justify-center items-center top-0"
 					style={{ ...sliderStyle }}
 					onMouseDown={slideReady}
 					onMouseUp={slideFinish}
