@@ -143,17 +143,17 @@ const HairSolution = (props: any) => {
         title: 'Like A Virgin',
         data: data.result?.rows?.filter((row) => row.checked1) || [],
     }, {
-        title: 'Pro Youth',
-        data: data.result?.rows?.filter((row) => row.checked2) || [],
-    }, {
-        title: 'Sweet Repair',
-        data: data.result?.rows?.filter((row) => row.checked3) || [],
-    }, {
         title: 'Boost Therapy',
         data: data.result?.rows?.filter((row) => row.checked4) || [],
     }, {
         title: 'Bond Therapy',
         data: data.result?.rows?.filter((row) => row.checked5) || [],
+    }, {
+        title: 'Sweet Repair',
+        data: data.result?.rows?.filter((row) => row.checked3) || [],
+    }, {
+        title: 'Pro Youth',
+        data: data.result?.rows?.filter((row) => row.checked2) || [],
     }]
 
     // console.log('data.product.rows', data.product);
@@ -481,7 +481,7 @@ const HairSolution = (props: any) => {
                             )}
                         </TabContent>
                     ))}
-                    <div className="text-center lg:hidden mt-2">
+                    <div className="text-center lg:hidden mt-[.25rem]">
                         <a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block">
                             See All
                         </a>
