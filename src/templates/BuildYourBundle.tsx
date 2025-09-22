@@ -51,6 +51,14 @@ const BuildYourBundle = (props: any) => {
         .top-header {
             top: ${headerPos}px;
         }
+        .footer {
+            padding-top: 10px;
+        }
+        @media (min-width: 992px) {
+            .footer {
+                padding-top: 40px;
+            }
+        }
     `;
 
     const settingDiscount = (num) => {
@@ -141,6 +149,10 @@ const BuildYourBundle = (props: any) => {
 
     // console.log('-----tab2Products-----', tanData);
     // tab2Products.map((a) => console.log('a', a.title))
+    const inlineStyle = `
+    
+    `
+    
     
     return strapiData ? (
         <div>

@@ -530,7 +530,7 @@ const ProductInfo = (props: any) => {
                             <Button disabled={disabled || !selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                 {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                 {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) || disabled ? 'Added' : ''}
-                                {!disabled && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add' : ''}
+                                {!disabled && selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add' : ''}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
                                 { dataAccordion.length > 0 && <AccordionPDP isBundlePage={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }

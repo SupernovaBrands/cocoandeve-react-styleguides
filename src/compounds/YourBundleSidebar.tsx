@@ -13,7 +13,7 @@ const ItemCard = (props) => {
         const items = [...itemSelected];
         items.splice(idx, 1);
         setItemSelected(items);
-        setIsOpen(false);
+        if (items.length === 0) setIsOpen(false);
     };
     return (
         <li className={`flex mb-[1rem] ${placeholder ? 'opacity-[.5]' : ''}`}>
