@@ -374,7 +374,7 @@ const HairSolution = (props: any) => {
                 </section>
             )}
 
-            {data.result && data.compare?.image_right?.url && (
+            {data.result && (
                 <section className="my-3 lg:mb-5 lg:mt-5 container px-0">
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
@@ -430,7 +430,7 @@ const HairSolution = (props: any) => {
                                 
                             </Carousel.Wrapper>
                             {row.data.length > 1 && (
-                                <div className="px-g lg:px-[.25rem]">
+                                <div className={`px-g lg:px-[.25rem] ${row.data.length <= 4 ? 'lg:hidden' : ''}`}>
                                     <CarouselScrollbar
                                         emblaApi={resultCarousels[`emblaResult${index}`][1]}
                                         scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}
