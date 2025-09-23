@@ -139,24 +139,41 @@ const HairSolution = (props: any) => {
     }, [waitlistData]);
 
     
-    const RESULT_VIDEOS_ALL = [{
-        title: 'Like A Virgin',
-        data: data.result?.rows?.filter((row) => row.checked1) || [],
-    }, {
-        title: 'Boost Therapy',
-        data: data.result?.rows?.filter((row) => row.checked4) || [],
-    }, {
-        title: 'Bond Therapy',
-        data: data.result?.rows?.filter((row) => row.checked5) || [],
-    }, {
-        title: 'Sweet Repair',
-        data: data.result?.rows?.filter((row) => row.checked3) || [],
-    }, {
-        title: 'Pro Youth',
-        data: data.result?.rows?.filter((row) => row.checked2) || [],
-    }]
+    // const RESULT_VIDEOS_ALL = [{
+    //     title: 'Like A Virgin',
+    //     data: data.result?.rows?.filter((row) => row.checked1) || [],
+    // }, {
+    //     title: 'Boost Therapy',
+    //     data: data.result?.rows?.filter((row) => row.checked4) || [],
+    // }, {
+    //     title: 'Bond Therapy',
+    //     data: data.result?.rows?.filter((row) => row.checked5) || [],
+    // }, {
+    //     title: 'Sweet Repair',
+    //     data: data.result?.rows?.filter((row) => row.checked3) || [],
+    // }, {
+    //     title: 'Youth Revive',
+    //     data: data.result?.rows?.filter((row) => row.checked2) || [],
+    // }]
 
     // console.log('data.product.rows', data.product);
+
+    const CATEGORY_LABELS = {
+        checked1: 'Like A Virgin',
+        checked2: 'Youth Revive',
+        checked3: 'Sweet Repair',
+        checked4: 'Boost Therapy',
+        checked5: 'Bond Therapy',
+    };
+
+    const DEFAULT_CATEGORY_ORDER = ['checked1', 'checked2', 'checked3', 'checked4', 'checked5'];
+
+    const categoryOrder = data?.result?.category_order || DEFAULT_CATEGORY_ORDER;
+
+    const RESULT_VIDEOS_ALL = categoryOrder.map((key) => ({
+        title: CATEGORY_LABELS[key],
+        data: data.result?.rows?.filter((row) => row[key]) || [],
+    }));
 
     const sortByAvailability = (itemArray: any) => {
         const availableItems = itemArray?.filter((v) => v.availableForSale) || [];
