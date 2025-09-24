@@ -11,6 +11,8 @@ import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
 import { formatMoney, getCookie } from "~/modules/utils";
 import KlarnaModal from '~/components/modal/KlarnaModal';
+import CartBundleItem from "./cart-bundle-item";
+
 
 // import { CartData } from "./types";
 // import { getCookie } from "~/modules/utils";
@@ -77,6 +79,25 @@ const Cart: React.FC<Props> = (props) => {
 	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
 	const [invalidGiftsToDelete, setInvalidGiftsToDelete] = useState([]);
 
+	let os = 'unknown';
+    const [platform, setPlatform] = useState(os);
+
+	useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+    
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
+    
+        setPlatform(os);
+    }, []);
+
 	const handleOpenModalKlarna = () => {
 		setIsModalKlarnaOpen(false);
     }
@@ -84,6 +105,14 @@ const Cart: React.FC<Props> = (props) => {
 	const setIsKlarnaOpen = (stateModal:boolean) => {
 		setIsModalKlarnaOpen(stateModal);
 	}
+
+	const isBundleItem = (item) => {
+		try {
+			return item.attributes.find((props:any) => props.key.includes('_components_'));
+		} catch {
+			return null
+		}
+	};
 
 	useEffect(() => {
 		if (cartData) {
@@ -151,16 +180,7 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
-		const isBundleItem = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit' && attribute.value === 'yes');
-		if (!isBundleItem) onDeleteLine(item.id, attributes);
-		else {
-			// delete bundle group
-			const groupId = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit_group').value || 0;
-			const itemsToDelete = cartData.items.filter((item) => item.attributes.find((att) => att.key === '_make_your_own_kit_group' && att.value === groupId))
-				.map((v) => v.id);
-			// console.log('itemsToDelete', itemsToDelete);
-			onDeleteLine(itemsToDelete, attributes);
-		}
+		onDeleteLine(item.id, attributes);
 	}
 
 	const getId = (shopifyId: string) => {
@@ -299,7 +319,17 @@ const Cart: React.FC<Props> = (props) => {
 								<ul className="list-unstyled border-b-[1px] pb-0">
 									{cart.items && cart.items.map((item) => {
 										/* @ts-ignore */
-										const cartItemComponent:any = <CartItem key={item.id} item={item}
+										const cartItemComponent:any = isBundleItem(item) ? 
+											<CartBundleItem
+												item={item}
+												onRemoveItem={onRemoveItem}
+												store={store}
+												isBundleItem={isBundleItem}
+												platform={platform}
+											/>
+										: <CartItem 
+											key={item.id}
+											item={item}
 											isLastStock={item.id === isLastStockKey}
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
