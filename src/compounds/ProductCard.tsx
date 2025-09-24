@@ -208,6 +208,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
+    const [hasUserSelectedSwatch, setHasUserSelectedSwatch] = useState(false);
     const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     const [price, setPrice] = useState(props.price);
     const [comparePrice, setComparePrice] = useState(props.comparePrice);
@@ -251,6 +252,7 @@ const SwatchOverlay = (props:any) => {
         const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === id);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
+            setHasUserSelectedSwatch(true);
         }
         if (available === 'true') {
             setSwatchAvailable(true);
@@ -274,6 +276,14 @@ const SwatchOverlay = (props:any) => {
     }, [selectedVariant]);
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
+
+    useEffect(() => {
+        if (!hasUserSelectedSwatch && firstAvailable?.id === 0 && props.swatch?.data?.length > 0) {
+            const fallbackSwatch = props.swatch.data[0];
+            setSelectedVariant(fallbackSwatch);
+            setSwatchAvailable(false);
+        }
+    }, [firstAvailable, props.swatch?.data, hasUserSelectedSwatch]);
 
     return (
         <>
@@ -499,10 +509,10 @@ const ProductCard = (props:any) => {
                     <AddToCartButton store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 )}
 
-                {!props.isLaunchWL && props.product.swatch && props.product.availableForSale &&
+                {!props.isLaunchWL && props.product.swatch &&
                     <SwatchOverlay handleShade={handleShade} store={store} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
                 }
-                {!props.isLaunchWL && !props.product.availableForSale && (
+                {!props.isLaunchWL && !props.product.swatch && !props.product.availableForSale && (
                     <WaitlistButton store={store} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
                 )}
 
