@@ -60,7 +60,7 @@ const CartExtrass = (props:any) => {
 		if (['dev', 'my', 'int'].includes(store)) {
 			setShowAtome(true);
 		}
-		if (['us'].includes(store)) {
+		if (['us', 'uk'].includes(store)) {
 			setShowShoppay(true);
 		}
 
