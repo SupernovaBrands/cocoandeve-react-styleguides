@@ -223,30 +223,7 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	}
 
-	const isBundleItem = (item) => {
-		try {
-			return item.attributes.find((props:any) => props.key.includes('_components_'));
-		} catch {
-			return null
-		}
-	};
-
-	const displayChildProduct = (item) => {
-		const data = isBundleItem(item);
-		if (data && data.value) {
-			const parsed = JSON.parse(data.value) || [];
-			return parsed.length > 0 && (
-				<ul className="list-disc list-inside text-sm font-normal mt-25">{parsed.map((line, id) => <li key={id}>{line.title}</li>)}</ul>
-			)
-		} else {
-			return <></>
-		}
-	};
-
-	const bundleItemNotEditable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_editable' && attr.value === 'no');
-	const bundleItemNotRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'no');
-	const itemNotEditable = item.isFreeItem || bundleItemNotEditable || item.merchandise.product.tags.includes('parentkit');
-	const showSwatches = variants && variants.length > 1 && !item.isFreeItem && !isBundleItem(item);
+	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -297,7 +274,7 @@ export const CartItem = (props:CartItemProps) => {
 									{`${item.recurring ? ' Subscriptions' : ''}`}
 								</ConditionWrapper>
 							)}
-						{isBundleItem(item) && displayChildProduct(item)}
+
 						{item.recurring && (
 							<span className="text-primary mt-1 flex font-italic text-sm font-normal">
 								<SvgRecurring className="svg mr-1" />
@@ -305,11 +282,7 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
-						{/* {isBundleItem(item) && (
-							<>
-								<p className="font-normal text-xs mt-25 text-primary">{item.attributes.find((props:any) => props.key === '_make_your_own_kit_notes').value}</p>
-							</>
-						)} */}
+						
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
@@ -323,7 +296,7 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && !bundleItemNotRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -420,7 +393,7 @@ export const CartItem = (props:CartItemProps) => {
 				<div className="flex items-center justify-between">
 					<QuantityBox
 						name="quantity-box"
-						editable={!itemNotEditable}
+						editable={!item.isFreeItem}
 						quantity={item.quantity}
 						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 						isLastStock={isLastStock}
@@ -442,16 +415,6 @@ export const CartItem = (props:CartItemProps) => {
 						)
 						: (
 							<div className="flex flex-col text-right">
-								{!isBundleItem(item) && (
-									<>
-										{item.comparePrice > 0
-										? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-										: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-									</>
-								)}
-								{/* {isBundleItem(item) && (
-									<span className="line-through">{formatMoney(parseFloat(item.merchandise.price?.amount) * 100, false, store)}</span>
-								)} */}
 								<strong>
 									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
 										? formatMoney(item.priceAfterDiscounted, false, store)

@@ -101,7 +101,10 @@ const YourBundleSidebar = (props: any) => {
                     // { key: '_make_your_own_kit_ids', value: varIds.join(',') },
                     { key: '_make_your_own_kit_group', value: `${groupId}` },
                     { key: '_make_your_own_kit_discount', value: `${bundleDiscount}` },
-                    { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Off - Bundle of ${row.length}`}
+                    { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Off - Bundle of ${row.length}`},
+                    { key: '_make_your_own_kit_image', value: v.src.replace('320x', '150x') },
+                    { key: '_make_your_own_kit_orig_price', value: (v.price).toString() },
+                    { key: '_make_your_own_kit_new_price', value: (v.price - (bundleDiscount / 100) * v.price).toString() }
                 ]
             }
         });
@@ -117,6 +120,8 @@ const YourBundleSidebar = (props: any) => {
             updateCart: true,
             ids: gIds
         });
+
+        console.log('multipleAdd', multipleAdd);
 
         if (multipleAdd) {
 
