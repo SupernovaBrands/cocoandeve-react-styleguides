@@ -342,7 +342,11 @@ const YotpoReviewWidget = (props:any) => {
 			getReviews(page);
 		}
 
-		moveToTop();
+		setTimeout(() => {
+			requestAnimationFrame(() => {
+				moveToTop();
+			});
+		}, 50); 
 	};
 
 	const onQnaPageChange = (page) => {
