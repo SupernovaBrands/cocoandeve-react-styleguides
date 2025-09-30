@@ -9,7 +9,7 @@ import CartUpsell from '~/components/cart/cart-upsell';
 import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
-import { formatMoney, getCookie } from "~/modules/utils";
+import { encryptParam, formatMoney, getCookie } from "~/modules/utils";
 import KlarnaModal from '~/components/modal/KlarnaModal';
 import CartBundleItem from "./cart-bundle-item";
 
@@ -60,7 +60,7 @@ const Cart: React.FC<Props> = (props) => {
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
-		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true,
+		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true, discountData: null
 	});
 
 	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
@@ -240,8 +240,6 @@ const Cart: React.FC<Props> = (props) => {
 		// console.log('toggle manual gwp');
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
-
-	// console.log('cart.tsx', cart);
 
 	return (
 		<>

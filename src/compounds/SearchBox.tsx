@@ -147,7 +147,7 @@ const SearchBox = (props: any) => {
 						productFiltered.sort(handleSort);
 						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
-						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
+						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
