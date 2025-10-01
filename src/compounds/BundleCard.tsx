@@ -211,7 +211,9 @@ const BundleCard = (props:any) => {
     if (selectedVariant && selectedVariant.price) {
         originalPrice = parseFloat(selectedVariant.price?.amount) * 100;
     }
-    const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
+    const tempReducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
+    const fixedReducedPrice = (tempReducedPrice / 100).toFixed(2);
+    const reducedPrice = parseFloat(fixedReducedPrice) * 100;
 
     const openModal = (e) => {
         e.preventDefault();
