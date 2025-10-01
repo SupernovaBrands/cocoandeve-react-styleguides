@@ -43,13 +43,13 @@ export const CartBundleItem = (props:CartBundleProps) => {
 									{comp.title.replace('/ Dark', '/ Dark Shade').replace('/ Medium', '/ Medium Shade').replace('/ Ultra Dark', '/ Ultra Dark Shade')}
 								</span>
 							</p>
-							{index === 0 && (
+							{/* {index === 0 && ( */}
 								<button className="cart-item__remove btn-unstyled text-body flex"
 									type="button" aria-label="Remove"
 									onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 										<SvgTrash className="svg w-[1em]" />
 								</button>
-							)}
+							{/* )} */}
 						</div>
 
 						<div className="flex items-center justify-between">
