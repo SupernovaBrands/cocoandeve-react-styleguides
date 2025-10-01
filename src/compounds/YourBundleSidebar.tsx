@@ -23,7 +23,7 @@ const ItemCard = (props) => {
                 {!placeholder && <img src={item.src} width={48} height={48} className="w-[3rem] h-[3rem] rounded-[.5rem]" />}
                 <figcaption className="ml-[.5rem] flex justify-between flex-1 items-center">
                     <div>
-                        <p className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title}</p>
+                        <p className="font-bold text-sm leading-[normal] mb-[.25rem] mr-25">{item.title.replace('/ Dark', '/ Dark Shade').replace('/ Medium', '/ Medium Shade').replace('/ Ultra Dark', '/ Ultra Dark Shade')}</p>
                         {!placeholder && (
                             <>
                                 <div className="flex mb-[.25rem]">
