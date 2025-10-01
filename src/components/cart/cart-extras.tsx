@@ -5,6 +5,7 @@ const tSettings = global.config.tSettings;
 import React, {useState, useEffect} from 'react';
 import Info from '~/images/icons/info.svg';
 import AfterPayIcon from '~/images/icons/afterpay.svg';
+import ClearPayIcon from '~/images/icons/clearpay.svg';
 import Script from 'next/script';
 
 import {
@@ -21,6 +22,7 @@ const CartExtrass = (props:any) => {
 	const [totalPrice, setTotalPrice] = useState(props.totalPrice);
 	const [loading] = useState(false);
 	const [showAfterpay, setShowAfterpay] = useState(false);
+	const [showClearpay, setShowClearpay] = useState(false);
 	const [showShoppay, setShowShoppay] = useState(false);
 	const [showAtome, setShowAtome] = useState(false);
 	const [showKlarna, setShowKlarna] = useState(false);
@@ -37,6 +39,8 @@ const CartExtrass = (props:any) => {
             showWith: false,
             size: 'sm',
         };
+		
+		if (store == 'uk') attributes2.locale = 'en_GB';
 
         //@ts-ignore
         globalThis.window.Afterpay.createPlacements({
@@ -47,13 +51,16 @@ const CartExtrass = (props:any) => {
     }
 
 	useEffect(() => {
-		if (['dev', 'au', 'ca', 'us'].includes(store)) {
+		if (['dev', 'au', 'ca'].includes(store)) {
 			setShowAfterpay(true);
+		}
+		if (['uk'].includes(store)) {
+			setShowClearpay(true);
 		}
 		if (['dev', 'my', 'int'].includes(store)) {
 			setShowAtome(true);
 		}
-		if (['us'].includes(store)) {
+		if (['us', 'uk'].includes(store)) {
 			setShowShoppay(true);
 		}
 
@@ -114,6 +121,22 @@ const CartExtrass = (props:any) => {
 					<button type="button" className='afterpay-logo brand-afterpay type-badge black-on-mint'>
 						{/* <img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-afterpay.svg" height="15px" className="inline-block align-baseline w-[86px] mt-[5px]" alt="Afterpay logo"/> */}
 						<AfterPayIcon className="w-[96px] bg-white"/>
+					</button>
+					<Info className="svg ml-hg cursor-pointer"/>
+					<div id="cart-afterpay-line"></div>
+					<Script id="afterpay-script" src="https://js.afterpay.com/afterpay-1.x.js" onLoad={afterpayLoaded}/>
+				</div>
+			</div>
+			</>
+		)}
+
+		{showClearpay && (
+			<>
+			<div className='text-center font-size-sm border-top py-2 flex items-center justify-center px-2 flex-wrap'>
+				<span className='block w-full'>or 4 interest-free payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 4) + Number.EPSILON)), false, store)} with </span>
+				<div className="afterpay-content relative flex items-center mt-1">
+					<button type="button" className='afterpay-logo brand-afterpay type-badge black-on-mint'>
+						<ClearPayIcon className="w-[96px] bg-white"/>
 					</button>
 					<Info className="svg ml-hg cursor-pointer"/>
 					<div id="cart-afterpay-line"></div>

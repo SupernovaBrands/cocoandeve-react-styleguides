@@ -160,10 +160,10 @@ const ProductWaitlist = (props: any) => {
 				data.formDescription = props.vrt_waitlist_form_description;
 			}
 
-			
+
 
 			const variantId = parseInt(props.selectedVariant.id.replace('gid://shopify/ProductVariant/', ''), 10) || 0;
-			
+
 			const variantId1 = props.vrt_waitlist_form_varid_cs?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds2 = props.vrt_waitlist_form_varid_cs_2?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
 			const variantIds3 = props.vrt_waitlist_form_varid_cs_3?.split(',').map((v) => parseInt(v.trim(), 10)) || [];
@@ -200,7 +200,8 @@ const ProductWaitlist = (props: any) => {
 	return (
 		<>
 			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-3 mb-3 rounded-lg bg-pink-light" data-product-id={props.productId}>
-				<p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p>
+				{/* <p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p> */}
+				<p className="font-bold mb-2 text-[1.5em] lg:text-lg" dangerouslySetInnerHTML={{__html: data.waitlistTitle ?? 'Join the waitlist'}} />
 				{/* <p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p> */}
 				<p className="mb-2">
 					{restockType === null && parse(data.formDescription?.replace('{{productName}}', 'product') ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.")}
@@ -226,7 +227,7 @@ const ProductWaitlist = (props: any) => {
 						<span className="block mb-g text-center w-full ">- Or -</span></>}
 						<div className="row">
 							<div className="relative flex items-stretch w-full flex-grow max-w-full flex-1 mb-1">
-								<input onChange={(e:any) => changeEmail(e)} className="placeholder:text-gray-800 focus:outline-none block appearance-none w-full py-[13px] px-2 text-base leading-normal bg-white text-gray-800 rounded-h border-left-1" type="email" name="email" placeholder="Enter your email" />
+								<input onChange={(e:any) => changeEmail(e)} className="placeholder:text-gray-800 focus:outline-none block appearance-none w-full py-[13px] px-2 text-base leading-normal bg-white text-gray-800 rounded-h border-left-1" type="email" name="email" aria-label="email" placeholder="Enter your email" />
 							</div>
 							{/* { emailError && <small className="col-12 text-primary email-error">Please enter a valid email address</small> } */}
 						</div>

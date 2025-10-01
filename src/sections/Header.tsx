@@ -183,6 +183,7 @@ const Header = (props: any) => {
 	useEffect(() => {
 		if (isLoggedIn && addingReward) setUserPts(-1);
 	}, [addingReward]);
+
 	return (
 		<>
 			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
@@ -201,6 +202,7 @@ const Header = (props: any) => {
 						isStickyEnabled={annBar?.isStickyEnabled || false}
 						background={annBar?.background || 'bg-primary-light'}
 						textColor={annBar?.textColor || 'text-secondary'}
+						textSize={annBar?.textSize || 16}
 					/>
 				)}
 
@@ -217,7 +219,7 @@ const Header = (props: any) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
-											<a href={`${nav.handle}`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
+											<a href={`${nav.handle}?c=main-menu`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
@@ -285,7 +287,7 @@ const Header = (props: any) => {
 								</button>
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
-								<a className="text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
+								<a className="text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" tabIndex={0} role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
 									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
 									<span className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
 								</a>

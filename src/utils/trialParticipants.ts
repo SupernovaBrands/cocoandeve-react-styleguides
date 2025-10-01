@@ -1174,6 +1174,78 @@ const trialParticipants = [
 		"user": "Tracey Grahl",
 		"score": "5",
 		"content": "\nI'm someone who burns easily and always has a coat of self-tan on. This is the only oil that doesn't make me burn or ruin my self-tan. Most oils make my self-tan separate but this doesn’t affect it at all. I love how it keeps me protected while allowing me to get a tan. It smells amazing and absorbs so fast, leaving a hydrated glowy finish with no residue. I have finally found my dream product.\n"
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-06-04",
+		"title": "No sticky, greasy or slimy feel - the perfect body oil!",
+		"user": "Vivien Winkworth",
+		"score": 4,
+		"content": "Absorbed brilliantly into skin even when very generously applied and I was able to get dressed within minutes without any worry of getting it on my clothes. It wasn’t sticky, greasy or slimy feeling which I absolutely love as this puts me off using most body products. My tan didn't fade and it left my skin feeling so soft and smooth with a healthy glow to it."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-06-03",
+		"title": "Adding this to my routine, love it!",
+		"user": "Samantha Richards",
+		"score": 5,
+		"content": "This product really makes you feel like you’re on vacation, the smell is beachy and fruity. The oil glides on and moisturizes my skin so well, there was no residue leftover. And it lasted all night."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-31",
+		"title": "Suitable for sensitive skin",
+		"user": "Kathleen",
+		"score": 5,
+		"content": "I have sensitive skin and this helped it feel moisturized with zero reaction. I love how smooth this product made my skin feel. It does not feel greasy or oily after applying."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-31",
+		"title": "Soft glowy skin ✨",
+		"user": "Giulia",
+		"score": 4,
+		"content": "A body oil with a sweet scent that will leave your skin feeling soft and glowing! Overall, a nice oil for hydrated skin."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-30",
+		"title": "Hydration to beat the summer heat",
+		"user": "Tamara",
+		"score": 4,
+		"content": "I like oil products as they help my skin feel more hydrated for longer and this oil would be great in the heat of summer. It applies flawlessly on the skin, absorbs quickly and doesn’t have a greasy feel. Smells great too!"
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-30",
+		"title": "My tan lasted 2 WEEKS",
+		"user": "Rosie",
+		"score": 5,
+		"content": "I have very pale skin naturally, so I am very careful with tanning. The Coco & Eve firming and tan prolonging peptide body oil really made my skin feel so soft and healthy after a day at the beach. Usually my tan would be gone within a few days, but with regular use of the body oil I found that my tan lasted around 1-2 weeks. Now I have a natural looking glow that I don't need to constantly maintain."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-30",
+		"title": "Absorbs instantly & leaves a glowy look - definitely recommend",
+		"user": "Jessica Brown",
+		"score": 5,
+		"content": "Comes in a lovely bottle and the formula is non-greasy, my skin soaks it up instantly. I feel moisturised and glowy after applying!"
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-29",
+		"title": "Lightweight and sweet-smelling!",
+		"user": "Sarah",
+		"score": 4,
+		"content": "I like how the scent is sweet but not overpowering! The product itself is nourishing without being oily."
+	  },
+	  {
+		"sku": "CE0005102020",
+		"date": "2025-05-28",
+		"title": "Perfect addition for summer ☀️",
+		"user": "Fidelma Harvey",
+		"score": 5,
+		"content": "This oil makes my skin feel very soft and absorbs really well, making it easy to use. It smells so good too!"
 	  }
 ];
 

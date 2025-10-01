@@ -8,7 +8,11 @@ const START_INDEX = 0;
 const CarouselScrollbar = ({
     emblaApi,
     scrollSnaps,
-    className
+    className,
+    prevArrow,
+    nextArrow,
+    visibleInScreen,
+    carouselItemLength
 }: CarouselScrollbarProps) => {
     const scrollbarRef = React.useRef<HTMLDivElement>(null);
     const scrollbarTrackRef = React.useRef<HTMLDivElement>(null);
@@ -69,6 +73,16 @@ const CarouselScrollbar = ({
                 (newTranslateX / (track.clientWidth - scrollbar.clientWidth)) * 100;
             const closestIndex = findClosestIndex(scrollSnaps, percentageFromLeftEdge);
 
+            if (prevArrow && prevArrow?.current) {
+                if (closestIndex < 2) prevArrow?.current?.classList.add('hidden');
+                else prevArrow?.current?.classList.remove('hidden');
+            }
+
+            if (nextArrow && nextArrow?.current) {
+                if (visibleInScreen + closestIndex >= carouselItemLength) nextArrow?.current?.classList.add('hidden');
+                else nextArrow?.current?.classList.remove('hidden');
+            }
+
             const maxWidthApiScrollProgressPx = emblaApi.internalEngine().limit.length;
             const rangeValueForEmblaEngine = ((-1 * percentageFromLeftEdge) / 100) * maxWidthApiScrollProgressPx;
             const engine = emblaApi.internalEngine();
@@ -76,6 +90,8 @@ const CarouselScrollbar = ({
             engine.translate.to(rangeValueForEmblaEngine);
             engine.location.set(rangeValueForEmblaEngine);
             engine.index.set(closestIndex);
+
+
         },
         [emblaApi, isDragging, scrollSnaps]
     );
@@ -186,6 +202,9 @@ const CarouselScrollbar = ({
             window.removeEventListener('touchend', handleMouseUp);
         }
     }, [handleMouseMoveScrollbar, handleMouseUp]);
+
+
+    // console.log('scrollSnaps', scrollSnaps);
 
     return (
         <div

@@ -18,7 +18,7 @@ import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { useRef, useEffect, useState, useCallback } from 'react';
 
 const iconsData = {
-    'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">100% Natural DHA</span></>,
+    'natural-dha': <><NaturalDha className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">All Natural DHA</span></>,
     'sulfate-free': <><Sulfate className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Sulfate Free</span></>,
     'gluten': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Gluten Free</span></>,
     'gluten-free': <><Gluten className="svg h-[1.625em]" /><span className="text-center flex-grow-1 font-size-sm mt-1">Gluten Free</span></>,
@@ -165,8 +165,8 @@ const ProudToBe = (props:any) => {
     }
 
     return (
-        <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2">
-        <h2 className="mb-0">Proud to be</h2>
+        <div className="proud-to-be-wrapper my-3 lg:mb-0 lg:order-2 mt-[0!important]">
+        {/* <h2 className="mb-0">Proud to be</h2> */}
         <div className="">
                 <div className="carousel--scroll position-relative md:overflow-hidden">
                     <div className="main-box overflow-hidden -mx-hg md:-mx-1">
@@ -184,12 +184,12 @@ const ProudToBe = (props:any) => {
                         </Carousel.Wrapper> */}
                         <ul onScroll={scrolling} ref={scrollEl}
                             onMouseDown={handleDragStart} onMouseUp={handleDragEnd} onMouseMove={handleDrag}
-                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-1 overflow-x-auto overflow-y-hidden sm:mb-1`} role="listbox" aria-label="Carousel Items">
+                            className={`${preventSelection} [scrollbar-width:none] carousel-inner flex flex-nowrap row w-auto list-unstyled mt-3 pb-1 md:pb-0 md:mb-2 overflow-x-auto overflow-y-hidden sm:mb-2 mt-[0!important]`} aria-label="Carousel Items">
                             {proudToBeArr.map((proud:any, index: number) =>{
                                 if (!proud) {
                                     return null;
                                 }
-                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${proudToBeArr.length > 5 && index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`} role="option">
+                                return <li key={`${proud}-${index}`} className={`flex flex-[0_0_19%] ${proudToBeArr.length > 5 && index === 0 ? 'lg:flex-1' : 'lg:flex-[0_0_16.67%]'} items-center flex-col px-1 carousel-item active`}>
                                 {iconsData[proud.replace('peta approved', 'peta')]}
                                 </li>
                                 }

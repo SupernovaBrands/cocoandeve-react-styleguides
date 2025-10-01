@@ -45,12 +45,14 @@
 // @import 'compounds/birthday-popup';
 // @import 'compounds/exit-intent';
 @import 'compounds/newsletter-popup';
+@import 'compounds/sales-popup';
 // @import 'compounds/sweepstakes-popup';
 // @import 'compounds/cookies-popup';
 // @import 'compounds/pdp-upsell';
 @import 'compounds/nav-mega-menu';
 
 @import 'sections/product-carousel';
+@import 'sections/reels-carousel';
 @import 'sections/range-banner';
 @import 'sections/howto';
 // @import 'sections/playground';
@@ -66,10 +68,14 @@
 // @import 'templates/sustainability';
 @import 'templates/pdp';
 @import 'templates/sweepstakes';
+@import 'templates/page';
 // @import 'templates/our-story';
 // @import 'templates/product';
 // @import 'templates/p3-site-smaller';
-
+body {
+    background-color: #fff;
+    color: #000;
+}
 #gorgias-chat-container #chat-button {
     z-index: 999 !important;
 }

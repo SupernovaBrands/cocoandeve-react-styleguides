@@ -19,6 +19,16 @@ type PropType = {
 
 const PostCard: React.FC<PropType> = (props) => {
 	const { className, data, template, imgClass, textPrimary, textClass, height, pictureClass, showSubtext } = props;
+	const tagText = [];
+	if (data.tags && data.tags.length > 0) {
+		data.tags.map((item: string) => tagText.push(item.charAt(0).toUpperCase() + item.slice(1)))
+	}
+	
+	let descriptionText = '';
+	if (showSubtext) {
+		descriptionText = template === 'pdp' ? data.description : data.description.replace(/<[^>]*>?/gm, '');
+	}
+	const ariaLabel = `${tagText.join(' ')} ${data.title}${showSubtext ? ` ${parse(descriptionText)}` : ''} Read more`;
 	return (
 		<article className={`${className}`}>
 			<figure className={`border border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-[2rem]`}>
@@ -30,7 +40,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						</picture>
 					</a>
 				)}
-				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={data.title}>
+				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={ariaLabel}>
 					<figcaption className={`${template === 'blog' || template === 'pdp' || template === 'article' ? 'p-2 flex-grow flex' : 'flex-grow'} flex flex-col ${textClass}`}>
 						<div className={`${template === 'article' ? 'badge-blog' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
 							{data.tags.length > 0 && (
@@ -53,9 +63,9 @@ const PostCard: React.FC<PropType> = (props) => {
 							</div>
 						)}
 						{template === 'blog' || template === 'pdp' || template === 'article' ? (
-							<span className={`btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`} aria-label={data.title}>Read more</span>
+							<strong className={`btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`}>Read more</strong>
 						) : (
-							<span className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full" aria-label={data.title}>Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></span>
+							<strong className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full">Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></strong>
 						)}
 						{/* content */}
 					</figcaption>
