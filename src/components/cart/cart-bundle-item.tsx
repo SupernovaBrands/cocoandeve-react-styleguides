@@ -40,7 +40,7 @@ export const CartBundleItem = (props:CartBundleProps) => {
 						<div className="flex items-start no-gutters justify-between">
 							<p className="mb-1 font-bold w-2/3 pl-0">
 								<span className="text-black">
-									{comp.title}
+									{comp.title.replace('/ Dark', '/ Dark Shade').replace('/ Medium', '/ Medium Shade').replace('/ Ultra Dark', '/ Ultra Dark Shade')}
 								</span>
 							</p>
 							{index === 0 && (
