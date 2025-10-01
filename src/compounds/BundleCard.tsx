@@ -119,7 +119,7 @@ const SwatchOverlay = (props:any) => {
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
     const itemAvailable = props.swatch.data.filter((d) => d.available);
 
-    console.log('selectedVariant', selectedVariant);
+    // console.log('selectedVariant', selectedVariant);
 
     return (
         <>
