@@ -149,7 +149,19 @@ const YourBundleSidebar = (props: any) => {
     
     const variantSelected = selected.filter((sel) => sel.id !== null);
     const originalPrice = selected.filter(it => it.id !== null && it.price).reduce((n, { price }) => n + parseInt(price, 10), 0);
-    const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
+    // const reducedPrice = originalPrice - (bundleDiscount / 100) * originalPrice;
+
+    // let itemsOriginal = 0;
+    let itemsReduced = 0;
+    selected.filter(it => it.id !== null && it.price).map((it) => {
+        const priceInt = parseInt(it.price, 10);
+
+        // const tOrig = (priceInt / 100).toFixed(2);
+        const nPrice = priceInt - (bundleDiscount / 100) * priceInt;
+        const tNew = (nPrice / 100).toFixed(2);
+        // itemsOriginal += priceInt;
+        itemsReduced += (parseFloat(tNew)*100);
+    })
 
     const btnInlineStyle = `
     .btn--sidebar-atc {
@@ -180,8 +192,8 @@ const YourBundleSidebar = (props: any) => {
                     </div>
                 </div>
                 <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
-                    {reducedPrice > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(originalPrice, false, store)}</span>}
-                    <span className="text-lg mr-[.5rem] font-bold">{formatMoney(reducedPrice, false, store)}</span>
+                    {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(originalPrice, false, store)}</span>}
+                    <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
                     <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
                 </div>
                 <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
@@ -201,8 +213,8 @@ const YourBundleSidebar = (props: any) => {
                                 <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
                                 <span className="btn--sidebar-atc">Add to Cart</span>
                                 <ul className="flex lg:hidden">
-                                    <li>{reducedPrice > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
-                                    <li><span className="">{formatMoney(reducedPrice, false, store)}</span></li>
+                                    <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
+                                    <li><span className="">{formatMoney(itemsReduced, false, store)}</span></li>
                                 </ul>
                             </>
                         )}
