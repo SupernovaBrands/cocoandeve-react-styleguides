@@ -119,6 +119,8 @@ const SwatchOverlay = (props:any) => {
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
     const itemAvailable = props.swatch.data.filter((d) => d.available);
 
+    console.log('selectedVariant', selectedVariant);
+
     return (
         <>
             <AddToCartButton
@@ -128,7 +130,7 @@ const SwatchOverlay = (props:any) => {
                 selectedVariant={selectedVariant}
                 maxItem={maxItem}
                 className="btn-choose"
-                available={itemAvailable.length > 0}
+                available={itemAvailable.length > 0 }
                 label={itemAvailable.length > 0 ? 'Choose' : 'Out of stock'}
                 reducedPrice={reducedPrice}
                 store={store}
@@ -157,8 +159,8 @@ const SwatchOverlay = (props:any) => {
                     setItemSelected={setItemSelected}
                     selectedVariant={selectedVariant}
                     maxItem={maxItem}
-                    available={itemAvailable.length > 0}
-                    label={!swatchAvailable ? 'Add' : null}
+                    available={itemAvailable.length > 0 && selectedVariant.availableForSale}
+                    label={selectedVariant.availableForSale ? 'Add' : 'Out of Stock'}
                     reducedPrice={reducedPrice}
                     store={store}
                 />
