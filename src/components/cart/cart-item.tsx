@@ -32,7 +32,7 @@ export const CartItem = (props:CartItemProps) => {
 
 	const { swatches, variants, selectedSwatch } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
-	const isMultiOptions = item.swatches.length > 1;
+	const isMultiOptions = item.swatches.length > 1 && !item.merchandise.product.isProductBundleApp?.value;
 
 	const [hideItem, setHideItem] = useState(false);
 	const [editingVariant, setEditingVariant] = useState(null);
