@@ -31,8 +31,7 @@ export const CartItem = (props:CartItemProps) => {
 		useShopifyVariantInfo, store } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
-	
-	const isMultiOptions = item.swatches.length > 1;
+	const isMultiOptions = item.swatches.length > 1 && !item.merchandise.product.isProductBundleApp?.value;
 
 	const [hideItem, setHideItem] = useState(false);
 	const [editingVariant, setEditingVariant] = useState(null);
@@ -282,7 +281,7 @@ export const CartItem = (props:CartItemProps) => {
 								{item.recurringMessage}
 							</span>
 						)}
-						
+
 					</p>
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
