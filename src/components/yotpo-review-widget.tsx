@@ -169,6 +169,7 @@ const YotpoReviewWidget = (props:any) => {
 	const [videoUploading, setVideoUploading] = useState(null);
 	const [cssHeight, setCssHeight] = useState(true);
 	const [initialReviewImage, setInitialReviewImage] = useState(0);
+	const [userInitiated, setUserInitiated] = useState(false);
 
 	const yotpoThanksRef = useRef(null);
 
@@ -323,7 +324,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const moveToTop = () => {
-
+		if (!userInitiated) return;
 		if (reviewBox.current) {
 			const container = document.querySelector('.yotpo-reviews__container');
 			// console.log('container', container);
@@ -334,6 +335,7 @@ const YotpoReviewWidget = (props:any) => {
 	}
 
 	const onRevPageChange = (page) => {
+		setUserInitiated(true);
 		if (Object.keys(selectedFilter).length > 0 || selectedTopic !== '') {
 			setFiltering(true);
 			doFilter(page);
@@ -350,6 +352,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	const onQnaPageChange = (page) => {
+		setUserInitiated(true);
 		getQuestions(page);
 		moveToTop();
 	};
