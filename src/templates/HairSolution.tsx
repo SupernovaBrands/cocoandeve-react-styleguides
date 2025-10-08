@@ -76,14 +76,17 @@ const HairSolution = (props: any) => {
         emblaResult1: useEmblaCarousel(optionsResults),
         emblaResult2: useEmblaCarousel(optionsResults),
         emblaResult3: useEmblaCarousel(optionsResults),
+        emblaResult4: useEmblaCarousel(optionsResults),
         prev0: useRef(null),
         prev1: useRef(null),
         prev2: useRef(null),
         prev3: useRef(null),
+        prev4: useRef(null),
         next0: useRef(null),
         next1: useRef(null),
         next2: useRef(null),
         next3: useRef(null),
+        next4: useRef(null),
     };
 
     const { selected: selected0 } = useSelectedSnapDisplay(resultCarousels[`emblaResult0`][1]);
@@ -136,21 +139,41 @@ const HairSolution = (props: any) => {
     }, [waitlistData]);
 
     
-    const RESULT_VIDEOS_ALL = [{
-        title: 'Like A Virgin',
-        data: data.result?.rows?.filter((row) => row.checked1) || [],
-    }, {
-        title: 'Pro Youth',
-        data: data.result?.rows?.filter((row) => row.checked2) || [],
-    }, {
-        title: 'Sweet Repair',
-        data: data.result?.rows?.filter((row) => row.checked3) || [],
-    }, {
-        title: 'Boost Therapy',
-        data: data.result?.rows?.filter((row) => row.checked4) || [],
-    }]
+    // const RESULT_VIDEOS_ALL = [{
+    //     title: 'Like A Virgin',
+    //     data: data.result?.rows?.filter((row) => row.checked1) || [],
+    // }, {
+    //     title: 'Boost Therapy',
+    //     data: data.result?.rows?.filter((row) => row.checked4) || [],
+    // }, {
+    //     title: 'Bond Therapy',
+    //     data: data.result?.rows?.filter((row) => row.checked5) || [],
+    // }, {
+    //     title: 'Sweet Repair',
+    //     data: data.result?.rows?.filter((row) => row.checked3) || [],
+    // }, {
+    //     title: 'Youth Revive',
+    //     data: data.result?.rows?.filter((row) => row.checked2) || [],
+    // }]
 
     // console.log('data.product.rows', data.product);
+
+    const CATEGORY_LABELS = {
+        checked1: 'Like A Virgin',
+        checked2: 'Youth Revive',
+        checked3: 'Sweet Repair',
+        checked4: 'Boost Therapy',
+        checked5: 'Bond Therapy',
+    };
+
+    const DEFAULT_CATEGORY_ORDER = ['checked1', 'checked2', 'checked3', 'checked4', 'checked5'];
+
+    const categoryOrder = data?.result?.category_order || DEFAULT_CATEGORY_ORDER;
+
+    const RESULT_VIDEOS_ALL = categoryOrder.map((key) => ({
+        title: CATEGORY_LABELS[key],
+        data: data.result?.rows?.filter((row) => row[key]) || [],
+    }));
 
     const sortByAvailability = (itemArray: any) => {
         const availableItems = itemArray?.filter((v) => v.availableForSale) || [];
@@ -346,13 +369,44 @@ const HairSolution = (props: any) => {
                 </section>
             )}
 
-            {data.compare && (
+            {data.product?.rows?.[productTab]?.compare && (
+                <section className="lg:mb-5">
+                    {data.product.rows[productTab].compare?.image_right?.url ? (
+                        <ProductBanner
+                            background="bg-pink-light"
+                            reverse={false}
+                            contentData={{
+                                first_image: data.product.rows[productTab].compare?.image_left,
+                                second_image: data.product.rows[productTab].compare?.image_right,
+                            }}
+                            src={data.product.rows[productTab].compare?.image_right?.url}
+                            rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
+                            leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
+                            svgClasses="!h-[16.97px]"
+                        >
+                            <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
+                                {data.product.rows[productTab].compare?.title}
+                            </h4>
+                            <p className="font-bold mb-[.25rem]">
+                                {data.product.rows[productTab].compare?.subtitle}
+                            </p>
+                            <p>{data.product.rows[productTab].compare?.description}</p>
+                        </ProductBanner>
+                    ) : (
+                        <div className="flex justify-center w-full">
+                            <div className="spinner-border" role="status" aria-hidden="true" />
+                        </div>
+                    )}
+                </section>
+            )}
+
+            {/* {data.compare && (
                 <section className="lg:mb-5">
                     {/* {!data.compare?.image_right?.url && (
                         <div className="flex justify-center w-full">
 							<div className="spinner-border" role="status" aria-hidden="true" />
 						</div>
-                    )} */}
+                    )}
                     {data.compare?.image_right?.url && (
                         <ProductBanner
                             background="bg-pink-light"
@@ -372,7 +426,7 @@ const HairSolution = (props: any) => {
                         </ProductBanner>
                     )}
                 </section>
-            )}
+            )} */}
 
             {data.result && (
                 <section className="my-3 lg:mb-5 lg:mt-5 container px-0">
@@ -429,8 +483,8 @@ const HairSolution = (props: any) => {
                                 )}
                                 
                             </Carousel.Wrapper>
-                            {row.data.length > 1 && (
-                                <div className={`px-g lg:px-[.25rem] ${row.data.length <= 4 ? 'lg:hidden' : ''}`}>
+                            {row.data.length > 4 && (
+                                <div className="px-g lg:px-[.25rem]">
                                     <CarouselScrollbar
                                         emblaApi={resultCarousels[`emblaResult${index}`][1]}
                                         scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}

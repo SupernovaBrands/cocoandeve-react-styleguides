@@ -88,12 +88,14 @@ const ProductBannerSlider = (props) => {
 		// e.preventDefault();
 		// console.log('handleMouseDown');
 		setClicked(true);
+		document.body.classList.add('no-select');
 	};
 
 	const slideFinish = (e) => {
 		// console.log('handleMouseUp');
 		// e.preventDefault();
 		setClicked(false);
+		document.body.classList.remove('no-select');
 	};
 
 	const slideMove = (e) => {
@@ -158,10 +160,16 @@ const ProductBannerSlider = (props) => {
 					ref={compSlider}
 					className="touch-none img-slider absolute flex justify-center items-center top-0"
 					style={{ ...sliderStyle }}
-					onMouseDown={slideReady}
+					onMouseDown={(e) => {
+						e.preventDefault();
+						slideReady(e);
+					}}
 					onMouseUp={slideFinish}
 					onMouseMove={slideMove}
-					onTouchStart={slideReady}
+					onTouchStart={(e) => {
+						e.preventDefault();
+						slideReady(e);
+					}}
 					onTouchEnd={slideFinish}
 					onTouchMove={slideMove}
 				>

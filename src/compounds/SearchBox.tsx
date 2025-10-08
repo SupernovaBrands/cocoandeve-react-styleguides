@@ -105,6 +105,15 @@ const SearchBox = (props: any) => {
 		return 0;
 	};
 
+	const keywordSort = (a, b) => {
+		const hasKeywordA = a.title.toLowerCase().includes(keyword.toLowerCase());
+  		const hasKeywordB = b.title.toLowerCase().includes(keyword.toLowerCase());
+
+		if (hasKeywordA && !hasKeywordB) return -1;
+		if (!hasKeywordA && hasKeywordB) return 1;
+		return 0;
+	}
+
 	async function setResult () {
 		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
@@ -136,6 +145,7 @@ const SearchBox = (props: any) => {
 						});
 						productFiltered.sort(tagsSort);
 						productFiltered.sort(handleSort);
+						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 

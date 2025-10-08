@@ -100,12 +100,18 @@ const SingleProductItem = (props: any) => {
                                     )
                                 })}
                             </ul>
-                            {data?.variant_id && (
-                                <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
-                                    {adding ? (
-										<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
-									) : data?.button_label}
-                                </button>
+                            {data?.variant_id &&  (
+                                <>
+                                    {data?.availableForSale ? (
+                                        <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
+                                            {adding ? (
+                                                <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
+                                            ) : data?.button_label}
+                                        </button>
+                                    ) : (
+                                        <button className={`disabled opacity-70 btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline`}>Offer Fully Redeemed</button>
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>
