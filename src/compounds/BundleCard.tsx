@@ -70,7 +70,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
+    const { selectedVariant, setSelectedVariant, maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
     
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
@@ -87,7 +87,7 @@ const SwatchOverlay = (props:any) => {
             firstAvailable = swatch;
         }
     }
-    const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
+    // const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
     const changeSwatch = (e:any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
@@ -116,7 +116,7 @@ const SwatchOverlay = (props:any) => {
         }
     };
 
-    const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
+    const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant?.id) || props.swatch.data[0];
     const itemAvailable = props.swatch.data.filter((d) => d.available);
 
     // console.log('selectedVariant', selectedVariant);
@@ -147,8 +147,8 @@ const SwatchOverlay = (props:any) => {
                     </label>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
                         {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
-                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
+                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
+                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
@@ -159,8 +159,8 @@ const SwatchOverlay = (props:any) => {
                     setItemSelected={setItemSelected}
                     selectedVariant={selectedVariant}
                     maxItem={maxItem}
-                    available={itemAvailable.length > 0 && selectedVariant.availableForSale}
-                    label={selectedVariant.availableForSale ? 'Add' : 'Out of Stock'}
+                    available={itemAvailable.length > 0 && selectedVariant?.availableForSale}
+                    label={selectedVariant?.availableForSale ? 'Add' : 'Out of Stock'}
                     reducedPrice={reducedPrice}
                     store={store}
                 />
@@ -236,7 +236,6 @@ const BundleCard = (props:any) => {
         setSkus(skus);
     }, [product, selectedVariant]);
 
-    // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant?.availableForSale', selectedVariant);
 
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
@@ -267,7 +266,7 @@ const BundleCard = (props:any) => {
                         <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-[1.05rem]">
                             <span className="text-gray-600 font-normal line-through">
                                 {!selectedVariant && formatMoney(product.priceInCent, false, store)}
-                                {selectedVariant && selectedVariant.price && (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store))}
+                                {selectedVariant && selectedVariant.price ? (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store)) : ''}
                             </span>
                             <span className="font-bold ml-[.5rem]">{formatMoney(reducedPrice, false, store)}</span>
                         </div>
@@ -279,7 +278,11 @@ const BundleCard = (props:any) => {
                                 itemSelected={itemSelected}
                                 setItemSelected={setItemSelected}
                                 reducedPrice={reducedPrice}
-                                handleShade={handleShade} store={store} generalSetting={generalSetting} swatch={product.swatch} product={product} />
+                                handleShade={handleShade}
+                                setSelectedVariant={setSelectedVariant}
+                                selectedVariant={selectedVariant}
+                                store={store} generalSetting={generalSetting} swatch={product.swatch} product={product}
+                            />
                         )}
                         {!product.swatch && (
                             <AddToCartButton
