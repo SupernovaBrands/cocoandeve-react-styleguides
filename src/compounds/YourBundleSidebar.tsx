@@ -27,7 +27,7 @@ const ItemCard = (props) => {
                         {!placeholder && (
                             <>
                                 <div className="flex mb-[.25rem]">
-                                    <span className="line-through mr-1">{formatMoney(item.price, false, store)}</span>
+                                    <span className="line-through mr-1">{formatMoney(item.comparePrice ? item.comparePrice : item.price, false, store)}</span>
                                     <span className="">{formatMoney(reducedPrice, false, store)}</span>
                                 </div>
                                 
@@ -103,12 +103,12 @@ const YourBundleSidebar = (props: any) => {
                     { key: '_make_your_own_kit_discount', value: `${bundleDiscount}` },
                     { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Off - Bundle of ${row.length}`},
                     { key: '_make_your_own_kit_image', value: v.src.replace('320x', '150x') },
-                    { key: '_make_your_own_kit_orig_price', value: (v.price).toString() },
+                    { key: '_make_your_own_kit_orig_price', value: v.comparePrice ? (v.comparePrice).toString() : (v.price).toString() },
                     { key: '_make_your_own_kit_new_price', value: (v.price - (bundleDiscount / 100) * v.price).toString() }
                 ]
             }
         });
-        
+
         const multipleAdd = await addToCart({
             id: null,
             quantity: 1,
@@ -153,7 +153,9 @@ const YourBundleSidebar = (props: any) => {
 
     // let itemsOriginal = 0;
     let itemsReduced = 0;
+    let origPrice = 0;
     selected.filter(it => it.id !== null && it.price).map((it) => {
+        origPrice += (it.comparePrice ? it.comparePrice : it.price)
         const priceInt = parseInt(it.price, 10);
 
         // const tOrig = (priceInt / 100).toFixed(2);
@@ -192,7 +194,7 @@ const YourBundleSidebar = (props: any) => {
                     </div>
                 </div>
                 <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
-                    {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(originalPrice, false, store)}</span>}
+                    {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
                     <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
                     <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
                 </div>
@@ -213,7 +215,7 @@ const YourBundleSidebar = (props: any) => {
                                 <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
                                 <span className="btn--sidebar-atc">Add to Cart</span>
                                 <ul className="flex lg:hidden">
-                                    <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(originalPrice, false, store)}</span>}</li>
+                                    <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(origPrice, false, store)}</span>}</li>
                                     <li><span className="">{formatMoney(itemsReduced, false, store)}</span></li>
                                 </ul>
                             </>

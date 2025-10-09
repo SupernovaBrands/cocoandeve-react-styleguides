@@ -236,7 +236,6 @@ const BundleCard = (props:any) => {
         setSkus(skus);
     }, [product, selectedVariant]);
 
-
 	return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <p role="button" aria-label={`View detail of product ${product.title}`} onClick={(e) => openModal(e)} className="cursor-pointer rounded-[1rem] lg:rounded-[2rem] product-card--img block lg:pb-[1rem]">
@@ -266,7 +265,8 @@ const BundleCard = (props:any) => {
                         <div className="mt-[.5rem] hidden lg:inline-flex justify-center text-sm lg:text-[1.05rem]">
                             <span className="text-gray-600 font-normal line-through">
                                 {!selectedVariant && formatMoney(product.priceInCent, false, store)}
-                                {selectedVariant && selectedVariant.price ? (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store)) : ''}
+                                {selectedVariant && selectedVariant.compareAtPrice && (formatMoney(parseFloat(selectedVariant.compareAtPrice?.amount) * 100, false, store))}
+                                {selectedVariant && !selectedVariant.compareAtPrice && selectedVariant.price ? (formatMoney(parseFloat(selectedVariant.price?.amount) * 100, false, store)) : ''}
                             </span>
                             <span className="font-bold ml-[.5rem]">{formatMoney(reducedPrice, false, store)}</span>
                         </div>
