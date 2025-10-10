@@ -22,12 +22,14 @@ const AddToCartButton = (props:any) => {
     }, [itemSelected]);
 
     const onAddItem = () => {
+        
         if (selected.includes(selectedVariant.id)) {
             const currentSelected = [...itemSelected];
             const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
             setItemSelected(newSelected);
             return false;
         }
+        if (selected.length >= maxItem) return false;
         setItemSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
