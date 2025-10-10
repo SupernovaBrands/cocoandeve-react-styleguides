@@ -118,10 +118,8 @@ const YourBundleSidebar = (props: any) => {
             handle: null,
             bubble: true,
             updateCart: true,
-            ids: gIds
+            ids: gIds.reverse()
         });
-
-        console.log('multipleAdd', multipleAdd);
 
         if (multipleAdd) {
 
