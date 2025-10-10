@@ -23,7 +23,8 @@ export const CartBundleItem = (props:CartBundleProps) => {
 	const percentAmt = parseInt(Math.abs(percentChange).toFixed(0), 10);
 
 	return parsedComp.length > 0 ? parsedComp.map((comp, index) => {
-		const origPrice = parseInt(comp.oldPrice, 10);
+		const fixedPrice = (parseFloat(comp.price) * 100).toFixed(2);
+		const origPrice = parseInt(fixedPrice, 10);
 		const newPrice = origPrice - (percentAmt / 100) * origPrice;
 		return (
 			<li key={`cart-bundle-item-${index}`} className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
