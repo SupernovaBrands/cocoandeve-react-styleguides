@@ -119,8 +119,8 @@ const InlineProductCard = (props: any) => {
     return (product && selectedVariant) && (
         <div className="relative">
             {swatchOpen && (
-                <div className="swatch-wrapper-video-card w-auto bg-white absolute left-[.5rem] right-[.5rem] bottom-[calc(100%-30px)] py-[1rem] rounded-t-[2rem] px-[44px] min-h-[129px]">
-                    <div className="block mb-[.625em] text-center">
+                <div className="swatch-wrapper-video-card w-auto bg-white absolute left-[.5rem] right-[.5rem] bottom-[calc(100%-30px)] py-[1rem] rounded-t-[2rem] min-h-[129px]">
+                    <div className="block mb-[.625em] text-center px-1">
                         {product.swatch?.style && <strong>Style: </strong>}
                         {product.swatch?.shade && <strong>Shade: </strong>}
                         {product.swatch?.tangleTamer && <strong>Type: </strong>}
@@ -128,7 +128,7 @@ const InlineProductCard = (props: any) => {
                         {product.swatch?.variant && <strong>Variant: </strong>}
                         <strong ref={swatchLabel} data-swatch-label>{swatchSelected.label}</strong>
                     </div>
-                    <ul className="list-unstyled flex justify-center">
+                    <ul className="list-unstyled flex justify-center px-[44px]">
                     {product?.swatch && product?.swatch?.data.map((item, index) => {
                         return <li key={`swatch-card-${item.id}`} className={`w-auto lg:w-1/4 product-variant-swatch__item mx-hg ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
                                 <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
