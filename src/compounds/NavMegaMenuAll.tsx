@@ -1,5 +1,15 @@
+import React, { useEffect, useRef, useState } from 'react';
+
 const NavMegaMenuAll = (props: any) => {
-    const { menus, generalSetting } = props;
+    const { menus, generalSetting, store } = props;
+    const [navClass, setNavClass] = useState('justify-between');
+
+    useEffect(() => {
+        if (store === 'int' || store === 'my') {
+            setNavClass('justify-start gap-x-[6rem]')
+        } 
+    },[store]);
+
     return (
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
@@ -16,7 +26,7 @@ const NavMegaMenuAll = (props: any) => {
                             )}
                         </>
                     </div>
-                    <div className="ml-3 mb-3 flex flex-wrap justify-between  px-0 flex-grow-1 w-full">
+                    <div className={`ml-3 mb-3 flex flex-wrap ${navClass} px-0 flex-grow-1 w-full`}>
                         {menus && menus.map((menu) => {
                             if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
                                 return (
