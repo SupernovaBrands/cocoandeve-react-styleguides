@@ -106,7 +106,7 @@ const Sweepstakes = (props) => {
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, content?.smsbump, activeCountryCode).then((resp) => {
+			submitsToSmsBumpAPi(phone, content?.smsbump, activeCountryCode, store, 'Sweepstakes Page').then((resp) => {
 				// console.log('submitsToSmsBump', resp);
 				if (resp.status === 'error' && !validForm.email) {
 					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });

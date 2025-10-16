@@ -68,7 +68,7 @@ const LaunchWaitlistModals = (props) => {
         }
 
         if (phoneNumber && phoneCode) {
-            submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
+            submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store, regSource);
         }
 
         if (typeof(fallback) === 'function') {

@@ -94,7 +94,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
         if (emailRef.current) {
             emailRef.current.focus();
         }
-        
+
     }, []);
 
     useEffect(() => {
@@ -124,7 +124,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
         const emailRequired = isPhoneEmpty;
         return { emailValid, emailRequired };
     };
-    
+
     const handleForm = (e) => {
         e.preventDefault();
         const { emailValid, emailRequired } = validateForm(email, phone);
@@ -142,7 +142,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                 setFormCompleted(true);
             }
             if (phone && phone !== '') {
-                submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+                submitsToSmsBumpAPi(phone, smsBump, activeCountryCode, store, 'Newsletter Variant Popup').then((resp) => {
                     if (resp.status === 'error') {
                         setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
                     } else {
@@ -163,7 +163,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
             } catch (e) {
                 console.log('error wtba push');
             }
-            
+
             // send event to ga4
             trackEvent('newsletter_popup', {
                 category: 'Newsletter Registration',
