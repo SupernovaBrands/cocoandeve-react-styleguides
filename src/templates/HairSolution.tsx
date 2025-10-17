@@ -1,9 +1,9 @@
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { EmblaOptionsType } from 'embla-carousel';
+import { useEffect, useRef, useState } from 'react';
 import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
 import ProductBanner from '~/compounds/ProductBanner';
-import useMediaQuery from '~/hooks/useMediaQuery';
+// import useMediaQuery from '~/hooks/useMediaQuery';
 import PlusIcon from '~/images/icons/plus.svg';
 import MinusIcon from '~/images/icons/minus.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
@@ -15,8 +15,8 @@ import {
 	PrevButton,
 	NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
-import { PRODUCTS } from '~/modules/dummy_products';
-import { VIDEOS } from '~/modules/dummy_videos';
+// import { PRODUCTS } from '~/modules/dummy_products';
+// import { VIDEOS } from '~/modules/dummy_videos';
 import VideoUpsellCard from '~/components/VideoUpsellCard';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
@@ -24,14 +24,16 @@ import { useSelectedSnapDisplay } from '~/components/carousel/EmblaCarouselSelec
 import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
 
 const HairSolution = (props: any) => {
-    const { preOrderSetting, data, formatMoney, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
+    const { useWindowSize, preOrderSetting, data, formatMoney, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
     const [activeTab, setActiveTab] = useState(0);
     const [productTab, setProductTab] = useState(0);
     const [resultTab, setResultTab] = useState(0);
 
     // const [productEmbla, setProductEmbla] = useState({});
 
-    const isDesktop = useMediaQuery('(min-width: 769px)');
+    // const isDesktopQuery = useMediaQuery('(min-width: 769px)');
+    const [width, height] = useWindowSize();
+    const [isDesktop, setIsDesktop] = useState(true);
     const { ConditionalWrap } = props;
     const options: EmblaOptionsType = {
         loop: true,
@@ -137,6 +139,14 @@ const HairSolution = (props: any) => {
         if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
+
+    useEffect(() => {
+        if (globalThis && globalThis.window.innerWidth > 992) {
+            setIsDesktop(true);
+        } else {
+            setIsDesktop(false);
+        }
+    }, [width]);
 
     
     // const RESULT_VIDEOS_ALL = [{
