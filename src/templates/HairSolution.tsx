@@ -22,9 +22,16 @@ import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { useSelectedSnapDisplay } from '~/components/carousel/EmblaCarouselSelected';
 import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
+import { useWindowSize } from '~/hooks/useWindowSize';
+import ProductInfo from '~/components/modal/ProductInfo';
 
 const HairSolution = (props: any) => {
-    const { useWindowSize, preOrderSetting, data, formatMoney, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
+    const { ProductSettings, preOrderSetting, data, formatMoney, waitlistPdp, store, 
+        generalSetting, addToCart, trackEvent, trackBluecoreEvent,
+        strapiAutomateHardcode, checkHardcodedImages, checkHardcodedTitles,
+        checkHardcodedVariant, checkHardcodedTagline, checkHardcodedFaq,
+        checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, FragranceNotes, buildProductCardModel
+    } = props;
     const [activeTab, setActiveTab] = useState(0);
     const [productTab, setProductTab] = useState(0);
     const [resultTab, setResultTab] = useState(0);
@@ -148,6 +155,19 @@ const HairSolution = (props: any) => {
         }
     }, [width]);
 
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null,
+        tab: null,
+        swatch: null
+    });
+
+    useEffect(() => {
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
+    }, [productData.open])
     
     // const RESULT_VIDEOS_ALL = [{
     //     title: 'Like A Virgin',
@@ -345,6 +365,8 @@ const HairSolution = (props: any) => {
                                                             store={store}
                                                             customProductTitle={null}
                                                             hideUnderline={true}
+                                                            setProductData={setProductData}
+                                                            clickShowPopup={true}
                                                         />
                                                     })}
                                                 </Carousel.Inner>
@@ -376,6 +398,35 @@ const HairSolution = (props: any) => {
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
                         </div>
                     </div>
+                    <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+                        <ProductInfo
+                            generalSetting={generalSetting}
+                            strapiAutomateHardcode={strapiAutomateHardcode}
+                            checkHardcodedImages={checkHardcodedImages}
+                            checkHardcodedTitles={checkHardcodedTitles}
+                            checkHardcodedVariant={checkHardcodedVariant}
+                            checkHardcodedTagline={checkHardcodedTagline}
+                            checkHardcodedFaq={checkHardcodedFaq}
+                            checkHardcodedHowToUse={checkHardcodedHowToUse}
+                            ProductSettings={ProductSettings}
+                            BenefitIngredient={BenefitIngredient}
+                            HowToUse={HowToUse}
+                            Faq={Faq}
+                            FragranceNotes={FragranceNotes}
+                            store={store}
+                            data={productData}
+                            setTab1Selected={() => null}
+                            tab1Selected={[]}
+                            setTab0Selected={() => null}
+                            tab0Selected={[]}
+                            activeTab={activeTab}
+                            maxItem={5}
+                            buildProductCardModel={buildProductCardModel}
+                            // useMediaQuery={useMediaQuery}
+                            directAddToCart={true}
+                            addToCart={addToCart}
+                            handleClose={() => setProductData({...productData, ...{ open: false }})} />
+                    </Modal>
                 </section>
             )}
 

@@ -14,6 +14,8 @@ import AccordionPDP from "../AccordionPDP";
 import Modal from "~/components/Modal";
 import ShippingTable from "~/components/modal/ShippingTable";
 import { removeObjectWithId } from "~/modules/utils";
+import { useWindowSize } from "~/hooks/useWindowSize";
+import ProudToBe from "~/compounds/ProudToBe";
 
 type imageProps = {
     id: number,
@@ -26,6 +28,9 @@ type imageProps = {
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
+        Faq,
+        addToCart,
+        directAddToCart,
         generalSetting,
         FragranceNotes,
         ProductSettings,
@@ -50,7 +55,16 @@ const ProductInfo = (props: any) => {
         buildProductCardModel,
         useMediaQuery,
     } = props;
-    const isDesktop = useMediaQuery('(min-width: 769px)');
+    // const isDesktop = useMediaQuery('(min-width: 769px)');
+    const [isDesktop, setIsDesktop] = useState(true);
+    const [width, height] = useWindowSize();
+    useEffect(() => {
+        if (globalThis && globalThis.window.innerWidth > 992) {
+            setIsDesktop(true);
+        } else {
+            setIsDesktop(false);
+        }
+    }, [width]);
     const [scrollProgress, setScrollProgress] = useState(0);
     const [productStrapi, setProductStrapi] = useState(null);
     const [productShopify, setProductShopify] = useState(null);
@@ -89,8 +103,25 @@ const ProductInfo = (props: any) => {
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const [addingItem, setAddingItem] = useState(false);
+
+    const addToCartHandle = async () => {
+        if (typeof addToCart === 'function') {
+            setAddingItem(true);
+            await addToCart({
+                id: selectedVariant.id,
+                quantity: 1,
+                handle: selectedVariant?.product?.handle,
+                title: selectedVariant.title,
+            });
+            setAddingItem(false);
+            handleClose();
+        }
+        return false;
+    }
+
     const onAddItem = () => {
-        
+        // build your bundle
         const itemSelected = activeTab === 0 ? tab0Selected : tab1Selected;
         const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
         if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) {
@@ -128,11 +159,11 @@ const ProductInfo = (props: any) => {
 
     const getProductData = async (handle) => {
         try {
-            const response = await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, { cache: 'force-cache' });
+            const response = await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`);
             const { product } = await response.json();
             setProductShopify(product);
 
-            const response2 = await fetch(`/api/getProductStrapi?handle=${handle}&region=${store}`, { cache: 'force-cache' });
+            const response2 = await fetch(`/api/getProductStrapi?handle=${handle}&region=${store}`);
             const productStrapi = await response2.json();
 
             if (productStrapi && productStrapi.length > 0) setProductStrapi(productStrapi[0]);
@@ -269,12 +300,18 @@ const ProductInfo = (props: any) => {
             text: '',
             component: <HowToUse howToUse={howToUse} tags={productShopify?.tags || []} handle={productStrapi?.handle}/>
         },
-        // {
-        //     id: 'faq',
-        //     title: 'FAQ',
-        //     text: '',
-        //     component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
-        // }
+        {
+            id: 'faq',
+            title: 'FAQ',
+            text: '',
+            component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
+        },
+        {
+            id: 'proud-to-be',
+            title: 'Proud to be',
+            text: '',
+            component: <div className="order-2 mt-2 lg:mt-0">{ <ProudToBe proudToBe={proudToBe || 'natural-dha|sulfate-free|vegan|silicone-free|cruelty-free|toxin-free|gluten-free|ethically|paraben-free|peta|fragrance-free'}/> }</div>
+        }
     ];
 
     if (fragrance_notes && fragrance_notes.trim() !== '') {
@@ -293,8 +330,16 @@ const ProductInfo = (props: any) => {
 			openIndexId = 0;
 		}
         await setOpenIndex(openIndexId);
+    
         if (typeof callback === 'function') {
             callback();
+        }
+        if (!isDesktop) {
+            setTimeout(() => {
+                const wrapper = document.querySelector('.modal__mini-pdp').closest('.fixed')
+                const el = (document.querySelector(`.modal__mini-pdp #accordion-${id}`) as HTMLDivElement)
+                if (el) wrapper.scrollTop = el.offsetTop;
+            }, 365)
         }
 	};
 
@@ -528,13 +573,18 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            <Button disabled={!selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
-                                {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
-                                {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
-                                {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add' : ''}
+                            <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
+                                {!addingItem && (
+                                    <>
+                                        {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
+                                        {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
+                                        {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add' : ''}
+                                    </>
+                                )}
                             </Button>
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                { dataAccordion.length > 0 && <AccordionPDP isBundlePage={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
+                                { dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
                             </div>
                         </div>
                     </>

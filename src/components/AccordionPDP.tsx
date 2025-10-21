@@ -22,7 +22,8 @@ const AccordionPDP = (props: any) => {
 			if (!isDesktop) globalThis.window.scrollTo({ top: scrollDiv - 100, behavior: 'smooth'});
 		}
 
-		props.onClick(id, afterClick);
+		if (props.isInPopup) props.onClick(id);
+		else props.onClick(id, afterClick);
 		//setTimeout(() => scrollToId(id, targetEl), 150)
 	}
 
