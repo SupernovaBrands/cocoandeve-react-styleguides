@@ -1298,3 +1298,5 @@ export const checkLaunchWLBox = (launchWL, handle) => {
     }
 	return { isLaunchWL, launchBox };
 }
+
+export const removeObjectWithId = (arr, idToRemove) => arr.filter((obj) => obj.id !== idToRemove);
