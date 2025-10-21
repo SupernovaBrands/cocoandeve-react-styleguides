@@ -94,9 +94,9 @@ const CartExtrass = (props:any) => {
 		{showAtome && (
 			<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
 				{!loading && (
-					<span className="inline-flex items-center">
+					<span>
 						<span>Pay in 3 payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 3) + Number.EPSILON)), false, store)} with</span>
-						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px] mt-1px mr-1" alt="Shop pay logo"/>
+						<img src="https://supernovabrands.github.io/cocoandeve-styleguides/images/logo-atome.svg" height="15px" className="inline-block align-baseline h-[14px] w-[59px] align-middle mb-px ml-[3px] mb-[3px] mt-1px mr-1" alt="Shop pay logo"/>
 					</span>
 				)}
 			</div>
