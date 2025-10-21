@@ -447,19 +447,19 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 	const klaviyoList = {
 		dev: 'UYNUCe',
 		us: 'UkrRia',
-		uk: '',
-		ca:  '',
-		au: '',
-		eu: '',
+		uk: 'WsMw9R',
+		ca:  'Sf9WxH',
+		au: 'X35yA9',
+		eu: 'WkXKHK',
 	}
 
 	const klaviyoPK = {
 		dev: 'ULW9Jz',
 		us: 'VQmHzA',
-		uk: '',
-		ca:  '',
-		au: '',
-		eu: '',
+		uk: 'TPtP96',
+		ca:  'UZ7U4p',
+		au: 'WYtipg',
+		eu: 'XLgmDM',
 	}
 
 	const phone_number = phoneNumber && phoneNumber.startsWith("+") ? phoneNumber.replace("++", "+") : `+${phoneNumber}`;
