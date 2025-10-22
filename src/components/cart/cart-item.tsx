@@ -93,7 +93,7 @@ export const CartItem = (props:CartItemProps) => {
 		}
 
 		const { swatches } = item;
-		if (swatches.length >= 2) {
+		if (swatches.length >= 2 && !item.merchandise.product.isProductBundleApp?.value) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
@@ -191,6 +191,29 @@ export const CartItem = (props:CartItemProps) => {
 	
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
+	const groupSwatches = (data) => {
+		if (!item.merchandise.product.isProductBundleApp?.value) {
+			return data;
+		}
+		const grouped = Object.values(
+			data.reduce((acc, item) => {
+				if (!acc[item.name]) {
+				acc[item.name] = { ...item };
+				} else {
+				// gabungkan id
+				acc[item.name].id += "|" + item.id;
+				// ambil intersection values
+				acc[item.name].values = acc[item.name].values.filter(v =>
+					item.values.includes(v)
+				);
+				}
+				return acc;
+			}, {})
+		);
+		return grouped;
+	}
+
+
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
 	}, [selectedSwatch]);
@@ -230,7 +253,7 @@ export const CartItem = (props:CartItemProps) => {
 								condition={item.isFreeItem}
 								wrapper={(children:any) => <span className="text-black">{children}</span>}
 							>
-								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }p
 							</ConditionWrapper>
 						)
 							: (
@@ -304,8 +327,7 @@ export const CartItem = (props:CartItemProps) => {
 						</div>
 					)}
 				>
-
-					{swatches.map((opt:any, index:number) => {
+					{groupSwatches(swatches).map((opt:any, index:number) => {
 						const options = item.merchandise.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
 						const selected = options.filter((option:any, ind:any) => option.name.toLowerCase() !== 'size' && index === ind)
 							.map((option:any) => option.value).join();
