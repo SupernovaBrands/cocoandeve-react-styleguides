@@ -92,7 +92,7 @@ const CartExtrass = (props:any) => {
 		)}
 
 		{showAtome && (
-			<div className="text-center font-size-sm border-top py-2" style={{ minHeight: '5.5em' }}>
+			<div className="text-center font-size-sm border-top pt-2">
 				{!loading && (
 					<span>
 						<span>Pay in 3 payments of {formatMoney(Math.round(((parseFloat(totalPrice) / 3) + Number.EPSILON)), false, store)} with</span>
