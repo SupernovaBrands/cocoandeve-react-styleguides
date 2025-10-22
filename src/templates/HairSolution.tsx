@@ -26,7 +26,8 @@ import { useWindowSize } from '~/hooks/useWindowSize';
 import ProductInfo from '~/components/modal/ProductInfo';
 
 const HairSolution = (props: any) => {
-    const { ProductSettings, preOrderSetting, data, formatMoney, waitlistPdp, store, 
+    const { getActiveWL, getId, fbqEvent, tiktokSubscribe, subscribeBluecoreWaitlist, submitsToSmsBumpAPi, 
+        bluecoreProductWaitlist, trackBluecoreLaunchWaitlistEvent, waitlistPdpStore, launchProductWaitlist, ProductSettings, preOrderSetting, data, formatMoney, waitlistPdp, store, 
         generalSetting, addToCart, trackEvent, trackBluecoreEvent,
         strapiAutomateHardcode, checkHardcodedImages, checkHardcodedTitles,
         checkHardcodedVariant, checkHardcodedTagline, checkHardcodedFaq,
@@ -400,6 +401,10 @@ const HairSolution = (props: any) => {
                     </div>
                     <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
                         <ProductInfo
+                            getActiveWL={getActiveWL}
+                            getId={getId}
+                            waitlistPdpStore={waitlistPdpStore}
+                            launchProductWaitlist={launchProductWaitlist}
                             generalSetting={generalSetting}
                             strapiAutomateHardcode={strapiAutomateHardcode}
                             checkHardcodedImages={checkHardcodedImages}
@@ -425,6 +430,11 @@ const HairSolution = (props: any) => {
                             // useMediaQuery={useMediaQuery}
                             directAddToCart={true}
                             addToCart={addToCart}
+                            fbqEvent={fbqEvent} tiktokSubscribe={tiktokSubscribe} 
+                            subscribeBluecoreWaitlist={subscribeBluecoreWaitlist}
+                            submitsToSmsBumpAPi={submitsToSmsBumpAPi} 
+                            bluecoreProductWaitlist={bluecoreProductWaitlist}
+                            trackBluecoreLaunchWaitlistEvent={trackBluecoreLaunchWaitlistEvent}
                             handleClose={() => setProductData({...productData, ...{ open: false }})} />
                     </Modal>
                 </section>
