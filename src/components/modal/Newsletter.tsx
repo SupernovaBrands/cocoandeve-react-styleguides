@@ -134,7 +134,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 		const emailRequired = isPhoneEmpty;
 		return { emailValid, emailRequired, phoneValid };
 	};
-	
+
 	const handleForm = (e) => {
 		e.preventDefault();
 		const { emailValid, emailRequired, phoneValid } = validateForm(email, phone);
@@ -152,7 +152,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 				if (emailValid) setFormCompleted(true);
 			}
 			if (phone && phone !== '' && phoneValid) {
-				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode, store, 'Newsletter Popup').then((resp) => {
 					if (resp.status === 'error') {
 						setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
 					} else {

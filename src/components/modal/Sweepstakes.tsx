@@ -153,13 +153,13 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode).then((resp) => {
-				// console.log('submitsToSmsBump', resp);
-				if (resp.status === 'error' && !validForm.email) {
-					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
-				} else {
-					setFormCompleted(true);
-				}
+			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Popup").then((resp) => {
+				console.log('submitsToSmsBump', resp);
+				// if (resp.status === 'error' && !validForm.email) {
+				// 	setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
+				// } else {
+				// 	setFormCompleted(true);
+				// }
 			});
 			if (validForm.email || email === '') {
 				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
@@ -272,7 +272,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 							</div>
 						</div>
 					)}
-					
+
 					<CloseButton handleClose={onClose} />
 				</div>
 			</div>
