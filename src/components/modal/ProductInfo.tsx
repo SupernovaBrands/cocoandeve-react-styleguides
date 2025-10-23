@@ -122,7 +122,7 @@ const ProductInfo = (props: any) => {
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
-                id: selectedVariant.id,
+                id: selectedVariant.bundleId ? `gid://shopify/ProductVariant/${selectedVariant.bundleId.value}` : selectedVariant.id,
                 quantity: 1,
                 handle: selectedVariant?.product?.handle,
                 title: selectedVariant.title,
