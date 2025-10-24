@@ -97,6 +97,7 @@ const Sweepstakes = (props) => {
 				}
 				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
 				setFormCompleted(true);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
 			} else {
 				setEmailError({ valid: false, error: 'Please enter a valid email address' });
 			}
@@ -112,11 +113,13 @@ const Sweepstakes = (props) => {
 					setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
 				} else {
 					setFormCompleted(true);
+					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}
 			});
 			if (validForm.email || email === '') {
 				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true, social);
 				setFormCompleted(true);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
 			}
 		}
 	}
