@@ -11,7 +11,7 @@ import DropdownStore from '~/components/DropdownStore';
 
 const Footer = (props) => {
     // console.log('footer test prop', props);
-    const { store, aboutMenu, helpMenu, shopMenu } = props;
+    const { store, aboutMenu, helpMenu, shopMenu, trackBluecoreLaunchWaitlistEvent } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const onSubmit = (evt) => {
@@ -39,10 +39,11 @@ const Footer = (props) => {
                 //@ts-ignore
                 globalThis.window.fbq('track', 'Lead');
             }
+            trackBluecoreLaunchWaitlistEvent(email, 'Footer Newsletter');
         } catch(e){
             console.log(e);
         }
-    
+
         try {
             // @ts-ignore
             window.wtba = window.wtba || [];
