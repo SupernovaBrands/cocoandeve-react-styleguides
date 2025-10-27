@@ -42,6 +42,7 @@ type NewsletterProp = {
 	data: NewsletterData
 	store: string
 	trackEvent: any
+	trackBluecoreLaunchWaitlistEvent: any
 }
 
 const validForm = {
@@ -75,7 +76,7 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackEvent }) => {
+const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackEvent, trackBluecoreLaunchWaitlistEvent }) => {
 	const { nbp_img, nbp_code, nbp_desc, nbp_note, nbp_img_lg, nbp_submit, nbp_enabled, nbp_heading, nbp_smsbump, floating_btn, nbp_bg_color, nbp_email_ph, nbp_phone_ph,
 		nbp_completed, nbp_heading_2, nbp_desc_color, nbp_heading_color, nbp_completed_desc, nbp_heading_2_color, nbp_comliance_position
 	} = data;
@@ -149,6 +150,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 			utmParams();
 			if (emailValid || !emailRequired) {
 				subscribeBluecoreRegistration(email, phone);
+				trackBluecoreLaunchWaitlistEvent(email, 'Newsletter Popup');
 				if (emailValid) setFormCompleted(true);
 			}
 			if (phone && phone !== '' && phoneValid) {
