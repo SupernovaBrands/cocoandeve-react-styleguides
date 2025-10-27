@@ -128,7 +128,7 @@ const ArticlPosteBanner = (props) => {
 };
 
 const Article = (props) => {
-    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, region, featuredImg, popArticles, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdpSetting } = props;
+    const { content, isLoading, postNewsletter, postBannerInfo, upsells, store, addToCart, generalSetting, productCardColorSettingData, region, featuredImg, popArticles, trackBluecoreEvent, bluecoreProductWaitlist, waitlistPdpSetting } = props;
     let body = '';
     
     if (content?.BlogContentMultiStores?.[region]?.body_content && typeof content.BlogContentMultiStores[region].body_content === 'string') {
@@ -518,7 +518,7 @@ const Article = (props) => {
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:pl-0 sm:pr-0">
                     <p className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</p>
-                    {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
+                    {!isLoading && ( <ShopArticle waitlistPdpSetting={waitlistPdpSetting} productCardColorSettingData={productCardColorSettingData} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} store={region} isLoading={isLoading} label={label} products={upsells} addToCart={addToCart} generalSetting={generalSetting} /> )}
                 </div>
             </div>
         )}

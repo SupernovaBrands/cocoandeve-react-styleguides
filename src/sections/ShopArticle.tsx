@@ -20,14 +20,19 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 
-	const { addToCart, generalSetting, label, store, isLoading, bluecoreProductWaitlist, trackBluecoreEvent, waitlistPdpSetting } = props;
+	const { addToCart, generalSetting, productCardColorSettingData, label, store, isLoading, bluecoreProductWaitlist, trackBluecoreEvent, waitlistPdpSetting } = props;
     const [products, setProducts] = useState(props.products);
 
     useEffect(() => {
         if (props?.products) {
-            setProducts(props.products);
+            const productsData = props.products.map(product => ({
+                ...product,
+                ctaBgColor: productCardColorSettingData?.product_card_cta_bg_color,
+                ctaTextColor: productCardColorSettingData?.product_card_cta_text_color,
+            }));
+            setProducts(productsData);
         }
-    }, [props])
+    }, [props.products, productCardColorSettingData]);
 
     const [waitlistData, setWaitlistData] = useState({
         open: false,
