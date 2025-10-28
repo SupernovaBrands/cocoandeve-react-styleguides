@@ -291,6 +291,11 @@ const ProductInfo = (props: any) => {
     const shippingTableStore = shippingTable?.shippingTableInfo?.shippingTableInfo[store] || {};
     const shippingTableStore2 = shippingTable[`shipping_table_${store.toUpperCase()}`] || {};
 
+    const pdpCtaColors = ProductSettings.find((setting:any) => setting.__component === 'product.product-cta-color-settings');
+    const pdpCtaColorStore = pdpCtaColors.productColorSettings?.productColorSettings ? pdpCtaColors?.productColorSettings?.productColorSettings[store] : null;
+    const bgColor = pdpCtaColorStore?.pdp_cta_bg_color;
+    const textColor = pdpCtaColorStore?.pdp_cta_text_color;
+
     const shippingTable2 = shippingTable?.shippingTableInfo?.shippingTableInfo?.[store];
 
     const fragranceNotesObject = {
@@ -625,7 +630,7 @@ const ProductInfo = (props: any) => {
                                     <ProductWaitlist forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title}/>
                                 </div>}
                             {selectedVariant?.availableForSale && (
-                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${bgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : bgColor === 'bg-primary-light' ? 'border-primary-light bg-primary-light hover:bg-primary-dark' : 'btn-primary'} ${textColor ? textColor : 'text-white'} rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (
                                         <>
