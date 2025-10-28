@@ -516,23 +516,26 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 
 export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode, region, source='Newsletter') => {
 	const phoneNumber = `${countryPhoneCode}${phone.replace(/^0+/, '')}`;
-	return submitPhoneKlaviyo({store: region, phoneNumber, source});
 
-	// const date = new Date();
-	// const tse = date.getTime();
-	// const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${region}`}',list_id:${formId}}`;
-	// const signature = encryptParam(content);
+	if (region !== 'int') {
+		return submitPhoneKlaviyo({store: region, phoneNumber, source});
+	}
 
-	// return fetch(`${API_ENDPOINT}/smsbump/subscribe`, {
-	// 	body: JSON.stringify({
-	// 		phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${region}`, signature,
-	// 	}),
-	// 	headers: {
-	// 		'Accept': 'application/json',
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	method: 'POST',
-	// }).then((data) => data.json());
+	const date = new Date();
+	const tse = date.getTime();
+	const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${region}`}',list_id:${formId}}`;
+	const signature = encryptParam(content);
+
+	return fetch(`${API_ENDPOINT}/smsbump/subscribe`, {
+		body: JSON.stringify({
+			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${region}`, signature,
+		}),
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		method: 'POST',
+	}).then((data) => data.json());
 };
 
 
