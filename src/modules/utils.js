@@ -517,7 +517,7 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode, region, source='Newsletter') => {
 	const phoneNumber = `${countryPhoneCode}${phone.replace(/^0+/, '')}`;
 
-	if (region !== 'int') {
+	if (!['int', 'my'].includes(region)) {
 		return submitPhoneKlaviyo({store: region, phoneNumber, source});
 	}
 
