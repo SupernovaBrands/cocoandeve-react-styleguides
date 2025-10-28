@@ -42,6 +42,7 @@ interface SweepstakesData {
 	sweepstakes_popup_thank_title_color_mob: string,
 	sweepstakes_popup_thank_desc_color_mob: string,
 	sweepstakes_popup_submit: string,
+	source_name: string,
 }
 
 type SweepstakesProp = {
@@ -154,7 +155,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Popup").then((resp) => {
+			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, data?.source_name || "Sweepstakes Popup").then((resp) => {
 				console.log('submitsToSmsBump', resp);
 				// if (resp.status === 'error' && !validForm.email) {
 				// 	setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
