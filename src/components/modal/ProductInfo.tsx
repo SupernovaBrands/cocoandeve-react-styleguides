@@ -381,11 +381,15 @@ const ProductInfo = (props: any) => {
     }, [tab1Selected]);
 
     useEffect(() => {
-        // if (autoTicks && autoTicks.length > 0) {
-        //     defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-        // }
+        let defaultVariant = null;
+        const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+        if (autoTicks && autoTicks.length > 0) {
+            defaultVariant = productShopify?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+        }
         const variantNodes = productShopify?.variants?.nodes;
-        const defaultVariant = variantNodes?.sort((x, y) => y.availableForSale - x.availableForSale)[0];
+
+        // select only first variant
+        defaultVariant = variantNodes?.length > 0 ? variantNodes[0] : null;
         setSelectedVariant(defaultVariant || null);
         // const productModel = buildProductCardModel(store, productShopify, null, null);
         // if (productShopify) setProductModel(productModel);
@@ -627,7 +631,10 @@ const ProductInfo = (props: any) => {
                                         <>
                                             {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                             {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
-                                            {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add to Cart' : ''}
+                                            {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? <>
+                                                <span className="lg:hidden">Add</span>
+                                                <span className="hidden lg:inline">Add to Cart</span>
+                                            </> : ''}
                                         </>
                                     )}
                                 </Button>
