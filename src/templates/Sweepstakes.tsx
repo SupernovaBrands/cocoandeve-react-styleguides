@@ -243,7 +243,7 @@ const Sweepstakes = (props) => {
                                         <small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
                                     </div> */}
                                     {/* <div className="hidden input-error toc-error text-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div> */}
-                                    <p className={`text-xs mb-[1rem] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} />
+                                    <p className={`text-[10px] mb-[1rem] leading-[13px] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} />
                                     <div className="lg:mb-2 sm:mb-1">
                                         <button id="sweepstakes__submit" type="submit" className="bg-primary hover:bg-primary-darken w-full rounded border border-transparent font-bold text-white py-[13px] px-[54px] btn-primary" disabled={!allowSubmit}>{content?.submit || 'Sign me up!'}</button>
                                     </div>
