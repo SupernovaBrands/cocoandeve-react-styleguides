@@ -82,7 +82,8 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 								data-code={sbp_code}
 								buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full"
 							>
-								Use Code: {sbp_code}
+								<span className="hidden lg:inline">Code: {sbp_code}</span>
+								<span className="lg:hidden">Use Code: {sbp_code}</span>
 								<Paste className="svg--current-color svg text-primary ml-1" />
 							</Button>
 						) : (
