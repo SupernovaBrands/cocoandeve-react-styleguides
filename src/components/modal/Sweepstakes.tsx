@@ -41,6 +41,8 @@ interface SweepstakesData {
 	sweepstakes_foot_note_color_mob: string,
 	sweepstakes_popup_thank_title_color_mob: string,
 	sweepstakes_popup_thank_desc_color_mob: string,
+	sweepstakes_popup_submit: string,
+	source_name: string,
 }
 
 type SweepstakesProp = {
@@ -153,7 +155,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Popup").then((resp) => {
+			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, data?.source_name || "Sweepstakes Popup").then((resp) => {
 				console.log('submitsToSmsBump', resp);
 				// if (resp.status === 'error' && !validForm.email) {
 				// 	setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
@@ -207,7 +209,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	return (
 		<>
 			{/* @ts-ignore */}
-			<div style={styles} className="modal-content mx-0 lg:mx-4 bg-center bg-cover">
+			<div style={styles} className="modal-content mx-0 lg:mx-4 bg-center bg-cover lg:min-h-[500px] lg:flex lg:items-center">
 				<div className="modal-body px-0 py-0 bg-white lg:bg-transparent">
 					<picture className="w-full lg:hidden">
 						<source srcSet={data?.sweepstakes_popup_img_lg?.url} media="(min-width: 992px)" />
@@ -248,7 +250,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 									)}
 									{!phoneError.valid && data?.phone_en && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
 									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
-									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">Register now</Button>
+									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">{data.sweepstakes_popup_submit || 'Register now'}</Button>
 									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
 							</div>
