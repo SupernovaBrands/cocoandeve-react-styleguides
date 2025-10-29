@@ -258,7 +258,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className={`font-size-xs lg:mt-2 font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-0'}`} dangerouslySetInnerHTML={{__html: props.policy}}></p>
+                    <p className={`font-size-xs lg:mt-2 ${props.productCard ? 'mb-[1rem]' : 'mb-0'}`} dangerouslySetInnerHTML={{__html: props.policy}}></p>
                 </form>
             </div> }
 
