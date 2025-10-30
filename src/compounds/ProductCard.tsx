@@ -429,7 +429,7 @@ const ProductCard = (props:any) => {
             { props.product.activeBadges && !props.sideUpsell && 
                 <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                     {props.product.activeBadges.map((badge) => (
-                        <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] font-normal lg:text-sm  product-card__badge mr-[8px] mb-[8px] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} text-[${props.product?.badgeMobileFontSize}px]`}>{badge.badge_text}</span>
+                        <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] font-normal lg:text-sm  product-card__badge mr-[4px] mb-[4px] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} text-[${props.product?.badgeMobileFontSize}px]`}>{badge.badge_text}</span>
                     ))}
                 </div>
             }
