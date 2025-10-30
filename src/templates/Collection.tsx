@@ -524,6 +524,7 @@ const Collection = (props: any) => {
                                                     url="/pages/build-your-own-bundle"
                                                     store={store}
                                                     imgAlt="Illustration of a person build items to find their perfect bundle"
+                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                 />
                                             )}
                                             {showQuizCard && (
@@ -538,6 +539,7 @@ const Collection = (props: any) => {
                                                     url="/pages/self-tan-quiz"
                                                     store={store}
                                                     imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
+                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                 />
                                             )}
                                         </div>
@@ -603,6 +605,7 @@ const Collection = (props: any) => {
                                             url="/pages/build-your-own-bundle"
                                             store={store}
                                             imgAlt="Illustration of a person build items to find their perfect bundle"
+                                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                         />
                                     )}
                                     {showQuizCard && (
@@ -617,6 +620,7 @@ const Collection = (props: any) => {
                                             ctaLabel="Take the Quiz"
                                             url="/pages/self-tan-quiz"
                                             imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
+                                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                         />
                                     )}
                                 </div>

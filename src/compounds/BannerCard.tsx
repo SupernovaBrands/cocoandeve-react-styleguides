@@ -10,9 +10,11 @@ interface BannerCardProps {
     imgAlt: string
     store: string
     children?: any
+    ctaBgColor?: string
+    ctaTextColor?: string
 }
 
-const BannerCard: React.FC<BannerCardProps> = ({ className, url, imgDt, imgMb, title, description, ctaLabel, imgAlt, store, children = null }) => (
+const BannerCard: React.FC<BannerCardProps> = ({ className, url, imgDt, imgMb, title, description, ctaLabel, imgAlt, store, children = null, ctaBgColor }) => (
 	<figure className={className ?? ''}>
         <a href={url}>
             <picture className="block">
@@ -31,7 +33,7 @@ const BannerCard: React.FC<BannerCardProps> = ({ className, url, imgDt, imgMb, t
                         />
                     )}
                     {ctaLabel && (
-                        <span className="hidden lg:inline-block align-middle text-center select-none border border-primary py-1 px-3 leading-normal no-underline bg-primary text-white hover:primary-dark hover:text-white hover:no-underline rounded-full lg:py-[7px] lg:px-[28px] min-w-[157px]">
+                        <span className={`hidden lg:inline-block align-middle text-center select-none border ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark': 'border-primary bg-primary hover:primary-dark'} py-1 px-3 leading-normal no-underline text-white hover:text-white hover:no-underline rounded-full lg:py-[7px] lg:px-[28px] min-w-[157px]`}>
                             {ctaLabel}
                         </span>
                     )}

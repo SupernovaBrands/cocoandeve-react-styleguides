@@ -40,7 +40,7 @@ const RealResultCarousel = (props: any) => {
 		Autoplay({ playOnInit: false, delay: 3000 })
 	]);
 
-	const { videos, store } = props;
+	const { videos, store, generalSetting } = props;
 	const allTab = videos.filter((data) => data.enabled_all);
 	const hairTab = videos.filter((data: any) => data.enabled_hair);
 	const tanSpfTab = videos.filter((data: any) => data.enabled_tanspf);
@@ -66,13 +66,13 @@ const RealResultCarousel = (props: any) => {
 					<div className="lg:flex lg:flex-wrap lg:justify-between">
 						
 						{ !props.show && (<ul className="instagram-reels__nav hide-scrollbar list-style-none mx-auto flex border-b-0 text-center justify-start px-hg flex-nowrap overflow-scroll mb-g lg:overflow-hidden lg:mx-0 lg:px-0">
-							<li key={`all`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'all' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} /></li>
-							<li key={`hair`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'hair' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} /></li>
-							<li key={`tan`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'tan' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title={store === 'ca' ? 'Tan' : 'Tan & SPF'} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} /></li>
-							<li key={`skincare`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'skin' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} /></li>
-							<li key={`body`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'body' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} /></li>
+							<li key={`all`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'all' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li key={`hair`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'hair' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li key={`tan`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'tan' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title={store === 'ca' ? 'Tan' : 'Tan & SPF'} active={activeTab === 'tan'} onNavChange={() => setActiveTab('tan')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li key={`skincare`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'skin' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Skin' active={activeTab === 'skin'} onNavChange={() => setActiveTab('skin')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li key={`body`}><TabNav className={`bg-gray-400 mr-1 whitespace-nowrap rounded-full py-25 lg:py-1 px-2 lg:text-base ${activeTab === 'body' ? 'instagram-reels__nav--active font-normal bg-primary' : 'text-gray-600'}`} title='Body' active={activeTab === 'body'} onNavChange={() => setActiveTab('body')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
 						</ul>) }
-						<a href="/pages/reviews" className="mb-3 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline lg:px-[1.625em] lg:py-[.5em] hidden lg:inline-block">See All</a>
+						<a href="/pages/reviews" className={`mb-3 btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline lg:px-[1.625em] lg:py-[.5em] hidden lg:inline-block`}>See All</a>
 					</div>
                     <div className='px-hg'>
 						<TabContent active={activeTab === 'all'}>

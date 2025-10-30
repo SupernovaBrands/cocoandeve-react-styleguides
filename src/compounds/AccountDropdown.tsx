@@ -6,7 +6,7 @@ import { Button } from '~/components/index';
 import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
-    const { openAccountBox, store, onModal, swellLoyalty, scrolled, annBarEnabled, timerData, isStickyEnabled, isScrollEnabled } = props;
+    const { openAccountBox, store, onModal, swellLoyalty, scrolled, annBarEnabled, timerData, isStickyEnabled, isScrollEnabled, generalSetting } = props;
     const defaultCheckedNewsOptIn = !!onModal === true ? !!onModal : !['uk', 'eu'].includes(store);
     const [regInit, setRegInit] = useState(true);
     const [newsOptIn, setNewsOptIn] = useState(defaultCheckedNewsOptIn);
@@ -183,14 +183,14 @@ const AccountDropdown = (props:any) => {
                                 <label htmlFor="dropdownLoginFormPassword" id="dropdownLoginFormPasswordLabel" className="sr-only">Password</label>
                                 <input autoComplete="current-password" ref={loginPassRef} onChange={handleLoginChange} type="password" className="font-size-sm h-[50px] block appearance-none w-full py-1 px-2 mb-1 leading-normal bg-gray-400 text-gray-800 border-gray-200 rounded border-0 focus:outline-none" id="dropdownLoginFormPassword" placeholder="Password" aria-labelledby="dropdownLoginFormPasswordLabel" />
                             </div>
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''} ${loadingLogin ? '!opacity-70' : ''}`} disabled={!allowLogin}>
+                            <Button type="submit" buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'btn-primary'} w-full border-0 py-1 mt-1 ${!allowLogin ? '!opacity-100' : ''} ${loadingLogin ? '!opacity-70' : ''}`} disabled={!allowLogin}>
                                 {!loadingLogin && 'Log In'}
                                 {loadingLogin && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
                             </Button>
                             <ul className="d-flex justify-content-between mt-2 mb-1 list-unstyled">
                                 <li className='flex justify-between'>
-                                    <a tabIndex={0} href="/account/login?recover=true" className="text-underline text-primary underline">Forgot your password?</a>
-                                    <button type="button" className="text-underline text-primary underline" onClick={() => setActiveFrame(!activeFrame)}>Sign up</button>
+                                    <a tabIndex={0} href="/account/login?recover=true" className={`text-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'text-dark' : 'text-primary'} underline`}>Forgot your password?</a>
+                                    <button type="button" className={`text-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'text-dark' : 'text-primary'} underline`} onClick={() => setActiveFrame(!activeFrame)}>Sign up</button>
                                 </li>
                             </ul>
                         </form>
