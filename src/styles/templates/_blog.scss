@@ -242,6 +242,11 @@
 				@apply bg-primary;
 				@apply text-white;
 			}
+
+			&.active-dark {
+				@apply bg-dark;
+				@apply text-white;
+			}
 		}
 
 	}

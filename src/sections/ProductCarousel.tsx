@@ -88,11 +88,11 @@ const ProductCarousel = (props: any) => {
 				<div>
 					<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
 						<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
-							<li><TabNav className={`${activeTab === 'bestsellers' ? 'text-body' : ''}`} title='Best Sellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} /></li>
-							<li><TabNav className={`${activeTab === 'new' ? 'text-body' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} /></li>
-							<li><TabNav className={`${activeTab === 'valuesets' ? 'text-body' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} /></li>
+							<li><TabNav className={`${activeTab === 'bestsellers' ? 'text-body' : ''}`} title='Best Sellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li><TabNav className={`${activeTab === 'new' ? 'text-body' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+							<li><TabNav className={`${activeTab === 'valuesets' ? 'text-body' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
 						</ul>
-						<a href="/collections/all" className="hidden lg:inline btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] lg:px-[1.625em] lg:py-[.5em] mb-2 mt-0 mb-3">Shop All</a>
+						<a href="/collections/all" className={`hidden lg:inline btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] lg:px-[1.625em] lg:py-[.5em] mb-2 mt-0 mb-3`}>Shop All</a>
 					</div>
 					<div className="product__carousel-body pl-[.5625em] lg:px-0 text-center">
 						<TabContent active={activeTab === 'new'}>

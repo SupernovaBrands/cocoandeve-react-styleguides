@@ -16,7 +16,7 @@ const NavMegaMenuAll = (props: any) => {
                 <div className="flex w-full">
                     <div className="max-w-[14.625em] mr-3 mb-3 px-0">
                         <>
-                            <a href={generalSetting.mega_menu_shop_all_url} className="bg-gray-400 text-primary rounded border border-transparent font-bold mb-2 w-full hover:no-underline hover:text-primary inline-flex items-center justify-center px-3 py-1 text-lg text-center whitespace-nowrap">
+                            <a href={generalSetting.mega_menu_shop_all_url} className={`bg-gray-400 ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'text-dark hover:text-dark' : 'text-primary hover:text-primary'} rounded border border-transparent font-bold mb-2 w-full hover:no-underline inline-flex items-center justify-center px-3 py-1 text-lg text-center whitespace-nowrap`}>
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
                             {generalSetting.bg_image && (

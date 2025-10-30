@@ -291,10 +291,8 @@ const ProductInfo = (props: any) => {
     const shippingTableStore = shippingTable?.shippingTableInfo?.shippingTableInfo[store] || {};
     const shippingTableStore2 = shippingTable[`shipping_table_${store.toUpperCase()}`] || {};
 
-    const pdpCtaColors = ProductSettings.find((setting:any) => setting.__component === 'product.product-cta-color-settings');
-    const pdpCtaColorStore = pdpCtaColors.productColorSettings?.productColorSettings ? pdpCtaColors?.productColorSettings?.productColorSettings[store] : null;
-    const bgColor = pdpCtaColorStore?.pdp_cta_bg_color;
-    const textColor = pdpCtaColorStore?.pdp_cta_text_color;
+    const bgColor = generalSetting?.bfcm_cta_bg_color;
+    const textColor = generalSetting?.bfcm_cta_text_color;
 
     const shippingTable2 = shippingTable?.shippingTableInfo?.shippingTableInfo?.[store];
 

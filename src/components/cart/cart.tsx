@@ -426,7 +426,7 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
 								<div className="w-full mt-1">
-									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
+									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary checkout-url" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
 							{['us','ca'].includes(store) && (

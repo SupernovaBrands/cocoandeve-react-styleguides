@@ -69,6 +69,14 @@
 			@apply text-primary-light;
 		}
 	}
+
+	.bfcm-dark-layout {
+		.checkout-url,
+		.checkout-url:hover {
+			background-color: #151515 !important;
+			border-color: #151515;
+		}
+	}
 }
 
 // .cart-drawer {

@@ -131,6 +131,14 @@ const Header = (props: any) => {
 		}
 	}, [openDrawer])
 
+	useEffect(() => {
+		if (generalSetting?.bfcm_cta_bg_color === 'bg-dark') {
+			document.body.classList.add('bfcm-dark-layout');
+		} else {
+			document.body.classList.remove('bfcm-dark-layout');
+		}
+	}, [generalSetting])
+
 	{/*
 	useEffect(() => {
 		// console.log('ThemeSettings', ThemeSettings, searchBox);
@@ -279,7 +287,7 @@ const Header = (props: any) => {
 									<Account className={`hover:fill-primary text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
-									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} />
+									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} generalSetting={generalSetting} />
 								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
