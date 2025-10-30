@@ -257,7 +257,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 							</div>
 						</div>
 					) : (
-						<div className="px-3 lg:px-4 py-3 lg:py-4 ">
+						<div className="px-3 lg:px-4 py-3 lg:py-4  lg:min-w-[640px]">
 							<div className="flex flex-wrap  justify-end lg:-mx-g">
 								<div className="sweepstakes-popup__thank-you text-center lg:w-1/2 flex-col items-center justify-center mt-1 mb-1 lg:my-[60px] text-gray-600 flex lg:px-g">
 									<div className="flex flex-wrap  justify-center lg:justify-center">
