@@ -382,17 +382,17 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
-										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
-										</>
-									)}
-
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
 											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
+										</>
+									)}
+
+									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
+										<>
+											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
 
