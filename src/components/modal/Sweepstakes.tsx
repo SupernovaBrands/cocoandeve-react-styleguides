@@ -43,6 +43,7 @@ interface SweepstakesData {
 	sweepstakes_popup_thank_desc_color_mob: string,
 	sweepstakes_popup_submit: string,
 	source_name: string,
+	sbp_close_color: string,
 }
 
 type SweepstakesProp = {
@@ -249,9 +250,9 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 										</div>
 									)}
 									{!phoneError.valid && data?.phone_en && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-sm ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 font-size-xs ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">{data.sweepstakes_popup_submit || 'Register now'}</Button>
-									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 font-size-xs ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 text-[8px] ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
 							</div>
 						</div>
@@ -275,7 +276,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 						</div>
 					)}
 
-					<CloseButton handleClose={onClose} />
+					<CloseButton handleClose={onClose} className={`${data?.sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`}   />
 				</div>
 			</div>
 		</>
