@@ -250,7 +250,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 										</div>
 									)}
 									{!phoneError.valid && data?.phone_en && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 text-[11px] ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 text-[11px] lg:text-[11px] ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">{data.sweepstakes_popup_submit || 'Register now'}</Button>
 									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 text-[8px] ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
