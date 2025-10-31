@@ -13,7 +13,7 @@ import { useSearchParams } from 'next/navigation';
 import { getCookie } from "~/modules/utils";
 
 const TrackMyOrder = (props: any) => {
-    const { store } = props;
+    const { store, generalSetting } = props;
     const [code, setCode] = useState('');
     const [showDelivery, setShowDelivery] = useState(false);
     const [dataTracking, setDataTracking] = useState(null);
@@ -71,7 +71,7 @@ const TrackMyOrder = (props: any) => {
                                 <label htmlFor="tracking_number" className="sr-only">Order or Tracking Number</label>
                                 <input ref={inputRef} placeholder="Enter your order number or tracking number" defaultValue={code} className="w-full text-dark px-[15px] py-[12px] mb-[5px] border-[1px] border-[solid] !border-[#e4e4e4] rounded-[4px] text-sm placeholder:text-gray-700" id="tracking_number" name="order_number" type="text" />
                                 <p className="font-size-xs text-left">To track a different order/shipment, please enter the correct order number or tracking number above.</p>
-                                <button type="submit" className='mb-1 btn btn-primary w-100 block mt-g py-g w-full rounded'>{submitBtn}</button>
+                                <button type="submit" className={`mb-1 btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary'} btn-primary w-100 block mt-g py-g w-full rounded`}>{submitBtn}</button>
                             </form>
                         </div>
                     </div>

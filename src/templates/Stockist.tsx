@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BeautyConfidence from '~/components/BeautyConfidence';
 
 const Stockist = (props: any) => {
-    const { content, isLoading, store } = props;
+    const { content, isLoading, store, generalSetting } = props;
 	const [region, setRegion] = useState('australia');
 	const [regionTitle, setRegionTitle] = useState('Australia');
 	const [stores, setStores] = useState([]);
@@ -57,6 +57,7 @@ const Stockist = (props: any) => {
 		setStores(content.stockist.filter((item) => item.country_tag.includes(region)));
 	}, [region]);
 
+    console.log('generalSetting', generalSetting)
     return (
         <>
             <section className="container text-center stockist px-g">
@@ -126,7 +127,7 @@ const Stockist = (props: any) => {
                             <p className="text-body text-xl font-bold mb-[1rem]">{content.question_title}</p>
                             <p className="text-body">No worries, you can email us:</p>
                             <a href="mailto:wholesale@cocoandeve.com" className="text-body underline lg:text-lg font-bold mb-2">wholesale@cocoandeve.com</a>
-                            <a href="mailto:wholesale@cocoandeve.com" className="btn btn-primary btn--send-mail rounded-full min-w-[157px] border-primary font-normal hover:no-underline">Send mail</a>
+                            <a href="mailto:wholesale@cocoandeve.com" className={`btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark bg-dark' : 'border-primary btn-primary'} btn--send-mail rounded-full min-w-[157px] font-normal hover:no-underline`}>Send mail</a>
                         </div>
                     </div>
                     <BeautyConfidence parentClass="w-full lg:w-1/2 lg:px-g stockist__beauty-confidence" />
