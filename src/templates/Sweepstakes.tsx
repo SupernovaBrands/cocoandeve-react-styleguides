@@ -252,7 +252,7 @@ const Sweepstakes = (props) => {
                                 <div className="sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
                                     <h2 className={`h1 ${content.heading_col} mb-1`}>{content.thank_title}</h2>
                                     <p className="mb-[1rem]">{content.thank_desc}</p>
-                                    <a href="/collections/all" className="btn btn-lg btn-primary btn-block hover:text-white hover:no-underline w-full border-2 border border-primary">{content?.sweepstakes_popup_thank_shopnow || 'Shop Coco & Eve'}</a>
+                                    <a href={content?.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary btn-block hover:text-white hover:no-underline w-full border-2 border border-primary">{content?.sweepstakes_popup_thank_shopnow || 'Shop Coco & Eve'}</a>
                                 </div>
                             )}
                             <p className={`text-xs my-2 lg:mb-0 ${content.desc_col}`} dangerouslySetInnerHTML={{ __html: content.foot_note }} />
