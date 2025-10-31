@@ -58,7 +58,7 @@ const Cart: React.FC<Props> = (props) => {
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
-		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true,
+		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true, discountTierLabel: null,
 	});
 
 	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
@@ -328,34 +328,34 @@ const Cart: React.FC<Props> = (props) => {
 								<hr />
 
 								<div className="flex flex-wrap mt-3 mb-2">
-									<p className="w-2/3 mb-1 font-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
+									<p className="w-2/3 mb-1 font-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
 									{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-bundledisount-label">{bundleLabel}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-bundledisount-label">{bundleLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, false, store)}`}</p>
 										</>
 									)}
 
 									{!combineDiscount && (cart.discountLine) > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
 										</>
 									)}
 
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-combine-label">{discountLabel}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-combine-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
 
 									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-tier-discount-label">{cart.discountTierLabel ?? discountMeter?.selectedTier?.text}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-tier-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
 
