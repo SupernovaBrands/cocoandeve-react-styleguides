@@ -302,7 +302,7 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
-						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl}/>
+						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
 					</div>
 				</nav>
 				<MobileMenu
