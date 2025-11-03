@@ -134,6 +134,7 @@ const YotpoReviewWidget = (props:any) => {
 		showButtons,
 		template,
 		productShopifyName,
+		generalSetting
 	} = props;
 
 	// console.log('productUrl', productUrl);
@@ -802,7 +803,7 @@ const YotpoReviewWidget = (props:any) => {
 							<Button onClick={() => handleForm('review')}
 								type="button"
 								lg={false}
-								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
+								buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent`}>
 									Write A Review
 							</Button>
 						</div>
@@ -810,7 +811,7 @@ const YotpoReviewWidget = (props:any) => {
 							<Button onClick={() => handleForm('question')}
 								type="button"
 								lg={false}
-								buttonClass="btn-outline-primary w-full px-0 bg-transparent">
+								buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent`}>
 									Ask A Question
 							</Button>
 						</div>
@@ -830,7 +831,7 @@ const YotpoReviewWidget = (props:any) => {
 			<div className="tab-content mt-3" id="yotpo-widget__tabContent" ref={reviewBox}>
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] flex flex-wrap ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
-						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
+						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} generalSetting={generalSetting} />
                         <YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0 lg:hidden mb-3'} />
 						<YotpoFilterForm hideFilters={hideFilters} className="review__filter-form flex flex-col" id={`yotpoFilterForm`} onFilterChange={onFilterChange} customFilter={customFilter} />
 					</div>
@@ -989,7 +990,7 @@ const YotpoReviewWidget = (props:any) => {
 
 				<div id="yotpo-widget__questions" className={`flex flex-wrap [transition:opacity_0.15s_linear] ${activeTab === 'question' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__questions-tab">
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
-						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} />
+						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} generalSetting={generalSetting} />
 					</div>
 					<div className="review__question-right">
 						<YotpoReviewTab total={total} totalQa={totalQa} setActiveTab={setActiveTab} activeTab={activeTab} className={'review__tab lg:mt-0'} />
