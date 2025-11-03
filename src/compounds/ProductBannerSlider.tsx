@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
+import { useWindowSize } from '~/hooks/useWindowSize';
 
 const ProductBannerSlider = (props) => {
 	const { isPageReview } = props;
@@ -13,19 +14,6 @@ const ProductBannerSlider = (props) => {
 	const [wrapperWidth, setWrapperWidth] = useState(0);
 	const [wrapperHeight, setWrapperHeight] = useState({ minHeight: '480px' });
 	const [imgPt, setImgPt] = useState('');
-
-	const useWindowSize = () => {
-		const [size, setSize] = useState([0, 0]);
-		useLayoutEffect(() => {
-			function updateSize() {
-				setSize([window.innerWidth, window.innerHeight]);
-			}
-			window.addEventListener('resize', updateSize);
-			updateSize();
-			return () => window.removeEventListener('resize', updateSize);
-		}, []);
-		return size;
-	}
 
 	const [width, height] = useWindowSize();
 
