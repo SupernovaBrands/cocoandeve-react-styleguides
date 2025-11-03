@@ -403,7 +403,7 @@ const ProductCard = (props:any) => {
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
     const customTitle = props.customProductTitle?.customTitles?.find((row) => row.handle === product?.handle && row.enabled_item && filterIncludes.includes(row.options))?.title || null;
-
+    console.log('activeBadges', props.product.handle, props.product);
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
@@ -429,7 +429,7 @@ const ProductCard = (props:any) => {
             { props.product.activeBadges && !props.sideUpsell && 
                 <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                     {props.product.activeBadges.map((badge) => (
-                        <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] font-normal lg:text-sm  product-card__badge mr-[4px] mb-[4px] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} text-[${props.product?.badgeMobileFontSize}px]`}>{badge.badge_text}</span>
+                        <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] font-normal lg:text-sm  product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'} text-[${props.product?.badgeMobileFontSize}px]`}>{badge.badge_text}</span>
                     ))}
                 </div>
             }
