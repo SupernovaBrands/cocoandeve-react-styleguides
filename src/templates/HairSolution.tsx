@@ -293,7 +293,7 @@ const HairSolution = (props: any) => {
                                     reverse={true}
                                     pictureClasses={'pt-0 lg:pt-[56%]'}
                                     imageClasses={'lg:embed-responsive-item lg:object-cover rounded-[.5rem] lg:rounded-[0]'}
-                                    textContentClasses={'lg:grid-cols-[1fr_repeat(8,_[_col-start_]_minmax(0,_70px))] lg:!pl-0 lg:!pb-[1rem] !px-0'}
+                                    textContentClasses={'lg:grid-cols-[1fr_repeat(8,_[_col-start_]_minmax(0,_70px))] !pt-[1rem] lg:!pl-0 lg:!pb-[1rem] !px-0'}
                                     textContentBoxClasses={'lg:col-start-[col-start_2] lg:col-end-[span_5] mb-0 lg:text-start'}
                                     src={row.image_m.url}
                                     srcSet={row.image_d.url}
@@ -305,7 +305,7 @@ const HairSolution = (props: any) => {
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className="mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg btn-outline-primary rounded-full no-underline hover:no-underline font-bold mb-1">{row.cta_label}</a>
+                                    <a href={row.cta_url} className="mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg btn-outline-primary !rounded-full no-underline hover:no-underline font-bold mb-1 lg:border-[1px] lg:min-h-[50px]">{row.cta_label}</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
@@ -314,18 +314,18 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className="my-3 lg:mt-5">
+                <section className="my-3 lg:my-5">
                     <div className="container px-0 lg:px-g">
-                        <h3 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl" dangerouslySetInnerHTML={{
+                        <h3 className="text-center text-xl mb-g lg:mb-[35px] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
-                            <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6 ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
+                            <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-full lg:basis-full ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
                                 ))}
                             </ul>
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">Shop All</a>
+                            {/* <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">Shop All</a> */}
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -394,6 +394,11 @@ const HairSolution = (props: any) => {
                                     </TabContent>
                                 )
                             })}
+                            <div className="text-center hidden lg:block mt-3">
+                                <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[1rem] py-[.8125em] inline-block lg:border-[1px] h-[50px] w-[168px]">
+                                    Shop All
+                                </a>
+                            </div>
                         </div>
                         <div className="text-center">
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
@@ -454,11 +459,13 @@ const HairSolution = (props: any) => {
                             rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
                             leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
                             svgClasses="!h-[16.97px]"
+                            imgClasses={'h-[240px] md:h-[auto]'}
+                            textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[2rem]'}
                         >
                             <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
                                 {data.product.rows[productTab].compare?.title}
                             </h4>
-                            <p className="font-bold mb-[.25rem]">
+                            <p className="font-bold mb-[.25rem] lg:text-lg">
                                 {data.product.rows[productTab].compare?.subtitle}
                             </p>
                             <p>{data.product.rows[productTab].compare?.description}</p>
@@ -554,12 +561,12 @@ const HairSolution = (props: any) => {
                                 )}
                                 
                             </Carousel.Wrapper>
-                            {row.data.length > 4 && (
-                                <div className="px-g lg:px-[.25rem]">
+                            {row.data.length > 1 && (
+                                <div className={`px-g lg:px-[.25rem] ${row.data.length <= 4 ? 'lg:hidden' : ''}`}>
                                     <CarouselScrollbar
                                         emblaApi={resultCarousels[`emblaResult${index}`][1]}
                                         scrollSnaps={resultCarousels[`emblaResult${index}`][1]?.scrollSnapList()}
-                                        className="py-2 lg:py-g after:bg-gray-500 after:rounded-[2px]"
+                                        className="py-[1.5rem] lg:py-g after:bg-gray-500 after:rounded-[2px]"
                                         prevArrow={resultCarousels[`prev${index}`]}
                                         nextArrow={resultCarousels[`next${index}`]}
                                         visibleInScreen={VISIBLE_IN_SCREEN}
