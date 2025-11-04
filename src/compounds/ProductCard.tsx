@@ -403,7 +403,6 @@ const ProductCard = (props:any) => {
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
     const customTitle = props.customProductTitle?.customTitles?.find((row) => row.handle === product?.handle && row.enabled_item && filterIncludes.includes(row.options))?.title || null;
-    console.log('activeBadges', props.product.handle, props.product);
 	return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">
