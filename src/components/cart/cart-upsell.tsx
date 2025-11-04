@@ -67,8 +67,8 @@ const CartUpsell = (props:any) => {
         } else if (variant && variant.compareAtPrice) {
             const comparePrice = parseFloat(variant.compareAtPrice.amount) * 100;
             const price = parseFloat(variant.price.amount) * 100;
-            const percent = Math.ceil(price/comparePrice * 100);
-            return `SAVE ${percent}%`;
+            const percent = Math.round(price/comparePrice * 100);
+            return `SAVE ${100 - percent}%`;
 
         }
         return null;
