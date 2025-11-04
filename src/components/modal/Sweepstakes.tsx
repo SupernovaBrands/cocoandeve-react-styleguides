@@ -156,7 +156,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		}
 
 		if (validForm.phone) {
-			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, data?.source_name || "Sweepstakes Popup").then((resp) => {
+			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Pop-up").then((resp) => {
 				console.log('submitsToSmsBump', resp);
 				// if (resp.status === 'error' && !validForm.email) {
 				// 	setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
