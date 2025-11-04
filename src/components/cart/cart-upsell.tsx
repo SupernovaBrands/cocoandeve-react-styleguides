@@ -88,7 +88,6 @@ const CartUpsell = (props:any) => {
 
     //@ts-ignore
     window.emblaBrow = emblaApi;
-    console.log('upsell1', upsell);
     return (
         <>
             <hr className="mt-2 mb-3" />
