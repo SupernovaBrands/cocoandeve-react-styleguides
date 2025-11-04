@@ -76,15 +76,19 @@ const CartUpsell = (props:any) => {
 
     useEffect(() => {
         if (products.length > 1 && products.length < 4) {
-            setUpsells([...products, ...products]);
+            const merged = [...products, ...products];
+            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            setUpsells(uniqueMerged);
         } else {
-            setUpsells(products);
+            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            setUpsells(uniqueMerged);
         }
     }, [products]);
 
 
     //@ts-ignore
     window.emblaBrow = emblaApi;
+    console.log('upsell1', upsell);
     return (
         <>
             <hr className="mt-2 mb-3" />
