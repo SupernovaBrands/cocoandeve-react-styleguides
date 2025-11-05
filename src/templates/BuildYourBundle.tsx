@@ -45,7 +45,7 @@ const BuildYourBundle = (props: any) => {
         swatch: null
     });
 
-    const { getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+    const { waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const cssInline = `
         .top-header {
@@ -293,6 +293,7 @@ const BuildYourBundle = (props: any) => {
             </div>
             <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
                 <ProductInfo
+                    waitlistPdpStore={waitlistPdpStore}
                     getActiveWL={getActiveWL}
                     generalSetting={generalSetting}
                     strapiAutomateHardcode={strapiAutomateHardcode}
