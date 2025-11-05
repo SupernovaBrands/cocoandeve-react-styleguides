@@ -186,7 +186,7 @@ const BundleCard = (props:any) => {
             defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
         }
         const variantNodes = product?.variants?.nodes;
-        if (defaultVariant === null) defaultVariant = variantNodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
+        if (defaultVariant === null) defaultVariant = variantNodes.length > 0 ? variantNodes[0] : null;
         setSelectedVariant(defaultVariant || null);
     }, []);
 

@@ -466,7 +466,6 @@ const ProductInfo = (props: any) => {
     } ,[generalSetting, productShopify, productStrapi]);
 
     const activeWL = getActiveWL(launchProductWaitlist, productStrapi?.handle);
-    console.log('activeWL', activeWL);
     const launchHandlesArr = activeWL && activeWL.launch_wl_handles ? activeWL.launch_wl_handles.split(',') : [];
 
     const [showLaunchWaitlist, setShowLaunchWaitlist] = useState(false);
@@ -624,7 +623,7 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore.enable_auto_wl_pdp &&
+                            {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore && waitlistPdpStore.enable_auto_wl_pdp &&
                                 <div className="px-[5px] py-1 bg-pink-light mb-2 lg:mb-4 rounded-h">
                                     <ProductWaitlist forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title}/>
                                 </div>}
