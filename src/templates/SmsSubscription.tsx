@@ -80,7 +80,7 @@ const SmsSubscription = (props) => {
 			if (validForm.phone) {
                 subscribeBluecoreWaitlist('', '', '', 'SmsBumpLP', phone, true);
                 if (smsBump !== '') {
-                    submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+                    submitsToSmsBumpAPi(phone, smsBump, activeCountryCode, region, 'Sms Subscription Popup').then((resp) => {
                         // console.log('resp', resp);
                         if (resp.status === 'error') {
                             setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });

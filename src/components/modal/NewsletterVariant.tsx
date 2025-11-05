@@ -94,7 +94,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
         if (emailRef.current) {
             emailRef.current.focus();
         }
-        
+
     }, []);
 
     useEffect(() => {
@@ -124,7 +124,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
         const emailRequired = isPhoneEmpty;
         return { emailValid, emailRequired };
     };
-    
+
     const handleForm = (e) => {
         e.preventDefault();
         const { emailValid, emailRequired } = validateForm(email, phone);
@@ -142,7 +142,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                 setFormCompleted(true);
             }
             if (phone && phone !== '') {
-                submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+                submitsToSmsBumpAPi(phone, smsBump, activeCountryCode, store, 'Newsletter Variant Popup').then((resp) => {
                     if (resp.status === 'error') {
                         setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
                     } else {
@@ -163,7 +163,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
             } catch (e) {
                 console.log('error wtba push');
             }
-            
+
             // send event to ga4
             trackEvent('newsletter_popup', {
                 category: 'Newsletter Registration',
@@ -237,7 +237,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
                                 <input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
                             </div> */}
                             {!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-                            <p className="text-xs text-gray-600 text-center mt-1 mb-2 leading-[18px!important] lg:mb-[1.5rem]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] font-bold underline ').replace('text-primary', 'text-gray-600').replace('font-normal', 'font-bold').replace('no-underline', 'underline')}} />
+                            <p className="text-xs text-gray-600 text-center mt-1 mb-2 leading-[18px!important] lg:mb-[1.5rem]" dangerouslySetInnerHTML={{__html: nbp_note.replace('text-primary', 'text-gray-600')}} />
                             <button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base mb-1">Yes please</button>
                             <button type="button" onClick={handleClose} className="relative hover:bg-primary-dark w-full border border-primary rounded bg-white py-[13px] px-[54px] text-primary font-bold align-middle block text-base hover:bg-white">I’ll pass</button>
                         </form>

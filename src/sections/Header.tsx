@@ -227,6 +227,7 @@ const Header = (props: any) => {
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
+													store={store}
 													generalSetting={generalSetting}
 												/>
 											)}

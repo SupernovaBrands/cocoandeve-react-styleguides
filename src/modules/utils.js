@@ -442,24 +442,102 @@ export const subscribeBluecoreRegistration = (
 	return ajaxRequest.send(jsonData);
 };
 
-export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode) => {
-	const phoneNumber = countryPhoneCode ? `+${countryPhoneCode}${phone.replace(/^0+/, '')}` : phone;
+export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
+	console.log('submit to klaviyo', store, phoneNumber);
+	const klaviyoList = {
+		dev: 'UYNUCe',
+		us: 'UkrRia',
+		uk: 'WsMw9R',
+		ca:  'Sf9WxH',
+		au: 'X35yA9',
+		eu: 'WkXKHK',
+	}
+
+	const klaviyoPK = {
+		dev: 'ULW9Jz',
+		us: 'VQmHzA',
+		uk: 'TPtP96',
+		ca:  'UZ7U4p',
+		au: 'WYtipg',
+		eu: 'XLgmDM',
+	}
+
+	const phone_number = phoneNumber && phoneNumber.startsWith("+") ? phoneNumber.replace("++", "+") : `+${phoneNumber}`;
+
+	if (klaviyoPK[store] && klaviyoList[store]) {
+		const url = `https://a.klaviyo.com/client/subscriptions?company_id=${klaviyoPK[store]}`;
+		const data = {
+			data: {
+			type: "subscription",
+			attributes: {
+				custom_source: source,
+				profile: {
+				data: {
+					type: "profile",
+					attributes: {
+						subscriptions: {
+							sms: {
+								marketing: {
+									consent: "SUBSCRIBED"
+								},
+								transactional: {
+									consent: "SUBSCRIBED"
+								}
+							},
+						},
+						phone_number,
+					}
+				}
+				}
+			},
+			relationships: {
+				list: {
+				data: {
+					type: 'list',
+					id: klaviyoList[store],
+				}
+				}
+			}
+			}
+		}
+
+		const options = {
+			method: 'POST',
+			headers: {revision: '2025-10-15', 'content-type': 'application/vnd.api+json'},
+			body: JSON.stringify(data),
+		};
+		return fetch(url, options)
+			.then(res => res.json())
+			.then(json => json)
+			.catch(err => err);
+	}
+	return {};
+}
+
+export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode, region, source='Newsletter') => {
+	let phoneNumber = `+${countryPhoneCode}${phone.replace(/^0+/, '')}`;
+	if (!['int', 'my'].includes(region)) {
+		phoneNumber = `${countryPhoneCode}${phone.replace(/^0+/, '')}`;
+		return submitPhoneKlaviyo({store: region, phoneNumber, source});
+	}
+
 	const date = new Date();
 	const tse = date.getTime();
 	const content = `{phone:'${phoneNumber}',time:${tse},brand:'${`cocoandeve_shopify_${getCookie('region')}`}',list_id:${formId}}`;
 	const signature = encryptParam(content);
 
-	const response = await fetch(`${tSettings.apiEndpoint}/smsbump/subscribe`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
+	return fetch(`${tSettings.apiEndpoint}/smsbump/subscribe`, {
 		body: JSON.stringify({
 			phone: phoneNumber, list_id: formId, brand: `cocoandeve_shopify_${getCookie('region')}`, signature,
-		})
-	});
-	return response.json();
+		}),
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		method: 'POST',
+	}).then((data) => data.json());
 };
+
 
 export const submitsToSmsBump = (phone, formId, countryLetterCode = false, countryPhoneCode = null) => {
 	if (['ca', 'dev'].includes(tSettings.store)) {

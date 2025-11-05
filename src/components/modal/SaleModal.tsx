@@ -19,6 +19,7 @@ interface SalesPopupData {
 	sbp_percentage: string
 	sbp_image_position: string
 	sbp_percentage_color: string
+	sbp_close_color: string
 }
 
 type SalePopupProp = {
@@ -29,7 +30,8 @@ type SalePopupProp = {
 
 
 const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
-	const { sbp_img, sbp_img_lg, sbp_code, sbp_desc, sbp_enabled, sbp_heading, sbp_bg_color, sbp_desc_color, sbp_heading_color, sbp_cta_enabled, sbp_cta_text, sbp_cta_url, sbp_percentage, sbp_image_position, sbp_percentage_color } = data;
+	console.log('data', data);
+	const { sbp_img, sbp_img_lg, sbp_code, sbp_desc, sbp_enabled, sbp_heading, sbp_bg_color, sbp_desc_color, sbp_heading_color, sbp_cta_enabled, sbp_cta_text, sbp_cta_url, sbp_percentage, sbp_image_position, sbp_percentage_color, sbp_close_color } = data;
 	const [copied, setCopied] = useState(false);
 	const [platform, setPlatform] = useState('');
 
@@ -64,7 +66,7 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
                 </picture>
             </div>
             <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4">
-                <CloseButton handleClose={handleClose} className="fill-[#000] h-[1em!important] text-sm [width:auto!important]" />
+                <CloseButton handleClose={handleClose} className={`${sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
                 <div className="text-center w-full">
                     <h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em] leading-[1.25]`}>{sbp_heading}</h3>
                     <div className={`flex items-center justify-center ${platform === 'os-win' || platform === 'os-android' ? 'mb-1' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'mb-2' : ''}`}>
@@ -82,7 +84,8 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 								data-code={sbp_code}
 								buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full"
 							>
-								Use Code: {sbp_code}
+								<span className="hidden lg:inline">Code: {sbp_code}</span>
+								<span className="lg:hidden">Use Code: {sbp_code}</span>
 								<Paste className="svg--current-color svg text-primary ml-1" />
 							</Button>
 						) : (

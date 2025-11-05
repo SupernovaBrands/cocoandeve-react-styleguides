@@ -42,6 +42,7 @@ type NewsletterProp = {
 	data: NewsletterData
 	store: string
 	trackEvent: any
+	trackBluecoreLaunchWaitlistEvent: any
 }
 
 const validForm = {
@@ -75,7 +76,7 @@ if (store === 'us') {
 	numberCodeDef = 60;
 }
 
-const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackEvent }) => {
+const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackEvent, trackBluecoreLaunchWaitlistEvent }) => {
 	const { nbp_img, nbp_code, nbp_desc, nbp_note, nbp_img_lg, nbp_submit, nbp_enabled, nbp_heading, nbp_smsbump, floating_btn, nbp_bg_color, nbp_email_ph, nbp_phone_ph,
 		nbp_completed, nbp_heading_2, nbp_desc_color, nbp_heading_color, nbp_completed_desc, nbp_heading_2_color, nbp_comliance_position
 	} = data;
@@ -134,7 +135,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 		const emailRequired = isPhoneEmpty;
 		return { emailValid, emailRequired, phoneValid };
 	};
-	
+
 	const handleForm = (e) => {
 		e.preventDefault();
 		const { emailValid, emailRequired, phoneValid } = validateForm(email, phone);
@@ -149,10 +150,11 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 			utmParams();
 			if (emailValid || !emailRequired) {
 				subscribeBluecoreRegistration(email, phone);
+				trackBluecoreLaunchWaitlistEvent(email, 'Newsletter Popup');
 				if (emailValid) setFormCompleted(true);
 			}
 			if (phone && phone !== '' && phoneValid) {
-				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode).then((resp) => {
+				submitsToSmsBumpAPi(phone, smsBump, activeCountryCode, store, 'Newsletter Popup').then((resp) => {
 					if (resp.status === 'error') {
 						setPhoneError({ valid: false, error: resp.message || 'Invalid phone number' });
 					} else {
@@ -301,7 +303,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
 							</div>
 							{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note.replace('class="', 'class="text-xs leading-[1.25!important] font-bold underline ')}} />
+							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note}} />
 							<button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base">{nbp_submit}</button>
 						</form>
 					)}

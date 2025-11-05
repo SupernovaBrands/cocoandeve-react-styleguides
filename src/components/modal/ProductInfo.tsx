@@ -14,6 +14,9 @@ import AccordionPDP from "../AccordionPDP";
 import Modal from "~/components/Modal";
 import ShippingTable from "~/components/modal/ShippingTable";
 import { removeObjectWithId } from "~/modules/utils";
+import { useWindowSize } from "~/hooks/useWindowSize";
+import ProudToBe from "~/compounds/ProudToBe";
+import ProductWaitlist from "~/compounds/product-waitlist-oos";
 
 type imageProps = {
     id: number,
@@ -26,6 +29,19 @@ type imageProps = {
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
+        getActiveWL,
+        getId,
+        fbqEvent,
+        tiktokSubscribe,
+        subscribeBluecoreWaitlist,
+        submitsToSmsBumpAPi,
+        bluecoreProductWaitlist,
+        trackBluecoreLaunchWaitlistEvent,
+        waitlistPdpStore,
+        launchProductWaitlist,
+        Faq,
+        addToCart,
+        directAddToCart,
         generalSetting,
         FragranceNotes,
         ProductSettings,
@@ -50,7 +66,18 @@ const ProductInfo = (props: any) => {
         buildProductCardModel,
         useMediaQuery,
     } = props;
-    const isDesktop = useMediaQuery('(min-width: 769px)');
+    // const isDesktop = useMediaQuery('(min-width: 769px)');
+    const [isDesktop, setIsDesktop] = useState(true);
+    const [width, height] = useWindowSize();
+    const waitlistForm = useRef(null);
+
+    useEffect(() => {
+        if (globalThis && globalThis.window.innerWidth > 992) {
+            setIsDesktop(true);
+        } else {
+            setIsDesktop(false);
+        }
+    }, [width]);
     const [scrollProgress, setScrollProgress] = useState(0);
     const [productStrapi, setProductStrapi] = useState(null);
     const [productShopify, setProductShopify] = useState(null);
@@ -89,8 +116,25 @@ const ProductInfo = (props: any) => {
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const [addingItem, setAddingItem] = useState(false);
+
+    const addToCartHandle = async () => {
+        if (typeof addToCart === 'function') {
+            setAddingItem(true);
+            await addToCart({
+                id: selectedVariant.bundleId ? `gid://shopify/ProductVariant/${selectedVariant.bundleId.value}` : selectedVariant.id,
+                quantity: 1,
+                handle: selectedVariant?.product?.handle,
+                title: selectedVariant.title,
+            });
+            setAddingItem(false);
+            handleClose();
+        }
+        return false;
+    }
+
     const onAddItem = () => {
-        
+        // build your bundle
         const itemSelected = activeTab === 0 ? tab0Selected : tab1Selected;
         const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
         if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) {
@@ -128,11 +172,11 @@ const ProductInfo = (props: any) => {
 
     const getProductData = async (handle) => {
         try {
-            const response = await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, { cache: 'force-cache' });
+            const response = await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`);
             const { product } = await response.json();
             setProductShopify(product);
 
-            const response2 = await fetch(`/api/getProductStrapi?handle=${handle}&region=${store}`, { cache: 'force-cache' });
+            const response2 = await fetch(`/api/getProductStrapi?handle=${handle}&region=${store}`);
             const productStrapi = await response2.json();
 
             if (productStrapi && productStrapi.length > 0) setProductStrapi(productStrapi[0]);
@@ -269,12 +313,18 @@ const ProductInfo = (props: any) => {
             text: '',
             component: <HowToUse howToUse={howToUse} tags={productShopify?.tags || []} handle={productStrapi?.handle}/>
         },
-        // {
-        //     id: 'faq',
-        //     title: 'FAQ',
-        //     text: '',
-        //     component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
-        // }
+        {
+            id: 'faq',
+            title: 'FAQ',
+            text: '',
+            component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
+        },
+        {
+            id: 'proud-to-be',
+            title: 'Proud to be',
+            text: '',
+            component: <div className="order-2 mt-2 lg:mt-0">{ <ProudToBe proudToBe={proudToBe || 'natural-dha|sulfate-free|vegan|silicone-free|cruelty-free|toxin-free|gluten-free|ethically|paraben-free|peta|fragrance-free'}/> }</div>
+        }
     ];
 
     if (fragrance_notes && fragrance_notes.trim() !== '') {
@@ -293,8 +343,16 @@ const ProductInfo = (props: any) => {
 			openIndexId = 0;
 		}
         await setOpenIndex(openIndexId);
+    
         if (typeof callback === 'function') {
             callback();
+        }
+        if (!isDesktop) {
+            setTimeout(() => {
+                const wrapper = document.querySelector('.modal__mini-pdp').closest('.fixed')
+                const el = (document.querySelector(`.modal__mini-pdp #accordion-${id}`) as HTMLDivElement)
+                if (el) wrapper.scrollTop = el.offsetTop;
+            }, 365)
         }
 	};
 
@@ -323,11 +381,15 @@ const ProductInfo = (props: any) => {
     }, [tab1Selected]);
 
     useEffect(() => {
-        // if (autoTicks && autoTicks.length > 0) {
-        //     defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-        // }
+        let defaultVariant = null;
+        const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+        if (autoTicks && autoTicks.length > 0) {
+            defaultVariant = productShopify?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
+        }
         const variantNodes = productShopify?.variants?.nodes;
-        const defaultVariant = variantNodes?.sort((x, y) => y.availableForSale - x.availableForSale)[0];
+
+        // select only first variant
+        defaultVariant = variantNodes?.length > 0 ? variantNodes[0] : null;
         setSelectedVariant(defaultVariant || null);
         // const productModel = buildProductCardModel(store, productShopify, null, null);
         // if (productShopify) setProductModel(productModel);
@@ -399,6 +461,37 @@ const ProductInfo = (props: any) => {
             }
         }
     } ,[generalSetting, productShopify, productStrapi]);
+
+    const activeWL = getActiveWL(launchProductWaitlist, productStrapi?.handle);
+    console.log('activeWL', activeWL);
+    const launchHandlesArr = activeWL && activeWL.launch_wl_handles ? activeWL.launch_wl_handles.split(',') : [];
+
+    const [showLaunchWaitlist, setShowLaunchWaitlist] = useState(false);
+    useEffect(() => {
+        setShowLaunchWaitlist(productStrapi && launchHandlesArr.length > 0 && launchHandlesArr.includes(productStrapi.handle));
+    }, []);
+
+
+    const onSubmitWaitlist = ({ email, phoneCode, phoneNumber, smsBump, fallback }) => {
+        if (email) {
+            try {
+                tiktokSubscribe(email);
+                fbqEvent('track', 'Lead');
+            } catch(e) { console.log(e) }
+
+            // email:string, productId:any, variantID:any, regSource:any, phone:any, welcome:any, igHandle:any
+            subscribeBluecoreWaitlist(email, productStrapi?.handle, selectedVariant?.id, `oos-item-${productStrapi.handle}`, phoneNumber, true, '');
+            bluecoreProductWaitlist({email, productId: selectedVariant ? getId(selectedVariant?.id) : '', productTitle: productStrapi.title});
+        }
+
+        if (phoneNumber && phoneCode) {
+            submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
+        }
+
+        if (typeof(fallback) === 'function') {
+            fallback();
+        }
+    }
     
     return (
         <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-[50px] lg:pt-5'}`}>
@@ -528,13 +621,27 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            <Button disabled={!selectedVariant?.availableForSale} onClick={onAddItem} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
-                                {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
-                                {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
-                                {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? 'Add' : ''}
-                            </Button>
+                            {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore.enable_auto_wl_pdp &&
+                                <div className="px-[5px] py-1 bg-pink-light mb-2 lg:mb-4 rounded-h">
+                                    <ProductWaitlist forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title}/>
+                                </div>}
+                            {selectedVariant?.availableForSale && (
+                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                    {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
+                                    {!addingItem && (
+                                        <>
+                                            {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
+                                            {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
+                                            {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? <>
+                                                <span className="lg:hidden">Add</span>
+                                                <span className="hidden lg:inline">Add to Cart</span>
+                                            </> : ''}
+                                        </>
+                                    )}
+                                </Button>
+                            )}
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                { dataAccordion.length > 0 && <AccordionPDP isBundlePage={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
+                                { dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
                             </div>
                         </div>
                     </>
