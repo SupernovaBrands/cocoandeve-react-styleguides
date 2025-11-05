@@ -466,7 +466,8 @@ const ProductInfo = (props: any) => {
     } ,[generalSetting, productShopify, productStrapi]);
 
     const activeWL = getActiveWL(launchProductWaitlist, productStrapi?.handle);
-    const launchHandlesArr = activeWL.launch_wl_handles ? activeWL.launch_wl_handles.split(',') : [];
+    console.log('activeWL', activeWL);
+    const launchHandlesArr = activeWL && activeWL.launch_wl_handles ? activeWL.launch_wl_handles.split(',') : [];
 
     const [showLaunchWaitlist, setShowLaunchWaitlist] = useState(false);
     useEffect(() => {
