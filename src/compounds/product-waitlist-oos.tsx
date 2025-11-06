@@ -26,6 +26,7 @@ type waitlistProps = {
 }
 
 const ProductWaitlist = (props: any) => {
+	const { bgColor } = props;
 	const [tos, setTos] = useState(false);
 	const [email, setEmail] = useState('');
 	const [emailError, setEmailError] = useState(false);
@@ -240,7 +241,7 @@ const ProductWaitlist = (props: any) => {
 						</div>
 						</div>
 						<div className="flex my-1">
-							<input onClick={submitForm} disabled={!validForm} className={`${!validForm ? 'opacity-[0.65]' : ''} inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full bg-primary text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[8px]`} type="button" value="Submit" />
+							<input onClick={submitForm} disabled={!validForm} className={`${!validForm ? 'opacity-[0.65]' : ''} inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'bg-primary'} text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[8px]`} type="button" value="Submit" />
 						</div>
 						<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-body underline" target="_blank" href="/pages/privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
 					{/* </form> */}
@@ -248,7 +249,7 @@ const ProductWaitlist = (props: any) => {
 				)}
 				{restockType === 'no' && (
 					<div className="flex my-1">
-						<a className="btn btn-primary btn-lg w-full hover:bg-primary-dark py-[13px] no-underline hover:text-white hover:no-underline border:primary" href="/collections/all">Shop other products</a>
+						<a className={`btn ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary hover:bg-primary-dark border:primary'} btn-lg w-full py-[13px] no-underline hover:text-white hover:no-underline`} href="/collections/all">Shop other products</a>
 					</div>
 				)}
 			</div> }
@@ -258,7 +259,7 @@ const ProductWaitlist = (props: any) => {
 					{!['yes', 'no'].includes(restockType) && parse(data.formDescriptionThanks?.replace('{{productName}}', 'product') || '')}
 					{['yes', 'no'].includes(restockType) && 'in the meantime.. sit back, relax, hair masque & chill!'}
 				</p>
-				<a href="/collections/all" className="btn btn-primary btn-lg w-full hover:bg-primary-dark py-[13px] no-underline hover:text-white hover:no-underline">Shop other products</a>
+				<a href="/collections/all" className={`btn ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary hover:bg-primary-dark border:primary'} btn-lg w-full py-[13px] no-underline hover:text-white hover:no-underline`}>Shop other products</a>
 			</div> }
 		</>
 	);

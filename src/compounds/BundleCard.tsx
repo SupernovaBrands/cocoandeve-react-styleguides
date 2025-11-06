@@ -7,7 +7,7 @@ import Eye from '~/images/icons/eye.svg';
 const DEFAULT_LABEL = '<p class="inline lg:hidden">Add</p><p class="hidden lg:inline">Add to Cart</p>';
 
 const AddToCartButton = (props:any) => {
-    const { store, reducedPrice, label, available, product, itemSelected, setItemSelected, selectedVariant, maxItem, className } = props;
+    const { store, reducedPrice, label, available, product, itemSelected, setItemSelected, selectedVariant, maxItem, className, ctaBgColor } = props;
     
     const [selected, setSelected] = useState([]);
 
@@ -49,7 +49,7 @@ const AddToCartButton = (props:any) => {
     const disabled = !available;
 
     return (
-        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} ${selected?.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''} bg-gray-400 active:bg-gray-400 visited:bg-gray-400 hover:bg-gray-400 text-primary !mb-0 h-5 lg:h-[44px] lg:!min-h-[44px] block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:flex-col sm:text-sm flex items-center px-[.75rem] justify-between lg:!p-g lg:flex lg:min-w-[137px] lg:justify-center`}>
+        <Button disabled={disabled} onClick={onAddItem} buttonClass={`${className ?? ''} ${selected?.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''} bg-gray-400 active:bg-gray-400 visited:bg-gray-400 hover:bg-gray-400 ${ctaBgColor === 'bg-dark' ? 'text-dark' : 'text-primary'} !mb-0 h-5 lg:h-[44px] lg:!min-h-[44px] block lg:inline-block w-full product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base btn-primary rounded-full mb-[.75rem] sm:flex-col sm:text-sm flex items-center px-[.75rem] justify-between lg:!p-g lg:flex lg:min-w-[137px] lg:justify-center`}>
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
             {label && <span>{label}</span>}
             {!label && (selected.includes(selectedVariant?.id) ? <span>Added</span> : <span dangerouslySetInnerHTML={{
@@ -72,7 +72,7 @@ const SwatchOverlay = (props:any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
-    const { selectedVariant, setSelectedVariant, maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
+    const { selectedVariant, setSelectedVariant, maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade, ctaBgColor } = props;
     
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
@@ -135,6 +135,7 @@ const SwatchOverlay = (props:any) => {
                 available={itemAvailable.length > 0 }
                 label={itemAvailable.length > 0 ? 'Choose' : 'Out of stock'}
                 reducedPrice={reducedPrice}
+                ctaBgColor={ctaBgColor}
                 store={store}
             />
             <div className={`!w-auto px-0 swatch-overlay !left-[-1px] !right-[-1px] bottom-[-1px] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-gray-400 rounded-[20px] lg:rounded-[26px]`}>
@@ -164,6 +165,7 @@ const SwatchOverlay = (props:any) => {
                     available={itemAvailable.length > 0 && selectedVariant?.availableForSale}
                     label={selectedVariant?.availableForSale ? 'Add' : 'Out of Stock'}
                     reducedPrice={reducedPrice}
+                    ctaBgColor={ctaBgColor}
                     store={store}
                 />
             </div>
@@ -172,7 +174,7 @@ const SwatchOverlay = (props:any) => {
 };
 
 const BundleCard = (props:any) => {
-    const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
+    const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem, ctaBgColor } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
@@ -253,7 +255,7 @@ const BundleCard = (props:any) => {
             </p>
 
             { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
-            <p role="button" onClick={(e) => openModal(e)} className={`cursor-pointer inline-flex lg:min-w-[3.375em] badge rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] product-card__badge`}>
+            <p role="button" onClick={(e) => openModal(e)} className={`cursor-pointer inline-flex lg:min-w-[3.375em] badge rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm ${ctaBgColor === 'bg-dark' ? 'text-dark' : 'text-primary'} top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] product-card__badge`}>
                 <span className="mr-1 hidden lg:inline">Details</span>
                 <Eye className="svg h-[1rem] w-[1rem]" />
             </p>
@@ -283,6 +285,7 @@ const BundleCard = (props:any) => {
                                 handleShade={handleShade}
                                 setSelectedVariant={setSelectedVariant}
                                 selectedVariant={selectedVariant}
+                                ctaBgColor={ctaBgColor}
                                 store={store} generalSetting={generalSetting} swatch={product.swatch} product={product}
                             />
                         )}
@@ -296,6 +299,7 @@ const BundleCard = (props:any) => {
                                 store={store}
                                 available={selectedVariant?.availableForSale}
                                 label={!selectedVariant?.availableForSale ? 'Out of Stock' : null}
+                                ctaBgColor={ctaBgColor}
                                 reducedPrice={reducedPrice}
                             />
                         )}

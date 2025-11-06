@@ -283,7 +283,7 @@ const Cart: React.FC<Props> = (props) => {
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="mt-3 mb-[1.8rem] text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
+									<a href="/collections" className="shop--all-url bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								{/* <div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm

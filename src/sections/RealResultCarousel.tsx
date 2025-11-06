@@ -165,7 +165,7 @@ const RealResultCarousel = (props: any) => {
 								</Carousel.Inner>
 							</Carousel.Wrapper>
 						</TabContent>
-						<a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] mt-g lg:hidden inline-block">
+						<a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] mt-g lg:hidden inline-block`}>
 						See All
 						</a>
                     </div>

@@ -45,7 +45,7 @@ const BuildYourBundle = (props: any) => {
         swatch: null
     });
 
-    const { waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+    const { waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant, globalSettings } = props;
 
     const cssInline = `
         .top-header {
@@ -175,20 +175,20 @@ const BuildYourBundle = (props: any) => {
             <div className={`sticky top-header bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`}>
                 <p className="text-base lg:text-2xl font-bold mb-[.25rem] lg:mb-[1rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
-                    <li onClick={() => setBundleSize(2)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`${bundleSize === 2 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 2 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>2</span>
+                    <li onClick={() => setBundleSize(2)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 2 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'shadow-[inset_0_0_0_1px_#151515]' : 'shadow-[inset_0_0_0_1px_#D62E55]'}` : `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:shadow-[inset_0_0_0_1px_#151515]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}`}>
+                        <span className={`${bundleSize === 2 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 2 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} text-white rounded-full` : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>2</span>
                         {bundleSize === 2 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(3)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 3 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`${bundleSize === 3 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 3 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>3</span>
+                    <li onClick={() => setBundleSize(3)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 3 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'shadow-[inset_0_0_0_1px_#151515]' : 'shadow-[inset_0_0_0_1px_#D62E55]'}` : `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:shadow-[inset_0_0_0_1px_#151515]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}`}>
+                        <span className={`${bundleSize === 3 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 3 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} text-white rounded-full` : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>3</span>
                         {bundleSize === 3 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(4)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 4 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`${bundleSize === 4 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 4 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>4</span>
+                    <li onClick={() => setBundleSize(4)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 4 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'shadow-[inset_0_0_0_1px_#151515]' : 'shadow-[inset_0_0_0_1px_#D62E55]'}` : `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:shadow-[inset_0_0_0_1px_#151515]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}`}>
+                        <span className={`${bundleSize === 4 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 4 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} text-white rounded-full` : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>4</span>
                         {bundleSize === 4 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
-                    <li onClick={() => setBundleSize(5)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
-                        <span className={`${bundleSize === 5 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 5 ? 'bg-primary text-white rounded-full' : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>5</span>
+                    <li onClick={() => setBundleSize(5)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white ${bundleSize === 5 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'shadow-[inset_0_0_0_1px_#151515]' : 'shadow-[inset_0_0_0_1px_#D62E55]'}` : `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:shadow-[inset_0_0_0_1px_#151515]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}`}>
+                        <span className={`${bundleSize === 5 ? 'px-1 w-[26px] lg:w-[50px]' : 'px-2 max-w-4'} max-h-[26px] lg:max-w-[3.25rem] lg:max-h-[2.8125rem] flex justify-center items-center py-1 cursor-pointer ${bundleSize === 5 ? `${globalSettings?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} text-white rounded-full` : 'text-gray-600'} ${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''}`}>5</span>
                         {bundleSize === 5 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
                 </ul>
@@ -197,8 +197,8 @@ const BuildYourBundle = (props: any) => {
                 <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-[.25rem] lg:px-0 justify-between">
                     <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3">{strapiData?.choose_product_text}</p>
                     <ul className="product__carousel-nav list-style-none mx-0 flex flex-wrap border-b-0 text-center pb-0 lg:pb-3 justify-center px-hg lg:px-0">
-                        <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-                        <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
+                        <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} ctaBgColor={globalSettings?.bfcm_cta_bg_color} ctaTextColor={globalSettings?.bfcm_cta_text_color} /></li>
+                        <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} ctaBgColor={globalSettings?.bfcm_cta_bg_color} ctaTextColor={globalSettings?.bfcm_cta_text_color} /></li>
                     </ul>
                 </div>
                 <TabContent active={activeTab === 0}>
@@ -219,6 +219,7 @@ const BuildYourBundle = (props: any) => {
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
+                                                ctaBgColor={globalSettings?.bfcm_cta_bg_color}
                                                 setProductData={setProductData}
                                             />
                                         )}
@@ -238,6 +239,7 @@ const BuildYourBundle = (props: any) => {
                                         strapiData={strapiData}
                                         maxItem={MAX_ITEM}
                                         minItem={MIN_ITEM}
+                                        ctaBgColor={globalSettings?.bfcm_cta_bg_color}
                                     />
                                 </section>
                             </>
@@ -265,6 +267,7 @@ const BuildYourBundle = (props: any) => {
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
                                                 setProductData={setProductData}
+                                                ctaBgColor={globalSettings?.bfcm_cta_bg_color}
                                             />
                                         )}
                                     </div>
@@ -283,6 +286,7 @@ const BuildYourBundle = (props: any) => {
                                         strapiData={strapiData}
                                         maxItem={MAX_ITEM}
                                         minItem={MIN_ITEM}
+                                        ctaBgColor={globalSettings?.bfcm_cta_bg_color}
                                     />
                                 </div>
                             </>
@@ -318,6 +322,7 @@ const BuildYourBundle = (props: any) => {
                     maxItem={MAX_ITEM}
                     buildProductCardModel={buildProductCardModel}
                     useMediaQuery={useMediaQuery}
+                    ctaBgColor={globalSettings?.bfcm_cta_bg_color}
                     handleClose={() => setProductData({...productData, ...{ open: false }})} />
             </Modal>
         </div>

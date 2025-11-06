@@ -241,7 +241,7 @@ const AccountDropdown = (props:any) => {
                                 </label>
                             </div>
                             {/* <input type="submit" className="align-middle text-center select-none border whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white block w-full mt-g bg-primary font-bold" value="Create Account" /> */}
-                            <Button type="submit" buttonClass={`btn-primary w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`} ${loadingCreate ? '!opacity-70' : ''}`} disabled={!allowSubmit}>
+                            <Button type="submit" buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'btn-primary'} w-full border-0 py-1 mt-1 ${regInit ? '!opacity-100' : `${!allowSubmit ? '!opacity-65' : ''}`} ${loadingCreate ? '!opacity-70' : ''}`} disabled={!allowSubmit}>
                                 {!loadingCreate && 'Create Account'}
                                 {loadingCreate && <div className="mx-auto h-2 w-2 animate-spin rounded-full border-[3px] border-white border-t-primary" />}
                             </Button>

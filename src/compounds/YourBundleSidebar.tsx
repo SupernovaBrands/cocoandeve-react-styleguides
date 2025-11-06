@@ -47,7 +47,7 @@ const ItemCard = (props) => {
 };
 
 const YourBundleSidebar = (props: any) => {
-    const { updateCartAttributes, parentProduct, bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData, minItem, maxItem } = props;
+    const { updateCartAttributes, parentProduct, bundleSize, bundleDiscount, itemSelected, store, setItemSelected, type, addToCart, strapiData, minItem, maxItem, ctaBgColor } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [processing, setProcessing] = useState(false);
 
@@ -206,7 +206,7 @@ const YourBundleSidebar = (props: any) => {
                             <ItemCard setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} />
                         ))}
                     </ol>
-                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full border-primary bg-primary text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
+                    <Button onClick={processCheckout} disabled={variantSelected.length !== bundleSize || processing} buttonClass={`mt-2 rounded-full ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark' : 'border-primary bg-primary'} text-white w-full flex ${processing ? 'justify-center min-h-[50px]' : 'justify-between'} items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
                         {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
                         {!processing && (
                             <>

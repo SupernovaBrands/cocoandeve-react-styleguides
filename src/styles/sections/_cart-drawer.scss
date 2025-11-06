@@ -72,9 +72,8 @@
 
 	.bfcm-dark-layout {
 		.checkout-url,
-		.checkout-url:hover {
-			background-color: #151515 !important;
-			border-color: #151515;
+		.shop--all-url {
+			@apply bg-dark text-white hover:bg-dark hover:text-white border-dark hover:border-dark;
 		}
 	}
 }
