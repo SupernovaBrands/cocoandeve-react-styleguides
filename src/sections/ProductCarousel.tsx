@@ -224,7 +224,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent>
-						<a href="/collections/all" className="lg:hidden mt-2 btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]">Shop All</a>
+						<a href="/collections/all" className={`lg:hidden mt-2 btn btn-lg ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]`}>Shop All</a>
 					</div>
 				</div>
 			</div>
