@@ -17,9 +17,9 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore
 	} = props;
-
+	
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -214,6 +214,7 @@ const Header = (props: any) => {
 						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
+						{mainMenu.length > 0 && (
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
 							{mainMenu && mainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
@@ -255,6 +256,7 @@ const Header = (props: any) => {
 								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">Results IRL</a>
 							</li>
 						</ul>
+						)}
 
 						<ul className="basis-[30%] lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
