@@ -60,7 +60,7 @@ const Cart: React.FC<Props> = (props) => {
 	const [cart, setCart] = useState({
 		id: '', items: [], lines: { edges: [] }, discountAllocations: [], discountCodes: [], buyerIdentity: {},
 		discountBundleAmount: 0, checkoutUrl: '', discountCombineLine: 0, discountLine: 0, discountTier: 0, subtotalPrice: 0,
-		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true, discountData: null, discountTierLabel: null,
+		totalAmount: 0, itemCount: 0, cost: {totalAmount: {amount: 0}}, combineDiscount: true, discountData: null,
 	});
 
 	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
@@ -391,7 +391,7 @@ const Cart: React.FC<Props> = (props) => {
 
 									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
 										<>
-											<p className="w-2/3 mb-1 font-bold" data-cy="cart-tier-discount-label">{cart.discountTierLabel ?? discountMeter?.selectedTier?.text}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-tier-discount-label">{discountMeter?.selectedTier?.text}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-tier-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
