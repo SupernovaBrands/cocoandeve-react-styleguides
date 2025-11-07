@@ -230,15 +230,33 @@ const YotpoReviewWidget = (props:any) => {
 	const getReviews = (page = 1) => {
 		setRevLoading(true);
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
-		$.get(`${apiUrl}/reviews.json?sku=${productSkus}`, { signature, page, per: 5, lang: localeParam }, function (data) {
+		// $.get(`${apiUrl}/reviews.json?sku=${productSkus}`, { page, per: 5, lang: localeParam }, function (data) {
+		// 	processReviews(data.response);
+		// });
+
+		fetch(`${apiUrl}/reviews.json?sku=${productSkus}&page=${page}&per=5&lang=${localeParam}`, {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'signature': signature
+			}
+		}).then((e) => e.json()).then((data) => {
 			processReviews(data.response);
+		}).catch(error => {
+			console.error('Fetch error:', error);
 		});
 	};
 
 	const getQuestions = (page = 1) => {
 		setQnaLoading(true);
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
-		$.get(`${apiUrl}/questions.json?sku=${productSkus}`, { signature, page, lang: localeParam }, function (data) {
+		fetch(`${apiUrl}/questions.json?sku=${productSkus}&page=${page}&lang=${localeParam}`, {
+		method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'signature': signature,
+			}
+		}).then((e) => e.json()).then((data) => {
 			setQuestions(data.response.questions);
 
 			const pagination = processPagination({
@@ -249,22 +267,48 @@ const YotpoReviewWidget = (props:any) => {
 			setTotalQa(pagination.total);
 			setQnaPage(pagination);
 			setQnaLoading(false);
+		}).catch(error => {
+			console.error('Fetch error:', error);
 		});
+
+		// $.get(`${apiUrl}/questions.json?sku=${productSkus}`, { signature, page, lang: localeParam }, function (data) {
+		// 	setQuestions(data.response.questions);
+
+		// 	const pagination = processPagination({
+		// 		page: data.response.page,
+		// 		per_page: data.response.per_page,
+		// 		total: data.response.total_questions,
+		// 	});
+		// 	setTotalQa(pagination.total);
+		// 	setQnaPage(pagination);
+		// 	setQnaLoading(false);
+		// });
 	};
 
 	const getTopics = () => {
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
-		$.get(`${apiUrl}/product/custom_fields.json`, { signature, sku: productSkus, lang: localeParam }, function (data) {
+		fetch(`${apiUrl}/product/custom_fields.json?signature=${signature}&sku=${productSkus}&lang=${localeParam}`, {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json'
+		}
+		}).then((e) => e.json()).then((data) => {
 			if (data.response.topics) setTopics(data.response.topics.slice(0, 24));
 			if (data.response.custom_fields) setCustomFilter(data.response.custom_fields);
+		}).catch(error => {
+			console.error('Fetch error:', error);
 		});
+
+		// $.get(`${apiUrl}/product/custom_fields.json`, { signature, sku: productSkus, lang: localeParam }, function (data) {
+		// 	if (data.response.topics) setTopics(data.response.topics.slice(0, 24));
+		// 	if (data.response.custom_fields) setCustomFilter(data.response.custom_fields);
+		// });
 	};
 
 	const doFilter = (page = 1) => {
 		setRevLoading(true);
 		const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
 		const dataJson = {
-			signature,
 			page,
 			sku: productSkus,
 			...selectedFilter,
@@ -282,6 +326,7 @@ const YotpoReviewWidget = (props:any) => {
 			headers: {
 				'content-type': 'application/json',
 				'cache-control': 'no-cache',
+				'signature': signature,
 			},
 			processData: false,
 			data: JSON.stringify({
@@ -348,7 +393,7 @@ const YotpoReviewWidget = (props:any) => {
 			requestAnimationFrame(() => {
 				moveToTop();
 			});
-		}, 50); 
+		}, 50);
 	};
 
 	const onQnaPageChange = (page) => {
@@ -673,7 +718,7 @@ const YotpoReviewWidget = (props:any) => {
 	};
 
 	useEffect(() => {
-		getTopics();
+		// getTopics();
 		getCustomQuestions(productId, (qs) => {
 			setCustomQs(qs);
 		}, yotpoKey);
