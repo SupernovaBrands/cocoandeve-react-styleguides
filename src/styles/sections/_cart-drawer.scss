@@ -75,6 +75,12 @@
 		.shop--all-url {
 			@apply bg-dark text-white hover:bg-dark hover:text-white border-dark hover:border-dark;
 		}
+
+		.manual-gwp__container .manual-gwp__item {
+			button {
+				@apply text-dark border-dark hover:bg-dark hover:text-white;
+			}
+		}
 	}
 }
 
