@@ -151,7 +151,7 @@ const Footer = (props) => {
                             </div>
                             <div className="w-1/2 lg:w-full">
                                 <p className="text-sm font-bold mb-1">Currency</p>
-                                <DropdownStore direction='dropup' store={store} />
+                                <DropdownStore direction='dropup' store={store} generalSetting={generalSetting} />
                             </div>
                         </div>
                     </div>
