@@ -96,7 +96,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		'background-image': isMobile ? `` : `url(${data?.sweepstakes_popup_img_lg?.url})`,
 	};
 	const onClose = () => {
-		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 		handleClose();
 	};
 
@@ -138,6 +138,9 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	const handleForm = (e) => {
 		e.preventDefault();
 
+		setEmailError({ valid: false, error: '' });
+		setPhoneError({ valid: false, error: '' });
+
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
 				if (!validForm.phone) {
@@ -148,14 +151,16 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				}
 				setFormCompleted(true);
 			} else {
-				setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				// setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.email) setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.phone) setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 			}
 		} else {
 			setEmailError({ valid: false, error: 'Please enter a valid email address' });
 			setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 		}
 
-		if (validForm.phone) {
+		if (validForm.email && validForm.phone) {
 			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Pop-up").then((resp) => {
 				console.log('submitsToSmsBump', resp);
 				// if (resp.status === 'error' && !validForm.email) {
@@ -170,7 +175,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				setFormCompleted(true);
 			}
 		}
-		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 
 		try {
 			// @ts-ignore
