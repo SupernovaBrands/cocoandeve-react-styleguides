@@ -398,6 +398,7 @@ const Cart: React.FC<Props> = (props) => {
 										</div>
 										</>
 									)}
+									<p className="w-full mb-1 font-bold text-right">Ships in 3-5 days</p>
 								</div>
 								{manualGwpSetting && manualGwpSetting.enabled && (
 									<>
