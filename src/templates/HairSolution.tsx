@@ -571,7 +571,7 @@ const HairSolution = (props: any) => {
                         </TabContent>
                     ))}
                     <div className="text-center lg:hidden mt-[.25rem]">
-                        <a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block">
+                        <a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block`}>
                             See All
                         </a>
                     </div>

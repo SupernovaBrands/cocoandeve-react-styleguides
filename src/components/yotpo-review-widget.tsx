@@ -865,10 +865,12 @@ const YotpoReviewWidget = (props:any) => {
 						activeForm={activeForm}
 						customQuestions={customQs}
 						onSubmit={onSubmitReview}
+						bgCtaColor={generalSetting?.bfcm_cta_bg_color}
 					/>
 					<YotpoQuestionForm
 						activeForm={activeForm}
 						onSubmit={onSubmitQuestion}
+						bgCtaColor={generalSetting?.bfcm_cta_bg_color}
 					/>
 				</div>
 			)}
