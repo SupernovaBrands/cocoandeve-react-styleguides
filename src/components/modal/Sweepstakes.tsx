@@ -152,7 +152,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				setFormCompleted(true);
 			} else {
 				// setEmailError({ valid: false, error: 'Please enter a valid email address' });
-				if (!validForm.email) setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.email) setEmailError({ valid: false, error: email === '' ? 'Email address is required.' : 'Please enter a valid email address' });
 				if (!validForm.phone) setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 			}
 		} else {
