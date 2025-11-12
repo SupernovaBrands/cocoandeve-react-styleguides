@@ -366,6 +366,45 @@ const HairSolution = (props: any) => {
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g`}>Shop All</a>
                         </div>
                     </div>
+                    <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+                        <ProductInfo
+                            getActiveWL={getActiveWL}
+                            getId={getId}
+                            waitlistPdpStore={waitlistPdpStore}
+                            launchProductWaitlist={launchProductWaitlist}
+                            generalSetting={generalSetting}
+                            strapiAutomateHardcode={strapiAutomateHardcode}
+                            checkHardcodedImages={checkHardcodedImages}
+                            checkHardcodedTitles={checkHardcodedTitles}
+                            checkHardcodedVariant={checkHardcodedVariant}
+                            checkHardcodedTagline={checkHardcodedTagline}
+                            checkHardcodedFaq={checkHardcodedFaq}
+                            checkHardcodedHowToUse={checkHardcodedHowToUse}
+                            ProductSettings={ProductSettings}
+                            BenefitIngredient={BenefitIngredient}
+                            HowToUse={HowToUse}
+                            Faq={Faq}
+                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                            FragranceNotes={FragranceNotes}
+                            store={store}
+                            data={productData}
+                            setTab1Selected={() => null}
+                            tab1Selected={[]}
+                            setTab0Selected={() => null}
+                            tab0Selected={[]}
+                            activeTab={activeTab}
+                            maxItem={5}
+                            buildProductCardModel={buildProductCardModel}
+                            // useMediaQuery={useMediaQuery}
+                            directAddToCart={true}
+                            addToCart={addToCart}
+                            fbqEvent={fbqEvent} tiktokSubscribe={tiktokSubscribe} 
+                            subscribeBluecoreWaitlist={subscribeBluecoreWaitlist}
+                            submitsToSmsBumpAPi={submitsToSmsBumpAPi} 
+                            bluecoreProductWaitlist={bluecoreProductWaitlist}
+                            trackBluecoreLaunchWaitlistEvent={trackBluecoreLaunchWaitlistEvent}
+                            handleClose={() => setProductData({...productData, ...{ open: false }})} />
+                    </Modal>
                 </section>
             )}
 
