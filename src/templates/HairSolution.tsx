@@ -417,6 +417,7 @@ const HairSolution = (props: any) => {
                             BenefitIngredient={BenefitIngredient}
                             HowToUse={HowToUse}
                             Faq={Faq}
+                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                             FragranceNotes={FragranceNotes}
                             store={store}
                             data={productData}
