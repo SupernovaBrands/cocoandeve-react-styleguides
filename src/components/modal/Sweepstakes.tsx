@@ -96,7 +96,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		'background-image': isMobile ? `` : `url(${data?.sweepstakes_popup_img_lg?.url})`,
 	};
 	const onClose = () => {
-		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 		handleClose();
 	};
 
@@ -175,7 +175,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				setFormCompleted(true);
 			}
 		}
-		// setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
+		setCookie('sweepstakes_signup_popup', 'sweepstakes_signup_popup', 30);
 
 		try {
 			// @ts-ignore
