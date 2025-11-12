@@ -40,19 +40,34 @@ const Sweepstakes = (props) => {
         setCountryCode(selectedCode);
     }
 
+	const showEmailMessage = (emailVal) => {
+		if (emailVal === '') setEmailError({ valid: false, error: 'Email address is required' })
+		else if (!validateEmail(emailVal) && emailVal !== '') setEmailError({ valid: false, error: 'Please enter a valid email address' })
+		else setEmailError({ valid: true, error: '' })
+	}
+
     const handleEmail = (e) => {
 		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
         setEmail(e.target.value);
         // setAllowSubmit(email);
+		showEmailMessage(e.target.value);
 	};
 
     const handlePhone = (e) => {
-		setPhone(e.target.value);
+		setPhone((prev) => {
+			showEmailMessage(email);
+			return e.target.value
+		});
 		// setAllowSubmit(true);
 	};
 
 	useEffect(() => {
-		setAllowSubmit(validateEmail(email) && (validatePhone(phone) || phone === ''))
+		setAllowSubmit(validateEmail(email) && (validatePhone(phone) || phone === ''));
+		if (!validatePhone(phone) && phone !== '') {
+			setPhoneError({ valid: false, error: 'Please enter a valid phone number'})
+		} else {
+			setPhoneError({ valid: true, error: ''})
+		}
 	}, [email, phone])
 
     const handleCode = (e) => {
@@ -221,11 +236,13 @@ const Sweepstakes = (props) => {
 									)}
 
 									{content.email_en && (
-										<div className="flex flew-wrap -mx-2 flex-col lg:flex-row">
+										<div className="flex flew-wrap -mx-2 flex-col">
 											<div className="w-full pr-2 pl-2">
-												<input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className="block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 lg:mb-2"></input>
+												<input value={email} onChange={handleEmail} type="email" placeholder="Type email here" id="sweepstakes__email" className={`block appearance-none w-full py-[14px] px-[16px] mb-2 text-base leading-base bg-gray-400 text-gray-800 border-0 rounded-h outline-none mb-0 sm:mb-1 ${emailError.valid ? 'lg:mb-2' : 'lg:mb-1'}`}></input>
 											</div>
-											<small className="col-12 text-danger email-error hidden">Please enter a valid email address</small>
+											{!emailError.valid && (
+												<p className="text-left px-2 text-xs text-danger text-primary email-error mb-1">{emailError.error}</p>
+											)}
 										</div>
 									)}
 
@@ -234,11 +251,13 @@ const Sweepstakes = (props) => {
 									)}
                                     {content.phone_en && (
 										<div className="flex flex-wrap">
-											<div className="relative flex items-stretch w-full sm:mb-1 lg:mb-2">
+											<div className={`relative flex items-stretch w-full sm:mb-1 ${phoneError.valid ? 'lg:mb-2' : 'lg:mb-1'}`}>
 												{activeCountryCode && <InputCountry store={store} id="modal--sweepstakes__country" className={`bg-gray-400 mb-[0!important]`} handleCode={handleCode} activeCountry={activeCountryCode} chevronCls="svg absolute  h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" />}
 												<input value={phone} onChange={handlePhone} className="mb-0 basis-[100%!important] block w-full py-[14px] px-[16px] -ml-[1px] border-l-0 rounded-h bg-gray-400 text-gray-800 focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400" type="phone" placeholder="Phone number" />
 											</div>
-											<small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
+											{!phoneError.valid && (
+												<p className="text-left text-xs text-danger text-primary phone-error mb-1">{phoneError.error}</p>
+											)}
 										</div>
 									)}
                                     {/* <div className="flex flex-wrap items-center place-content-center my-2">
