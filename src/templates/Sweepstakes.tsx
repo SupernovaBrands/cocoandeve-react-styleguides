@@ -43,13 +43,17 @@ const Sweepstakes = (props) => {
     const handleEmail = (e) => {
 		const email = e.target.value !== '' && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.target.value);
         setEmail(e.target.value);
-        setAllowSubmit(email);
+        // setAllowSubmit(email);
 	};
 
     const handlePhone = (e) => {
 		setPhone(e.target.value);
-		setAllowSubmit(true);
+		// setAllowSubmit(true);
 	};
+
+	useEffect(() => {
+		setAllowSubmit(validateEmail(email) && (validatePhone(phone) || phone === ''))
+	}, [email, phone])
 
     const handleCode = (e) => {
 		// console.log(e);
@@ -87,6 +91,8 @@ const Sweepstakes = (props) => {
 		e.preventDefault();
 		// console.log('onSubmit');
 		// console.log(email, phone);
+		setEmailError({ valid: false, error: '' });
+		setPhoneError({ valid: false, error: '' });
 
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
@@ -99,7 +105,9 @@ const Sweepstakes = (props) => {
 				setFormCompleted(true);
 				window.scrollTo({ top: 0, behavior: 'smooth' });
 			} else {
-				setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				// setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.email) setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.phone) setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 			}
 		} else {
 			setEmailError({ valid: false, error: 'Please enter a valid email address' });

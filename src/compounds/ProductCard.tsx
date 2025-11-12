@@ -413,7 +413,6 @@ const ProductCard = (props:any) => {
                 </picture>
             {/* </a> */}
             </ConditionalWrap>
-
             { props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] pt-[5px] pb-[3px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-[${props.product?.badgeMobileFontSize}px] lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
             { props.product.activeBadges && !props.sideUpsell && 
                 <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
@@ -428,7 +427,6 @@ const ProductCard = (props:any) => {
                     <Eye className="svg h-[1rem] w-[1rem]" />
                 </p>
             )}
-
             <div className={`pt-0 pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content ${props.collectionTemplate ? 'px-[.5rem]' : ''}`}>
                 <p className={`product-title__text text-center grow flex flex-col items-start justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap 
