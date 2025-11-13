@@ -513,6 +513,7 @@ const Collection = (props: any) => {
                                                 key={`collection-quiz-card--${handle}--${index}`}
                                                 quizSetting={collectionSettings.quizSetting}
                                                 store={store}
+                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                 />
                                         )}
 
@@ -572,6 +573,7 @@ const Collection = (props: any) => {
                                     key={`collection-quiz-card--${handle}--99`}
                                     quizSetting={collectionSettings.quizSetting}
                                     store={store}
+                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                     />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
