@@ -1,9 +1,9 @@
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { EmblaOptionsType } from 'embla-carousel';
+import { useEffect, useRef, useState } from 'react';
 import TabNav from '~/components/TabNav';
 import TabContent from '~/components/TabContent';
 import ProductBanner from '~/compounds/ProductBanner';
-import useMediaQuery from '~/hooks/useMediaQuery';
+// import useMediaQuery from '~/hooks/useMediaQuery';
 import PlusIcon from '~/images/icons/plus.svg';
 import MinusIcon from '~/images/icons/minus.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
@@ -15,23 +15,33 @@ import {
 	PrevButton,
 	NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
-import { PRODUCTS } from '~/modules/dummy_products';
-import { VIDEOS } from '~/modules/dummy_videos';
+// import { PRODUCTS } from '~/modules/dummy_products';
+// import { VIDEOS } from '~/modules/dummy_videos';
 import VideoUpsellCard from '~/components/VideoUpsellCard';
 import Modal from "~/components/Modal";
 import ModalWaitlist from "~/components/modal/Waitlist";
 import { useSelectedSnapDisplay } from '~/components/carousel/EmblaCarouselSelected';
 import CarouselScrollbar from '~/components/carousel/CarouselScrollbar';
+import { useWindowSize } from '~/hooks/useWindowSize';
+import ProductInfo from '~/components/modal/ProductInfo';
 
 const HairSolution = (props: any) => {
-    const { preOrderSetting, data, formatMoney, waitlistPdp, store, generalSetting, addToCart, trackEvent, trackBluecoreEvent } = props;
+    const { getActiveWL, getId, fbqEvent, tiktokSubscribe, subscribeBluecoreWaitlist, submitsToSmsBumpAPi, 
+        bluecoreProductWaitlist, trackBluecoreLaunchWaitlistEvent, waitlistPdpStore, launchProductWaitlist, ProductSettings, preOrderSetting, data, formatMoney, waitlistPdp, store, 
+        generalSetting, addToCart, trackEvent, trackBluecoreEvent,
+        strapiAutomateHardcode, checkHardcodedImages, checkHardcodedTitles,
+        checkHardcodedVariant, checkHardcodedTagline, checkHardcodedFaq,
+        checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, FragranceNotes, buildProductCardModel
+    } = props;
     const [activeTab, setActiveTab] = useState(0);
     const [productTab, setProductTab] = useState(0);
     const [resultTab, setResultTab] = useState(0);
 
     // const [productEmbla, setProductEmbla] = useState({});
 
-    const isDesktop = useMediaQuery('(min-width: 769px)');
+    // const isDesktopQuery = useMediaQuery('(min-width: 769px)');
+    const [width, height] = useWindowSize();
+    const [isDesktop, setIsDesktop] = useState(true);
     const { ConditionalWrap } = props;
     const options: EmblaOptionsType = {
         loop: true,
@@ -138,6 +148,27 @@ const HairSolution = (props: any) => {
         else document.body.classList.remove('overflow-y-hidden');
     }, [waitlistData]);
 
+    useEffect(() => {
+        if (globalThis && globalThis.window.innerWidth > 992) {
+            setIsDesktop(true);
+        } else {
+            setIsDesktop(false);
+        }
+    }, [width]);
+
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null,
+        tab: null,
+        swatch: null
+    });
+
+    useEffect(() => {
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
+    }, [productData.open])
     
     // const RESULT_VIDEOS_ALL = [{
     //     title: 'Like A Virgin',
@@ -335,6 +366,8 @@ const HairSolution = (props: any) => {
                                                             store={store}
                                                             customProductTitle={null}
                                                             hideUnderline={true}
+                                                            setProductData={setProductData}
+                                                            clickShowPopup={true}
                                                         />
                                                     })}
                                                 </Carousel.Inner>

@@ -97,12 +97,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
         if (email === '' && phoneNumber === '') {
             setPhoneError(true);
         }
-
-        if (!tosClick) {
-            setTos(false);
-            setTosError(true);
-            setValidForm(false);
-        } else if (validForm) {
+        if (validForm) {
             props.onSubmitLaunchWaitlist({box, email, phoneCode, phoneNumber, fallback: () => {
                 setShowSuccess(true);
                 if (props?.launchModalData?.handle) setCookie(`launch_waitlist_${store}__${props.launchModalData.handle}`, true, 1);
@@ -156,7 +151,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     }
 
     useEffect(() => {
-        if (!emailError && !phoneError && tos && (email || phoneNumber)) {
+        if (!emailError && !phoneError && (email || phoneNumber)) {
             setValidForm(true);
         } else {
             setValidForm(false);
@@ -252,19 +247,19 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                                 </div>
                             </div>
                         )}
-                        {!props.productCard && (
+                        {/* {!props.productCard && (
                             <CheckBox onClick={tosClickHandle} borderLight={props.productCard} onChange={changeTos} labelClass="flex justify-content-center my-1 relative pl-3" id="agreement-launch-waitlist" checked={false}>
                                 <a className="text-sm text-body underline font-bold hover:text-body" href="/pages/privacy-policy">I agree to Privacy Policy & ToS</a>
                             </CheckBox>
-                        )}
-                        {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>}
+                        )} */}
+                        {/* {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>} */}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
                         <Button type="submit" buttonClass={`${bgCtaColor === 'bg-dark' ? 'bg-dark text-white border-dark' : 'btn-primary'} w-full border-0 ${props.productCard ? 'h-[3.125rem] border-none' : '!py-[15px]'}`}>
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>
-                    <p className={`font-size-xs lg:mt-2 font-bold ${props.productCard ? 'mb-[1rem]' : 'mb-0'}`} dangerouslySetInnerHTML={{__html: props.policy.replace('<a href', `<a class="text-xs ${props.productCard ? '' : 'underline'}" href`)}}></p>
+                    <p className={`font-size-xs lg:mt-2 ${props.productCard ? 'mb-[1rem]' : 'mb-0'}`} dangerouslySetInnerHTML={{__html: props.policy}}></p>
                 </form>
             </div> }
 
