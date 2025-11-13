@@ -85,6 +85,10 @@
 		.bfcm-btn {
 			@apply border-dark text-dark hover:bg-dark hover:text-white;
 		}
+
+		.bfcm-btn--selected {
+			@apply bg-dark text-white hover:bg-dark !important;
+		}
 	}
 }
 
