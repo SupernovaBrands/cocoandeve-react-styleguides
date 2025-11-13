@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
-    <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g lg:mb-0">
+    <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
         <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
             <picture className={`rounded-[24px] lg:rounded-[32px] block ${data?.playground_range_bg}`}>
                 <source srcSet={imgDt} media="(min-width: 992px)" />

@@ -27,7 +27,7 @@ const ProductCarousel = (props: any) => {
         if (props?.products) {
             setProducts(props.products);
         }
-    }, [props]);
+    }, [props])
 
     const [waitlistData, setWaitlistData] = useState({
         open: false,

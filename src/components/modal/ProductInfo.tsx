@@ -291,6 +291,7 @@ const ProductInfo = (props: any) => {
     const shippingTable = ProductSettings?.find((section:any) => section.__component === 'product.product-shipping-table') || {};
     const shippingTableStore = shippingTable?.shippingTableInfo?.shippingTableInfo[store] || {};
     const shippingTableStore2 = shippingTable[`shipping_table_${store.toUpperCase()}`] || {};
+
     const shippingTable2 = shippingTable?.shippingTableInfo?.shippingTableInfo?.[store];
 
     const fragranceNotesObject = {

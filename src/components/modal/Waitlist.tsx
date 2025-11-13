@@ -38,7 +38,6 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 
 	const inputRef = useRef(null);
 	const globalSettings = useGlobalSettings();
-	
 	// const { isPreview } = usePreview();
     // const store = (isPreview) ? 'dev' : 'us';
     // const waitlistPopup = globalSettings?.data?.ThemeSettings.find((t: any) => t.__component === 'theme.product-waitlist-popup');
