@@ -3,7 +3,7 @@ import Button from './Button';
 const tStrings = global.config.tStrings;
 
 const YotpoRatingCard = (props) => {
-    const { score, total, totalQa, handleForm } = props;
+    const { score, total, totalQa, handleForm, generalSetting} = props;
     return (
         <div className="yotpo-widget__rating-sidebar flex flex-col lg:mr-0 rounded-[24px] lg:rounded-[32px] border border-gray-600 p-2 lg:mb-4">
             <div className="items-center lg:justify-center leading-[1.25] flex mb-1">
@@ -19,7 +19,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('review')}
                     type="button"
                     lg={false}
-                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full mb-g text-sm py-1 font-normal">
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent rounded-full mb-g text-sm py-1 font-normal`}>
                         Write A Review
                 </Button>
             </div>
@@ -27,7 +27,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('question')}
                     type="button"
                     lg={false}
-                    buttonClass="btn-outline-primary w-full px-0 bg-transparent rounded-full text-sm py-1 font-normal">
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent rounded-full text-sm py-1 font-normal`}>
                         Ask A Question
                 </Button>
             </div>

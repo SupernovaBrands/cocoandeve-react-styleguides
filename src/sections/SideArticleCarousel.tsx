@@ -21,7 +21,7 @@ const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ?
 )
 
 const SideArticleCarousel = (props: any) => {
-    const { articleCarousel } = props;
+    const { articleCarousel, bgColor, textColor } = props;
     const [scrollProgress, setScrollProgress] = useState(0);
 
 	const [emblaRef1, emblaApi1] = useEmblaCarousel({ align: 'start', ...options}, [
@@ -51,6 +51,8 @@ const SideArticleCarousel = (props: any) => {
                             const isLast = index + 1 === row.length;
                             return (
                                 <PostCard
+                                    bgColor={bgColor}
+                                    textColor={textColor}
                                     key={`${data.id}-${index}`} carousel={true} template="pdp"
                                     className={`product__side-article flex-grow-0 flex-shrink-0 basis-[335px] w-[335px] ${isLast ? '' : 'pr-hg lg:pr-g'} lg:w-[80%] lg:basis-[80%]`} data={data} />
                             )

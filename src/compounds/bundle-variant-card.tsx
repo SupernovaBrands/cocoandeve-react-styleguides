@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../components";
 
 const BundleVariantCard = (props) => {
-    const { showLaunchWaitlist, swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency } = props;
+    const { showLaunchWaitlist, swatchType, slides, bundleKey, optionSelected, store, formatMoney, activeVariant, saving, productStrapi, optionValue, variantDescriptionText, addToCart, productShopify, trackEvent, addToCartAnalytics, cart, currency, bgColor, textColor } = props;
     // console.log('set slides', slides[productStrapi?.images.length - 1]);
     const [addingItem, setAddingItem] = useState(false);
 
@@ -159,7 +159,7 @@ const BundleVariantCard = (props) => {
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base bg-primary text-white hover:bg-primary border-primary  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm btn-primary rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : bgColor === 'bg-primary-light' ? 'border-primary-light bg-primary-light hover:bg-primary-dark' : 'border-primary btn-primary bg-primary hover:bg-primary-dark'} ${textColor ? textColor : 'text-white'}  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
                                 {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>

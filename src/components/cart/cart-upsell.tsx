@@ -142,7 +142,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="bfcm-btn btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}

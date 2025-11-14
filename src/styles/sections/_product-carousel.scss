@@ -11,4 +11,8 @@
     &-nav li .nav--active {
         @apply bg-primary text-white font-normal focus:text-white visited:text-white hover:text-white;
     }
+
+    &-nav li .nav--dark {
+        @apply bg-dark text-white font-normal focus:text-white visited:text-white hover:text-white;
+    }
 }

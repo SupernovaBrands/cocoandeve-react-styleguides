@@ -46,7 +46,7 @@ const validForm = {
 // }
 
 const SmsSubscription = (props) => {
-    const { content, region } = props;
+    const { content, region, generalSetting } = props;
     const [phone, setPhone] = useState('');
 	const [code, setCode] = useState(props.numberCodeDef);
 	const [phoneError, setPhoneError] = useState({ valid: true, error: 'Please enter valid phone number' });
@@ -160,7 +160,7 @@ const SmsSubscription = (props) => {
                             <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
                             <div className="row">
                                 <div className="w-full md:w-1/2 md:mx-1/4 mx-auto lg:px-hg">
-                                    <button type="submit" className="w-full btn btn-primary btn-block btn-lg border-primary">{formContent.cta_text}</button>
+                                    <button type="submit" className={`w-full btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white hover:bg-dark' : 'btn-primary border-primary'} btn-block btn-lg`}>{formContent.cta_text}</button>
                                     {!phoneError.valid && <p className="mt-1 mb-0 font-size-xs text-danger">{phoneError.error}</p>}
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ const SmsSubscription = (props) => {
                             <h2 className="sms-subscription__title mb-3 text-[32px] lg:text-[46px] leading-[40px] lg:leading-[57px]">{formContent.success_title}</h2>
                             {formContent.success_desc && (<p className="sms-subscription__success mb-4 lg:pb-4 px-6 lg:px-3">{formContent.success_desc}</p>)}
                             <div className="col-12 lg:max-w-[50%] lg:mx-auto px-0 mt-6">
-                                <a href={formContent.success_link} className="btn btn-primary btn-lg btn-block w-full border-primary">{formContent.success_cta}</a>
+                                <a href={formContent.success_link} className={`btn btn-lg btn-block w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white hover:bg-dark hover:text-white' : 'btn-primary border-primary'}`}>{formContent.success_cta}</a>
                             </div>
                         </div>
                     )}

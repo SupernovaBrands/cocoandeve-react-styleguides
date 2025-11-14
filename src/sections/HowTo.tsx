@@ -18,7 +18,7 @@ import Close from '~/images/icons/close.svg';
 
 const HowToCarousel = (props) => {
 
-    const { videoData, isLoading, title } = props;
+    const { videoData, isLoading, title, ctaBgColor } = props;
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [screenLG, setScreenLG] = useState(992);
@@ -96,7 +96,7 @@ const HowToCarousel = (props) => {
 										<PostTag paddingClass="py-[.375em] px-[.75em]" key={`article-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
 									) : ''}
 									<p className="text-lg lg:text-xl font-bold mt-2 blog-video-card__title mb-1 cursor-pointer"><a role="button" tabIndex={0} href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
-									<span className="inline-block btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full">Read more</span>
+									<span className={`inline-block btn ${ctaBgColor === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full`}>Read more</span>
 								</figcaption>
 							</figure>
 						</div>

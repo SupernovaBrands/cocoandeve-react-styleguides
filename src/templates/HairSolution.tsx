@@ -259,7 +259,7 @@ const HairSolution = (props: any) => {
                         <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
-                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[40px]`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} /></li>    
+                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[40px]`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>    
                                 ))}
                             </ul>
                         </div>
@@ -305,7 +305,7 @@ const HairSolution = (props: any) => {
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className="mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg btn-outline-primary rounded-full no-underline hover:no-underline font-bold mb-1">{row.cta_label}</a>
+                                    <a href={row.cta_url} className={`mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline font-bold mb-1`}>{row.cta_label}</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
@@ -322,10 +322,10 @@ const HairSolution = (props: any) => {
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
                             <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-5/6 lg:basis-5/6 ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
-                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} /></li>
+                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                                 ))}
                             </ul>
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g">Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g`}>Shop All</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -396,7 +396,7 @@ const HairSolution = (props: any) => {
                             })}
                         </div>
                         <div className="text-center">
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="inline-block lg:hidden btn btn-lg btn-outline-primary rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g">Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g`}>Shop All</a>
                         </div>
                     </div>
                     <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
@@ -417,6 +417,7 @@ const HairSolution = (props: any) => {
                             BenefitIngredient={BenefitIngredient}
                             HowToUse={HowToUse}
                             Faq={Faq}
+                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                             FragranceNotes={FragranceNotes}
                             store={store}
                             data={productData}
@@ -505,10 +506,10 @@ const HairSolution = (props: any) => {
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
                             {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
-                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} /></li>
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                             ))}
                         </ul>
-                        <a href={data.result.cta_url} className="hidden lg:inline-block lg:btn lg:btn-lg lg:btn-outline-primary lg:rounded-full underline lg:no-underline hover:no-underline font-bold">{data.result.cta_label}</a>
+                        <a href={data.result.cta_url} className={`hidden lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold`}>{data.result.cta_label}</a>
                     </div>
                     {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
                         <TabContent key={`result-tab-content-${index}`} className="lg:px-g" active={resultTab === index}>
@@ -570,7 +571,7 @@ const HairSolution = (props: any) => {
                         </TabContent>
                     ))}
                     <div className="text-center lg:hidden mt-[.25rem]">
-                        <a href="/pages/reviews" className="instagram-reels__button btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block">
+                        <a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block`}>
                             See All
                         </a>
                     </div>

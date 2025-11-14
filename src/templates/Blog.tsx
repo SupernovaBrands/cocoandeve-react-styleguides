@@ -27,7 +27,7 @@ const options: EmblaOptionsType = {
 
 const Blog = (props) => {
 
-	const { isLoading, postData, videoData, tag, region } = props;
+	const { isLoading, postData, videoData, tag, region, generalSetting } = props;
 	const [activeFrame, setActiveFrame] = useState(true);
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
@@ -130,17 +130,17 @@ const Blog = (props) => {
 			<div className="container px-0">
 				<h1 className="text-center mb-2 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
-					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/tan" title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
+					<BlogNavTag href="/blogs/news" title="All" ctaBgColor={generalSetting?.bfcm_cta_bg_color} active={active ? false : (tag === 'all' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/hair" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/skin" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
+					<BlogNavTag href="/blogs/news/tagged/body" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
 					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (
 					<>
 						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
-							{videoSliders.length > 0 && <HowToCarousel btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} />}
+							{videoSliders.length > 0 && <HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} />}
 							<div className="flex flex-wrap mb-0 mt-2 w-full">
 								{videoItems.map((item, index) => (
 									<div className="mb-4 lg:mb-3 w-full lg:w-1/3 sm:px-hg lg:px-g">
@@ -176,7 +176,7 @@ const Blog = (props) => {
 									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
 										<Carousel.Inner emblaRef={emblaRef}>
 											{extendedPostData.map((data, index) => (
-												<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} />
+												<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} />
 											))}
 										</Carousel.Inner>
 										<Carousel.Navigation>
@@ -206,7 +206,7 @@ const Blog = (props) => {
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper my-2 flex flex-wrap">
-								<HowToCarousel btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
+								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
 							</div>
 						}
 						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-0 px-g lg:px-hg"></div>

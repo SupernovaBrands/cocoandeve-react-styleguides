@@ -22,7 +22,7 @@ const validForm = {
 };
 
 const ArticleNewsLetter = (props) => {
-    const { postNewsletter, store } = props;
+    const { postNewsletter, store, generalSetting } = props;
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
     const [submitted, setSubmitted] = useState(false);
@@ -91,7 +91,7 @@ const ArticleNewsLetter = (props) => {
                             <div className=" relative flex flex-wrap w-full items-stretch">
                                 <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl-[2rem] rounded-bl-[2rem] -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className="py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline bg-primary hover:bg-primary-dark border-primary text-white rounded-full" type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className={`py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark-dark border-dark': 'bg-primary hover:bg-primary-dark border-primary'} text-white rounded-full`} type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                             {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
@@ -504,7 +504,7 @@ const Article = (props) => {
                             </ul>
                         </div>
                         {postNewsletter?.post_newsletter_enabled && (
-                            <ArticleNewsLetter postNewsletter={postNewsletter} store={region} />
+                            <ArticleNewsLetter postNewsletter={postNewsletter} store={region} generalSetting={generalSetting} />
                         )}
                         {postBannerInfo?.enables && (
                             <ArticlPosteBanner postBannerInfo={postBannerInfo} title={content?.title} />

@@ -83,7 +83,7 @@ const CartManualGwp = (props:any) => {
 								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
 								<Button
 									lg={false}
-								    buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bg-primary text-white hover:bg-primary' : ''}`}
+								    buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''}`}
 									onClick={() => {
 										if (!adding) {
 											if (isSelected) {

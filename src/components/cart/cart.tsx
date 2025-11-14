@@ -256,7 +256,7 @@ const Cart: React.FC<Props> = (props) => {
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="mt-3 mb-[1.8rem] text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
+									<a href="/collections" className="shop--all-url bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								{/* <div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
@@ -426,7 +426,7 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
 								<div className="w-full mt-1">
-									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
+									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary checkout-url" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
 							{['us','ca'].includes(store) && (
