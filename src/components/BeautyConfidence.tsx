@@ -19,7 +19,7 @@ const BeautyConfidence = (props) => {
 
 	useEffect(() => {
 		const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
-		fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, {headers: { 'signatuer': signature}}).then((data) => data.json()).then((r) => {
+		fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, {headers: { 'signature': signature}}).then((data) => data.json()).then((r) => {
 			setTotalReviews(r?.response?.total_reviews?.toLocaleString());
 		});
 	}, [])
