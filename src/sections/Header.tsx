@@ -17,7 +17,7 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav
 	} = props;
 	
 	const [openDrawer, setOpenDrawer] = useState(false);
@@ -29,6 +29,7 @@ const Header = (props: any) => {
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(points || 0);
 	const [flashBubbleWrapper, setFlashBubbleWrapper] = useState(false);
+	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
 	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -90,7 +91,15 @@ const Header = (props: any) => {
 
 	const accountRef = useRef(null);
 
-
+	useEffect(() => {
+		if (!initialStore) {
+			if (store === 'us') {
+				setActiveMainMenu(mainNav);
+			} else {
+				setActiveMainMenu(mainMenu);
+			}
+		}
+	}, [props])
 	useEffect(() => {
 		let lastScrollTop = 0;
 		let scrollTop = 0;
@@ -214,9 +223,9 @@ const Header = (props: any) => {
 						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
-						{mainMenu.length > 0 && (
+						{activeMainMenu.length > 0 && (
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							{mainMenu && mainMenu.map((nav, i) => {
+							{activeMainMenu && activeMainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
@@ -224,7 +233,7 @@ const Header = (props: any) => {
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
-													menus={mainMenu || []}
+													menus={activeMainMenu || []}
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
@@ -302,7 +311,7 @@ const Header = (props: any) => {
 				<MobileMenu
 					onToggleMobileNav={onToggleMobileNav}
 					openDrawer={openDrawer}
-					mainMenu={mainMenu}
+					mainMenu={activeMainMenu}
 					menuBannerCode={menuBannerCode}
 					menuBannerQuiz={menuBannerQuiz}
 					userPts={userPts}
