@@ -157,7 +157,12 @@ const SmsSubscription = (props) => {
                                     <small className="col-12 text-danger phone-error hidden">Please enter a valid phone number</small>
                                 </div>
                             </div>
-                            <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div>
+                            {/* <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div> */}
+                            <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 text-body mx-auto"
+                                dangerouslySetInnerHTML={{
+                                    __html: formContent.tos
+                                }}
+                            />
                             <div className="row">
                                 <div className="w-full md:w-1/2 md:mx-1/4 mx-auto lg:px-hg">
                                     <button type="submit" className={`w-full btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white hover:bg-dark' : 'btn-primary border-primary'} btn-block btn-lg`}>{formContent.cta_text}</button>
