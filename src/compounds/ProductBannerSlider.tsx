@@ -169,7 +169,7 @@ const ProductBannerSlider = (props) => {
 					</span>
 				</div>
 				<div ref={compOverlay} style={{ ...imgOverlayStyle }} className="product-banner__slider--compareimg absolute h-auto overflow-hidden img-comp-overlay top-0">
-					<img src={props?.first_image?.url} className="block max-w-none" loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
+					<img src={props?.first_image?.url} className={`block max-w-none ${props.imgClasses}`} loading="lazy" alt="product banner 2" width={wrapperWidth} style={{ width: `${wrapperWidth}px` }} />
 				</div>
 			</div>
 		)}
