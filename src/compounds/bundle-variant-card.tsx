@@ -161,7 +161,7 @@ const BundleVariantCard = (props) => {
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : bgColor === 'bg-primary-light' ? 'border-primary-light bg-primary-light hover:bg-primary-dark' : 'border-primary btn-primary bg-primary hover:bg-primary-dark'} ${textColor ? textColor : 'text-white'}  w-full lg:w-auto items-center product-card-btn border  flex lg:flex-row btn-sm rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'bg-dark hover:bg-dark border-dark hover:text-white' : 'bg-primary hover:bg-primary border-primary btn-primary'} text-white w-full lg:w-auto items-center product-card-btn border flex lg:flex-row btn-sm rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
                                 {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>

@@ -226,8 +226,8 @@ const SwatchOverlay = (props:any) => {
         <>
             {props.quizResult && (() => {
                 const resultVariant = props.product.variants.nodes.find((node) => node.sku === props.quizResultSku);
-                const { selectedOptions } = resultVariant;
-                const color = selectedOptions?.find((s) => s.name === 'Color');
+                // const { selectedOptions } = resultVariant;
+                const color = resultVariant?.selectedOptions?.find((s) => s.name === 'Color');
                 return resultVariant && (
                     <>
                         {color && (
