@@ -12,7 +12,7 @@ const CartUpsell = (props:any) => {
     const { items: products, addToCart, store } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
-
+    console.log('upsell', upsell);
     const addUpsell = async (variant:any, percentage:any) => {
         setLoading(true);
         const addLine = await addToCart({
@@ -152,8 +152,8 @@ const CartUpsell = (props:any) => {
                                                 )}
                                                 {!loading && ('Add')}
                                             </button>
-                                            {item?.upsell_note && (
-                                                <small className='block mt-[5px]'>Add & select your print</small>
+                                            {item?.note && item?.note !== '' && (
+                                                <small className='block mt-[5px]'>{item?.note}</small>
                                             )}
                                         </figcaption>
                                     </figure>
