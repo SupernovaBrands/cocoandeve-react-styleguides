@@ -11,7 +11,7 @@ import DropdownStore from '~/components/DropdownStore';
 
 const Footer = (props) => {
     // console.log('footer test prop', props);
-    const { store, aboutMenu, helpMenu, shopMenu, trackBluecoreLaunchWaitlistEvent } = props;
+    const { store, aboutMenu, helpMenu, shopMenu, trackBluecoreLaunchWaitlistEvent, generalSetting } = props;
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const onSubmit = (evt) => {
@@ -88,7 +88,7 @@ const Footer = (props) => {
                 <div className="w-full lg:w-1/2 px-0 lg:pl-0 lg:pr-4">
                     <h2 className="font-bold mb-1 text-xl lg:text-2xl text-body" data-nosnippet>Newsletter</h2>
                     <p className="mb-[1rem] lg:mb-2 text-body" data-nosnippet>Receive exclusive offers, promotions and beauty tips via email.</p>
-                    <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} />
+                    <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} ctaBgColor={generalSetting?.bfcm_cta_bg_color} />
                     <p className="footer__newsletter-tos text-sm mt-1 mb-[3.2142857142857144em] lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-5 lg:mt-1 lg:mb-3" data-nosnippet>Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
                 </div>
                 <div className="w-full lg:w-1/2 px-0 lg:pl-g">
@@ -151,7 +151,7 @@ const Footer = (props) => {
                             </div>
                             <div className="w-1/2 lg:w-full">
                                 <p className="text-sm font-bold mb-1">Currency</p>
-                                <DropdownStore direction='dropup' store={store} />
+                                <DropdownStore direction='dropup' store={store} generalSetting={generalSetting} />
                             </div>
                         </div>
                     </div>

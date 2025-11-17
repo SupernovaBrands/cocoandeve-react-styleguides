@@ -14,8 +14,9 @@ type BirthdayProp = {
 	handleSubmit: any
 	dateRef: any
 	monthRef: any
+	ctaBgColor: any
 }
-const Birthday: React.FC<BirthdayProp> = ({handleClose, data, handleSubmit, dateRef, monthRef}) => (
+const Birthday: React.FC<BirthdayProp> = ({handleClose, data, handleSubmit, dateRef, monthRef, ctaBgColor}) => (
 	<div className="modal-content bg-primary-light-second">
 		<div className="modal-body p-0">
 			<CloseButton handleClose={handleClose} className="text-black" />
@@ -50,7 +51,7 @@ const Birthday: React.FC<BirthdayProp> = ({handleClose, data, handleSubmit, date
 		            	</div>
 		            </div>
 					<div className="flex flex-wrap -mx-hg lg:-mx-g px-g">
-						<Button type="submit" buttonClass="btn-primary mr-lg-g w-full border-0">Submit</Button>
+						<Button type="submit" buttonClass={`${ctaBgColor === 'bg-dark' ? 'bg-dark text-white border-dark' : 'btn-primary'} mr-lg-g w-full border-0`}>Submit</Button>
 					</div>
 				</form>
 			</div>

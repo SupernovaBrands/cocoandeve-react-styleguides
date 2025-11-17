@@ -3,3 +3,10 @@
 		display: none;
 	}
 }
+
+.bfcm-dark-layout {
+	.collection-grid__tags-link.active,
+	.collection-grid__tags-link.bg-primary {
+		@apply bg-dark text-white hover:text-white hover:bg-dark;
+	}
+}

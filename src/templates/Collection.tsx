@@ -473,7 +473,7 @@ const Collection = (props: any) => {
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
-                                                            ${children.handle === handle ? 'active text-white bg-primary hover:text-white' : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
+                                                            ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} hover:text-white` : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
                                                     />
@@ -513,6 +513,7 @@ const Collection = (props: any) => {
                                                 key={`collection-quiz-card--${handle}--${index}`}
                                                 quizSetting={collectionSettings.quizSetting}
                                                 store={store}
+                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                 />
                                         )}
 
@@ -572,6 +573,7 @@ const Collection = (props: any) => {
                                     key={`collection-quiz-card--${handle}--99`}
                                     quizSetting={collectionSettings.quizSetting}
                                     store={store}
+                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                     />
                             )}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}

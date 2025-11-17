@@ -17,7 +17,7 @@ const validForm = {
 };
 
 const Sweepstakes = (props) => {
-    const { content, store, trackBluecoreLaunchWaitlistEvent } = props;
+    const { content, store, trackBluecoreLaunchWaitlistEvent, generalSetting } = props;
     const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
     const [emailError, setEmailError] = useState<{ valid: boolean, error: string }>({ valid: true, error: 'Please enter valid email' });
@@ -272,14 +272,14 @@ const Sweepstakes = (props) => {
                                     {/* <div className="hidden input-error toc-error text-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div> */}
                                     <p className={`text-[10px] mb-[1rem] leading-[13px] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} />
                                     <div className="lg:mb-2 sm:mb-1">
-                                        <button id="sweepstakes__submit" type="submit" className="bg-primary hover:bg-primary-darken w-full rounded border border-transparent font-bold text-white py-[13px] px-[54px] btn-primary" disabled={!allowSubmit}>{content?.submit || 'Sign me up!'}</button>
+                                        <button id="sweepstakes__submit" type="submit" className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark' : 'bg-primary hover:bg-primary-darken'} btn-primary w-full rounded border border-transparent font-bold text-white py-[13px] px-[54px]`} disabled={!allowSubmit}>{content?.submit || 'Sign me up!'}</button>
                                     </div>
                                 </form>
                             ) : (
                                 <div className="sweepstakes__thank-you px-4 py-3 bg-white text-center rounded">
                                     <h2 className={`h1 ${content.heading_col} mb-1`}>{content.thank_title}</h2>
                                     <p className="mb-[1rem]">{content.thank_desc}</p>
-                                    <a href={content?.sweepstakes_popup_thank_shopnow_url} className="btn btn-lg btn-primary btn-block hover:text-white hover:no-underline w-full border-2 border border-primary">{content?.sweepstakes_popup_thank_shopnow || 'Shop Coco & Eve'}</a>
+                                    <a href={content?.sweepstakes_popup_thank_shopnow_url} className={`btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white border-dark hover:bg-dark' : 'btn-primary border-primary'} btn-block hover:text-white hover:no-underline w-full border-2 border`}>{content?.sweepstakes_popup_thank_shopnow || 'Shop Coco & Eve'}</a>
                                 </div>
                             )}
                             <p className={`text-xs my-2 lg:mb-0 ${content.desc_col}`} dangerouslySetInnerHTML={{ __html: content.foot_note }} />

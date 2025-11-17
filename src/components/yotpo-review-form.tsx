@@ -25,6 +25,7 @@ interface YotpoReviewFormProps {
   customQuestions: CustomQuestion[];
   onSubmit: (data: ReviewData) => void;
   activeForm: string;
+  bgCtaColor: string
 }
 
 interface ReviewData {
@@ -40,6 +41,7 @@ const YotpoReviewForm: FC<YotpoReviewFormProps> = ({
   customQuestions,
   onSubmit,
   activeForm,
+  bgCtaColor
 }) => {
   const [score, setScore] = useState<number>(0);
   const [hoverStar, setHoverStar] = useState<number>(0);
@@ -335,7 +337,7 @@ const YotpoReviewForm: FC<YotpoReviewFormProps> = ({
         </div>
         <div className="flex form-group mb-1 items-center justify-end">
           {hasError && <small className="text-primary mr-1">{tStrings.yotpo.formError}</small>}
-          <Button type="button" disabled={submitting} className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold w-[110px]" lg={false} onClick={onSubmitButton}>
+          <Button type="button" bgCtaColor={bgCtaColor} disabled={submitting} className="bg-white border border-primary hover:bg-primary hover:text-white text-primary font-bold w-[110px]" lg={false} onClick={onSubmitButton}>
             {!submitting && tStrings.yotpo.submit}
             {submitting && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" />}
           </Button>

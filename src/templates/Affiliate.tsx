@@ -7,7 +7,7 @@ import Benefit5 from '~/images/icons/affiliate-benefits-5-exchange.svg';
 import Benefit6 from '~/images/icons/affiliate-benefits-6-exchange.svg';
 
 const Affiliate = (props: any) => {
-	const { banner, content, benefit, hiw } = props;
+	const { banner, content, benefit, hiw, generalSetting } = props;
 	return (
 		<>
 			{banner && (
@@ -33,8 +33,8 @@ const Affiliate = (props: any) => {
 									</h2>
 									<a
 										href={banner.cta}
-										className="btn btn-primary block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
-											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px] lg:border-primary"
+										className={`btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
+											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
 										>{banner.cta_label}</a>
 								</div>
 							</div>
@@ -135,7 +135,7 @@ const Affiliate = (props: any) => {
 											<h2 className={`mx-auto mb-g text-[1.75rem] leading-[1.875rem] ${i === 2 ? 'max-w-[85%]' : 'max-w-[80%]'} lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none`}>{content[`section_ct_title_${i + 1}`]}</h2>
 											{i === 0 && (
 												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem] lg:mt-0">
-													<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', 'btn btn-primary mt-g lg:mt-0 border border-primary rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]'))}</>
+													<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-g lg:mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
 												</p>
 											)}
 											{i == 1 && (
