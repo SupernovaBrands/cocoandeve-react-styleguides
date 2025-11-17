@@ -188,7 +188,7 @@ const MobileMenu = (props: any) => {
 					</li>
 				)}
 				<li key="shopall" className="my-g p-g" role="presentation">
-					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g rounded-full`} data-cy="shopall-btn">Shop All</a>
+					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
