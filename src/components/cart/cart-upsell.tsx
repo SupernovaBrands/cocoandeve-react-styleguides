@@ -152,6 +152,9 @@ const CartUpsell = (props:any) => {
                                                 )}
                                                 {!loading && ('Add')}
                                             </button>
+                                            {item?.upsell_note && (
+                                                <small className='block mt-[5px]'>Add & select your print</small>
+                                            )}
                                         </figcaption>
                                     </figure>
                                 );
