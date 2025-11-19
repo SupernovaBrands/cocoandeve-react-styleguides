@@ -9,6 +9,8 @@ const BundleVariantCard = (props) => {
     const [currentVariant, setCurrentVariant] = useState(activeVariant);
 
     const [imageSrc, setImageSrc] = useState('');
+    let os = 'unknown';
+    const [platform, setPlatform] = useState(os);
 
     const onAddItem = async (e) => {
         if (typeof addToCart === 'function') {
@@ -119,11 +121,30 @@ const BundleVariantCard = (props) => {
         }
     }, [bundleImg]);
 
+    
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+    
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
+    
+        setPlatform(os);
+    }, []);
+
     return  (
         <>
         <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
-            {saving && <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em]`}>{saving}</span>}
+            {saving && <div className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-xs text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em] inline`}>
+                <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{saving}</span>
+            </div>}
             <div className="float-left">
                 <figure className="flex">
                     {urlSet && bundleImg && (
