@@ -6,8 +6,12 @@
 // }
 
 .blog-post-grid__content .article__content {
-	p:not(.product-title__text), h1, h2, h3, h4, h5, h6 {
+	p:not(.product-title__text), p:not(.artical-detail), h1, h2, h3, h4, h5, h6 {
 		@apply px-g block lg:px-0;
+	}
+
+	.artical-detail {
+		@apply px-0 !important;
 	}
 
 	.carousel__products .carousel__container {
@@ -22,7 +26,7 @@
 			@apply text-sm;
 		}
 
-		svg {
+		svg:not(.artical-detail--svg) {
 			width: 10px !important;
 			height: 10px !important;
 		}
@@ -65,6 +69,10 @@
 				@apply lg:-mb-[27.5px];
 			}
 		}
+	}
+
+	.artical-detail--link {
+		@apply inline-flex lg:mr-0 lg:px-[.75rem] lg:py-[0.25rem] lg:right-[1rem] mr-[.5rem] !important;
 	}
 
 	// p img {

@@ -281,7 +281,7 @@ const SwatchOverlay = (props:any) => {
 };
 
 const ProductCard = (props:any) => {
-    const { clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell } = props;
+    const { clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
@@ -392,7 +392,7 @@ const ProductCard = (props:any) => {
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <ConditionalWrap 
                 condition={clickShowPopup}
-                wrap={children => <p role="button" className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block" onClick={openModal}>{children}</p>}
+                wrap={children => <p role="button" className={`rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
                 elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">{children}</a>}
             >
                 <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
@@ -422,9 +422,9 @@ const ProductCard = (props:any) => {
                 </div>
             }
             {clickShowPopup && (
-                <p role="button" onClick={(e) => openModal(e)} className={`cursor-pointer inline-flex lg:min-w-[3.375em] badge rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
+                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} cursor-pointer inline-flex lg:min-w-[3.375em] rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
                     <span className="mr-1 hidden lg:inline">Details</span>
-                    <Eye className="svg h-[1rem] w-[1rem]" />
+                    <Eye className="artical-detail--svg svg h-[1rem] w-[1rem]" />
                 </p>
             )}
             <div className={`pt-0 pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content ${props.collectionTemplate ? 'px-[.5rem]' : ''}`}>
