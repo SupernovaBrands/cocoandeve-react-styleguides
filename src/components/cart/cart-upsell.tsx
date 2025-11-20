@@ -138,6 +138,9 @@ const CartUpsell = (props:any) => {
                                         <figcaption className="text-base block w-full">
                                             <p className="font-bold">
                                                 <span className="text-gray-800">{product.title}</span>
+                                                {item?.note && item?.note !== '' && (
+                                                    <small className='block mt-[5px] font-normal'>{item?.note}</small>
+                                                )}
                                             </p>
                                             <p className="mt-1">
                                                 {getCompareAtPrice(variant, item.percentage) && (
@@ -152,9 +155,6 @@ const CartUpsell = (props:any) => {
                                                 )}
                                                 {!loading && ('Add')}
                                             </button>
-                                            {item?.note && item?.note !== '' && (
-                                                <small className='block mt-[5px]'>{item?.note}</small>
-                                            )}
                                         </figcaption>
                                     </figure>
                                 );
