@@ -314,7 +314,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className={`my-3 lg:mt-5`}>
+                <section className="my-3 lg:mt-5">
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
