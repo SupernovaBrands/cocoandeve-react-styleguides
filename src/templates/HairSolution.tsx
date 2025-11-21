@@ -249,7 +249,7 @@ const HairSolution = (props: any) => {
             )}
             <div className={`abtest-wrapper flex flex-col ${props?.sectionTest}`}>
             {data.range && (
-                <section className={`mt-3 mb-3 lg:mb-5 ${props.sectionTest ? 'order-1 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
+                <section className={`mt-3 mb-3 lg:mb-5 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -314,7 +314,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className="my-3 lg:my-5">
+                <section className={`my-3 lg:mt-5 ${props.sectionTest ? 'order-0' : ''}`}>
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-[35px] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
@@ -445,9 +445,9 @@ const HairSolution = (props: any) => {
                     </Modal>
                 </section>
             )}
-            </div>
+            
             {data.product?.rows?.[productTab]?.compare && (
-                <section className="lg:mb-5">
+                <section className={` ${props.sectionTest ? 'order-1 lg:mb-0' : 'lg:mb-5'}`}>
                     {data.product.rows[productTab].compare?.image_right?.url ? (
                         <ProductBanner
                             background="bg-pink-light"
@@ -478,7 +478,7 @@ const HairSolution = (props: any) => {
                     )}
                 </section>
             )}
-
+            </div>
             {/* {data.compare && (
                 <section className="lg:mb-5">
                     {/* {!data.compare?.image_right?.url && (
