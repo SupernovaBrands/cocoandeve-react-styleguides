@@ -422,7 +422,7 @@ const ProductCard = (props:any) => {
                 </div>
             }
             {clickShowPopup && (
-                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} cursor-pointer inline-flex lg:min-w-[3.375em] rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
+                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'lg:min-w-[3.375em] badge'} cursor-pointer inline-flex rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
                     <span className={`mr-1 ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
                     <Eye className="artical-detail--svg svg h-[1rem] w-[1rem]" />
                 </p>
