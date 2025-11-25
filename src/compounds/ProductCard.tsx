@@ -391,17 +391,17 @@ const ProductCard = (props:any) => {
         //     }
         // }
 
-        // if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-        //     const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11f0acb0-5f8a-459e-9d31-6f706061df00/540x';
-        //     const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
-        //     if (shade === 'medium') {
-        //         setProductImage(medImg);
-        //         setProductHoverImage(darkImg)
-        //     } else {
-        //         setProductImage(darkImg);
-        //         setProductHoverImage(medImg)
-        //     }
-        // }
+        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
+            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/540x';
+            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
+            if (shade === 'medium') {
+                setProductImage(medImg);
+                setProductHoverImage(darkImg)
+            } else {
+                setProductImage(darkImg);
+                setProductHoverImage(medImg)
+            }
+        }
     }, [shade]);
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
