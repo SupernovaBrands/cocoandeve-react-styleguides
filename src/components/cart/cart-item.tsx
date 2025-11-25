@@ -179,11 +179,11 @@ export const CartItem = (props:CartItemProps) => {
 			// }
 
 			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/983fb531-02c7-4ccf-6790-65fa09bfe300/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
 			}
 
 			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b3c02561-5245-4734-0f8c-f30a86efb500/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/public';
 			}
 
 			if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
