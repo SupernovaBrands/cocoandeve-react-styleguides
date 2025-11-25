@@ -455,7 +455,7 @@ const HairSolution = (props: any) => {
                             rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
                             leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
                             svgClasses="!h-[16.97px]"
-                            imgClasses={'h-[240px] md:h-[auto]'}
+                            imgClasses={'h-[240px] md:h-[400px]'}
                             textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[2rem]'}
                         >
                             <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
@@ -572,8 +572,8 @@ const HairSolution = (props: any) => {
                             )}
                         </TabContent>
                     ))}
-                    <div className="text-center lg:hidden mt-[.25rem]">
-                        <a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline px-[4em] py-[.8125em] inline-block`}>
+                    <div className="text-center mt-[.25rem] lg:mt-3">
+                        <a href="/pages/reviews" className="instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 lg:border-[1px] hover:no-underline px-[4em] py-[.8125em] lg:py-[.875em] inline-block lg:w-[158px] lg:px-1">
                             See All
                         </a>
                     </div>
