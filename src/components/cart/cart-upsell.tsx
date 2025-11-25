@@ -67,8 +67,8 @@ const CartUpsell = (props:any) => {
         } else if (variant && variant.compareAtPrice) {
             const comparePrice = parseFloat(variant.compareAtPrice.amount) * 100;
             const price = parseFloat(variant.price.amount) * 100;
-            const percent = Math.ceil(price/comparePrice * 100);
-            return `SAVE ${percent}%`;
+            const percent = Math.round(price/comparePrice * 100);
+            return `SAVE ${100 - percent}%`;
 
         }
         return null;
@@ -76,9 +76,12 @@ const CartUpsell = (props:any) => {
 
     useEffect(() => {
         if (products.length > 1 && products.length < 4) {
-            setUpsells([...products, ...products]);
+            const merged = [...products, ...products];
+            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            setUpsells(uniqueMerged);
         } else {
-            setUpsells(products);
+            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            setUpsells(uniqueMerged);
         }
     }, [products]);
 
@@ -139,7 +142,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="bfcm-btn btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}

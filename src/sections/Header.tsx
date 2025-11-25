@@ -17,9 +17,9 @@ const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
-		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey
+		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav
 	} = props;
-
+	
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -29,6 +29,7 @@ const Header = (props: any) => {
 	const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState([]);
 	const [userPts, setUserPts] = useState(points || 0);
 	const [flashBubbleWrapper, setFlashBubbleWrapper] = useState(false);
+	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
 	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -90,7 +91,15 @@ const Header = (props: any) => {
 
 	const accountRef = useRef(null);
 
-
+	useEffect(() => {
+		if (!initialStore) {
+			if (store === 'us') {
+				setActiveMainMenu(mainNav);
+			} else {
+				setActiveMainMenu(mainMenu);
+			}
+		}
+	}, [props])
 	useEffect(() => {
 		let lastScrollTop = 0;
 		let scrollTop = 0;
@@ -130,6 +139,14 @@ const Header = (props: any) => {
 			document.body.classList.remove('overflow-hidden');
 		}
 	}, [openDrawer])
+
+	useEffect(() => {
+		if (generalSetting?.bfcm_cta_bg_color === 'bg-dark') {
+			document.body.classList.add('bfcm-dark-layout');
+		} else {
+			document.body.classList.remove('bfcm-dark-layout');
+		}
+	}, [generalSetting])
 
 	{/*
 	useEffect(() => {
@@ -214,8 +231,9 @@ const Header = (props: any) => {
 						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
+						{activeMainMenu.length > 0 && (
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							{mainMenu && mainMenu.map((nav, i) => {
+							{activeMainMenu && activeMainMenu.map((nav, i) => {
 								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 									return (
 										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
@@ -223,7 +241,7 @@ const Header = (props: any) => {
 											{nav.title.includes('Shop') && (
 												<NavMegaMenuAll
 													title={nav.title}
-													menus={mainMenu || []}
+													menus={activeMainMenu || []}
 													getCollectionProductsByHandle={getCollectionProductsByHandle}
 													listIds={sevenDaysSalesIds}
 													dummy={dummy}
@@ -255,6 +273,7 @@ const Header = (props: any) => {
 								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">Results IRL</a>
 							</li>
 						</ul>
+						)}
 
 						<ul className="basis-[30%] lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
 							{swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
@@ -279,7 +298,7 @@ const Header = (props: any) => {
 									<Account className={`hover:fill-primary text-[1.375em] h-[1em] mr-[5px] ${openAccountBox ? 'fill-primary' : ''}`} />
 								</button>
 								{!isLoggedIn && (
-									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} />
+									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} generalSetting={generalSetting} />
 								)}
 							</li>
 							<li key="search" className="nav-item pr-g lg:pl-hg">
@@ -294,18 +313,19 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
-						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl}/>
+						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
 					</div>
 				</nav>
 				<MobileMenu
 					onToggleMobileNav={onToggleMobileNav}
 					openDrawer={openDrawer}
-					mainMenu={mainMenu}
+					mainMenu={activeMainMenu}
 					menuBannerCode={menuBannerCode}
 					menuBannerQuiz={menuBannerQuiz}
 					userPts={userPts}
 					isLoggedIn={isLoggedIn}
 					swellLoyalty={swellLoyalty}
+					generalSetting={generalSetting}
 					store={store}
 				/>
 				<SearchBox

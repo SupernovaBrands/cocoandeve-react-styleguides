@@ -256,7 +256,7 @@ const Cart: React.FC<Props> = (props) => {
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="mt-3 mb-[1.8rem] text-center">{tStrings.cart_empty}</p>
-									<a href="/collections" className="bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
+									<a href="/collections" className="shop--all-url bg-primary text-white !rounded-h hover:no-underline hover:text-white hover:bg-primary-dark text-base inline-block align-middle text-center select-none border whitespace-no-wrap rounded py-[8px] px-[29px] leading-normal no-underline font-bold" data-cy="shop-all-btn">Shop all products</a>
 								</div>
 								{/* <div className="cart-empty-discount-form container text-start hidden">
 									<CartDiscountForm
@@ -328,34 +328,34 @@ const Cart: React.FC<Props> = (props) => {
 								<hr />
 
 								<div className="flex flex-wrap mt-3 mb-2">
-									<p className="w-2/3 mb-1 font-bold " data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
+									<p className="w-2/3 mb-1 font-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
 									{!combineDiscount && cart.discountBundleAmount > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-bundledisount-label">{bundleLabel}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-bundledisount-label">{bundleLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-bundledisount-value">{`-${formatMoney(cart.discountBundleAmount, false, store)}`}</p>
 										</>
 									)}
 
 									{!combineDiscount && (cart.discountLine) > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-label">{discountLabel}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountLine, false, store)}`}</p>
-										</>
-									)}
-
-									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
-										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountMeter?.selectedTier?.text}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
 
 									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
 										<>
-											<p className="w-2/3 mb-1  font-bold " data-cy="cart-discount-label">{discountLabel}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-combine-label">{discountLabel}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-combine-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
+										</>
+									)}
+
+									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
+										<>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-tier-discount-label">{discountMeter?.selectedTier?.text}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-tier-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
 										</>
 									)}
 
@@ -426,7 +426,7 @@ const Cart: React.FC<Props> = (props) => {
 								<strong className="w-2/3 text-lg" data-cy="cart-total-label">{tStrings.cart_total}</strong>
 								<strong className="w-1/3 text-lg text-right" data-cy="cart-total-value">{formatMoney(cart.totalAmount, false, store)}</strong>
 								<div className="w-full mt-1">
-									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
+									<a onClick={submitForm} className="btn w-full btn-lg btn-primary hover:text-white hover:!no-underline py-[13px] border-[2px] border-primary hover:border-primary checkout-url" href={cart.checkoutUrl}>{tStrings.cart_checkout}</a>
 								</div>
 							</div>
 							{['us','ca'].includes(store) && (

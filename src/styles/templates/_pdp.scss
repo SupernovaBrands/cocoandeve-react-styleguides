@@ -353,3 +353,18 @@
         @apply rounded-[8px]
     }
 }
+
+.bfcm-dark-layout {
+    .product-side-upsell {
+
+        .product-card {
+
+            &__content {
+                button {
+                    @apply text-dark bg-white border-dark lg:border min-h-[38px] py-0 font-bold;
+                }
+            }
+
+        }
+    }
+}

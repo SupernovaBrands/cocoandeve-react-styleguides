@@ -11,7 +11,7 @@ const BeautyConfidence = (props) => {
     const [totalReviews, setTotalReviews] = useState(null);
     const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 	const SERVICES = [
-		
+
 		{ id: 'winner-award', label: 'Award-winning <br>Beauty'},
 		{ id: 'money-back', label: 'Money back <br>guarantee'},
         { id: 'stars', label: `__ratings__ stars <br class="hidden lg:block"> <span class="hidden lg:inline">Customer</span> Reviews`},
@@ -19,7 +19,7 @@ const BeautyConfidence = (props) => {
 
 	useEffect(() => {
 		const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
-		fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve&signature=${signature}`).then((data) => data.json()).then((r) => {
+		fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, {headers: { 'signature': signature}}).then((data) => data.json()).then((r) => {
 			setTotalReviews(r?.response?.total_reviews?.toLocaleString());
 		});
 	}, [])
