@@ -75,9 +75,23 @@
 		@apply inline-flex lg:mr-0 lg:px-[.75rem] lg:py-[0.25rem] lg:right-[1rem] mr-[.5rem] top-[12.5px] lg:top-[9px] !important;
 	}
 
+	.modal__mini-pdp {
+		p, h1, h2, h3, h4, h5, h6 {
+			@apply px-0 !important;
+		}
+
+		a {
+			@apply no-underline;
+		}
+
+		a:not(.bg-primary-light):hover {
+			@apply underline;
+		}
+	}
+
 	// p img {
-	// 	margin-left: -30px !important;
-	// 	margin-right: -30px !important;
-	// 	max-width: 117.5%;
-	// }
+	// margin-left: -30px !important;
+	// margin-right: -30px !important;
+	// max-width: 117.5%;
+	//}
 }
