@@ -368,6 +368,7 @@ const HairSolution = (props: any) => {
                                                             hideUnderline={true}
                                                             setProductData={setProductData}
                                                             clickShowPopup={true}
+                                                            landingPageTemplate={true}
                                                         />
                                                     })}
                                                 </Carousel.Inner>
