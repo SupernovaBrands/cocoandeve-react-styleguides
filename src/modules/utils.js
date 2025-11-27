@@ -1386,7 +1386,9 @@ export const isKit = (title) => {
 
 export const getSkus = (product) => {
 	let skus = [];
-	if (product && product.productType !== 'HERO') {
+	if (product.isProductBundleApp?.value && product.productBundleSkus?.value) {
+        skus = product.productBundleSkus?.value.split(',');
+	} else if (product && product.productType !== 'HERO') {
         const skus_ = isKit(product.title)
             ? product.variants.nodes.map((node) => node.sku)
             : product.variants.nodes.filter((node) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node) => node.sku);
