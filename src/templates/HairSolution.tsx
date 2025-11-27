@@ -395,14 +395,11 @@ const HairSolution = (props: any) => {
                                     </TabContent>
                                 )
                             })}
-<<<<<<< HEAD
-=======
                             {/* <div className="text-center hidden lg:block mt-3">
                                 <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[1rem] py-[.8125em] inline-block lg:border-[1px] h-[50px] w-[168px]">
                                     Shop All
                                 </a>
                             </div> */}
->>>>>>> 86ev1ned8
                         </div>
                         <div className="text-center">
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g`}>Shop All</a>
