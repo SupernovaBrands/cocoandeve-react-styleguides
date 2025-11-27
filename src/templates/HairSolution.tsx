@@ -249,7 +249,7 @@ const HairSolution = (props: any) => {
             )}
             <div className={`abtest-wrapper flex flex-col ${props?.sectionTest}`}>
             {data.range && (
-                <section className={`mt-3 mb-3 lg:mb-5 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
+                <section className={`mt-3 mb-3 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -325,7 +325,7 @@ const HairSolution = (props: any) => {
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                                 ))}
                             </ul>
-                            {/* <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g`}>Shop All</a> */}
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g`}>Shop All</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -394,6 +394,14 @@ const HairSolution = (props: any) => {
                                     </TabContent>
                                 )
                             })}
+<<<<<<< HEAD
+=======
+                            {/* <div className="text-center hidden lg:block mt-3">
+                                <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className="btn btn-lg btn-outline-primary rounded-full border-2 hover:no-underline px-[1rem] py-[.8125em] inline-block lg:border-[1px] h-[50px] w-[168px]">
+                                    Shop All
+                                </a>
+                            </div> */}
+>>>>>>> 86ev1ned8
                         </div>
                         <div className="text-center">
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g`}>Shop All</a>
