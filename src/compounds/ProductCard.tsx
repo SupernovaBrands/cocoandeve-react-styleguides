@@ -387,7 +387,9 @@ const ProductCard = (props:any) => {
     }
 
     useEffect(() => {
-        if (product && product.productType !== 'HERO') {
+        if (product.isProductBundleApp?.value && product.productBundleSkus?.value) {
+            setSkus(product.productBundleSkus?.value.split(','));
+        } else if (product && product.productType !== 'HERO') {
             const skus_ = isKit(product.title)
                 ? product.variants.nodes.map((node:any) => node.sku)
                 : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
