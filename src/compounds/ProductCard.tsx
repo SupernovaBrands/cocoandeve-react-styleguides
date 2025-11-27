@@ -452,6 +452,10 @@ const ProductCard = (props: any) => {
     const skus = useMemo(() => {
         if (!product?.variants?.nodes) return [];
 
+        if (product.isProductBundleApp?.value && product.productBundleSkus?.value) {
+            return product.productBundleSkus?.value.split(',');
+        }
+
         if (product.variants.nodes[0]?.reviewSku) {
             return [product.variants.nodes[0].reviewSku.value];
         }
