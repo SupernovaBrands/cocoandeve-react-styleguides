@@ -314,7 +314,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className="my-3 lg:my-5">
+                <section className="my-3 lg:mt-5 lg:mb-5">
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-[35px] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
@@ -450,6 +450,7 @@ const HairSolution = (props: any) => {
                 <section className="lg:mb-5">
                     {data.product.rows[productTab].compare?.image_right?.url ? (
                         <ProductBanner
+                            mainClasses={'lg:mb-0'}
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
@@ -508,7 +509,7 @@ const HairSolution = (props: any) => {
             )} */}
 
             {data.result && (
-                <section className="my-3 lg:mb-5 lg:mt-5 container px-0">
+                <section className="my-3 lg:mb-5 lg:mt-0 container px-0">
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
