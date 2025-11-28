@@ -342,7 +342,7 @@ const HairSolution = (props: any) => {
                                             <div className="w-full px-g mb-g lg:mb-0">
                                                 <picture className="block">
                                                     <source srcSet={tabRow.image_d.url} media="(min-width: 992px)" />
-                                                    <img src={tabRow.image_m.url} className="w-full rounded-[2rem] lg:h-full" alt="Hair Concern Solution Product Banner" />
+                                                    <img src={tabRow.image_m.url} className="w-full rounded-[2rem] h-[180px] lg:h-full" alt="Hair Concern Solution Product Banner" />
                                                 </picture>
                                             </div>
 
@@ -526,7 +526,7 @@ const HairSolution = (props: any) => {
                                     {row.data.length > 0 && row.data.map((data: any, i: number) => (
                                         <VideoUpsellCard
                                             key={`all-${data.item_id}-${i}`}
-                                            classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[83.5%] basis-[83.5%] lg:w-1/4 lg:basis-1/4 mb-0 px-[.25rem]"
+                                            classes="instagram-reels__card flex-grow-0 flex-shrink-0 w-[85.5%] basis-[85.5%] lg:w-1/4 lg:basis-1/4 mb-0 px-[.25rem]"
                                             videoUrl={data.video_url}
                                             author={data.title}
                                             url={data.url}
