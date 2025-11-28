@@ -123,7 +123,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi2.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronPrev className="svg--current-color" />
 										</span>
 									</PrevButton>
@@ -131,7 +131,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi2.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronNext className="svg--current-color" />
 										</span>
 									</NextButton>
@@ -166,7 +166,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi1.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronPrev className="svg--current-color" />
 										</span>
 									</PrevButton>
@@ -174,7 +174,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi1.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronNext className="svg--current-color" />
 										</span>
 									</NextButton>
@@ -209,7 +209,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi3.scrollPrev() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronPrev className="svg--current-color" />
 										</span>
 									</PrevButton>
@@ -217,7 +217,7 @@ const ProductCarousel = (props: any) => {
 										onClick={() => emblaApi3.scrollNext() }
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
-										<span className="absolute z-[-1] flex justify-center items-center">
+										<span className="absolute z-[1] flex justify-center items-center">
 											<ChevronNext className="svg--current-color" />
 										</span>
 									</NextButton>
