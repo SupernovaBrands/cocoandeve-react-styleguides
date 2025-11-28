@@ -84,6 +84,10 @@
 			@apply no-underline;
 		}
 
+		a.ingredients--list {
+			@apply underline !important;
+		}
+
 		a:not(.bg-primary-light):hover {
 			@apply underline;
 		}
