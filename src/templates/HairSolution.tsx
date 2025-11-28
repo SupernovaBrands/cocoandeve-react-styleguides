@@ -249,7 +249,7 @@ const HairSolution = (props: any) => {
             )}
 
             {data.range && (
-                <section className="mt-3 mb-3 lg:mt-5 lg:mb-0">
+                <section className="mt-3 mb-0 lg:mt-5 lg:mb-0">
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -450,7 +450,7 @@ const HairSolution = (props: any) => {
                 <section className="lg:mb-5">
                     {data.product.rows[productTab].compare?.image_right?.url ? (
                         <ProductBanner
-                            mainClasses={'lg:mb-0'}
+                            mainClasses={'!mb-0'}
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
