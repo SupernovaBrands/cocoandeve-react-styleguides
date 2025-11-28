@@ -249,7 +249,7 @@ const HairSolution = (props: any) => {
             )}
             <div className={`abtest-wrapper flex flex-col ${props?.sectionTest}`}>
             {data.range && (
-                <section className={`mt-3 mb-3 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
+                <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
                     <div className="container">
                         <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -451,7 +451,7 @@ const HairSolution = (props: any) => {
                 <section className={` ${props.sectionTest ? 'order-1 lg:mb-0' : 'lg:mb-5'}`}>
                     {data.product.rows[productTab].compare?.image_right?.url ? (
                         <ProductBanner
-                            mainClasses={'lg:mb-0'}
+                            mainClasses={'!mb-0'}
                             background="bg-pink-light"
                             reverse={false}
                             contentData={{
