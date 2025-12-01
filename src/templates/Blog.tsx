@@ -184,7 +184,7 @@ const Blog = (props) => {
 												onClick={() => autoPlayClick(arrowClickPrev)}
 												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="absolute z-[-1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
+												<span className="absolute z-[1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
 													<ChevronPrev className="svg--current-color w-g h-g" />
 												</span>
 											</PrevButton>
@@ -192,7 +192,7 @@ const Blog = (props) => {
 												onClick={() => autoPlayClick(arrowClickNext)}
 												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 											>
-												<span className="absolute z-[-1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
+												<span className="absolute z-[1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
 													<ChevronNext className="svg--current-color w-g h-g" />
 												</span>
 											</NextButton>
