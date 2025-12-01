@@ -44,7 +44,7 @@ export const CartItem = (props:CartItemProps) => {
 	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
 		setEditingVariant(index);
 		setSelectedVariant([swatchValue]);
-		await onChangeVariant(item.id, variant.id, item.quantity);
+		await onChangeVariant(item.id, variant.id, item.quantity, item);
 		setEditingVariant(null);
 	}
 
