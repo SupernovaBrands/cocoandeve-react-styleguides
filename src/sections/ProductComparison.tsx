@@ -204,7 +204,7 @@ const ProductComparison = (props: any) => {
                                                     onClick={() => emblaApi2.scrollPrev() }
                                                     className="lg:w-auto lg:h-full hidden lg:flex"
                                                 >
-                                                    <span className="absolute z-[-1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                    <span className="absolute z-[1] -left-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
                                                         <ChevronPrev className="svg--current-color w-[1rem] h-[1rem]" />
                                                     </span>
                                                 </PrevButton>
@@ -212,7 +212,7 @@ const ProductComparison = (props: any) => {
                                                     onClick={() => emblaApi2.scrollNext() }
                                                     className="lg:w-auto lg:h-full hidden lg:flex"
                                                 >
-                                                    <span className="absolute z-[-1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
+                                                    <span className="absolute z-[1] -right-hg flex justify-center items-center w-[2.75rem] h-[2.75rem] shadow-lg rounded-full bg-white">
                                                         <ChevronNext className="svg--current-color w-[1rem] h-[1rem]" />
                                                     </span>
                                                 </NextButton>
