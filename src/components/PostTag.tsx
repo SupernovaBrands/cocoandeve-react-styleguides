@@ -1,12 +1,24 @@
+import { useState, useEffect } from "react";
+
 type PropType = {
 	tag: string
 	children: React.ReactNode
 	paddingClass?: any,
-	widthClass?: any
+	widthClass?: any,
+	store: string
 }
 
 const PostTag: React.FC<PropType> = (props) => {
-	const { tag, children, paddingClass, widthClass } = props;
+	const { tag, children, paddingClass, widthClass, store } = props;
+
+	const [isClient, setIsClient] = useState(false);
+	useEffect(() => setIsClient(true), []);
+
+	// Hide only on client after hydration
+	if (isClient && (store === 'int' || store === 'my') && tag.toLowerCase() === 'tan') {
+		return null;
+	}
+	
 	const handleTag = (e: any, tag: string) => {
 		const linkedTags = ['hair', 'tan', 'skin', 'body'];
 		let tagUrl = tag === 'suncare' ? 'tan' : tag;
