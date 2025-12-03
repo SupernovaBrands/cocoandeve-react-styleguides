@@ -368,6 +368,7 @@ const HairSolution = (props: any) => {
                                                             hideUnderline={true}
                                                             setProductData={setProductData}
                                                             clickShowPopup={true}
+                                                            landingPageTemplate={true}
                                                         />
                                                     })}
                                                 </Carousel.Inner>
@@ -376,7 +377,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollPrev() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                             <ChevronPrev className="svg--current-color" />
                                                         </span>
                                                     </PrevButton>
@@ -384,7 +385,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollNext() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[-1] flex justify-center items-center lg:!top-auto">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto">
                                                             <ChevronNext className="svg--current-color" />
                                                         </span>
                                                     </NextButton>

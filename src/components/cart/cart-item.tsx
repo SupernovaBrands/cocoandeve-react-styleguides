@@ -44,7 +44,7 @@ export const CartItem = (props:CartItemProps) => {
 	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
 		setEditingVariant(index);
 		setSelectedVariant([swatchValue]);
-		await onChangeVariant(item.id, variant.id, item.quantity);
+		await onChangeVariant(item.id, variant.id, item.quantity, item);
 		setEditingVariant(null);
 	}
 
@@ -180,11 +180,11 @@ export const CartItem = (props:CartItemProps) => {
 			// }
 
 			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
 			}
 
 			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11f0acb0-5f8a-459e-9d31-6f706061df00/public';
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/public';
 			}
 
 			if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
