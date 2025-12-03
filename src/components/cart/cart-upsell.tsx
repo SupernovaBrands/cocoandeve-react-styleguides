@@ -77,10 +77,10 @@ const CartUpsell = (props:any) => {
     useEffect(() => {
         if (products.length > 1 && products.length < 4) {
             const merged = [...products, ...products];
-            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t?.product?.handle === v?.product?.handle) === i);
             setUpsells(uniqueMerged);
         } else {
-            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t?.product?.handle === v?.product?.handle) === i);
             setUpsells(uniqueMerged);
         }
     }, [products]);

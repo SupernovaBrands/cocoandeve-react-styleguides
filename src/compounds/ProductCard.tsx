@@ -16,6 +16,7 @@ const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store }
     // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
 
     let textColor = 'text-white';
+    label = props.sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : label;
 
     return (
         <>
