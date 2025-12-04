@@ -30,7 +30,7 @@ type SalePopupProp = {
 
 
 const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
-	console.log('data', data);
+	// console.log('data', data);
 	const { sbp_img, sbp_img_lg, sbp_code, sbp_desc, sbp_enabled, sbp_heading, sbp_bg_color, sbp_desc_color, sbp_heading_color, sbp_cta_enabled, sbp_cta_text, sbp_cta_url, sbp_percentage, sbp_image_position, sbp_percentage_color, sbp_close_color } = data;
 	const [copied, setCopied] = useState(false);
 	const [platform, setPlatform] = useState('');

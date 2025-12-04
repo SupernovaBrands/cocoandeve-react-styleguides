@@ -241,6 +241,17 @@ const Cart: React.FC<Props> = (props) => {
 		await props.manualGwpSetting.toggleManualGwp(id, manualGwpSetting);
 	}
 
+	// console.log('cart.tsx', cart);
+	const dates = {
+		ca: '15th December',
+		us: 'December 12',
+		uk: '19th December',
+		eu: '10th December',
+		au: '18th December',
+		int: '17th December',
+		my: '17th December',
+		dev: 'December 12',
+	}
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -339,6 +350,11 @@ const Cart: React.FC<Props> = (props) => {
 
 										return !item.isManualGwp && cartItemComponent;
 									})}
+									{dates[store] && (
+										<li>
+											<p className="text-sm mt-1 mb-2">Last chance for Christmas delivery — shop now before {dates[store]}.</p>
+										</li>
+									)}
 								</ul>
 
 								{tSettings.cartRedemption.enabled && (

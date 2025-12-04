@@ -12,7 +12,6 @@ const CartUpsell = (props:any) => {
     const { items: products, addToCart, store } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
-    console.log('upsell', upsell);
     const addUpsell = async (variant:any, percentage:any) => {
         setLoading(true);
         const addLine = await addToCart({
