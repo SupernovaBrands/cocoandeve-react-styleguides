@@ -114,7 +114,7 @@ const SmsSubscription = (props) => {
 			numberCodeDef = 1;
 		} else if (region === 'au') {
 			numberCodeDef = 61;
-		} else if (region === 'UK') {
+		} else if (region === 'uk') {
 			numberCodeDef = 44;
 		} else if (region === 'ca') {
 			numberCodeDef = 1;
@@ -122,7 +122,7 @@ const SmsSubscription = (props) => {
 			numberCodeDef = 33;
 		} else if (region === 'de') {
 			numberCodeDef = 49;
-		} else if (region === 'my' || region === 'my') {
+		} else if (region === 'my') {
 			numberCodeDef = 60;
 		}
 
