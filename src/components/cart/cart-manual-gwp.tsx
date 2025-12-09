@@ -11,6 +11,7 @@ const CartManualGwp = (props:any) => {
 	const scrollRef = useRef(null);
 	const [adding, setAdding] = useState(false);
 	const [processingId, setProcessingId] = useState([]);
+	const [showMessage, setShowMessage] = useState(false);
 	const {
 		title,
 		maxSelected,
@@ -18,6 +19,7 @@ const CartManualGwp = (props:any) => {
 		items,
 		onAddItem,
 		onRemoveItem,
+		disableSelectItem,
 	} = props;
 	
 	useEffect(() => {
@@ -81,28 +83,41 @@ const CartManualGwp = (props:any) => {
 									{item.price && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />}
 								</figure>
 								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
-								<Button
-									lg={false}
-								    buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''}`}
-									onClick={() => {
-										if (!adding) {
-											if (isSelected) {
-												removeItem(item.variantId || item.id);
-											} else { addItem(item.variantId || item.id); }
-										}
-									}}
-									disabled={adding}
-									data-cy="cart-addfreegift-btn"
-								>
-									{isLoading && (
-										<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
-									)}
-									{!isLoading && (isSelected ? 'Remove' : 'Add')}
-								</Button>
+								{!disableSelectItem && (
+									<Button
+										lg={false}
+										buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''}`}
+										onClick={() => {
+											if (!adding) {
+												if (isSelected) {
+													removeItem(item.variantId || item.id);
+												} else { addItem(item.variantId || item.id); }
+											}
+										}}
+										disabled={adding}
+										data-cy="cart-addfreegift-btn"
+									>
+										{isLoading && (
+											<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
+										)}
+										{!isLoading && (isSelected ? 'Remove' : 'Add')}
+									</Button>
+								)}
+								{disableSelectItem && (
+									<Button
+										lg={false}
+										onClick={() => {
+											setShowMessage(true)
+										}}
+										buttonClass={`${!isSelected ? 'hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500' : ''} disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''} opacity-[.5]`}
+									>Add</Button>
+								)}
 							</li>
 						);
 					})}
 				</ul>
+				{disableSelectItem && <hr />}
+				{showMessage && <p className="text-primary mt-1 text-[14px]">Add another item to your cart to claim your free gift.</p>}
 			</div>
 	);
 }
