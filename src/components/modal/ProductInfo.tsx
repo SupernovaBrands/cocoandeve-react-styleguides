@@ -335,7 +335,7 @@ const ProductInfo = (props: any) => {
         dataAccordion = [];
     }
 
-    const [openIndex, setOpenIndex] = useState('benefits-ingredients');
+    const [openIndex, setOpenIndex] = useState('');
 
     const toggleCard = async (id: any, callback:any = null) => {
         let openIndexId = id;
