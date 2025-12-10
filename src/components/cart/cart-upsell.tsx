@@ -12,7 +12,6 @@ const CartUpsell = (props:any) => {
     const { items: products, addToCart, store } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
-
     const addUpsell = async (variant:any, percentage:any) => {
         setLoading(true);
         const addLine = await addToCart({
@@ -77,10 +76,10 @@ const CartUpsell = (props:any) => {
     useEffect(() => {
         if (products.length > 1 && products.length < 4) {
             const merged = [...products, ...products];
-            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            const uniqueMerged = merged.filter((v, i, a) => a.findIndex(t => t?.product?.handle === v?.product?.handle) === i);
             setUpsells(uniqueMerged);
         } else {
-            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t.product.handle === v.product.handle) === i);
+            const uniqueMerged = products.filter((v, i, a) => a.findIndex(t => t?.product?.handle === v?.product?.handle) === i);
             setUpsells(uniqueMerged);
         }
     }, [products]);
@@ -115,17 +114,21 @@ const CartUpsell = (props:any) => {
                 <Carousel.Wrapper emblaApi={emblaApi} className="w-full flex flex-col">
                     <Carousel.Inner emblaRef={emblaRef} className={`flex flex-row w-full`}>
                         {upsell.map((item:any, index:number) => {
-                            const { product } = item;
+                            const { product, variantId } = item;
                             let variantNode = null;
                             try {
-                                variantNode = product.variants.nodes.find((node:any) => node.availableForSale);
+                                if (variantId) {
+                                    variantNode = product.variants.nodes.find((node:any) => node.id === variantId);
+                                } else {
+                                    variantNode = product.variants.nodes.find((node:any) => node.availableForSale);
+                                }
                             } catch (e) {
                                 console.error('Error:', e);
                             }
 
                             if (variantNode) {
                                 const variant = {...variantNode};
-                                const img = product.media.nodes[0]?.image?.url;
+                                const img = variant?.image?.url || product.media.nodes[0]?.image?.url;
                                 return (
                                     <figure key={`upsell-${index}`} className={`relative flex items-center flex-grow-0 flex-shrink-0 space-x-2 ${upsell.length === 1 ? 'w-full min-w-[100%] max-w-[100%]' : 'w-[270px] md:w-[313px] basis-[270px] md:basis-[313px] mr-1'}`}>
                                         <picture className="w-20 h-20 bg-pink-100">
@@ -134,6 +137,9 @@ const CartUpsell = (props:any) => {
                                         <figcaption className="text-base block w-full">
                                             <p className="font-bold">
                                                 <span className="text-gray-800">{product.title}</span>
+                                                {item?.note && item?.note !== '' && (
+                                                    <small className='block mt-[5px] font-normal'>{item?.note}</small>
+                                                )}
                                             </p>
                                             <p className="mt-1">
                                                 {getCompareAtPrice(variant, item.percentage) && (

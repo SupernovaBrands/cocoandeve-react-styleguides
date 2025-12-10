@@ -213,7 +213,16 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	// console.log('cart.tsx', cart);
-
+	const dates = {
+		ca: '15th December',
+		us: 'December 12',
+		uk: '19th December',
+		eu: '10th December',
+		au: '18th December',
+		int: '17th December',
+		my: '17th December',
+		dev: 'December 12',
+	}
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -302,6 +311,11 @@ const Cart: React.FC<Props> = (props) => {
 
 										return !item.isManualGwp && cartItemComponent;
 									})}
+									{dates[store] && (
+										<li>
+											<p className="text-sm mt-1 mb-2">Last chance for Christmas delivery — shop now before {dates[store]}.</p>
+										</li>
+									)}
 								</ul>
 
 								{tSettings.cartRedemption.enabled && (
@@ -345,17 +359,17 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 
-									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
-										<>
-											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-combine-label">{discountLabel}</p>
-											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-combine-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
-										</>
-									)}
-
 									{discountMeter.enabled > 0 && cart?.discountTier > 0 && (
 										<>
 											<p className="w-2/3 mb-1 font-bold" data-cy="cart-tier-discount-label">{discountMeter?.selectedTier?.text}</p>
 											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-tier-discount-value">{`-${formatMoney(cart.discountTier, false, store)}`}</p>
+										</>
+									)}
+
+									{combineDiscount && cart.discountCombineLine > 0 && !isSwellDiscCode && (
+										<>
+											<p className="w-2/3 mb-1 font-bold" data-cy="cart-discount-combine-label">{discountLabel}</p>
+											<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-discount-combine-value">{`-${formatMoney(cart.discountCombineLine, false, store)}`}</p>
 										</>
 									)}
 

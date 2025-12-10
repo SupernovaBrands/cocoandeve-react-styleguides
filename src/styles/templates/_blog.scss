@@ -64,7 +64,7 @@
 				a {
 					@apply underline;
 				}
-				p {
+				p:not(.artical-detail) {
 					@apply mb-[1rem];
 				}
 
