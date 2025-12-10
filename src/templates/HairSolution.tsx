@@ -578,7 +578,7 @@ const HairSolution = (props: any) => {
                             )}
                         </TabContent>
                     ))}
-                    <div className={`text-center ${RESULT_VIDEOS_ALL[resultTab].data.length > 4 ? 'mt-0' : 'mt-[1.5rem]' } lg:hidden lg:mt-3`}>
+                    <div className={`text-center ${RESULT_VIDEOS_ALL[resultTab].data.length > 1 ? 'mt-0' : 'mt-[1.5rem]' } lg:hidden lg:mt-3`}>
                         <a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 lg:border-[1px] hover:no-underline px-[4em] py-[.8125em] lg:py-[.875em] inline-block lg:w-[158px] lg:px-1`}>
                             See All
                         </a>
