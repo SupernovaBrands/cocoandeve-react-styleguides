@@ -183,35 +183,37 @@ const Blog = (props) => {
 				{activeFrame && (
 					<>
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
-							<div className="container px-0">
-								{postData.length > 0 &&
-									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
-										<Carousel.Inner emblaRef={emblaRef}>
-											{extendedPostData.map((data, index) => (
-												<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
-											))}
-										</Carousel.Inner>
-										<Carousel.Navigation>
-											<PrevButton
-												onClick={() => autoPlayClick(arrowClickPrev)}
-												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
-											>
-												<span className="absolute z-[1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
-													<ChevronPrev className="svg--current-color w-g h-g" />
-												</span>
-											</PrevButton>
-											<NextButton
-												onClick={() => autoPlayClick(arrowClickNext)}
-												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
-											>
-												<span className="absolute z-[1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
-													<ChevronNext className="svg--current-color w-g h-g" />
-												</span>
-											</NextButton>
-										</Carousel.Navigation>
-									</Carousel.Wrapper>
-								}
-							</div>
+							{!isLoading && (
+								<div className="container px-0">
+									{postData.length > 0 &&
+										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
+											<Carousel.Inner emblaRef={emblaRef}>
+												{extendedPostData.map((data, index) => (
+													<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
+												))}
+											</Carousel.Inner>
+											<Carousel.Navigation>
+												<PrevButton
+													onClick={() => autoPlayClick(arrowClickPrev)}
+													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+												>
+													<span className="absolute z-[1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
+														<ChevronPrev className="svg--current-color w-g h-g" />
+													</span>
+												</PrevButton>
+												<NextButton
+													onClick={() => autoPlayClick(arrowClickNext)}
+													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+												>
+													<span className="absolute z-[1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
+														<ChevronNext className="svg--current-color w-g h-g" />
+													</span>
+												</NextButton>
+											</Carousel.Navigation>
+										</Carousel.Wrapper>
+									}
+								</div>
+							)}
 							{/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
 							<div id="poppularArticles" className="container"></div>
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
