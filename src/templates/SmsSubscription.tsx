@@ -158,7 +158,7 @@ const SmsSubscription = (props) => {
                                 </div>
                             </div>
                             {/* <div className="sms-subscription__tos !text-sm px-0 mt-1 lg:mt-0 mb-3 lg:px-5 text-body mx-auto">By subscribing, you agree to receive recurring automated marketing by text message. For more info, see our <a href="/pages/privacy-policy" target="_blank" className="text-sm">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.</div> */}
-                            <div className="sms-subscription__tos !text-sm px-0 mt-1 mb-3 lg:px-5 text-body mx-auto"
+                            <div className="sms-subscription__tos !text-sm px-0 mt-1 mb-3 lg:px-g text-body mx-auto w-full lg:w-[85%]"
                                 dangerouslySetInnerHTML={{
                                     __html: formContent.tos
                                 }}
