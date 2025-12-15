@@ -451,6 +451,8 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 		ca:  'Sf9WxH',
 		au: 'X35yA9',
 		eu: 'WkXKHK',
+		my: 'XUeTL7',
+		int: 'Yttc79'
 	}
 
 	const klaviyoPK = {
@@ -460,6 +462,8 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 		ca:  'UZ7U4p',
 		au: 'WYtipg',
 		eu: 'XLgmDM',
+		my: 'QTMSqX',
+		int: 'WH4iKb'
 	}
 
 	const phone_number = phoneNumber && phoneNumber.startsWith("+") ? phoneNumber.replace("++", "+") : `+${phoneNumber}`;
@@ -516,10 +520,10 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 
 export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode, region, source='Newsletter') => {
 	let phoneNumber = `+${countryPhoneCode}${phone.replace(/^0+/, '')}`;
-	if (!['int', 'my'].includes(region)) {
+	// if (!['int', 'my'].includes(region)) {
 		phoneNumber = `${countryPhoneCode}${phone.replace(/^0+/, '')}`;
 		return submitPhoneKlaviyo({store: region, phoneNumber, source});
-	}
+	// }
 
 	const date = new Date();
 	const tse = date.getTime();
