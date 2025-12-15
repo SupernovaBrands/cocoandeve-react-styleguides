@@ -244,10 +244,10 @@ const Cart: React.FC<Props> = (props) => {
 
 	// console.log('cart.tsx', cart);
 	const dates = {
-		ca: '15th December',
-		us: 'December 12',
+		// ca: '15th December',
+		// us: 'December 12',
 		uk: '19th December',
-		eu: '10th December',
+		// eu: '10th December',
 		au: '18th December',
 		int: '17th December',
 		my: '17th December',
