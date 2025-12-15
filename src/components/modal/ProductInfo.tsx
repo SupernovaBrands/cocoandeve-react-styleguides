@@ -328,15 +328,15 @@ const ProductInfo = (props: any) => {
         }
     ];
 
-    if (fragrance_notes && fragrance_notes.trim() !== '') {
-        dataAccordion.splice(1, 0, fragranceNotesObject);
-    }
+    // if (fragrance_notes && fragrance_notes.trim() !== '') {
+    //     dataAccordion.splice(1, 0, fragranceNotesObject);
+    // }
 
     if (!benefits && !ingredients && !fullIngredients && (howToUse && !Object.keys(howToUse).length) && (faq && !Object.keys(faq).length)) {
         dataAccordion = [];
     }
 
-    const [openIndex, setOpenIndex] = useState('benefits-ingredients');
+    const [openIndex, setOpenIndex] = useState('');
 
     const toggleCard = async (id: any, callback:any = null) => {
         let openIndexId = id;
