@@ -18,6 +18,11 @@ import {
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
+// --- UPSSELL TO PARENT MAPPING ---
+const UPSELL_PARENT_MAP = {
+	'antioxidant-rich tanning set': 'sun-kissed-gradual-tanning-lotion',
+};
+
 const SearchBox = (props: any) => {
 	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store } = props;
 	const [keyword, setKeyword] = useState('');
@@ -126,7 +131,7 @@ const SearchBox = (props: any) => {
 
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
-				res?.json().then(data => {
+				res?.json().then(async data => {
 					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
@@ -148,6 +153,28 @@ const SearchBox = (props: any) => {
 						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
+
+						// --- UPSSELL REPLACEMENT LOGIC ---
+						const upsellProduct = uniqueHandle[0];
+						if (upsellProduct.productType === 'BUNDLE') {
+							const keywordLower = keyword.toLowerCase();
+							const matchedUpsell = Object.keys(UPSELL_PARENT_MAP).find(key => keywordLower.includes(key.toLowerCase()));
+							const parentHandle = UPSELL_PARENT_MAP[matchedUpsell];
+							const parentData = await fetch(`/api/getProductInfo?handle=${parentHandle}&region=${store}`).then(r => r.json());
+							if (parentData?.product) {
+								const { img } = getFeaturedImgMeta(parentData.product, store);
+								setProducts([{
+									title: parentData.product.title,
+									handle: parentData.product.handle,
+									featuredImgUrl: img || '',
+									url: `/products/${parentData.product.handle}`,
+									product: parentData.product,
+								}]);
+								setLoading(false);
+								return;
+							}
+						}
+						// --- END UPSSELL REPLACEMENT LOGIC ---
 
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
