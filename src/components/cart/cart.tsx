@@ -46,10 +46,11 @@ interface Props {
 	currency?: any;
 	user?: any;
 	isAuthenticated?: boolean;
+	showFreeGiftBox?: boolean;
 }
 
 const Cart: React.FC<Props> = (props) => {
-	const { showCart, cartData, itemCount, discountBanner, store,
+	const { showFreeGiftBox, showCart, cartData, itemCount, discountBanner, store,
 		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting, cartUpsell, addToCart } = props;
 	// const storeApi = new storefrontApi();
@@ -223,6 +224,8 @@ const Cart: React.FC<Props> = (props) => {
 		my: '17th December',
 		dev: 'December 12',
 	}
+
+	// console.log('manualGwpSetting', manualGwpSetting);
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -262,6 +265,7 @@ const Cart: React.FC<Props> = (props) => {
 							</div>
 						)}
 						{!props.isLoading && (!cart.itemCount || itemCount === 0 ? (
+							<>
 							<div className="pt-3 text-center">
 								<div className="container px-g cart-empty-shop-cta">
 									<p className="mt-3 mb-[1.8rem] text-center">{tStrings.cart_empty}</p>
@@ -283,6 +287,18 @@ const Cart: React.FC<Props> = (props) => {
 									/>
 								</div> */}
 							</div>
+
+							{showFreeGiftBox && manualGwpSetting && manualGwpSetting.enabled && (
+								<div className="px-g lg:px-3 pt-3">
+									<hr />
+									<CartManualGwp {...manualGwpSetting}
+										onAddItem={onToggleManualGwp}
+										onRemoveItem={onToggleManualGwp}
+										disableSelectItem={true}
+									/>
+								</div>
+							)}
+							</>
 						) : (
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
