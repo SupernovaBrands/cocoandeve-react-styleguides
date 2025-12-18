@@ -219,10 +219,10 @@ const Cart: React.FC<Props> = (props) => {
 		// us: 'December 12',
 		uk: '19th December',
 		// eu: '10th December',
-		au: '18th December',
+		// au: '18th December',
 		// int: '17th December',
 		// my: '17th December',
-		dev: 'December 12',
+		// dev: 'December 12',
 	}
 
 	// console.log('manualGwpSetting', manualGwpSetting);
