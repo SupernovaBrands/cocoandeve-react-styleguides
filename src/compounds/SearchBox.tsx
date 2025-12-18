@@ -132,7 +132,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(async data => {
-					// console.log(data, 'testing');
+					console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
@@ -153,28 +153,6 @@ const SearchBox = (props: any) => {
 						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
-
-						// --- UPSSELL REPLACEMENT LOGIC ---
-						const upsellProduct = uniqueHandle[0];
-						if (upsellProduct.productType === 'BUNDLE') {
-							const keywordLower = keyword.toLowerCase();
-							const matchedUpsell = Object.keys(UPSELL_PARENT_MAP).find(key => keywordLower.includes(key.toLowerCase()));
-							const parentHandle = UPSELL_PARENT_MAP[matchedUpsell];
-							const parentData = await fetch(`/api/getProductInfo?handle=${parentHandle}&region=${store}`).then(r => r.json());
-							if (parentData?.product) {
-								const { img } = getFeaturedImgMeta(parentData.product, store);
-								setProducts([{
-									title: parentData.product.title,
-									handle: parentData.product.handle,
-									featuredImgUrl: img || '',
-									url: `/products/${parentData.product.handle}`,
-									product: parentData.product,
-								}]);
-								setLoading(false);
-								return;
-							}
-						}
-						// --- END UPSSELL REPLACEMENT LOGIC ---
 
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
@@ -199,7 +177,51 @@ const SearchBox = (props: any) => {
 							setProducts(uniqueFiltered);
 							setLoading(false);
 						} else {
-							setProducts([]);
+							const storeProducts = await fetch(`/api/getVariantBySku?region=${store}`).then(r => r.json());
+							const products = storeProducts?.products || [];
+							const singleSets = uniqueHandle.map(async (item) => {
+
+								if (item.productType !== 'BUNDLE') {
+									return null;
+								}
+
+								const title = item?.title.toLowerCase();
+								const matchedParentProduct = products.find(product =>
+									product.product_type !== 'BUNDLE' && product.variants?.some(v => v.title.toLowerCase() === title)
+								);
+
+								if (matchedParentProduct) {
+									const singleProduct = await fetch(
+										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
+									).then(r => r.json());
+
+									if (singleProduct?.product) {
+										const { img } = getFeaturedImgMeta(singleProduct.product, store);
+										return {
+											title: singleProduct.product.title,
+											handle: singleProduct.product.handle,
+											featuredImgUrl: img || '',
+											url: `/products/${singleProduct.product.handle}`,
+											product: singleProduct.product,
+										};
+									}
+								} else {
+									const { img } = getFeaturedImgMeta(item, store);
+									return {
+										title: item.title,
+										handle: item.handle,
+										featuredImgUrl: img || '',
+										url: `/products/${item.handle}`,
+										product: item,
+									};
+								}
+
+								return null;
+							});
+
+							const sets = await Promise.all(singleSets);
+							const finalSets = sets.filter(Boolean);
+							setProducts(finalSets);
 						}
 					} else {
 						setProducts([]);
