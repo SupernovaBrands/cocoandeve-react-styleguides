@@ -214,16 +214,16 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	// console.log('cart.tsx', cart);
-	const dates = {
-		// ca: '15th December',
-		// us: 'December 12',
-		uk: '19th December',
-		// eu: '10th December',
-		// au: '18th December',
-		// int: '17th December',
-		// my: '17th December',
-		// dev: 'December 12',
-	}
+	// const dates = {
+	// 	// ca: '15th December',
+	// 	// us: 'December 12',
+	// 	uk: '19th December',
+	// 	// eu: '10th December',
+	// 	// au: '18th December',
+	// 	// int: '17th December',
+	// 	// my: '17th December',
+	// 	// dev: 'December 12',
+	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
 	return (
@@ -327,11 +327,11 @@ const Cart: React.FC<Props> = (props) => {
 
 										return !item.isManualGwp && cartItemComponent;
 									})}
-									{dates[store] && (
+									{/* {dates[store] && (
 										<li>
 											<p className="text-sm mt-1 mb-2">Last chance for Christmas delivery — shop now before {dates[store]}.</p>
 										</li>
-									)}
+									)} */}
 								</ul>
 
 								{tSettings.cartRedemption.enabled && (
