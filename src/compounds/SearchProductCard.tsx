@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 const SearchProductCard = (props: any) => {
-	const  { url, title, img, trackEvent, store } = props;
+	const  { url, title, img, trackEvent, store, subtitle } = props;
 	let featuredImageUrl = img;
-
 	// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && url === 'daily-essentials-bundle') {
 	// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
 	// }
@@ -43,11 +42,16 @@ const SearchProductCard = (props: any) => {
 					<img src={featuredImageUrl.replace('/public', '/192x').replace('.jpg', '_192x.jpg').replace('.png', '_192x.png')} alt={title} className="block w-full h-[85px] lg:w-full max-h-[5.3125em] lg:max-h-none object-cover lg:h-[211px]" loading="lazy" width="96" height="85" />
 				</picture>
 			</a>
-			<figcaption className="flex-grow-1 flex flex-column align-self-center w-full items-center">
-				<form className="product-card-form flex-grow-1 flex flex-column h-full ml-g lg:ml-0 items-center">
+			<figcaption className="flex-grow-1 flex align-self-center w-full items-center">
+				<form className="product-card-form flex-grow-1 flex flex-col h-full ml-g lg:ml-0 items-center">
 					<input type="hidden" name="id" value="variantId" />
 					<input type="hidden" name="quantity" value="1" />
 					<a onClick={tracking} href={`/products/${url}`} className="block font-bold text-body mb-0 mt-0 lg:mt-2 hover:text-body">{title}</a>
+					{subtitle && (
+						<p className="text-sm italic text-gray-600 whitespace-nowrap">
+							Available on this product page.
+						</p>
+					)}
 				</form>
 			</figcaption>
 		</figure>
