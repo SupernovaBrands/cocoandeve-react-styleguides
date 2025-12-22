@@ -199,21 +199,13 @@ const SearchBox = (props: any) => {
 										const { img } = getFeaturedImgMeta(singleProduct.product, store);
 										return {
 											title: singleProduct.product.title,
+											subtitle: true,
 											handle: singleProduct.product.handle,
 											featuredImgUrl: img || '',
 											url: `/products/${singleProduct.product.handle}`,
 											product: singleProduct.product,
 										};
 									}
-								} else {
-									const { img } = getFeaturedImgMeta(item, store);
-									return {
-										title: item.title,
-										handle: item.handle,
-										featuredImgUrl: img || '',
-										url: `/products/${item.handle}`,
-										product: item,
-									};
 								}
 
 								return null;
@@ -333,6 +325,7 @@ const SearchBox = (props: any) => {
 												url={item.handle}
 												key={`s1--${index}`}
 												title={item?.title}
+												subtitle={item?.subtitle || false}
 												img={item?.featuredImgUrl}
 												classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/6 lg:basis-1/6 px-hg lg:px-g"
 												trackEvent={trackEvent}
