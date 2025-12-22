@@ -136,6 +136,7 @@ const SearchBox = (props: any) => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
+						const isSetSearch = /\bset\b/.test(keywordLower);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
 							t.handle === value.handle
@@ -163,7 +164,7 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
-									subtitle: item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
+									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
@@ -175,6 +176,7 @@ const SearchBox = (props: any) => {
 									uniqueFiltered.unshift(item);
 								}
 							});
+							uniqueFiltered.sort((a, b) => (b.subtitle ? 1 : 0) - (a.subtitle ? 1 : 0));
 							setProducts(uniqueFiltered);
 							setLoading(false);
 						} else {
