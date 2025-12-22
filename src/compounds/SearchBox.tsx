@@ -126,11 +126,12 @@ const SearchBox = (props: any) => {
 
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
-				res?.json().then(data => {
+				res?.json().then(async data => {
 					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
+						const isSetSearch = /\bset\b/.test(keywordLower);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
 							t.handle === value.handle
@@ -158,6 +159,7 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
+									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
@@ -169,10 +171,47 @@ const SearchBox = (props: any) => {
 									uniqueFiltered.unshift(item);
 								}
 							});
+							uniqueFiltered.sort((a, b) => (b.subtitle ? 1 : 0) - (a.subtitle ? 1 : 0));
 							setProducts(uniqueFiltered);
 							setLoading(false);
 						} else {
-							setProducts([]);
+							const storeProducts = await fetch(`/api/getVariantBySku?region=${store}`).then(r => r.json());
+							const products = storeProducts?.products || [];
+							const singleSets = uniqueHandle.map(async (item) => {
+
+								if (item.productType !== 'BUNDLE') {
+									return null;
+								}
+
+								const title = item?.title.toLowerCase();
+								const matchedParentProduct = products.find(product =>
+									product.product_type !== 'BUNDLE' && product.variants?.some(v => v.title.toLowerCase() === title)
+								);
+
+								if (matchedParentProduct) {
+									const singleProduct = await fetch(
+										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
+									).then(r => r.json());
+
+									if (singleProduct?.product) {
+										const { img } = getFeaturedImgMeta(singleProduct.product, store);
+										return {
+											title: singleProduct.product.title,
+											subtitle: true,
+											handle: singleProduct.product.handle,
+											featuredImgUrl: img || '',
+											url: `/products/${singleProduct.product.handle}`,
+											product: singleProduct.product,
+										};
+									}
+								}
+
+								return null;
+							});
+
+							const sets = await Promise.all(singleSets);
+							const finalSets = sets.filter(Boolean);
+							setProducts(finalSets);
 						}
 					} else {
 						setProducts([]);
@@ -284,6 +323,7 @@ const SearchBox = (props: any) => {
 												url={item.handle}
 												key={`s1--${index}`}
 												title={item?.title}
+												subtitle={item?.subtitle || false}
 												img={item?.featuredImgUrl}
 												classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/6 lg:basis-1/6 px-hg lg:px-g"
 												trackEvent={trackEvent}
