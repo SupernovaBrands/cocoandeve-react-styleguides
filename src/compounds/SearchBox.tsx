@@ -18,11 +18,6 @@ import {
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
-// --- UPSSELL TO PARENT MAPPING ---
-const UPSELL_PARENT_MAP = {
-	'antioxidant-rich tanning set': 'sun-kissed-gradual-tanning-lotion',
-};
-
 const SearchBox = (props: any) => {
 	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store } = props;
 	const [keyword, setKeyword] = useState('');
