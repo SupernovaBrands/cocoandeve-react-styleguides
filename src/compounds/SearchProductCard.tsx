@@ -49,7 +49,7 @@ const SearchProductCard = (props: any) => {
 					<a onClick={tracking} href={`/products/${url}`} className="block font-bold text-body mb-0 mt-0 lg:mt-2 hover:text-body">{title}</a>
 					{subtitle && (
 						<p className="text-sm italic text-gray-600 whitespace-nowrap">
-							Set is available on the product page.
+							Set is available on this product page.
 						</p>
 					)}
 				</form>
