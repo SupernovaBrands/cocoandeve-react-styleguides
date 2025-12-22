@@ -132,7 +132,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(async data => {
-					console.log(data, 'testing');
+					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
@@ -163,6 +163,7 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
+									subtitle: item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
