@@ -43,12 +43,12 @@ const SearchProductCard = (props: any) => {
 				</picture>
 			</a>
 			<figcaption className="flex-grow-1 flex align-self-center w-full items-center">
-				<form className="product-card-form flex-grow-1 flex flex-col h-full ml-g lg:ml-0 items-center">
+				<form className="product-card-form flex-grow-1 flex flex-col h-full ml-g lg:ml-0">
 					<input type="hidden" name="id" value="variantId" />
 					<input type="hidden" name="quantity" value="1" />
 					<a onClick={tracking} href={`/products/${url}`} className="block font-bold text-body mb-0 mt-0 lg:mt-2 hover:text-body">{title}</a>
 					{subtitle && (
-						<p className="text-sm italic text-gray-600 whitespace-nowrap">
+						<p className="text-sm italic text-gray-600">
 							Set is available on this product page.
 						</p>
 					)}
