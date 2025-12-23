@@ -18,11 +18,6 @@ import {
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
-// --- UPSSELL TO PARENT MAPPING ---
-const UPSELL_PARENT_MAP = {
-	'antioxidant-rich tanning set': 'sun-kissed-gradual-tanning-lotion',
-};
-
 const SearchBox = (props: any) => {
 	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store } = props;
 	const [keyword, setKeyword] = useState('');
@@ -189,8 +184,19 @@ const SearchBox = (props: any) => {
 								}
 
 								const title = item?.title.toLowerCase();
+								const handle = item?.handle;
+								
 								const matchedParentProduct = products.find(product =>
-									product.product_type !== 'BUNDLE' && product.variants?.some(v => v.title.toLowerCase() === title)
+									product.product_type !== 'BUNDLE' &&
+									(
+										product.variants?.some(
+											v => v.title?.toLowerCase() === title
+										)
+										||
+										product.tags?.some(
+											tag => tag.toLowerCase() === handle
+										)
+									)
 								);
 
 								if (matchedParentProduct) {
