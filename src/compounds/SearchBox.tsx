@@ -184,8 +184,19 @@ const SearchBox = (props: any) => {
 								}
 
 								const title = item?.title.toLowerCase();
+								const handle = item?.handle;
+								
 								const matchedParentProduct = products.find(product =>
-									product.product_type !== 'BUNDLE' && product.variants?.some(v => v.title.toLowerCase() === title)
+									product.product_type !== 'BUNDLE' &&
+									(
+										product.variants?.some(
+											v => v.title?.toLowerCase() === title
+										)
+										||
+										product.tags?.some(
+											tag => tag.toLowerCase() === handle
+										)
+									)
 								);
 
 								if (matchedParentProduct) {
