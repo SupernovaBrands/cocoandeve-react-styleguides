@@ -131,6 +131,7 @@ const SearchBox = (props: any) => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
+						const keywordHandle = keywordLower.trim().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 						const isSetSearch = /\bset\b/.test(keywordLower);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
@@ -159,7 +160,7 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
-									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
+									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && (item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) || item.tags?.some(v => v.toLowerCase() === keywordHandle)) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
