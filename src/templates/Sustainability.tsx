@@ -260,10 +260,10 @@ const Sustainability = (props: any) => {
                             {!isLoading && (
                                 <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-0 justify-center">
                                     {/* <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><DimethiconeFree className="svg block w-full mb-1 h-[32px]" />Silicone Free</li> */}
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
-                                    <li className="w-1/3 flex items-center mb-2 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
-                                    <li className="w-1/3 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
+                                    <li className="w-1/2 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ToxinFree className="svg block w-full mb-1 h-[32px]" />Toxin-free</li>
+                                    <li className="w-1/2 flex items-center mb-2 flex-wrap text-center justify-center text-body"><ParabelFree className="svg block w-full mb-1 h-[32px]" />Paraben Free</li>
+                                    <li className="w-1/2 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
+                                    <li className="w-1/2 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
                             )}
                         </div>
