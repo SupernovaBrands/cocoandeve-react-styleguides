@@ -114,6 +114,26 @@ const SearchBox = (props: any) => {
 		return 0;
 	}
 
+	const checkVariantMatch = (variantTitle, searchTitle) => {
+		if (!variantTitle || !searchTitle) return false;
+
+		const cleanVariant = variantTitle.toLowerCase().split('/')[0].trim();
+		const cleanSearch = searchTitle.toLowerCase().split('/')[0].trim();
+
+		if (cleanVariant === cleanSearch) return true;
+
+		const variantWords = cleanVariant.split(/\s+/);
+		const searchWords = cleanSearch.split(/\s+/);
+
+		for (const searchWord of searchWords) {
+			if (!variantWords.includes(searchWord)) {
+			return false;
+			}
+		}
+		
+		return true;
+	}
+
 	async function setResult () {
 		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
@@ -131,6 +151,7 @@ const SearchBox = (props: any) => {
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
+						const keywordHandle = keywordLower.trim().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 						const isSetSearch = /\bset\b/.test(keywordLower);
 						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
@@ -148,7 +169,7 @@ const SearchBox = (props: any) => {
 						productFiltered.sort(handleSort);
 						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
-						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch'));
+						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
@@ -159,7 +180,9 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
-									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && item.variants?.nodes?.some(v => v.title.toLowerCase() === keywordLower) ? true : false,
+									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
+										(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
+										item.tags?.some(v => v.toLowerCase() === keywordHandle)) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
@@ -184,10 +207,19 @@ const SearchBox = (props: any) => {
 								}
 
 								const title = item?.title.toLowerCase();
+								const handle = item?.handle;
+								
 								const matchedParentProduct = products.find(product =>
-									product.product_type !== 'BUNDLE' && product.variants?.some(v => v.title.toLowerCase() === title)
+									product.product_type !== 'BUNDLE' &&
+									(
+										product.variants?.some(v => checkVariantMatch(v.title?.toLowerCase(), title))
+										||
+										product.tags?.some(
+											tag => tag.toLowerCase() === handle
+										)
+									)
 								);
-
+	
 								if (matchedParentProduct) {
 									const singleProduct = await fetch(
 										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
