@@ -147,7 +147,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(async data => {
-					console.log(data, 'testing');
+					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
@@ -170,7 +170,7 @@ const SearchBox = (props: any) => {
 						productFiltered.sort(keywordSort);
 						const uniqueCombined = productFiltered.filter((i) => !exclusion.includes(i.handle));
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
-						console.log('uniqueFiltered', uniqueFiltered)
+
 						if (uniqueFiltered.length > 0) {
 							uniqueFiltered = uniqueFiltered.map((item) => {
 								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
@@ -202,7 +202,6 @@ const SearchBox = (props: any) => {
 						} else {
 							const storeProducts = await fetch(`/api/getVariantBySku?region=${store}`).then(r => r.json());
 							const products = storeProducts?.products || [];
-							console.log('products', products);
 							const singleSets = uniqueHandle.map(async (item) => {
 
 								if (item.productType !== 'BUNDLE') {
@@ -224,7 +223,7 @@ const SearchBox = (props: any) => {
 										)
 									)
 								);
-								console.log('matchedParentProduct', matchedParentProduct)
+	
 								if (matchedParentProduct) {
 									const singleProduct = await fetch(
 										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
