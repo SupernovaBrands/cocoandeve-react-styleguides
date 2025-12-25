@@ -180,11 +180,9 @@ const SearchBox = (props: any) => {
 								return {
 									title: item.title,
 									handle: item.handle,
-									// ==================== UPDATED SUBTITLE CHECK ====================
 									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
 										(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
 										item.tags?.some(v => v.toLowerCase() === keywordHandle)) ? true : false,
-									// ==================== END OF UPDATED SUBTITLE CHECK ====================
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
@@ -214,9 +212,7 @@ const SearchBox = (props: any) => {
 								const matchedParentProduct = products.find(product =>
 									product.product_type !== 'BUNDLE' &&
 									(
-										// ==================== UPDATED VARIANT CHECK ====================
 										product.variants?.some(v => checkVariantMatch(v.title?.toLowerCase(), title))
-										// ==================== END OF UPDATED VARIANT CHECK ====================
 										||
 										product.tags?.some(
 											tag => tag.toLowerCase() === handle
