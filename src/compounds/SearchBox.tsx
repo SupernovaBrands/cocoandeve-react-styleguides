@@ -116,23 +116,48 @@ const SearchBox = (props: any) => {
 
 	const checkVariantMatch = (variantTitle, searchTitle) => {
 		if (!variantTitle || !searchTitle) return false;
-
+		
 		const cleanVariant = variantTitle.toLowerCase().split('/')[0].trim();
 		const cleanSearch = searchTitle.toLowerCase().split('/')[0].trim();
-
+		
 		if (cleanVariant === cleanSearch) return true;
-
+		
 		const variantWords = cleanVariant.split(/\s+/);
 		const searchWords = cleanSearch.split(/\s+/);
-
+		
 		for (const searchWord of searchWords) {
 			if (!variantWords.includes(searchWord)) {
-			return false;
+				return false;
 			}
 		}
 		
 		return true;
-	}
+	};
+
+	// Helper function to check tag similarity
+	const checkTagSimilarity = (tag, keyword) => {
+		if (!tag || !keyword) return false;
+		
+		// Remove & character from both strings
+		const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, ' ').trim();
+		const normalizedKeyword = keyword.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, ' ').trim();
+		
+		// Check exact match
+		if (normalizedTag === normalizedKeyword) return true;
+		
+		// Split into words
+		const tagWords = normalizedTag.split(/\s+/);
+		const keywordWords = normalizedKeyword.split(/\s+/);
+		
+		// Check if all keyword words are present in tag words
+		for (const keywordWord of keywordWords) {
+			if (!tagWords.includes(keywordWord)) {
+				return false;
+			}
+		}
+		
+		return true;
+	};
 
 	async function setResult () {
 		const exclusion = content?.search_exclusion?.split(',') || '';
@@ -182,7 +207,7 @@ const SearchBox = (props: any) => {
 									handle: item.handle,
 									subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
 										(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
-										item.tags?.some(v => v.toLowerCase() === keywordHandle)) ? true : false,
+										item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower))) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
