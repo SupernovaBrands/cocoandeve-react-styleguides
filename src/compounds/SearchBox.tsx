@@ -114,40 +114,39 @@ const SearchBox = (props: any) => {
 		return 0;
 	}
 
-	const checkVariantMatch = (variantTitle, searchTitle) => {
-		if (!variantTitle || !searchTitle) return false;
-
-		const cleanVariant = variantTitle.toLowerCase().split('/')[0].trim();
-		const cleanSearch = searchTitle.toLowerCase().split('/')[0].trim();
-
-		if (cleanVariant === cleanSearch) return true;
-
-		const variantWords = cleanVariant.split(/\s+/);
-		const searchWords = cleanSearch.split(/\s+/);
-
-		for (const searchWord of searchWords) {
-			if (variantWords.includes(searchWord) && variantWords.includes('set')) {
-				return true;
-			}
-		}
+	// const checkVariantMatch = (variantTitle, searchTitle) => {
+	// 	if (!variantTitle || !searchTitle) return false;
 		
-		return false;
-	};
+	// 	const cleanVariant = variantTitle.toLowerCase().split('/')[0].trim();
+	// 	const cleanSearch = searchTitle.toLowerCase().split('/')[0].trim();
+		
+	// 	if (cleanVariant === cleanSearch) return true;
+		
+	// 	const variantWords = cleanVariant.split(/\s+/);
+	// 	const searchWords = cleanSearch.split(/\s+/);
+		
+	// 	for (const searchWord of searchWords) {
+	// 		if (variantWords.includes(searchWord) && variantWords.includes('set')) {
+	// 			return true;
+	// 		}
+	// 	}
+		
+	// 	return false;
+	// };
 
-	// // Helper function to check tag similarity
 	const checkTagSimilarity = (tag, keyword) => {
 		if (!tag || !keyword) return false;
 
 		const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
 		const normalizedKeyword = keyword.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
-		
+
 		if (normalizedTag === normalizedKeyword) return true;
-		
+
 		const tagWords = normalizedTag.split('-');
 		const keywordWords = normalizedKeyword.split(/\s+/);
-		
+
 		for (const keywordWord of keywordWords) {
-			if (tagWords.includes(keywordWord) && tagWords.includes('set')) {
+			if (tagWords.includes(keywordWord) && tagWords.includes('set') && tagWords.includes('upsell')) {
 				return true;
 			}
 		}
@@ -204,7 +203,7 @@ const SearchBox = (props: any) => {
 									// subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
 									// 	(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
 									// 	item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower))) ? true : false,
-									subtitle: item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false,
+									subtitle: item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
