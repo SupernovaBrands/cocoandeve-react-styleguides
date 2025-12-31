@@ -316,7 +316,7 @@ const Cart: React.FC<Props> = (props) => {
 								</div> */}
 							</div>
 
-							{manualGwpSetting && manualGwpSetting.enabled && (
+							{/* {manualGwpSetting && manualGwpSetting.enabled && (
 								<div className="px-g lg:px-3 pt-3 hidden lg:block">
 									<hr />
 									<CartManualGwp {...manualGwpSetting}
@@ -325,7 +325,7 @@ const Cart: React.FC<Props> = (props) => {
 										disableSelectItem={true}
 									/>
 								</div>
-							)}
+							)} */}
 							</>
 						) : (
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
