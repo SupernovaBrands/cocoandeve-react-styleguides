@@ -114,26 +114,6 @@ const SearchBox = (props: any) => {
 		return 0;
 	}
 
-	// const checkVariantMatch = (variantTitle, searchTitle) => {
-	// 	if (!variantTitle || !searchTitle) return false;
-		
-	// 	const cleanVariant = variantTitle.toLowerCase().split('/')[0].trim();
-	// 	const cleanSearch = searchTitle.toLowerCase().split('/')[0].trim();
-		
-	// 	if (cleanVariant === cleanSearch) return true;
-		
-	// 	const variantWords = cleanVariant.split(/\s+/);
-	// 	const searchWords = cleanSearch.split(/\s+/);
-		
-	// 	for (const searchWord of searchWords) {
-	// 		if (variantWords.includes(searchWord) && variantWords.includes('set')) {
-	// 			return true;
-	// 		}
-	// 	}
-		
-	// 	return false;
-	// };
-
 	const checkTagSimilarity = (tag, keyword) => {
 		if (!tag || !keyword) return false;
 
@@ -167,7 +147,7 @@ const SearchBox = (props: any) => {
 		fetch(`/api/predictiveSearch?q=${keyword}`).then(
 			res => {
 				res?.json().then(async data => {
-					console.log(data, 'testing');
+					// console.log(data, 'testing');
 					const productsData = data?.products;
 					if (productsData.length > 0) {
 						const keywordLower = keyword.toLowerCase();
