@@ -112,7 +112,7 @@ const Sweepstakes = (props) => {
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
 				if (!validForm.phone) {
-					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true, social);
+					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Page', '', true, social);
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
@@ -140,7 +140,7 @@ const Sweepstakes = (props) => {
 				}
 			});
 			if (validForm.email || email === '') {
-				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true, social);
+				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Page', phone, true, social);
 				setFormCompleted(true);
 				window.scrollTo({ top: 0, behavior: 'smooth' });
 			}
@@ -206,7 +206,7 @@ const Sweepstakes = (props) => {
             background-image: url(${content.sweepstakes_img.url});
             background-size: cover;
             background-repeat: no-repeat;
-            
+
         }
         @media (min-width: 992px) {
             .sweepstakes__cover{

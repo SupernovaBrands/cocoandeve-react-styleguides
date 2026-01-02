@@ -486,7 +486,7 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 export const subscribeBluecoreRegistration = (
 	email,
 	phone,
-	regSource = 'registration',
+	regSource = 'Newsletter Popup',
 ) => {
 	const country = getCookie('country_code');
 	const region = getCookie('region');

@@ -144,8 +144,8 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
 				if (!validForm.phone) {
-					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true);
-					trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Pop-up', '', true);
+					trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes Pop-up');
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
@@ -170,8 +170,8 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				// }
 			});
 			if (validForm.email || email === '') {
-				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
-				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Pop-up', phone, true);
+				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes Pop-up');
 				setFormCompleted(true);
 			}
 		}

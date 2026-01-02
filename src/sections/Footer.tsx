@@ -5,7 +5,7 @@ import Youtube from '~/images/icons/youtube.svg';
 import Tiktok from '~/images/icons/tiktok.svg';
 // import PalmTree from '~/images/icons/palm-tree.svg';
 import { useEffect, useState } from 'react';
-import { encryptParam, getCookie } from "~/modules/utils";
+import { encryptParam, getCookie, submitToKlaviyo } from "~/modules/utils";
 import Form from "~/compounds/footer-newsletter-form";
 import DropdownStore from '~/components/DropdownStore';
 
@@ -40,6 +40,8 @@ const Footer = (props) => {
                 globalThis.window.fbq('track', 'Lead');
             }
             trackBluecoreLaunchWaitlistEvent(email, 'Footer Newsletter');
+            const store = getCookie('region');
+            submitToKlaviyo({store, email, phoneNumber: '', source: 'Newsletter Footer'})
         } catch(e){
             console.log(e);
         }
