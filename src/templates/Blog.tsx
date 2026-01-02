@@ -32,7 +32,9 @@ const Blog = (props) => {
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [active, setActive] = useState(false);
+	const [tanStatus, setTanStatus] = useState(true);
 	const [tanTitle, setTanTitle] = useState('Tan & SPF');
+	const [isClient, setIsClient] = useState(false);
 
 	const handleHowTo = () => {
 		setActiveFrame(!activeFrame);
@@ -104,6 +106,8 @@ const Blog = (props) => {
 			setActiveFrame(activeFrame);
 			setActive(false);
 		}
+
+		setIsClient(true);
 	}, []);
 
 
@@ -123,6 +127,7 @@ const Blog = (props) => {
 	useEffect(() => {
 		const title = region === 'ca' ? 'Tan' : 'Tan & SPF';
 		setTanTitle(title);
+		if (region === 'int' || region === 'my') setTanStatus(false);
 	}, [region]);
 	
 	return (
@@ -132,7 +137,9 @@ const Blog = (props) => {
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="All" ctaBgColor={generalSetting?.bfcm_cta_bg_color} active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
+					{tanStatus && (
+						<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title={tanTitle} active={active ? false : (tag === 'tan' ? true : false)}/>
+					)}
 					<BlogNavTag href="/blogs/news/tagged/skin" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/body" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
 					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
@@ -140,7 +147,7 @@ const Blog = (props) => {
 				{!activeFrame && (
 					<>
 						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
-							{videoSliders.length > 0 && <HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} />}
+							{videoSliders.length > 0 && <HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} store={region} />}
 							<div className="flex flex-wrap mb-0 mt-2 w-full">
 								{videoItems.map((item, index) => (
 									<div className="mb-4 lg:mb-3 w-full lg:w-1/3 sm:px-hg lg:px-g">
@@ -156,9 +163,14 @@ const Blog = (props) => {
 												</picture>
 											)}
 											<figcaption className="p-2 ">
-												{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
-													<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
-												) : ''}
+												{ item?.tags?.length > 0 ? item?.tags?.map((tag) => {
+													if (isClient && (region === 'int' || region === 'my') && tag.toLowerCase() === 'tan') {
+														return null;
+													}
+													return (
+														<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
+													);
+												}) : '' }
 												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a tabIndex={0} role="button" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 											</figcaption>
 										</figure>
@@ -171,42 +183,44 @@ const Blog = (props) => {
 				{activeFrame && (
 					<>
 						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
-							<div className="container px-0">
-								{postData.length > 0 &&
-									<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
-										<Carousel.Inner emblaRef={emblaRef}>
-											{extendedPostData.map((data, index) => (
-												<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} />
-											))}
-										</Carousel.Inner>
-										<Carousel.Navigation>
-											<PrevButton
-												onClick={() => autoPlayClick(arrowClickPrev)}
-												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
-											>
-												<span className="absolute z-[1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
-													<ChevronPrev className="svg--current-color w-g h-g" />
-												</span>
-											</PrevButton>
-											<NextButton
-												onClick={() => autoPlayClick(arrowClickNext)}
-												className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
-											>
-												<span className="absolute z-[1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
-													<ChevronNext className="svg--current-color w-g h-g" />
-												</span>
-											</NextButton>
-										</Carousel.Navigation>
-									</Carousel.Wrapper>
-								}
-							</div>
+							{!isLoading && (
+								<div className="container px-0">
+									{postData.length > 0 &&
+										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
+											<Carousel.Inner emblaRef={emblaRef}>
+												{extendedPostData.map((data, index) => (
+													<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
+												))}
+											</Carousel.Inner>
+											<Carousel.Navigation>
+												<PrevButton
+													onClick={() => autoPlayClick(arrowClickPrev)}
+													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+												>
+													<span className="absolute z-[1] flex justify-center items-center lg:-left-[.5em] h-5 w-5 rounded-full bg-white shadow">
+														<ChevronPrev className="svg--current-color w-g h-g" />
+													</span>
+												</PrevButton>
+												<NextButton
+													onClick={() => autoPlayClick(arrowClickNext)}
+													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+												>
+													<span className="absolute z-[1] flex justify-center items-center lg:-right-[.5em] h-5 w-5 rounded-full bg-white shadow">
+														<ChevronNext className="svg--current-color w-g h-g" />
+													</span>
+												</NextButton>
+											</Carousel.Navigation>
+										</Carousel.Wrapper>
+									}
+								</div>
+							)}
 							{/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
 							<div id="poppularArticles" className="container"></div>
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper my-2 flex flex-wrap">
-								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} />
+								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
 							</div>
 						}
 						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-0 px-g lg:px-hg"></div>
