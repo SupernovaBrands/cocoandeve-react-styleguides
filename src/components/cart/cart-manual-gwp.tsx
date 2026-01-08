@@ -7,6 +7,7 @@ import SvgChevronNext from '~/images/icons/chevron-next.svg';
 import Button from '../Button';
 
 const CartManualGwp = (props:any) => {
+	const { tierMessage, isLimitReached } = props;
 	const [showScroll, setShowScroll] = useState(false);
 	const scrollRef = useRef(null);
 	const [adding, setAdding] = useState(false);
@@ -47,17 +48,43 @@ const CartManualGwp = (props:any) => {
 	}
 
 	const addItem = async (id:any) => {
+
+		if (maxSelected === 0) {
+			return;
+		}
+
 		setAdding(true);
 		setProcessingId(id);
+
+		const maxAllowedGifts = maxSelected;
+		const currentGifts = selectedKey || [];
+
+		if (currentGifts.length >= maxAllowedGifts) {
+			const giftToRemove = currentGifts[0];
+			await onRemoveItem(giftToRemove);
+		}
+
 		await onAddItem(id);
+
 		setAdding(false);
 		setProcessingId(null);
 	}
+
+	useEffect(() => {
+		if (!disableSelectItem) {
+			setShowMessage(false);
+		}
+	}, [disableSelectItem]);
 
 	return (
 			<div className="manual-gwp relative mt-2">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
+				{tierMessage && (
+					<p className="font-bold py-1 rounded text-primary text-sm">
+						{tierMessage}
+					</p>
+				)}
 				{showScroll && (
 					<>
 						<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
@@ -91,7 +118,9 @@ const CartManualGwp = (props:any) => {
 											if (!adding) {
 												if (isSelected) {
 													removeItem(item.variantId || item.id);
-												} else { addItem(item.variantId || item.id); }
+												} else {
+													addItem(item.variantId || item.id);
+												}
 											}
 										}}
 										disabled={adding}
