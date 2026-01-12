@@ -7,7 +7,7 @@ import SvgChevronNext from '~/images/icons/chevron-next.svg';
 import Button from '../Button';
 
 const CartManualGwp = (props:any) => {
-	const { qtyTierMessage } = props;
+	const { tierMessage } = props;
 	const [showScroll, setShowScroll] = useState(false);
 	const scrollRef = useRef(null);
 	const [adding, setAdding] = useState(false);
@@ -80,9 +80,9 @@ const CartManualGwp = (props:any) => {
 			<div className="manual-gwp relative mt-2">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
-				{qtyTierMessage && (
+				{tierMessage && (
 					<p className="font-bold py-1 rounded text-primary text-sm">
-						{qtyTierMessage}
+						{tierMessage}
 					</p>
 				)}
 				{showScroll && (

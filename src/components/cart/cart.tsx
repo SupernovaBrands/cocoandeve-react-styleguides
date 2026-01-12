@@ -253,87 +253,20 @@ const Cart: React.FC<Props> = (props) => {
 	// 	// dev: 'December 12',
 	// }
 
-	// console.log('manualGwpSetting', manualGwpSetting);
+	console.log('manualGwpSetting', manualGwpSetting);
 	
-	// const pluralize = (count:number, singular:string, plural:string) => count === 1 ? singular : plural;
+	useEffect(() => {
+		if (!manualGwpSetting) return;
 
-	// const qualifyingItems = cart?.items?.filter((item:any) => {
-	// 	if (item.isManualGwp) return false;
+		const maxAllowed = manualGwpSetting?.maxSelected;
+		const currentGifts = cartData.lines.filter(line => line.isManualGwp);
 
-	// 	const isAccessory = item?.merchandise?.product?.tags?.some(
-	// 		(tag: string) => tag.toLowerCase() === 'accessories'
-	// 	);
+		if (currentGifts.length > maxAllowed) {
+			const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
+			giftsToRemove.forEach(gift => onRemoveItem(gift));
+		}
+	}, [cartData.items, manualGwpSetting]);
 
-	// 	return !isAccessory;
-	// }) || [];
-
-	// const qualifyingQty = qualifyingItems.reduce((sum:number, item:any) => sum + (item.quantity || 0), 0);
-
-	// const isSingleItemOnly = qualifyingQty === 1;
-
-	// const gwpQtyTiers = [
-	// 	{ minQty: 2, gifts: 1 },
-	// 	{ minQty: 3, gifts: 2 },
-	// ];
-
-	// const activeGwpTier = [...gwpQtyTiers].sort((a, b) => b.minQty - a.minQty).find(t => qualifyingQty >= t.minQty);
-
-	// const allowedGwpCount = activeGwpTier?.gifts || 0;
-
-	// const nextGwpTier = gwpQtyTiers.find(t => t.minQty > (activeGwpTier?.minQty || 0));
-
-	// const isGwpLimitReached = allowedGwpCount > 0 && manualGwpSetting?.selectedKey?.length >= allowedGwpCount;
-
-	// let gwpTierMessage = '';
-
-	// if (qualifyingQty === 1 && gwpQtyTiers.length > 0) {
-	// 	const firstTier = gwpQtyTiers[0];
-
-	// 	gwpTierMessage = `Add 1 more item and get ${firstTier.gifts} FREE ${pluralize(
-	// 		firstTier.gifts,
-	// 		'Gift',
-	// 		'Gifts'
-	// 	)}!`;
-	// }
-
-	// if (!gwpTierMessage) {
-	// 	if (allowedGwpCount > 0 && !nextGwpTier) {
-	// 		// final tier
-	// 		gwpTierMessage = `You’ve unlocked ${allowedGwpCount} FREE ${pluralize(
-	// 			allowedGwpCount,
-	// 			'Gift',
-	// 			'Gifts'
-	// 		)}!`;
-	// 	} else if (allowedGwpCount > 0 && nextGwpTier) {
-	// 		const remainingQty = nextGwpTier.minQty - qualifyingQty;
-
-	// 		gwpTierMessage = `${allowedGwpCount} FREE ${pluralize(
-	// 			allowedGwpCount,
-	// 			'Gift',
-	// 			'Gifts'
-	// 		)}! Add ${remainingQty} more ${pluralize(
-	// 			remainingQty,
-	// 			'Item',
-	// 			'Items'
-	// 		)} to unlock ${nextGwpTier.gifts} FREE ${pluralize(
-	// 			nextGwpTier.gifts,
-	// 			'Gift',
-	// 			'Gifts'
-	// 		)}`;
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	if (!manualGwpSetting) return;
-
-	// 	const maxAllowed = allowedGwpCount || manualGwpSetting?.maxSelected;
-	// 	const currentGifts = cartData.lines.filter(line => line.isManualGwp);
-
-	// 	if (currentGifts.length > maxAllowed) {
-	// 		const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
-	// 		giftsToRemove.forEach(gift => onRemoveItem(gift));
-	// 	}
-	// }, [cartData.items, allowedGwpCount]);
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -551,17 +484,10 @@ const Cart: React.FC<Props> = (props) => {
 								{manualGwpSetting && manualGwpSetting.enabled && (
 									<>
 										<hr />
-										{/* <CartManualGwp {...manualGwpSetting}
-											maxSelected={allowedGwpCount || manualGwpSetting?.maxSelected}
-											tierMessage={gwpTierMessage}
-											isLimitReached={isGwpLimitReached}
-											disableSelectItem={isSingleItemOnly}
-											onAddItem={onToggleManualGwp}
-											onRemoveItem={onToggleManualGwp}
-										/> */}
 										<CartManualGwp {...manualGwpSetting}
 											maxSelected={manualGwpSetting?.maxSelected}
-											qtyTierMessage={manualGwpSetting?.qtyTierMessage}
+											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
 										/>
