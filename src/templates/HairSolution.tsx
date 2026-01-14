@@ -462,7 +462,7 @@ const HairSolution = (props: any) => {
                             rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
                             leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
                             svgClasses="!h-[16.97px]"
-                            imgClasses={'h-[240px] md:h-[400px]'}
+                            imgClasses={'h-[240px] md:h-auto'}
                             textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[2rem]'}
                         >
                             <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
