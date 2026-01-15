@@ -154,6 +154,11 @@ const NavMegaMenu = (props: any) => {
                                         )
                                     })
                                 )}
+                                {props.title === 'Hair' && (
+                                    <li>
+                                        <a href="/pages/hair-concerns-solutions" className="h4 !text-body" aria-label="Hair Concerns & Solutions"><strong>Hair Concerns & Solutions</strong></a>
+                                    </li>
+                                )}
                             </ol>
                         </div>
                         <div className="lg:w-3/5 pr-4 mb-3 flex flex-wrap ">
