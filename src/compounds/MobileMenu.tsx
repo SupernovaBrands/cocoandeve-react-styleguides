@@ -149,7 +149,7 @@ const MobileMenu = (props: any) => {
 											</li>
 										);
 									})}
-									<li key="shopall" className="py-[.3125em] px-0">
+									<li key="shopall" className="border-b p-0">
 										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
 											<strong>
 												{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
@@ -157,11 +157,23 @@ const MobileMenu = (props: any) => {
 											</strong>
 										</a>
 									</li>
+									{menu.title === 'Hair' && (
+										<li className="py-[.3125em] px-0">
+											<a href="/pages/hair-concerns-solutions" className="px-g pb-1 pt-2 block text-body no-underline font-bold" aria-label="Hair Concerns & Solutions">
+												Hair Concerns & Solutions
+											</a>
+										</li>
+									)}
 								</ul>
 							)}
 						</li>
 					)
 				})}
+				<li key="hair-concerns-solutions" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
+					<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex" aria-label="Hair Concerns">
+						Hair Concerns
+					</a>
+				</li>
 				{enableSwellAcc && (
 					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 						{!isLoggedIn && (
