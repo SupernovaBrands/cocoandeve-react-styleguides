@@ -158,22 +158,30 @@ const MobileMenu = (props: any) => {
 										</a>
 									</li>
 									{menu.title === 'Hair' && (
-										<li className="py-[.3125em] px-0">
-											<a href="/pages/hair-concerns-solutions" className="px-g pb-1 pt-2 block text-body no-underline font-bold" aria-label="Hair Concerns & Solutions">
-												Hair Concerns & Solutions
-											</a>
-										</li>
+										// <li className="py-[.3125em] px-0">
+										// 	<a href="/pages/hair-concerns-solutions" className="px-g pb-1 pt-2 block text-body no-underline font-bold" aria-label="Hair Concerns & Solutions">
+										// 		Hair Concerns & Solutions
+										// 	</a>
+										// </li>
+										<MenuBanner content={{
+											type: 'link-to',
+											url: '/pages/hair-concerns-solutions',
+											cta: 'Shop Now',
+											line1: '<b>Hair Concerns</b>',
+											line2: 'Shop by Concern',
+											icon: 'heart'
+										}} theme='pink-light' className="mt-g" />
 									)}
 								</ul>
 							)}
 						</li>
 					)
 				})}
-				<li key="hair-concerns-solutions" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
+				{/* <li key="hair-concerns-solutions" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
 					<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex" aria-label="Hair Concerns">
 						Hair Concerns
 					</a>
-				</li>
+				</li> */}
 				{enableSwellAcc && (
 					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 						{!isLoggedIn && (
@@ -206,6 +214,15 @@ const MobileMenu = (props: any) => {
 					cta: 'Build',
 					line1: '<b>Build Your Bundle</b>',
 					line2: 'Mix, match & save your way!',
+					icon: 'heart'
+				}} theme='pink-light' className="mt-g" />
+
+				<MenuBanner content={{
+					type: 'link-to',
+					url: '/pages/hair-concerns-solutions',
+					cta: 'Shop Now',
+					line1: '<b>Hair Concerns</b>',
+					line2: 'Shop by Concern',
 					icon: 'heart'
 				}} theme='pink-light' className="mt-g" />
 
