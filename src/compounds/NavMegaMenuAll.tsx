@@ -42,7 +42,7 @@ const NavMegaMenuAll = (props: any) => {
                                                 <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>Shop {menu.title} Range</a></li>
                                             )}
                                             {menu.title === 'Hair' && (
-                                                <li className="mt-1"><a href="/pages/hair-concerns-solutions" className="text-body font-bold" aria-label="Shop by Concern">Shop by Concern</a></li>
+                                                <li className="mt-1"><a href="/pages/hair-concerns-solutions" className="block border font-bold hover:no-underline no-underline px-1 py-1 text-body text-center hover:text-primary" aria-label="Shop by Concern">Shop by Concern</a></li>
                                             )}
                                         </ol>
                                     </div>

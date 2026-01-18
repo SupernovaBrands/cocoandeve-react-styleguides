@@ -147,7 +147,7 @@ const NavMegaMenu = (props: any) => {
                                 )}
                                 {props.title === 'Hair' && (
                                     <li>
-                                        <a href="/pages/hair-concerns-solutions" className="h4 !text-body" aria-label="Hair Concerns & Solutions"><strong>Hair Concerns & Solutions</strong></a>
+                                        <a href="/pages/hair-concerns-solutions" className="block border font-bold hover:no-underline no-underline px-1 py-1 text-body text-center hover:text-primary" aria-label="Hair Concerns & Solutions"><strong>Hair Concerns & Solutions</strong></a>
                                     </li>
                                 )}
                             </ol>
