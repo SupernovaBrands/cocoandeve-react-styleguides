@@ -146,7 +146,7 @@ const CartManualGwp = (props:any) => {
 					})}
 				</ul>
 				{disableSelectItem && <hr />}
-				{showMessage && <p className="text-primary mt-1 text-[14px]">Add another item to your cart to claim your free gift.</p>}
+				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">Add another item to your cart to claim your free gift.</p>}
 			</div>
 	);
 }
