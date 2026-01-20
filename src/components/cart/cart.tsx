@@ -225,6 +225,19 @@ const Cart: React.FC<Props> = (props) => {
 	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
+	
+	useEffect(() => {
+		if (!manualGwpSetting) return;
+
+		const maxAllowed = manualGwpSetting?.maxSelected;
+		const currentGifts = cartData.lines.filter(line => line.isManualGwp);
+
+		if (currentGifts.length > maxAllowed) {
+			const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
+			giftsToRemove.forEach(gift => onRemoveItem(gift));
+		}
+	}, [cartData.items, manualGwpSetting]);
+
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
