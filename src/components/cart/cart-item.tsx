@@ -30,9 +30,19 @@ export const CartItem = (props:CartItemProps) => {
 		productId, item, isLastStock,
 		useShopifyVariantInfo, store } = props;
 
-	const { swatches, variants, selectedSwatch } = item;
+	const { swatches, variants, selectedSwatch, attributes } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
 	const isMultiOptions = item.swatches.length > 1;
+
+	const componentsJson = attributes.find((attr) => attr.key === '_components')
+	const componentImage = attributes.find((attr) => attr.key === '_image')
+
+	let components = null;
+	let component = null;
+	if (componentsJson) {
+		components = JSON.parse(componentsJson.value);
+		component = components[0];
+	}
 
 	const [hideItem, setHideItem] = useState(false);
 	const [editingVariant, setEditingVariant] = useState(null);
@@ -230,13 +240,16 @@ export const CartItem = (props:CartItemProps) => {
 				condition={!item.isFreeItem}
 				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
 			>
-				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+				{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
 						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
 						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
-				</picture>
+				</picture>)}
+				{componentImage?.value && <picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+					<img src={componentImage?.value} className="w-full object-contain bg-pink-light h-[78px]" alt={component?.title} loading="lazy" width="78" height="78" />
+				</picture>}
 			</ConditionWrapper>
 			<figcaption className="w-9/12 px-hg lg:px-g">
 				<div className="flex items-start no-gutters justify-between">
@@ -246,7 +259,8 @@ export const CartItem = (props:CartItemProps) => {
 								condition={item.isFreeItem}
 								wrapper={(children:any) => <span className="text-black">{children}</span>}
 							>
-								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && !component && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && component && (`${component.title.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
 						)
 							: (
@@ -268,7 +282,8 @@ export const CartItem = (props:CartItemProps) => {
 										}
 									}}
 								>
-									{ !item.isFreeItem && (`${productTitle(item)}`) }
+									{ !item.isFreeItem && !component && (`${productTitle(item)}`) }
+									{ !item.isFreeItem && component && (`${component?.title}`) }
 									{`${item.recurring ? ' Subscriptions' : ''}`}
 								</ConditionWrapper>
 							)}
@@ -389,14 +404,14 @@ export const CartItem = (props:CartItemProps) => {
 				<div className="flex items-center justify-between">
 					<QuantityBox
 						name="quantity-box"
-						editable={!item.isFreeItem}
+						editable={component ? false : !item.isFreeItem}
 						quantity={item.quantity}
 						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 						isLastStock={isLastStock}
 						productId={productId}
-						productStock={productStock}
+						productStock={component ? 10000 : productStock}
 						isModified={item.modified}
-						originalQuantity={item.original_quantity}
+						originalQuantity={component ? item.quantity : item.original_quantity}
 						allowZero={true}
 					/>
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
