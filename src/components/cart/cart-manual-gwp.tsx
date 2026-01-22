@@ -21,6 +21,7 @@ const CartManualGwp = (props:any) => {
 		onAddItem,
 		onRemoveItem,
 		disableSelectItem,
+		errorMessage
 	} = props;
 	
 	useEffect(() => {
@@ -107,9 +108,9 @@ const CartManualGwp = (props:any) => {
 									<picture className="block">
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									{item.price && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />}
+									{item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />}
 								</figure>
-								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
+								<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
 								{!disableSelectItem && (
 									<Button
 										lg={false}
@@ -146,7 +147,7 @@ const CartManualGwp = (props:any) => {
 					})}
 				</ul>
 				{disableSelectItem && <hr />}
-				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">Add another item to your cart to claim your free gift.</p>}
+				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">{errorMessage}</p>}
 			</div>
 	);
 }
