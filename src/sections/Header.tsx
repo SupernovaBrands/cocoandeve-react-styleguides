@@ -249,7 +249,7 @@ const Header = (props: any) => {
 													generalSetting={generalSetting}
 												/>
 											)}
-											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(nav.title) > -1 && (
+											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare', 'SPF'].indexOf(nav.title) > -1 && (
 												<NavMegaMenu
 													title={nav.title}
 													handle={nav.handle.replace('/collections/', '')}
