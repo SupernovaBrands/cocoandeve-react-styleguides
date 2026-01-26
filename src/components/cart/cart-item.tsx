@@ -260,7 +260,7 @@ export const CartItem = (props:CartItemProps) => {
 								wrapper={(children:any) => <span className="text-black">{children}</span>}
 							>
 								{ item.isFreeItem && !component && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
-								{ item.isFreeItem && component && (`${component.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && component && (`${component.title?.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
 						)
 							: (
