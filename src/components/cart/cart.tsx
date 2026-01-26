@@ -267,6 +267,19 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData.items, manualGwpSetting]);
 
+	useEffect(() => {
+		if (!cartData?.lines) return;
+
+		const paidItems = cartData.lines.filter((line: any) => !line.isManualGwp);
+		const gwpItems = cartData.lines.filter((line: any) => line.isManualGwp);
+
+		if (paidItems.length === 0 && gwpItems.length > 0) {
+			const gwpIds = gwpItems.map((item: any) => item.id);
+			onDeleteLine(gwpIds, []);
+		}
+	}, [cartData?.lines]);
+
+
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
