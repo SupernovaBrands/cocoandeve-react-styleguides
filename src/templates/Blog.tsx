@@ -137,13 +137,13 @@ const Blog = (props) => {
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="All" ctaBgColor={generalSetting?.bfcm_cta_bg_color} active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
-					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
-						<>
-							<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
-							<BlogNavTag href="/blogs/news/tagged/spf" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="SPF" active={active ? false : (tag === 'spf' ? true : false)}/>
-						</>
+					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
+						<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
-					{['int', 'my'].includes(region) && (
+					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
+						<BlogNavTag href="/blogs/news/tagged/spf" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="SPF" active={active ? false : (tag === 'suncare' ? true : false)}/>
+					)}
+					{['int', 'my', 'au'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/skin" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					)}
 					<BlogNavTag href="/blogs/news/tagged/body" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
