@@ -140,7 +140,7 @@ const Blog = (props) => {
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
-					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
+					{['us', 'uk', 'eu', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/spf" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="SPF" active={active ? false : (tag === 'suncare' ? true : false)}/>
 					)}
 					{['int', 'my', 'au'].includes(region) && (
