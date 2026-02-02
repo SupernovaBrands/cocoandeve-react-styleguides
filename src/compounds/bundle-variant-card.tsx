@@ -107,7 +107,7 @@ const BundleVariantCard = (props) => {
     )?.values || [];
 
     const bundleImg = slides[slides.length - 1];
-    const urlSet = productStrapi?.bundle_handle || null;
+    const urlSet = optionValue === "Antioxidant-rich Tanning Set" ? null : productStrapi?.bundle_handle || null;
 
     useEffect(() => {
         const selectedValue = currentVariant.selectedOptions[1]?.value.toLowerCase();
