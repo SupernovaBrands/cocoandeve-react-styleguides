@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import HairIcon from '~/images/icons/hair-dryer.svg';
+import BundleIcon from '~/images/icons/bundle-icon.svg';
+import TanQuizIcon from '~/images/icons/tan-quiz.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
 import BrandLogo from '~/images/ce-logo.svg';
@@ -113,118 +116,123 @@ const MobileMenu = (props: any) => {
 								</button>
 							)}
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
-									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
-										<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
-											const newStates = {...defMenuState};
-											newStates[i] = false;
-											setMenuStates(newStates);
-										}}>
-											<ChevronPrev className="h-[1em]" />
-										</button>
-										<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
-											<BrandLogo className="lg:h-[34px]" />
-										</a>
-										<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
-											<Close className="h-[1em]"  onClick={() => {
-												// const newStates = {...defMenuState};
-												// newStates[i] = false;
-												// setMenuStates(newStates);
-												onToggleMobileNav(false);
-											}} />
-										</button>
-									</li>
-									<li key="menuTitle" className="border-b p-0">
-										<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
-									</li>
-									{menu.rows?.map((row, index) => {
-										let title = row.title;
-										if (title.toLowerCase().includes('accessories')) title = 'Accessories';
-										if (title === 'Face Moisturizer') title = 'Face Moisturiser';
-										if (title === 'Moisturiser') title = 'Moisturizers';
-										if (title === 'Tan & SPF Sets') title = 'Tan Sets';
-										return (
-											<li key={`row-${row.handle}-${index}`} className="border-b p-0">
-												<a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
+									<div className="flex-shrink-0">
+										<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
+											<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
+												const newStates = {...defMenuState};
+												newStates[i] = false;
+												setMenuStates(newStates);
+											}}>
+												<ChevronPrev className="h-[1em]" />
+											</button>
+											<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
+												<BrandLogo className="lg:h-[34px]" />
+											</a>
+											<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
+												<Close className="h-[1em]"  onClick={() => {
+													// const newStates = {...defMenuState};
+													// newStates[i] = false;
+													// setMenuStates(newStates);
+													onToggleMobileNav(false);
+												}} />
+											</button>
+										</li>
+										<li key="menuTitle" className="border-b p-0">
+											<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
+										</li>
+									</div>
+									<div className="flex-grow overflow-y-auto">
+										{menu.rows?.map((row, index) => {
+											let title = row.title;
+											if (title.toLowerCase().includes('accessories')) title = 'Accessories';
+											if (title === 'Face Moisturizer') title = 'Face Moisturiser';
+											if (title === 'Moisturiser') title = 'Moisturizers';
+											if (title === 'Tan & SPF Sets') title = 'Tan Sets';
+											return (
+												<li key={`row-${row.handle}-${index}`} className="border-b p-0">
+													<a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
+												</li>
+											);
+										})}
+										<li key="shopall" className="border-b p-0">
+											<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
+												<strong>
+													{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
+													{menu.title !== 'Value Sets' && (`Shop ${menu.title} Range`)}
+												</strong>
+											</a>
+										</li>
+									</div>
+									<div className="flex-shrink-0 mt-auto mb-2">
+										{menu.title === 'Hair' && (
+											<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+												<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
+													<HairIcon className="mr-1" /> Hair Concerns & Solutions
+												</a>
 											</li>
-										);
-									})}
-									<li key="shopall" className="border-b p-0">
-										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
-											<strong>
-												{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
-												{menu.title !== 'Value Sets' && (`Shop ${menu.title} Range`)}
-											</strong>
-										</a>
-									</li>
-									{menu.title === 'Hair' && (
-										// <li className="py-[.3125em] px-0">
-										// 	<a href="/pages/hair-concerns-solutions" className="px-g pb-1 pt-2 block text-body no-underline font-bold" aria-label="Hair Concerns & Solutions">
-										// 		Hair Concerns & Solutions
-										// 	</a>
-										// </li>
-										<MenuBanner content={{
-											type: 'link-to',
-											url: '/pages/hair-concerns-solutions',
-											cta: 'Shop Now',
-											line1: '<b>Hair Concerns</b>',
-											line2: 'Shop by Concern',
-											icon: 'heart'
-										}} theme='pink-light' className="mt-g" />
-									)}
+										)}
+									</div>
 								</ul>
 							)}
 						</li>
 					)
 				})}
-				{/* <li key="hair-concerns-solutions" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
-					<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex" aria-label="Hair Concerns">
-						Hair Concerns
-					</a>
-				</li> */}
-				{enableSwellAcc && (
-					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
-						{!isLoggedIn && (
-							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
-								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
-							</a>
-						)}
-						{isLoggedIn && (
-							<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
-								{userPts !== -1 && (
-									<>{userPts} Points <BeautyIcon className="ml-1 mr-1" /></>
-								)}
-								{userPts === -1 && (
-									<div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
-								)}
-								{/* <div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" /> */}
-							</button>
-						)}
-					</li>
-				)}
-				{!enableSwellAcc && (
-					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
-						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
-					</li>
-				)}
 
-				<MenuBanner content={{
-					type: 'link-to',
-					url: '/pages/build-your-own-bundle',
-					cta: 'Build',
-					line1: '<b>Build Your Bundle</b>',
-					line2: 'Mix, match & save your way!',
-					icon: 'heart'
-				}} theme='pink-light' className="mt-g" />
+				<div className="mt-3">
+					{enableSwellAcc && (
+						<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+							{!isLoggedIn && (
+								<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
+									<BeautyIcon className="mr-1" /> Bali Beauty Club
+								</a>
+							)}
+							{isLoggedIn && (
+								<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
+									{userPts !== -1 && (
+										<>{userPts} Points <BeautyIcon className="ml-1 mr-1" /></>
+									)}
+									{userPts === -1 && (
+										<div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
+									)}
+									{/* <div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" /> */}
+								</button>
+							)}
+						</li>
+					)}
+					{!enableSwellAcc && (
+						<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+							<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
+						</li>
+					)}
 
-				<MenuBanner content={{
-					type: 'link-to',
-					url: '/pages/hair-concerns-solutions',
-					cta: 'Shop Now',
-					line1: '<b>Hair Concerns</b>',
-					line2: 'Shop by Concern',
-					icon: 'heart'
-				}} theme='pink-light' className="mt-g" />
+					{/* <MenuBanner content={{
+						type: 'link-to',
+						url: '/pages/build-your-own-bundle',
+						cta: 'Build',
+						line1: '<b>Build Your Bundle</b>',
+						line2: 'Mix, match & save your way!',
+						icon: 'heart'
+					}} theme='pink-light' className="mt-g" /> */}
+
+					<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+						<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
+							<TanQuizIcon className="mr-1" /> Take the Tan Quiz
+						</a>
+					</li>
+
+					<li key="build-your-own-bundle" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+						<a href="/pages/build-your-own-bundle" className="w-full m-0 pb-1 pt-2 text-body flex">
+							<BundleIcon className="mr-1" /> Build Your Bundle
+						</a>
+					</li>
+
+					<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+						<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
+							<HairIcon className="mr-1" /> Hair Concerns & Solutions
+						</a>
+					</li>
+				</div>
 
 				<li key="shopall" className="my-g p-g" role="presentation">
 					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
