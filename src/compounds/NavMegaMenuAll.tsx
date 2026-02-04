@@ -35,14 +35,16 @@ const NavMegaMenuAll = (props: any) => {
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={row.handle} className="text-body" aria-label={row.title}>{row.title}</a>
+                                                    <a href={row.handle} className={`text-body ${row.title === 'Tan Quiz' ? 'border-b border-[#CE8011]' : ''}`} aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
+                                            {menu.title === 'Hair' && (
+                                                <li className="mb-1 ">
+                                                    <a href="/pages/hair-concerns-solutions" className="text-body hover:no-underline border-b border-[#CE8011]" aria-label="Hair Concerns & Solutions">Hair Concerns & Solutions</a>
+                                                </li>
+                                            )}
                                             {menu.handle !== '/collections/kits-gifts' && (
                                                 <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
-                                            )}
-                                            {menu.title === 'Hair' && (
-                                                <li className="mt-1"><a href="/pages/hair-concerns-solutions" className="block border font-bold hover:no-underline no-underline px-1 py-1 text-body text-center hover:text-primary" aria-label="Shop by Concern">Shop by Concern</a></li>
                                             )}
                                         </ol>
                                     </div>
