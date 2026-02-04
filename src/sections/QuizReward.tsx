@@ -21,7 +21,7 @@ const QuizRewardTest = (props: any) => {
                         <a href="/pages/rewards">
                             <picture className="block">
                                 <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/704453dd-6f76-4a3a-1c09-c72dc47c5d00/public" media="(min-width: 992px)" />
-                                <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/public" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
+                                <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/public" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={384} height={72} />
                             </picture>
                             <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                                 <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body">Rewards Program</p>
