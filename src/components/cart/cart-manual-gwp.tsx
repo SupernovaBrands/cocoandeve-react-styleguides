@@ -108,7 +108,10 @@ const CartManualGwp = (props:any) => {
 									<picture className="block">
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									{item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />}
+									{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
+									<figcaption className={`relative bg-gray-400 text-xs rounded-h ${item.price && item.price !== '$0' && item.price !== '0' ? 'block' : 'hidden'}`}>
+										{item.price && item.price !== '$0' && item.price !== '0' ? `Worth ${item.price}` : ''}
+									</figcaption>
 								</figure>
 								<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
 								{!disableSelectItem && (
