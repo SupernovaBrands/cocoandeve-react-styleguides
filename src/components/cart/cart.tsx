@@ -224,7 +224,7 @@ const Cart: React.FC<Props> = (props) => {
 	// 	// dev: 'December 12',
 	// }
 
-	console.log('manualGwpSetting', manualGwpSetting);
+	// console.log('manualGwpSetting', manualGwpSetting);
 	
 	useEffect(() => {
 		if (!manualGwpSetting) return;
