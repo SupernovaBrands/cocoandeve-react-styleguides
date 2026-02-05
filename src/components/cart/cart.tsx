@@ -225,6 +225,32 @@ const Cart: React.FC<Props> = (props) => {
 	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
+	
+	useEffect(() => {
+		if (!manualGwpSetting) return;
+
+		const maxAllowed = manualGwpSetting?.maxSelected;
+		const currentGifts = cartData.lines.filter(line => line.isManualGwp);
+
+		if (currentGifts.length > maxAllowed) {
+			const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
+			giftsToRemove.forEach(gift => onRemoveItem(gift));
+		}
+	}, [cartData.items, manualGwpSetting]);
+
+	useEffect(() => {
+		if (!cartData?.lines) return;
+
+		const paidItems = cartData.lines.filter((line: any) => !line.isManualGwp);
+		const gwpItems = cartData.lines.filter((line: any) => line.isManualGwp);
+
+		if (paidItems.length === 0 && gwpItems.length > 0) {
+			const gwpIds = gwpItems.map((item: any) => item.id);
+			onDeleteLine(gwpIds, []);
+		}
+	}, [cartData?.lines]);
+
+
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -432,6 +458,9 @@ const Cart: React.FC<Props> = (props) => {
 									<>
 										<hr />
 										<CartManualGwp {...manualGwpSetting}
+											maxSelected={manualGwpSetting?.maxSelected}
+											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
 										/>
