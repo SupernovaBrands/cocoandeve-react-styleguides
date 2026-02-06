@@ -61,6 +61,46 @@ const MobileMenu = (props: any) => {
 		}, 200);
 	}, [menuStates]);
 
+	// Add this useEffect to your MobileMenu component
+	useEffect(() => {
+		let scrollY = 0;
+		
+		if (openDrawer) {
+			// Prevent body scroll
+			scrollY = window.scrollY;
+			document.body.style.overflow = 'hidden';
+			document.body.style.height = '100vh';
+			document.body.style.position = 'fixed';
+			document.body.style.width = '100%';
+			document.body.style.top = `-${scrollY}px`;
+			
+			// Store scroll position in data attribute
+			document.body.setAttribute('data-scroll-y', scrollY.toString());
+		} else {
+			// Restore body scroll
+			document.body.style.overflow = '';
+			document.body.style.height = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.top = '';
+			
+			// Restore scroll position
+			const savedScrollY = document.body.getAttribute('data-scroll-y');
+			if (savedScrollY) {
+				window.scrollTo(0, parseInt(savedScrollY, 10));
+			}
+		}
+		
+		// Cleanup
+		return () => {
+			document.body.style.overflow = '';
+			document.body.style.height = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.top = '';
+		};
+	}, [openDrawer]);
+
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
@@ -116,7 +156,7 @@ const MobileMenu = (props: any) => {
 								</button>
 							)}
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
 									<div className="flex-shrink-0">
 										<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 											<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
@@ -164,7 +204,7 @@ const MobileMenu = (props: any) => {
 											</a>
 										</li>
 									</div>
-									<div className="flex-shrink-0 mt-auto mb-2">
+									<div className="flex-shrink-0 mt-auto mb-4">
 										{menu.title === 'Hair' && (
 											<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 												<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
