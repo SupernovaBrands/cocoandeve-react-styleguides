@@ -216,7 +216,7 @@ const MobileMenu = (props: any) => {
 									{menu.title === 'Tan' && (
 										<div className="flex-shrink-0 mt-auto mb-4">
 											<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
-												<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
+												<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
 													<TanQuizIcon className="mr-1" /> Take the Tan Quiz
 												</a>
 											</li>
