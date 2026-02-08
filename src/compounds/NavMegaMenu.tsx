@@ -142,7 +142,14 @@ const NavMegaMenu = (props: any) => {
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
-                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 !text-body">{menu.title}</a></li>
+                                        return (
+                                            <li className=" mb-1" key={`mobile-menu-${i}`}>
+                                                <a href={menu.handle} className={`h4 !text-body ${menu.title === 'Tan Quiz' ? 'border-b border-[#CE8011] hover:no-underline' : ''}`}>
+                                                    {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
+                                                    {!menu.handle.includes('build-your-own-bundle') && menu.title}
+                                                </a>
+                                            </li>
+                                        )
                                     })
                                 )}
                             </ol>

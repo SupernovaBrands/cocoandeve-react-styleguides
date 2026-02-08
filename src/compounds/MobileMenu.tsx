@@ -116,7 +116,7 @@ const MobileMenu = (props: any) => {
 								</button>
 							)}
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`} aria-labelledby={m_title}>
 									<div className="flex-shrink-0">
 										<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
 											<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
@@ -164,22 +164,31 @@ const MobileMenu = (props: any) => {
 											</a>
 										</li>
 									</div>
-									<div className="flex-shrink-0 mt-auto mb-2">
-										{menu.title === 'Hair' && (
+									{menu.title === 'Hair' && (
+										<div className="flex-shrink-0 mt-auto mb-4">
 											<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 												<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
 													<HairIcon className="mr-1" /> Hair Concerns & Solutions
 												</a>
 											</li>
-										)}
-									</div>
+										</div>
+									)}
+									{menu.title === 'Tan' && (
+										<div className="flex-shrink-0 mt-auto mb-4">
+											<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+												<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
+													<TanQuizIcon className="mr-1" /> Take the Tan Quiz
+												</a>
+											</li>
+										</div>
+									)}
 								</ul>
 							)}
 						</li>
 					)
 				})}
 
-				<div className="mt-3">
+				<div className="mt-5">
 					{enableSwellAcc && (
 						<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 							{!isLoggedIn && (
