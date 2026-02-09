@@ -70,10 +70,7 @@ const BundleVariantCard = (props) => {
     };
 
     const getHardcodedImage = (handle, store, selectedValue) => {
-        const isValid =
-            (handle === 'bronzing-self-tanner-drops' && store === 'au') ||
-            (handle === 'antioxidant-glow-cream' && store === 'us') ||
-            (handle === 'antioxidant-glow-cream' && store === 'ca');
+        const isValid = (handle === 'bronzing-self-tanner-drops' && store === 'au') || (handle === 'antioxidant-glow-cream' && store === 'ca');
 
         if (!isValid) return null;
 
