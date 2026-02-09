@@ -288,7 +288,7 @@ const SwatchOverlay = memo((props: any) => {
         if (swatchLabel.current) swatchLabel.current.textContent = targetText;
 
         if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'au'].includes(store)) {
-            handleShade(targetText.toLowerCase());
+            handleShade(targetText?.toLowerCase());
         }
     }, [product, store, handleShade]);
 
@@ -357,7 +357,7 @@ const SwatchOverlay = memo((props: any) => {
 });
 
 const isKit = (title:string) => {
-	const productTitle = title.toLowerCase();
+	const productTitle = title?.toLowerCase();
 	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
@@ -396,7 +396,7 @@ const ProductCard = (props: any) => {
         }
 
         return nodes.filter((node: any) => {
-            const t = node.title.toLowerCase();
+            const t = node?.title?.toLowerCase();
             return !t.includes('bundle') && !t.includes('kit') && !t.includes('set');
         }).map((node: any) => node.sku);
     }, [product]);
