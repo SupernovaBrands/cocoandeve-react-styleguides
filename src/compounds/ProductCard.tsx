@@ -231,7 +231,7 @@ const SwatchOverlay = memo((props: any) => {
 
         if (autoTicks.length > 0) {
             first = product?.variants?.nodes.find((obj) =>
-                autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
+                autoTicks?.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
             ) || null;
         }
 
@@ -376,7 +376,7 @@ const ProductCard = (props: any) => {
 
         if (autoTicks.length > 0) {
             const match = variantNodes.find((obj) =>
-                autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
+                autoTicks?.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
             );
             if (match) return match;
         }
@@ -397,6 +397,7 @@ const ProductCard = (props: any) => {
 
         return nodes.filter((node: any) => {
             const t = node?.title?.toLowerCase();
+            if (!t) return true;
             return !t.includes('bundle') && !t.includes('kit') && !t.includes('set');
         }).map((node: any) => node.sku);
     }, [product]);
@@ -444,7 +445,7 @@ const ProductCard = (props: any) => {
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
     const customTitle = useMemo(() => props.customProductTitle?.customTitles?.find(
-            (row) => row.handle === product?.handle && row.enabled_item && filterIncludes.includes(row.options)
+            (row) => row.handle === product?.handle && row.enabled_item && filterIncludes?.includes(row.options)
         )?.title || null,
         [props.customProductTitle, product?.handle, filterIncludes]
     );
