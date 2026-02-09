@@ -17,7 +17,6 @@ const YotpoStar = (props: any) => {
 	const localeParam = 'en';
 
 	const fetchStar = () => {
-		console.log('fetcing star');
 		if (hasFetchedRef.current) return;
 		hasFetchedRef.current = true;
 
@@ -51,7 +50,7 @@ const YotpoStar = (props: any) => {
 			{
 				root: null,
 				rootMargin: '200px',
-				threshold: 0.1
+				threshold: 0.5
 			}
 		);
 
@@ -91,19 +90,32 @@ const YotpoStar = (props: any) => {
 			</a> */}
 			{props.smSingleStar && (
 				<>
-					<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
-						<ReviewStarSingle className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'}`} />
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">
+						{!props.smSingleStarAllDevice && (
+							<ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
+						)}
 					</a>
-					<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
-						<span className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'} ml-25`}>{`${score ? score.toFixed(1) : 0}/5.0`}</span>
-					</a>
+					{props.smSingleStar && (
+						<>
+							<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
+								<ReviewStarSingle className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'}`} />
+							</a>
+							<a className="review-star__v2" href={`/products/${props?.productHandle}?write-a-review=true`} aria-label="Write a review for this product">
+								<span className={`${props.smSingleStarAllDevice ? '' : 'lg:hidden'} ml-25`}>{score ? score.toFixed(1) : 0}/5.0</span>
+							</a>
+						</>
+					)}
+					{props.showScore && score && (
+						<span className="ml-25">({score?.toFixed(0)})</span>
+					)}
+					{props.showTotal && (
+						<span className="ml-25 review-star__total">
+							<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-xs text-body hover:text-primary ${props.hideUnderline ? '' : 'underline'} yotpo-start__number`} aria-label={`Total reviews (${total?.toFixed(0)})`}>({total?.toFixed(0)})</a>
+						</span>
+					)}
 				</>
-			)}
-			{props.showScore && score && <span className="ml-25">({`${score?.toFixed(0)}`})</span>}
-			{props.showTotal && (
-				<span className="ml-25 review-star__total">
-					<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`${props.smSingleStar || props.sustainability ? '' : ''} text-xs text-body hover:text-primary ${props.hideUnderline ? '' : 'underline'} yotpo-start__number`} aria-label={`Total reviews (${total?.toFixed(0)})`}>({total?.toFixed(0)})</a>
-				</span>
+			) : (
+				<div className="h-2 w-full" aria-hidden="true" />
 			)}
 		</div>
 	) : (

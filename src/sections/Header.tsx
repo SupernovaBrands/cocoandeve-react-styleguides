@@ -1,12 +1,17 @@
+import dynamic from 'next/dynamic';
+import { useMemo, useCallback } from 'react';
+
 import { useState, useEffect, useRef } from 'react';
 import AnnouncementBar from '~/components/AnnouncementBar';
 import NavMegaMenu from '~/compounds/NavMegaMenu';
-import MobileMenu from '~/compounds/MobileMenu';
+// import MobileMenu from '~/compounds/MobileMenu';
+const MobileMenu = dynamic(() => import('~/compounds/MobileMenu'), { ssr: false });
 import BrandLogo from '~/images/ce-logo.svg';
 import Account from '~/images/icons/account.svg';
 import Search from '~/images/icons/search-thin.svg';
 import CartIcon from '~/images/icons/cart.svg';
-import SearchBox from '~/compounds/SearchBox';
+// import SearchBox from '~/compounds/SearchBox';
+const SearchBox = dynamic(() => import('~/compounds/SearchBox'), { ssr: false });
 import AccountDropdown from '~/compounds/AccountDropdown';
 import NavMegaMenuAll from '~/compounds/NavMegaMenuAll';
 import Tooltip from '~/components/Tooltip';
@@ -19,7 +24,7 @@ const Header = (props: any) => {
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
 		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav
 	} = props;
-	
+
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -30,6 +35,12 @@ const Header = (props: any) => {
 	const [userPts, setUserPts] = useState(points || 0);
 	const [flashBubbleWrapper, setFlashBubbleWrapper] = useState(false);
 	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
+
+	useEffect(() => {
+		if (!initialStore) {
+			setActiveMainMenu(store === 'us' ? mainNav : mainMenu);
+		}
+	}, [initialStore, store, mainNav, mainMenu]);
 	// const router = useRouter();
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
@@ -50,7 +61,7 @@ const Header = (props: any) => {
 	}, [flashBubble]);
 
 	const onToggleSearchBox = () => {
-		setOpenAccountBox(false);
+		handleAccountBoxChange(false);
 		setOpenSearchBox(!openSearchBox);
 		// console.log('onToggleSearchBox', openSearchBox);
 		if (!openSearchBox) document.querySelector('body').classList.add('overflow-y-hidden', 'search-panel-active');
@@ -61,18 +72,21 @@ const Header = (props: any) => {
 		if (isLoggedIn) {
 			window.location.href = '/account'
 		}
-		else setOpenAccountBox(!openAccountBox);
+		else handleAccountBoxChange(!openAccountBox);
 		setOpenSearchBox(false);
 		document.querySelector('body').classList.remove('overflow-y-hidden', 'search-panel-active');
 	}
 
 	useEffect(() => {
-		setOpenAccountBox(openDropdownRegister);
+		if (openDropdownRegister !== openAccountBox) {
+			setOpenAccountBox(openDropdownRegister);
+		}
 	}, [openDropdownRegister]);
 
-	useEffect(() => {
-		setOpenDropDownRegister(openAccountBox);
-	}, [openAccountBox]);
+	const handleAccountBoxChange = useCallback((newValue: boolean) => {
+		setOpenAccountBox(newValue);
+		setOpenDropDownRegister(newValue);
+	}, [setOpenDropDownRegister]);
 
 	const closeTip = () => {
 		setFlashBubble(false);
@@ -91,46 +105,24 @@ const Header = (props: any) => {
 
 	const accountRef = useRef(null);
 
-	useEffect(() => {
-		if (!initialStore) {
-			if (store === 'us') {
-				setActiveMainMenu(mainNav);
-			} else {
-				setActiveMainMenu(mainMenu);
-			}
+	const handleScroll = useCallback(() => {
+		if (disabledScroll) return;
+
+		const scrollTop = window.scrollY;
+		if (!openSearchBox) {
+			setScrolled(scrollTop > 0);
+		} else {
+			setScrolled(false);
 		}
-	}, [props])
+	}, [openSearchBox, disabledScroll]);
+
 	useEffect(() => {
-		let lastScrollTop = 0;
-		let scrollTop = 0;
-		const handleScroll = (e:any) => {
-			if (disabledScroll) {
-				return false;
-			}
-
-			if (!openSearchBox) {
-				scrollTop = window.scrollY;
-				if (scrollTop < lastScrollTop) {
-					if (scrollTop <= 0) {
-						setScrolled(false);
-					}
-				} else if (scrollTop <= 0) {
-					setScrolled(false);
-				} else {
-					setScrolled(true);
-				}
-				lastScrollTop = scrollTop;
-			} else {
-				setScrolled(false);
-			}
-		};
-
-		window.addEventListener('scroll', handleScroll);
+		window.addEventListener('scroll', handleScroll, { passive: true });
 
 		return () => {
-		  window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('scroll', handleScroll);
 		};
-	}, []);
+	}, [handleScroll]);
 
 	useEffect(() => {
 		if (openDrawer) {
@@ -182,13 +174,13 @@ const Header = (props: any) => {
 	useEffect(() => {
 		const closeDropdown = (e) => {
 			if (openAccountBox && !accountRef.current?.contains(e.target)) {
-				setOpenAccountBox(false);
+				handleAccountBoxChange(false);
 			}
 		};
 		document.addEventListener('mousedown', closeDropdown);
 		return () => {
-		    document.removeEventListener('mousedown', closeDropdown);
-		  };
+			document.removeEventListener('mousedown', closeDropdown);
+		};
 	}, [openAccountBox]);
 
 	useEffect(() => {
@@ -228,51 +220,51 @@ const Header = (props: any) => {
 						<button className="text-lg border-0 [flex-basis:30%] lg:hidden h-[40px]" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
 							<span className="block w-[1.25em] h-[2px] bg-[#151515] relative before:-top-[.4em] before:w-[1.05em] before:h-[2px] before:bg-[#151515] before:absolute before:left-[0] after:content-[''] after:h-[2px] after:bg-body after:absolute after:left-[0] after:w-[.95em] after:top-[.4em]"></span>
 						</button>
-						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0"  aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] lg:[flex-basis:10%] mx-auto lg:mx-0" aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
 						{activeMainMenu.length > 0 && (
-						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
-							{activeMainMenu && activeMainMenu.map((nav, i) => {
-								if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
-									return (
-										<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
-											<a href={`${nav.handle}?c=main-menu`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
-											{nav.title.includes('Shop') && (
-												<NavMegaMenuAll
-													title={nav.title}
-													menus={activeMainMenu || []}
-													getCollectionProductsByHandle={getCollectionProductsByHandle}
-													listIds={sevenDaysSalesIds}
-													dummy={dummy}
-													store={store}
-													generalSetting={generalSetting}
-												/>
-											)}
-											{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare', 'SPF'].indexOf(nav.title) > -1 && (
-												<NavMegaMenu
-													title={nav.title}
-													handle={nav.handle.replace('/collections/', '')}
-													url={nav.handle}
-													menus={nav.rows || []}
-													getCollectionProductsByHandle={getCollectionProductsByHandle}
-													listIds={sevenDaysSalesIds}
-													dummy={dummy}
-													store={store}
-													getFeaturedImgMeta={getFeaturedImgMeta}
-												/>
-											)}
-										</li>
-									);
-								}
-							})}
-							<li key="line" className="nav-item px-hg">
-								<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">|</a>
-							</li>
-							<li key="result-irl" className="nav-item px-hg">
-								<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">Results IRL</a>
-							</li>
-						</ul>
+							<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:[flex-basis:auto] lg:flex-row">
+								{activeMainMenu && activeMainMenu.map((nav, i) => {
+									if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
+										return (
+											<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
+												<a href={`${nav.handle}?c=main-menu`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
+												{nav.title.includes('Shop') && (
+													<NavMegaMenuAll
+														title={nav.title}
+														menus={activeMainMenu || []}
+														getCollectionProductsByHandle={getCollectionProductsByHandle}
+														listIds={sevenDaysSalesIds}
+														dummy={dummy}
+														store={store}
+														generalSetting={generalSetting}
+													/>
+												)}
+												{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare', 'SPF'].indexOf(nav.title) > -1 && (
+													<NavMegaMenu
+														title={nav.title}
+														handle={nav.handle.replace('/collections/', '')}
+														url={nav.handle}
+														menus={nav.rows || []}
+														getCollectionProductsByHandle={getCollectionProductsByHandle}
+														listIds={sevenDaysSalesIds}
+														dummy={dummy}
+														store={store}
+														getFeaturedImgMeta={getFeaturedImgMeta}
+													/>
+												)}
+											</li>
+										);
+									}
+								})}
+								<li key="line" className="nav-item px-hg">
+									<a className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">|</a>
+								</li>
+								<li key="result-irl" className="nav-item px-hg">
+									<a href="/pages/reviews" className="inline-block no-underline m-0 fw-bold text-body font-bold py-[.375em] hover:no-underline hover:text-primary">Results IRL</a>
+								</li>
+							</ul>
 						)}
 
 						<ul className="basis-[30%] lg:[flex-basis:auto] flex flex-wrap list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center ">
@@ -308,7 +300,7 @@ const Header = (props: any) => {
 							</li>
 							<li key="cart" className="nav-item d-flex lg:pl-hg">
 								<a className="text-body hover:text-primary hover:fill-primary flex justify-center items-center [flex-flow:column] relative py-[6px] lg:py-hg h4 !font-normal" data-toggle="modal" data-target="#cart-drawer" tabIndex={0} role="button" data-cy="cart-icon" onClick={() => props.onToggleCart()}>
-									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]"/>
+									<CartIcon className="text-[1.5625em] h-[1em] lg:text-[27.5px] lg:h-[27.5px]" />
 									<span className="cart-drawer__count absolute leading-[1] text-xs lg:text-[15px] h-full top-[50%] left-[50%] h-100 font-[Arial,_Helvetica,_sans-serif] -translate-x-[50%] -translate-y-[7.5%] lg:-translate-y-[12.5%]">{cartCount || 0}</span>
 								</a>
 							</li>
@@ -316,28 +308,32 @@ const Header = (props: any) => {
 						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
 					</div>
 				</nav>
-				<MobileMenu
-					onToggleMobileNav={onToggleMobileNav}
-					openDrawer={openDrawer}
-					mainMenu={activeMainMenu}
-					menuBannerCode={menuBannerCode}
-					menuBannerQuiz={menuBannerQuiz}
-					userPts={userPts}
-					isLoggedIn={isLoggedIn}
-					swellLoyalty={swellLoyalty}
-					generalSetting={generalSetting}
-					store={store}
-				/>
-				<SearchBox
-					store={store}
-					openAccountBox={openAccountBox}
-					dummy={dummy}
-					content={searchBox}
-					onToggleSearchBox={onToggleSearchBox}
-					trackEvent={trackEvent}
-					openSearchBox={openSearchBox}
-					getFeaturedImgMeta={getFeaturedImgMeta}
-				/>
+				{openDrawer && (
+					<MobileMenu
+						onToggleMobileNav={onToggleMobileNav}
+						openDrawer={openDrawer}
+						mainMenu={activeMainMenu}
+						menuBannerCode={menuBannerCode}
+						menuBannerQuiz={menuBannerQuiz}
+						userPts={userPts}
+						isLoggedIn={isLoggedIn}
+						swellLoyalty={swellLoyalty}
+						generalSetting={generalSetting}
+						store={store}
+					/>
+				)}
+				{openSearchBox && (
+					<SearchBox
+						store={store}
+						openAccountBox={openAccountBox}
+						dummy={dummy}
+						content={searchBox}
+						onToggleSearchBox={onToggleSearchBox}
+						trackEvent={trackEvent}
+						openSearchBox={openSearchBox}
+						getFeaturedImgMeta={getFeaturedImgMeta}
+					/>
+				)}
 
 			</header>
 			{/*<Cart showCart={openCartDrawer} handleClose={handleClose}/>*/}
