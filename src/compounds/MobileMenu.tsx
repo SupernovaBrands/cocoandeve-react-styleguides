@@ -195,7 +195,7 @@ const MobileMenu = (props: any) => {
 												</li>
 											);
 										})}
-										<li key="shopall" className="border-b p-0">
+										<li key="shopall">
 											<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
 												<strong>
 													{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}

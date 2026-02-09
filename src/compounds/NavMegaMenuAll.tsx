@@ -35,12 +35,12 @@ const NavMegaMenuAll = (props: any) => {
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={row.handle} className={`text-body ${row.title === 'Tan Quiz' ? 'border-b border-[#CE8011] hover:no-underline' : ''}`} aria-label={row.title}>{row.title}</a>
+                                                    <a href={row.handle} className={`text-body ${row.title === 'Tan Quiz' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[1px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`} aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
                                             {menu.title === 'Hair' && (
                                                 <li className="mb-1 ">
-                                                    <a href="/pages/hair-concerns-solutions" className="text-body hover:no-underline border-b border-[#CE8011]" aria-label="Hair Concerns & Solutions">Hair Concerns & Solutions</a>
+                                                    <a href="/pages/hair-concerns-solutions" className="text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[80px] after:h-[1px] after:bottom-0 after:left-[-80px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" aria-label="Hair Concerns & Solutions">Hair Concerns & Solutions</a>
                                                 </li>
                                             )}
                                             {menu.handle !== '/collections/kits-gifts' && (
