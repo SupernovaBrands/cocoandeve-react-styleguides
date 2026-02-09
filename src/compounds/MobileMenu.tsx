@@ -239,7 +239,7 @@ const MobileMenu = (props: any) => {
 							{isLoggedIn && (
 								<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
 									{userPts !== -1 && (
-										<>{userPts} Points <BeautyIcon className="ml-1 mr-1" /></>
+										<><BeautyIcon className="mr-1" /> {userPts} Points</>
 									)}
 									{userPts === -1 && (
 										<div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
