@@ -1,18 +1,21 @@
+import dynamic from 'next/dynamic';
 import { EmblaOptionsType } from 'embla-carousel';
 import TabNav from '~/components/TabNav';
-import TabContent from '~/components/TabContent';
-import { useEffect, useState } from 'react';
+// import TabContent from '~/components/TabContent';
+import { useEffect, useMemo, useState } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
-import Modal from "~/components/Modal";
-import ModalWaitlist from "~/components/modal/Waitlist";
+const Modal = dynamic(() => import('~/components/Modal'), { ssr: false });
+const ModalWaitlist = dynamic(() => import('~/components/modal/Waitlist'), { ssr: false });
 import {
 	PrevButton,
 	NextButton,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ProductCard from "~/compounds/ProductCard";
+import { useVisibleCount } from '~/hooks/useVisibleCount';
+
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -27,12 +30,12 @@ const options: EmblaOptionsType = {
 
 const ProductCarousel = (props: any) => {
 	const [waitlistData, setWaitlistData] = useState({
-        open: false,
-        title: '',
-        image: '',
-        handle: undefined,
+		open: false,
+		title: '',
+		image: '',
+		handle: undefined,
 		date: '',
-    });
+	});
 
 	const { customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
@@ -45,30 +48,58 @@ const ProductCarousel = (props: any) => {
 	}
 	const [activeTab, setActiveTab] = useState('bestsellers');
 
-    const [isHomepage, setIsHomepage] = useState(false);
-    const [isProduct, setIsProduct] = useState(false);
+	const [isHomepage, setIsHomepage] = useState(false);
+	const [isProduct, setIsProduct] = useState(false);
 	const [customTitle, setCustomTitle] = useState(customProductTitle || null);
 
+	// Single carousel update
+	const [emblaRef, emblaApi] = useEmblaCarousel(options);
+
+	const tabProducts = useMemo(() => {
+		const newTabCount = productsData?.tab1?.products?.length || 0;
+		const newTabProducts = newTabCount > 4
+			? productsData?.tab1?.products
+			: productsData?.tab1?.products?.concat(productsData?.tab1?.products) || [];
+
+		return {
+			bestsellers: productsData?.tab2?.products || [],
+			new: newTabProducts,
+			valuesets: productsData?.tab3?.products || []
+		};
+	}, [productsData]);
+
+	const currentProducts = useMemo(() =>
+		tabProducts[activeTab] || [],
+		[activeTab, tabProducts]
+	);
+
+	useEffect(() => {
+		if (emblaApi) {
+			emblaApi.reInit();
+			emblaApi.scrollTo(0, true);
+		}
+	}, [activeTab, emblaApi]);
+
 	//tab 1
-	const [emblaRef1, emblaApi1] = useEmblaCarousel(options);
+	// const [emblaRef1, emblaApi1] = useEmblaCarousel(options);
 
 	//tab 2
-	const [emblaRef2, emblaApi2] = useEmblaCarousel(options);
+	// const [emblaRef2, emblaApi2] = useEmblaCarousel(options);
 
 	//tab 3
-	const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
+	// const [emblaRef3, emblaApi3] = useEmblaCarousel(options);
 
 	useEffect(() => {
-        if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
-        else document.body.classList.remove('overflow-y-hidden');
-    }, [waitlistData]);
+		if (waitlistData.open) document.body.classList.add('overflow-y-hidden');
+		else document.body.classList.remove('overflow-y-hidden');
+	}, [waitlistData]);
 
-	const newTabCount = productsData?.tab1?.products.length;
-	const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
+	// const newTabCount = productsData?.tab1?.products.length;
+	// const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
 
 	useEffect(() => {
-        setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
-        setIsProduct(window.location.pathname.includes('/products/'));
+		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
+		setIsProduct(window.location.pathname.includes('/products/'));
 	}, []);
 
 	useEffect(() => {
@@ -80,47 +111,72 @@ const ProductCarousel = (props: any) => {
 		}
 	}, [isProduct]);
 
+	const tabConfig = [
+		{ key: 'bestsellers', title: 'Best Sellers' },
+		{ key: 'new', title: 'New' },
+		{ key: 'valuesets', title: 'Value Sets' }
+	];
+
+	const visibleCount = useVisibleCount({
+		mobile: 2,
+		desktop: 4,
+	});
+
 	return (
 		<>
-		<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
-			{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
-			<div className="row">
-				<div>
-					<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
-						<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
-							<li><TabNav className={`${activeTab === 'bestsellers' ? 'text-body' : ''}`} title='Best Sellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
+			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
+				{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
+				<div className="row">
+					<div>
+						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
+							<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
+								{tabConfig.map(({ key, title }) => (
+									<li key={key}>
+										<TabNav
+											className={`${activeTab === key ? 'text-body' : ''}`}
+											title={title}
+											active={activeTab === key}
+											onNavChange={() => setActiveTab(key)}
+											ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+											ctaTextColor={generalSetting?.bfcm_cta_text_color}
+										/>
+									</li>
+								))}
+								{/* <li><TabNav className={`${activeTab === 'bestsellers' ? 'text-body' : ''}`} title='Best Sellers' active={activeTab === 'bestsellers'} onNavChange={() => setActiveTab('bestsellers')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
 							<li><TabNav className={`${activeTab === 'new' ? 'text-body' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
-							<li><TabNav className={`${activeTab === 'valuesets' ? 'text-body' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
-						</ul>
-						<a href="/collections/all" className={`hidden lg:inline btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] lg:px-[1.625em] lg:py-[.5em] mb-2 mt-0 mb-3`}>Shop All</a>
-					</div>
-					<div className="product__carousel-body pl-[.5625em] lg:px-0 text-center">
-						<TabContent active={activeTab === 'new'}>
-							<Carousel.Wrapper emblaApi={emblaApi2} className="carousel__products">
-								<Carousel.Inner emblaRef={emblaRef2}>
-									{productsData?.tab1?.products && newTabProducts.map((item: any, index: number) => {
+							<li><TabNav className={`${activeTab === 'valuesets' ? 'text-body' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li> */}
+							</ul>
+							<a href="/collections/all" className={`hidden lg:inline btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] lg:px-[1.625em] lg:py-[.5em] mb-2 mt-0 mb-3`}>Shop All</a>
+						</div>
+						<div className="product__carousel-body pl-[.5625em] lg:px-0 text-center">
+							{/* <TabContent active={activeTab === 'new'}> */}
+							<Carousel.Wrapper emblaApi={emblaApi} className="carousel__products">
+								<Carousel.Inner emblaRef={emblaRef}>
+									{currentProducts.map((item: any, index: number) => {
+										const isAboveFold = activeTab === 'bestsellers' && index < visibleCount;
 										return <ProductCard
-                                            key={`${activeTab}-${item.id}-${index}`}
-                                            keyName={`${activeTab}-${item.id}-${index}`}
-                                            product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={false}
-                                            carousel={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            preOrders={preOrders}
-                                            generalSetting={generalSetting}
-                                            homePage={props.homePage || false}
+											key={`${activeTab}-${item.id}-${index}`}
+											keyName={`${activeTab}-${item.id}-${index}`}
+											product={item}
+											className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+											button={true}
+											setWaitlistData={setWaitlistData}
+											smSingleStar={false}
+											carousel={true}
+											addToCart={addToCart}
+											trackEvent={trackEvent}
+											preOrders={preOrders}
+											generalSetting={generalSetting}
+											homePage={props.homePage || false}
 											store={store}
 											customProductTitle={customTitle}
-                                        />
+											isAboveFold={isAboveFold}
+										/>
 									})}
 								</Carousel.Inner>
 								<Carousel.Navigation>
 									<PrevButton
-										onClick={() => emblaApi2.scrollPrev() }
+										onClick={() => emblaApi.scrollPrev()}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[1] flex justify-center items-center">
@@ -128,7 +184,7 @@ const ProductCarousel = (props: any) => {
 										</span>
 									</PrevButton>
 									<NextButton
-										onClick={() => emblaApi2.scrollNext() }
+										onClick={() => emblaApi.scrollNext()}
 										className="lg:w-auto lg:h-0 hidden lg:flex"
 									>
 										<span className="absolute z-[1] flex justify-center items-center">
@@ -137,8 +193,8 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
-						</TabContent>
-						<TabContent active={activeTab === 'bestsellers'}>
+							{/* </TabContent> */}
+							{/* <TabContent active={activeTab === 'bestsellers'}>
 							<Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products bests">
 								<Carousel.Inner emblaRef={emblaRef1}>
 									{productsData?.tab2?.products && productsData.tab2.products.map((item: any, index: number) => {
@@ -180,8 +236,8 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
-						</TabContent>
-						<TabContent active={activeTab === 'valuesets'}>
+						</TabContent> */}
+							{/* <TabContent active={activeTab === 'valuesets'}>
 							<Carousel.Wrapper emblaApi={emblaApi3} className="carousel__products">
 								<Carousel.Inner emblaRef={emblaRef3}>
 									{productsData?.tab3?.products && productsData.tab3.products.map((item: any, index: number) => {
@@ -223,15 +279,15 @@ const ProductCarousel = (props: any) => {
 									</NextButton>
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
-						</TabContent>
-						<a href="/collections/all" className={`lg:hidden mt-2 btn btn-lg ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]`}>Shop All</a>
+						</TabContent> */}
+							<a href="/collections/all" className={`lg:hidden mt-2 btn btn-lg ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]`}>Shop All</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
-                <ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
-        	</Modal>
+			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
+				<ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({ ...waitlistData, open: false })} />
+			</Modal>
 		</>
 	);
 };

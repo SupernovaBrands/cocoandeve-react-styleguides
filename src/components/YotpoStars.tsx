@@ -1,44 +1,80 @@
 import '~/config';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReviewStar from './ReviewStar';
 import { ConditionalWrap, currentTime, encryptParam } from '~/modules/utils';
 import ReviewStarSingle from './ReviewStarSingle';
 
 const YotpoStar = (props: any) => {
 	const [init, setInit] = useState(false);
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(5);
 	const [total, setTotal] = useState(0);
+	const [isVisible, setIsVisible] = useState(false);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const hasFetchedRef = useRef(false);
+
 	const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 	const signature = encryptParam(`{sku:'${props.sku}',time:${currentTime()}}`);
 	const localeParam = 'en';
 
 	const fetchStar = () => {
-		// console.log('fetchStar');
-		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}`, {headers:  {'signature': signature}})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data.response && data.response.bottomline) {
-					setScore(data?.response?.bottomline?.average_score);
-					setTotal(data?.response?.bottomline?.total_review);
-				}
-				if (!init) {
-					setInit(true);
-				}
+		console.log('fetcing star');
+		if (hasFetchedRef.current) return;
+		hasFetchedRef.current = true;
+
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${props.sku}`, {
+			headers: { 'signature': signature }
+		}).then((response) => response.json()).then((data) => {
+			if (data.response && data.response.bottomline) {
+				setScore(data?.response?.bottomline?.average_score);
+				setTotal(data?.response?.bottomline?.total_review);
+			}
+			if (!init) {
+				setInit(true);
+			}
+		}).catch((error) => {
+			console.error('Error fetching Yotpo reviews:', error);
+			hasFetchedRef.current = false;
 		});
 	};
 
-	// console.log('props.sku123');
-
 	useEffect(() => {
-		if (props.sku.length > 0 && !init) fetchStar();
-	}, []);
+		if (!props.sku || props.sku.length === 0) return;
 
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !isVisible) {
+						setIsVisible(true);
+					}
+				});
+			},
+			{
+				root: null,
+				rootMargin: '200px',
+				threshold: 0.1
+			}
+		);
+
+		if (containerRef.current) {
+			observer.observe(containerRef.current);
+		}
+
+		return () => {
+			if (containerRef.current) {
+				observer.unobserve(containerRef.current);
+			}
+		};
+	}, [props.sku, isVisible]);
+
+	// fetch reviews when visible
 	useEffect(() => {
-		// if (total === 0 || score === 0) fetchStar();
-	}, [total, score]);
+		if (isVisible && props.sku.length > 0 && !init) {
+			fetchStar();
+		}
+	}, [isVisible, isVisible, init, props.sku]);
 
 	return init ? (
-		<div className={`flex items-center ${props.className}`} data-skus={props.sku}>
+		<div ref={containerRef} className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			<ConditionalWrap
                 condition={props?.productHandle}
                 wrap={children => <a href={`/products/${props?.productHandle}?write-a-review=true`} className="text-sm" aria-label="Write a review for this product">{children}</a>}
@@ -70,7 +106,9 @@ const YotpoStar = (props: any) => {
 				</span>
 			)}
 		</div>
-	) : (<div />);
+	) : (
+		<div ref={containerRef} className="h-2 w-full" aria-hidden="true" />
+	);
 };
 
 YotpoStar.defaultProps = {
