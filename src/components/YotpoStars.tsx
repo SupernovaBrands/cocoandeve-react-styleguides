@@ -114,8 +114,6 @@ const YotpoStar = (props: any) => {
 						</span>
 					)}
 				</>
-			) : (
-				<div className="h-2 w-full" aria-hidden="true" />
 			)}
 		</div>
 	) : (
