@@ -20,10 +20,10 @@ const options: EmblaOptionsType = {
 const SLIDES = [
 	{
 		mobile_image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1a1b1bcf-b955-488b-028f-e8899fe1e400/public"
+			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1a1b1bcf-b955-488b-028f-e8899fe1e400/722x"
 		},
 		image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee973277-9d5b-42dc-21d5-ad82a8589f00/public"
+			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee973277-9d5b-42dc-21d5-ad82a8589f00/1920x"
 		}
 	},
 ];
@@ -45,7 +45,7 @@ const ImageBanner = (props: any) => {
 						fetchpriority={isFirstSlide ? "high" : undefined}
 						loading={isFirstSlide ? "eager" : "lazy"}
 						className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full"
-						src={slide?.image_mobile?.url.replace('/public', '/800x')}
+						src={slide?.image_mobile?.url.replace('/public', '/722x')}
 						alt={`slide ${index + 1}`}
 						width="414"
 						height="926"
