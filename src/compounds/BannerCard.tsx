@@ -17,7 +17,7 @@ const BannerCard: React.FC<BannerCardProps> = ({ className, url, imgDt, imgMb, t
         <a href={url}>
             <picture className="block">
                 <source srcSet={imgDt} media="(min-width: 992px)" />
-                <img className="w-full rounded-[24px] lg:rounded-[32px]" src={imgMb} loading="lazy" alt={imgAlt ?? ''} />
+                <img className="w-full rounded-[24px] lg:rounded-[32px]" src={imgMb} loading="lazy" alt={imgAlt ?? ''} width={384} height={72} />
             </picture>
             {children ?? <></>}
             {!children && (

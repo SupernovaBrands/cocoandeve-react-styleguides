@@ -14,8 +14,8 @@ const QuizReward = (props: any) => {
                 <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                     <BannerCard
                         className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
-                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/public"
-                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6ac2ef18-3d2f-4c03-891d-0bb1bc6cf900/public"
+                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7d9c7b41-0156-4100-2cbf-818451545e00/520x"
+                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6ac2ef18-3d2f-4c03-891d-0bb1bc6cf900/540x"
                         title="Build Your Bundle"
                         description="Mix, match & save <br />your way!"
                         ctaLabel="Build Now"
@@ -30,16 +30,16 @@ const QuizReward = (props: any) => {
                         className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
                         url="/pages/self-tan-quiz"
                         store={store}
-                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/public"
+                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/520x"
+                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/540x"
                         imgAlt="Illustration of a person taking a quiz to find their perfect self-tan solution"
                     />
                     {store !== 'my' && (
                         <figure className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative rounded">
                             <a href="/pages/rewards">
                                 <picture className="block">
-                                    <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/704453dd-6f76-4a3a-1c09-c72dc47c5d00/public" media="(min-width: 992px)" />
-                                    <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/public" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
+                                    <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/704453dd-6f76-4a3a-1c09-c72dc47c5d00/540x" media="(min-width: 992px)" />
+                                    <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/520x" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
                                 </picture>
                                 <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                                     <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body">Rewards Program</p>
