@@ -3,7 +3,7 @@
 import { EmblaOptionsType } from 'embla-carousel';
 import TabNav from '~/components/TabNav';
 // import TabContent from '~/components/TabContent';
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 // const Carousel = dynamic(() => import('~/components/carousel/EmblaCarouselMulti'), {
 //   loading: () => <div>Loading...</div>

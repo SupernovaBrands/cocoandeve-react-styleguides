@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useMemo, useCallback } from 'react';
+import { useCallback, useRef as useReactRef } from 'react';
 
 import { useState, useEffect, useRef } from 'react';
 import AnnouncementBar from '~/components/AnnouncementBar';
@@ -35,6 +35,8 @@ const Header = (props: any) => {
 	const [userPts, setUserPts] = useState(points || 0);
 	const [flashBubbleWrapper, setFlashBubbleWrapper] = useState(false);
 	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
+	const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+	const megaMenuCache = useReactRef<Record<string, any>>({});
 
 	useEffect(() => {
 		if (!initialStore) {
@@ -228,9 +230,12 @@ const Header = (props: any) => {
 								{activeMainMenu && activeMainMenu.map((nav, i) => {
 									if (['Help', 'Blog', 'Results IRL', 'Aide', 'Hilfe'].indexOf(nav.title) === -1) {
 										return (
-											<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
-												<a href={`${nav.handle}?c=main-menu`} onMouseEnter={() => handleSearchBox(nav.title)} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
-												{nav.title.includes('Shop') && (
+											<li key={`mainMenu-${i}`} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}
+												onMouseEnter={() => { handleSearchBox(nav.title); setHoveredNav(nav.handle); }}
+												onMouseLeave={() => setHoveredNav(null)}
+											>
+												<a href={`${nav.handle}?c=main-menu`} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{nav.title}</a>
+												{nav.title.includes('Shop') && hoveredNav === nav.handle && (
 													<NavMegaMenuAll
 														title={nav.title}
 														menus={activeMainMenu || []}
@@ -241,7 +246,7 @@ const Header = (props: any) => {
 														generalSetting={generalSetting}
 													/>
 												)}
-												{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare', 'SPF'].indexOf(nav.title) > -1 && (
+												{['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare', 'SPF'].indexOf(nav.title) > -1 && hoveredNav === nav.handle && (
 													<NavMegaMenu
 														title={nav.title}
 														handle={nav.handle.replace('/collections/', '')}
@@ -252,6 +257,7 @@ const Header = (props: any) => {
 														dummy={dummy}
 														store={store}
 														getFeaturedImgMeta={getFeaturedImgMeta}
+														cache={megaMenuCache.current}
 													/>
 												)}
 											</li>
