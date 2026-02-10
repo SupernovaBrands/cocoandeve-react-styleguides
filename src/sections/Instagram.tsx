@@ -103,7 +103,7 @@ const InstagramTest = (props: any) => {
                                             <a href={data[0].link} target="_blank" className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
                                                 <picture>
                                                     <source srcSet={data[0].image}/>
-                                                    <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={data[0].image} alt="Model applying Coco & Eve tanning foam" />
+                                                    <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={data[0].image} alt="Model applying Coco & Eve tanning foam" loading="lazy" decoding="async" width={327} height={327} />
                                                 </picture>
                                             </a>
                                         </div>
@@ -116,7 +116,7 @@ const InstagramTest = (props: any) => {
                                                     <a href={item.link} target="_blank"  className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image}/>
-                                                            <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={item.image} alt={`Instagram image ${index + 1}`} />
+                                                            <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={item.image} alt={`Instagram image ${index + 1}`} loading="lazy" decoding="async" width={168} height={168} />
                                                         </picture>
                                                     </a>
                                                 </div>
