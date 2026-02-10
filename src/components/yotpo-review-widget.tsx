@@ -394,24 +394,20 @@ const YotpoReviewWidget = (props:any) => {
 		// }).done(function (data) {
 		// 	processReviews(data.response);
 		// });
-		fetch(`${apiUrl}/reviews.json?${params}&per=5`, {
+
+		fetch(`${apiUrl}/reviews.json?${params}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				'Cache-Control': 'no-cache',
 				'signature': signature,
 			},
-			body: JSON.stringify({
-				page,
-				domain_key: productId,
-				...selectedFilter,
-				topic_names: [selectedTopic],
-			}),
 		}).then(response => response.json()).then(data => {
 			processReviews(data.response);
 		}).catch(error => {
 			console.error('Error fetching reviews:', error);
 		});
+
 	};
 
 	const onFilterChange = () => {
