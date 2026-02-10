@@ -1,6 +1,6 @@
 'use client'
 
-import Link from "next/link";
+// import Link from "next/link";
 
 const PlaygroundCard = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
     <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
@@ -36,16 +36,16 @@ const Playground = (props: any) => {
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p> */}
                     <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my'].includes(store) ? 'justify-center' : ''} `}>
                         <PlaygroundCard store={store} data={content?.range_1}
-                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/public`}
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/public`}
+                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/614x`}
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/400x`}
                             imgAlt={`${content?.range_1?.Title} Playground - ${content?.range_1?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
                         />
                         {['us', 'uk', 'eu', 'dev', 'ca', 'au'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_2}
-                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/df4e3bd1-7214-4b0f-a687-62f9770c3200/public`}
-                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3cdbc885-e603-4a69-ec85-12133a72b800/public`}
+                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/df4e3bd1-7214-4b0f-a687-62f9770c3200/614x`}
+                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3cdbc885-e603-4a69-ec85-12133a72b800/400x`}
                                 imgAlt={`${content?.range_2?.Title} Playground - ${content?.range_2?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                                 ctaBgColor={ctaBgColor}
                                 ctaTextColor={ctaTextColor}
@@ -62,16 +62,16 @@ const Playground = (props: any) => {
                         )}
                         {['int', 'my', 'au'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_3}
-                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e0e4d5bb-56be-4d47-7878-f7d054b02900/public`}
-                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c27447c-170d-4fd6-589d-fd8e90b78200/public`}
+                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e0e4d5bb-56be-4d47-7878-f7d054b02900/614x`}
+                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c27447c-170d-4fd6-589d-fd8e90b78200/400x`}
                                 imgAlt={`${content?.range_3?.Title} Playground - ${content?.range_3?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                                 ctaBgColor={ctaBgColor}
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
                         <PlaygroundCard store={store} data={content?.range_4}
-                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/46c4a841-3709-4bb0-725b-f60016eb0700/public`}
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6cddc9d8-a879-483e-f915-df6cbd6ed900/public`}
+                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/46c4a841-3709-4bb0-725b-f60016eb0700/614x`}
+                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6cddc9d8-a879-483e-f915-df6cbd6ed900/400x`}
                             imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}

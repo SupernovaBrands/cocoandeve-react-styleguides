@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import SocialLogin from './SocialLogin';
-import Link from 'next/link';
 import { setCookie } from '~/modules/utils';
 import { Button } from '~/components/index';
-import { useRouter } from 'next/navigation';
 
 const AccountDropdown = (props:any) => {
     const { openAccountBox, store, onModal, swellLoyalty, scrolled, annBarEnabled, timerData, isStickyEnabled, isScrollEnabled, generalSetting } = props;
@@ -28,7 +26,7 @@ const AccountDropdown = (props:any) => {
 
     const loginEmailRef = useRef(null);
     const loginPassRef = useRef(null);
-    const router = useRouter();
+    // const router = useRouter();
     const validPassword = (e) => {
 		const val = e.target.value;
         setValidPass(/^(?=[^0-9\s]*[0-9])\S{6,}$/.test(e.target.value));
