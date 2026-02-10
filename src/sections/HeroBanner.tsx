@@ -42,7 +42,7 @@ const ImageBanner = (props: any) => {
 					<source srcSet={slide?.image_desktop?.url} media="(min-width: 992px)" width="1140" height="435" />
 					<img
 						// @ts-ignore
-						fetchriority={isFirstSlide ? "high" : undefined}
+						fetchpriority={isFirstSlide ? "high" : undefined}
 						loading={isFirstSlide ? "eager" : "lazy"}
 						className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full"
 						src={slide?.image_mobile?.url}
