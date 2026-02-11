@@ -137,7 +137,7 @@ const BundleVariantCard = (props) => {
 
     return  (
         <>
-        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
+        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Sets</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
             {saving && <div className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em] inline`}>
                 <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{saving}</span>
@@ -146,12 +146,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} />
+                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Sets ${optionValue.replace('1x ', '')}`} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
+                        <img alt={`Save with Sets ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
