@@ -41,7 +41,7 @@ const InstagramCard = memo(({
             }
             await video.play();
         } catch (e) {
-            console.debug('Video play failed:', e);
+            // console.debug('Video play failed:', e);
         }
     }, [videoUrl]);
 
@@ -52,7 +52,7 @@ const InstagramCard = memo(({
         try {
             video.pause();
         } catch (e) {
-            console.debug('Video pause failed:', e);
+            // console.debug('Video pause failed:', e);
         }
     }, []);
 
