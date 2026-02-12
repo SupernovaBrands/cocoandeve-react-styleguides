@@ -179,13 +179,13 @@ export const CartItem = (props:CartItemProps) => {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
 			// }
 
-			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
-			}
+			// if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
+			// }
 
-			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/public';
-			}
+			// if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/public';
+			// }
 
 			// if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
