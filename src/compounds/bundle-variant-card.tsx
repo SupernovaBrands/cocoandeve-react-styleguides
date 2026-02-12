@@ -68,7 +68,7 @@ const BundleVariantCard = (props) => {
             },
             au: {
                 medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f266ff2-a074-4f25-c810-86deb5e4de00/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f9bb183f-f94a-4110-1ec3-82423743ca00/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
             },
         },
     };
