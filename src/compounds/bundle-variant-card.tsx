@@ -66,11 +66,15 @@ const BundleVariantCard = (props) => {
                 medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7df2104a-c639-466a-10a7-351ffee2d800/320x',
                 default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
             },
+            au: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f266ff2-a074-4f25-c810-86deb5e4de00/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f9bb183f-f94a-4110-1ec3-82423743ca00/320x',
+            },
         },
     };
 
     const getHardcodedImage = (handle, store, selectedValue) => {
-        const isValid = (handle === 'antioxidant-glow-cream' && store === 'ca');
+        const isValid = (handle === 'antioxidant-glow-cream' && store === 'ca') || (handle === 'antioxidant-glow-cream' && store === 'au');
 
         if (!isValid) return null;
 
