@@ -216,13 +216,13 @@ export const CartItem = (props:CartItemProps) => {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/public';
 			// }
 
-			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/public';
-			}
+			// if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'medium') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/public';
+			// }
 
-			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/public';
-			}
+			// if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'dark') {
+			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/public';
+			// }
 		}
 
 		setFeaturedImageUrl(featuredImage);
