@@ -239,11 +239,6 @@ const SwatchOverlay = memo((props: any) => {
             first = props.swatch.data.find((swatchData: any) => swatchData.available) || { id: 0 };
         }
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const swatch = props.swatch.data.find((swatchData: any) => swatchData.value === 'dark');
-            if (swatch?.availableForSale) first = swatch;
-        }
-
         return first;
     }, [product, generalSetting, store, props.swatch.data]);
 
@@ -287,9 +282,6 @@ const SwatchOverlay = memo((props: any) => {
 
         if (swatchLabel.current) swatchLabel.current.textContent = targetText;
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'au'].includes(store)) {
-            handleShade(targetText?.toLowerCase());
-        }
     }, [product, store, handleShade]);
 
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant?.id) || props.swatch.data[0];
@@ -406,32 +398,15 @@ const ProductCard = (props: any) => {
         let image = props.product.src;
         let hoverImage = props.product.imgHover;
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/540x';
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
-            image = darkImg;
-            hoverImage = medImg;
-        }
-
         return { productImage: image, productHoverImage: hoverImage };
     }, [product.handle, store, props.product.src, props.product.imgHover]);
 
-    const [shade, setShade] = useState(() => {
-        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) return 'dark';
-        return '';
-    });
+    const [shade, setShade] = useState('');
 
     const handleShade = useCallback((val) => setShade(val), []);
 
     const shadeImages = useMemo(() => {
-        if (product.handle !== 'bronzing-self-tanner-drops' || !['au'].includes(store)) {
-            return { productImage, productHoverImage };
-        }
-        const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/540x';
-        const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
-
-        if (shade === 'medium') return { productImage: medImg, productHoverImage: darkImg };
-        return { productImage: darkImg, productHoverImage: medImg };
+        return { productImage, productHoverImage };
     }, [shade, product.handle, store, productImage, productHoverImage]);
 
     const effectivelyAvailable = !product.availableForSale ? false : selectedVariant?.availableForSale ?? false;
