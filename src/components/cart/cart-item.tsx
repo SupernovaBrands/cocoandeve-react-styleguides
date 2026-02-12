@@ -195,6 +195,14 @@ export const CartItem = (props:CartItemProps) => {
 				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
 			}
 
+			if (['au'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f266ff2-a074-4f25-c810-86deb5e4de00/public';
+			}
+
+			if (['au'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
+				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f9bb183f-f94a-4110-1ec3-82423743ca00/public';
+			}
+
 			// if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
 			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/public';
 			// }
