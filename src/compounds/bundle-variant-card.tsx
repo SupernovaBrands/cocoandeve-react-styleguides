@@ -51,26 +51,30 @@ const BundleVariantCard = (props) => {
     }
 
     const hardcodeImages = {
-        'bronzing-self-tanner-drops': {
-            au: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
-            },
-        },
+        // 'bronzing-self-tanner-drops': {
+        //     au: {
+        //         medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
+        //         default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
+        //     },
+        // },
         'antioxidant-glow-cream': {
-            us: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
-            },
+            // us: {
+            //     medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
+            //     default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+            // },
             ca: {
                 medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7df2104a-c639-466a-10a7-351ffee2d800/320x',
+                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+            },
+            au: {
+                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f266ff2-a074-4f25-c810-86deb5e4de00/320x',
                 default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
             },
         },
     };
 
     const getHardcodedImage = (handle, store, selectedValue) => {
-        const isValid = (handle === 'bronzing-self-tanner-drops' && store === 'au') || (handle === 'antioxidant-glow-cream' && store === 'ca');
+        const isValid = (handle === 'antioxidant-glow-cream' && store === 'ca') || (handle === 'antioxidant-glow-cream' && store === 'au');
 
         if (!isValid) return null;
 
