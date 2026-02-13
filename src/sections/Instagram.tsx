@@ -102,8 +102,8 @@ const InstagramTest = (props: any) => {
                                         <div className="w-1/2 lg:w-[28.570%] lg:basis-[28.570%] hidden lg:block">
                                             <a href={data[0].link} target="_blank" className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
                                                 <picture>
-                                                    <source srcSet={data[0].image}/>
-                                                    <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={data[0].image} alt="Model applying Coco & Eve tanning foam" />
+                                                    <source srcSet={data[0].image} media="(min-width: 992px)" />
+                                                    <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={data[0].imageMobile} alt="Model applying Coco & Eve tanning foam" loading="lazy" decoding="async" width={327} height={327} />
                                                 </picture>
                                             </a>
                                         </div>
@@ -115,8 +115,8 @@ const InstagramTest = (props: any) => {
                                                 <div className={`w-1/2 lg:w-1/5 lg:basis-1/5 p-0 ${index === 0 ? 'lg:hidden' : ''} ${index > 3 ? 'hidden lg:block' : ''}`}  key={`inst4--${index}`}>
                                                     <a href={item.link} target="_blank"  className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
                                                         <picture>
-                                                            <source srcSet={item.image}/>
-                                                            <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={item.image} alt={`Instagram image ${index + 1}`} />
+                                                            <source srcSet={item.image} media="(min-width: 992px)" />
+                                                            <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={item.imageMobile} alt={`Instagram image ${index + 1}`} loading="lazy" decoding="async" width={168} height={168} />
                                                         </picture>
                                                     </a>
                                                 </div>
