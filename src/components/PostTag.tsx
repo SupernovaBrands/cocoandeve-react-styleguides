@@ -36,7 +36,7 @@ const PostTag: React.FC<PropType> = (props) => {
 	else if (tag.toLowerCase() === 'new') className = 'bg-secondary text-white hover:text-white';
 	else if (tag.toLowerCase() === 'hot') className = 'bg-primary text-white hover:text-white';
 	return (
-		<span onClick={(e) => handleTag(e, tag)} className={`${paddingClass} font-[400] cursor-pointer inline-block badge no-underline hover:no-underline text-center mr-25 rounded ${className} ${widthClass}`}>{children}</span>
+		<span onClick={(e) => handleTag(e, tag)} className={`${paddingClass} font-[400] cursor-pointer inline-block badge no-underline hover:no-underline text-center mr-25 rounded-[2px] ${className} ${widthClass}`}>{children}</span>
 	)
 };
 
