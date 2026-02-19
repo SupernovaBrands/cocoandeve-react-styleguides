@@ -34,18 +34,18 @@ const PostCard: React.FC<PropType> = (props) => {
 	const ariaLabel = `${tagText.join(' ')} ${data.title}${showSubtext ? ` ${parse(descriptionText)}` : ''} Read more`;
 	return (
 		<article className={`${className}`}>
-			<figure className={`border border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-[2rem]`}>
+			<figure className={`border-none border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 sm:-mx-g !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-none`}>
 				{data.img && (
 					<a href={data.handle ?? '#'} className={`relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
 						<picture className={`${template === 'article' || imgClass ? 'embed-responsive' : ''} ${pictureClass}`}>
 							{data.srcSet && (<source srcSet={data.srcSet} media="(min-width: 992px)" width="568" height="298"/>)}
-							<img src={data.img} className={`rounded-t-[2rem] w-full ${pictureClass ? 'object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle' : ''} ${template === 'article' || imgClass ? 'embed-responsive-item' : ''} ${template === 'pdp' ? 'h-[178px] md:h-[298px]' : ''} object-cover`} alt={data.title} width="382" height="178"/>
+							<img src={data.img} className={`rounded-none w-full ${pictureClass ? 'object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle' : ''} ${template === 'article' || imgClass ? 'embed-responsive-item' : ''} ${template === 'pdp' ? 'h-[178px] md:h-[298px]' : ''} object-cover`} alt={data.title} width="382" height="178"/>
 						</picture>
 					</a>
 				)}
 				<a href={data.handle ?? '#'} className="no-underline hover:no-underline flex flex-col flex-grow" aria-label={ariaLabel}>
 					<figcaption className={`${template === 'blog' || template === 'pdp' || template === 'article' ? 'p-2 flex-grow flex' : 'flex-grow'} flex flex-col ${textClass}`}>
-						<div className={`${template === 'article' ? 'badge-blog' : ''} ${template === 'blog' ? 'badge-blog' : ''}`}>
+						<div className={`${template === 'article' ? 'badge-blog flex' : ''} ${template === 'blog' ? 'badge-blog flex' : ''}`}>
 							{data.tags.length > 0 && (
 								<>
 									{data.tags.map((item: string, index: number) => (
@@ -65,11 +65,12 @@ const PostCard: React.FC<PropType> = (props) => {
 								)}
 							</div>
 						)}
-						{template === 'blog' || template === 'pdp' || template === 'article' ? (
+						{/* {template === 'blog' || template === 'pdp' || template === 'article' ? (
 							<strong className={`btn ${bgColor} ${bgColor === 'bg-dark' ? 'border-dark text-white hover:bg-dark' : 'btn-outline-primary'} self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`}>Read more</strong>
 						) : (
 							<strong className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full">Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></strong>
-						)}
+						)} */}
+						<span className="inline-block pb-2 block underline hover:underline leading-[1.25!important] rounded-full text-body">Read more</span>
 						{/* content */}
 					</figcaption>
 				</a>

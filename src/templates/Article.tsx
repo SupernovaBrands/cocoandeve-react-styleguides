@@ -78,10 +78,10 @@ const ArticleNewsLetter = (props) => {
 
     return (
         <div className="container blog-post-grid__newsletter px-0 hidden">
-            <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-[1.5em]">
+            <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-none">
                 <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-[1.5em] rounded-tr-[1.5em] lg:rounded-tr-none lg:rounded-bl-[1.5em]" alt="Blog article banner" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-none rounded-tr-none lg:rounded-tr-none lg:rounded-bl-none" alt="Blog article banner" />
                 </picture>
                 <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
                     <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
@@ -89,9 +89,9 @@ const ArticleNewsLetter = (props) => {
                     {!submitted && (
                         <form className="w-full mb-g lg:mb-[1rem]" onSubmit={onSubmit}>
                             <div className=" relative flex flex-wrap w-full items-stretch">
-                                <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl-[2rem] rounded-bl-[2rem] -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
+                                <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl-none rounded-bl-none -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className={`py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark-dark border-dark': 'bg-primary hover:bg-primary-dark border-primary'} text-white rounded-full`} type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className={`py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark-dark border-dark': 'bg-primary hover:bg-primary-dark border-primary'} text-white rounded-none`} type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                             {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
@@ -120,7 +120,7 @@ const ArticlPosteBanner = (props) => {
             <a href={postBannerInfo.blog_banner_link} className="block text-center d-block mt-1" aria-label={`Banner Post of ${title}`}>
                 <picture className="w-auto mt-2 mb-1 no-gutters__in-container">
                     <source srcSet={postBannerInfo.blog_banner_dektop.url} media="(min-width: 992px)" width="600" height="244" />
-                    <img src={postBannerInfo.blog_banner_dektop.url} className="rounded object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
+                    <img src={postBannerInfo.blog_banner_dektop.url} className="rounded-none object-cover align-middle mx-full lg:h-[244px] sm:h-auto" loading="lazy" width="384" height="156" alt={title} />
                 </picture>
             </a>
         </div>
@@ -458,27 +458,11 @@ const Article = (props) => {
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 id="articleTitleHeading" className="text-center mb-1">{content?.title}</h1>
                         <span className="text-body mb-1 article__published-at">{updateDate}</span>
-                        
-                        {featuredImg && (
-                            featuredImageLink ? (
-                                <a href={featuredImageLink}>
-                                    <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
-                                        <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
-                                    </picture>
-                                </a>
-                            ) : (
-                                <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g lg:rounded">
-                                    <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
-                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle lg:rounded" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
-                                </picture>
-                            )
-                        )}
 
                         {quickNav?.length > 0 && (
                             <>
                                 <span className="block mt-1 lg:pt-g text-left font-bold text-body">In this article:</span>
-                                <div className="mt-1 mb-2 lg:mb-1 lg:pb-g text-body">
+                                <div className="mt-1 mb-2 lg:mb-1 text-body">
                                     {quickNav.map((quickLink, index) => (
                                         <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">
                                             <span>{quickLink}</span>
@@ -487,23 +471,39 @@ const Article = (props) => {
                                 </div>
                             </>
                         )}
+
+                        {featuredImg && (
+                            featuredImageLink ? (
+                                <a href={featuredImageLink}>
+                                    <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                        <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                        <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
+                                    </picture>
+                                </a>
+                            ) : (
+                                <picture className="my-2 lg:mb-1 block relative w-auto ratio ratio-1x1 mx-auto lg:mx-0 sm:-mx-g">
+                                    <source srcSet={featuredImg?.url} media="(min-width: 992px)" />
+                                    <img className="object-cover absolute w-full h-full top-0 bottom-0 left-0 align-middle" src={featuredImg?.url?.replace('/public', '/540x')} alt={featuredImg?.alt?.replace('.jpg', '')?.replace('.png', '')?.replace('_', ' ') || `featured image of ${content?.title}`} title={content?.title} fetchPriority="high" />
+                                </picture>
+                            )
+                        )}
                         
                         <div className="article__content mt-4 lg:mt-0">
                             {parse(bodyContent)}
                             <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Twitter">
-                                        <Twitter className="svg fill-primary h-[1em]" />
+                                        <Twitter className="svg fill-dark h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=https://${region}.cocoandeve.com`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Facebook">
-                                        <Facebook className="svg fill-primary h-[1em]" />
+                                        <Facebook className="svg fill-dark h-[1em]" />
                                     </a>
                                 </li>
                                 <li className="inline-block">
                                     <a target="_blank" href={`https://pinterest.com/pin/create/button/?url=https://${region}.cocoandeve.com&media=${featuredImageUrl}&description=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Pinterest">
-                                        <Pinterest className="svg fill-primary h-[1em]" />
+                                        <Pinterest className="svg fill-dark h-[1em]" />
                                     </a>
                                 </li>
                             </ul>

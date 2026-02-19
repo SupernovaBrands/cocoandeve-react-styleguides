@@ -6,7 +6,7 @@ const SidebarCard = ({ data }) => (
 		<a href={data.link} className="shrink-0 mr-g" aria-label={`Read full article on ${data.title}`}>
 			<picture>
 				<source srcSet={data.srcSet} media="(min-width: 992px)" />
-				<img alt={`${data.alt ?? `Featured image of ${data.title} article`}`} src={data.src} className="rounded" loading="lazy" width={96} height={96} />
+				<img alt={`${data.alt ?? `Featured image of ${data.title} article`}`} src={data.src} className="rounded-none" loading="lazy" width={96} height={96} />
 			</picture>
 		</a>
 		<figcaption className="flex flex-col">
