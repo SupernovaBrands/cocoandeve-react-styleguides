@@ -1,44 +1,101 @@
-import Link from "next/link";
 import YotpoStar from "~/components/YotpoStars";
 import { Button } from "../components";
-import { useRef, useState, useEffect } from "react";
-import { formatMoney, getCookie } from "~/modules/utils";
+import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
+import { formatMoney } from "~/modules/utils";
 import parse from 'html-react-parser';
 import Eye from '~/images/icons/eye.svg';
 
-const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
+interface PricingProps {
+    buttonData: {
+        btnLabel?: string;
+        label?: string;
+        sideUpsell?: boolean;
+        addingItem?: boolean;
+        comparePrice?: string;
+        price?: string;
+        carousel?: boolean;
+        collectionTemplate?: boolean;
+    };
+    collectionTemplate?: boolean;
+    hideCent: boolean;
+    selectedVariant?: any;
+    store?: string;
+}
+
+const DEFAULT_LABEL = 'Add To Cart';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
+
+const PARSED_DEFAULT_LABEL = parse(DEFAULT_LABEL);
+const PARSED_DEFAULT_LABEL_SIDE_UPSELL = parse(DEFAULT_LABEL_SIDE_UPSELL);
 
 const ConditionalWrap = ({condition, wrap, children, elseWrap}) => condition ? wrap(children) : elseWrap(children);
 
-const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store }) => {
-    let label = props.btnLabel ? props.btnLabel : props.label;
-    // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
-
+const Pricing = memo(({ buttonData, collectionTemplate, hideCent, selectedVariant, store }: PricingProps) => {
+    let label = buttonData.btnLabel ? buttonData.btnLabel : buttonData.label;
     let textColor = 'text-white';
-    label = props.sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : label;
+    label = buttonData.sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : label;
+
+    const parsedLabel = useMemo(() => {
+        if (!label || label === DEFAULT_LABEL) return PARSED_DEFAULT_LABEL;
+        if (label === DEFAULT_LABEL_SIDE_UPSELL) return PARSED_DEFAULT_LABEL_SIDE_UPSELL;
+        return parse(label);
+    }, [label]);
+
+    // const displayPrice = hideCent && selectedVariant?.price
+    //     ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store)
+    //     : buttonData.price;
+
+    // const displayComparePrice = buttonData.comparePrice
+    //     ? (hideCent && selectedVariant?.compareAtPrice
+    //         ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store)
+    //         : buttonData.comparePrice)
+    //     : null;
 
     return (
         <>
-            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-nowrap text-left py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'} `}>
-                { !props.addingItem &&  parse(label ? label : DEFAULT_LABEL) }
-                { props.addingItem && <span className={`${textColor} spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" /> }
+            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-full flex justify-center ${buttonData.carousel || buttonData.collectionTemplate ? 'w-full text-nowrap text-center py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'}`}>
+                {!buttonData.addingItem && parsedLabel}
+                {buttonData.addingItem && <span className={`${textColor} spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
             </span>
-            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
-                {props.comparePrice && (<span className="line-through mr-25 font-normal">
-                    {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : props.comparePrice}
-                </span>)}
-                <span className="">{
-                    hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : props.price}
-                </span>
-            </span>
+            {/* <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${buttonData.carousel || buttonData.collectionTemplate ? 'w-auto text-right py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
+                {displayComparePrice && (
+                    <span className="line-through mr-25 font-normal">{displayComparePrice}</span>
+                )}
+                <span>{displayPrice}</span>
+            </span> */}
         </>
-    )
-};
+    );
+});
 
-const WaitlistButton = (props:any) => {
-    const handleWaitlist = () => {
-        // console.log('set waitlist data', props);
+// const Pricing = ({ props, collectionTemplate, hideCent, selectedVariant, store }) => {
+//     let label = props.btnLabel ? props.btnLabel : props.label;
+//     // label = collectionTemplate ? label : label?.replace('Add', 'Add to Cart').replace('Waitlist', 'Waitlist Me');
+
+//     let textColor = 'text-white';
+//     label = props.sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : label;
+
+//     const parsedLabel = useMemo(() => parse(label || DEFAULT_LABEL), [label]);
+
+//     return (
+//         <>
+//             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-nowrap text-left py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'} `}>
+//                 { !props.addingItem && parsedLabel }
+//                 { props.addingItem && <span className={`${textColor} spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" /> }
+//             </span>
+//             <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${props.carousel || props.collectionTemplate ? 'w-auto text-right py-[.8125em]' : props.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
+//                 {props.comparePrice && (<span className="line-through mr-25 font-normal">
+//                     {hideCent && selectedVariant && selectedVariant.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : props.comparePrice}
+//                 </span>)}
+//                 <span className="">{
+//                     hideCent && selectedVariant && selectedVariant.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : props.price}
+//                 </span>
+//             </span>
+//         </>
+//     )
+// };
+
+const WaitlistButton = memo((props: any) => {
+    const handleWaitlist = useCallback(() => {
         props.setWaitlistData({
             open: true,
             title: props.product.title,
@@ -47,49 +104,76 @@ const WaitlistButton = (props:any) => {
             date: props.selectedVariant?.waitlistPopupDate?.value || '',
             productId: props.selectedVariant?.id?.replace('gid://shopify/ProductVariant/', ''),
         });
-    };
-    const defaultText = 'Waitlist Me';
-    const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
-    return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true}/>
-        </Button>
-    )
-};
+    }, [props.product, props.selectedVariant]);
 
-const LaunchButton = (props: any) => {
-    const handleLaunchWaitlist = () => {
+    const defaultText = 'Waitlist Me';
+    const WAITLIST_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
+
+    const buttonData = useMemo(() => ({
+        label: WAITLIST_LABEL,
+        comparePrice: props.comparePrice,
+        price: props.price,
+        carousel: props.carousel,
+        collectionTemplate: props.collectionTemplate,
+        sideUpsell: props.sideUpsell,
+    }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
+
+    return (
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-center !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
+        </Button>
+    );
+});
+
+const LaunchButton = memo((props: any) => {
+    const handleLaunchWaitlist = useCallback(() => {
         const data = {
             open: true,
             handle: props.product.handle,
             variantId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
             tags: props.product.tags,
-            productId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''), // props.product?.id?.replace('gid://shopify/Product/', ''),
-        }
-        if (props.launchBox === 1) {
-            props.setLaunchWLModal(data);
-        } else if (props.launchBox === 2) {
-            props.setLaunchWLModal2(data);
-        } else if (props.launchBox === 3) {
-            props.setLaunchWLModal3(data);
-        }
-    };
-    const defaultText = 'Waitlist Me';
-    const data = {...props, ...{ label: `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>` }};
-    return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
-            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} props={data} hideCent={true} />
-        </Button>
-    )
-}
+            productId: props.selectedVariant?.id.replace('gid://shopify/ProductVariant/', ''),
+        };
+        if (props.launchBox === 1) props.setLaunchWLModal(data);
+        else if (props.launchBox === 2) props.setLaunchWLModal2(data);
+        else if (props.launchBox === 3) props.setLaunchWLModal3(data);
+    }, [props.product, props.selectedVariant, props.launchBox]);
 
-const AddToCartButton = (props:any) => {
+    const defaultText = 'Waitlist Me';
+    const LAUNCH_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
+    const buttonData = useMemo(() => ({
+        label: LAUNCH_LABEL,
+        comparePrice: props.comparePrice,
+        price: props.price,
+        carousel: props.carousel,
+        collectionTemplate: props.collectionTemplate,
+        sideUpsell: props.sideUpsell,
+    }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
+
+    return (
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+            <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
+        </Button>
+    );
+});
+
+const AddToCartButton = memo((props: any) => {
     const { className, addToCart, selectedVariant, preOrders, sideUpsell, trackEvent, bgClass, textClass } = props;
     const [addingItem, setAddingItem] = useState(false);
-    const [ctaLabel, setCtaLabel] = useState(props.label);
-    const btnLabel = props.label;
 
-    const onAddItem = async (e) => {
+    const ctaLabel = useMemo(() => {
+        if (preOrders && selectedVariant?.id) {
+            const variantId = selectedVariant.id.replace('gid://shopify/ProductVariant/', '');
+            const { group1, group2, group3 } = preOrders;
+
+            if (group1.enabled && group1.variantIds.includes(variantId)) return group1.cta;
+            if (group2.enabled && group2.variantIds.includes(variantId)) return group2.cta;
+            if (group3.enabled && group3.variantIds.includes(variantId)) return group3.cta;
+        }
+        return sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : DEFAULT_LABEL;
+    }, [selectedVariant?.id, preOrders, sideUpsell]);
+
+    const onAddItem = useCallback(async () => {
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
@@ -99,6 +183,7 @@ const AddToCartButton = (props:any) => {
                 title: selectedVariant.title,
             });
             setAddingItem(false);
+
             if (sideUpsell && typeof trackEvent === 'function') {
                 trackEvent('pdp_upsell', {
                     category: 'Add to Cart',
@@ -107,350 +192,351 @@ const AddToCartButton = (props:any) => {
                 });
             }
         }
-        return false;
-    }
+    }, [addToCart, selectedVariant, sideUpsell, trackEvent]);
 
-    useEffect(() => {
-        if (preOrders && selectedVariant && selectedVariant.id) {
-            const { group1, group2, group3 } = preOrders;
-            if (group1.enabled && selectedVariant && group1.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group1.cta);
-            } else if (group2.enabled && selectedVariant && group2.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group2.cta);
-            } else if (group3.enabled && selectedVariant && group3.variantIds.includes(selectedVariant.id.replace('gid://shopify/ProductVariant/', ''))) {
-                setCtaLabel(group3.cta);
-            } else {
-                let ctaLabel = DEFAULT_LABEL;
-                if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
-                setCtaLabel(`${ctaLabel}`);
-                // setCtaLabel(props.label);
-            }
-        }
-    }, [selectedVariant, preOrders]);
-
-    // useEffect(() => {
-    //     let ctaLabel = DEFAULT_LABEL;
-    //     if (props.sideUpsell) ctaLabel = DEFAULT_LABEL_SIDE_UPSELL;
-    //     setCtaLabel(`${ctaLabel}`);
-    // }, [])
+    const buttonData = useMemo(() => ({
+        btnLabel: props.label,
+        label: ctaLabel,
+        addingItem,
+        comparePrice: props.comparePrice,
+        price: props.price,
+        carousel: props.carousel,
+        collectionTemplate: props.collectionTemplate,
+        sideUpsell: props.sideUpsell,
+    }), [props.label, ctaLabel, addingItem, props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
-            <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} />
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
+            <Pricing
+                store={props.store}
+                selectedVariant={selectedVariant}
+                hideCent={false}
+                collectionTemplate={props.collectionTemplate}
+                buttonData={buttonData}
+            />
         </Button>
     );
-};
+});
 
-const SwatchOverlay = (props:any) => {
-    const spanEl = useRef(null);
+const SwatchOverlay = memo((props: any) => {
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
     const [hasUserSelectedSwatch, setHasUserSelectedSwatch] = useState(false);
     const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
-    const [price, setPrice] = useState(props.price);
-    const [comparePrice, setComparePrice] = useState(props.comparePrice);
-    let labelText = label === 'Add' ? label : props.swatch.label;
-    labelText = `<span class="lg:hidden">Add</span><span class="hidden lg:inline">${labelText}</span>`;
 
-    let firstAvailable: any;
-    const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
-    if (autoTicks && autoTicks.length > 0) {
-        firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-    }
-    if (firstAvailable === null || !firstAvailable?.availableForSale) {
-        firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
-    }
-    // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-    //     let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'medium');
-    //     if (swatch.availableForSale) {
-    //         firstAvailable = swatch;
-    //     }
-    // }
-    if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'dark');
-        if (swatch.availableForSale) {
-            firstAvailable = swatch;
+    const firstAvailable = useMemo(() => {
+        const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
+        let first: any = null;
+
+        if (autoTicks.length > 0) {
+            first = product?.variants?.nodes.find((obj) =>
+                autoTicks?.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
+            ) || null;
         }
-    }
+
+        if (first === null || !first?.availableForSale) {
+            first = props.swatch.data.find((swatchData: any) => swatchData.available) || { id: 0 };
+        }
+
+        return first;
+    }, [product, generalSetting, store, props.swatch.data]);
+
     const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
-    const changeSwatch = (e:any) => {
-        const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
-        spanEls.forEach((span:any) => {
-            span.classList.remove('border-primary');
-            span.classList.add('border-white');
-        });
-        e.target.classList.remove('border-white');
-        e.target.classList.add('border-primary');
-        const targetText = e.target.getAttribute('data-val');
-        swatchLabel.current.textContent = targetText;
-        const available = e.target.getAttribute('data-avail');
-        const id = e.target.getAttribute('data-id');
-        const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === id);
-        if (selectedSwatch) {
-            setSelectedVariant(selectedSwatch);
-            setHasUserSelectedSwatch(true);
+    useEffect(() => {
+        if (!hasUserSelectedSwatch && firstAvailable) {
+            setSelectedVariant(firstAvailable);
+            setSwatchAvailable(firstAvailable.id !== 0 && firstAvailable.availableForSale !== false);
         }
-        if (available === 'true') {
-            setSwatchAvailable(true);
-        } else {
-            setSwatchAvailable(false);
-        }
+    }, [firstAvailable, hasUserSelectedSwatch]);
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'au'].includes(store)) {
-            handleShade(targetText.toLowerCase())
-        }
-    };
+    const { price, comparePrice } = useMemo(() => {
+        const derivedPrice = selectedVariant?.price
+            ? formatMoney(parseFloat(selectedVariant?.price.amount) * 100, false, store)
+            : formatMoney(0, false, store);
+        const derivedComparePrice = selectedVariant?.compareAtPrice
+            ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store)
+            : null;
+        return { price: derivedPrice, comparePrice: derivedComparePrice };
+    }, [selectedVariant, store]);
 
     useEffect(() => {
-        const region = getCookie('region');
-        if (selectedVariant.compareAtPrice) {
-            setComparePrice(formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, region));
-        } else {
-            setComparePrice(null);
-        }
-        setPrice(selectedVariant && selectedVariant.price ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, region) : formatMoney(0, false, region));
-    }, [selectedVariant]);
-
-    const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant.id) || props.swatch.data[0];
-
-    useEffect(() => {
-        if (!hasUserSelectedSwatch && firstAvailable?.id === 0 && props.swatch?.data?.length > 0) {
-            const fallbackSwatch = props.swatch.data[0];
-            setSelectedVariant(fallbackSwatch);
+        if (!hasUserSelectedSwatch && (firstAvailable?.id === 0) && props.swatch?.data?.length > 0) {
+            setSelectedVariant(props.swatch.data[0]);
             setSwatchAvailable(false);
         }
     }, [firstAvailable, props.swatch?.data, hasUserSelectedSwatch]);
 
+    const changeSwatch = useCallback((e: any) => {
+        const id = e.target.getAttribute('data-id');
+        const available = e.target.getAttribute('data-avail') === 'true';
+        const targetText = e.target.getAttribute('data-val');
+
+        const selectedSwatch = product?.variants?.nodes?.find((node: any) => node.id === id);
+        if (selectedSwatch) {
+            setSelectedVariant(selectedSwatch);
+            setHasUserSelectedSwatch(true);
+            props.onVariantChange?.(selectedSwatch);
+        }
+        setSwatchAvailable(available);
+
+        if (swatchLabel.current) swatchLabel.current.textContent = targetText;
+
+    }, [product, store, handleShade]);
+
+    const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant?.id) || props.swatch.data[0];
+
+    if (props.quizResult) {
+        const resultVariant = props.product.variants.nodes.find((node) => node.sku === props.quizResultSku);
+        if (!resultVariant) return null;
+
+        const color = resultVariant.selectedOptions?.find((s) => s.name === 'Color');
+
+        return (
+            <>
+                {color && (
+                    <div className="my-1 flex justify-center items-center">
+                        <div className={`block variant-swatch border-2 border-white ${color.value?.toLowerCase()} mr-1`} /> {color.value}
+                    </div>
+                )}
+                {resultVariant.availableForSale ? (
+                    <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" />
+                ) : (
+                    <WaitlistButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={resultVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
+                )}
+            </>
+        );
+    }
+
+    let labelText = label === DEFAULT_LABEL ? label : props.swatch.label;
+    labelText = `<span class="lg:hidden">${DEFAULT_LABEL}</span><span class="hidden lg:inline">${labelText}</span>`;
+
     return (
         <>
-            {props.quizResult && (() => {
-                const resultVariant = props.product.variants.nodes.find((node) => node.sku === props.quizResultSku);
-                const { selectedOptions } = resultVariant;
-                const color = selectedOptions?.find((s) => s.name === 'Color');
-                return resultVariant && (
-                    <>
-                        {color && (
-                            <div className="my-1 flex justify-center items-center">
-                                <div className={`block variant-swatch border-2 border-white ${color.value?.toLowerCase()} mr-1`} /> {color.value}
-                            </div>
-                        )}
-                        {resultVariant.availableForSale && (
-                            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0"/>
-                        )}
-                        {!resultVariant.availableForSale && (
-                            <WaitlistButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={resultVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" />
-                        )}
-                    </>
-                )
-            })()}
-
-            {!props.quizResult && (
-                <>
-                    <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
-                    <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : 'left-[8px] lg:left-1 right-[8px] lg:right-1 bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t`}>
-                        <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
-                            <div className="block mb-[.625em]">
-                                {props.swatch.style && <strong>Style: </strong>}
-                                {props.swatch.shade && <strong>Shade: </strong>}
-                                {props.swatch.tangleTamer && <strong>Type: </strong>}
-                                {props.swatch.scent && <strong>Scent: </strong>}
-                                {props.swatch.variant && <strong>Variant: </strong>}
-                                <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
-                            </div>
-                            <ul className="list-unstyled product-variant-swatch flex justify-center">
-                                {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
-                                    <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-1/4'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                        <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        {/* <AddToCartButton store={store} comparePrice={props.comparePrice} price={props.price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0"/> */}
-                        {swatchAvailable && (
-                            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
-                        )}
-                        {!swatchAvailable && (
-                            <WaitlistButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} />
-                        )}
+            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
+            <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
+                <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
+                    <div className="block mb-[.625em]">
+                        {props.swatch.style && <strong>Style: </strong>}
+                        {props.swatch.shade && <strong>Shade: </strong>}
+                        {props.swatch.tangleTamer && <strong>Type: </strong>}
+                        {props.swatch.scent && <strong>Scent: </strong>}
+                        {props.swatch.variant && <strong>Variant: </strong>}
+                        <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
                     </div>
-                </>
-            )}
+                    <ul className="list-unstyled product-variant-swatch flex justify-center">
+                        {props.swatch.data.map((item: any) => (
+                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-1/4'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
+                                <span
+                                    onClick={changeSwatch}
+                                    data-id={item.id}
+                                    data-val={item.label}
+                                    data-avail={item.availableForSale}
+                                    className={`block variant-swatch mx-auto border-2 ${selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                {swatchAvailable ? (
+                    <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
+                ) : (
+                    <WaitlistButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} />
+                )}
+            </div>
         </>
     );
-};
+});
 
 const isKit = (title:string) => {
-	const productTitle = title.toLowerCase();
+	const productTitle = title?.toLowerCase();
 	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
-const ProductCard = (props:any) => {
+const ProductCardButton = (props: any) => {
+    const { className, ...rest } = props;
+
+    return (
+        <>
+            {!rest.isLaunchWL && !rest.product.swatch && rest.effectivelyAvailable && (
+                    <AddToCartButton {...rest} />
+                )}
+
+                {!rest.isLaunchWL && rest.product.swatch && (
+                    <SwatchOverlay
+                        {...rest}
+                        swatch={rest.product.swatch}
+                    />
+                )}
+
+                {!rest.isLaunchWL && !rest.product.swatch && !rest.effectivelyAvailable && (
+                    <WaitlistButton {...rest} />
+                )}
+
+                {props.isLaunchWL && (
+                    <LaunchButton {...rest} />
+                )}
+        </>
+    );
+}
+
+const ProductCard = (props: any) => {
     const { clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
-    const [skus, setSkus] = useState([]);
-    const [selectedVariant, setSelectedVariant] = useState(null);
-    const [shade, setShade] = useState('');
-    const [productImage, setProductImage] = useState(props.product.src);
-    const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
     const { product } = props;
-    const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
 
-    const handleShade = (val) => {
-        setShade(val)
-    }
-    const trackLink = () => {
-        if (typeof trackEvent === 'function') {
-            if (carousel) {
-                trackEvent('carousel_product', {
-                    category: 'Clickout',
-                    target: product.handle,
-                });
-            }
+    const autoTicks = useMemo(
+        () => generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [],
+        [generalSetting?.auto_tick_variant]
+    );
 
-            if (eventNameOnClick) {
-                trackEvent(eventNameOnClick, {
-                    category: 'Clickout',
-                    target: product.handle,
-                });
-            }
-
-            trackEvent('product_card_click', {
-                category: 'Clickout',
-                target: product.handle,
-            });
-        }
-    }
-
-    useEffect(() => {
-        if (product && product.productType !== 'HERO') {
-            const skus_ = isKit(product.title)
-                ? product.variants.nodes.map((node:any) => node.sku)
-                : product.variants.nodes.filter((node: any) => !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')).map((node:any) => node.sku);
-            if (product.variants.nodes[0]?.reviewSku) {
-                setSkus([product.variants.nodes[0]?.reviewSku.value]);
-            } else {
-                setSkus(skus_);
-            }
-        } else if (product && product.variants) {
-            if (isKit(product.title)) {
-                if (product.variants.nodes[0]?.reviewSku) {
-                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
-                } else {
-                    setSkus(product.variants.nodes.map((node:any) => node.sku));
-                }
-            } else {
-                const single = product.variants.nodes.filter((node:any) => {
-                    return !node.title.toLowerCase().includes('bundle') && !node.title.toLowerCase().includes('kit') && !node.title.toLowerCase().includes('set')
-                })
-                if (product.variants.nodes[0]?.reviewSku) {
-                    setSkus([product.variants.nodes[0]?.reviewSku.value]);
-                } else {
-                    setSkus(single.map((node:any) => node.sku));
-                }
-            }
-        }
-
-        // https://app.clickup.com/t/86ergy8je
-        if (!product.availableForSale && selectedVariant?.availableForSale) {
-            selectedVariant.availableForSale = false;
-        }
-    }, [product, selectedVariant]);
-
-    useEffect(() => {
-        // console.log('product-card');
-        let defaultVariant = null;
-        if (autoTicks && autoTicks.length > 0) {
-            defaultVariant = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
-        }
+    const [selectedVariant, setSelectedVariant] = useState(() => {
         const variantNodes = product?.variants?.nodes;
-        if (defaultVariant === null) defaultVariant = variantNodes.sort((x, y) => y.availableForSale - x.availableForSale)[0];
-        setSelectedVariant(defaultVariant || null);
-    }, []);
+        if (!variantNodes) return null;
 
-    useEffect(() => {
-        // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-        //     setShade('medium');
-        // } else if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-        //     setShade('dark');
-        // }
+        if (autoTicks.length > 0) {
+            const match = variantNodes.find((obj) =>
+                autoTicks?.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', '')))
+            );
+            if (match) return match;
+        }
+        return [...variantNodes].sort((x, y) => Number(y.availableForSale) - Number(x.availableForSale))[0] || null;
+    });
 
-        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            setShade('dark');
+    const skus = useMemo(() => {
+        if (!product?.variants?.nodes) return [];
+
+        if (product.variants.nodes[0]?.reviewSku) {
+            return [product.variants.nodes[0].reviewSku.value];
         }
 
-    }, []);
-    useEffect(() => {
-        // if (product.handle === 'bronzing-self-tanner-drops' && ['dev', 'us'].includes(store)) {
-        //     const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/825b3d6e-4a4a-44d5-a993-c75e89aca800/540x';
-        //     const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/540x';
-        //     if (shade === 'medium') {
-        //         setProductImage(medImg);
-        //         setProductHoverImage(darkImg)
-        //     } else {
-        //         setProductImage(darkImg);
-        //         setProductHoverImage(medImg)
-        //     }
-        // }
-
-        if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-            const darkImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/540x';
-            const medImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
-            if (shade === 'medium') {
-                setProductImage(medImg);
-                setProductHoverImage(darkImg)
-            } else {
-                setProductImage(darkImg);
-                setProductHoverImage(medImg)
-            }
+        const nodes = product.variants.nodes;
+        if (isKit(product.title) || product.productType === 'HERO') {
+            return nodes.map((node: any) => node.sku);
         }
-    }, [shade]);
+
+        return nodes.filter((node: any) => {
+            const t = node?.title?.toLowerCase();
+            if (!t) return true;
+            return !t.includes('bundle') && !t.includes('kit') && !t.includes('set');
+        }).map((node: any) => node.sku);
+    }, [product]);
+
+    const { productImage, productHoverImage } = useMemo(() => {
+        let image = props.product.src;
+        let hoverImage = props.product.imgHover;
+
+        return { productImage: image, productHoverImage: hoverImage };
+    }, [product.handle, store, props.product.src, props.product.imgHover]);
+
+    const [shade, setShade] = useState('');
+
+    const handleShade = useCallback((val) => setShade(val), []);
+
+    const shadeImages = useMemo(() => {
+        return { productImage, productHoverImage };
+    }, [shade, product.handle, store, productImage, productHoverImage]);
+
+    const effectivelyAvailable = !product.availableForSale ? false : selectedVariant?.availableForSale ?? false;
+
+    const trackLink = useCallback(() => {
+        if (typeof trackEvent !== 'function') return;
+        if (carousel) trackEvent('carousel_product', { category: 'Clickout', target: product.handle });
+        if (eventNameOnClick) trackEvent(eventNameOnClick, { category: 'Clickout', target: product.handle });
+        trackEvent('product_card_click', { category: 'Clickout', target: product.handle });
+    }, [trackEvent, carousel, eventNameOnClick, product.handle]);
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
-    const customTitle = props.customProductTitle?.customTitles?.find((row) => row.handle === product?.handle && row.enabled_item && filterIncludes.includes(row.options))?.title || null;
+    const customTitle = useMemo(() => props.customProductTitle?.customTitles?.find(
+            (row) => row.handle === product?.handle && row.enabled_item && filterIncludes?.includes(row.options)
+        )?.title || null,
+        [props.customProductTitle, product?.handle, filterIncludes]
+    );
 
-    const openModal = (e) => {
+    const openModal = useCallback((e) => {
         e.preventDefault();
         props.setProductData({
             open: true,
             handle: product.handle,
-            selectedVariant: selectedVariant,
-            swatch: product.swatch
+            selectedVariant,
+            swatch: product.swatch,
         });
-    };
+    }, [product, selectedVariant, props.setProductData]);
 
-	return !props.useCardTemplate ? (
+    const price = selectedVariant?.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : formatMoney(0, false, store);
+    const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : null;
+
+    const handleVariantChange = useCallback((variant) => {
+        setSelectedVariant(variant);
+    }, []);
+
+    return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <ConditionalWrap
-                condition={clickShowPopup}
-                wrap={children => <p role="button" className={`rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
-                elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">{children}</a>}
-            >
-                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
-                    {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
-                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-2 lg:!pt-hg" alt={product?.title} loading="lazy" />}
+            <div className="relative group">
+                <ConditionalWrap
+                    condition={clickShowPopup}
+                    wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
+                    elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
+                >
+                    <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+                        {shadeImages.productImage && <source srcSet={shadeImages.productImage} media="(min-width: 992px)" />}
+                        {shadeImages.productImage && (
+                            //@ts-ignore
+                            <img src={shadeImages.productImage} width={540} height={540} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-0 !left-0 !right-auto lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0" alt={product?.title} loading={props.isAboveFold ? "eager" : "lazy"} fetchpriority={props.isAboveFold ? "high" : "auto"} />
+                        )}
 
-                    {props.showTip && (
-                        <>
-                            <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
-                        </>
-                    )}
-                    {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
-                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt={`Product card 2nd image of ${product?.title}`} loading="lazy" />}
-                        </picture>
-                    )}
-                </picture>
-            {/* </a> */}
-            </ConditionalWrap>
-            { props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] pt-[5px] pb-[3px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-[${props.landingPageTemplate ? '12' : props.product?.badgeMobileFontSize}px] lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`}>{props.product.badgeText}</span>) }
-            { props.product.activeBadges && !props.sideUpsell &&
+                        {props.showTip && (
+                            <>
+                                <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+                                <span className="absolute text-white font-xs p-1 block lg:hidden">👻 3 for 2</span>
+                            </>
+                        )}
+                        {shadeImages.productHoverImage && !shadeImages.productHoverImage.includes('shopify/assets/no-image') && (
+                            <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover img--hover hidden lg:block">
+                                <img src={shadeImages.productHoverImage} width={540} height={540} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-0 !left-0 lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0" alt={`${product?.title} - alternate view`} loading="lazy"
+                                    //@ts-ignore
+                                    fetchpriority="auto" />
+                            </picture>
+                        )}
+                    </picture>
+                    
+                </ConditionalWrap>
+                <div className="absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
+                    opacity-0 translate-y-[.75rem]
+                    transition-all duration-300
+                    group-hover:opacity-100 group-hover:translate-y-0">
+                        <ProductCardButton
+                            {...props}
+                            store={store}
+                            generalSetting={generalSetting}
+                            preOrders={preOrders}
+                            addToCart={addToCart}
+                            trackEvent={trackEvent}
+                            label={label}
+                            selectedVariant={selectedVariant}
+                            effectivelyAvailable={effectivelyAvailable}
+                            handleShade={handleShade}
+                            comparePrice={props.product.comparePrice}
+                            price={props.product.price}
+                            onVariantChange={handleVariantChange}
+                        />
+                </div>
+            </div>
+
+            {/* Badges */}
+            {props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
+                <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                    {props.product.badgeText}
+                </span>
+            )}
+            {props.product.activeBadges && !props.sideUpsell && (
                 <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                     {props.product.activeBadges.map((badge) => (
-                        <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] pt-[5px] pb-[3px] px-[0.83333em] font-normal lg:text-sm  product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'} text-[${props.landingPageTemplate ? '12' : props.product?.badgeMobileFontSize}px]`}>{badge.badge_text}</span>
+                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] font-normal lg:text-sm product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                            {badge.badge_text}
+                        </span>
                     ))}
                 </div>
-            }
+            )}
 
             {clickShowPopup && (
                 <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'lg:min-w-[3.375em] badge'} cursor-pointer inline-flex rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
@@ -458,50 +544,55 @@ const ProductCard = (props:any) => {
                     <Eye className="artical-detail--svg svg h-[1rem] w-[1rem]" />
                 </p>
             )}
-            <div className={`pt-0 pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content ${props.collectionTemplate ? 'px-[.5rem]' : ''}`}>
-                <p className={`product-title__text text-center grow flex flex-col items-start justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+
+            {/* Content */}
+            <div className={`pt-0 pb-0 relative grow flex flex-col product-card__content lg:px-[.75rem]`}>
+                <p className={`product-title__text pt-[.5rem] lg:pt-[1rem] lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
                         condition={clickShowPopup}
-                        wrap={children => <span role="button" className={`text-sm hover:underline lg:text-base product-card__title text-body hover:text-body w-full text-center`} onClick={openModal}>{children}</span>}
-                        elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center`}>{children}</a>}
+                        wrap={children => <span role="button" className="text-sm hover:underline lg:text-base product-card__title text-body hover:text-body w-full" onClick={openModal}>{children}</span>}
+                        elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full`}>{children}</a>}
                     >
-                    {/* <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center`}> */}
                         {customTitle ?? props.product.title}
-                    {/* </a> */}
                     </ConditionalWrap>
                 </p>
-                <div className="review-stars__number min-h-[20px] flex justify-center mb-1 lg:mb-[1rem]">
-                    {skus.length > 0 && (<YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />)}
+
+                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] items-center">
+                    {skus.length > 0 && (
+                        <YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
+                    )}
+                    {selectedVariant && (
+                        <div className="flex items-center text-[14px] leading-[18px]">
+                            {comparePrice && <span className="line-through pr-[.25rem] text-gray-600">{comparePrice}</span>}
+                            <span className={`font-bold ${comparePrice ? 'text-primary' : 'text-body'}`}>{price}</span>
+                        </div>
+                    )}
                 </div>
 
-                {!props.isLaunchWL && !props.product.swatch && selectedVariant?.availableForSale && (
-                    <AddToCartButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
-                )}
-
-                {!props.isLaunchWL && props.product.swatch &&
-                    <SwatchOverlay handleShade={handleShade} store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null}/>
-                }
-                {!props.isLaunchWL && !props.product.swatch && !props.product.availableForSale && (
-                    <WaitlistButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
-                )}
-
-                {!props.isLaunchWL && !props.product.swatch && !selectedVariant?.availableForSale && props.product.availableForSale && (
-                    <WaitlistButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
-                )}
-
-                {props.isLaunchWL && (
-                    <LaunchButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} launchBox={props.launchBox} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} setLaunchWLModal2={props.setLaunchWLModal2} setLaunchWLModal3={props.setLaunchWLModal3} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
-                )}
-                {/* {props.quizResult && (
-                    <QuizResultButton product={props.product} sku={props.quizResultSku} addToCart={addToCart} />
-                )} */}
+                <div className="lg:hidden">
+                    <ProductCardButton
+                        {...props}
+                        store={store}
+                        generalSetting={generalSetting}
+                        preOrders={preOrders}
+                        addToCart={addToCart}
+                        trackEvent={trackEvent}
+                        label={label}
+                        selectedVariant={selectedVariant}
+                        effectivelyAvailable={effectivelyAvailable}
+                        handleShade={handleShade}
+                        comparePrice={props.product.comparePrice}
+                        price={props.product.price}
+                        onVariantChange={handleVariantChange}
+                    />
+                </div>
             </div>
         </div>
-	) : (
-		<div key={props.keyName} className={`${props.className} carousel-item ${props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
-			<img className="img-fluid" src={`//via.placeholder.com/600x400?text=${props.product.label}`} alt={`slide ${props.product.index}`}/>
-		</div>
-	);
+    ) : (
+        <div key={props.keyName} className={`${props.className} carousel-item ${props.activeIndex === props.product.index ? 'active ' : ''} ${props.itemMovingNext ? 'carousel-item-next carousel-item-start ' : ''} ${props.itemMovingPrev ? 'carousel-item-prev carousel-item-end ' : ''}`}>
+            <img className="img-fluid" src={`//via.placeholder.com/600x400?text=${props.product.label}`} alt={`slide ${props.product.index}`} />
+        </div>
+    );
 };
 
 export default ProductCard;

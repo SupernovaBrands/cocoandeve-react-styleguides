@@ -17,7 +17,7 @@ const PageReviewCard = (props:any) => {
                     <div className='flex content-start flex-wrap pl-[0] pr-[0] lg:pl-[20px] lg:pr-[0px] max-w-[440px]'>
                         <h3 className='grow-0 flex mb-[4px] lg:mb-[16px] lg:text-[20px]'>{data?.author}</h3>
                         <a href={`/products/${props?.productHandle}#write-a-review`} className=" grow-0 flex text-sm w-full block" aria-label="Write a review for this product">
-                            <ReviewStar score="5" className={`flex grow-0`} />
+                            <ReviewStar score={5} className={`flex grow-0`} />
                         </a>
                         <p className='flex mt-[16px] mb-[16px] lg:mt-[40px] lg:mb-[40px] lg:text-[20px] lg:leading-[25px] grow'>{data?.description}</p>
                         {/* <p>- {data?.author}</p> */}
