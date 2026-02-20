@@ -1,13 +1,13 @@
 .product-card {
 
 	.product-title__text {
-		@apply mx-0 lg:mb-25 mb-25 lg:mt-0 min-h-[40px];
+		@apply mx-0;
 	}
 
 	.review-stars__number {
 
 		svg {
-			@apply w-1 h-1 ml-[4px];
+			@apply w-[14px] h-[14px] ml-[4px];
 
 			&:first-child {
 				@apply ml-0;
@@ -27,7 +27,7 @@
 		&:not(.button-overlay) {
 
 			@screen lg {
-				@apply mb-g;
+				@apply w-full mb-0;
 			}
 
 			@screem sm {
@@ -36,7 +36,7 @@
 		}
 
 		@screen sm {
-			@apply flex-row max-h-[38px];
+			@apply flex-row max-h-[38px] w-full;
 
 			.product-card-btn__text,
 			.product-card-btn__prices {
@@ -60,7 +60,7 @@
 
 	.swatch-overlay {
 		@screen lg {
-			@apply left-g right-g;
+			@apply left-0 right-0 bottom-[1.25rem];
 
 			.button-overlay {
 				margin-bottom: -21px;
@@ -83,7 +83,7 @@
 		}
 
 		.product-title__text {
-			@apply mb-0 lg:mb-25 lg:min-h-4;
+			@apply mb-0 lg:min-h-4;
 		}
 
 		.swatch-overlay {

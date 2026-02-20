@@ -45,7 +45,7 @@
 			&__products .carousel__button {
 
 				span {
-					@apply bg-white top-[8.125em] w-5 h-5 rounded-full shadow-lg;
+					@apply top-[8.125em] w-5 h-5;
 				}
 
 				svg {
@@ -53,11 +53,11 @@
 				}
 
 				&--prev span {
-					@apply -left-[0.5em];
+					@apply -left-[2rem];
 				}
 
 				&--next span {
-					@apply -right-[0.5em];
+					@apply -right-[2rem];
 				}
 			}
 

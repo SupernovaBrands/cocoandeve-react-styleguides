@@ -1,8 +1,7 @@
-import Link from "next/link";
 import YotpoStar from "~/components/YotpoStars";
 import { Button } from "../components";
 import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
-import { formatMoney, getCookie } from "~/modules/utils";
+import { formatMoney } from "~/modules/utils";
 import parse from 'html-react-parser';
 import Eye from '~/images/icons/eye.svg';
 
@@ -23,7 +22,7 @@ interface PricingProps {
     store?: string;
 }
 
-const DEFAULT_LABEL = '<span class="lg:hidden">Add</span><span class="hidden lg:inline">Add To Cart</span>';
+const DEFAULT_LABEL = 'Add To Cart';
 const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
 
 const PARSED_DEFAULT_LABEL = parse(DEFAULT_LABEL);
@@ -42,28 +41,28 @@ const Pricing = memo(({ buttonData, collectionTemplate, hideCent, selectedVarian
         return parse(label);
     }, [label]);
 
-    const displayPrice = hideCent && selectedVariant?.price
-        ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store)
-        : buttonData.price;
+    // const displayPrice = hideCent && selectedVariant?.price
+    //     ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store)
+    //     : buttonData.price;
 
-    const displayComparePrice = buttonData.comparePrice
-        ? (hideCent && selectedVariant?.compareAtPrice
-            ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store)
-            : buttonData.comparePrice)
-        : null;
+    // const displayComparePrice = buttonData.comparePrice
+    //     ? (hideCent && selectedVariant?.compareAtPrice
+    //         ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store)
+    //         : buttonData.comparePrice)
+    //     : null;
 
     return (
         <>
-            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-auto flex ${buttonData.carousel || buttonData.collectionTemplate ? 'w-auto text-nowrap text-left py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'}`}>
+            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__text lg:w-full flex justify-center ${buttonData.carousel || buttonData.collectionTemplate ? 'w-full text-nowrap text-center py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-left'}`}>
                 {!buttonData.addingItem && parsedLabel}
                 {buttonData.addingItem && <span className={`${textColor} spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
             </span>
-            <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${buttonData.carousel || buttonData.collectionTemplate ? 'w-auto text-right py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
+            {/* <span className={`${collectionTemplate ? 'border-x border-x-transparent' : ''} product-card-btn__prices lg:w-auto flex ${buttonData.carousel || buttonData.collectionTemplate ? 'w-auto text-right py-[.8125em]' : buttonData.sideUpsell ? 'w-full lg:w-full text-center text-sm' : 'w-full text-center lg:text-right'}`}>
                 {displayComparePrice && (
                     <span className="line-through mr-25 font-normal">{displayComparePrice}</span>
                 )}
                 <span>{displayPrice}</span>
-            </span>
+            </span> */}
         </>
     );
 });
@@ -120,7 +119,7 @@ const WaitlistButton = memo((props: any) => {
     }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-center !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
         </Button>
     );
@@ -152,7 +151,7 @@ const LaunchButton = memo((props: any) => {
     }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
         </Button>
     );
@@ -207,7 +206,7 @@ const AddToCartButton = memo((props: any) => {
     }), [props.label, ctaLabel, addingItem, props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-full mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
             <Pricing
                 store={props.store}
                 selectedVariant={selectedVariant}
@@ -253,7 +252,7 @@ const SwatchOverlay = memo((props: any) => {
 
     const { price, comparePrice } = useMemo(() => {
         const derivedPrice = selectedVariant?.price
-            ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, store)
+            ? formatMoney(parseFloat(selectedVariant?.price.amount) * 100, false, store)
             : formatMoney(0, false, store);
         const derivedComparePrice = selectedVariant?.compareAtPrice
             ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store)
@@ -262,7 +261,7 @@ const SwatchOverlay = memo((props: any) => {
     }, [selectedVariant, store]);
 
     useEffect(() => {
-        if (!hasUserSelectedSwatch && firstAvailable?.id === 0 && props.swatch?.data?.length > 0) {
+        if (!hasUserSelectedSwatch && (firstAvailable?.id === 0) && props.swatch?.data?.length > 0) {
             setSelectedVariant(props.swatch.data[0]);
             setSwatchAvailable(false);
         }
@@ -277,6 +276,7 @@ const SwatchOverlay = memo((props: any) => {
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
             setHasUserSelectedSwatch(true);
+            props.onVariantChange?.(selectedSwatch);
         }
         setSwatchAvailable(available);
 
@@ -308,13 +308,13 @@ const SwatchOverlay = memo((props: any) => {
         );
     }
 
-    let labelText = label === 'Add' ? label : props.swatch.label;
-    labelText = `<span class="lg:hidden">Add</span><span class="hidden lg:inline">${labelText}</span>`;
+    let labelText = label === DEFAULT_LABEL ? label : props.swatch.label;
+    labelText = `<span class="lg:hidden">${DEFAULT_LABEL}</span><span class="hidden lg:inline">${labelText}</span>`;
 
     return (
         <>
-            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
-            <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px] bottom-[35px]' : 'left-[8px] lg:left-1 right-[8px] lg:right-1 bottom-[35px]'} flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary rounded-t`}>
+            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
+            <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
                 <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
                     <div className="block mb-[.625em]">
                         {props.swatch.style && <strong>Style: </strong>}
@@ -351,6 +351,33 @@ const SwatchOverlay = memo((props: any) => {
 const isKit = (title:string) => {
 	const productTitle = title?.toLowerCase();
 	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
+}
+
+const ProductCardButton = (props: any) => {
+    const { className, ...rest } = props;
+
+    return (
+        <>
+            {!rest.isLaunchWL && !rest.product.swatch && rest.effectivelyAvailable && (
+                    <AddToCartButton {...rest} />
+                )}
+
+                {!rest.isLaunchWL && rest.product.swatch && (
+                    <SwatchOverlay
+                        {...rest}
+                        swatch={rest.product.swatch}
+                    />
+                )}
+
+                {!rest.isLaunchWL && !rest.product.swatch && !rest.effectivelyAvailable && (
+                    <WaitlistButton {...rest} />
+                )}
+
+                {props.isLaunchWL && (
+                    <LaunchButton {...rest} />
+                )}
+        </>
+    );
 }
 
 const ProductCard = (props: any) => {
@@ -435,46 +462,76 @@ const ProductCard = (props: any) => {
         });
     }, [product, selectedVariant, props.setProductData]);
 
+    const price = selectedVariant?.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : formatMoney(0, false, store);
+    const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : null;
+
+    const handleVariantChange = useCallback((variant) => {
+        setSelectedVariant(variant);
+    }, []);
+
     return !props.useCardTemplate ? (
         <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
-            <ConditionalWrap
-                condition={clickShowPopup}
-                wrap={children => <p role="button" className={`rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
-                elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="rounded-t-[1.5em] lg:rounded-t-[2em] product-card--img block">{children}</a>}
-            >
-                <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-t-[1.5em] lg:rounded-t-[2em] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
-                    {shadeImages.productImage && <source srcSet={shadeImages.productImage} media="(min-width: 992px)" />}
-                    {shadeImages.productImage && (
-                        //@ts-ignore
-                        <img src={shadeImages.productImage} width={540} height={540} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 !right-auto lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t !pt-2 lg:!pt-hg" alt={product?.title} loading={props.isAboveFold ? "eager" : "lazy"} fetchpriority={props.isAboveFold ? "high" : "auto"} />
-                    )}
+            <div className="relative group">
+                <ConditionalWrap
+                    condition={clickShowPopup}
+                    wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
+                    elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
+                >
+                    <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+                        {shadeImages.productImage && <source srcSet={shadeImages.productImage} media="(min-width: 992px)" />}
+                        {shadeImages.productImage && (
+                            //@ts-ignore
+                            <img src={shadeImages.productImage} width={540} height={540} className="bg-pink-light embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-0 !left-0 !right-auto lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0" alt={product?.title} loading={props.isAboveFold ? "eager" : "lazy"} fetchpriority={props.isAboveFold ? "high" : "auto"} />
+                        )}
 
-                    {props.showTip && (
-                        <>
-                            <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
-                            <span className="absolute text-white font-xs p-1 block lg:hidden rounded">👻 3 for 2</span>
-                        </>
-                    )}
-                    {shadeImages.productHoverImage && !shadeImages.productHoverImage.includes('shopify/assets/no-image') && (
-                        <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-t-[1.5em] lg:rounded-t-[2em] img--hover hidden lg:block">
-                            <img src={shadeImages.productHoverImage} width={540} height={540} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-[-2.5%] !left-0 lg:!max-h-[calc(100%-1rem)] lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-t" alt={`${product?.title} - alternate view`} loading="lazy"
-                                //@ts-ignore
-                                fetchpriority="auto" />
-                        </picture>
-                    )}
-                </picture>
-            </ConditionalWrap>
+                        {props.showTip && (
+                            <>
+                                <span className="absolute text-white font-xs p-1 hidden lg:block">👻 Get 3 for 2 with code: HALLOWEEN 👻</span>
+                                <span className="absolute text-white font-xs p-1 block lg:hidden">👻 3 for 2</span>
+                            </>
+                        )}
+                        {shadeImages.productHoverImage && !shadeImages.productHoverImage.includes('shopify/assets/no-image') && (
+                            <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover img--hover hidden lg:block">
+                                <img src={shadeImages.productHoverImage} width={540} height={540} className="embed-responsive-item fit--cover !max-w-full !w-full !h-full !top-0 !left-0 lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0" alt={`${product?.title} - alternate view`} loading="lazy"
+                                    //@ts-ignore
+                                    fetchpriority="auto" />
+                            </picture>
+                        )}
+                    </picture>
+                    
+                </ConditionalWrap>
+                <div className="absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
+                    opacity-0 translate-y-[.75rem]
+                    transition-all duration-300
+                    group-hover:opacity-100 group-hover:translate-y-0">
+                        <ProductCardButton
+                            {...props}
+                            store={store}
+                            generalSetting={generalSetting}
+                            preOrders={preOrders}
+                            addToCart={addToCart}
+                            trackEvent={trackEvent}
+                            label={label}
+                            selectedVariant={selectedVariant}
+                            effectivelyAvailable={effectivelyAvailable}
+                            handleShade={handleShade}
+                            comparePrice={props.product.comparePrice}
+                            price={props.product.price}
+                            onVariantChange={handleVariantChange}
+                        />
+                </div>
+            </div>
 
             {/* Badges */}
             {props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] pt-[5px] pb-[3px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                     {props.product.badgeText}
                 </span>
             )}
             {props.product.activeBadges && !props.sideUpsell && (
                 <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                     {props.product.activeBadges.map((badge) => (
-                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] pt-[5px] pb-[3px] px-[0.83333em] font-normal lg:text-sm product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] font-normal lg:text-sm product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                             {badge.badge_text}
                         </span>
                     ))}
@@ -489,38 +546,46 @@ const ProductCard = (props: any) => {
             )}
 
             {/* Content */}
-            <div className={`pt-0 pb-0 ${props.carousel && !props.shopArticle ? 'px-[8px] lg:px-[1rem]' : 'px-25'} ${props.quizResult ? 'lg:px-2' : props.sideUpsell ? 'lg:px-[5px]' : 'lg:px-1'} relative grow flex flex-col bg-pink-light rounded-b-[1.5em] lg:rounded-b-[2em] product-card__content ${props.collectionTemplate ? 'px-[.5rem]' : ''}`}>
-                <p className={`product-title__text text-center grow flex flex-col items-start justify-center h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+            <div className={`pt-0 pb-0 relative grow flex flex-col product-card__content lg:px-[.75rem]`}>
+                <p className={`product-title__text pt-[.5rem] lg:pt-[1rem] lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
                         condition={clickShowPopup}
-                        wrap={children => <span role="button" className="text-sm hover:underline lg:text-base product-card__title text-body hover:text-body w-full text-center" onClick={openModal}>{children}</span>}
-                        elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full text-center`}>{children}</a>}
+                        wrap={children => <span role="button" className="text-sm hover:underline lg:text-base product-card__title text-body hover:text-body w-full" onClick={openModal}>{children}</span>}
+                        elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} product-card__title text-body hover:text-body w-full`}>{children}</a>}
                     >
                         {customTitle ?? props.product.title}
                     </ConditionalWrap>
                 </p>
 
-                <div className="review-stars__number min-h-[20px] flex justify-center mb-1 lg:mb-[1rem]">
+                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] items-center">
                     {skus.length > 0 && (
                         <YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                     )}
+                    {selectedVariant && (
+                        <div className="flex items-center text-[14px] leading-[18px]">
+                            {comparePrice && <span className="line-through pr-[.25rem] text-gray-600">{comparePrice}</span>}
+                            <span className={`font-bold ${comparePrice ? 'text-primary' : 'text-body'}`}>{price}</span>
+                        </div>
+                    )}
                 </div>
 
-                {!props.isLaunchWL && !props.product.swatch && effectivelyAvailable && (
-                    <AddToCartButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} selectedVariant={selectedVariant} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null} />
-                )}
-
-                {!props.isLaunchWL && props.product.swatch && (
-                    <SwatchOverlay handleShade={handleShade} store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} generalSetting={generalSetting} quizResult={props.quizResult} quizResultSku={props.quizResultSku} preOrders={preOrders} setWaitlistData={props.setWaitlistData} swatch={props.product.swatch} price={props.product.price} comparePrice={props.product.comparePrice} carousel={props.carousel} product={props.product} addToCart={addToCart} label={label} sideUpsell={props.sideUpsell} trackEvent={trackEvent || null} />
-                )}
-
-                {!props.isLaunchWL && !props.product.swatch && !effectivelyAvailable && (
-                    <WaitlistButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} selectedVariant={selectedVariant} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
-                )}
-
-                {props.isLaunchWL && (
-                    <LaunchButton store={store} bgClass={generalSetting?.bfcm_cta_bg_color} textClass={generalSetting?.bfcm_cta_text_color} launchBox={props.launchBox} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} selectedVariant={selectedVariant} setLaunchWLModal={props.setLaunchWLModal} setLaunchWLModal2={props.setLaunchWLModal2} setLaunchWLModal3={props.setLaunchWLModal3} product={props.product} comparePrice={props.product.comparePrice} price={props.product.price} carousel={props.carousel} sideUpsell={props.sideUpsell} />
-                )}
+                <div className="lg:hidden">
+                    <ProductCardButton
+                        {...props}
+                        store={store}
+                        generalSetting={generalSetting}
+                        preOrders={preOrders}
+                        addToCart={addToCart}
+                        trackEvent={trackEvent}
+                        label={label}
+                        selectedVariant={selectedVariant}
+                        effectivelyAvailable={effectivelyAvailable}
+                        handleShade={handleShade}
+                        comparePrice={props.product.comparePrice}
+                        price={props.product.price}
+                        onVariantChange={handleVariantChange}
+                    />
+                </div>
             </div>
         </div>
     ) : (
