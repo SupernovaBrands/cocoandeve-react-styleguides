@@ -5,7 +5,7 @@ const tStrings = global.config.tStrings;
 const YotpoRatingCard = (props) => {
     const { score, total, totalQa, handleForm, generalSetting} = props;
     return (
-        <div className="yotpo-widget__rating-sidebar flex flex-col lg:mr-0 rounded-[24px] lg:rounded-[32px] border border-gray-600 p-2 lg:mb-4">
+        <div className="yotpo-widget__rating-sidebar flex flex-col lg:mr-0 rounded-none border border-gray-600 p-2 lg:mb-4">
             <div className="items-center lg:justify-center leading-[1.25] flex mb-1">
                 <span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
                 <div className="lg:ml-1">
@@ -19,7 +19,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('review')}
                     type="button"
                     lg={false}
-                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent rounded-full mb-g text-sm py-1 font-normal`}>
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-dark'} w-full px-0 bg-transparent rounded-none mb-g text-sm py-1 font-normal`}>
                         Write A Review
                 </Button>
             </div>
@@ -27,7 +27,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('question')}
                     type="button"
                     lg={false}
-                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} w-full px-0 bg-transparent rounded-full text-sm py-1 font-normal`}>
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-dark'} w-full px-0 bg-transparent rounded-none text-sm py-1 font-normal`}>
                         Ask A Question
                 </Button>
             </div>
