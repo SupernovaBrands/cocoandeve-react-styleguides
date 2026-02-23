@@ -112,8 +112,8 @@ const RealResultCarousel = (props: any) => {
 	}, [activeTab, emblaApi]);
 
 	return (
-		<div className="instagram-reels container my-3 text-center px-0 lg:px-g lg:mt-5">
-			<p className="instagram-reels__title text-xl lg:text-2xl font-bold mb-2">Real Results</p>
+		<div className="instagram-reels container mt-3 mb-5 text-center px-0 lg:px-g lg:mt-5">
+			<p className="instagram-reels__title text-xl lg:text-2xl font-bold mb-g">Real Results</p>
 			<div className="row">
                 <div className="text-center instagram-reels__video-container pl-hg lg:px-25">
 					<div className="lg:flex lg:flex-wrap lg:justify-between lg:items-center lg:mb-3">

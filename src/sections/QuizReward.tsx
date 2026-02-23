@@ -51,8 +51,8 @@ const QuizRewardTest = (props: any) => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-5">
-            <p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
+        <section ref={sectionRef} className="container text-center my-5">
+            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Discover more</p>
             {/* <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
@@ -117,7 +117,7 @@ const QuizRewardTest = (props: any) => {
                             <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_d_417x.jpg?v=1771217469" media="(min-width: 992px)" />
                             <img className="w-full h-[88px] lg:h-auto" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" loading="lazy" alt="Cocoandeve overview review" width={384} height={88} />
                         </picture>
-                        <figcaption className="absolute top-0 bottom-0 left-0 right-0 p-[.75rem] lg:p-[1.5rem] items-center text-left">
+                        <figcaption className="absolute top-0 bottom-0 left-0 right-0 py-[.75rem] px-[.625rem] lg:p-[1.5rem] items-center text-left">
                             <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>
                             <div className="grid grid-cols-[99fr_83fr_107fr] lg:grid-cols-1 gap-[1rem] lg:gap-[.75rem]">
                                 <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">

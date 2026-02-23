@@ -124,7 +124,7 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
+			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
 				{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 				<div className="row">
 					<div className="">
@@ -279,7 +279,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent> */}
-							<a href="/collections/all" className={`lg:hidden mt-2 ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : ''} p-[1rem] text-body text-underline underline-offset-[.25rem] font-bold inline-block`}>Shop All</a>
+							<a href="/collections/all" className={`lg:hidden mt-[1rem] ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : ''} p-[1rem] text-body text-underline underline-offset-[.25rem] font-bold inline-block`}>Shop All</a>
 						</div>
 					</div>
 				</div>
