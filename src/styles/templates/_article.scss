@@ -46,11 +46,11 @@
 		}
 
 		img, picture {
-			@apply rounded-t-[1.5em] px-0;
+			@apply px-0;
 		}
 
 		&__content {
-			@apply px-[8px] rounded-b-[1.5em];
+			@apply px-[8px];
 		}
 
 		.badge {
