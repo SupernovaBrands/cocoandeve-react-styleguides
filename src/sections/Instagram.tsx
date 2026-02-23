@@ -38,15 +38,15 @@ const InstagramTest = (props: any) => {
     */
 
     return (
-        <section className={`instagram instagram__section pt-3 pb-[1.5625em] lg:py-[3.125em] text-center ${props.className ?? ''} mx-auto bg-pink-light`}>
+        <section className={`instagram instagram__section py-3 lg:py-[3.125em] text-center ${props.className ?? ''} mx-auto bg-pink-light`}>
             <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg">
-                    <div className="w-11/12 lg:w-7/12 text-center mx-auto px-0 pb-1 instagram__caption">
-                        <p className="text-xl lg:text-2xl font-bold mb-1">Get social with us</p>
+                    <div className="w-11/12 lg:w-7/12 text-center mx-auto px-0 pb-g lg:pb-3 instagram__caption">
+                        <p className="text-xl lg:text-2xl font-bold mb-[.5rem] lg:mb-1">Get social with us</p>
                         {/* <p className="h4 mb-1 instagram__address">
                             <a href="https://www.instagram.com/cocoandeve" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
                         </p> */}
-                        <p className="instagram__desc font-normal mb-0 text-sm lg:text-base lg:max-w-[85%] lg:mx-auto">
+                        <p className="instagram__desc font-normal mb-0 text-sm leading-[18px] lg:text-base lg:max-w-[85%] lg:mx-auto">
                             {props.desc ? (
                                 <>{props.desc}</>
                             ) : (
@@ -56,8 +56,8 @@ const InstagramTest = (props: any) => {
                     </div>
                 </div>
                 {data?.length > 0 && (
-                    <div className="px-1 py-0 lg:p-0 instagram__feeds">
-                        <div className="flex flex-nowrap sm:p-0 md:p-1 -mx-hg lg:-mx-g px-hg lg:-px-g instagram__feeds-container pb-0">
+                    <div className="px-g py-0 lg:p-0 instagram__feeds">
+                        <div className="flex flex-nowrap sm:p-0 md:px-1 -mx-hg lg:-mx-g px-hg lg:-px-g instagram__feeds-container pb-0">
                             {/* <div className="instagram--feed--left w-full p-0">
                                 <div className="flex flex-wrap m-0">
                                     <div className="w-full lg:w-2/3 p-0">
@@ -96,27 +96,27 @@ const InstagramTest = (props: any) => {
                                     ))}
                                 </div>
                             </div> */}
-                            <div className="w-full p-0">
-                                <div className="flex flex-wrap m-0">
+                            <div className="w-full p-0 lg:px-1">
+                                <div className="grid grid-cols-1 xl:grid-cols-[381.33px_1fr] xl:gap-[.5rem]">
                                     {data && data.length && (
-                                        <div className="w-1/2 lg:w-[28.570%] lg:basis-[28.570%] hidden lg:block">
-                                            <a href={data[0].link} target="_blank" className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
+                                        <div className="w-full hidden xl:block">
+                                            <a href={data[0].link} target="_blank" className='block instagram--feed--link h-full' aria-label="Visit Instagram profile">
                                                 <picture>
                                                     <source srcSet={data[0].image} media="(min-width: 992px)" />
-                                                    <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={data[0].imageMobile} alt="Model applying Coco & Eve tanning foam" loading="lazy" decoding="async" width={327} height={327} />
+                                                    <img className="w-full aspect-square object-cover h-full" src={data[0].imageMobile} alt="Model applying Coco & Eve tanning foam" loading="lazy" decoding="async" width={327} height={327} />
                                                 </picture>
                                             </a>
                                         </div>
                                     )}
                                     
-                                    <div className="w-full lg:w-[71.43%] lg:basis-[71.43] flex flex-wrap">
-                                        {data && data.length && data.slice(0, 11).map((item, index) => {
+                                    <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-g md:gap-[.5rem]">
+                                        {data && data.length && data.slice(0, 9).map((item, index) => {
                                             return (
-                                                <div className={`w-1/2 lg:w-1/5 lg:basis-1/5 p-0 ${index === 0 ? 'lg:hidden' : ''} ${index > 3 ? 'hidden lg:block' : ''}`}  key={`inst4--${index}`}>
-                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link p-25' aria-label="Visit Instagram profile">
+                                                <div className={`w-full p-0 ${index === 0 ? 'lg:hidden' : ''} ${index > 3 ? 'hidden lg:block' : ''}`}  key={`inst4--${index}`}>
+                                                    <a href={item.link} target="_blank"  className='block instagram--feed--link' aria-label="Visit Instagram profile">
                                                         <picture>
                                                             <source srcSet={item.image} media="(min-width: 992px)" />
-                                                            <img className="w-full aspect-square object-cover rounded-[1.5em] lg:rounded-[2em]" src={item.imageMobile} alt={`Instagram image ${index + 1}`} loading="lazy" decoding="async" width={168} height={168} />
+                                                            <img className="w-full aspect-square object-cover" src={item.imageMobile} alt={`Instagram image ${index + 1}`} loading="lazy" decoding="async" width={165} height={165} />
                                                         </picture>
                                                     </a>
                                                 </div>

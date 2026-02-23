@@ -124,16 +124,15 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
+			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
 				{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 				<div className="row">
-					<div>
-						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
-							<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
+					<div className="">
+						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-2">
+							<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0 gap-[.5rem] lg:gap-[.375rem]">
 								{tabConfig.map(({ key, title }) => (
-									<li key={key}>
+									<li key={key} className="flex items-center">
 										<TabNav
-											className={`${activeTab === key ? 'text-body' : ''}`}
 											title={title}
 											active={activeTab === key}
 											onNavChange={() => setActiveTab(key)}
@@ -146,19 +145,19 @@ const ProductCarousel = (props: any) => {
 							<li><TabNav className={`${activeTab === 'new' ? 'text-body' : ''}`} title='New' active={activeTab === 'new'} onNavChange={() => setActiveTab('new')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
 							<li><TabNav className={`${activeTab === 'valuesets' ? 'text-body' : ''}`} title='Value Sets' active={activeTab === 'valuesets'} onNavChange={() => setActiveTab('valuesets')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li> */}
 							</ul>
-							<a href="/collections/all" className={`hidden lg:inline btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em] lg:px-[1.625em] lg:py-[.5em] mb-2 mt-0 mb-3`}>Shop All</a>
+							<a href="/collections/all" className={`hidden lg:inline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : ''} hover:no-underline px-[1rem] text-underline text-body font-bold underline-offset-[.25rem]`}>Shop All</a>
 						</div>
 						<div className="product__carousel-body pl-[.5625em] lg:px-0 text-center">
 							{/* <TabContent active={activeTab === 'new'}> */}
-							<Carousel.Wrapper emblaApi={emblaApi} className="carousel__products">
-								<Carousel.Inner emblaRef={emblaRef}>
+							<Carousel.Wrapper emblaApi={emblaApi} className="carousel__products lg:px-[.75rem]">
+								<Carousel.Inner emblaRef={emblaRef} innerClass="">
 									{currentProducts.map((item: any, index: number) => {
 										const isAboveFold = activeTab === 'bestsellers' && index < visibleCount;
 										return <ProductCard
 											key={`${activeTab}-${item.id}-${index}`}
 											keyName={`${activeTab}-${item.id}-${index}`}
 											product={item}
-											className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+											className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/4 md:basis-1/4 px-[.375em] lg:px-[.5rem] text-center"
 											button={true}
 											setWaitlistData={setWaitlistData}
 											smSingleStar={false}
@@ -202,7 +201,7 @@ const ProductCarousel = (props: any) => {
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/4 md:basis-1/4 px-[.375em] lg:px-[.5rem] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={false}
@@ -245,7 +244,7 @@ const ProductCarousel = (props: any) => {
                                             key={`${activeTab}-${item.id}-${index}`}
                                             keyName={`${activeTab}-${item.id}-${index}`}
                                             product={item}
-                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/4 md:basis-1/4 px-[.375em] lg:px-[.5rem] text-center"
                                             button={true}
                                             setWaitlistData={setWaitlistData}
                                             smSingleStar={false}
@@ -280,7 +279,7 @@ const ProductCarousel = (props: any) => {
 								</Carousel.Navigation>
 							</Carousel.Wrapper>
 						</TabContent> */}
-							<a href="/collections/all" className={`lg:hidden mt-2 btn btn-lg ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary'} rounded-full border-2 hover:no-underline px-[3.375em] py-[.8125em]`}>Shop All</a>
+							<a href="/collections/all" className={`lg:hidden mt-[1rem] ${generalSetting?.bfcm_cta_bg_color ? 'border-dark text-dark hover:bg-dark hover:text-white' : ''} p-[1rem] text-body text-underline underline-offset-[.25rem] font-bold inline-block`}>Shop All</a>
 						</div>
 					</div>
 				</div>
