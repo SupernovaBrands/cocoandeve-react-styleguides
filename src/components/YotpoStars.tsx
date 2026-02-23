@@ -86,7 +86,7 @@ const YotpoStar = (props: any) => {
 		<div ref={containerRef} className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			{init ? (
 				<>
-					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="flex text-[14px] leading-[18px]" aria-label="Write a review for this product">
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="flex text-[14px] leading-[18px] review-stars__link" aria-label="Write a review for this product">
 						{!props.smSingleStarAllDevice && (
 							// <ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 							<>
