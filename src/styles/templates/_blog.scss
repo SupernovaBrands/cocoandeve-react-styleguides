@@ -246,6 +246,11 @@
 			&.active-dark {
 				@apply bg-dark;
 				@apply text-white;
+				@screen sm {
+					@apply bg-white;
+					@apply text-body;
+					@apply border-body border-b-2
+				}
 			}
 		}
 
