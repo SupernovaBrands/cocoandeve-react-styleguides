@@ -135,7 +135,7 @@ const Playground = (props: any) => {
                     {/* SPF */}
                     {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (
                         <PlaygroundCardV2 store={store} data={content?.range_5}
-                            imgMb={content?.range_5?.image_mobile?.url}
+                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_m_828x.jpg?v=1771226109`}
                             imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_d_1920x.jpg?v=1771226885`}
                             imgAlt={`${content?.range_5?.Title} Playground - ${content?.range_5?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}

@@ -38,15 +38,15 @@ const InstagramTest = (props: any) => {
     */
 
     return (
-        <section className={`instagram instagram__section pt-3 pb-[1.5625em] lg:py-[3.125em] text-center ${props.className ?? ''} mx-auto bg-pink-light`}>
+        <section className={`instagram instagram__section py-3 lg:py-[3.125em] text-center ${props.className ?? ''} mx-auto bg-pink-light`}>
             <div className="container instagram--feed container-fluid lg:px-g sm:px-hg">
                 <div className="flex flex-wrap lg:-mx-g sm:-mx-hg">
-                    <div className="w-11/12 lg:w-7/12 text-center mx-auto px-0 pb-1 instagram__caption">
-                        <p className="text-xl lg:text-2xl font-bold mb-1">Get social with us</p>
+                    <div className="w-11/12 lg:w-7/12 text-center mx-auto px-0 pb-g lg:pb-3 instagram__caption">
+                        <p className="text-xl lg:text-2xl font-bold mb-[.5rem] lg:mb-1">Get social with us</p>
                         {/* <p className="h4 mb-1 instagram__address">
                             <a href="https://www.instagram.com/cocoandeve" target="_blank"  className="text-body hover:text-body no-underline font-bold mb-g">@cocoandeve</a>
                         </p> */}
-                        <p className="instagram__desc font-normal mb-0 text-sm lg:text-base lg:max-w-[85%] lg:mx-auto">
+                        <p className="instagram__desc font-normal mb-0 text-sm leading-[18px] lg:text-base lg:max-w-[85%] lg:mx-auto">
                             {props.desc ? (
                                 <>{props.desc}</>
                             ) : (
@@ -57,7 +57,7 @@ const InstagramTest = (props: any) => {
                 </div>
                 {data?.length > 0 && (
                     <div className="px-g py-0 lg:p-0 instagram__feeds">
-                        <div className="flex flex-nowrap sm:p-0 md:p-1 -mx-hg lg:-mx-g px-hg lg:-px-g instagram__feeds-container pb-0">
+                        <div className="flex flex-nowrap sm:p-0 md:px-1 -mx-hg lg:-mx-g px-hg lg:-px-g instagram__feeds-container pb-0">
                             {/* <div className="instagram--feed--left w-full p-0">
                                 <div className="flex flex-wrap m-0">
                                     <div className="w-full lg:w-2/3 p-0">
