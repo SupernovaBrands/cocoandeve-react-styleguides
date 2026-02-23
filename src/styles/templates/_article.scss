@@ -38,6 +38,10 @@
 			@apply lg:mb-12;
 		}
 
+		.review-stars__link {
+			@apply no-underline;
+		}
+
 		button {
 			@apply lg:min-h-[38px];
 			&:not(.button-overlay) {
