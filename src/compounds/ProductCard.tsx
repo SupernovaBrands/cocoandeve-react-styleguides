@@ -477,7 +477,7 @@ const ProductCard = (props: any) => {
                     wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
                     elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
                 >
-                    <picture className={`w-full h-full max-w-full left-0 embed-responsive before:pt-[100%] block relative ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
+                    <picture className={`w-full h-full max-w-full left-0 embed-responsive lg:aspect-[278/312] before:pt-[100%] lg:before:pt-[112%] block relative ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                         {shadeImages.productImage && <source srcSet={shadeImages.productImage} media="(min-width: 992px)" />}
                         {shadeImages.productImage && (
                             //@ts-ignore
@@ -562,8 +562,8 @@ const ProductCard = (props: any) => {
                         <YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                     )}
                     {selectedVariant && (
-                        <div className="flex items-center text-[14px] leading-[18px]">
-                            {comparePrice && <span className="line-through pr-[.25rem] text-gray-600">{comparePrice}</span>}
+                        <div className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[28px]">
+                            {comparePrice && <span className="line-through pr-[.25rem] lg:pr-[.5rem] text-gray-600">{comparePrice}</span>}
                             <span className={`font-bold ${comparePrice ? 'text-primary' : 'text-body'}`}>{price}</span>
                         </div>
                     )}

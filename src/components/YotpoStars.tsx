@@ -117,7 +117,7 @@ const YotpoStar = (props: any) => {
 			) : (
 				<div className="" aria-hidden="true" >
 					{/* <ReviewStar score={4.5} className="flex items-center" /> */}
-					<span className="flex items-center text-[14px] leading-[18px]">
+					<span className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[28px]">
 						{/* <SvgFull role="presentation" className={`fill-body`} /> */}
 						<SingleStar score={4.9} />
 					</span>
