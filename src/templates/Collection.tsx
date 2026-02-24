@@ -347,7 +347,7 @@ const Collection = (props: any) => {
     // const mobileDropdown = [...rest, first];
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
-            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
+            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
                 <option value="featured">Sort By</option>
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
