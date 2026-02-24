@@ -503,7 +503,7 @@ const ProductCard = (props: any) => {
                 <div className="absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
                     opacity-0 translate-y-[.75rem]
                     transition-all duration-300
-                    group-hover:opacity-100 group-hover:translate-y-0">
+                    [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
                         <ProductCardButton
                             {...props}
                             store={store}
