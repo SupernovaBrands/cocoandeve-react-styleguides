@@ -1,6 +1,6 @@
 const Badge = (props: any) => {
     return (
-        <span className={`rounded px-[16px] py-[6px] leading-tight inline-block p-1 text-center font-semibold text-base align-baseline ${props.badgeClasses}`}>{props.children}</span>
+        <span className={`rounded-none px-[8px] py-[4px] leading-[20px] inline-block text-center font-normal text-xs align-baseline ${props.badgeClasses}`}>{props.children}</span>
     )
 }
 
