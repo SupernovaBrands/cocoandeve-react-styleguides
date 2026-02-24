@@ -524,14 +524,14 @@ const ProductCard = (props: any) => {
 
             {/* Badges */}
             {props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                <span className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                     {props.product.badgeText}
                 </span>
             )}
             {props.product.activeBadges && !props.sideUpsell && (
-                <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
+                <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                     {props.product.activeBadges.map((badge) => (
-                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] font-normal lg:text-sm product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                             {badge.badge_text}
                         </span>
                     ))}
