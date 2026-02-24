@@ -125,7 +125,7 @@ const AnnouncementBar = (props: any) => {
 			const now = nowUtcTime();
 			starTimer(now, startAt, endAt);
 		}
-	}, [props]);
+	}, []);
 
 	useEffect(() => {
 		if (showTimer) document.body.classList.add('timer-bar--show');

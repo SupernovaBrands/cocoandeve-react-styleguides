@@ -86,7 +86,7 @@ const YotpoStar = (props: any) => {
 		<div ref={containerRef} className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			{init ? (
 				<>
-					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="flex text-[14px] leading-[18px] review-stars__link" aria-label="Write a review for this product">
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="flex text-sm lg:text-base leading-[18px] lg:leading-[20px] review-stars__link" aria-label="Write a review for this product">
 						{!props.smSingleStarAllDevice && (
 							// <ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 							<>
@@ -115,9 +115,9 @@ const YotpoStar = (props: any) => {
 					)} */}
 				</>
 			) : (
-				<div className="" aria-hidden="true" >
+				<div className="flex" aria-hidden="true" >
 					{/* <ReviewStar score={4.5} className="flex items-center" /> */}
-					<span className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[28px]">
+					<span className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[20px]">
 						{/* <SvgFull role="presentation" className={`fill-body`} /> */}
 						<SingleStar score={4.9} />
 					</span>
