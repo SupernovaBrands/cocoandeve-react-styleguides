@@ -254,7 +254,7 @@ const MobileMenu = (props: any) => {
 							</li>
 
 							<li className="p-0">
-								<h4 className="h4 text-body px-g pb-1 pt-2 block mb-1">Find Your Match</h4>
+								<h4 className="h4 text-body px-g pt-2 block mb-1">Find Your Match</h4>
 							</li>
 						</div>
 
