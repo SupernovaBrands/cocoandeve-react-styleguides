@@ -381,7 +381,7 @@ const ProductCardButton = (props: any) => {
 }
 
 const ProductCard = (props: any) => {
-    const { clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
+    const { style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
     const { product } = props;
 
     const autoTicks = useMemo(
@@ -470,7 +470,7 @@ const ProductCard = (props: any) => {
     }, []);
 
     return !props.useCardTemplate ? (
-        <div key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
+        <div style={style} key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <div className="relative group">
                 <ConditionalWrap
                     condition={clickShowPopup}

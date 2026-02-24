@@ -69,30 +69,8 @@
 	}
 }
 
-.collection-template__products {
-
-	.product-card {
-		@apply mb-4 lg:mb-5;
-
-		&__content {
-			@apply px-[8px] lg:px-[1rem];
-		}
-
-		button {
-			@apply max-h-[none] min-h-[38px] lg:min-h-[50px];
-		}
-
-		.product-title__text {
-			@apply mb-0 lg:min-h-4;
-		}
-
-		.swatch-overlay {
-			@apply left-[.5rem] right-[.5rem] lg:left-g lg:right-g;
-
-			.product-variant-swatch__item {
-				@apply w-auto lg:w-1/4;
-			}
-		}
-
-	} 
+@screen lg {
+	.collection-lg-order {
+		order: var(--lg-order);
+	}
 }
