@@ -24,7 +24,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6222,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/170cf4c8-a30d-4e2b-50b9-69d1e3a33100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/170cf4c8-a30d-4e2b-50b9-69d1e3a33100/public"
         }
     },
     {
@@ -52,7 +52,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5120,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/89a433d5-2a69-48fe-74c9-11c53cf2b200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/89a433d5-2a69-48fe-74c9-11c53cf2b200/public"
         }
     },
     {
@@ -80,7 +80,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6360,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c1ec2980-3871-4d12-cb98-4618a9a00900/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/c1ec2980-3871-4d12-cb98-4618a9a00900/public"
         }
     },
     {
@@ -108,7 +108,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6361,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/28793ee7-b9a4-4978-9ebb-253d20d67f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/28793ee7-b9a4-4978-9ebb-253d20d67f00/public"
         }
     },
     {
@@ -136,7 +136,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6362,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0b76de74-72b5-4871-0674-45ee44529700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/0b76de74-72b5-4871-0674-45ee44529700/public"
         }
     },
     {
@@ -164,7 +164,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6279,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/75d774a1-499c-435d-bfe7-8ee45af84b00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/75d774a1-499c-435d-bfe7-8ee45af84b00/public"
         }
     },
     {
@@ -192,7 +192,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6228,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d70c031-3a8f-4cb5-7dcf-9c3f62bd4500/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/2d70c031-3a8f-4cb5-7dcf-9c3f62bd4500/public"
         }
     },
     {
@@ -220,7 +220,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6229,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/30d73a75-cc54-449d-63fe-d875631c1f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/30d73a75-cc54-449d-63fe-d875631c1f00/public"
         }
     },
     {
@@ -248,7 +248,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6223,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/76ca7b89-f40b-486c-37d3-72c813b69700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/76ca7b89-f40b-486c-37d3-72c813b69700/public"
         }
     },
     {
@@ -276,7 +276,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6221,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/19d2ccd3-bd6b-43cd-c025-dea5bc034200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/19d2ccd3-bd6b-43cd-c025-dea5bc034200/public"
         }
     },
     {
@@ -304,7 +304,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 6220,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a56734b8-f0c5-431e-063a-e99a159b7700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a56734b8-f0c5-431e-063a-e99a159b7700/public"
         }
     },
     {
@@ -332,7 +332,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5113,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/89735a65-6096-4317-174c-43095b06a100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/89735a65-6096-4317-174c-43095b06a100/public"
         }
     },
     {
@@ -360,7 +360,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5161,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3500c287-d55e-494d-0c94-5608c6f95300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/3500c287-d55e-494d-0c94-5608c6f95300/public"
         }
     },
     {
@@ -388,7 +388,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5183,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0002323c-2987-47e5-eb79-283b4c10c300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/0002323c-2987-47e5-eb79-283b4c10c300/public"
         }
     },
     {
@@ -416,7 +416,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5129,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f79dd9fd-d794-44c2-3c31-f9562b392800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/f79dd9fd-d794-44c2-3c31-f9562b392800/public"
         }
     },
     {
@@ -444,7 +444,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5681,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d7b92d4f-1bfc-404e-8969-463714fe5900/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/d7b92d4f-1bfc-404e-8969-463714fe5900/public"
         }
     },
     {
@@ -472,7 +472,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5167,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/18c7660e-e5b7-4e5e-bd1a-e8b047a96b00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/18c7660e-e5b7-4e5e-bd1a-e8b047a96b00/public"
         }
     },
     {
@@ -500,7 +500,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5181,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/bdf4131b-887d-4f43-c90d-6b705aad3e00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/bdf4131b-887d-4f43-c90d-6b705aad3e00/public"
         }
     },
     {
@@ -528,7 +528,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5184,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/01124585-d579-4086-6406-fb94479b5400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/01124585-d579-4086-6406-fb94479b5400/public"
         }
     },
     {
@@ -556,7 +556,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5174,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ca058b1c-073a-4ff1-7318-c3beb7083800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/ca058b1c-073a-4ff1-7318-c3beb7083800/public"
         }
     },
     {
@@ -584,7 +584,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5119,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/33cfe856-3d35-4545-0b92-129b6e974800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/33cfe856-3d35-4545-0b92-129b6e974800/public"
         }
     },
     {
@@ -612,7 +612,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5675,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0b661a0e-d0c2-41d0-4dce-19e0df135c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/0b661a0e-d0c2-41d0-4dce-19e0df135c00/public"
         }
     },
     {
@@ -640,7 +640,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5671,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/317b43f8-64f7-4670-2e58-7dc23f015e00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/317b43f8-64f7-4670-2e58-7dc23f015e00/public"
         }
     },
     {
@@ -668,7 +668,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5678,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/22b8f26a-2c3a-4105-6a36-ee2a7dd98300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/22b8f26a-2c3a-4105-6a36-ee2a7dd98300/public"
         }
     },
     {
@@ -696,7 +696,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5679,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6a2f4e7a-fbb6-4233-cb21-b6a9fec25400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/6a2f4e7a-fbb6-4233-cb21-b6a9fec25400/public"
         }
     },
     {
@@ -724,7 +724,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5677,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6e1a2cb8-e0a4-4c6f-51ee-9fb58c84e600/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/6e1a2cb8-e0a4-4c6f-51ee-9fb58c84e600/public"
         }
     },
     {
@@ -752,7 +752,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5676,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e7a5b2be-9853-41a7-17a9-808a35a93900/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/e7a5b2be-9853-41a7-17a9-808a35a93900/public"
         }
     },
     {
@@ -780,7 +780,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5182,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e70fd756-38c3-4289-f877-f50830a3cc00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/e70fd756-38c3-4289-f877-f50830a3cc00/public"
         }
     },
     {
@@ -808,7 +808,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5164,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/409b2282-46e8-466d-8d6f-ea4402714d00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/409b2282-46e8-466d-8d6f-ea4402714d00/public"
         }
     },
     {
@@ -836,7 +836,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5123,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/89b6744e-2a3c-410b-34e6-6667fdc5a100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/89b6744e-2a3c-410b-34e6-6667fdc5a100/public"
         }
     },
     {
@@ -864,7 +864,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5130,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/aca906f5-62f1-406d-3b22-9a9b6a72db00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/aca906f5-62f1-406d-3b22-9a9b6a72db00/public"
         }
     },
     {
@@ -892,7 +892,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5108,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/eaafbe29-a317-43c4-a074-917de4ccaf00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/eaafbe29-a317-43c4-a074-917de4ccaf00/public"
         }
     },
     {
@@ -920,7 +920,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5106,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9301d635-a334-43af-95d7-1af25cab2b00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9301d635-a334-43af-95d7-1af25cab2b00/public"
         }
     },
     {
@@ -948,7 +948,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5138,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/82bbe1e4-09e9-4dcd-ca95-4ec5dab19100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/82bbe1e4-09e9-4dcd-ca95-4ec5dab19100/public"
         }
     },
     {
@@ -976,7 +976,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5118,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/40162254-19d4-4384-8407-8fae20ce2e00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/40162254-19d4-4384-8407-8fae20ce2e00/public"
         }
     },
     {
@@ -1004,7 +1004,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5155,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9338b9b2-adee-49bf-f083-64a539e25300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9338b9b2-adee-49bf-f083-64a539e25300/public"
         }
     },
     {
@@ -1032,7 +1032,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5136,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9685d7b9-6774-4174-0f63-424376bfba00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9685d7b9-6774-4174-0f63-424376bfba00/public"
         }
     },
     {
@@ -1060,7 +1060,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5178,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/718d4196-6974-48ef-a673-be054fd5f800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/718d4196-6974-48ef-a673-be054fd5f800/public"
         }
     },
     {
@@ -1088,7 +1088,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5127,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9ddd1621-55c2-4197-0aff-a33ceb584f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9ddd1621-55c2-4197-0aff-a33ceb584f00/public"
         }
     },
     {
@@ -1116,7 +1116,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5110,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/09bf70d5-72b6-4d55-04e1-e5b19c119800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/09bf70d5-72b6-4d55-04e1-e5b19c119800/public"
         }
     },
     {
@@ -1144,7 +1144,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5158,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c547423-12ab-4abf-87d5-f4a876808600/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/7c547423-12ab-4abf-87d5-f4a876808600/public"
         }
     },
     {
@@ -1172,7 +1172,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5945,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2950a307-3490-495a-a867-fcf882f1f300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/2950a307-3490-495a-a867-fcf882f1f300/public"
         }
     },
     {
@@ -1200,7 +1200,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5944,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b843de19-ec62-48ae-125f-763766160e00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/b843de19-ec62-48ae-125f-763766160e00/public"
         }
     },
     {
@@ -1228,7 +1228,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5943,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b5cea17d-6480-4bee-c84e-3dce06bc3200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/b5cea17d-6480-4bee-c84e-3dce06bc3200/public"
         }
     },
     {
@@ -1256,7 +1256,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5144,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c1c626b3-82f4-4cd5-d432-e5219a908a00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/c1c626b3-82f4-4cd5-d432-e5219a908a00/public"
         }
     },
     {
@@ -1284,7 +1284,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5737,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/931af568-a332-4a90-de60-6a729907bd00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/931af568-a332-4a90-de60-6a729907bd00/public"
         }
     },
     {
@@ -1312,7 +1312,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5685,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d11462e9-7632-4bcc-6235-b2a6308a3200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/d11462e9-7632-4bcc-6235-b2a6308a3200/public"
         }
     },
     {
@@ -1340,7 +1340,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5684,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/119ca0fc-a04c-441b-976e-7a8c9e804c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/119ca0fc-a04c-441b-976e-7a8c9e804c00/public"
         }
     },
     {
@@ -1368,7 +1368,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5683,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/cc7ee4ed-a9c6-4059-bb66-9d0edcf44c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/cc7ee4ed-a9c6-4059-bb66-9d0edcf44c00/public"
         }
     },
     {
@@ -1396,7 +1396,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5682,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/bba48b62-d063-4075-6c96-45bb3fbf4e00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/bba48b62-d063-4075-6c96-45bb3fbf4e00/public"
         }
     },
     {
@@ -1424,7 +1424,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5680,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cce3868-35af-4db7-0dff-a67eb62d5b00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/8cce3868-35af-4db7-0dff-a67eb62d5b00/public"
         }
     },
     {
@@ -1452,7 +1452,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5460,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/959a060f-1f98-40d9-0e70-436c06d49800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/959a060f-1f98-40d9-0e70-436c06d49800/public"
         }
     },
     {
@@ -1480,7 +1480,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5149,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7cb42458-a02a-41a2-0bf4-b0ea3f0b1400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/7cb42458-a02a-41a2-0bf4-b0ea3f0b1400/public"
         }
     },
     {
@@ -1508,7 +1508,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5142,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2353cb4d-df5c-487d-8280-040e5ee37f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/2353cb4d-df5c-487d-8280-040e5ee37f00/public"
         }
     },
     {
@@ -1536,7 +1536,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5153,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ea20fdba-b779-4a37-3515-9b595236e800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/ea20fdba-b779-4a37-3515-9b595236e800/public"
         }
     },
     {
@@ -1589,7 +1589,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5122,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/332dcec1-5209-4683-f743-7c727b02ad00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/332dcec1-5209-4683-f743-7c727b02ad00/public"
         }
     },
     {
@@ -1617,7 +1617,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5124,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d68cb3-ee34-4939-321f-fa92b6cedf00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a2d68cb3-ee34-4939-321f-fa92b6cedf00/public"
         }
     },
     {
@@ -1645,7 +1645,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5109,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9bf2a726-871a-4990-57df-4bd7a6721c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9bf2a726-871a-4990-57df-4bd7a6721c00/public"
         }
     },
     {
@@ -1673,7 +1673,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5131,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/159fc699-3665-4409-fe27-c6bbb0ec8c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/159fc699-3665-4409-fe27-c6bbb0ec8c00/public"
         }
     },
     {
@@ -1701,7 +1701,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5177,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1fdd7d34-6cea-4c4f-dcc6-fd3549a7b000/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/1fdd7d34-6cea-4c4f-dcc6-fd3549a7b000/public"
         }
     },
     {
@@ -1729,7 +1729,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5151,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1ac69b5e-fc33-4016-8519-8bc12ed2bb00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/1ac69b5e-fc33-4016-8519-8bc12ed2bb00/public"
         }
     },
     {
@@ -1757,7 +1757,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5165,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3df7dc1e-5914-4881-4c39-905933b99800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/3df7dc1e-5914-4881-4c39-905933b99800/public"
         }
     },
     {
@@ -1785,7 +1785,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5150,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6c82738f-c632-46a7-3317-48ba7f311300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/6c82738f-c632-46a7-3317-48ba7f311300/public"
         }
     },
     {
@@ -1813,7 +1813,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5171,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/eefc184c-95bc-4f38-38d9-3d6eb9e48200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/eefc184c-95bc-4f38-38d9-3d6eb9e48200/public"
         }
     },
     {
@@ -1841,7 +1841,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5134,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b7225134-ae0a-49bb-6c18-698bef258c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/b7225134-ae0a-49bb-6c18-698bef258c00/public"
         }
     },
     {
@@ -1869,7 +1869,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5146,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/56ebf3b3-70a0-47ff-3d57-8d8958c6ba00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/56ebf3b3-70a0-47ff-3d57-8d8958c6ba00/public"
         }
     },
     {
@@ -1897,7 +1897,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5157,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c9a17e06-b75a-4085-b082-dbf1466cbd00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/c9a17e06-b75a-4085-b082-dbf1466cbd00/public"
         }
     },
     {
@@ -1925,7 +1925,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5145,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0bba5342-5398-4c0a-4eb8-31412c80f900/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/0bba5342-5398-4c0a-4eb8-31412c80f900/public"
         }
     },
     {
@@ -1953,7 +1953,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5180,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d9d9228c-349d-4026-cf5c-50e061d9e500/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/d9d9228c-349d-4026-cf5c-50e061d9e500/public"
         }
     },
     {
@@ -1981,7 +1981,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5111,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b72a18df-9bde-4866-58d6-a93e98edd800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/b72a18df-9bde-4866-58d6-a93e98edd800/public"
         }
     },
     {
@@ -2009,7 +2009,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5168,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/cef87f0b-e12d-4526-3ede-d3e65d9fe700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/cef87f0b-e12d-4526-3ede-d3e65d9fe700/public"
         }
     },
     {
@@ -2037,7 +2037,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5179,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3667b3b3-365b-4dac-43f4-81b447388200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/3667b3b3-365b-4dac-43f4-81b447388200/public"
         }
     },
     {
@@ -2065,7 +2065,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5154,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e9aba44-a9c0-4015-acab-c7718cff1200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/5e9aba44-a9c0-4015-acab-c7718cff1200/public"
         }
     },
     {
@@ -2093,7 +2093,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5169,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/953e6582-e9cd-47bb-4c7f-316c5f1c3700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/953e6582-e9cd-47bb-4c7f-316c5f1c3700/public"
         }
     },
     {
@@ -2121,7 +2121,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5139,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8bfbdccd-c8e4-4b8e-955d-0fc163b7a400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/8bfbdccd-c8e4-4b8e-955d-0fc163b7a400/public"
         }
     },
     {
@@ -2149,7 +2149,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5115,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/42323cf2-9913-4804-43ad-5123ea3f2300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/42323cf2-9913-4804-43ad-5123ea3f2300/public"
         }
     },
     {
@@ -2177,7 +2177,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5107,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a035160a-0825-42a2-99e7-8e321ae69000/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a035160a-0825-42a2-99e7-8e321ae69000/public"
         }
     },
     {
@@ -2205,7 +2205,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5163,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8b83c9f6-73c6-4d05-975f-43fc72280800/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/8b83c9f6-73c6-4d05-975f-43fc72280800/public"
         }
     },
     {
@@ -2233,7 +2233,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5156,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/75b6b6db-7d13-4a39-e9cf-f7856fd5c700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/75b6b6db-7d13-4a39-e9cf-f7856fd5c700/public"
         }
     },
     {
@@ -2261,7 +2261,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5166,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ce80befc-2427-4fa1-4efe-0204e11eb400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/ce80befc-2427-4fa1-4efe-0204e11eb400/public"
         }
     },
     {
@@ -2289,7 +2289,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5147,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a451a736-c746-425f-2240-4c9b7e3f8c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a451a736-c746-425f-2240-4c9b7e3f8c00/public"
         }
     },
     {
@@ -2317,7 +2317,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5143,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a70e0365-9a7b-4a84-6d02-ea59337e9d00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a70e0365-9a7b-4a84-6d02-ea59337e9d00/public"
         }
     },
     {
@@ -2345,7 +2345,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5125,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4c1e0e56-c171-4853-56d9-93c27ef8cf00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/4c1e0e56-c171-4853-56d9-93c27ef8cf00/public"
         }
     },
     {
@@ -2373,7 +2373,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5114,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/53446b43-038b-471b-1c76-99ccc9808500/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/53446b43-038b-471b-1c76-99ccc9808500/public"
         }
     },
     {
@@ -2401,7 +2401,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5112,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/bfd925e4-3508-4bf8-155c-6fe3efa3e400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/bfd925e4-3508-4bf8-155c-6fe3efa3e400/public"
         }
     },
     {
@@ -2429,7 +2429,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5170,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/441c3bc2-eee2-4bfb-eaea-ef4aa3643b00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/441c3bc2-eee2-4bfb-eaea-ef4aa3643b00/public"
         }
     },
     {
@@ -2457,7 +2457,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5152,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5df2d860-be01-420d-baac-6296eaf8ac00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/5df2d860-be01-420d-baac-6296eaf8ac00/public"
         }
     },
     {
@@ -2485,7 +2485,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5148,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/268ba596-ab7f-4e21-7b91-cab4a5841f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/268ba596-ab7f-4e21-7b91-cab4a5841f00/public"
         }
     },
     {
@@ -2513,7 +2513,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5673,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8055ba48-8761-4d59-d2df-9eabd413ae00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/8055ba48-8761-4d59-d2df-9eabd413ae00/public"
         }
     },
     {
@@ -2541,7 +2541,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5674,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/bf8fe5ee-7b54-45f3-67a3-33cbdd632500/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/bf8fe5ee-7b54-45f3-67a3-33cbdd632500/public"
         }
     },
     {
@@ -2569,7 +2569,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5137,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8bd4e1b-ed14-435b-0b83-5ab7b905e900/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/f8bd4e1b-ed14-435b-0b83-5ab7b905e900/public"
         }
     },
     {
@@ -2597,7 +2597,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5133,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/df9ca21f-cbde-4736-158a-9a8b03453400/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/df9ca21f-cbde-4736-158a-9a8b03453400/public"
         }
     },
     {
@@ -2625,7 +2625,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5663,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/429d8900-13ed-4a60-fb95-bfbaea362a00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/429d8900-13ed-4a60-fb95-bfbaea362a00/public"
         }
     },
     {
@@ -2653,7 +2653,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5688,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4d4c4610-7d55-4127-e27c-2b98faacfb00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/4d4c4610-7d55-4127-e27c-2b98faacfb00/public"
         }
     },
     {
@@ -2681,7 +2681,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5687,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/15d57346-efbe-4f07-944f-32b167292600/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/15d57346-efbe-4f07-944f-32b167292600/public"
         }
     },
     {
@@ -2709,7 +2709,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5686,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a11594e5-03db-4906-5e8c-f0b26a7a7300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a11594e5-03db-4906-5e8c-f0b26a7a7300/public"
         }
     },
     {
@@ -2737,7 +2737,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5140,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10db55d5-e9d9-4e5f-15b0-bcf919ec7f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/10db55d5-e9d9-4e5f-15b0-bcf919ec7f00/public"
         }
     },
     {
@@ -2765,7 +2765,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5176,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5b919d8f-6bbf-4530-76e8-71843d8b1f00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/5b919d8f-6bbf-4530-76e8-71843d8b1f00/public"
         }
     },
     {
@@ -2793,7 +2793,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5135,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/377aa30f-ed27-4d91-af0c-fbdf9be5f600/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/377aa30f-ed27-4d91-af0c-fbdf9be5f600/public"
         }
     },
     {
@@ -2821,7 +2821,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5160,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3804e488-232b-4e2c-7f26-74ee4dd50c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/3804e488-232b-4e2c-7f26-74ee4dd50c00/public"
         }
     },
     {
@@ -2849,7 +2849,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5159,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/79606441-2d97-4351-04fb-df8c4ac7cc00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/79606441-2d97-4351-04fb-df8c4ac7cc00/public"
         }
     },
     {
@@ -2877,7 +2877,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5172,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a49c8a1a-182f-48bf-91ae-7320dabed600/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a49c8a1a-182f-48bf-91ae-7320dabed600/public"
         }
     },
     {
@@ -2905,7 +2905,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5689,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5130ffef-ec0f-481d-bd81-9ea94d29d500/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/5130ffef-ec0f-481d-bd81-9ea94d29d500/public"
         }
     },
     {
@@ -2933,7 +2933,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5664,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/badee358-bd62-4a64-777e-dbddf1ed7c00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/badee358-bd62-4a64-777e-dbddf1ed7c00/public"
         }
     },
     {
@@ -2961,7 +2961,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5672,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9bdeda17-5269-4668-e8f9-817344185100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/9bdeda17-5269-4668-e8f9-817344185100/public"
         }
     },
     {
@@ -2989,7 +2989,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5670,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/044b5793-dbb8-47ad-df6a-c02a4f819000/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/044b5793-dbb8-47ad-df6a-c02a4f819000/public"
         }
     },
     {
@@ -3017,7 +3017,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5669,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dbabfe29-262c-4c7a-19fc-2001d2d7ec00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/dbabfe29-262c-4c7a-19fc-2001d2d7ec00/public"
         }
     },
     {
@@ -3045,7 +3045,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5668,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef00e2d3-cf5e-4631-36dd-d3c311b09700/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/ef00e2d3-cf5e-4631-36dd-d3c311b09700/public"
         }
     },
     {
@@ -3073,7 +3073,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5667,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/068ab8f3-4bb4-4258-0273-fcfbabe9de00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/068ab8f3-4bb4-4258-0273-fcfbabe9de00/public"
         }
     },
     {
@@ -3101,7 +3101,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5666,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/085de21b-9a8f-491b-4240-afcc91c1c100/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/085de21b-9a8f-491b-4240-afcc91c1c100/public"
         }
     },
     {
@@ -3154,7 +3154,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5173,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11644bb5-af90-4af0-25ef-919a1cec4300/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/11644bb5-af90-4af0-25ef-919a1cec4300/public"
         }
     },
     {
@@ -3182,7 +3182,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5175,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ab1a3ed5-a33d-48d3-5819-cd05c410d200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/ab1a3ed5-a33d-48d3-5819-cd05c410d200/public"
         }
     },
     {
@@ -3210,7 +3210,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5116,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a3fa6673-9537-42c7-47c7-2d2647505200/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/a3fa6673-9537-42c7-47c7-2d2647505200/public"
         }
     },
     {
@@ -3238,7 +3238,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5162,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d7fb1d32-3072-4429-42c5-4367288bac00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/d7fb1d32-3072-4429-42c5-4367288bac00/public"
         }
     },
     {
@@ -3266,7 +3266,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5132,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/279896f8-480a-4a04-9dc5-6d7330742a00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/279896f8-480a-4a04-9dc5-6d7330742a00/public"
         }
     },
     {
@@ -3294,7 +3294,7 @@ const REVIEWS_PH = [
         localizations: [],
         image_media: {
             id: 5128,
-            url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/75f31aae-fb91-4a92-55fe-4f6cf53cde00/public"
+            url: "/ghVX8djKS3R8-n0oGeWHEA/75f31aae-fb91-4a92-55fe-4f6cf53cde00/public"
         }
     }
 ]

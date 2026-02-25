@@ -65,16 +65,16 @@ const Playground = (props: any) => {
                 <>
                     <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my'].includes(store) ? 'justify-center' : ''} `}>
                         <PlaygroundCard store={store} data={content?.range_1}
-                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/020b1b8a-d311-4e1f-8420-8579ab0dd800/614x`}
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8738abb-5f94-47cc-8693-ec76c6714b00/400x`}
+                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_111bfe7e-d857-4df6-8f1e-354218ce673a.jpg?v=1772038666`}
+                            imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1c51a568-d52d-4e7b-9725-fa78727dabd7.jpg?v=1772038686`}
                             imgAlt={`${content?.range_1?.Title} Playground - ${content?.range_1?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
                         />
                         {['us', 'uk', 'eu', 'dev', 'ca', 'au'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_2}
-                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/df4e3bd1-7214-4b0f-a687-62f9770c3200/614x`}
-                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3cdbc885-e603-4a69-ec85-12133a72b800/400x`}
+                                imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_2c81882b-9c2e-406d-934f-31f66daaaef2.jpg?v=1772038705`}
+                                imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_482bcca9-d4ba-4538-ba28-c2b3983be3cd.jpg?v=1772038724`}
                                 imgAlt={`${content?.range_2?.Title} Playground - ${content?.range_2?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                                 ctaBgColor={ctaBgColor}
                                 ctaTextColor={ctaTextColor}
@@ -91,16 +91,16 @@ const Playground = (props: any) => {
                         )}
                         {['int', 'my', 'au'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_3}
-                                imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e0e4d5bb-56be-4d47-7878-f7d054b02900/614x`}
-                                imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c27447c-170d-4fd6-589d-fd8e90b78200/400x`}
+                                imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1cea1022-8bd3-4ff5-a25a-0a027127f08c.jpg?v=1772038747`}
+                                imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_8c5d88cb-2992-481a-8186-302ef130253d.jpg?v=1772038776`}
                                 imgAlt={`${content?.range_3?.Title} Playground - ${content?.range_3?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                                 ctaBgColor={ctaBgColor}
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
                         <PlaygroundCard store={store} data={content?.range_4}
-                            imgMb={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/46c4a841-3709-4bb0-725b-f60016eb0700/614x`}
-                            imgDt={`https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6cddc9d8-a879-483e-f915-df6cbd6ed900/400x`}
+                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_eb4fcc19-3cf7-4f26-b3a0-fe05193f1ce3.jpg?v=1772038800`}
+                            imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e5940bdf-f680-4671-ac8f-c26549338ee4.jpg?v=1772038829`}
                             imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
@@ -109,7 +109,7 @@ const Playground = (props: any) => {
                 </>
             )}
 
-            
+
         </div> */}
         {content && (
             <>
@@ -186,7 +186,7 @@ const Playground = (props: any) => {
 				</Carousel.Navigation>
             </Carousel.Wrapper>
             {/* New playground Full screen */}
-                
+
             </>
         )}
         </>

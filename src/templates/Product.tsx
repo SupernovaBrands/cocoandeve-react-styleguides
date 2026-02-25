@@ -345,7 +345,7 @@ const Product = (props: any) => {
                         </form>
                         <a href="/" className="pdp-banner-click no-underline lg:order-2 pdp-banner-click mb-1 w-full mt-1 lg:mt-4">
                             <picture className="">
-                                <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1557f100-0d32-4fe3-b6f1-f4634cc04900/375x" className="w-full" alt="Halloween Sale!"/>
+                                <img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/375x.jpg?v=1772039793" className="w-full" alt="Halloween Sale!"/>
                             </picture>
                         </a>
                         <a href="#" className="underline text-primary text-sm lg:order-2 mb-2" role="button">Terms & Conditions</a>

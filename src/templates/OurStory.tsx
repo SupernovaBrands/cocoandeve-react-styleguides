@@ -61,8 +61,8 @@ const OurStoryTemplate = (props: any) => {
 				<h1 className="text-center absolute mx-g my-1 text-xl lg:text-[3.375em] lg:leading-[1] text-white lg:mx-[12.5%] sm:font-[400] lg:font-bold">{banner.tiitle}</h1>
 				{!isLoading && (
 					<picture>
-						<source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a1dca008-8438-4aaf-d8ba-ad72d7668500/public" media="(min-width: 992px)" />
-						<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6d1e9527-c4f1-42dd-4229-ac48de60a500/828x" className="w-full" alt={banner.tiitle} />
+						<source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a01c51d4-b2ff-4b85-8d1f-f9d5fc03286e.jpg?v=1772039610" media="(min-width: 992px)" />
+						<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/828x.jpg?v=1772039632" className="w-full" alt={banner.tiitle} />
 					</picture>
 				)}
 			</section>
@@ -75,16 +75,16 @@ const OurStoryTemplate = (props: any) => {
 					}} />
 				)}
 				<ImageWithText
-					src={!isLoading ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/342a6ea4-56aa-4b59-75b5-0bab0cd19700/public' : null}
-					srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d2fefbbc-8dcb-4782-db07-ffa713901500/public'}>
+					src={!isLoading ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1196e378-94f4-4094-a2cf-ef044b0e8e08.jpg?v=1772039650' : null}
+					srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a4ba7b46-ca70-4ea0-ae41-d5254ba2a9d3.jpg?v=1772039670'}>
 					<h2 className="mb-[.5rem] text-lg text-body lg:text-xl">{intro.titleintro_1}</h2>
 					{!isLoading && <p className="text-body">{intro.description_1}</p>}
 				</ImageWithText>
 
 				<ImageWithText
 					reverse={true}
-					src={!isLoading ? 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ad271208-07c1-4920-b861-9de497293a00/public' : null}
-					srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8cff9e32-7b24-4fd7-793f-fdea4fc2e600/public'}>
+					src={!isLoading ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_61c02a0b-a1e6-42db-9fe6-e55a99d4e863.jpg?v=1772039693' : null}
+					srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_5c5881ab-3bb8-4e20-856b-f2c62879af84.jpg?v=1772039719'}>
 					<h2 className="mb-[.5rem] text-lg text-body lg:text-xl">{intro.titleintro_2}</h2>
 					{!isLoading && <p className="mb-[1rem] lg:mb-0 text-body">{intro.description_2}</p>}
 				</ImageWithText>
@@ -151,8 +151,8 @@ const OurStoryTemplate = (props: any) => {
 				{!isLoading && (
 					<figure className="ml-auto lg:w-[718px] lg:basis-[718px] grow-0 p-0 relative mb-0">
 						<picture className={`relative block cursor-pointer lg:z-[2]`} onClick={() => handlOpenModal(true)}>
-							<source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/191aae59-800a-4906-b776-b94aded44d00/public'} media="(min-width: 992px)" />
-							<img src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2db1b4fd-acbe-45c4-e5b3-a68312dcd700/public'} className="w-full rounded-0" alt="Behind the scenes" />
+							<source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_93c12e5d-47e8-4c9f-93b9-a7bdcfc1dc39.jpg?v=1772039749'} media="(min-width: 992px)" />
+							<img src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4725fd90-34bd-4cd4-82e4-46e3d49d909d.jpg?v=1772039768'} className="w-full rounded-0" alt="Behind the scenes" />
 							<div className="flex items-center absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
 								<Play className="svg--current-color w-[57px] h-[57px] lg:w-[88px] lg:h-[88px] text-white " />
 								{/* <span className="text-white font-bold text-[1.625em] lg:text-[2.75em] ml-1 lg:ml-g">Play Video</span> */}
@@ -160,7 +160,7 @@ const OurStoryTemplate = (props: any) => {
 						</picture>
 					</figure>
 				)}
-				
+
 			</section>
 
 			{!isLoading && (

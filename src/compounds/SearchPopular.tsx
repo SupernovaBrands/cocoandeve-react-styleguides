@@ -18,32 +18,20 @@ const PopularProducts = (props: any) => {
 							{popProducts.length > 0 && popProducts.map((product) => {
 								const { title, handle } = product;
 								let featuredImageUrl = product.featuredImgUrl;
-								// if (store === 'au' && handle === 'daily-essentials-bundle') {
-								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
-								// }
-								// if (store === 'au' && handle === 'tan-masters-kit') {
-								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f7a07e54-75c2-4834-3bfd-00bd9188a300/public';
-								// }
 								if (store === 'eu' && handle === 'hair-revival-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/5e4131b1-37c9-4e58-7e23-d56aac5e9600/public';
+									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_97f5a2d2-ccf4-4f13-9e5e-40c246bc935d.jpg?v=1772038243';
 								}
-								// if (store === 'int' && handle === 'hair-revival-set') {
-								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f8c59cc-00b2-4c2e-29bb-7a84435cdd00/public';
-								// }
-								// if (store === 'my' && handle === 'hair-revival-set') {
-								// 	featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c28d622f-45cc-49ce-d5c2-0dbd6c1f9100/public';
-								// }
 								if (['my', 'uk', 'eu', 'au'].includes(store) && handle === 'clean-slate-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d6596e4-f344-4968-c8b9-6b2530881000/public';
+									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9296534d-a960-4c10-9c99-82ba4e5d8c6f.jpg?v=1772038262';
 								}
 								if (store === 'int' && handle === 'clean-slate-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
+									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_03b6e47b-ea7c-4db3-8edc-7e02bee8514b.jpg?v=1772038281';
 								}
 								if (store === 'eu' && handle === 'sunny-honey-bali-bronzing-self-tan-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f406164-c10f-4f00-6a01-b4c9401dd200/public';
+									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6cd46e55-8015-4c34-b853-4082b687277c.jpg?v=1772038303';
 								}
 								if (store === 'eu' && handle === 'bali-bae-self-tan-set') {
-									featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/67f1b020-5e23-4c02-7d8c-e762222db500/public';
+									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_64cdaa05-d417-4b44-a67b-eaece672355a.jpg?v=1772038323';
 								}
 								return (
 									<SearchProductCard

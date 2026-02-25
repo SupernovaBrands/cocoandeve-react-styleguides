@@ -447,8 +447,8 @@ const Collection = (props: any) => {
                             </>
                             {/* )} */}
 
-                            
-                            
+
+
                         </div>
                         {handle !== 'all' && (
                             <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
@@ -571,8 +571,8 @@ const Collection = (props: any) => {
                                 collectionSettings.isLoading ? (
                                     <ProductCardQuiz
                                         className="relative w-full lg:h-full"
-                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_54c7854e-f086-4ce2-9f68-24e9d0655bd7.jpg?v=1772039518"
+                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_fb6619af-f9a9-438b-a1a2-b7d00cfcef20.jpg?v=1772039537"
                                         key={`collection-quiz-card--${handle}--99`}
                                         quizSetting={collectionSettings.quizSetting}
                                         store={store}

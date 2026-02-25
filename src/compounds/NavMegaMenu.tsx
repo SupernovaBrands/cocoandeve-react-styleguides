@@ -167,7 +167,7 @@ const NavMegaMenu = (props: any) => {
                                     props.menus.map((menu, i) => {
                                         return (
                                             <li className=" mb-1" key={`mobile-menu-${i}`}>
-                                                
+
                                                 <a href={menu.handle} className={`h4 !text-body ${menu.title === 'Tan Quiz' || menu.title === 'SPF Quiz' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[2px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`}>
                                                     {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
                                                     {!menu.handle.includes('build-your-own-bundle') && menu.title}
