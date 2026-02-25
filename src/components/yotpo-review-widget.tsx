@@ -1067,7 +1067,7 @@ const YotpoReviewWidget = (props:any) => {
 				</div>
 			)}
 
-			<div className="tab-content mt-4" id="yotpo-widget__tabContent" ref={reviewBox}>
+			<div className="tab-content mt-3 lg:mt-4" id="yotpo-widget__tabContent" ref={reviewBox}>
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] flex flex-wrap ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} generalSetting={generalSetting} />
@@ -1151,14 +1151,14 @@ const YotpoReviewWidget = (props:any) => {
 												))}
 											</div>
 											<div className="w-full lg:w-3/4 lg:pl-hg pr-0">
-												<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
-													<ReviewStar score={review.score} />
-												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block text-body" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
+													<a className="block underline underline-offset-4 sm:hidden lg:block text-body" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
 														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
+												<div className="mb-1 mt-1 flex text-secondary mt-1 sm:hidden lg:block">
+													<ReviewStar score={review.score} />
+												</div>
 												<h4 className="mb-1 mt-1 font-bold lg:font-normal">
 													{decodeHtml(review.title)}
 												</h4>
