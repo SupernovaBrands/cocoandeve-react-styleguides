@@ -232,9 +232,9 @@ export const CartItem = (props:CartItemProps) => {
 			>
 				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
-						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
 				</picture>
 			</ConditionWrapper>

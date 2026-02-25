@@ -281,7 +281,6 @@ const Cart: React.FC<Props> = (props) => {
 									useQuantity={discountMeter.useQuantity}
 								/>
 							)}
-							<hr className="w-full m-0" />
 						</div>
 
 						{props.isLoading && (
@@ -328,7 +327,7 @@ const Cart: React.FC<Props> = (props) => {
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
 								id="cart-drawer-form"
-								className="container px-g lg:px-3 cart-drawer__form pb-g"
+								className="container px-[16px] lg:px-3 cart-drawer__form pb-g"
 								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
@@ -337,7 +336,7 @@ const Cart: React.FC<Props> = (props) => {
 							>
 								<input type="hidden" name="checkout" value="Checkout" />
 
-								<ul className="list-unstyled border-b-[1px] pb-0">
+								<ul className="list-unstyled pb-0">
 									{cart.items && cart.items.map((item) => {
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
@@ -358,6 +357,18 @@ const Cart: React.FC<Props> = (props) => {
 										</li>
 									)} */}
 								</ul>
+
+								{manualGwpSetting && manualGwpSetting.enabled && (
+									<>
+										<CartManualGwp {...manualGwpSetting}
+											maxSelected={manualGwpSetting?.maxSelected}
+											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
+											onAddItem={onToggleManualGwp}
+											onRemoveItem={onToggleManualGwp}
+										/>
+									</>
+								)}
 
 								{tSettings.cartRedemption.enabled && (
 									<>
@@ -380,9 +391,8 @@ const Cart: React.FC<Props> = (props) => {
 									discountBanner={discountBanner}
 									cart={cartData}
 								/>
-								<hr />
 
-								<div className="flex flex-wrap mt-3 mb-2">
+								<div className="flex flex-wrap my-4 lg:my-6">
 									<p className="w-2/3 mb-1 font-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-1 font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
@@ -454,19 +464,6 @@ const Cart: React.FC<Props> = (props) => {
 										</>
 									)}
 								</div>
-								{manualGwpSetting && manualGwpSetting.enabled && (
-									<>
-										<hr />
-										<CartManualGwp {...manualGwpSetting}
-											maxSelected={manualGwpSetting?.maxSelected}
-											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
-											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
-											onAddItem={onToggleManualGwp}
-											onRemoveItem={onToggleManualGwp}
-										/>
-										<hr />
-									</>
-								)}
 
 								{cartUpsell && cartUpsell.enable && cartUpsell.items.length > 0 && (
 									<CartUpsell {...cartUpsell} addToCart={addToCart} store={store}></CartUpsell>

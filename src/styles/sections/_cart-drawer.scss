@@ -29,8 +29,8 @@
 			&__right {
 				top: 0;
 			}
-			&__left { right: 2em; }
-			&__right { right: 0.5em; }
+			&__left { right: 40px; }
+			&__right { right: 0; }
 
 			&__item {
 				flex: 0 0 calc-em(96);
@@ -44,6 +44,7 @@
 				figcaption {
 					@apply text-xs;
 					padding: .3125rem;
+					border-radius: 8px;
 				}
 
 				button {

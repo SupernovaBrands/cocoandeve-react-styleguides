@@ -78,7 +78,7 @@ const CartManualGwp = (props:any) => {
 	}, [disableSelectItem]);
 
 	return (
-			<div className="manual-gwp relative mt-2">
+			<div className="manual-gwp relative mt-4">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
 				{tierMessage && (
@@ -117,7 +117,7 @@ const CartManualGwp = (props:any) => {
 								{!disableSelectItem && (
 									<Button
 										lg={false}
-										buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''}`}
+										buttonClass={`${!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-body btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white hover:bg-body' : ''}`}
 										onClick={() => {
 											if (!adding) {
 												if (isSelected) {
