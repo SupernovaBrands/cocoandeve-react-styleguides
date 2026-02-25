@@ -16,10 +16,10 @@ const options: EmblaOptionsType = {
 const SLIDES = [
 	{
 		mobile_image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1a1b1bcf-b955-488b-028f-e8899fe1e400/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_d265bc14-4f75-42fd-9ab0-edc9c10b268f.jpg?v=1772038620"
 		},
 		image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee973277-9d5b-42dc-21d5-ad82a8589f00/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_62a2f115-b4f2-4093-a41b-a7b54b360369.jpg?v=1772038639"
 		}
 	},
 ];

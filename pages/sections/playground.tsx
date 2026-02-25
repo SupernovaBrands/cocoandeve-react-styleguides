@@ -13,11 +13,11 @@ const data = {
         "playground_range_bg": "bg-secondary-light",
         "image": {
             "id": 5690,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d32b6302-730c-4a75-df44-68902bb77100/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_108d79ab-434a-490a-9899-e6ce42c3775d.jpg?v=1772001007"
         },
         "image_mobile": {
             "id": 2901,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b46544da-3a84-4309-363b-9778f9090000/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_061f8ac1-5a03-487a-9d95-67b1e0b927c2.png?v=1772001040"
         }
     },
     "range_2": {
@@ -29,11 +29,11 @@ const data = {
         "playground_range_bg": "bg-yellow-light",
         "image": {
             "id": 5691,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9285cc9-f4cc-49b2-a159-efd75a4b1800/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_fbdfbdf3-77c2-41b8-a305-1a4ede73c923.jpg?v=1772001151"
         },
         "image_mobile": {
             "id": 2903,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/33a889be-891d-4e4d-d04c-88ea7cbb3300/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_566a27e7-7c2c-4acc-8aa0-4d84cf197a95.png?v=1772001176"
         }
     },
     "range_3": {
@@ -45,11 +45,11 @@ const data = {
         "playground_range_bg": "bg-secondary-light",
         "image": {
             "id": 5693,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/18b2e9f8-fc1f-4a03-8355-1b96f2205600/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1157da21-6280-4649-bf61-d34d0978a2e0.jpg?v=1772001208"
         },
         "image_mobile": {
             "id": 5694,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c1820c74-44d7-4cd0-9e1d-273c32b6cc00/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_83aef349-e782-41f7-8a1f-a06c1955093c.jpg?v=1772001240"
         }
     },
     "range_4": {
@@ -61,11 +61,11 @@ const data = {
         "playground_range_bg": "bg-primary-light-second",
         "image": {
             "id": 5692,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c000358-bae4-4d76-8d67-5172ce932500/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_d21d7566-d555-4650-bb75-0732296d9129.jpg?v=1772001281"
         },
         "image_mobile": {
             "id": 2905,
-            "url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10d3f2b0-a667-4606-4c9c-05f3cec3ac00/public"
+            "url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_303a7172-f49a-4a1b-8bb2-f11d32ca6640.png?v=1772001316"
         }
     }
 };

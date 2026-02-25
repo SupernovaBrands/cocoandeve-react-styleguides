@@ -170,8 +170,8 @@ const Sustainability = (props: any) => {
                         </div>
                         <div className="px-hg lg:px-g w-full lg:w-5/12 lg:basis-5/12 lg:order-1 my-25 lg:my-0">
                             <picture className="">
-                                <source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/83ca8477-6853-4e0c-5da1-6397476d2a00/public'} media="(min-width: 992px)" />
-                                <img className="w-[60%] mx-auto lg:w-full" alt={'Sustainability Infographic'} src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/fffabaea-d734-462a-85b5-69fb6f9c2800/828x'} />
+                                <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_86b9f8dc-8c48-4bfb-861d-f158acbb33aa.jpg?v=1772040025'} media="(min-width: 992px)" />
+                                <img className="w-[60%] mx-auto lg:w-full" alt={'Sustainability Infographic'} src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/828x_ea723d38-130c-4f67-9a69-1cd777a26943.jpg?v=1772040050'} />
                             </picture>
                         </div>
                     </div>
@@ -277,7 +277,7 @@ const Sustainability = (props: any) => {
                         <Carousel.Wrapper emblaApi={emblaApi2} className="px-0">
                             <Carousel.Inner emblaRef={emblaRef2} className="lg:mx-0 lg:!transform-none">
                                 {PACKAGING.map((data) => (
-                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src} 
+                                    <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src}
                                         className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-hg lg:px-g">
                                         <h6 className="mb-25 lg:mb-[8px] font-bold">{data.title}</h6>
                                         <p className="mb-0 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br />environmentally-friendly'))}</p>

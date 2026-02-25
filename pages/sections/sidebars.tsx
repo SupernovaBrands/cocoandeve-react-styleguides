@@ -7,8 +7,8 @@ export default function Sidebars() {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 		{
@@ -16,8 +16,8 @@ export default function Sidebars() {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 		{
@@ -25,8 +25,8 @@ export default function Sidebars() {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			srcSet: '/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 	];

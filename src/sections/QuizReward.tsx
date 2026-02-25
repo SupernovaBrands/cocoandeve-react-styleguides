@@ -12,16 +12,16 @@ const QuizRewardTest = (props: any) => {
 			<div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
-                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2569ea0a-b963-411d-7320-1bab3cd77000/public"
+                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6878a0bc-fbfa-412a-8808-8fa15a490556.jpg?v=1772038851"
+                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_38f5a992-64ae-469a-980e-edaa6037c895.jpg?v=1772038914"
                     ctaBgColor={ctaBgColor}
                 />
 				{store !== 'my' && (
 					<figure className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative rounded">
                         <a href="/pages/rewards">
                             <picture className="block">
-                                <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/704453dd-6f76-4a3a-1c09-c72dc47c5d00/public" media="(min-width: 992px)" />
-                                <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/66f96d20-d935-4759-f5d2-e0fc56748700/public" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
+                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_baac65ef-f0e3-4951-a927-352dc7628101.jpg?v=1772038942" media="(min-width: 992px)" />
+                                <img className="w-full rounded-[24px] lg:rounded-[32px]" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_fffde238-7c6b-45d2-82f1-8ac9a86c7b72.jpg?v=1772038965" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" />
                             </picture>
                             <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center px-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                                 <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body">Rewards Program</p>
