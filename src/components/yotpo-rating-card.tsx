@@ -10,7 +10,7 @@ const YotpoRatingCard = (props) => {
                 <span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
                 <div className="lg:ml-1">
                     <ReviewStar score={score} />
-                    <span className="block yotpo-widget__total mt-25 font-normal text-body">
+                    <span className="block yotpo-widget__total mt-25 font-normal text-body text-base">
                         {`${total} ${total > 1 ? tStrings.yotpo.reviews : tStrings.yotpo.review}, ${totalQa} ${tStrings.yotpo.qnas}`}
                     </span>
                 </div>
