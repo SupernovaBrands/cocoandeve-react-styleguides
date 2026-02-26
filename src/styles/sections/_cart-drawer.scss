@@ -29,13 +29,13 @@
 			&__right {
 				top: 0;
 			}
-			&__left { right: 2em; }
-			&__right { right: 0.5em; }
+			&__left { right: 40px; }
+			&__right { right: 0; }
 
 			&__item {
 				flex: 0 0 calc-em(96);
 				width: calc-em(96);
-				@apply mr-[1.5625em];
+				@apply mr-[16px];
 
 				picture {
 					@apply px-hg;
@@ -44,6 +44,7 @@
 				figcaption {
 					@apply text-xs;
 					padding: .3125rem;
+					border-radius: 8px;
 				}
 
 				button {
@@ -88,6 +89,22 @@
 
 		.bfcm-btn--selected {
 			@apply bg-dark text-white hover:bg-dark !important;
+		}
+	}
+
+	.shopify-secure {
+		&:before {
+			content: ' ';
+			width: 84.5px;
+			border-top: 1px solid #A3A3A3;
+			margin-right: 30px;
+		}
+
+		&:after {
+			content: ' ';
+			width: 84.5px;
+			border-top: 1px solid #A3A3A3;
+			margin-left: 30px;
 		}
 	}
 }

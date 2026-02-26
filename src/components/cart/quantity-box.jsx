@@ -133,21 +133,22 @@ export default class QuantityBox extends React.Component {
 
 	render() {
 		return (
-			<div className={`quantity-box flex rounded border ${this.props.editable ? '' : 'border-gray-500'}`}>
+			<div className="quantity-box flex border border-[#A3A3A3] min-h-[50px]">
 				<button
-					className="quantity-box__button p-[16px] grow-0"
+					className="quantity-box__button px-[16px] py-[12px] grow-0"
 					type="button"
 					aria-label="Add Subtract"
 					disabled={!this.props.editable || this.state.prevQuantity === 0}
 					onClick={this.onSubtractQuantity}
 					data-cy="cart-subtract-quantity-icon"
 				>
-					<SvgMinus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
+					{/* <SvgMinus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} /> */}
+					<span>-</span>
 				</button>
 				<input
 					type="number"
 					name={this.props.name}
-					className={`${!this.props.editable ? 'text-gray-500 border-gray-500' : 'text-body border-dark'} text-center text-md lg:text-lg w-[2em] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-0 p-0`}
+					className="text-body border-dark text-center text-[14px] lg:text-[14px] w-[2em] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-0 p-0"
 					min={0}
 					value={this.state.quantity}
 					onChange={this.onChangeQuantity}
@@ -156,14 +157,15 @@ export default class QuantityBox extends React.Component {
 					aria-label="quantity input"
 				/>
 				<button
-					className="quantity-box__button p-[16px]"
+					className="quantity-box__button px-[16px] py-[12px]"
 					type="button"
 					aria-label="Add Quantity"
 					disabled={!this.props.editable || this.state.lastStock}
 					onClick={this.onAddQuantity}
 					data-cy="cart-add-quantity-icon"
 				>
-					<SvgPlus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} />
+					{/* <SvgPlus className={`svg w-[1em] ${!this.props.editable ? 'fill-gray-500' : ''}`} /> */}
+					<span>+</span>
 				</button>
 			</div>
 		);
