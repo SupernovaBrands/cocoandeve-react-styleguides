@@ -45,19 +45,20 @@ const YotpoStar = (props:any) => {
 
 	if (!init) return (<div />);
 	return props.hideStars ? (
-		<div className={`flex ${props.extraClass}`}>
+		<div className={`flex ${props.extraClass} gap-[5px]`}>
 			<SvgFull className="svg text-primary size-[1em]" />
-			<span className="ml-25 ">{`${score ? score.toFixed(1) : 0}/5.0`}</span>
-			<span className="ml-25">
+			<span>{`${score ? score.toFixed(1) : 0}/5.0`}</span>
+			<span>
 				<a className="underline text-nowrap" href={`${props.productUrl}?write-a-review=true`}>{`${total} ${tStrings.yotpo.reviews}`}</a>
 			</span>
 		</div>
 	) : (
-		<a tabIndex={0} className={`flex ${props.extraClass} mb-2 md:mb-1 hover:no-underline`} onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>
-			<ReviewStar score={score} />
-			{props.showScore && <span className="ml-25 text-primary hover:underline hover:text-primary-darken review__inline-star">{`${score ? score.toFixed(1) : 0} stars`}</span>}
+		<a tabIndex={0} className={`flex ${props.extraClass} gap-[5px] mb-[1rem] md:mb-1 hover:no-underline`} onClick={() => props.scrollToElement ? props.scrollToElement('#products-review', 500, globalThis.window.innerWidth < 992 ? -130 : -160) : scrollToWidget()}>
+			{/* <ReviewStar score={score} /> */}
+			<SvgFull className="svg text-primary size-[1em]" />
+			{props.showScore && <span className="text-gray-600 hover:underline hover:text-primary-darken review__inline-star">{`${score ? score.toFixed(1) : 0}`}</span>}
 			{props.showTotal && (
-				<span className="ml-25 link-secondary underline text-dark hover:text-primary" onClick={scrollToWidget}>({total})</span>
+				<span className="link-secondary underline text-dark hover:text-primary" onClick={scrollToWidget}>({total})</span>
 			)}
 		</a>
 	);

@@ -1,9 +1,5 @@
 .product {
 
-    &__yotpo-stars {
-        @apply mb-[1rem] lg:mb-1;
-    }
-
     &-side-article {
         .overflow-hidden {
             @apply pr-g lg:pr-0;
@@ -85,7 +81,7 @@
 .product-form .product-swatch {
     
     .variant-swatch {
-        @apply border-t border-b w-auto h-auto rounded-full me-25 py-[6px] flex-1 basis-auto lg:min-h-4 lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none;
+        @apply border-t border-b w-auto h-auto me-25 py-[6px] flex-1 basis-auto lg:min-h-4 lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none;
 
         &:after {
             @apply w-[24px] left-[12.5px] lg:w-3;
@@ -103,11 +99,10 @@
 
 .product-form-submit {
     .quantity-box {
-        @apply rounded-full border-gray-500;
+        @apply border-gray-500;
     }
 
     .product-form-submit__cta {
-        @apply rounded-full;
 
         &-text,
         &-compare {
@@ -118,10 +113,6 @@
             @apply font-bold;
         }
     }
-}
-
-.product-image-carousel__container img {
-    @apply rounded;
 }
 
 .product-banner__slider {
@@ -138,10 +129,10 @@
         @apply p-[.5rem] lg:p-[14px];
 
         &--left {
-            @apply mr-25 lg:mr-1;
+            @apply mr-1;
         }
         &--right {
-            @apply ml-25 lg:ml-1;
+            @apply ml-1;
         }
     }
 }
@@ -182,37 +173,31 @@
 
 .product__side-article {
 
+    picture {
+        @apply aspect-[330/175] lg:aspect-[370/175];
+
+        img {
+            height: 100%;
+        }
+    }
+
     figcaption {
+        @apply px-[.75rem] py-[1rem];
+
         .badge {
-            @apply py-[.375em];
+            @apply py-[.25rem] px-[.5rem] text-xs leading-[normal];
         }
         p {
-            @apply text-lg mb-[1rem] min-h-[4.688rem] lg:min-h-[auto];
+            @apply text-lg mt-[.5rem] font-normal mb-0;
+        }
+
+        .post-card__read-more {
+            @apply hidden;
         }
     }
 
     .post-card__description {
         @apply hidden;
-    }
-
-    .btn__read-more {
-        @apply rounded-full;
-    }
-
-    figure {
-        @apply rounded-[24px];
-        @screen lg {
-            @apply rounded-[32px];
-        }
-    }
-
-    img,
-    picture {
-        @apply rounded-t-[24px] h-[175px];
-        @screen lg {
-            @apply rounded-t-[32px];
-        }
-
     }
     
 }
@@ -289,11 +274,12 @@
         @apply w-[24px] h-[24px]
     }
 }
-.review__inline-star {
-    @apply text-body;
-}
 
 .product__reviews {
+    .yotpo-review-tab__total-review,
+    .yotpo-review-tab__total-question {
+        @apply inline pl-[3px];
+    }
     .input-group {
         .input-group-append {
             @apply order-1;

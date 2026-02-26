@@ -133,7 +133,7 @@ export default class QuantityBox extends React.Component {
 
 	render() {
 		return (
-			<div className="quantity-box flex rounded border">
+			<div className="quantity-box flex border">
 				<button
 					className="quantity-box__button p-[16px] grow-0"
 					type="button"
