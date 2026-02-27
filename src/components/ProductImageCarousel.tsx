@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel';
+import { EmblaCarouselType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '~/images/icons/chevron-down.svg';
@@ -76,13 +76,13 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	const pdpImagePrev = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaThumbsApi.scrollPrev();
+		// emblaThumbsApi.scrollPrev();
 		emblaMainApi.scrollPrev();
 	};
 
 	const pdpImageNext = () => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaThumbsApi.scrollNext();
+		// emblaThumbsApi.scrollNext();
 		emblaMainApi.scrollNext();
 	};
 
@@ -93,9 +93,16 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	const onSelect = useCallback(() => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
-		setSelectedIndex(emblaMainApi.selectedScrollSnap());
-		emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap());
-	}, [emblaMainApi, emblaThumbsApi, setSelectedIndex]);
+		const index = emblaMainApi.selectedScrollSnap();
+		setSelectedIndex(index);
+		emblaThumbsApi.scrollTo(index);
+		
+		// Force the active thumb into view
+		thumbRefs.current[index]?.scrollIntoView({
+			block: 'nearest',
+			behavior: 'smooth',
+		});
+	}, [emblaMainApi, emblaThumbsApi]);
 
 	const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
 		const progress = Math.max(0, Math.min(1, emblaMainApi.scrollProgress()));
@@ -138,32 +145,44 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
         }
     }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
 
+	const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
 	return (
-		<>
-			<div className="lg:w-1/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-0 hidden lg:block">
-				<div className={`carousel w-full hidden lg:flex items-center mt-[25px] `}>
-					<Carousel.Wrapper className={`w-full flex flex-col items-center`} emblaApi={emblaThumbsApi}>
-						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col h-[520px]`}>
+		<div className="flex w-full lg:w-7/12 lg:sticky lg:top-[115px] lg:self-start">
+			<div className="lg:overflow-hidden lg:w-[100px] lg:basis-[100px] lg:order-2 px-0 lg:px-0 hidden lg:block">
+				<div className={`carousel w-full hidden lg:flex items-center`}>
+					<Carousel.Wrapper className={`w-full flex flex-col items-center md:h-[430px] [@media(min-width:1200px)]:h-[570px] lg:justify-center`} emblaApi={emblaThumbsApi}>
+						<Carousel.Inner emblaRef={emblaThumbsRef} className={`flex flex-col`} innerClass={`lg:h-[430px]`}>
 							{slides.map((slide, index) => (
-								<div className={` max-w-[70px] flex flex-[0_0_70px] ${index === 0 ? 'mb-0' : 'my-1'} rounded`} key={index}>
-									<button type="button" className={`${selectedIndex === index ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(index)} aria-label="View product thumbnail">
+								<div className={` max-w-[70px] flex flex-[0_0_70px] mb-2`} key={index}>
+									<button 
+										type="button" 
+										ref={(el) => { thumbRefs.current[index] = el; }}
+										className={`${selectedIndex === index ? 'border border-primary' : 'border border-transparent'} `} 
+										onClick={() => onThumbClick(index)} 
+										aria-label="View product thumbnail">
 										{isDesktop && (
 											<picture>
 												<source srcSet={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} media="(min-width: 769px)" />
-												<img alt={`Thumbnail image of Product Image ${index}`} className="w-[70px] rounded b" src={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+												<img loading="lazy" alt={`Thumbnail image of Product Image ${index}`} className="w-[70px]" src={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
 											</picture>
 										)}
 									</button>
 								</div>
 							))}
 							{videoStack?.video_thumbnail?.url && (
-								<div className={` max-w-[70px] flex flex-[0_0_70px] my-1 rounded relative`} key={slides.length}>
-									<button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)} aria-label="View product thumbnail">
+								<div className={` max-w-[70px] flex flex-[0_0_70px] my-1 relative`} key={slides.length}>
+									<button 
+										type="button" 
+										ref={(el) => { thumbRefs.current[slides.length] = el; }}
+										className={`${selectedIndex === slides.length ? 'border border-primary' : ''} `} 
+										onClick={() => onThumbClick(slides.length)} 
+										aria-label="View product thumbnail">
 										{isDesktop && (
 											<>
 												<picture>
 													<source srcSet={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
-													<img alt={`Thumbnail image of Product Video`} className="w-[70px] rounded b" src={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
+													<img alt={`Thumbnail image of Product Video`} className="w-[70px]" src={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
 												</picture>
 												<div className="absolute inset-0 flex items-center justify-center">
 													<Play className="svg fill-gray-100 h-[2em] fill-sm" />
@@ -175,35 +194,37 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							)}
 						</Carousel.Inner>
 						<Carousel.Navigation>
-							{slides.length > 6 && (	
+							{slides.length > 5 && (	
 								<>
-									{selectedIndex !== 0 && <PrevButton
+									<PrevButton
 										onClick={pdpImagePrev}
-										className="carousel__gallery-thumb w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto top-[-25px]"
+										className="carousel__gallery-thumb w-[70px] h-[70px] text-body bg-white left-auto right-auto md:-top-[25px] [@media(min-width:1200px)]:-top-[10px]"
 									>
 										<ChevronPrev className="w-g h-g svg--current-color" />
-									</PrevButton>}
-									{selectedIndex < slidesCount - 1 && <NextButton
+									</PrevButton>
+									<NextButton
 										onClick={pdpImageNext}
-										className="carousel__gallery-thumb mt-auto w-5 h-5 rounded-full shadow-lg text-primary bg-white left-auto right-auto bottom-[-25px]"
+										className="carousel__gallery-thumb mt-auto w-[70px] h-[70px] text-body bg-white left-auto right-auto md:-bottom-[25px] [@media(min-width:1200px)]:-bottom-[10px]"
 									>
 										<ChevronNext className="w-g h-g svg--current-color" />
-									</NextButton>}
+									</NextButton>
 								</>
 							)}
 						</Carousel.Navigation>
 					</Carousel.Wrapper>
 				</div>
 			</div>
-			<div className="product-image-carousel__container w-full lg:w-6/12 lg:order-2 lg:sticky lg:top-[80px] px-0 lg:px-g">
-				<div className="carousel mb-1 lg:mb-2 lg:sticky aspect-ratio overflow-hidden">
+			<div className="product-image-carousel__container w-full lg:w-6/12 lg:flex-1 lg:order-2 px-0 lg:px-g">
+				<div className="carousel mb-1 lg:mb-0 lg:sticky aspect-ratio overflow-hidden">
 					<Carousel.Wrapper emblaApi={emblaMainApi}>
 						<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
 							{slides.map((slide, index) => (
 								<div className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full" key={index}>
 									<picture className="flex items-center justify-center">
 										<source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
-										<img height="367" width="367" fetchPriority={index > -1 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
+										<img loading={index === 0 ? 'eager' : 'lazy'} height="367" width="367" 
+											// @ts-ignore
+											fetchpriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
 									</picture>
 								</div>
 							))}
@@ -227,7 +248,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

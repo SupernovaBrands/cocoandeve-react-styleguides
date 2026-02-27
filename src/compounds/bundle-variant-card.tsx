@@ -137,32 +137,32 @@ const BundleVariantCard = (props) => {
 
     return  (
         <>
-        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
-        <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
-            {saving && <div className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em] inline`}>
-                <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{saving}</span>
+        <p className="lg:text-lg font-bold mb-[.5rem]">Save with Bundles</p>
+        <div className="overflow-hidden mb-3 lg:mb-4 bg-gray-400 relative">
+            {saving && <div className={`min-w-[4.25rem] leading-[normal] badge rounded-[2px] border-black py-[.25rem] px-[.5rem] bg-body absolute font-normal text-xs text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em] flex items-center justify-center`}>
+                <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{saving}</span>
             </div>}
             <div className="float-left">
                 <figure className="flex">
                     {urlSet && bundleImg && (
-                        <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} />
+                        <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%] aspect-[120/260] lg:aspect-[124/174]">
+                            <img loading="lazy" className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} width={120} height={260} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
+                        <img loading="lazy" alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="aspect-[120/260]  lg:aspect-[124/174] w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} width={120} height={260} />
                     )}
-                    <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
-                        <div className="mb-25 lg:mb-[1rem]">
-                            {!urlSet && <p className="text-body mb-25 lg:mb-[.5rem] block font-bold">{optionValue.replace('1x ', '')}</p>}
+                    <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[.75rem] py-[1rem] lg:p-[1rem] flex flex-col">
+                        <div className="mb-[.75rem] lg:mb-[1rem]">
+                            {!urlSet && <p className="text-body mb-[.5rem] block font-bold">{optionValue.replace('1x ', '')}</p>}
                             {urlSet && (
-                                <a className="text-body mb-25 lg:mb-[.5rem] block font-bold" href={`/products/${urlSet}`}>
+                                <a className="text-body mb-[.5rem] block font-bold" href={`/products/${urlSet}`}>
                                     {optionValue.replace('1x ', '')}
                                 </a>
                             )}
                             {variantDescriptionText && variantDescriptionText.length > 0 && (
-                                <div className="text-sm mb-25 lg:mb-0">
+                                <div className="text-sm">
                                     {variantDescriptionText.map((el, i) => {
                                         return el !== '' && (<p key={`bundle-description-${i}`} dangerouslySetInnerHTML={{__html: el}} />);
                                     })}
@@ -171,13 +171,13 @@ const BundleVariantCard = (props) => {
                         </div>
                         <div className="flex flex-col lg:flex-row">
                             {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
-                                <div className="option-select relative mb-[8px] lg:mb-0 lg:w-auto lg:mr-25 border-white">
-                                    <select aria-label="Select Bundle Option" onChange={onChangeOption} className="custom-select lg:min-w-[125px] appearance-none rounded-full bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
+                                <div className="option-select relative mb-[.5rem] lg:mb-0 lg:w-auto lg:mr-[.5rem] border-white">
+                                    <select aria-label="Select Bundle Option" onChange={onChangeOption} className="custom-select rounded-none lg:min-w-[125px] appearance-none bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'bg-dark hover:bg-dark border-dark hover:text-white' : 'bg-primary hover:bg-primary border-primary btn-primary'} text-white w-full lg:w-auto items-center product-card-btn border flex lg:flex-row btn-sm rounded-full mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`lg:flex-1 min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'bg-dark hover:bg-dark border-dark hover:text-white' : 'bg-primary hover:bg-primary border-primary btn-primary'} text-white w-full lg:w-auto items-center product-card-btn border flex lg:flex-row btn-sm mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
                                 {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>

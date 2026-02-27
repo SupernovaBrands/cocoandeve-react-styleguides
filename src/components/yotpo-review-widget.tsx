@@ -1119,7 +1119,7 @@ const YotpoReviewWidget = (props:any) => {
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
 												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
 													<span className='items-start w-auto'>
-														<span class="whitespace-normal">{review.user_name}</span>
+														<span className="whitespace-normal">{review.user_name}</span>
 														{review.verified_buyer && <SvgVerified className="svg align-text-top lg:mt-[2px] text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:inline-block" />}
 													</span>
 												</h4>
