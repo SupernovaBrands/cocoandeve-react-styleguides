@@ -3,9 +3,9 @@ const PdpQuizBanner = (props) => {
         <a className="text-body hover:text-body hover:no-underline pb-3 lg:pb-4 block" href={props.quizCard.pdp_quiz_card_cta_url}>
             <div className="relative flex bg-yellow-light items-center justify-between">
                 <div className="flex items-center relative">
-                    <picture className="m-0 h-full">
-                        <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-dt-v2_940x.jpg?v=1772086733" media="(min-width: 992px)" />
-                        <img alt="Tan Quiz" className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-mb-v2_690x.jpg?v=1772086733" loading="lazy" />
+                    <picture className="m-0 h-full aspect-[345/56] lg:aspect-[470/64]">
+                        <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-dt-v2_940x.jpg?v=1772086733" media="(min-width: 992px)" width={470} height={64} />
+                        <img alt="Tan Quiz" className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/quiz-banner-mb-v2_690x.jpg?v=1772086733" loading="lazy" width={345} height={56} />
                     </picture>
                     <div className="flex absolute left-[1rem] top-[50%] -translate-y-[50%] lg:left-2 items-center gap-[.25rem] lg:gap-[.5rem]">
                         <strong className="text-base !leading-[normal] lg:text-lg">Take the Tan Quiz</strong>
