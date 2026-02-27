@@ -23,7 +23,7 @@ interface PricingProps {
 }
 
 const DEFAULT_LABEL = 'Add To Cart';
-const DEFAULT_LABEL_SIDE_UPSELL = 'Add';
+const DEFAULT_LABEL_SIDE_UPSELL = 'Add To Cart';
 
 const PARSED_DEFAULT_LABEL = parse(DEFAULT_LABEL);
 const PARSED_DEFAULT_LABEL_SIDE_UPSELL = parse(DEFAULT_LABEL_SIDE_UPSELL);
