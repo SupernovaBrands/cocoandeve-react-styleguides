@@ -19,13 +19,19 @@
 
     &-form {
         .quantity-box {
-            @apply lg:px-2;
     
             &__button {
                 @apply px-[12.5px];
         
                 svg {
                     @apply w-1;
+                }
+
+                &-subtract {
+                    @apply pl-[2.125rem];
+                }
+                &-add {
+                    @apply pr-[2.125rem]; 
                 }
             }
         }

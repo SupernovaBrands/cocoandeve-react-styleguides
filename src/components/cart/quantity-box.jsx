@@ -22,6 +22,7 @@ export default class QuantityBox extends React.Component {
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		if (prevState.isEditing) return null;
 		if (prevState.updateQuantity) {
 			return {
 				quantity: nextProps.quantity,
@@ -127,15 +128,15 @@ export default class QuantityBox extends React.Component {
 	}
 
 	changeQuantity = async () => {
-		await this.props.onChangeQuantity(this.state.quantity);
-		this.setState({updateQuantity: true});
+		await this.props.onChangeQuantity(parseInt(this.state.quantity, 10));
+		this.setState({ updateQuantity: true, isEditing: false });
 	}
 
 	render() {
 		return (
 			<div className="quantity-box flex border">
 				<button
-					className="quantity-box__button p-[16px] grow-0"
+					className="quantity-box__button quantity-box__button-subtract p-[16px] grow-0"
 					type="button"
 					aria-label="Add Subtract"
 					disabled={!this.props.editable || this.state.prevQuantity === 0}
@@ -156,7 +157,7 @@ export default class QuantityBox extends React.Component {
 					aria-label="quantity input"
 				/>
 				<button
-					className="quantity-box__button p-[16px]"
+					className="quantity-box__button quantity-box__button-add p-[16px]"
 					type="button"
 					aria-label="Add Quantity"
 					disabled={!this.props.editable || this.state.lastStock}
