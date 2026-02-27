@@ -112,7 +112,7 @@
 		}
 
 		&__track-scrollbar {
-			@apply relative justify-self-end self-center w-full overflow-hidden cursor-pointer touch-pan-y;
+			@apply hidden lg:block relative justify-self-end self-center w-full overflow-hidden cursor-pointer touch-pan-y;
 			&:before {
 				@apply content-[''] absolute w-full top-[50%] -translate-y-[50%] border-[2px] border-gray-400;
 			}
