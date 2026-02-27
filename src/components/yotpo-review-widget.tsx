@@ -1320,10 +1320,20 @@ const YotpoReviewWidget = (props:any) => {
 					// <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
 						<div className="modal-content mx-2 lg:mx-0 relative max-h-[50%]">
 							<div className="flex flex-wrap items-center bg-white rounded rounded-lg overflow-hidden">
-								<div className="lg:w-1/2 pr-lg-0">
+								<div className={`lg:w-1/2 pr-lg-0 ${getMediaData(reviewModal)[0].id}`}>
 									{getMediaData(reviewModal).length === 1 ? (
 										<>
-											{getMediaData(reviewModal)[0].image_url && (<img src={getMediaData(reviewModal)[0].image_url?.replace('https:', '')} alt="Slide 1" className="d-block w-100" />) }
+											{getMediaData(reviewModal)[0].image_url?.includes('.mp4') ? (
+												<div className="relative flex">
+													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
+														<source src={getMediaData(reviewModal)[0].image_url} type="video/mp4" />
+													</video>
+													<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${getMediaData(reviewModal)[0].id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
+												</div>
+											) : getMediaData(reviewModal)[0].image_url ? (
+												<img src={getMediaData(reviewModal)[0].image_url?.replace('https:', '')} alt="Slide 1" className="d-block w-100" />
+											) : null}
+
 											{getMediaData(reviewModal)[0].video_url && (
 												<div className="relative flex relative">
 													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
@@ -1342,13 +1352,17 @@ const YotpoReviewWidget = (props:any) => {
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
 															{media.image_url && (<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />)}
-															{media.video_url && (
+															{media.video_url ? (
 																// eslint-disable-next-line jsx-a11y/media-has-caption
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
 																	<source src={media.video_url} type="video/mp4" />
 																</video>
-															)}
-															{media.video_url && (
+															) : media.object_url ? (
+																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
+																	<source src={media.object_url} type="video/mp4" />
+																</video>
+															) : null}
+															{media.video_url || media.object_url && (
 																<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${media.id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 															)}
 														</div>
