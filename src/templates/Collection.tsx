@@ -462,7 +462,7 @@ const Collection = (props: any) => {
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
                                                         href={`/collections/${children.handle}`}
-                                                        className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline lg:leading-[25px]
+                                                        className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                             ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
                                                         onClick={showLoading}
                                                         dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
@@ -488,7 +488,7 @@ const Collection = (props: any) => {
                                 <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>
                             </div>
                         )}
-                        <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid pt-4 lg:pt-[1.5rem] overflow-hidden w-full gap-g lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2`}>
+                        <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid pt-4 lg:pt-[1.5rem] overflow-hidden w-full gap-x-g gap-y-[2.375rem] lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2 pb-[2.375rem] lg:pb-5`}>
                             {(showSpinner || loading) && (
                                 <div className="mb-3 px-hg lg:px-g text-center w-full block col-span-2 lg:col-span-4">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
@@ -588,9 +588,10 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />
+            
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
+                    <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />
                     {!isLoading && <hr className="collection-footer border-gray-400 my-2" />}
                     <div className="container py-2 mb-2">
                         {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
