@@ -91,7 +91,7 @@ const ArticleNewsLetter = (props) => {
                             <div className=" relative flex flex-wrap w-full items-stretch">
                                 <input required onChange={handleEmail} value={email} type="email" className="bg-white flex-[1_1_auto] w-[1%] focus:outline-none focus:border-gray-400 active:border-gray-400  focus-visible:border-gray-400 block appearance-none py-[14px] px-[16px] mb-0 text-base leading-base border border-[solid] border-gray-400 text-body placeholder:text-gray-500 border-gray-200 rounded-tl-none rounded-bl-none -mr-1 relative rounded-tr-none rounded-br-none" placeholder={postNewsletter.blog_ns_email} aria-label={postNewsletter.blog_ns_email} />
                                 <div className="input-group-append flex -ml-[1px]">
-                                    <button className={`py-[9px] px-2 min-w-[9.375em] lg:min-w-[11.375em] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark-dark border-dark': 'bg-primary hover:bg-primary-dark border-primary'} text-white rounded-none`} type="submit">{postNewsletter.blog_ns_btn}</button>
+                                    <button className={`py-[15px] px-[24px] lg:px-[54px] relative leading-base font-normal inline-block align-middle text-center select-none border whitespace-no-wrap no-underline ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark hover:bg-dark-dark border-dark': 'bg-primary hover:bg-primary-dark border-primary'} text-white rounded-none`} type="submit">{postNewsletter.blog_ns_btn}</button>
                                 </div>
                             </div>
                             {!emailError.valid && <span className="text-[red] font-size-sm">{emailError.error}</span>}
@@ -454,14 +454,14 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news?how-to-tab=true" title="How to's"/>
                     </div>
                 )} */}
-                <article className="flex flex-wrap mt-4 lg:mt-3 lg:-mx-g sm:-mx-hg lg:mb-4">
+                <article className="flex flex-wrap mt-4 lg:mt-4 lg:-mx-g sm:-mx-hg">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 id="articleTitleHeading" className="text-center mb-1">{content?.title}</h1>
-                        <span className="text-body mb-1 article__published-at">{updateDate}</span>
+                        {/* <span className="text-body mb-1 article__published-at">{updateDate}</span> */}
 
                         {quickNav?.length > 0 && (
                             <>
-                                <span className="block mt-1 lg:pt-g text-left font-bold text-body">In this article:</span>
+                                <span className="block text-left font-bold text-body">In this article:</span>
                                 <div className="mt-1 mb-2 lg:mb-1 text-body">
                                     {quickNav.map((quickLink, index) => (
                                         <a onClick={(e) => handleClick(e, `#link-${index + 1}`)} key={index} href={`#link-${index + 1}`} className="blog-post-quick-links">

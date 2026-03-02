@@ -131,10 +131,10 @@ const Blog = (props) => {
 	}, [region]);
 	
 	return (
-		<div className="mobile-wrapper mt-2 lg:mt-4 lg:px-0">
+		<div className="mobile-wrapper mt-3 lg:px-0">
 			<div className="container px-0">
-				<h1 className="text-center mb-2 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
-				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
+				<h1 className="text-center mb-[1rem] lg:mb-1 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
+				<div className="px-g blog-nav-tags mb-3 flex" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
 					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
@@ -147,7 +147,7 @@ const Blog = (props) => {
 						<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					)}
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a>
+					{/* <a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a> */}
 				</div>
 				{!activeFrame && (
 					<>
@@ -187,14 +187,14 @@ const Blog = (props) => {
 				)}
 				{activeFrame && (
 					<>
-						<div className="flex flex-wrap article-list-wrapper lg:mb-4 lg:-mx-g px-0 lg:px-hg">
+						<div className="flex flex-wrap article-list-wrapper mb-2 lg:-mx-g px-0 lg:px-hg">
 							{!isLoading && (
 								<div className="container px-0">
 									{postData.length > 0 &&
 										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
 											<Carousel.Inner emblaRef={emblaRef}>
 												{extendedPostData.map((data, index) => (
-													<PostCard showSubtext={true} carousel={true} key={index} textClass="flex-grow" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] sm:px-hg lg:px-g lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
+													<PostCard showSubtext={true} readMoreLink={true} carousel={true} key={index} textClass="flex-grow" fontWeight="font-bold" badgePadding="py-[6px] px-[12px] text-xs lg:text-sm" figcaptionPadding="p-[1rem]" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] px-[.375em] lg:px-[.5rem] lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
 												))}
 											</Carousel.Inner>
 											<Carousel.Navigation>
