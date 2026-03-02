@@ -29,7 +29,10 @@ const Inner = ({ title, bannerData }) => {
         <figure className="w-full relative items-center px-0 mb-0 aspect-[375/200] lg:aspect-[1440/279]">
             <picture className={``}>
                 <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
-                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')} className="w-full" alt="Collection Banner" width="375" height="200" fetchPriority="high" />
+                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')} 
+                    className="w-full" alt="Collection Banner" width="375" height="200" 
+                    // @ts-ignore
+                    fetchpriority="high" />
             </picture>
             <figcaption className="w=full flex lg:visible absolute w-auto items-center my-auto top-0 bottom-0">
                 {/* <h1 className="hidden mb-0"
@@ -363,7 +366,7 @@ const Collection = (props: any) => {
 
             {tcPopups?.enabled_collection && (
                 <>
-                    <div className="text-left terms--link container px-g py-[.5rem] lg:py-1">
+                    <div className="text-left terms--link container px-g py-[.5rem] lg:px-2 lg:py-1">
                         <a onClick={() => handlOpenModal(true)} className="underline underline-offset-[3px] text-body lg:px-0 lg:py-2 text-base" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy : 'Terms & Conditions'}</a>
                     </div>
 
@@ -373,7 +376,7 @@ const Collection = (props: any) => {
                 </>
             )}
 
-            <div className="container collection__container pt-3 px-0 lg:px-g lg:pt-[50px] lg:pb-2">
+            <div className="container collection__container pt-3 px-0 lg:px-g lg:pt-4 lg:pb-2">
                 <div className="flex flex-wrap overflow-hidden lg:-mx-g">
                     {/* {sidebarMenu.length > 0 && (
                         <aside className="w-1/4 hidden px-g lg:block">
