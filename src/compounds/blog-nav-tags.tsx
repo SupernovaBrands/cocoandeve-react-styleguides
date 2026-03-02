@@ -1,6 +1,6 @@
 const navTags = (props) => {
     return (
-        <a href={props.href} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${props.active ? 'active-dark' : ''}`}>{props.title}</a>
+        <a href={props.href} className={`leading-[25px] py-[5px] lg:py-1 px-2 hover:no-underline no-underline ${props.active ? 'active-dark' : ''}`}>{props.title}</a>
     );
 };
 

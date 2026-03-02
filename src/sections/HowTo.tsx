@@ -79,7 +79,7 @@ const HowToCarousel = (props) => {
 			<Carousel.Wrapper emblaApi={emblaApi} className="pl-hg lg:px-g">
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
-						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
+						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 px-[.375em] lg:px-[.5rem]">
 							<figure className="rounded-none">
 								{!isLoading && (
 									<picture className="relative w-full block m-0 cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>
@@ -90,14 +90,16 @@ const HowToCarousel = (props) => {
 												</svg>
 									</picture>
 								)}
-								<figcaption className="p-2">
-									{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
-										// <span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-bold py-[.375em] px-[.75em] mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
-										<PostTag store={store} paddingClass="py-[.375em] px-[.75em]" key={`article-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
-									) : ''}
-									<p className="text-lg lg:text-xl font-bold mt-2 blog-video-card__title mb-1 cursor-pointer"><a role="button" tabIndex={0} href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+								<figcaption className="p-[1rem]">
+									<div className="flex gap-[8px] flex-wrap">
+										{ item?.tags?.length > 0 ? item?.tags?.map((tag) =>
+											// <span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} min-w-[3.375em] badge-tag font-bold py-[.375em] px-[.75em] mr-1 rounded capitalize inline-block badge text-center`}>{tag}</span>
+											<PostTag store={store} paddingClass="py-[6px] px-[12px] text-xs lg:text-sm" key={`article-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
+										) : ''}
+										</div>
+									<p className="text-lg font-bold mt-[8px] blog-video-card__title cursor-pointer"><a role="button" tabIndex={0} href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 									{/* <span className={`inline-block btn ${ctaBgColor === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full`}>Read more</span> */}
-									<span className="inline-block pb-2 block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" onClick={handlOpenModal}>Read more</span>
+									<span className="inline-block underline-offset-4 text-sm lg:text-base underline-offset-4 font-semibold block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" onClick={handlOpenModal}>Read more</span>
 								</figcaption>
 							</figure>
 						</div>
@@ -109,7 +111,7 @@ const HowToCarousel = (props) => {
 						disabled={prevDisabled7}
 						className={props.btnLeft}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] left-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] carousel__button--direction -left-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
@@ -118,7 +120,7 @@ const HowToCarousel = (props) => {
 						disabled={nextDisabled7}
 						className={props.btnRight}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] [box-shadow:0 6.5px 8px #15151529!important] carousel__button--direction shadow-[0 6.5px 8px #15151529] right-0 bg-white w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
+						<span className="lg:top-[129px!important] sm:top-[69px!important] carousel__button--direction -right-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>
