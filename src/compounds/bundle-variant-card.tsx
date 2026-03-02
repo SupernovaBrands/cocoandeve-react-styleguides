@@ -51,24 +51,14 @@ const BundleVariantCard = (props) => {
     }
 
     const hardcodeImages = {
-        // 'bronzing-self-tanner-drops': {
-        //     au: {
-        //         medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
-        //         default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
-        //     },
-        // },
         'antioxidant-glow-cream': {
-            // us: {
-            //     medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
-            //     default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
-            // },
             ca: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7df2104a-c639-466a-10a7-351ffee2d800/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+                medium: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x.jpg?v=1772038067',
+                default: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ad3300be-ff9f-40d6-9cee-94fc4029480c.jpg?v=1772038099&width=320',
             },
             au: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/9f266ff2-a074-4f25-c810-86deb5e4de00/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+                medium: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6f16012d-d745-467e-9459-0331ff465e12.jpg?v=1772038128&width=320',
+                default: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_7538f6f0-8a91-4aad-842f-2c2a78b098b3.jpg?v=1772038161&width=320',
             },
         },
     };
@@ -122,10 +112,10 @@ const BundleVariantCard = (props) => {
         }
     }, [bundleImg]);
 
-    
+
     useEffect(() => {
         const userAgent = navigator.userAgent || navigator.vendor;
-    
+
         if (/windows/i.test(userAgent)) {
             os = 'os-win';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
@@ -135,7 +125,7 @@ const BundleVariantCard = (props) => {
         } else if (/android/i.test(userAgent)) {
             os = 'os-android';
         }
-    
+
         setPlatform(os);
     }, []);
 

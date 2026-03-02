@@ -45,64 +45,57 @@ const Editors = (props) => {
     const DATA = [
         {
             id: 1,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/05e7dd9f-51b5-43c2-603e-f192867cdb00/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/05e7dd9f-51b5-43c2-603e-f192867cdb00/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f333c0a2-5b72-42eb-a125-69a2b28fdf68.jpg?v=1772038346',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_3cbed588-c614-423c-bfcb-c31e92de6c15.jpg?v=1772038372',
             alt: 'Nylon',
             size: { width: 84, height: 15, widthLg: 106, heightLg: 19 }
         },
         {
             id: 2,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90ca804e-f0a1-460d-3bcf-97dd9477d200/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90ca804e-f0a1-460d-3bcf-97dd9477d200/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Cosmopolitan_logo_2x_897487d3-c4c5-409a-b99b-995e850a4e05.png?v=1614299638',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Cosmopolitan_logo_2x_897487d3-c4c5-409a-b99b-995e850a4e05.png?v=1614299638',
             alt: 'Cosmopolitan',
             size: { width: 90, height: 17, widthLg: 127, heightLg: 24 }
         },
         {
             id: 3,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/419db1b0-0851-494d-b3fc-4c080ed08f00/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/419db1b0-0851-494d-b3fc-4c080ed08f00/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Elle_logo_2x_15d012a5-11f1-4898-a024-1c77d647e406.png?v=1614299637',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Elle_logo_2x_15d012a5-11f1-4898-a024-1c77d647e406.png?v=1614299637',
             alt: 'Elle',
             size: { width: 55, height: 22, widthLg: 65, heightLg: 26 }
         },
         {
             id: 4,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4905a8e3-d16e-4e27-a903-6a527bd05100/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4905a8e3-d16e-4e27-a903-6a527bd05100/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ca13670d-f260-4697-a8da-7ba96188ed3f.jpg?v=1772038478',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ca13670d-f260-4697-a8da-7ba96188ed3f.jpg?v=1772038478',
             alt: 'Glamour',
             size: { width: 72, height: 17, widthLg: 110, heightLg: 26 }
         },
-        // {
-        //     id: 5,
-        //     srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
-        //     src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ed711819-5774-4639-08fa-3b4cc255c600/public',
-        //     alt: 'Refinery29',
-        //     size: { width: 62, height: 36, widthLg: 68, heightLg: 40 }
-        // },
         {
             id: 6,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21469fa-4de6-48d2-d1ba-ed4afbb5ae00/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21469fa-4de6-48d2-d1ba-ed4afbb5ae00/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Mail_online_logo_2x_bc784a7a-72f0-48ff-81f3-9fe95ce1f8ab.png?v=1614299637',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Mail_online_logo_2x_bc784a7a-72f0-48ff-81f3-9fe95ce1f8ab.png?v=1614299637',
             alt: 'Mail Online',
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         },
         {
             id: 8,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d13f6da2-b104-4fb0-c635-7fe1a09ce600/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d13f6da2-b104-4fb0-c635-7fe1a09ce600/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Marie_Claire_logo_wordmark_text_2x_3c8d4d6f-8f05-41a6-8929-386585e59d6d.png?v=1614294473',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Marie_Claire_logo_wordmark_text_2x_3c8d4d6f-8f05-41a6-8929-386585e59d6d.png?v=1614294473',
             alt: 'Marie claire',
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         },
         {
             id: 9,
-            srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a0a4f933-9b0a-42fa-9007-5c4c5ae52700/public',
-            src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a0a4f933-9b0a-42fa-9007-5c4c5ae52700/public',
+            srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_75a09386-9761-4d57-973c-be82682986f3.png?v=1772038586',
+            src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_75a09386-9761-4d57-973c-be82682986f3.png?v=1772038586',
             alt: 'Good Housekeeping',
             size: { width: 110, height: 17, widthLg: 169, heightLg: 26 }
         }
     ];
     // console.log('editor props', props);
     return (
-        <section className={`list-logo container mb-g lg:my-[50px] lg:px-g pb-1 lg:pb-0 
+        <section className={`list-logo container mb-g lg:my-[50px] lg:px-g pb-1 lg:pb-0
         px-g pt-2 lg:pt-0 ${props.className ?? ''}`}>
             <Carousel.Wrapper emblaApi={emblaApi} className="carousel__editor lg:pl-3">
                 <Carousel.Inner emblaRef={emblaRef} className='items-center'>

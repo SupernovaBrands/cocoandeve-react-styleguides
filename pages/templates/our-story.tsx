@@ -14,11 +14,11 @@ const OurStory = () => {
 		tiitle: "In a (coco) nutshell? We promise unBALIevably good hair and skin ",
 		back_img: {
 			id: 2832,
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e53e1e88-4ef5-4062-58a7-0fe5ced13e00/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_3a91f449-88be-4657-85da-519fc14f33cd.jpg?v=1772003595"
 		},
 		back_img_mob: {
 			id: 970,
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a210713e-e312-4cb7-4ace-d82b7ea61b00/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_de960b8c-cd64-4563-a7ea-06e483ffbab0.png?v=1772003626"
 		}
 	};
 	const intro = {
@@ -30,19 +30,19 @@ const OurStory = () => {
         titleintro_2: 'We\'ve sourced only the best ingredients',
         back_img_1: {
             id: 978,
-            url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0a194d82-efaa-420c-9af0-14d13e5da400/public'
+            url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9318a497-8da4-4869-a623-ce4d2c55b32f.jpg?v=1772003729'
         },
         back_img_mob_1: {
             id: 979,
-            url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b1a5112e-d110-4ec3-f158-e2d731b82800/public'
+            url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_71b4830f-d726-4b69-b89c-0ca2cf96d5ef.jpg?v=1772003754'
         },
         back_img_2: {
             id: 977,
-            url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8f541235-2c46-4816-e1a0-45607ea8e600/public'
+            url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_50f67713-d9af-404f-b2a2-eb4c6c3bd748.jpg?v=1772003793'
         },
         back_img_mob_2: {
             id: 980,
-            url: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e49b810-539a-415e-fe28-9d90b11c1700/public'
+            url: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_d06ac580-add5-4cbf-b6e4-ad844d7f22f8.jpg?v=1772003816'
         }
 	};
 	const logo = {
@@ -53,7 +53,7 @@ const OurStory = () => {
 				id: 25,
 				image: {
 					id: 972,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a9486a6e-e9e7-442f-dac5-aec68b27a400/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a7daa6b6-adfe-49f4-a577-cdc38a525fa8.png?v=1772003849",
 					alternativeText: "Award nilon"
 				}
 			},
@@ -61,7 +61,7 @@ const OurStory = () => {
 				id: 26,
 				image: {
 					id: 973,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/59ed32c3-032c-4558-bbdd-29108c38db00/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_2dfaa7d1-33f9-4ddc-ba0a-2474cd7527da.png?v=1772003873",
 					alternativeText: "Award she find"
 				}
 			},
@@ -69,7 +69,7 @@ const OurStory = () => {
 				id: 27,
 				image: {
 					id: 976,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a0d3de24-f27d-4166-bd42-3b9ec6732500/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_7840c81d-6cb2-4093-b0c4-b3cf8a7d0471.png?v=1772037143",
 					alternativeText: "Beauty global 2018"
 				}
 			},
@@ -77,7 +77,7 @@ const OurStory = () => {
 				id: 28,
 				image: {
 					id: 975,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/be1b40c9-97dc-4c89-8335-41dfb27b6d00/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_52f1c8b2-73dd-423d-8884-2f38c8eaa69c.png?v=1772037172",
 					alternativeText: "Beauty global 2019"
 				}
 			},
@@ -85,7 +85,7 @@ const OurStory = () => {
 				id: 29,
 				image: {
 					id: 971,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3e31732a-6a98-4ddb-e4bd-7272fbf19200/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ff2ff677-d7f5-4903-b898-90030226693e.png?v=1772037196",
 					alternativeText: "Blink beauty winner 2018"
 				}
 			},
@@ -93,7 +93,7 @@ const OurStory = () => {
 				id: 30,
 				image: {
 					id: 974,
-					url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ae862554-062f-47f3-6cbf-2157f1cb7f00/public",
+					url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_00969649-e2cf-4730-a99f-075b073e942d.png?v=1772037229",
 					alternativeText: "Fabolous beauty awarcs 2018"
 				}
 			}
@@ -106,11 +106,11 @@ const OurStory = () => {
 		video: "https://cdn.shopify.com/s/files/1/0028/8253/5533/files/Pop_Up_Video_Journalist_-_1_reexport_2.mp4?v=1634105075",
 		back_img: {
 			id: 4933,
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ca199257-8681-4a5a-f901-04872f760d00/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4b8791c2-b658-4697-b250-5e4c97348591.jpg?v=1772037251"
 		},
 		back_img_mob: {
 			id: 4934,
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/612f3ff4-8ce4-45bc-042c-3098f0a69c00/public"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a0d1d496-77bb-4074-8532-0341b7fae51e.jpg?v=1772037274"
 		}
 	};
 
