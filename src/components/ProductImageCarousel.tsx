@@ -7,6 +7,7 @@ import ChevronPrev from '~/images/icons/chevron-up.svg';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import Play from '~/images/icons/play.svg';
 import { useIsVisible } from "~/hooks/useIsVisible";
+import CarouselScrollbar from './carousel/CarouselScrollbar';
 
 interface ImageSlide {
 	id: number
@@ -121,7 +122,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	}, [emblaMainApi, onSelect, onScroll]);
 
 	const startVideoOnMouseMove = useCallback(async () => {
-		console.log('startVideoOnMouseMove');
+		// console.log('startVideoOnMouseMove');
         try {
             await videoRef.current.play();
         } catch (e) {
@@ -215,7 +216,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 				</div>
 			</div>
 			<div className="product-image-carousel__container w-full lg:w-6/12 lg:flex-1 lg:order-2 px-0 lg:px-g">
-				<div className="carousel mb-1 lg:mb-0 lg:sticky aspect-ratio overflow-hidden">
+				<div className="carousel mb-0 lg:sticky aspect-ratio overflow-hidden">
 					<Carousel.Wrapper emblaApi={emblaMainApi}>
 						<Carousel.Inner emblaRef={emblaMainRef} className="w-full">
 							{slides.map((slide, index) => (
@@ -239,14 +240,24 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 						</Carousel.Inner>
 						{bottomBadge && (<span className="bg-black absolute text-white p-1 w-full text-center left-0 right-0 bottom-0">{bottomBadge}</span>)}
 					</Carousel.Wrapper>
+					{slides.length > 1 && (
+						<div className="px-g lg:hidden">
+							<CarouselScrollbar
+								emblaApi={emblaMainApi}
+								scrollSnaps={emblaMainApi?.scrollSnapList()}
+								className="after:bg-gray-500 after:rounded-[2px]"
+							/>
+						</div>
+					)}
 				</div>
-				<div className="px-g lg:hidden">
+				
+				{/* <div className="px-g lg:hidden">
 					<div className="carousel__progress bg-gray-400">
 						<div
 							className="carousel__progress--scroll bg-gray-500"
 							style={{ left: `${scrollProgress}%`, width: `${((1 / slides.length) * 100) + 2.5}%` }} />
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
