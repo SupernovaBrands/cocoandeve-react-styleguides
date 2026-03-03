@@ -32,11 +32,12 @@ interface LaunchWaitListProps {
     handle?: string;
     emailShow?: boolean;
     phoneShow?: boolean;
+    bgCtaColor?: string
 }
 
 const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
     let countries = countriesList;
-    const { loggedInEmail, store, tags, box } = props;
+    const { loggedInEmail, store, tags, box, bgCtaColor } = props;
 
     let bgColor:string;
     const tagsLength = tags?.length || 0;
@@ -254,7 +255,7 @@ const LaunchWaitList: React.FC<LaunchWaitListProps> = (props) => {
                         {/* {tosError && <span className="block w-full text-primary terms-error mb-0 mt-0 text-sm">You have not agreed to the Privacy Policy & ToS</span>} */}
                     </div>
                     <div className={`flex flex-wrap px-2 -mx-2 mb-1 mt-1 ${props.productCard ? 'lg:mb-2' : ''}`}>
-                        <Button type="submit" buttonClass={`btn-primary w-full border-0 ${props.productCard ? 'h-[3.125rem] border-none' : '!py-[15px]'}`}>
+                        <Button type="submit" buttonClass={`${bgCtaColor === 'bg-dark' ? 'bg-dark text-white border-dark' : 'btn-primary'} w-full border-0 ${props.productCard ? 'h-[3.125rem] border-none' : '!py-[15px]'}`}>
                             { props.cta ? props.cta : 'Submit Form' }
                         </Button>
                     </div>

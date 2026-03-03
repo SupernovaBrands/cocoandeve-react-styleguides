@@ -351,6 +351,89 @@ export const addXMLRequestCallback = function (callback) {
 	}
 };
 
+export const submitToKlaviyo = async ({store, email, phoneNumber, source}) => {
+	console.log('submit to klaviyo', store, email, phoneNumber);
+	const klaviyoList = {
+		dev: 'UmMRZB',
+		us: 'XigzGv',
+		uk: 'XGPBp7',
+		ca:  'TqyMrz',
+		au: 'UBCCt3',
+		eu: 'Y9pDee',
+		my: 'XhdR9u',
+		int: 'StauX5'
+	}
+
+	const klaviyoPK = {
+		dev: 'ULW9Jz',
+		us: 'VQmHzA',
+		uk: 'TPtP96',
+		ca:  'UZ7U4p',
+		au: 'WYtipg',
+		eu: 'XLgmDM',
+		my: 'QTMSqX',
+		int: 'WH4iKb'
+	}
+
+	const phone_number = phoneNumber && phoneNumber.startsWith("+") ? phoneNumber.replace("++", "+") : `+${phoneNumber}`;
+
+	if (klaviyoPK[store] && klaviyoList[store]) {
+		const url = `https://a.klaviyo.com/client/subscriptions?company_id=${klaviyoPK[store]}`;
+		const data = {
+			data: {
+			type: "subscription",
+			attributes: {
+				custom_source: source,
+				profile: {
+				data: {
+					type: "profile",
+					attributes: {
+						subscriptions: {
+							email: {
+								marketing: {
+									consent: "SUBSCRIBED"
+								},
+							},
+						},
+						email,
+					}
+				}
+				}
+			},
+			relationships: {
+				list: {
+				data: {
+					type: 'list',
+					id: klaviyoList[store],
+				}
+				}
+			}
+			}
+		}
+
+		try {
+			globalThis.klaviyo.push([
+				'identify', {
+					$email: email
+				}
+			]);
+		} catch(e) {
+			console.log(e, 'Error on identifying email for klaviyo');
+		}
+
+		const options = {
+			method: 'POST',
+			headers: {revision: '2025-10-15', 'content-type': 'application/vnd.api+json'},
+			body: JSON.stringify(data),
+		};
+		return fetch(url, options)
+			.then(res => res.json())
+			.then(json => json)
+			.catch(err => err);
+	}
+	return {};
+}
+
 export const subscribeBluecoreWaitlist = async (email, productId, variantID, regSource, phone, welcome, igHandle) => {
 	const countryCode = getCookie('country_code');
 	const country = countriesCode.find((c) => c.code === countryCode)?.name || '';
@@ -393,6 +476,13 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 		globalThis.window.fbq('track', 'Lead');
 	}
 
+	try {
+		const store = getCookie('region');
+		submitToKlaviyo({store, email: data.email, phoneNumber: data.phone, source: regSource})
+	} catch(e) {
+		console.log(e, 'submit to klaviyo')
+	}
+
 	const response = await fetch('https://s-app.cocoandeve.com/bluecore/waitlist.json', {
 		method: 'POST',
 		headers: {
@@ -406,7 +496,7 @@ export const subscribeBluecoreWaitlist = async (email, productId, variantID, reg
 export const subscribeBluecoreRegistration = (
 	email,
 	phone,
-	regSource = 'registration',
+	regSource = 'Newsletter Popup',
 ) => {
 	const country = getCookie('country_code');
 	const region = getCookie('region');
@@ -435,6 +525,14 @@ export const subscribeBluecoreRegistration = (
 	} catch (e) {
 		console.log(e);
 	}
+
+	try {
+		const store = getCookie('region');
+		submitToKlaviyo({store, email: data.email, phoneNumber: data.phone, source: regSource})
+	} catch(e) {
+		console.log(e, 'submit to klaviyo')
+	}
+
 	const ajaxRequest = new XMLHttpRequest();
 	ajaxRequest.open('POST', `https://s-app.cocoandeve.com/bluecore/registrations`, true);
 	ajaxRequest.setRequestHeader('Content-type', 'application/json');
@@ -451,6 +549,8 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 		ca:  'Sf9WxH',
 		au: 'X35yA9',
 		eu: 'WkXKHK',
+		my: 'XUeTL7',
+		int: 'Yttc79'
 	}
 
 	const klaviyoPK = {
@@ -460,6 +560,8 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 		ca:  'UZ7U4p',
 		au: 'WYtipg',
 		eu: 'XLgmDM',
+		my: 'QTMSqX',
+		int: 'WH4iKb'
 	}
 
 	const phone_number = phoneNumber && phoneNumber.startsWith("+") ? phoneNumber.replace("++", "+") : `+${phoneNumber}`;
@@ -516,10 +618,10 @@ export const submitPhoneKlaviyo = async ({store, phoneNumber, source}) => {
 
 export const submitsToSmsBumpAPi = async (phone, formId, countryPhoneCode, region, source='Newsletter') => {
 	let phoneNumber = `+${countryPhoneCode}${phone.replace(/^0+/, '')}`;
-	if (!['int', 'my'].includes(region)) {
+	// if (!['int', 'my'].includes(region)) {
 		phoneNumber = `${countryPhoneCode}${phone.replace(/^0+/, '')}`;
 		return submitPhoneKlaviyo({store: region, phoneNumber, source});
-	}
+	// }
 
 	const date = new Date();
 	const tse = date.getTime();

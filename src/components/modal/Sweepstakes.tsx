@@ -138,24 +138,29 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	const handleForm = (e) => {
 		e.preventDefault();
 
+		setEmailError({ valid: false, error: '' });
+		setPhoneError({ valid: false, error: '' });
+
 		if (validateForm(email, phone)) {
 			if (validForm.email) {
 				if (!validForm.phone) {
-					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', '', true);
-					trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+					subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Pop-up', '', true);
+					trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes Pop-up');
 				} else {
 					setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 				}
 				setFormCompleted(true);
 			} else {
-				setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				// setEmailError({ valid: false, error: 'Please enter a valid email address' });
+				if (!validForm.email) setEmailError({ valid: false, error: email === '' ? 'Email address is required.' : 'Please enter a valid email address' });
+				if (!validForm.phone) setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 			}
 		} else {
 			setEmailError({ valid: false, error: 'Please enter a valid email address' });
 			setPhoneError({ valid: false, error: 'Please enter a valid phone number' });
 		}
 
-		if (validForm.phone) {
+		if (validForm.email && validForm.phone) {
 			submitsToSmsBumpAPi(phone, data?.smsbump, activeCountryCode, store, "Sweepstakes Pop-up").then((resp) => {
 				console.log('submitsToSmsBump', resp);
 				// if (resp.status === 'error' && !validForm.email) {
@@ -165,8 +170,8 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 				// }
 			});
 			if (validForm.email || email === '') {
-				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes', phone, true);
-				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes');
+				subscribeBluecoreWaitlist(email, '', '', 'Sweepstakes Pop-up', phone, true);
+				trackBluecoreLaunchWaitlistEvent(email, 'Sweepstakes Pop-up');
 				setFormCompleted(true);
 			}
 		}

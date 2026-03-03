@@ -25,8 +25,8 @@ const Sidebar = ({data}) => {
 				<h2 className="mb-2 lg:mb-3 text-center lg:text-left block font-bold text-xl lg:text-2xl">Popular Reads</h2>
 				<ul className="overflow-scroll no-scrollbar flex flex-nowrap px-g lg:flex-wrap lg:overflow-hidden lg:px-0">
 					{data.map((item: any, index) => 
-						<li className={`w-[92.5%] basis-[92.5%] lg:w-full lg:basis-full flex-grow-0 flex-shrink-0 ${data.length -1 === index ? '' : 'lg:mb-2'}`}>
-							<SidebarCard key={item.id} data={item} />
+						<li key={`card-${index}`} className={`w-[92.5%] basis-[92.5%] lg:w-full lg:basis-full flex-grow-0 flex-shrink-0 ${data.length -1 === index ? '' : 'lg:mb-2'}`}>
+							<SidebarCard data={item} />
 						</li>
 					)}
 				</ul>

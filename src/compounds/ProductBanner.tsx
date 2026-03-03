@@ -23,7 +23,7 @@ const ProductBanner = (props: any) => {
             <div className="product__banner-right w-full lg:w-1/2 px-0 relative">
                 {comparisonImages ? (
                     <div className="product-banner__image w-full">
-                        <ProductBannerSlider svgClasses={props.svgClasses ?? null} leftArrowClasses={props.leftArrowClasses ?? null} rightArrowClasses={props.rightArrowClasses ?? null} {...comparisonImages} />
+                        <ProductBannerSlider imgClasses={props.imgClasses ?? null} svgClasses={props.svgClasses ?? null} leftArrowClasses={props.leftArrowClasses ?? null} rightArrowClasses={props.rightArrowClasses ?? null} {...comparisonImages} />
                     </div>
                 ) : (
                     <>

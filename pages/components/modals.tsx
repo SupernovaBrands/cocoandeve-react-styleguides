@@ -40,7 +40,7 @@ const Modals = () => {
 	};
 
 	const MODAL_WAITLIST = {
-		image: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b653f2b3-08b7-421c-351a-3a5b70a27e00/public',
+		image: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4bb63048-746f-49d3-b6c5-06a7cf6a12b0.jpg?v=1772000716',
 		open: false,
 		title: 'Oh coco-nuts!',
 		handle: 'shampoo-conditioner-set'
@@ -76,14 +76,14 @@ const Modals = () => {
 	const MODAL_NEWSLETTER = {
 		"nbp_img": {
 			"alt": "welcomepopup_2_mobile_1_764x332_crop_center.png",
-			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3391e840-d687-4451-4640-8a1987e58200/public"
+			"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public.png?v=1772000767"
 		},
 		"nbp_code": "",
 		"nbp_desc": "Get <b> 10% OFF*</b> your first order plus first access to new product launches, exclusive offers, expert tips and routines.",
 		"nbp_note": "Receive exclusive offers via email or recurring automated marketing messages. For more info see our <a class=\"font-weight-bold text-underline text-dark\" href=\"/pages/privacy-policy\">Privacy Policy</a>. Message frequency varies. Msg &amp; data rates may apply. Sign up not required for purchase.*Excludes travel size items and accessories.",
 		"nbp_img_lg": {
 			"alt": "welcomepopup_1_.Desktoppng_1428x940_crop_center.png",
-			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3baf7c71-89aa-481a-962d-d06e75017700/public"
+			"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e32d9c75-ec1c-46dc-aef7-71167396e73e.png?v=1772000810"
 		},
 		"nbp_submit": "Submit",
 		"nbp_enabled": false,
@@ -104,7 +104,7 @@ const Modals = () => {
 
 	const MODAL_SWEEPSTAKE = {
 		src: 'https://via.placeholder.com/690x414/FFF2F4',
-		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/90d9a664-debc-4d42-8de7-bf77c6f94f00/public',
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9395b81f-27cd-4e0c-816f-d8b4cb974b48.jpg?v=1772000851',
 		title: 'Win $500 of products',
 		subtitle: 'and exclusive savings on our Black Friday <br />Deals and future offers!',
 		sweepstakes_popup_title: '',
@@ -131,7 +131,7 @@ const Modals = () => {
 	};
 
 	const EXIT_INTENT = {
-		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d17ae0b2-d981-4cab-7c69-d70ea2ab7e00/public',
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_45b85a83-0ef8-4586-a135-233388e36a67.jpg?v=1772000907',
 		title: 'OUR BIGGEST<br />SALE EVER',
 		desc1: 'UP<br />TO',
 		desc2: '50% OFF',

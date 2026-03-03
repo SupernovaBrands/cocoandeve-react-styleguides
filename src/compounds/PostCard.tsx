@@ -15,10 +15,13 @@ type PropType = {
 	pictureClass?: string
 	carousel?: boolean
 	showSubtext?: boolean
+	bgColor?: string
+	textColor?: string
+	store?: string
 }
 
 const PostCard: React.FC<PropType> = (props) => {
-	const { className, data, template, imgClass, textPrimary, textClass, height, pictureClass, showSubtext } = props;
+	const { className, data, template, imgClass, textPrimary, textClass, height, pictureClass, showSubtext, bgColor, textColor, store } = props;
 	const tagText = [];
 	if (data.tags && data.tags.length > 0) {
 		data.tags.map((item: string) => tagText.push(item.charAt(0).toUpperCase() + item.slice(1)))
@@ -46,7 +49,7 @@ const PostCard: React.FC<PropType> = (props) => {
 							{data.tags.length > 0 && (
 								<>
 									{data.tags.map((item: string, index: number) => (
-										<PostTag widthClass={template === 'blog' ? 'min-w-[3.375em]' : ''} paddingClass={`${template === 'pdp' ? 'py-[.5em] px-[1em] mr-[4px]' : ''} ${template === 'blog' || template === 'article' ? 'py-[.375em] px-[.75em]' : ''}`} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
+										<PostTag store={store} widthClass={template === 'blog' ? 'min-w-[3.375em]' : ''} paddingClass={`${template === 'pdp' ? 'py-[.5em] px-[1em] mr-[4px]' : ''} ${template === 'blog' || template === 'article' ? 'py-[.375em] px-[.75em]' : ''}`} key={`article-tag-${item}-${index}`} tag={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</PostTag>
 									))}
 								</>
 							)}
@@ -63,7 +66,7 @@ const PostCard: React.FC<PropType> = (props) => {
 							</div>
 						)}
 						{template === 'blog' || template === 'pdp' || template === 'article' ? (
-							<strong className={`btn btn-outline-primary self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`}>Read more</strong>
+							<strong className={`btn ${bgColor} ${bgColor === 'bg-dark' ? 'border-dark text-white hover:bg-dark' : 'btn-outline-primary'} self-start hover:no-underline leading-[1.25!important] mt-0 mb-0 flex rounded-full ${showSubtext ? 'lg:py-[14px] lg:px-[53px]' : 'lg:mt-auto'}`}>Read more</strong>
 						) : (
 							<strong className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full">Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></strong>
 						)}

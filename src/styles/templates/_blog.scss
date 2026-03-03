@@ -64,7 +64,7 @@
 				a {
 					@apply underline;
 				}
-				p {
+				p:not(.artical-detail) {
 					@apply mb-[1rem];
 				}
 
@@ -240,6 +240,11 @@
 
 			&.active {
 				@apply bg-primary;
+				@apply text-white;
+			}
+
+			&.active-dark {
+				@apply bg-dark;
 				@apply text-white;
 			}
 		}

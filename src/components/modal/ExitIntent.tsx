@@ -15,9 +15,10 @@ interface ExitIntentData {
 type ExitIntentProp = {
 	handleClose: () => void
 	data: ExitIntentData
+	ctaBgColor: string
 }
 
-const ExitIntent: React.FC<ExitIntentProp> = ({ handleClose, data }) => (
+const ExitIntent: React.FC<ExitIntentProp> = ({ handleClose, data, ctaBgColor }) => (
 	<div className="modal-content flex flex-col w-full outline-0">
 		<div className="modal-body p-0">
 			<figure className="m-0 relative">
@@ -29,7 +30,7 @@ const ExitIntent: React.FC<ExitIntentProp> = ({ handleClose, data }) => (
 						<span className="text-[4rem] leading-[3.125rem] font-bold">{data.off_text}</span>
 					</p>
 					<p className="exit-intent-popup__text h4 mb-1">{data.extra_text}</p>
-					<a className='w-full items-center rounded font-bold btn-primary px-3 py-1 md:px-4 md:py-g border-0 border-primary no-underline hover:border-primary hover:text-white hover:no-underline inline-flex justify-center relative' href={data.button_url}>{data.button_text}</a>
+					<a className={`w-full items-center rounded font-bold ${ctaBgColor === 'bg-dark' ? 'bg-dark border-dark hover:border-dark text-white hover:text-white' : 'border-primary hover:border-primary btn-primary'} px-3 py-1 md:px-4 md:py-g border-0 no-underline hover:text-white hover:no-underline inline-flex justify-center relative`} href={data.button_url}>{data.button_text}</a>
 				</figcaption>
 			</figure>
 			<CloseButton handleClose={handleClose} className="fill-[#fff] h-[1em!important] text-sm [width:auto!important]" />

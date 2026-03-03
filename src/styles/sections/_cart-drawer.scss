@@ -69,6 +69,27 @@
 			@apply text-primary-light;
 		}
 	}
+
+	.bfcm-dark-layout {
+		.checkout-url,
+		.shop--all-url {
+			@apply bg-dark text-white hover:bg-dark hover:text-white border-dark hover:border-dark;
+		}
+
+		.manual-gwp__container .manual-gwp__item {
+			button {
+				@apply text-dark border-dark hover:bg-dark hover:text-white;
+			}
+		}
+
+		.bfcm-btn {
+			@apply border-dark text-dark hover:bg-dark hover:text-white;
+		}
+
+		.bfcm-btn--selected {
+			@apply bg-dark text-white hover:bg-dark !important;
+		}
+	}
 }
 
 // .cart-drawer {

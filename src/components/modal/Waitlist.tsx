@@ -53,6 +53,9 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 		});
 	}
 
+	const themeGeneralSetting = globalSettings?.data?.ThemeSettings.find((setting) => setting.__component === 'theme.general-setting');
+	const generalSetting = themeGeneralSetting?.generalSetting?.generalSetting?.[store];
+
 	const isNonOOs = wlNoOOS.find(
 		(item) => item.waitlist_popup_handles?.includes(data.handle),
 	);
@@ -61,8 +64,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 		const email = inputRef.current.value;
 
 		if (validateEmail(email) && data.handle) {
-			const regSource = isNonOOs ? 'launch_waitlist' : 'waitlist';
-			subscribeBluecoreWaitlist(email, data.handle, '', `${regSource}_${data.handle}`, '', true);
+			const regSource = isNonOOs ? 'Launch Waitlist' : 'Waitlist';
+			subscribeBluecoreWaitlist(email, data.handle, '', `${data.title} - ${regSource}`, '', true);
 			setSuccess(true);
 			setFormError(false);
 			setCookie(`waitlist_${store}__${data.handle}`, true, 1);
@@ -92,7 +95,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 				inputRef.current.focus();
 			}
 		};
-	
+
 		const focusTimeout = setTimeout(handleFocus, 300);
 		const observer = new MutationObserver(() => {
 			if (inputRef.current) {
@@ -100,22 +103,22 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 				observer.disconnect();
 			}
 		});
-	
+
 		observer.observe(document.body, { childList: true, subtree: true });
-	
+
 		if (inputRef.current) {
 			handleFocus();
 		}
-	
+
 		return () => {
 			observer.disconnect();
 			clearTimeout(focusTimeout);
 		};
 	  }, [success]);
 
-	
+
 	const currId = parseInt(data.productId, 10) || 0;
-	
+
 	useEffect(() => {
 		// const wlPdpData = waitlistPdp[0]?.waitlistPdp[store];
 		if (currId !== 0 && waitlistPdp !== null) {
@@ -127,7 +130,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 
 			setFormTitle(waitlistPdp?.vrt_waitlist_form_title);
 			setFormDescription(waitlistPdp?.vrt_waitlist_form_description);
-			
+
 
 			if (wlComingSoon.includes(data.handle)) {
 				// data.formId = waitlistPdp.vrt_cs_smsbumpid;
@@ -293,7 +296,7 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 										<label htmlFor="email-waitlist" id="waitlistPopupInput" className="sr-only">waitlist popup input</label>
 										<input ref={inputRef} autoComplete="off" id="email-waitlist" type="email" placeholder={'Enter your email'} className="block w-full rounded-[4px] bg-white text-gray-800 px-[1em] py-[14px] border border-gray-400" aria-label="waitlistPopupInput" />
 										{formError && <span className="mt-1 font-size-sm text-primary">{'Invalid Email Address'}</span>}
-										<Button disabled={success} type="submit" buttonClass="btn-primary border-0 w-full mt-1 rounded-[4px] font-bold py-g">{'Yes, notify me!'}</Button>
+										<Button disabled={success} type="submit" buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white border-primary' : 'btn-primary'} border-0 w-full mt-1 rounded-[4px] font-bold py-g`}>{'Yes, notify me!'}</Button>
 									</div>
 								)}
 							</>

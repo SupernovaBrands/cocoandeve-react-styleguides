@@ -150,7 +150,7 @@
     @apply mb-4 lg:mb-5;
     
     &--hair-concerns-solutions {
-        @apply mb-0 lg:mb-5;
+        @apply mb-0;
     }
 
 
@@ -351,5 +351,20 @@
 
     img {
         @apply rounded-[8px]
+    }
+}
+
+.bfcm-dark-layout {
+    .product-side-upsell {
+
+        .product-card {
+
+            &__content {
+                button {
+                    @apply text-dark bg-white border-dark lg:border min-h-[38px] py-0 font-bold;
+                }
+            }
+
+        }
     }
 }

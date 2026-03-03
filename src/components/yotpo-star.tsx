@@ -33,7 +33,7 @@ const YotpoStar = (props:any) => {
 	}
 
 	useEffect(() => {
-		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${productSkus}&signature=${signature}`).then((data) => data.json()).then((r) => {
+		fetch(`${apiUrl}/product/bottomline.json?lang=${localeParam}&sku=${productSkus}`, {headers: {'signature': signature}}).then((data) => data.json()).then((r) => {
 			const { response } = r;
 			setScore(response.bottomline.average_score);
 			setTotal(response.bottomline.total_review);
