@@ -87,7 +87,7 @@
 .product-form .product-swatch {
     
     .variant-swatch {
-        @apply border-t border-b w-auto h-auto me-25 py-[6px] flex-1 basis-auto lg:min-h-4 lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none rounded-none;
+        @apply border-t border-b w-auto h-auto me-25 py-[6px] flex-1 basis-auto lg:min-h-4 lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none rounded-none lg:py-[.5rem] lg:px-[1rem];
 
         &:after {
             @apply w-[24px] left-[12.5px] lg:w-3;
@@ -97,8 +97,12 @@
             @apply h-[18px] w-[18px] top-auto left-g;
 
             @screen lg {
-                @apply h-[24px] w-[24px];
+                @apply h-2 w-2;
             }
+        }
+
+        span {
+            @apply lg:ml-3;
         }
     }
 }
@@ -106,6 +110,13 @@
 .product-form-submit {
     .quantity-box {
         @apply border-gray-500;
+
+        input[name="quantity-box"] {
+            @apply lg:text-lg;
+        }
+        &__button span {
+            @apply lg:text-lg;
+        }
     }
 
     .product-form-submit__cta {
@@ -144,7 +155,7 @@
 }
 
 .product__banner {
-    @apply mb-4 lg:mb-4;
+    @apply mb-3 lg:mb-4;
     
     &--hair-concerns-solutions {
         @apply mb-0;
@@ -305,7 +316,7 @@
             }
         }
         input {
-            @apply order-2 pl-0;
+            @apply py-g pr-g order-2 pl-0;
         }
     }
 
@@ -315,7 +326,7 @@
     }
 
     .review__filter-sidebar {
-        @apply w-full lg:w-3/12;
+        @apply w-full lg:w-3/12 lg:pr-2 ;
 
         .input-group {
             @apply w-full;
@@ -328,7 +339,7 @@
 
     .product__review-list-container,
     .review__question-right {
-        @apply w-full lg:w-9/12 lg:pl-g;
+        @apply w-full lg:w-9/12 lg:pl-2;
     }
 
     .product__review-list-container > hr,
@@ -349,6 +360,21 @@
 
     img {
         @apply rounded-[8px]
+    }
+
+    .custom-select {
+        @apply text-base h-[3.125rem] lg:my-hg;
+    }
+
+    .review__filter-form-inputs {
+        @apply mt-g lg:mt-1;
+    }
+
+    .product__review-user a {
+        @apply mb-0;
+    }
+    .product__review-list-item {
+        @apply pt-3 lg:mt-2;
     }
 }
 
