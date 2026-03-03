@@ -6,36 +6,38 @@ import BundleCard from "~/compounds/BundleCard";
 import Modal from "~/components/Modal";
 import ProductInfo from "~/components/modal/ProductInfo";
 
+const useMediaQuery = (query: string) => {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+        const media = window.matchMedia(query);
+        if (media.matches !== matches) {
+            setMatches(media.matches);
+        }
+        const listener = (e: MediaQueryListEvent) => setMatches(e.matches);
+        media.addEventListener('change', listener);
+        return () => media.removeEventListener('change', listener);
+    }, [matches, query]);
+
+    return matches;
+};
+
 const MIN_ITEM = 2;
 const MAX_ITEM = 5;
 
 const BuildYourBundle = (props: any) => {
+    const { waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
+
     const [bundleSize, setBundleSize] = useState(MIN_ITEM);
     const [bundleDiscount, setBundleDiscount] = useState(15);
     const [activeTab, setActiveTab] = useState(0);
     const [headerPos, setHeaderPos] = useState(0);
 
-    const [tab1Products, setTab1Products] = useState([]);
-    const [tab2Products, setTab2Products] = useState([]);
+    const [tab1Products, setTab1Products] = useState(hairData || []);
+    const [tab2Products, setTab2Products] = useState(tanData || []);
 
     const [tab0Selected, setTab0Selected] = useState([]);
     const [tab1Selected, setTab1Selected] = useState([]);
-
-    const useMediaQuery = (query) => {
-        const [matches, setMatches] = useState(false);
-    
-        useEffect(() => {
-        const media = window.matchMedia(query);
-        if (media.matches !== matches) {
-            setMatches(media.matches);
-        }
-        const listener = () => setMatches(media.matches);
-        media.addListener(listener);
-        return () => media.removeListener(listener);
-        }, [matches, query]);
-    
-        return matches;
-    };
 
     const [productData, setProductData] = useState({
         open: false,
@@ -44,22 +46,6 @@ const BuildYourBundle = (props: any) => {
         tab: null,
         swatch: null
     });
-
-    const { waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tanData, hairData, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
-
-    const cssInline = `
-        .top-header {
-            top: ${headerPos}px;
-        }
-        .footer {
-            padding-top: 10px;
-        }
-        @media (min-width: 992px) {
-            .footer {
-                padding-top: 40px;
-            }
-        }
-    `;
 
     const settingDiscount = (num) => {
         if (num === 2) setBundleDiscount(10);
@@ -80,7 +66,7 @@ const BuildYourBundle = (props: any) => {
         }
         setTimeout(() => {
             const sidebar = document.querySelector('.container--page');
-            if (sidebar && isDesktop) sidebar.scrollIntoView({behavior: 'smooth'});
+            if (sidebar && isDesktop) sidebar.scrollIntoView({ behavior: 'smooth' });
         }, 150);
     };
 
@@ -104,10 +90,9 @@ const BuildYourBundle = (props: any) => {
     }, [activeTab]);
 
     useEffect(() => {
-        if (document) {
-            setTimeout(() => {
-                setHeaderPos(document.querySelector('header')?.getBoundingClientRect().height || 0);
-            }, 2000)
+        const header = document?.querySelector('header');
+        if (header) {
+            setHeaderPos(header.getBoundingClientRect().height || 0);
         }
     }, [store]);
 
@@ -118,26 +103,26 @@ const BuildYourBundle = (props: any) => {
     }, [productData.open])
 
     const LoadingEl = () => <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3 my-3 lg:my-5" role="status" />;
-    const generalSetting = ProductSettings.find((setting:any) => setting.__component === 'product.general');
+    const generalSetting = ProductSettings.find((setting: any) => setting.__component === 'product.general');
 
     const [platform, setPlatform] = useState('');
 
     useEffect(() => {
-		const userAgent = navigator.userAgent || navigator.vendor;
-		let os = 'unknown';
+        const userAgent = navigator.userAgent || navigator.vendor;
+        let os = 'unknown';
 
-		if (/windows/i.test(userAgent)) {
-			os = 'os-win';
-		} else if (/macintosh|mac os x/i.test(userAgent)) {
-			os = 'os-mac';
-		} else if (/iphone|ipad|ipod/i.test(userAgent)) {
-			os = 'os-ios';
-		} else if (/android/i.test(userAgent)) {
-			os = 'os-android';
-		}
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
 
-		setPlatform(os);
-	}, []);
+        setPlatform(os);
+    }, []);
 
     useEffect(() => {
         if (hairData.length > 0) setTab1Products(hairData);
@@ -147,32 +132,24 @@ const BuildYourBundle = (props: any) => {
     }, [tanData]);
 
 
-    // console.log('-----tab2Products-----', tanData);
-    // tab2Products.map((a) => console.log('a', a.title))
-    const inlineStyle = `
-    
-    `
-    
-    
     return strapiData ? (
-        <div>
-            <style>{cssInline}</style>
+        <div style={{ '--header-height': `${headerPos}px` } as React.CSSProperties}>
             <figure className="flex flex-wrap relative">
                 <picture>
-					<source media="(min-width: 992px)" srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925" />
-					<img alt={`Banner of ${strapiData?.title_text}`} src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926" className="block w-full" loading="lazy" />
-				</picture>
+                    <source media="(min-width: 992px)" srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925" />
+                    <img alt={`Banner of ${strapiData?.title_text}`} src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926" className="block w-full" loading="eager" fetchPriority="high" width={750} height={422} />
+                </picture>
                 <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
                     <div className="flex items-center bg-black inline-flex badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
                         <span className="relative top-[1px]">{strapiData?.tag_text}</span>
                     </div>
                     <h1 className="text-center mt-[1rem] mb-[.5rem]">{strapiData?.title_text}</h1>
                     <p dangerouslySetInnerHTML={{
-						__html: strapiData?.desc_text,
-					}} />
+                        __html: strapiData?.desc_text,
+                    }} />
                 </figcaption>
             </figure>
-            <div className={`sticky top-header bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`}>
+            <div className={`sticky bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`} style={{ top: `${headerPos}px` }}>
                 <p className="text-base lg:text-2xl font-bold mb-[.25rem] lg:mb-[1rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
                     <li onClick={() => setBundleSize(2)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
@@ -207,9 +184,10 @@ const BuildYourBundle = (props: any) => {
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {tab1Products.filter((item) => item && item.priceInCent > 0).map((item, index) => 
+                                        {tab1Products.filter((item) => item && item.priceInCent > 0).map((item, index) =>
                                             <BundleCard
                                                 key={`build-your-bundle--hair--${index}`}
+                                                index={index}
                                                 product={item}
                                                 className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 store={props.store}
@@ -251,9 +229,10 @@ const BuildYourBundle = (props: any) => {
                             <>
                                 <div className="w-full lg:w-[calc(75%-30px)]">
                                     <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {tab2Products.filter((item) => item && item.priceInCent > 0).map((item, index) => 
+                                        {tab2Products.filter((item) => item && item.priceInCent > 0).map((item, index) =>
                                             <BundleCard
                                                 key={`build-your-bundle--tan--${index}`}
+                                                index={index}
                                                 product={item}
                                                 className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 generalSetting={generalSetting}
@@ -287,11 +266,11 @@ const BuildYourBundle = (props: any) => {
                                 </div>
                             </>
                         )}
-                        {tab2Products?.length <=0 && <LoadingEl />}
+                        {tab2Products?.length <= 0 && <LoadingEl />}
                     </div>
                 </TabContent>
             </div>
-            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
+            <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
                 <ProductInfo
                     waitlistPdpStore={waitlistPdpStore}
                     getActiveWL={getActiveWL}
@@ -317,8 +296,8 @@ const BuildYourBundle = (props: any) => {
                     activeTab={activeTab}
                     maxItem={MAX_ITEM}
                     buildProductCardModel={buildProductCardModel}
-                    useMediaQuery={useMediaQuery}
-                    handleClose={() => setProductData({...productData, ...{ open: false }})} />
+
+                    handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
             </Modal>
         </div>
     ) : <div className="flex items-center justify-center">

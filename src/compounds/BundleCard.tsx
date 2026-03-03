@@ -6,9 +6,9 @@ import Eye from '~/images/icons/eye.svg';
 
 const DEFAULT_LABEL = '<p class="inline lg:hidden">Add</p><p class="hidden lg:inline">Add to Cart</p>';
 
-const AddToCartButton = (props:any) => {
+const AddToCartButton = (props: any) => {
     const { store, reducedPrice, label, available, product, itemSelected, setItemSelected, selectedVariant, maxItem, className } = props;
-    
+
     const [selected, setSelected] = useState([]);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const AddToCartButton = (props:any) => {
     }, [itemSelected]);
 
     const onAddItem = () => {
-        
+
         if (selected.includes(selectedVariant.id)) {
             const currentSelected = [...itemSelected];
             const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
@@ -53,8 +53,8 @@ const AddToCartButton = (props:any) => {
             {/* <Pricing store={props.store} selectedVariant={selectedVariant} hideCent={false} collectionTemplate={props.collectionTemplate} props={{...props, btnLabel, addingItem, selectedVariant, preOrders, ...{ label: ctaLabel } }} /> */}
             {label && <span>{label}</span>}
             {!label && (selected.includes(selectedVariant?.id) ? <span>Added</span> : <span dangerouslySetInnerHTML={{
-							__html: DEFAULT_LABEL,
-						}}/>)}
+                __html: DEFAULT_LABEL,
+            }} />)}
             <div className="inline-flex justify-center text-sm lg:text-base lg:hidden">
                 <span className="font-normal line-through">
                     {!selectedVariant && formatMoney(product.priceInCent, false, store)}
@@ -68,32 +68,32 @@ const AddToCartButton = (props:any) => {
     );
 };
 
-const SwatchOverlay = (props:any) => {
+const SwatchOverlay = (props: any) => {
     const spanEl = useRef(null);
     const swatchLabel = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
     const { selectedVariant, setSelectedVariant, maxItem, setItemSelected, reducedPrice, itemSelected, product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
-    
+
     let firstAvailable: any;
     const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
     if (autoTicks && autoTicks.length > 0) {
         firstAvailable = product?.variants?.nodes.find((obj) => (autoTicks.includes(parseInt(obj.id.replace('gid://shopify/ProductVariant/', ''))))) || null;
     }
     if (firstAvailable === null || !firstAvailable?.availableForSale) {
-        firstAvailable = props.swatch.data.find((swatchData:any) => swatchData.available) || { id: 0 };
+        firstAvailable = props.swatch.data.find((swatchData: any) => swatchData.available) || { id: 0 };
     }
-    
+
     if (product.handle === 'bronzing-self-tanner-drops' && ['au'].includes(store)) {
-        let swatch = props.swatch.data.find((swatchData:any) => swatchData.value === 'dark');
+        let swatch = props.swatch.data.find((swatchData: any) => swatchData.value === 'dark');
         if (swatch.availableForSale) {
             firstAvailable = swatch;
         }
     }
     // const [selectedVariant, setSelectedVariant] = useState(firstAvailable || null);
 
-    const changeSwatch = (e:any) => {
+    const changeSwatch = (e: any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
-        spanEls.forEach((span:any) => {
+        spanEls.forEach((span: any) => {
             span.classList.remove('border-primary');
             span.classList.add('border-white');
         });
@@ -103,7 +103,7 @@ const SwatchOverlay = (props:any) => {
         swatchLabel.current.textContent = targetText;
         const available = e.target.getAttribute('data-avail');
         const id = e.target.getAttribute('data-id');
-        const selectedSwatch = product?.variants?.nodes?.find((node:any) => node.id === id);
+        const selectedSwatch = product?.variants?.nodes?.find((node: any) => node.id === id);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
         }
@@ -132,7 +132,7 @@ const SwatchOverlay = (props:any) => {
                 selectedVariant={selectedVariant}
                 maxItem={maxItem}
                 className="btn-choose"
-                available={itemAvailable.length > 0 }
+                available={itemAvailable.length > 0}
                 label={itemAvailable.length > 0 ? 'Choose' : 'Out of stock'}
                 reducedPrice={reducedPrice}
                 store={store}
@@ -148,9 +148,9 @@ const SwatchOverlay = (props:any) => {
                         <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
                     </label>
                     <ul className="list-unstyled product-variant-swatch flex justify-center">
-                        {props.swatch.data.length > 0 && props.swatch.data.map((item:any, i:any) => (
-                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
+                        {props.swatch.data.length > 0 && props.swatch.data.map((item: any, i: any) => (
+                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto lg:w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
+                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
                             </li>
                         ))}
                     </ul>
@@ -171,8 +171,8 @@ const SwatchOverlay = (props:any) => {
     );
 };
 
-const BundleCard = (props:any) => {
-    const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem } = props;
+const BundleCard = (props: any) => {
+    const { setProductData, keyName, className, product, setItemSelected, itemSelected, generalSetting, store, bundleDiscount, maxItem, index } = props;
     const [skus, setSkus] = useState([]);
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [shade, setShade] = useState('');
@@ -238,12 +238,12 @@ const BundleCard = (props:any) => {
         setSkus(skus);
     }, [product, selectedVariant]);
 
-	return (
+    return (
         <div key={keyName} className={`product-card ${className} ${!className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <p role="button" aria-label={`View detail of product ${product.title}`} onClick={(e) => openModal(e)} className="cursor-pointer rounded-[1rem] lg:rounded-[2rem] product-card--img block lg:pb-[1rem]">
                 <picture className={`w-full h-full lg:h-[calc(100%+1rem)] max-w-full left-0 embed-responsive before:pt-[100%] block relative rounded-[1rem] lg:rounded-[2rem] ${!props.product.src ? 'bg-shimmer' : ''} bg-pink-light`}>
                     {productImage && <source srcSet={productImage} media="(min-width: 992px)" />}
-                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-full lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-[1rem] lg:rounded-[2rem] !pt-g lg:!pt-0" alt="" loading="lazy" />}
+                    {productImage && <img src={productImage} className="bg-pink-light embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] !right-auto lg:!max-h-full lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-[1rem] lg:rounded-[2rem] !pt-g lg:!pt-0" alt="" loading={typeof index === 'number' && index < 4 ? "eager" : "lazy"} />}
                     {productHoverImage && !productHoverImage.includes('shopify/assets/no-image') && (
                         <picture className="w-full h-full max-w-full left-0 embed-responsive-item fit--cover rounded-[1rem] lg:rounded-[2rem] img--hover hidden lg:block">
                             {productHoverImage && <img src={productHoverImage} className="embed-responsive-item fit--cover !max-w-[97.5%] !w-[97.5%] !h-[97.5%] !top-[-2.5%] !left-[2.5px] lg:!max-h-full lg:!w-full lg:!h-full lg:!max-w-full lg:!top-0 lg:!left-0 lg:!right-0 rounded-[1rem] lg:rounded-[2rem]" alt="" loading="lazy" />}
@@ -252,7 +252,7 @@ const BundleCard = (props:any) => {
                 </picture>
             </p>
 
-            { product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>) }
+            {product.badgeText && !product.badgeText.includes('% OFF') && (<span className={`min-w-[3.375em] leading-[1.25] badge rounded-[.5em] py-[0.33333em] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-xs lg:text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g product-card__badge`}>{product.badgeText}</span>)}
             <p role="button" onClick={(e) => openModal(e)} className={`cursor-pointer inline-flex lg:min-w-[3.375em] badge rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] product-card__badge`}>
                 <span className="mr-1 hidden lg:inline">Details</span>
                 <Eye className="svg h-[1rem] w-[1rem]" />
@@ -310,7 +310,7 @@ const BundleCard = (props:any) => {
                 </div> */}
             </div>
         </div>
-	);
+    );
 };
 
 export default BundleCard;

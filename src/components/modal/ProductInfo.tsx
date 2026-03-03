@@ -45,18 +45,18 @@ const ProductInfo = (props: any) => {
         generalSetting,
         FragranceNotes,
         ProductSettings,
-        checkHardcodedHowToUse, 
-        checkHardcodedFaq, 
-        BenefitIngredient, 
-        HowToUse, 
-        checkHardcodedTagline, 
-        checkHardcodedVariant, 
-        data, 
+        checkHardcodedHowToUse,
+        checkHardcodedFaq,
+        BenefitIngredient,
+        HowToUse,
+        checkHardcodedTagline,
+        checkHardcodedVariant,
+        data,
         maxItem,
-        store, 
-        handleClose, 
-        checkHardcodedImages, 
-        strapiAutomateHardcode, 
+        store,
+        handleClose,
+        checkHardcodedImages,
+        strapiAutomateHardcode,
         checkHardcodedTitles,
         setTab0Selected,
         setTab1Selected,
@@ -84,9 +84,9 @@ const ProductInfo = (props: any) => {
     const [productShopify, setProductShopify] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 
-    const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start'});
+    const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: false, align: 'start' });
     const [selectedVariant, setSelectedVariant] = useState(null);
-    
+
     const { isVisible, targetRef } = useIsVisible(
         {
             root: null,
@@ -104,16 +104,16 @@ const ProductInfo = (props: any) => {
     });
 
     const pdpImagePrev = () => {
-		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaThumbsApi.scrollPrev();
-		emblaMainApi.scrollPrev();
-	};
+        if (!emblaMainApi || !emblaThumbsApi) return;
+        emblaThumbsApi.scrollPrev();
+        emblaMainApi.scrollPrev();
+    };
 
-	const pdpImageNext = () => {
-		if (!emblaMainApi || !emblaThumbsApi) return;
-		emblaThumbsApi.scrollNext();
-		emblaMainApi.scrollNext();
-	};
+    const pdpImageNext = () => {
+        if (!emblaMainApi || !emblaThumbsApi) return;
+        emblaThumbsApi.scrollNext();
+        emblaMainApi.scrollNext();
+    };
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -147,7 +147,7 @@ const ProductInfo = (props: any) => {
 
         if (itemSelected.length >= maxItem) return false;
         const productModel = buildProductCardModel(store, productShopify, null, null);
-        
+
         setItemSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
@@ -181,15 +181,17 @@ const ProductInfo = (props: any) => {
             const productStrapi = await response2.json();
 
             if (productStrapi && productStrapi.length > 0) setProductStrapi(productStrapi[0]);
-            
+
         } catch (error) {
             console.error('Error fetching product info:', error);
         }
     };
 
     useEffect(() => {
-        getProductData(data.handle);
-    }, [data.handle]);
+        if (data.open && data.handle) {
+            getProductData(data.handle);
+        }
+    }, [data.open, data.handle]);
 
     // console.log('product shopify', productShopify);
     // console.log('product strapi', productStrapi);
@@ -209,18 +211,18 @@ const ProductInfo = (props: any) => {
         if (!emblaMainApi || !emblaThumbsApi) return;
         emblaMainApi.scrollTo(index);
     };
-    
+
     const onSelect = useCallback(() => {
         if (!emblaMainApi || !emblaThumbsApi) return;
         setSelectedIndex(emblaMainApi.selectedScrollSnap());
         emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap());
     }, [emblaMainApi, emblaThumbsApi, setSelectedIndex]);
-    
+
     const onScroll = useCallback((emblaMainApi: EmblaCarouselType) => {
         const progress = Math.max(0, Math.min(1, emblaMainApi.scrollProgress()));
         setScrollProgress(progress * 100);
     }, []);
-    
+
     useEffect(() => {
         if (!emblaMainApi) return;
         onSelect();
@@ -229,25 +231,25 @@ const ProductInfo = (props: any) => {
         emblaMainApi.on('select', onScroll);
         emblaMainApi.on('reInit', onScroll);
         emblaMainApi.on('scroll', onScroll);
-    
+
     }, [emblaMainApi, onSelect, onScroll]);
-    
+
     const startVideoOnMouseMove = useCallback(async () => {
         try {
             await videoRef.current.play();
         } catch (e) {
-        // do nothing
+            // do nothing
         }
     }, []);
-    
+
     const stopVideoOnMove = useCallback(() => {
         try {
             videoRef.current.pause();
         } catch (e) {
-        // do nothing
+            // do nothing
         }
     }, []);
-    
+
     useEffect(() => {
         if (isVisible) {
             startVideoOnMouseMove();
@@ -260,7 +262,7 @@ const ProductInfo = (props: any) => {
     // hardcode image based on region functions:
     productTitle = checkHardcodedTitles(productTitle, store, productStrapi?.handle);
 
-    let productVariantInfo = productStrapi?.Sections.find((section:any) => section.__component === 'product.product-variant');
+    let productVariantInfo = productStrapi?.Sections.find((section: any) => section.__component === 'product.product-variant');
     productVariantInfo = checkHardcodedVariant(productVariantInfo, store, productStrapi?.handle);
 
     let additionalTitle = [];
@@ -275,20 +277,20 @@ const ProductInfo = (props: any) => {
         })
     }
 
-    let descriptionField = productStrapi?.Sections.find((section:any) => section.__component === 'product.descriptions-fields');
+    let descriptionField = productStrapi?.Sections.find((section: any) => section.__component === 'product.descriptions-fields');
     descriptionField = checkHardcodedTagline(descriptionField, store, productStrapi?.handle);
-    const {proud_tobe: proudToBe, benefits, full_ingredients_list: fullIngredients, ingredients, tagline, fragrance_notes} = descriptionField || {};
+    const { proud_tobe: proudToBe, benefits, full_ingredients_list: fullIngredients, ingredients, tagline, fragrance_notes } = descriptionField || {};
 
-    let howToUse = productStrapi?.Sections.find((section:any) => section.__component === 'product.how-to-use') || {};
+    let howToUse = productStrapi?.Sections.find((section: any) => section.__component === 'product.how-to-use') || {};
     // Hardcode How to Use
     howToUse = checkHardcodedHowToUse(howToUse, store, productStrapi?.handle);
-    let faq = productStrapi?.Sections.find((section:any) => section.__component === 'product-tab.faq') || {};
+    let faq = productStrapi?.Sections.find((section: any) => section.__component === 'product-tab.faq') || {};
     if (['us'].includes(store) && productStrapi?.handle === 'tan-activating-body-oil-spf') {
-		faq = JSON.parse(JSON.stringify(faq).replace(/SPF30/g, 'SPF20'));
-	}
+        faq = JSON.parse(JSON.stringify(faq).replace(/SPF30/g, 'SPF20'));
+    }
     faq = checkHardcodedFaq(faq, store, productStrapi?.handle);
 
-    const shippingTable = ProductSettings?.find((section:any) => section.__component === 'product.product-shipping-table') || {};
+    const shippingTable = ProductSettings?.find((section: any) => section.__component === 'product.product-shipping-table') || {};
     const shippingTableStore = shippingTable?.shippingTableInfo?.shippingTableInfo[store] || {};
     const shippingTableStore2 = shippingTable[`shipping_table_${store.toUpperCase()}`] || {};
 
@@ -306,25 +308,25 @@ const ProductInfo = (props: any) => {
             id: 'benefits-ingredients',
             title: 'Benefits & Ingredients',
             text: '',
-            component: <BenefitIngredient benefits={benefits} ingredients={ingredients} fullIngredients={fullIngredients}/>
+            component: <BenefitIngredient benefits={benefits} ingredients={ingredients} fullIngredients={fullIngredients} />
         },
         {
             id: 'how-to-use',
             title: 'How to Use',
             text: '',
-            component: <HowToUse howToUse={howToUse} tags={productShopify?.tags || []} handle={productStrapi?.handle}/>
+            component: <HowToUse howToUse={howToUse} tags={productShopify?.tags || []} handle={productStrapi?.handle} />
         },
         {
             id: 'faq',
             title: 'FAQ',
             text: '',
-            component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2}/>
+            component: <Faq faq={faq} shippingTableStore={shippingTableStore} shippingTableStore2={shippingTableStore2} />
         },
         {
             id: 'proud-to-be',
             title: 'Proud to be',
             text: '',
-            component: <div className="order-2 mt-2 lg:mt-0">{ <ProudToBe proudToBe={proudToBe || 'natural-dha|sulfate-free|vegan|silicone-free|cruelty-free|toxin-free|gluten-free|ethically|paraben-free|peta|fragrance-free'}/> }</div>
+            component: <div className="order-2 mt-2 lg:mt-0">{<ProudToBe proudToBe={proudToBe || 'natural-dha|sulfate-free|vegan|silicone-free|cruelty-free|toxin-free|gluten-free|ethically|paraben-free|peta|fragrance-free'} />}</div>
         }
     ];
 
@@ -338,13 +340,13 @@ const ProductInfo = (props: any) => {
 
     const [openIndex, setOpenIndex] = useState('');
 
-    const toggleCard = async (id: any, callback:any = null) => {
+    const toggleCard = async (id: any, callback: any = null) => {
         let openIndexId = id;
         if (id === openIndex) {
-			openIndexId = 0;
-		}
+            openIndexId = 0;
+        }
         await setOpenIndex(openIndexId);
-    
+
         if (typeof callback === 'function') {
             callback();
         }
@@ -355,7 +357,7 @@ const ProductInfo = (props: any) => {
                 if (el) wrapper.scrollTop = el.offsetTop;
             }, 365)
         }
-	};
+    };
 
     // const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
 
@@ -407,9 +409,9 @@ const ProductInfo = (props: any) => {
     const spanEl = useRef(null);
     const [swatchAvailable, setSwatchAvailable] = useState(true);
 
-    const changeSwatch = (e:any) => {
+    const changeSwatch = (e: any) => {
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
-        spanEls.forEach((span:any) => {
+        spanEls.forEach((span: any) => {
             span.classList.remove('border-primary');
             span.classList.add('border-white');
         });
@@ -419,7 +421,7 @@ const ProductInfo = (props: any) => {
         swatchLabel.current.textContent = targetText;
         const available = e.target.getAttribute('data-avail');
         const id = e.target.getAttribute('data-id');
-        const selectedSwatch = productShopify?.variants?.nodes?.find((node:any) => node.id === id);
+        const selectedSwatch = productShopify?.variants?.nodes?.find((node: any) => node.id === id);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
         }
@@ -461,7 +463,7 @@ const ProductInfo = (props: any) => {
                 });
             }
         }
-    } ,[generalSetting, productShopify, productStrapi]);
+    }, [generalSetting, productShopify, productStrapi]);
 
     const activeWL = getActiveWL(launchProductWaitlist, productStrapi?.handle);
     const launchHandlesArr = activeWL && activeWL.launch_wl_handles ? activeWL.launch_wl_handles.split(',') : [];
@@ -477,22 +479,22 @@ const ProductInfo = (props: any) => {
             try {
                 tiktokSubscribe(email);
                 fbqEvent('track', 'Lead');
-            } catch(e) { console.log(e) }
+            } catch (e) { console.log(e) }
 
             // email:string, productId:any, variantID:any, regSource:any, phone:any, welcome:any, igHandle:any
             subscribeBluecoreWaitlist(email, productStrapi?.handle, selectedVariant?.id, `oos-item-${productStrapi.handle}`, phoneNumber, true, '');
-            bluecoreProductWaitlist({email, productId: selectedVariant ? getId(selectedVariant?.id) : '', productTitle: productStrapi.title});
+            bluecoreProductWaitlist({ email, productId: selectedVariant ? getId(selectedVariant?.id) : '', productTitle: productStrapi.title });
         }
 
         if (phoneNumber && phoneCode) {
             submitsToSmsBumpAPi(phoneNumber, smsBump, phoneCode, store);
         }
 
-        if (typeof(fallback) === 'function') {
+        if (typeof (fallback) === 'function') {
             fallback();
         }
     }
-    
+
     return (
         <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-[50px] lg:pt-5'}`}>
             {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1rem] right-[1rem]`} />}
@@ -511,13 +513,13 @@ const ProductInfo = (props: any) => {
                                                 <div className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full" key={index}>
                                                     <picture className="flex items-center justify-center">
                                                         <source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
-                                                        <img height="367" width="367" fetchPriority={index > -1 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
+                                                        <img height="367" width="367" fetchPriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
                                                     </picture>
                                                 </div>
                                             ))}
                                             {videoStack?.video_url && (
                                                 <div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
-                                                    <video width="320" height="240"  className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
+                                                    <video width="320" height="240" className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
                                                         <source src={videoStack?.video_url} type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
@@ -573,7 +575,7 @@ const ProductInfo = (props: any) => {
                                             )}
                                         </Carousel.Inner>
                                         <Carousel.Navigation>
-                                            {slides.length > 4 && (	
+                                            {slides.length > 4 && (
                                                 <>
                                                     <PrevButton
                                                         onClick={pdpImagePrev}
@@ -601,7 +603,7 @@ const ProductInfo = (props: any) => {
                                     <p className="product__title--additional before:content-[''] !text-body !font-bold !text-lg lg:!text-2xl">{additionalTitle[0]}</p>
                                 )} */}
                             </h4>
-                            { tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p> }
+                            {tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p>}
                             {data.swatch && (
                                 <>
                                     <label className="block mb-[.625em]">
@@ -613,9 +615,9 @@ const ProductInfo = (props: any) => {
                                         <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
                                     </label>
                                     <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
-                                        {data.swatch.data.length > 0 && data.swatch.data.map((item:any, i:any) => (
-                                            <li key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available': ''}>
-                                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${ selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
+                                        {data.swatch.data.length > 0 && data.swatch.data.map((item: any, i: any) => (
+                                            <li key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
+                                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
                                             </li>
                                         ))}
                                     </ul>
@@ -623,7 +625,7 @@ const ProductInfo = (props: any) => {
                             )}
                             {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore && waitlistPdpStore.enable_auto_wl_pdp &&
                                 <div className="px-[5px] py-1 bg-pink-light mb-2 lg:mb-4 rounded-h">
-                                    <ProductWaitlist bgColor={ctaBgColor} forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title}/>
+                                    <ProductWaitlist bgColor={ctaBgColor} forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title} />
                                 </div>}
                             {selectedVariant?.availableForSale && (
                                 <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
@@ -641,7 +643,7 @@ const ProductInfo = (props: any) => {
                                 </Button>
                             )}
                             <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                { dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} /> }
+                                {dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} />}
                             </div>
                         </div>
                     </>
@@ -654,7 +656,7 @@ const ProductInfo = (props: any) => {
                 </Modal>
             )}
         </div>
-        
+
     );
 };
 
