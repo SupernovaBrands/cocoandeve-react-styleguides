@@ -1,6 +1,6 @@
 const PdpQuizBanner = (props) => {
     return (
-        <a className="text-body hover:text-body hover:no-underline pb-3 lg:pb-4 block" href={props.quizCard.pdp_quiz_card_cta_url}>
+        <a className="text-body hover:text-body hover:no-underline mb-3 lg:mb-4 block" href={props.quizCard.pdp_quiz_card_cta_url}>
             <div className="relative flex bg-yellow-light items-center justify-between">
                 <div className="flex items-center relative">
                     <picture className="m-0 h-full aspect-[345/56] lg:aspect-[470/64]">
