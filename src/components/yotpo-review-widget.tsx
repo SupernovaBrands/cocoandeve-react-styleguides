@@ -1132,13 +1132,9 @@ const YotpoReviewWidget = (props:any) => {
 												<div className="flex text-secondary mt-25 sm:block lg:hidden">
 													<ReviewStar score={review.score} />
 												</div>
-												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline lg:hidden sm:block text-body" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
-														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
-													</a>
-												)}
-												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
-													<p key={kebabCase(field[0])} className="text-sm mb-0 product__reviews-custom-field">
+												
+												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field, idx) => (
+													<p key={kebabCase(field[0])} className={`text-sm mb-0 product__reviews-custom-field ${idx === 0 ? 'mt-1' : ''}`}>
 														<strong className="text-xs">
 															{field[0]}
 															:
@@ -1149,6 +1145,11 @@ const YotpoReviewWidget = (props:any) => {
 														</span>
 													</p>
 												))}
+												{review?.products?.length > 0 && (
+													<a className="mb-1 mt-2 block underline lg:hidden sm:block text-body underline-offset-[.25rem]" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
+														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
+													</a>
+												)}
 											</div>
 											<div className="w-full lg:w-3/4 lg:pl-hg pr-0">
 												{review?.products?.length > 0 && (

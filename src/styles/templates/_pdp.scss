@@ -299,6 +299,7 @@
 }
 
 .product__reviews {
+    @apply pb-[50px] lg:pb-5;
     .yotpo-review-tab__total-review,
     .yotpo-review-tab__total-question {
         @apply inline pl-[3px];
@@ -368,6 +369,10 @@
 
     .review__filter-form-inputs {
         @apply mt-g lg:mt-1;
+    }
+
+    .review__filter-form p {
+        @apply mb-g lg:mb-2;
     }
 
     .product__review-user a {
