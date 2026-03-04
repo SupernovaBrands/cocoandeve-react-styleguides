@@ -16,10 +16,14 @@ const NewProductModal = (props) => {
         description,
         cta_url,
         cta_label,
-        handleClose,
-    } = props;
+    } = props.data;
+
+    const onClose = () => {
+        props.handleClose();
+    };
+
     return (
-        <div className={`new-product-modal flex w-full h-full ${bg_color} ${image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
+        <div className={`new-product-modal flex w-full h-full ${bg_color} ${image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col bg-primary-light`}>
             <div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
                 <picture className="w-full h-full">
                     <source srcSet={img_lg?.url} media="(min-width: 992px)" />
@@ -27,7 +31,7 @@ const NewProductModal = (props) => {
                 </picture>
             </div>
             <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4 lg:min-w-[390px]">
-                <CloseButton handleClose={handleClose} className={`${close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
+                <CloseButton handleClose={onClose} className={`${close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
                 <div className="text-center w-full">
                     <h3 className={`${text_color || 'text-body'} font-bold text-[24px] lg:text-[32px] leading-[1.25] mb-[4px]`}>{heading}</h3>
                     <h4 className={`${text_color || 'text-body'} font-bold text-[16px] lg:text-[20px]`}>{subheading}</h4>
