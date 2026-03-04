@@ -39,6 +39,8 @@ const BuildYourBundle = (props: any) => {
     const [tab0Selected, setTab0Selected] = useState([]);
     const [tab1Selected, setTab1Selected] = useState([]);
 
+    const [tabSelected, setTabSelected] = useState([]);
+
     const [productData, setProductData] = useState({
         open: false,
         handle: null,
@@ -50,20 +52,15 @@ const BuildYourBundle = (props: any) => {
     const settingDiscount = (num) => {
         if (num === 2) setBundleDiscount(10);
         else if (num === 3) setBundleDiscount(15);
-        else if (num === 4) setBundleDiscount(18);
-        else if (num >= 5) setBundleDiscount(20);
+        else if (num >= 4) setBundleDiscount(20);
     };
 
     const isDesktop = useMediaQuery('(min-width: 769px)');
 
     const renderItems = (items) => {
-        if (items.length >= MIN_ITEM) {
-            setBundleSize(items.length >= MAX_ITEM ? MAX_ITEM : items.length);
-            settingDiscount(items.length);
-        } else {
-            setBundleSize(MIN_ITEM);
-            settingDiscount(MIN_ITEM);
-        }
+        const newSize = Math.min(Math.max(items.length + 1, MIN_ITEM), MAX_ITEM);
+        setBundleSize(newSize);
+        settingDiscount(items.length >= MIN_ITEM ? items.length : MIN_ITEM);
         setTimeout(() => {
             const sidebar = document.querySelector('.container--page');
             if (sidebar && isDesktop) sidebar.scrollIntoView({ behavior: 'smooth' });
@@ -72,22 +69,11 @@ const BuildYourBundle = (props: any) => {
 
     useEffect(() => {
         setBundleSize(bundleSize >= MAX_ITEM ? MAX_ITEM : bundleSize);
-        settingDiscount(bundleSize);
     }, [bundleSize]);
 
     useEffect(() => {
-        renderItems(tab0Selected);
-    }, [tab0Selected]);
-
-    useEffect(() => {
-        renderItems(tab1Selected);
-    }, [tab1Selected]);
-
-
-    useEffect(() => {
-        if (activeTab === 0) renderItems(tab0Selected);
-        else if (activeTab === 1) renderItems(tab1Selected);
-    }, [activeTab]);
+        renderItems(tabSelected);
+    }, [tabSelected]);
 
     useEffect(() => {
         const header = document?.querySelector('header');
@@ -149,7 +135,7 @@ const BuildYourBundle = (props: any) => {
                     }} />
                 </figcaption>
             </figure>
-            <div className={`sticky bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`} style={{ top: `${headerPos}px` }}>
+            {/* <div className={`sticky bg-secondary-light py-[.5rem] lg:py-3 flex flex-col justify-center items-center choose-your-bundle lg:!top-[106px] z-[1] lg:z-[2]`} style={{ top: `${headerPos}px` }}>
                 <p className="text-base lg:text-2xl font-bold mb-[.25rem] lg:mb-[1rem]">{strapiData?.choose_size_text}</p>
                 <ul className="flex flex-wrap">
                     <li onClick={() => setBundleSize(2)} className={`text-sm lg:text-lg rounded-full flex justify-center items-center bg-white mr-[.5rem] lg:mr-[1rem] ${bundleSize === 2 ? 'shadow-[inset_0_0_0_1px_#D62E55]' : 'hover:shadow-[inset_0_0_0_1px_#D62E55]'}`}>
@@ -169,7 +155,7 @@ const BuildYourBundle = (props: any) => {
                         {bundleSize === 5 && <span className={`inline-block pl-[.5rem] pr-[1rem] lg:font-bold ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Save {bundleDiscount}%</span>}
                     </li>
                 </ul>
-            </div>
+            </div> */}
             <div className="container--page container pt-3 px-[11px] lg:px-g pb-0 lg:py-5">
                 <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-[.25rem] lg:px-0 justify-between">
                     <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3">{strapiData?.choose_product_text}</p>
@@ -191,9 +177,9 @@ const BuildYourBundle = (props: any) => {
                                                 product={item}
                                                 className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
                                                 store={props.store}
-                                                itemSelected={tab0Selected}
+                                                itemSelected={tabSelected}
                                                 generalSetting={generalSetting}
-                                                setItemSelected={setTab0Selected}
+                                                setItemSelected={setTabSelected}
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
@@ -207,8 +193,8 @@ const BuildYourBundle = (props: any) => {
                                         parentProduct={parentProduct}
                                         updateCartAttributes={updateCartAttributes}
                                         store={props.store}
-                                        setItemSelected={setTab0Selected}
-                                        itemSelected={tab0Selected}
+                                        setItemSelected={setTabSelected}
+                                        itemSelected={tabSelected}
                                         bundleSize={bundleSize}
                                         bundleDiscount={bundleDiscount}
                                         type={activeTab}
@@ -238,8 +224,8 @@ const BuildYourBundle = (props: any) => {
                                                 generalSetting={generalSetting}
                                                 collectionTemplate={true}
                                                 store={props.store}
-                                                itemSelected={tab1Selected}
-                                                setItemSelected={setTab1Selected}
+                                                itemSelected={tabSelected}
+                                                setItemSelected={setTabSelected}
                                                 bundleDiscount={bundleDiscount}
                                                 bundleSize={bundleSize}
                                                 maxItem={MAX_ITEM}
@@ -253,8 +239,8 @@ const BuildYourBundle = (props: any) => {
                                         parentProduct={parentProduct}
                                         updateCartAttributes={updateCartAttributes}
                                         store={props.store}
-                                        setItemSelected={setTab1Selected}
-                                        itemSelected={tab1Selected}
+                                        setItemSelected={setTabSelected}
+                                        itemSelected={tabSelected}
                                         bundleSize={bundleSize}
                                         bundleDiscount={bundleDiscount}
                                         type={activeTab}
@@ -289,10 +275,8 @@ const BuildYourBundle = (props: any) => {
                     FragranceNotes={FragranceNotes}
                     store={store}
                     data={productData}
-                    setTab1Selected={setTab1Selected}
-                    tab1Selected={tab1Selected}
-                    setTab0Selected={setTab0Selected}
-                    tab0Selected={tab0Selected}
+                    tabSelected={tabSelected}
+                    setTabSelected={setTabSelected}
                     activeTab={activeTab}
                     maxItem={MAX_ITEM}
                     buildProductCardModel={buildProductCardModel}

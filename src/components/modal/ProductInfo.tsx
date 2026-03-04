@@ -58,10 +58,8 @@ const ProductInfo = (props: any) => {
         checkHardcodedImages,
         strapiAutomateHardcode,
         checkHardcodedTitles,
-        setTab0Selected,
-        setTab1Selected,
-        tab1Selected,
-        tab0Selected,
+        tabSelected,
+        setTabSelected,
         activeTab,
         buildProductCardModel,
         ctaBgColor,
@@ -136,19 +134,19 @@ const ProductInfo = (props: any) => {
 
     const onAddItem = () => {
         // build your bundle
-        const itemSelected = activeTab === 0 ? tab0Selected : tab1Selected;
-        const setItemSelected = activeTab === 0 ? setTab0Selected : setTab1Selected;
-        if (selected0.includes(selectedVariant.id) || selected1.includes(selectedVariant.id)) {
-            const currentSelected = [...itemSelected];
+        // const itemSelected = activeTab === 0 ? tabSelected : tabSelected;
+        // const setItemSelected = activeTab === 0 ? setTabSelected : setTabSelected;
+        if (selected.includes(selectedVariant.id)) {
+            const currentSelected = [...tabSelected];
             const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
-            setItemSelected(newSelected);
+            setTabSelected(newSelected);
             return false;
         }
 
-        if (itemSelected.length >= maxItem) return false;
+        if (tabSelected.length >= maxItem) return false;
         const productModel = buildProductCardModel(store, productShopify, null, null);
 
-        setItemSelected((prev) => {
+        setTabSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
                 src: productModel.src,
@@ -361,27 +359,18 @@ const ProductInfo = (props: any) => {
 
     // const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
 
-    const [selected0, setSelected0] = useState([]);
-    const [selected1, setSelected1] = useState([]);
+    // const [selected0, setSelected0] = useState([]);
+    // const [selected1, setSelected1] = useState([]);
+    const [selected, setSelected] = useState([]);
     useEffect(() => {
-        if (tab0Selected.length > 0) {
+        if (tabSelected.length > 0) {
             const ids = [];
-            tab0Selected.map((item) => ids.push(item.id));
-            setSelected0(ids);
+            tabSelected.map((item) => ids.push(item.id));
+            setSelected(ids);
         } else {
-            setSelected0([]);
+            setSelected([]);
         }
-    }, [tab0Selected]);
-
-    useEffect(() => {
-        if (tab1Selected.length > 0) {
-            const ids = [];
-            tab1Selected.map((item) => ids.push(item.id));
-            setSelected1(ids);
-        } else {
-            setSelected1([]);
-        }
-    }, [tab1Selected]);
+    }, [tabSelected]);
 
     useEffect(() => {
         let defaultVariant = null;
@@ -628,13 +617,13 @@ const ProductInfo = (props: any) => {
                                     <ProductWaitlist bgColor={ctaBgColor} forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title} />
                                 </div>}
                             {selectedVariant?.availableForSale && (
-                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (
                                         <>
                                             {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
-                                            {selected0.includes(selectedVariant?.id) || selected1.includes(selectedVariant?.id) ? 'Added' : ''}
-                                            {selectedVariant?.availableForSale && !selected0.includes(selectedVariant?.id) && !selected1.includes(selectedVariant?.id) ? <>
+                                            {selected.includes(selectedVariant?.id) ? 'Added' : ''}
+                                            {selectedVariant?.availableForSale && !selected.includes(selectedVariant?.id) ? <>
                                                 <span className="lg:hidden">Add</span>
                                                 <span className="hidden lg:inline">Add to Cart</span>
                                             </> : ''}
