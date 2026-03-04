@@ -191,7 +191,7 @@ const Stockist = (props: any) => {
                         <figure className="relative">
                             <picture className="block">
                                 <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d022c821-9395-482f-8d63-628c5427ca00/592x" media="(min-width: 992px)" />
-                                <img className="w-full lg:h-auto" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d022c821-9395-482f-8d63-628c5427ca00/360x" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
+                                <img className="w-full lg:h-auto" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
                             </picture>
                             <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[0.75rem] lg:p-[1.5rem] flex flex-col">
                                 <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>

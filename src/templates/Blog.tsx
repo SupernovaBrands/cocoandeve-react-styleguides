@@ -187,7 +187,7 @@ const Blog = (props) => {
 				)}
 				{activeFrame && (
 					<>
-						<div className="flex flex-wrap article-list-wrapper mb-2 lg:-mx-g px-0 lg:px-hg">
+						<div className="flex flex-wrap article-list-wrapper lg:-mx-g px-0 lg:px-hg">
 							{!isLoading && (
 								<div className="container px-0">
 									{postData.length > 0 &&
@@ -224,7 +224,7 @@ const Blog = (props) => {
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
-							<div className="how-to-wrapper my-2 flex flex-wrap">
+							<div className="how-to-wrapper my-3 lg:my-4 flex flex-wrap">
 								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
 							</div>
 						}
