@@ -1,6 +1,22 @@
 .instagram-reels__video-container {
     .nav--active {
-        @apply bg-primary text-white font-normal focus:text-white visited:text-white hover:text-white;
+        // @apply bg-primary text-white font-normal focus:text-white visited:text-white hover:text-white;
+        position: relative;
+        
+        &:after {
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #151515;
+            content: '';
+
+            @screen lg {
+                content: none;
+            }
+        }
     }
 
     .nav--dark {

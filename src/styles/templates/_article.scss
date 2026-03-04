@@ -22,6 +22,8 @@
 	}
 	.carousel__products .carousel__container .product-card {
 
+		@apply px-[.375rem];
+
 		&__title {
 			@apply text-sm;
 		}
@@ -38,6 +40,10 @@
 			@apply lg:mb-12;
 		}
 
+		.review-stars__link {
+			@apply no-underline;
+		}
+
 		button {
 			@apply lg:min-h-[38px];
 			&:not(.button-overlay) {
@@ -46,11 +52,11 @@
 		}
 
 		img, picture {
-			@apply rounded-t-[1.5em] px-0;
+			@apply px-0;
 		}
 
 		&__content {
-			@apply px-[8px] rounded-b-[1.5em];
+			@apply px-0;
 		}
 
 		.badge {

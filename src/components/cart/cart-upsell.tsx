@@ -89,23 +89,22 @@ const CartUpsell = (props:any) => {
     window.emblaBrow = emblaApi;
     return (
         <>
-            <hr className="mt-2 mb-3" />
-            <div className="relative mb-3">
+            <div className="relative mb-4 lg:mb-[60px]">
                 { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
                 { upsell.length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>
                             <PrevButton
                                 onClick={() => prev()}
-                                className="text-primary hidden lg:block h-[25px]"
+                                className="text-body block h-[25px]"
                             >
-                                <SvgChevronPrev className="w-g h-g svg--current-color" />
+                                <SvgChevronPrev className="w-[20px] h-[20px]" />
                             </PrevButton>
                             <NextButton
                                 onClick={() => next()}
-                                className="text-primary hidden lg:block h-[25px]"
+                                className="text-body block h-[25px]"
                                                         >
-                                <SvgChevronNext className="w-g h-g svg--current-color" />
+                                <SvgChevronNext className="w-[20px] h-[20px]" />
                             </NextButton>
                         </Carousel.Navigation>
                     </div>
@@ -148,7 +147,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="bfcm-btn btn btn-outline-primary px-4 py-1 mt-1 min-w-[112px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="bfcm-btn btn btn-outline-body px-[28px] py-1 mt-1 min-w-[86px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}

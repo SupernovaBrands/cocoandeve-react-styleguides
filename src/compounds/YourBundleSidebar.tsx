@@ -17,7 +17,7 @@ const ItemCard = (props) => {
     };
     console.log('item selected', itemSelected);
     return (
-        <li className={`flex bg-white w-full rounded-[3px] ${itemSelected.length < 3 ? 'w-[80px] h-[80px]' : ''} lg:w-[85px] lg:h-[82px] relative ${!isLast ? 'before:content-[""] before:w-[.75rem] lg:before:w-[1px] before:absolute before:top-[50%] lg:before:left-[50%] before:-right-[.75rem] lg:before:right-auto before:-translate-y-[50%] lg:before:-translate-x-[50%] before:h-[1px] lg:before:h-2 before:bg-gray-500 lg:before:top-auto lg:before:-bottom-3' : ''}`}>
+        <li className={`flex bg-white w-full rounded-[3px] ${itemSelected.length < 3 ? 'w-[80px] basis-[80px] h-[80px]' : ''} lg:w-[85px] lg:h-[82px] relative ${!isLast ? 'before:content-[""] before:w-[.75rem] lg:before:w-[1px] before:absolute before:top-[50%] lg:before:left-[50%] before:-right-[.75rem] lg:before:right-auto before:-translate-y-[50%] lg:before:-translate-x-[50%] before:h-[1px] lg:before:h-2 before:bg-gray-500 lg:before:top-auto lg:before:-bottom-3' : ''}`}>
             {/* <span className="inline-block font-bold mr-[.5rem] mt-[.5rem] text-lg">{index + 1}</span> */}
             {/* {placeholder && <div className="w-[3rem] h-[3rem] rounded-[.5rem] bg-gray-400" />} */}
             {!placeholder && (
@@ -201,73 +201,73 @@ const YourBundleSidebar = (props: any) => {
     }
     `
 
-    console.log('item selected', selected);
-
     return (
-        <div className={`lg:ml-[25px] lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
-            <style>{btnInlineStyle}</style>
-            <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
-                <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[.5rem]' : 'pt-g fixed pb-[1rem]'}  left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
-                    <div className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
-                        <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
-                        {!isOpen && (
-                            <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-primary-light text-body lg:bg-white rounded-[.5rem] lg:hidden h-[26px]">
-                                <span className="relative top-[1px] font-bold">Saving {bundleDiscount}%</span>
-                            </div>
-                        )}
+        <>
+            <div className={`w-full lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+                <style>{btnInlineStyle}</style>
+                <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
+                    <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[.5rem]' : 'pt-g fixed pb-[1rem]'}  left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
+                        <div className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
+                            <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
+                            {!isOpen && (
+                                <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-primary-light text-body lg:bg-white rounded-[.5rem] lg:hidden h-[26px]">
+                                    <span className="relative top-[1px] font-bold">Saving {bundleDiscount}%</span>
+                                </div>
+                            )}
+                        </div>
+                        <div className="lg:hidden flex items-center text-primary font-bold text-sm" onClick={() => setIsOpen(!isOpen)}>
+                            <span className="mr-[.5rem] inline-block top-[2px] relative">View ({itemSelected.length})</span>
+                            <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
+                        </div>
                     </div>
-                    <div className="lg:hidden flex items-center text-primary font-bold text-sm" onClick={() => setIsOpen(!isOpen)}>
-                        <span className="mr-[.5rem] inline-block top-[2px] relative">View ({itemSelected.length})</span>
-                        <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
+                    {variantSelected.length >= minItem && (
+                        <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
+                            {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
+                            <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
+                            <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
+                        </div>
+                    )}
+                    <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
+                        <div className="flex mb-2 items-center lg:items-start">
+                            {/* <PercentageSmall className="flex-[0_0_20px] mr-[.5rem] " /> */}
+                            <p className="text-sm">{strapiData?.sidebar_desc}</p>
+                        </div>
+                        <ol className="flex gap-[.75rem] lg:flex-col lg:gap-2 lg:items-center">
+                            {selected.map((item, index) => (
+                                <ItemCard maxItem={maxItem} setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} isLast={index === selected.length - 1} />
+                            ))}
+                        </ol>
+                        <Button onClick={processCheckout} disabled={variantSelected.length < minItem || variantSelected.length > maxItem || processing} buttonClass={`mt-2 rounded-none border-primary bg-primary text-white w-full flex ${processing ? 'min-h-[50px]' : ''} justify-center items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
+                            {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
+                            {!processing && (
+                                <>
+                                    <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                                    <span className="btn--sidebar-atc">Add to Cart</span>
+                                    {/* <ul className="flex lg:hidden">
+                                        <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(origPrice, false, store)}</span>}</li>
+                                        <li><span className="">{formatMoney(itemsReduced, false, store)}</span></li>
+                                    </ul> */}
+                                </>
+                            )}
+                        </Button>
+                        <div className="flex mt-2">
+                            <DeliverySmall className="flex-[0_0_20px]" />
+                            <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"
+                                dangerouslySetInnerHTML={{
+                                    __html: strapiData?.sidebar_shipping,
+                                }}
+                            />
+                        </div>
+                        <p className="text-[#666] text-sm lg:hidden pb-4">
+                            {strapiData?.sidebar_tos}
+                        </p>
                     </div>
                 </div>
-                {variantSelected.length >= minItem && (
-                    <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
-                        {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
-                        <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
-                        <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
-                    </div>
-                )}
-                <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
-                    <div className="flex mb-2 items-center lg:items-start">
-                        {/* <PercentageSmall className="flex-[0_0_20px] mr-[.5rem] " /> */}
-                        <p className="text-sm">{strapiData?.sidebar_desc}</p>
-                    </div>
-                    <ol className="flex gap-[.75rem] lg:flex-col lg:gap-2 lg:items-center">
-                        {selected.map((item, index) => (
-                            <ItemCard maxItem={maxItem} setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} isLast={index === selected.length - 1} />
-                        ))}
-                    </ol>
-                    <Button onClick={processCheckout} disabled={variantSelected.length < minItem || variantSelected.length > maxItem || processing} buttonClass={`mt-2 rounded-none border-primary bg-primary text-white w-full flex ${processing ? 'min-h-[50px]' : ''} justify-center items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
-                        {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
-                        {!processing && (
-                            <>
-                                <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
-                                <span className="btn--sidebar-atc">Add to Cart</span>
-                                {/* <ul className="flex lg:hidden">
-                                    <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(origPrice, false, store)}</span>}</li>
-                                    <li><span className="">{formatMoney(itemsReduced, false, store)}</span></li>
-                                </ul> */}
-                            </>
-                        )}
-                    </Button>
-                    <div className="flex mt-2">
-                        <DeliverySmall className="flex-[0_0_20px]" />
-                        <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"
-                            dangerouslySetInnerHTML={{
-                                __html: strapiData?.sidebar_shipping,
-                            }}
-                        />
-                    </div>
-                    <p className="text-[#666] text-sm lg:hidden pb-4">
-                        {strapiData?.sidebar_tos}
-                    </p>
-                </div>
+                <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">
+                    {strapiData?.sidebar_tos}
+                </p>
             </div>
-            <p className="text-[#666] text-sm hidden lg:block mt-[1rem]">
-                {strapiData?.sidebar_tos}
-            </p>
-        </div>
+        </>
     );
 };
 

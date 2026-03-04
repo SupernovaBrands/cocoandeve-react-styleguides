@@ -6,7 +6,7 @@ const tSettings = global.config.tSettings;
 const tStrings = global.config.tStrings;
 
 import React, { useState, useEffect, useRef } from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 import {
 	kebabCase,
@@ -62,36 +62,91 @@ const getCustomQuestions = (productId, callback, yotpoKey) => {
 	if (!yotpoKey) {
 		return false;
 	}
-	$.post('https://staticw2.yotpo.com/batch/',
-		{
+	// $.post('https://staticw2.yotpo.com/batch/',
+	// 	{
+	// 		methods: JSON.stringify([{
+	// 			method: 'main_widget',
+	// 			params: { pid: `${productId}` },
+	// 		}]),
+	// 		app_key: yotpoKey,
+	// 		is_mobile: false,
+	// 	}, function (data) {
+	// 		const res = JSON.parse(data);
+	// 		const widget = $(res[0].result);
+	// 		const questionEls = widget.find('.yotpo-custom-tag-field');
+	// 		const filterEls = widget.find('.filters-dropdown');
+	// 		const questions = [];
+	// 		questionEls.each((idx, el) => {
+	// 			const $el = $(el);
+	// 			const q = {
+	// 				question: $el.find('.yotpo-field-title').text().trim(),
+	// 				options: [],
+	// 				radio: $el.attr('role') === 'radiogroup',
+	// 			};
+	// 			$el.find('input').each((x, el2) => {
+	// 				if (!q.slug) { q.slug = el2.name; }
+	// 				q.options.push(el2.value);
+	// 			});
+	// 			q.filter = filterEls.filter(`[data-question-id=${q.slug.replace('--', '')}]`).data('default-button-display-value');
+	// 			questions.push(q);
+	// 		});
+	// 		callback(questions);
+	// 	});
+	fetch('https://staticw2.yotpo.com/batch/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: new URLSearchParams({
 			methods: JSON.stringify([{
 				method: 'main_widget',
 				params: { pid: `${productId}` },
 			}]),
 			app_key: yotpoKey,
 			is_mobile: false,
-		}, function (data) {
-			const res = JSON.parse(data);
-			const widget = $(res[0].result);
-			const questionEls = widget.find('.yotpo-custom-tag-field');
-			const filterEls = widget.find('.filters-dropdown');
-			const questions = [];
-			questionEls.each((idx, el) => {
-				const $el = $(el);
-				const q = {
-					question: $el.find('.yotpo-field-title').text().trim(),
-					options: [],
-					radio: $el.attr('role') === 'radiogroup',
-				};
-				$el.find('input').each((x, el2) => {
-					if (!q.slug) { q.slug = el2.name; }
-					q.options.push(el2.value);
-				});
-				q.filter = filterEls.filter(`[data-question-id=${q.slug.replace('--', '')}]`).data('default-button-display-value');
-				questions.push(q);
+		})
+	}).then(response => response.text()).then(data => {
+		const res = JSON.parse(data);
+		
+		const tempDiv = document.createElement('div');
+		tempDiv.innerHTML = res[0].result;
+		
+		const questionEls = tempDiv.querySelectorAll('.yotpo-custom-tag-field');
+		const filterEls = tempDiv.querySelectorAll('.filters-dropdown');
+		const questions = [];
+		
+		questionEls.forEach((el) => {
+			const q = {
+				question: el.querySelector('.yotpo-field-title')?.textContent.trim() || '',
+				options: [],
+				radio: el.getAttribute('role') === 'radiogroup',
+			};
+			
+			const inputs = el.querySelectorAll('input');
+			inputs.forEach((input) => {
+				if (!q.slug) { 
+					q.slug = input.name; 
+				}
+				q.options.push(input.value);
 			});
-			callback(questions);
+			
+			// Find matching filter element
+			const slugWithoutDashes = q.slug?.replace('--', '') || '';
+			const matchingFilter = Array.from(filterEls).find(
+				filter => filter.getAttribute('data-question-id') === slugWithoutDashes
+			);
+			
+			if (matchingFilter) {
+				q.filter = matchingFilter.getAttribute('data-default-button-display-value');
+			}
+			
+			questions.push(q);
 		});
+		
+		callback(questions);
+	}).catch(error => {
+		console.error('Error fetching Yotpo data:', error);
+	});
 };
 
 let formattedDate = 'dd/mm/yy';
@@ -319,26 +374,40 @@ const YotpoReviewWidget = (props:any) => {
 
 		const params = objectToQueryString(dataJson);
 		if (selectedFilter?.free_text_search?.includes('%')) selectedFilter.free_text_search = encodeURIComponent(selectedFilter.free_text_search);
-		$.ajax({
-			crossDomain: true,
-			contentType: 'application/json',
-			url: `${apiUrl}/reviews.json?${params}&per=5`,
+		// $.ajax({
+		// 	crossDomain: true,
+		// 	contentType: 'application/json',
+		// 	url: `${apiUrl}/reviews.json?${params}&per=5`,
+		// 	method: 'GET',
+		// 	headers: {
+		// 		'content-type': 'application/json',
+		// 		'cache-control': 'no-cache',
+		// 		'signature': signature,
+		// 	},
+		// 	processData: false,
+		// 	data: JSON.stringify({
+		// 		page,
+		// 		domain_key: productId,
+		// 		...selectedFilter,
+		// 		topic_names: [selectedTopic],
+		// 	}),
+		// }).done(function (data) {
+		// 	processReviews(data.response);
+		// });
+
+		fetch(`${apiUrl}/reviews.json?${params}`, {
 			method: 'GET',
 			headers: {
-				'content-type': 'application/json',
-				'cache-control': 'no-cache',
+				'Content-Type': 'application/json',
+				'Cache-Control': 'no-cache',
 				'signature': signature,
 			},
-			processData: false,
-			data: JSON.stringify({
-				page,
-				domain_key: productId,
-				...selectedFilter,
-				topic_names: [selectedTopic],
-			}),
-		}).done(function (data) {
+		}).then(response => response.json()).then(data => {
 			processReviews(data.response);
+		}).catch(error => {
+			console.error('Error fetching reviews:', error);
 		});
+
 	};
 
 	const onFilterChange = () => {
@@ -440,37 +509,93 @@ const YotpoReviewWidget = (props:any) => {
 
 	const uploadToYotpoS3 = (reviewData, reviewResponse) => {
 		if (reviewData.uploaded_images) {
-			$.post('https://api.yotpo.com/s3_signature', { policy_name: 'ReviewImages', app_key: yotpoKey }).then((resp) => {
+			// $.post('https://api.yotpo.com/s3_signature', { policy_name: 'ReviewImages', app_key: yotpoKey }).then((resp) => {
+			// 	const { response } = resp;
+			// 	const yotpoS3 = `https://${response.bucket}.s3.amazonaws.com/`;
+
+			// 	const startUpload = (i) => {
+			// 		if (reviewData.uploaded_images[i]) {
+			// 			const dataUrl = reviewData.uploaded_images[i];
+			// 			const type = getContentType(dataUrl);
+			// 			const fileName = `${response.date}_${reviewResponse.creation_request_id}-${i + 1}.${type.replace('image/', '')}`;
+			// 			const fullName = `${response.path}${fileName}`;
+			// 			const formData = getUploadImageUrlEncodedParams(fullName, response,
+			// 				{ dataUrl: reviewData.uploaded_images[i].dataUrl });
+			// 			const xhr = new XMLHttpRequest();
+
+			// 			xhr.open('POST', yotpoS3, true);
+			// 			xhr.onreadystatechange = (res) => {
+			// 				if (res.target.readyState === 4) {
+			// 					const imageUrl = `${yotpoS3}${fullName}`;
+			// 					const processImageParams = {
+			// 						image_upload_token: reviewResponse.image_upload_token,
+			// 						image_urls: [imageUrl],
+			// 					};
+			// 					$.ajax({
+			// 						url: 'https://api-cdn.yotpo.com/images/process', method: 'POST', data: processImageParams, dataType: 'json',
+			// 					}).done(() => startUpload(i + 1));
+			// 				}
+			// 			};
+			// 			xhr.send(formData);
+			// 		}
+			// 	};
+
+			// 	startUpload(0);
+			// }).catch((e) => console.log(`Error: ${e}`));
+			fetch('https://api.yotpo.com/s3_signature', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: new URLSearchParams({
+					policy_name: 'ReviewImages',
+					app_key: yotpoKey,
+				})
+			}).then(response => response.json()).then((resp) => {
 				const { response } = resp;
 				const yotpoS3 = `https://${response.bucket}.s3.amazonaws.com/`;
-
-				const startUpload = (i) => {
+				
+				const startUpload = async (i) => {
 					if (reviewData.uploaded_images[i]) {
 						const dataUrl = reviewData.uploaded_images[i];
 						const type = getContentType(dataUrl);
 						const fileName = `${response.date}_${reviewResponse.creation_request_id}-${i + 1}.${type.replace('image/', '')}`;
 						const fullName = `${response.path}${fileName}`;
-						const formData = getUploadImageUrlEncodedParams(fullName, response,
-							{ dataUrl: reviewData.uploaded_images[i].dataUrl });
+						const formData = getUploadImageUrlEncodedParams(fullName, response, {
+							dataUrl: reviewData.uploaded_images[i].dataUrl
+						});
+						
+						// Upload to S3
 						const xhr = new XMLHttpRequest();
-
 						xhr.open('POST', yotpoS3, true);
-						xhr.onreadystatechange = (res) => {
+						xhr.onreadystatechange = async (res) => {
 							if (res.target.readyState === 4) {
 								const imageUrl = `${yotpoS3}${fullName}`;
-								const processImageParams = {
+								const processImageParams = new URLSearchParams({
 									image_upload_token: reviewResponse.image_upload_token,
-									image_urls: [imageUrl],
-								};
-								$.ajax({
-									url: 'https://api-cdn.yotpo.com/images/process', method: 'POST', data: processImageParams, dataType: 'json',
-								}).done(() => startUpload(i + 1));
+									image_urls: JSON.stringify([imageUrl]),
+								});
+								
+								try {
+									await fetch('https://api-cdn.yotpo.com/images/process', {
+										method: 'POST',
+										headers: {
+											'Content-Type': 'application/x-www-form-urlencoded',
+										},
+										body: processImageParams,
+									});
+									
+									startUpload(i + 1);
+									
+								} catch (error) {
+									console.error('Error processing image:', error);
+								}
 							}
 						};
 						xhr.send(formData);
 					}
 				};
-
+				
 				startUpload(0);
 			}).catch((e) => console.log(`Error: ${e}`));
 		}
@@ -594,26 +719,53 @@ const YotpoReviewWidget = (props:any) => {
 			delete reviewData.uploaded_videos;
 		}
 
-		$.post('https://api-cdn.yotpo.com/v1/widget/reviews', {
-			...reviewData,
-			appkey: yotpoKey,
-			sku: productId,
-			product_title: productName,
-			product_description: productDesc,
-			product_url: productUrl,
-			product_image_url: productImage,
-		}, function (response) {
+		// $.post('https://api-cdn.yotpo.com/v1/widget/reviews', {
+		// 	...reviewData,
+		// 	appkey: yotpoKey,
+		// 	sku: productId,
+		// 	product_title: productName,
+		// 	product_description: productDesc,
+		// 	product_url: productUrl,
+		// 	product_image_url: productImage,
+		// }, function (response) {
+		// 	if (reviewData.uploaded_images) {
+		// 		uploadToYotpoS3(reviewData, response);
+		// 	}
+
+		// 	if (uploadedVideos) {
+		// 		setLoadWidgetScript(true);
+		// 		uploadVideos(uploadedVideos, response);
+		// 	}
+
+		// 	setThanksData(reviewData);
+		// 	setRevThanks(true);
+		// });
+		fetch('https://api-cdn.yotpo.com/v1/widget/reviews', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: new URLSearchParams({
+				...reviewData,
+				appkey: yotpoKey,
+				sku: productId,
+				product_title: productName,
+				product_description: productDesc,
+				product_url: productUrl,
+				product_image_url: productImage,
+			})
+		}).then(response => response.json()).then((response) => {
 			if (reviewData.uploaded_images) {
 				uploadToYotpoS3(reviewData, response);
 			}
-
 			if (uploadedVideos) {
 				setLoadWidgetScript(true);
 				uploadVideos(uploadedVideos, response);
 			}
-
 			setThanksData(reviewData);
 			setRevThanks(true);
+		}).catch(error => {
+			console.error('Error submitting review:', error);
 		});
 	};
 
@@ -625,17 +777,37 @@ const YotpoReviewWidget = (props:any) => {
 	}, [revThanks]);
 
 	const onSubmitQuestion = (reviewData) => {
-		$.post('https://api.yotpo.com/questions/send_confirmation_mail', {
-			...reviewData,
-			appkey: yotpoKey,
-			sku: productId,
-			product_title: productName,
-			product_description: productDesc,
-			product_url: productUrl,
-			product_image_url: productImage,
-		}, function () {
+		// $.post('https://api.yotpo.com/questions/send_confirmation_mail', {
+		// 	...reviewData,
+		// 	appkey: yotpoKey,
+		// 	sku: productId,
+		// 	product_title: productName,
+		// 	product_description: productDesc,
+		// 	product_url: productUrl,
+		// 	product_image_url: productImage,
+		// }, function () {
+		// 	setThanksData(reviewData);
+		// 	setQnaThanks(true);
+		// });
+		fetch('https://api.yotpo.com/questions/send_confirmation_mail', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: new URLSearchParams({
+				...reviewData,
+				appkey: yotpoKey,
+				sku: productId,
+				product_title: productName,
+				product_description: productDesc,
+				product_url: productUrl,
+				product_image_url: productImage,
+			})
+		}).then(response => response.json()).then(() => {
 			setThanksData(reviewData);
 			setQnaThanks(true);
+		}).catch(error => {
+			console.error('Error sending confirmation mail:', error);
 		});
 	};
 
@@ -655,7 +827,12 @@ const YotpoReviewWidget = (props:any) => {
 					target.votes_down -= 1;
 				}
 
-				$.post(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`);
+				// $.post(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`);
+				fetch(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`, {
+					method: 'POST'
+				}).catch(error => {
+					console.error('Error submitting vote:', error);
+				});
 				setVotes({
 					...votes,
 					[key]: vote,
@@ -667,7 +844,12 @@ const YotpoReviewWidget = (props:any) => {
 					target.votes_down -= 1;
 				}
 
-				$.post(`${apiUrl}${pathVote}?vote_type=${vote}&reduce=true&signature=${signature}`);
+				// $.post(`${apiUrl}${pathVote}?vote_type=${vote}&reduce=true&signature=${signature}`);
+				fetch(`${apiUrl}${pathVote}?vote_type=${vote}&reduce=true&signature=${signature}`, {
+					method: 'POST'
+				}).catch(error => {
+					console.error('Error submitting vote:', error);
+				});
 				setVotes({
 					...votes,
 					[key]: null,
@@ -685,8 +867,18 @@ const YotpoReviewWidget = (props:any) => {
 					target.votes_down += 1;
 				}
 
-				$.post(`${apiUrl}${pathVote}?vote_type=${prevVote}&reduce=true&signature=${signature}`);
-				$.post(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`);
+				// $.post(`${apiUrl}${pathVote}?vote_type=${prevVote}&reduce=true&signature=${signature}`);
+				fetch(`${apiUrl}${pathVote}?vote_type=${prevVote}&reduce=true&signature=${signature}`, {
+					method: 'POST'
+				}).catch(error => {
+					console.error('Error submitting vote:', error);
+				});
+				// $.post(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`);
+				fetch(`${apiUrl}${pathVote}?vote_type=${vote}&signature=${signature}`, {
+					method: 'POST'
+				}).catch(error => {
+					console.error('Error submitting vote:', error);
+				});
 				setVotes({
 					...votes,
 					[key]: vote,
@@ -875,7 +1067,7 @@ const YotpoReviewWidget = (props:any) => {
 				</div>
 			)}
 
-			<div className="tab-content mt-3" id="yotpo-widget__tabContent" ref={reviewBox}>
+			<div className="tab-content mt-3 lg:mt-4" id="yotpo-widget__tabContent" ref={reviewBox}>
 				<div id="yotpo-widget__reviews" className={`[transition:opacity_0.15s_linear] flex flex-wrap ${activeTab === 'review' ? 'block' : 'hidden'}`} role="tabpanel" aria-labelledby="yotpo-widget__reviews-tab">
 					<div className="flex flex-col review__filter-sidebar lg:pr-g">
 						<YotpoRatingCard score={score} total={total} totalQa={totalQa} handleForm={handleForm} generalSetting={generalSetting} />
@@ -923,11 +1115,11 @@ const YotpoReviewWidget = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
-											<div className="w-full lg:w-1/4 pl-0 lg:pr-g">
+										<div key={review.id} className="product__review-list-item border-gray-600 border-b pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
+											<div className="w-full lg:w-1/4 pl-0 lg:pr-g product__review-user">
 												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
 													<span className='items-start w-auto'>
-														<span class="whitespace-normal">{review.user_name}</span>
+														<span className="whitespace-normal">{review.user_name}</span>
 														{review.verified_buyer && <SvgVerified className="svg align-text-top lg:mt-[2px] text-[0.75em] ms-25 text-primary size-[1em] fill-primary hidden lg:inline-block" />}
 													</span>
 												</h4>
@@ -940,13 +1132,9 @@ const YotpoReviewWidget = (props:any) => {
 												<div className="flex text-secondary mt-25 sm:block lg:hidden">
 													<ReviewStar score={review.score} />
 												</div>
-												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline lg:hidden sm:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
-														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
-													</a>
-												)}
-												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field) => (
-													<p key={kebabCase(field[0])} className="text-sm mb-0 product__reviews-custom-field">
+												
+												{review.custom_fields !== null && Object.entries(review.custom_fields).map((field, idx) => (
+													<p key={kebabCase(field[0])} className={`text-sm mb-0 product__reviews-custom-field ${idx === 0 ? 'mt-1' : ''}`}>
 														<strong className="text-xs">
 															{field[0]}
 															:
@@ -957,16 +1145,21 @@ const YotpoReviewWidget = (props:any) => {
 														</span>
 													</p>
 												))}
-											</div>
-											<div className="w-full lg:w-3/4 lg:pl-hg pr-0">
-												<div className="flex text-secondary mt-1 lg:mt-0 sm:hidden lg:block">
-													<ReviewStar score={review.score} />
-												</div>
 												{review?.products?.length > 0 && (
-													<a className="mb-1 mt-1 block underline sm:hidden lg:block" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
+													<a className="mb-1 mt-2 block underline lg:hidden sm:block text-body underline-offset-[.25rem]" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
 														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
 													</a>
 												)}
+											</div>
+											<div className="w-full lg:w-3/4 lg:pl-hg pr-0">
+												{review?.products?.length > 0 && (
+													<a className="block underline underline-offset-4 sm:hidden lg:block text-body" href={`${template === 'product' && productUrl ? productUrl : `/products/${review?.products[0]?.slug}`}`}>
+														{template === 'product' && productShopifyName ? productShopifyName : review?.products[0]?.name}
+													</a>
+												)}
+												<div className="mb-1 mt-1 flex text-secondary mt-1 sm:hidden lg:block">
+													<ReviewStar score={review.score} />
+												</div>
 												<h4 className="mb-1 mt-1 font-bold lg:font-normal">
 													{decodeHtml(review.title)}
 												</h4>
@@ -1020,15 +1213,15 @@ const YotpoReviewWidget = (props:any) => {
 						{!revLoading && revPage.totalPage > 1 && (
 							<ul className="list-unstyled flex justify-center items-center mt-2">
 								<li>
-									<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-body btn py-0 border-0 text-body px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 								</li>
 								{revPage.show.map((v) => (
 									<li key={v}>
-										<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
+										<button type="button" className={`text-body btn py-0 border-0 text-body px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
 									</li>
 								))}
 								<li>
-									<button type="button" className={`text-primary btn py-0 border-0 text-primary px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-body btn py-0 border-0 text-body px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 								</li>
 							</ul>
 						)}
@@ -1107,15 +1300,15 @@ const YotpoReviewWidget = (props:any) => {
 						{!qnaLoading && qnaPage.totalPage > 1 && (
 							<ul className="list-unstyled flex justify-center items-center mt-2">
 								<li>
-									<button type="button" className={`btn border-0 text-primary py-0 px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-primary" /></button>
+									<button type="button" className={`btn border-0 text-body py-0 px-1 ${qnaPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={qnaPage.page === 1} onClick={() => onQnaPageChange(qnaPage.page - 1)}><SvgChevronPrev className="svg text-body" /></button>
 								</li>
 								{qnaPage.show.map((v) => (
 									<li key={v}>
-										<button type="button" className={`btn border-0 text-primary py-0 px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
+										<button type="button" className={`btn border-0 text-body py-0 px-1 ${v === qnaPage.page ? 'font-bold' : ''}`} onClick={() => onQnaPageChange(v)}>{v}</button>
 									</li>
 								))}
 								<li>
-									<button type="button" className={`btn border-0 text-primary py-0 px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-primary" /></button>
+									<button type="button" className={`btn border-0 text-body py-0 px-1 ${qnaPage.page === qnaPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={qnaPage.page === qnaPage.totalPage} onClick={() => onQnaPageChange(qnaPage.page + 1)}><SvgChevronNext className="svg text-body" /></button>
 								</li>
 							</ul>
 						)}

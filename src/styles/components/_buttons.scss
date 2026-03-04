@@ -1,10 +1,10 @@
 @layer components {
 	.btn {
 		@apply inline-block align-middle text-center select-none
-				border font-bold rounded-h py-[9px] px-[28px] leading-base;
+				border font-bold py-[9px] px-[28px] leading-base;
 
 		&-lg {
-			@apply rounded border-2 py-[13px] px-[54px] leading-base;
+			@apply border-2 py-[13px] px-[54px] leading-base;
 		}
 
 		&-primary {

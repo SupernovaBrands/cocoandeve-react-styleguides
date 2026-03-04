@@ -2,7 +2,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
-import AutoHeight from 'embla-carousel-auto-height'
+// import AutoHeight from 'embla-carousel-auto-height'
 import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
 
@@ -125,7 +125,7 @@ const AnnouncementBar = (props: any) => {
 			const now = nowUtcTime();
 			starTimer(now, startAt, endAt);
 		}
-	}, [props]);
+	}, []);
 
 	useEffect(() => {
 		if (showTimer) document.body.classList.add('timer-bar--show');

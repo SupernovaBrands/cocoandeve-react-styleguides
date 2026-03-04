@@ -4,7 +4,7 @@
 
 		.custom-control-label {
 			@apply border-0 lg:border lg:border-gray-600 inline-block p-0 pl-[2em] lg:pl-[4.313em]
-				relative mb-0 align-top  w-full lg:py-2 lg:pr-2 rounded before:top-0;
+				relative mb-0 align-top  w-full lg:pb-2 lg:pr-2 rounded before:top-0;
 
 			&::before {
 				@apply absolute block w-[1.25em] h-[1.25em] pointer-events-none bg-white

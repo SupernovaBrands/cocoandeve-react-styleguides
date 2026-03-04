@@ -70,7 +70,7 @@ const SingleProductCarousel = (props: any) => {
                                     key={`singleCarousel-${item.id}-${index}`}
                                     keyName={`singleCarousel-${item.id}-${index}`}
                                     product={item}
-                                    className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[172px] basis-[172px] md:w-1/4 md:basis-1/4 pr-[.375em] pl-[.375em] lg:px-g text-center"
+                                    className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/4 md:basis-1/4 px-[.375em] lg:px-[.5rem] text-center"
                                     button={true}
                                     setWaitlistData={setWaitlistData}
                                     smSingleStar={false}

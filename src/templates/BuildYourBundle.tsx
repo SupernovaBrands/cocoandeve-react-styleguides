@@ -5,6 +5,7 @@ import YourBundleSidebar from "~/compounds/YourBundleSidebar";
 import BundleCard from "~/compounds/BundleCard";
 import Modal from "~/components/Modal";
 import ProductInfo from "~/components/modal/ProductInfo";
+import ProductCard from "~/compounds/ProductCard";
 
 const useMediaQuery = (query: string) => {
     const [matches, setMatches] = useState(false);
@@ -121,11 +122,11 @@ const BuildYourBundle = (props: any) => {
     return strapiData ? (
         <div style={{ '--header-height': `${headerPos}px` } as React.CSSProperties}>
             <figure className="flex flex-wrap relative">
-                <picture>
+                <picture className="w-full block">
                     <source media="(min-width: 992px)" srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925" />
                     <img alt={`Banner of ${strapiData?.title_text}`} src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926" className="block w-full" loading="eager" fetchPriority="high" width={750} height={422} />
                 </picture>
-                <figcaption className="container absolute top-0 left-0 right-0 text-center pt-[2rem]">
+                <figcaption className="container absolute top-0 pt-3 lg:pt-0 lg:top-[50%] lg:-translate-y-[50%] left-0 right-0 text-center ">
                     <div className="flex items-center bg-black inline-flex badge badge--sm pt-[6px] pb-[.25rem] leading-[18px] rounded text-white text-sm font-normal px-[.75rem]">
                         <span className="relative top-[1px]">{strapiData?.tag_text}</span>
                     </div>
@@ -156,105 +157,74 @@ const BuildYourBundle = (props: any) => {
                     </li>
                 </ul>
             </div> */}
-            <div className="container--page container pt-3 px-[11px] lg:px-g pb-0 lg:py-5">
-                <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-[.25rem] lg:px-0 justify-between">
-                    <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3">{strapiData?.choose_product_text}</p>
-                    <ul className="product__carousel-nav list-style-none mx-0 flex flex-wrap border-b-0 text-center pb-0 lg:pb-3 justify-center px-hg lg:px-0">
-                        <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-                        <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
-                    </ul>
-                </div>
-                <TabContent active={activeTab === 0}>
-                    <div className="flex flex-wrap justify-center">
-                        {tab1Products?.length > 0 && (
-                            <>
-                                <div className="w-full lg:w-[calc(75%-30px)]">
-                                    <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {tab1Products.filter((item) => item && item.priceInCent > 0).map((item, index) =>
-                                            <BundleCard
-                                                key={`build-your-bundle--hair--${index}`}
-                                                index={index}
-                                                product={item}
-                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
-                                                store={props.store}
-                                                itemSelected={tabSelected}
-                                                generalSetting={generalSetting}
-                                                setItemSelected={setTabSelected}
-                                                bundleDiscount={bundleDiscount}
-                                                bundleSize={bundleSize}
-                                                maxItem={MAX_ITEM}
-                                                setProductData={setProductData}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                                <section className="w-full lg:w-[calc(25%+30px)]">
-                                    <YourBundleSidebar
-                                        parentProduct={parentProduct}
-                                        updateCartAttributes={updateCartAttributes}
-                                        store={props.store}
-                                        setItemSelected={setTabSelected}
-                                        itemSelected={tabSelected}
-                                        bundleSize={bundleSize}
-                                        bundleDiscount={bundleDiscount}
-                                        type={activeTab}
-                                        addToCart={addToCart}
-                                        strapiData={strapiData}
-                                        maxItem={MAX_ITEM}
-                                        minItem={MIN_ITEM}
-                                    />
-                                </section>
-                            </>
-                        )}
-                        {tab1Products?.length <= 0 && <LoadingEl />}
-                    </div>
+            <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-[.25rem] lg:px-0 justify-between">
+                <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3">{strapiData?.choose_product_text}</p>
+                <ul className="product__carousel-nav list-style-none mx-0 flex flex-wrap border-b-0 text-center pb-0 lg:pb-3 justify-center px-hg lg:px-0">
+                    <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
+                    <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''} !min-h-[28px] lg:!min-h-[45px] !max-h-[28px] lg:!max-h-[45px] lg:!text-lg !font-normal`} title={strapiData.collection_2_label || 'Tan & SPF'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
+                </ul>
+            </div>
+            <div className="container--page container pt-3 px-g pb-0 lg:py-5 grid grid-cols-1 lg:grid-cols-[71.966%_25.47%] lg:gap-x-[1.875rem]">
+                
+                <TabContent active={activeTab === 0} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                    {tab1Products.filter((item) => item && item.priceInCent > 0).map((item, index) => (
+                        <ProductCard
+                            kitBuilder={true}
+                            key={`build-your-bundle--hair--${index}`}
+                            index={index}
+                            product={item}
+                            className="relative flex flex-col w-full basis-full text-center"
+                            store={props.store}
+                            itemSelected={tabSelected}
+                            generalSetting={generalSetting}
+                            setItemSelected={setTabSelected}
+                            bundleDiscount={bundleDiscount}
+                            bundleSize={bundleSize}
+                            maxItem={MAX_ITEM}
+                            setProductData={setProductData}
+                            collectionTemplate={true}
+                        />
+                    ))}
+                    {tab1Products?.length <= 0 && <LoadingEl />}
                 </TabContent>
-                <TabContent active={activeTab === 1}>
-                    <div className="flex flex-wrap justify-center">
-                        {tab2Products?.length > 0 && (
-                            <>
-                                <div className="w-full lg:w-[calc(75%-30px)]">
-                                    <div className="flex flex-wrap lg:-mx-[.25rem]">
-                                        {tab2Products.filter((item) => item && item.priceInCent > 0).map((item, index) =>
-                                            <BundleCard
-                                                key={`build-your-bundle--tan--${index}`}
-                                                index={index}
-                                                product={item}
-                                                className="relative mb-4 lg:mb-[44px] flex flex-col w-1/2 md:w-[278px] md:basis-[278px] px-[.25rem] text-center"
-                                                generalSetting={generalSetting}
-                                                collectionTemplate={true}
-                                                store={props.store}
-                                                itemSelected={tabSelected}
-                                                setItemSelected={setTabSelected}
-                                                bundleDiscount={bundleDiscount}
-                                                bundleSize={bundleSize}
-                                                maxItem={MAX_ITEM}
-                                                setProductData={setProductData}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="w-full lg:w-[calc(25%+30px)]">
-                                    <YourBundleSidebar
-                                        parentProduct={parentProduct}
-                                        updateCartAttributes={updateCartAttributes}
-                                        store={props.store}
-                                        setItemSelected={setTabSelected}
-                                        itemSelected={tabSelected}
-                                        bundleSize={bundleSize}
-                                        bundleDiscount={bundleDiscount}
-                                        type={activeTab}
-                                        addToCart={addToCart}
-                                        strapiData={strapiData}
-                                        maxItem={MAX_ITEM}
-                                        minItem={MIN_ITEM}
-                                    />
-                                </div>
-                            </>
-                        )}
-                        {tab2Products?.length <= 0 && <LoadingEl />}
-                    </div>
+                <TabContent active={activeTab === 1} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                    {tab2Products.filter((item) => item && item.priceInCent > 0).map((item, index) =>
+                        <ProductCard
+                            kitBuilder={true}
+                            key={`build-your-bundle--tan--${index}`}
+                            index={index}
+                            product={item}
+                            className="relative flex flex-col w-full basis-full text-center"
+                            generalSetting={generalSetting}
+                            collectionTemplate={true}
+                            store={props.store}
+                            itemSelected={tabSelected}
+                            setItemSelected={setTabSelected}
+                            bundleDiscount={bundleDiscount}
+                            bundleSize={bundleSize}
+                            maxItem={MAX_ITEM}
+                            setProductData={setProductData}
+                        />
+                    )}
+                    {tab2Products?.length <= 0 && <LoadingEl />}
                 </TabContent>
+
+                <YourBundleSidebar
+                    parentProduct={parentProduct}
+                    updateCartAttributes={updateCartAttributes}
+                    store={props.store}
+                    setItemSelected={setTabSelected}
+                    itemSelected={tabSelected}
+                    bundleSize={bundleSize}
+                    bundleDiscount={bundleDiscount}
+                    type={activeTab}
+                    addToCart={addToCart}
+                    strapiData={strapiData}
+                    maxItem={MAX_ITEM}
+                    minItem={MIN_ITEM}
+                />
+                
+                
             </div>
             <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
                 <ProductInfo

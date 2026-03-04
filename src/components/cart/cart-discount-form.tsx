@@ -4,6 +4,8 @@ import SvgPercent from '~/images/icons/percent-square.svg';
 import MenuBannerDecorative from '~/images/icons/menu-banner-decoration.svg';
 import DiscountTag from '~/images/icons/tag.svg';
 import CloseIcon from '~/images/icons/close-circle.svg';
+import Minus from '~/images/icons/minus.svg';
+import Plus from '~/images/icons/plus.svg';
 
 export const CartDiscountForm = (props:any) => {
     const stateData = {
@@ -23,6 +25,7 @@ export const CartDiscountForm = (props:any) => {
     const [state, setState] = useState(stateData);
     const [discInput, setDiscInput] = useState('');
     const [validItemInCart, setValidItemInCart] = useState(false);
+    const [formOpened, setFormOpened] = useState(true);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -131,13 +134,23 @@ export const CartDiscountForm = (props:any) => {
 
     return (
         <>
-            <div className="py-g cart-drawer__discount-form">
-                <div className={`${state.hasCode ? 'hidden' : 'flex'} flex-nowrap py-0`}>
+            <div className="py-2 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid">
+                <div onClick={() => setFormOpened(!formOpened)} className='cart-drawer__discount-form-toggle flex justify-between items-center'>
+                    <span>Apply a promo code</span>
+                    <span>
+                        {formOpened ? (
+                            <Minus className="svg text-gray-100 fill-[#00000080]" />
+                        ) : (
+                            <Plus className="svg text-gray-100 fill-[#00000080]" />
+                        )}
+                    </span>
+                </div>
+                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2 pb-0`}>
                     <input
                         ref={inputRef}
                         type="text"
                         name="discount"
-                        className={`field block appearance-none w-3/4 border mr-1 text-base leading-normal border rounded-h outline-none mb-0 ${state.code ? 'border-0 bg-gray-400' : 'focus:border-black border-black bg-white'}`}
+                        className={`field block appearance-none w-3/4 border text-base leading-normal outline-none mb-0 border-[#F5F5F5] rounded-none ${state.code ? 'bg-gray-400' : 'bg-[#F5F5F5]'}`}
                         placeholder="Enter promo code here"
                         onChange={onTextChange}
                         onKeyUp={onKeyUp}
@@ -147,7 +160,7 @@ export const CartDiscountForm = (props:any) => {
                     />
                     <Button
                         lg={false}
-                        buttonClass={`w-1/4 px-1 min-w-[100px] ${discInput ? 'btn-outline-primary hover:underline hover:bg-white hover:text-primary' : 'border-black text-black'}`}
+                        buttonClass={`border-[#F5F5F5] bg-[#F5F5F5] rounded-none w-1/4 px-1 min-w-[100px] !opacity-100 border-none ${discInput ? 'btn-outline-primary hover:underline hover:text-primary' : 'border-black text-primary'}`}
                         onClick={applyDiscount}
                         disabled={!discInput}
                         >

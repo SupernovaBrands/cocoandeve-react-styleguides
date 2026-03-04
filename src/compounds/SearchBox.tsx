@@ -13,7 +13,6 @@ import {
 	PrevButton,
 	NextButton,
 	usePrevNextButtons,
-	controlAutoplay,
 } from '~/components/carousel/EmblaCarouselArrowButtons';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
