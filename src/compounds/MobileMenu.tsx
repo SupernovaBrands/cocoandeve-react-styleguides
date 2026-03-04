@@ -121,7 +121,7 @@ const MobileMenu = (props: any) => {
 				{menuBannerQuiz && menuBannerQuiz.enable && (
 					<MenuBanner content={menuBannerQuiz} theme='pink-light' />
 				)}
-				{mainMenu?.map((menu, i) => {
+				{mainMenu?.map?.((menu, i) => {
 					const hasRow = menu.rows;
 					const m_title = menu.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 					const isSaleLink = ((menu.rows && menu.rows.length === 0 && menu.title.toLowerCase() !== 'sale') || (menu.title.toLowerCase() === 'sale'));
