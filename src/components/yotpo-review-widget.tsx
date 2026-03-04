@@ -1115,7 +1115,7 @@ const YotpoReviewWidget = (props:any) => {
 								<p className="product__reviews-total font-bold mb-0">{`${total} Review${total !== 1 ? 's' : ''}`}</p>
 								<div className="container product__review-list" role="list">
 									{reviews.map((review) => (
-										<div key={review.id} className="product__review-list-item border-gray-600 border-b mt-g pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
+										<div key={review.id} className="product__review-list-item border-gray-600 border-b pt-0 pb-3 lg:py-3 flex flex-wrap sm:-mx-hg lg:-mx-g" role="listitem">
 											<div className="w-full lg:w-1/4 pl-0 lg:pr-g product__review-user">
 												<h4 className="h4 mb-0 flex items-center lg:items-start sm:inline-flex lg:flex font-bold">
 													<span className='items-start w-auto'>
