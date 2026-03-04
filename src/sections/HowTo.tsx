@@ -19,6 +19,7 @@ import Close from '~/images/icons/close.svg';
 const HowToCarousel = (props) => {
 
     const { videoData, isLoading, title, ctaBgColor, store } = props;
+	console.log('videoData', videoData);
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [screenLG, setScreenLG] = useState(992);
@@ -26,6 +27,7 @@ const HowToCarousel = (props) => {
 
 	const handlOpenModal = (e) => {
 		const dataSrc = e.currentTarget.getAttribute('data-src');
+		console.log('dataSrc', dataSrc);
 		setvideoSrc(dataSrc);
 		setModal(true);
 	};
@@ -99,7 +101,7 @@ const HowToCarousel = (props) => {
 										</div>
 									<p className="text-lg font-bold mt-[8px] blog-video-card__title cursor-pointer"><a role="button" tabIndex={0} href="#" className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 									{/* <span className={`inline-block btn ${ctaBgColor === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full`}>Read more</span> */}
-									<span className="inline-block underline-offset-4 text-sm lg:text-base underline-offset-4 font-semibold block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" onClick={handlOpenModal}>Read more</span>
+									<span className="py-[10px] lg:py-g inline-block underline-offset-4 text-sm lg:text-base underline-offset-4 font-semibold block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>Read more</span>
 								</figcaption>
 							</figure>
 						</div>
@@ -109,18 +111,18 @@ const HowToCarousel = (props) => {
 					<PrevButton
 						onClick={() => autoPlayClick(arrowClickPrev)}
 						disabled={prevDisabled7}
-						className={props.btnLeft}
+						className={`${props.btnLeft} z-[-1]`}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] carousel__button--direction -left-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
+						<span className="lg:top-[129px!important] z-[-1] sm:top-[69px!important] carousel__button--direction -left-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center right-0 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
 					<NextButton
 						onClick={() => autoPlayClick(arrowClickNext)}
 						disabled={nextDisabled7}
-						className={props.btnRight}
+						className={`${props.btnRight} z-[-1]`}
 					>
-						<span className="lg:top-[129px!important] sm:top-[69px!important] carousel__button--direction -right-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
+						<span className="lg:top-[129px!important] z-[-1] sm:top-[69px!important] carousel__button--direction -right-[5px] w-[3.75em] h-[3.75em] absolute z-[-1] hidden lg:flex justify-center items-center rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>

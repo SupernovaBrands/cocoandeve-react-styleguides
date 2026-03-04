@@ -22,6 +22,8 @@
 	}
 	.carousel__products .carousel__container .product-card {
 
+		@apply px-[.375rem];
+
 		&__title {
 			@apply text-sm;
 		}
@@ -54,7 +56,7 @@
 		}
 
 		&__content {
-			@apply px-[8px];
+			@apply px-0;
 		}
 
 		.badge {

@@ -81,7 +81,7 @@ const ArticleNewsLetter = (props) => {
             <div className="w-full flex flex-wrap bg-pink-light mb-2 mx-0 rounded-none">
                 <picture className="lg:w-[270px] lg:basis-[270px] w-full p-0">
                     <source srcSet={postNewsletter.blog_ns_image_mob.url} media="(min-width: 992px)" />
-                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[160px] object-cover lg:h-full rounded-tl-none rounded-tr-none lg:rounded-tr-none lg:rounded-bl-none" alt="Blog article banner" />
+                    <img src={postNewsletter.blog_ns_image_desk.url} className="w-full h-[140px] object-cover lg:h-full rounded-tl-none rounded-tr-none lg:rounded-tr-none lg:rounded-bl-none" alt="Blog article banner" />
                 </picture>
                 <div className="lg:w-[calc(100%-270px)] lg:basis-[calc(100%-270px)] w-full px-g py-2 lg:px-3 lg:py-[1.5rem]">
                     <h2 className="mb-g lg:!mb-[1rem] blog-post-grid__newsletter-title !px-0 text-lg text-body">{postNewsletter.blog_ns_title}</h2>
@@ -103,7 +103,7 @@ const ArticleNewsLetter = (props) => {
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-[10px] lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline text-body"'))}</p>
+                    <p className="text-sm lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline text-body"'))}</p>
                 </div>
             </div>
         </div>
@@ -454,9 +454,9 @@ const Article = (props) => {
                         <BlogNavTag href="/blogs/news?how-to-tab=true" title="How to's"/>
                     </div>
                 )} */}
-                <article className="flex flex-wrap mt-4 lg:mt-4 lg:-mx-g sm:-mx-hg">
+                <article className="flex flex-wrap mt-3 lg:mt-4 lg:-mx-g sm:-mx-hg">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
-                        <h1 id="articleTitleHeading" className="text-center mb-1">{content?.title}</h1>
+                        <h1 id="articleTitleHeading" className="text-center mb-1 text-xl lg:text-2xl">{content?.title}</h1>
                         {/* <span className="text-body mb-1 article__published-at">{updateDate}</span> */}
 
                         {quickNav?.length > 0 && (
@@ -522,7 +522,7 @@ const Article = (props) => {
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:pl-0 sm:pr-0">
-                    <p className="font-bold text-xl lg:text-2xl text-center !mb-g lg:!mb-4">Shop this article</p>
+                    <p className="font-bold text-xl lg:text-2xl text-center">Shop this article</p>
                     {!isLoading && ( 
                         <ShopArticle 
                             waitlistPdpSetting={waitlistPdpSetting}
