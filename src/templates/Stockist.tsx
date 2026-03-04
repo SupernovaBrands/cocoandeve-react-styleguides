@@ -121,11 +121,11 @@ const Stockist = (props: any) => {
                 <h1 className="mb-25 mt-3 lg:mt-5 mb-3 text-body text-xl lg:text-2xl text-center">{content.title}</h1>
                 <form className="flex flex-wrap justify-between">
                     <div>
-                        <label className="w-auto md:w-auto mb-[8px] block lg:text-lg sm:=text-sm font-bold">{content.label_title}</label>
+                        <label className="w-auto md:w-auto mb-[4px] block lg:text-lg sm:=text-sm font-bold">{content.label_title}</label>
                         <div className="hidden lg:block" dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
                     </div>
                     <div className="w-full lg:w-auto">
-                        <select title="Change your country or region" className="border-0 custom-select lg:min-w-[auto] min-w-[190px] rounded-none stockist__select" value={region} onChange={regionChangeHandler} >
+                        <select title="Change your country or region" className="border-0 custom-select lg:min-w-[auto] min-w-[190px] rounded-none stockist__select py-[13px] pr-[12px] pl-[20px]" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
@@ -155,26 +155,65 @@ const Stockist = (props: any) => {
                             )}
                         </select>
                     </div>
-                    <div className="block lg:hidden mt-1" dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
+                    <div className="block lg:hidden mt-1 text-sm lg:text-base" dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
                 </form>
-                <p className="font-bold mt-4 mb-g text-left lg:text-lg">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></p>
+                <p className="font-bold mt-3 mb-g text-left lg:text-lg">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></p>
                 <hr className="hidden "></hr>
                 {!isLoading && (
                     <Carousel.Wrapper emblaApi={emblaApi2} className="px-0 lg:overflow-visible">
                         <Carousel.Inner emblaRef={emblaRef2} className="flex lg:flex-wrap -mx-hg lg:-mx-g">
                             {stores.map((filteredItem, idx) => (
-                                <figure key={filteredItem.id} className="m-0 flex-[0_0_40%] md:flex-[0_0_20%] lg:flex-none lg:w-1/5 px-hg lg:px-g" data-toggle={filteredItem.country_tag}>
-                                    <a href={filteredItem.logo_url} className="block lg:py-1 rounded">
+                                <figure key={filteredItem.id} className="m-0 flex-[0_0_40%] md:flex-[0_0_20%] lg:flex-none lg:w-1/5 px-[.375em] lg:px-[.5rem]" data-toggle={filteredItem.country_tag}>
+                                    <a href={filteredItem.logo_url} className="block rounded-none">
                                         <img className="lg:mx-auto lg:!w-auto h-[60px]" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
                                     </a>
-                                    <figcaption className="mb-2 !font-normal text-base lg:text-lg text-body text-center">{filteredItem.title}</figcaption>
+                                    <figcaption className="mb-[16px] !font-normal text-sm lg:text-lg text-body text-center">{filteredItem.title}</figcaption>
                                 </figure>
                             ))}
                         </Carousel.Inner>
                     </Carousel.Wrapper>
                 )}
-                
-                {/* <div className="flex my-3 flex-wrap lg:-mx-g lg:my-5">
+                <div className="my-3 lg:my-5">
+                    <div className="grid gap-y-[.75rem] md:grid-cols-2 md:gap-x-[1rem] xl:grid-cols-[572px_572px] px-0 lg:px-25">
+                        <figure className="relative">
+                            <picture className="block">
+                                <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1b7e136d-8733-4fdb-72a8-b21d09445600/592x" media="(min-width: 992px)" />
+                                <img className="w-full h-[135px] lg:h-auto" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1b7e136d-8733-4fdb-72a8-b21d09445600/360x" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
+                            </picture>
+                            <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
+                                <div className="">
+                                    <p className="text-[18px] mb-[4px] leading-[22px] lg:text-xl text-left text-body font-bold">{content.question_title}</p>
+                                    <a href="mailto:wholesale@cocoandeve.com" className="text-sm lg:text-base leading-2 mt-[.25rem] hover:no-underline hover:text-body">No worries, you can email us: <br/>wholesale@cocoandeve.com</a>
+                                </div>
+                                <a href="mailto:wholesale@cocoandeve.com" className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 hover:no-underline hover:text-body">Send mail</a>
+                            </figcaption>
+                        </figure>
+                        <figure className="relative">
+                            <picture className="block">
+                                <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d022c821-9395-482f-8d63-628c5427ca00/592x" media="(min-width: 992px)" />
+                                <img className="w-full lg:h-auto" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d022c821-9395-482f-8d63-628c5427ca00/360x" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
+                            </picture>
+                            <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[0.75rem] lg:p-[1.5rem] flex flex-col">
+                                <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>
+                                <div className="grid grid-cols-[99fr_83fr_107fr] lg:grid-cols-1 gap-[1rem] lg:gap-[.75rem]">
+                                    <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
+                                        <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-2 h-2' />
+                                        <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">Award-winning beauty</p>
+                                    </div>
+                                    <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
+                                        <i dangerouslySetInnerHTML={{ __html: MONEY_BACK }} className='w-2 h-2' />
+                                        <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">Money back guarantee</p>
+                                    </div>
+                                    <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
+                                        <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2' />
+                                        <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">{totalReviews} Customer Reviews</p>
+                                    </div>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                {/* <div className="flex my-3 flex-wrap lg:-mx-g lg:mt-5">
                     <div className="w-full lg:w-1/2 lg:px-g">
                         <div className="flex-col justify-center items-center bg-[#EBF7F2] rounded hidden lg:flex py-4 md:h-full">
                             <p className="text-body text-xl font-bold mb-[1rem]">{content.question_title}</p>
