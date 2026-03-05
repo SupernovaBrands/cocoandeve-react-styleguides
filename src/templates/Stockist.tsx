@@ -27,7 +27,7 @@ const Stockist = (props: any) => {
 	const [region, setRegion] = useState('australia');
 	const [regionTitle, setRegionTitle] = useState('Australia');
 	const [stores, setStores] = useState([]);
-    const [totalReviews, setTotalReviews] = useState('28159');
+    const [totalReviews, setTotalReviews] = useState('28,159');
     const sectionRef = useRef<HTMLElement>(null);
     const hasFetched = useRef(false);
 
