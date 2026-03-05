@@ -71,9 +71,9 @@ const OurStoryTemplate = (props: any) => {
 			<section className="page-banner-image flex relative justify-center items-center p-0 w-full">
 				<h1 className="text-center absolute text-xl lg:text-[3em] lg:leading-[1] text-white lg:mx-[16.5%] mx-[10.0%] font-bold">{banner.tiitle}</h1>
 				{!isLoading && (
-					<picture>
+					<picture className="w-full h-full">
 						<source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a01c51d4-b2ff-4b85-8d1f-f9d5fc03286e.jpg?v=1772039610" media="(min-width: 992px)" />
-						<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/828x.jpg?v=1772039632" className="w-full" alt={banner.tiitle} />
+						<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/828x.jpg?v=1772039632" className="w-full lg:h-[264px]" alt={banner.tiitle} />
 					</picture>
 				)}
 			</section>
@@ -101,7 +101,7 @@ const OurStoryTemplate = (props: any) => {
 								src={!isLoading ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_61c02a0b-a1e6-42db-9fe6-e55a99d4e863.jpg?v=1772039693' : null}
 								srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_5c5881ab-3bb8-4e20-856b-f2c62879af84.jpg?v=1772039719'}>
 								<h2 className="mb-[.5rem] text-base text-body lg:text-xl">{intro.titleintro_2}</h2>
-								{!isLoading && <p className="mb-[1rem] lg:mb-0 text-body text-sm lg:text-base">{intro.description_2}</p>}
+								{!isLoading && <p className="lg:mb-0 text-body text-sm lg:text-base">{intro.description_2}</p>}
 							</ImageWithText>
 						</div>
 					</Carousel.Inner>
@@ -188,10 +188,10 @@ const OurStoryTemplate = (props: any) => {
 					</div>
 				</div>
 				{!isLoading && (
-					<figure className="ml-auto lg:w-[718px] lg:basis-[718px] grow-0 p-0 relative mb-0">
-						<picture className={`relative block cursor-pointer lg:z-[2]`} onClick={() => handlOpenModal(true)}>
-							<source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_93c12e5d-47e8-4c9f-93b9-a7bdcfc1dc39.jpg?v=1772039749'} media="(min-width: 992px)" />
-							<img src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4725fd90-34bd-4cd4-82e4-46e3d49d909d.jpg?v=1772039768'} className="w-full rounded-0" alt="Behind the scenes" />
+					<figure className="ml-auto w-full lg:w-[718px] lg:basis-[718px] grow-0 p-0 relative mb-0">
+						<picture className={`relative block cursor-pointer w-full h-[200px] lg:h-[400px] lg:z-[2]`} onClick={() => handlOpenModal(true)}>
+							<source srcSet={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d17d9b69-072e-48a0-40ad-4338161a9500/public'} media="(min-width: 992px)" />
+							<img src={'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d17d9b69-072e-48a0-40ad-4338161a9500/public'} className="w-full h-full object-cover rounded-0" alt="Behind the scenes" />
 							<div className="absolute top-0 left-0 w-full h-full bg-black/20 z-[1] rounded-0"></div>
 							<div className="flex items-center absolute z-[2] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
 								<Play className="svg--current-color w-[57px] h-[57px] lg:w-[64px] lg:h-[64px] text-white " />
