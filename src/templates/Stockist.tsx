@@ -160,14 +160,14 @@ const Stockist = (props: any) => {
                 <p className="font-bold mt-3 mb-g text-left lg:text-lg">{content.stockist_logo_title} <span className="stockist__location">{regionTitle}</span></p>
                 <hr className="hidden "></hr>
                 {!isLoading && (
-                    <Carousel.Wrapper emblaApi={emblaApi2} className="px-0 lg:overflow-visible">
-                        <Carousel.Inner emblaRef={emblaRef2} className="flex lg:flex-wrap -mx-hg lg:-mx-g">
+                    <Carousel.Wrapper emblaApi={emblaApi2} className="px-0 lg:overflow-visible -mr-[15px] lg:-mr-0">
+                        <Carousel.Inner emblaRef={emblaRef2} className="flex lg:flex-wrap gap-0 lg:gap-[16px] pb-2 lg:pb-0">
                             {stores.map((filteredItem, idx) => (
-                                <figure key={filteredItem.id} className="m-0 flex-[0_0_40%] md:flex-[0_0_20%] lg:flex-none lg:w-1/5 px-[.375em] lg:px-[.5rem]" data-toggle={filteredItem.country_tag}>
+                                <figure key={filteredItem.id} className="m-0 flex-[0_0_40%] md:flex-[0_0_20%] lg:flex-none lg:w-[calc((100%-64px)/5)]" data-toggle={filteredItem.country_tag}>
                                     <a href={filteredItem.logo_url} className="block rounded-none">
                                         <img className="lg:mx-auto lg:!w-auto h-[60px]" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
                                     </a>
-                                    <figcaption className="mb-[16px] !font-normal text-sm lg:text-lg text-body text-center">{filteredItem.title}</figcaption>
+                                    <figcaption className="mb-0 !font-normal text-sm lg:text-lg text-body text-center">{filteredItem.title}</figcaption>
                                 </figure>
                             ))}
                         </Carousel.Inner>
@@ -183,7 +183,7 @@ const Stockist = (props: any) => {
                             <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
                                 <div className="">
                                     <p className="text-[18px] mb-[4px] leading-[22px] lg:text-xl text-left text-body font-bold">{content.question_title}</p>
-                                    <a href="mailto:wholesale@cocoandeve.com" className="text-sm lg:text-base leading-2 mt-[.25rem] hover:no-underline hover:text-body">No worries, you can email us: <br/>wholesale@cocoandeve.com</a>
+                                    <a href="mailto:wholesale@cocoandeve.com" className="text-sm lg:text-base leading-2 mt-[.25rem] hover:no-underline hover:text-body">No worries, you can email us: <br/><u className="underline underline-offset-4">wholesale@cocoandeve.com</u></a>
                                 </div>
                                 <a href="mailto:wholesale@cocoandeve.com" className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 hover:no-underline hover:text-body">Send mail</a>
                             </figcaption>

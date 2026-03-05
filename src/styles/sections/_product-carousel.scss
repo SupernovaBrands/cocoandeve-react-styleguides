@@ -27,4 +27,10 @@
     &-nav li .nav--dark {
         @apply bg-dark text-white font-normal focus:text-white visited:text-white hover:text-white;
     }
+
+    &-reviews {
+        .product__carousel-nav {
+            @apply pb-[1rem];
+        }
+    }
 }
