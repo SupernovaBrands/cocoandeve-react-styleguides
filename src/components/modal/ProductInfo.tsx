@@ -29,6 +29,7 @@ type imageProps = {
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
+        kitBuilder,
         getActiveWL,
         getId,
         fbqEvent,
@@ -392,7 +393,7 @@ const ProductInfo = (props: any) => {
 
     // const disabled = selected0.includes(selectedVariant?.id) || selected0.length >= maxItem || selected1.includes(selectedVariant?.id) || selected1.length >= maxItem;
     // const disabled = selected0.length >= maxItem || selected1.length >= maxItem;
-    // console.log('');
+    console.log('productShopify',productShopify);
 
     const swatchLabel = useRef(null);
     const spanEl = useRef(null);
@@ -486,14 +487,14 @@ const ProductInfo = (props: any) => {
 
     return (
         <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-[50px] lg:pt-5'}`}>
-            {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1rem] right-[1rem]`} />}
-            <div className="flex flex-wrap justify-center">
+            {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1.5rem] right-[1rem] lg:right-[1.5rem]`} />}
+            <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-[48.48%_47.48%] lg:gap-4">
                 {(!productShopify || !productStrapi) && (
                     <span className="spinner-border spinner-border-sm text-body !w-3 !h-3 lg:!w-4 lg:!h-4" role="status" />
                 )}
                 {productStrapi && productShopify && (
                     <>
-                        <div className="w-full lg:w-1/2 lg:pr-2 row flex flex-wrap items-start md:-mx-g lg:justify-start lg:block">
+                        <div className="w-full row flex flex-wrap items-start lg:justify-start lg:block">
                             <div className="product-image-carousel__container w-full px-0">
                                 <div className="carousel aspect-ratio overflow-hidden">
                                     <Carousel.Wrapper emblaApi={emblaMainApi} className="">
@@ -502,7 +503,7 @@ const ProductInfo = (props: any) => {
                                                 <div className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full" key={index}>
                                                     <picture className="flex items-center justify-center">
                                                         <source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
-                                                        <img height="367" width="367" fetchPriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-none" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
+                                                        <img height="367" width="367" fetchPriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-[.5rem]" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
                                                     </picture>
                                                 </div>
                                             ))}
@@ -585,14 +586,14 @@ const ProductInfo = (props: any) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full px-g lg:pr-0 lg:w-1/2 lg:pl-2">
+                        <div className="w-full px-g lg:px-0">
                             <h4 className="font-bold text-lg lg:text-2xl mb-[1rem] lg:mb-1 mt-25 lg:mt-0">
                                 <p className={`${additionalTitle.length > 0 ? 'pr-25 inline' : ''}`}>{productTitle}</p>
                                 {/* {additionalTitle.length > 0 && !['BUNDLE'].includes(productStrapi.product_type) && /(\d+(?:\.\d+)?)(ml|g|oz|kg|lb)/.test(additionalTitle[0]) && (
                                     <p className="product__title--additional before:content-[''] !text-body !font-bold !text-lg lg:!text-2xl">{additionalTitle[0]}</p>
                                 )} */}
                             </h4>
-                            {tagline && <p className={`mb-[1rem] product__tagline text-sm lg:text-base`}>{tagline}</p>}
+                            {tagline && <p className={`mb-[1rem] lg:mb-2 product__tagline text-sm lg:text-base`}>{tagline}</p>}
                             {data.swatch && (
                                 <>
                                     <label className="block mb-[.625em]">
@@ -612,28 +613,35 @@ const ProductInfo = (props: any) => {
                                     </ul>
                                 </>
                             )}
-                            {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore && waitlistPdpStore.enable_auto_wl_pdp &&
-                                <div className="px-[5px] py-1 bg-pink-light mb-2 lg:mb-4 rounded-h">
-                                    <ProductWaitlist bgColor={ctaBgColor} forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title} />
-                                </div>}
+                            
                             {selectedVariant?.availableForSale && (
-                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-full mb-1 lg:mb-4 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (
                                         <>
                                             {!selectedVariant?.availableForSale ? 'Out of Stock' : ''}
                                             {selected.includes(selectedVariant?.id) ? 'Added' : ''}
                                             {selectedVariant?.availableForSale && !selected.includes(selectedVariant?.id) ? <>
-                                                <span className="lg:hidden">Add</span>
-                                                <span className="hidden lg:inline">Add to Cart</span>
+                                                {/* <span className="lg:hidden">Add</span> */}
+                                                <span>Add to Cart</span>
                                             </> : ''}
                                         </>
                                     )}
                                 </Button>
                             )}
-                            <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
-                                {dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} />}
-                            </div>
+                            {!kitBuilder && (
+                                <div className="product__accordion mb-1 lg:mt-3 lg:mb-3 order-2 lg:order-2">
+                                    {dataAccordion.length > 0 && <AccordionPDP isInPopup={true} isDesktop={isDesktop} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} />}
+                                </div>
+                            )}
+
+                            {kitBuilder && (
+                                <div className="product__benefit my-[1rem] lg:my-2">
+                                    <BenefitIngredient benefits={benefits} ingredients={ingredients} fullIngredients={fullIngredients} />
+                                </div>
+                            )}
+                            {!showLaunchWaitlist && !selectedVariant.availableForSale && waitlistPdpStore && waitlistPdpStore.enable_auto_wl_pdp &&
+                                <ProductWaitlist bgColor={ctaBgColor} forwardRef={waitlistForm} {...waitlistPdpStore} handle={productStrapi?.handle} productId={selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')} selectedVariant={selectedVariant} onSubmitWaitlist={onSubmitWaitlist} productTitle={productShopify.title} />}
                         </div>
                     </>
                 )}

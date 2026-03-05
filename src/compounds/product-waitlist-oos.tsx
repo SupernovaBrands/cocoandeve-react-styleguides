@@ -200,11 +200,11 @@ const ProductWaitlist = (props: any) => {
 
 	return (
 		<>
-			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-3 mb-3 rounded-lg bg-pink-light" data-product-id={props.productId}>
+			{ !showSuccess && <div ref={props.forwardRef} className="w-full p-g lg:p-2 rounded-[.5rem] bg-pink-light" data-product-id={props.productId}>
 				{/* <p className="font-bold mb-2 text-[1.5em] lg:text-lg">{data.waitlistTitle ?? 'Join the waitlist'}</p> */}
-				<p className="font-bold mb-2 text-[1.5em] lg:text-lg" dangerouslySetInnerHTML={{__html: data.waitlistTitle ?? 'Join the waitlist'}} />
+				<p className="font-bold mb-[.5rem] lg:mb-[.25rem] text-base lg:text-lg" dangerouslySetInnerHTML={{__html: data.waitlistTitle ?? 'Join the waitlist'}} />
 				{/* <p className="mb-2" dangerouslySetInnerHTML={{__html: data.formDescription ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock." }}></p> */}
-				<p className="mb-2">
+				<p className="mb-[1rem] lg:mb-[.5rem] text-sm leading-[18px] lg:text-base lg:leading-[20px] text-gray-600">
 					{restockType === null && parse(data.formDescription?.replace('{{productName}}', 'product') ?? "Be the first to know when <strong>Sunny Honey Bali Bronzing Foam in medium shade</strong> is back in stock.")}
 					{restockType === 'yes' && `Our product has become a worldwide hit and we're struggling to keep up with the demand. But don't worry, we're on it! Sign up to join the waitlist.`}
 					{restockType === 'no' && `Our product has been such a hit that it's sold out and unfortunately, we won’t be restocking it. We appreciate your support and hope you'll explore our other amazing products!`}
@@ -234,21 +234,21 @@ const ProductWaitlist = (props: any) => {
 						</div>
 						<div className="flex flex-wrap items-center justify-start">
 						<div className="-mt-1 w-full">
-							<CheckBox boxSmall={true} onChange={changeTos} borderLight={true} labelClass="flex justify-content-center my-1 relative pl-[25px] font-size-sm mt-2" id="agreement-waitlist" checked={tos}>
-								<span className="text-xs">I agree to the <a className="text-xs text-body underline" href="/pages/privacy-policy" target="_blank">Privacy Policy</a></span>
+							<CheckBox boxSmall={true} onChange={changeTos} borderLight={true} labelClass="flex justify-content-center my-[.75rem] lg:my-[1rem] relative pl-[25px]" id="agreement-waitlist" checked={tos}>
+								<span className="text-sm leading-[18px] lg:text-base lg:leading-[20px] text-gray-600">I agree to the <a className="text-sm text-gray-600 leading-[18px] lg:text-base lg:leading-[20px] text-body underline" href="/pages/privacy-policy" target="_blank">Privacy Policy</a></span>
 							</CheckBox>
 							{/* {!tos && <small className="block w-full text-primary terms-error -mt-1 text-center">You have not agreed to the Privacy Policy & ToS</small>} */}
 						</div>
 						</div>
-						<div className="flex my-1">
-							<input onClick={submitForm} disabled={!validForm} className={`${!validForm ? 'opacity-[0.65]' : ''} inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'bg-primary'} text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[8px]`} type="button" value="Submit" />
+						<div className="flex mb-[.5rem]">
+							<input onClick={submitForm} disabled={!validForm} className={`${!validForm ? 'opacity-[0.65]' : ''} inline-block align-middle text-center select-none border whitespace-no-wrap  px-3  no-underline  leading-tight text-base bg-blue-600 hover:bg-blue-600 w-full ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'bg-primary'} text-white py-1 font-bold pt-[13px] pb-[13px] rounded-[.5rem] lg:rounded-none`} type="button" value="Yes, notify me!" />
 						</div>
-						<p className="text-xs">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-body underline" target="_blank" href="/pages/privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
+						<p className="text-xs text-gray-600">Receive exclusive offers via email or automated marketing SMS (4/mth). For more info see our <a className="link-secondary text-underline text-xs text-gray-600 underline" target="_blank" href="/pages/privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>. Opt out any time. Msg & data rates may apply. Consent not required for purchase.</p>
 					{/* </form> */}
 					</>
 				)}
 				{restockType === 'no' && (
-					<div className="flex my-1">
+					<div className="flex">
 						<a className={`btn ${bgColor === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary hover:bg-primary-dark border:primary'} btn-lg w-full py-[13px] no-underline hover:text-white hover:no-underline`} href="/collections/all">Shop other products</a>
 					</div>
 				)}

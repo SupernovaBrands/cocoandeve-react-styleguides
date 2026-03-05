@@ -6,6 +6,12 @@ import { formatMoney, getCartId } from "~/modules/utils";
 import { Button } from "../components";
 import { useEffect, useState } from 'react';
 
+const STEP = [
+    {label: '10%'},
+    {label: '15%'},
+    {label: '20%'}
+]
+
 const ItemCard = (props) => {
     const { item, placeholder, maxItem, index, isLast, bundleDiscount, setItemSelected, itemSelected, setIsOpen } = props;
     const reducedPrice = item.price - (bundleDiscount / 100) * item.price;
@@ -15,13 +21,50 @@ const ItemCard = (props) => {
         setItemSelected(items);
         if (items.length === 0) setIsOpen(false);
     };
-    console.log('item selected', itemSelected);
     return (
-        <li className={`flex bg-white w-full rounded-[3px] ${itemSelected.length < 3 ? 'w-[80px] basis-[80px] h-[80px]' : ''} lg:w-[85px] lg:h-[82px] relative ${!isLast ? 'before:content-[""] before:w-[.75rem] lg:before:w-[1px] before:absolute before:top-[50%] lg:before:left-[50%] before:-right-[.75rem] lg:before:right-auto before:-translate-y-[50%] lg:before:-translate-x-[50%] before:h-[1px] lg:before:h-2 before:bg-gray-500 lg:before:top-auto lg:before:-bottom-3' : ''}`}>
+        <li className={`
+            flex 
+            bg-white 
+            
+            rounded-[3px] 
+            relative 
+            lg:w-[85px] 
+            ${itemSelected.length < 3 ? 'w-[80px] basis-[80px] h-[80px]' : 'w-full '} 
+            ${itemSelected.length < 2 ? 'lg:h-[80px]' : 'lg:h-[82px]'} 
+            ${!isLast ? `before:content-[""] 
+                before:w-[.75rem] 
+                before:bg-gray-500 
+                before:absolute 
+                before:top-[50%] 
+                before:-right-[.75rem] 
+                before:-translate-y-[50%] 
+                before:h-[1px] 
+
+                ${itemSelected.length < 2 ?
+                    `
+                    lg:before:h-[1px] 
+                    lg:before:top-[50%] 
+                    lg:before:-right-2 
+                    lg:before:-translate-y-[50%] 
+                    lg:before:w-2 
+                    `
+                : 
+                    `
+                    lg:before:w-[1px] 
+                    lg:before:left-[50%] 
+                    lg:before:right-auto 
+                    lg:before:-translate-x-[50%] 
+                    lg:before:h-2 
+                    lg:before:top-auto 
+                    lg:before:-bottom-3
+                    `
+                }
+                ` : ''}
+            `}>
             {/* <span className="inline-block font-bold mr-[.5rem] mt-[.5rem] text-lg">{index + 1}</span> */}
             {/* {placeholder && <div className="w-[3rem] h-[3rem] rounded-[.5rem] bg-gray-400" />} */}
             {!placeholder && (
-                <div className="relative aspect-1/1 lg:aspect-[85/82]">
+                <div className={`relative aspect-1/1 ${itemSelected.length < 2 ? '' : 'lg:aspect-[85/82]'}`}>
                     <button onClick={() => editItem(index)} aria-label={`Edit Bundle Item ${index}`} className='absolute -top-[.5rem] -right-[.5rem]'>
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <rect width="24" height="24" rx="12" fill="white" />
@@ -39,9 +82,9 @@ const ItemCard = (props) => {
                                 <path d="M16.5 10.5V6.75C16.5 4.26472 14.4853 2.25 12 2.25C9.51472 2.25 7.5 4.26472 7.5 6.75V10.5M6.75 21.75H17.25C18.4926 21.75 19.5 20.7426 19.5 19.5V12.75C19.5 11.5074 18.4926 10.5 17.25 10.5H6.75C5.50736 10.5 4.5 11.5074 4.5 12.75V19.5C4.5 20.7426 5.50736 21.75 6.75 21.75Z" stroke="#151515" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <span className={`font-bold mt-[.5rem] ${itemSelected.length >= 4 ? 'text-xs' : 'text-sm'}`}>
-                                {index + 1 === 2 && '10%'}
-                                {index + 1 === 3 && '15%'}
-                                {index + 1 >= 4 && '20%'}
+                                {index + 1 === 2 && STEP[0].label}
+                                {index + 1 === 3 && STEP[1].label}
+                                {index + 1 >= 4 && STEP[2].label}
                                 &nbsp;off
                             </span>
                         </div>
@@ -108,17 +151,19 @@ const YourBundleSidebar = (props: any) => {
 
     const processCheckout = async () => {
 
+        // console.log('selected', selected);
+
         if (selected.length < minItem || selected.length > maxItem) return false;
 
         setProcessing(true);
         const groupId = Date.now();
-        const gIds = selected.map((v, idx, row) => {
+        const gIds = selected.filter((sel) => sel.id !== null).reverse().map((v, idx, row) => {
             return {
                 merchandiseId: v.id,
                 attributes: [
                     { key: '_campaign_type', value: 'build_your_own_bundle' },
                     { key: '_make_your_own_kit', value: 'yes' },
-                    { key: '_make_your_own_kit_removable', value: idx === 0 ? 'yes' : 'no' },
+                    { key: '_make_your_own_kit_removable', value: idx === (row.length - 1) ? 'yes' : 'no' },
                     { key: '_make_your_own_kit_editable', value: 'no' },
                     // { key: '_make_your_own_kit_type', value: `tab${type}` },
                     // { key: '_make_your_own_kit_ids', value: varIds.join(',') },
@@ -201,11 +246,12 @@ const YourBundleSidebar = (props: any) => {
     }
     `
 
+    // console.log('itemSelected', itemSelected);
     return (
         <>
             <div className={`w-full lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
                 <style>{btnInlineStyle}</style>
-                <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : 'mb-[1rem] lg:mb-0'} lg:static`}>
+                <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : ''} lg:static`}>
                     <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[.5rem]' : 'pt-g fixed pb-[1rem]'}  left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                         <div className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                             <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
@@ -220,28 +266,30 @@ const YourBundleSidebar = (props: any) => {
                             <ChevronUp className={`w-g h-g svg--current-color ${isOpen ? 'rotate-180' : ''}`} />
                         </div>
                     </div>
-                    {variantSelected.length >= minItem && (
-                        <div className="flex-wrap justify-center mb-[1rem] items-center hidden lg:flex">
-                            {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
-                            <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
-                            <span className="text-sm py-[.25rem] px-[.75rem] bg-white rounded-[.5rem]">{bundleDiscount}% OFF</span>
-                        </div>
-                    )}
+                    
                     <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
-                        <div className="flex mb-2 items-center lg:items-start">
+                        <div className="flex mb-2 items-center lg:justify-center">
                             {/* <PercentageSmall className="flex-[0_0_20px] mr-[.5rem] " /> */}
-                            <p className="text-sm">{strapiData?.sidebar_desc}</p>
+                            {itemSelected.length === 0 && <p className="text-sm">{strapiData?.sidebar_desc}</p>}
+                            {itemSelected.length > 0 && itemSelected.length < maxItem && (<p className="text-sm">Add more to unlock {STEP[itemSelected.length - 1]?.label || ''} {itemSelected.length > 3 ? STEP[2].label : ''} off</p>)}
                         </div>
-                        <ol className="flex gap-[.75rem] lg:flex-col lg:gap-2 lg:items-center">
+                        <ol className={`flex gap-[.75rem] ${itemSelected.length > 1 ? 'lg:flex-col lg:items-center' : 'lg:justify-center'} lg:gap-2 `}>
                             {selected.map((item, index) => (
                                 <ItemCard maxItem={maxItem} setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} isLast={index === selected.length - 1} />
                             ))}
                         </ol>
+                        {variantSelected.length >= minItem && (
+                            <div className="flex-wrap lg:justify-center my-2 items-center flex">
+                                {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
+                                <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
+                                <span className="text-sm font-bold py-[.25rem] px-[.75rem] bg-primary-light rounded-[.5rem]">{bundleDiscount}% OFF</span>
+                            </div>
+                        )}
                         <Button onClick={processCheckout} disabled={variantSelected.length < minItem || variantSelected.length > maxItem || processing} buttonClass={`mt-2 rounded-none border-primary bg-primary text-white w-full flex ${processing ? 'min-h-[50px]' : ''} justify-center items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
                             {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
                             {!processing && (
                                 <>
-                                    <span className="btn--sidebar-label">{`${variantSelected.length}/${bundleSize} Selected`}</span>
+                                    <span className="btn--sidebar-label">{`${variantSelected.length >= 2 ? 'Add to Cart' : `${variantSelected.length}/${bundleSize} Selected`}`}</span>
                                     <span className="btn--sidebar-atc">Add to Cart</span>
                                     {/* <ul className="flex lg:hidden">
                                         <li>{itemsReduced > 0 && <span className="line-through mr-[.5rem] font-normal">{formatMoney(origPrice, false, store)}</span>}</li>
