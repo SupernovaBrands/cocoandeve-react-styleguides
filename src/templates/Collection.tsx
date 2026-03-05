@@ -310,6 +310,10 @@ const Collection = (props: any) => {
         setLoading(false);
     }, [currentCollection]);
 
+    // useEffect(() => {
+    //     if (showQuizCard) setShowBundleCard(showQuizCard || handle === 'hair' || handle === 'shampoo-conditioner' || handle === 'treatments' || handle === 'hair-styling' || handle === 'hair-accessories')
+    // }, [showQuizCard, currentCollection]);
+
     const collectionSettings = useCollectionSettings(handle, store);
     const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
     const collectionSingle = useCollectionSingle(handleFooter, store);

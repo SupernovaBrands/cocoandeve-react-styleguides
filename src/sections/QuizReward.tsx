@@ -19,7 +19,7 @@ const STAR = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" vie
 const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 
 const QuizReward = (props: any) => {
-	const { store, generalSetting } = props;
+    const { store, generalSetting } = props;
     const ctaBgColor = generalSetting?.bfcm_cta_bg_color;
     const [totalReviews, setTotalReviews] = useState('28159');
     const sectionRef = useRef<HTMLElement>(null);

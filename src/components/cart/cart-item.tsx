@@ -9,7 +9,7 @@ import QuantityBox from '~/components/cart/quantity-box';
 import SvgTrash from '~/images/icons/trash.svg';
 import SvgRecurring from '~/images/icons/recurring.svg';
 import SvgChevronDown from '~/images/icons/chevron-down.svg';
-import { capitalizeString, kebabCase, formatMoney } from '~/modules/utils';
+import { capitalizeString, kebabCase, formatMoney, isKit } from '~/modules/utils';
 
 type CartItemProps = {
 	item?: any;
@@ -195,6 +195,13 @@ export const CartItem = (props:CartItemProps) => {
 	}
 
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
+	const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
+
+	let isRemovable = null;
+	if (isKitBuilder) {
+		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
+	}
+	
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -215,6 +222,11 @@ export const CartItem = (props:CartItemProps) => {
 				</picture>}
 			</ConditionWrapper>
 			<figcaption className="w-9/12 px-hg lg:px-g">
+				{isKitBuilder && (
+					<div className="inline-flex badge rounded-[.5rem] py-[.125rem] px-[.5rem] lg:px-[.5rem] bg-primary font-normal text-xs text-white mb-25">
+						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
+					</div>
+				)}
 				<div className="flex items-start no-gutters justify-between">
 					<p className="mb-1 font-bold w-2/3 pl-0">
 						{item.isFreeItem && item.originalPrice >= 0 ? (
@@ -272,11 +284,17 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !isKitBuilder && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
-					</button>)}
+						</button>)}
+					{isKitBuilder && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+							<SvgTrash className="svg w-[1em]" />
+						</button>)}
+					
 
 				</div>
 
@@ -329,7 +347,7 @@ export const CartItem = (props:CartItemProps) => {
 											return selectedVari.join() === o.join();
 										});
 
-										return variant && (
+										return variant && !isKitBuilder && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
@@ -348,7 +366,7 @@ export const CartItem = (props:CartItemProps) => {
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
+										{`${!isKitBuilder ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
@@ -365,19 +383,21 @@ export const CartItem = (props:CartItemProps) => {
 
 				{item.attributes && item.attributes.map((itm:any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-				<div className="flex items-center justify-between">
-					<QuantityBox
-						name="quantity-box"
-						editable={component ? false : !item.isFreeItem}
-						quantity={item.quantity}
-						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
-						isLastStock={isLastStock}
-						productId={productId}
-						productStock={component ? 10000 : productStock}
-						isModified={item.modified}
-						originalQuantity={component ? item.quantity : item.original_quantity}
-						allowZero={true}
-					/>
+				<div className={`flex items-center ${isKitBuilder ? 'justify-end' : 'justify-between'}`}>
+					{!isKitBuilder && (
+						<QuantityBox
+							name="quantity-box"
+							editable={component ? false : !item.isFreeItem}
+							quantity={item.quantity}
+							onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
+							isLastStock={isLastStock}
+							productId={productId}
+							productStock={component ? 10000 : productStock}
+							isModified={item.modified}
+							originalQuantity={component ? item.quantity : item.original_quantity}
+							allowZero={true}
+						/>
+					)}
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
 							<div className="flex flex-col text-right">

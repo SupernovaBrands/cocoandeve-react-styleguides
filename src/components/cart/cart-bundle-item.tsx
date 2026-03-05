@@ -27,7 +27,7 @@ export const CartBundleItem = (props:CartBundleProps) => {
 		const origPrice = parseInt(fixedPrice, 10);
 		const newPrice = origPrice - (percentAmt / 100) * origPrice;
 		return (
-			<li key={`cart-bundle-item-${index}`} className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
+			<li key={`cart-bundle-item-${index}`} className={`cart-item cart-item__kit ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 				<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
 					<span className="w-3/12 px-hg lg:px-g">
 						<picture>
@@ -53,8 +53,8 @@ export const CartBundleItem = (props:CartBundleProps) => {
 							{/* )} */}
 						</div>
 
-						<div className="flex items-center justify-between">
-							<QuantityBox
+						<div className="flex items-center justify-end">
+							{/* <QuantityBox
 								name="quantity-box"
 								editable={false}
 								quantity={1}
@@ -65,7 +65,7 @@ export const CartBundleItem = (props:CartBundleProps) => {
 								// isModified={item.modified}
 								// originalQuantity={item.original_quantity}
 								// allowZero={true}
-							/>
+							/> */}
 							<div className="flex flex-col text-right">
 								<>
 									{parseInt(comp.oldPrice, 10) > 0 && <span className="line-through">{formatMoney(parseInt(comp.oldPrice, 10), false, store)}</span>}
