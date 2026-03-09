@@ -36,7 +36,7 @@ const CartManualGwp = (props:any) => {
 		el.scrollTo({ left: left + offset });
 	}
 
-	const markText = (price:any) => ({ __html: `Worth ${price}` });
+	const markText = (price:any,compare:any) => ({ __html: `Worth ${compare && <del>{compare}</del>} ${price}` });
 
 	const removeItem = async (id:any) => {
 		setAdding(true);
@@ -53,6 +53,14 @@ const CartManualGwp = (props:any) => {
 		setAdding(false);
 		setProcessingId(null);
 	}
+
+	useEffect(() => {
+		if (!disableSelectItem) {
+			setShowMessage(false);
+		}
+	}, [disableSelectItem]);
+
+	// console.log('man gwp item', items);
 
 	return (
 			<div className="manual-gwp relative mt-2">
