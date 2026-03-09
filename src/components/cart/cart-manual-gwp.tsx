@@ -38,7 +38,7 @@ const CartManualGwp = (props:any) => {
 		el.scrollTo({ left: left + offset });
 	}
 
-	const markText = (price:any) => ({ __html: `Worth ${price}` });
+	const markText = (price:any,compare:any) => ({ __html: `Worth ${compare && <del>{compare}</del>} ${price}` });
 
 	const removeItem = async (id:any) => {
 		setAdding(true);
@@ -77,6 +77,8 @@ const CartManualGwp = (props:any) => {
 		}
 	}, [disableSelectItem]);
 
+	// console.log('man gwp item', items);
+
 	return (
 			<div className="manual-gwp relative mt-4">
 				<p className="text-base font-bold mb-0">{title}</p>
@@ -110,7 +112,7 @@ const CartManualGwp = (props:any) => {
 									</picture>
 									{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
 									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
-										Worth {item.price}
+										Worth {item.compare && <del>{item.compare}</del>} {item.price}
 									</figcaption>
 								</figure>
 								<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
