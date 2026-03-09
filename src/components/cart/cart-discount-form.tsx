@@ -145,7 +145,7 @@ export const CartDiscountForm = (props:any) => {
                         )}
                     </span>
                 </div>
-                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2 pb-0`}>
+                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2 pb-2 border-b border-[#ADADAD] border-solid`}>
                     <input
                         ref={inputRef}
                         type="text"
@@ -180,7 +180,8 @@ export const CartDiscountForm = (props:any) => {
                 </div> }
                 { !state.isApplied && state.error && <p className="text-primary mt-1 text-[14px]">{state.error}</p> }
                 {state.discountBanner?.enable && !state.hasCode && validItemInCart && (
-                <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer w-[calc(100%-10px)]" onClick={applyBanner}>
+
+                <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
                     <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                     <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
                         <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: state.discountBanner.code_banner_content}}/>
