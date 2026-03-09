@@ -77,8 +77,6 @@ const CartManualGwp = (props:any) => {
 		}
 	}, [disableSelectItem]);
 
-	// console.log('man gwp item', items);
-
 	return (
 			<div className="manual-gwp relative mt-4">
 				<p className="text-base font-bold mb-0">{title}</p>
