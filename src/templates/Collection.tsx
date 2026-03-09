@@ -350,7 +350,7 @@ const Collection = (props: any) => {
     // const mobileDropdown = [...rest, first];
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
-            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
+            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white w-[170px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
                 <option value="featured">Sort By</option>
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
@@ -453,39 +453,42 @@ const Collection = (props: any) => {
                             
                             
                         </div>
-                        {handle !== 'all' && (
+                        {/* {handle !== 'all' && ( */}
                             <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
                                 <div className="w-full lg:w-3/5">
-                                    <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
-                                        {childMenu.length > 0 && childMenu.map((children, index) => {
-                                            if (children && children.handle) {
-                                                const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
-                                                return (
-                                                    <Link
-                                                        scroll={false}
-                                                        key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}`}
-                                                        className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
-                                                            ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
-                                                        onClick={showLoading}
-                                                        dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
-                                                    />
-                                                );
-                                            }
-                                        })}
-                                        {childMenu.length === 0 && (
-                                            <Link
-                                                href={`/collections/${handle}`}
-                                                className={`text-nowrap mr-1 py-1 px-2 hover:no-underline text-gray-600 hover:text-gray-600`}
-                                                onClick={showLoading}
-                                                scroll={false}
-                                            >All</Link>
-                                        )}
-                                    </div>
+                                    {handle !== 'all' && (
+                                        <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
+                                            {childMenu.length > 0 && childMenu.map((children, index) => {
+                                                if (children && children.handle) {
+                                                    const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
+                                                    return (
+                                                        <Link
+                                                            scroll={false}
+                                                            key={`tags--${children.handle}-${index}`}
+                                                            href={`/collections/${children.handle}`}
+                                                            className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
+                                                                ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
+                                                            onClick={showLoading}
+                                                            dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
+                                                        />
+                                                    );
+                                                }
+                                            })}
+                                            {childMenu.length === 0 && (
+                                                <Link
+                                                    href={`/collections/${handle}`}
+                                                    className={`text-nowrap mr-1 py-1 px-2 hover:no-underline text-gray-600 hover:text-gray-600`}
+                                                    onClick={showLoading}
+                                                    scroll={false}
+                                                >All</Link>
+                                            )}
+                                        </div>
+                                    )}
+                                    
                                 </div>
                                 <FilterOptions className="hidden lg:flex" />
                             </div>
-                        )}
+                        {/* )} */}
                         {!showSpinner && !loading && collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && (
                             <div className="w-full">
                                 <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>
