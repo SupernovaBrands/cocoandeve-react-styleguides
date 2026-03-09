@@ -411,6 +411,16 @@ export const submitToKlaviyo = async ({store, email, phoneNumber, source}) => {
 			}
 		}
 
+		try {
+			globalThis.klaviyo.push([
+				'identify', {
+					$email: email
+				}
+			]);
+		} catch(e) {
+			console.log(e, 'Error on identifying email for klaviyo');
+		}
+
 		const options = {
 			method: 'POST',
 			headers: {revision: '2025-10-15', 'content-type': 'application/vnd.api+json'},

@@ -508,8 +508,8 @@ const Collection = (props: any) => {
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz
                                                 className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
-                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_cf267d18-59f2-4757-99be-6c6ac7768f72.jpg?v=1772039465"
+                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1fb50453-fa89-4f49-92b7-f8181d2255e2.jpg?v=1772039489"
                                                 key={`collection-quiz-card--${handle}--${index}`}
                                                 quizSetting={collectionSettings.quizSetting}
                                                 store={store}
@@ -568,8 +568,8 @@ const Collection = (props: any) => {
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz
                                     className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
-                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_54c7854e-f086-4ce2-9f68-24e9d0655bd7.jpg?v=1772039518"
+                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_fb6619af-f9a9-438b-a1a2-b7d00cfcef20.jpg?v=1772039537"
                                     key={`collection-quiz-card--${handle}--99`}
                                     quizSetting={collectionSettings.quizSetting}
                                     store={store}

@@ -68,8 +68,22 @@ export const mainMenu = [
                 "handle": "suncare"
             }
         ],
-        "title": "Tan & SPF",
-        "handle": "tan-and-spf"
+        "title": "Tan",
+        "handle": "tan"
+    },
+    {
+        "rows": [
+            {
+                "title": "Body Suncare",
+                "handle": "body-suncare"
+            },
+            {
+                "title": "Face Suncare",
+                "handle": "face-suncare"
+            }
+        ],
+        "title": "SPF",
+        "handle": "spf"
     },
     {
         "rows": [],
@@ -139,8 +153,22 @@ export const megaMenu = [
                 "handle": "tan-accessories"
             }
         ],
-        "title": "Tan & SPF",
-        "handle": "tan-and-spf"
+        "title": "Tan",
+        "handle": "tan"
+    },
+    {
+        "rows": [
+            {
+                "title": "Body Suncare",
+                "handle": "body-suncare"
+            },
+            {
+                "title": "Face Suncare",
+                "handle": "face-suncare"
+            }
+        ],
+        "title": "SPF",
+        "handle": "spf"
     },
     {
         "rows": [
@@ -583,8 +611,12 @@ export const sidebar_collection_ph = [
         "handle": "hair-benefits"
     },
     {
-        "title": "Tan <br class=\"d-lg-none\">  & SPF",
-        "handle": "tan-and-spf"
+        "title": "Tan",
+        "handle": "tan"
+    },
+    {
+        "title": "SPF",
+        "handle": "spf"
     },
     {
         "title": "Skincare",

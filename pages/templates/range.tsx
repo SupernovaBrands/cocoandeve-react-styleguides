@@ -13,26 +13,26 @@ const RealResultsTemplate = () => {
 
 
     const rangeBannerContent = {
-        desktop: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/0cf3879a-ef24-4599-2cfb-3c95bfc44300/public',
-        mobile: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f0834ff6-ac4a-4f7d-57c4-07b962918800/public',
+        desktop: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4b4cf346-2666-4840-88f8-6986e552349c.jpg?v=1772037304',
+        mobile: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_46cbaad1-9587-4e38-a9e4-0daa2794442a.jpg?v=1772037331',
     }
 
     const rangeIntroContent = [
         {
-            desktopImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/6a2fb4fd-ec6c-4788-3f77-91363d8d4900/public',
-            mobileImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/fbf6d90d-f60c-4c1c-eb40-3987e8fbb800/public',
+            desktopImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_5f4bf42e-40f5-4e50-b9f9-8d9cf33724f7.jpg?v=1772037354',
+            mobileImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_443ca219-a9e4-4f82-a5e7-7102c3b111e2.jpg?v=1772037374',
             title: 'Like A Virgin Range',
 			content: "<p>Transform your tresses with our award-winning range. Nourishes from root-to-tip as it restores dry, damaged & brittle hair back to its ‘virgin’ condition - your hair's revival in a bottle! </p>",
         },
         {
-            desktopImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f8fa9245-cab3-45da-328b-354661015400/public',
-            mobileImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ca182fc9-d990-421a-3e87-8fb64236be00/public',
+            desktopImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a7f43613-e550-4646-a959-364ddd69b77c.jpg?v=1772037410',
+            mobileImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_20d6ab97-fd38-4a11-a5b5-e1d37a1e9776.jpg?v=1772037432',
             title: 'Pro Youth Range',
 			content: "<p>The world's first retinol-infused honey haircare with game changing results from day 1. A treat for your tresses, designed to hydrate, strengthen & enhance natural shine - for hair that feels as sweet as it looks!</p>",
         },
         {
-            desktopImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/afc32965-310f-483c-a07f-bc7713e93300/public',
-            mobileImg: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e68d19ca-ada4-45c3-d060-01139f8fc800/public',
+            desktopImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4506cf12-639d-4937-aa49-4e4ef74d9fea.jpg?v=1772037457',
+            mobileImg: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_0e513140-bbf5-4eab-8d2b-25c66227bd54.jpg?v=1772037483',
             title: 'Hair Essentials Range',
 			content: "<p>Elevate your daily hair ritual with our curated collection that repair, nourish & revitalize strands with its transformative power and incredible ingredients, designed to protect & enhance from root to tip.</p>",
         }

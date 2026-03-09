@@ -51,29 +51,20 @@ const BundleVariantCard = (props) => {
     }
 
     const hardcodeImages = {
-        'bronzing-self-tanner-drops': {
-            au: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/320x',
-            },
-        },
         'antioxidant-glow-cream': {
-            us: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
-            },
             ca: {
-                medium: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7df2104a-c639-466a-10a7-351ffee2d800/320x',
-                default: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/320x',
+                medium: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x.jpg?v=1772038067',
+                default: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ad3300be-ff9f-40d6-9cee-94fc4029480c.jpg?v=1772038099&width=320',
+            },
+            au: {
+                medium: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6f16012d-d745-467e-9459-0331ff465e12.jpg?v=1772038128&width=320',
+                default: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_7538f6f0-8a91-4aad-842f-2c2a78b098b3.jpg?v=1772038161&width=320',
             },
         },
     };
 
     const getHardcodedImage = (handle, store, selectedValue) => {
-        const isValid =
-            (handle === 'bronzing-self-tanner-drops' && store === 'au') ||
-            (handle === 'antioxidant-glow-cream' && store === 'us') ||
-            (handle === 'antioxidant-glow-cream' && store === 'ca');
+        const isValid = (handle === 'antioxidant-glow-cream' && store === 'ca') || (handle === 'antioxidant-glow-cream' && store === 'au');
 
         if (!isValid) return null;
 
@@ -107,7 +98,7 @@ const BundleVariantCard = (props) => {
     )?.values || [];
 
     const bundleImg = slides[slides.length - 1];
-    const urlSet = productStrapi?.bundle_handle || null;
+    const urlSet = optionValue === "Antioxidant-rich Tanning Set" ? null : productStrapi?.bundle_handle || null;
 
     useEffect(() => {
         const selectedValue = currentVariant.selectedOptions[1]?.value.toLowerCase();
@@ -121,10 +112,10 @@ const BundleVariantCard = (props) => {
         }
     }, [bundleImg]);
 
-    
+
     useEffect(() => {
         const userAgent = navigator.userAgent || navigator.vendor;
-    
+
         if (/windows/i.test(userAgent)) {
             os = 'os-win';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
@@ -134,13 +125,13 @@ const BundleVariantCard = (props) => {
         } else if (/android/i.test(userAgent)) {
             os = 'os-android';
         }
-    
+
         setPlatform(os);
     }, []);
 
     return  (
         <>
-        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Bundles</p>
+        <p className="lg:text-lg font-bold mb-1 mt-3 lg:mt-4">Save with Sets</p>
         <div className="overflow-hidden mb-3 bg-gray-400 rounded-[32px] relative">
             {saving && <div className={`min-w-[3.375em] leading-[1.25] badge rounded-[8px] border-black py-[0.33333em] px-[0.83333em] bg-body absolute font-normal text-sm text-white top-[1.04167em] left-[1.04167em] lg:top-[1em] lg:left-[1em] inline`}>
                 <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{saving}</span>
@@ -149,12 +140,12 @@ const BundleVariantCard = (props) => {
                 <figure className="flex">
                     {urlSet && bundleImg && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
-                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} />
+                            <img className="w-full h-full object-cover" src={imageSrc} alt={`Save with Sets ${optionValue.replace('1x ', '')}`} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
+                        <img alt={`Save with Sets ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[0.6em] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-25 lg:mb-[1rem]">
