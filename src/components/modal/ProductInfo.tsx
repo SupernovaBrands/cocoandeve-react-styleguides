@@ -490,7 +490,7 @@ const ProductInfo = (props: any) => {
             {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1.5rem] right-[1rem] lg:right-[1.5rem]`} />}
             <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-[48.48%_47.48%] lg:gap-4">
                 {(!productShopify || !productStrapi) && (
-                    <span className="spinner-border spinner-border-sm text-body !w-3 !h-3 lg:!w-4 lg:!h-4" role="status" />
+                    <span className="spinner-border spinner-border-sm text-body !w-3 !h-3 lg:!w-4 lg:!h-4 lg:col-span-2 lg:justify-self-center" role="status" />
                 )}
                 {productStrapi && productShopify && (
                     <>
