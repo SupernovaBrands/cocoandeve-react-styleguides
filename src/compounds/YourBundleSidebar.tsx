@@ -251,7 +251,7 @@ const YourBundleSidebar = (props: any) => {
         <>
             <div className={`w-full lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
                 <style>{btnInlineStyle}</style>
-                <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full' : ''} lg:static`}>
+                <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full lg:h-auto' : ''} lg:static`}>
                     <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[.5rem]' : 'pt-g fixed pb-[1rem]'}  left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
                         <div className="text-center lg:mb-[1rem] text-lg flex items-center lg:justify-center lg:w-full">
                             <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
@@ -267,25 +267,25 @@ const YourBundleSidebar = (props: any) => {
                         </div>
                     </div>
                     
-                    <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:block`}>
-                        <div className="flex mb-2 items-center lg:justify-center">
+                    <div className={`${isOpen ? 'overflow-y-scroll lg:overflow-y-hidden' : 'hidden pt-[1rem]'} bg-white lg:bg-gray-400 px-2 lg:p-0 lg:flex lg:flex-col`}>
+                        <div className="flex mb-2 items-center lg:justify-center lg:order-2">
                             {/* <PercentageSmall className="flex-[0_0_20px] mr-[.5rem] " /> */}
                             {itemSelected.length === 0 && <p className="text-sm">{strapiData?.sidebar_desc}</p>}
                             {itemSelected.length > 0 && itemSelected.length < maxItem && (<p className="text-sm">Add more to unlock {STEP[itemSelected.length - 1]?.label || ''} {itemSelected.length > 3 ? STEP[2].label : ''} off</p>)}
                         </div>
-                        <ol className={`flex gap-[.75rem] ${itemSelected.length > 1 ? 'lg:flex-col lg:items-center' : 'lg:justify-center'} lg:gap-2 `}>
+                        <ol className={`flex gap-[.75rem] lg:order-3 ${itemSelected.length > 1 ? 'lg:flex-col lg:items-center' : 'lg:justify-center'} lg:gap-2 `}>
                             {selected.map((item, index) => (
                                 <ItemCard maxItem={maxItem} setIsOpen={setIsOpen} itemSelected={itemSelected} setItemSelected={setItemSelected} bundleDiscount={bundleDiscount} key={`sidebar--item-${index}`} item={item} placeholder={item.placeholder} store={store} index={index} isLast={index === selected.length - 1} />
                             ))}
                         </ol>
                         {variantSelected.length >= minItem && (
-                            <div className="flex-wrap lg:justify-center my-2 items-center flex">
+                            <div className="flex-wrap lg:justify-center items-center my-2 flex lg:order-1 lg:mt-0 lg:mb-1">
                                 {itemsReduced > 0 && <span className="line-through text-lg mr-[.5rem] text-gray-600 opacity-[.5]">{formatMoney(origPrice, false, store)}</span>}
                                 <span className="text-lg mr-[.5rem] font-bold">{formatMoney(itemsReduced, false, store)}</span>
                                 <span className="text-sm font-bold py-[.25rem] px-[.75rem] bg-primary-light rounded-[.5rem]">{bundleDiscount}% OFF</span>
                             </div>
                         )}
-                        <Button onClick={processCheckout} disabled={variantSelected.length < minItem || variantSelected.length > maxItem || processing} buttonClass={`mt-2 rounded-none border-primary bg-primary text-white w-full flex ${processing ? 'min-h-[50px]' : ''} justify-center items-center lg:block px-g font-normal lg:font-bold btn--sidebar`}>
+                        <Button onClick={processCheckout} disabled={variantSelected.length < minItem || variantSelected.length > maxItem || processing} buttonClass={`mt-2 rounded-none border-primary bg-primary text-white w-full flex ${processing ? 'min-h-[50px]' : ''} justify-center items-center lg:block px-g font-normal lg:font-bold btn--sidebar lg:order-4`}>
                             {processing && <span className="spinner-border spinner-border-sm text-white !w-[18px] !h-[18px] lg:!w-[1rem] lg:!h-[1rem]" role="status" />}
                             {!processing && (
                                 <>
@@ -298,7 +298,7 @@ const YourBundleSidebar = (props: any) => {
                                 </>
                             )}
                         </Button>
-                        <div className="flex mt-2">
+                        <div className="flex mt-2 lg:order-5">
                             <DeliverySmall className="flex-[0_0_20px]" />
                             <p className="ml-[.5rem] text-sm mb-2 lg:mb-0"
                                 dangerouslySetInnerHTML={{

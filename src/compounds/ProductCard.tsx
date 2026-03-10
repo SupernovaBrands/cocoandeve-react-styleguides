@@ -520,7 +520,7 @@ const ProductCard = (props: any) => {
         <div style={style} key={props.keyName} className={`product-card ${props.carousel ? 'product-card__carousel' : ''} ${props.className} ${!props.className ? 'w-3/4 md:w-1/4 pr-4 pl-4 text-center' : ''}`}>
             <div className="relative group">
                 {kitBuilder && (
-                    <span role="button" onClick={(e) => openModal(e)} className="hidden cursor-pointer lg:inline underline underline-offset-[.25rem] text-base absolute top-[.75rem] right-[1rem]
+                    <span role="button" onClick={(e) => openModal(e)} className="hidden cursor-pointer lg:inline underline underline-offset-[.25rem] text-base lg:text-sm absolute top-[.75rem] right-[1rem]
                         z-[2]
                         opacity-0 translate-y-[.75rem]
                         transition-all duration-300
