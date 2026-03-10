@@ -36,9 +36,9 @@ const ProductBannerSlider = (props) => {
 			if (isPageReview && window.innerWidth < 769) {
 				setImgPt('pt-[76.6%]');
 			} else if (isPageReview && window.innerWidth >= 769) {
-				setImgPt('pt-[55%]');
+				setImgPt('pt-[53%]');
 			} else if (imgHeight < 600) {
-				setImgPt('pt-[55%]');
+				setImgPt('pt-[53%]');
 			} else if (window.innerWidth > 1440) {
 				setImgPt(`pt-[${imgHeight}px]`);
 			} else {
