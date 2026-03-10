@@ -160,7 +160,7 @@ export const CartDiscountForm = (props:any) => {
                     />
                     <Button
                         lg={false}
-                        buttonClass={`border-[#F5F5F5] bg-[#F5F5F5] rounded-none w-1/4 px-1 min-w-[100px] !opacity-100 border-none ${discInput ? 'btn-outline-primary hover:underline hover:text-primary' : 'border-black text-primary'}`}
+                        buttonClass={`border-[#F5F5F5] bg-[#F5F5F5] rounded-none w-1/4 px-g min-w-[100px] !opacity-100 border-none text-right ${discInput ? 'border-black text-primary' : 'border-black text-primary'}`}
                         onClick={applyDiscount}
                         disabled={!discInput}
                         >
