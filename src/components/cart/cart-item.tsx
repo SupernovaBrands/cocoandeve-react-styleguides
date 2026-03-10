@@ -201,7 +201,7 @@ export const CartItem = (props:CartItemProps) => {
 	if (isKitBuilder) {
 		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
 	}
-	
+
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -212,7 +212,7 @@ export const CartItem = (props:CartItemProps) => {
 			>
 				{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						<img src={featuredImageUrl} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
 						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
@@ -294,7 +294,7 @@ export const CartItem = (props:CartItemProps) => {
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					
+
 
 				</div>
 
