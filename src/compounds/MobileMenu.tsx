@@ -219,11 +219,13 @@ const MobileMenu = (props: any) => {
 						</div>
 
 						<div className="flex-grow overflow-y-auto">
-							<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
-								<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
-									<TanQuizIcon className="mr-1" /> Take the Tan Quiz
-								</a>
-							</li>
+							{!['int', 'my'].includes(store) && (
+								<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+									<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
+										<TanQuizIcon className="mr-1" /> Take the Tan Quiz
+									</a>
+								</li>
+							)}
 
 							{/* <li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 								<a href="#" className="w-full m-0 pb-1 pt-2 text-body flex">
