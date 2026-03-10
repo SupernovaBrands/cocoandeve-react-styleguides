@@ -522,26 +522,10 @@ const ProductCard = (props: any) => {
                 </div>
             </div>
 
-            {/* Badges */}
-            {props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                <span className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[12.5px] left-[17.5px] lg:left-3 lg:top-g ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                    {props.product.badgeText}
-                </span>
-            )}
-            {props.product.activeBadges && !props.sideUpsell && (
-                <div className={`absolute top-[12.5px] left-[17.5px] lg:left-3 lg:top-g text-left flex flex-wrap ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
-                    {props.product.activeBadges.map((badge) => (
-                        <span key={badge.badge_text} className={`min-w-[3.375em] leading-[1.25] badge rounded-[2px] py-[2px] px-[0.83333em] font-normal lg:text-sm product-card__badge mr-[4px] mb-[4px] ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                            {badge.badge_text}
-                        </span>
-                    ))}
-                </div>
-            )}
-
-            {clickShowPopup && (
-                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'lg:min-w-[3.375em] badge'} cursor-pointer inline-flex rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
-                    <span className={`mr-1 ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
-                    <Eye className="artical-detail--svg svg h-[1rem] w-[1rem]" />
+            {clickShowPopup && !kitBuilder && (
+                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} cursor-pointer absolute top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[10px] product-card__badge`}>
+                    {/* <span className={`mr-1 ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span> */}
+                    <Eye className="artical-detail--svg svg h-[1.5rem] w-[1.5rem]" />
                 </p>
             )}
 
