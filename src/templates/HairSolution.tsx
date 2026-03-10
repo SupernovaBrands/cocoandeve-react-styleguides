@@ -427,10 +427,8 @@ const HairSolution = (props: any) => {
                             FragranceNotes={FragranceNotes}
                             store={store}
                             data={productData}
-                            setTab1Selected={() => null}
-                            tab1Selected={[]}
-                            setTab0Selected={() => null}
-                            tab0Selected={[]}
+                            setTabSelected={() => null}
+                            tabSelected={[]}
                             activeTab={activeTab}
                             maxItem={5}
                             buildProductCardModel={buildProductCardModel}
