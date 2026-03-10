@@ -233,7 +233,7 @@ const HairSolution = (props: any) => {
                             <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
                         </picture>
                     )}
-                    <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-1/2 lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
+                    <figcaption className="absolute top-[50%] max-w-[55%] -translate-y-[50%] left-g lg:w-[30%] lg:scroll-ml-1 lg:left-[calc(((100%-960px)/2)+(15px))]">
                         <h1 className="text-xl mb-[.5rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
                                 __html: data.banner.title,
@@ -249,17 +249,17 @@ const HairSolution = (props: any) => {
             )}
             <div className={`abtest-wrapper flex flex-col ${props?.sectionTest}`}>
             {data.range && (
-                <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-5'}`}>
+                <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-4'}`}>
                     <div className="container">
-                        <h2 className="text-center text-xl mb-g lg:mb-3 lg:text-2xl"
+                        <h2 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
                                 __html: data.range.title,
                             }}
                         />
-                        <div className="product__carousel-nav-container hidden lg:flex lg:justify-center lg:items-center container lg:px-g">
+                        <div className="product__carousel-nav-container hidden lg:flex lg:items-center container lg:px-g">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
-                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''} lg:h-[40px]`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>    
+                                    <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''}`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>    
                                 ))}
                             </ul>
                         </div>
@@ -276,7 +276,7 @@ const HairSolution = (props: any) => {
                                 wrap={children => <TabContent active={activeTab === index}>{children}</TabContent>}
                                 elseWrap={children => (
                                     <div className={`accordion-item border-t border-b border-gray-500`}>
-                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center ${openIndex === index ? `pt-3 md:pt-[1.875rem] pb-3` : 'py-3 md:py-[1.875rem]'} ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
+                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center ${openIndex === index ? `pt-2 md:pt-[1.875rem] pb-2` : 'py-2 md:py-[1.875rem]'} ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
                                             <strong className="text-body no-underline leading-[17px]">{row.title}</strong>
                                             { openIndex === index && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                             { openIndex !== index && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
@@ -292,20 +292,20 @@ const HairSolution = (props: any) => {
                                     background="bg-gray-400 lg:bg-gray-100"
                                     reverse={true}
                                     pictureClasses={'pt-0 lg:pt-[56%]'}
-                                    imageClasses={'lg:embed-responsive-item lg:object-cover rounded-[.5rem] lg:rounded-[0]'}
+                                    imageClasses={'lg:embed-responsive-item lg:object-cover'}
                                     textContentClasses={'lg:grid-cols-[1fr_repeat(8,_[_col-start_]_minmax(0,_70px))] !pt-[1rem] lg:!pl-0 lg:!pb-[1rem] !px-0'}
                                     textContentBoxClasses={'lg:col-start-[col-start_2] lg:col-end-[span_5] mb-0 lg:text-start'}
                                     src={row.image_m.url}
                                     srcSet={row.image_d.url}
                                 >
-                                    <h3 className="h1 mb-2 lg:mb-[1.5rem] hidden lg:block">{row.title}</h3>
+                                    <h3 className="text-xl mb-2 lg:mb-[1rem] hidden lg:block">{row.title}</h3>
                                     <p className="mb-1 text-sm">{row.content}</p>
                                     <p className="text-sm"
                                         dangerouslySetInnerHTML={{
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className={`mt-[1rem] inline-block lg:mt-[1.5rem] btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } !rounded-full no-underline hover:no-underline font-bold mb-1 lg:border-[1px] lg:min-h-[50px]`}>{row.cta_label}</a>
+                                    <a href={row.cta_url} className={`mt-[1rem] inline-block underline font-bold py-[1rem] text-body hover:text-body underline-offset-4`}>{row.cta_label}</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
@@ -314,18 +314,18 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className={`my-3 lg:mt-5 lg:mb-5 ${props.sectionTest ? 'order-0' : ''}`}>
+                <section className={`my-3 lg:mt-4 lg:mb-4 ${props.sectionTest ? 'order-0' : ''}`}>
                     <div className="container px-0 lg:px-g">
-                        <h3 className="text-center text-xl mb-g lg:mb-[35px] lg:text-2xl" dangerouslySetInnerHTML={{
+                        <h3 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
-                            <ul className={`product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 lg:w-full lg:basis-full ${data.product.rows && data.product.rows.length > 7 ? 'overflow-x-scroll hide-scrollbar lg:overflow-x-scroll' : ''}`}>
+                            <ul className={`gap-[4px] product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
-                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
+                                    <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                                 ))}
                             </ul>
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`hidden lg:w-[168px] lg:basis-[168px] lg:px-g lg:py-[.875rem] lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold lg:ml-g`}>Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`font-bold hidden hover:text-body lg:inline-block py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
@@ -342,7 +342,7 @@ const HairSolution = (props: any) => {
                                             <div className="w-full px-g mb-g lg:mb-0">
                                                 <picture className="block">
                                                     <source srcSet={tabRow.image_d.url} media="(min-width: 992px)" />
-                                                    <img src={tabRow.image_m.url} className="w-full rounded-[2rem] h-[180px] lg:h-full" alt="Hair Concern Solution Product Banner" />
+                                                    <img src={tabRow.image_m.url} className="object-cover h-[180px] lg:h-[400px]" alt="Hair Concern Solution Product Banner" />
                                                 </picture>
                                             </div>
 
@@ -402,7 +402,7 @@ const HairSolution = (props: any) => {
                             </div> */}
                         </div>
                         <div className="text-center">
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full no-underline hover:no-underline border-[2px] font-bold mt-g`}>Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden underline font-bold mt-g py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                     </div>
                     <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
@@ -448,7 +448,7 @@ const HairSolution = (props: any) => {
             )}
             
             {data.product?.rows?.[productTab]?.compare && (
-                <section className={` ${props.sectionTest ? 'order-1 lg:mb-0' : 'lg:mb-5'}`}>
+                <section className={` ${props.sectionTest ? 'order-1 lg:mb-0' : 'lg:mb-4'}`}>
                     {data.product.rows[productTab].compare?.image_right?.url ? (
                         <ProductBanner
                             mainClasses={'!mb-0'}
@@ -463,9 +463,9 @@ const HairSolution = (props: any) => {
                             leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
                             svgClasses="!h-[16.97px]"
                             imgClasses={'h-[240px] md:h-auto'}
-                            textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[2rem]'}
+                            textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[1rem]'}
                         >
-                            <h4 className="text-lg lg:text-2xl mb-2 lg:mb-4 lg:font-bold">
+                            <h4 className="text-lg lg:text-2xl mb-[4px] lg:mb-4 lg:font-bold">
                                 {data.product.rows[productTab].compare?.title}
                             </h4>
                             <p className="font-bold mb-[.25rem] lg:text-lg">
@@ -510,15 +510,15 @@ const HairSolution = (props: any) => {
             )} */}
 
             {data.result && (
-                <section className={`my-3 lg:mb-5 lg:mt-0 container px-0 ${props.sectionTest ? 'lg:mt-5' : ''}`}>
+                <section className={`my-3 lg:mb-4 lg:mt-0 container px-0 ${props.sectionTest ? 'lg:mt-5' : ''}`}>
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
                             {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
-                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap lg:h-[40px]`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
+                                <li key={`result-nav-${index}`}><TabNav className={`${resultTab === index ? 'text-body' : ''} whitespace-nowrap`} title={row.title} active={resultTab === index} onNavChange={() => setResultTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                             ))}
                         </ul>
-                        <a href={data.result.cta_url} className={`hidden lg:inline-block lg:btn lg:btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'lg:btn-outline-primary' } lg:rounded-full underline lg:no-underline hover:no-underline font-bold`}>{data.result.cta_label}</a>
+                        <a href={data.result.cta_url} className={`hidden lg:inline-block font-bold hover:text-body py-[1rem] text-body underline underline-offset-4`}>{data.result.cta_label}</a>
                     </div>
                     {RESULT_VIDEOS_ALL.length > 0 && RESULT_VIDEOS_ALL.map((row, index) => (
                         <TabContent key={`result-tab-content-${index}`} className="lg:px-g" active={resultTab === index}>
@@ -580,7 +580,7 @@ const HairSolution = (props: any) => {
                         </TabContent>
                     ))}
                     <div className={`text-center ${RESULT_VIDEOS_ALL[resultTab].data.length > 1 ? 'mt-0' : 'mt-[1.5rem]' } lg:hidden lg:mt-3`}>
-                        <a href="/pages/reviews" className={`instagram-reels__button btn btn-lg ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } rounded-full border-2 lg:border-[1px] hover:no-underline px-[4em] py-[.8125em] lg:py-[.875em] inline-block lg:w-[158px] lg:px-1`}>
+                        <a href="/pages/reviews" className={`instagram-reels__button mt-[1.5rem] py-[1rem] text-body underline underline-offset-4 font-bold`}>
                             See All
                         </a>
                     </div>
