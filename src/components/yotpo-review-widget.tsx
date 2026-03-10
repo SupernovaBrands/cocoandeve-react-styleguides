@@ -972,7 +972,7 @@ const YotpoReviewWidget = (props:any) => {
 	const isTrialParticipant = (review:any) => review.trial_participants || trialParticipants.find((t) => t.user === review.user_name
 	&& t.title === review.title && t.content === review.content);
 
-	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
+	const getMediaData = (review:any) => review.videos_data.concat(review.images_data);
 
 	const playVideo = (ev:any, el:any) => {
 		ev.target.classList.add('hidden');
@@ -980,6 +980,10 @@ const YotpoReviewWidget = (props:any) => {
 		videoEl.setAttribute('controls', 'true');
 		videoEl.play();
 	};
+
+	useEffect(() => {
+		console.log('reviews', reviews);
+	}, [reviews])
 
 	return !init ? (
 		<div className="flex justify-center mt-4 w-full">
