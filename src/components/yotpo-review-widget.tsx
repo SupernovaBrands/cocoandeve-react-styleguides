@@ -780,7 +780,7 @@ const YotpoReviewWidget = (props:any) => {
 	const isTrialParticipant = (review:any) => review.trial_participants || trialParticipants.find((t) => t.user === review.user_name
 	&& t.title === review.title && t.content === review.content);
 
-	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
+	const getMediaData = (review:any) => review.videos_data.concat(review.images_data);
 
 	const playVideo = (ev:any, el:any) => {
 		ev.target.classList.add('hidden');
@@ -788,6 +788,10 @@ const YotpoReviewWidget = (props:any) => {
 		videoEl.setAttribute('controls', 'true');
 		videoEl.play();
 	};
+
+	useEffect(() => {
+		console.log('reviews', reviews);
+	}, [reviews])
 
 	return !init ? (
 		<div className="flex justify-center mt-4 w-full">
@@ -987,7 +991,7 @@ const YotpoReviewWidget = (props:any) => {
 														{getMediaData(review).map((media:any, index:any) => (
 															<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review, index) }}>
 																<img className="object-cover size-[75px]" src={media.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
-																{media.video_url && (
+																{media.video_url || media.image_url?.includes('.mp4') || media.image_url?.includes('.mov')  && (
 																	<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 																)}
 																{/* preloade image for modal, to make it fast load when popup opened */}
@@ -1131,7 +1135,7 @@ const YotpoReviewWidget = (props:any) => {
 								<div className={`lg:w-1/2 pr-lg-0 ${getMediaData(reviewModal)[0].id}`}>
 									{getMediaData(reviewModal).length === 1 ? (
 										<>
-											{getMediaData(reviewModal)[0].image_url?.includes('.mp4') ? (
+											{getMediaData(reviewModal)[0].image_url?.includes('.mp4') || getMediaData(reviewModal)[0].image_url?.includes('.mov') ? (
 												<div className="relative flex">
 													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
 														<source src={getMediaData(reviewModal)[0].image_url} type="video/mp4" />
@@ -1159,7 +1163,14 @@ const YotpoReviewWidget = (props:any) => {
 												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
-															{media.image_url && (<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />)}
+															
+															{media.image_url?.includes('.mp4') || media.image_url?.includes('.mov') ? (
+																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.thumb_url ? media.thumb_url : ''}>
+																	<source src={media.image_url} type="video/mp4" />
+																</video>
+															) : media.image_url ? (
+																<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />
+															) : null}
 															{media.video_url ? (
 																// eslint-disable-next-line jsx-a11y/media-has-caption
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
@@ -1170,7 +1181,7 @@ const YotpoReviewWidget = (props:any) => {
 																	<source src={media.object_url} type="video/mp4" />
 																</video>
 															) : null}
-															{media.video_url || media.object_url && (
+															{media.video_url || media.object_url || media.image_url?.includes('.mp4') || media.image_url?.includes('.mov') && (
 																<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${media.id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 															)}
 														</div>
