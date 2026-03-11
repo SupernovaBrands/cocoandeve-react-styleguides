@@ -152,8 +152,8 @@
 
 	@screen lg {
 		.hide-scrollbar {
-			-ms-overflow-style: thin;
-			scrollbar-width: thin;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
 		}
 	}
 

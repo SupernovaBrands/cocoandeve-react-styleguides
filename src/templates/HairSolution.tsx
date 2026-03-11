@@ -314,13 +314,13 @@ const HairSolution = (props: any) => {
             )}
 
             {data.product && data.product.rows && data.product.rows.length > 0 && (
-                <section className={`my-3 lg:mt-4 lg:mb-4 ${props.sectionTest ? 'order-0' : ''}`}>
+                <section className={`my-3 lg:mt-4 lg:mb-3 ${props.sectionTest ? 'order-0' : ''}`}>
                     <div className="container px-0 lg:px-g">
                         <h3 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
-                            <ul className={`gap-[4px] product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0`}>
+                            <ul className={`gap-[4px] product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 overflow-x-scroll hide-scrollbar overflow-y-hidden`}>
                                 {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                                 ))}
@@ -328,7 +328,7 @@ const HairSolution = (props: any) => {
                             <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`font-bold hidden hover:text-body lg:inline-block py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                         
-                        <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-3">
+                        <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-2">
                             {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((tabRow, index) => {
                                 // const e = useEmblaCarousel(options)
                                 
@@ -457,10 +457,10 @@ const HairSolution = (props: any) => {
                                 second_image: data.product.rows[productTab].compare?.image_right,
                             }}
                             src={data.product.rows[productTab].compare?.image_right?.url}
-                            rightArrowClasses="p-hg ml-1 lg:p-[11.5px]"
-                            leftArrowClasses="p-hg mr-1 lg:p-[11.5px]"
-                            svgClasses="!h-[16.97px]"
-                            imgClasses={'h-[240px] md:h-auto'}
+                            rightArrowClasses="p-[.5rem!important] ml-1 lg:p-[11.5px]"
+                            leftArrowClasses="p-[.5rem!important] mr-1 lg:p-[11.5px]"
+                            svgClasses="lg:!h-[12px] !h-[8px]"
+                            imgClasses={'h-[208px] md:h-[400px] object-cover'}
                             textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[1rem]'}
                         >
                             <h4 className="text-lg lg:text-2xl mb-[4px] lg:mb-4 lg:font-bold">
