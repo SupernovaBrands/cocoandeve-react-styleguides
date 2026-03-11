@@ -457,7 +457,7 @@ const Article = (props) => {
                 <article className="flex flex-wrap mt-3 lg:mt-4 lg:-mx-g sm:-mx-hg">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
                         <h1 id="articleTitleHeading" className="text-center mb-1 text-xl lg:text-2xl">{content?.title}</h1>
-                        {/* <span className="text-body mb-1 article__published-at">{updateDate}</span> */}
+                        <span className="text-body mb-1 article__published-at block">{updateDate}</span>
 
                         {quickNav?.length > 0 && (
                             <>
