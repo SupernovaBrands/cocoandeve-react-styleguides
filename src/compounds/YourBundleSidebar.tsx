@@ -222,7 +222,10 @@ const YourBundleSidebar = (props: any) => {
     let origPrice = 0;
     selected.filter(it => it.id !== null && it.price).map((it) => {
         origPrice += (it.comparePrice ? it.comparePrice : it.price)
-        const priceInt = parseInt(it.price, 10);
+
+        // item price use compare if any, if not use regular price
+        const itemPrice = it.comparePrice ? it.comparePrice : it.price;
+        const priceInt = parseInt(itemPrice, 10);
 
         // const tOrig = (priceInt / 100).toFixed(2);
         const nPrice = priceInt - (bundleDiscount / 100) * priceInt;
