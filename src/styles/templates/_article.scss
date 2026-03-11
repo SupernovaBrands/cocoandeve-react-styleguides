@@ -7,7 +7,7 @@
 
 .blog-post-grid__content .article__content {
 	p:not(.product-title__text), p:not(.artical-detail), h1, h2, h3, h4, h5, h6 {
-		@apply px-g block lg:px-0;
+		@apply px-0 block lg:px-0;
 	}
 
 	.artical-detail {
@@ -22,63 +22,63 @@
 	}
 	.carousel__products .carousel__container .product-card {
 
-		@apply px-[.375rem];
+		// @apply px-[.375rem];
 
 		&__title {
-			@apply text-sm;
+			@apply block mb-0 sm:mb-[8px] !important;
 		}
 
-		svg:not(.artical-detail--svg) {
-			width: 10px !important;
-			height: 10px !important;
-		}
+		// svg:not(.artical-detail--svg) {
+		// 	width: 10px !important;
+		// 	height: 10px !important;
+		// }
 		.product-title__text {
-			@apply text-sm px-0 !mb-hg lg:!mb-[.5rem];
+			@apply px-0 mb-0 !important;
 		}
 
-		.review-stars__number {
-			@apply lg:mb-12;
-		}
+		// .review-stars__number {
+		// 	@apply lg:mb-12;
+		// }
 
 		.review-stars__link {
 			@apply no-underline;
 		}
 
-		button {
-			@apply lg:min-h-[38px];
-			&:not(.button-overlay) {
-				@apply lg:mb-[8px];
-			}
-		}
+		// button {
+		// 	@apply lg:min-h-[38px];
+		// 	&:not(.button-overlay) {
+		// 		@apply lg:mb-[8px];
+		// 	}
+		// }
 
-		img, picture {
-			@apply px-0;
-		}
+		// img, picture {
+		// 	@apply px-0;
+		// }
 
-		&__content {
-			@apply px-0;
-		}
+		// &__content {
+		// 	@apply px-0;
+		// }
 
 		.badge {
-			@apply rounded-[8px] lg:top-[9px] lg:left-[22.5px] text-xs;
+			@apply text-xs !important;
 		}
 
-		.product-card-btn__text,
-		.product-card-btn__prices {
-			@apply lg:py-hg lg:text-sm;
-		}
+		// .product-card-btn__text,
+		// .product-card-btn__prices {
+		// 	@apply lg:py-hg lg:text-sm;
+		// }
 
-		.swatch-overlay {
-			@apply lg:left-hg lg:right-hg;
+		// .swatch-overlay {
+		// 	@apply lg:left-hg lg:right-hg;
 
-			.button-overlay {
-				@apply lg:-mb-[27.5px];
-			}
-		}
+		// 	.button-overlay {
+		// 		@apply lg:-mb-[27.5px];
+		// 	}
+		// }
 	}
 
 	.artical-detail--link {
-		@apply inline-flex lg:mr-0 lg:px-[.75rem] lg:py-[0.25rem] lg:right-[1rem] mr-[.5rem] top-[12.5px] lg:top-[9px] !important;
+		@apply inline-flex right-[1rem] px-0 !important;
 	}
 
 	.modal__mini-pdp {
