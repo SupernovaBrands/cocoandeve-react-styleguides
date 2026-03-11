@@ -789,10 +789,6 @@ const YotpoReviewWidget = (props:any) => {
 		videoEl.play();
 	};
 
-	useEffect(() => {
-		console.log('reviews', reviews);
-	}, [reviews])
-
 	return !init ? (
 		<div className="flex justify-center mt-4 w-full">
 			<div className="spinner-border" role="status" aria-hidden="true" />
