@@ -322,6 +322,28 @@ const ProductCard = (props:any) => {
     }
 
     useEffect(() => {
+        let isMounted = true;
+        // https://app.clickup.com/t/86ewvv35x 
+        fetch(`/api/getProductStrapi?handle=${product.handle}&region=${store}`).then(res => res.json()).then(data => {
+            if (!isMounted) return;
+
+            const strapiProduct = data?.[0];
+
+            if (strapiProduct?.featured_image_media?.url) {
+                setProductImage(strapiProduct.featured_image_media.url);
+            }
+
+            if (strapiProduct?.images?.[1]?.url) {
+                setProductHoverImage(strapiProduct.images[1].url);
+            }
+        }).catch(() => {});
+
+        return () => {
+            isMounted = false;
+        };
+    }, [product.handle, store]);
+
+    useEffect(() => {
         if (product && product.productType !== 'HERO') {
             const skus_ = isKit(product.title)
                 ? product.variants.nodes.map((node:any) => node.sku)
