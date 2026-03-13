@@ -468,37 +468,12 @@ const ProductCard = (props: any) => {
         }).map((node: any) => node.sku);
     }, [product]);
 
-    // const { productImage, productHoverImage } = useMemo(() => {
-    //     let image = props.product.src;
-    //     let hoverImage = props.product.imgHover;
+    const { productImage, productHoverImage } = useMemo(() => {
+        let image = props.product.src;
+        let hoverImage = props.product.imgHover;
 
-    //     return { productImage: image, productHoverImage: hoverImage };
-    // }, [product.handle, store, props.product.src, props.product.imgHover]);
-
-    const [productImage, setProductImage] = useState(props.product.src);
-    const [productHoverImage, setProductHoverImage] = useState(props.product.imgHover);
-
-    useEffect(() => {
-        let isMounted = true;
-
-        fetch(`/api/getProductStrapi?handle=${product.handle}&region=${store}`).then(res => res.json()).then(data => {
-            if (!isMounted) return;
-
-            const strapiProduct = data?.[0];
-
-            if (strapiProduct?.featured_image_media?.url) {
-                setProductImage(strapiProduct.featured_image_media.url);
-            }
-
-            if (strapiProduct?.images?.[1]?.url) {
-                setProductHoverImage(strapiProduct.images[1].url);
-            }
-        }).catch(() => {});
-
-        return () => {
-            isMounted = false;
-        };
-    }, [product.handle, store]);
+        return { productImage: image, productHoverImage: hoverImage };
+    }, [product.handle, store, props.product.src, props.product.imgHover]);
 
     const [shade, setShade] = useState('');
 
