@@ -12,7 +12,7 @@ const PageReviewCard = (props:any) => {
     }, []);
     return (
         <div key={props.keyName} className='review-comparision-card px-hg flex lg:w-[100%] lg:basis-[100%] w-[90%] basis-[90%] relative flex-grow-0 flex-shrink-0'>
-            <div className='flex w-[100%] basis-[100%] bg-gray-400 rounded-[32px]  flex-col-reverse lg:flex-row relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0  pl-[16px] pr-[16px] pt-[16px] lg:pt-0 lg:px-g text-center'>
+            <div className='flex w-[100%] basis-[100%] bg-gray-400 rounded-[0]  flex-col-reverse lg:flex-row relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0  pl-[16px] pr-[16px] pt-[16px] lg:pt-0 lg:px-g text-center'>
                 <div className='review-comparision-card__content w-[100%] lg:w-1/2 text-left align-items-center justify-center flex pt-[16px] lg:pt-[60px] pb-[16px] lg:pb-[60px] grow'>
                     <div className='flex content-start flex-wrap pl-[0] pr-[0] lg:pl-[20px] lg:pr-[0px] max-w-[440px]'>
                         <h3 className='grow-0 flex mb-[4px] lg:mb-[16px] lg:text-[20px]'>{data?.author}</h3>
@@ -30,7 +30,7 @@ const PageReviewCard = (props:any) => {
                             media="(min-width: 992px)" width="1362" height="1162"/>
                         <img
                             src={data?.image?.url}
-                            className={`${props.imageClasses ?? ''} h-full w-full rounded-[32px]`} loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
+                            className={`${props.imageClasses ?? ''} h-full w-full rounded-[0]`} loading="lazy" height="357" width="414" alt={"Product banner and comparison image"} />
                     </picture>
                 </div>
             </div>
