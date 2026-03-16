@@ -122,7 +122,7 @@ const WaitlistButton = memo((props: any) => {
     }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-center !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+        <Button onClick={handleWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-center !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
         </Button>
     );
@@ -154,7 +154,7 @@ const LaunchButton = memo((props: any) => {
     }), [props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
     return (
-        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
+        <Button onClick={handleLaunchWaitlist} buttonClass={`${props.className ?? ''} border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${props.bgClass ? props.bgClass : 'btn-primary'} ${props.textClass ? props.textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1 justify-between' : 'sm:flex-col sm:text-sm lg:justify-between lg:!px-g'} font-normal`}>
             <Pricing store={props.store} selectedVariant={props.selectedVariant} collectionTemplate={props.collectionTemplate} buttonData={buttonData} hideCent={true} />
         </Button>
     );
@@ -241,7 +241,7 @@ const AddToCartButton = memo((props: any) => {
     const isKitBuilderAdded = kitSelected.includes(selectedVariant.id);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${isKitBuilderAdded ? 'bg-white hover:bg-white text-body !border-[1px] border-solid border-body' : ''}`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${isKitBuilderAdded ? 'bg-white hover:bg-white text-body !border-[1px] border-solid border-body' : ''}`}>
             <Pricing
                 store={props.store}
                 selectedVariant={selectedVariant}
@@ -579,14 +579,14 @@ const ProductCard = (props: any) => {
 
                 {/* Badges */}
                 {props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                    <span className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                    <span className={`min-w-[3.375em] leading-[normal] badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                         {props.product.badgeText}
                     </span>
                 )}
                 {props.product.activeBadges && !props.sideUpsell && (
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.activeBadges.map((badge) => (
-                            <span key={badge.badge_text} className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                            <span key={badge.badge_text} className={`min-w-[3.375em] leading-[normal] badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
                                 {badge.badge_text}
                             </span>
                         ))}
