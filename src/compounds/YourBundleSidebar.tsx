@@ -252,7 +252,7 @@ const YourBundleSidebar = (props: any) => {
     // console.log('itemSelected', itemSelected);
     return (
         <>
-            <div className={`w-full lg:top-[230px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
+            <div className={`w-full lg:sticky lg:self-start lg:top-[115px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
                 <style>{btnInlineStyle}</style>
                 <div className={`lg:bg-gray-400 lg:p-2 ${isOpen ? 'fixed bottom-0 right-0 left-0 z-[9999] flex flex-col justify-end h-full lg:h-auto' : ''} lg:static`}>
                     <div className={`${!isOpen ? 'shadow-[0px_-4px_3px_rgba(0,0,0,0.1)]' : ''} lg:shadow-none flex bg-white lg:bg-gray-400 ${isOpen ? 'static pt-4 pb-[.5rem]' : 'pt-g fixed pb-[1rem]'}  left-0 right-0 bottom-0 justify-between px-2 z-[1] lg:static lg:p-0`}>
