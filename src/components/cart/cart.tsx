@@ -33,6 +33,7 @@ interface Props {
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: any, attributes: Array<any>[]) => void;
 	discountMeter?: any;
+	getFeaturedImgMeta?: any;
 	shippingMeter?: any;
 	shippingData?: any;
 	handleDiscount?: any;
@@ -52,7 +53,7 @@ interface Props {
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
-		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
+		onUpdateCart, onDeleteLine, discountMeter, getFeaturedImgMeta, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting, cartUpsell, addToCart } = props;
 	// const storeApi = new storefrontApi();
 	// console.log(manualGwpSetting, 'manualGwpSetting');
@@ -393,6 +394,7 @@ const Cart: React.FC<Props> = (props) => {
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
+											getFeaturedImgMeta={getFeaturedImgMeta}
 											store={store}
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
