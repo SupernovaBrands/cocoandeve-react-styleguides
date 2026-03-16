@@ -133,7 +133,7 @@ const ProductInfo = (props: any) => {
         return false;
     }
 
-    const onAddItem = () => {
+    const onAddItem = async () => {
         // build your bundle
         // const itemSelected = activeTab === 0 ? tabSelected : tabSelected;
         // const setItemSelected = activeTab === 0 ? setTabSelected : setTabSelected;
@@ -145,7 +145,7 @@ const ProductInfo = (props: any) => {
         }
 
         if (tabSelected.length >= maxItem) return false;
-        const productModel = buildProductCardModel(store, productShopify, null, null);
+        const productModel = await buildProductCardModel(store, productShopify, null, null);
 
         setTabSelected((prev) => {
             const prevData = [...prev];

@@ -103,20 +103,23 @@ const NavMegaMenu = (props: any) => {
                             });
                         }
 
-                        const selectedWithImgs = selected.map((item) => {
-                            const { img } = getFeaturedImgMeta(item, store);
-                            return {
-                                title: item.title,
-                                img: img || null,
-                                url: `/products/${item.handle}`,
-                            };
-                        });
+                        (async () => {
+                            const selectedWithImgs = await Promise.all(selected.map(async (item) => {
+                                const { img } = await getFeaturedImgMeta(item, store);
+                                return {
+                                    title: item.title,
+                                    handle: item.handle,
+                                    featuredImage: item.featuredImage,
+                                    featuredMeta: item.featuredMeta,
+                                };
+                            }));
 
-                        // Store in cache for subsequent hovers
-                        cache[cacheKey] = selectedWithImgs;
+                            // Store in cache for subsequent hovers
+                            cache[cacheKey] = selectedWithImgs;
 
-                        setProducts(selectedWithImgs);
-                        setIsLoading(false);
+                            setProducts(selectedWithImgs);
+                            setIsLoading(false);
+                        })();
 
                         // getFeaturedImages().then((data) => {
                         //     if (data?.length > 0) {
