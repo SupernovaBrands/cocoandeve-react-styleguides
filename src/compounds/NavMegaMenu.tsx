@@ -108,9 +108,8 @@ const NavMegaMenu = (props: any) => {
                                 const { img } = await getFeaturedImgMeta(item, store);
                                 return {
                                     title: item.title,
-                                    handle: item.handle,
-                                    featuredImage: item.featuredImage,
-                                    featuredMeta: item.featuredMeta,
+                                    img: img || null,
+                                    url: `/products/${item.handle}`,
                                 };
                             }));
 
