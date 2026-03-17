@@ -188,12 +188,12 @@ export const CartItem = (props:CartItemProps) => {
 			</ConditionWrapper>
 			<figcaption className="w-9/12 px-hg lg:px-g">
 				{isKitBuilder && (
-					<div className="inline-flex badge rounded-[.5rem] py-[.125rem] px-[.5rem] lg:px-[.5rem] bg-primary font-normal text-xs text-white mb-25">
+					<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-1">
 						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
 					</div>
 				)}
 				<div className="flex items-start no-gutters justify-between">
-					<p className="mb-1 font-bold w-2/3 pl-0">
+					<p className={`mb-1 font-bold ${isKitBuilder ? 'w-auto' : 'w-2/3'} pl-0`}>
 						{item.isFreeItem && item.originalPrice >= 0 ? (
 							<ConditionWrapper
 								condition={item.isFreeItem}
@@ -347,7 +347,7 @@ export const CartItem = (props:CartItemProps) => {
 
 				{item.attributes && item.attributes.map((itm:any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-				<div className={`flex items-center ${isKitBuilder ? 'justify-end' : 'justify-between'}`}>
+				<div className={`flex items-center justify-between`}>
 					{!isKitBuilder && (
 						<QuantityBox
 							name="quantity-box"
@@ -362,6 +362,10 @@ export const CartItem = (props:CartItemProps) => {
 							allowZero={true}
 						/>
 					)}
+
+					{isKitBuilder && (
+						<strong>x1</strong>
+					)}
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
 							<div className="flex flex-col text-right">
@@ -373,7 +377,7 @@ export const CartItem = (props:CartItemProps) => {
 							</div>
 						)
 						: (
-							<div className="flex flex-col text-right">
+							<div className={`flex ${isKitBuilder ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
 								{item.comparePrice > 0
 									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
 									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
