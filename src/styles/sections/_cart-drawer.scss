@@ -245,3 +245,32 @@
 // 		cursor: auto;
 // 	}
 // }
+
+@layer utilities {
+  .kit-first {
+    @apply relative;
+  }
+
+  .kit-first::before {
+    content: '';
+    @apply block absolute left-0 right-0 top-0 h-[1px] bg-gray-500;
+	top: -1px;
+  }
+
+  .kit-last {
+    @apply border-b border-gray-500 pb-2;
+  }
+
+  .cart-item__kit {
+	.quantity-box {
+		@apply border-gray-500;
+	}
+	.quantity-box__button,
+	input[type="number"] {
+		@apply text-gray-500;
+	}
+	.preorder-notif {
+		@apply pt-[.5rem] mb-0;
+	}
+  }
+}

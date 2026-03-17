@@ -376,17 +376,23 @@ const Cart: React.FC<Props> = (props) => {
 								<input type="hidden" name="checkout" value="Checkout" />
 
 								<ul className="list-unstyled pb-0">
-									{cart.items && cart.items.map((item) => {
+									{cart.items && cart.items.map((item, index) => {
+										const prev = cart.items[index - 1];
+  										const next = cart.items[index + 1];
+
+										const getKitGroup = (it:any) => it?.attributes?.find((a:any) => a.key === '_make_your_own_kit_group')?.value;
+
+										const kitGroup = getKitGroup(item);
+										const prevGroup = getKitGroup(prev);
+										const nextGroup = getKitGroup(next);
+
+										const isKitBuilder = item.attributes?.find((attr:any) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
+
+										const isKitFirst = isKitBuilder && kitGroup !== prevGroup;
+  										const isKitLast = isKitBuilder && kitGroup !== nextGroup;
+
 										/* @ts-ignore */
-										const cartItemComponent:any = isBundleItem(item) ? 
-											<CartBundleItem
-												item={item}
-												onRemoveItem={onRemoveItem}
-												store={store}
-												isBundleItem={isBundleItem}
-												platform={platform}
-											/>
-										: <CartItem 
+										const cartItemComponent:any = <CartItem 
 											key={item.id}
 											item={item}
 											isLastStock={item.id === isLastStockKey}
@@ -396,6 +402,9 @@ const Cart: React.FC<Props> = (props) => {
 											store={store}
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
+											isKitFirst={isKitFirst}
+											isKitLast={isKitLast}
+
 										/>
 
 										return !item.isManualGwp && cartItemComponent;

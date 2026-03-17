@@ -21,6 +21,8 @@ type CartItemProps = {
 	productStock: number;
 	useShopifyVariantInfo?: any;
 	store?: any;
+	isKitFirst?: any;
+	isKitLast?: any;
 }
 
 
@@ -28,7 +30,7 @@ export const CartItem = (props:CartItemProps) => {
 	const { onChangeQuantity, onRemoveItem,
 		onChangeVariant, productStock,
 		productId, item, isLastStock,
-		useShopifyVariantInfo, store } = props;
+		useShopifyVariantInfo, store, isKitFirst, isKitLast } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
 	
@@ -166,14 +168,20 @@ export const CartItem = (props:CartItemProps) => {
 	const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
 	let isRemovable = null;
+	let kitGroup = null;
 	if (isKitBuilder) {
 		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
+		kitGroup = item.attributes.find((attr) => attr.key === '_make_your_own_kit_group')?.value;
 	}
 	
 
 	return (
-		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
-		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
+		<li className={`cart-item 
+			${isKitBuilder ? `cart-item__kit cart-item__kit-${kitGroup}` : ''} 
+			${isKitFirst ? 'kit-first' : ''} 
+			${isKitLast ? 'kit-last' : ''} 
+			${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
+		<figure className={`flex flex-wrap ${isKitBuilder ? 'pt-2' : 'py-2'} mb-0 items-start -mx-hg lg:-mx-g`}>
 			<ConditionWrapper
 				condition={!item.isFreeItem}
 				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
@@ -401,13 +409,13 @@ export const CartItem = (props:CartItemProps) => {
 		</figure>
 
 		{item.showPreorderNotif?.show && (
-			<span className="block mb-2 text-sm">{item.showPreorderNotif?.note || ''}</span>
+			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif?.note || ''}</span>
 		)}
 		{item.showPreorderNotif_2?.show && (
-			<span className="block mb-2 text-sm">{item.showPreorderNotif_2?.note}</span>
+			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif_2?.note}</span>
 		)}
 		{item.showPreorderNotif_3?.show && (
-			<span className="block mb-2 text-sm">{item.showPreorderNotif_3?.note}</span>
+			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif_3?.note}</span>
 		)}
 	</li>
 
