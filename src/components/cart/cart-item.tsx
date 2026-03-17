@@ -186,7 +186,7 @@ export const CartItem = (props:CartItemProps) => {
 			</ConditionWrapper>
 			<figcaption className="w-9/12 px-hg lg:px-g">
 				{isKitBuilder && (
-					<div className="inline-flex badge rounded-[.5rem] py-[.125rem] px-[.5rem] lg:px-[.5rem] bg-primary font-normal text-xs text-white mb-25">
+					<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-1">
 						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
 					</div>
 				)}

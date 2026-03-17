@@ -138,13 +138,13 @@ const ProductInfo = (props: any) => {
         // const itemSelected = activeTab === 0 ? tabSelected : tabSelected;
         // const setItemSelected = activeTab === 0 ? setTabSelected : setTabSelected;
         if (selected.includes(selectedVariant.id)) {
-            const currentSelected = [...tabSelected];
+            const currentSelected = tabSelected ? [...tabSelected] : [];
             const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
             setTabSelected(newSelected);
             return false;
         }
 
-        if (tabSelected.length >= maxItem) return false;
+        if (tabSelected && tabSelected.length >= maxItem) return false;
         const productModel = buildProductCardModel(store, productShopify, null, null);
 
         setTabSelected((prev) => {
@@ -364,7 +364,7 @@ const ProductInfo = (props: any) => {
     // const [selected1, setSelected1] = useState([]);
     const [selected, setSelected] = useState([]);
     useEffect(() => {
-        if (tabSelected.length > 0) {
+        if (tabSelected && tabSelected.length > 0) {
             const ids = [];
             tabSelected.map((item) => ids.push(item.id));
             setSelected(ids);
