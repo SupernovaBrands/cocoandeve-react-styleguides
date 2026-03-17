@@ -1,0 +1,42 @@
+.container {
+
+    :global {
+
+        .product-card {
+
+            button:not(.button-overlay) {
+                @apply mb-[.5rem] lg:mb-0 lg:min-h-[auto];
+            }
+            .product-card-btn__text {
+                @apply lg:leading-[10px] lg:py-g;
+            }
+
+            .btn__hover-overlay {
+                @apply lg:left-0 lg:right-0 lg:bottom-0 lg:translate-y-0;
+            }
+        }
+
+        .benefits-content {
+            @apply hidden;
+        }
+
+        .product__benefit .list-check {
+            @apply flex flex-col gap-1;
+            li {
+                @apply text-sm mb-0 !leading-[18px];
+            }
+        }
+
+        .kit-builder--nav {
+            button {
+                @apply text-base leading-[20px] px-[1rem] py-[.25rem] rounded-full bg-gray-400 text-gray-600 lg:text-lg lg:leading-[25px] lg:px-2 lg:py-1;
+
+
+                &.nav--active {
+                    @apply bg-primary text-white;
+                }
+            }
+        }
+
+    }
+}
