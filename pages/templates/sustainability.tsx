@@ -257,6 +257,10 @@ const SustainabilityTemplate = () => {
 				buildProductCardModel={() => null}
 				store={'dev'}
 				addToCart={() => null}
+				generalSetting={() => null}
+				squareBadge={() => null}
+				waitlistPdpSetting={() => null}
+				ConditionalWrap={() => null}
 			/>
             <Footer
 				aboutMenu={aboutMenu}
