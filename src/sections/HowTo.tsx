@@ -19,7 +19,7 @@ import Close from '~/images/icons/close.svg';
 const HowToCarousel = (props) => {
 
     const { videoData, isLoading, title, ctaBgColor, store } = props;
-	console.log('videoData', videoData);
+	// console.log('videoData', videoData);
 	const [modal, setModal] = useState(false);
 	const [videoSrc, setvideoSrc] = useState('');
 	const [screenLG, setScreenLG] = useState(992);
