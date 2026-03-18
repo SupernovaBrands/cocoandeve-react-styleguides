@@ -304,8 +304,8 @@ const Collection = (props: any) => {
             setSidebarMenu(data.parents);
 
             let childMenuDataTemp = data.childrens;
-            if (typeof window !== 'undefined' && window.location.search.includes('main-collection=tan-and-spf')) {
-                childMenuDataTemp = data.childrens.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
+            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
+                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
             }
 
             setChildMenu(childMenuDataTemp);
