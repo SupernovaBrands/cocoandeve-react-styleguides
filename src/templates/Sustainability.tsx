@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import ImageWithText from "~/compounds/ImageWithText";
 import parse from 'html-react-parser';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -157,6 +157,27 @@ const Sustainability = (props: any) => {
             body: packaging.text_3,
         },
     ];
+
+    const formulas = useMemo(() => {
+        if (!formula) return [];
+        return [
+            {
+                key: 'formula-1',
+                title: formula.tab_1,
+                content: formula.text_1,
+            },
+            {
+                key: 'formula-2',
+                title: formula.tab_2,
+                content: formula.text_2,
+            },
+            {
+                key: 'formula-3',
+                title: formula.tab_3,
+                content: formula.text_3?.replace('h4', 'h4 class="mb-1"'),
+            },
+        ].filter(item => item.title && item.content); // removes empty ones
+    }, [formula]);
 
     useEffect(() => {
         if (products) {
@@ -394,85 +415,71 @@ const Sustainability = (props: any) => {
                             )}
                         </div>
                         <div className="w-full block lg:hidden order-1 mb-[1rem]">
-                            <ConditionalWrap
-                                condition={isDesktop}
-                                wrap={children => <div className="px-0">{children}</div>}
-                                elseWrap={children => (
-                                    <div className="bg-gray-100 px-g border-t-0 border-b-0 md:border-t md:border-b border-gray-500 accordion w-full accordion-flush">
-                                        {children}
-                                    </div>
-                                )}
-                            >
-                            {[
-                                {
-                                    key: 'formula-1',
-                                    title: formula.tab_1,
-                                    content: formula.text_1,
-                                },
-                                {
-                                    key: 'formula-2',
-                                    title: formula.tab_2,
-                                    content: formula.text_2,
-                                },
-                                {
-                                    key: 'formula-3',
-                                    title: formula.tab_3,
-                                    content: formula.text_3.replace('h4', 'h4 class="mb-1"'),
-                                },
-                            ].map((item, index) => (
-                                    <ConditionalWrap
-                                        key={item.key}
-                                        condition={isDesktop}
-                                        wrap={children => (
-                                            <TabContent
-                                                className="mt-2 lg:mt-[1.5rem] lg:min-h-0"
-                                                active={activeTab2 === item.key}
-                                            >
-                                                {children}
-                                            </TabContent>
-                                        )}
-                                        elseWrap={children => (
-                                            <div className="accordion-item border-t border-b border-gray-500">
-                                                <div
-                                                    className={`cursor-pointer flex w-full justify-between items-center ${
-                                                        openIndex === index
-                                                            ? 'pt-2 pb-2 accordion-opened'
-                                                            : 'py-2'
-                                                    }`}
-                                                    onClick={() => onClick(index)}
-                                                >
-                                                    <strong className="text-body">
-                                                        {item.title}
-                                                    </strong>
-
-                                                    {openIndex === index ? (
-                                                        <MinusIcon className="h-[.75em] w-[.75em]" />
-                                                    ) : (
-                                                        <PlusIcon className="h-[.75em] w-[.75em]" />
-                                                    )}
-                                                </div>
-                                                <div
-                                                    className={`accordion-content ${
-                                                        openIndex === index
-                                                            ? 'accordion-content--open'
-                                                            : 'accordion-content--close'
-                                                    }`}
+                            {ConditionalWrap && (
+                                <ConditionalWrap
+                                    condition={isDesktop}
+                                    wrap={children => <div className="px-0">{children}</div>}
+                                    elseWrap={children => (
+                                        <div className="bg-gray-100 px-g border-t-0 border-b-0 md:border-t md:border-b border-gray-500 accordion w-full accordion-flush">
+                                            {children}
+                                        </div>
+                                    )}
+                                >
+                                {formulas.map((item, index) => (
+                                        <ConditionalWrap
+                                            key={item.key}
+                                            condition={isDesktop}
+                                            wrap={children => (
+                                                <TabContent
+                                                    className="mt-2 lg:mt-[1.5rem] lg:min-h-0"
+                                                    active={activeTab2 === item.key}
                                                 >
                                                     {children}
+                                                </TabContent>
+                                            )}
+                                            elseWrap={children => (
+                                                <div className="accordion-item border-t border-b border-gray-500">
+                                                    <div
+                                                        className={`cursor-pointer flex w-full justify-between items-center ${
+                                                            openIndex === index
+                                                                ? 'pt-2 pb-2 accordion-opened'
+                                                                : 'py-2'
+                                                        }`}
+                                                        onClick={() => onClick(index)}
+                                                    >
+                                                        <strong className="text-body">
+                                                            {item.title}
+                                                        </strong>
+
+                                                        {openIndex === index ? (
+                                                            <MinusIcon className="h-[.75em] w-[.75em]" />
+                                                        ) : (
+                                                            <PlusIcon className="h-[.75em] w-[.75em]" />
+                                                        )}
+                                                    </div>
+                                                    <div
+                                                        className={`accordion-content ${
+                                                            openIndex === index
+                                                                ? 'accordion-content--open'
+                                                                : 'accordion-content--close'
+                                                        }`}
+                                                    >
+                                                        {children}
+                                                    </div>
                                                 </div>
+                                            )}
+                                        >
+                                            <div className="text-body pb-g">
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: item.content,
+                                                    }}
+                                                />
                                             </div>
-                                        )}
-                                    >
-                                        <div className="text-body pb-g">
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: item.content,
-                                                }}
-                                            />
-                                        </div>
-                                    </ConditionalWrap>
-                                ))}
-                            </ConditionalWrap>
+                                        </ConditionalWrap>
+                                    ))}
+                                </ConditionalWrap>
+                            )}
                         </div>
                     </div>
                 </div>
