@@ -509,8 +509,10 @@ const ProductCard = (props: any) => {
         });
     }, [product, selectedVariant, props.setProductData]);
 
-    const price = selectedVariant?.price ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store) : formatMoney(0, false, store);
-    const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(Math.trunc(parseFloat(selectedVariant.compareAtPrice.amount)) * 100, false, store) : null;
+    const price = selectedVariant?.price ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, store) : formatMoney(0, false, store);
+    const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store) : null;
+
+    // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant', selectedVariant);
 
     const handleVariantChange = useCallback((variant) => {
         setSelectedVariant(variant);
