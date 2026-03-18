@@ -74,10 +74,10 @@ export const CartItem = (props:CartItemProps) => {
 		// }));
 	}
 
-	const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
+	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
 	let isRemovable = null;
-	if (isKitBuilder) {
+	if (isBundle) {
 		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
 	}
 
@@ -248,13 +248,13 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && !isKitBuilder && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
 					</button>)}
 
-					{isKitBuilder && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -312,7 +312,7 @@ export const CartItem = (props:CartItemProps) => {
 											return selectedVari.join() === o.join();
 										});
 
-										return variant && !isKitBuilder && (
+										return variant && !isBundle && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
@@ -331,7 +331,7 @@ export const CartItem = (props:CartItemProps) => {
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{`${!isKitBuilder ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
+										{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
