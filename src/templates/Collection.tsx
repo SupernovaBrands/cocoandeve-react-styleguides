@@ -327,7 +327,12 @@ const Collection = (props: any) => {
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
         })}`).then((res) => res.json()).then((data) => {
             // setSidebarMenu(data.parents);
+            let childMenuDataTemp = data.childrens;
+            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
+                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
+            }
             setChildMenu(data.childrens);
+            
         });
     }, [handle, squareBadge, customProductTitle]);
 
@@ -464,12 +469,13 @@ const Collection = (props: any) => {
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                             {childMenu.length > 0 && childMenu.map((children, index) => {
                                                 if (children && children.handle) {
+                                                    const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                     const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                     return (
                                                         <Link
                                                             scroll={false}
                                                             key={`tags--${children.handle}-${index}`}
-                                                            href={`/collections/${children.handle}`}
+                                                            href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
                                                             className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                                 ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
                                                             onClick={showLoading}
@@ -488,7 +494,6 @@ const Collection = (props: any) => {
                                             )}
                                         </div>
                                     )}
-                                    
                                 </div>
                                 <FilterOptions className="hidden lg:flex" />
                             </div>
