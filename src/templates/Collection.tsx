@@ -331,7 +331,7 @@ const Collection = (props: any) => {
             if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
                 childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
             }
-            setChildMenu(data.childrens);
+            setChildMenu(childMenuDataTemp);
             
         });
     }, [handle, squareBadge, customProductTitle]);
