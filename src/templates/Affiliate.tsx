@@ -12,6 +12,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '~/components/carousel/EmblaCarouselArrowButtons';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
+import AccordionPDP from '~/components/AccordionPDP';
 
 const screenLG = 992;
 
@@ -19,6 +20,24 @@ const Affiliate = (props: any) => {
 	const innerWidth = globalThis.window ? globalThis.window.innerWidth : 0;
 
 	const { banner, content, benefit, hiw, generalSetting } = props;
+	const [dataAccordion, setDataAccordion] = useState([]);
+
+	useEffect(() => {
+		setDataAccordion([
+			{
+				id: 1,
+				title: content.faq_title_1,
+				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'),
+			},
+			{
+				id: 2,
+				title: content.faq_title_2,
+				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'),
+			},
+		]);
+	}, [content])
+
+
 
 	const options: EmblaOptionsType = {
 		loop: innerWidth >= screenLG,
@@ -33,6 +52,16 @@ const Affiliate = (props: any) => {
 		setScrollProgress(progress * 100 / 1.5);
 	}, []);
 
+	const [openIndex, setOpenIndex] = useState(0);
+
+	const toggleCard = (id: number) => {
+		if (id === openIndex) {
+			setOpenIndex(0);
+		} else {
+			setOpenIndex(id);
+		}
+	};
+
 	return (
 		<>
 			{banner && (
@@ -43,11 +72,11 @@ const Affiliate = (props: any) => {
 					</picture>
 
 					<figcaption className="relative bg-affiliate lg:bg-transparent lg:absolute w-full -top-2 lg:top-0 bottom-0 left-0 right-0">
-						<div className="polygon-path bg-affiliate h-[5.625rem] absolute -translate-y-[50%] top-[1px] left-0 right-0 lg:hidden"></div>
+						{/* <div className="polygon-path bg-affiliate h-[5.625rem] absolute -translate-y-[50%] top-[1px] left-0 right-0 lg:hidden"></div> */}
 						<div className="container lg:h-full">
 							<div className="flex justify-center items-center h-full">
 								<div className="grow-0 shrink-0 basis-[40%] hidden lg:block"></div>
-								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:flex-1 text-affiliate-black">
+								{/* <div className="f-text lg:border-t lg:border-t-transparent text-center lg:flex-1 text-affiliate-black">
 									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
 									<h1 className="text-[2rem] leading-[2.25rem] mt-25 mb-1 max-w-[80%] mx-auto lg:my-2 lg:text-hero lg:leading-[4.5rem] lg:max-w-[90%]">{banner.title}</h1>
 									<h2 className="hidden lg:block text-xl font-normal mb-[2.813rem] leading-[1.5rem]">{banner.subtitle}</h2>
@@ -61,7 +90,7 @@ const Affiliate = (props: any) => {
 										className={`btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
 											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
 										>{banner.cta_label}</a>
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</figcaption>
@@ -73,7 +102,7 @@ const Affiliate = (props: any) => {
 						<div className="container">
 							<h2 className="text-[24px] leading-[30px] mt-[0] lg:mt-[20px] mb-[24px] lg:mb-[40px] text-[#000] lg:text-[2rem] lg:leading-[40px] text-center">{hiw.section_title}</h2>
 						</div>
-						<div className="container">
+						<div className="container px-g">
 							<div className="flex justify-center flex-wrap lg:flex-row">
 								<div className="basis-full lg:basis-[418px] order-2">
 									{hiw.result_img_1 && (
@@ -83,9 +112,9 @@ const Affiliate = (props: any) => {
 									)}
 								</div>
 								<div className="grow-0 shrink-0 basis-full lg:flex-1 order-1 lg:pt-[20px]">
-									<div className="max-w-[654px] mx-auto text-center lg:text-left">
+									<div className="max-w-[654px] mx-auto text-left lg:text-left">
 										
-										<div className="max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
+										<div className="lg:max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
 											{parse(hiw.section_p.replace('<p>', '<p class=" mb-[1rem]">'))}
 										</div>
 										<div className="flex  badge-awards flex-wrap gap-[12px] justify-center lg:justify-start mb-[24px]">
@@ -203,18 +232,11 @@ const Affiliate = (props: any) => {
 			)}
 			{content && (
 				<section className="mt-2 mb-1 lg:mb-4 overflow-hidden">
-					<div className="container">
-						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-2">
-							<h2 className="text-[#000] my-4 text-[1.75rem] lg:text-[3rem] leading-[1.875rem] lg:leading-[3.625rem] lg:mb-[60px] text-center">{content.faq_heading}</h2>
+					<div className="container px-g">
+						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-0 lg:px-2">
+							<h2 className="text-[#000] mb-[12px] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[60px] text-center">{content.faq_heading}</h2>
 
-							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_1}</h2>
-							<div className="mb-4">
-								{parse(content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
-							</div>
-							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_2}</h2>
-							<div className="mb-4">
-								{parse(content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
-							</div>
+							{dataAccordion && (<AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px lg:max-w-none" />)}
 						</div>
 					</div>
 				</section>
