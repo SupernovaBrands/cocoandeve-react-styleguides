@@ -465,7 +465,7 @@ const ProductCard = (props: any) => {
     const price = selectedVariant?.price ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, store) : formatMoney(0, false, store);
     const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store) : null;
 
-    if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant', selectedVariant);
+    // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant', selectedVariant);
 
     const handleVariantChange = useCallback((variant) => {
         setSelectedVariant(variant);
