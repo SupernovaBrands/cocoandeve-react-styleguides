@@ -76,10 +76,10 @@ const ProductInfo = (props: any) => {
                         {/* <a onClick={() => setActiveTab('benefits')} className={`${activeTab === 'benefits' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="benefits" role="button" tabIndex={0} aria-controls="benefits" aria-selected="true">
                             Benefits
                         </a> */}
-                        <a onClick={() => setActiveTab('ingredients')} className={`${activeTab === 'ingredients' ? 'active !bg-body !text-white' : ''} bg-body px-[16px] py-[5px] rounded-[0px] border-0  !text-white text-decoration-none hover:no-underline flex items-center`} id="ingredients" role="button" tabIndex={0} aria-controls="ingredients" aria-selected="true">
+                        <a onClick={() => setActiveTab('ingredients')} className={`${activeTab === 'ingredients' ? 'active ' : ''} bg-white px-[16px] py-[5px] rounded-[0px] border-0  !text-body text-decoration-none hover:no-underline flex items-center`} id="ingredients" role="button" tabIndex={0} aria-controls="ingredients" aria-selected="true">
                             Ingredients
                         </a>
-                        <a onClick={() => setActiveTab('how_to_use')} className={`${activeTab === 'how_to_use' ? 'active !bg-body !text-white' : ''} bg-body px-[16px] py-[5px] rounded-[0]  !text-white text-decoration-none hover:no-underline flex items-center`} id="how_to_use" role="button" tabIndex={0} aria-controls="how to use" aria-selected="true">
+                        <a onClick={() => setActiveTab('how_to_use')} className={`${activeTab === 'how_to_use' ? 'active ' : ''} bg-white px-[16px] py-[5px] rounded-[0]  !text-body text-decoration-none hover:no-underline flex items-center`} id="how_to_use" role="button" tabIndex={0} aria-controls="how to use" aria-selected="true">
                             How to use
                         </a>
                     </div>
