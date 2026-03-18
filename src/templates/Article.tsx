@@ -522,7 +522,7 @@ const Article = (props) => {
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:pl-0 sm:pr-0">
-                    <p className="font-bold text-xl lg:text-2xl text-center">Shop this article</p>
+                    <p className="font-bold text-xl lg:text-2xl text-left px-[15px!important]">Shop this article</p>
                     {!isLoading && ( 
                         <ShopArticle 
                             waitlistPdpSetting={waitlistPdpSetting}
@@ -559,7 +559,7 @@ const Article = (props) => {
                 </div>
             </div>
         )}
-        <div id="relatedPostCard" className="mb-4 lg:mb-0"></div>
+        <div id="relatedPostCard" className="mb-0"></div>
         {quickNav?.length > 0 && (
             <>
                 <a className={`blog-back-to-top font-bold h4 m-0 ${showButton ? 'btn--show' : ''}`} id="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>

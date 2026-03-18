@@ -4,7 +4,7 @@ const PackagingCard = (props: any) => (
 			<source srcSet={props.srcSet} media="(min-width: 992px)" />
 			<img className="embed-responsive-item fit--cover rounded-none" alt="Img Alt" src={props.src} loading="lazy" />
 		</picture>
-		<div className="px-[12px] py-[1rem] min-h-[315px] lg:min-h-[288px] rounded-none">
+		<div className="px-0 lg:px-[12px] py-[12px] lg:py-[1rem] min-h-auto lg:min-h-[288px] rounded-none">
 			{props.children}
 		</div>
 	</div>
