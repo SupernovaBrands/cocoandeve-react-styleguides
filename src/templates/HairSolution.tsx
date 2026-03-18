@@ -305,7 +305,7 @@ const HairSolution = (props: any) => {
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className={`mt-[1rem] inline-block underline font-bold py-[1rem] text-body hover:text-body underline-offset-4`}>{row.cta_label}</a>
+                                    <a href={row.cta_url} className={`mt-[1rem] inline-block underline font-bold py-[1rem] text-body hover:text-body underline-offset-4`}>Shop All</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
@@ -342,7 +342,7 @@ const HairSolution = (props: any) => {
                                             <div className="w-full px-g mb-g lg:mb-0">
                                                 <picture className="block">
                                                     <source srcSet={tabRow.image_d.url} media="(min-width: 992px)" />
-                                                    <img src={tabRow.image_m.url} className="object-cover h-[180px] lg:h-[400px]" alt="Hair Concern Solution Product Banner" />
+                                                    <img src={tabRow.image_m.url} className="object-cover h-auto lg:h-[400px]" alt="Hair Concern Solution Product Banner" />
                                                 </picture>
                                             </div>
 
@@ -377,7 +377,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollPrev() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto left-[-2.5rem!important]">
                                                             <ChevronPrev className="svg--current-color" />
                                                         </span>
                                                     </PrevButton>
@@ -385,7 +385,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollNext() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto right-[-2.5rem!important]">
                                                             <ChevronNext className="svg--current-color" />
                                                         </span>
                                                     </NextButton>
