@@ -9,7 +9,7 @@ import QuantityBox from '~/components/cart/quantity-box';
 import SvgTrash from '~/images/icons/trash.svg';
 import SvgRecurring from '~/images/icons/recurring.svg';
 import SvgChevronDown from '~/images/icons/chevron-down.svg';
-import { capitalizeString, kebabCase, formatMoney, isKit } from '~/modules/utils';
+import { capitalizeString, kebabCase, formatMoney } from '~/modules/utils';
 
 type CartItemProps = {
 	item?: any;
@@ -168,10 +168,9 @@ export const CartItem = (props:CartItemProps) => {
 	}
 
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
-	const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
 	let isRemovable = null;
-	if (isKitBuilder) {
+	if (isBundle) {
 		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
 	}
 	
@@ -254,12 +253,12 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && !isKitBuilder && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{isKitBuilder && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -318,7 +317,7 @@ export const CartItem = (props:CartItemProps) => {
 											return selectedVari.join() === o.join();
 										});
 
-										return variant && !isKitBuilder && (
+										return variant && !isBundle && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
@@ -337,7 +336,7 @@ export const CartItem = (props:CartItemProps) => {
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{`${!isKitBuilder ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
+										{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
@@ -358,7 +357,7 @@ export const CartItem = (props:CartItemProps) => {
 					{!isBundle && (
 						<QuantityBox
 							name="quantity-box"
-							editable={!item.isFreeItem && !isKitBuilder}
+							editable={!item.isFreeItem}
 							quantity={item.quantity}
 							onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
 							isLastStock={isLastStock}
@@ -383,7 +382,7 @@ export const CartItem = (props:CartItemProps) => {
 								</strong>
 							</div>
 						) : (
-							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+							<div className={`flex ${isBundle ? 'gap-[.5rem]' : 'flex-col'} text-right`}>
 								{isBundle ? (
 									<>
 										{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
@@ -411,8 +410,8 @@ export const CartItem = (props:CartItemProps) => {
 					<ul className="flex flex-col gap-[.25rem] pt-1">
 						{bundleItems.map((bundleItem) => (
 							<li className="flex items-center gap-[.25rem]">
-								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_20x.jpg')} loading='lazy' className="aspect-[1/1]" />
-								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} loading='lazy' width={20} height={20} className="aspect-[1/1]" />
+								<span className="text-sm leading-[normal]">1x {bundleItem?.merchandise?.title}</span>
 							</li>
 						))}
 					</ul>
