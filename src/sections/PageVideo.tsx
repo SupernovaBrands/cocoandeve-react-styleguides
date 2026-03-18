@@ -20,7 +20,7 @@ const PageVideo = (props: any) => {
 	};
 
     return (
-        <div className='lg:container lg:py-[60px] mt-4 lg:mt-0'>
+        <div className='lg:container lg:py-[60px] mt-3 lg:mt-0'>
             <picture className="block w-full rounded-[32px] relative" onClick={() => handlOpenModal(true)}>
                 <source
                     srcSet={data?.img_desk?.url}
