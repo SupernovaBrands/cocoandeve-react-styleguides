@@ -38,7 +38,7 @@ const PostCard: React.FC<PropType> = (props) => {
 	const ariaLabel = `${tagText.join(' ')} ${data.title}${showSubtext ? ` ${parse(descriptionText)}` : ''} Read more`;
 	return (
 		<article className={`${className}`}>
-			<figure className={`ss-awais border-none border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-none`}>
+			<figure className={`border-none border-secondary-light ${template === 'blog' || template === 'pdp' ? '' : 'post-card mb-4 lg:mb-0 bg-white h-full'} ${template === 'article' ? 'lg:mx-0 !h-auto lg:!h-full !mb-0' : ''} h-auto lg:h-full flex flex-col ${height} rounded-none`}>
 				{data.img && (
 					<a href={data.handle ?? '#'} className={`relative block hover:after:bg-white hover:after:bg-opacity-20 after:content-[''] after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:transition-colors after:duration-150 after:ease-in-out`} aria-label={data.title}>
 						<picture className={`${template === 'article' || imgClass ? 'embed-responsive' : ''} ${pictureClass}`}>
