@@ -174,6 +174,9 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	}
 
+	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
+	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 		<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
@@ -182,11 +185,7 @@ export const CartItem = (props:CartItemProps) => {
 				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
 			>
 				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
-					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
-					) : (
-						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
-					)}
+					<img src={featuredImage.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 				</picture>
 			</ConditionWrapper>
 			<figcaption className={`w-9/12 px-hg lg:px-g`}>
@@ -404,7 +403,7 @@ export const CartItem = (props:CartItemProps) => {
 					<ul className="flex flex-col gap-[.25rem] pt-1">
 						{bundleItems.map((bundleItem) => (
 							<li className="flex items-center gap-[.25rem]">
-								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_20x.jpg')} loading='lazy' className="aspect-[1/1]" />
+								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
 								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
 							</li>
 						))}
