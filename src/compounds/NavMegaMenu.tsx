@@ -87,16 +87,29 @@ const NavMegaMenu = (props: any) => {
                                 });
                             }
 
-                            const selectedWithImgs = selected.map((item) => {
-                                const { img } = getFeaturedImgMeta(item, store);
-                                return {
-                                    title: item.title,
-                                    img: img || null,
-                                    url: `/products/${item.handle}`,
-                                };
-                            });
-                            setProducts(selectedWithImgs);
-                            setIsLoading(false);
+                            // const selectedWithImgs = selected.map((item) => {
+                            //     const { img } = getFeaturedImgMeta(item, store);
+                            //     return {
+                            //         title: item.title,
+                            //         img: img || null,
+                            //         url: `/products/${item.handle}`,
+                            //     };
+                            // });
+                            // setProducts(selectedWithImgs);
+                            // setIsLoading(false);
+
+                            (async () => {
+                                const selectedWithImgs = await Promise.all(selected.map(async (item) => {
+                                    const { img } = await getFeaturedImgMeta(item, store);
+                                    return {
+                                        title: item.title,
+                                        img: img || null,
+                                        url: `/products/${item.handle}`,
+                                    };
+                                }));
+                                setProducts(selectedWithImgs);
+                                setIsLoading(false);
+                            })();
                         });
                     } catch (err) {
                         console.log(err);

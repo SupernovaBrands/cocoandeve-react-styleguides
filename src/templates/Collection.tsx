@@ -263,13 +263,13 @@ const Collection = (props: any) => {
     };
 
 
-    const selectSortChange = (e: any) => {
+    const selectSortChange = async (e: any) => {
         showLoading(e);
         const sort = e.target.value === 'best-selling' ? 'featured' : e.target.value;
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
-            .then((data) => {
+            .then(async (data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+                const mapped = await Promise.all(products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge)));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);

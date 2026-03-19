@@ -157,6 +157,7 @@ const ProductCarousel = (props: any) => {
                             tab1Selected={[]}
                             setTab0Selected={() => null}
                             tab0Selected={[]}
+                            tabSelected={[]}
                             activeTab={0}
                             maxItem={5}
                             buildProductCardModel={buildProductCardModel}
