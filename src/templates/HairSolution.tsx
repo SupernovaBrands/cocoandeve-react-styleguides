@@ -336,7 +336,7 @@ const HairSolution = (props: any) => {
                                     <TabContent active={productTab === index} key={`tab-prooduct-content-${index}`}>
                                         <ConditionalWrap
                                             condition={isDesktop}
-                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[25%_75%]">{children}</div>}
+                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[28%_72%]">{children}</div>}
                                             elseWrap={children => children}
                                         >
                                             <div className="w-full px-g mb-g lg:mb-0">
@@ -457,8 +457,8 @@ const HairSolution = (props: any) => {
                                 second_image: data.product.rows[productTab].compare?.image_right,
                             }}
                             src={data.product.rows[productTab].compare?.image_right?.url}
-                            rightArrowClasses="p-[.5rem!important] ml-1 lg:p-[11.5px]"
-                            leftArrowClasses="p-[.5rem!important] mr-1 lg:p-[11.5px]"
+                            rightArrowClasses="ml-1"
+                            leftArrowClasses="mr-1"
                             svgClasses="lg:!h-[12px] !h-[8px]"
                             imgClasses={'h-[208px] md:h-[400px] object-cover'}
                             textContentClasses={'lg:grid-cols-[1fr_repeat(6,_[_col-start_]_minmax(0,_70px))] pt-[1rem]'}

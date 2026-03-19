@@ -103,7 +103,7 @@ const ArticleNewsLetter = (props) => {
                             <span className="ml-1">{postNewsletter.blog_ns_success}</span>
                         </div>
                     )}
-                    <p className="text-sm lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-[10px] lg:text-xs underline text-body"'))}</p>
+                    <p className="text-sm lg:text-xs text-gray-600 mb-0 text-gray-600 mt-0 mb-[0!important] !px-0">{parse(postNewsletter.blog_ns_note.replace('<a', '<a class="text-sm lg:text-xs underline text-primary"'))}</p>
                 </div>
             </div>
         </div>
