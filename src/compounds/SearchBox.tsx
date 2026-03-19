@@ -226,7 +226,7 @@ const SearchBox = (props: any) => {
 									).then(r => r.json());
 
 									if (singleProduct?.product) {
-										const { img } = await getFeaturedImgMeta(singleProduct.product, store);
+										const { img } = getFeaturedImgMeta(singleProduct.product, store);
 										return {
 											title: singleProduct.product.title,
 											subtitle: true,
