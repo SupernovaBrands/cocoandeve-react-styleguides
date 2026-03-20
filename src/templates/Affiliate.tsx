@@ -13,6 +13,8 @@ import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '~/c
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
 import AccordionPDP from '~/components/AccordionPDP';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const screenLG = 992;
 
@@ -27,12 +29,12 @@ const Affiliate = (props: any) => {
 			{
 				id: 1,
 				title: content.faq_title_1,
-				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'),
+				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] mb-3 lg:mb-[1rem]"'),
 			},
 			{
 				id: 2,
 				title: content.faq_title_2,
-				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'),
+				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] mb-3 lg:mb-[1rem]"'),
 			},
 		]);
 	}, [content])
@@ -117,9 +119,9 @@ const Affiliate = (props: any) => {
 										<div className="lg:max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
 											{parse(hiw.section_p.replace('<p>', '<p class=" mb-[1rem]">'))}
 										</div>
-										<div className="flex  badge-awards flex-wrap gap-[12px] justify-center lg:justify-start mb-[24px]">
+										<div className="flex  badge-awards flex-wrap gap-[8px] lg:gap-[12px] justify-center lg:justify-start mb-[24px]">
 											{hiw.beauty_awards.map((award) => (
-												<div key={award.id} className="text-center mb-2 grow-0 shrink-0 basis-1/7 lg:flex lg:justify-center">
+												<div key={award.id} className="text-center grow-0 shrink-0 basis-1/7 lg:flex lg:justify-center">
 													<img src={award.url.replace('public', '86x')} className="w-full max-w-[64px] lg:max-w-[74px]" loading="lazy" alt="" />
 												</div>
 											))}
@@ -135,11 +137,11 @@ const Affiliate = (props: any) => {
 			{benefit && (
 				<section className="lg:max-w-[1160px] mx-auto ">
 					<div className="container">
-						<h2 className="text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px] mb-4 lg:mb-[4.063rem] text-center mt-2 lg:mt-0">{benefit.section_title}</h2>
+						<h2 className="text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px] mb-[24px] lg:mb-[4.063rem] text-center mt-2 lg:mt-0">{benefit.section_title}</h2>
 						<div className="flex flex-wrap justify-center benefits ">
 							{[...Array(6)].map((data, i) => (
 								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/6 text-center mb-0 lg:mb-0">
-									<div className="w-[6.25rem] h-[6.25rem] inline-block rounded-full relative mx-auto " role="presentation">
+									<div className="w-[6.25rem] h-[44px] lg:h-[54px] inline-block rounded-full relative mx-auto " role="presentation">
 										{i === 0 && <Benefit1 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 1 && <Benefit2 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 2 && <Benefit3 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
@@ -147,7 +149,7 @@ const Affiliate = (props: any) => {
 										{i === 4 && <Benefit5 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 										{i === 5 && <Benefit6 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 									</div>
-									<p className="text-[14px] leading-[18px] mt-[8px] lg:mt-[16px] mx-auto max-w-[166px] lg:max-w-[176px]">
+									<p className="text-[14px] leading-[18px] mt-[8px] lg:mt-[16px] mx-auto max-w-[166px] lg:max-w-[176px] mb-[12px] lg:mb-0">
 										{parse(benefit[`txt_${i + 1}`])}
 									</p>
 								</div>
@@ -158,19 +160,19 @@ const Affiliate = (props: any) => {
 			)}
 
 			{content && (
-				<section className="mt-[60px] overflow-hidden">
+				<section className="mt-[48px] lg:mt-[60px] overflow-hidden">
 					<h2 className="text-center text-[#000] mb-[24px] lg:mb-[40px] mt-[0] text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px]">{content.section_title}</h2>
-					<Carousel.Wrapper emblaApi={emblaApi} className="mb-1 max-w-[1160px] mx-auto">
+					<Carousel.Wrapper emblaApi={emblaApi} className="mb-1 max-w-[1160px] mx-auto carousel__page-affiliate">
 						<Carousel.Inner emblaRef={emblaRef} className="ml-[9px]">
 							{[...Array(3)].map((idx, i) => (
 								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
-									<div className={`w-full lg:w-1/2 flex gap-[8px] lg:gap-[16px] flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0`}>
+									<div className={`w-full lg:w-1/2 flex gap-[8px] lg:gap-[16px] flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0 lg:pl-2`}>
 										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px]">{content[`section_ct_step_${i + 1}`]}</h3>
 										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] max-w-[380px]'>{content[`section_ct_title_${i + 1}`]}</h2>
 
 										{i === 0 && (
 											<p className="m-0 max-w-none lg:max-w-none text-[16px] lg:leading-[20px] lg:mb-[1rem] rounded-0">
-												<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn rounded-none w-full lg:w-auto ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
+												<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn rounded-none w-full lg:w-[243px] font-normal h-[50px] flex items-center justify-center ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
 											</p>
 										)}
 										{i == 1 && (
@@ -192,42 +194,25 @@ const Affiliate = (props: any) => {
 								</div>
 							))}
 						</Carousel.Inner>
+						<Carousel.Navigation>
+                                <PrevButton
+                                    onClick={() => emblaApi.scrollPrev() }
+                                    className="lg:w-auto lg:h-0 hidden lg:flex"
+                                >
+                                    <span className="absolute z-[-1] flex justify-center items-center">
+                                        <ChevronPrev className="svg--current-color" />
+                                    </span>
+                                </PrevButton>
+                                <NextButton
+                                    onClick={() => emblaApi.scrollNext() }
+                                    className="lg:w-auto lg:h-0 hidden lg:flex"
+                                >
+                                    <span className="absolute z-[-1] flex justify-center items-center">
+                                        <ChevronNext className="svg--current-color" />
+                                    </span>
+                                </NextButton>
+                            </Carousel.Navigation>
 					</Carousel.Wrapper>
-
-					{/* {[...Array(3)].map((idx, i) => (
-							<div key={`affiliate-content-${i}`} className="flex flex-wrap flex-1 justify-center">
-								{content[`section_ct_img_${i + 1}`] && (
-									<div className={`w-full lg:w-1/2 p-0 bg-[#feb1be] ${content[`section_img_pos_${i + 1}`] === 'right' ? 'lg:order-2' : ''}`}>
-										<img src={content[`section_ct_img_${i + 1}`].url} className="w-full" loading="lazy" alt="" />
-									</div>
-								)}
-								<div className="w-full lg:w-1/2 p-0 flex items-center justify-center bg-[#f5dadf]">
-									<div className="max-w-[41.563rem] pt-[1.75rem] lg:pt-4 pb-4">
-										<div className="text-center lg:text-left max-w-[28.438rem]">
-											<h3 className="mx-auto mb-[0.813rem] text-base leading-[1.5rem] tracking-[.8px] max-w-[80%] font-normal lg:text-[1.5rem] lg:leading-[1.5rem] lg:mb-[2rem] lg:tracking-[1.2px]  lg:max-w-none">{content[`section_ct_step_${i + 1}`]}</h3>
-											<h2 className={`mx-auto mb-g text-[1.75rem] leading-[1.875rem] ${i === 2 ? 'max-w-[85%]' : 'max-w-[80%]'} lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none`}>{content[`section_ct_title_${i + 1}`]}</h2>
-											{i === 0 && (
-												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem] lg:mt-0">
-													<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-g lg:mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
-												</p>
-											)}
-											{i == 1 && (
-												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem]">
-													<>{parse(content[`section_ct_text_${i + 1}`])}</>
-												</p>
-											)}
-											{i === 2 && (
-												<div className="affiliate--content-li text-left px-0 lg:mb-[1rem]">
-													{i === 2 && (
-														<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-[1.25rem]"'))}</>
-													)}
-												</div>
-											)}
-										</div>
-									</div>
-								</div>
-							</div>
-						))} */}
 				</section>
 			)}
 			{content && (
@@ -236,7 +221,7 @@ const Affiliate = (props: any) => {
 						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-0 lg:px-2">
 							<h2 className="text-[#000] mb-[12px] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[60px] text-center">{content.faq_heading}</h2>
 
-							{dataAccordion && (<AccordionPDP data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px lg:max-w-none" />)}
+							{dataAccordion && (<AccordionPDP noWrapperBorder={true} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px lg:max-w-none" />)}
 						</div>
 					</div>
 				</section>
