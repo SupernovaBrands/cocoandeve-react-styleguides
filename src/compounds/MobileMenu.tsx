@@ -271,13 +271,13 @@ const MobileMenu = (props: any) => {
 								<a href="#" className="w-full m-0 pb-1 pt-2 text-body flex">
 									<SpfQuizIcon className="mr-1" /> Take the SPF Quiz
 								</a>
-							</li>
+							</li> */}
 
 							<li key="build-your-own-bundle" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 								<a href="/pages/build-your-own-bundle" className="w-full m-0 pb-1 pt-2 text-body flex">
 									<BundleIcon className="mr-1" /> Build Your Bundle
 								</a>
-							</li> */}
+							</li>
 
 							<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 								<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
