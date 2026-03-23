@@ -22,6 +22,11 @@ type CartItemProps = {
 	productStock: number;
 	useShopifyVariantInfo?: any;
 	store?: any;
+	isBundle?: boolean;
+	bundleItems?: any;
+	bundleGroup?: string;
+	bundleCompare?: any;
+	bundlePrice?: any;
 }
 
 
@@ -29,7 +34,7 @@ export const CartItem = (props:CartItemProps) => {
 	const { onChangeQuantity, onRemoveItem,
 		onChangeVariant, productStock,
 		productId, item, isLastStock,
-		useShopifyVariantInfo, store, getFeaturedImgMeta } = props;
+		useShopifyVariantInfo, store, getFeaturedImgMeta, isBundle, bundleItems, bundleGroup, bundleCompare, bundlePrice } = props;
 
 	const { swatches, variants, selectedSwatch } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
@@ -68,6 +73,13 @@ export const CartItem = (props:CartItemProps) => {
 		// 	//@ts-ignore
 		// 	isAccordionOpen: !prevState.isAccordionOpen,
 		// }));
+	}
+
+	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
+
+	let isRemovable = null;
+	if (isBundle) {
+		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
 	}
 
 	const productTitle = (item:any) => {
@@ -191,24 +203,28 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	}
 
+	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
+	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
-		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
+		<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
 			<ConditionWrapper
 				condition={!item.isFreeItem}
 				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
 			>
 				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
-					{item.featuredImageUrl ? (
-						<img src={featuredImageUrl} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
-					) : (
-						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[78px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
-					)}
+					<img src={featuredImage.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 				</picture>
 			</ConditionWrapper>
-			<figcaption className="w-9/12 px-hg lg:px-g">
+			<figcaption className={`w-9/12 px-hg lg:px-g`}>
+				{/* {isKitBuilder && (
+					<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-1">
+						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
+					</div>
+				)} */}
 				<div className="flex items-start no-gutters justify-between">
-					<p className="mb-1 font-bold w-2/3 pl-0">
+					<p className={`mb-1 font-bold ${isBundle ? 'w-auto' : 'w-2/3'} pl-0`}>
 						{item.isFreeItem && item.originalPrice >= 0 ? (
 							<ConditionWrapper
 								condition={item.isFreeItem}
@@ -224,13 +240,13 @@ export const CartItem = (props:CartItemProps) => {
 										if (item.disableCartItemLink || !isUpsell(item)) {
 											return (
 												<span className="text-black">
-													{children}
+													{isBundle ? 'Build Your Own Bundle' : children}
 												</span>
 											);
 										} else {
 											return (
 												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
-													{children}
+													{isBundle ? 'Build Your Own Bundle' : children}
 												</a>
 											);
 										}
@@ -260,11 +276,17 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
 					</button>)}
+
+					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+							<SvgTrash className="svg w-[1em]" />
+						</button>)}
 
 				</div>
 
@@ -318,7 +340,7 @@ export const CartItem = (props:CartItemProps) => {
 											return selectedVari.join() === o.join();
 										});
 
-										return variant && (
+										return variant && !isBundle && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
@@ -337,7 +359,7 @@ export const CartItem = (props:CartItemProps) => {
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
+										{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
@@ -354,19 +376,24 @@ export const CartItem = (props:CartItemProps) => {
 
 				{item.attributes && item.attributes.map((itm:any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-				<div className="flex items-center justify-between">
-					<QuantityBox
-						name="quantity-box"
-						editable={!item.isFreeItem}
-						quantity={item.quantity}
-						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
-						isLastStock={isLastStock}
-						productId={productId}
-						productStock={productStock}
-						isModified={item.modified}
-						originalQuantity={item.original_quantity}
-						allowZero={true}
-					/>
+				<div className={`flex items-center justify-between`}>
+					{!isBundle && (
+						<QuantityBox
+							name="quantity-box"
+							editable={!item.isFreeItem}
+							quantity={item.quantity}
+							onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
+							isLastStock={isLastStock}
+							productId={productId}
+							productStock={productStock}
+							isModified={item.modified}
+							originalQuantity={item.original_quantity}
+							allowZero={true}
+						/>
+					)}
+					{/* {isKitBuilder && (
+						<strong className="">x1</strong>
+					)} */}
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
 							<div className="flex flex-col text-right">
@@ -376,22 +403,41 @@ export const CartItem = (props:CartItemProps) => {
 									Free
 								</strong>
 							</div>
-						)
-						: (
-							<div className="flex flex-col text-right">
-								{item.comparePrice > 0
-									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-								<strong>
-									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
-										? formatMoney(item.priceAfterDiscounted, false, store)
-										: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+						) : (
+							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+								{isBundle ? (
+									<>
+										{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
+										<strong>{formatMoney(bundlePrice, false, store)}</strong>
+									</>
+								) : (
+									<>
+										{item.comparePrice > 0
+											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+										<strong>
+											{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
+												? formatMoney(item.priceAfterDiscounted, false, store)
+												: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 
-									{item.recurring && (item.period)}
-								</strong>
+											{item.recurring && (item.period)}
+										</strong>
+									</>
+								)}
 							</div>
 						)}
 				</div>
+
+				{isBundle && bundleItems && bundleItems.length > 0 && (
+					<ul className="flex flex-col gap-[.25rem] pt-1">
+						{bundleItems.map((bundleItem) => (
+							<li className="flex items-center gap-[.25rem]">
+								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
+								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+							</li>
+						))}
+					</ul>
+				)}
 
 				{(isLastStock) && (
 					<p className="mt-1 mb-0 text-danger">Oh nuts! You got the last one!</p>)}

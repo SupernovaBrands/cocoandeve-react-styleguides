@@ -86,6 +86,14 @@ const Cart: React.FC<Props> = (props) => {
 		setIsModalKlarnaOpen(stateModal);
 	}
 
+	const isBundleItem = (item) => {
+		try {
+			return item.attributes.find((props:any) => props.key.includes('_components_'));
+		} catch {
+			return null
+		}
+	};
+
 	useEffect(() => {
 		if (cartData) {
 
@@ -152,7 +160,15 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
-		onDeleteLine(item.id, attributes);
+		const isKitBuilder = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit' && attribute.value === 'yes');
+		if (!isKitBuilder) onDeleteLine(item.id, attributes);
+		else {
+			// delete bundle group
+			const groupId = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit_group').value || 0;
+			const itemsToDelete = cartData.items.filter((item) => item.attributes.find((att) => att.key === '_make_your_own_kit_group' && att.value === groupId))
+				.map((v) => v.id);
+			onDeleteLine(itemsToDelete, attributes);
+		}
 	}
 
 	const getId = (shopifyId: string) => {
@@ -251,6 +267,40 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData?.lines]);
 
+	const mappedItems = cart.items.reduce((acc, item) => {
+		const bundleGroup = item.attributes.find(attr => attr.key === '_make_your_own_kit_group')?.value;
+
+		if (bundleGroup) {
+			const existingBundle = acc.find(i => i.isBundle && i.bundleGroup === bundleGroup);
+			if (existingBundle) {
+				existingBundle.bundleItems.push(item);
+				existingBundle.totalPrice += item.originalPrice;
+				existingBundle.totalComparePrice += item.comparePrice;
+				existingBundle.totalDiscountedPrice = Math.round(existingBundle.totalPrice * (1 - existingBundle.discount / 100));
+			} else {
+				const discount = Number(item.attributes.find(attr => attr.key === '_make_your_own_kit_discount')?.value ?? 0);
+				const totalPrice = item.originalPrice;
+				const bundleEntry = {
+					isBundle: true,
+					bundleGroup,
+					item,
+					bundleItems: [item],
+					discount,
+					totalPrice,
+					totalComparePrice: item.comparePrice,
+					totalDiscountedPrice: Math.round(totalPrice * (1 - discount / 100)),
+				};
+				acc.unshift(bundleEntry);
+			}
+		} else {
+			acc.push({ isBundle: false, item });
+		}
+
+		return acc;
+	}, []);
+
+	// console.log('mappedItems', mappedItems);
+
 
 	return (
 		<>
@@ -339,7 +389,8 @@ const Cart: React.FC<Props> = (props) => {
 								<input type="hidden" name="checkout" value="Checkout" />
 
 								<ul className="list-unstyled border-b-[1px] pb-0">
-									{cart.items && cart.items.map((item) => {
+									{mappedItems && mappedItems.map((mappedItem) => {
+										const item = mappedItem.item;
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
@@ -350,6 +401,11 @@ const Cart: React.FC<Props> = (props) => {
 											store={store}
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
+											isBundle={mappedItem.isBundle || false}
+											bundleItems={mappedItem.bundleItems || []}
+											bundleGroup={mappedItem.bundleGroup || ''}
+											bundleCompare={mappedItem.totalPrice || 0}
+											bundlePrice={mappedItem.totalDiscountedPrice || 0}
 										/>
 
 										return !item.isManualGwp && cartItemComponent;
