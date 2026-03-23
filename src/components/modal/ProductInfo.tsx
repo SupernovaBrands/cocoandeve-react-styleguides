@@ -146,8 +146,12 @@ const ProductInfo = (props: any) => {
 
         if (tabSelected && tabSelected.length >= maxItem) return false;
         const productModel = await buildProductCardModel(store, productShopify, null, null);
-
+        
         setTabSelected((prev) => {
+        // if (tabSelected && tabSelected.length >= maxItem) return false;
+        // const productModel = buildProductCardModel(store, productShopify, null, null);
+
+        // setTabSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
                 src: productModel.src,

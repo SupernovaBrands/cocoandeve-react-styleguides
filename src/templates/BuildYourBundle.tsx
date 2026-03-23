@@ -217,9 +217,9 @@ const BuildYourBundle = (props: any) => {
                 <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-g lg:px-0 pt-3 lg:pt-5">
                     <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3 pr-[1rem] lg:pr-0">{strapiData?.choose_product_text}</p>
                     <ul className="kit-builder--nav list-style-none mx-0 flex gap-[.5rem] lg:gap-1 flex-wrap border-b-0 text-center justify-center">
-                        <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>
-                        <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>
-                        <li><TabNav className={`${activeTab === 2 ? 'text-body' : ''}`} title={strapiData.collection_3_label || 'SPF'} active={activeTab === 2} onNavChange={() => setActiveTab(2)} /></li>
+                        {strapiData.collection_1_label && <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>}
+                        {strapiData.collection_2_label && <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>}
+                        {strapiData.collection_3_label && <li><TabNav className={`${activeTab === 2 ? 'text-body' : ''}`} title={strapiData.collection_3_label || 'SPF'} active={activeTab === 2} onNavChange={() => setActiveTab(2)} /></li>}
                     </ul>
                 </div>
                 <div className={`container px-g pb-0 lg:pt-3 grid grid-cols-1 lg:grid-cols-[71.966%_25.47%] lg:gap-x-[1.875rem]`}>

@@ -555,7 +555,6 @@ const ProductCard = (props: any) => {
                             </picture>
                         )}
                     </picture>
-
                 </ConditionalWrap>
                 <div className="btn__hover-overlay absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
                     opacity-0 translate-y-[.75rem]
