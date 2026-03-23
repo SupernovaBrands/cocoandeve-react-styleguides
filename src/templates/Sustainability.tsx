@@ -379,11 +379,42 @@ const Sustainability = (props: any) => {
                                     <li className="w-1/2 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Gluten className="svg block w-full mb-1 h-[32px]" />Gluten Free</li>
                                     <li className="w-1/2 flex items-center mb-0 flex-wrap text-center justify-center text-body"><Vegan className="svg block w-full mb-1 h-[32px]" />Clean Beauty</li>
                                 </ul>
-                            )} */}
+                            )}
                             <picture className="">
                                 <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-ingredients_cc7872fad6.jpg?v=1773620533'} media="(min-width: 992px)" />
                                 <img className="w-full" alt={'No Nasties Formula'} src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-ingredients_cc7872fad6.jpg?v=1773620533'} />
-                            </picture>
+                            </picture> */}
+                            <figure className="relative">
+                                <picture className="block">
+                                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-rewards_83b7609e93.png?v=1774241600" media="(min-width: 992px)" />
+                                    <img className="w-full lg:h-auto" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-rewards_83b7609e93.png?v=1774241600" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
+                                </picture>
+                                <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col">
+                                    <p className="text-[18px] lg:text-xl mb-[0.75rem]  lg:mb-[1.75rem] font-bold">No-Nasties Formulas</p>
+                                    <div className="max-w-[371px] w-full grid grid-cols-2 gap-[0.75rem] lg:gap-[1.25rem]">
+                                        <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
+                                            <DimethiconeFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
+                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Silicone Free</p>
+                                        </div>
+                                        <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
+                                            <Gluten className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
+                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Gluten Free</p>
+                                        </div>
+                                        <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
+                                            <ToxinFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
+                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Toxin-free</p>
+                                        </div>
+                                        <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
+                                            <Vegan className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
+                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Clean Beauty</p>
+                                        </div>
+                                        <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
+                                            <ParabelFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
+                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Paraben Free</p>
+                                        </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                         <div className="w-full lg:w-1/2 order-1 lg:order-2 px-[.375em] lg:px-[.5rem] hidden lg:block">
                             {/* <h2 className="block lg:hidden text-center lg:text-left mb-2">{formula.heading}</h2> */}
@@ -485,7 +516,7 @@ const Sustainability = (props: any) => {
                 </div>
             </section>
             {!isLoading && (
-                <section className="pt-0 pb-1 relative">
+                <section className="pt-0 pb-1 relative lg:mt-4 mt-0">
                     <div className="container pt-2 lg:p-0">
                         <p className="pb-[1rem] mb-0 font-bold text-center text-body text-xl lg:text-2xl">{packaging.heading}</p>
                         <Carousel.Wrapper emblaApi={emblaApi2} className="px-0">
