@@ -627,7 +627,7 @@ const ProductInfo = (props: any) => {
                                             {selected.includes(selectedVariant?.id) ? 'Added' : ''}
                                             {selectedVariant?.availableForSale && !selected.includes(selectedVariant?.id) ? <>
                                                 {/* <span className="lg:hidden">Add</span> */}
-                                                <span>Add to Cart</span>
+                                                <span>{kitBuilder ? 'Add to Bundle' : 'Add to Cart'}</span>
                                             </> : ''}
                                         </>
                                     )}
