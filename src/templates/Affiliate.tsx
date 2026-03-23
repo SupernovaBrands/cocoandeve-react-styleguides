@@ -84,7 +84,7 @@ const Affiliate = (props: any) => {
 									<a
 										href={banner.cta}
 										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:flex fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
-											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
+											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
 										>{banner.cta_label}</a>
 								</div>
 							</div>
