@@ -73,26 +73,20 @@ const Affiliate = (props: any) => {
 						<img src={banner.back_img_2.url.replace('public', '828x')} alt={banner.title} className="w-full" loading="lazy" />
 					</picture>
 
-					<figcaption className="relative bg-affiliate lg:bg-transparent lg:absolute w-full -top-2 lg:top-0 bottom-0 left-0 right-0">
+					<figcaption className="lg:bg-transparent absolute w-full top-2 lg:top-0 bottom-0 left-0 right-0">
 						{/* <div className="polygon-path bg-affiliate h-[5.625rem] absolute -translate-y-[50%] top-[1px] left-0 right-0 lg:hidden"></div> */}
 						<div className="container lg:h-full">
-							<div className="flex justify-center items-center h-full">
-								<div className="grow-0 shrink-0 basis-[40%] hidden lg:block"></div>
-								{/* <div className="f-text lg:border-t lg:border-t-transparent text-center lg:flex-1 text-affiliate-black">
+							<div className="flex justify-center lg:justify-start items-center h-full">
+								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:text-left lg:flex-1 lg:flex flex-col gap-[24px] text-affiliate-black">
 									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
-									<h1 className="text-[2rem] leading-[2.25rem] mt-25 mb-1 max-w-[80%] mx-auto lg:my-2 lg:text-hero lg:leading-[4.5rem] lg:max-w-[90%]">{banner.title}</h1>
-									<h2 className="hidden lg:block text-xl font-normal mb-[2.813rem] leading-[1.5rem]">{banner.subtitle}</h2>
-									<h2 className="lg:hidden text-base text-[#000] font-normal mb-2">
-										{banner.subtitle.split(' ').map((text: string, idx: number) => {
-											return idx === 3 ? parse(`${text}${"<br />"}`) : `${text} `
-										})}
-									</h2>
+									<h1 className="text-[24px] leading-[2.25rem] my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%]" dangerouslySetInnerHTML={{__html: banner.title}} />
+									<h2 className="font-normal text-base lg:text-[24px] leading-[1.5rem] lg:leading-[28px]" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
 									<a
 										href={banner.cta}
-										className={`btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
+										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:flex fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
 											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
 										>{banner.cta_label}</a>
-								</div> */}
+								</div>
 							</div>
 						</div>
 					</figcaption>
@@ -137,7 +131,7 @@ const Affiliate = (props: any) => {
 			{benefit && (
 				<section className="lg:max-w-[1160px] mx-auto ">
 					<div className="container">
-						<h2 className="text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px] mb-[24px] lg:mb-[4.063rem] text-center mt-2 lg:mt-0">{benefit.section_title}</h2>
+						<h2 className="text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px] mb-[24px] lg:mb-[40px] text-center mt-2 lg:mt-0">{benefit.section_title}</h2>
 						<div className="flex flex-wrap justify-center benefits ">
 							{[...Array(6)].map((data, i) => (
 								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/6 text-center mb-0 lg:mb-0">
@@ -167,7 +161,7 @@ const Affiliate = (props: any) => {
 							{[...Array(3)].map((idx, i) => (
 								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
 									<div className={`w-full lg:w-1/2 flex gap-[8px] lg:gap-[16px] flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0 lg:pl-2`}>
-										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px]">{content[`section_ct_step_${i + 1}`]}</h3>
+										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal">{content[`section_ct_step_${i + 1}`]}</h3>
 										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] max-w-[380px]'>{content[`section_ct_title_${i + 1}`]}</h2>
 
 										{i === 0 && (
@@ -218,10 +212,10 @@ const Affiliate = (props: any) => {
 			{content && (
 				<section className="mt-2 mb-1 lg:mb-4 overflow-hidden">
 					<div className="container px-g">
-						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-0 lg:px-2">
+						<div className="max-w-[53rem] mx-auto mb-[42px] lg:mb-0 px-0 lg:px-2">
 							<h2 className="text-[#000] mb-[12px] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[60px] text-center">{content.faq_heading}</h2>
 
-							{dataAccordion && (<AccordionPDP noWrapperBorder={true} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px lg:max-w-none" />)}
+							{dataAccordion && (<AccordionPDP noWrapperBorder={true} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px] lg:max-w-none" />)}
 						</div>
 					</div>
 				</section>
