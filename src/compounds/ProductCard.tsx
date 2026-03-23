@@ -613,7 +613,7 @@ const ProductCard = (props: any) => {
                     </ConditionalWrap>
                 </p>
 
-                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] items-center">
+                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] lg:items-center gap-[.25rem] lg:gap-0 flex-col lg:flex-row">
                     {skus.length > 0 && (
                         <YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                     )}
