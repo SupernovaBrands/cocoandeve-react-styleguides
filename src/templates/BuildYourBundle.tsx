@@ -222,129 +222,132 @@ const BuildYourBundle = (props: any) => {
                         {strapiData.collection_3_label && <li><TabNav className={`${activeTab === 2 ? 'text-body' : ''}`} title={strapiData.collection_3_label || 'SPF'} active={activeTab === 2} onNavChange={() => setActiveTab(2)} /></li>}
                     </ul>
                 </div>
-                <div className={`container px-g pb-0 lg:pt-3 grid grid-cols-1 lg:grid-cols-[71.966%_25.47%] lg:gap-x-[1.875rem]`}>
-                    
-                    <TabContent active={activeTab === 0} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
-                        {tab1Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) => {
-                            const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                            return (
-                                <ProductCard
-                                    clickShowPopup={true}
-                                    kitBuilder={true}
-                                    key={`build-your-bundle--hair--${index}`}
-                                    index={index}
-                                    product={item}
-                                    className="relative flex flex-col w-full basis-full text-center"
-                                    store={props.store}
-                                    itemSelected={tabSelected || []}
-                                    generalSetting={generalSetting}
-                                    setItemSelected={setTabSelected}
-                                    bundleDiscount={bundleDiscount}
-                                    bundleSize={bundleSize}
-                                    maxItem={MAX_ITEM}
-                                    setProductData={setProductData}
-                                    collectionTemplate={true}
-                                    trackEvent={trackEvent}
-                                    eventNameOnClick='kit_builder_product_card'
-                                    preOrders={preOrders}
-                                    isLaunchWL={isLaunchWL}
-                                    launchBox={launchBox}
-                                    setLaunchWLModal={setLaunchWLModal}
-                                    setLaunchWLModal2={setLaunchWLModal2}
-                                    setLaunchWLModal3={setLaunchWLModal3}
-                                    setWaitlistData={setWaitlistData}
-                                />
-                            )
-                        })}
-                        {tab1Products?.length <= 0 && <LoadingEl />}
-                    </TabContent>
-                    <TabContent active={activeTab === 1} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
-                        {tab2Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) =>
-                        {
-                            const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                            return (
-                                <ProductCard
-                                    clickShowPopup={true}
-                                    kitBuilder={true}
-                                    key={`build-your-bundle--tan--${index}`}
-                                    index={index}
-                                    product={item}
-                                    className="relative flex flex-col w-full basis-full text-center"
-                                    generalSetting={generalSetting}
-                                    collectionTemplate={true}
-                                    store={props.store}
-                                    itemSelected={tabSelected || []}
-                                    setItemSelected={setTabSelected}
-                                    bundleDiscount={bundleDiscount}
-                                    bundleSize={bundleSize}
-                                    maxItem={MAX_ITEM}
-                                    setProductData={setProductData}
-                                    trackEvent={trackEvent}
-                                    eventNameOnClick='kit_builder_product_card'
-                                    preOrders={preOrders}
-                                    isLaunchWL={isLaunchWL}
-                                    launchBox={launchBox}
-                                    setLaunchWLModal={setLaunchWLModal}
-                                    setLaunchWLModal2={setLaunchWLModal2}
-                                    setLaunchWLModal3={setLaunchWLModal3}
-                                    setWaitlistData={setWaitlistData}
-                                />
-                            )
-                        }
-                        )}
-                        {tab2Products?.length <= 0 && <LoadingEl />}
-                    </TabContent>
-                    <TabContent active={activeTab === 2} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
-                        {tab3Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) =>
-                        {
-                            const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                            return (
-                                <ProductCard
-                                    clickShowPopup={true}
-                                    kitBuilder={true}
-                                    key={`build-your-bundle--tan--${index}`}
-                                    index={index}
-                                    product={item}
-                                    className="relative flex flex-col w-full basis-full text-center"
-                                    generalSetting={generalSetting}
-                                    collectionTemplate={true}
-                                    store={props.store}
-                                    itemSelected={tabSelected || []}
-                                    setItemSelected={setTabSelected}
-                                    bundleDiscount={bundleDiscount}
-                                    bundleSize={bundleSize}
-                                    maxItem={MAX_ITEM}
-                                    setProductData={setProductData}
-                                    trackEvent={trackEvent}
-                                    eventNameOnClick='kit_builder_product_card'
-                                    preOrders={preOrders}
-                                    isLaunchWL={isLaunchWL}
-                                    launchBox={launchBox}
-                                    setLaunchWLModal={setLaunchWLModal}
-                                    setLaunchWLModal2={setLaunchWLModal2}
-                                    setLaunchWLModal3={setLaunchWLModal3}
-                                    setWaitlistData={setWaitlistData}
-                                />
-                            )
-                        }
-                        )}
-                        {tab3Products?.length <= 0 && <LoadingEl />}
-                    </TabContent>
+                <div className={`container px-g pb-0 lg:pt-3 lg:flex lg:gap-x-[1.875rem]`}>
+                    <div className="lg:w-[71.966%]">
+                        <TabContent active={activeTab === 0} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                            {tab1Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) => {
+                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
+                                return (
+                                    <ProductCard
+                                        clickShowPopup={true}
+                                        kitBuilder={true}
+                                        key={`build-your-bundle--hair--${index}`}
+                                        index={index}
+                                        product={item}
+                                        className="relative flex flex-col w-full basis-full text-center"
+                                        store={props.store}
+                                        itemSelected={tabSelected || []}
+                                        generalSetting={generalSetting}
+                                        setItemSelected={setTabSelected}
+                                        bundleDiscount={bundleDiscount}
+                                        bundleSize={bundleSize}
+                                        maxItem={MAX_ITEM}
+                                        setProductData={setProductData}
+                                        collectionTemplate={true}
+                                        trackEvent={trackEvent}
+                                        eventNameOnClick='kit_builder_product_card'
+                                        preOrders={preOrders}
+                                        isLaunchWL={isLaunchWL}
+                                        launchBox={launchBox}
+                                        setLaunchWLModal={setLaunchWLModal}
+                                        setLaunchWLModal2={setLaunchWLModal2}
+                                        setLaunchWLModal3={setLaunchWLModal3}
+                                        setWaitlistData={setWaitlistData}
+                                    />
+                                )
+                            })}
+                            {tab1Products?.length <= 0 && <LoadingEl />}
+                        </TabContent>
+                        <TabContent active={activeTab === 1} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                            {tab2Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) =>
+                            {
+                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
+                                return (
+                                    <ProductCard
+                                        clickShowPopup={true}
+                                        kitBuilder={true}
+                                        key={`build-your-bundle--tan--${index}`}
+                                        index={index}
+                                        product={item}
+                                        className="relative flex flex-col w-full basis-full text-center"
+                                        generalSetting={generalSetting}
+                                        collectionTemplate={true}
+                                        store={props.store}
+                                        itemSelected={tabSelected || []}
+                                        setItemSelected={setTabSelected}
+                                        bundleDiscount={bundleDiscount}
+                                        bundleSize={bundleSize}
+                                        maxItem={MAX_ITEM}
+                                        setProductData={setProductData}
+                                        trackEvent={trackEvent}
+                                        eventNameOnClick='kit_builder_product_card'
+                                        preOrders={preOrders}
+                                        isLaunchWL={isLaunchWL}
+                                        launchBox={launchBox}
+                                        setLaunchWLModal={setLaunchWLModal}
+                                        setLaunchWLModal2={setLaunchWLModal2}
+                                        setLaunchWLModal3={setLaunchWLModal3}
+                                        setWaitlistData={setWaitlistData}
+                                    />
+                                )
+                            }
+                            )}
+                            {tab2Products?.length <= 0 && <LoadingEl />}
+                        </TabContent>
+                        <TabContent active={activeTab === 2} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                            {tab3Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) =>
+                            {
+                                const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
+                                return (
+                                    <ProductCard
+                                        clickShowPopup={true}
+                                        kitBuilder={true}
+                                        key={`build-your-bundle--tan--${index}`}
+                                        index={index}
+                                        product={item}
+                                        className="relative flex flex-col w-full basis-full text-center"
+                                        generalSetting={generalSetting}
+                                        collectionTemplate={true}
+                                        store={props.store}
+                                        itemSelected={tabSelected || []}
+                                        setItemSelected={setTabSelected}
+                                        bundleDiscount={bundleDiscount}
+                                        bundleSize={bundleSize}
+                                        maxItem={MAX_ITEM}
+                                        setProductData={setProductData}
+                                        trackEvent={trackEvent}
+                                        eventNameOnClick='kit_builder_product_card'
+                                        preOrders={preOrders}
+                                        isLaunchWL={isLaunchWL}
+                                        launchBox={launchBox}
+                                        setLaunchWLModal={setLaunchWLModal}
+                                        setLaunchWLModal2={setLaunchWLModal2}
+                                        setLaunchWLModal3={setLaunchWLModal3}
+                                        setWaitlistData={setWaitlistData}
+                                    />
+                                )
+                            }
+                            )}
+                            {tab3Products?.length <= 0 && <LoadingEl />}
+                        </TabContent>
+                    </div>
 
-                    <YourBundleSidebar
-                        parentProduct={parentProduct}
-                        updateCartAttributes={updateCartAttributes}
-                        store={props.store}
-                        setItemSelected={setTabSelected}
-                        itemSelected={tabSelected}
-                        bundleSize={bundleSize}
-                        bundleDiscount={bundleDiscount}
-                        type={activeTab}
-                        addToCart={addToCart}
-                        strapiData={strapiData}
-                        maxItem={MAX_ITEM}
-                        minItem={MIN_ITEM}
-                    />  
+                    <div className="lg:w-[25.47%]">
+                        <YourBundleSidebar
+                            parentProduct={parentProduct}
+                            updateCartAttributes={updateCartAttributes}
+                            store={props.store}
+                            setItemSelected={setTabSelected}
+                            itemSelected={tabSelected}
+                            bundleSize={bundleSize}
+                            bundleDiscount={bundleDiscount}
+                            type={activeTab}
+                            addToCart={addToCart}
+                            strapiData={strapiData}
+                            maxItem={MAX_ITEM}
+                            minItem={MIN_ITEM}
+                        />
+                    </div>  
                 </div>
             </div>
             <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>

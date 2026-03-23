@@ -86,11 +86,6 @@ export const CartItem = (props:CartItemProps) => {
 
 	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
-	let isRemovable = null;
-	if (isBundle) {
-		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
-	}
-
 	const productTitle = (item:any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
 		if (item.merchandise.title.toLowerCase() === 'default title') {
