@@ -10,7 +10,6 @@ const AccordionPDP = (props: any) => {
 		component: any;
 		isBundlePage?: boolean;
 		children?: any;
-		isBundlePage?: boolean;
 	};
 	const { data, isDesktop } = props;
 	const scrollToId = (id, targetEl) => {
