@@ -30,7 +30,7 @@ const DEFAULT_LABEL_SIDE_UPSELL = 'Add To Cart';
 const PARSED_DEFAULT_LABEL = parse(DEFAULT_LABEL);
 const PARSED_DEFAULT_LABEL_SIDE_UPSELL = parse(DEFAULT_LABEL_SIDE_UPSELL);
 
-const ConditionalWrap = ({condition, wrap, children, elseWrap}) => condition ? wrap(children) : elseWrap(children);
+const ConditionalWrap = ({ condition, wrap, children, elseWrap }) => condition ? wrap(children) : elseWrap(children);
 
 const Pricing = memo(({ buttonData, collectionTemplate, kitBuilder, kitBuilderLabel }: PricingProps) => {
     let label = buttonData.btnLabel ? buttonData.btnLabel : buttonData.label;
@@ -208,8 +208,8 @@ const AddToCartButton = memo((props: any) => {
             if (kitSelected.includes(selectedVariant.id)) {
                 const currentSelected = [...itemSelected];
                 const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
-                    setItemSelected(newSelected);
-                    return false;
+                setItemSelected(newSelected);
+                return false;
             }
             if (kitSelected.length >= maxItem) return false;
             setItemSelected((prev) => {
@@ -351,7 +351,7 @@ const SwatchOverlay = memo((props: any) => {
 
     return (
         <>
-            <AddToCartButton 
+            <AddToCartButton
                 store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent}
                 kitBuilder={props.kitBuilder} overlayButton={true}
             />
@@ -380,9 +380,9 @@ const SwatchOverlay = memo((props: any) => {
                     </ul>
                 </div>
                 {swatchAvailable ? (
-                    <AddToCartButton 
-                    product={props.product} maxItem={props.maxItem} kitBuilder={props.kitBuilder} itemSelected={props.itemSelected} setItemSelected={props.setItemSelected}
-                    store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
+                    <AddToCartButton
+                        product={props.product} maxItem={props.maxItem} kitBuilder={props.kitBuilder} itemSelected={props.itemSelected} setItemSelected={props.setItemSelected}
+                        store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} label={label} preOrders={preOrders} comparePrice={comparePrice} price={price} selectedVariant={selectedVariant} carousel={props.carousel} addToCart={addToCart} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent || null} />
                 ) : (
                     <WaitlistButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} setWaitlistData={props.setWaitlistData} product={props.product} selectedVariant={selectedVariant} comparePrice={comparePrice} price={price} carousel={props.carousel} className="button-overlay z-[1] w-full mb-0" sideUpsell={props.sideUpsell} />
                 )}
@@ -391,9 +391,9 @@ const SwatchOverlay = memo((props: any) => {
     );
 });
 
-const isKit = (title:string) => {
-	const productTitle = title?.toLowerCase();
-	return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
+const isKit = (title: string) => {
+    const productTitle = title?.toLowerCase();
+    return productTitle.includes('tanning goddess') || productTitle.includes('kit') || productTitle.includes('set') || productTitle.includes('bundle') || productTitle.includes('duo')
 }
 
 const ProductCardButton = (props: any) => {
@@ -402,27 +402,27 @@ const ProductCardButton = (props: any) => {
     return (
         <>
             {!rest.isLaunchWL && !rest.product.swatch && rest.effectivelyAvailable && (
-                    <AddToCartButton {...rest} />
-                )}
+                <AddToCartButton {...rest} />
+            )}
 
-                {!rest.isLaunchWL && rest.product.swatch && (
-                    <SwatchOverlay
-                        {...rest}
-                        swatch={rest.product.swatch}
-                    />
-                )}
+            {!rest.isLaunchWL && rest.product.swatch && (
+                <SwatchOverlay
+                    {...rest}
+                    swatch={rest.product.swatch}
+                />
+            )}
 
-                {!rest.isLaunchWL && !rest.product.swatch && !rest.effectivelyAvailable && (
-                    <WaitlistButton {...rest} />
-                )}
+            {!rest.isLaunchWL && !rest.product.swatch && !rest.effectivelyAvailable && (
+                <WaitlistButton {...rest} />
+            )}
 
-                {props.isLaunchWL && (
-                    <LaunchButton {...rest} />
-                )}
+            {props.isLaunchWL && (
+                <LaunchButton {...rest} />
+            )}
 
-                {props.kitBuilder && (
-                    <span onClick={(e) => props.openModal(e)} className="inline-block mt-[.5rem] mb-[.5rem] lg:hidden text-sm leading-[18px] underline">Learn more</span>
-                )}
+            {props.kitBuilder && (
+                <span onClick={(e) => props.openModal(e)} className="inline-block mt-[.5rem] mb-[.5rem] lg:hidden text-sm leading-[18px] underline">Learn more</span>
+            )}
         </>
     );
 }
@@ -494,8 +494,8 @@ const ProductCard = (props: any) => {
 
     const filterIncludes = props.collectionTemplate ? ['collection-pdp', 'collection'] : ['pdp', 'collection-pdp'];
     const customTitle = useMemo(() => props.customProductTitle?.customTitles?.find(
-            (row) => row.handle === product?.handle && row.enabled_item && filterIncludes?.includes(row.options)
-        )?.title || null,
+        (row) => row.handle === product?.handle && row.enabled_item && filterIncludes?.includes(row.options)
+    )?.title || null,
         [props.customProductTitle, product?.handle, filterIncludes]
     );
 
@@ -513,6 +513,24 @@ const ProductCard = (props: any) => {
     const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store) : null;
 
     // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant', selectedVariant);
+    const [platform, setPlatform] = useState('unknown');
+
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+        let detectedOS = 'unknown';
+
+        if (/windows/i.test(userAgent)) {
+            detectedOS = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            detectedOS = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            detectedOS = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            detectedOS = 'os-android';
+        }
+
+        setPlatform(detectedOS);
+    }, []);
 
     const handleVariantChange = useCallback((variant) => {
         setSelectedVariant(variant);
@@ -560,35 +578,35 @@ const ProductCard = (props: any) => {
                     opacity-0 translate-y-[.75rem]
                     transition-all duration-300
                     [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
-                        <ProductCardButton
-                            {...props}
-                            store={store}
-                            generalSetting={generalSetting}
-                            preOrders={preOrders}
-                            addToCart={addToCart}
-                            trackEvent={trackEvent}
-                            label={label}
-                            selectedVariant={selectedVariant}
-                            effectivelyAvailable={effectivelyAvailable}
-                            handleShade={handleShade}
-                            comparePrice={props.product.comparePrice}
-                            price={props.product.price}
-                            onVariantChange={handleVariantChange}
-                            openModal={openModal}
-                        />
+                    <ProductCardButton
+                        {...props}
+                        store={store}
+                        generalSetting={generalSetting}
+                        preOrders={preOrders}
+                        addToCart={addToCart}
+                        trackEvent={trackEvent}
+                        label={label}
+                        selectedVariant={selectedVariant}
+                        effectivelyAvailable={effectivelyAvailable}
+                        handleShade={handleShade}
+                        comparePrice={props.product.comparePrice}
+                        price={props.product.price}
+                        onVariantChange={handleVariantChange}
+                        openModal={openModal}
+                    />
                 </div>
 
                 {/* Badges */}
                 {!kitBuilder && props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                    <span className={`min-w-[3.375em] leading-[normal] badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                        {props.product.badgeText}
+                    <span className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                        <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{props.product.badgeText}</span>
                     </span>
                 )}
                 {!kitBuilder && props.product.activeBadges && !props.sideUpsell && (
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.activeBadges.map((badge) => (
-                            <span key={badge.badge_text} className={`min-w-[3.375em] leading-[normal] badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                                {badge.badge_text}
+                            <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
+                                <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
