@@ -490,14 +490,16 @@ const Cart: React.FC<Props> = (props) => {
 										<>
 											<>
 												<p className="hidden lg:flex w-2/3 mb-1  font-bold" data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												{/* <p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
+												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
 											</>
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
-												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
+												{/* <p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
 											</div>
 										</>
 									)}
