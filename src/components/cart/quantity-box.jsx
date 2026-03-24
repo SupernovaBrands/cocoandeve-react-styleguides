@@ -15,6 +15,7 @@ export default class QuantityBox extends React.Component {
 		this.state = {
 			prevQuantity: props.quantity,
 			quantity: `${props.quantity}`,
+			currentlyNotInStock: props?.currentlyNotInStock,
 			lastStock: false,
 		};
 
@@ -23,6 +24,11 @@ export default class QuantityBox extends React.Component {
 
 	static getDerivedStateFromProps(nextProps, prevState) {
 		if (prevState.isEditing) return null;
+		if (nextProps.productStock < 0 && prevState?.currentlyNotInStock) {
+			return {
+				lastStock: false,
+			};
+		}
 		if (prevState.updateQuantity) {
 			return {
 				quantity: nextProps.quantity,
