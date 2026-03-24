@@ -509,7 +509,7 @@ const Cart: React.FC<Props> = (props) => {
 											<p className="mb-1" data-cy="cart-shipping-label">
 												<strong>{`${tStrings.cart_shipping} `}</strong>
 											</p>
-											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
+											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Free</p>
 										</div>
 										</>
 									)}
