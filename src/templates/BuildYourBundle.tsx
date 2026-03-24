@@ -103,8 +103,6 @@ const BuildYourBundle = (props: any) => {
     </div>;
     const generalSetting = ProductSettings.find((setting: any) => setting.__component === 'product.general');
 
-    const [platform, setPlatform] = useState('');
-
     const [waitlistData, setWaitlistData] = useState({
         open: false,
         title: '',
@@ -142,23 +140,6 @@ const BuildYourBundle = (props: any) => {
     });
 
     useEffect(() => {
-        const userAgent = navigator.userAgent || navigator.vendor;
-        let os = 'unknown';
-
-        if (/windows/i.test(userAgent)) {
-            os = 'os-win';
-        } else if (/macintosh|mac os x/i.test(userAgent)) {
-            os = 'os-mac';
-        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            os = 'os-ios';
-        } else if (/android/i.test(userAgent)) {
-            os = 'os-android';
-        }
-
-        setPlatform(os);
-    }, []);
-
-    useEffect(() => {
         if (tab1Data.length > 0) setTab1Products(tab1Data);
     }, [tab1Data]);
 
@@ -173,12 +154,26 @@ const BuildYourBundle = (props: any) => {
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [launchSubmitted, setLaunchSubmitted] = useState(false);
 
+    let bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925';
+    let bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926';
+    if (['int', 'my'].includes(store)) {
+        bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_MB_INT_MY.gif?v=1774338778';
+    }
+
+    if (['us', 'uk', 'eu'].includes(store)) {
+        bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_MB_US_UK_EU.gif?v=1774338778';
+    }
+
+    if (['au', 'ca'].includes(store)) {
+        
+    }
+
     return strapiData ? (
         <div className={`${styles.container}`} style={{ '--header-height': `${headerPos}px` } as React.CSSProperties}>
             <figure className="flex flex-wrap relative">
                 <picture className="w-full block">
-                    <source media="(min-width: 992px)" srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925" />
-                    <img alt={`Banner of ${strapiData?.title_text}`} src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926" className="block w-full" loading="eager" 
+                    <source media="(min-width: 992px)" srcSet={bannerDt} />
+                    <img alt={`Banner of ${strapiData?.title_text}`} src={bannerMb} className="block w-full" loading="eager" 
                         // @ts-ignore
                         fetchpriority="high" width={750} height={422} />
                 </picture>
