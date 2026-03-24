@@ -17,10 +17,19 @@ type PropType = {
 	slides: ImageSlide[]
 	bottomBadge?: string
 	activeImageIndex: number
+	store: string
 	videoStack: {
 		video_url: string
 		video_thumbnail: {
 			url: string
+		}
+		productVideoPdp: {
+			[store: string]: {
+				video_url: string
+				video_thumbnail: {
+					url: string
+				}
+			}
 		}
 	}
 }
@@ -41,12 +50,15 @@ const useMediaQuery = (query) => {
 	return matches;
 };
 
-const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex, videoStack }) => {
+const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBadge, activeImageIndex, videoStack, store }) => {
 	const isDesktop = useMediaQuery('(min-width: 769px)');
 	const [selectedIndex, setSelectedIndex] = useState(activeImageIndex);
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
 	let slides = slideBoxes;
+	const storeData = videoStack?.productVideoPdp?.productVideoPdp?.[store];
+	const videoUrl = storeData?.video_url || videoStack?.video_url;
+	const videoThumbnail = storeData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
@@ -156,14 +168,14 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 									</button>
 								</div>
 							))}
-							{videoStack?.video_thumbnail?.url && (
+							{videoThumbnail && (
 								<div className={` max-w-[70px] flex flex-[0_0_70px] my-1 rounded relative`} key={slides.length}>
 									<button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)} aria-label="View product thumbnail">
 										{isDesktop && (
 											<>
 												<picture>
-													<source srcSet={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
-													<img alt={`Thumbnail image of Product Video`} className="w-[70px] rounded b" src={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
+													<source srcSet={`${videoThumbnail || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
+													<img alt={`Thumbnail image of Product Video`} className="w-[70px] rounded b" src={`${videoThumbnail || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
 												</picture>
 												<div className="absolute inset-0 flex items-center justify-center">
 													<Play className="svg fill-gray-100 h-[2em] fill-sm" />
@@ -207,10 +219,10 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 									</picture>
 								</div>
 							))}
-							{videoStack?.video_url && (
+							{videoUrl && (
 								<div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
 									<video width="320" height="240"  className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
-										<source src={videoStack?.video_url} type="video/mp4" />
+										<source src={videoUrl} type="video/mp4" />
 										Your browser does not support the video tag.
 									</video>
 								</div>
