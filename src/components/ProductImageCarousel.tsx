@@ -56,9 +56,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 	const [scrollProgress, setScrollProgress] = useState(0);
 	const [emblaMainRef, emblaMainApi] = useEmblaCarousel({ loop: true, align: 'start'});
 	let slides = slideBoxes;
-	const storeData = videoStack?.productVideoPdp?.productVideoPdp?.[store];
-	const videoUrl = storeData?.video_url || videoStack?.video_url;
-	const videoThumbnail = storeData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
+	const productVideoData = videoStack?.productVideoPdp?.productVideoPdp?.[store];
+	const videoUrl = productVideoData?.video_url || videoStack?.video_url;
+	const videoThumbnail = productVideoData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
 	// if (slides.length <= 8 && slides.length > 7) {
 	// 	slides.push(slides[slides.length / 2]);
 	// }
