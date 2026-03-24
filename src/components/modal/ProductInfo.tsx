@@ -210,6 +210,10 @@ const ProductInfo = (props: any) => {
 
     const slidesCount = slides.length + (videoStack?.video_thumbnail?.url ? 1 : 0);
 
+    const productVideoData = videoStack?.productVideoPdp?.productVideoPdp?.[store];
+	const videoUrl = productVideoData?.video_url || videoStack?.video_url;
+	const videoThumbnail = productVideoData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
+
     const onThumbClick = (index: number) => {
         if (!emblaMainApi || !emblaThumbsApi) return;
         emblaMainApi.scrollTo(index);
@@ -510,10 +514,10 @@ const ProductInfo = (props: any) => {
                                                     </picture>
                                                 </div>
                                             ))}
-                                            {videoStack?.video_url && (
+                                            {videoUrl && (
                                                 <div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
                                                     <video width="320" height="240" className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
-                                                        <source src={videoStack?.video_url} type="video/mp4" />
+                                                        <source src={videoUrl} type="video/mp4" />
                                                         Your browser does not support the video tag.
                                                     </video>
                                                 </div>
@@ -549,14 +553,14 @@ const ProductInfo = (props: any) => {
                                                     </button>
                                                 </div>
                                             ))}
-                                            {videoStack?.video_thumbnail?.url && (
+                                            {videoThumbnail && (
                                                 <div className={`w-auto h-auto flex flex-grow-0 flex-shrink-0 basis-[70px] mr-2 rounded relative`} key={slides.length}>
                                                     <button type="button" className={`${selectedIndex === slides.length ? 'border border-primary' : ''} rounded`} onClick={() => onThumbClick(slides.length)}>
                                                         {isDesktop && (
                                                             <>
                                                                 <picture>
-                                                                    <source srcSet={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
-                                                                    <img className="w-[70px] rounded b" src={`${videoStack?.video_thumbnail?.url || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
+                                                                    <source srcSet={`${videoThumbnail || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} media="(min-width: 769px)" />
+                                                                    <img className="w-[70px] rounded b" src={`${videoThumbnail || slides[0].src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${slides.length + 1}`)}`} width={70} height={70} />
                                                                 </picture>
                                                                 <div className="absolute inset-0 flex items-center justify-center">
                                                                     <Play className="svg fill-gray-100 h-[2em] fill-sm" />
