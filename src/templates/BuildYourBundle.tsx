@@ -35,12 +35,17 @@ const MIN_ITEM = 2;
 const MAX_ITEM = 5;
 
 const BuildYourBundle = (props: any) => {
+    const bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925';
+    const bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926';
+
     const { submitsToSmsBumpAPi, trackBluecoreLaunchWaitlistEvent, loggedInEmail, trackBluecoreEvent, waitlistPdpSetting, launchWL, preOrders, trackEvent, waitlistPdpStore, getActiveWL, parentProduct, updateCartAttributes, tab1Data, tab2Data, tab3Data, buildProductCardModel, FragranceNotes, ProductSettings, checkHardcodedFaq, checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, checkHardcodedTagline, addToCart, strapiData, store, checkHardcodedImages, strapiAutomateHardcode, checkHardcodedTitles, checkHardcodedVariant } = props;
 
     const [bundleSize, setBundleSize] = useState(MIN_ITEM);
     const [bundleDiscount, setBundleDiscount] = useState(15);
     const [activeTab, setActiveTab] = useState(0);
     const [headerPos, setHeaderPos] = useState(0);
+    const [bannerDesktop, setBannerDesktop] = useState(bannerDt);
+    const [bannerMobile, setBannerMobile] = useState(bannerMb);
 
     const [tab1Products, setTab1Products] = useState(tab1Data || []);
     const [tab2Products, setTab2Products] = useState(tab2Data || []);
@@ -90,6 +95,21 @@ const BuildYourBundle = (props: any) => {
         if (header) {
             setHeaderPos(header.getBoundingClientRect().height || 0);
         }
+        
+        if (['int', 'my'].includes(store)) {
+            setBannerMobile('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_MB_int_my_58c602f1-f437-441a-87d3-e2a1d7d471e2.gif?v=1774403623');
+            setBannerDesktop('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_DT_int_my_1920x.gif?v=1774403624');
+        }
+
+        if (['us', 'uk', 'eu', 'dev'].includes(store)) {
+            setBannerMobile('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_MB_US_UK_EU.gif?v=1774338778');
+            setBannerDesktop('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_DT_eu_uk_us_1920x.gif?v=1774403714');
+        }
+
+        if (['au', 'ca'].includes(store)) {
+            setBannerMobile('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Build_Your_Own_Web_Bundle_-_MB_CA_AU.gif?v=1774403757');
+            setBannerDesktop('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Build_Your_Own_Web_Bundle_-_DT_CA_AU_1920x.gif?v=1774403757');
+        }
     }, [store]);
 
     useEffect(() => {
@@ -102,8 +122,6 @@ const BuildYourBundle = (props: any) => {
         <span className="spinner-border spinner-border-sm text-body !w-2 !h-2 lg:!w-3 lg:!h-3" role="status" />
     </div>;
     const generalSetting = ProductSettings.find((setting: any) => setting.__component === 'product.general');
-
-    const [platform, setPlatform] = useState('');
 
     const [waitlistData, setWaitlistData] = useState({
         open: false,
@@ -142,23 +160,6 @@ const BuildYourBundle = (props: any) => {
     });
 
     useEffect(() => {
-        const userAgent = navigator.userAgent || navigator.vendor;
-        let os = 'unknown';
-
-        if (/windows/i.test(userAgent)) {
-            os = 'os-win';
-        } else if (/macintosh|mac os x/i.test(userAgent)) {
-            os = 'os-mac';
-        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
-            os = 'os-ios';
-        } else if (/android/i.test(userAgent)) {
-            os = 'os-android';
-        }
-
-        setPlatform(os);
-    }, []);
-
-    useEffect(() => {
         if (tab1Data.length > 0) setTab1Products(tab1Data);
     }, [tab1Data]);
 
@@ -173,12 +174,14 @@ const BuildYourBundle = (props: any) => {
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [launchSubmitted, setLaunchSubmitted] = useState(false);
 
+    
+
     return strapiData ? (
         <div className={`${styles.container}`} style={{ '--header-height': `${headerPos}px` } as React.CSSProperties}>
             <figure className="flex flex-wrap relative">
                 <picture className="w-full block">
-                    <source media="(min-width: 992px)" srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925" />
-                    <img alt={`Banner of ${strapiData?.title_text}`} src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926" className="block w-full" loading="eager" 
+                    <source media="(min-width: 992px)" srcSet={bannerDesktop} width={1920} height={352} />
+                    <img alt={`Banner of ${strapiData?.title_text}`} src={bannerMobile} className="block w-full" loading="eager" 
                         // @ts-ignore
                         fetchpriority="high" width={750} height={422} />
                 </picture>
