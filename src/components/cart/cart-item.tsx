@@ -179,7 +179,7 @@ export const CartItem = (props:CartItemProps) => {
 					setFeaturedImageUrl(result.img);
 				}
 			} catch (e) {
-				console.log('cart image error', e);
+				console.log('cart image error.', e);
 			}
 		};
 
