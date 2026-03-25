@@ -91,7 +91,7 @@ const QuizReward = (props: any) => {
                             <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
                                 <div className="">
                                     <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Rewards Program</p>
-                                    <p className="text-base leading-2 hidden lg:block mt-[.25rem]">Earn points. Get rewards. <br/>Free products made simple!</p>
+                                    <p className="text-base leading-2 hidden lg:block mt-[.25rem]">Earn points. Get rewards. <br />Free products made simple!</p>
                                 </div>
                                 <span className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2">Join Now</span>
                             </figcaption>

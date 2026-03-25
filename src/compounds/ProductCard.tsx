@@ -472,6 +472,8 @@ const ProductCard = (props: any) => {
         let image = props.product.src;
         let hoverImage = props.product.imgHover;
 
+        if (hoverImage) hoverImage = hoverImage.replace('.jpg', '_320x.jpg');
+
         return { productImage: image, productHoverImage: hoverImage };
     }, [product.handle, store, props.product.src, props.product.imgHover]);
 
