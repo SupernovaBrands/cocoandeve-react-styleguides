@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const PlaygroundCard = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
     <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
-        <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
+        <a href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skincare', 'collections/skincare')}>
             <picture className={`rounded-[24px] lg:rounded-[32px] block ${data?.playground_range_bg}`}>
                 <source srcSet={imgDt} media="(min-width: 992px)" />
                 <img alt={imgAlt} className="rounded-[24px] lg:rounded-[32px] w-full lg:max-h-[320px]" src={imgMb} loading="lazy" />
@@ -49,7 +49,7 @@ const PlaygroundTest = (props: any) => {
                 <>
                     {/* <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p> */}
-                    <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my'].includes(store) ? 'justify-center' : ''} `}>
+                    <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my', 'ca', 'au'].includes(store) ? 'justify-center' : ''} `}>
                         <PlaygroundCard store={store} data={content?.range_1}
                             imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_111bfe7e-d857-4df6-8f1e-354218ce673a.jpg?v=1772038666`}
                             imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1c51a568-d52d-4e7b-9725-fa78727dabd7.jpg?v=1772038686`}
@@ -66,7 +66,7 @@ const PlaygroundTest = (props: any) => {
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
-                        {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (
+                        {['us', 'uk', 'eu', 'dev'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_5}
                                 imgMb={content?.range_5?.image_mobile?.url}
                                 imgDt={content?.range_5?.image?.url}
@@ -75,7 +75,7 @@ const PlaygroundTest = (props: any) => {
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
-                        {['int', 'my', 'au'].includes(store) && (
+                        {['int', 'my'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_3}
                                 imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1cea1022-8bd3-4ff5-a25a-0a027127f08c.jpg?v=1772038747`}
                                 imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_8c5d88cb-2992-481a-8186-302ef130253d.jpg?v=1772038776`}
