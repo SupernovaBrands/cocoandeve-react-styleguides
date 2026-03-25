@@ -102,7 +102,7 @@ const BuildYourBundle = (props: any) => {
         }
 
         if (['us', 'uk', 'eu', 'dev'].includes(store)) {
-            setBannerMobile('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_MB_US_UK_EU.gif?v=1774338778');
+            setBannerMobile('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_MB_US_UK_EU_mb.gif?v=1774421087');
             setBannerDesktop('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_DT_eu_uk_us_1920x.gif?v=1774403714');
         }
 
@@ -218,7 +218,7 @@ const BuildYourBundle = (props: any) => {
             </div> */}
             <div className="container--page pb-3 lg:pb-5">
                 <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-g lg:px-0 pt-3 lg:pt-5">
-                    <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3 pr-[1rem] lg:pr-0">{strapiData?.choose_product_text}</p>
+                    <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3 pr-[.5rem] lg:pr-0">{strapiData?.choose_product_text}</p>
                     <ul className="kit-builder--nav list-style-none mx-0 flex gap-[.5rem] lg:gap-1 flex-wrap border-b-0 text-center justify-center">
                         {strapiData.collection_1_label && <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>}
                         {strapiData.collection_2_label && <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>}
