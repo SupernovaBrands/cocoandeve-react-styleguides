@@ -38,11 +38,11 @@ const sweepstakesTemplate = () => {
 		"subheading_col": "text-body",
 		"sweepstakes_lg": {
 			"alt": "SR shampoo conditioner pop up_Desktop (1).jpg",
-			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d21cdc04-c11e-4f2a-9e83-c38a8d2bf100/public"
+			"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_180ea567-ee25-4ade-841c-59e3a0f93816.jpg?v=1772037510"
 		},
 		"sweepstakes_img": {
 			"alt": "SR shampoo conditioner_PAGE_CA_MOB.jpg",
-			"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/62217e1d-cd17-4a46-bce1-beea6906fe00/public"
+			"url": "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9068311a-f72a-473e-ab2a-31b2ec0252b5.jpg?v=1772037532"
 		},
 		"sweepstakes_popup_thank_shopnow": "Shop Coco & Eve",
 		"sweepstakes_popup_thank_shopnow_url": "https://www.cocoandeve.com/collections"

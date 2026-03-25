@@ -1,16 +1,21 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
+import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
-    const { handle, listIds, dummy, store, getFeaturedImgMeta, cache = {} } = props;
+    const { handle, listIds, dummy, store, getFeaturedImgMeta, cache } = props;
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const handleUrl = useMemo(() => {
-        if (store === 'ca' && handle === 'tan-and-spf') return 'tan';
-        return handle;
-    }, [handle, store]);
+    let handleUrl = handle;
 
     useEffect(() => {
+        // If we already have cached data for this handle, use it immediately
+        if (cache && cache[handle]) {
+            setProducts(cache[handle]);
+            setIsLoading(false);
+            return;
+        }
+
         if (dummy) {
             {/* @ts-ignore */ }
             const selected = [
@@ -23,134 +28,108 @@ const NavMegaMenu = (props: any) => {
             setIsLoading(false);
             return;
         }
-
-        if (!handleUrl) {
-            setIsLoading(false);
-            return;
-        }
-
-        // Use cached data if available
-        const cacheKey = `${handleUrl}_${store}`;
-        if (cache[cacheKey]) {
-            setProducts(cache[cacheKey]);
-            setIsLoading(false);
-            return;
-        }
-
-        const controller = new AbortController();
-
-        fetch(`/api/collectionProducts?handle=${handleUrl}&region=${store}`, { signal: controller.signal }).then(
-            res => {
-                try {
-                    res?.json().then(data => {
-                        const plist = handleUrl === 'skin' || handleUrl === 'skincare' ? data?.products : data?.products?.filter(product => product.availableForSale);
-                        let selected = [];
-                        if (handleUrl === 'skin' || handleUrl === 'skincare') {
-                            const skin1 = plist.find((p) => p.handle === 'double-cleanser-set') || null;
-                            const skin2 = plist.find((p) => p.handle === 'antioxidant-glow-cream') || null;
-                            const skin3 = plist.find((p) => p.handle === 'depuff-eye-cream') || null;
-                            if (skin1) selected.push({
-                                title: skin1.title,
-                                handle: skin1.handle,
-                                featuredImage: skin1.featuredImage,
-                                featuredMeta: skin1.featuredMeta,
-                            });
-                            if (skin2) selected.push({
-                                title: skin2.title,
-                                handle: skin2.handle,
-                                featuredImage: skin2.featuredImage,
-                                featuredMeta: skin2.featuredMeta,
-                            });
-                            if (skin3) selected.push({
-                                title: skin3.title,
-                                handle: skin3.handle,
-                                featuredImage: skin3.featuredImage,
-                                featuredMeta: skin3.featuredMeta,
-                            });
-                            // plist.filter((p) =>
-                            //     p.handle === 'double-cleanser-set' || p.handle === 'antioxidant-glow-cream' || p.handle === 'depuff-eye-cream'
-                            // ).forEach((item) => {
-                            //     {/* @ts-ignore */}
-                            //     selected.push({
-                            //         title: item.title,
-                            //         handle: item.handle,
-                            //         featuredImage: item.featuredImage,
-                            //         featuredMeta: item.featuredMeta,
-                            //     });
-                            // });
-                        } else {
-                            for (let i = 0; i < listIds.length; i += 1) {
-                                const item = plist.find((it) => it.id.includes(listIds[i]));
-                                if (item) {
-                                    {/* @ts-ignore */ }
-                                    selected.push({
+        if (handleUrl) {
+            if (store === 'ca' && handleUrl === 'tan-and-spf') {
+                handleUrl = 'tan'
+            }
+            fetch(`/api/collectionProducts?handle=${handleUrl}&region=${store}`).then(
+                res => {
+                    try {
+                        res?.json().then(data => {
+                            const plist = handleUrl === 'skin' || handleUrl === 'skincare' ? data?.products : data?.products?.filter(product => product.availableForSale);
+                            let selected = [];
+                            if (handleUrl === 'skin' || handleUrl === 'skincare') {
+                                const skin1 = plist.find((p) => p.handle === 'double-cleanser-set') || null;
+                                const skin2 = plist.find((p) => p.handle === 'antioxidant-glow-cream') || null;
+                                const skin3 = plist.find((p) => p.handle === 'depuff-eye-cream') || null;
+                                if (skin1) selected.push({
+                                    title: skin1.title,
+                                    handle: skin1.handle,
+                                    featuredImage: skin1.featuredImage,
+                                    featuredMeta: skin1.featuredMeta,
+                                });
+                                if (skin2) selected.push({
+                                    title: skin2.title,
+                                    handle: skin2.handle,
+                                    featuredImage: skin2.featuredImage,
+                                    featuredMeta: skin2.featuredMeta,
+                                });
+                                if (skin3) selected.push({
+                                    title: skin3.title,
+                                    handle: skin3.handle,
+                                    featuredImage: skin3.featuredImage,
+                                    featuredMeta: skin3.featuredMeta,
+                                });
+                                // plist.filter((p) =>
+                                //     p.handle === 'double-cleanser-set' || p.handle === 'antioxidant-glow-cream' || p.handle === 'depuff-eye-cream'
+                                // ).forEach((item) => {
+                                //     {/* @ts-ignore */}
+                                //     selected.push({
+                                //         title: item.title,
+                                //         handle: item.handle,
+                                //         featuredImage: item.featuredImage,
+                                //         featuredMeta: item.featuredMeta,
+                                //     });
+                                // });
+                            } else {
+                                for (let i = 0; i < listIds.length; i += 1) {
+                                    const item = plist.find((it) => it.id.includes(listIds[i]));
+                                    if (item) {
+                                        {/* @ts-ignore */ }
+                                        selected.push({
+                                            title: item.title,
+                                            handle: item.handle,
+                                            featuredImage: item.featuredImage,
+                                            featuredMeta: item.featuredMeta,
+                                        });
+                                    }
+                                }
+                            }
+                            if (selected.length < 3 && plist) {
+                                selected = plist.map((item) => {
+                                    return {
                                         title: item.title,
                                         handle: item.handle,
                                         featuredImage: item.featuredImage,
                                         featuredMeta: item.featuredMeta,
-                                    });
-                                }
+                                    };
+                                });
                             }
-                        }
-                        if (selected.length < 3 && plist) {
-                            selected = plist.map((item) => {
-                                return {
-                                    title: item.title,
-                                    handle: item.handle,
-                                    featuredImage: item.featuredImage,
-                                    featuredMeta: item.featuredMeta,
-                                };
-                            });
-                        }
 
-                        const selectedWithImgs = selected.map((item) => {
-                            const { img } = getFeaturedImgMeta(item, store);
-                            return {
-                                title: item.title,
-                                img: img || null,
-                                url: `/products/${item.handle}`,
-                            };
+                            // const selectedWithImgs = selected.map((item) => {
+                            //     const { img } = getFeaturedImgMeta(item, store);
+                            //     return {
+                            //         title: item.title,
+                            //         img: img || null,
+                            //         url: `/products/${item.handle}`,
+                            //     };
+                            // });
+                            // setProducts(selectedWithImgs);
+                            // setIsLoading(false);
+
+                            (async () => {
+                                const selectedWithImgs = await Promise.all(selected.map(async (item) => {
+                                    const { img } = await getFeaturedImgMeta(item, store);
+                                    return {
+                                        title: item.title,
+                                        img: img || null,
+                                        url: `/products/${item.handle}`,
+                                    };
+                                }));
+                                // Cache the result for subsequent hovers
+                                if (cache) cache[handle] = selectedWithImgs;
+                                setProducts(selectedWithImgs);
+                                setIsLoading(false);
+                            })();
                         });
-
-                        // Store in cache for subsequent hovers
-                        cache[cacheKey] = selectedWithImgs;
-
-                        setProducts(selectedWithImgs);
-                        setIsLoading(false);
-
-                        // getFeaturedImages().then((data) => {
-                        //     if (data?.length > 0) {
-                        //         const selectedImgs = selected.map((item) => {
-                        //             let featuredImg = data.find((img) => img.handle === item.handle)
-                        //             ? data.find((img) => img.handle === item.handle).featured_image_url : null;
-
-                        //             // some featured img in dev store is return null
-                        //             if (featuredImg === null && item.handle === 'double-cleanser-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e5913415-4bac-4ace-98f6-d56ab1377100/public';
-                        //             if (featuredImg === null && item.handle === 'honey-bliss-hair-set') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/17e65724-7eab-4660-02f6-055876059b00/public';
-                        //             if (featuredImg === null && item.handle === 'pro-youth-shampoo-conditioner') featuredImg = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f1879976-1cc4-405e-4027-4950b96c8d00/public';
-
-                        //             return {
-                        //                 title: item.title,
-                        //                 img: featuredImg,
-                        //                 url: `/products/${item.handle}`,
-                        //             };
-                        //         })
-                        //         {/* @ts-ignore */}
-                        //         // setProducts(selectedImgs.filter((i) => i.img));
-                        //         setProducts(selectedImgs);
-                        //         setIsLoading(false);
-                        //     }
-                        // })
-                    });
-                } catch (err) {
-                    console.log(err);
+                    } catch (err) {
+                        console.log(err);
+                    }
                 }
-            }
-        ).catch((err) => {
-            if (err.name !== 'AbortError') console.log(err);
-        });
-
-        return () => controller.abort();
+            )
+        } else {
+            setIsLoading(false);
+        }
     }, []);
 
     return (
@@ -163,7 +142,15 @@ const NavMegaMenu = (props: any) => {
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
-                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 !text-body">{menu.title}</a></li>
+                                        return (
+                                            <li className=" mb-1" key={`mobile-menu-${i}`}>
+
+                                                <a href={menu.handle} className={`h4 !text-body ${menu.title === 'Tan Quiz' || menu.title === 'SPF Quiz' || menu.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[2px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`}>
+                                                    {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
+                                                    {!menu.handle.includes('build-your-own-bundle') && menu.title}
+                                                </a>
+                                            </li>
+                                        )
                                     })
                                 )}
                             </ol>

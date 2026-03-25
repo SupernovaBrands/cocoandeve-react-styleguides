@@ -7,6 +7,7 @@ import SvgChevronNext from '~/images/icons/chevron-next.svg';
 import Button from '../Button';
 
 const CartManualGwp = (props:any) => {
+	const { tierMessage } = props;
 	const [showScroll, setShowScroll] = useState(false);
 	const scrollRef = useRef(null);
 	const [adding, setAdding] = useState(false);
@@ -20,6 +21,7 @@ const CartManualGwp = (props:any) => {
 		onAddItem,
 		onRemoveItem,
 		disableSelectItem,
+		errorMessage
 	} = props;
 	
 	useEffect(() => {
@@ -47,17 +49,43 @@ const CartManualGwp = (props:any) => {
 	}
 
 	const addItem = async (id:any) => {
+
+		if (maxSelected === 0) {
+			return;
+		}
+
 		setAdding(true);
 		setProcessingId(id);
+
+		const maxAllowedGifts = maxSelected;
+		const currentGifts = selectedKey || [];
+
+		if (currentGifts.length >= maxAllowedGifts) {
+			const giftToRemove = currentGifts[0];
+			await onRemoveItem(giftToRemove);
+		}
+
 		await onAddItem(id);
+
 		setAdding(false);
 		setProcessingId(null);
 	}
+
+	useEffect(() => {
+		if (!disableSelectItem) {
+			setShowMessage(false);
+		}
+	}, [disableSelectItem]);
 
 	return (
 			<div className="manual-gwp relative mt-2">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
+				{tierMessage && (
+					<p className="font-bold py-1 rounded text-primary text-sm">
+						{tierMessage}
+					</p>
+				)}
 				{showScroll && (
 					<>
 						<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
@@ -80,9 +108,12 @@ const CartManualGwp = (props:any) => {
 									<picture className="block">
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
-									{item.price && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />}
+									{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
+									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
+										Worth {item.price}
+									</figcaption>
 								</figure>
-								<p className="grow my-1 text-base h-full font-bold">{item.label}</p>
+								<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
 								{!disableSelectItem && (
 									<Button
 										lg={false}
@@ -91,7 +122,9 @@ const CartManualGwp = (props:any) => {
 											if (!adding) {
 												if (isSelected) {
 													removeItem(item.variantId || item.id);
-												} else { addItem(item.variantId || item.id); }
+												} else {
+													addItem(item.variantId || item.id);
+												}
 											}
 										}}
 										disabled={adding}
@@ -117,7 +150,7 @@ const CartManualGwp = (props:any) => {
 					})}
 				</ul>
 				{disableSelectItem && <hr />}
-				{showMessage && <p className="text-primary mt-1 text-[14px]">Add another item to your cart to claim your free gift.</p>}
+				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">{errorMessage}</p>}
 			</div>
 	);
 }

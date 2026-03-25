@@ -157,11 +157,11 @@ const Homepage = () => {
 			"playground_range_bg": "bg-secondary-light",
 			"image": {
 				"id": 5690,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d32b6302-730c-4a75-df44-68902bb77100/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/d32b6302-730c-4a75-df44-68902bb77100/public"
 			},
 			"image_mobile": {
 				"id": 2901,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b46544da-3a84-4309-363b-9778f9090000/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/b46544da-3a84-4309-363b-9778f9090000/public"
 			}
 		},
 		"range_2": {
@@ -173,11 +173,11 @@ const Homepage = () => {
 			"playground_range_bg": "bg-yellow-light",
 			"image": {
 				"id": 5691,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9285cc9-f4cc-49b2-a159-efd75a4b1800/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/e9285cc9-f4cc-49b2-a159-efd75a4b1800/public"
 			},
 			"image_mobile": {
 				"id": 2903,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/33a889be-891d-4e4d-d04c-88ea7cbb3300/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/33a889be-891d-4e4d-d04c-88ea7cbb3300/public"
 			}
 		},
 		"range_3": {
@@ -189,11 +189,11 @@ const Homepage = () => {
 			"playground_range_bg": "bg-secondary-light",
 			"image": {
 				"id": 5693,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/18b2e9f8-fc1f-4a03-8355-1b96f2205600/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/18b2e9f8-fc1f-4a03-8355-1b96f2205600/public"
 			},
 			"image_mobile": {
 				"id": 5694,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c1820c74-44d7-4cd0-9e1d-273c32b6cc00/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/c1820c74-44d7-4cd0-9e1d-273c32b6cc00/public"
 			}
 		},
 		"range_4": {
@@ -205,11 +205,11 @@ const Homepage = () => {
 			"playground_range_bg": "bg-primary-light-second",
 			"image": {
 				"id": 5692,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c000358-bae4-4d76-8d67-5172ce932500/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/7c000358-bae4-4d76-8d67-5172ce932500/public"
 			},
 			"image_mobile": {
 				"id": 2905,
-				"url": "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10d3f2b0-a667-4606-4c9c-05f3cec3ac00/public"
+				"url": "/ghVX8djKS3R8-n0oGeWHEA/10d3f2b0-a667-4606-4c9c-05f3cec3ac00/public"
 			}
 		}
 	};

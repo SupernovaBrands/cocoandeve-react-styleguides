@@ -31,6 +31,7 @@ interface Props {
 	onUpdateCart: (item: any, qty: number) => void;
 	onDeleteLine: (lineId: any, attributes: Array<any>[]) => void;
 	discountMeter?: any;
+	getFeaturedImgMeta?: any;
 	shippingMeter?: any;
 	shippingData?: any;
 	handleDiscount?: any;
@@ -50,7 +51,7 @@ interface Props {
 
 const Cart: React.FC<Props> = (props) => {
 	const { showCart, cartData, itemCount, discountBanner, store,
-		onUpdateCart, onDeleteLine, discountMeter, shippingMeter,
+		onUpdateCart, onDeleteLine, discountMeter, getFeaturedImgMeta, shippingMeter,
 		removeDiscount, shippingData, handleDiscount, manualGwpSetting, changeVariant, trackEvent, tiktokEvent, fbqEvent, currency, user, isAuthenticated, strapiCartSetting, cartUpsell, addToCart } = props;
 	// const storeApi = new storefrontApi();
 	// console.log(discountMeter, 'discountMeter');
@@ -84,6 +85,14 @@ const Cart: React.FC<Props> = (props) => {
 	const setIsKlarnaOpen = (stateModal:boolean) => {
 		setIsModalKlarnaOpen(stateModal);
 	}
+
+	const isBundleItem = (item) => {
+		try {
+			return item.attributes.find((props:any) => props.key.includes('_components_'));
+		} catch {
+			return null
+		}
+	};
 
 	useEffect(() => {
 		if (cartData) {
@@ -151,7 +160,15 @@ const Cart: React.FC<Props> = (props) => {
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
-		onDeleteLine(item.id, attributes);
+		const isKitBuilder = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit' && attribute.value === 'yes');
+		if (!isKitBuilder) onDeleteLine(item.id, attributes);
+		else {
+			// delete bundle group
+			const groupId = item.attributes.find((attribute) => attribute.key === '_make_your_own_kit_group').value || 0;
+			const itemsToDelete = cartData.items.filter((item) => item.attributes.find((att) => att.key === '_make_your_own_kit_group' && att.value === groupId))
+				.map((v) => v.id);
+			onDeleteLine(itemsToDelete, attributes);
+		}
 	}
 
 	const getId = (shopifyId: string) => {
@@ -225,6 +242,66 @@ const Cart: React.FC<Props> = (props) => {
 	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
+	
+	useEffect(() => {
+		if (!manualGwpSetting) return;
+
+		const maxAllowed = manualGwpSetting?.maxSelected;
+		const currentGifts = cartData.lines.filter(line => line.isManualGwp);
+
+		if (currentGifts.length > maxAllowed) {
+			const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
+			giftsToRemove.forEach(gift => onRemoveItem(gift));
+		}
+	}, [cartData.items, manualGwpSetting]);
+
+	useEffect(() => {
+		if (!cartData?.lines) return;
+
+		const paidItems = cartData.lines.filter((line: any) => !line.isManualGwp);
+		const gwpItems = cartData.lines.filter((line: any) => line.isManualGwp);
+
+		if (paidItems.length === 0 && gwpItems.length > 0) {
+			const gwpIds = gwpItems.map((item: any) => item.id);
+			onDeleteLine(gwpIds, []);
+		}
+	}, [cartData?.lines]);
+
+	const mappedItems = cart.items.reduce((acc, item) => {
+		const bundleGroup = item.attributes.find(attr => attr.key === '_make_your_own_kit_group')?.value;
+
+		if (bundleGroup) {
+			const existingBundle = acc.find(i => i.isBundle && i.bundleGroup === bundleGroup);
+			if (existingBundle) {
+				existingBundle.bundleItems.push(item);
+				existingBundle.totalPrice += item.originalPrice;
+				existingBundle.totalComparePrice += item.comparePrice;
+				existingBundle.totalDiscountedPrice = Math.round(existingBundle.totalPrice * (1 - existingBundle.discount / 100));
+			} else {
+				const discount = Number(item.attributes.find(attr => attr.key === '_make_your_own_kit_discount')?.value ?? 0);
+				const totalPrice = item.originalPrice;
+				const bundleEntry = {
+					isBundle: true,
+					bundleGroup,
+					item,
+					bundleItems: [item],
+					discount,
+					totalPrice,
+					totalComparePrice: item.comparePrice,
+					totalDiscountedPrice: Math.round(totalPrice * (1 - discount / 100)),
+				};
+				acc.unshift(bundleEntry);
+			}
+		} else {
+			acc.push({ isBundle: false, item });
+		}
+
+		return acc;
+	}, []);
+
+	// console.log('mappedItems', mappedItems);
+
+
 	return (
 		<>
 		<Modal className="modal-lg bg-white max-w-[26.875em] !h-full" isOpen={showCart} handleClose={() => props.handleClose()} cartDrawer={true} backdropClasses="h-full">
@@ -312,16 +389,23 @@ const Cart: React.FC<Props> = (props) => {
 								<input type="hidden" name="checkout" value="Checkout" />
 
 								<ul className="list-unstyled border-b-[1px] pb-0">
-									{cart.items && cart.items.map((item) => {
+									{mappedItems && mappedItems.map((mappedItem) => {
+										const item = mappedItem.item;
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
+											getFeaturedImgMeta={getFeaturedImgMeta}
 											store={store}
 											productId={parseInt(getId(item.merchandise.product.id))}
 											productStock={item.merchandise.quantityAvailable}
+											isBundle={mappedItem.isBundle || false}
+											bundleItems={mappedItem.bundleItems || []}
+											bundleGroup={mappedItem.bundleGroup || ''}
+											bundleCompare={mappedItem.totalPrice || 0}
+											bundlePrice={mappedItem.totalDiscountedPrice || 0}
 										/>
 
 										return !item.isManualGwp && cartItemComponent;
@@ -406,14 +490,16 @@ const Cart: React.FC<Props> = (props) => {
 										<>
 											<>
 												<p className="hidden lg:flex w-2/3 mb-1  font-bold" data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												{/* <p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
+												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
 											</>
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
-												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
+												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
+												{/* <p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
 											</div>
 										</>
 									)}
@@ -423,7 +509,7 @@ const Cart: React.FC<Props> = (props) => {
 											<p className="mb-1" data-cy="cart-shipping-label">
 												<strong>{`${tStrings.cart_shipping} `}</strong>
 											</p>
-											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
+											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Free</p>
 										</div>
 										</>
 									)}
@@ -432,6 +518,9 @@ const Cart: React.FC<Props> = (props) => {
 									<>
 										<hr />
 										<CartManualGwp {...manualGwpSetting}
+											maxSelected={manualGwpSetting?.maxSelected}
+											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
 										/>

@@ -171,11 +171,11 @@ const SearchBox = (props: any) => {
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 
 						if (uniqueFiltered.length > 0) {
-							uniqueFiltered = uniqueFiltered.map((item) => {
+							uniqueFiltered = await Promise.all(uniqueFiltered.map(async (item) => {
 								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
 								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
 								// featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
-								const { img } = getFeaturedImgMeta(item, store);
+								const { img } = await getFeaturedImgMeta(item, store);
 								return {
 									title: item.title,
 									handle: item.handle,
@@ -187,7 +187,7 @@ const SearchBox = (props: any) => {
 									url: `/products/${item.handle}`,
 									product: item,
 								};
-							});
+							}));
 							uniqueFiltered.forEach((item, i) => {
 								if (item.handle === 'pro-youth-hair-scalp-mask') {
 									uniqueFiltered.splice(i, 1);
@@ -226,7 +226,7 @@ const SearchBox = (props: any) => {
 									).then(r => r.json());
 
 									if (singleProduct?.product) {
-										const { img } = getFeaturedImgMeta(singleProduct.product, store);
+										const { img } = await getFeaturedImgMeta(singleProduct.product, store);
 										return {
 											title: singleProduct.product.title,
 											subtitle: true,
@@ -262,26 +262,43 @@ const SearchBox = (props: any) => {
 
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
-			const pProducts = [];
+			// const pProducts = [];
 			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, {cache: 'force-cache'}).then((r) => r.json()));
 			const popProducts = await Promise.all(pInfos);
-			popProducts.map((data) => {
+			// popProducts.map((data) => {
+			// 	const { product } = data;
+			// 	if (product) {
+			// 		// console.log('');
+			// 		const { img } = getFeaturedImgMeta(product, store);
+			// 		// const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
+			// 		// 	? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
+			// 		if (img) {
+			// 			pProducts.push({
+			// 				...product,
+			// 				featuredImgUrl: img,
+			// 				url: `/products/${product.handle}`,
+			// 			});
+			// 		}
+			// 	}
+			// });
+			// if (pProducts.length > 0) setPopProducts(pProducts);
+
+			const pProducts = await Promise.all(popProducts.map(async (data) => {
 				const { product } = data;
 				if (product) {
-					// console.log('');
-					const { img } = getFeaturedImgMeta(product, store);
-					// const featuredImg = featuredImgs.find((img) => img.handle === product.handle)
-					// 	? featuredImgs.find((img) => img.handle === product.handle).featured_image_url : null;
+					const { img } = await getFeaturedImgMeta(product, store);
 					if (img) {
-						pProducts.push({
+						return {
 							...product,
 							featuredImgUrl: img,
 							url: `/products/${product.handle}`,
-						});
+						};
 					}
 				}
-			});
-			if (pProducts.length > 0) setPopProducts(pProducts);
+				return null;
+			}));
+
+			setPopProducts(pProducts.filter(Boolean));
 		}
 	}
 

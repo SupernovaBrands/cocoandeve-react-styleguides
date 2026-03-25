@@ -25,6 +25,23 @@
 		// 	}
 		// }
 	}
+
+	@keyframes race {
+		0% {
+			left: -40px;
+			opacity: 0;
+		}
+		10% {
+			opacity: 1;
+		}
+		90% {
+			opacity: 1;
+		}
+		100% {
+			left: 100%;
+			opacity: 0;
+		}
+	}
 	// .cart-drawer__count {
 	// 	font-family: Arial, Helvetica, sans-serif;
 	// 	position: absolute;

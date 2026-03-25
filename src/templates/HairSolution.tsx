@@ -228,7 +228,7 @@ const HairSolution = (props: any) => {
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
                     {data.banner.image_d && data.banner.image_m && (
-                        <picture className={``}>
+                        <picture className={`w-full block`}>
                             <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
                             <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
                         </picture>

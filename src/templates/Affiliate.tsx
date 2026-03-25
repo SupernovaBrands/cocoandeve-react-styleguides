@@ -84,10 +84,10 @@ const Affiliate = (props: any) => {
 							</div>
 						</div>
 						<span className="-mt-[2.188rem] -z-[1] bottom-g translate-y-full hidden lg:inline-block absolute w-full">
-							<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/301bd0f2-1acf-465d-be74-933a99d5ad00/public" alt="" className="w-full" loading="lazy" />
+							<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_b0266e79-db8d-429c-b30a-cc2d499a5bee.png?v=1772039338" alt="" className="w-full" loading="lazy" />
 						</span>
 						<span className="translate-y-full inline-block lg:hidden w-full mt-[1.563rem]">
-							<img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d12c4875-8037-4011-ea6a-6bbf5f8c4a00/public" alt="" className="w-full" loading="lazy" />
+							<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_aac78f89-b144-4b63-9b11-b384f1f56b00.jpg?v=1772039359" alt="" className="w-full" loading="lazy" />
 						</span>
 					</section>
 				</div>

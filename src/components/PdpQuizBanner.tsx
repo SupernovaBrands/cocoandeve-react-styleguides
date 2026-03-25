@@ -4,10 +4,10 @@ const PdpQuizBanner = (props) => {
             <div className="relative mb-3 lg:mb-2 flex max-h-[64px] lg:min-h-[97px] rounded-[24px] lg:rounded-[32px] bg-yellow-light items-center justify-between pr-2">
                 <div className="flex items-center">
                     <picture className="m-0 h-full rounded-l-[24px] lg:rounded-r-[32px] lg:order-2 lg:absolute lg:right-0 lg:top-0 lg:bottom-0">
-                        <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/36224cd9-a27f-4723-de76-688622b56300/public" media="(min-width: 992px)" />
-                        <img alt="Tan Quiz" className="rounded-l-[24px] lg:rounded-r-[32px] w-auto h-[64px] lg:h-[97px]" src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d0ba3105-a067-4e7e-1d63-5164a5abad00/86x" loading="lazy" />
+                        <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_7e2e0aac-64d4-4afd-92ba-d36182ec8d3c.png?v=1772037559" media="(min-width: 992px)" />
+                        <img alt="Tan Quiz" className="rounded-l-[24px] lg:rounded-r-[32px] w-auto h-[64px] lg:h-[97px]" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9bafacdd-f8a2-4f6f-beb1-69b3f1b5f47c.png?v=1772037586&width=86" loading="lazy" />
                     </picture>
-                    
+
                     <div className="lg:order-1 ml-g lg:ml-2">
                         <p className="font-bold lg:mb-25 lg:text-lg" dangerouslySetInnerHTML={{__html: `Tan Quiz<span class="lg:hidden block font-normal text-sm">Find your perfect shade</span>`}} />
                         <div className="hidden lg:block text-sm">Find the perfect shade to match <br />your skin’s needs in 3 minutes!</div>

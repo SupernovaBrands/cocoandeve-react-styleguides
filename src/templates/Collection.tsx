@@ -263,13 +263,13 @@ const Collection = (props: any) => {
     };
 
 
-    const selectSortChange = (e: any) => {
+    const selectSortChange = async (e: any) => {
         showLoading(e);
         const sort = e.target.value === 'best-selling' ? 'featured' : e.target.value;
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
-            .then((data) => {
+            .then(async (data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+                const mapped = await Promise.all(products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge)));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -302,7 +302,13 @@ const Collection = (props: any) => {
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
-            setChildMenu(data.childrens);
+
+            let childMenuDataTemp = data.childrens;
+            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
+                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
+            }
+
+            setChildMenu(childMenuDataTemp);
             if (defaultSort !== null) {
                 const sort = defaultSort === 'best-selling' ? 'featured' : defaultSort;
                 fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
@@ -466,12 +472,13 @@ const Collection = (props: any) => {
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
+                                                const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}`}
+                                                        href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} hover:text-white` : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
@@ -508,8 +515,8 @@ const Collection = (props: any) => {
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz
                                                 className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
-                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_cf267d18-59f2-4757-99be-6c6ac7768f72.jpg?v=1772039465"
+                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1fb50453-fa89-4f49-92b7-f8181d2255e2.jpg?v=1772039489"
                                                 key={`collection-quiz-card--${handle}--${index}`}
                                                 quizSetting={collectionSettings.quizSetting}
                                                 store={store}
@@ -568,8 +575,8 @@ const Collection = (props: any) => {
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz
                                     className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
-                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_54c7854e-f086-4ce2-9f68-24e9d0655bd7.jpg?v=1772039518"
+                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_fb6619af-f9a9-438b-a1a2-b7d00cfcef20.jpg?v=1772039537"
                                     key={`collection-quiz-card--${handle}--99`}
                                     quizSetting={collectionSettings.quizSetting}
                                     store={store}

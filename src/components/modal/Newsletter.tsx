@@ -297,12 +297,16 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 								<input ref={emailRef} value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
 							{!emailError.valid && <span className='text-[#dc3545] text-xs block'>{emailError.error}</span>}
-							<p className={`text-center mb-1 mt-1`}>and / or</p>
-							<div className="relative flex items-stretch w-full flex-wrap mb-25">
-								<InputCountry store={store} id="modal--newsletter__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" />
-								<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
-							</div>
-							{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
+							{!['int', 'my'].includes(store) && (
+								<>
+									<p className={`text-center mb-1 mt-1`}>and / or</p>
+									<div className="relative flex items-stretch w-full flex-wrap mb-25">
+										<InputCountry store={store} id="modal--newsletter__country" chevronCls="svg absolute fill-[#4e4e4e] h-[.75em] right-[.625em] top-[50%] [transform:translateY(-50%)]" handleCode={handleCode} activeCountry={activeCountryCode} className="bg-gray-400 py-[14px] px-[16px] rounded-h relative flex-[1_1_auto] w-[1%!important] bg-clip-padding" />
+										<input value={phone} onChange={handlePhone} id="modal--newsletter__phone" className="bg-clip-padding block w-full -ml-[1px] bg-gray-400 border-l-0 rounded-tl-none rounded-bl-none py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400 flex-[1_1_auto] w-[1%] lg:basis-[57.5%] sm:basis-[55%]" type="tel" placeholder={nbp_phone_ph} aria-label="phone" />
+									</div>
+									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
+								</>
+							)}
 							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note}} />
 							<button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base">{nbp_submit}</button>
 						</form>
