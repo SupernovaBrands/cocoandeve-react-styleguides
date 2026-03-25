@@ -157,22 +157,25 @@ const BuildYourBundle = (props: any) => {
     let bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_dt.gif?v=1760430925';
     let bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/131025_Build-Your-Own-Web-Bundle_MB.gif?v=1760430926';
     if (['int', 'my'].includes(store)) {
-        bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_MB_INT_MY.gif?v=1774338778';
+        bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_MB_int_my_58c602f1-f437-441a-87d3-e2a1d7d471e2.gif?v=1774403623';
+        bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_DT_int_my_1920x.gif?v=1774403624';
     }
 
-    if (['us', 'uk', 'eu'].includes(store)) {
+    if (['us', 'uk', 'eu', 'dev'].includes(store)) {
         bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_MB_US_UK_EU.gif?v=1774338778';
+        bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/171025_Build_your_Own_Bundle_Hair_Tan_DT_eu_uk_us_1920x.gif?v=1774403714';
     }
 
     if (['au', 'ca'].includes(store)) {
-        
+        bannerMb = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Build_Your_Own_Web_Bundle_-_MB_CA_AU.gif?v=1774403757';
+        bannerDt = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Build_Your_Own_Web_Bundle_-_DT_CA_AU_1920x.gif?v=1774403757';
     }
 
     return strapiData ? (
         <div className={`${styles.container}`} style={{ '--header-height': `${headerPos}px` } as React.CSSProperties}>
             <figure className="flex flex-wrap relative">
                 <picture className="w-full block">
-                    <source media="(min-width: 992px)" srcSet={bannerDt} />
+                    <source media="(min-width: 992px)" srcSet={bannerDt} width={1920} height={352} />
                     <img alt={`Banner of ${strapiData?.title_text}`} src={bannerMb} className="block w-full" loading="eager" 
                         // @ts-ignore
                         fetchpriority="high" width={750} height={422} />
