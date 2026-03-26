@@ -80,7 +80,7 @@ const Playground = (props: any) => {
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
-                        {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (
+                        {['us', 'uk', 'eu', 'dev'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_5}
                                 imgMb={content?.range_5?.image_mobile?.url}
                                 imgDt={content?.range_5?.image?.url}
@@ -89,7 +89,7 @@ const Playground = (props: any) => {
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
-                        {['int', 'my', 'au'].includes(store) && (
+                        {['int', 'my'].includes(store) && (
                             <PlaygroundCard store={store} data={content?.range_3}
                                 imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1cea1022-8bd3-4ff5-a25a-0a027127f08c_614x.jpg?v=1772038747`}
                                 imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_8c5d88cb-2992-481a-8186-302ef130253d_400x.jpg?v=1772038776`}
