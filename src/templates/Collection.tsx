@@ -599,6 +599,11 @@ const Collection = (props: any) => {
                             )} */}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
+                        {bannerData?.seo_description && (
+                            <div className="w-full">
+                                <p className="px-g lg:px-2 mb-[1rem] w-full collection-grid--empty">{bannerData.seo_description}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
