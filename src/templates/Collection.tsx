@@ -47,6 +47,7 @@ const Banner = ({ title, bannerData }) => {
 
 const Collection = (props: any) => {
     const {
+        mainNav,
         products,
         isLoading,
         mainCollectionHandles,
@@ -76,7 +77,7 @@ const Collection = (props: any) => {
         bannerData,
         customProductTitle,
     } = props;
-    // console.log('customProductTitlexxx', customProductTitle);
+    // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
@@ -136,6 +137,11 @@ const Collection = (props: any) => {
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
     const [collProducts, setCollProducts] = useState(products);
+
+    const subNav = mainNav.find((nav) => nav.handle === `/collections/${handle}`) || null;
+    // console.log('sub nav', subNav);
+    
+    // console.log('sub coll', subCollection);
 
     const navigationScroll = () => {
         // console.log('running nav scroll');
@@ -308,7 +314,21 @@ const Collection = (props: any) => {
                 childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
             }
 
-            setChildMenu(childMenuDataTemp);
+            let subCollection = [];
+            if (subNav) {
+                subCollection = subNav.rows.filter((row) => row.handle.includes('/collections/')).map(item => ({
+                    ...item,
+                    handle: item.handle.replace('/collections/', '')
+                }));
+                subCollection.unshift({
+                    handle,
+                    title: 'All',
+                    item_id: 'parent-id'
+                });
+                console.log('subCollection', subCollection)
+            }
+
+            setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
             if (defaultSort !== null) {
                 const sort = defaultSort === 'best-selling' ? 'featured' : defaultSort;
                 fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
