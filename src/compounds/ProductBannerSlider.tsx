@@ -30,7 +30,7 @@ const ProductBannerSlider = (props) => {
 		};
 
 		compareImages();
-		
+
 		setTimeout(() => {
 			const imgHeight = compOverlay.current?.children?.[0]?.clientHeight;
 			if (isPageReview && window.innerWidth < 769) {
@@ -44,8 +44,8 @@ const ProductBannerSlider = (props) => {
 			} else {
 				setImgPt('pt-[86%]');
 			}
-			
-		}, 300); 
+
+		}, 300);
 	};
 	const getCursorPos = (el) => {
 		let x = 0;
@@ -127,6 +127,37 @@ const ProductBannerSlider = (props) => {
 	useEffect(() => {
 		initComparisons();
 	}, [width])
+
+	// handle load image for banner
+	useEffect(() => {
+		const target = document.querySelector('.product__banner-content');
+		if (!target) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+				// force browser reflow / lazy load trigger
+				window.dispatchEvent(new Event('resize'));
+				initComparisons();
+
+				// optional: stop observing setelah trigger sekali
+				observer.unobserve(entry.target);
+				}
+			});
+			},
+			{
+			root: null, // viewport
+			threshold: 0.1, // 10% terlihat sudah cukup
+			}
+		);
+
+		observer.observe(target);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	return <>
 		{/* <span>Window size: {width} x {height}</span> */}
