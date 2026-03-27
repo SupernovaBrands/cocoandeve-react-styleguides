@@ -325,7 +325,7 @@ const Collection = (props: any) => {
                     title: 'All',
                     item_id: 'parent-id'
                 });
-                console.log('subCollection', subCollection)
+                // console.log('subCollection', subCollection)
             }
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
