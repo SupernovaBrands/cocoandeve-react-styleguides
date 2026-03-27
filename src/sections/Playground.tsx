@@ -69,13 +69,15 @@ const Playground = (props: any) => {
                                 ctaTextColor={ctaTextColor}
                             />
                         )}
-                        <PlaygroundCard store={store} data={content?.range_4}
-                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_eb4fcc19-3cf7-4f26-b3a0-fe05193f1ce3_614x.jpg?v=1772038800`}
-                            imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e5940bdf-f680-4671-ac8f-c26549338ee4_400x.jpg?v=1772038829`}
-                            imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
-                            ctaBgColor={ctaBgColor}
-                            ctaTextColor={ctaTextColor}
-                        />
+                        {['us', 'uk', 'eu', 'dev', 'ca', 'au'].includes(store) && (
+                            <PlaygroundCard store={store} data={content?.range_4}
+                                imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_eb4fcc19-3cf7-4f26-b3a0-fe05193f1ce3_614x.jpg?v=1772038800`}
+                                imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e5940bdf-f680-4671-ac8f-c26549338ee4_400x.jpg?v=1772038829`}
+                                imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                                ctaBgColor={ctaBgColor}
+                                ctaTextColor={ctaTextColor}
+                            />
+                        )}
                     </div>
                 </>
             )}
