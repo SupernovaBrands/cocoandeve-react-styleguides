@@ -138,7 +138,7 @@ const Collection = (props: any) => {
 
     const [collProducts, setCollProducts] = useState(products);
 
-    const subNav = mainNav.find((nav) => nav.handle === `/collections/${handle}`) || null;
+    const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
     // console.log('sub nav', subNav);
     
     // console.log('sub coll', subCollection);
