@@ -161,7 +161,7 @@ const Collection = (props: any) => {
         [...products].sort((a, b) => (b.availableForSale ? 1 : 0) - (a.availableForSale ? 1 : 0))
     );
 
-    const subNav = mainNav.find((nav) => nav.handle === `/collections/${handle}`) || null;
+    const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
     // console.log('sub nav', subNav);
     
     // console.log('sub coll', subCollection);
