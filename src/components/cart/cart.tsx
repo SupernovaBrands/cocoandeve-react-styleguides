@@ -225,7 +225,7 @@ const Cart: React.FC<Props> = (props) => {
 				});
 			});
 
-			tiktokEvent('InitiateCheckout', payload, user?.email);
+			// tiktokEvent('InitiateCheckout', payload, user?.email);
 			fbqEvent('track', 'InitiateCheckout');
 
 		} catch(e) {
@@ -266,7 +266,7 @@ const Cart: React.FC<Props> = (props) => {
 	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
-	
+
 	useEffect(() => {
 		if (!manualGwpSetting) return;
 
