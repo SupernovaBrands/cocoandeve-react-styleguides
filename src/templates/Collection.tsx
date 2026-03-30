@@ -263,13 +263,13 @@ const Collection = (props: any) => {
     };
 
 
-    const selectSortChange = (e: any) => {
+    const selectSortChange = async (e: any) => {
         showLoading(e);
         const sort = e.target.value === 'best-selling' ? 'featured' : e.target.value;
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
-            .then((data) => {
+            .then(async (data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+                const mapped = await Promise.all(products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge)));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -302,7 +302,13 @@ const Collection = (props: any) => {
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
             setSidebarMenu(data.parents);
-            setChildMenu(data.childrens);
+
+            let childMenuDataTemp = data.childrens;
+            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
+                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
+            }
+
+            setChildMenu(childMenuDataTemp);
             if (defaultSort !== null) {
                 const sort = defaultSort === 'best-selling' ? 'featured' : defaultSort;
                 fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
@@ -466,12 +472,13 @@ const Collection = (props: any) => {
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
+                                                const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}`}
+                                                        href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} hover:text-white` : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}

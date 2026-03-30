@@ -2,22 +2,31 @@ import { useEffect, useState } from "react";
 import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
-    const { handle, listIds, dummy, store, getFeaturedImgMeta } = props;
+    const { handle, listIds, dummy, store, getFeaturedImgMeta, cache } = props;
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     let handleUrl = handle;
 
     useEffect(() => {
+        // If we already have cached data for this handle, use it immediately
+        if (cache && cache[handle]) {
+            setProducts(cache[handle]);
+            setIsLoading(false);
+            return;
+        }
+
         if (dummy) {
-            {/* @ts-ignore */}
+            {/* @ts-ignore */ }
             const selected = [
                 { title: 'Title', img: 'https://via.placeholder.com/444x558', url: '/' },
                 { title: 'Title', img: 'https://via.placeholder.com/444x558', url: '/' },
                 { title: 'Title', img: 'https://via.placeholder.com/444x558', url: '/' },
             ];
-            {/* @ts-ignore */}
+            {/* @ts-ignore */ }
             setProducts(selected);
+            setIsLoading(false);
+            return;
         }
         if (handleUrl) {
             if (store === 'ca' && handleUrl === 'tan-and-spf') {
@@ -66,7 +75,7 @@ const NavMegaMenu = (props: any) => {
                                 for (let i = 0; i < listIds.length; i += 1) {
                                     const item = plist.find((it) => it.id.includes(listIds[i]));
                                     if (item) {
-                                        {/* @ts-ignore */}
+                                        {/* @ts-ignore */ }
                                         selected.push({
                                             title: item.title,
                                             handle: item.handle,
@@ -87,16 +96,31 @@ const NavMegaMenu = (props: any) => {
                                 });
                             }
 
-                            const selectedWithImgs = selected.map((item) => {
-                                const { img } = getFeaturedImgMeta(item, store);
-                                return {
-                                    title: item.title,
-                                    img: img || null,
-                                    url: `/products/${item.handle}`,
-                                };
-                            });
-                            setProducts(selectedWithImgs);
-                            setIsLoading(false);
+                            // const selectedWithImgs = selected.map((item) => {
+                            //     const { img } = getFeaturedImgMeta(item, store);
+                            //     return {
+                            //         title: item.title,
+                            //         img: img || null,
+                            //         url: `/products/${item.handle}`,
+                            //     };
+                            // });
+                            // setProducts(selectedWithImgs);
+                            // setIsLoading(false);
+
+                            (async () => {
+                                const selectedWithImgs = await Promise.all(selected.map(async (item) => {
+                                    const { img } = await getFeaturedImgMeta(item, store);
+                                    return {
+                                        title: item.title,
+                                        img: img || null,
+                                        url: `/products/${item.handle}`,
+                                    };
+                                }));
+                                // Cache the result for subsequent hovers
+                                if (cache) cache[handle] = selectedWithImgs;
+                                setProducts(selectedWithImgs);
+                                setIsLoading(false);
+                            })();
                         });
                     } catch (err) {
                         console.log(err);
@@ -120,7 +144,7 @@ const NavMegaMenu = (props: any) => {
                                     props.menus.map((menu, i) => {
                                         return (
                                             <li className=" mb-1" key={`mobile-menu-${i}`}>
-                                                
+
                                                 <a href={menu.handle} className={`h4 !text-body ${menu.title === 'Tan Quiz' || menu.title === 'SPF Quiz' || menu.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[2px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`}>
                                                     {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
                                                     {!menu.handle.includes('build-your-own-bundle') && menu.title}
@@ -133,23 +157,23 @@ const NavMegaMenu = (props: any) => {
                         </div>
                         <div className="lg:w-3/5 pr-4 mb-3 flex flex-wrap ">
                             <span className="block mb-2 text-lg w-full px-g">Best Sellers:</span>
-                                {products.length > 0 && products.slice(0, 3).map((card, i) => {
-                                    return (
-                                        <figure key={`mobile-card-${i}`} className="relative w-1/3 flex lg:flex-col mb-2 lg:px-g">
-                                            {/* @ts-ignore */}
-                                            <a href={card.url} className="px-0 !no-underline flex-none max-w-none">
-                                                <picture>
-                                                    {/* @ts-ignore */}
-                                                    <img src={card.img} alt={card.title} className="block w-100 object-cover max-h-[none]" />
-                                                </picture>
-                                                <figcaption className="flex-grow-1 d-flex flex-column ml-g lg:ml-0 align-self-center">
-                                                    {/* @ts-ignore */}
-                                                    <h5 className="product-card__text font-bold text-body mb-0 mt-1">{card.title}</h5>
-                                                </figcaption>
-                                            </a>
-                                        </figure>
-                                    )
-                                })}
+                            {products.length > 0 && products.slice(0, 3).map((card, i) => {
+                                return (
+                                    <figure key={`mobile-card-${i}`} className="relative w-1/3 flex lg:flex-col mb-2 lg:px-g">
+                                        {/* @ts-ignore */}
+                                        <a href={card.url} className="px-0 !no-underline flex-none max-w-none">
+                                            <picture>
+                                                {/* @ts-ignore */}
+                                                <img src={card.img} alt={card.title} className="block w-100 object-cover max-h-[none]" />
+                                            </picture>
+                                            <figcaption className="flex-grow-1 d-flex flex-column ml-g lg:ml-0 align-self-center">
+                                                {/* @ts-ignore */}
+                                                <h5 className="product-card__text font-bold text-body mb-0 mt-1">{card.title}</h5>
+                                            </figcaption>
+                                        </a>
+                                    </figure>
+                                )
+                            })}
                         </div>
                     </div>
                 ) : (
