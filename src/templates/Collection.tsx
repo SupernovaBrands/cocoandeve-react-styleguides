@@ -485,7 +485,7 @@ const Collection = (props: any) => {
                         {/* {handle !== 'all' && ( */}
                             <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
                                 <div className="w-full lg:w-3/5">
-                                    {handle !== 'all' && (
+                                    {!['all', 'best-seller'].includes(handle) && (
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                             {childMenu.length > 0 && childMenu.map((children, index) => {
                                                 if (children && children.handle) {
