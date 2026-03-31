@@ -83,8 +83,8 @@ const Affiliate = (props: any) => {
 									<h2 className="font-normal text-base lg:text-[24px] leading-[1.5rem] lg:leading-[28px]" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
 									<a
 										href={banner.cta}
-										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:flex fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
-											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px] lg:mx-0`}
+										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
+											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px] lg:mx-0 text-center`}
 										>{banner.cta_label}</a>
 								</div>
 							</div>
@@ -160,13 +160,13 @@ const Affiliate = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="ml-[9px]">
 							{[...Array(3)].map((idx, i) => (
 								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
-									<div className={`w-full lg:w-1/2 flex gap-[8px] lg:gap-[16px] flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0 lg:pl-2`}>
-										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal">{content[`section_ct_step_${i + 1}`]}</h3>
-										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] max-w-[380px]'>{content[`section_ct_title_${i + 1}`]}</h2>
+									<div className={`w-full lg:w-1/2 flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0 lg:px-2 z-[1]`}>
+										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal mb-[8px] lg:mb-[16px]">{content[`section_ct_step_${i + 1}`]}</h3>
+										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] mb-[8px] lg:mb-[8px]'>{parse(content[`section_ct_title_${i + 1}`])}</h2>
 
 										{i === 0 && (
 											<p className="m-0 max-w-none lg:max-w-none text-[16px] lg:leading-[20px] lg:mb-[1rem] rounded-0">
-												<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn rounded-none w-full lg:w-[243px] font-normal h-[50px] flex items-center justify-center ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
+												<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn rounded-none w-full lg:w-[243px] font-normal h-[50px] flex items-center justify-center lg:mt-[8px] ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
 											</p>
 										)}
 										{i == 1 && (
@@ -177,7 +177,7 @@ const Affiliate = (props: any) => {
 										{i === 2 && (
 											<div className="affiliate--content-li text-left px-0 lg:mb-[1rem]">
 												{i === 2 && (
-													<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-[1.25rem]"'))}</>
+													<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-1 text-[14px]"'))}</>
 												)}
 											</div>
 										)}
