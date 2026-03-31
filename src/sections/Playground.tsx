@@ -34,7 +34,7 @@ const Playground = (props: any) => {
                 <>
                     {/* <p className="font-bold mb-g">We're totally coco-nuts about beauty!</p>
                     <p className="range-banner__subtitle mb-2 md:mb-4 md:text-lg">Infusing powerful and tropical ingredients <br className="lg:hidden" />for amazing results. <br className="hidden lg:block" />21 beauty awards. <br className="lg:hidden" />100% clean. Cruelty free.</p> */}
-                    <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my', 'ca', 'au'].includes(store) ? 'justify-center' : ''} `}>
+                    <div className={`flex flex-wrap lg:-mx-g items-center px-0 lg:px-g mb-g lg:mb-0 ${['int', 'my', 'ca', 'au'].includes(store) ? 'justify-center' : ''} ${['my'].includes(store) ? '!mb-0' : ''}`}>
                         <PlaygroundCard store={store} data={content?.range_1}
                             imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_111bfe7e-d857-4df6-8f1e-354218ce673a_614x.jpg?v=1772038666`}
                             imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1c51a568-d52d-4e7b-9725-fa78727dabd7_400x.jpg?v=1772038686`}

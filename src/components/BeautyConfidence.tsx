@@ -43,7 +43,7 @@ const BeautyConfidence = (props) => {
                 <ul className="list-unstyled flex flex-wrap items-center justify-center">
                     {SERVICES.map((list, i) => {
                         return (
-                            <li key={i} className={`text-center w-1/3 md:w-1/2 mb-0 ${i == 1 ? 'px-0' : 'px-g sm:px-hg'}`}>
+                            <li key={i} className={`text-center w-1/3 ${props.store === 'my' ? 'md:w-1/3' : 'md:w-1/2'} mb-0 ${i == 1 ? 'px-0' : 'px-g sm:px-hg'}`}>
                                 <i className="inline-flex flex-wrap h1 mb-g">
                                     {list.id === 'stars' && <Stars className="text-body" />}
                                     {list.id === 'winner-award' && <WinnerAward className="text-body" />}

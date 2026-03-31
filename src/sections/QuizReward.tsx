@@ -7,15 +7,17 @@ const QuizRewardTest = (props: any) => {
     const ctaBgColor = generalSetting?.bfcm_cta_bg_color;
 
     return (
-		<section className="container text-center mt-4 lg:mt-2 mb-1 lg:mb-5">
-			<p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>
+		<section className={`container text-center ${store === 'my' ? 'mt-0' : 'mt-4'} lg:mt-2 mb-1 lg:mb-5`}>
+			{store !== 'my' && <p className="text-xl lg:text-2xl mb-g lg:mb-3 font-bold">Discover more</p>}
 			<div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
-                <ProductCardQuiz
-                    className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
-                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6878a0bc-fbfa-412a-8808-8fa15a490556_614x.jpg?v=1772038851"
-                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_38f5a992-64ae-469a-980e-edaa6037c895_540x.jpg?v=1772038914"
-                    ctaBgColor={ctaBgColor}
-                />
+                {!['my', 'int'].includes(store)  && (
+                    <ProductCardQuiz
+                        className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
+                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6878a0bc-fbfa-412a-8808-8fa15a490556_614x.jpg?v=1772038851"
+                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_38f5a992-64ae-469a-980e-edaa6037c895_540x.jpg?v=1772038914"
+                        ctaBgColor={ctaBgColor}
+                    />
+                )}
 				{store !== 'my' && (
 					<figure className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative rounded">
                         <a href="/pages/rewards">
@@ -34,7 +36,7 @@ const QuizRewardTest = (props: any) => {
 					</figure>
 				)}
 
-                <BeautyConfidence parentClass="w-full lg:w-1/3 px-g mb-g lg:mb-0 block" />
+                <BeautyConfidence store={store} parentClass={`w-full px-g mb-g lg:mb-0 block ${store === 'my' ? 'lg:w-2/4' : 'lg:w-1/3'}`} />
 			</div>
 		</section>
 	)
