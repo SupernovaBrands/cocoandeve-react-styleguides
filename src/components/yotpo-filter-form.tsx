@@ -3,7 +3,6 @@ import SvgSearch from '~/images/icons/search.svg';
 const tStrings = global.config.tStrings;
 const YotpoFilterForm = (props) => {
     const {onFilterChange, customFilter, id, className, hideFilters} = props;
-
     return (
         <div id={ id ?? 'yotpoFilterForm'} className={`${className ?? ''}`}>
             <p className="font-bold mb-1 lg:mb-2">{tStrings.yotpo.filterReviews}</p>
