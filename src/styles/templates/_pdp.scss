@@ -76,11 +76,11 @@
     }
 }
 
-.product-variant .custom-control-input:checked ~ .custom-control-label {
-    @apply border-0;
+.product-variant .custom-control-input ~ .custom-control-label {
+    @apply border-0 border-none;
 
     .product-swatch {
-        @apply flex;
+        display: flex !important;
     }
 }
 

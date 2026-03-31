@@ -21,10 +21,10 @@
 			}
 		}
 
-		.product-swatch,
-		&__note {
-			@apply hidden;
-		}
+		// .product-swatch,
+		// &__note {
+		// 	@apply hidden;
+		// }
 
 		&__saving {
 			@apply bg-primary text-white rounded font-normal font-size-sm px-1 inline-block lg:hidden py-[2px];

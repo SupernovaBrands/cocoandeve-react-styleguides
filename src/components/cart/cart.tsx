@@ -116,7 +116,7 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData, itemCount]);
 
-	console.log('cartUpsell1', cartUpsell);
+	// console.log('cartUpsell1', cartUpsell);
 
 	useEffect(() => {
 		if (invalidGiftsToDelete.length > 0) {
