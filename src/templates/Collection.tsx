@@ -488,7 +488,7 @@ const Collection = (props: any) => {
                                 </>
                             {/* )} */}
 
-                            {!isLoading && handle !== 'all' && (
+                            {!isLoading && !['all', 'best-seller'].includes(handle) && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
