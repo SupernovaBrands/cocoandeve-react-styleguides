@@ -65,6 +65,7 @@ const Cart: React.FC<Props> = (props) => {
 	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
 	const bundleLabel = strapiCartSetting?.body?.cartGeneral?.drawer_bundle_discount || 'Bundle Savings';
 	const manualGwpBuyItems = strapiCartSetting?.body?.manualGwp?.customer_buys || '';
+	const enabledFreeShippingMeasure = strapiCartSetting?.body?.shippingMetter?.enable_free_shipping_measure;
 
 	const [isLastStockKey, setLastStockKey] = useState('');
 
@@ -313,9 +314,10 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{discountMeter && !discountMeter.enabled && shippingMeter
+							{discountMeter && (Object.keys(discountMeter).length === 0 || !discountMeter.enabled) && shippingMeter
 								&& shippingMeter.enabled
 								&& cart.itemCount > 0
+								&& enabledFreeShippingMeasure
 								&& (
 									<CartShippingMeter
 										target={shippingMeter.target}
