@@ -130,7 +130,7 @@ const QuizReward = (props: any) => {
                                 </div>
                                 <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
                                     <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2' />
-                                    <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">{totalReviews} Customer Reviews</p>
+                                    <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0"><span className="text-nowrap">{totalReviews} Customer</span> Reviews</p>
                                 </div>
                             </div>
                         </figcaption>
