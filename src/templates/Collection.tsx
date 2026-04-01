@@ -307,7 +307,8 @@ const Collection = (props: any) => {
 			parentHandle: mainCollectionHandles,
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
-            setSidebarMenu(data.parents);
+            const parenstSidebar = (store === 'int') ? data.parents.filter((parent: any) => parent?.handle !== 'body') : data.parents;
+            setSidebarMenu(parenstSidebar || data.parents);
 
             let childMenuDataTemp = data.childrens;
             if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
