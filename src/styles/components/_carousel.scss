@@ -102,7 +102,7 @@
 			&__page-affiliate .carousel__button {
 
 				span {
-					@apply top-[8.5em] w-5 h-5 rounded-full;
+					@apply top-[6.5em] w-5 h-5 rounded-full;
 				}
 
 				svg {
@@ -110,11 +110,11 @@
 				}
 
 				&--prev span {
-					@apply -left-[2em];
+					@apply -left-[2.5em];
 				}
 
 				&--next span {
-					@apply -right-[2em];
+					@apply -right-[2.5em];
 				}
 			}
 		}

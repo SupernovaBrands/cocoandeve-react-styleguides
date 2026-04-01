@@ -79,8 +79,8 @@ const Affiliate = (props: any) => {
 							<div className="flex justify-center lg:justify-start items-center h-full">
 								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:text-left lg:flex-1 lg:flex flex-col gap-[24px] text-affiliate-black">
 									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
-									<h1 className="text-[24px] leading-[2.25rem] my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%]" dangerouslySetInnerHTML={{__html: banner.title}} />
-									<h2 className="font-normal text-base lg:text-[24px] leading-[1.5rem] lg:leading-[28px]" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
+									<h1 className="text-[24px] leading-[30px] mb-[8px] lg:mb-0 my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%]" dangerouslySetInnerHTML={{__html: banner.title}} />
+									<h2 className="font-normal text-base lg:text-[24px] leading-[20px] lg:leading-[30px] mb-[16px] lg:mb-0" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
 									<a
 										href={banner.cta}
 										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
@@ -136,14 +136,14 @@ const Affiliate = (props: any) => {
 							{[...Array(6)].map((data, i) => (
 								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/6 text-center mb-0 lg:mb-0">
 									<div className="w-[6.25rem] h-[44px] lg:h-[54px] inline-block rounded-full relative mx-auto " role="presentation">
-										{i === 0 && <Benefit1 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 1 && <Benefit2 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 2 && <Benefit3 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 3 && <Benefit4 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 4 && <Benefit5 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 5 && <Benefit6 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 0 && <Benefit1 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 1 && <Benefit2 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 2 && <Benefit3 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 3 && <Benefit4 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 4 && <Benefit5 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 5 && <Benefit6 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 									</div>
-									<p className="text-[14px] leading-[18px] mt-[8px] lg:mt-[16px] mx-auto max-w-[166px] lg:max-w-[176px] mb-[12px] lg:mb-0">
+									<p className="text-[14px] leading-[18px] mt-[5px] lg:mt-[12px] mx-auto max-w-[166px] lg:max-w-[176px] mb-[12px] lg:mb-0">
 										{parse(benefit[`txt_${i + 1}`])}
 									</p>
 								</div>
@@ -160,7 +160,7 @@ const Affiliate = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="ml-[9px]">
 							{[...Array(3)].map((idx, i) => (
 								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
-									<div className={`w-full lg:w-1/2 flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[40px] order-1 lg:order-0 lg:px-2 z-[1]`}>
+									<div className={`w-full lg:w-[53%] flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[6%] order-1 lg:order-0 lg:px-2 z-[1]`}>
 										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal mb-[8px] lg:mb-[16px]">{content[`section_ct_step_${i + 1}`]}</h3>
 										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] mb-[8px] lg:mb-[8px]'>{parse(content[`section_ct_title_${i + 1}`])}</h2>
 
@@ -182,7 +182,7 @@ const Affiliate = (props: any) => {
 											</div>
 										)}
 									</div>
-									<div className={`w-full lg:w-[calc(50%+40px)] order-0 lg:order-1`}>
+									<div className={`w-full lg:w-[calc(54%)] order-0 lg:order-1`}>
 										<img src={content[`section_ct_img_${i + 1}`].url} className="w-full" loading="lazy" alt="" />
 									</div>
 								</div>
