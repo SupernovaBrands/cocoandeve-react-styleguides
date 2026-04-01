@@ -129,7 +129,7 @@ const Blog = (props) => {
 		setTanTitle(title);
 		if (region === 'int' || region === 'my') setTanStatus(false);
 	}, [region]);
-	
+
 	return (
 		<div className="mobile-wrapper mt-3 lg:px-0">
 			<div className="container px-0">

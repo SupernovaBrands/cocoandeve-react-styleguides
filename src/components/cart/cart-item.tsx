@@ -192,7 +192,7 @@ export const CartItem = (props:CartItemProps) => {
 		return () => {
 			active = false;
 		};
-	
+
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
 	const groupSwatches = (data) => {
@@ -239,7 +239,7 @@ export const CartItem = (props:CartItemProps) => {
 
 	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
 	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
-	
+
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -256,7 +256,7 @@ export const CartItem = (props:CartItemProps) => {
 				</picture>}
 			</ConditionWrapper>
 			<figcaption className={`w-9/12 px-hg lg:px-g`}>
-				
+
 				<div className="flex items-start no-gutters justify-between">
 					<p className={`mb-1 font-bold ${isBundle ? 'w-auto' : 'w-2/3'} pl-0`}>
 						{item.isFreeItem && item.originalPrice >= 0 ? (
