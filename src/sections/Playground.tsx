@@ -155,13 +155,15 @@ const Playground = (props: any) => {
                     )}
 
                     {/* body */}
-                    <PlaygroundCardV2 store={store} data={content?.range_4}
-                        imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_m_828x.jpg?v=1771226109`}
-                        imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_d_1920x.jpg?v=1771226880`}
-                        imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
-                        ctaBgColor={ctaBgColor}
-                        ctaTextColor={ctaTextColor}
-                    />
+                    {['ca', 'us', 'uk', 'eu', 'dev', 'au'].includes(store) && (
+                        <PlaygroundCardV2 store={store} data={content?.range_4}
+                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_m_828x.jpg?v=1771226109`}
+                            imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_body_d_1920x.jpg?v=1771226880`}
+                            imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                            ctaBgColor={ctaBgColor}
+                            ctaTextColor={ctaTextColor}
+                        />
+                    )}
                 </Carousel.Inner>
                 <Carousel.Navigation>
                     <div className="container px-2 hidden lg:block">
@@ -172,14 +174,16 @@ const Playground = (props: any) => {
                             <li className="h-4 flex items-center">
                                 <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 1 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(1)} />
                             </li>
-                            <li className="h-4 flex items-center">
-                                <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 2 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(2)} />
-                            </li>
-                            {/* int & my only 3 slides */}
+                            {/* my only 2 slides */}
                             {!['int', 'my'].includes(store) && (
-                                <li className="h-4 flex items-center">
-                                    <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 3 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(3)} />
-                                </li>
+                                <>
+                                    <li className="h-4 flex items-center">
+                                        <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 2 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(2)} />
+                                    </li>
+                                    <li className="h-4 flex items-center">
+                                        <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 3 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(3)} />
+                                    </li>
+                                </>
                             )}
                         </ol>
                     </div>

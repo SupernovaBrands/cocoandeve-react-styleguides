@@ -52,7 +52,7 @@ const QuizReward = (props: any) => {
 
     return (
         <section ref={sectionRef} className="container text-center my-5">
-            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Discover more</p>
+            {!['my'].includes(store) && <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Discover more</p>}
             {/* <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
@@ -80,46 +80,65 @@ const QuizReward = (props: any) => {
                 <BeautyConfidence parentClass="w-full lg:w-1/3 px-g mb-g lg:mb-0 block" />
 			</div> */}
 
-            <div className="grid gap-y-[.75rem] md:grid-cols-3 md:gap-x-[1rem] xl:grid-cols-[572px_278px_278px] px-hg lg:px-25">
-                <div className="grid grid-cols-2 gap-x-[.75rem] md:contents">
-                    <figure className="relative">
-                        <a href="/pages/rewards" className="block relative">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_d_858x.jpg?v=1771217469" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_m_330x.jpg?v=1771217469" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
-                            </picture>
-                            <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
-                                <div className="">
-                                    <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Rewards Program</p>
-                                    <p className="text-base leading-2 hidden lg:block mt-[.25rem]">Earn points. Get rewards. <br />Free products made simple!</p>
-                                </div>
-                                <span className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2">Join Now</span>
-                            </figcaption>
-                        </a>
-                    </figure>
-                    <figure>
-                        <a href="/pages/self-tan-quiz" className="block relative">
-                            <picture className="block">
-                                <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_quiz_d_417x.jpg?v=1771217468" media="(min-width: 992px)" />
-                                <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_quiz_m_330x.jpg?v=1771217472" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={165} height={165} />
-                            </picture>
-                            <figcaption className="absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
-                                <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Tan Quiz</p>
-                                <span className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 hidden lg:block">Take the Quiz</span>
-                            </figcaption>
-                        </a>
-                    </figure>
+            <div className={`
+                grid gap-y-[.75rem] md:gap-x-[1rem] 
+                ${['my'].includes(store) ? 'md:grid-cols-1' : ''} 
+                ${['ca', 'us', 'uk', 'eu', 'au', 'dev'].includes(store) ? 'md:grid-cols-3 xl:grid-cols-[572px_278px_278px]' : ''}
+                ${['int'].includes(store) ? 'md:grid-cols-2' : ''}
+                px-hg lg:px-25`}>
+                <div className={`grid ${store === 'int' ? 'grid-cols-1' : 'grid-cols-2'} gap-x-[.75rem] md:contents`}>
+                    {!['my'].includes(store) && (
+                        <figure className="relative">
+                            <a href="/pages/rewards" className="block relative">
+                                <picture className="block">
+                                    <source srcSet={`${['int'].includes(store) ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_d_835x284_crop_center.jpg?v=1771217469' : 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_d_858x.jpg?v=1771217469'}`} media="(min-width: 992px)" />
+                                    <img className="w-full" src={`${['int'].includes(store) ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_d_858x.jpg?v=1771217469' : 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_rewards_m_330x.jpg?v=1771217469'}`} loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
+                                </picture>
+                                <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
+                                    <div className="">
+                                        <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Rewards Program</p>
+                                        <p className="text-base leading-2 hidden lg:block mt-[.25rem]">Earn points. Get rewards. <br/>Free products made simple!</p>
+                                    </div>
+                                    <span className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2">Join Now</span>
+                                </figcaption>
+                            </a>
+                        </figure>  
+                    )}
+                    {!['int', 'my'].includes(store) && (
+                        <figure>
+                            <a href="/pages/self-tan-quiz" className="block relative">
+                                <picture className="block">
+                                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_quiz_d_417x.jpg?v=1771217468" media="(min-width: 992px)" />
+                                    <img className="w-full" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_quiz_m_330x.jpg?v=1771217472" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={165} height={165} />
+                                </picture>
+                                <figcaption className="absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
+                                    <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Tan Quiz</p>
+                                    <span className="text-underline text-left text-body font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 hidden lg:block">Take the Quiz</span>
+                                </figcaption>
+                            </a>
+                        </figure>
+                    )}
                 </div>
 
                 <div className="md:contents">
                     <figure className="lg:grid lg:grid-cols-[1fr] lg:items-center relative">
                         <picture className="block">
-                            <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_d_417x.jpg?v=1771217469" media="(min-width: 992px)" />
-                            <img className="w-full h-[88px] lg:h-auto" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" loading="lazy" alt="Cocoandeve overview review" width={384} height={88} />
+                            <source media="(min-width: 992px)" 
+                            srcSet={`
+                            ${['ca', 'us', 'uk', 'eu', 'au', 'dev'].includes(store) ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_d_417x.jpg?v=1771217469' : ''}
+                            ${['int'].includes(store) ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/INT_Beauty_Confidence_835x.jpg?v=1775097929' : ''}
+                            ${['my'].includes(store) ? 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/MY_Beauty_Confidence_rewards_1740x.jpg?v=1775097928' : ''}
+                            `} />
+                            <img loading="lazy" alt="Cocoandeve overview review" width={384} height={88} className="w-full h-[88px] lg:h-auto" 
+                            src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" />
                         </picture>
                         <figcaption className="absolute top-0 bottom-0 left-0 right-0 py-[.75rem] px-[.625rem] lg:p-[1.5rem] items-center text-left">
-                            <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>
-                            <div className="grid grid-cols-[99fr_83fr_107fr] lg:grid-cols-1 gap-[1rem] lg:gap-[.75rem]">
+                            {!['my'].includes(store) && <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>}
+                            <div className={`
+                                grid grid-cols-[99fr_83fr_107fr] gap-[1rem] lg:gap-[.75rem]
+                                ${['my'].includes(store) ? 'lg:grid-cols-3' : ''}
+                                ${['ca', 'us', 'uk', 'eu', 'au', 'dev', 'int'].includes(store) ? 'lg:grid-cols-1' : ''}
+                                `}>
                                 <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
                                     <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-2 h-2' />
                                     <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">Award-winning beauty</p>
