@@ -24,6 +24,12 @@ const HowToCarousel = (props) => {
 	const [screenLG, setScreenLG] = useState(992);
 	const autoplayPluginRef = useRef(Autoplay({ playOnInit: false, delay: 5000 }));
 
+	let filteredVideos = videoData;
+
+	if (store === 'au') filteredVideos = filteredVideos.filter((a) => a.tags.includes('hair') || a.tags.includes('tan') || a.tags.includes('body'));
+	if (store === 'ca') filteredVideos = filteredVideos.filter((a) => a.tags.includes('hair') || a.tags.includes('tan') || a.tags.includes('body') || a.tags.includes('suncare'));
+	if (store === 'int') filteredVideos = filteredVideos.filter((a) => a.tags.includes('hair'));
+
 	const handlOpenModal = (e) => {
 		const dataSrc = e.currentTarget.getAttribute('data-src');
 		setvideoSrc(dataSrc);
@@ -78,7 +84,7 @@ const HowToCarousel = (props) => {
 			{title && (<h2 className="text-center mb-g lg:mb-3 text-xl lg:text-2xl w-full">The Ultimate “HOW TO”s</h2>)}
 			<Carousel.Wrapper emblaApi={emblaApi} className="pl-hg lg:px-g">
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
-					{videoData.map((item, index) => (
+					{filteredVideos.map((item, index) => (
 						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 lg:px-g sm:px-hg">
 							<figure className="border border-secondary-light rounded-[2rem]">
 								{!isLoading && (
