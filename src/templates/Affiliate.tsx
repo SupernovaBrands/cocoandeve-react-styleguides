@@ -160,7 +160,7 @@ const Affiliate = (props: any) => {
 						<Carousel.Inner emblaRef={emblaRef} className="ml-[9px]">
 							{[...Array(3)].map((idx, i) => (
 								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
-									<div className={`w-full lg:w-[53%] flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[6%] order-1 lg:order-0 lg:px-2 z-[1]`}>
+									<div className={`w-full lg:w-[53%] flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[6%] order-1 lg:order-0 lg:px-2 z-[1] lg:min-h-[238px]`}>
 										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal mb-[8px] lg:mb-[16px]">{content[`section_ct_step_${i + 1}`]}</h3>
 										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] mb-[8px] lg:mb-[8px]'>{parse(content[`section_ct_title_${i + 1}`])}</h2>
 
