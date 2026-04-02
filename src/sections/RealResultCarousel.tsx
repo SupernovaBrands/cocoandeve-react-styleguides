@@ -87,10 +87,10 @@ const RealResultCarousel = (props: any) => {
 		if (videos.length >= 4 || videos.length === 0) {
 			return videos;
 		}
-		
+
 		const result = [...videos];
 		const loopTimes = 4 - videos.length;
-		
+
 		for (let i = 1; i <= loopTimes; i++) {
 			videos.forEach((obj) => {
 				result.push({ ...obj, review_url: `${obj.review_url}#t=${i * 5}` });
@@ -98,11 +98,11 @@ const RealResultCarousel = (props: any) => {
 			});
 			if (result.length >= 4) break;
 		}
-		
+
 		return result;
 	}, []);
 
-	const currentVideos = useMemo(() => 
+	const currentVideos = useMemo(() =>
 		concatVideos(tabs[activeTab] || []),
 		[activeTab, tabs]
 	);
@@ -117,7 +117,7 @@ const RealResultCarousel = (props: any) => {
 			<div className="row">
                 <div className="text-center instagram-reels__video-container pl-hg lg:px-25">
 					<div className="lg:flex lg:flex-wrap lg:justify-between lg:items-center lg:mb-3">
-						
+
 						{ !props.show && (<ul className="instagram-reels__nav gap-[.5rem] lg:gap-[.375rem] hide-scrollbar list-style-none mx-auto flex border-b-0 text-center justify-start px-hg flex-nowrap overflow-scroll mb-[1rem] lg:mb-0 lg:overflow-hidden lg:mx-0 lg:px-0">
 							<li className="flex items-center" key={`all`}><TabNav className={`whitespace-nowrap py-25 lg:py-1 px-2 lg:text-base lg:leading-[25px] ${activeTab === 'all' ? 'instagram-reels__nav--active font-normal lg:bg-body lg:text-white lg:focus:text-white lg:visited:text-white lg:hover:text-white' : 'text-gray-600'}`} title='All' active={activeTab === 'all'} onNavChange={() => setActiveTab('all')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>
 							<li className="flex items-center" key={`hair`}><TabNav className={`whitespace-nowrap py-25 lg:py-1 px-2 lg:text-base lg:leading-[25px] ${activeTab === 'hair' ? 'instagram-reels__nav--active font-normal lg:bg-body lg:text-white lg:focus:text-white lg:visited:text-white lg:hover:text-white' : 'text-gray-600'}`} title='Hair' active={activeTab === 'hair'} onNavChange={() => setActiveTab('hair')} ctaBgColor={generalSetting?.bfcm_cta_bg_color} ctaTextColor={generalSetting?.bfcm_cta_text_color} /></li>

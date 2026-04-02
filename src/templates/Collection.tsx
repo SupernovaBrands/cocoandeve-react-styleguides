@@ -29,8 +29,8 @@ const Inner = ({ title, bannerData }) => {
         <figure className="w-full relative items-center px-0 mb-0 aspect-[375/200] lg:aspect-[1440/279]">
             <picture className={``}>
                 <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
-                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')} 
-                    className="w-full" alt="Collection Banner" width="375" height="200" 
+                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')}
+                    className="w-full" alt="Collection Banner" width="375" height="200"
                     // @ts-ignore
                     fetchpriority="high" />
             </picture>
@@ -163,7 +163,7 @@ const Collection = (props: any) => {
 
     const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
     // console.log('sub nav', subNav);
-    
+
     // console.log('sub coll', subCollection);
 
     const navigationScroll = () => {
@@ -352,7 +352,7 @@ const Collection = (props: any) => {
             }
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
-            
+
         });
     }, [handle, squareBadge, customProductTitle]);
 
@@ -628,7 +628,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            
+
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />
