@@ -22,7 +22,7 @@ const options: EmblaOptionsType = {
 	align: 'start',
 	breakpoints: {
 		'(min-width: 992px)': {
-			watchDrag: false,
+			watchDrag: true,
 			duration: 40,
 		}
 	}
