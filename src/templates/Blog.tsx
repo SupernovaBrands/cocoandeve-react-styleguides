@@ -189,7 +189,7 @@ const Blog = (props) => {
 					<>
 						<div className="flex flex-wrap article-list-wrapper lg:-mx-g px-0 lg:px-hg">
 							{!isLoading && (
-								<div className="container px-0">
+								<div className="px-g">
 									{postData.length > 0 &&
 										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
 											<Carousel.Inner emblaRef={emblaRef}>
@@ -225,7 +225,7 @@ const Blog = (props) => {
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper my-3 lg:my-4 flex flex-wrap">
-								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-19px] sm:left-0" btnRight="lg:right-[-19px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
+								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-25px] sm:left-0" btnRight="lg:right-[-25px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
 							</div>
 						}
 						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-0 px-g lg:px-hg"></div>

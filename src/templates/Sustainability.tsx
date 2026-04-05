@@ -369,7 +369,7 @@ const Sustainability = (props: any) => {
                 <div className="px-0 py-3 lg:py-5">
                     <h2 className="mb-[1rem] lg:mb-3 text-body lg:text-2xl text-center">Our Ingredient Standards</h2>
                     <div className="flex flex-wrap lg:-mx-g px-g">
-                        <div className="w-full lg:w-1/2 order-2 lg:order-1 px-0 lg:pl-[.5rem] lg:pr-[.5rem]">
+                        <div className="w-full lg:w-1/2 order-2 lg:order-1 px-0 lg:pl-[.5rem] lg:pr-[.5rem] h-full lg:h-[275px]">
                             {/* <h2 className="hidden lg:block mb-1 text-base lg:mb-3">{formula.heading}</h2>
                             {!isLoading && (
                                 <ul className="list-none flex flex-wrap -mx-hg lg:-mx-g mt-2 w-full lg:w-3/4 p-0 mb-0 justify-center">
@@ -416,7 +416,7 @@ const Sustainability = (props: any) => {
                                 </figcaption>
                             </figure>
                         </div>
-                        <div className="w-full lg:w-1/2 order-1 lg:order-2 px-[.375em] lg:px-[.5rem] hidden lg:block">
+                        <div className="w-full lg:w-1/2 order-1 lg:order-2 px-[.375em] lg:px-[.5rem] hidden lg:block h-full lg:h-[275px]">
                             {/* <h2 className="block lg:hidden text-center lg:text-left mb-2">{formula.heading}</h2> */}
                             {!isLoading && (
                                 <div className="h-full px-[1.5rem] py-[1.5rem] bg-gray-100">
