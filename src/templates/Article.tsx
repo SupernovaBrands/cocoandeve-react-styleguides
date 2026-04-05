@@ -456,7 +456,7 @@ const Article = (props) => {
                 )} */}
                 <article className="flex flex-wrap mt-3 lg:mt-4 lg:-mx-g sm:-mx-hg">
                     <div className="blog-post-grid__content w-full lg:w-8/12 lg:block lg:px-g sm:px-hg">
-                        <h1 id="articleTitleHeading" className="text-center mb-1 text-xl lg:text-2xl">{content?.title}</h1>
+                        <h1 id="articleTitleHeading" className="text-left mb-1 text-xl lg:text-2xl">{content?.title}</h1>
                         <span className="text-body mb-1 article__published-at block text-sm">{updateDate}</span>
 
                         {quickNav?.length > 0 && (
@@ -490,7 +490,7 @@ const Article = (props) => {
                         
                         <div className="article__content mt-4 lg:mt-0">
                             {parse(bodyContent)}
-                            <ul className="px-g block mb-1 mt-1 lg:px-0 lg:mb-0">
+                            <ul className="block mb-1 mt-1 px-0 lg:mb-0">
                                 <li className="inline-block mr-[0.75rem]">
                                     <a target="_blank" href={`https://twitter.com/intent/tweet?url=https://${region}.cocoandeve.com&text=${content?.title}`} className="no-underline text-primary text-[1.875em]" aria-label="Share on Twitter">
                                         <Twitter className="svg fill-dark h-[1em]" />

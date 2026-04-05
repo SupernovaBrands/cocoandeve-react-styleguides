@@ -6,11 +6,11 @@ const YotpoRatingCard = (props) => {
     const { score, total, totalQa, handleForm, generalSetting} = props;
     return (
         <div className="yotpo-widget__rating-sidebar flex flex-col lg:mr-0 rounded-none border border-gray-600 p-2 lg:mb-4">
-            <div className="items-center lg:justify-center leading-[1.25] flex mb-1">
+            <div className="items-start lg:justify-center leading-[1.25] flex mb-1">
                 <span className="yotpo-widget__score text-[2.8125em] mr-25">{score ? score.toFixed(1) : 0}</span>
-                <div className="lg:ml-1">
+                <div className="lg:ml-1 lg:h-[70px] flex flex-col justify-start">
                     <ReviewStar score={score} />
-                    <span className="block yotpo-widget__total mt-25 font-normal text-body text-base">
+                    <span className="block yotpo-widget__total mt-25 font-normal text-body text-base leading-tight line-clamp-2">
                         {`${total} ${total > 1 ? tStrings.yotpo.reviews : tStrings.yotpo.review}, ${totalQa} ${tStrings.yotpo.qnas}`}
                     </span>
                 </div>
