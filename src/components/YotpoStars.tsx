@@ -19,6 +19,7 @@ const YotpoStar = (props: any) => {
 	const [score, setScore] = useState(5);
 	const [total, setTotal] = useState(0);
 	const [isVisible, setIsVisible] = useState(false);
+	const [platform, setPlatform] = useState('unknown');
 	const containerRef = useRef<HTMLDivElement>(null);
 	const hasFetchedRef = useRef(false);
 
@@ -82,11 +83,28 @@ const YotpoStar = (props: any) => {
 		}
 	}, [isVisible]);
 
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+        let detectedOS = 'unknown';
+
+        if (/windows/i.test(userAgent)) {
+            detectedOS = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            detectedOS = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            detectedOS = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            detectedOS = 'os-android';
+        }
+
+        setPlatform(detectedOS);
+    }, []);
+	console.log('platform', platform);
 	return (
 		<div ref={containerRef} className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			{init ? (
 				<>
-					<a href={`/products/${props?.productHandle}?write-a-review=true`} className="flex text-sm lg:text-base leading-[18px] lg:leading-[20px] review-stars__link" aria-label="Write a review for this product">
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`flex text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[18px!important]' : 'leading-[12px!important]'} review-stars__link" aria-label="Write a review for this product`}>
 						{!props.smSingleStarAllDevice && (
 							// <ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 							<>

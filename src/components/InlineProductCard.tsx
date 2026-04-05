@@ -149,7 +149,7 @@ const InlineProductCard = (props: any) => {
                         {selectedVariant.price && selectedVariant.price.amount && <span className="font-bold">{formatMoney(store, parseFloat(selectedVariant.price.amount) * 100)}</span>}
                     </div>
                 </div>
-                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className={`h-4 w-4 button__video-upsell rounded-full flex items-center justify-center ${addingItem ? 'bg-white' : `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'}`}`} type="button">
+                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className={`h-4 w-4 button__video-upsell rounded-none flex items-center justify-center ${addingItem ? 'bg-white' : `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'}`}`} type="button">
                     {/* {!addingItem && <PlusCircle className={`button__video-upsell-svg svg fill-primary hover:fill-primary-dark h-full w-full ${selectedVariant.availableForSale ? '' : 'opacity-[.5]'}`} />} */}
                     {!addingItem && (
                         <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">

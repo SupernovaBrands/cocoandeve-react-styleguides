@@ -1211,17 +1211,17 @@ const YotpoReviewWidget = (props:any) => {
 						)}
 
 						{!revLoading && revPage.totalPage > 1 && (
-							<ul className="list-unstyled flex justify-center items-center mt-2">
+							<ul className="list-unstyled flex justify-center items-center mt-2 gap-2">
 								<li>
-									<button type="button" className={`text-body btn py-0 border-0 text-body px-1 font-normal ${revPage.page === 1 && 'invisible'}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-body btn py-0 border-0 text-body px-[4px] font-normal ${revPage.page === 1 && ''}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 								</li>
 								{revPage.show.map((v) => (
 									<li key={v}>
-										<button type="button" className={`text-body btn py-0 border-0 text-body px-1 ${v === revPage.page ? '' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
+										<button type="button" className={`text-body btn py-0 border-0 text-body px-[4px] ${v === revPage.page ? 'border-b-2' : 'font-normal'}`} onClick={() => onRevPageChange(v)}>{v}</button>
 									</li>
 								))}
 								<li>
-									<button type="button" className={`text-body btn py-0 border-0 text-body px-1 font-normal ${revPage.page === revPage.totalPage && 'invisible'}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
+									<button type="button" className={`text-body btn py-0 border-0 text-body px-[4px] font-normal ${revPage.page === revPage.totalPage && ''}`} aria-label="Next review page" disabled={revPage.page === revPage.totalPage} onClick={() => onRevPageChange(revPage.page + 1)}><SvgChevronNext className="svg svg--current-color size-1em" /></button>
 								</li>
 							</ul>
 						)}
