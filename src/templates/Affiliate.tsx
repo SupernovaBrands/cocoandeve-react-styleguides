@@ -182,7 +182,7 @@ const Affiliate = (props: any) => {
 											</div>
 										)}
 									</div>
-									<div className={`w-full lg:w-[calc(54%)] order-0 lg:order-1`}>
+									<div className={`w-full lg:w-[calc(50%+77px)] order-0 lg:order-1`}>
 										<img src={content[`section_ct_img_${i + 1}`].url} className="w-full" loading="lazy" alt="" />
 									</div>
 								</div>
