@@ -135,8 +135,8 @@ const Blog = (props) => {
 			<div className="container px-0">
 				<h1 className="text-center mb-[1rem] lg:mb-1 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex" id="navBlogTags">
-					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
+					{!['int'].includes(region) && (<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>)}
+					{!['int'].includes(region) && (<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>)}
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/tan" title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
