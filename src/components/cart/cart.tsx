@@ -65,6 +65,7 @@ const Cart: React.FC<Props> = (props) => {
 	const discountLabel = strapiCartSetting?.body?.cartGeneral?.drawer_discount || 'Discount';
 	const bundleLabel = strapiCartSetting?.body?.cartGeneral?.drawer_bundle_discount || 'Bundle Savings';
 	const manualGwpBuyItems = strapiCartSetting?.body?.manualGwp?.customer_buys || '';
+	const enabledFreeShippingMeasure = strapiCartSetting?.body?.shippingMetter?.enable_free_shipping_measure;
 
 	const [isLastStockKey, setLastStockKey] = useState('');
 
@@ -201,7 +202,7 @@ const Cart: React.FC<Props> = (props) => {
 				});
 			});
 
-			tiktokEvent('InitiateCheckout', payload, user?.email);
+			// tiktokEvent('InitiateCheckout', payload, user?.email);
 			fbqEvent('track', 'InitiateCheckout');
 
 		} catch(e) {
@@ -242,7 +243,7 @@ const Cart: React.FC<Props> = (props) => {
 	// }
 
 	// console.log('manualGwpSetting', manualGwpSetting);
-	
+
 	useEffect(() => {
 		if (!manualGwpSetting) return;
 
@@ -313,9 +314,10 @@ const Cart: React.FC<Props> = (props) => {
 								<SvgClose className="svg w-[1em]" aria-hidden="true" />
 							</button>
 
-							{discountMeter && !discountMeter.enabled && shippingMeter
+							{discountMeter && (Object.keys(discountMeter).length === 0 || !discountMeter.enabled) && shippingMeter
 								&& shippingMeter.enabled
 								&& cart.itemCount > 0
+								&& enabledFreeShippingMeasure
 								&& (
 									<CartShippingMeter
 										target={shippingMeter.target}
@@ -490,16 +492,14 @@ const Cart: React.FC<Props> = (props) => {
 										<>
 											<>
 												<p className="hidden lg:flex w-2/3 mb-1  font-bold" data-cy="cart-shipping-label">{tStrings.cart_shipping}</p>
-												{/* <p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
-												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
+												<p className={`hidden lg:flex w-1/3 mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</>
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
 													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
 												</p>
-												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">Free</p>
-												{/* <p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p> */}
+												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
 										</>
 									)}
@@ -509,7 +509,7 @@ const Cart: React.FC<Props> = (props) => {
 											<p className="mb-1" data-cy="cart-shipping-label">
 												<strong>{`${tStrings.cart_shipping} `}</strong>
 											</p>
-											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Free</p>
+											<p className={`mb-1 font-bold text-right text-primary`} data-cy="cart-shipping-value">Calculated in Checkout</p>
 										</div>
 										</>
 									)}
