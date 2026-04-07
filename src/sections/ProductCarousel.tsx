@@ -37,7 +37,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { homePage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -48,7 +48,7 @@ const ProductCarousel = (props: any) => {
 	}
 	const [activeTab, setActiveTab] = useState('bestsellers');
 
-	const [isHomepage, setIsHomepage] = useState(false);
+	// const [isHomepage, setIsHomepage] = useState(false);
 	const [isProduct, setIsProduct] = useState(false);
 	const [customTitle, setCustomTitle] = useState(customProductTitle || null);
 
@@ -98,7 +98,7 @@ const ProductCarousel = (props: any) => {
 	// const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
 
 	useEffect(() => {
-		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
+		// setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
 		setIsProduct(window.location.pathname.includes('/products/'));
 	}, []);
 
@@ -125,7 +125,7 @@ const ProductCarousel = (props: any) => {
 	return (
 		<>
 			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
-				{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
+				{!homePage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 				<div className="row">
 					<div className="">
 						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-2">
