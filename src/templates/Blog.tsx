@@ -147,7 +147,7 @@ const Blog = (props) => {
 						<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					)}
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
-					{/* <a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a> */}
+					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (
 					<>
