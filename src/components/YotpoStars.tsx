@@ -99,12 +99,12 @@ const YotpoStar = (props: any) => {
 
         setPlatform(detectedOS);
     }, []);
-	console.log('platform', platform);
+
 	return (
 		<div ref={containerRef} className={`flex items-center ${props.className}`} data-skus={props.sku}>
 			{init ? (
 				<>
-					<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`flex text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[18px!important]' : 'leading-[12px!important]'} review-stars__link" aria-label="Write a review for this product`}>
+					<a href={`/products/${props?.productHandle}?write-a-review=true`} className={`flex text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[18px!important]' : 'leading-[12px!important]'} review-stars__link`} aria-label="Write a review for this product">
 						{!props.smSingleStarAllDevice && (
 							// <ReviewStar score={score} className={`${props.smSingleStar ? 'review-star__v1 hidden lg:flex' : 'flex'}`} />
 							<>
