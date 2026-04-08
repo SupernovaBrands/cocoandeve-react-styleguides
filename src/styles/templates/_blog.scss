@@ -64,7 +64,8 @@
 				a {
 					@apply underline;
 				}
-				p:not(.artical-detail) {
+				p:not(.artical-detail),
+				p:not(.product-card__badge) {
 					@apply mb-[1rem];
 				}
 
