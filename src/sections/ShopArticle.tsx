@@ -132,7 +132,7 @@ const ProductCarousel = (props: any) => {
                                     setWaitlistData={setWaitlistData}
                                     setProductData={setProductData}
                                     clickShowPopup={true}
-                                    badge={false}
+                                    badge={true}
                                 />)
                             )}
                         </Carousel.Inner>
