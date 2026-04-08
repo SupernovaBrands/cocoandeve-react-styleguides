@@ -33,9 +33,9 @@ const NewProductModal = (props) => {
             <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4 lg:min-w-[390px]">
                 <CloseButton handleClose={onClose} className={`${close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
                 <div className="text-center w-full">
-                    <h3 className={`${text_color || 'text-body'} font-bold text-[24px] lg:text-[32px] leading-[1.25] mb-[4px]`}>{heading}</h3>
-                    <h4 className={`${text_color || 'text-body'} font-bold text-[16px] lg:text-[20px]`}>{subheading}</h4>
-                    <p className={`${close_color || 'text-body'}  mb-2 text-[14px] lg:text-[14px] leading-[1.25] mt-1 lg:mt-[4px]`}>{description}</p>
+                    <h3 className={`${text_color || 'text-body'} font-bold text-[24px] lg:text-[32px] leading-[1.25] mb-[4px]`} dangerouslySetInnerHTML={{ __html: heading }}/>
+                    <h4 className={`${text_color || 'text-body'} font-bold text-[16px] lg:text-[20px]`} dangerouslySetInnerHTML={{ __html: subheading }}/>
+                    <p className={`${close_color || 'text-body'}  mb-2 text-[14px] lg:text-[14px] leading-[1.25] mt-1 lg:mt-[4px]`} dangerouslySetInnerHTML={{ __html: description }}/>
                     
                     <a href={cta_url} className="btn-lg py-[15px] hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-[0] mt-1 text-[16px]">
                         {cta_label}
