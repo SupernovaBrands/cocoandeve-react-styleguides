@@ -12,6 +12,7 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import { useState, useEffect } from "react";
 import Modal from "~/components/Modal";
 import Close from '~/images/icons/close.svg';
+import PostTag from "~/components/PostTag";
 
 const options: EmblaOptionsType = {
 	loop: true,
@@ -148,15 +149,19 @@ const Blog = (props) => {
 					)}
 					<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
 					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a>
+					{!['int', 'my'].includes(region) && (
+						<BlogNavTag href="/blogs/news/tagged/body" title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
+					)}
+					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`leading-[20px] hover:text-primary lg:leading-[25px] py-[5px] lg:py-1 px-2 hover:no-underline no-underline ${active ? 'active-dark' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (
 					<>
-						<div className="how-to-wrapper how-to--top lg:mb-4 flex flex-wrap lg:-mx-g sm:-mx-hg">
+						<div className="flex flex-wrap article-list-wrapper lg:-mx-g px-0 lg:px-hg">
 							{videoSliders.length > 0 && <HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-4px] sm:left-0" btnRight="lg:right-[-4px] sm:right-0" videoData={extendedVideoSliders} isLoading={isLoading} store={region} />}
-							<div className="flex flex-wrap mb-0 mt-2 w-full">
+							<div className="flex flex-wrap mb-0 mt-2 w-full px-g">
 								{videoItems.map((item, index) => (
-									<div className="mb-4 lg:mb-3 w-full lg:w-1/3 sm:px-hg lg:px-g">
-										<figure className="mb-2 no-gutters__in-container border border-secondary-light lg:mx-0 sm:-mx-g">
+									<div className="w-full lg:w-1/3 px-0 lg:px-[.5rem]">
+										<figure className="no-gutters__in-container lg:mx-0 sm:-mx-g">
 											{!isLoading && (
 												<picture className="cursor-pointer embed-responsive m-0" data-src={item.video_url} onClick={handlOpenModal}>
 													<source srcSet={item.src.replace('/public', '/750x')} media="(min-width: 992px)" width="368" height="192"></source>
@@ -167,16 +172,20 @@ const Blog = (props) => {
 															</svg>
 												</picture>
 											)}
-											<figcaption className="p-2 ">
-												{ item?.tags?.length > 0 ? item?.tags?.map((tag) => {
-													if (isClient && (region === 'int' || region === 'my') && tag.toLowerCase() === 'tan') {
-														return null;
-													}
-													return (
-														<span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
-													);
-												}) : '' }
-												<p className="h2 mt-2 blog-video-card__title mb-0 cursor-pointer"><a tabIndex={0} role="button" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
+											<figcaption className="p-[1rem]">
+												<div className="badge-blog flex gap-[8px]">
+													{ item?.tags?.length > 0 ? item?.tags?.map((tag) => {
+														if (isClient && (region === 'int' || region === 'my') && tag.toLowerCase() === 'tan') {
+															return null;
+														}
+														return (
+															// <span className={`${colors[tag?.toLowerCase()]?.bg} ${colors[tag?.toLowerCase()]?.text} badge-tag font-weight-normal mr-1 rounded capitalize inline-block badge text-center min-w-[3.375em]`}>{tag}</span>
+															<PostTag store={region} widthClass="min-w-[3.375em]" paddingClass="py-[4px] px-[8px] text-xs" key={`video-tag-${tag}-${index}`} tag={tag}>{tag.charAt(0).toUpperCase() + tag.slice(1)}</PostTag>
+															
+														);
+													}) : '' }
+												</div>
+												<p className="h2 mt-[8px] blog-video-card__title mb-0 cursor-pointer"><a tabIndex={0} role="button" className="no-underline hover:underline hover:text-body h2 text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 											</figcaption>
 										</figure>
 									</div>
@@ -189,7 +198,7 @@ const Blog = (props) => {
 					<>
 						<div className="flex flex-wrap article-list-wrapper lg:-mx-g px-0 lg:px-hg">
 							{!isLoading && (
-								<div className="px-g">
+								<div className="container px-0 m-0 lg:px-g">
 									{postData.length > 0 &&
 										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
 											<Carousel.Inner emblaRef={emblaRef}>
@@ -225,7 +234,7 @@ const Blog = (props) => {
 						</div>
 						{videoData.length > 0 &&
 							<div className="how-to-wrapper my-3 lg:my-4 flex flex-wrap">
-								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-25px] sm:left-0" btnRight="lg:right-[-25px] sm:right-0" className="lg:-mx-g" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
+								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-25px] sm:left-0" btnRight="lg:right-[-25px] sm:right-0" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
 							</div>
 						}
 						<div id="taggedPostCard" className="blog-post__cards article-list-wrapper flex flex-wrap mb-0 mt-0 px-g lg:px-hg"></div>
