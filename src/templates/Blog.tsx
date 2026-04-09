@@ -135,18 +135,20 @@ const Blog = (props) => {
 			<div className="container px-0">
 				<h1 className="text-center mb-2 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex mt-2" id="navBlogTags">
-					<BlogNavTag href="/blogs/news" title="All" ctaBgColor={generalSetting?.bfcm_cta_bg_color} active={active ? false : (tag === 'all' ? true : false)}/>
+					{!['int'].includes(region) && (<BlogNavTag href="/blogs/news" title="All" ctaBgColor={generalSetting?.bfcm_cta_bg_color} active={active ? false : (tag === 'all' ? true : false)}/>)}
 					<BlogNavTag href="/blogs/news/tagged/hair" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/tan" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
-					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
+					{['us', 'uk', 'eu', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/spf" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="SPF" active={active ? false : (tag === 'suncare' ? true : false)}/>
 					)}
-					{['int', 'my', 'au'].includes(region) && (
+					{['my'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/skin" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					)}
-					<BlogNavTag href="/blogs/news/tagged/body" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
+					{!['int', 'my'].includes(region) && (
+						<BlogNavTag href="/blogs/news/tagged/body" ctaBgColor={generalSetting?.bfcm_cta_bg_color} title="Body" active={active ? false : (tag === 'body' ? true : false)}/>
+					)}
 					<a href="/blogs/news?how-to-tab=true" id="how-to-nav" onClick={handleHowTo} className={`me-1 mb-1 py-1 px-2 hover:no-underline lg:text-lg no-underline ${active ? 'active' : ''}`}>How to's</a>
 				</div>
 				{!activeFrame && (

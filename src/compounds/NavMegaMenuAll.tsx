@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const NavMegaMenuAll = (props: any) => {
     const { menus, generalSetting, store } = props;
@@ -35,7 +35,7 @@ const NavMegaMenuAll = (props: any) => {
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={row.handle} className="text-body" aria-label={row.title}>{row.title}</a>
+                                                    <a href={row.handle} className={`text-body ${row.title === 'Tan Quiz' || row.title === 'SPF Quiz' || row.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[1px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`} aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
                                             {menu.handle !== '/collections/kits-gifts' && (

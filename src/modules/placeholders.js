@@ -632,6 +632,37 @@ export const sidebar_collection_ph = [
     }
 ];
 
+export const sidebar_collection_ph_int = [
+    {
+        "title": "Shop All",
+        "handle": "all"
+    },
+    {
+        "title": "Hair",
+        "handle": "hair"
+    },
+    {
+        "title": "<br class=\"d-lg-none\">Hair Benefits",
+        "handle": "hair-benefits"
+    },
+    {
+        "title": "Tan",
+        "handle": "tan"
+    },
+    {
+        "title": "SPF",
+        "handle": "spf"
+    },
+    {
+        "title": "Skincare",
+        "handle": "skincare"
+    },
+    {
+        "title": "Value <br class=\"d-lg-none\"> Sets",
+        "handle": "kits-gifts"
+    }
+];
+
 
 export const sidebar_collection_ph_ca = [
     {

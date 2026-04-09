@@ -30,6 +30,7 @@ const ReviewStar = (props) => {
 
 ReviewStar.propTypes = {
 	score: PropTypes.number,
+	className: PropTypes.string
 };
 
 export default ReviewStar;

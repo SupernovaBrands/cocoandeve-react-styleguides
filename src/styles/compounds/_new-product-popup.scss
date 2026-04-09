@@ -1,0 +1,11 @@
+@layer components {
+    .new-product-modal {
+        background-color: white;
+    }
+
+    .modal-dialog--newproductpopup {
+        @screen lg {
+            min-width: 770px;
+        }
+    }
+}

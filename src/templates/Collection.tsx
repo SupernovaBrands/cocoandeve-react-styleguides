@@ -47,6 +47,7 @@ const Banner = ({ title, bannerData }) => {
 
 const Collection = (props: any) => {
     const {
+        mainNav,
         products,
         isLoading,
         mainCollectionHandles,
@@ -76,7 +77,7 @@ const Collection = (props: any) => {
         bannerData,
         customProductTitle,
     } = props;
-    // console.log('customProductTitlexxx', customProductTitle);
+    // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
@@ -136,6 +137,11 @@ const Collection = (props: any) => {
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
     const [collProducts, setCollProducts] = useState(products);
+
+    const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
+    // console.log('sub nav', subNav);
+    
+    // console.log('sub coll', subCollection);
 
     const navigationScroll = () => {
         // console.log('running nav scroll');
@@ -263,13 +269,13 @@ const Collection = (props: any) => {
     };
 
 
-    const selectSortChange = (e: any) => {
+    const selectSortChange = async (e: any) => {
         showLoading(e);
         const sort = e.target.value === 'best-selling' ? 'featured' : e.target.value;
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
-            .then((data) => {
+            .then(async (data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+                const mapped = await Promise.all(products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge)));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -301,8 +307,32 @@ const Collection = (props: any) => {
 			parentHandle: mainCollectionHandles,
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
-            setSidebarMenu(data.parents);
-            setChildMenu(data.childrens);
+            let parenstSidebar = data.parents;
+            if (data.parents?.length) {
+                parenstSidebar = (store === 'int') ? data.parents.filter((parent: any) => parent?.handle !== 'body') : data.parents;
+            }
+            setSidebarMenu(parenstSidebar || data.parents);
+
+            let childMenuDataTemp = data.childrens;
+            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
+                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
+            }
+
+            let subCollection = [];
+            if (subNav) {
+                subCollection = subNav.rows.filter((row) => row.handle.includes('/collections/')).map(item => ({
+                    ...item,
+                    handle: item.handle.replace('/collections/', '')
+                }));
+                subCollection.unshift({
+                    handle,
+                    title: 'All',
+                    item_id: 'parent-id'
+                });
+                // console.log('subCollection', subCollection)
+            }
+
+            setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
             if (defaultSort !== null) {
                 const sort = defaultSort === 'best-selling' ? 'featured' : defaultSort;
                 fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
@@ -461,17 +491,18 @@ const Collection = (props: any) => {
                                 </>
                             {/* )} */}
 
-                            {!isLoading && handle !== 'all' && (
+                            {!isLoading && !['all', 'best-seller'].includes(handle) && (
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle) {
+                                                const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}`}
+                                                        href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} hover:text-white` : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}

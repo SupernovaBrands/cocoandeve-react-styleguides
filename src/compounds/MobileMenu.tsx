@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import Close from '~/images/icons/close.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
+import HairIcon from '~/images/icons/hair-dryer.svg';
+import BundleIcon from '~/images/icons/bundle-icon.svg';
+import TanQuizIcon from '~/images/icons/tan-quiz.svg';
+import SpfQuizIcon from '~/images/icons/spf-quiz.svg';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import BeautyIcon from '~/images/icons/palm-tree-v2.svg';
+import FindYourMatch from '~/images/icons/match-icon.svg';
 import BrandLogo from '~/images/ce-logo.svg';
 import MenuBanner from '~/compounds/MenuBanner';
 const defMenuState = {
@@ -113,66 +118,147 @@ const MobileMenu = (props: any) => {
 								</button>
 							)}
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 absolute bg-white w-100 left-0 top-0 min-h-[52.5em] ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'invisible translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block opacity-100' : 'hidden opacity-0'}`} aria-labelledby={m_title}>
-									<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
-										<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
-											const newStates = {...defMenuState};
-											newStates[i] = false;
-											setMenuStates(newStates);
-										}}>
-											<ChevronPrev className="h-[1em]" />
-										</button>
-										<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
-											<BrandLogo className="lg:h-[34px]" />
-										</a>
-										<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
-											<Close className="h-[1em]"  onClick={() => {
-												// const newStates = {...defMenuState};
-												// newStates[i] = false;
-												// setMenuStates(newStates);
-												onToggleMobileNav(false);
-											}} />
-										</button>
-									</li>
-									<li key="menuTitle" className="border-b p-0">
-										<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
-									</li>
-									{menu.rows?.map((row, index) => {
-										let title = row.title;
-										if (title.toLowerCase().includes('accessories')) title = 'Accessories';
-										if (title === 'Face Moisturizer') title = 'Face Moisturiser';
-										if (title === 'Moisturiser') title = 'Moisturizers';
-										if (title === 'Tan & SPF Sets') title = 'Tan Sets';
-										return (
-											<li key={`row-${row.handle}-${index}`} className="border-b p-0">
-												<a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
-											</li>
-										);
-									})}
-									<li key="shopall" className="py-[.3125em] px-0">
-										<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
-											<strong>
-												{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
-												{menu.title !== 'Value Sets' && (`Shop ${menu.title} Range`)}
-											</strong>
-										</a>
-									</li>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`} aria-labelledby={m_title}>
+									<div className="flex-shrink-0">
+										<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
+											<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
+												const newStates = {...defMenuState};
+												newStates[i] = false;
+												setMenuStates(newStates);
+											}}>
+												<ChevronPrev className="h-[1em]" />
+											</button>
+											<a href="/" className="text-body mx-auto py-[.6875em]" aria-label="CocoAndEve Logo">
+												<BrandLogo className="lg:h-[34px]" />
+											</a>
+											<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
+												<Close className="h-[1em]"  onClick={() => {
+													// const newStates = {...defMenuState};
+													// newStates[i] = false;
+													// setMenuStates(newStates);
+													onToggleMobileNav(false);
+												}} />
+											</button>
+										</li>
+										<li key="menuTitle" className="border-b p-0">
+											<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
+										</li>
+									</div>
+									<div className="flex-grow overflow-y-auto">
+										{menu.rows?.map((row, index) => {
+											let title = row.title;
+											if (title.toLowerCase().includes('accessories')) title = 'Accessories';
+											if (title === 'Face Moisturizer') title = 'Face Moisturiser';
+											if (title === 'Moisturiser') title = 'Moisturizers';
+											if (title === 'Tan & SPF Sets') title = 'Tan Sets';
+											return (
+												<li key={`row-${row.handle}-${index}`} className="border-b p-0">
+													<a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
+												</li>
+											);
+										})}
+										<li key="shopall">
+											<a href={menu.handle} className="px-g pb-1 pt-2 block text-body no-underline">
+												<strong>
+													{menu.title === 'Value Sets' && (`Shop All ${menu.title}`)}
+													{menu.title !== 'Value Sets' && (`Shop ${menu.title} Range`)}
+												</strong>
+											</a>
+										</li>
+									</div>
 								</ul>
 							)}
 						</li>
 					)
 				})}
+				<li key="mainmenu-find-your-match" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
+					<button
+						id="find-your-match"
+						className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent"
+						onClick={() => {
+							const newStates = { ...defMenuState };
+							newStates[0] = true;
+							setMenuStates(newStates);
+						}}
+					>
+						<h4 className="m-0 font-normal flex items-center">
+							<FindYourMatch className="mr-1 inline-block" />
+							<span>Find Your Match</span>
+						</h4>
+						<ChevronNext className="h-[1em] text-xs mb-25" />
+					</button>
+
+					<ul
+						id="subMenuSubFindMatch"
+						className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[0] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`}
+					>
+						<div className="flex-shrink-0">
+							<li className="flex justify-between mx-g items-center py-[5px]">
+								<button
+									type="button"
+									className="p-[20px] mb-0 -ml-[20px]"
+									onClick={() => {
+										const newStates = { ...defMenuState };
+										newStates[0] = false;
+										setMenuStates(newStates);
+									}}
+								>
+									<ChevronPrev className="h-[1em]" />
+								</button>
+								<a href="/" className="text-body mx-auto py-[.6875em]">
+									<BrandLogo className="lg:h-[34px]" />
+								</a>
+								<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]'>
+									<Close className="h-[1em]" />
+								</button>
+							</li>
+
+							<li className="p-0">
+								<h4 className="h4 text-body px-g pt-2 block mb-1">Find Your Match</h4>
+							</li>
+						</div>
+
+						<div className="flex-grow overflow-y-auto">
+							{!['int', 'my'].includes(store) && (
+								<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+									<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
+										<TanQuizIcon className="mr-1" /> Take the Tan Quiz
+									</a>
+								</li>
+							)}
+
+							{/* <li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+								<a href="#" className="w-full m-0 pb-1 pt-2 text-body flex">
+									<SpfQuizIcon className="mr-1" /> Take the SPF Quiz
+								</a>
+							</li> */}
+
+							<li key="build-your-own-bundle" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+								<a href="/pages/build-your-own-bundle" className="w-full m-0 pb-1 pt-2 text-body flex">
+									<BundleIcon className="mr-1" /> Build Your Bundle
+								</a>
+							</li>
+
+							<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+								<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
+									<HairIcon className="mr-1" /> Hair Concerns & Solutions
+								</a>
+							</li>
+						</div>
+					</ul>
+				</li>
+
 				{enableSwellAcc && (
 					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
 						{!isLoggedIn && (
 							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
-								Bali Beauty Club <BeautyIcon className="ml-1 mr-1" />
+								<BeautyIcon className="mr-1" /> Bali Beauty Club
 							</a>
 						)}
 						{isLoggedIn && (
 							<button onClick={handleAccount} className="w-full m-0 pb-1 pt-2 text-body flex">
 								{userPts !== -1 && (
-									<>{userPts} Points <BeautyIcon className="ml-1 mr-1" /></>
+									<><BeautyIcon className="mr-1" /> {userPts} Points</>
 								)}
 								{userPts === -1 && (
 									<div className="spinner-border !border-[2px] !w-[1rem] !h-[1rem]" role="status" aria-hidden="true" />
@@ -187,6 +273,7 @@ const MobileMenu = (props: any) => {
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
+
 				<li key="shopall" className="my-g p-g" role="presentation">
 					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
 				</li>
