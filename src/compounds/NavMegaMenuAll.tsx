@@ -21,11 +21,11 @@ const NavMegaMenuAll = (props: any) => {
                             <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
-                            {/* {generalSetting.bg_image && (
+                            {generalSetting.bg_image && generalSetting.mega_menu_image_url && (
                                 <a href={generalSetting.mega_menu_image_url}>
-                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
+                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="block w-100 rounded" />
                                 </a>
-                            )} */}
+                            )}
 
                             {menus && menus.filter((menu) => menu.title.toLowerCase() === 'best sellers').map((menu) => {
                                 return (
