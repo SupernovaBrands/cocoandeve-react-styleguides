@@ -37,6 +37,9 @@ const Header = (props: any) => {
 	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
 	const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 	const megaMenuCache = useReactRef<Record<string, any>>({});
+	const headerRef = useReactRef<HTMLElement>(null);
+	const headerHeightRef = useReactRef<number>(0);
+	const [headerHeight, setHeaderHeight] = useState(0);
 
 	useEffect(() => {
 		if (!initialStore) {
@@ -112,11 +115,30 @@ const Header = (props: any) => {
 
 		const scrollTop = window.scrollY;
 		if (!openSearchBox) {
+			if (scrollTop > 0 && !scrolled && headerRef.current) {
+				const h = headerRef.current.offsetHeight;
+				headerHeightRef.current = h;
+				setHeaderHeight(h);
+			}
 			setScrolled(scrollTop > 0);
 		} else {
 			setScrolled(false);
+			setHeaderHeight(0);
 		}
-	}, [openSearchBox, disabledScroll]);
+	}, [openSearchBox, disabledScroll, scrolled]);
+
+	useEffect(() => {
+		const el = headerRef.current;
+		if (!el) return;
+		const ro = new ResizeObserver(() => {
+			if (!scrolled) {
+				headerHeightRef.current = el.offsetHeight;
+			}
+		});
+		ro.observe(el);
+		headerHeightRef.current = el.offsetHeight;
+		return () => ro.disconnect();
+	}, [scrolled]);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll, { passive: true });
@@ -197,7 +219,8 @@ const Header = (props: any) => {
 
 	return (
 		<>
-			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={accountRef}>
+			<div style={{ height: scrolled ? headerHeight : 0 }} />
+			<header className={`main-header z-[1030] w-full ${scrolled ? 'fixed top-0 shadow-md header--scrolled' : 'relative'}`} ref={(el) => { headerRef.current = el; accountRef.current = el; }}>
 				{(annBar?.enabled || (!annBar.loaded && !annBar.enabled)) && (
 					<AnnouncementBar
 						loaded={annBar?.loaded}
