@@ -153,7 +153,7 @@ const MobileMenu = (props: any) => {
 											if (title === 'Tan & SPF Sets') title = 'Tan Sets';
 											return (
 												<li key={`row-${row.handle}-${index}`} className="border-b p-0">
-													<a href={row.handle} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
+													<a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
 												</li>
 											);
 										})}

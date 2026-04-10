@@ -306,18 +306,30 @@ const Collection = (props: any) => {
 			parentHandle: mainCollectionHandles,
             childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
 		})}`).then((res) => res.json()).then((data) => {
-            let parenstSidebar = data.parents;
-            if (data.parents?.length) {
-                parenstSidebar = (store === 'int') ? data.parents.filter((parent: any) => parent?.handle !== 'body') : data.parents;
+            let parentHandle = null
+            if (window && window.location.search?.includes('p=')) {
+                const params = new URLSearchParams(window.location.search);
+                parentHandle = params.get('p')
+            } else {
+                parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
             }
-            setSidebarMenu(parenstSidebar || data.parents);
+
+            const sidebarData = data.parents.map(item => ({
+                ...item,
+                isParent: item.handle === parentHandle
+            }));
+            let parenstSidebar = sidebarData;
+            if (sidebarData?.length) {
+                parenstSidebar = (store === 'int') ? sidebarData.filter((parent: any) => parent?.handle !== 'body') : sidebarData;
+            }
+            setSidebarMenu(parenstSidebar || sidebarData);
 
             let childMenuDataTemp = data.childrens;
             if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
                 childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
             }
 
-            const parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
+            
             const subNav = mainNav?.find((nav) => nav.handle === `/collections/${parentHandle}`) || null;
 
             let subCollection = [];
@@ -331,10 +343,10 @@ const Collection = (props: any) => {
                     title: 'All',
                     item_id: 'parent-id'
                 });
-                // console.log('subCollection', subCollection)
+                
             }
 
-            console.log('parentCollection', parentCollection)
+            console.log('subCollection', subCollection)
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
             if (defaultSort !== null) {
@@ -406,6 +418,8 @@ const Collection = (props: any) => {
     const [first, ...rest] = sidebarMenu;
     const mobileDropdown = [...rest,first];
 
+    // console.log('sidebarMenu', sidebarMenu);
+
     return (
         <>
             <Banner title={collectionTitle} bannerData={bannerData} />
@@ -436,7 +450,7 @@ const Collection = (props: any) => {
                                     <li className={`${!isLast ? 'mb-[.75em]' : 'mb-0'}`} key={`sidebarr--${parent.handle}-${index}`}>
                                         <a
                                             className={`hover:no-underline hover:text-primary text-base
-                                                ${handle === parent.handle || parent.handle === parentHandle ? 'text-primary' : 'text-body'}`}
+                                                ${parent.isParent ? 'text-primary' : 'text-body'}`}
                                             href={`/collections/${parent.handle}`}
                                             dangerouslySetInnerHTML={{ __html: html }}
                                         />
@@ -502,11 +516,16 @@ const Collection = (props: any) => {
                                             if (children && children.handle) {
                                                 const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
+                                                let parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
+                                                if (window && window.location.search?.includes('p=')) {
+                                                    const params = new URLSearchParams(window.location.search);
+                                                    parentHandle = params.get('p')
+                                                }
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
+                                                        href={`/collections/${children.handle}${isSpfTan ? `?main-collection=tan-and-spf&p=${parentHandle}` : `?p=${parentHandle}`}`}
                                                         className={`collection-grid__tags-link rounded-full text-nowrap mr-1 py-1 px-2 hover:no-underline
                                                             ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'} hover:text-white` : 'bg-gray-400 text-gray-600 hover:text-gray-600'}`}
                                                         onClick={showLoading}
