@@ -10,7 +10,7 @@ const NavMegaMenuAll = (props: any) => {
         } 
     },[store]);
 
-    // console.log('generalSetting', generalSetting.bg_image);
+    // console.log('generalSetting', generalSetting);
 
     return (
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
@@ -21,19 +21,18 @@ const NavMegaMenuAll = (props: any) => {
                             <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
-                            {generalSetting.bg_image && generalSetting.mega_menu_image_url && (
-                                <a href={generalSetting.mega_menu_image_url}>
+                            {generalSetting.mega_menu_banner && generalSetting.bg_image && generalSetting.mega_menu_image_url && (
+                                <a href={generalSetting.mega_menu_image_url} className="block mb-1">
                                     <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="block w-100 rounded" />
                                 </a>
                             )}
 
-                            {menus && menus.filter((menu) => menu.title.toLowerCase() === 'best sellers').map((menu) => {
-                                return (
-                                    <a key={`button-main-${menu.handle}`} href={menu.handle} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
-                                        {menu.title}
-                                    </a>
-                                )
-                            })}
+                            {generalSetting.mega_menu_button2_label && generalSetting.mega_menu_button2_url && (
+                                <a href={generalSetting.mega_menu_button2_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
+                                    {generalSetting.mega_menu_button2_label}
+                                </a>
+                            )}
+
                         </>
                     </div>
                     <div className={`ml-1 mb-3 flex flex-wrap ${navClass} px-0 flex-grow-1 w-full`}>
