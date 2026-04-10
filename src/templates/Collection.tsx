@@ -138,7 +138,6 @@ const Collection = (props: any) => {
 
     const [collProducts, setCollProducts] = useState(products);
 
-    const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
     // console.log('sub nav', subNav);
     
     // console.log('sub coll', subCollection);
@@ -318,6 +317,9 @@ const Collection = (props: any) => {
                 childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
             }
 
+            const parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
+            const subNav = mainNav?.find((nav) => nav.handle === `/collections/${parentHandle}`) || null;
+
             let subCollection = [];
             if (subNav) {
                 subCollection = subNav.rows.filter((row) => row.handle.includes('/collections/')).map(item => ({
@@ -325,12 +327,14 @@ const Collection = (props: any) => {
                     handle: item.handle.replace('/collections/', '')
                 }));
                 subCollection.unshift({
-                    handle,
+                    handle: parentHandle,
                     title: 'All',
                     item_id: 'parent-id'
                 });
                 // console.log('subCollection', subCollection)
             }
+
+            console.log('parentCollection', parentCollection)
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
             if (defaultSort !== null) {
