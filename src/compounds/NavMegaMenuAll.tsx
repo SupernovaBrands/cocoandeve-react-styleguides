@@ -48,7 +48,7 @@ const NavMegaMenuAll = (props: any) => {
                                                 </li>
                                             ))}
                                             {menu.handle !== '/collections/kits-gifts' && (
-                                                <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
+                                                <li><a href={`${menu.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
                                             )}
                                         </ol>
                                     </div>

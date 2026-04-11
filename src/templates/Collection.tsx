@@ -4,7 +4,7 @@ import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 // import ProductCardLoading from "~/compounds/ProductCardLoading";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 // import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
@@ -147,6 +147,7 @@ const Collection = (props: any) => {
         toggle(open);
     };
     // const [sidebarMenu, setSidebarMenu] = useState(store === 'ca' ? sidebar_collection_ph_ca : sidebar_collection_ph);
+    const [parentParam, setParentParam] = useState<string | null>(null);
     const [childMenu, setChildMenu] = useState(() => {
         if (childMenuData && childMenuData.length > 0) return childMenuData;
         if (!subHandles) return [];
@@ -327,35 +328,58 @@ const Collection = (props: any) => {
     const loadWaitlist = isWaitlist(collProducts);
 
     useEffect(() => {
-        fetch(`/api/collectionInfo?${new URLSearchParams({
-            parentHandle: mainCollectionHandles,
-            childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
-        })}`).then((res) => res.json()).then((data) => {
-            // setSidebarMenu(data.parents);
-            let childMenuDataTemp = data.childrens;
-            if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
-                childMenuDataTemp = data.childrens?.map(item => item.handle === 'tan' ? { handle: 'tan-and-spf', title: 'Tan & SPF' } : item);
-            }
-            let subCollection = [];
-            if (subNav) {
-                subCollection = subNav.rows.filter((row) => row.handle.includes('/collections/')).map(item => ({
-                    ...item,
-                    handle: item.handle.replace('/collections/', '')
-                }));
-                subCollection.unshift({
-                    handle: parentHandle,
-                    title: 'All',
-                    item_id: 'parent-id'
+        const params = new URLSearchParams(window.location.search);
+        setParentParam(params.get('p'));
+    }, [handle]);
+
+    useEffect(() => {
+        if (!mainNav || mainNav.length === 0) {
+            if (subHandles) {
+                fetch(`/api/collectionInfo?${new URLSearchParams({
+                    parentHandle: mainCollectionHandles,
+                    childrenHandle: (store === 'ca') ? subHandles?.replace('tan-and-spf', 'tan') : subHandles,
+                })}`).then((res) => res.json()).then((data) => {
+                    setChildMenu(data.childrens);
                 });
-                
             }
+            return;
+        }
 
-            // console.log('subCollection', subCollection)
+        const pHandle = parentParam;
+        let parentMenu = null;
 
-            setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
+        if (pHandle) {
+            parentMenu = mainNav.find((menu: any) =>
+                menu.handle?.replace('/collections/', '') === pHandle
+            );
+        }
 
-        });
-    }, [handle, squareBadge, customProductTitle]);
+        if (!parentMenu) {
+            parentMenu = mainNav.find((menu: any) =>
+                menu.rows?.some((row: any) =>
+                    row.handle?.replace('/collections/', '') === handle
+                )
+            );
+        }
+
+        if (!parentMenu) {
+            parentMenu = mainNav.find((menu: any) =>
+                menu.handle?.replace('/collections/', '') === handle
+            );
+        }
+
+        if (parentMenu) {
+            const parentHandle = parentMenu.handle?.replace('/collections/', '');
+            const children = [
+                { handle: parentHandle, title: parentMenu.title },
+                ...(parentMenu.rows || []).map((row: any) => ({
+                    handle: row.handle?.replace('/collections/', ''),
+                    title: row.title,
+                })),
+            ];
+            setChildMenu(children);
+        }
+    }, [handle, parentParam, mainNav]);
 
     useEffect(() => {
         setCollProducts([...products].sort((a, b) => (b.availableForSale ? 1 : 0) - (a.availableForSale ? 1 : 0)));
@@ -487,18 +511,31 @@ const Collection = (props: any) => {
                         </div>
                         {/* {handle !== 'all' && ( */}
                             <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
-                                <div className="w-full lg:w-3/5">
-                                    {!['all', 'best-seller'].includes(handle) && (
+                                <div className="w-full lg:w-8/12">
+                                    {handle !== 'all' && (
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                             {childMenu.length > 0 && childMenu.map((children, index) => {
-                                                if (children && children.handle) {
+                                                if (children && children.handle && !children.handle.includes('/pages/')) {
                                                     const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                     const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                     return (
                                                         <Link
                                                             scroll={false}
                                                             key={`tags--${children.handle}-${index}`}
-                                                            href={`/collections/${children.handle}${isSpfTan ? '?main-collection=tan-and-spf' : ''}`}
+                                                            href={`/collections/${children.handle}${
+                                                                isSpfTan ? `?main-collection=tan-and-spf${
+                                                                    parentParam
+                                                                        ? `&p=${parentParam}`
+                                                                        : parentCollection?.collection?.handle
+                                                                        ? `&p=${parentCollection.collection.handle}`
+                                                                        : ""
+                                                                    }` : parentParam ? 
+                                                                    `?p=${parentParam}`
+                                                                    : parentCollection?.collection?.handle
+                                                                    ? `?p=${parentCollection.collection.handle}`
+                                                                    : ""
+                                                            }`}
+
                                                             className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                                 ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
                                                             onClick={showLoading}
@@ -536,7 +573,7 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 const lgOrder = index < 3 ? index + 1 : index + 2;
                                 return showQuizCard && index === 1 ? (
-                                    <>
+                                    <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         <ProductCard
                                             product={item}
                                             className={`relative flex flex-col text-center collection-lg-order`}
@@ -578,7 +615,7 @@ const Collection = (props: any) => {
                                         </div>
 
 
-                                    </>
+                                    </Fragment>
                                 ) : (
                                     <ProductCard
                                         key={`collection-b-${handle}-${item.id}-${index}`}
