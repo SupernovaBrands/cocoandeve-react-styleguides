@@ -4,7 +4,7 @@ import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
 import ProductCardLoading from "~/compounds/ProductCardLoading";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCollectionSettings, useCollectionSingle } from "~/hooks/useCollection";
@@ -322,7 +322,12 @@ const Collection = (props: any) => {
             if (sidebarData?.length) {
                 parenstSidebar = (store === 'int') ? sidebarData.filter((parent: any) => parent?.handle !== 'body') : sidebarData;
             }
-            setSidebarMenu(parenstSidebar || sidebarData);
+            // console.log('parent sidebar', parenstSidebar);
+            // console.log('sidebar data', sidebarData);
+            const datas = parenstSidebar || sidebarData;
+            const sidebarRemovedDuplicate = datas.filter((item, index, self) => index === self.findIndex(t => t.handle === item.handle));
+
+            setSidebarMenu(sidebarRemovedDuplicate);
 
             let childMenuDataTemp = data.childrens;
             if (typeof window !== 'undefined' && window.location.search?.includes('main-collection=tan-and-spf')) {
@@ -346,7 +351,7 @@ const Collection = (props: any) => {
                 
             }
 
-            console.log('subCollection', subCollection)
+            // console.log('subCollection', subCollection)
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
             if (defaultSort !== null) {
@@ -513,7 +518,7 @@ const Collection = (props: any) => {
                                 <div className="w-full px-hg lg:px-0 mt-1 mb-1">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll mb-3 flex mt-1" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
-                                            if (children && children.handle) {
+                                            if (children && children.handle && !children.handle.includes('/pages/')) {
                                                 const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                 let parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
@@ -558,7 +563,7 @@ const Collection = (props: any) => {
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return showQuizCard && index === 2 ? (
-                                    <>
+                                    <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz
                                                 className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
@@ -572,7 +577,6 @@ const Collection = (props: any) => {
                                         )}
 
                                         <ProductCard
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
                                             button={true}
@@ -592,9 +596,8 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />
-                                    </>
+                                    </Fragment>
                                 ) : (
-                                    <>
                                         <ProductCard
                                             key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
@@ -616,7 +619,6 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />
-                                    </>
                                 )
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
