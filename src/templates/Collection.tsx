@@ -161,7 +161,6 @@ const Collection = (props: any) => {
         [...products].sort((a, b) => (b.availableForSale ? 1 : 0) - (a.availableForSale ? 1 : 0))
     );
 
-    const subNav = mainNav?.find((nav) => nav.handle === `/collections/${handle}`) || null;
     // console.log('sub nav', subNav);
 
     // console.log('sub coll', subCollection);
@@ -344,12 +343,14 @@ const Collection = (props: any) => {
                     handle: item.handle.replace('/collections/', '')
                 }));
                 subCollection.unshift({
-                    handle,
+                    handle: parentHandle,
                     title: 'All',
                     item_id: 'parent-id'
                 });
-                // console.log('subCollection', subCollection)
+                
             }
+
+            // console.log('subCollection', subCollection)
 
             setChildMenu(subCollection.length > 0 ? subCollection : childMenuDataTemp);
 
@@ -388,6 +389,8 @@ const Collection = (props: any) => {
             </select>
         </div>
     );
+
+    // console.log('sidebarMenu', sidebarMenu);
 
     return (
         <>
@@ -535,7 +538,6 @@ const Collection = (props: any) => {
                                 return showQuizCard && index === 1 ? (
                                     <>
                                         <ProductCard
-                                            key={`collection-b-${handle}-${item.id}-${index}`}
                                             product={item}
                                             className={`relative flex flex-col text-center collection-lg-order`}
                                             style={{ '--lg-order': lgOrder } as React.CSSProperties}
