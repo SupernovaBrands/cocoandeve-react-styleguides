@@ -35,11 +35,11 @@ const NavMegaMenuAll = (props: any) => {
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={row.handle} className="text-body" aria-label={row.title}>{row.title}</a>
+                                                    <a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body" aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
                                             {menu.handle !== '/collections/kits-gifts' && (
-                                                <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
+                                                <li><a href={`${menu.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
                                             )}
                                         </ol>
                                     </div>

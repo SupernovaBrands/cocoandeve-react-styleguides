@@ -163,7 +163,7 @@ const NavMegaMenu = (props: any) => {
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
                                     props.menus.map((menu, i) => {
-                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={menu.handle} className="h4 !text-body">{menu.title}</a></li>
+                                        return <li className=" mb-1" key={`mobile-menu-${i}`}><a href={`${menu.handle}?p=${props.handle}`} className="h4 !text-body">{menu.title}</a></li>
                                     })
                                 )}
                             </ol>
