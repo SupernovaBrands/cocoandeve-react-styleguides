@@ -127,8 +127,8 @@ const NavMegaMenu = (props: any) => {
                 {!isLoading ? (
                     <div className="flex mx-5 px-3">
                         <div className="lg:w-2/5 pr-4 pl-4 mb-3">
-                            <a href={props.url} className="block mb-2 h4 !text-body underline">
-                                <strong>Shop all {props.title}</strong>
+                            <a href={props.url} className="block mb-2 h4 !text-body">
+                                <strong>Shop All {props.title}</strong>
                             </a>
                             <ol className="list-unstyled">
                                 {props.menus.length > 0 && (
@@ -136,7 +136,7 @@ const NavMegaMenu = (props: any) => {
                                         return (
                                             <li className=" mb-1" key={`mobile-menu-${i}`}>
 
-                                                <a href={`${menu.handle}?p=${props.url.replace('/collections/', '')}`} className={`h4 !text-body ${menu.title === 'Tan Quiz' || menu.title === 'SPF Quiz' || menu.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[2px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`}>
+                                                <a href={`${menu.handle}?p=${props.url.replace('/collections/', '')}`} className={`text-body ${menu.title === 'Tan Quiz' || menu.title === 'SPF Quiz' || menu.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[2px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`}>
                                                     {menu.handle.includes('build-your-own-bundle') && <strong>{menu.title}</strong>}
                                                     {!menu.handle.includes('build-your-own-bundle') && menu.title}
                                                 </a>

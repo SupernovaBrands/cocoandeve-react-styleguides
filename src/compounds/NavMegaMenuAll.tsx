@@ -47,9 +47,9 @@ const NavMegaMenuAll = (props: any) => {
                                                     <a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className={`text-body ${row.title === 'Tan Quiz' || row.title === 'SPF Quiz' || row.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[1px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`} aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
-                                            {menu.handle !== '/collections/kits-gifts' && (
+                                            {/* {menu.handle !== '/collections/kits-gifts' && (
                                                 <li><a href={`${menu.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
-                                            )}
+                                            )} */}
                                         </ol>
                                     </div>
                                 )
