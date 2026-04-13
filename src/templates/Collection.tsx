@@ -491,7 +491,7 @@ const Collection = (props: any) => {
                                 <>
                                     {!isLoading && (
                                         <>
-                                            <div className="w-1/2 lg:hidden px-hg">
+                                            <div className="w-1/2 lg:hidden px-hg pb-g">
                                                 <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                     <option value="">Filter by</option>
                                                     {mobileDropdown.map((parent: any, index: number) => {
@@ -500,7 +500,7 @@ const Collection = (props: any) => {
                                                     })}
                                                 </select>
                                             </div>
-                                            <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0">
+                                            <div className="w-1/2 lg:w-2/5 lg:flex items-center justify-end px-hg lg:pr-0 pb-g">
                                                 <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`custom-select p-1 w-full lg:w-auto rounded ${handle === 'all' ? 'mb-2' : ''} lg:mb-0 bg-gray-400 border border-gray-400 pl-g lg:min-w-[154px] pr-1 lg:pr-3 min-h-[3.125em] indent-0`} defaultValue={defaultSort}>
                                                     <option value="featured">Sort By</option>
                                                     <option value="best-selling">Best selling</option>

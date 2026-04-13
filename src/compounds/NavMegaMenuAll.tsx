@@ -10,25 +10,34 @@ const NavMegaMenuAll = (props: any) => {
         } 
     },[store]);
 
+    // console.log('generalSetting', generalSetting);
+
     return (
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex w-full">
-                    <div className="max-w-[14.625em] mr-1 mb-3 px-0">
+                    <div className="max-w-[12em] mr-1 mb-3 px-0">
                         <>
-                            <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-2 w-full hover:no-underline inline-flex items-center justify-center px-3 py-1 text-lg text-center whitespace-nowrap`}>
+                            <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
-                            {generalSetting.bg_image && (
-                                <a href={generalSetting.mega_menu_image_url}>
-                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
+                            {generalSetting.mega_menu_banner && generalSetting.bg_image && generalSetting.mega_menu_image_url && (
+                                <a href={generalSetting.mega_menu_image_url} className="block mb-1">
+                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="block w-100 rounded" />
                                 </a>
                             )}
+
+                            {generalSetting.mega_menu_button2_label && generalSetting.mega_menu_button2_url && (
+                                <a href={generalSetting.mega_menu_button2_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
+                                    {generalSetting.mega_menu_button2_label}
+                                </a>
+                            )}
+
                         </>
                     </div>
                     <div className={`ml-1 mb-3 flex flex-wrap ${navClass} px-0 flex-grow-1 w-full`}>
                         {menus && menus.map((menu) => {
-                            if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
+                            if (menu.title.toLowerCase() !== 'best sellers' && menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
                                 return (
                                     <div key={`menu-${menu.title}`} className="d-flex flex-column">
                                         <a href={menu.handle} className="block mb-2 text-lg text-body font-bold" aria-label={menu.title}>{menu.title}</a>
