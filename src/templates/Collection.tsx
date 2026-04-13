@@ -3,6 +3,7 @@ import Modal from "~/components/Modal";
 import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
+import ProductCardKit from "~/compounds/ProductCardKit";
 import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -126,6 +127,7 @@ const Collection = (props: any) => {
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const [showQuizCard, setShowQuizCard] = useState(false);
+    const [showByobCard, setShowByobCard] = useState({ show: false, desktopPos: 5, mobilePos: 2 });
 	const handlOpenModal = (open: boolean) => {
 		toggle(open);
 	};
@@ -289,9 +291,12 @@ const Collection = (props: any) => {
     };
 
     useEffect(() => {
-        setShowQuizCard(handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf');
+        const showQuiz = handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf';
+        setShowQuizCard(showQuiz);
+        setShowByobCard({ show: true, desktopPos: showQuiz ? 4 : 5, mobilePos: 2 });
         setLoading(false);
     }, [currentCollection]);
+    
 
     const collectionSettings = useCollectionSettings(handle, store);
     const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
@@ -562,7 +567,12 @@ const Collection = (props: any) => {
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                                return showQuizCard && index === 2 ? (
+                                return showQuizCard && index === showByobCard?.desktopPos ? (
+                                    <ProductCardKit
+                                        className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                        store={store}
+                                    />
+                                ) : (showQuizCard && index === 2 ? (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         {!collectionSettings.isLoading && (
                                             <ProductCardQuiz
@@ -619,7 +629,7 @@ const Collection = (props: any) => {
                                             store={store}
                                             customProductTitle={customProductTitle}
                                         />
-                                )
+                                ))
                             })}
                             {collProducts.length === 2 && showQuizCard && !collectionSettings.isLoading && (
                                 <ProductCardQuiz
