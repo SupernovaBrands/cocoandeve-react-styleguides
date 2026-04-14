@@ -430,10 +430,6 @@ const Collection = (props: any) => {
         else document.body.classList.remove('!overflow-y-hidden');
     }, [isOpen]);
 
-    useEffect(() => {
-        console.log('byobBanner', byobBanner);
-    }, [byobBanner])
-
     const footerCss = `
     .collection-footer__html p {
         margin-bottom: 1rem;
