@@ -302,7 +302,7 @@
     // @apply pb-[50px] lg:pb-5;
     .yotpo-review-tab__total-review,
     .yotpo-review-tab__total-question {
-        @apply inline pl-[3px];
+        @apply hidden pl-[3px];
     }
     .input-group {
         .input-group-append {
