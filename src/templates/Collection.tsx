@@ -3,6 +3,7 @@ import Modal from "~/components/Modal";
 import TermCondition from '~/components/modal/TermCondition';
 import ProductCard from "~/compounds/ProductCard";
 import ProductCardQuiz from "~/compounds/ProductCardQuiz";
+import ProductCardKit from "~/compounds/ProductCardKit";
 // import ProductCardLoading from "~/compounds/ProductCardLoading";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -88,6 +89,7 @@ const Collection = (props: any) => {
         customProductTitle,
         childMenuData,
         mainNav,
+        byobBanner,
     } = props;
     // console.log('customProductTitlexxx', customProductTitle);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -138,7 +140,7 @@ const Collection = (props: any) => {
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const showQuizCard = useMemo(() => handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
-
+    const [showByobCard, setShowByobCard] = useState({ show: false, position: 5 });
     const launchHandles = useMemo(() => {
         if (launchWL) return launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || [];
         return [];
@@ -310,6 +312,19 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         setLoading(false);
+
+        let currentPos = parseInt(byobBanner?.desktop_position, 10);
+
+        if (window.innerWidth < 769) {
+            currentPos = parseInt(byobBanner?.mobile_position, 10);
+        }
+
+        if (currentPos > 0) {
+            setShowByobCard({
+                show: true,
+                position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
+            });
+        }
     }, [currentCollection]);
 
     const collectionSettings = useCollectionSettings(handle, store);
@@ -549,7 +564,20 @@ const Collection = (props: any) => {
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 const lgOrder = index < 3 ? index + 1 : index + 2;
-                                return showQuizCard && index === 1 ? (
+                                return showByobCard.show && index === showByobCard?.position ? (
+                                    <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
+                                            {!collectionSettings.isLoading && (
+                                                <ProductCardKit
+                                                    className="relative flex flex-col text-center collection-lg-order"
+                                                    store={store}
+                                                />
+                                            )}
+
+                                            {collectionSettings.isLoading && (
+                                                <QuizCardPlaceholder />
+                                            )}
+                                        </div>
+                                ) : (showQuizCard && index === 1 ? (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         <ProductCard
                                             product={item}
@@ -616,7 +644,7 @@ const Collection = (props: any) => {
                                         store={store}
                                         customProductTitle={customProductTitle}
                                     />
-                                )
+                                ))
                             })}
                             {/* {collProducts.length === 2 && showQuizCard && (
                                 collectionSettings.isLoading ? (
