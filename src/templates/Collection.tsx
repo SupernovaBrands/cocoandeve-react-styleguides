@@ -566,6 +566,7 @@ const Collection = (props: any) => {
                                 const lgOrder = index < 3 ? index + 1 : index + 2;
                                 return showByobCard.show && index === showByobCard?.position ? (
                                     <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
+                                        <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                             {!collectionSettings.isLoading && (
                                                 <ProductCardKit
                                                     className="relative flex flex-col text-center collection-lg-order"
@@ -576,7 +577,8 @@ const Collection = (props: any) => {
                                             {collectionSettings.isLoading && (
                                                 <QuizCardPlaceholder />
                                             )}
-                                        </div>
+                                        </Fragment>
+                                    </div>
                                 ) : (showQuizCard && index === 1 ? (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         <ProductCard
