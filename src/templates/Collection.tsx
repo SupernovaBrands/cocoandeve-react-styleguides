@@ -137,7 +137,7 @@ const Collection = (props: any) => {
         phoneShow: true,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
-    const showQuizCard = useMemo(() => handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
+    const showQuizCard = useMemo(() => handle === 'spf' || handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
 
     const launchHandles = useMemo(() => {
         if (launchWL) return launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || [];
@@ -598,15 +598,33 @@ const Collection = (props: any) => {
 
                                         <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                             {!collectionSettings.isLoading && (
-                                                <ProductCardQuiz
-                                                    className="relative w-full lg:h-full"
-                                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                    key={`collection-quiz-card--${handle}--${index}`}
-                                                    quizSetting={collectionSettings.quizSetting}
-                                                    store={store}
-                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                />
+                                                handle === 'spf' ? (
+                                                    <ProductCardQuiz
+                                                        className="relative w-full lg:h-full"
+                                                        href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                        title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                        heading="SPF Quiz"
+                                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                        key={`collection-quiz-card--spf--${index}`}
+                                                        quizSetting={collectionSettings.quizSetting}
+                                                        store={store}
+                                                        ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                    />
+                                                ) : (
+                                                    <ProductCardQuiz
+                                                        className="relative w-full lg:h-full"
+                                                        href="/pages/self-tan-quiz"
+                                                        title={collectionSettings?.quizSetting?.quiz_title}
+                                                        heading="Tan Quiz"
+                                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                        key={`collection-quiz-card--${handle}--${index}`}
+                                                        quizSetting={collectionSettings.quizSetting}
+                                                        store={store}
+                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                    />
+                                                )
                                             )}
 
                                             {collectionSettings.isLoading && (
