@@ -17,7 +17,7 @@ const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTe
                 <div className="px-2 container flex flex-col h-full justify-center">
                     <p className="text-[18px] leading-[22px] lg:text-[55px] lg:leading-[40px] font-bold mb-[.25rem] lg:mb-[1.5rem]">{data?.Title || 'Title'}</p>
                     <p className="text-xs leading-[15px] lg:text-[30px] lg:leading-[36px] lg:mb-[1.5rem]" dangerouslySetInnerHTML={{ __html: data?.text || 'Text' }} />
-                    <span className="hidden lg:flex text-[22px] leading-[28px] w-[228px] font-bold border border-body h-[55px] items-center justify-center">Discover</span>
+                    <span className="hidden lg:flex text-[22px] leading-[28px] w-[228px] font-bold border border-body h-[55px] items-center justify-center transition-colors duration-300 hover:bg-black hover:text-white">Discover</span>
                 </div>
             </figcaption>
         </a>
