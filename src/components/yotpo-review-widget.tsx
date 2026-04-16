@@ -1211,7 +1211,7 @@ const YotpoReviewWidget = (props:any) => {
 						)}
 
 						{!revLoading && revPage.totalPage > 1 && (
-							<ul className="list-unstyled flex flex-wrap justify-center items-center mt-2 gap-2">
+							<ul className="review__pagination list-unstyled flex flex-wrap justify-center items-center mt-2 gap-2">
 								<li>
 									<button type="button" className={`text-body btn py-0 border-0 text-body px-[4px] font-normal ${revPage.page === 1 && ''}`} aria-label="Previous review page" disabled={revPage.page === 1} onClick={() => onRevPageChange(revPage.page - 1)}><SvgChevronPrev className="svg svg--current-color size-1em" /></button>
 								</li>

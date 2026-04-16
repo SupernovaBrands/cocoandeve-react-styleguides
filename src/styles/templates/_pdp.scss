@@ -304,6 +304,9 @@
     .yotpo-review-tab__total-question {
         @apply hidden pl-[3px];
     }
+    .review__pagination {
+        @apply gap-1 lg:gap-2;
+    }
     .input-group {
         .input-group-append {
             @apply order-1;
