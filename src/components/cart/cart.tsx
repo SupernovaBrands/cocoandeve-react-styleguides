@@ -478,7 +478,7 @@ const Cart: React.FC<Props> = (props) => {
 									cart={cartData}
 								/>
 
-								<div className="flex flex-wrap mt-4 mb-4 lg:mt-[60px] lg:mb-[50px]">
+								<div className="flex flex-wrap mt-3 mb-3 lg:mt-[30px] lg:mb-[30px]">
 									<p className="w-2/3 mb-[5px] font-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-[5px] font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
