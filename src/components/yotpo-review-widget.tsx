@@ -931,6 +931,7 @@ const YotpoReviewWidget = (props:any) => {
 	useEffect(() => {
 		// getTopics();
 		getCustomQuestions(productId, (qs) => {
+			console.log('custom questions', qs);
 			setCustomQs(qs);
 		}, yotpoKey);
 	}, [productId]);

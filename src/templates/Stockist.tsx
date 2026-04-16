@@ -27,33 +27,13 @@ const Stockist = (props: any) => {
 	const [region, setRegion] = useState('australia');
 	const [regionTitle, setRegionTitle] = useState('Australia');
 	const [stores, setStores] = useState([]);
-    const [totalReviews, setTotalReviews] = useState('28,159');
-    const sectionRef = useRef<HTMLElement>(null);
-    const hasFetched = useRef(false);
+    const [totalReviews, setTotalReviews] = useState(null);
 
     useEffect(() => {
-        const el = sectionRef.current;
-        if (!el) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !hasFetched.current) {
-                    hasFetched.current = true;
-                    const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
-                    fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, { headers: { 'signature': signature } })
-                        .then((data) => data.json())
-                        .then((r) => {
-                            setTotalReviews(r?.response?.total_reviews?.toLocaleString());
-                        })
-                        .catch(() => { });
-                    observer.disconnect();
-                }
-            },
-            { rootMargin: '200px' }
-        );
-
-        observer.observe(el);
-        return () => observer.disconnect();
+        const signature = encryptParam(`{brand:'cocoandeve',time:${new Date().getTime()}}`);
+        fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, {headers: { 'signature': signature}}).then((data) => data.json()).then((r) => {
+            setTotalReviews(r?.response?.total_reviews?.toLocaleString());
+        });
     }, []);
 
     const [emblaRef2, emblaApi2] = useEmblaCarousel({
@@ -167,7 +147,7 @@ const Stockist = (props: any) => {
                                     <a href={filteredItem.logo_url} className="block rounded-none">
                                         <img className="lg:mx-auto lg:!w-auto h-[60px]" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
                                     </a>
-                                    <figcaption className="mb-0 !font-normal text-sm lg:text-lg text-body text-center">{filteredItem.title}</figcaption>
+                                    <figcaption className="mb-0 !font-normal text-sm lg:text-base text-body text-center">{filteredItem.title}</figcaption>
                                 </figure>
                             ))}
                         </Carousel.Inner>
