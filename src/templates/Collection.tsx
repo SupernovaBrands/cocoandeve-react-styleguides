@@ -98,6 +98,7 @@ const Collection = (props: any) => {
     } = props;
     // console.log('customProductTitlexxx', customProductTitle);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
+    // const [splitCard, setSplitCard] = useState(false);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
@@ -144,7 +145,7 @@ const Collection = (props: any) => {
         phoneShow: true,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
-    const showQuizCard = useMemo(() => handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
+    const showQuizCard = useMemo(() => handle === 'spf' || handle === 'body-suncare' || handle === 'face-suncare' || handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
     const [showByobCard, setShowByobCard] = useState({ show: false, position: 5 });
     const launchHandles = useMemo(() => {
         if (launchWL) return launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || [];
@@ -611,36 +612,53 @@ const Collection = (props: any) => {
 
                                         <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                             {!collectionSettings.isLoading && (
-                                                <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                handle === 'spf' || (parentCollection && parentCollection.collection.handle === 'spf') ? (
                                                     <ProductCardQuiz
-                                                        className="relative"
-                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
-                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                        key={`collection-quiz-card--${handle}--${index}`}
+                                                        className="relative w-full lg:h-full"
+                                                        href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                        title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                        heading="SPF Quiz"
+                                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                        key={`collection-quiz-card--spf--${index}`}
                                                         quizSetting={collectionSettings.quizSetting}
                                                         store={store}
-                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                        ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                        ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
                                                     />
+                                                ) : (
+                                                    <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                        <ProductCardQuiz
+                                                            className="relative"
+                                                            imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
+                                                            imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                            key={`collection-quiz-card--${handle}--${index}`}
+                                                            quizSetting={collectionSettings.quizSetting}
+                                                            store={store}
+                                                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                            splitVersion={currentCollection.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')}
+                                                        />
 
-                                                    <ProductCardQuiz
-                                                        className="relative"
-                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                        key={`collection-byob-card--${handle}--${index}`}
-                                                        url='/pages/build-your-own-bundle'
-                                                        ctaLabel='Build Now'
-                                                        title='Build Your Bundle'
-                                                        quizSetting={{
-                                                            quiz_title: 'Mix, match & save <br />your way!',
-                                                        }}
-                                                        store={store}
-                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                    />
-                                                </div>
+                                                        {(currentCollection.handle === 'tan' || (parentCollection && parentCollection.collection.handle === 'tan')) && (
+                                                            <ProductCardQuiz
+                                                                className="relative"
+                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
+                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                key={`collection-byob-card--${handle}--${index}`}
+                                                                href='/pages/build-your-own-bundle'
+                                                                ctaLabel='Build Now'
+                                                                heading='Build Your Bundle'
+                                                                title='Mix, match & save <br />your way!'
+                                                                store={store}
+                                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                )
                                             )}
 
                                             {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder split={true} />
+                                                <QuizCardPlaceholder split={currentCollection.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')} />
                                             )}
                                         </div>
 

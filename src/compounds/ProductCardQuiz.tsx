@@ -1,15 +1,15 @@
 const ProductCardQuiz = (props: any) => {
-	const title = props.quizSetting?.quiz_title || 'Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps';
-    // console.log('quiz setting', props.quizSetting);
+	const title = props.title || 'Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps';
+    // console.log('split ver', props.splitVersion);
 	return (
 		<figure className={props.className ?? ''}>
-            <a href={props.url ?? '/pages/self-tan-quiz'}>
+            <a href={props.href ?? '/pages/self-tan-quiz'}>
                 <picture className="block">
                     <source srcSet={props.imgDt} media="(min-width: 992px)" />
                     <img className="w-full" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
-                <figcaption className="absolute left-[5em] top-2/4 lg:top-[50%] lg:left-0 lg:right-0 -translate-y-1/2 lg:-translate-y-[50%] text-left lg:text-center pl-25 pr-g lg:px-0 lg:mt-0 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
-                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">{props.title ?? 'Tan Quiz'}</p>
+                <figcaption className={`${props.splitVersion ? 'lg:mt-0 lg:top-[50%] lg:-translate-y-[50%]' : 'lg:mt-4 lg:top-0 lg:transform-none'} absolute left-[5em] top-2/4 lg:left-0 lg:right-0 -translate-y-1/2 text-left lg:text-center pl-25 pr-g lg:px-0 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center`}>
+                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">{props.heading ?? 'Tan Quiz'}</p>
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body"
                         dangerouslySetInnerHTML={{
 							__html: ['us'].includes(props.store) ? title.replace('colour', 'color') : title,
