@@ -107,42 +107,42 @@ const getCustomQuestions = (productId, callback, yotpoKey) => {
 		})
 	}).then(response => response.text()).then(data => {
 		const res = JSON.parse(data);
-		
+
 		const tempDiv = document.createElement('div');
 		tempDiv.innerHTML = res[0].result;
-		
+
 		const questionEls = tempDiv.querySelectorAll('.yotpo-custom-tag-field');
 		const filterEls = tempDiv.querySelectorAll('.filters-dropdown');
 		const questions = [];
-		
+
 		questionEls.forEach((el) => {
 			const q = {
 				question: el.querySelector('.yotpo-field-title')?.textContent.trim() || '',
 				options: [],
 				radio: el.getAttribute('role') === 'radiogroup',
 			};
-			
+
 			const inputs = el.querySelectorAll('input');
 			inputs.forEach((input) => {
-				if (!q.slug) { 
-					q.slug = input.name; 
+				if (!q.slug) {
+					q.slug = input.name;
 				}
 				q.options.push(input.value);
 			});
-			
+
 			// Find matching filter element
 			const slugWithoutDashes = q.slug?.replace('--', '') || '';
 			const matchingFilter = Array.from(filterEls).find(
 				filter => filter.getAttribute('data-question-id') === slugWithoutDashes
 			);
-			
+
 			if (matchingFilter) {
 				q.filter = matchingFilter.getAttribute('data-default-button-display-value');
 			}
-			
+
 			questions.push(q);
 		});
-		
+
 		callback(questions);
 	}).catch(error => {
 		console.error('Error fetching Yotpo data:', error);
@@ -410,13 +410,31 @@ const YotpoReviewWidget = (props:any) => {
 
 	};
 
-	const onFilterChange = () => {
-		const form = document.getElementById('yotpoFilterForm');
+	const findParentById = (element, targetId) => {
+		let current = element;
+
+		while (current) {
+			if (current.id === targetId) {
+			return current;
+			}
+			current = current.parentElement;
+		}
+
+		return null; // kalau tidak ketemu
+	}
+
+	const onFilterChange = (elm) => {
+		// const form = document.getElementById('yotpoFilterForm');
+		// not sure why we are using document element on this widget??
+		const form = findParentById(elm.target, 'yotpoFilterForm');
+		if (!form) {
+			return null;
+		}
 		const filter = {};
 
 		const text = form.querySelector('input[name="free_text_search"]').value;
-		// console.log('aaa', text);
-		if (text) filter.free_text_search = text;
+		// if (text) filter.free_text_search = text;
+		filter.free_text_search = text;
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
@@ -554,7 +572,7 @@ const YotpoReviewWidget = (props:any) => {
 			}).then(response => response.json()).then((resp) => {
 				const { response } = resp;
 				const yotpoS3 = `https://${response.bucket}.s3.amazonaws.com/`;
-				
+
 				const startUpload = async (i) => {
 					if (reviewData.uploaded_images[i]) {
 						const dataUrl = reviewData.uploaded_images[i];
@@ -564,7 +582,7 @@ const YotpoReviewWidget = (props:any) => {
 						const formData = getUploadImageUrlEncodedParams(fullName, response, {
 							dataUrl: reviewData.uploaded_images[i].dataUrl
 						});
-						
+
 						// Upload to S3
 						const xhr = new XMLHttpRequest();
 						xhr.open('POST', yotpoS3, true);
@@ -575,7 +593,7 @@ const YotpoReviewWidget = (props:any) => {
 									image_upload_token: reviewResponse.image_upload_token,
 									image_urls: JSON.stringify([imageUrl]),
 								});
-								
+
 								try {
 									await fetch('https://api-cdn.yotpo.com/images/process', {
 										method: 'POST',
@@ -584,9 +602,9 @@ const YotpoReviewWidget = (props:any) => {
 										},
 										body: processImageParams,
 									});
-									
+
 									startUpload(i + 1);
-									
+
 								} catch (error) {
 									console.error('Error processing image:', error);
 								}
@@ -595,7 +613,7 @@ const YotpoReviewWidget = (props:any) => {
 						xhr.send(formData);
 					}
 				};
-				
+
 				startUpload(0);
 			}).catch((e) => console.log(`Error: ${e}`));
 		}
@@ -1352,7 +1370,7 @@ const YotpoReviewWidget = (props:any) => {
 												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
-															
+
 															{media.image_url?.includes('.mp4') || media.image_url?.includes('.mov') ? (
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.thumb_url ? media.thumb_url : ''}>
 																	<source src={media.image_url} type="video/mp4" />

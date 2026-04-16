@@ -551,7 +551,7 @@ const Collection = (props: any) => {
                                                                         : parentCollection?.collection?.handle
                                                                         ? `&p=${parentCollection.collection.handle}`
                                                                         : ""
-                                                                    }` : parentParam ? 
+                                                                    }` : parentParam ?
                                                                     `?p=${parentParam}`
                                                                     : parentCollection?.collection?.handle
                                                                     ? `?p=${parentCollection.collection.handle}`
