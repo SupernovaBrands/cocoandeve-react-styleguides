@@ -10,8 +10,20 @@
 		@apply px-0 block lg:px-0;
 	}
 
+	.product-variant-swatch {
+		@apply lg:gap-0 !important;
+	}
+
+	.article-swatch-label {
+		@apply text-sm;
+	}
+
 	.artical-detail {
 		@apply px-0 !important;
+	}
+
+	.article-swatch-heading {
+		@apply pt-1 pb-1;
 	}
 
 	.product-card__badge {

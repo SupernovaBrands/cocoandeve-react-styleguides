@@ -522,7 +522,7 @@ const Article = (props) => {
         {upsells?.length > 0 && (
             <div className="blog-post-grid__shop-articles articleCarousel py-3 flex flex-wrap lg:-mx-g sm:-mx-g w-full">
                 <div className="container lg:px-0 sm:pl-0 sm:pr-0">
-                    <p className="font-bold text-xl lg:text-2xl text-left px-[15px!important]">Shop this article</p>
+                    <p className="font-bold text-xl lg:text-2xl text-left px-[15px!important] text-center">Shop this article</p>
                     {!isLoading && ( 
                         <ShopArticle 
                             waitlistPdpSetting={waitlistPdpSetting}
