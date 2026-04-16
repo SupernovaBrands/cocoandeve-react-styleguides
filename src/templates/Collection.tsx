@@ -332,7 +332,7 @@ const Collection = (props: any) => {
         // console.log('currentCollection', currentCollection);
         if (currentPos > 0) {
             setShowByobCard({
-                show: currentCollection.handle !== 'tan',
+                show: currentCollection?.handle !== 'tan',
                 position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
             });
         }
@@ -659,10 +659,10 @@ const Collection = (props: any) => {
                                                             quizSetting={collectionSettings.quizSetting}
                                                             store={store}
                                                             ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                            splitVersion={currentCollection.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')}
+                                                            splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')}
                                                         />
 
-                                                        {(currentCollection.handle === 'tan' || (parentCollection && parentCollection.collection.handle === 'tan')) && (
+                                                        {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection.collection.handle === 'tan')) && (
                                                             <ProductCardQuiz
                                                                 className="relative"
                                                                 imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
@@ -681,7 +681,7 @@ const Collection = (props: any) => {
                                             )}
 
                                             {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder split={currentCollection.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')} />
+                                                <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')} />
                                             )}
                                         </div>
 
