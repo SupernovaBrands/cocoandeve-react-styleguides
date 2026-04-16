@@ -17,8 +17,13 @@ import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
 
-const QuizCardPlaceholder = () => {
-    return (
+const QuizCardPlaceholder = (props) => {
+    return props.split ? (
+        <div className="relative flex flex-col gap-[1.5rem] lg:gap-0 w-full lg:justify-between lg:h-full lg:pb-[1rem]">
+            <div className="bg-shimmer w-full aspect-[360/64] md:aspect-[218/419] lg:aspect-[278/190]" />
+            <div className="bg-shimmer w-full aspect-[360/64] md:aspect-[218/419] lg:aspect-[278/190]" />
+        </div>
+    ) : (
         <div className="relative w-full lg:h-full">
             <div className="bg-shimmer w-full aspect-[360/64] lg:aspect-[278/391]" />
         </div>
@@ -319,9 +324,10 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
+        // console.log('currentCollection', currentCollection);
         if (currentPos > 0) {
             setShowByobCard({
-                show: true,
+                show: currentCollection.handle !== 'tan',
                 position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
             });
         }
@@ -565,8 +571,8 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 const lgOrder = index < 3 ? index + 1 : index + 2;
                                 return showByobCard.show && index === showByobCard?.position ? (
-                                    <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
-                                        <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
+                                    <div key={`collection-b-${handle}-${item.id}-${index}`} className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
+                                        <Fragment>
                                             {!collectionSettings.isLoading && (
                                                 <ProductCardKit
                                                     className="relative flex flex-col text-center collection-lg-order"
@@ -605,19 +611,36 @@ const Collection = (props: any) => {
 
                                         <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                             {!collectionSettings.isLoading && (
-                                                <ProductCardQuiz
-                                                    className="relative w-full lg:h-full"
-                                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                    key={`collection-quiz-card--${handle}--${index}`}
-                                                    quizSetting={collectionSettings.quizSetting}
-                                                    store={store}
-                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                />
+                                                <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                    <ProductCardQuiz
+                                                        className="relative"
+                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
+                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                        key={`collection-quiz-card--${handle}--${index}`}
+                                                        quizSetting={collectionSettings.quizSetting}
+                                                        store={store}
+                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                    />
+
+                                                    <ProductCardQuiz
+                                                        className="relative"
+                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
+                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                        key={`collection-byob-card--${handle}--${index}`}
+                                                        url='/pages/build-your-own-bundle'
+                                                        ctaLabel='Build Now'
+                                                        title='Build Your Bundle'
+                                                        quizSetting={{
+                                                            quiz_title: 'Mix, match & save <br />your way!',
+                                                        }}
+                                                        store={store}
+                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                    />
+                                                </div>
                                             )}
 
                                             {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder />
+                                                <QuizCardPlaceholder split={true} />
                                             )}
                                         </div>
 
