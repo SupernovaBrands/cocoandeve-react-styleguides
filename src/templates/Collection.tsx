@@ -520,7 +520,7 @@ const Collection = (props: any) => {
                                     {handle !== 'all' && (
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                             {childMenu.length > 0 && childMenu.map((children, index) => {
-                                                if (children && children.handle && !children.handle.includes('/pages/')) {
+                                                if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
                                                     const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                     return (
                                                         <Link
