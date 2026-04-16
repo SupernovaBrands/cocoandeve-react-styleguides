@@ -586,7 +586,7 @@ const Collection = (props: any) => {
                             </div>
                         )}
                         <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid pt-4 lg:pt-[1.5rem] overflow-hidden w-full gap-x-g gap-y-[2.375rem] lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2 pb-[2.375rem] lg:pb-5`}>
-                            {(showSpinner || loading) && (
+                            {(showSpinner || loading || isLoading || collectionSettings.isLoading) && (
                                 <div className="mb-3 px-hg lg:px-g text-center w-full block col-span-2 lg:col-span-4">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                 </div>
@@ -653,6 +653,9 @@ const Collection = (props: any) => {
                                                     <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
                                                         <ProductCardQuiz
                                                             className="relative"
+                                                            href={collectionSettings?.quizSetting?.quiz_button_url}
+                                                            title={collectionSettings?.quizSetting?.quiz_title}
+                                                            ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
                                                             imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
                                                             imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
                                                             key={`collection-quiz-card--${handle}--${index}`}
