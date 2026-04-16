@@ -634,8 +634,8 @@ const Collection = (props: any) => {
                                                         href={collectionSettings?.quizSetting?.spf_quiz_button_url}
                                                         title={collectionSettings?.quizSetting?.spf_quiz_title}
                                                         heading="SPF Quiz"
-                                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Mobile_c98875de22.jpg?v=1776312419"
+                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Desktop_2e89ead50d.jpg?v=1776312419"
                                                         key={`collection-quiz-card--spf--${index}`}
                                                         quizSetting={collectionSettings.quizSetting}
                                                         store={store}
