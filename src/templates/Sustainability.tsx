@@ -366,7 +366,7 @@ const Sustainability = (props: any) => {
                 </div>
             </section> */}
             <section className="container px-0">
-                <div className="px-0 py-3 lg:py-5">
+                <div className="px-0">
                     <h2 className="mb-[1rem] lg:mb-3 text-body lg:text-2xl text-center">Our Ingredient Standards</h2>
                     <div className="flex flex-wrap lg:-mx-g px-g">
                         <div className="w-full lg:w-1/2 order-2 lg:order-1 px-0 lg:pl-[.5rem] lg:pr-[.5rem] h-full lg:h-[275px]">
@@ -394,23 +394,23 @@ const Sustainability = (props: any) => {
                                     <div className="max-w-[371px] w-full grid grid-cols-2 gap-[0.75rem] lg:gap-[1.25rem]">
                                         <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
                                             <DimethiconeFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
-                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Silicone Free</p>
+                                            <p className="text-sm leading-[18px] lg:text-base lg:leading-2">Silicone Free</p>
                                         </div>
                                         <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
                                             <Gluten className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
-                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Gluten Free</p>
+                                            <p className="text-sm leading-[18px] lg:text-base lg:leading-2">Gluten Free</p>
                                         </div>
                                         <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
                                             <ToxinFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
-                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Toxin-free</p>
+                                            <p className="text-sm leading-[18px] lg:text-base lg:leading-2">Toxin-free</p>
                                         </div>
                                         <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
                                             <Vegan className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
-                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Clean Beauty</p>
+                                            <p className="text-sm leading-[18px] lg:text-base lg:leading-2">Clean Beauty</p>
                                         </div>
                                         <div className="flex flex-auto min-w-0 flex-row items-start lg:items-center lg:gap-[10px] gap-[.5rem]">
                                             <ParabelFree className="w-[23px] h-[23px] lg:w-[32px] lg:h-[32px] fill-primary" />
-                                            <p className="text-sm leading-[18px] lg:text-lg lg:leading-2">Paraben Free</p>
+                                            <p className="text-sm leading-[18px] lg:text-base lg:leading-2">Paraben Free</p>
                                         </div>
                                     </div>
                                 </figcaption>

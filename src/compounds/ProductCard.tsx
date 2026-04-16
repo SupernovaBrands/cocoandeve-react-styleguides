@@ -316,8 +316,8 @@ const SwatchOverlay = memo((props: any) => {
         <>
             <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
             <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
-                <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
-                    <div className="block mb-[.625em]">
+                <div className={`article-swatch-heading text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
+                    <div className="block mb-[.625em] article-swatch-label">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
                         {props.swatch.tangleTamer && <strong>Type: </strong>}
@@ -404,6 +404,7 @@ const ProductCard = (props: any) => {
     });
 
     const skus = useMemo(() => {
+        // console.log(product, 'testing');
         if (!product?.variants?.nodes) return [];
 
         if (product.variants.nodes[0]?.reviewSku) {
