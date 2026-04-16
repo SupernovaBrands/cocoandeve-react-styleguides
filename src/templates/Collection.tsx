@@ -17,8 +17,13 @@ import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
 
-const QuizCardPlaceholder = () => {
-    return (
+const QuizCardPlaceholder = (props) => {
+    return props.split ? (
+        <div className="relative flex flex-col gap-[1.5rem] lg:gap-0 w-full lg:justify-between lg:h-full lg:pb-[1rem]">
+            <div className="bg-shimmer w-full aspect-[360/64] md:aspect-[218/419] lg:aspect-[278/190]" />
+            <div className="bg-shimmer w-full aspect-[360/64] md:aspect-[218/419] lg:aspect-[278/190]" />
+        </div>
+    ) : (
         <div className="relative w-full lg:h-full">
             <div className="bg-shimmer w-full aspect-[360/64] lg:aspect-[278/391]" />
         </div>
@@ -93,6 +98,7 @@ const Collection = (props: any) => {
     } = props;
     // console.log('customProductTitlexxx', customProductTitle);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
+    // const [splitCard, setSplitCard] = useState(false);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
     const sidebarRef = useRef(null);
     const subCatRef = useRef(null);
@@ -139,7 +145,7 @@ const Collection = (props: any) => {
         phoneShow: true,
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
-    const showQuizCard = useMemo(() => handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
+    const showQuizCard = useMemo(() => handle === 'spf' || handle === 'body-suncare' || handle === 'face-suncare' || handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
     const [showByobCard, setShowByobCard] = useState({ show: false, position: 5 });
     const launchHandles = useMemo(() => {
         if (launchWL) return launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || [];
@@ -319,9 +325,10 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
+        // console.log('currentCollection', currentCollection);
         if (currentPos > 0) {
             setShowByobCard({
-                show: true,
+                show: currentCollection?.handle !== 'tan',
                 position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
             });
         }
@@ -520,7 +527,7 @@ const Collection = (props: any) => {
                                     {handle !== 'all' && (
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                             {childMenu.length > 0 && childMenu.map((children, index) => {
-                                                if (children && children.handle && !children.handle.includes('/pages/')) {
+                                                if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
                                                     const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
                                                     return (
                                                         <Link
@@ -556,7 +563,7 @@ const Collection = (props: any) => {
                             </div>
                         )}
                         <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid pt-4 lg:pt-[1.5rem] overflow-hidden w-full gap-x-g gap-y-[2.375rem] lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2 pb-[2.375rem] lg:pb-5`}>
-                            {(showSpinner || loading) && (
+                            {(showSpinner || loading || isLoading || collectionSettings.isLoading) && (
                                 <div className="mb-3 px-hg lg:px-g text-center w-full block col-span-2 lg:col-span-4">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
                                 </div>
@@ -565,8 +572,8 @@ const Collection = (props: any) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 const lgOrder = index < 3 ? index + 1 : index + 2;
                                 return showByobCard.show && index === showByobCard?.position ? (
-                                    <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
-                                        <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
+                                    <div key={`collection-b-${handle}-${item.id}-${index}`} className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
+                                        <Fragment>
                                             {!collectionSettings.isLoading && (
                                                 <ProductCardKit
                                                     className="relative flex flex-col text-center collection-lg-order"
@@ -605,19 +612,56 @@ const Collection = (props: any) => {
 
                                         <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                             {!collectionSettings.isLoading && (
-                                                <ProductCardQuiz
-                                                    className="relative w-full lg:h-full"
-                                                    imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                    imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                    key={`collection-quiz-card--${handle}--${index}`}
-                                                    quizSetting={collectionSettings.quizSetting}
-                                                    store={store}
-                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                />
+                                                handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
+                                                    <ProductCardQuiz
+                                                        className="relative w-full lg:h-full"
+                                                        href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                        title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                        heading="SPF Quiz"
+                                                        imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                        imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                        key={`collection-quiz-card--spf--${index}`}
+                                                        quizSetting={collectionSettings.quizSetting}
+                                                        store={store}
+                                                        ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                        ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
+                                                    />
+                                                ) : (
+                                                    <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                        <ProductCardQuiz
+                                                            className="relative"
+                                                            href={collectionSettings?.quizSetting?.quiz_button_url}
+                                                            title={collectionSettings?.quizSetting?.quiz_title}
+                                                            ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
+                                                            imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
+                                                            imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                            key={`collection-quiz-card--${handle}--${index}`}
+                                                            quizSetting={collectionSettings.quizSetting}
+                                                            store={store}
+                                                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                            splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
+                                                        />
+
+                                                        {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
+                                                            <ProductCardQuiz
+                                                                className="relative"
+                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
+                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                key={`collection-byob-card--${handle}--${index}`}
+                                                                href='/pages/build-your-own-bundle'
+                                                                ctaLabel='Build Now'
+                                                                heading='Build Your Bundle'
+                                                                title='Mix, match & save <br />your way!'
+                                                                store={store}
+                                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                )
                                             )}
 
                                             {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder />
+                                                <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
                                             )}
                                         </div>
 
