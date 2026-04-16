@@ -612,7 +612,7 @@ const Collection = (props: any) => {
 
                                         <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                             {!collectionSettings.isLoading && (
-                                                handle === 'spf' || (parentCollection && parentCollection.collection.handle === 'spf') ? (
+                                                handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
                                                     <ProductCardQuiz
                                                         className="relative w-full lg:h-full"
                                                         href={collectionSettings?.quizSetting?.spf_quiz_button_url}
@@ -636,10 +636,10 @@ const Collection = (props: any) => {
                                                             quizSetting={collectionSettings.quizSetting}
                                                             store={store}
                                                             ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                            splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')}
+                                                            splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
                                                         />
 
-                                                        {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection.collection.handle === 'tan')) && (
+                                                        {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
                                                             <ProductCardQuiz
                                                                 className="relative"
                                                                 imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
@@ -658,7 +658,7 @@ const Collection = (props: any) => {
                                             )}
 
                                             {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection.collection.handle === 'tan')} />
+                                                <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
                                             )}
                                         </div>
 
