@@ -605,7 +605,7 @@ const Collection = (props: any) => {
                                                         title={collectionSettings?.quizSetting?.spf_quiz_title}
                                                         heading="SPF Quiz"
                                                         imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Mobile_c98875de22.jpg?v=1776312419"
-                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Desktop_2x_0efb456abc.jpg?v=1776319160"
+                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Desktop_1_74f23b613d.jpg?v=1776326655"
                                                         key={`collection-quiz-card--spf--${index}`}
                                                         quizSetting={collectionSettings.quizSetting}
                                                         store={store}
