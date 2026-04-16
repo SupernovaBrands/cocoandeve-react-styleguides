@@ -579,10 +579,34 @@ const Collection = (props: any) => {
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return showByobCard.show && index === showByobCard?.position ? (
-                                    <ProductCardKit
-                                        className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
-                                        store={store}
-                                    />
+                                    <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
+                                        {!collectionSettings.isLoading && (
+                                            <ProductCardKit
+                                                className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                                store={store}
+                                            />
+                                        )}
+                                        <ProductCard
+                                            product={item}
+                                            className="relative mb-5 flex flex-col w-1/2 md:w-1/3 pr-hg pl-hg lg:pr-g lg:pl-g text-center"
+                                            button={true}
+                                            setWaitlistData={setWaitlistData}
+                                            smSingleStar={true}
+                                            addToCart={addToCart}
+                                            trackEvent={trackEvent}
+                                            eventNameOnClick='collection_product_card'
+                                            preOrders={preOrders}
+                                            isLaunchWL={isLaunchWL}
+                                            launchBox={launchBox}
+                                            setLaunchWLModal={setLaunchWLModal}
+                                            setLaunchWLModal2={setLaunchWLModal2}
+                                            setLaunchWLModal3={setLaunchWLModal3}
+                                            generalSetting={generalSetting}
+                                            collectionTemplate={true}
+                                            store={store}
+                                            customProductTitle={customProductTitle}
+                                        />
+                                    </Fragment>
                                 ) : (showQuizCard && index === 2 ? (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         {!collectionSettings.isLoading && (
