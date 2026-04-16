@@ -29,12 +29,12 @@ const Affiliate = (props: any) => {
 			{
 				id: 1,
 				title: content.faq_title_1,
-				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] mb-3 lg:mb-[1rem]"'),
+				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] mb-1 lg:mb-1"'),
 			},
 			{
 				id: 2,
 				title: content.faq_title_2,
-				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] mb-3 lg:mb-[1rem]"'),
+				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] mb-1 lg:mb-1"'),
 			},
 		]);
 	}, [content])
@@ -213,7 +213,7 @@ const Affiliate = (props: any) => {
 				<section className="mt-[40px] lg:mt-[50px] mb-1 lg:mb-4 overflow-hidden">
 					<div className="container px-g">
 						<div className="max-w-[53rem] mx-auto mb-[42px] lg:mb-0 px-0 lg:px-2">
-							<h2 className="text-[#000] mb-[0] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[23px] text-center">{content.faq_heading}</h2>
+							<h2 className="text-[#000] mb-[0] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[16px] text-center">{content.faq_heading}</h2>
 
 							{dataAccordion && (<AccordionPDP noWrapperBorder={true} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px] lg:max-w-none" />)}
 						</div>
