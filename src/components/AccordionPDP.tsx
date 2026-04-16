@@ -32,7 +32,7 @@ const AccordionPDP = (props: any) => {
 		<div className={`border-t-0 border-b-0 ${!props.isBundlePage && !props?.noWrapperBorder ? 'md:border-t md:border-b' : ''} border-gray-500 accordion w-full accordion-flush`} id="accordionSimple">
 			{data.map((d: Accordion, index: number) => (
 				<div key={d.id} className={`accordion-item scroll-mt-[10px] border-t border-b border-gray-500`} onClick={(e) => scrollToView(d.id, e.target)}>
-					<div id={`accordion-${d.id}`} className={`scroll-mt-[10px] cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-3 md:pt-[1.875rem] ${index === 0 ? 'pb-3' : 'pb-3'}` : 'py-[1.125rem] md:py-[1.4375rem]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={(e) => onClick(d.id, e.target)}>
+					<div id={`accordion-${d.id}`} className={`scroll-mt-[10px] cursor-pointer flex w-full justify-between items-center ${props.openIndex === d.id ? `pt-[15px] md:pt-[30px] md:pb-[27px] ${index === 0 ? 'pb-3' : 'pb-3'}` : 'py-[15px] md:py-[30px]'} ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={(e) => onClick(d.id, e.target)}>
 						<strong className={`text-body no-underline ${props?.itemClasses}`}>{d.title}</strong>
 						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
 						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
