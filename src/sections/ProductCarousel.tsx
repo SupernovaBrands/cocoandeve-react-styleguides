@@ -37,7 +37,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { productPage, homePage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -48,8 +48,8 @@ const ProductCarousel = (props: any) => {
 	}
 	const [activeTab, setActiveTab] = useState('bestsellers');
 
-	const [isHomepage, setIsHomepage] = useState(false);
-	const [isProduct, setIsProduct] = useState(false);
+	// const [isHomepage, setIsHomepage] = useState(false);
+	// const [isProduct, setIsProduct] = useState(false);
 	const [customTitle, setCustomTitle] = useState(customProductTitle || null);
 
 	// Single carousel update
@@ -97,19 +97,19 @@ const ProductCarousel = (props: any) => {
 	// const newTabCount = productsData?.tab1?.products.length;
 	// const newTabProducts = newTabCount > 4 ? productsData?.tab1?.products : productsData?.tab1?.products.concat(productsData?.tab1?.products);
 
-	useEffect(() => {
-		setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
-		setIsProduct(window.location.pathname.includes('/products/'));
-	}, []);
+	// useEffect(() => {
+		// setIsHomepage(['/'].indexOf(window.location.pathname) >= 0);
+		// setIsProduct(window.location.pathname.includes('/products/'));
+	// }, []);
 
 	useEffect(() => {
-		if (isProduct && customTitle?.customTitles?.length > 0) {
+		if (productPage && customTitle?.customTitles?.length > 0) {
 			const filtered = customTitle?.customTitles?.filter((c) => ['pdp', 'collection-pdp'].includes(c.options));
 			setCustomTitle({
 				customTitles: filtered
 			});
 		}
-	}, [isProduct]);
+	}, [productPage]);
 
 	const tabConfig = [
 		{ key: 'bestsellers', title: 'Best Sellers' },
@@ -124,8 +124,8 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${isProduct ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
-				{!isHomepage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
+			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-0 lg:px-0 ${productPage ? 'mb-4 lg:mb-5 lg:pb-4' : ''}`}>
+				{!homePage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 				<div className="row">
 					<div>
 						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-g">
