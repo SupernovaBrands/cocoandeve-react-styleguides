@@ -134,17 +134,7 @@ export const CartDiscountForm = (props:any) => {
 
     return (
         <>
-            <div className="py-2 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid">
-                <div onClick={() => setFormOpened(!formOpened)} className='cart-drawer__discount-form-toggle flex justify-between items-center'>
-                    <span>Apply a promo code</span>
-                    <span>
-                        {formOpened ? (
-                            <Minus className="svg text-gray-100 fill-[#00000080]" />
-                        ) : (
-                            <Plus className="svg text-gray-100 fill-[#00000080]" />
-                        )}
-                    </span>
-                </div>
+            <div className="py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid">
                 <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2 pb-2 border-b border-[#ADADAD] border-solid`}>
                     <input
                         ref={inputRef}
@@ -181,13 +171,16 @@ export const CartDiscountForm = (props:any) => {
                 { !state.isApplied && state.error && <p className="text-primary mt-1 text-[14px]">{state.error}</p> }
                 {state.discountBanner?.enable && !state.hasCode && validItemInCart && (
 
-                <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
+                <div className="discount__banner relative rounded-[8px_0_0_8px] flex pl-[20px] pr-g py-1 bg-[#F5DADF] mt-2 mb-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
                     <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                     <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
                         <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: state.discountBanner.code_banner_content}}/>
                         <span className="flex text-primary font-bold items-center hover:cursor-pointer">Use</span>
                     </div>
-                    <MenuBannerDecorative className="svg absolute banner-decoration" />
+                    <svg className='svg absolute banner-decoration' xmlns="http://www.w3.org/2000/svg" width="10" height="60" viewBox="0 0 10 60" fill="none">
+                    <path d="M0 0H10L0 8.5L10 16.5L0 25L10 32.5L0 40.5L10 46L0 52L10 60H0V0Z" fill="#F5DADF"/>
+                    </svg>
+                    {/* <MenuBannerDecorative className="svg absolute banner-decoration" /> */}
                 </div>
                 )}
             </div>
