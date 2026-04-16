@@ -103,7 +103,7 @@ const SingleProductItem = (props: any) => {
                             {data?.variant_id &&  (
                                 <>
                                     {data?.availableForSale ? (
-                                        <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[20px] rounded-[0] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
+                                        <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[16px] lg:mt-[14px] rounded-[0] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
                                             {adding ? (
                                                 <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                             ) : data?.button_label}
