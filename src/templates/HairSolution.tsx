@@ -251,12 +251,12 @@ const HairSolution = (props: any) => {
             {data.range && (
                 <section className={`mt-3 mb-0 lg:mb-0 order-2 lg:mt-5`}>
                     <div className="container">
-                        <h2 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl"
+                        <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
                                 __html: data.range.title,
                             }}
                         />
-                        <div className="product__carousel-nav-container hidden lg:flex lg:items-center container lg:px-g">
+                        <div className="product__carousel-nav-container hidden lg:flex lg:items-center container lg:px-g justify-center">
                             <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-g lg:pb-3 justify-start px-hg lg:px-0">
                                 {data.range.rows && data.range.rows.length > 0 && data.range.rows.map((row, index) => (
                                     <li key={`nav-range-${index}`}><TabNav className={`${activeTab === index ? 'text-body' : ''}`} title={row.tab_title} active={activeTab === index} onNavChange={() => setActiveTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>    
@@ -336,13 +336,13 @@ const HairSolution = (props: any) => {
                                     <TabContent active={productTab === index} key={`tab-prooduct-content-${index}`}>
                                         <ConditionalWrap
                                             condition={isDesktop}
-                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[28%_72%]">{children}</div>}
+                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[25%_75%]">{children}</div>}
                                             elseWrap={children => children}
                                         >
                                             <div className="w-full px-g mb-g lg:mb-0">
                                                 <picture className="block">
                                                     <source srcSet={tabRow.image_d.url} media="(min-width: 992px)" />
-                                                    <img src={tabRow.image_m.url} className="object-cover h-auto lg:h-[400px]" alt="Hair Concern Solution Product Banner" />
+                                                    <img src={tabRow.image_m.url} className="object-cover" alt="Hair Concern Solution Product Banner" />
                                                 </picture>
                                             </div>
 
@@ -377,7 +377,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollPrev() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto left-[-2.5rem!important]">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto left-[-2.0rem!important]">
                                                             <ChevronPrev className="svg--current-color" />
                                                         </span>
                                                     </PrevButton>
@@ -385,7 +385,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollNext() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto right-[-2.5rem!important]">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto right-[-2.0rem!important]">
                                                             <ChevronNext className="svg--current-color" />
                                                         </span>
                                                     </NextButton>
@@ -402,7 +402,7 @@ const HairSolution = (props: any) => {
                             </div> */}
                         </div>
                         <div className="text-center">
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden underline font-bold mt-g py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
+                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden underline font-bold mt-0 py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                     </div>
                     <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
