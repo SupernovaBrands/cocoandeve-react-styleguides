@@ -420,10 +420,10 @@ const Sustainability = (props: any) => {
                             {/* <h2 className="block lg:hidden text-center lg:text-left mb-2">{formula.heading}</h2> */}
                             {!isLoading && (
                                 <div className="h-full px-[1.5rem] py-[1.5rem] bg-gray-100">
-                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start">
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'bg-dark text-white hover:text-white' : ''}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'bg-dark text-white hover:text-white' : ''}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
-                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'bg-dark text-white hover:text-white' : ''}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
+                                    <ul className="list-none mx-auto flex flex-wrap text-center justify-center lg:justify-start gap-[6px]">
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 pl-0 pr-[6px] lg:px-2 ${activeTab2 === 'formula-1' ? 'bg-dark text-white hover:text-white' : 'bg-white'}`} title={formula.tab_1} active={activeTab2 === 'formula-1'} onNavChange={() => setActiveTab2('formula-1')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 px-[6px] lg:px-2 ${activeTab2 === 'formula-2' ? 'bg-dark text-white hover:text-white' : 'bg-white'}`} title={formula.tab_2} active={activeTab2 === 'formula-2'} onNavChange={() => setActiveTab2('formula-2')} /></li>
+                                        <li className="grow lg:grow-0 text-center"><TabNav className={`-mb-[1px] py-1 px-1 lg:px-2 ${activeTab2 === 'formula-3' ? 'bg-dark text-white hover:text-white' : 'bg-white'}`} title={formula.tab_3} active={activeTab2 === 'formula-3'} onNavChange={() => setActiveTab2('formula-3')} /></li>
                                     </ul>
                                     <div className='px-0'>
                                         <TabContent className="mt-2 lg:mt-[1.5rem] lg:min-h-0" active={activeTab2 === 'formula-1'}>
@@ -525,7 +525,7 @@ const Sustainability = (props: any) => {
                                     <PackagingCard key={data.id} srcSet={data.srcSet} src={data.src}
                                         className="flex-grow-0 flex-shrink-0 w-[87.5%] basis-[87.5%] lg:w-1/3 lg:basis-1/3 px-[.375em] lg:px-[.5rem]">
                                         <h6 className="mb-25 lg:mb-[8px] font-bold">{data.title}</h6>
-                                        <p className="mb-0 leading-[20px]">{parse(data.body.replace('environmentally-friendly', '<br />environmentally-friendly'))}</p>
+                                        <p className="mb-0 leading-[20px] text-sm lg:text-base">{parse(data.body.replace('environmentally-friendly', 'environmentally-friendly'))}</p>
                                     </PackagingCard>
                                 ))}
                             </Carousel.Inner>

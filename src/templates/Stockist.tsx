@@ -145,7 +145,7 @@ const Stockist = (props: any) => {
                             {stores.map((filteredItem, idx) => (
                                 <figure key={filteredItem.id} className="m-0 flex-[0_0_40%] md:flex-[0_0_20%] lg:flex-none lg:w-[calc((100%-64px)/5)]" data-toggle={filteredItem.country_tag}>
                                     <a href={filteredItem.logo_url} className="block rounded-none">
-                                        <img className="lg:mx-auto lg:!w-auto h-[60px]" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
+                                        <img className="lg:mx-auto lg:!w-auto h-[50px] lg:h-[60px]" src={filteredItem.logo.url} alt={filteredItem.logo.alt || `Stockist logo ${filteredItem.title} ${idx}`} />
                                     </a>
                                     <figcaption className="mb-0 !font-normal text-sm lg:text-base text-body text-center">{filteredItem.title}</figcaption>
                                 </figure>
