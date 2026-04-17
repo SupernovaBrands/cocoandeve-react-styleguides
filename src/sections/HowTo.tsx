@@ -101,7 +101,7 @@ const HowToCarousel = (props) => {
 									</div>
 									<p className="text-lg font-bold mt-[8px] blog-video-card__title cursor-pointer"><a role="button" tabIndex={0} className="no-underline hover:underline hover:text-body text-lg lg:text-xl text-body" data-src={item.video_url} onClick={handlOpenModal}>{item.title}</a></p>
 									{/* <span className={`inline-block btn ${ctaBgColor === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-primary' } self-start hover:no-underline leading-[1.25!important] mt-auto mb-0 border-[2px] lg:border-[1px] lg:py-g lg:px-[54px] font-bold rounded-full`}>Read more</span> */}
-									<span className="py-[10px] lg:py-g inline-block underline-offset-4 text-sm lg:text-base underline-offset-4 font-semibold block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>Read more</span>
+									{/* <span className="py-[10px] lg:py-g inline-block underline-offset-4 text-sm lg:text-base underline-offset-4 font-semibold block underline hover:underline leading-[1.25!important] rounded-full text-body cursor-pointer" data-src={item.video_url} onClick={handlOpenModal}>Read more</span> */}
 								</figcaption>
 							</figure>
 						</div>

@@ -173,7 +173,7 @@ const Footer = (props) => {
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul> */}
                 <hr className="block w-full border-body mb-0 mt-[1rem] lg:mt-3 bg-gray-600 opacity-20" />
-                <p className="footer__copyright text-center block w-full justify-center items-baseline pb-0 lg:pb-[12px] pt-[12px] text-sm text-sm ">© {(new Date().getFullYear())} Coco&amp;Eve</p>
+                <p className="footer__copyright text-center block w-full justify-center items-baseline pb-0 lg:pb-[12px] pt-[12px] lg:text-base text-sm">© {(new Date().getFullYear())} Coco&amp;Eve</p>
             </div>
         </footer>
     );

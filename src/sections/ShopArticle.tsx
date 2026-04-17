@@ -47,17 +47,23 @@ const ProductCarousel = (props: any) => {
         }
         
         // Desktop: responsive based on product count
-        if (productCount === 3) {
-            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/3 basis-1/3 px-[.5rem] text-center";
-        } else if (productCount === 4) {
-            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
-        } else if (productCount === 2) {
-            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/2 basis-1/2 px-[.5rem] text-center";
-        } else if (productCount === 1) {
-            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-full basis-full px-[.5rem] text-center";
-        } else {
-            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
-        }
+        // if (productCount === 3) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/3 basis-1/3 px-[.5rem] text-center";
+        // } else if (productCount === 4) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // } else if (productCount === 2) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/2 basis-1/2 px-[.5rem] text-center";
+        // } else if (productCount === 1) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-full basis-full px-[.5rem] text-center";
+        // } else {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // }
+
+        // if (productCount > 3) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // } else {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/3 basis-1/3 px-[.5rem] text-center";
+        // }
     };
 
     useEffect(() => {
@@ -122,7 +128,7 @@ const ProductCarousel = (props: any) => {
                                     key={`product-${id}-${data.id}`}
                                     product={data}
                                     label={label}
-                                    className={getSlideClassName(products.length)}
+                                    className="relative flex-grow-0 flex-shrink-0 flex flex-col w-[175px] basis-[175px] md:w-[180px] md:basis-[180px] lg:px-1 sm:px-hg text-center"
                                     button={true}
                                     link={data.handle}
                                     carousel={true}
