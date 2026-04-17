@@ -93,9 +93,19 @@ const BundleVariantCard = (props) => {
         }
     };
 
-    const option2 = productShopify?.options.find(
-        (op) => currentVariant.selectedOptions.find((c) => c.name === op.name && swatchType.includes(c.name.toLowerCase()))
-    )?.values || [];
+    const rawValues =
+        productShopify?.options
+            .find((op) =>
+                currentVariant.selectedOptions.find(
+                    (c) =>
+                        c.name === op.name &&
+                        swatchType.includes(c.name.toLowerCase())
+                    )
+        )?.values || [];
+
+    const option2 = rawValues.filter(
+        (value, index, self) => self.indexOf(value) === index
+    );
 
     const bundleImg = slides[slides.length - 1];
     const urlSet = optionValue === "Antioxidant-rich Tanning Set" ? null : productStrapi?.bundle_handle || null;
