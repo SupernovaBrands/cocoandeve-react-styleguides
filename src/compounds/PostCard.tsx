@@ -58,7 +58,7 @@ const PostCard: React.FC<PropType> = (props) => {
 								</>
 							)}
 						</div>
-						<p className={`${fontWeight} text-lg ${template === 'blog' ? 'blog-post__card' : ''} ${template === 'article' ? 'hover:text-primary hover:underline' : 'hover:no-underline'} mt-[8px] leading-[25px!important] ${showSubtext ? 'mb-1' : 'mb-[1rem]'} block text-body hover:text-body`}>{data.title}</p>
+						<p className={`${fontWeight} text-lg ${template === 'blog' ? 'blog-post__card' : ''} ${template === 'article' ? 'hover:text-primary hover:underline' : 'hover:no-underline'} mt-[8px] leading-[25px!important] ${showSubtext ? 'mb-1' : 'mb-[8px]'} block text-body hover:text-body`}>{data.title}</p>
 						{showSubtext && (
 							<div className={`group-hover:text-primary-darken post-card__description ${template === 'article' ? 'text-body hover:text-body mt-0 px-3 mb-0 pb-1' : ''} ${textClass} ${template === 'blog' ? 'blog-card__desc' : `sm:grow-0 ${showSubtext ? '' : 'lg:flex-grow'}`} ${textPrimary ? 'text-primary hover:text-primary-darken hover:no-underline' : 'text-body'} flex flex-col ${template === 'pdp' ? 'mb-[32px] lg:mb-2' : ''}`}>
 								{ template === 'pdp' && data.description && (
