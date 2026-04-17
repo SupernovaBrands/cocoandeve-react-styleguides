@@ -305,7 +305,7 @@ const HairSolution = (props: any) => {
                                             __html: row.ideal_for,
                                         }}
                                     />
-                                    <a href={row.cta_url} className={`mt-[1rem] inline-block underline font-bold py-[1rem] text-body hover:text-body underline-offset-4`}>Shop All</a>
+                                    <a href={row.cta_url} className={`mt-[1rem] inline-block underline font-bold py-[1rem] text-body hover:text-body underline-offset-4`}>Shop Products</a>
                                 </ProductBanner>
                             </ConditionalWrap>
                         ))}
