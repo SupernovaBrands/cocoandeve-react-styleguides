@@ -292,7 +292,7 @@ const Collection = (props: any) => {
     };
 
     useEffect(() => {
-        const showQuiz = handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf';
+        const showQuiz = handle === 'tan' || handle === 'spf' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf';
         setShowQuizCard(showQuiz);
         
         let currentPos = parseInt(byobBanner?.desktop_position, 10);
@@ -610,6 +610,21 @@ const Collection = (props: any) => {
                                 ) : (showQuizCard && index === 2 ? (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         {!collectionSettings.isLoading && (
+                                            handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
+                                                <ProductCardQuiz
+                                                    className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
+                                                    href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                    title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                    heading="SPF Quiz"
+                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Mobile_c98875de22.jpg?v=1776312419"
+                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Desktop_36cddf2557.jpg?v=1776332145"
+                                                    key={`collection-quiz-card--spf--${index}`}
+                                                    quizSetting={collectionSettings.quizSetting}
+                                                    store={store}
+                                                    ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                    ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
+                                                />
+                                            ) : (
                                             <ProductCardQuiz
                                                 className="relative w-full md:w-1/3 px-hg lg:px-g mb-4 lg:mb-5 lg:h-full"
                                                 imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_cf267d18-59f2-4757-99be-6c6ac7768f72.jpg?v=1772039465"
@@ -619,6 +634,7 @@ const Collection = (props: any) => {
                                                 store={store}
                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                 />
+                                            )
                                         )}
 
                                         <ProductCard
