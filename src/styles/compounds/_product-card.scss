@@ -73,4 +73,9 @@
 	.collection-lg-order {
 		order: var(--lg-order);
 	}
+
+	.collection__container .product-card__title,
+	.product-range__title .product-card__title {
+		min-height: 40px;
+	}
 }

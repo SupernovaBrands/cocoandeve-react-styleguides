@@ -353,7 +353,7 @@ const HairSolution = (props: any) => {
                                                             key={`${activeTab}-${item.id}-${index}`}
                                                             keyName={`${activeTab}-${item.id}-${index}`}
                                                             product={item}
-                                                            className="relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/3 md:basis-1/3 px-[.375em] lg:px-[.5rem] text-center"
+                                                            className="product-range__title relative mb-0 lg:mb-0 flex-grow-0 flex-shrink-0 flex flex-col w-[177px] basis-[177px] md:w-1/3 md:basis-1/3 px-[.375em] lg:px-[.5rem] text-center"
                                                             button={true}
                                                             smSingleStar={false}
                                                             carousel={true}
