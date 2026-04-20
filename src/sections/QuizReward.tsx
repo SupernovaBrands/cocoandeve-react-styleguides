@@ -113,7 +113,7 @@ const QuizRewardTest = (props: any) => {
                                 </picture>
                                 <figcaption className="absolute top-0 bottom-0 left-0 right-0 p-[1rem] lg:p-[1.5rem] flex flex-col justify-between">
                                     <p className="text-[18px] leading-[22px] lg:text-xl text-left text-body font-bold">Tan Quiz</p>
-                                    <span className="text-underline text-left text-body hover:text-primary transition-colors font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 hidden lg:inline-flex w-fit">Take the Quiz</span>
+                                    <span className="text-underline text-left text-body hover:text-primary transition-colors font-bold underline-offset-[.125rem] text-sm lg:text-base leading-2 inline-flex w-fit">Take the Quiz</span>
                                 </figcaption>
                             </a>
                         </figure>

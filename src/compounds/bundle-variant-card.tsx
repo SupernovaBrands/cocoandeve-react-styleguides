@@ -135,6 +135,8 @@ const BundleVariantCard = (props) => {
         setPlatform(os);
     }, []);
 
+    const isMultiVariant = option2.length > 0 && !currentVariant.title.includes('Silky Hair');
+
     return  (
         <>
         <p className="lg:text-lg font-bold mb-[.5rem]">Save with Bundles</p>
@@ -145,13 +147,13 @@ const BundleVariantCard = (props) => {
             <div className="float-left">
                 <figure className="flex">
                     {urlSet && bundleImg && (
-                        <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%] aspect-[120/260] lg:aspect-[124/174]">
-                            <img loading="lazy" className="w-full h-full object-cover" src={imageSrc} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} width={120} height={260} />
+                        <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
+                            <img loading="lazy" className="w-full h-full object-cover" src={imageSrc.replace('.jpg', '_240x.jpg')} alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} width={120} height={260} />
                         </a>
                     )}
 
                     {!urlSet && bundleImg && (
-                        <img loading="lazy" alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="aspect-[120/260]  lg:aspect-[124/174] w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc} width={120} height={260} />
+                        <img loading="lazy" alt={`Save with Bundles ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc.replace('.jpg', '_240x.jpg')} width={120} height={260} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[.75rem] py-[1rem] lg:p-[1rem] flex flex-col">
                         <div className="mb-[.75rem] lg:mb-[1rem]">
@@ -169,23 +171,23 @@ const BundleVariantCard = (props) => {
                                 </div>
                             )}
                         </div>
-                        <div className="flex flex-col lg:flex-row">
-                            {option2.length > 0 && !currentVariant.title.includes('Silky Hair') && (
+                        <div className={`flex ${isMultiVariant ? 'flex-col' : 'flex-row'} lg:flex-row`}>
+                            {isMultiVariant && (
                                 <div className="option-select relative mb-[.5rem] lg:mb-0 lg:w-auto lg:mr-[.5rem] border-white">
                                     <select aria-label="Select Bundle Option" onChange={onChangeOption} className="custom-select rounded-none lg:min-w-[125px] appearance-none bg-white max-h-[44px] lg:max-h-[44px] w-full px-2 text-sm py-0" defaultValue={optionSelected}>
                                         {option2.map((op, i) => <option key={`option-select-${i}`} value={op.toLowerCase().replace(' ', '-')}>{op.replace('Antioxidant Glow', '')}</option>)}
                                     </select>
                                 </div>
                             )}
-                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`lg:flex-1 min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'bg-dark hover:bg-dark border-dark hover:text-white' : 'bg-primary hover:bg-primary border-primary btn-primary'} text-white w-full lg:w-auto items-center product-card-btn border flex lg:flex-row btn-sm mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
-                                {(!currentVariant.availableForSale || showLaunchWaitlist) && 'Out of Stock'}
+                            <Button disabled={!currentVariant.availableForSale || showLaunchWaitlist} onClick={onAddItem} buttonClass={`flex-1 grow-0 ${isMultiVariant ? 'lg:grow-1 lg:flex-1' : ''} min-h-[42px] lg:mb-0 border-gray-500 px-2 text-sm lg:text-base ${bgColor === 'bg-dark' ? 'bg-dark hover:bg-dark border-dark hover:text-white' : 'bg-primary hover:bg-primary border-primary btn-primary'} text-white w-auto items-center product-card-btn border flex lg:flex-row btn-sm mb-1 py-0 ${addingItem ? 'justify-center min-w-[150px]' : 'justify-between'} !mb-0 ${!currentVariant.availableForSale || showLaunchWaitlist ? '!justify-center' : ''}`}>
+                                {(!currentVariant.availableForSale || showLaunchWaitlist) && <span className="text-nowrap">Out of Stock</span>}
                                 {!showLaunchWaitlist && currentVariant.availableForSale && !addingItem && (
                                     <>
-                                        <span className="pt-[3px]">
+                                        <span className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} ${isMultiVariant ? '' : 'pr-2 lg:pr-0'}`}>
                                             {currentVariant.compareAtPrice && <span className="line-through mr-25 font-normal">{formatMoney(store, parseFloat(currentVariant.compareAtPrice.amount) * 100)}</span>}
-                                            <span className="">{formatMoney(store, parseFloat(currentVariant.price.amount) * 100)}</span>
+                                            <span className="mr-25">{formatMoney(store, parseFloat(currentVariant.price.amount) * 100)}</span>
                                         </span>
-                                        <span className="min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l pt-[3px]">Add</span>
+                                        <span className={`min-h-[42px] pl-2 lg:ml-1 lg:pl-g block flex items-center border-white border-l ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>Add</span>
                                     </>
                                 )}
                                 {currentVariant.availableForSale && addingItem && <span className={`spinner-border spinner-border-sm text-white !w-[15px] !h-[15px]`} role="status" />}
