@@ -51,6 +51,7 @@ const SideArticleCarousel = (props: any) => {
                             const isLast = index + 1 === row.length;
                             return (
                                 <PostCard
+                                    readMoreLink={true}
                                     bgColor={bgColor}
                                     textColor={textColor}
                                     key={`${data.id}-${index}`} carousel={true} template="pdp"

@@ -214,9 +214,9 @@
             @apply text-lg mt-[.5rem] font-normal mb-0;
         }
 
-        .post-card__read-more {
-            @apply hidden;
-        }
+        // .post-card__read-more {
+        //     @apply hidden;
+        // }
     }
 
     .post-card__description {
@@ -227,6 +227,14 @@
 
 // pdp side upsell
 .product-side-upsell {
+
+    .product-variant-swatch  {
+        @apply lg:gap-[2px];
+    }
+
+    .article-swatch-heading {
+        @apply lg:py-25;
+    }
 
     &__title {
         @apply mb-g text-center lg:text-left;

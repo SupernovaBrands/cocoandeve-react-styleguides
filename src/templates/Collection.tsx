@@ -445,7 +445,7 @@ const Collection = (props: any) => {
             {tcPopups?.enabled_collection && (
                 <>
                     <div className="text-left terms--link container px-g py-[.5rem] lg:px-2 lg:py-1">
-                        <a onClick={() => handlOpenModal(true)} className="underline underline-offset-[3px] text-body lg:px-0 lg:py-2 text-base" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy : 'Terms & Conditions'}</a>
+                        <a onClick={() => handlOpenModal(true)} className="underline underline-offset-[3px] text-body text-sm" role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handlOpenModal(true)}>{tcPopups.copy ? tcPopups.copy : 'Terms & Conditions'}</a>
                     </div>
 
                     <Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handlOpenModal(false)}>
@@ -479,7 +479,7 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className="text-xl lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-170px)] lg:w-3/5 lg:order-first self-center text-body"
+                            <h1 className="text-lg lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-170px)] lg:w-3/5 lg:order-first self-center text-body"
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
@@ -532,7 +532,7 @@ const Collection = (props: any) => {
 
                         </div>
                         {/* {handle !== 'all' && ( */}
-                            <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
+                            <div className={`flex lg:justify-between items-center w-full ${handle !== 'all' ? 'mt-[1rem] px-g lg:px-2' : ''}`}>
                                 <div className="w-full lg:w-8/12">
                                     {handle !== 'all' && (
                                         <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>

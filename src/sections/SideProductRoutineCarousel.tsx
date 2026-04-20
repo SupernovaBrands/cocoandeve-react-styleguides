@@ -126,6 +126,8 @@ const SideProductRoutineCarousel = (props: any) => {
         loadItems();
     }, []);
 
+    // console.log('finalItems', finalItems);
+
 	return finalItems.length > 0 && (
         <>
         <div className="product-side-upsell lg:pb-1 pt-0 md:pt-2">

@@ -19,7 +19,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('review')}
                     type="button"
                     lg={false}
-                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-dark'} w-full px-0 bg-transparent rounded-none mb-g text-sm py-1 font-normal`}>
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark' : 'btn-outline-dark'} hover:bg-dark hover:text-white w-full px-0 bg-transparent rounded-none mb-g text-sm py-1 font-normal`}>
                         Write A Review
                 </Button>
             </div>
@@ -27,7 +27,7 @@ const YotpoRatingCard = (props) => {
                 <Button onClick={() => handleForm('question')}
                     type="button"
                     lg={false}
-                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark hover:bg-dark hover:text-white' : 'btn-outline-dark'} w-full px-0 bg-transparent rounded-none text-sm py-1 font-normal`}>
+                    buttonClass={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'border-dark text-dark' : 'btn-outline-dark'} hover:bg-dark hover:text-white w-full px-0 bg-transparent rounded-none text-sm py-1 font-normal`}>
                         Ask A Question
                 </Button>
             </div>
