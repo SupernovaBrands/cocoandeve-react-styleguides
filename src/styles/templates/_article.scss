@@ -10,6 +10,14 @@
 		@apply px-0 block lg:px-0;
 	}
 
+	.product-card .btn__hover-overlay {
+		@apply bottom-[25px];
+	}
+
+	.product-card button {
+		@apply h-[38px] min-h-[auto] !important;
+	}
+
 	.product-variant-swatch {
 		@apply lg:gap-0 !important;
 	}
