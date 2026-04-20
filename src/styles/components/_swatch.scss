@@ -2,12 +2,13 @@
 	flex-shrink: 0;
 	width: calc-em(40);
 	height: calc-em(40);
+	border-radius: 50%;
 	background-color: white;
 	background-size: calc-em(30);
 	position: relative;
-	margin-left: 0;
-	margin-right: 0;
-	border-radius: 9999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	&:hover {
 		cursor: pointer;
@@ -26,15 +27,11 @@
 
 	&:before {
 		content: ' ';
-		position: absolute;
 		width: calc-em(30);
 		height: calc-em(30);
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
-		top: calc-em(3);
-		left: calc-em(3);
-		margin: auto;
 		border-radius: 50%;
 	}
 
