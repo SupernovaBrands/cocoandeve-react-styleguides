@@ -80,13 +80,11 @@
 	}
 }
 
-@layer components {
-	.sustainabilty__carousel {
-		.product__carousel-nav {
-			@apply justify-center !important;
-		}
-		.product__carousel-nav li button {
-			@apply px-[8px] lg:px-2 py-[8px] lg:py-1 !important;
-		}
+.reviews-page__carousel {
+	.product__carousel-nav {
+		@apply justify-center !important;
+	}
+	.product__carousel-nav li button {
+		@apply px-[8px] lg:px-2 py-[8px] lg:py-1 !important;
 	}
 }
