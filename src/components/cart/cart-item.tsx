@@ -332,11 +332,11 @@ export const CartItem = (props:CartItemProps) => {
 						</button>)}
 
 
-					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{/* {isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
-						</button>)}
+						</button>)} */}
 
 				</div>
 
