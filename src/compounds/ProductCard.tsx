@@ -358,7 +358,7 @@ const SwatchOverlay = memo((props: any) => {
             />
             <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
                 <div className={`article-swatch-heading text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
-                    <div className="block mb-[.625em] article-swatch-label">
+                    <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
                         {props.swatch.tangleTamer && <strong>Type: </strong>}
