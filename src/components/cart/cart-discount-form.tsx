@@ -134,8 +134,8 @@ export const CartDiscountForm = (props:any) => {
 
     return (
         <>
-            <div className="py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid">
-                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2 pb-2 border-b border-[#ADADAD] border-solid`}>
+            <div className="py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid pb-2">
+                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2  border-[#ADADAD] border-solid`}>
                     <input
                         ref={inputRef}
                         type="text"
@@ -158,7 +158,7 @@ export const CartDiscountForm = (props:any) => {
                     </Button>
                 </div>
                 { state.hasCode && <div className="mt-0 flex flex-col items-start mb-0 md:mb-25">
-                    <p className="text-xs text-gray-500 mb-1">Promo code applied </p>
+                    <p className="text-xs text-gray-500 mb-1 mt-1">Promo code applied </p>
                     <div className="bg-gray-100 items-center inline-flex px-1 py-1 text-[#00000080] rounded-h">
                         <DiscountTag className="svg text-gray-100 fill-[#00000080]"></DiscountTag>
                         <span className="mx-1 text-base">
