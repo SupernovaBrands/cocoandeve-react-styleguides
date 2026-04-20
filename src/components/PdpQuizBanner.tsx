@@ -1,11 +1,11 @@
 const PdpQuizBanner = (props) => {
     return (
-        <a className="text-body hover:text-body hover:no-underline" href={props.quizCard.pdp_quiz_card_cta_url}>
-            <div className="relative mb-3 lg:mb-2 flex max-h-[64px] lg:min-h-[97px] rounded-[24px] lg:rounded-[32px] bg-yellow-light items-center justify-between pr-2">
+        <a className={`text-body hover:text-body hover:no-underline block ${props.showSpf ? 'mb-1' : 'mb-3'} lg:mb-2`} href={props.quizCard.pdp_quiz_card_cta_url}>
+            <div className="relative flex max-h-[64px] lg:min-h-[97px] rounded-[24px] lg:rounded-[32px] bg-yellow-light items-center justify-between pr-2">
                 <div className="flex items-center">
                     <picture className="m-0 h-full rounded-l-[24px] lg:rounded-r-[32px] lg:order-2 lg:absolute lg:right-0 lg:top-0 lg:bottom-0">
                         <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_7e2e0aac-64d4-4afd-92ba-d36182ec8d3c.png?v=1772037559" media="(min-width: 992px)" />
-                        <img alt="Tan Quiz" className="rounded-l-[24px] lg:rounded-r-[32px] w-auto h-[64px] lg:h-[97px]" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9bafacdd-f8a2-4f6f-beb1-69b3f1b5f47c.png?v=1772037586&width=86" loading="lazy" />
+                        <img alt="Tan Quiz" className="rounded-l-[24px] lg:rounded-r-[32px] w-auto h-[64px] lg:h-[97px]" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_9bafacdd-f8a2-4f6f-beb1-69b3f1b5f47c.png?v=1772037586&width=258" loading="lazy" />
                     </picture>
 
                     <div className="lg:order-1 ml-g lg:ml-2">
