@@ -74,7 +74,7 @@ const PostCard: React.FC<PropType> = (props) => {
 						) : (
 							<strong className="inline-block px-3 pb-2 block no-underline hover:underline leading-[1.25!important] rounded-full">Read more <ChevronNext className="svg inline-block font-size-xs fill-primary" /></strong>
 						)} */}
-						{readMoreLink && <span className="post-card__read-more inline-block lg:text-base text-sm font-semibold underline-offset-4 py-g block underline hover:underline leading-[1.25!important] rounded-full text-body">Read more</span>}
+						{readMoreLink && <span className="post-card__read-more inline-block lg:text-base text-sm font-semibold underline-offset-4 py-g block underline hover:underline leading-[1.25!important] rounded-full text-body mt-auto">Read more</span>}
 						{/* content */}
 					</figcaption>
 				</a>
