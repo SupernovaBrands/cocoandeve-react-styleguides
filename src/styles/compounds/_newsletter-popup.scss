@@ -75,12 +75,15 @@
     .modal-newsletter--floating-btn {
         @apply bg-body;
         right: 15px;
-        transition: all .3s ease-in-out;
-        bottom: -100%;
         z-index: 1030;
+        bottom: calc-em(84);
+        transform: translateY(150%);
+        visibility: hidden;
+        transition: transform .3s ease-in-out, visibility .3s;
 
         &.show {
-            bottom: calc-em(84);
+            transform: translateY(0);
+            visibility: visible;
 
             .template-product & {
                 bottom: calc-em(90);
@@ -93,10 +96,7 @@
 
         @screen lg {
             right: calc((100% - 1200px) / 2 + 22.5px);
-
-            &.show {
-                bottom: calc-em(70);
-            }
+            bottom: calc-em(70);
         }
 
         // @screen xl {
