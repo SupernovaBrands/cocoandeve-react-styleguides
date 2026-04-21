@@ -113,7 +113,7 @@ const HowToCarousel = (props) => {
 						disabled={prevDisabled7}
 						className={`lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]`}
 					>
-						<span className="absolute z-[1] flex justify-center items-center lg:-left-[2em] h-5 w-5 rounded-full">
+						<span className="absolute z-[1] flex justify-center items-center lg:-left-[2.5em] h-5 w-5 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
@@ -122,7 +122,7 @@ const HowToCarousel = (props) => {
 						disabled={nextDisabled7}
 						className={`lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]`}
 					>
-						<span className="absolute z-[1] flex justify-center items-center lg:-right-[2em] h-5 w-5 rounded-full">
+						<span className="absolute z-[1] flex justify-center items-center lg:-right-[2.5em] h-5 w-5 rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>

@@ -209,7 +209,7 @@ const Blog = (props) => {
 													onClick={() => autoPlayClick(arrowClickPrev)}
 													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 												>
-													<span className="absolute z-[1] flex justify-center items-center lg:-left-[2em] h-5 w-5 rounded-full">
+													<span className="absolute z-[1] flex justify-center items-center lg:-left-[2.5em] h-5 w-5 rounded-full">
 														<ChevronPrev className="svg--current-color w-g h-g" />
 													</span>
 												</PrevButton>
@@ -217,7 +217,7 @@ const Blog = (props) => {
 													onClick={() => autoPlayClick(arrowClickNext)}
 													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 												>
-													<span className="absolute z-[1] flex justify-center items-center lg:-right-[2em] h-5 w-5 rounded-full">
+													<span className="absolute z-[1] flex justify-center items-center lg:-right-[2.5em] h-5 w-5 rounded-full">
 														<ChevronNext className="svg--current-color w-g h-g" />
 													</span>
 												</NextButton>
@@ -231,7 +231,7 @@ const Blog = (props) => {
 							<div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
 						</div>
 						{videoData.length > 0 &&
-							<div className="how-to-wrapper my-3 lg:my-4 flex flex-wrap">
+							<div className="how-to-wrapper my-3 lg:my-4 flex flex-wrap lg:-mx-g px-0 lg:px-hg">
 								<HowToCarousel ctaBgColor={generalSetting?.bfcm_cta_bg_color} btnLeft="lg:left-[-25px] sm:left-0" btnRight="lg:right-[-25px] sm:right-0" title={true} videoData={extendedVideoData} isLoading={isLoading} store={region} />
 							</div>
 						}
