@@ -247,8 +247,8 @@ const Sustainability = (props: any) => {
                         </div>
                         <div className="w-full lg:w-[33%] lg:basis-[33%] lg:order-2 my-25 lg:my-0">
                             <picture className="">
-                                <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-Infographic_1_33c8ce6c2a.jpg?v=1773609993'} media="(min-width: 992px)" />
-                                <img className="w-[80%] mx-auto lg:w-full" alt={'Sustainability Infographic'} src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-Infographic_mobile_0af51ef84a.jpg?v=1773622236'} />
+                                <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_86b9f8dc-8c48-4bfb-861d-f158acbb33aa.jpg?v=1772040025'} media="(min-width: 992px)" />
+                                <img className="w-[80%] mx-auto lg:w-full" alt={'Sustainability Infographic'} src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/828x_ea723d38-130c-4f67-9a69-1cd777a26943.jpg?v=1772040050'} />
                             </picture>
                         </div>
                     </div>
