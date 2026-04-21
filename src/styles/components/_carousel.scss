@@ -83,7 +83,7 @@
 			&__page-reviews .carousel__button {
 
 				span {
-					@apply top-[12em] w-5 h-5 rounded-full;
+					@apply top-[14em] w-5 h-5 rounded-full;
 				}
 
 				svg {
@@ -91,11 +91,11 @@
 				}
 
 				&--prev span {
-					@apply -left-[2em];
+					@apply -left-[3em];
 				}
 
 				&--next span {
-					@apply -right-[2em];
+					@apply -right-[3em];
 				}
 			}
 
