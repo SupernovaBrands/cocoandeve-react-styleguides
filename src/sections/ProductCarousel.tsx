@@ -124,7 +124,7 @@ const ProductCarousel = (props: any) => {
 
 	return (
 		<>
-			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${productPage ? 'mb-0 lg:mb-5' : ''}`}>
+			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${productPage ? 'mb-0 lg:mb-5 lg:pb-2' : ''}`}>
 				{!homePage && (<h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-2">You may also like</h2>)}
 				<div className="row">
 					<div className="">
