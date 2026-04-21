@@ -544,7 +544,7 @@ const ProductCard = (props: any) => {
 
             {clickShowPopup && (
                 <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} group text-xs lg:py-[6px] lg:px-[8px] py-0 px-0 flex mb-0 hover:text-primary lg:bg-white cursor-pointer absolute top-[.5rem] right-[1rem] lg:right-[1rem] lg:top-[10px] product-card__badge items-center leading-none`}>
-                    <span className={`mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
+                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
                     <Eye className="h-[20px] lg:h-g w-[20px] lg:w-g block group-hover:hidden" />
                     <EyeHover className="h-[20px] lg:h-g w-[20px] lg:w-g hidden group-hover:block" />
                 </p>
