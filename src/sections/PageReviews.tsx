@@ -95,7 +95,7 @@ const PageReviews = (props: any) => {
         {REVIEWS?.length && (
             <div className="lg:bg-gray-400 lg:pt-[40px] lg:pb-[40px]">
                 <div className='page-reviews container pt-[30px] lg:pt-[0] px-0 lg:px-0' >
-                    <div className='px-0 overflow-auto'>
+                    <div className='px-0 overflow-hidden lg:overflow-visible'>    
                         <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__page-reviews -mx-hg">
                             <Carousel.Inner emblaRef={emblaRef1} className="mx-g lg:mx-0">
                                 {REVIEWS.map((data: any, i: number) => data?.image && (
