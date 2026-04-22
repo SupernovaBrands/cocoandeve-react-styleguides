@@ -329,14 +329,13 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
-        // console.log('currentCollection', currentCollection);
-        if (currentPos > 0) {
-            setShowByobCard({
-                show: currentCollection?.handle !== 'tan',
-                position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
-            });
-        }
-    }, [currentCollection]);
+        // console.log('currentPos', currentPos);
+        const DEFAULT_BYOB_POSITION = 4;
+        setShowByobCard(prev => ({
+            show: currentCollection?.handle !== 'tan',
+            position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
+        }));
+    }, [currentCollection, byobBanner]);
 
     // useEffect(() => {
     //     if (showQuizCard) setShowBundleCard(showQuizCard || handle === 'hair' || handle === 'shampoo-conditioner' || handle === 'treatments' || handle === 'hair-styling' || handle === 'hair-accessories')
