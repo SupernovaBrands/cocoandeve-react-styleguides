@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
@@ -6,23 +7,36 @@ import useMediaQuery from '~/hooks/useMediaQuery';
 import { useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 // import Link from "next/link";
 
-const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
-    <figure className="flex-grow-0 flex-shrink-0 w-full basis-full active:opacity-90 lg:active:opacity-100">
-        <a className="relative block" href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
-            <picture className={`block ${data?.playground_range_bg}`}>
-                <source srcSet={imgDt} media="(min-width: 992px)" width={1440} height={460} />
-                <img width="375" height="88" alt={imgAlt} className="w-full" src={imgMb} loading="lazy" decoding="async" />
-            </picture>
-            <figcaption className="py-[1rem] absolute left-0 right-0 top-0 bottom-0 text-body text-left">
-                <div className="px-2 container flex flex-col h-full justify-center">
-                    <p className="text-[18px] leading-[22px] lg:text-[55px] lg:leading-[40px] font-bold mb-[.25rem] lg:mb-[1.5rem]">{data?.Title || 'Title'}</p>
-                    <p className="text-xs leading-[15px] lg:text-[30px] lg:leading-[36px] lg:mb-[1.5rem]" dangerouslySetInnerHTML={{ __html: data?.text || 'Text' }} />
-                    <span className="hidden lg:flex text-[22px] leading-[28px] w-[228px] font-bold border border-body h-[55px] items-center justify-center transition-colors duration-300 hover:bg-black hover:text-white">Discover</span>
-                </div>
-            </figcaption>
-        </a>
-    </figure>
-);
+const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor, isLocked, onTap }) => {
+    const [tapped, setTapped] = useState(false);
+
+    const handleTouchStart = () => {
+        if (isLocked) return;
+        setTapped(true);
+        onTap?.();
+    };
+
+    return (
+        <figure
+            className={`flex-grow-0 flex-shrink-0 w-full basis-full transition-opacity duration-150 ${tapped ? 'opacity-90' : ''} ${isLocked && !tapped ? 'pointer-events-none' : ''}`}
+            onTouchStart={handleTouchStart}
+        >
+            <a className="relative block" href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
+                <picture className={`block ${data?.playground_range_bg}`}>
+                    <source srcSet={imgDt} media="(min-width: 992px)" width={1440} height={460} />
+                    <img width="375" height="88" alt={imgAlt} className="w-full" src={imgMb} loading="lazy" decoding="async" />
+                </picture>
+                <figcaption className="py-[1rem] absolute left-0 right-0 top-0 bottom-0 text-body text-left">
+                    <div className="px-2 container flex flex-col h-full justify-center">
+                        <p className="text-[18px] leading-[22px] lg:text-[55px] lg:leading-[40px] font-bold mb-[.25rem] lg:mb-[1.5rem]">{data?.Title || 'Title'}</p>
+                        <p className="text-xs leading-[15px] lg:text-[30px] lg:leading-[36px] lg:mb-[1.5rem]" dangerouslySetInnerHTML={{ __html: data?.text || 'Text' }} />
+                        <span className="hidden lg:flex text-[22px] leading-[28px] w-[228px] font-bold border border-body h-[55px] items-center justify-center transition-colors duration-300 hover:bg-black hover:text-white">Discover</span>
+                    </div>
+                </figcaption>
+            </a>
+        </figure>
+    );
+};
 
 // const PlaygroundCard = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
 //     <figure className="w-full lg:w-1/4 px-g lg:px-g relative mb-g">
@@ -42,6 +56,7 @@ const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTe
 
 const Playground = (props: any) => {
     const isDesktop = useMediaQuery("(min-width: 992px)");
+    const [navigating, setNavigating] = useState(false);
     const options: EmblaOptionsType = {
         loop: true,
         active: isDesktop
@@ -121,6 +136,8 @@ const Playground = (props: any) => {
                         imgAlt={`${content?.range_1?.Title} Playground - ${content?.range_1?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                         ctaBgColor={ctaBgColor}
                         ctaTextColor={ctaTextColor}
+                        isLocked={navigating}
+                        onTap={() => setNavigating(true)}
                     />
                     {/* tan */}
                     {['us', 'uk', 'eu', 'dev', 'ca', 'au'].includes(store) && (
@@ -130,6 +147,8 @@ const Playground = (props: any) => {
                             imgAlt={`${content?.range_2?.Title} Playground - ${content?.range_2?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
+                            isLocked={navigating}
+                            onTap={() => setNavigating(true)}
                         />
                     )}
                     {/* SPF */}
@@ -140,6 +159,8 @@ const Playground = (props: any) => {
                             imgAlt={`${content?.range_5?.Title} Playground - ${content?.range_5?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
+                            isLocked={navigating}
+                            onTap={() => setNavigating(true)}
                         />
                     )}
 
@@ -151,6 +172,8 @@ const Playground = (props: any) => {
                             imgAlt={`${content?.range_3?.Title} Playground - ${content?.range_3?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
+                            isLocked={navigating}
+                            onTap={() => setNavigating(true)}
                         />
                     )}
 
@@ -162,6 +185,8 @@ const Playground = (props: any) => {
                             imgAlt={`${content?.range_4?.Title} Playground - ${content?.range_4?.text?.replace(/(<([^>]+)>)/gi, '')}`}
                             ctaBgColor={ctaBgColor}
                             ctaTextColor={ctaTextColor}
+                            isLocked={navigating}
+                            onTap={() => setNavigating(true)}
                         />
                     )}
                 </Carousel.Inner>
