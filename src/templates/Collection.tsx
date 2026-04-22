@@ -673,7 +673,7 @@ const Collection = (props: any) => {
                                                                 key={`collection-byob-card--${handle}--${index}`}
                                                                 href='/pages/build-your-own-bundle'
                                                                 ctaLabel='Build Now'
-                                                                heading='Build Your Bundle'
+                                                                heading='Build Your Own Bundle'
                                                                 title='Mix, match & save <br />your way!'
                                                                 store={store}
                                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
