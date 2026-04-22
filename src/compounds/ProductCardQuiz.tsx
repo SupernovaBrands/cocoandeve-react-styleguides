@@ -1,8 +1,28 @@
+import { useEffect, useState } from 'react';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 
 const ProductCardQuiz = (props: any) => {
 	const title = props.title || 'Find the perfect solution for your <br className="hidden lg:block"/>skin’s needs in just a few steps';
     // console.log('split ver', props.splitVersion);
+
+    let os = 'unknown';
+    const [platform, setPlatform] = useState(os);
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+    
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
+    
+        setPlatform(os);
+    }, []);
+
 	return (
 		<figure className={props.className ?? ''}>
             <a href={props.href ?? '/pages/self-tan-quiz'}>
@@ -11,7 +31,7 @@ const ProductCardQuiz = (props: any) => {
                     <img className="w-full" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
                 <figcaption className={`${props.splitVersion ? 'lg:mt-0 lg:top-[50%] lg:-translate-y-[50%]' : 'lg:mt-4 lg:top-0 lg:transform-none'} absolute ${props.heading === 'SPF Quiz' ? 'left-0 w-[100%]' : 'left-[5em] w-[75%] pl-25 pr-g'} top-2/4 lg:left-0 lg:right-0 -translate-y-1/2 text-left lg:text-center lg:px-0 lg:pt-0 pb-0 lg:pb-0 lg:w-full items-center [flex-flow:column] justify-center`}>
-                    <p className={`lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full ${props.heading === 'SPF Quiz' ? 'text-lg text-center' : ''}`}>{props.heading ?? 'Take the Tan Quiz'}</p>
+                    <p className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full ${props.heading === 'SPF Quiz' ? 'text-lg text-center' : ''}`}>{props.heading ?? 'Take the Tan Quiz'}</p>
                     <p className={`hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body ${props.heading === 'SPF Quiz' ? '[@media(min-width:1200px)]:max-w-[100%]' : '[@media(min-width:1200px)]:max-w-[65%]'} [@media(min-width:1200px)]:mx-auto`}
                         dangerouslySetInnerHTML={{
 							__html: ['us'].includes(props.store) ? title.replace('colour', 'color') : title,
