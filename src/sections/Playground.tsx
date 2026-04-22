@@ -7,7 +7,7 @@ import { useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 // import Link from "next/link";
 
 const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor }) => (
-    <figure className="flex-grow-0 flex-shrink-0 w-full basis-full">
+    <figure className="flex-grow-0 flex-shrink-0 w-full basis-full active:opacity-90 lg:active:opacity-100">
         <a className="relative block" href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
             <picture className={`block ${data?.playground_range_bg}`}>
                 <source srcSet={imgDt} media="(min-width: 992px)" width={1440} height={460} />
