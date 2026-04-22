@@ -9,7 +9,7 @@ const ProductCardKit = (props: any) => {
                     <img src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_v2_x112.jpg?v=1776675078'} className="w-full" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
                 <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-25 pr-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
-                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">Build Your Bundle</p>
+                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">Build Your Own Bundle</p>
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body"
                         dangerouslySetInnerHTML={{
 							__html: 'Mix, match & save<br>your way!',

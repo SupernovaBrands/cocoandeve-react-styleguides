@@ -9,7 +9,7 @@ const ProductCardQuiz = (props: any) => {
                     <img className="w-full" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
                 <figcaption className={`${props.splitVersion ? 'lg:mt-0 lg:top-[50%] lg:-translate-y-[50%]' : 'lg:mt-4 lg:top-0 lg:transform-none'} absolute left-[5em] top-2/4 lg:left-0 lg:right-0 -translate-y-1/2 text-left lg:text-center pl-25 pr-g lg:px-0 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center`}>
-                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">{props.heading ?? 'Tan Quiz'}</p>
+                    <p className="lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full">{props.heading ?? 'Take the Tan Quiz'}</p>
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body [@media(min-width:1200px)]:max-w-[65%] [@media(min-width:1200px)]:mx-auto"
                         dangerouslySetInnerHTML={{
 							__html: ['us'].includes(props.store) ? title.replace('colour', 'color') : title,
