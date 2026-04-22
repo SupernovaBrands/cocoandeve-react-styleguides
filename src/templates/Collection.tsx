@@ -325,8 +325,8 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
-        console.log('currentPos', currentPos);
-        const DEFAULT_BYOB_POSITION = 4; // 5th card (0-indexed)
+        // console.log('currentPos', currentPos);
+        const DEFAULT_BYOB_POSITION = 4;
         setShowByobCard(prev => ({
             show: currentCollection?.handle !== 'tan',
             position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
