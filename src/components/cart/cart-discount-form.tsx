@@ -172,7 +172,7 @@ export const CartDiscountForm = (props:any) => {
                 {state.discountBanner?.enable && !state.hasCode && validItemInCart && (
                 <>
                     <div className='border-b border-[#ADADAD] border-solid w-full mt-2'></div>
-                    <div className="discount__banner relative rounded-[8px_0_0_8px] flex pl-[20px] pr-g py-1 bg-[#F5DADF] mt-2 mb-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
+                    <div className="discount__banner relative rounded-[8px_0_0_8px] flex pl-[20px] pr-g py-1 bg-[#F5DADF] mt-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
                         <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
                         <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
                             <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: state.discountBanner.code_banner_content}}/>
