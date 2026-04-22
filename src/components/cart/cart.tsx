@@ -329,7 +329,7 @@ const Cart: React.FC<Props> = (props) => {
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
 								id="cart-drawer-form"
-								className="container px-[16px] lg:px-3 cart-drawer__form pb-g"
+								className="container px-[16px] lg:px-3 lg:pb-5 cart-drawer__form pb-5"
 								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
@@ -449,7 +449,7 @@ const Cart: React.FC<Props> = (props) => {
 											<div className="flex lg:hidden justify-between w-full">
 												<p className="mb-1" data-cy="cart-shipping-label">
 													<strong>{`${tStrings.cart_shipping} `}</strong>
-													<span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span>
+													{/* <span className="text-sm block mt-25">{`${shippingData?.freeRate && shippingData.freeRate.min_order_subtotal ? `(free standard shipping over ${formatMoney(parseFloat(shippingData.freeRate.min_order_subtotal) * 100, false, store)})` : ''}`}</span> */}
 												</p>
 												<p className={`mb-1 font-bold text-end justify-end ${shippingData.amount > 0 ? '' : 'text-primary'}`} data-cy="cart-shipping-value">{shippingData.amount > 0 ? formatMoney(shippingData.amount, false, store) : 'Free'}</p>
 											</div>
