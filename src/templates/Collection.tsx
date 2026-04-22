@@ -146,7 +146,7 @@ const Collection = (props: any) => {
     });
     const [launchWLSuccess, setLaunchWLSuccess] = useState(false);
     const showQuizCard = useMemo(() => handle === 'spf' || handle === 'body-suncare' || handle === 'face-suncare' || handle === 'tan' || handle === 'suncare-tan' || handle === 'tan-and-spf' || handle === 'tan-sets' || handle === 'tanning-mitts' || handle === 'body-tan' || handle === 'face-tan' || handle === 'tan-accessories' || parentCollection?.collection?.handle === 'tan' || parentCollection?.collection?.handle === 'tan-and-spf', [handle, parentCollection]);
-    const [showByobCard, setShowByobCard] = useState({ show: false, position: 5 });
+    const [showByobCard, setShowByobCard] = useState({ show: false, position: 5, dtPosition: 5 });
     const launchHandles = useMemo(() => {
         if (launchWL) return launchWL.launch_wl_handles.split(',').map((v) => v.trim()) || [];
         return [];
@@ -329,11 +329,12 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
-        // console.log('currentPos', currentPos);
-        const DEFAULT_BYOB_POSITION = 4;
+        // console.log('currentCollection', currentCollection);
+        const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
         setShowByobCard(prev => ({
             show: currentCollection?.handle !== 'tan',
             position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
+            dtPosition: currentPos > 0 ? currentPos : DEFAULT_BYOB_POSITION,
         }));
     }, [currentCollection, byobBanner]);
 
@@ -423,6 +424,7 @@ const Collection = (props: any) => {
 
     // const [first, ...rest] = sidebarMenu;
     // const mobileDropdown = [...rest, first];
+    // console.log('byobBanner', showByobCard);
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
             <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white text-sm lg:text-base w-[150px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
@@ -577,127 +579,126 @@ const Collection = (props: any) => {
                             )}
                             {collProducts.length > 0 && collProducts.map((item: any, index: number) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
-                                const lgOrder = index < 3 ? index + 1 : index + 2;
-                                return showByobCard.show && index === showByobCard?.position ? (
-                                    <div key={`collection-b-${handle}-${item.id}-${index}`} className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
-                                        <Fragment>
-                                            {!collectionSettings.isLoading && (
-                                                <ProductCardKit
-                                                    className="relative flex flex-col text-center collection-lg-order"
-                                                    store={store}
-                                                />
-                                            )}
-
-                                            {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder />
-                                            )}
-                                        </Fragment>
-                                    </div>
-                                ) : (showQuizCard && index === 1 ? (
+                                const lgOrder = index <= 3 ? index + 1 : index + 2;
+                                return (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
-                                        <ProductCard
-                                            product={item}
-                                            className={`relative flex flex-col text-center collection-lg-order`}
-                                            style={{ '--lg-order': lgOrder } as React.CSSProperties}
-                                            button={true}
-                                            setWaitlistData={setWaitlistData}
-                                            smSingleStar={true}
-                                            addToCart={addToCart}
-                                            trackEvent={trackEvent}
-                                            eventNameOnClick='collection_product_card'
-                                            preOrders={preOrders}
-                                            isLaunchWL={isLaunchWL}
-                                            launchBox={launchBox}
-                                            setLaunchWLModal={setLaunchWLModal}
-                                            setLaunchWLModal2={setLaunchWLModal2}
-                                            setLaunchWLModal3={setLaunchWLModal3}
-                                            generalSetting={generalSetting}
-                                            collectionTemplate={true}
-                                            store={store}
-                                            customProductTitle={customProductTitle}
-                                        />
-
-                                        <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
-                                            {!collectionSettings.isLoading && (
-                                                handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
-                                                    <ProductCardQuiz
-                                                        className="relative w-full lg:h-full"
-                                                        href={collectionSettings?.quizSetting?.spf_quiz_button_url}
-                                                        title={collectionSettings?.quizSetting?.spf_quiz_title}
-                                                        heading="SPF Quiz"
-                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Mobile_c98875de22.jpg?v=1776312419"
-                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-SPF_Quiz_Desktop_36cddf2557.jpg?v=1776332145"
-                                                        key={`collection-quiz-card--spf--${index}`}
-                                                        quizSetting={collectionSettings.quizSetting}
+                                        {showByobCard.show && index === showByobCard?.position && (
+                                            <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
+                                                {!collectionSettings.isLoading && (
+                                                    <ProductCardKit
+                                                        className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
-                                                        ctaBgColor={generalSetting?.spf_cta_bg_color}
-                                                        ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
                                                     />
-                                                ) : (
-                                                    <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
-                                                        <ProductCardQuiz
-                                                            className="relative"
-                                                            href={collectionSettings?.quizSetting?.quiz_button_url}
-                                                            title={collectionSettings?.quizSetting?.quiz_title}
-                                                            ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
-                                                            imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
-                                                            imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                            key={`collection-quiz-card--${handle}--${index}`}
-                                                            quizSetting={collectionSettings.quizSetting}
-                                                            store={store}
-                                                            ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                            splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
-                                                        />
+                                                )}
+                                                {collectionSettings.isLoading && (
+                                                    <QuizCardPlaceholder />
+                                                )}
+                                            </div>
+                                        )}
+                                        {showQuizCard && index === 1 ? (
+                                            <>
+                                                <ProductCard
+                                                    product={item}
+                                                    className={`relative flex flex-col text-center collection-lg-order`}
+                                                    style={{ '--lg-order': lgOrder } as React.CSSProperties}
+                                                    button={true}
+                                                    setWaitlistData={setWaitlistData}
+                                                    smSingleStar={true}
+                                                    addToCart={addToCart}
+                                                    trackEvent={trackEvent}
+                                                    eventNameOnClick='collection_product_card'
+                                                    preOrders={preOrders}
+                                                    isLaunchWL={isLaunchWL}
+                                                    launchBox={launchBox}
+                                                    setLaunchWLModal={setLaunchWLModal}
+                                                    setLaunchWLModal2={setLaunchWLModal2}
+                                                    setLaunchWLModal3={setLaunchWLModal3}
+                                                    generalSetting={generalSetting}
+                                                    collectionTemplate={true}
+                                                    store={store}
+                                                    customProductTitle={customProductTitle}
+                                                />
 
-                                                        {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
+                                                <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
+                                                    {!collectionSettings.isLoading && (
+                                                        handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
                                                             <ProductCardQuiz
-                                                                className="relative"
-                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                                key={`collection-byob-card--${handle}--${index}`}
-                                                                href='/pages/build-your-own-bundle'
-                                                                ctaLabel='Get Started'
-                                                                heading='Build Your Own Bundle'
-                                                                title='Mix, match & save <br />your way!'
+                                                                className="relative w-full lg:h-full"
+                                                                href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                                title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                                heading="SPF Quiz"
+                                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
+                                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
+                                                                key={`collection-quiz-card--spf--${index}`}
+                                                                quizSetting={collectionSettings.quizSetting}
                                                                 store={store}
-                                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                                ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
                                                             />
-                                                        )}
-                                                    </div>
-                                                )
-                                            )}
+                                                        ) : (
+                                                            <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                                <ProductCardQuiz
+                                                                    className="relative"
+                                                                    href={collectionSettings?.quizSetting?.quiz_button_url}
+                                                                    title={collectionSettings?.quizSetting?.quiz_title}
+                                                                    ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
+                                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                    key={`collection-quiz-card--${handle}--${index}`}
+                                                                    quizSetting={collectionSettings.quizSetting}
+                                                                    store={store}
+                                                                    ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                    splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
+                                                                />
 
-                                            {collectionSettings.isLoading && (
-                                                <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
-                                            )}
-                                        </div>
+                                                                {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
+                                                                    <ProductCardQuiz
+                                                                        className="relative"
+                                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
+                                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                        key={`collection-byob-card--${handle}--${index}`}
+                                                                        href='/pages/build-your-own-bundle'
+                                                                        ctaLabel='Get Started'
+                                                                        heading='Build Your Own Bundle'
+                                                                        title='Mix, match & save <br />your way!'
+                                                                        store={store}
+                                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                    />
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    )}
 
-
+                                                    {collectionSettings.isLoading && (
+                                                        <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
+                                                    )}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <ProductCard
+                                                product={item}
+                                                className={`relative flex flex-col text-center collection-lg-order`}
+                                                style={{ '--lg-order': lgOrder } as React.CSSProperties}
+                                                button={true}
+                                                setWaitlistData={setWaitlistData}
+                                                smSingleStar={true}
+                                                addToCart={addToCart}
+                                                trackEvent={trackEvent}
+                                                eventNameOnClick='collection_product_card'
+                                                preOrders={preOrders}
+                                                isLaunchWL={isLaunchWL}
+                                                launchBox={launchBox}
+                                                setLaunchWLModal={setLaunchWLModal}
+                                                setLaunchWLModal2={setLaunchWLModal2}
+                                                setLaunchWLModal3={setLaunchWLModal3}
+                                                generalSetting={generalSetting}
+                                                collectionTemplate={true}
+                                                store={store}
+                                                customProductTitle={customProductTitle}
+                                            />
+                                        )}
                                     </Fragment>
-                                ) : (
-                                    <ProductCard
-                                        key={`collection-b-${handle}-${item.id}-${index}`}
-                                        product={item}
-                                        className={`relative flex flex-col text-center collection-lg-order`}
-                                        style={{ '--lg-order': lgOrder } as React.CSSProperties}
-                                        button={true}
-                                        setWaitlistData={setWaitlistData}
-                                        smSingleStar={true}
-                                        addToCart={addToCart}
-                                        trackEvent={trackEvent}
-                                        eventNameOnClick='collection_product_card'
-                                        preOrders={preOrders}
-                                        isLaunchWL={isLaunchWL}
-                                        launchBox={launchBox}
-                                        setLaunchWLModal={setLaunchWLModal}
-                                        setLaunchWLModal2={setLaunchWLModal2}
-                                        setLaunchWLModal3={setLaunchWLModal3}
-                                        generalSetting={generalSetting}
-                                        collectionTemplate={true}
-                                        store={store}
-                                        customProductTitle={customProductTitle}
-                                    />
-                                ))
+                                );
                             })}
                             {/* {collProducts.length === 2 && showQuizCard && (
                                 collectionSettings.isLoading ? (
