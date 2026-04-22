@@ -134,7 +134,7 @@ export const CartDiscountForm = (props:any) => {
 
     return (
         <>
-            <div className="py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid pb-2">
+            <div className={`py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid ${state.hasCode || !formOpened ? 'pb-[5px]' : 'pb-2'}`}>
                 <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2  border-[#ADADAD] border-solid`}>
                     <input
                         ref={inputRef}
