@@ -101,9 +101,9 @@
             }
         }
 
-        span {
-            @apply lg:ml-3;
-        }
+        // span {
+        //     @apply lg:ml-3;
+        // }
     }
 }
 
@@ -229,7 +229,26 @@
 .product-side-upsell {
 
     .product-variant-swatch  {
-        @apply lg:gap-[2px];
+        @apply lg:gap-0;
+    }
+
+    .product-card-btn {
+        @apply lg:min-h-[auto];
+        span {
+            @apply lg:py-[.5rem];
+        }
+    }
+
+    .variant-swatch {
+        @apply lg:w-[25px] lg:h-[25px];
+
+        &:before {
+            @apply lg:w-[19px] lg:h-[19px];
+        }
+    }
+
+    .article-swatch-label {
+        @apply lg:text-sm lg:mb-[.25rem];
     }
 
     .article-swatch-heading {
@@ -411,4 +430,13 @@
 
 .yotpo-reviews__container .product__reviews-title {
     @apply lg:text-2xl mb-3 lg:mb-[3.125rem];
+}
+
+.mobile-cta__bottom {
+    .product-swatch {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+    }
 }

@@ -35,8 +35,8 @@ const Inner = ({ title, bannerData }) => {
         <figure className="w-full relative items-center px-0 mb-0 aspect-[375/200] lg:aspect-[1440/279]">
             <picture className={``}>
                 <source srcSet={bannerData?.img_desk?.url} media="(min-width: 992px)" />
-                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')} 
-                    className="w-full" alt="Collection Banner" width="375" height="200" 
+                <img src={bannerData?.img_mob?.url?.replace('/public', '/540x')}
+                    className="w-full" alt="Collection Banner" width="375" height="200"
                     // @ts-ignore
                     fetchpriority="high" />
             </picture>
@@ -503,7 +503,7 @@ const Collection = (props: any) => {
                                                 })}
                                             </select>
                                         </div> */}
-                                        <div className="w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0">
+                                        <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
                                             {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
                                                 <option value="featured">Sort By</option>
                                                 <option value="best-selling">Best selling</option>
@@ -518,44 +518,42 @@ const Collection = (props: any) => {
                             </>
                             {/* )} */}
 
-                            
-                            
+                            {handle === 'all' && <FilterOptions className="hidden lg:flex" />}
                         </div>
                         {/* {handle !== 'all' && ( */}
-                            <div className={`flex lg:justify-between items-center w-full ${handle !== 'all' ? 'mt-[1rem] px-g lg:px-2' : ''}`}>
+                        {handle !== 'all' && (
+                            <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
                                 <div className="w-full lg:w-8/12">
-                                    {handle !== 'all' && (
-                                        <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
-                                            {childMenu.length > 0 && childMenu.map((children, index) => {
-                                                if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
-                                                    const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
-                                                    return (
-                                                        <Link
-                                                            scroll={false}
-                                                            key={`tags--${children.handle}-${index}`}
-                                                            href={`/collections/${children.handle}${parentParam ? `?p=${parentParam}` : (parentCollection?.collection?.handle ? `?p=${parentCollection.collection.handle}` : '')}`}
-                                                            className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
+                                    <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
+                                        {childMenu.length > 0 && childMenu.map((children, index) => {
+                                            if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
+                                                const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
+                                                return (
+                                                    <Link
+                                                        scroll={false}
+                                                        key={`tags--${children.handle}-${index}`}
+                                                        href={`/collections/${children.handle}${parentParam ? `?p=${parentParam}` : (parentCollection?.collection?.handle ? `?p=${parentCollection.collection.handle}` : '')}`}
+                                                        className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                                 ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
-                                                            onClick={showLoading}
-                                                            dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
-                                                        />
-                                                    );
-                                                }
-                                            })}
-                                            {childMenu.length === 0 && (
-                                                <Link
-                                                    href={`/collections/${handle}`}
-                                                    className={`text-nowrap mr-1 py-1 px-2 hover:no-underline text-gray-600 hover:text-gray-600`}
-                                                    onClick={showLoading}
-                                                    scroll={false}
-                                                >All</Link>
-                                            )}
-                                        </div>
-                                    )}
-                                    
+                                                        onClick={showLoading}
+                                                        dangerouslySetInnerHTML={{ __html: children.title.toLowerCase().includes('accessories') ? 'Accessories' : html }}
+                                                    />
+                                                );
+                                            }
+                                        })}
+                                        {childMenu.length === 0 && (
+                                            <Link
+                                                href={`/collections/${handle}`}
+                                                className={`text-nowrap mr-1 py-1 px-2 hover:no-underline text-gray-600 hover:text-gray-600`}
+                                                onClick={showLoading}
+                                                scroll={false}
+                                            >All</Link>
+                                        )}
+                                    </div>
                                 </div>
                                 <FilterOptions className="hidden lg:flex" />
                             </div>
+                        )}
                         {/* )} */}
                         {!showSpinner && !loading && collProducts.length <= 0 && !isLoading && !collectionSettings.isLoading && (
                             <div className="w-full">
@@ -627,7 +625,7 @@ const Collection = (props: any) => {
                                                         ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
                                                     />
                                                 ) : (
-                                                    <div className="w-full lg:h-full flex flex-col gap-[1.5rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                    <div className="w-full lg:h-full flex flex-col gap-[1rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
                                                         <ProductCardQuiz
                                                             className="relative"
                                                             href={collectionSettings?.quizSetting?.quiz_button_url}
@@ -649,7 +647,7 @@ const Collection = (props: any) => {
                                                                 imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
                                                                 key={`collection-byob-card--${handle}--${index}`}
                                                                 href='/pages/build-your-own-bundle'
-                                                                ctaLabel='Build Now'
+                                                                ctaLabel='Get Started'
                                                                 heading='Build Your Own Bundle'
                                                                 title='Mix, match & save <br />your way!'
                                                                 store={store}
@@ -713,7 +711,7 @@ const Collection = (props: any) => {
                 </div>
             </div>
 
-            
+
             {!collectionSingle.isLoading && footerAbout.enabled && initMain && (
                 <>
                     <hr className="collection-footer border-gray-400 mt-0 mb-25 lg:hidden" />
