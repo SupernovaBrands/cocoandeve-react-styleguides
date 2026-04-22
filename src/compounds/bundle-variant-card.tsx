@@ -94,7 +94,7 @@ const BundleVariantCard = (props) => {
     };
 
     const option2 = productShopify?.options.find(
-        (op) => currentVariant.selectedOptions.find((c) => c.name === op.name && swatchType.includes(c.name.toLowerCase()))
+        (op) => currentVariant.selectedOptions.find((c) => c.name === op.name && swatchType.some(item => c.name.toLowerCase().includes(item.toLowerCase())))
     )?.values || [];
 
     const bundleImg = slides[slides.length - 1];

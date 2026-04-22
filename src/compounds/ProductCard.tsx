@@ -450,7 +450,7 @@ const ProductCard = (props: any) => {
     });
 
     const skus = useMemo(() => {
-        console.log(product, 'testing');
+        // console.log(product, 'testing');
         if (!product?.variants?.nodes) return [];
 
         if (product.isProductBundleApp?.value && product.productBundleSkus?.value) {
