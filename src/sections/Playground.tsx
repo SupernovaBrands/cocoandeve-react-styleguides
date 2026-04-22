@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import useEmblaCarousel from 'embla-carousel-react';
 import { EmblaOptionsType } from 'embla-carousel';
@@ -9,6 +9,14 @@ import { useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 
 const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor, isLocked, onTap }) => {
     const [tapped, setTapped] = useState(false);
+
+    useEffect(() => {
+        const handlePageShow = (e: PageTransitionEvent) => {
+            if (e.persisted) setTapped(false);
+        };
+        window.addEventListener('pageshow', handlePageShow);
+        return () => window.removeEventListener('pageshow', handlePageShow);
+    }, []);
 
     const handleTouchStart = () => {
         if (isLocked) return;
@@ -57,6 +65,15 @@ const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTe
 const Playground = (props: any) => {
     const isDesktop = useMediaQuery("(min-width: 992px)");
     const [navigating, setNavigating] = useState(false);
+
+    useEffect(() => {
+        const handlePageShow = (e: PageTransitionEvent) => {
+            if (e.persisted) setNavigating(false);
+        };
+        window.addEventListener('pageshow', handlePageShow);
+        return () => window.removeEventListener('pageshow', handlePageShow);
+    }, []);
+
     const options: EmblaOptionsType = {
         loop: true,
         active: isDesktop
