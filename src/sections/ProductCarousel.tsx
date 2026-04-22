@@ -129,7 +129,7 @@ const ProductCarousel = (props: any) => {
 				<div className="row">
 					<div className="">
 						<div className="product__carousel-nav-container lg:flex lg:justify-between lg:items-center container lg:px-2">
-							<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-[1rem] lg:pb-3 justify-center lg:justify-start px-hg lg:px-0 gap-[.5rem] lg:gap-[.375rem]">
+							<ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-wrap border-b-0 text-center pb-[1rem] lg:pb-3 justify-center lg:justify-start px-hg lg:px-0 gap-0 lg:gap-[.375rem]">
 								{tabConfig.map(({ key, title }) => (
 									<li key={key} className="flex items-center">
 										<TabNav
