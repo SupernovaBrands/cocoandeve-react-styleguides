@@ -625,7 +625,7 @@ const Collection = (props: any) => {
                                                         ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
                                                     />
                                                 ) : (
-                                                    <div className="w-full lg:h-full flex flex-col gap-[1rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                    <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
                                                         <ProductCardQuiz
                                                             className="relative"
                                                             href={collectionSettings?.quizSetting?.quiz_button_url}
