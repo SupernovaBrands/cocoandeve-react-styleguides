@@ -110,7 +110,7 @@ const WaitlistButton = memo((props: any) => {
         });
     }, [props.product, props.selectedVariant]);
 
-    const defaultText = 'Waitlist Me';
+    const defaultText = 'Waitlist';
     const WAITLIST_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
 
     const buttonData = useMemo(() => ({
@@ -143,7 +143,7 @@ const LaunchButton = memo((props: any) => {
         else if (props.launchBox === 3) props.setLaunchWLModal3(data);
     }, [props.product, props.selectedVariant, props.launchBox]);
 
-    const defaultText = 'Waitlist Me';
+    const defaultText = 'Waitlist';
     const LAUNCH_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
     const buttonData = useMemo(() => ({
         label: LAUNCH_LABEL,
@@ -347,8 +347,8 @@ const SwatchOverlay = memo((props: any) => {
         );
     }
 
-    let labelText = label === DEFAULT_LABEL ? label : props.swatch.label;
-    labelText = `<span class="lg:hidden">${DEFAULT_LABEL}</span><span class="hidden lg:inline">${labelText}</span>`;
+    let labelText = props.swatch.label;
+    labelText = `<span class="lg:hidden">${labelText}</span><span class="hidden lg:inline">${labelText}</span>`;
 
     return (
         <>
