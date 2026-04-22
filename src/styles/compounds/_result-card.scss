@@ -1,10 +1,10 @@
 @layer components {
   .result-card {
     picture {
-      padding-top: percentage(175 / 395);
+      padding-top: percentage(193 / 345);
 
       @screen lg {
-        padding-top: percentage(175 / 385);
+        padding-top: percentage(193 / 365);
       }
     }
   }

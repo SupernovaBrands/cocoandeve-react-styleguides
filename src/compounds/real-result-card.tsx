@@ -132,7 +132,7 @@ const RealResultCard = (props) => {
 		<div className="w-full lg:w-1/3 lg:inline-block result-card sm:px-hg">
 			<picture className="embed-responsive rounded-none overflow-hidden">
 				<source srcSet={data.image_media ? data.image_media.url : data.image_old} media="(min-width: 992px)" />
-				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full h-[175px!important] lg:w-[376px] embed-responsive-item fit--cover rounded-none object-top" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
+				<img alt={`Review - ${data.review_type || ''} @${data.author || ''}`} className="w-full embed-responsive-item fit--cover rounded-none object-top" src={data.image_media ? data.image_media.url : data.image_old} loading="lazy" />
 			</picture>
 			<div className="py-[1rem] px-[12px] bg-white rounded-none mb-2">
 				<div className="flex items-center mb-[8px] gap-[12px]">
