@@ -157,7 +157,7 @@ export const CartDiscountForm = (props:any) => {
                         {state.loading ? <div className="spinner-border !w-[25px] !h-[25px]" role="status" /> : 'Apply'}
                     </Button>
                 </div>
-                { state.hasCode && <div className="mt-0 flex flex-col items-start mb-0 md:mb-25">
+                { state.hasCode && <div className="mt-0 flex flex-col items-start mb-25 md:mb-25">
                     <p className="text-xs text-gray-500 mb-1 mt-1">Promo code applied </p>
                     <div className="bg-gray-100 items-center inline-flex px-1 py-1 text-[#00000080] rounded-h">
                         <DiscountTag className="svg text-gray-100 fill-[#00000080]"></DiscountTag>
