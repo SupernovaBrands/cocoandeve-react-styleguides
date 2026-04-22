@@ -325,14 +325,13 @@ const Collection = (props: any) => {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
 
-        // console.log('currentCollection', currentCollection);
-        if (currentPos > 0) {
-            setShowByobCard({
-                show: currentCollection?.handle !== 'tan',
-                position: Number.isNaN(currentPos) ? 0 : currentPos - 1,
-            });
-        }
-    }, [currentCollection]);
+        console.log('currentPos', currentPos);
+        const DEFAULT_BYOB_POSITION = 4; // 5th card (0-indexed)
+        setShowByobCard(prev => ({
+            show: currentCollection?.handle !== 'tan',
+            position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
+        }));
+    }, [currentCollection, byobBanner]);
 
     const collectionSettings = useCollectionSettings(handle, store);
     const handleFooter = parentCollection === null ? handle : parentCollection?.collection?.handle;
@@ -427,6 +426,8 @@ const Collection = (props: any) => {
             </select>
         </div>
     );
+
+    console.log('showByobCard', showByobCard);
 
     return (
         <>
