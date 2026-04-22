@@ -336,17 +336,17 @@ const HairSolution = (props: any) => {
                                     <TabContent active={productTab === index} key={`tab-prooduct-content-${index}`}>
                                         <ConditionalWrap
                                             condition={isDesktop}
-                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[25%_75%]">{children}</div>}
+                                            wrap={children => <div className="flex flex-wrap items-center justify-center lg:-mx-g grid lg:grid-cols-[27%_73%]">{children}</div>}
                                             elseWrap={children => children}
                                         >
                                             <div className="w-full px-g mb-g lg:mb-0">
                                                 <picture className="block">
                                                     <source srcSet={tabRow.image_d.url} media="(min-width: 992px)" />
-                                                    <img src={tabRow.image_m.url} className="object-cover" alt="Hair Concern Solution Product Banner" />
+                                                    <img src={tabRow.image_m.url} className="object-cover h-auto lg:h-[410px]" alt="Hair Concern Solution Product Banner" />
                                                 </picture>
                                             </div>
 
-                                            <Carousel.Wrapper emblaApi={productCarousels[`embla${index}`][1]} className="carousel__products">
+                                            <Carousel.Wrapper emblaApi={productCarousels[`embla${index}`][1]} className="carousel__products ">
                                                 <Carousel.Inner innerClass="px-[9px] lg:px-0" emblaRef={productCarousels[`embla${index}`][0]}>
                                                     {tabRow.products && tabRow.products.length > 0 && sortByAvailability(tabRow.products).map((item: any, index: number) => {
                                                         return <ProductCard
@@ -377,7 +377,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollPrev() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto left-[-2.0rem!important]">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto left-[-2.8rem!important]">
                                                             <ChevronPrev className="svg--current-color" />
                                                         </span>
                                                     </PrevButton>
@@ -385,7 +385,7 @@ const HairSolution = (props: any) => {
                                                         onClick={() => productCarousels[`embla${index}`][1].scrollNext() }
                                                         className="lg:w-auto lg:h-full hidden lg:flex lg:items-center lg:justify-center"
                                                     >
-                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto right-[-2.0rem!important]">
+                                                        <span className="absolute z-[1] flex justify-center items-center lg:!top-auto right-[-2.8rem!important]">
                                                             <ChevronNext className="svg--current-color" />
                                                         </span>
                                                     </NextButton>
