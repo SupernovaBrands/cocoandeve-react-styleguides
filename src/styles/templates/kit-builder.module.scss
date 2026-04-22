@@ -17,6 +17,10 @@
             button {
                 @apply rounded-none;
             }
+
+            .product-title__text {
+                @apply lg:pt-[1rem]
+            }
         }
 
         .benefits-content {
