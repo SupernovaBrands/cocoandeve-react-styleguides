@@ -196,9 +196,9 @@ const Blog = (props) => {
 					<>
 						<div className="flex flex-wrap article-list-wrapper lg:-mx-g px-0 lg:px-hg">
 							{!isLoading && (
-								<div className="container px-0 m-0 lg:px-g">
+								<div className="container px-0 m-0">
 									{postData.length > 0 &&
-										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full pl-hg lg:pl-0">
+										<Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full px-hg lg:px-g">
 											<Carousel.Inner emblaRef={emblaRef}>
 												{extendedPostData.map((data, index) => (
 													<PostCard showSubtext={true} readMoreLink={true} carousel={true} key={index} textClass="flex-grow" fontWeight="font-bold" badgePadding="py-[6px] px-[12px] text-xs lg:text-sm" figcaptionPadding="p-[1rem]" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] px-[.375em] lg:px-[.5rem] lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={region} />
@@ -209,7 +209,7 @@ const Blog = (props) => {
 													onClick={() => autoPlayClick(arrowClickPrev)}
 													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 												>
-													<span className="absolute z-[1] flex justify-center items-center lg:-left-[2.5em] h-5 w-5 rounded-full">
+													<span className="absolute z-[1] flex justify-center items-center lg:-left-[2em] h-5 w-5 rounded-full">
 														<ChevronPrev className="svg--current-color w-g h-g" />
 													</span>
 												</PrevButton>
@@ -217,7 +217,7 @@ const Blog = (props) => {
 													onClick={() => autoPlayClick(arrowClickNext)}
 													className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
 												>
-													<span className="absolute z-[1] flex justify-center items-center lg:-right-[2.5em] h-5 w-5 rounded-full">
+													<span className="absolute z-[1] flex justify-center items-center lg:-right-[2em] h-5 w-5 rounded-full">
 														<ChevronNext className="svg--current-color w-g h-g" />
 													</span>
 												</NextButton>
