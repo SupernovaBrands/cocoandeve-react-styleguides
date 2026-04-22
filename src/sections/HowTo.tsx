@@ -78,7 +78,7 @@ const HowToCarousel = (props) => {
 	return (
 		<section className="container px-0 m-0">
 			{title && (<h2 className="text-center mb-g lg:mb-3 text-xl lg:text-2xl w-full">The Ultimate “HOW TO”s</h2>)}
-			<Carousel.Wrapper emblaApi={emblaApi} className="relative blog-post__carousel w-full px-hg lg:px-g">
+			<Carousel.Wrapper emblaApi={emblaApi} className="relative blog-post__carousel w-full px-hg lg:px-g mx-0 lg:mx-g">
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
 						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 px-[.375em] lg:px-[.5rem]">
