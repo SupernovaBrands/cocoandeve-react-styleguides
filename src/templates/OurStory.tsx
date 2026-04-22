@@ -20,14 +20,29 @@ const OurStoryTemplate = (props: any) => {
 	const { banner, intro, logo, videoBanner, isLoading } = props;
 	const videoElem = useRef(null);
 	const [modal, setModal] = useState(false);
+	
+	// FIX: Get poster image from videoBanner data
+	const getPosterImage = () => {
+		if (videoBanner?.back_img_mob?.url) {
+			return videoBanner.back_img_mob.url;
+		}
+		return videoBanner?.back_img?.url || '';
+	};
+	
 	const handlOpenModal = (open: boolean) => {
 		setModal(open);
-		if (videoElem) {
-			if (modal) {
-				videoElem.current?.play();
-			} else {
-				videoElem.current?.pause();
-				if (videoElem && videoElem.current) videoElem.current.currentTime = 0;
+		if (open) {
+			setTimeout(() => {
+				if (videoElem.current) {
+					videoElem.current.play().catch(error => {
+						console.log("Autoplay prevented:", error);
+					});
+				}
+			}, 100);
+		} else {
+			if (videoElem.current) {
+				videoElem.current.pause();
+				if (videoElem.current) videoElem.current.currentTime = 0;
 			}
 		}
 	};
@@ -205,8 +220,16 @@ const OurStoryTemplate = (props: any) => {
 
 			{!isLoading && (
 				<Modal className="modal-lg modal-dialog-centered !px-0 " isOpen={modal} handleClose={() => handlOpenModal(false)}>
-					<div className="relative lg:border lg:border-[rgba(0,0,0,.2)]">
-						<video ref={videoElem} controls className="rounded-[20px]" autoPlay={false} playsInline webkit-playsinline>
+					<div className="relative lg:border lg:border-[rgba(0,0,0,.2)] bg-black">
+						<video 
+							ref={videoElem} 
+							controls 
+							className="rounded-[20px]" 
+							autoPlay={false} 
+							playsInline 
+							webkit-playsinline
+							poster={getPosterImage()}
+						>
 							<source src={videoBanner.video} type="video/mp4" />
 						</video>
 					</div>
