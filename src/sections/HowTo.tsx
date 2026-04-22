@@ -76,9 +76,9 @@ const HowToCarousel = (props) => {
     };
 
 	return (
-		<section className="container px-0 m-0 lg:px-g">
+		<section className="container px-0 m-0">
 			{title && (<h2 className="text-center mb-g lg:mb-3 text-xl lg:text-2xl w-full">The Ultimate “HOW TO”s</h2>)}
-			<Carousel.Wrapper emblaApi={emblaApi} className="relative blog-post__carousel w-full pl-hg lg:pl-0">
+			<Carousel.Wrapper emblaApi={emblaApi} className="relative blog-post__carousel w-full px-hg lg:px-g">
 				<Carousel.Inner emblaRef={emblaRef} className={props.className}>
 					{videoData.map((item, index) => (
 						<div key={`${item.id}-${index}`} className="carousel__slide flex-grow-0 flex-shrink-0 w-[90%] basis-[90%] lg:w-1/2 lg:basis-1/2 px-0 px-[.375em] lg:px-[.5rem]">
@@ -113,7 +113,7 @@ const HowToCarousel = (props) => {
 						disabled={prevDisabled7}
 						className={`lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]`}
 					>
-						<span className="absolute z-[1] flex justify-center items-center lg:-left-[2.5em] h-5 w-5 rounded-full">
+						<span className="absolute z-[1] flex justify-center items-center lg:-left-[2em] h-5 w-5 rounded-full">
 							<ChevronPrev className="svg svg--current-color" />
 						</span>
 					</PrevButton>
@@ -122,7 +122,7 @@ const HowToCarousel = (props) => {
 						disabled={nextDisabled7}
 						className={`lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]`}
 					>
-						<span className="absolute z-[1] flex justify-center items-center lg:-right-[2.5em] h-5 w-5 rounded-full">
+						<span className="absolute z-[1] flex justify-center items-center lg:-right-[2em] h-5 w-5 rounded-full">
 							<ChevronNext className="svg svg--current-color" />
 						</span>
 					</NextButton>
