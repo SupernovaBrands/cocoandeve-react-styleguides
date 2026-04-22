@@ -26,7 +26,7 @@ const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTe
 
     return (
         <figure
-            className={`flex-grow-0 flex-shrink-0 w-full basis-full transition-opacity duration-150 ${tapped ? 'opacity-90' : ''} ${isLocked && !tapped ? 'pointer-events-none' : ''}`}
+            className={`flex-grow-0 flex-shrink-0 w-full basis-full ${tapped ? 'opacity-90' : ''} ${isLocked && !tapped ? 'pointer-events-none' : ''}`}
             onTouchStart={handleTouchStart}
         >
             <a className="relative block" href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
