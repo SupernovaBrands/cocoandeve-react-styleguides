@@ -99,7 +99,7 @@ const BundleVariantCard = (props) => {
                 currentVariant.selectedOptions.find(
                     (c) =>
                         c.name === op.name &&
-                        swatchType.includes(c.name.toLowerCase())
+                        swatchType.some(item => c.name.toLowerCase().includes(item.toLowerCase()))
                     )
         )?.values || [];
 
