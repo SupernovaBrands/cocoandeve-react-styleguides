@@ -598,15 +598,15 @@ const ProductCard = (props: any) => {
 
                 {/* Badges */}
                 {!kitBuilder && props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                    <span className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                        {props.product.badgeText}
+                    <span className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>
+                        <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{props.product.badgeText}</span>
                     </span>
                 )}
-                {!kitBuilder && props.product.activeBadges && !props.sideUpsell && (
+                {!kitBuilder && props.product.topBadges && !props.sideUpsell && (
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
-                        {props.product.activeBadges.map((badge) => (
-                            <span key={badge.badge_text} className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                                {badge.badge_text}
+                        {props.product.topBadges.map((badge) => (
+                            <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
+                                <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
@@ -623,7 +623,16 @@ const ProductCard = (props: any) => {
 
             {/* Content */}
             <div className={`pt-0 pb-0 relative grow flex flex-col product-card__content lg:px-[.75rem]`}>
-                <p className={`product-title__text pt-[.5rem] lg:pt-[1rem] lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+                {!kitBuilder && props.product.bottomBadges && !props.sideUpsell && (
+                    <div className={`pt-[.5rem] lg:pt-[1rem] lg:pb-[.25rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
+                        {props.product.bottomBadges.map((badge) => (
+                            <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
+                                <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>{badge.badge_text}</span>
+                            </span>
+                        ))}
+                    </div>
+                )}
+                <p className={`product-title__text ${props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
                         condition={clickShowPopup}
                         wrap={children => <span role="button" className="text-sm leading-[18px] hover:underline lg:text-base product-card__title text-body hover:text-body w-full mb-[3px]" onClick={openModal}>{children}</span>}
