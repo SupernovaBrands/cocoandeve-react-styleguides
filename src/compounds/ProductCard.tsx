@@ -656,9 +656,7 @@ const ProductCard = (props: any) => {
                     )}
                     {selectedVariant && (
                         <div className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[28px]">
-                            {!kitBuilder && comparePrice && (
-                                <del className="pr-[.25rem] lg:pr-[.5rem] text-gray-600">{comparePrice}</del>
-                            )}
+                            {!kitBuilder && comparePrice && <span className="line-through pr-[.25rem] lg:pr-[.5rem] text-gray-600">{comparePrice}</span>}
                             <span className={`font-bold ${!kitBuilder && comparePrice ? 'text-primary' : 'text-body'}`}>
                                 {kitBuilder ? (comparePrice ?? price) : price}
                             </span>

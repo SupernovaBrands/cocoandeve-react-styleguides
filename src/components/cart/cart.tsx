@@ -415,7 +415,6 @@ const Cart: React.FC<Props> = (props) => {
 								<ul className="list-unstyled pb-0">
 									{mappedItems && mappedItems.map((mappedItem) => {
 										const item = mappedItem.item;
-
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem 
 											key={item.id}

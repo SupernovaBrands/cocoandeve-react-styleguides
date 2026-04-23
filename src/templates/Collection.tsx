@@ -331,8 +331,12 @@ const Collection = (props: any) => {
 
         // console.log('currentCollection', currentCollection);
         const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
+        // console.log('currentCollection', currentCollection);
+        // console.log('parentCollection', parentCollection);
+        const show = (currentCollection?.handle !== 'tan' && parentCollection === null) || (parentCollection && parentCollection?.collection?.handle !== 'tan');
+        // console.log('kit banner', show);
         setShowByobCard(prev => ({
-            show: currentCollection?.handle !== 'tan',
+            show,
             position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
             dtPosition: currentPos > 0 ? currentPos : DEFAULT_BYOB_POSITION,
         }));
@@ -502,10 +506,10 @@ const Collection = (props: any) => {
                                     )}
                                 </>
                             ) : ( */}
-                            <>
+                            {/* <>
                                 {!isLoading && (
-                                    <>
-                                        {/* <div className="w-1/2 lg:hidden px-hg">
+                                    <> */}
+                            {/* <div className="w-1/2 lg:hidden px-hg">
                                             <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                 <option value="">Filter by</option>
                                                 {mobileDropdown.map((parent: any, index: number) => {
@@ -514,19 +518,19 @@ const Collection = (props: any) => {
                                                 })}
                                             </select>
                                         </div> */}
-                                        <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
-                                            {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
+                            <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
+                                {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
                                                 <option value="featured">Sort By</option>
                                                 <option value="best-selling">Best selling</option>
                                                 <option value="price-low-high">Price, low to high</option>
                                                 <option value="price-high-low">Price, high to low</option>
                                                 <option value="newest">Date, new to old</option>
                                             </select> */}
-                                            <FilterOptions className="lg:hidden" />
-                                        </div>
-                                    </>
+                                <FilterOptions className="lg:hidden" />
+                            </div>
+                            {/* </>
                                 )}
-                            </>
+                            </> */}
                             {/* )} */}
 
                             {handle === 'all' && <FilterOptions className="hidden lg:flex" />}
@@ -539,11 +543,24 @@ const Collection = (props: any) => {
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
+                                                const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
+                                                // let parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
+                                                // if (window && window.location.search?.includes('p=')) {
+                                                //     const params = new URLSearchParams(window.location.search);
+                                                //     parentHandle = params.get('p')
+                                                // }
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}${parentParam ? `?p=${parentParam}` : (parentCollection?.collection?.handle ? `?p=${parentCollection.collection.handle}` : '')}`}
+                                                        href={`/collections/${children.handle}${isSpfTan
+                                                            ? `?main-collection=tan-and-spf&p=${parentParam}`
+                                                            : parentParam
+                                                                ? `?p=${parentParam}`
+                                                                : parentCollection?.collection?.handle
+                                                                    ? `?p=${parentCollection.collection.handle}`
+                                                                    : ''
+                                                            }`}
                                                         className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                                 ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
                                                         onClick={showLoading}

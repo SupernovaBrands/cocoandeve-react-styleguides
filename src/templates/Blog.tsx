@@ -141,7 +141,7 @@ const Blog = (props) => {
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/tan" title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
-					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
+					{['us', 'uk', 'eu', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/spf" title="SPF" active={active ? false : (tag === 'suncare' ? true : false)}/>
 					)}
 					{['my'].includes(region) && (

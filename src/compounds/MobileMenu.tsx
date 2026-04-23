@@ -63,7 +63,6 @@ const MobileMenu = (props: any) => {
 		}, 200);
 	}, [menuStates]);
 
-	// Add this useEffect to your MobileMenu component
 	useEffect(() => {
 		let scrollY = 0;
 		
