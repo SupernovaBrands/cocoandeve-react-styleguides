@@ -329,7 +329,7 @@ const Cart: React.FC<Props> = (props) => {
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 							<form
 								id="cart-drawer-form"
-								className="container px-[16px] lg:px-3 lg:pb-[120px] cart-drawer__form pb-[120px]"
+								className="container px-[16px] lg:px-3] cart-drawer__form"
 								action={cart.checkoutUrl?.replace('www', 'us')}
 								method="get"
 								noValidate
@@ -394,7 +394,7 @@ const Cart: React.FC<Props> = (props) => {
 									cart={cartData}
 								/>
 
-								<div className="flex flex-wrap mt-3 mb-3 lg:mt-[30px] lg:mb-[30px]">
+								<div className="flex flex-wrap mt-3 mb-1 lg:mt-[30px] lg:mb-1">
 									<p className="w-2/3 mb-[5px] font-bold" data-cy="cart-subtotal-label">{tStrings.cart_subtotal}</p>
 									<p className="w-1/3 mb-[5px] font-bold text-right" data-cy="cart-subtotal-value">{formatMoney(cart.subtotalPrice, false, store)}</p>
 
