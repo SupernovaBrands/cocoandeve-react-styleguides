@@ -89,7 +89,7 @@ const CartUpsell = (props:any) => {
     window.emblaBrow = emblaApi;
     return (
         <>
-            <div className="relative mb-4 lg:mb-[60px]">
+            <div className="relative mb-2 lg:mb-2">
                 { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
                 { upsell.length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
