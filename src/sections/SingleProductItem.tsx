@@ -39,8 +39,8 @@ const SingleProductItem = (props: any) => {
     return (
         <>
             <div className={`container px-0 text-center py-3 lg:pb-0 lg:px-0 mb-0 lg:pb-4 lg:pt-[60px]`}>
-                <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-5 lg:mx-0 ">{data?.heading}</h2>
-                <p className='mb-g mx-4 lg:mx-0 lg:mb-3'>{data?.subheading}</p>
+                <h2 className="text-xl lg:text-2xl text-center mb-g lg:mb-1 mx-1 lg:mx-0 ">{data?.heading}</h2>
+                <p className='mb-g mx-1 lg:mx-0 lg:mb-3'>{data?.subheading}</p>
 
                 <div className="flex mx-0 mb-0 flex-wrap lg:flex-row-reverse flex-row ">
                     {data?.images?.length > 0 && (
@@ -50,7 +50,7 @@ const SingleProductItem = (props: any) => {
                                     {data?.images?.map((image: any, index: number) => {
                                         return (
                                             <div key={`slid-${index}`} className='flex-grow-0 flex-shrink-0 w-full basis-full'>
-                                                <picture className="block w-full rounded-[32px] overflow-hidden">
+                                                <picture className="block w-full rounded-[0] overflow-hidden">
                                                     <source
                                                         srcSet={image?.desktop?.url || null}
                                                         media="(min-width: 992px)" width="1362" height="1162"/>
@@ -90,8 +90,8 @@ const SingleProductItem = (props: any) => {
                         </picture>
                     </div> */}
                     <div className="single-product-item__right text-left w-full lg:w-1/2 relative   mb-0 mx-auto   flex justify-center lg:block">
-                        <div className="rounded-[32px] bg-white  p-[16px] pt-[20px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
-                            <div className="flex mb-[8px] items-center"><h2 className="text-md lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-sm">•</span> <span className="text-sm">{data?.after_title || ''}</span></div>
+                        <div className="rounded-[0] bg-white  p-[16px] pt-[16px] lg:my-[30px] lg:p-[30px] max-w-[315px] lg:max-w-[570px] mt-[-85px] lg:mr-[-90px] lg:ml-auto">
+                            <div className="flex mb-[4px] lg:mb-[8px] items-center"><h2 className="text-[16px] lg:text-xl lg:font-bold mb-0">{data?.product_title || ''}</h2> <span className="block mx-[5px] text-[16px]">•</span> <span className="text-sm">{data?.after_title || ''}</span></div>
                             <p className="text-sm mb-[8px] lg:mb-[16px] lg:max-w-[410px]">{data?.description}</p>
                             <ul className="text-sm  list-check page-product-list ">
                                 {data?.list?.split('\n').map((li: any) => {
@@ -103,13 +103,13 @@ const SingleProductItem = (props: any) => {
                             {data?.variant_id &&  (
                                 <>
                                     {data?.availableForSale ? (
-                                        <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
+                                        <button onClick={() => onAdd()} className="btn btn-large btn-primary mt-[16px] lg:mt-[14px] rounded-[0] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline">
                                             {adding ? (
                                                 <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                             ) : data?.button_label}
                                         </button>
                                     ) : (
-                                        <button className={`disabled opacity-70 btn btn-large btn-primary mt-[20px] rounded-[32px] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline`}>Offer Fully Redeemed</button>
+                                        <button className={`disabled opacity-70 btn btn-large btn-primary mt-[20px] rounded-[0] w-full p-g lg:max-w-[236px] font-normal hover:text-color hover:text-white hover:no-underline`}>Offer Fully Redeemed</button>
                                     )}
                                 </>
                             )}

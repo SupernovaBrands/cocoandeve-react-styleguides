@@ -20,10 +20,10 @@ const Sidebar = ({data}) => {
 	// const GROUPED_INDEX = Array.from(Array(Math.ceil(data.length / PER_PAGE)).keys());
 	// console.log('sidebar data', data);
 	return (
-		<section className="blog-post-grid__sidebar lg:sticky w-full my-4 lg:mt-0 lg:mb-auto self-end flex lg:block flex-wrap">
-			<div className="px-g py-3 lg:px-[1.5625em] lg:py-4 w-[-webkit-fill-available] order-2 bg-gray-400 -mx-g lg:mx-auto lg:rounded">
-				<h2 className="mb-2 lg:mb-3 text-center lg:text-left block font-bold text-xl lg:text-2xl">Popular Reads</h2>
-				<ul className="overflow-scroll no-scrollbar flex flex-nowrap px-g lg:flex-wrap lg:overflow-hidden lg:px-0">
+		<section className="blog-post-grid__sidebar lg:sticky w-full mt-3 mb-3 lg:mt-0 lg:mb-auto self-end flex lg:block flex-wrap">
+			<div className="py-2 px-g lg:px-2 w-[-webkit-fill-available] order-2 bg-gray-400 rounded-none">
+				<h2 className="mb-2 text-center lg:text-left block font-bold text-xl lg:text-lg">Popular Reads</h2>
+				<ul className="overflow-scroll no-scrollbar flex flex-nowrap lg:flex-wrap lg:overflow-hidden lg:px-0">
 					{data.map((item: any, index) => 
 						<li key={`card-${index}`} className={`w-[92.5%] basis-[92.5%] lg:w-full lg:basis-full flex-grow-0 flex-shrink-0 ${data.length -1 === index ? '' : 'lg:mb-2'}`}>
 							<SidebarCard data={item} />

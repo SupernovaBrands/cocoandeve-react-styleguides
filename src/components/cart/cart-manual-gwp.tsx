@@ -78,7 +78,7 @@ const CartManualGwp = (props:any) => {
 	}, [disableSelectItem]);
 
 	return (
-			<div className="manual-gwp relative mt-2">
+			<div className="manual-gwp relative mt-4">
 				<p className="text-base font-bold mb-0">{title}</p>
 				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
 				{tierMessage && (
@@ -89,16 +89,16 @@ const CartManualGwp = (props:any) => {
 				{showScroll && (
 					<>
 						<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
-							<SvgChevronPrev className="svg" />
+							<SvgChevronPrev className="svg h-[20px]" />
 							<span className="hidden">Left</span>
 						</button>
 						<button className={`absolute btn-unstyled text-primary manual-gwp__right ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('right')}>
-							<SvgChevronNext className="svg" />
+							<SvgChevronNext className="svg h-[20px]" />
 							<span className="hidden">Right</span>
 						</button>
 					</>
 				)}
-				<ul className="list-unstyled manual-gwp__container flex mb-0 text-center mt-[1rem] mb-2" ref={scrollRef}>
+				<ul className="list-unstyled manual-gwp__container flex text-center mt-[1rem] mb-4 lg:mb-[60px]" ref={scrollRef}>
 					{items?.filter((item) => item?.variantId !== '' && item?.handle !== '' && item?.enabledItem)?.map((item:any, index:number) => {
 						const isLoading = adding && processingId === item.id;
 						const isSelected = !!(selectedKey && selectedKey.find((key:any) => isItemIdInKey(key, item.id)));
@@ -117,7 +117,7 @@ const CartManualGwp = (props:any) => {
 								{!disableSelectItem && (
 									<Button
 										lg={false}
-										buttonClass={`${!isSelected ? 'hover:text-primary hover:bg-transparent lg:hover:bg-primary lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-primary btn-outline-primary p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''}`}
+										buttonClass={`${!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-body btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white hover:bg-body' : ''}`}
 										onClick={() => {
 											if (!adding) {
 												if (isSelected) {
@@ -149,7 +149,7 @@ const CartManualGwp = (props:any) => {
 						);
 					})}
 				</ul>
-				{disableSelectItem && <hr />}
+				{/* {disableSelectItem && <hr />} */}
 				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">{errorMessage}</p>}
 			</div>
 	);

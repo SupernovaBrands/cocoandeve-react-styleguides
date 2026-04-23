@@ -24,8 +24,8 @@ const CartShippingMeter = (props) => {
 	const text = remaining <= 0 ? finalText : progressText.replace('#{shipping_price}', amount).replace('#{amount}', amount);
 
 	return (
-		<div className="mt-1">
-			<p className="mb-1">{text}</p>
+		<div className="mt-1 border-b border-[#ADADAD] border-solid">
+			<p className="mb-1 text-[14px] lg:text-base">{text}</p>
 			<div className="progress mb-2 bg-gray-400 rounded">
 				<div
 					className="progress-bar bg-primary h-[5px] rounded"

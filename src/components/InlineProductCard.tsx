@@ -137,9 +137,9 @@ const InlineProductCard = (props: any) => {
                     </ul>
                 </div>
             )}
-            <figure className="relative z-[1] p-[.5rem] bg-gray-400 rounded-[1.25rem] mt-[.75rem] grid grid-cols-[68px_auto_40px] gap-[1rem] items-center">
+            <figure className="relative z-[1] p-[.5rem] bg-gray-400 mt-[.75rem] grid grid-cols-[68px_auto_40px] gap-[1rem] items-center">
                 <a href={`/products/${product.handle}`}>
-                    <img width={68} height={64} className="rounded-[.5rem]" src={product.src.replace('public', '86x')} />
+                    <img width={68} height={64} className="rounded-none" src={product.src.replace('public', '86x')} />
                 </a>
                 <div className="flex flex-col justify-between">
                     <p className="text-sm mb-[.5rem]">{product.title}</p>
@@ -149,7 +149,7 @@ const InlineProductCard = (props: any) => {
                         {selectedVariant.price && selectedVariant.price.amount && <span className="font-bold">{formatMoney(store, parseFloat(selectedVariant.price.amount) * 100)}</span>}
                     </div>
                 </div>
-                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className={`h-4 w-4 button__video-upsell rounded-full flex items-center justify-center ${addingItem ? 'bg-white' : `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'}`}`} type="button">
+                <button ref={ref} onClick={onAddItem} disabled={!product.swatch && !selectedVariant.availableForSale} className={`h-4 w-4 button__video-upsell rounded-none flex items-center justify-center ${addingItem ? 'bg-white' : `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-primary'}`}`} type="button">
                     {/* {!addingItem && <PlusCircle className={`button__video-upsell-svg svg fill-primary hover:fill-primary-dark h-full w-full ${selectedVariant.availableForSale ? '' : 'opacity-[.5]'}`} />} */}
                     {!addingItem && (
                         <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">

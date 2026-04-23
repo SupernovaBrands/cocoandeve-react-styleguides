@@ -1,5 +1,9 @@
 .product-card {
 
+	&__title {
+		@apply min-h-[54px] lg:min-h-[auto] items-start flex;
+	}
+
 	.product-title__text {
 		@apply mx-0;
 	}
@@ -72,5 +76,19 @@
 @screen lg {
 	.collection-lg-order {
 		order: var(--lg-order);
+	}
+
+	.collection__container .product-card__title,
+	.product-range__title .product-card__title {
+		min-height: 40px;
+	}
+}
+
+.reviews-page__carousel {
+	.product__carousel-nav {
+		@apply justify-center !important;
+	}
+	.product__carousel-nav li button {
+		@apply px-[8px] lg:px-2 py-[8px] lg:py-1 !important;
 	}
 }

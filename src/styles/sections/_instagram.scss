@@ -1,9 +1,9 @@
 @layer components {
   .instagram {
       &--feed {
-        &--link {
-          padding: calc-em(6);
-        }
+        // &--link {
+        //   padding: calc-em(6);
+        // }
     
         @screen lg {
           &--left {
@@ -14,9 +14,9 @@
             flex: 0 0 57.14286%;
             max-width: 57.14286%;
           }
-          img {
-            border-radius: calc-em(10);
-          }
+          // img {
+          //   border-radius: calc-em(10);
+          // }
         }
       }
     }

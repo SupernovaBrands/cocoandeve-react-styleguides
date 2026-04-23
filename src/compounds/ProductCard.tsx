@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
 import { formatMoney, removeObjectWithId } from "~/modules/utils";
 import parse from 'html-react-parser';
 import Eye from '~/images/icons/eye.svg';
+import EyeHover from '~/images/icons/eye-hover.svg';
 
 interface PricingProps {
     buttonData: {
@@ -109,7 +110,7 @@ const WaitlistButton = memo((props: any) => {
         });
     }, [props.product, props.selectedVariant]);
 
-    const defaultText = 'Waitlist Me';
+    const defaultText = 'Waitlist';
     const WAITLIST_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
 
     const buttonData = useMemo(() => ({
@@ -142,7 +143,7 @@ const LaunchButton = memo((props: any) => {
         else if (props.launchBox === 3) props.setLaunchWLModal3(data);
     }, [props.product, props.selectedVariant, props.launchBox]);
 
-    const defaultText = 'Waitlist Me';
+    const defaultText = 'Waitlist';
     const LAUNCH_LABEL = `<span class="lg:hidden">Waitlist</span><span class="hidden lg:inline">${defaultText}</span>`;
     const buttonData = useMemo(() => ({
         label: LAUNCH_LABEL,
@@ -241,7 +242,7 @@ const AddToCartButton = memo((props: any) => {
     const isKitBuilderAdded = kitSelected.includes(selectedVariant.id);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${isKitBuilderAdded ? 'bg-white hover:bg-white text-body !border-[1px] border-solid border-body' : ''}`}>
+        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
             <Pricing
                 store={props.store}
                 selectedVariant={selectedVariant}
@@ -346,18 +347,15 @@ const SwatchOverlay = memo((props: any) => {
         );
     }
 
-    let labelText = label === DEFAULT_LABEL ? label : props.swatch.label;
-    labelText = `<span class="lg:hidden">${DEFAULT_LABEL}</span><span class="hidden lg:inline">${labelText}</span>`;
+    let labelText = props.swatch.label;
+    labelText = `<span class="lg:hidden">${labelText}</span><span class="hidden lg:inline">${labelText}</span>`;
 
     return (
         <>
-            <AddToCartButton
-                store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent}
-                kitBuilder={props.kitBuilder} overlayButton={true}
-            />
+            <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
             <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
-                <div className={`text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
-                    <div className="block mb-[.625em]">
+                <div className={`article-swatch-heading text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
+                    <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
                         {props.swatch.style && <strong>Style: </strong>}
                         {props.swatch.shade && <strong>Shade: </strong>}
                         {props.swatch.tangleTamer && <strong>Type: </strong>}
@@ -450,6 +448,7 @@ const ProductCard = (props: any) => {
     });
 
     const skus = useMemo(() => {
+        // console.log(product, 'testing');
         if (!product?.variants?.nodes) return [];
 
         if (product.variants.nodes[0]?.reviewSku) {
@@ -574,41 +573,40 @@ const ProductCard = (props: any) => {
                             </picture>
                         )}
                     </picture>
-
+                    
                 </ConditionalWrap>
                 <div className="btn__hover-overlay absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
                     opacity-0 translate-y-[.75rem]
                     transition-all duration-300
                     [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
-                    <ProductCardButton
-                        {...props}
-                        store={store}
-                        generalSetting={generalSetting}
-                        preOrders={preOrders}
-                        addToCart={addToCart}
-                        trackEvent={trackEvent}
-                        label={label}
-                        selectedVariant={selectedVariant}
-                        effectivelyAvailable={effectivelyAvailable}
-                        handleShade={handleShade}
-                        comparePrice={props.product.comparePrice}
-                        price={props.product.price}
-                        onVariantChange={handleVariantChange}
-                        openModal={openModal}
-                    />
+                        <ProductCardButton
+                            {...props}
+                            store={store}
+                            generalSetting={generalSetting}
+                            preOrders={preOrders}
+                            addToCart={addToCart}
+                            trackEvent={trackEvent}
+                            label={label}
+                            selectedVariant={selectedVariant}
+                            effectivelyAvailable={effectivelyAvailable}
+                            handleShade={handleShade}
+                            comparePrice={props.product.comparePrice}
+                            price={props.product.price}
+                            onVariantChange={handleVariantChange}
+                        />
                 </div>
 
                 {/* Badges */}
                 {!kitBuilder && props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
-                    <span className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
-                        <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{props.product.badgeText}</span>
+                    <span className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                        {props.product.badgeText}
                     </span>
                 )}
                 {!kitBuilder && props.product.activeBadges && !props.sideUpsell && (
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.activeBadges.map((badge) => (
-                            <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
-                                <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>{badge.badge_text}</span>
+                            <span key={badge.badge_text} className={`min-w-[3.375em] leading-normal badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>
+                                {badge.badge_text}
                             </span>
                         ))}
                     </div>
@@ -616,9 +614,10 @@ const ProductCard = (props: any) => {
             </div>
 
             {clickShowPopup && !kitBuilder && (
-                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'lg:min-w-[3.375em] badge'} cursor-pointer inline-flex rounded-[1.5rem] py-[.125rem] lg:py-[0.25rem] px-[.5rem] lg:px-[.75rem] bg-white absolute font-normal text-xs lg:text-sm text-primary top-[.5rem] right-[.5rem] lg:right-[1rem] lg:top-[1rem] mr-[.5rem] lg:mr-[1rem] product-card__badge`}>
-                    <span className={`mr-1 ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
-                    <Eye className="artical-detail--svg svg h-[1rem] w-[1rem]" />
+                <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} group text-xs lg:py-[6px] lg:px-[8px] py-0 px-0 flex mb-0 hover:text-primary lg:bg-white cursor-pointer absolute top-[.5rem] right-[1rem] lg:right-[1rem] lg:top-[10px] product-card__badge items-center leading-none`}>
+                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
+                    <Eye className="h-[20px] lg:h-g w-[20px] lg:w-g block group-hover:hidden" />
+                    <EyeHover className="h-[20px] lg:h-g w-[20px] lg:w-g hidden group-hover:block" />
                 </p>
             )}
 
@@ -634,15 +633,13 @@ const ProductCard = (props: any) => {
                     </ConditionalWrap>
                 </p>
 
-                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] lg:items-center gap-[.25rem] lg:gap-0 flex-col lg:flex-row">
+                <div className="review-stars__number min-h-[18px] flex justify-between pb-[.5rem] items-center">
                     {skus.length > 0 && (
                         <YotpoStar hideUnderline={props.hideUnderline} sustainability={props.sustainability} smSingleStar={smSingleStar} smSingleStarAllDevice={smSingleStarAllDevice} sku={skus.join(',')} productId={props.product.productId} productHandle={props.product.handle} showTotal={true} />
                     )}
                     {selectedVariant && (
                         <div className="flex items-center text-[14px] leading-[18px] lg:text-base lg:leading-[28px]">
-                            {!kitBuilder && comparePrice && (
-                                <del className="pr-[.25rem] lg:pr-[.5rem] text-gray-600">{comparePrice}</del>
-                            )}
+                            {!kitBuilder && comparePrice && <span className="line-through pr-[.25rem] lg:pr-[.5rem] text-gray-600">{comparePrice}</span>}
                             <span className={`font-bold ${!kitBuilder && comparePrice ? 'text-primary' : 'text-body'}`}>
                                 {kitBuilder ? (comparePrice ?? price) : price}
                             </span>

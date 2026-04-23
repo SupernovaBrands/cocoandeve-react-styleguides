@@ -63,15 +63,54 @@ const MobileMenu = (props: any) => {
 		}, 200);
 	}, [menuStates]);
 
+	useEffect(() => {
+		let scrollY = 0;
+		
+		if (openDrawer) {
+			// Prevent body scroll
+			scrollY = window.scrollY;
+			document.body.style.overflow = 'hidden';
+			document.body.style.height = '100vh';
+			document.body.style.position = 'fixed';
+			document.body.style.width = '100%';
+			document.body.style.top = `-${scrollY}px`;
+			
+			// Store scroll position in data attribute
+			document.body.setAttribute('data-scroll-y', scrollY.toString());
+		} else {
+			// Restore body scroll
+			document.body.style.overflow = '';
+			document.body.style.height = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.top = '';
+			
+			// Restore scroll position
+			const savedScrollY = document.body.getAttribute('data-scroll-y');
+			if (savedScrollY) {
+				window.scrollTo(0, parseInt(savedScrollY, 10));
+			}
+		}
+		
+		// Cleanup
+		return () => {
+			document.body.style.overflow = '';
+			document.body.style.height = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.top = '';
+		};
+	}, [openDrawer]);
+
 	return (
 		<nav id="mobile-nav" className={`mobile-nav z-[1050] fixed lg:hidden top-[0] bottom-[0] left-[0] [transition:opacity_.2s_linear] w-full h-full bg-[rgba(0,_0,_0,_0.6)] ${openDrawer ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 			<ul id="mobileMenu" className="h-full w-full [transition:transform_.1s_ease-in-out] overflow-y-auto overflow-x-hidden fixed h-100 col-12 bg-white list-unstyled py-2 mb-0 px-0"
 			aria-multiselectable="true">
-				<li key="toggle" className="flex justify-between mx-g py-[5px]" role="presentation">
+				<li key="toggle" className="flex justify-between px-g py-[8px]" role="presentation">
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<button type="button" onClick={() => onToggleMobileNav(false)} className={`mobile-nav__close svg absolute -mt-[25px] right-[0] pt-[25px] pr-[15px] pb-[40px] pl-[25px]`} aria-label="Close menu">
+					<button type="button" onClick={() => onToggleMobileNav(false)} className={`p-[20px] -mr-[20px]`} aria-label="Close menu">
 						<Close onClick={() => onToggleMobileNav(false)} className='svg w-[1em] h-[1em]' />
 					</button>
 				</li>
@@ -86,7 +125,7 @@ const MobileMenu = (props: any) => {
 					const m_title = menu.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 					const isSaleLink = ((menu.rows && menu.rows.length === 0 && menu.title.toLowerCase() !== 'sale') || (menu.title.toLowerCase() === 'sale'));
 					return menu.handle !== '/collections/all' && (
-						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
+						<li key={`mainmenu-${i}`} className="flex px-g py-0 border-b border-[#A3A3A3]" role="presentation">
 							{isSaleLink && (
 								<div className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent">
 									<a href={menu.handle} className="w-full m-0 text-body flex s">{menu.title}</a>
@@ -118,9 +157,9 @@ const MobileMenu = (props: any) => {
 								</button>
 							)}
 							{menu.rows && menu.rows.length > 0 && (
-								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`} aria-labelledby={m_title}>
+								<ul id={`subMenuSub${i}`} key={`subsubmenu ${menu.title}`} className={`subsubMenu z-[1000] w-full list-unstyled py-2 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[i] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`} aria-labelledby={m_title}>
 									<div className="flex-shrink-0">
-										<li key={`menuRow`} className="flex justify-between mx-g items-center py-[5px]">
+										<li key={`menuRow`} className="flex justify-between px-g items-center py-[8px]">
 											<button type="button" className="p-[20px] mb-0 -ml-[20px]" aria-label="Back to previous menu" onClick={() => {
 												const newStates = {...defMenuState};
 												newStates[i] = false;
@@ -132,7 +171,7 @@ const MobileMenu = (props: any) => {
 												<BrandLogo className="lg:h-[34px]" />
 											</a>
 											<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]' aria-label="Close menu">
-												<Close className="h-[1em]"  onClick={() => {
+												<Close className="svg w-[1em] h-[1em]"  onClick={() => {
 													// const newStates = {...defMenuState};
 													// newStates[i] = false;
 													// setMenuStates(newStates);
@@ -140,7 +179,7 @@ const MobileMenu = (props: any) => {
 												}} />
 											</button>
 										</li>
-										<li key="menuTitle" className="border-b p-0">
+										<li key="menuTitle" className="border-b p-0 border-[#A3A3A3]">
 											<a href={menu.handle} className="h4 text-body px-g pb-1 pt-2 block mb-1">{menu.title}</a>
 										</li>
 									</div>
@@ -152,7 +191,7 @@ const MobileMenu = (props: any) => {
 											if (title === 'Moisturiser') title = 'Moisturizers';
 											if (title === 'Tan & SPF Sets') title = 'Tan Sets';
 											return (
-												<li key={`row-${row.handle}-${index}`} className="border-b p-0">
+												<li key={`row-${row.handle}-${index}`} className="border-b p-0 border-[#A3A3A3]">
 													<a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className="px-g pb-1 pt-2 block text-body no-underline">{title}</a>
 												</li>
 											);
@@ -171,7 +210,7 @@ const MobileMenu = (props: any) => {
 						</li>
 					)
 				})}
-				<li key="mainmenu-find-your-match" className="flex px-g py-0 border-b border-[#4E4E4E]" role="presentation">
+				<li key="mainmenu-find-your-match" className="flex px-g py-0 border-b border-[#A3A3A3]" role="presentation">
 					<button
 						id="find-your-match"
 						className="flex w-full relative p-0 items-center justify-between m-0 pb-1 pt-2 border-b border-b-transparent"
@@ -190,10 +229,10 @@ const MobileMenu = (props: any) => {
 
 					<ul
 						id="subMenuSubFindMatch"
-						className={`subsubMenu z-[1000] w-full list-unstyled p-0 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[0] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`}
+						className={`subsubMenu z-[1000] w-full list-unstyled py-2 fixed bg-white w-100 left-0 top-0 h-screen flex flex-col ${menuStates[0] ? 'visible translate-x-[0] [transition:transform_0.15s_ease-in]' : 'translate-x-full [transition:transform_0.15s_ease-out]'} ${openDrawer ? 'block' : 'hidden'}`}
 					>
 						<div className="flex-shrink-0">
-							<li className="flex justify-between mx-g items-center py-[5px]">
+							<li className="flex justify-between px-g items-center py-[8px]">
 								<button
 									type="button"
 									className="p-[20px] mb-0 -ml-[20px]"
@@ -209,7 +248,7 @@ const MobileMenu = (props: any) => {
 									<BrandLogo className="lg:h-[34px]" />
 								</a>
 								<button type="button" onClick={() => onToggleMobileNav(false)} className='p-[20px] -mr-[20px]'>
-									<Close className="h-[1em]" />
+									<Close className="svg w-[1em] h-[1em]" />
 								</button>
 							</li>
 
@@ -220,7 +259,7 @@ const MobileMenu = (props: any) => {
 
 						<div className="flex-grow overflow-y-auto">
 							{!['int', 'my'].includes(store) && (
-								<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+								<li key="self-tan-quiz" className="flex px-g py-0 border-b w-full border-[#A3A3A3]" role="presentation">
 									<a href="/pages/self-tan-quiz" className="w-full m-0 pb-1 pt-2 text-body flex">
 										<TanQuizIcon className="mr-1" /> Take the Tan Quiz
 									</a>
@@ -239,7 +278,7 @@ const MobileMenu = (props: any) => {
 								</a>
 							</li>
 
-							<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+							<li key="hair-concerns-solutions" className="flex px-g py-0 border-b w-full border-[#A3A3A3]" role="presentation">
 								<a href="/pages/hair-concerns-solutions" className="w-full m-0 pb-1 pt-2 text-body flex">
 									<HairIcon className="mr-1" /> Hair Concerns & Solutions
 								</a>
@@ -249,7 +288,7 @@ const MobileMenu = (props: any) => {
 				</li>
 
 				{enableSwellAcc && (
-					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+					<li key="bali-beauty-club" className="flex px-g py-0 border-b w-full border-[#A3A3A3]" role="presentation">
 						{!isLoggedIn && (
 							<a href="/pages/rewards" className="w-full m-0 pb-1 pt-2 text-body flex">
 								<BeautyIcon className="mr-1" /> Bali Beauty Club
@@ -269,7 +308,7 @@ const MobileMenu = (props: any) => {
 					</li>
 				)}
 				{!enableSwellAcc && (
-					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#4E4E4E]" role="presentation">
+					<li key="my-account" className="flex px-g py-0 border-b w-full border-[#A3A3A3]" role="presentation">
 						<a href="/account" className="w-full m-0 pb-1 pt-2 text-body flex">Account</a>
 					</li>
 				)}
@@ -277,7 +316,7 @@ const MobileMenu = (props: any) => {
 				<li key="shopall" className="my-g p-g" role="presentation">
 					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
 				</li>
-				<li key="countries" className="px-g py-1 border-b mb-g border-[#4E4E4E]" role="presentation">
+				<li key="countries" className="px-g py-1 border-b mb-g border-[#A3A3A3]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
 						onClick={() => setStoreSelection(!storeSelection)}>
 						{currency === 'SGD' && 'Rest of the World (SGD)'}

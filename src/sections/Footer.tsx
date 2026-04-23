@@ -74,7 +74,7 @@ const Footer = (props) => {
         } else if (lower === 'privacy policy') {
             label = 'Privacy';
         } else if (lower === 'terms & conditions') {
-            label = 'Terms';
+            label = 'Terms & Conditions';
         } else if (lower === 'accessibility statement') {
             label = 'Accessibility';
         } else if (lower === 'modern slavery policy') {
@@ -85,13 +85,13 @@ const Footer = (props) => {
         return label;
     };
     return (
-        <footer className="pt-4 pb-[24px] lg:pb-[32px] mb-0 footer">
+        <footer className="pt-4 pb-[24px] lg:pb-[20px] mb-0 footer">
             <div className="container lg:mb-0 px-g flex flex-wrap">
                 <div className="w-full lg:w-1/2 px-0 lg:pl-0 lg:pr-4">
-                    <h2 className="font-bold mb-1 text-xl lg:text-2xl text-body" data-nosnippet>Newsletter</h2>
-                    <p className="mb-[1rem] lg:mb-2 text-body" data-nosnippet>Receive exclusive offers, promotions and beauty tips via email.</p>
+                    <h2 className="font-bold mb-[8px] text-xl lg:text-2xl text-body" data-nosnippet>Newsletter</h2>
+                    <p className="mb-[1rem] lg:mb-[24px] text-body" data-nosnippet>Receive exclusive offers, promotions and beauty tips via email.</p>
                     <Form classes="footer__newsletter-form lg:order-1" onSubmit={onSubmit} submitted={submitted} handleEmail={handleEmail} email={email} ctaBgColor={generalSetting?.bfcm_cta_bg_color} />
-                    <p className="footer__newsletter-tos text-sm mt-1 mb-[3.2142857142857144em] lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-5 lg:mt-1 lg:mb-3" data-nosnippet>Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
+                    <p className="footer__newsletter-tos text-sm mt-1 lg:order-0 text-gray-600 lg:text-body-color lg:opacity-60 mb-[16px]" data-nosnippet>Please read our <a href="/pages/privacy-policy" className="text-sm text-gray-600 lg:text-body-color underline">Privacy Policy</a> for more information about how we use your data.</p>
                 </div>
                 <div className="w-full lg:w-1/2 px-0 lg:pl-g">
                     <div className="flex flex-wrap w-full lg:-mx-g">
@@ -132,7 +132,7 @@ const Footer = (props) => {
                             <li><a href="#" className="text-sm text-body">Privacy Policy</a></li>
                             <li><a href="#" className="text-sm text-body">Accessibility Statement</a></li> */}
                         </ul>
-                        <div className="footer__socials-currency w-full lg:w-auto flex lg:flex-1 lg:basis-auto inline lg:flex-col mb-2">
+                        <div className="footer__socials-currency w-full lg:w-auto flex lg:flex-1 lg:basis-auto inline lg:flex-col mb-2 lg:mt-0 mt-[32px]">
                             <div className="w-1/2 lg:w-full lg:mb-3">
                                 <p className="text-sm font-bold mb-1">Follow Us</p>
                                 <a href="https://www.instagram.com/cocoandeve/" className="inline-flex pe-1" target="_blank" aria-label="Instagram">
@@ -172,8 +172,8 @@ const Footer = (props) => {
                     <li className="mb-2"><a href="/pages/terms-and-conditions" className="text-body text-sm mr-2">Terms</a></li>
                     <li className="mb-2"><a href="/pages/accessibility-statement" className="text-body text-sm mr-2">Accessibility</a></li>
                 </ul> */}
-                <hr className="block w-full border-body mb-0 mt-1 lg:mt-3 bg-gray-600 opacity-20" />
-                <p className="footer__copyright text-center block w-full justify-center items-baseline mt-[1rem] lg:mt-[12px] lg:text-base text-sm ">© {(new Date().getFullYear())} Coco&amp;Eve</p>
+                <hr className="block w-full border-body mb-0 mt-[1rem] lg:mt-3 bg-gray-600 opacity-20" />
+                <p className="footer__copyright text-center block w-full justify-center items-baseline pb-0 lg:pb-[12px] pt-[12px] lg:text-base text-sm">© {(new Date().getFullYear())} Coco&amp;Eve</p>
             </div>
         </footer>
     );

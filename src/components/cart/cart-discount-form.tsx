@@ -4,6 +4,8 @@ import SvgPercent from '~/images/icons/percent-square.svg';
 import MenuBannerDecorative from '~/images/icons/menu-banner-decoration.svg';
 import DiscountTag from '~/images/icons/tag.svg';
 import CloseIcon from '~/images/icons/close-circle.svg';
+import Minus from '~/images/icons/minus.svg';
+import Plus from '~/images/icons/plus.svg';
 
 export const CartDiscountForm = (props:any) => {
     const stateData = {
@@ -23,6 +25,7 @@ export const CartDiscountForm = (props:any) => {
     const [state, setState] = useState(stateData);
     const [discInput, setDiscInput] = useState('');
     const [validItemInCart, setValidItemInCart] = useState(false);
+    const [formOpened, setFormOpened] = useState(true);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -131,13 +134,13 @@ export const CartDiscountForm = (props:any) => {
 
     return (
         <>
-            <div className="py-g cart-drawer__discount-form">
-                <div className={`${state.hasCode ? 'hidden' : 'flex'} flex-nowrap py-0`}>
+            <div className={`py-0 cart-drawer__discount-form border-t border-b border-[#ADADAD] border-solid ${state.hasCode || !formOpened ? 'pb-[5px]' : 'pb-2'}`}>
+                <div className={`${state.hasCode || !formOpened ? 'hidden' : 'flex'} flex-nowrap pt-2  border-[#ADADAD] border-solid`}>
                     <input
                         ref={inputRef}
                         type="text"
                         name="discount"
-                        className={`field block appearance-none w-3/4 border mr-1 text-base leading-normal border rounded-h outline-none mb-0 ${state.code ? 'border-0 bg-gray-400' : 'focus:border-black border-black bg-white'}`}
+                        className={`field block appearance-none w-3/4 border text-base leading-normal outline-none mb-0 border-[#F5F5F5] rounded-none ${state.code ? 'bg-gray-400' : 'bg-[#F5F5F5]'}`}
                         placeholder="Enter promo code here"
                         onChange={onTextChange}
                         onKeyUp={onKeyUp}
@@ -147,15 +150,15 @@ export const CartDiscountForm = (props:any) => {
                     />
                     <Button
                         lg={false}
-                        buttonClass={`w-1/4 px-1 min-w-[100px] ${discInput ? 'btn-outline-primary hover:underline hover:bg-white hover:text-primary' : 'border-black text-black'}`}
+                        buttonClass={`border-[#F5F5F5] bg-[#F5F5F5] rounded-none w-1/4 px-g min-w-[100px] !opacity-100 border-none text-right ${discInput ? 'border-black text-primary' : 'border-black text-primary'}`}
                         onClick={applyDiscount}
                         disabled={!discInput}
                         >
                         {state.loading ? <div className="spinner-border !w-[25px] !h-[25px]" role="status" /> : 'Apply'}
                     </Button>
                 </div>
-                { state.hasCode && <div className="mt-0 flex flex-col items-start mb-0 md:mb-25">
-                    <p className="text-xs text-gray-500 mb-1">Promo code applied </p>
+                { state.hasCode && <div className="mt-0 flex flex-col items-start mb-25 md:mb-25">
+                    <p className="text-xs text-gray-500 mb-1 mt-1">Promo code applied </p>
                     <div className="bg-gray-100 items-center inline-flex px-1 py-1 text-[#00000080] rounded-h">
                         <DiscountTag className="svg text-gray-100 fill-[#00000080]"></DiscountTag>
                         <span className="mx-1 text-base">
@@ -167,14 +170,20 @@ export const CartDiscountForm = (props:any) => {
                 </div> }
                 { !state.isApplied && state.error && <p className="text-primary mt-1 text-[14px]">{state.error}</p> }
                 {state.discountBanner?.enable && !state.hasCode && validItemInCart && (
-                <div className="discount__banner relative m-0 md:mb-25 flex px-g py-1 bg-pink-light mt-1 hover:cursor-pointer w-[calc(100%-10px)]" onClick={applyBanner}>
-                    <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
-                    <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
-                        <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: state.discountBanner.code_banner_content}}/>
-                        <span className="flex text-primary font-bold items-center hover:cursor-pointer">Use</span>
+                <>
+                    <div className='border-b border-[#ADADAD] border-solid w-full mt-2'></div>
+                    <div className="discount__banner relative rounded-[8px_0_0_8px] flex pl-[20px] pr-g py-1 bg-[#F5DADF] mt-2 hover:cursor-pointer w-[calc(100%-10px)] " onClick={applyBanner}>
+                        <SvgPercent className="text-primary svg percent svg--current-color h-[2em]" />
+                        <div className="mobile-nav__banner-content pl-g flex justify-between w-full">
+                            <p className="mb-0 font-size-sm" dangerouslySetInnerHTML={{__html: state.discountBanner.code_banner_content}}/>
+                            <span className="flex text-primary font-bold items-center hover:cursor-pointer">Use</span>
+                        </div>
+                        <svg className='svg absolute banner-decoration' xmlns="http://www.w3.org/2000/svg" width="10" height="60" viewBox="0 0 10 60" fill="none">
+                        <path d="M0 0H10L0 8.5L10 16.5L0 25L10 32.5L0 40.5L10 46L0 52L10 60H0V0Z" fill="#F5DADF"/>
+                        </svg>
+                        {/* <MenuBannerDecorative className="svg absolute banner-decoration" /> */}
                     </div>
-                    <MenuBannerDecorative className="svg absolute banner-decoration" />
-                </div>
+                </>
                 )}
             </div>
         </>

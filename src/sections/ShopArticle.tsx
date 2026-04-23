@@ -27,6 +27,44 @@ const ProductCarousel = (props: any) => {
         checkHardcodedTitles, checkHardcodedVariant, checkHardcodedTagline, checkHardcodedFaq, checkHardcodedHowToUse,
         BenefitIngredient, HowToUse, ProductSettings, trackBluecoreLaunchWaitlistEvent, tiktokSubscribe, fbqEvent } = props;
     const [products, setProducts] = useState(props.products);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 991);
+        };
+        
+        checkMobile(); // Initial check
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+    
+    // Function to get dynamic slide class based on product count and screen size
+    const getSlideClassName = (productCount: number) => {
+        if (isMobile) {
+            return "relative flex-grow-0 flex-shrink-0 flex flex-col w-[175px] basis-[175px] px-[.375em] text-center";
+        }
+        
+        // Desktop: responsive based on product count
+        // if (productCount === 3) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/3 basis-1/3 px-[.5rem] text-center";
+        // } else if (productCount === 4) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // } else if (productCount === 2) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/2 basis-1/2 px-[.5rem] text-center";
+        // } else if (productCount === 1) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-full basis-full px-[.5rem] text-center";
+        // } else {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // }
+
+        // if (productCount > 3) {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/4 basis-1/4 px-[.5rem] text-center";
+        // } else {
+        //     return "relative flex-grow-0 flex-shrink-0 flex flex-col w-1/3 basis-1/3 px-[.5rem] text-center";
+        // }
+    };
 
     useEffect(() => {
         if (props?.products) {
@@ -81,7 +119,7 @@ const ProductCarousel = (props: any) => {
 	const autoPlayClick1 = controlAutoplay(emblaApi1);
 	return (
         <>
-            <div className="pt-0 text-center">
+            <div className={`pt-0 text-center ${products.length > 3 ? 'px-hg lg:px-0' : ''}`}>
                 {products.length > 0 && (
                     <Carousel.Wrapper emblaApi={emblaApi1} className="carousel__products">
                         <Carousel.Inner emblaRef={emblaRef1} className="lg:justify-center">
@@ -100,7 +138,7 @@ const ProductCarousel = (props: any) => {
                                     setWaitlistData={setWaitlistData}
                                     setProductData={setProductData}
                                     clickShowPopup={true}
-                                    badge={false}
+                                    badge={true}
                                 />)
                             )}
                         </Carousel.Inner>

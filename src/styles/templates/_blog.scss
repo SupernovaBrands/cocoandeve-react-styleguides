@@ -64,7 +64,8 @@
 				a {
 					@apply underline;
 				}
-				p:not(.artical-detail) {
+				p:not(.artical-detail),
+				p:not(.product-card__badge) {
 					@apply mb-[1rem];
 				}
 
@@ -89,9 +90,9 @@
 					margin-block-end: 1em;
 				}
 
-				.product-variant-swatch li {
-					margin-right: 5px;
-				}
+				// .product-variant-swatch li {
+				// 	margin-right: 5px;
+				// }
 
 				.yotpo-start__number {
 					font-size: .875rem;
@@ -163,9 +164,9 @@
 	// 	pointer-events: none;
 	// }
 
-	.how-to figure {
-		margin-bottom: 1rem !important;
-	}
+	// .how-to figure {
+	// 	margin-bottom: 1rem !important;
+	// }
 
 	.article__content {
 		img, iframe {
@@ -232,8 +233,8 @@
 		}
 
 		a {
-			@apply bg-gray-400;
-			border-radius: calc-em(20);
+			// @apply bg-gray-400;
+			// border-radius: calc-em(20);
 			white-space: nowrap;
 			cursor: pointer;
 			@apply text-gray-600;
@@ -244,8 +245,14 @@
 			}
 
 			&.active-dark {
-				@apply bg-dark;
-				@apply text-white;
+				@apply bg-white;
+				@apply text-body;
+				@apply border-body border-b-2;
+				@screen lg {
+					@apply bg-dark;
+					@apply text-white;
+					@apply border-none;
+				}
 			}
 		}
 

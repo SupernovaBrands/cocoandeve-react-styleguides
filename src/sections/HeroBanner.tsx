@@ -125,7 +125,7 @@ const HeroBanner = (props: any) => {
 			</section>
 			{tcPopups?.enabled && (
 				<>
-					<div className="pt-1 text-center lg:text-left container">
+					<div className="pt-1 text-center lg:text-left container lg:px-2">
 						<button className="underline text-body text-sm" onClick={() => handleOpenModal()}>Terms & Conditions</button>
 					</div>
 					<Modal backdropClasses="lg:overflow-y-hidden" className="modal modal-dialog-centered !px-1 lg:!px-0 mt-0" isOpen={isOpen} handleClose={() => handleOpenModal()}>

@@ -91,8 +91,8 @@ const InstagramCard = memo(({
     // console.log('isVisible', isVisible);;
 
     return (
-        <div className={`text-left rounded ${classes}`}  ref={targetRef as any}>
-            <video ref={videoRef} preload="none" crossOrigin="anonymous" className="lazy-video w-full mb-0 bg-shimmer rounded-[1.5rem] h-[226px] min-h-[226px] lg:rounded-[2rem] lg:h-[355px] lg:min-h-[355px] object-cover" 
+        <div className={`text-left rounded pb-[.5rem] ${classes}`}  ref={targetRef as any}>
+            <video ref={videoRef} preload="none" crossOrigin="anonymous" className="lazy-video w-full mb-0 bg-shimmer h-[225px] min-h-[225px] lg:h-[365px] lg:min-h-[365px] object-cover" 
                 muted
                 playsInline
                 loop
@@ -101,8 +101,8 @@ const InstagramCard = memo(({
                 <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="captions" srcLang="en" label="English" />
                 <track src="https://cdn.shopify.com/s/files/1/0243/8817/3888/files/captions.vtt?v=1753146729" kind="descriptions" srcLang="en" label="English" />
             </video>
-            <p className="font-bold mb-25 mt-1 text-sm lg:text-base">{author}</p>
-            <a href={`/products/${product}`} className="font-size-sm text-body block hover:text-body underline">{title}</a>
+            <p className="font-bold mb-25 mt-1 text-sm leading-[1.125rem] lg:text-base">{author}</p>
+            <a href={`/products/${product}`} className="text-sm text-body block hover:text-body underline leading-[1.125rem]">{title}</a>
         </div>
     );
 });

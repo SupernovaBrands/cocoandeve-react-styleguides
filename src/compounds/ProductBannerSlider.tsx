@@ -36,9 +36,9 @@ const ProductBannerSlider = (props) => {
 			if (isPageReview && window.innerWidth < 769) {
 				setImgPt('pt-[76.6%]');
 			} else if (isPageReview && window.innerWidth >= 769) {
-				setImgPt('pt-[55%]');
+				setImgPt('pt-[53%]');
 			} else if (imgHeight < 600) {
-				setImgPt('pt-[55%]');
+				setImgPt('pt-[53%]');
 			} else if (window.innerWidth > 1440) {
 				setImgPt(`pt-[${imgHeight}px]`);
 			} else {
@@ -192,10 +192,10 @@ const ProductBannerSlider = (props) => {
 					onTouchEnd={slideFinish}
 					onTouchMove={slideMove}
 				>
-					<span className={`${props.leftArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--left'} rounded-full bg-white mr-1 p-[14px]`}>
+					<span className={`${props.leftArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--left'} bg-white mr-1 p-[.5rem] lg:p-[14px]`}>
 						<ChevronPrev className={`${props.svgClasses ?? 'chevron-prev'} text-white`} />
 					</span>
-					<span className={`${props.rightArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--right'} rounded-full bg-white ml-1 p-[14px]`}>
+					<span className={`${props.rightArrowClasses ?? 'product-banner__slider-arrow product-banner__slider-arrow--right'} bg-white ml-1 p-[.5rem] lg:p-[14px]`}>
 						<ChevronNext className={`${props.svgClasses ?? 'chevron-next'} text-white`} />
 					</span>
 				</div>

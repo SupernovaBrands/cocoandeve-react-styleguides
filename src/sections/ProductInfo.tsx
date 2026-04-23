@@ -76,10 +76,10 @@ const ProductInfo = (props: any) => {
                         {/* <a onClick={() => setActiveTab('benefits')} className={`${activeTab === 'benefits' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="benefits" role="button" tabIndex={0} aria-controls="benefits" aria-selected="true">
                             Benefits
                         </a> */}
-                        <a onClick={() => setActiveTab('ingredients')} className={`${activeTab === 'ingredients' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px] border-0  !text-dark text-decoration-none hover:no-underline flex items-center`} id="ingredients" role="button" tabIndex={0} aria-controls="ingredients" aria-selected="true">
+                        <a onClick={() => setActiveTab('ingredients')} className={`${activeTab === 'ingredients' ? 'active !border-body lg:bg-body lg:text-white lg:hover:text-white' : ''} border-b-2 border-white bg-white px-[16px] pt-[5px] pb-[3px] rounded-[0px] border-0  text-body hover:text-body text-decoration-none hover:no-underline flex items-center`} id="ingredients" role="button" tabIndex={0} aria-controls="ingredients" aria-selected="true">
                             Ingredients
                         </a>
-                        <a onClick={() => setActiveTab('how_to_use')} className={`${activeTab === 'how_to_use' ? 'active !bg-primary !text-white' : ''} bg-[#F5F5F5] px-[16px] py-[5px] rounded-[30px]  !text-dark text-decoration-none hover:no-underline flex items-center`} id="how_to_use" role="button" tabIndex={0} aria-controls="how to use" aria-selected="true">
+                        <a onClick={() => setActiveTab('how_to_use')} className={`${activeTab === 'how_to_use' ? 'active !border-body lg:bg-body lg:text-white lg:hover:text-white' : ''} border-b-2 border-white bg-white px-[16px] pt-[5px] pb-[3px] rounded-[0]  text-body hover:text-body text-decoration-none hover:no-underline flex items-center`} id="how_to_use" role="button" tabIndex={0} aria-controls="how to use" aria-selected="true">
                             How to use
                         </a>
                     </div>
@@ -131,17 +131,17 @@ const ProductInfo = (props: any) => {
                 )}
                 {ingredientsContent?.length > 0 && (
                     <div className={`flex mx-0 mb-0 flex-wrap bg-yellow-light ${activeTab === 'ingredients' ? 'block' : 'hidden'} `}>
-                        <div className='lg:container px-0 w-full relative block pb-[50px] pt-[50px] lg:px-g pl-hg'>
+                        <div className='lg:container px-0 w-full relative block pb-[30px] pt-[30px] lg:pb-[50px] lg:pt-[50px] lg:px-g pl-hg'>
                             <ul className='px-hg'>
                                 <Carousel.Wrapper emblaApi={emblaApi1} className="-mx-hg ">
                                     <Carousel.Inner emblaRef={emblaRef1} className=" lg:!transform-none">
                                         {ingredientsContent.map((item, i) => {
                                             return (
-                                                <div key={`ing--${i}`} className={`flex-grow-0 flex-shrink-0 w-[160px] basis-[160px] lg:w-[16.6%] lg:basis-[16.6%] px-hg flex-1 flex  border-b-[#ADADAD] border-solid border-b-0 border-t-0`}> 
-                                                    <div className='max-h-none grow bg-white p-[12px] lg:p-[16px] rounded-[20px] text-left lg:block'>
+                                                <div key={`ing--${i}`} className={`flex-grow-0 flex-shrink-0 w-[160px] basis-[160px] lg:w-[16.6%] lg:basis-[16.6%] px-[6px] lg:px-[8px] flex-1 flex  border-b-[#ADADAD] border-solid border-b-0 border-t-0`}> 
+                                                    <div className='max-h-none grow bg-white p-[12px] lg:p-[16px] rounded-[0] text-left lg:block'>
                                                         <img className='mb-[20px]' src={item?.image?.url} />
                                                         <h2 className='mb-1 text-[16px] leading-[20px] lg:text-[20px] lg:leading-[24px]'>{item.title}</h2>
-                                                        <p className='flex grow mb-0'>{item.description}</p>
+                                                        <p className='flex grow mb-0 text-[14px] lg:text-base'>{item.description}</p>
                                                     </div>
                                                 </div>
                                             )
@@ -155,58 +155,58 @@ const ProductInfo = (props: any) => {
                 
                 {how_to_use && (
                     <div className={`flex flex-col-reverse lg:flex-row mx-0 mb-0 flex-wrap bg-yellow-light ${activeTab === 'how_to_use' ? 'block' : 'hidden'} `}>
-                        <div className={`product__banner-left lg:w-1/2 text-left flex justify-center`}>
+                        <div className={`product__banner-left lg:w-1/2 text-left flex justify-center pt-[30px] lg:pt-0 pb-[14px] lg:pb-0`}>
                             <div className={`product__banner-content lg:min-h-[420px] lg:max-w-[535px] flex justify-center flex-col`}>
                                 <h2 className="lg:text-[32px] text-[20px] mb-2 lg:mb-4">{how_to_use?.heading}</h2>
                                 <ul>
                                     {how_to_use?.step1 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">1</span>
-                                            <p className="ml-g">{how_to_use?.step1}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[26px] lg:leading-[34px]">1</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step1}</p>
                                         </li>
                                     )}
 
                                     {how_to_use?.step2 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">2</span>
-                                            <p className="ml-g">{how_to_use?.step2}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[26px] lg:leading-[34px]">2</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step2}</p>
                                         </li>
                                     )}
 
                                     {how_to_use?.step3 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">3</span>
-                                            <p className="ml-g">{how_to_use?.step3}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[26px] lg:leading-[34px]">3</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step3}</p>
                                         </li>
                                     )}
                                     {how_to_use?.step4 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">4</span>
-                                            <p className="ml-g">{how_to_use?.step4}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]  lg:h-[26px] lg:leading-[34px]">4</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step4}</p>
                                         </li>
                                     )}
                                     {how_to_use?.step5 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">5</span>
-                                            <p className="ml-g">{how_to_use?.step5}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[26px] lg:leading-[34px]">5</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step5}</p>
                                         </li>
                                     )}
                                     {how_to_use?.step6 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">6</span>
-                                            <p className="ml-g">{how_to_use?.step6}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[26px] lg:leading-[34px]">6</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step6}</p>
                                         </li>
                                     )}
                                     {how_to_use?.step7 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">7</span>
-                                            <p className="ml-g">{how_to_use?.step7}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[42px]">7</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step7}</p>
                                         </li>
                                     )}
                                     {how_to_use?.step8 && (
-                                        <li className="flex mb-[16px]">
-                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px]">8</span>
-                                            <p className="ml-g">{how_to_use?.step8}</p>
+                                        <li className="flex mb-[16px] items-center">
+                                            <span className="text-[#BA3373] text-center text-[40px] font-bold flex-[0_0_20px] lg:h-[42px]">8</span>
+                                            <p className="ml-g lg:mt-[4px]">{how_to_use?.step8}</p>
                                         </li>
                                     )}
                                 </ul>

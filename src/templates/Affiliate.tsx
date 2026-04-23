@@ -6,8 +6,64 @@ import Benefit4 from '~/images/icons/affiliate-benefits-4-photos.svg';
 import Benefit5 from '~/images/icons/affiliate-benefits-5-exchange.svg';
 import Benefit6 from '~/images/icons/affiliate-benefits-6-exchange.svg';
 
+import { EmblaOptionsType } from 'embla-carousel';
+import Carousel from "~/components/carousel/EmblaCarouselMulti";
+import useEmblaCarousel from 'embla-carousel-react';
+import { NextButton, PrevButton, controlAutoplay, usePrevNextButtons } from '~/components/carousel/EmblaCarouselArrowButtons';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { EmblaCarouselType } from 'embla-carousel';
+import AccordionPDP from '~/components/AccordionPDP';
+import ChevronNext from '~/images/icons/chevron-next.svg';
+import ChevronPrev from '~/images/icons/chevron-prev.svg';
+
+const screenLG = 992;
+
 const Affiliate = (props: any) => {
+	const innerWidth = globalThis.window ? globalThis.window.innerWidth : 0;
+
 	const { banner, content, benefit, hiw, generalSetting } = props;
+	const [dataAccordion, setDataAccordion] = useState([]);
+
+	useEffect(() => {
+		setDataAccordion([
+			{
+				id: 1,
+				title: content.faq_title_1,
+				text: content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] mb-1 lg:mb-1"'),
+			},
+			{
+				id: 2,
+				title: content.faq_title_2,
+				text: content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] mb-1 lg:mb-1"'),
+			},
+		]);
+	}, [content])
+
+
+
+	const options: EmblaOptionsType = {
+		loop: innerWidth >= screenLG,
+		align: 'start'
+	};
+
+	const [emblaRef, emblaApi] = useEmblaCarousel(options);
+	const [scrollProgress, setScrollProgress] = useState(0);
+
+	const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
+		const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+		setScrollProgress(progress * 100 / 1.5);
+	}, []);
+
+	const [openIndex, setOpenIndex] = useState(0);
+
+	const toggleCard = (id: number) => {
+		if (id === openIndex) {
+			setOpenIndex(0);
+		} else {
+			setOpenIndex(id);
+		}
+	};
+
 	return (
 		<>
 			{banner && (
@@ -17,24 +73,18 @@ const Affiliate = (props: any) => {
 						<img src={banner.back_img_2.url.replace('public', '828x')} alt={banner.title} className="w-full" loading="lazy" />
 					</picture>
 
-					<figcaption className="relative bg-affiliate lg:bg-transparent lg:absolute w-full -top-2 lg:top-0 bottom-0 left-0 right-0">
-						<div className="polygon-path bg-affiliate h-[5.625rem] absolute -translate-y-[50%] top-[1px] left-0 right-0 lg:hidden"></div>
+					<figcaption className="lg:bg-transparent absolute w-full top-2 lg:top-0 bottom-0 left-0 right-0">
+						{/* <div className="polygon-path bg-affiliate h-[5.625rem] absolute -translate-y-[50%] top-[1px] left-0 right-0 lg:hidden"></div> */}
 						<div className="container lg:h-full">
-							<div className="flex justify-center items-center h-full">
-								<div className="grow-0 shrink-0 basis-[40%] hidden lg:block"></div>
-								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:flex-1 text-affiliate-black">
+							<div className="flex justify-center lg:justify-start items-center h-full">
+								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:text-left lg:flex-1 lg:flex flex-col gap-[24px] text-affiliate-black">
 									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
-									<h1 className="text-[2rem] leading-[2.25rem] mt-25 mb-1 max-w-[80%] mx-auto lg:my-2 lg:text-hero lg:leading-[4.5rem] lg:max-w-[90%]">{banner.title}</h1>
-									<h2 className="hidden lg:block text-xl font-normal mb-[2.813rem] leading-[1.5rem]">{banner.subtitle}</h2>
-									<h2 className="lg:hidden text-base text-[#000] font-normal mb-2">
-										{banner.subtitle.split(' ').map((text: string, idx: number) => {
-											return idx === 3 ? parse(`${text}${"<br />"}`) : `${text} `
-										})}
-									</h2>
+									<h1 className="text-[24px] leading-[30px] mb-[8px] lg:mb-0 my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%]" dangerouslySetInnerHTML={{__html: banner.title}} />
+									<h2 className="font-normal text-base lg:text-[24px] leading-[20px] lg:leading-[30px] mb-[16px] lg:mb-0" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
 									<a
 										href={banner.cta}
-										className={`btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block lg:inline-block fixed lg:static bottom-0 left-0 right-0 h-[3.125rem] z-10 w-full
-											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:rounded-[6px] lg:text-lg lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px]`}
+										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
+											lg:w-auto rounded-none text-base border-0 py-g lg:min-w-[13.438rem] lg:h-auto hover:no-underline hover:text-white lg:pt-[14px] lg:pb-g lg:border-[1px] lg:mx-0 text-center`}
 										>{banner.cta_label}</a>
 								</div>
 							</div>
@@ -44,38 +94,29 @@ const Affiliate = (props: any) => {
 			)}
 			{hiw && (
 				<div className="relative">
-					<section className="pt-[3.438rem] lg:pt-[6.313rem] bg-affiliate-green">
-						<div className="container -mb-4">
+					<section className="pt-[60px]  mb-[60px]">
+						<div className="container">
+							<h2 className="text-[24px] leading-[30px] mt-[0] lg:mt-[20px] mb-[24px] lg:mb-[40px] text-[#000] lg:text-[2rem] lg:leading-[40px] text-center">{hiw.section_title}</h2>
+						</div>
+						<div className="container px-g">
 							<div className="flex justify-center flex-wrap lg:flex-row">
-								<div className="grow-0 shrink-0 basis-full lg:basis-1/2 lg:order-2">
-									<div className="relative min-h-[16.25rem]">
-										{hiw.result_img_1 && (
-											<div className="absolute result-7 w-[11.188rem] lg:w-[18.938rem] h-auto z-[2] left-0">
-												<img src={hiw.result_img_1.url} className="w-full" loading="lazy" alt="" />
-											</div>
-										)}
-										{hiw.result_img_2 && (
-											<div className="absolute result-8 w-[13.5rem] right-25 top-3 lg:w-[22.813rem] lg:right-[1.563rem] lg:top-[3.125rem] h-auto z-[3]">
-												<img src={hiw.result_img_2.url} className="w-full" loading="lazy" alt="" />
-											</div>
-										)}
-										{hiw.result_img_3 && (
-											<div className="absolute result-9 w-[9.25rem] left-3 top-[7.625rem] lg:w-[15.688rem] lg:left-[3.125rem] lg:top-[12.813rem] h-auto z-[4]">
-												<img src={hiw.result_img_3.url} className="w-full" loading="lazy" alt="" />
-											</div>
-										)}
-									</div>
-								</div>
-								<div className="grow-0 shrink-0 basis-full lg:basis-1/2 lg:order-1">
-									<div className="max-w-[30.938rem] mx-auto text-center lg:text-left">
-										<h2 className="text-[2rem] leading-[2.375rem] mt-[3.125rem] lg:mt-0 mb-2 text-[#000] lg:text-[3rem] lg:leading-[3.375rem]">{hiw.section_title}</h2>
-										<div className="max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
-											{parse(hiw.section_p.replace('<p>', '<p class="lg:text-[1.125rem] lg:leading-[1.5rem] mb-[1rem]">'))}
+								<div className="basis-full lg:basis-[418px] order-2">
+									{hiw.result_img_1 && (
+										<div className=" w-full lg:w-full z-[2] ">
+											<img src={hiw.result_img_1.url} className="w-full" loading="lazy" alt="" />
 										</div>
-										<div className="flex justify-center items-center badge-awards mt-4 lg:mt-[4.375rem] flex-wrap">
+									)}
+								</div>
+								<div className="grow-0 shrink-0 basis-full lg:flex-1 order-1 lg:pt-[20px]">
+									<div className="max-w-[654px] mx-auto text-left lg:text-left">
+										
+										<div className="lg:max-w-[85%] mx-auto lg:mx-0 lg:max-w-none">
+											{parse(hiw.section_p.replace('<p>', '<p class=" mb-[1rem]">'))}
+										</div>
+										<div className="flex  badge-awards flex-wrap gap-[8px] lg:gap-[12px] justify-center lg:justify-start mb-[24px]">
 											{hiw.beauty_awards.map((award) => (
-												<div key={award.id} className="text-center mb-2 py-[.5em] px-[1em] min-w-[3.375em] grow-0 shrink-0 basis-1/4 lg:flex lg:justify-center">
-													<img src={award.url.replace('public', '86x')} className="w-full max-w-[4.125rem] lg:max-w-[5.375rem]" loading="lazy" alt="" />
+												<div key={award.id} className="text-center grow-0 shrink-0 basis-1/7 lg:flex lg:justify-center">
+													<img src={award.url.replace('public', '86x')} className="w-full max-w-[64px] lg:max-w-[74px]" loading="lazy" alt="" />
 												</div>
 											))}
 										</div>
@@ -83,32 +124,26 @@ const Affiliate = (props: any) => {
 								</div>
 							</div>
 						</div>
-						<span className="-mt-[2.188rem] -z-[1] bottom-g translate-y-full hidden lg:inline-block absolute w-full">
-							<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_b0266e79-db8d-429c-b30a-cc2d499a5bee.png?v=1772039338" alt="" className="w-full" loading="lazy" />
-						</span>
-						<span className="translate-y-full inline-block lg:hidden w-full mt-[1.563rem]">
-							<img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_aac78f89-b144-4b63-9b11-b384f1f56b00.jpg?v=1772039359" alt="" className="w-full" loading="lazy" />
-						</span>
 					</section>
 				</div>
 			)}
 
 			{benefit && (
-				<section className="mt-[10.625rem] lg:max-w-[52.188rem] mx-auto lg:mt-[15rem] xxl:mt-[19.375rem]">
+				<section className="lg:max-w-[1160px] mx-auto ">
 					<div className="container">
-						<h2 className="text-[#000] text-[2rem] lg:text-[3rem] leading-[2.375rem] lg:leading-[3.625rem] mb-4 lg:mb-[4.063rem] text-center">{benefit.section_title}</h2>
-						<div className="flex flex-wrap justify-center benefits">
+						<h2 className="text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px] mb-[24px] lg:mb-[40px] text-center mt-2 lg:mt-0">{benefit.section_title}</h2>
+						<div className="flex flex-wrap justify-center benefits ">
 							{[...Array(6)].map((data, i) => (
-								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/3 text-center mb-[2.188rem] lg:mb-[3.125rem]">
-									<div className="w-[6.25rem] h-[6.25rem] inline-block rounded-full relative mx-auto bg-affiliate-green" role="presentation">
-										{i === 0 && <Benefit1 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 1 && <Benefit2 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 2 && <Benefit3 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 3 && <Benefit4 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 4 && <Benefit5 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
-										{i === 5 && <Benefit6 className="absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+								<div key={`benefit-${i}`} className="w-1/2 lg:w-1/6 text-center mb-0 lg:mb-0">
+									<div className="w-[6.25rem] h-[44px] lg:h-[54px] inline-block rounded-full relative mx-auto " role="presentation">
+										{i === 0 && <Benefit1 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 1 && <Benefit2 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 2 && <Benefit3 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 3 && <Benefit4 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 4 && <Benefit5 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
+										{i === 5 && <Benefit6 className="h-[44px] lg:h-[54px] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]" />}
 									</div>
-									<p className="text-[.875rem] leading-[1.14285em] lg:text-[1.125rem] lg:leading-[1.5rem] max-w-[80%] lg:max-w-[90%] mt-[1rem] lg:mt-2 mx-auto">
+									<p className="text-[14px] leading-[18px] mt-[5px] lg:mt-[12px] mx-auto max-w-[166px] lg:max-w-[176px] mb-[12px] lg:mb-0">
 										{parse(benefit[`txt_${i + 1}`])}
 									</p>
 								</div>
@@ -119,58 +154,68 @@ const Affiliate = (props: any) => {
 			)}
 
 			{content && (
-				<section className="mt-3 lg:mt-0 overflow-hidden">
-					<h2 className="text-center text-[#000] mb-[2.813rem] mt-[1.125rem] text-[2rem] leading-[2.375rem] lg:mt-3 lg:text-[3rem] lg:leading-[3.625rem]">{content.section_title}</h2>
-					{[...Array(3)].map((idx, i) => (
-							<div key={`affiliate-content-${i}`} className="flex flex-wrap flex-1 justify-center">
-								{content[`section_ct_img_${i + 1}`] && (
-									<div className={`w-full lg:w-1/2 p-0 bg-[#feb1be] ${content[`section_img_pos_${i + 1}`] === 'right' ? 'lg:order-2' : ''}`}>
+				<section className="mt-[48px] lg:mt-[60px] overflow-hidden">
+					<h2 className="text-center text-[#000] mb-[24px] lg:mb-[40px] mt-[0] text-[24px] leading-[30px] lg:text-[2rem] lg:leading-[40px]">{content.section_title}</h2>
+					<Carousel.Wrapper emblaApi={emblaApi} className="mb-1 max-w-[1160px] mx-auto carousel__page-affiliate">
+						<Carousel.Inner emblaRef={emblaRef} className="ml-[9px]">
+							{[...Array(3)].map((idx, i) => (
+								<div key={`affiliate-content-${i}`} className='flex-grow-0 flex-shrink-0 w-[90%] lg:w-full basis-[90%] lg:basis-full flex items-center px-[6px] lg:px-[15px] flex-col lg:flex-row'>
+									<div className={`w-full lg:w-[53%] flex flex-col pt-[12px] lg:py-[30px] bg-[#fff] lg:-mr-[6%] order-1 lg:order-0 lg:px-2 z-[1] lg:min-h-[238px]`}>
+										<h3 className="text-[14px] leading-[18px] lg:text-[16px] lg:leading-[20px] font-normal mb-[8px] lg:mb-[16px]">{content[`section_ct_step_${i + 1}`]}</h3>
+										<h2 className='text-[16px] leading-[20px] lg:text-[24px] lg:leading-[30px] mb-[8px] lg:mb-[8px]'>{parse(content[`section_ct_title_${i + 1}`])}</h2>
+
+										{i === 0 && (
+											<p className="m-0 max-w-none lg:max-w-none text-[16px] lg:leading-[20px] lg:mb-[1rem] rounded-0">
+												<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn rounded-none w-full lg:w-[243px] font-normal h-[50px] flex items-center justify-center lg:mt-[8px] ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
+											</p>
+										)}
+										{i == 1 && (
+											<p className="mt-0 max-w-none lg:max-w-none text-[16px] lg:leading-[20px] lg:mb-[1rem] rounded-0">
+												<>{parse(content[`section_ct_text_${i + 1}`])}</>
+											</p>
+										)}
+										{i === 2 && (
+											<div className="affiliate--content-li text-left px-0 lg:mb-[1rem]">
+												{i === 2 && (
+													<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-1 text-[14px]"'))}</>
+												)}
+											</div>
+										)}
+									</div>
+									<div className={`w-full lg:w-[calc(50%+77px)] order-0 lg:order-1`}>
 										<img src={content[`section_ct_img_${i + 1}`].url} className="w-full" loading="lazy" alt="" />
 									</div>
-								)}
-								<div className="w-full lg:w-1/2 p-0 flex items-center justify-center bg-[#f5dadf]">
-									<div className="max-w-[41.563rem] pt-[1.75rem] lg:pt-4 pb-4">
-										<div className="text-center lg:text-left max-w-[28.438rem]">
-											<h3 className="mx-auto mb-[0.813rem] text-base leading-[1.5rem] tracking-[.8px] max-w-[80%] font-normal lg:text-[1.5rem] lg:leading-[1.5rem] lg:mb-[2rem] lg:tracking-[1.2px]  lg:max-w-none">{content[`section_ct_step_${i + 1}`]}</h3>
-											<h2 className={`mx-auto mb-g text-[1.75rem] leading-[1.875rem] ${i === 2 ? 'max-w-[85%]' : 'max-w-[80%]'} lg:text-[3rem] lg:leading-[3.25rem] lg:mb-3 lg:max-w-none`}>{content[`section_ct_title_${i + 1}`]}</h2>
-											{i === 0 && (
-												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem] lg:mt-0">
-													<>{parse(content[`section_ct_text_${i + 1}`].replace('btn', `btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark border-dark text-white' : 'btn-primary border-primary'} mt-g lg:mt-0 border rounded-[6px] lg:text-[1.125rem] lg:leading-[22.5px] py-[9px] hover:text-white hover:no-underline lg:min-w-[215px] lg:px-[1.75em] lg:py-[.5625em]`))}</>
-												</p>
-											)}
-											{i == 1 && (
-												<p className="mt-2 max-w-[19.5rem] lg:max-w-none lg:text-[1.125rem] lg:leading-[1.5rem] mx-auto lg:mb-[1rem]">
-													<>{parse(content[`section_ct_text_${i + 1}`])}</>
-												</p>
-											)}
-											{i === 2 && (
-												<div className="affiliate--content-li text-left px-0 lg:mb-[1rem]">
-													{i === 2 && (
-														<>{parse(content[`section_ct_text_${i + 1}`].replace('<li', '<li class="mb-0 lg:mb-[1.25rem]"'))}</>
-													)}
-												</div>
-											)}
-										</div>
-									</div>
 								</div>
-							</div>
-						))}
+							))}
+						</Carousel.Inner>
+						<Carousel.Navigation>
+                                <PrevButton
+                                    onClick={() => emblaApi.scrollPrev() }
+                                    className="lg:w-auto lg:h-0 hidden lg:flex"
+                                >
+                                    <span className="absolute z-[-1] flex justify-center items-center">
+                                        <ChevronPrev className="svg--current-color" />
+                                    </span>
+                                </PrevButton>
+                                <NextButton
+                                    onClick={() => emblaApi.scrollNext() }
+                                    className="lg:w-auto lg:h-0 hidden lg:flex"
+                                >
+                                    <span className="absolute z-[-1] flex justify-center items-center">
+                                        <ChevronNext className="svg--current-color" />
+                                    </span>
+                                </NextButton>
+                            </Carousel.Navigation>
+					</Carousel.Wrapper>
 				</section>
 			)}
 			{content && (
-				<section className="mt-2 mb-1 lg:mb-4 overflow-hidden">
-					<div className="container">
-						<div className="max-w-[53rem] mx-auto mb-[4.375rem] lg:mb-0 px-2">
-							<h2 className="text-[#000] my-4 text-[1.75rem] lg:text-[3rem] leading-[1.875rem] lg:leading-[3.625rem] lg:mb-[60px] text-center">{content.faq_heading}</h2>
+				<section className="mt-[40px] lg:mt-[50px] mb-1 lg:mb-4 overflow-hidden">
+					<div className="container px-g">
+						<div className="max-w-[53rem] mx-auto mb-[42px] lg:mb-0 px-0 lg:px-2">
+							<h2 className="text-[#000] mb-[0] text-[24px] lg:text-[32px] leading-[30px] lg:leading-[40px] lg:mb-[16px] text-center">{content.faq_heading}</h2>
 
-							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_1}</h2>
-							<div className="mb-4">
-								{parse(content.faq_content_1.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
-							</div>
-							<h2 className="text-base mb-g lg:text-xl lg:leading-[1.75rem] lg:mb-[1.563rem]">{content.faq_title_2}</h2>
-							<div className="mb-4">
-								{parse(content.faq_content_2.replace('<p', '<p class="text-sm leading-[17px] lg:text-[1.125rem] lg:leading-[1.5rem] mb-3 lg:mb-[1rem]"'))}
-							</div>
+							{dataAccordion && (<AccordionPDP noWrapperBorder={true} data={dataAccordion} onClick={toggleCard} openIndex={openIndex} itemClasses="max-w-[250px] lg:max-w-none" />)}
 						</div>
 					</div>
 				</section>

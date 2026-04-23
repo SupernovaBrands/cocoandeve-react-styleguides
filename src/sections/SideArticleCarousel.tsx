@@ -51,10 +51,11 @@ const SideArticleCarousel = (props: any) => {
                             const isLast = index + 1 === row.length;
                             return (
                                 <PostCard
+                                    readMoreLink={true}
                                     bgColor={bgColor}
                                     textColor={textColor}
                                     key={`${data.id}-${index}`} carousel={true} template="pdp"
-                                    className={`product__side-article flex-grow-0 flex-shrink-0 basis-[335px] w-[335px] ${isLast ? '' : 'pr-hg lg:pr-g'} lg:w-[80%] lg:basis-[80%]`} data={data} />
+                                    className={`product__side-article flex-grow-0 flex-shrink-0 basis-[342px] w-[342px] pr-[.75rem] lg:w-[81.25%] lg:basis-[81.25%]`} data={data} />
                             )
                         })}
                     </WithCarousel>
