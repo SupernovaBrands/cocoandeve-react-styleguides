@@ -597,17 +597,40 @@ const Collection = (props: any) => {
                                 return (
                                     <Fragment key={`collection-b-${handle}-${item.id}-${index}`}>
                                         {showByobCard.show && index === showByobCard?.position && (
-                                            <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
-                                                {!collectionSettings.isLoading && (
-                                                    <ProductCardKit
-                                                        className="relative flex flex-col text-center collection-lg-order"
-                                                        store={store}
-                                                    />
-                                                )}
-                                                {collectionSettings.isLoading && (
-                                                    <QuizCardPlaceholder />
-                                                )}
-                                            </div>
+                                            <>
+                                                <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
+                                                    {!collectionSettings.isLoading && (
+                                                        <ProductCardKit
+                                                            className="relative flex flex-col text-center collection-lg-order"
+                                                            store={store}
+                                                        />
+                                                    )}
+                                                    {collectionSettings.isLoading && (
+                                                        <QuizCardPlaceholder />
+                                                    )}
+                                                </div>
+                                                <ProductCard
+                                                    product={item}
+                                                    className={`relative flex flex-col text-center collection-lg-order`}
+                                                    style={{ '--lg-order': lgOrder } as React.CSSProperties}
+                                                    button={true}
+                                                    setWaitlistData={setWaitlistData}
+                                                    smSingleStar={true}
+                                                    addToCart={addToCart}
+                                                    trackEvent={trackEvent}
+                                                    eventNameOnClick='collection_product_card'
+                                                    preOrders={preOrders}
+                                                    isLaunchWL={isLaunchWL}
+                                                    launchBox={launchBox}
+                                                    setLaunchWLModal={setLaunchWLModal}
+                                                    setLaunchWLModal2={setLaunchWLModal2}
+                                                    setLaunchWLModal3={setLaunchWLModal3}
+                                                    generalSetting={generalSetting}
+                                                    collectionTemplate={true}
+                                                    store={store}
+                                                    customProductTitle={customProductTitle}
+                                                />
+                                            </>
                                         )}
                                         {showQuizCard && index === 1 ? (
                                             <>
