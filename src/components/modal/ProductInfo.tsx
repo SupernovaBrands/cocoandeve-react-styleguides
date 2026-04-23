@@ -104,12 +104,14 @@ const ProductInfo = (props: any) => {
 
     const pdpImagePrev = () => {
         if (!emblaMainApi || !emblaThumbsApi) return;
+        if (!emblaMainApi.canScrollPrev()) return;
         emblaThumbsApi.scrollPrev();
         emblaMainApi.scrollPrev();
     };
 
     const pdpImageNext = () => {
         if (!emblaMainApi || !emblaThumbsApi) return;
+        if (!emblaMainApi.canScrollNext()) return;
         emblaThumbsApi.scrollNext();
         emblaMainApi.scrollNext();
     };
