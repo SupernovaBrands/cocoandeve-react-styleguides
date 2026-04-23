@@ -218,6 +218,8 @@ const HairSolution = (props: any) => {
         return [...availableItems, ...productUnavailable];
     };
 
+    const filteredProductRows = data.product.rows?.filter(row => !(row.title === 'Oily Scalp' && store === 'au'));
+
     return (
         <>
             {(!data.banner.image_d || !data.banner.image_m) && (
@@ -321,15 +323,15 @@ const HairSolution = (props: any) => {
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
                             <ul className={`gap-[4px] product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap lg:flex-nowrap border-b-0 text-center justify-start px-g lg:px-0 overflow-x-scroll hide-scrollbar overflow-y-hidden`}>
-                                {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((row, index) => (
+                                {filteredProductRows && filteredProductRows.length > 0 && filteredProductRows.map((row, index) => (
                                     <li key={`hair-concern-product-nav-${index}`}><TabNav className={`${productTab === index ? 'text-body' : ''} whitespace-nowrap`} title={row.title} active={productTab === index} onNavChange={() => setProductTab(index)} ctaBgColor={generalSetting?.bfcm_cta_bg_color} /></li>
                                 ))}
                             </ul>
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`font-bold hidden hover:text-body lg:inline-block py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
+                            <a href={`/collections/${filteredProductRows[productTab].coll_handle}`} className={`font-bold hidden hover:text-body lg:inline-block py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                         
                         <div className="pt-g pb-[.5rem] lg:pb-0 lg:pt-2">
-                            {data.product.rows && data.product.rows.length > 0 && data.product.rows.map((tabRow, index) => {
+                            {filteredProductRows && filteredProductRows.length > 0 && filteredProductRows.map((tabRow, index) => {
                                 // const e = useEmblaCarousel(options)
                                 
                                 return (
@@ -402,7 +404,7 @@ const HairSolution = (props: any) => {
                             </div> */}
                         </div>
                         <div className="text-center">
-                            <a href={`/collections/${data.product.rows[productTab].coll_handle}`} className={`inline-block lg:hidden underline font-bold mt-0 py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
+                            <a href={`/collections/${filteredProductRows[productTab].coll_handle}`} className={`inline-block lg:hidden underline font-bold mt-0 py-[1rem] text-body underline underline-offset-4`}>Shop All</a>
                         </div>
                     </div>
                     <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal__mini-pdp modal-lg lg:max-w-[1070px] modal-dialog-centered lg:items-center" isOpen={productData.open} handleClose={() => setProductData({...productData, ...{ open: false }})}>
