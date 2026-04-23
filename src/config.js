@@ -83,7 +83,7 @@ module.exports = global.config = {
 		"cartShippingMeter": {
 			"enable": true,
 			"inProgressText": "#{shipping_price} away from free shipping!",
-			"finalText": "Congrats! Your order qualifies for free shipping!",
+			"finalText": "Congrats, your order qualifies for free shipping!",
 			"barColor": "#f4436c"
 		},
 		"cartDiscountMeter": {
