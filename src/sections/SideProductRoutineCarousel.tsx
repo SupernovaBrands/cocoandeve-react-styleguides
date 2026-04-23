@@ -18,7 +18,7 @@ const options: EmblaOptionsType = {
     dragFree: true,
 };
 
-const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ? 
+const WithCarousel = ({carousel, children, emblaApi1, emblaRef1}) => (carousel ?
     <Carousel.Wrapper emblaApi={emblaApi1}>
         <Carousel.Inner emblaRef={emblaRef1} className="mx-0">
             {children}
@@ -100,7 +100,7 @@ const SideProductRoutineCarousel = (props: any) => {
             })
             const cardModel = await Promise.all(mappedNodes?.filter((item) => item.availableForSale)?.map((r:any) => buildProductCardModel(store, r, generalSetting, badgeData)) || []);
             const cardModelmapped = cardModel.map((i) => {
-                const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, badgeBgColor, badgeTextColor, label, id, imgHover } = i;
+                const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, badgeBgColor, badgeTextColor, label, id, imgHover, isProductBundleApp, productBundleSkus } = i;
                 return {
                     availableForSale,
                     title,
@@ -116,6 +116,8 @@ const SideProductRoutineCarousel = (props: any) => {
                     badgeTextColor,
                     label,
                     imgHover,
+                    isProductBundleApp,
+                    productBundleSkus
                 }
             })
             setFinalItems(cardModelmapped || []);
@@ -157,7 +159,7 @@ const SideProductRoutineCarousel = (props: any) => {
                             />
                         })}
                     </WithCarousel>
-                    
+
                     {finalItems.length > 2 && (
                         <div className="px-0">
                             <div className="carousel__progress bg-gray-400">
