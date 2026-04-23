@@ -25,7 +25,7 @@ const CartShippingMeter = (props) => {
 
 	return (
 		<div className="mt-1 border-b border-[#ADADAD] border-solid">
-			<p className="mb-1">{text}</p>
+			<p className="mb-1 text-[14px] lg:text-base">{text}</p>
 			<div className="progress mb-2 bg-gray-400 rounded">
 				<div
 					className="progress-bar bg-primary h-[5px] rounded"
