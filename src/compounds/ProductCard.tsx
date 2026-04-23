@@ -614,7 +614,7 @@ const ProductCard = (props: any) => {
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.topBadges.map((badge) => (
                             <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
-                                <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
+                                <span className={`leading-[normal] lg:!text-sm !text-[12px]`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
@@ -632,10 +632,10 @@ const ProductCard = (props: any) => {
             {/* Content */}
             <div className={`pt-0 pb-0 relative grow flex flex-col product-card__content lg:px-[.75rem]`}>
                 {!kitBuilder && props.product.bottomBadges && !props.sideUpsell && (
-                    <div className={`pt-[.5rem] lg:pt-[1rem] lg:pb-[.25rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
+                    <div className={`pt-[.5rem] lg:pt-[1rem] pb-[.25rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.bottomBadges.map((badge) => (
                             <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
-                                <span className={`leading-[normal] ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={{ fontSize: props.landingPageTemplate ? '12px' : `${props.product?.badgeMobileFontSize}px` }}>{badge.badge_text}</span>
+                                <span className={`leading-[normal] lg:!text-sm !text-[12px]`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
