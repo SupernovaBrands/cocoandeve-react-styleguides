@@ -78,7 +78,7 @@ const Stockist = (props: any) => {
     useEffect(() => {
         if (store) {
             setRegion(mappedStore[store]?.region || 'australia');
-            setRegionTitle(mappedStore[store]?.title || 'australia');
+            setRegionTitle(mappedStore[store]?.title || 'Australia');
         }
     }, [store]);
 
