@@ -14,8 +14,8 @@ const BlogFiltered = (props) => {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_cc6d48a9-571b-4e87-ac4f-990f72049d5a.jpg?v=1772039388',
+			srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_cc6d48a9-571b-4e87-ac4f-990f72049d5a.jpg?v=1772039388',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 		{
@@ -23,8 +23,8 @@ const BlogFiltered = (props) => {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_ed577119-84c9-453b-a474-d93817f912d3.jpg?v=1772039420',
+			srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_ed577119-84c9-453b-a474-d93817f912d3.jpg?v=1772039420',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 		{
@@ -32,8 +32,8 @@ const BlogFiltered = (props) => {
 			link: '/templates/article',
 			title: '5 things you’re doing wrong with your hair care routine',
 			desc: 'Give these myths the brush off for a healthy scalp & shiny hair!',
-			src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
-			srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/3267a779-b6f6-4ce4-e410-c9f7dbe7ff00/320x',
+			src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_ed577119-84c9-453b-a474-d93817f912d3.jpg?v=1772039420',
+			srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/320x_ed577119-84c9-453b-a474-d93817f912d3.jpg?v=1772039420',
 			alt: 'Bond Building Pre-Shampoo Treatment',
 		},
 	];

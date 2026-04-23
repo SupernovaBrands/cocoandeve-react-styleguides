@@ -107,42 +107,42 @@ const getCustomQuestions = (productId, callback, yotpoKey) => {
 		})
 	}).then(response => response.text()).then(data => {
 		const res = JSON.parse(data);
-		
+
 		const tempDiv = document.createElement('div');
 		tempDiv.innerHTML = res[0].result;
-		
+
 		const questionEls = tempDiv.querySelectorAll('.yotpo-custom-tag-field');
 		const filterEls = tempDiv.querySelectorAll('.filters-dropdown');
 		const questions = [];
-		
+
 		questionEls.forEach((el) => {
 			const q = {
 				question: el.querySelector('.yotpo-field-title')?.textContent.trim() || '',
 				options: [],
 				radio: el.getAttribute('role') === 'radiogroup',
 			};
-			
+
 			const inputs = el.querySelectorAll('input');
 			inputs.forEach((input) => {
-				if (!q.slug) { 
-					q.slug = input.name; 
+				if (!q.slug) {
+					q.slug = input.name;
 				}
 				q.options.push(input.value);
 			});
-			
+
 			// Find matching filter element
 			const slugWithoutDashes = q.slug?.replace('--', '') || '';
 			const matchingFilter = Array.from(filterEls).find(
 				filter => filter.getAttribute('data-question-id') === slugWithoutDashes
 			);
-			
+
 			if (matchingFilter) {
 				q.filter = matchingFilter.getAttribute('data-default-button-display-value');
 			}
-			
+
 			questions.push(q);
 		});
-		
+
 		callback(questions);
 	}).catch(error => {
 		console.error('Error fetching Yotpo data:', error);
@@ -410,13 +410,31 @@ const YotpoReviewWidget = (props:any) => {
 
 	};
 
-	const onFilterChange = () => {
-		const form = document.getElementById('yotpoFilterForm');
+	const findParentById = (element, targetId) => {
+		let current = element;
+
+		while (current) {
+			if (current.id === targetId) {
+			return current;
+			}
+			current = current.parentElement;
+		}
+
+		return null; // kalau tidak ketemu
+	}
+
+	const onFilterChange = (elm) => {
+		// const form = document.getElementById('yotpoFilterForm');
+		// not sure why we are using document element on this widget??
+		const form = findParentById(elm.target, 'yotpoFilterForm');
+		if (!form) {
+			return null;
+		}
 		const filter = {};
 
 		const text = form.querySelector('input[name="free_text_search"]').value;
-		// console.log('aaa', text);
-		if (text) filter.free_text_search = text;
+		// if (text) filter.free_text_search = text;
+		filter.free_text_search = text;
 		const star = form.querySelector('select[name="scores"]').value;
 		if (star) filter.scores = [star];
 
@@ -554,7 +572,7 @@ const YotpoReviewWidget = (props:any) => {
 			}).then(response => response.json()).then((resp) => {
 				const { response } = resp;
 				const yotpoS3 = `https://${response.bucket}.s3.amazonaws.com/`;
-				
+
 				const startUpload = async (i) => {
 					if (reviewData.uploaded_images[i]) {
 						const dataUrl = reviewData.uploaded_images[i];
@@ -564,7 +582,7 @@ const YotpoReviewWidget = (props:any) => {
 						const formData = getUploadImageUrlEncodedParams(fullName, response, {
 							dataUrl: reviewData.uploaded_images[i].dataUrl
 						});
-						
+
 						// Upload to S3
 						const xhr = new XMLHttpRequest();
 						xhr.open('POST', yotpoS3, true);
@@ -575,7 +593,7 @@ const YotpoReviewWidget = (props:any) => {
 									image_upload_token: reviewResponse.image_upload_token,
 									image_urls: JSON.stringify([imageUrl]),
 								});
-								
+
 								try {
 									await fetch('https://api-cdn.yotpo.com/images/process', {
 										method: 'POST',
@@ -584,9 +602,9 @@ const YotpoReviewWidget = (props:any) => {
 										},
 										body: processImageParams,
 									});
-									
+
 									startUpload(i + 1);
-									
+
 								} catch (error) {
 									console.error('Error processing image:', error);
 								}
@@ -595,7 +613,7 @@ const YotpoReviewWidget = (props:any) => {
 						xhr.send(formData);
 					}
 				};
-				
+
 				startUpload(0);
 			}).catch((e) => console.log(`Error: ${e}`));
 		}
@@ -973,7 +991,7 @@ const YotpoReviewWidget = (props:any) => {
 	const isTrialParticipant = (review:any) => review.trial_participants || trialParticipants.find((t) => t.user === review.user_name
 	&& t.title === review.title && t.content === review.content);
 
-	const getMediaData = (review:any) => review.images_data.concat(review.videos_data);
+	const getMediaData = (review:any) => review.videos_data.concat(review.images_data);
 
 	const playVideo = (ev:any, el:any) => {
 		ev.target.classList.add('hidden');
@@ -1181,7 +1199,7 @@ const YotpoReviewWidget = (props:any) => {
 														{getMediaData(review).map((media:any, index:any) => (
 															<button key={media.id} type="button" className={`yotpo-widget__button-img relative inline-block mr-g mb-g ml-0 mr-2 mb-g text-start`} onClick={() => { handleClickImage(review, index) }}>
 																<img className="object-cover size-[75px]" src={media.thumb_url.replace('https:', '')} alt={`${review.user_name} ${index}`} width="150" height="150" />
-																{media.video_url && (
+																{media.video_url || media.image_url?.includes('.mp4') || media.image_url?.includes('.mov')  && (
 																	<SvgPlayIcon className="svg text-white w-[20px] h-[20px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 																)}
 																{/* preloade image for modal, to make it fast load when popup opened */}
@@ -1322,10 +1340,20 @@ const YotpoReviewWidget = (props:any) => {
 					// <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
 						<div className="modal-content mx-2 lg:mx-0 relative max-h-[50%]">
 							<div className="flex flex-wrap items-center bg-white rounded rounded-lg overflow-hidden">
-								<div className="lg:w-1/2 pr-lg-0">
+								<div className={`lg:w-1/2 pr-lg-0 ${getMediaData(reviewModal)[0].id}`}>
 									{getMediaData(reviewModal).length === 1 ? (
 										<>
-											{getMediaData(reviewModal)[0].image_url && (<img src={getMediaData(reviewModal)[0].image_url?.replace('https:', '')} alt="Slide 1" className="d-block w-100" />) }
+											{getMediaData(reviewModal)[0].image_url?.includes('.mp4') || getMediaData(reviewModal)[0].image_url?.includes('.mov') ? (
+												<div className="relative flex">
+													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
+														<source src={getMediaData(reviewModal)[0].image_url} type="video/mp4" />
+													</video>
+													<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${getMediaData(reviewModal)[0].id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
+												</div>
+											) : getMediaData(reviewModal)[0].image_url ? (
+												<img src={getMediaData(reviewModal)[0].image_url?.replace('https:', '')} alt="Slide 1" className="d-block w-100" />
+											) : null}
+
 											{getMediaData(reviewModal)[0].video_url && (
 												<div className="relative flex relative">
 													<video id={`video-review-${getMediaData(reviewModal)[0].id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={getMediaData(reviewModal)[0].cover ? getMediaData(reviewModal)[0].cover : ''}>
@@ -1343,14 +1371,25 @@ const YotpoReviewWidget = (props:any) => {
 												<Carousel.Inner emblaRef={emblaRef7} className='items-start'>
 													{getMediaData(reviewModal).map((media:any, i:any) => (
 														<div key={media.id} className={`carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full relative`}>
-															{media.image_url && (<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />)}
-															{media.video_url && (
+
+															{media.image_url?.includes('.mp4') || media.image_url?.includes('.mov') ? (
+																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.thumb_url ? media.thumb_url : ''}>
+																	<source src={media.image_url} type="video/mp4" />
+																</video>
+															) : media.image_url ? (
+																<img src={media.image_url?.replace('https:', '')} alt={`Slide ${i + 1}`} className="block w-full object-cover max-h-[500px]" />
+															) : null}
+															{media.video_url ? (
 																// eslint-disable-next-line jsx-a11y/media-has-caption
 																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
 																	<source src={media.video_url} type="video/mp4" />
 																</video>
-															)}
-															{media.video_url && (
+															) : media.object_url ? (
+																<video id={`video-review-${media.id}`} className="w-full bg-gray-400" autoPlay={false} name="media" poster={media.cover ? media.cover : ''}>
+																	<source src={media.object_url} type="video/mp4" />
+																</video>
+															) : null}
+															{media.video_url || media.object_url || media.image_url?.includes('.mp4') || media.image_url?.includes('.mov') && (
 																<SvgPlayIcon onClick={(ev:any) => playVideo(ev, `video-review-${media.id}`)} className="svg text-white w-[40px] h-[40px] lg:w-[80px] lg:h-[80px] absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]" />
 															)}
 														</div>

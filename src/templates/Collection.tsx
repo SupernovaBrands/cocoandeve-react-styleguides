@@ -64,6 +64,7 @@ const Banner = ({ title, bannerData }) => {
 
 const Collection = (props: any) => {
     const {
+        mainNav,
         products,
         isLoading,
         mainCollectionHandles,
@@ -93,10 +94,9 @@ const Collection = (props: any) => {
         bannerData,
         customProductTitle,
         childMenuData,
-        mainNav,
         byobBanner,
     } = props;
-    // console.log('customProductTitlexxx', customProductTitle);
+    // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
     // const [splitCard, setSplitCard] = useState(false);
     const [sevenDaysSalesIds, setSevenDaysSalesIds] = useState(props.sevenDaysArr || []);
@@ -169,6 +169,10 @@ const Collection = (props: any) => {
     const [collProducts, setCollProducts] = useState(() =>
         [...products].sort((a, b) => (b.availableForSale ? 1 : 0) - (a.availableForSale ? 1 : 0))
     );
+
+    // console.log('sub nav', subNav);
+
+    // console.log('sub coll', subCollection);
 
     const navigationScroll = () => {
         // console.log('running nav scroll');
@@ -296,13 +300,13 @@ const Collection = (props: any) => {
     };
 
 
-    const selectSortChange = (e: any) => {
+    const selectSortChange = async (e: any) => {
         showLoading(e);
         const sort = e.target.value === 'best-selling' ? 'featured' : e.target.value;
         fetch(`/api/collectionProducts/?sort=${sort}&handle=${currentCollection.handle}`).then((r) => r.json())
-            .then((data) => {
+            .then(async (data) => {
                 const { products } = data;
-                const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+                const mapped = await Promise.all(products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge)));
                 if (e.target.value === 'best-selling' && sevenDaysSalesIds.length > 0) {
                     const sorted = mapped.sort(handleSevenDaysSort);
                     const finalSorted = sortByAvailability(sorted, e.target.value);
@@ -327,8 +331,12 @@ const Collection = (props: any) => {
 
         // console.log('currentCollection', currentCollection);
         const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
+        // console.log('currentCollection', currentCollection);
+        // console.log('parentCollection', parentCollection);
+        const show = (currentCollection?.handle !== 'tan' && parentCollection === null) || (parentCollection && parentCollection?.collection?.handle !== 'tan');
+        // console.log('kit banner', show);
         setShowByobCard(prev => ({
-            show: currentCollection?.handle !== 'tan',
+            show,
             position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
             dtPosition: currentPos > 0 ? currentPos : DEFAULT_BYOB_POSITION,
         }));
@@ -430,6 +438,8 @@ const Collection = (props: any) => {
     );
 
 
+    // console.log('sidebarMenu', sidebarMenu);
+
     return (
         <>
             <Banner title={collectionTitle} bannerData={bannerData} />
@@ -530,11 +540,24 @@ const Collection = (props: any) => {
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
                                             if (children && children.handle && !children.handle.includes('/pages/') && !children.title.toLowerCase().includes('quiz')) {
                                                 const html = mainCollHandles.includes(children.handle) ? 'All' : children.title.replace('d-lg-none', 'lg:hidden');
+                                                const isSpfTan = childMenu.find((item) => item.handle === 'tan-and-spf');
+                                                // let parentHandle = parentCollection !== null ? parentCollection.collection.handle : handle;
+                                                // if (window && window.location.search?.includes('p=')) {
+                                                //     const params = new URLSearchParams(window.location.search);
+                                                //     parentHandle = params.get('p')
+                                                // }
                                                 return (
                                                     <Link
                                                         scroll={false}
                                                         key={`tags--${children.handle}-${index}`}
-                                                        href={`/collections/${children.handle}${parentParam ? `?p=${parentParam}` : (parentCollection?.collection?.handle ? `?p=${parentCollection.collection.handle}` : '')}`}
+                                                        href={`/collections/${children.handle}${isSpfTan
+                                                            ? `?main-collection=tan-and-spf&p=${parentParam}`
+                                                            : parentParam
+                                                                ? `?p=${parentParam}`
+                                                                : parentCollection?.collection?.handle
+                                                                    ? `?p=${parentCollection.collection.handle}`
+                                                                    : ''
+                                                            }`}
                                                         className={`collection-grid__tags-link text-nowrap py-1 px-2 hover:no-underline leading-[25px]
                                                                 ${children.handle === handle ? `active text-white ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark' : 'bg-body'} hover:text-white` : 'text-gray-600'}`}
                                                         onClick={showLoading}
@@ -708,6 +731,11 @@ const Collection = (props: any) => {
                             )} */}
                             {/* {collProducts.length <= 0 && <p className="collection-grid--empty">Sorry, there are no products in this collection.</p>} */}
                         </div>
+                        {bannerData?.seo_description && (
+                            <div className="w-full">
+                                <p className="px-g lg:px-2 mb-[1rem] w-full collection-grid--empty">{bannerData.seo_description}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

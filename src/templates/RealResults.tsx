@@ -96,29 +96,29 @@ const testimonialItems = [
 		index: 0,
 		label: 'Slide 1',
 		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/44e77586-f8d4-43b0-6450-9f9495994b00/400x',
-		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/44e77586-f8d4-43b0-6450-9f9495994b00/200x'
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f83e2652-efc9-4902-a090-55981981c8c5.png?v=1772039830&width=400',
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f83e2652-efc9-4902-a090-55981981c8c5.png?v=1772039830&width=200'
 	},
 	{
 		index: 1,
 		label: 'Slide 2',
 		quote: 'Coco & Eve’s vegan and nourishing hair mask has a cult following online for a good reason.',
-		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4a58f90b-411c-4eb0-4aaa-b0925aa29100/400x',
-		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4a58f90b-411c-4eb0-4aaa-b0925aa29100/200x'
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_94e100f0-481b-4cee-a29f-bfa4f34fec66.png?v=1772039893&width=400',
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_94e100f0-481b-4cee-a29f-bfa4f34fec66.png?v=1772039893&width=200'
 	},
 	{
 		index: 2,
 		label: 'Slide 3',
 		quote: 'Not only is this vegan masque Peta-approved it’s also pined after by many beauty moguls and bloggers',
-		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1edde7c-29d0-441b-be4a-ad0a72ebac00/400x',
-		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e1edde7c-29d0-441b-be4a-ad0a72ebac00/200x'
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1b2b9937-aeaf-455e-906e-23ac19de8ccd.png?v=1772039936&width=400',
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_1b2b9937-aeaf-455e-906e-23ac19de8ccd.png?v=1772039936&width=200'
 	},
 	{
 		index: 3,
 		label: 'Slide 4',
 		quote: 'There’s a reason this hair mask went viral on Instagram, and it’s not the pink-and-green packaging.',
-		srcSet: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/43a53f0c-58f4-4751-96f6-4b93092b1900/400x',
-		src: 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/43a53f0c-58f4-4751-96f6-4b93092b1900/200x'
+		srcSet: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_51526b49-3432-4fef-ad14-f933b2ce24d8.png?v=1772039984&width=400',
+		src: 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_51526b49-3432-4fef-ad14-f933b2ce24d8.png?v=1772039984&width=200'
 	}
 ]
 

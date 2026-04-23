@@ -215,7 +215,7 @@ const OurStoryTemplate = (props: any) => {
 						</picture>
 					</figure>
 				)}
-				
+
 			</section>
 
 			{!isLoading && (

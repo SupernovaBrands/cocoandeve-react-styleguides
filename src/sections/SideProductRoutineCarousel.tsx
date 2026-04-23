@@ -88,38 +88,42 @@ const SideProductRoutineCarousel = (props: any) => {
     }, [waitlistData]);
 
     useEffect(() => {
-        const mappedNodes = items.map((item) => {
-            const nodes = item.variants.edges.map((variant) => {
-                return variant.node;
+        const loadItems = async () => {
+            const mappedNodes = items.map((item) => {
+                const nodes = item.variants.edges.map((variant) => {
+                    return variant.node;
+                })
+                return {
+                    ...item,
+                    variants: { nodes },
+                }
             })
-            return {
-                ...item,
-                variants: { nodes },
-            }
-        })
-        const cardModel = mappedNodes?.filter((item) => item.availableForSale)?.map((r:any) => buildProductCardModel(store, r, generalSetting, badgeData)) || [];
-        const cardModelmapped = cardModel.map((i) => {
-            const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, badgeBgColor, badgeTextColor, label, id, imgHover } = i;
-            return {
-                availableForSale,
-                title,
-                handle,
-                src,
-                srcSet,
-                swatch,
-                price,
-                comparePrice,
-                variants,
-                badgeText,
-                badgeBgColor,
-			    badgeTextColor,
-                label,
-                imgHover,
-            }
-        })
-        setFinalItems(cardModelmapped || []);
-        // const { products } = items;
-        // const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+            const cardModel = await Promise.all(mappedNodes?.filter((item) => item.availableForSale)?.map((r:any) => buildProductCardModel(store, r, generalSetting, badgeData)) || []);
+            const cardModelmapped = cardModel.map((i) => {
+                const { availableForSale, src, srcSet, handle, swatch, title, price, comparePrice, variants, badgeText, badgeBgColor, badgeTextColor, label, id, imgHover } = i;
+                return {
+                    availableForSale,
+                    title,
+                    handle,
+                    src,
+                    srcSet,
+                    swatch,
+                    price,
+                    comparePrice,
+                    variants,
+                    badgeText,
+                    badgeBgColor,
+                    badgeTextColor,
+                    label,
+                    imgHover,
+                }
+            })
+            setFinalItems(cardModelmapped || []);
+            // const { products } = items;
+            // const mapped = products.map((p) => buildProductCardModel(store, p, generalSetting, squareBadge));
+        }
+
+        loadItems();
     }, []);
 
     // console.log('finalItems', finalItems);

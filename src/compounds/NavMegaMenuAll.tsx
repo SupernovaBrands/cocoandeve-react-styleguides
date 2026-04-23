@@ -10,37 +10,46 @@ const NavMegaMenuAll = (props: any) => {
         } 
     },[store]);
 
+    // console.log('generalSetting', generalSetting);
+
     return (
         <div className="z-[1010] nav-mega-menu hidden left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             <div className="container pt-3 flex flex-wrap items-center justify-between px-g">
                 <div className="flex w-full">
-                    <div className="max-w-[14.625em] mr-1 mb-3 px-0">
+                    <div className="max-w-[12em] mr-1 mb-3 px-0">
                         <>
-                            <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-2 w-full hover:no-underline inline-flex items-center justify-center px-3 py-1 text-lg text-center whitespace-nowrap`}>
+                            <a href={generalSetting.mega_menu_shop_all_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
                                 {generalSetting.mega_menu_shop_all_label}
                             </a>
-                            {generalSetting.bg_image && (
-                                <a href={generalSetting.mega_menu_image_url}>
-                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="d-block w-100 rounded" />
+                            {generalSetting.mega_menu_banner && generalSetting.bg_image && generalSetting.mega_menu_image_url && (
+                                <a href={generalSetting.mega_menu_image_url} className="block mb-1">
+                                    <img src={generalSetting.bg_image.url} alt="Shop all mega menu" className="block w-100 rounded" />
                                 </a>
                             )}
+
+                            {generalSetting.mega_menu_button2_label && generalSetting.mega_menu_button2_url && (
+                                <a href={generalSetting.mega_menu_button2_url} className={`${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white border-dark' : 'bg-gray-400 text-primary hover:text-primary'} rounded border border-transparent font-bold mb-1 w-full hover:no-underline inline-flex items-center justify-center px-2 py-[.5rem] text-base text-center whitespace-nowrap`}>
+                                    {generalSetting.mega_menu_button2_label}
+                                </a>
+                            )}
+
                         </>
                     </div>
                     <div className={`ml-1 mb-3 flex flex-wrap ${navClass} px-0 flex-grow-1 w-full`}>
                         {menus && menus.map((menu) => {
-                            if (menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
+                            if (menu.title.toLowerCase() !== 'best sellers' && menu.title.toLowerCase() !== 'sale' && menu.handle !== '/collections/sale' && menu.handle !== '/collections/all' && menu.handle !== '/collections/new-holiday-sets') {
                                 return (
                                     <div key={`menu-${menu.title}`} className="d-flex flex-column">
                                         <a href={menu.handle} className="block mb-2 text-lg text-body font-bold" aria-label={menu.title}>{menu.title}</a>
                                         <ol className="list-unstyled">
                                             {menu.rows.map((row) => (
                                                 <li key={`menuRow-${row.title}`} className="mb-1 ">
-                                                    <a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body" aria-label={row.title}>{row.title}</a>
+                                                    <a href={`${row.handle}?p=${menu.handle.replace('/collections/', '')}`} className={`text-body ${row.title === 'Tan Quiz' || row.title === 'SPF Quiz' || row.title === 'Hair Concerns & Solutions' ? "text-body hover:no-underline relative inline-block pb-[2px] overflow-hidden after:content-[''] after:absolute after:w-[40px] after:h-[1px] after:bottom-0 after:left-[-40px] after:bg-[#CE8011] after:animate-[race_2s_linear_infinite]" : ''}`} aria-label={row.title}>{row.title}</a>
                                                 </li>
                                             ))}
-                                            {menu.handle !== '/collections/kits-gifts' && (
-                                                <li><a href={`${menu.handle}?p=${menu.handle.replace('/collections/', '')}`} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
-                                            )}
+                                            {/* {menu.handle !== '/collections/kits-gifts' && (
+                                                <li><a href={menu.handle} className="text-body font-bold" aria-label={`Shop ${menu.title} Range`}>{menu.title} Range</a></li>
+                                            )} */}
                                         </ol>
                                     </div>
                                 )

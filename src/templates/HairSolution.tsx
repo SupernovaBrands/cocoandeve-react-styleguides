@@ -228,7 +228,7 @@ const HairSolution = (props: any) => {
             {data.banner && (
                 <figure className="w-full relative items-center px-0 mb-0 lg:flex lg:flex-wrap">
                     {data.banner.image_d && data.banner.image_m && (
-                        <picture className={``}>
+                        <picture className={`w-full block`}>
                             <source srcSet={data.banner.image_d?.url} media="(min-width: 992px)" />
                             <img src={data.banner.image_m?.url.replace('public', '540x')} className="w-full" alt="Hair Concern Solution Banner" width="375" height="200" fetchPriority="high"/>
                         </picture>
@@ -247,7 +247,7 @@ const HairSolution = (props: any) => {
                     </figcaption>
                 </figure>
             )}
-            <div className={`abtest-wrapper flex flex-col ${props?.sectionTest}`}>
+            <div className={`flex flex-col`}>
             {data.range && (
                 <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-4'}`}>
                     <div className="container">

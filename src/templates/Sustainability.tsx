@@ -188,11 +188,11 @@ const Sustainability = (props: any) => {
                 const t = [];
                 const pInfos = pArray.map(async (handle: string) => await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json()));
                 const productData = await Promise.all(pInfos);
-                productData.map((obj) => {
+                productData.map(async (obj) => {
                     const { product } = obj;
                     if (product) {
                         // delete product.selectedVariant;
-                        const mapped = buildProductCardModel(store, product, generalSetting, squareBadge);
+                        const mapped = await buildProductCardModel(store, product, generalSetting, squareBadge);
                         t.push(mapped);
                     }
                 });

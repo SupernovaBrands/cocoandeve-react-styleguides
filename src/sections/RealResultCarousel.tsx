@@ -79,6 +79,7 @@ const RealResultCarousel = (props: any) => {
 		all: videos.filter((data) => data.enabled_all),
 		hair: videos.filter((data) => data.enabled_hair),
 		tan: videos.filter((data) => data.enabled_tanspf),
+		spf: videos.filter((data) => data.enabled_spf),
 		skin: videos.filter((data) => data.enabled_skin),
 		body: videos.filter((data) => data.enabled_body),
 	}), [videos]);

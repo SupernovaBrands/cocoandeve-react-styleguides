@@ -20,10 +20,10 @@ const options: EmblaOptionsType = {
 const SLIDES = [
 	{
 		mobile_image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1a1b1bcf-b955-488b-028f-e8899fe1e400/722x"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_d265bc14-4f75-42fd-9ab0-edc9c10b268f_722x.jpg?v=1772038620"
 		},
 		image: {
-			url: "https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ee973277-9d5b-42dc-21d5-ad82a8589f00/1920x"
+			url: "https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_62a2f115-b4f2-4093-a41b-a7b54b360369_1920x.jpg?v=1772038639"
 		}
 	},
 ];
@@ -35,17 +35,17 @@ const ImageBanner = (props: any) => {
 		<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 			<Link onClick={() => { trackEvent('hero_banner_click', { category: 'Clickout' }) }} href={slide?.slide_url || ''} className="flex items-center justify-center">
 				<picture className='lg:px-g pt-[111.83575%] lg:pt-[38.17708%] relative block w-full overflow-hidden'>
-					<source srcSet={slide?.image_desktop?.url.replace('/public', '/desktoplg')} media="(min-width: 1601px)" width="1920" height="733" />
-					<source srcSet={slide?.image_desktop?.url.replace('/public', '/desktopmd')} media="(min-width: 1401px)" width="1600" height="611" />
-					<source srcSet={slide?.image_desktop?.url.replace('/public', '/desktopsm')} media="(min-width: 1201px)" width="1400" height="534" />
-					<source srcSet={slide?.image_desktop?.url.replace('/public', '/tablet')} media="(min-width: 1025px)" width="1200" height="458" />
-					<source srcSet={slide?.image_desktop?.url.replace('/public', '/1140x')} media="(min-width: 992px)" width="1140" height="435" />
+					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktoplg').replace('.jpg', '_1920x.jpg').replace('.gif', '_1920x.gif')} media="(min-width: 1601px)" width="1920" height="733" />
+					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktopmd').replace('.jpg', '_1600x.jpg').replace('.gif', '_1600x.gif')} media="(min-width: 1401px)" width="1600" height="611" />
+					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktopsm').replace('.jpg', '_1400x.jpg').replace('.gif', '_1400x.gif')} media="(min-width: 1201px)" width="1400" height="534" />
+					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/tablet').replace('.jpg', '_1200x.jpg').replace('.gif', '_1200x.gif')} media="(min-width: 1025px)" width="1200" height="458" />
+					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/1140x').replace('.jpg', '_1140x.jpg').replace('.gif', '_1140x.gif')} media="(min-width: 992px)" width="1140" height="435" />
 					<img
 						// @ts-ignore
 						fetchpriority={isFirstSlide ? "high" : undefined}
 						loading={isFirstSlide ? "eager" : "lazy"}
 						className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full"
-						src={slide?.image_mobile?.url.replace('/public', '/722x')}
+						src={slide?.image_mobile?.url?.replace('/public', '/722x').replace('.jpg', '_722x.jpg').replace('.gif', '_722x.gif')}
 						alt={`slide ${index + 1}`}
 						width="414"
 						height="926"

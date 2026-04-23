@@ -39,9 +39,9 @@ const ProductSubscription = (props:any) => {
                     </div>
                 </div>
                 <picture className="flex grow">
-                    <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2c4aaf19-03e3-4c7f-5261-211916d1e500/200x" media="(min-width: 1260px)"/>
-                    <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/03aff718-9e39-4900-2375-09b341da1200/150x" media="(min-width: 992px)"/>
-                    <img src="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1bd0d514-6f9e-4c33-8eb7-721355b4fb00/120x" className="sm:max-h-1/2 w-full object-cover" alt="Super Hydrating Shampoo &amp; Conditioner Set"/>
+                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_c40d268e-977e-4e0e-9def-52884282cbc7.png?v=1772037655&width=200" media="(min-width: 1260px)"/>
+                    <source srcSet="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_aaf6e8e9-0eee-41a7-ba08-b7f8423c80da.png?v=1772037690&width=150" media="(min-width: 992px)"/>
+                    <img src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_aaf6e8e9-0eee-41a7-ba08-b7f8423c80da.png?v=1772037690&width=120" className="sm:max-h-1/2 w-full object-cover" alt="Super Hydrating Shampoo &amp; Conditioner Set"/>
                 </picture>
             </div>
             { showTooltip && (<div className="absolute p-1 rounded tooltip bg-primary text-white max-w-[275px] text-sm" style={{willChange: 'transform', left: tooltipPosition.left, top: tooltipPosition.top}}>

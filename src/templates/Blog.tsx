@@ -137,14 +137,14 @@ const Blog = (props) => {
 				<h1 className="text-center mb-[1rem] lg:mb-1 text-xl lg:text-2xl font-bold">{tag === 'all' ? 'COCO & EVE BLOG' : `COCO & EVE ${tag.toUpperCase()} BLOG`}</h1>
 				<div className="px-g blog-nav-tags mb-3 flex justify-center gap-[4px] gap-0" id="navBlogTags">
 					<BlogNavTag href="/blogs/news" title="All" active={active ? false : (tag === 'all' ? true : false)}/>
-					<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>
+					{!['int'].includes(region) && (<BlogNavTag href="/blogs/news/tagged/hair" title="Hair" active={active ? false : (tag === 'hair' ? true : false)}/>)}
 					{['us', 'uk', 'eu', 'ca', 'au', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/tan" title="Tan" active={active ? false : (tag === 'tan' ? true : false)}/>
 					)}
-					{['us', 'uk', 'eu', 'ca', 'dev'].includes(region) && (
+					{['us', 'uk', 'eu', 'dev'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/spf" title="SPF" active={active ? false : (tag === 'suncare' ? true : false)}/>
 					)}
-					{['int', 'my', 'au'].includes(region) && (
+					{['my'].includes(region) && (
 						<BlogNavTag href="/blogs/news/tagged/skin" title="Skin" active={active ? false : (tag === 'skin' ? true : false)}/>
 					)}
 					{!['int', 'my'].includes(region) && (

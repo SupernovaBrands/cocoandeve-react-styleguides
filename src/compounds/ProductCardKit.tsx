@@ -25,7 +25,7 @@ const ProductCardKit = (props: any) => {
 		<figure className={props.className ?? ''}>
             <a href="/pages/build-your-own-bundle">
                 <picture className="block">
-                    <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_v2_417x.jpg?v=1776675016'} media="(min-width: 992px)" />
+                    <source srcSet={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_v2_417x616_crop_center.jpg?v=1776675016'} media="(min-width: 992px)" />
                     <img src={'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_v2_x112.jpg?v=1776675078'} className="w-full" loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
                 <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-25 pr-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">

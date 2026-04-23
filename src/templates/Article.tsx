@@ -156,7 +156,7 @@ const Article = (props) => {
     const [bodyContent, setBodyContent] = useState('');
     const [quickNav, setQuickNav] = useState([]);
 
-    const d = new Date(content?.updatedAt);
+    const d = new Date(content?.contentLastUpdated || content?.updatedAt);
     const day = d.toLocaleString('default', { day: 'numeric' });
     const month = d.toLocaleString('default', { month: 'short' });
     const year = d.toLocaleString('default', { year: 'numeric' });

@@ -38,7 +38,7 @@ const CartManualGwp = (props:any) => {
 		el.scrollTo({ left: left + offset });
 	}
 
-	const markText = (price:any) => ({ __html: `Worth ${price}` });
+	const markText = (price:any,compare:any) => ({ __html: `Worth ${compare && <del>{compare}</del>} ${price}` });
 
 	const removeItem = async (id:any) => {
 		setAdding(true);
@@ -109,7 +109,7 @@ const CartManualGwp = (props:any) => {
 										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
 									</picture>
 									{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
-									<figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
+									<figcaption className="relative gap-[2px] -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
 										Worth {item.price}
 									</figcaption>
 								</figure>

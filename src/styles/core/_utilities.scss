@@ -139,23 +139,47 @@
 	0%{background-position: 100% 50%}
 	100%{background-position: 0% 50%}
 }
-
 .bg-shimmer {
-	background: $gray-500;
-	background: linear-gradient(130deg, $gray-500 33%, $gray-100 50%, $gray-500 67%);
-	background-size: 1000% 1000%;
-	animation: gradient-shimmer 2.5s ease infinite;
+    background: $gray-500;
+    position: relative;
+    overflow: hidden;
 
-	img {
-		transition: opacity 0.4s linear;
-		opacity: 0;
-	}
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            130deg,
+            transparent 33%,
+            rgba($gray-100, 0.6) 50%,
+            transparent 67%
+        );
+        transform: translateX(-100%);
+        animation: gradient-shimmer 2.5s ease infinite;
+        will-change: transform;
+    }
 
-	&--loaded {
-		img {
-			opacity: 1;
-		}
-	}
+    img {
+        transition: opacity 0.4s linear;
+        opacity: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    &--loaded {
+        &::after {
+            display: none;
+        }
+
+        img {
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes gradient-shimmer {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(100%); }
 }
 
 // Percy

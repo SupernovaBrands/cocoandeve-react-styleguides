@@ -13,6 +13,7 @@ import { capitalizeString, kebabCase, formatMoney } from '~/modules/utils';
 
 type CartItemProps = {
 	item?: any;
+	getFeaturedImgMeta?: any;
 	isLastStock: boolean;
 	onChangeVariant: Function;
 	onChangeQuantity: Function;
@@ -21,6 +22,11 @@ type CartItemProps = {
 	productStock: number;
 	useShopifyVariantInfo?: any;
 	store?: any;
+	isBundle?: boolean;
+	bundleItems?: any;
+	bundleGroup?: string;
+	bundleCompare?: any;
+	bundlePrice?: any;
 }
 
 
@@ -28,11 +34,21 @@ export const CartItem = (props:CartItemProps) => {
 	const { onChangeQuantity, onRemoveItem,
 		onChangeVariant, productStock,
 		productId, item, isLastStock,
-		useShopifyVariantInfo, store } = props;
+		useShopifyVariantInfo, store, getFeaturedImgMeta, isBundle, bundleItems, bundleGroup, bundleCompare, bundlePrice } = props;
 
-	const { swatches, variants, selectedSwatch } = item;
+	const { swatches, variants, selectedSwatch, attributes } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
 	const isMultiOptions = item.swatches.length > 1;
+
+	const componentsJson = attributes.find((attr) => attr.key === '_components')
+	const componentImage = attributes.find((attr) => attr.key === '_image')
+
+	let components = null;
+	let component = null;
+	if (componentsJson) {
+		components = JSON.parse(componentsJson.value);
+		component = components[0];
+	}
 
 	const [hideItem, setHideItem] = useState(false);
 	const [editingVariant, setEditingVariant] = useState(null);
@@ -69,6 +85,13 @@ export const CartItem = (props:CartItemProps) => {
 		// }));
 	}
 
+	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
+
+	let isRemovable = null;
+	if (isBundle) {
+		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
+	}
+
 	const productTitle = (item:any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
 		if (item.merchandise.title.toLowerCase() === 'default title') {
@@ -98,118 +121,85 @@ export const CartItem = (props:CartItemProps) => {
 	}, [item]);
 
 	useEffect(() => {
-		let featuredImage = item?.featuredImageUrl || '';
-		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
-			featuredImage = item.merchandise?.image?.url;
-		} else {
-			if (store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2e3e1c74-7d61-47fd-5a07-749bcd364900/public';
-			}
+		let active = true;
+		let featuredImage = '';
 
-			if ((store === 'my' || store === 'uk' || store === 'eu' || store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/2d6596e4-f344-4968-c8b9-6b2530881000/public';
-			}
-
-			if (store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/271b3156-1d41-4f82-4824-a82722030500/public';
-			}
-
-			// if (store === 'au' && item.merchandise.product.handle === 'daily-essentials-bundle') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d1fe49e9-80c4-47cd-3c96-c27f2a578700/public';
-			// }
-
-			// if ((store === 'uk' || store === 'eu') && item.merchandise.product.handle === 'hair-revival-set') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/47b28a5c-84f7-4b12-ec75-dd477a1feb00/public';
-			// }
-
-			// if (store === 'int' && item.merchandise.product.handle === 'hair-revival-set') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/dcc547a9-dab9-4eea-bbc1-07e7645bab00/public';
-			// }
-
-			// if (store === 'my' && item.merchandise.product.handle === 'hair-revival-set') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/11a4d669-7e60-4441-1e07-ffbfeba9d800/public';
-			// }
-
-			if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/b708d084-8829-4e6d-cfeb-03a24148a800/public';
-			}
-
-			if ((store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/029c70f1-d5cf-45de-746a-891fdbd89d00/public';
-			}
-
-			if ((store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f4575694-2f11-43b0-6c36-179f0ee54300/public';
-			}
-
-			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'daily-essentials-bundle') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			// }
-
-			// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu' || store === 'ca') && item.merchandise.product.handle === 'deep-condition-bundle') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/10045f09-b506-4fc1-c28a-b1ced8673800/public';
-			// }
-
-			if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
-				item.featuredImageUrl = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
-			}
-
-			// if ((store === 'my') && item.merchandise.title === 'Daily Essentials Set' && item.merchandise.product.handle === 'leave-in-conditioner') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/503a39e9-27b7-4278-c850-1d015cb06000/public';
-			// }
-			if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8fce65c9-c57e-4401-71cd-313acd286200/public';
-			}
-			if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7c0d8baa-c79c-43f7-5b87-a93540510d00/public';
-			}
-			// if (['ca', 'us'].includes(store) && item.merchandise.product.handle === 'tan-masters-kit') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/c2f2fc94-076a-4866-f57c-5543acf89500/public';
-			// }
-			// if (store === 'au' && item.merchandise.product.handle === 'tan-masters-kit') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/4f464cde-27cb-45e0-8ede-62bb35015b00/public';
-			// }
-
-			// if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/e9f74cf3-1826-41a6-dde2-70b4fd315100/public';
-			// }
-
-			// if (['dev', 'us'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a5d370c5-14d7-4c95-179b-4a8695738100/public';
-			// }
-
-			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/8d32930a-749e-45b7-aadc-4e13dfe08800/public';
-			}
-
-			if (['au'].includes(store) && item.merchandise.product.handle === 'bronzing-self-tanner-drops' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/ef8c199f-3363-4623-2fbb-325e32cc8c00/public';
-			}
-
-			// if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
-			// }
-
-			if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a422995d-643e-4cb0-146f-b97ce9613700/public';
-			}
-
-			// if (['us'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
-			// 	featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/a2d3750e-60b3-4ab6-b57b-8b84c1025300/public';
-			// }
-
-			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'medium') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/f44857b0-8dfe-4373-4abc-7087f47ecb00/public';
-			}
-
-			if (['au'].includes(store) && item.merchandise.product.handle === 'all-in-glow-set' && selectedVariant[0].toLowerCase() === 'dark') {
-				featuredImage = 'https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/1c91fe5f-e66d-4efa-13b9-6dbb4b33c100/public';
-			}
+		if (store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e9cb40b2-9b22-481b-9cf0-f6a8d5628347.jpg?v=1772037749';
 		}
 
-		setFeaturedImageUrl(featuredImage);
-	}, []);
+		if ((store === 'my' || store === 'uk' || store === 'eu' || store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_44559ed8-85ec-40a1-9193-b12a85f50a7a.jpg?v=1772037770';
+		}
+
+		if (store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_878ce412-fae5-4b17-b2c7-cdfd50c95682.jpg?v=1772037792';
+		}
+
+		if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_051e9d3f-6619-48f3-92a7-c46b2fa78d8e.jpg?v=1772037812';
+		}
+
+		if ((store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_14bcf2e0-fc14-42fc-9c4a-0c067fa6a40b.jpg?v=1772037842';
+		}
+
+		if ((store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_dd372d4f-d256-412e-9507-f4dc5d731340.jpg?v=1772037864';
+		}
+
+		if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
+			item.featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
+		}
+
+		if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ac0ac9b3-0c0a-4e3b-a27d-b686e2d95980.jpg?v=1772037951';
+		}
+		if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4279b1fc-feb1-406b-85b6-4e1450cfff95.jpg?v=1772037973';
+		}
+
+		if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f3892614-a042-466a-8268-8fca468e9ac9.jpg?v=1772037996';
+		}
+
+		if (['au'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
+			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_20ab9884-e1bf-425e-86e9-908ee9148e97.jpg?v=1772038027&width=320';
+		}
+
+		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
+			featuredImage = item.merchandise?.image?.url;
+		}
+
+		if (featuredImage) {
+			setFeaturedImageUrl(featuredImage);
+			return;
+		}
+
+		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
+			setFeaturedImageUrl(item.merchandise.image.url);
+			return;
+		}
+
+		const loadImage = async () => {
+			try {
+				const result = await getFeaturedImgMeta(item.merchandise.product, store);
+				if (active && result?.img) {
+					setFeaturedImageUrl(result.img);
+				}
+			} catch (e) {
+				console.log('cart image error', e);
+			}
+		};
+
+		loadImage();
+
+		return () => {
+			active = false;
+		};
+	
+	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
@@ -223,30 +213,42 @@ export const CartItem = (props:CartItemProps) => {
 		}
 	}
 
+	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
+	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
-		<figure className="flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g">
+		<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
 			<ConditionWrapper
 				condition={!item.isFreeItem}
 				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
 			>
-				<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+				{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 					{item.featuredImageUrl ? (
 						<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					) : (
 						<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 					)}
-				</picture>
+				</picture>)}
+				{componentImage?.value && <picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+					<img src={componentImage?.value} className="w-full object-contain bg-pink-light h-[78px]" alt={component?.title} loading="lazy" width="78" height="78" />
+				</picture>}
 			</ConditionWrapper>
-			<figcaption className="w-9/12 px-hg lg:px-g">
+			<figcaption className={`w-9/12 px-hg lg:px-g`}>
+				{/* {isKitBuilder && (
+					<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-1">
+						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
+					</div>
+				)} */}
 				<div className="flex items-start no-gutters justify-between">
-					<p className="mb-1 font-bold w-2/3 pl-0">
+					<p className={`mb-1 font-bold ${isBundle ? 'w-auto' : 'w-2/3'} pl-0`}>
 						{item.isFreeItem && item.originalPrice >= 0 ? (
 							<ConditionWrapper
 								condition={item.isFreeItem}
 								wrapper={(children:any) => <span className="text-black">{children}</span>}
 							>
-								{ item.isFreeItem && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && !component && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
+								{ item.isFreeItem && component && (`${component.title?.replace('FREE', '').replace('Free', '').trim()}`) }
 							</ConditionWrapper>
 						)
 							: (
@@ -256,19 +258,20 @@ export const CartItem = (props:CartItemProps) => {
 										if (item.disableCartItemLink || !isUpsell(item)) {
 											return (
 												<span className="text-black">
-													{children}
+													{isBundle ? 'Build Your Own Bundle' : children}
 												</span>
 											);
 										} else {
 											return (
 												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
-													{children}
+													{isBundle ? 'Build Your Own Bundle' : children}
 												</a>
 											);
 										}
 									}}
 								>
-									{ !item.isFreeItem && (`${productTitle(item)}`) }
+									{ !item.isFreeItem && !component && (`${productTitle(item)}`) }
+									{ !item.isFreeItem && component && (`${component?.title}`) }
 									{`${item.recurring ? ' Subscriptions' : ''}`}
 								</ConditionWrapper>
 							)}
@@ -292,11 +295,17 @@ export const CartItem = (props:CartItemProps) => {
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{!item.isFreeItem && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
 					</button>)}
+
+					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+							<SvgTrash className="svg w-[1em]" />
+						</button>)}
 
 				</div>
 
@@ -350,7 +359,7 @@ export const CartItem = (props:CartItemProps) => {
 											return selectedVari.join() === o.join();
 										});
 
-										return variant && (
+										return variant && !isBundle && (
 											<button
 												key={`${opt.id}-${kebabCase(val)}`}
 												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
@@ -369,7 +378,7 @@ export const CartItem = (props:CartItemProps) => {
 
 									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{` - ${selected.replace(': limited edition!', '')} ${opt.name}`}
+										{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
 									</span>)}
 								</p>
 								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
@@ -386,19 +395,24 @@ export const CartItem = (props:CartItemProps) => {
 
 				{item.attributes && item.attributes.map((itm:any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-				<div className="flex items-center justify-between">
-					<QuantityBox
-						name="quantity-box"
-						editable={!item.isFreeItem}
-						quantity={item.quantity}
-						onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
-						isLastStock={isLastStock}
-						productId={productId}
-						productStock={productStock}
-						isModified={item.modified}
-						originalQuantity={item.original_quantity}
-						allowZero={true}
-					/>
+				<div className={`flex items-center justify-between`}>
+					{!isBundle && (
+						<QuantityBox
+							name="quantity-box"
+							editable={component ? false : !item.isFreeItem}
+							quantity={item.quantity}
+							onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
+							isLastStock={isLastStock}
+							productId={productId}
+							productStock={component ? 10000 : productStock}
+							isModified={item.modified}
+							originalQuantity={component ? item.quantity : item.original_quantity}
+							allowZero={true}
+						/>
+					)}
+					{/* {isKitBuilder && (
+						<strong className="">x1</strong>
+					)} */}
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
 							<div className="flex flex-col text-right">
@@ -408,22 +422,41 @@ export const CartItem = (props:CartItemProps) => {
 									Free
 								</strong>
 							</div>
-						)
-						: (
-							<div className="flex flex-col text-right">
-								{item.comparePrice > 0
-									? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-									: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-								<strong>
-									{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
-										? formatMoney(item.priceAfterDiscounted, false, store)
-										: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+						) : (
+							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+								{isBundle ? (
+									<>
+										{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
+										<strong>{formatMoney(bundlePrice, false, store)}</strong>
+									</>
+								) : (
+									<>
+										{item.comparePrice > 0
+											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+										<strong>
+											{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
+												? formatMoney(item.priceAfterDiscounted, false, store)
+												: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 
-									{item.recurring && (item.period)}
-								</strong>
+											{item.recurring && (item.period)}
+										</strong>
+									</>
+								)}
 							</div>
 						)}
 				</div>
+
+				{isBundle && bundleItems && bundleItems.length > 0 && (
+					<ul className="flex flex-col gap-[.25rem] pt-1">
+						{bundleItems.map((bundleItem) => (
+							<li className="flex items-center gap-[.25rem]">
+								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
+								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+							</li>
+						))}
+					</ul>
+				)}
 
 				{(isLastStock) && (
 					<p className="mt-1 mb-0 text-danger">Oh nuts! You got the last one!</p>)}
