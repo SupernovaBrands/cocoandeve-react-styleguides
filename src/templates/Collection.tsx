@@ -533,7 +533,7 @@ const Collection = (props: any) => {
                         </div>
                         {/* {handle !== 'all' && ( */}
                         {handle !== 'all' && (
-                            <div className="flex lg:justify-between items-center w-full mt-[1rem] px-g lg:px-2">
+                            <div className="flex lg:justify-between items-center w-full mt-0 lg:mt-[1rem] px-g lg:px-2">
                                 <div className="w-full lg:w-8/12">
                                     <div className="collection-grid__tags w-auto overflow-x-scroll flex gap-[.375rem]" ref={subCatRef}>
                                         {childMenu.length > 0 && childMenu.map((children, index) => {
@@ -571,7 +571,7 @@ const Collection = (props: any) => {
                                 <p className="px-hg lg:px-0 mb-[1rem] w-full collection-grid--empty">Sorry, there are no products in this collection.</p>
                             </div>
                         )}
-                        <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid ${handle === 'all' ? 'pt-[.5rem]' : 'pt-4'} lg:pt-[1.5rem] overflow-hidden w-full gap-x-g gap-y-[2.375rem] lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2 pb-[2.375rem] lg:pb-5`}>
+                        <div className={`grid grid-cols-2 lg:grid-cols-4 collection-grid ${handle === 'all' ? 'pt-[.5rem]' : 'pt-2'} lg:pt-[1.5rem] overflow-hidden w-full gap-x-g gap-y-[2.375rem] lg:gap-x-[1rem] lg:gap-y-[1.5rem] px-g lg:px-2 pb-[2.375rem] lg:pb-5`}>
                             {(showSpinner || loading || isLoading || collectionSettings.isLoading) && (
                                 <div className="mb-3 px-hg lg:px-g text-center w-full block col-span-2 lg:col-span-4">
                                     <div className="mx-auto h-3 w-3 animate-spin rounded-full border-4 border-body border-t-white" />
