@@ -120,16 +120,13 @@ const CarouselScrollbar = ({
 
     const handleMouseUp = React.useCallback(
         (event: MouseEvent | TouchEvent) => {
-            if (event.type !== 'touchmove') {
+            if (isDragging && event.type !== 'touchmove') {
                 event.preventDefault()
                 event.stopPropagation()
             }
             setIsDragging(false);
-
-            window.removeEventListener('touchmove', handleMouseMoveScrollbar);
-            window.removeEventListener('touchend', handleMouseUp);
         },
-        [handleMouseMoveScrollbar]
+        [isDragging]
     );
 
     const handleMouseDown = React.useCallback(
@@ -191,9 +188,10 @@ const CarouselScrollbar = ({
     }, [scrollbarTrackRef, scrollbarRef, scrollSnaps]);
 
     React.useEffect(() => {
+        if (!isDragging) return;
         window.addEventListener('mousemove', handleMouseMoveScrollbar);
         window.addEventListener('mouseup', handleMouseUp);
-        window.addEventListener('touchmove', handleMouseMoveScrollbar);
+        window.addEventListener('touchmove', handleMouseMoveScrollbar, { passive: false });
         window.addEventListener('touchend', handleMouseUp);
         return () => {
             window.removeEventListener('mousemove', handleMouseMoveScrollbar);
@@ -201,7 +199,7 @@ const CarouselScrollbar = ({
             window.removeEventListener('touchmove', handleMouseMoveScrollbar);
             window.removeEventListener('touchend', handleMouseUp);
         }
-    }, [handleMouseMoveScrollbar, handleMouseUp]);
+    }, [isDragging, handleMouseMoveScrollbar, handleMouseUp]);
 
 
     // console.log('scrollSnaps', scrollSnaps);
