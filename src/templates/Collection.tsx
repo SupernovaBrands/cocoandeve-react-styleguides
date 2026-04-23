@@ -503,10 +503,10 @@ const Collection = (props: any) => {
                                     )}
                                 </>
                             ) : ( */}
-                            <>
+                            {/* <>
                                 {!isLoading && (
-                                    <>
-                                        {/* <div className="w-1/2 lg:hidden px-hg">
+                                    <> */}
+                            {/* <div className="w-1/2 lg:hidden px-hg">
                                             <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                 <option value="">Filter by</option>
                                                 {mobileDropdown.map((parent: any, index: number) => {
@@ -515,19 +515,19 @@ const Collection = (props: any) => {
                                                 })}
                                             </select>
                                         </div> */}
-                                        <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
-                                            {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
+                            <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
+                                {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
                                                 <option value="featured">Sort By</option>
                                                 <option value="best-selling">Best selling</option>
                                                 <option value="price-low-high">Price, low to high</option>
                                                 <option value="price-high-low">Price, high to low</option>
                                                 <option value="newest">Date, new to old</option>
                                             </select> */}
-                                            <FilterOptions className="lg:hidden" />
-                                        </div>
-                                    </>
+                                <FilterOptions className="lg:hidden" />
+                            </div>
+                            {/* </>
                                 )}
-                            </>
+                            </> */}
                             {/* )} */}
 
                             {handle === 'all' && <FilterOptions className="hidden lg:flex" />}
