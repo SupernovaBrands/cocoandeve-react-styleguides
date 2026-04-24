@@ -429,7 +429,7 @@ const Collection = (props: any) => {
     // console.log('byobBanner', showByobCard);
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
-            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white text-sm lg:text-base w-[150px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
+            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white text-sm lg:text-base w-[135px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-2 lg:pr-[50px] [background-position:right_0_center]`} defaultValue={defaultSort}>
                 <option value="featured">Sort By</option>
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
@@ -440,6 +440,8 @@ const Collection = (props: any) => {
     );
 
     // console.log('sidebarMenu', sidebarMenu);
+    const plainTextTitle = collectionTitle ? collectionTitle.replace(/<[^>]+>/g, '') : 'Shop All';
+    const titleCharacterCount = plainTextTitle.length;
 
     return (
         <>
@@ -482,7 +484,7 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className="text-xl lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-150px)] lg:w-3/5 lg:order-first self-center text-body"
+                            <h1 className={`${titleCharacterCount > 20 ? 'text-sm' : 'text-lg'} text-base lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
