@@ -482,7 +482,7 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className={`${titleCharacterCount > 20 ? 'text-sm' : 'text-lg'} text-base lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
+                            <h1 className={`${titleCharacterCount > 20 ? 'text-sm' : 'text-lg'} lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
                                 dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
