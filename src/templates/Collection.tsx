@@ -322,7 +322,6 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         setLoading(false);
-
         // console.log('currentCollection', currentCollection);
         const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
 
@@ -331,7 +330,7 @@ const Collection = (props: any) => {
         if (window.innerWidth < 769) {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
-
+        setShowByobCard({ show: false, position: 0, dtPosition: 0 })
         if (currentPos > 0) {
             setShowByobCard({
                 show: true,
@@ -709,6 +708,19 @@ const Collection = (props: any) => {
                                                 store={store}
                                                 customProductTitle={customProductTitle}
                                             />
+                                        )}
+                                        {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
+                                            <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
+                                                {!collectionSettings.isLoading && (
+                                                    <ProductCardKit
+                                                        className="relative flex flex-col text-center collection-lg-order"
+                                                        store={store}
+                                                    />
+                                                )}
+                                                {collectionSettings.isLoading && (
+                                                    <QuizCardPlaceholder />
+                                                )}
+                                            </div>
                                         )}
                                     </Fragment>
                                 );
