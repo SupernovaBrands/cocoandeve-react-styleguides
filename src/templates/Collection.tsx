@@ -431,7 +431,7 @@ const Collection = (props: any) => {
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
                 <option value="price-high-low">Price, high to low</option>
-                <option value="newest">Date, new to old</option>
+                {/* <option value="newest">Date, new to old</option> */}
             </select>
         </div>
     );
