@@ -579,13 +579,13 @@ const ProductInfo = (props: any) => {
                                                 <>
                                                     <PrevButton
                                                         onClick={pdpImagePrev}
-                                                        className="carousel__gallery-thumb w-5 h-5 rounded-none text-body left-0 top-[50%] -translate-y-[50%] right-auto"
+                                                        className={`carousel__gallery-thumb w-5 h-5 rounded-none text-body left-0 top-[50%] -translate-y-[50%] right-auto ${selectedIndex === 0 ? 'hidden' : ''}`}
                                                     >
                                                         <ChevronPrev className="w-g h-g svg--current-color" />
                                                     </PrevButton>
                                                     <NextButton
                                                         onClick={pdpImageNext}
-                                                        className="carousel__gallery-thumb w-5 h-5 rounded-none text-body left-auto right-0 top-[50%] -translate-y-[50%]"
+                                                        className={`carousel__gallery-thumb w-5 h-5 rounded-none text-body left-auto right-0 top-[50%] -translate-y-[50%] ${selectedIndex === slidesCount - 1 ? 'hidden' : ''}`}
                                                     >
                                                         <ChevronNext className="w-g h-g svg--current-color" />
                                                     </NextButton>
