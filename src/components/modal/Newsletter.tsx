@@ -43,6 +43,7 @@ type NewsletterProp = {
 	store: string
 	trackEvent: any
 	trackBluecoreLaunchWaitlistEvent: any
+	modalId?: string
 }
 
 const validForm = {
@@ -94,18 +95,18 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 	const emailRef = useRef(null);
 
 	useEffect(() => {
-        if (emailRef.current) {
-            emailRef.current.focus();
-        }
-    }, []);
+		if (emailRef.current) {
+			emailRef.current.focus();
+		}
+	}, []);
 
 	useEffect(() => {
 		setSmsbump(nbp_smsbump || '');
 		// send event to ga4
-        trackEvent('newsletter_popup_view', {
-            category: 'Newsletter Registration',
-            target: 'newsletter_popup_register',
-        });
+		trackEvent('newsletter_popup_view', {
+			category: 'Newsletter Registration',
+			target: 'newsletter_popup_register',
+		});
 	}, []);
 
 	// const handleEmail = (e) => {
@@ -179,10 +180,10 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 			}
 
 			// send event to ga4
-            trackEvent('newsletter_popup', {
-                category: 'Newsletter Registration',
-                target: 'newsletter_popup_register',
-            });
+			trackEvent('newsletter_popup', {
+				category: 'Newsletter Registration',
+				target: 'newsletter_popup_register',
+			});
 			setCookie('signup_popup', 'signup_popup', 30);
 		}
 	};
@@ -259,7 +260,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 	};
 
 	useEffect(() => {
-        let numberCodeDef = 65;
+		let numberCodeDef = 65;
 		if (store === 'us') {
 			numberCodeDef = 1;
 		} else if (store === 'au') {
@@ -277,7 +278,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 		}
 
 		setaActiveCountryCode(numberCodeDef)
-    }, [store]);
+	}, [store]);
 
 	return (
 		<div className={`modal-content flex flex-col w-full outline-0 bg-clip-padding ${nbp_bg_color}`}>
@@ -292,7 +293,7 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 						<form className="relative lg:w-1/2 lg:pr-4 pr-3 pl-3 lg:pl-0" onSubmit={handleForm}>
 							<h2 className={` ${nbp_heading_color || 'text-body'} h1 text-center mb-0 leading-[1.25!important]`}>{nbp_heading}</h2>
 							<p className={` ${nbp_heading_2_color || 'text-body'} text-lg text-center mb-[1rem] font-bold leading-[1.25]`}>{nbp_heading_2}</p>
-							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25!important] text-center`} dangerouslySetInnerHTML={{__html: nbp_desc}} />
+							<p className={`${nbp_desc_color || 'text-white'} font-size-sm mb-g leading-[1.25!important] text-center`} dangerouslySetInnerHTML={{ __html: nbp_desc }} />
 							<div className="relative flex items-stretch w-full mb-0 flex-wrap mb-25">
 								<input ref={emailRef} value={email} onChange={handleEmail} id="modal--newsletter__email" className="bg-clip-padding block w-full mb-0 bg-gray-400 py-[14px] px-[16px] leading-[1.25] h-[3.125rem] rounded-h border border-gray-400" type="email" placeholder={nbp_email_ph} aria-label="email" />
 							</div>
@@ -307,15 +308,15 @@ const Newsletter: React.FC<NewsletterProp> = ({ handleClose, data, store, trackE
 									{!phoneError.valid && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
 								</>
 							)}
-							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{__html: nbp_note}} />
+							<p className="text-xs mt-g text-center my-g mx-1 leading-[1.25!important]" dangerouslySetInnerHTML={{ __html: nbp_note }} />
 							<button type="submit" className="relative hover:bg-primary-dark w-full border-2 border-transparent rounded bg-primary py-[13px] px-[54px] text-white font-bold align-middle block text-base">{nbp_submit}</button>
 						</form>
 					)}
 					{formCompleted && (
 						<div className="modal--newsletter__completed lg:w-1/2 px-3 lg:px-4 flex items-center justify-center min-h-[25em]">
 							<div className="flex flex-wrap justify-center items-center">
-								<h2 className={`h1 leading-[1.25!important] mb-1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{__html: nbp_completed}} /><br />
-								<h3 className={`text-center leading-[1.25!important] ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{__html: nbp_completed_desc}} />
+								<h2 className={`h1 leading-[1.25!important] mb-1 text-center w-full ${nbp_heading_2_color || 'text-body'}`} dangerouslySetInnerHTML={{ __html: nbp_completed }} /><br />
+								<h3 className={`text-center leading-[1.25!important] ${nbp_heading_2_color || 'text-body'} mb-g`} dangerouslySetInnerHTML={{ __html: nbp_completed_desc }} />
 								{!copied ? (
 									<Button onClick={copyCode} data-code="WELCOME" buttonClass="w-full items-center border-2 border-white bg-white text-primary inline-flex justify-center relative">
 										COPY: WELCOME <Paste className="svg--current-color svg" />

@@ -16,6 +16,7 @@ type ExitIntentProp = {
 	handleClose: () => void
 	data: ExitIntentData
 	ctaBgColor: string
+	modalId?: string
 }
 
 const ExitIntent: React.FC<ExitIntentProp> = ({ handleClose, data, ctaBgColor }) => (
