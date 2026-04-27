@@ -439,12 +439,12 @@ const Collection = (props: any) => {
         </div>
     );
 
+
     // console.log('sidebarMenu', sidebarMenu);
-    const plainTextTitle = collectionTitle ? collectionTitle.replace(/<[^>]+>/g, '') : 'Shop All';
-    const titleCharacterCount = plainTextTitle.length;
-    const splitVersionCard = currentCollection?.handle === 'tan' || 
-        !!(parentCollection && parentCollection?.collection?.handle === 'tan') || 
-        currentCollection?.handle === 'spf' || 
+
+    const splitVersionCard = currentCollection?.handle === 'tan' ||
+        !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
+        currentCollection?.handle === 'spf' ||
         !!(parentCollection && parentCollection?.collection?.handle === 'spf');
 
     return (
@@ -488,8 +488,8 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className={`${titleCharacterCount > 18 ? 'text-sm' : 'text-xl'} lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
-                                dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
+                            <h1 className={`text-[19px] lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
+                                dangerouslySetInnerHTML={{ __html: (collectionTitle ?? 'Shop All').replace('Shop ', '<span class="hidden lg:inline">Shop </span>') }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
                                 <>
