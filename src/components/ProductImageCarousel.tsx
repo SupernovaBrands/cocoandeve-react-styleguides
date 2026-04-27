@@ -160,6 +160,10 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
+	const formatImageUrl = (url, index, size = '150x') => {
+		return url.replace('_text_', `${index + 1}`).replace(/(\.[a-z]+)(\?.*)?$/i, `_${size}$1$2`);
+	};
+
 	return (
 		<div className="flex w-full lg:w-7/12 lg:sticky lg:top-[115px] lg:self-start">
 			<div className="lg:overflow-hidden lg:w-[100px] lg:basis-[100px] lg:order-2 px-0 lg:px-0 hidden lg:block">
@@ -176,8 +180,8 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 										aria-label="View product thumbnail">
 										{isDesktop && (
 											<picture>
-												<source srcSet={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} media="(min-width: 769px)" />
-												<img loading="lazy" alt={`Thumbnail image of Product Image ${index}`} className="w-[70px]" src={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+												<source srcSet={`${formatImageUrl(slide.src, index, '150x')}`} media="(min-width: 769px)" />
+												<img loading="lazy" alt={`Thumbnail image of Product Image ${index}`} className="w-[70px]" src={`${formatImageUrl(slide.src, index, '150x')}`} width={70} height={70} />
 											</picture>
 										)}
 									</button>
