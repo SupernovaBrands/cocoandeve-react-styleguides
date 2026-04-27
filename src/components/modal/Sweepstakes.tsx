@@ -51,6 +51,7 @@ type SweepstakesProp = {
 	data: SweepstakesData
 	trackBluecoreLaunchWaitlistEvent: (email: string, pageType: string) => void
 	store: string
+	modalId?: string
 }
 
 const validForm = {
@@ -192,7 +193,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 	}
 
 	useEffect(() => {
-        let numberCodeDef = 65;
+		let numberCodeDef = 65;
 		if (store === 'us') {
 			numberCodeDef = 1;
 		} else if (store === 'au') {
@@ -210,7 +211,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 		}
 
 		setaActiveCountryCode(numberCodeDef)
-    }, [store]);
+	}, [store]);
 	// console.log('content,', data);
 	return (
 		<>
@@ -225,12 +226,12 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 						<div className="px-3 lg:px-4 py-3 lg:py-4">
 							<div className="flex flex-wrap -mx-hg lg:-mx-g justify-end lg:mb-g mb-0 ">
 								<div className="hidden lg:block w-3/4 lg:w-8/12 lg:pl-0 text-center pr-0 lg:pr-g">
-									<h2 className={`modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color ? data?.sweepstakes_popup_title_color  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
-									<p className={`lg:mb-0 lg:mt-1 ${data?.sweepstakes_popup_desc_color ? data?.sweepstakes_popup_desc_color  : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<h2 className={`modal--sweepstakes__title h1 mb-0 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color ? data?.sweepstakes_popup_title_color : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
+									<p className={`lg:mb-0 lg:mt-1 ${data?.sweepstakes_popup_desc_color ? data?.sweepstakes_popup_desc_color : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 								<div className="lg:hidden w-full pl-0 lg:pl-0 text-center pr-0 lg:pr-g -mx-hg">
-									<h2 className={`modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color_mob ? data?.sweepstakes_popup_title_color_mob  : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
-									<p className={`lg:mb-0 lg:mt-1 font-size-sm mb-1 ${data?.sweepstakes_popup_desc_color_mob ? data?.sweepstakes_popup_desc_color_mob  : 'text-body'} px-0  lg:px-0`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
+									<h2 className={`modal--sweepstakes__title h2 mb-1 text-bold mt-1 lg:mt-1 lg:mb-0 ${data?.sweepstakes_popup_title_color_mob ? data?.sweepstakes_popup_title_color_mob : 'text-body'}`}>{data?.sweepstakes_popup_title}</h2>
+									<p className={`lg:mb-0 lg:mt-1 font-size-sm mb-1 ${data?.sweepstakes_popup_desc_color_mob ? data?.sweepstakes_popup_desc_color_mob : 'text-body'} px-0  lg:px-0`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_popup_desc }} />
 								</div>
 							</div>
 							<div id="waitlist-page" className="flex flex-wrap justify-end " data-page-type="Sweepstakes" data-form-id="#sweepstakes-popup__form" data-email-form="#sweepstakes__email">
@@ -255,9 +256,9 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 										</div>
 									)}
 									{!phoneError.valid && data?.phone_en && <span className='text-[#dc3545] text-xs block'>{phoneError.error}</span>}
-									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 text-[11px] lg:text-[11px] ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
-									<Button  type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">{data.sweepstakes_popup_submit || 'Register now'}</Button>
-									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 text-[8px] ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob  : 'text-body'}`} dangerouslySetInnerHTML={{__html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<p className={`hidden lg:block sweepstakes-popup__toc text-center mb-1 mt-2 text-[11px] lg:text-[11px] ${data?.sweepstakes_foot_note_color ? data?.sweepstakes_foot_note_color : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
+									<Button type="submit" buttonClass="btn-primary w-full border-0 py-g mt-2 lg:mt-0">{data.sweepstakes_popup_submit || 'Register now'}</Button>
+									<p className={`lg:hidden sweepstakes-popup__toc text-center mb-1 mt-1 text-[8px] ${data?.sweepstakes_foot_note_color_mob ? data?.sweepstakes_foot_note_color_mob : 'text-body'}`} dangerouslySetInnerHTML={{ __html: data?.sweepstakes_foot_note.replace('text-underline', ' text-underline ') }}></p>
 								</form>
 							</div>
 						</div>
@@ -281,7 +282,7 @@ const Sweepstakes: React.FC<SweepstakesProp> = ({ handleClose, data, trackBlueco
 						</div>
 					)}
 
-					<CloseButton handleClose={onClose} className={`${data?.sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`}   />
+					<CloseButton handleClose={onClose} className={`${data?.sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
 				</div>
 			</div>
 		</>

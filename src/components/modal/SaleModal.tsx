@@ -26,6 +26,7 @@ type SalePopupProp = {
 	handleClose: () => void
 	data: SalesPopupData
 	store: string
+	modalId?: string
 }
 
 
@@ -59,17 +60,17 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 
 	return (
 		<div className={`flex w-full h-full ${sbp_bg_color} ${sbp_image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
-            <div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
-                <picture className="w-full h-full">
-                    <source srcSet={sbp_img_lg?.url} media="(min-width: 992px)" />
-                    <img src={sbp_img?.url} className="w-full h-full object-cover object-top" alt={`Popup of ${sbp_heading}`} />
-                </picture>
-            </div>
-            <div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4">
-                <CloseButton handleClose={handleClose} className={`${sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
-                <div className="text-center w-full">
-                    <h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em] leading-[1.25]`}>{sbp_heading}</h3>
-                    <div className={`flex items-center justify-center ${platform === 'os-win' || platform === 'os-android' ? 'mb-1' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'mb-2' : ''}`}>
+			<div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
+				<picture className="w-full h-full">
+					<source srcSet={sbp_img_lg?.url} media="(min-width: 992px)" />
+					<img src={sbp_img?.url} className="w-full h-full object-cover object-top" alt={`Popup of ${sbp_heading}`} />
+				</picture>
+			</div>
+			<div className="lg:w-1/2 w-full flex flex-col items-center justify-center p-3 lg:p-4">
+				<CloseButton handleClose={handleClose} className={`${sbp_close_color ?? 'fill-[#000]'} h-[1em!important] text-sm [width:auto!important]`} />
+				<div className="text-center w-full">
+					<h3 className={`${sbp_heading_color || 'text-body'} font-normal text-[1.375em] leading-[1.25]`}>{sbp_heading}</h3>
+					<div className={`flex items-center justify-center ${platform === 'os-win' || platform === 'os-android' ? 'mb-1' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'mb-2' : ''}`}>
 						<h2 className={`${sbp_percentage_color || 'text-body'} text-[7.25em] ${platform === 'os-win' || platform === 'os-android' ? 'leading-[96px]' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'h-[88px] leading-[1]' : ''}`}>{sbp_percentage}</h2>
 						<div className="flex flex-col">
 							<h2 className={`${sbp_percentage_color || 'text-body'} text-[4.625em] ${platform === 'os-win' || platform === 'os-android' ? 'leading-[74px]' : ''} ${platform === 'os-mac' || platform === 'os-ios' ? 'leading-[1]' : ''}`}>%</h2>
@@ -77,31 +78,31 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 						</div>
 					</div>
 
-                    <p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`}>{sbp_desc}</p>
-                    {sbp_cta_enabled && (!copied ? (
-							<Button
-								onClick={copyCode}
-								data-code={sbp_code}
-								buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full"
-							>
-								<span className="hidden lg:inline">Code: {sbp_code}</span>
-								<span className="lg:hidden">Use Code: {sbp_code}</span>
-								<Paste className="svg--current-color svg text-primary ml-1" />
-							</Button>
-						) : (
-							<Button
-								buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative rounded-full"
-							>
-								COPIED
-							</Button>
-						)
+					<p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`}>{sbp_desc}</p>
+					{sbp_cta_enabled && (!copied ? (
+						<Button
+							onClick={copyCode}
+							data-code={sbp_code}
+							buttonClass="w-full items-center border-2 border-white bg-white text-dark inline-flex justify-center relative rounded-full"
+						>
+							<span className="hidden lg:inline">Code: {sbp_code}</span>
+							<span className="lg:hidden">Use Code: {sbp_code}</span>
+							<Paste className="svg--current-color svg text-primary ml-1" />
+						</Button>
+					) : (
+						<Button
+							buttonClass="w-full border-2 border-white bg-white text-primary inline-flex justify-center items-center relative rounded-full"
+						>
+							COPIED
+						</Button>
+					)
 					)}
-                    <a href={sbp_cta_url} className="btn-lg hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-full mt-1">
-                        {sbp_cta_text}
-                    </a>
-                </div>
-            </div>
-        </div>
+					<a href={sbp_cta_url} className="btn-lg hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-full mt-1">
+						{sbp_cta_text}
+					</a>
+				</div>
+			</div>
+		</div>
 	)
 };
 
