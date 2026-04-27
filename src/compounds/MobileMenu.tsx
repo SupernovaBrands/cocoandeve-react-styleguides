@@ -110,7 +110,7 @@ const MobileMenu = (props: any) => {
 					<a href="/" className="mx-auto lg:mx-0 py-1" aria-label="CocoAndEve Logo">
 						<BrandLogo className="lg:h-[34px] overflow-hidden " />
 					</a>
-					<button type="button" onClick={() => onToggleMobileNav(false)} className={`p-[20px] -mr-[20px]`} aria-label="Close menu">
+					<button type="button" onClick={() => onToggleMobileNav(false)} className={`absolute right-[20px] p-[20px] -mr-[20px]`} aria-label="Close menu">
 						<Close onClick={() => onToggleMobileNav(false)} className='svg w-[1em] h-[1em]' />
 					</button>
 				</li>
@@ -314,7 +314,7 @@ const MobileMenu = (props: any) => {
 				)}
 
 				<li key="shopall" className="my-g p-g" role="presentation">
-					<a href="/collections/all" className={`btn w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
+					<a href="/collections/all" className={`btn hover:text-white hover:no-underline w-full ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white hover:text-white' : 'btn-primary'} px-g py-g`} data-cy="shopall-btn">Shop All</a>
 				</li>
 				<li key="countries" className="px-g py-1 border-b mb-g border-[#A3A3A3]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
