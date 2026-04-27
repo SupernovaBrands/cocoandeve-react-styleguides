@@ -27,9 +27,9 @@ const PopularProducts = (props: any) => {
 								if (store === 'int' && handle === 'clean-slate-set') {
 									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_03b6e47b-ea7c-4db3-8edc-7e02bee8514b.jpg?v=1772038281';
 								}
-								if (store === 'eu' && handle === 'sunny-honey-bali-bronzing-self-tan-set') {
-									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6cd46e55-8015-4c34-b853-4082b687277c.jpg?v=1772038303';
-								}
+								// if (store === 'eu' && handle === 'sunny-honey-bali-bronzing-self-tan-set') {
+								// 	featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_6cd46e55-8015-4c34-b853-4082b687277c.jpg?v=1772038303';
+								// }
 								if (store === 'eu' && handle === 'bali-bae-self-tan-set') {
 									featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_64cdaa05-d417-4b44-a67b-eaece672355a.jpg?v=1772038323';
 								}
