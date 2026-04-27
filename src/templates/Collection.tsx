@@ -635,7 +635,7 @@ const Collection = (props: any) => {
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                                     {!collectionSettings.isLoading && (
-                                                        <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                        <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:gap-[1rem] lg:pb-[1rem]">
                                                             {(handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf')) && (
                                                                 <ProductCardQuiz
                                                                     className="relative"
@@ -659,7 +659,7 @@ const Collection = (props: any) => {
                                                                     title={collectionSettings?.quizSetting?.quiz_title}
                                                                     ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
                                                                     imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
-                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x.jpg?v=1776308057"
                                                                     key={`collection-quiz-card--${handle}--${index}`}
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
@@ -670,7 +670,7 @@ const Collection = (props: any) => {
                                                             <ProductCardQuiz
                                                                 className="relative"
                                                                 imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057"
                                                                 key={`collection-byob-card--${handle}--${index}`}
                                                                 href='/pages/build-your-own-bundle'
                                                                 ctaLabel='Get Started'
