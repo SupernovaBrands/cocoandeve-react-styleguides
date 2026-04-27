@@ -322,7 +322,6 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         setLoading(false);
-
         // console.log('currentCollection', currentCollection);
         const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
 
@@ -331,7 +330,7 @@ const Collection = (props: any) => {
         if (window.innerWidth < 769) {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
-
+        setShowByobCard({ show: false, position: 0, dtPosition: 0 })
         if (currentPos > 0) {
             setShowByobCard({
                 show: true,
@@ -431,15 +430,18 @@ const Collection = (props: any) => {
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
                 <option value="price-high-low">Price, high to low</option>
-                <option value="newest">Date, new to old</option>
+                {/* <option value="newest">Date, new to old</option> */}
             </select>
         </div>
     );
 
 
     // console.log('sidebarMenu', sidebarMenu);
-    const plainTextTitle = collectionTitle ? collectionTitle.replace(/<[^>]+>/g, '') : 'Shop All';
-    const titleCharacterCount = plainTextTitle.length;
+
+    const splitVersionCard = currentCollection?.handle === 'tan' ||
+        !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
+        currentCollection?.handle === 'spf' ||
+        !!(parentCollection && parentCollection?.collection?.handle === 'spf');
 
     return (
         <>
@@ -482,8 +484,8 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className={`${titleCharacterCount > 18 ? 'text-sm' : 'text-xl'} lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
-                                dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
+                            <h1 className={`text-[19px] lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
+                                dangerouslySetInnerHTML={{ __html: (collectionTitle ?? 'Shop All').replace('Shop ', '<span class="hidden lg:inline">Shop </span>') }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
                                 <>
@@ -504,10 +506,10 @@ const Collection = (props: any) => {
                                     )}
                                 </>
                             ) : ( */}
-                            <>
+                            {/* <>
                                 {!isLoading && (
-                                    <>
-                                        {/* <div className="w-1/2 lg:hidden px-hg">
+                                    <> */}
+                            {/* <div className="w-1/2 lg:hidden px-hg">
                                             <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                 <option value="">Filter by</option>
                                                 {mobileDropdown.map((parent: any, index: number) => {
@@ -516,19 +518,19 @@ const Collection = (props: any) => {
                                                 })}
                                             </select>
                                         </div> */}
-                                        <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
-                                            {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
+                            <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
+                                {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
                                                 <option value="featured">Sort By</option>
                                                 <option value="best-selling">Best selling</option>
                                                 <option value="price-low-high">Price, low to high</option>
                                                 <option value="price-high-low">Price, high to low</option>
                                                 <option value="newest">Date, new to old</option>
                                             </select> */}
-                                            <FilterOptions className="lg:hidden" />
-                                        </div>
-                                    </>
+                                <FilterOptions className="lg:hidden" />
+                            </div>
+                            {/* </>
                                 )}
-                            </>
+                            </> */}
                             {/* )} */}
 
                             {handle === 'all' && <FilterOptions className="hidden lg:flex" />}
@@ -636,22 +638,24 @@ const Collection = (props: any) => {
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                                     {!collectionSettings.isLoading && (
-                                                        handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
-                                                            <ProductCardQuiz
-                                                                className="relative w-full lg:h-full"
-                                                                href={collectionSettings?.quizSetting?.spf_quiz_button_url}
-                                                                title={collectionSettings?.quizSetting?.spf_quiz_title}
-                                                                heading="SPF Quiz"
-                                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                                key={`collection-quiz-card--spf--${index}`}
-                                                                quizSetting={collectionSettings.quizSetting}
-                                                                store={store}
-                                                                ctaBgColor={generalSetting?.spf_cta_bg_color}
-                                                                ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
-                                                            />
-                                                        ) : (
-                                                            <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                        <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                            {(handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf')) && (
+                                                                <ProductCardQuiz
+                                                                    className="relative"
+                                                                    href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                                    title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                                    heading="SPF Quiz"
+                                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Mobile_x96.jpg?v=1777003173"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Desktop_417x.jpg?v=1777003133"
+                                                                    key={`collection-quiz-card--spf--${index}`}
+                                                                    quizSetting={collectionSettings.quizSetting}
+                                                                    store={store}
+                                                                    ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                                    ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
+                                                                    splitVersion={splitVersionCard}
+                                                                />
+                                                            )}
+                                                            {(handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
                                                                 <ProductCardQuiz
                                                                     className="relative"
                                                                     href={collectionSettings?.quizSetting?.quiz_button_url}
@@ -663,29 +667,26 @@ const Collection = (props: any) => {
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                                    splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
+                                                                    splitVersion={splitVersionCard}
                                                                 />
-
-                                                                {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
-                                                                    <ProductCardQuiz
-                                                                        className="relative"
-                                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                                        key={`collection-byob-card--${handle}--${index}`}
-                                                                        href='/pages/build-your-own-bundle'
-                                                                        ctaLabel='Get Started'
-                                                                        heading='Build Your Own Bundle'
-                                                                        title='Mix, match & save <br />your way!'
-                                                                        store={store}
-                                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                                    />
-                                                                )}
-                                                            </div>
-                                                        )
+                                                            )}
+                                                            <ProductCardQuiz
+                                                                className="relative"
+                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
+                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                key={`collection-byob-card--${handle}--${index}`}
+                                                                href='/pages/build-your-own-bundle'
+                                                                ctaLabel='Get Started'
+                                                                heading='Build Your Own Bundle'
+                                                                title='Mix, match & save <br />your way!'
+                                                                store={store}
+                                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                            />
+                                                        </div>
                                                     )}
 
                                                     {collectionSettings.isLoading && (
-                                                        <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
+                                                        <QuizCardPlaceholder split={splitVersionCard} />
                                                     )}
                                                 </div>
                                             </>
@@ -711,6 +712,19 @@ const Collection = (props: any) => {
                                                 store={store}
                                                 customProductTitle={customProductTitle}
                                             />
+                                        )}
+                                        {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
+                                            <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
+                                                {!collectionSettings.isLoading && (
+                                                    <ProductCardKit
+                                                        className="relative flex flex-col text-center collection-lg-order"
+                                                        store={store}
+                                                    />
+                                                )}
+                                                {collectionSettings.isLoading && (
+                                                    <QuizCardPlaceholder />
+                                                )}
+                                            </div>
                                         )}
                                     </Fragment>
                                 );

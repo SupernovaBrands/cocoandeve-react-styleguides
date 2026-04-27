@@ -92,6 +92,14 @@ const RealResultCard = (props) => {
 		data.label = data.label.replace('Tan Boosting Anti-Aging Body Oil SPF50', 'Tan Boosting Anti-Aging Body Oil SPF45');
 	}
 
+	if (data.label) {
+		const hasStrongProduct = /<strong>\s*Product\s*:?\s*<\/strong>/i.test(data.label);
+
+		if (!hasStrongProduct) {
+			data.label = data.label.replace(/Product\s*:/i, '<strong>Product:</strong>');
+		}
+	}
+
 	const titleEscaped = escapeHtml(data.label);
 	// @ts-ignore
 	const children = parse(data.label)?.props?.children && parse(data.label)?.props?.children[1] ? parse(data.label)?.props?.children[1]?.props?.children : `Review @ ${data.author} for ${data.handle}`;

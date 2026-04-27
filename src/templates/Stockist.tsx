@@ -105,7 +105,7 @@ const Stockist = (props: any) => {
                         <div className="hidden lg:block" dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
                     </div>
                     <div className="w-full lg:w-auto">
-                        <select title="Change your country or region" className="border-0 custom-select lg:min-w-[auto] min-w-[190px] rounded-none stockist__select py-[13px] pr-[12px] pl-[20px]" value={region} onChange={regionChangeHandler} >
+                        <select title="Change your country or region" className="border-0 custom-select min-w-[190px] rounded-none stockist__select py-[13px] pr-[12px] pl-[20px]" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
