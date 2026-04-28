@@ -678,7 +678,7 @@ const Collection = (props: any) => {
                                                                 href='/pages/build-your-own-bundle'
                                                                 ctaLabel='Get Started'
                                                                 heading='Build Your Own Bundle'
-                                                                title='Mix, match & save <br />your way!'
+                                                                title='Mix, match & save <br />up to 20% OFF!'
                                                                 store={store}
                                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                             />
