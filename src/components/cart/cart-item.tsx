@@ -118,49 +118,49 @@ export const CartItem = (props:CartItemProps) => {
 		let active = true;
 		let featuredImage = '';
 
-		if (store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e9cb40b2-9b22-481b-9cf0-f6a8d5628347.jpg?v=1772037749';
-		}
+		// if (store === 'my' && item.merchandise.product.handle === 'masque-towelwrap') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_e9cb40b2-9b22-481b-9cf0-f6a8d5628347.jpg?v=1772037749';
+		// }
 
-		if ((store === 'my' || store === 'uk' || store === 'eu' || store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_44559ed8-85ec-40a1-9193-b12a85f50a7a.jpg?v=1772037770';
-		}
+		// if ((store === 'my' || store === 'uk' || store === 'eu' || store === 'au') && item.merchandise.product.handle === 'clean-slate-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_44559ed8-85ec-40a1-9193-b12a85f50a7a.jpg?v=1772037770';
+		// }
 
-		if (store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_878ce412-fae5-4b17-b2c7-cdfd50c95682.jpg?v=1772037792';
-		}
+		// if (store === 'int' && item.merchandise.product.handle === 'clean-slate-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_878ce412-fae5-4b17-b2c7-cdfd50c95682.jpg?v=1772037792';
+		// }
 
-		if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_051e9d3f-6619-48f3-92a7-c46b2fa78d8e.jpg?v=1772037812';
-		}
+		// if ((store === 'my' || store === 'dev') && item.merchandise.product.handle === 'sweet-scalp-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_051e9d3f-6619-48f3-92a7-c46b2fa78d8e.jpg?v=1772037812';
+		// }
 
 		// if ((store === 'eu') && item.merchandise.product.handle === 'sunny-honey-bali-bronzing-self-tan-set') {
 		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_14bcf2e0-fc14-42fc-9c4a-0c067fa6a40b.jpg?v=1772037842';
 		// }
 
-		if ((store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_dd372d4f-d256-412e-9507-f4dc5d731340.jpg?v=1772037864';
-		}
+		// if ((store === 'eu') && item.merchandise.product.handle === 'bali-bae-self-tan-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_dd372d4f-d256-412e-9507-f4dc5d731340.jpg?v=1772037864';
+		// }
 
 		// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
 		// 	item.featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
 		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
 		// }
 
-		if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ac0ac9b3-0c0a-4e3b-a27d-b686e2d95980.jpg?v=1772037951';
-		}
+		// if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ac0ac9b3-0c0a-4e3b-a27d-b686e2d95980.jpg?v=1772037951';
+		// }
 		// if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
 		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4279b1fc-feb1-406b-85b6-4e1450cfff95.jpg?v=1772037973';
 		// }
 
-		if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f3892614-a042-466a-8268-8fca468e9ac9.jpg?v=1772037996';
-		}
+		// if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f3892614-a042-466a-8268-8fca468e9ac9.jpg?v=1772037996';
+		// }
 
-		if (['au'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_20ab9884-e1bf-425e-86e9-908ee9148e97.jpg?v=1772038027&width=320';
-		}
+		// if (['au'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'dark') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_20ab9884-e1bf-425e-86e9-908ee9148e97.jpg?v=1772038027&width=320';
+		// }
 
 		if (useShopifyVariantInfo && item.merchandise?.image?.url) {
 			featuredImage = item.merchandise?.image?.url;
