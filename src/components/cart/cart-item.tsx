@@ -148,10 +148,10 @@ export const CartItem = (props:CartItemProps) => {
 			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_dd372d4f-d256-412e-9507-f4dc5d731340.jpg?v=1772037864';
 		}
 
-		if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
-			item.featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
-		}
+		// if ((store === 'my' || store === 'uk' || store === 'int' || store === 'au' || store === 'eu') && item.merchandise.product.handle === 'detox-nourish-set') {
+		// 	item.featuredImageUrl = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_a077878d-c77b-44b8-878f-1cb03a31a8b7.jpg?v=1772037888';
+		// }
 
 		if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ac0ac9b3-0c0a-4e3b-a27d-b686e2d95980.jpg?v=1772037951';
