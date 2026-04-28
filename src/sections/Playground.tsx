@@ -182,7 +182,7 @@ const Playground = (props: any) => {
                     )}
 
                     {/* skin */}
-                    {['int', 'my', 'au'].includes(store) && (
+                    {['int', 'au'].includes(store) && (
                         <PlaygroundCardV2 store={store} data={content?.range_3}
                             imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_m_828x.jpg?v=1771226109`}
                             imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_d_1920x.jpg?v=1771226885`}
@@ -210,12 +210,16 @@ const Playground = (props: any) => {
                 <Carousel.Navigation>
                     <div className="container px-2 hidden lg:block">
                         <ol className="flex items-center absolute bottom-[38px] gap-[.25rem]">
-                            <li className="h-4 flex items-center">
-                                <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 0 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(0)} />
-                            </li>
-                            <li className="h-4 flex items-center">
-                                <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 1 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(1)} />
-                            </li>
+                            {!['my'].includes(store) && (
+                                <>
+                                    <li className="h-4 flex items-center">
+                                        <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 0 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(0)} />
+                                    </li>
+                                    <li className="h-4 flex items-center">
+                                        <button className={`w-5 h-full relative after:absolute after:content-[""] after:left-0 after:right-0 after:bottom-0 after:top-[50%] after:translate-y-[-50%] after:bg-gray-600 ${idx1 === 1 ? 'after:h-[3px]' : 'after:h-[1px]'}`} onClick={() => onClick1(1)} />
+                                    </li>
+                                </>
+                            )}
                             {/* my only 2 slides */}
                             {!['int', 'my'].includes(store) && (
                                 <>
