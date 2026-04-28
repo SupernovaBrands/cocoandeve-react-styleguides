@@ -32,7 +32,7 @@ const ProductCardKit = (props: any) => {
                     <p className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full`}>Build Your Own Bundle</p>
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body"
                         dangerouslySetInnerHTML={{
-							__html: 'Mix, match & save<br>your way!',
+							__html: 'Mix, match & save<br>up to 20% OFF!',
 						}}
                     />
                     <span className={`hidden lg:inline-block align-middle text-center select-none border py-1 px-3 leading-normal no-underline ${props.ctaBgColor === 'bg-dark' ? 'bg-dark border-dark hover:bg-dark' : 'bg-primary border-primary hover:primary-dark' } text-white hover:text-white hover:no-underline rounded-none lg:py-[7px] lg:px-[28px] min-w-[157px]`}>Get Started</span>
