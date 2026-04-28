@@ -649,8 +649,8 @@ const Collection = (props: any) => {
                                                                     href={collectionSettings?.quizSetting?.spf_quiz_button_url}
                                                                     title={collectionSettings?.quizSetting?.spf_quiz_title}
                                                                     heading="SPF Quiz"
-                                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Mobile_x96.jpg?v=1777003173"
-                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Desktop_417x.jpg?v=1777003133"
+                                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Mobile_1_x96.jpg?v=1777355616"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Desktop_1_417x.jpg?v=1777355617"
                                                                     key={`collection-quiz-card--spf--${index}`}
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
