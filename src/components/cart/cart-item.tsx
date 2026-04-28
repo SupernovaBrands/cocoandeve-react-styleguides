@@ -156,9 +156,9 @@ export const CartItem = (props:CartItemProps) => {
 		if (store === 'au' && item.merchandise.product.handle === 'super-hydrating-shampoo-conditioner-limited-edition-set') {
 			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_ac0ac9b3-0c0a-4e3b-a27d-b686e2d95980.jpg?v=1772037951';
 		}
-		if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
-			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4279b1fc-feb1-406b-85b6-4e1450cfff95.jpg?v=1772037973';
-		}
+		// if (store === 'us' && item.merchandise.product.handle === 'detox-nourish-set') {
+		// 	featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_4279b1fc-feb1-406b-85b6-4e1450cfff95.jpg?v=1772037973';
+		// }
 
 		if (['ca'].includes(store) && item.merchandise.product.handle === 'golden-hour-set' && selectedVariant[0].toLowerCase() === 'medium') {
 			featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/public_f3892614-a042-466a-8268-8fca468e9ac9.jpg?v=1772037996';
