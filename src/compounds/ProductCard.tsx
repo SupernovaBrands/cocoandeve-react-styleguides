@@ -640,7 +640,7 @@ const ProductCard = (props: any) => {
                         ))}
                     </div>
                 )}
-                <p className={`product-title__text ${props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
+                <p className={`product-title__text ${!kitBuilder && props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
                         condition={clickShowPopup}
                         wrap={children => <span role="button" className="text-sm leading-[18px] hover:underline lg:text-base product-card__title text-body hover:text-body w-full mb-[3px]" onClick={openModal}>{children}</span>}
