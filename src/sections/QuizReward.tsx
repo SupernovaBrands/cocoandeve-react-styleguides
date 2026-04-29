@@ -52,7 +52,7 @@ const QuizRewardTest = (props: any) => {
 
     return (
         <section ref={sectionRef} className="container text-center my-5">
-            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Beauty With Confidence</p>
+            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Tried, Tested & Loved</p>
             {/* <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
@@ -132,8 +132,8 @@ const QuizRewardTest = (props: any) => {
                             <img loading="lazy" alt="Cocoandeve overview review" width={384} height={88} className="w-full h-[88px] lg:h-auto" 
                             src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" />
                         </picture>
-                        <figcaption className="absolute top-0 bottom-0 left-0 right-0 py-[.75rem] px-[.625rem] lg:p-[1.5rem] items-center text-left">
-                            {!['my'].includes(store) && <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty With Confidence</p>}
+                        <figcaption className="absolute top-0 bottom-0 left-0 right-0 py-[.75rem] px-[.625rem] lg:p-2 items-center text-left">
+                            {!['my'].includes(store) && <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Tried, Tested & Loved</p>}
                             <div className={`
                                 grid grid-cols-[99fr_83fr_107fr] gap-[1rem] lg:gap-[.75rem]
                                 ${['my'].includes(store) ? 'lg:grid-cols-3' : ''}
@@ -149,7 +149,7 @@ const QuizRewardTest = (props: any) => {
                                 </div>
                                 <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
                                     <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2' />
-                                    <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0"><span className="text-nowrap">{totalReviews} Customer</span> Reviews</p>
+                                    <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0"><span className="text-nowrap">{totalReviews} customer</span> reviews</p>
                                 </div>
                             </div>
                         </figcaption>
