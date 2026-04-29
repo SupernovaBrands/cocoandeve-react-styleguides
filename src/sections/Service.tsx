@@ -44,7 +44,7 @@ const Service = (props: any) => {
 					{SERVICES.map((list, i) => {
 						return (
 							<li key={i} className={`w-1/3 md:w-1/6 mb-4 lg:mb-0 ${i == 1 ? 'px-0' : 'px-g sm:px-hg'}`}>
-								<i className="inline-flex flex-wrap h1 mb-2">
+								<i className={`inline-flex flex-wrap h1 ${list.id === 'stars' ? 'mb-[18px]' : 'mb-2'}`}>
 									{list.id === 'stars' && <Stars className="text-body" />}
 									{list.id === 'winner-award' && <WinnerAward className="text-body" />}
 									{list.id === 'money-back' && <>{icon}</>}
