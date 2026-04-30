@@ -141,16 +141,16 @@ const QuizReward = (props: any) => {
                                 ${['my'].includes(store) ? 'lg:grid-cols-3' : ''}
                                 ${['ca', 'us', 'uk', 'eu', 'au', 'dev', 'int'].includes(store) ? 'lg:grid-cols-1' : ''}
                                 `}>
-                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
-                                    <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-2 h-2' />
+                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] lg:justify-center">
+                                    <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-2 h-2 mt-0 lg:mt-[5px]' />
                                     <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">Award-winning beauty</p>
                                 </div>
-                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
-                                    <i dangerouslySetInnerHTML={{ __html: MONEY_BACK }} className='w-2 h-2' />
+                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] lg:justify-center">
+                                    <i dangerouslySetInnerHTML={{ __html: MONEY_BACK }} className='w-2 h-2 mt-0 lg:mt-[5px]' />
                                     <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">Money back guarantee</p>
                                 </div>
-                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
-                                    <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2' />
+                                <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] lg:justify-center">
+                                    <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2 mt-0 lg:mt-[5px]' />
                                     <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0"><span className="text-nowrap">{totalReviews} customer</span> reviews</p>
                                 </div>
                             </div>
