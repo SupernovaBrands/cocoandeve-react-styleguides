@@ -605,6 +605,7 @@ const Collection = (props: any) => {
                                                     <ProductCardKit
                                                         className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
+                                                        data={collectionSettings?.byobSetting}
                                                     />
                                                 )}
                                                 {collectionSettings.isLoading && (
@@ -672,13 +673,13 @@ const Collection = (props: any) => {
                                                             )}
                                                             <ProductCardQuiz
                                                                 className="relative"
-                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057"
+                                                                imgMb={collectionSettings?.byobSetting?.byob_image_mobile?.url?.replace('.jpg', '_x96.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056'}
+                                                                imgDt={collectionSettings?.byobSetting?.byob_image_desktop_split?.url?.replace('.jpg', '_417x.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057'}
                                                                 key={`collection-byob-card--${handle}--${index}`}
-                                                                href='/pages/build-your-own-bundle'
-                                                                ctaLabel='Get Started'
-                                                                heading='Build Your Own Bundle'
-                                                                title='Mix, match & save <br />up to 20% OFF!'
+                                                                href={collectionSettings?.byobSetting?.byob_url || '/pages/build-your-own-bundle'}
+                                                                ctaLabel={collectionSettings?.byobSetting?.byob_button_cta || 'Get Started'}
+                                                                heading={collectionSettings?.byobSetting?.byob_title || 'Build Your Own Bundle'}
+                                                                title={collectionSettings?.byobSetting?.byob_text || 'Mix, match & save <br />up to 20% OFF!'}
                                                                 store={store}
                                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                             />
