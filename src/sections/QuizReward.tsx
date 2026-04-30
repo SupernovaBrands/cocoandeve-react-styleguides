@@ -52,7 +52,7 @@ const QuizRewardTest = (props: any) => {
 
     return (
         <section ref={sectionRef} className="container text-center my-5">
-            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">Tried, Tested & Loved</p>
+            <p className="text-xl lg:text-2xl mb-[.75rem] lg:mb-3 font-bold">{store === 'my' ? 'Tried, Tested & Loved' : 'Discover more'}</p>
             {/* <div className="flex flex-wrap -mx-hg lg:-mx-g justify-center">
                 <ProductCardQuiz
                     className="w-full lg:w-1/3 px-g mb-g lg:mb-0 block relative"
