@@ -152,7 +152,7 @@ const QuizReward = (props: any) => {
                             <img loading="lazy" alt="Cocoandeve overview review" width={384} height={88} className="w-full h-[88px] lg:h-auto" 
                             src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" />
                         </picture>
-                        <figcaption className="absolute bottom-0 left-0 right-0 py-[.75rem] px-[.625rem] lg:p-2 items-center text-left">
+                        <figcaption className="absolute inset-0 py-[.75rem] px-[.625rem] lg:p-2 flex flex-col justify-center text-left">
                             {!['my'].includes(store) && <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Tried, Tested & Loved</p>}
                             <div className={`
                                 grid grid-cols-[99fr_83fr_107fr] gap-[1rem] lg:gap-[.75rem]
