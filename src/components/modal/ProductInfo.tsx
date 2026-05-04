@@ -147,6 +147,7 @@ const ProductInfo = (props: any) => {
         }
 
         if (tabSelected && tabSelected.length >= maxItem) return false;
+        setAddingItem(true);
         const productModel = await buildProductCardModel(store, productShopify, null, null);
         
         setTabSelected((prev) => {
@@ -165,6 +166,7 @@ const ProductInfo = (props: any) => {
             });
             return prevData;
         });
+        setAddingItem(false);
         setTimeout(() => {
             handleClose();
         }, 1500);
@@ -625,7 +627,7 @@ const ProductInfo = (props: any) => {
                             )}
                             
                             {selectedVariant?.availableForSale && (
-                                <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
+                                <Button onTouchStart={() => {}} disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (
                                         <>
