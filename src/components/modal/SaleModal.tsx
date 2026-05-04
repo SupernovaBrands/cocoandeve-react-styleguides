@@ -78,7 +78,10 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 						</div>
 					</div>
 
-					<p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`}>{sbp_desc}</p>
+					{/* <p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`}>{sbp_desc}</p> */}
+					<p className={`${sbp_desc_color || 'text-body'} text-sm text-gray-600 mb-2 leading-[1.25]`} dangerouslySetInnerHTML={{
+						__html: sbp_desc
+					}}/>
 					{sbp_cta_enabled && (!copied ? (
 						<Button
 							onClick={copyCode}
