@@ -24,6 +24,24 @@ const QuizRewardTest = (props: any) => {
     const [totalReviews, setTotalReviews] = useState('28159');
     const sectionRef = useRef<HTMLElement>(null);
     const hasFetched = useRef(false);
+    let os = 'unknown';
+    const [platform, setPlatform] = useState(os);
+
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+    
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
+    
+        setPlatform(os);
+    }, []);
 
     useEffect(() => {
         const el = sectionRef.current;
@@ -143,15 +161,15 @@ const QuizRewardTest = (props: any) => {
                                 `}>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>Award-winning beauty</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Award-winning beauty</p>
                                 </div>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: MONEY_BACK }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>Money back guarantee</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>Money back guarantee</p>
                                 </div>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>{totalReviews} customer reviews</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>{totalReviews} customer reviews</p>
                                 </div>
                             </div>
                         </figcaption>
