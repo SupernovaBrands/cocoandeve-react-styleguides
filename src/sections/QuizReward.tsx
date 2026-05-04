@@ -143,15 +143,15 @@ const QuizReward = (props: any) => {
                                 `}>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${store === 'my' ? 'lg:mb-[4px] mb-0' : ''}`}>Award-winning beauty</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>Award-winning beauty</p>
                                 </div>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: MONEY_BACK }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${store === 'my' ? 'lg:mb-[4px] mb-0' : ''}`}>Money back guarantee</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>Money back guarantee</p>
                                 </div>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${store === 'my' ? 'lg:mb-[4px] mb-0' : ''}`}>{totalReviews} customer reviews</p>
+                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0`}>{totalReviews} customer reviews</p>
                                 </div>
                             </div>
                         </figcaption>
