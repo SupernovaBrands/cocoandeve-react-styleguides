@@ -31,7 +31,12 @@ const ProductCardQuiz = (props: any) => {
                     <img className="w-full" src={props.imgMb} loading="lazy" alt="Illustration of a person taking a quiz to find their perfect self-tan solution" width={384} height={72} />
                 </picture>
                 <figcaption className={`${props.splitVersion ? 'lg:mt-0 lg:top-[50%] lg:-translate-y-[50%]' : 'lg:mt-4 lg:top-0 lg:transform-none'} absolute left-[5em] w-[75%] pl-25 pr-g top-2/4 lg:left-0 lg:right-0 -translate-y-1/2 text-left lg:text-center lg:px-0 lg:pt-0 pb-0 lg:pb-0 lg:w-full items-center [flex-flow:column] justify-center`}>
-                    <p className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full ${props.heading && props.heading?.includes('SPF') ? 'pl-3 lg:pl-0' : '' }`}>{props.heading ?? 'Take the Tan Quiz'}</p>
+                    <p className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full`}>{props.heading ?? 'Take the Tan Quiz'}</p>
+                    <p className={`lg:hidden text-xs text-body ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}
+                        dangerouslySetInnerHTML={{
+							__html: props.subtitleMobile,
+						}}
+                    />
                     <p className={`hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body ${props.heading === 'SPF Quiz' ? '[@media(min-width:1200px)]:max-w-[100%]' : '[@media(min-width:1200px)]:max-w-[65%]'} [@media(min-width:1200px)]:mx-auto`}
                         dangerouslySetInnerHTML={{
 							__html: ['us'].includes(props.store) ? title.replace('colour', 'color') : title,
