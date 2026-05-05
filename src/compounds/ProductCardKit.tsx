@@ -31,6 +31,11 @@ const ProductCardKit = (props: any) => {
                 </picture>
                 <figcaption className="absolute left-[5em] top-2/4 lg:top-0 lg:left-0 lg:right-0 -translate-y-1/2 lg:transform-none text-left lg:text-center pl-25 pr-g lg:px-0 lg:mt-4 lg:pt-0 pb-0 lg:pb-0 w-[75%] lg:w-full items-center [flex-flow:column] justify-center">
                     <p className={`${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''} lg:text-xl mb-0 lg:mb-25 font-bold text-body w-full`}>{data?.byob_title || 'Build Your Own Bundle'}</p>
+                    <p className={`lg:hidden text-xs text-body ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}
+                        dangerouslySetInnerHTML={{
+							__html: data.byob_subtitle_mobile || 'Up to 20% OFF your routine',
+						}}
+                    />
                     <p className="hidden lg:block text-sm lg:text-base mb-g lg:mb-1 text-body"
                         dangerouslySetInnerHTML={{
 							__html: data?.byob_text || 'Mix, match & save<br>up to 20% OFF!',

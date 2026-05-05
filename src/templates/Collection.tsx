@@ -440,7 +440,7 @@ const Collection = (props: any) => {
     );
 
 
-    // console.log('sidebarMenu', sidebarMenu);
+    console.log('collectionSettings', collectionSettings);
 
     const splitVersionCard = currentCollection?.handle === 'tan' ||
         !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
@@ -656,8 +656,9 @@ const Collection = (props: any) => {
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.spf_cta_bg_color}
-                                                                    ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
+                                                                    ctaLabel={collectionSettings?.quizSetting?.spf_quiz_button_cta}
                                                                     splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.spf_quiz_subtitle_mobile || 'Find your SPF match in seconds'}
                                                                 />
                                                             )}
                                                             {(handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
@@ -673,6 +674,7 @@ const Collection = (props: any) => {
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                                     splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.quiz_subtitle_mobile || 'Get matched in 90 seconds'}
                                                                 />
                                                             )}
                                                             <ProductCardQuiz
@@ -686,6 +688,7 @@ const Collection = (props: any) => {
                                                                 title={collectionSettings?.byobSetting?.byob_text || 'Mix, match & save <br />up to 20% OFF!'}
                                                                 store={store}
                                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                subtitleMobile={collectionSettings?.byobSetting?.byob_subtitle_mobile || 'Up to 20% OFF your routine'}
                                                             />
                                                         </div>
                                                     )}
@@ -724,6 +727,7 @@ const Collection = (props: any) => {
                                                     <ProductCardKit
                                                         className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
+                                                        data={collectionSettings?.byobSetting}
                                                     />
                                                 )}
                                                 {collectionSettings.isLoading && (
