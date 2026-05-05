@@ -440,7 +440,7 @@ const Collection = (props: any) => {
     );
 
 
-    console.log('collectionSettings', collectionSettings);
+    // console.log('collectionSettings', collectionSettings);
 
     const splitVersionCard = currentCollection?.handle === 'tan' ||
         !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
