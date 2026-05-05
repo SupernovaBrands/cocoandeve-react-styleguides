@@ -38,7 +38,7 @@ export const CartItem = (props:CartItemProps) => {
 
 	const { swatches, variants, selectedSwatch, attributes } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
-	const isMultiOptions = item.swatches.length > 1;
+	const isMultiOptions = item.swatches.length > 1 && !item.merchandise.product.isProductBundleApp?.value;
 
 	const componentsJson = attributes.find((attr) => attr.key === '_components')
 	const componentImage = attributes.find((attr) => attr.key === '_image')
@@ -103,7 +103,7 @@ export const CartItem = (props:CartItemProps) => {
 		}
 
 		const { swatches } = item;
-		if (swatches.length >= 2) {
+		if (swatches.length >= 2 && !item.merchandise.product.isProductBundleApp?.value) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
@@ -198,8 +198,31 @@ export const CartItem = (props:CartItemProps) => {
 		return () => {
 			active = false;
 		};
-	
+
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
+
+	const groupSwatches = (data) => {
+		if (!item.merchandise.product.isProductBundleApp?.value) {
+			return data;
+		}
+		const grouped = Object.values(
+			data.reduce((acc, item) => {
+				if (!acc[item.name]) {
+				acc[item.name] = { ...item };
+				} else {
+				// gabungkan id
+				acc[item.name].id += "|" + item.id;
+				// ambil intersection values
+				acc[item.name].values = acc[item.name].values.filter(v =>
+					item.values.includes(v)
+				);
+				}
+				return acc;
+			}, {})
+		);
+		return grouped;
+	}
+
 
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
@@ -323,8 +346,7 @@ export const CartItem = (props:CartItemProps) => {
 						</div>
 					)}
 				>
-
-					{swatches.map((opt:any, index:number) => {
+					{groupSwatches(swatches).map((opt:any, index:number) => {
 						const options = item.merchandise.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
 						const selected = options.filter((option:any, ind:any) => option.name.toLowerCase() !== 'size' && index === ind)
 							.map((option:any) => option.value).join();
