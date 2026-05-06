@@ -7,8 +7,7 @@ type MultiPropType = {
 	className?: string
 };
 
-const EmblaCarousel: React.FC<MultiPropType> = (props) => {
-	const { children, emblaApi, className } = props;
+const EmblaCarousel: React.FC<MultiPropType> = ({ children, emblaApi, className = '' }) => {
 
 	useEffect(() => {
 		if (!emblaApi) return;
@@ -38,23 +37,16 @@ type InnerProp = {
 	className?: string
 	innerClass?: string
 }
-const Inner: React.FC<InnerProp> = (props) => {
+const Inner: React.FC<InnerProp> = ({ emblaRef, children, className = '', innerClass }) => {
 	return (
-		<div className={`overflow-hidden ${props.innerClass ?? ''}`} ref={props.emblaRef}>
-			<div className={`flex carousel__container ${props.className}`}>
-				{props.children}
+		<div className={`overflow-hidden ${innerClass ?? ''}`} ref={emblaRef}>
+			<div className={`flex carousel__container ${className}`}>
+				{children}
 			</div>
 		</div>
 	);
 };
 
-EmblaCarousel.defaultProps = {
-	className: ''
-};
-
-Inner.defaultProps = {
-	className: ''
-};
 const Carousel = { Wrapper: EmblaCarousel, Inner, Navigation };
 
 export default Carousel;

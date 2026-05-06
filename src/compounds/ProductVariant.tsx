@@ -10,28 +10,32 @@ type SwatchProp = {
 	activeVariant?: any
 	mobileCta?: boolean
 }
-const Swatch: React.FC<SwatchProp> = (props) => {
+const Swatch: React.FC<SwatchProp> = ({
+	hideSwatch = false,
+	className = '',
+	textClassName = '',
+	keyName,
+	shadeData,
+	selectedSwatch,
+	children,
+	mobileCta,
+	activeVariant,
+}: SwatchProp) => {
 	const sTan = ['medium','dark','ultra-dark'];
-	const shadesTan = props.shadeData ? props.shadeData.filter((s:any) => sTan.includes(s.id)) : [];
+	const shadesTan = shadeData ? shadeData.filter((s:any) => sTan.includes(s.id)) : [];
 
-	return props.hideSwatch ? <></> : (
-		<div key={props.keyName} className={`product-swatch ${props.mobileCta ? '' : 'flex'} mb-[1rem] lg:mb-0 overflow-x-auto hide-scrollbar ${props.className}`}>
-			{props.children}
-			{props.mobileCta && props.shadeData && props.shadeData.map((s: any, index: number) => {
+	return hideSwatch ? <></> : (
+		<div key={keyName} className={`product-swatch ${mobileCta ? '' : 'flex'} mb-[1rem] lg:mb-0 overflow-x-auto hide-scrollbar ${className}`}>
+			{children}
+			{mobileCta && shadeData && shadeData.map((s: any, index: number) => {
 				const isPod = ['antioxidant glow cream', 'refill pod', 'antioxidant glow cream + refill pod'].includes(s.id);
-				return s.id === props.selectedSwatch && !isPod && !props.activeVariant?.title?.includes('Silky Hair') ?
-					(<p key={`${s.id}-swatch-${index}`} className={`${props.textClassName} w-full text-sm ${shadesTan.length ? 'mt-[1.25rem] md:mt-[19px] lg:mt-[19px]' : 'mt-1 lg:mt-[9px]'} mb-0 product__swatch-label lg:hidden swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
+				return s.id === selectedSwatch && !isPod && !activeVariant?.title?.includes('Silky Hair') ?
+					(<p key={`${s.id}-swatch-${index}`} className={`${textClassName} w-full text-sm ${shadesTan.length ? 'mt-[1.25rem] md:mt-[19px] lg:mt-[19px]' : 'mt-1 lg:mt-[9px]'} mb-0 product__swatch-label lg:hidden swatch-label-${s.id}`} dangerouslySetInnerHTML={{ __html: s.text }} />)
 				: <p key={`${s.id}-swatch-${index}`} className="hidden"/>;
 			})}
 		</div>
 	);
 };
-
-Swatch.defaultProps = {
-	hideSwatch: false,
-	className: '',
-	textClassName: '',
-}
 
 type NotesProp = {
 	notes: string[]
@@ -64,29 +68,36 @@ type VariantProp = {
 	isAdditional?: boolean
 }
 
-const ProductVariant: React.FC<VariantProp> = (props) => {
+const ProductVariant: React.FC<VariantProp> = ({
+	subscription = false,
+	className = '',
+	compare = null,
+	checked = false,
+	keyName,
+	id,
+	onChange,
+	isAdditional,
+	inventory,
+	dataID,
+	children,
+	price,
+	saving,
+	checkType = 'radio',
+}: VariantProp) => {
 	return (
-		<div key={props.keyName} className={`product-variant custom-radio ${props.className}`}>
-			<input id={props.id} aria-label={props.id} onChange={(e) => props.onChange(e)} className="custom-control-input peer/variant" type={props.checkType} name="product-variant" value={props.id} data-is-additional={props.isAdditional} data-inventory={props.inventory} defaultChecked={props.checked} data-id={props.dataID} />
+		<div key={keyName} className={`product-variant custom-radio ${className}`}>
+			<input id={id} aria-label={id} onChange={(e) => onChange(e)} className="custom-control-input peer/variant" type={checkType} name="product-variant" value={id} data-is-additional={isAdditional} data-inventory={inventory} defaultChecked={checked} data-id={dataID} />
 			<div className={`custom-control-label border-0 border-color-[#fff] before:peer-checked/variant:shadow-[inset_0px_0px_0px_2px_white] before:!content-none !pl-0`}>
-				{props.children}
-				{!props.subscription && <p className="mb-1 font-bold product__pricing-dt">
-					{props.compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{props.compare}</span> }
-					<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {props.price}</span>
-					{props.compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {props.saving ? props.saving : '(Save 30%)'} </span>}
+				{children}
+				{!subscription && <p className="mb-1 font-bold product__pricing-dt">
+					{compare && <span className="line-through text-body mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline">{compare}</span> }
+					<span className="mr-[.25rem] text-nowrap lg:text-[1.25em] lg:leading-[1.25em] sm:hidden lg:inline"> {price}</span>
+					{compare && <span className="text-primary text-nowrap lg:text-[1.25em] lg:leading-[1.25em] hidden lg:inline font-normal"> {saving ? saving : '(Save 30%)'} </span>}
 				</p>}
 			</div>
 		</div>
 	)
 };
-
-ProductVariant.defaultProps = {
-	subscription: false,
-	className: '',
-	compare: null,
-	checked: false,
-	checkType: 'radio',
-}
 
 const Product = { Variant: ProductVariant, Swatch, Notes  };
 

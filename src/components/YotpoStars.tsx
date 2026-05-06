@@ -14,7 +14,19 @@ const SingleStar = ({score}) => (
 	</>
 )
 
-const YotpoStar = (props: any) => {
+const YotpoStar = ({
+	sku,
+	productHandle,
+	productUrl = '',
+	showScore = false,
+	showTotal = true,
+	className = '',
+	smSingleStar = false,
+	smSingleStarAllDevice,
+	hideUnderline,
+	sustainability,
+}: any) => {
+	const props = { sku, productHandle, productUrl, showScore, showTotal, className, smSingleStar, smSingleStarAllDevice, hideUnderline, sustainability };
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(5);
 	const [total, setTotal] = useState(0);
@@ -143,14 +155,6 @@ const YotpoStar = (props: any) => {
 			)}
 		</div>
 	);
-};
-
-YotpoStar.defaultProps = {
-	productUrl: '',
-	showScore: false,
-	showTotal: true,
-	className: '',
-	smSingleStar: false,
 };
 
 export default YotpoStar;

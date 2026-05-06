@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $grid-column-width-lg: minmax(0, (map-get($container-max-widths, lg) - $grid-gutter-width-lg * $grid-columns) / $grid-columns);
 $grid-column-width-xl: minmax(0, (map-get($container-max-widths, xl) - $grid-gutter-width-lg * $grid-columns) / $grid-columns);
 
@@ -41,9 +43,9 @@ $grid-column-width-xl: minmax(0, (map-get($container-max-widths, xl) - $grid-gut
 
 	&__image {
 		picture {
-			padding-top: percentage(646/750);
+			padding-top: math.percentage(math.div(646, 750));
 			@include media-breakpoint-up(lg) {
-				padding-top: percentage(1176/1366);
+				padding-top: math.percentage(math.div(1176, 1366));
 			}
 		}
 

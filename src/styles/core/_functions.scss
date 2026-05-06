@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @function calc-em($pixels, $context: 16, $unit: 1em) {
-	@return $pixels / $context * $unit;
+	@return math.div($pixels, $context) * $unit;
 }

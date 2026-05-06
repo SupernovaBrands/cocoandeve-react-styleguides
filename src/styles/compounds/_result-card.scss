@@ -1,10 +1,12 @@
+@use "sass:math";
+
 @layer components {
   .result-card {
     picture {
-      padding-top: percentage(193 / 345);
+      padding-top: math.percentage(math.div(193, 345));
 
       @screen lg {
-        padding-top: percentage(193 / 365);
+        padding-top: math.percentage(math.div(193, 365));
       }
     }
   }

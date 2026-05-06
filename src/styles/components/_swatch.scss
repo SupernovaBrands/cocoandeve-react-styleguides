@@ -1,3 +1,5 @@
+@use '../core/functions' as *;
+
 .variant-swatch {
 	flex-shrink: 0;
 	width: calc-em(40);
