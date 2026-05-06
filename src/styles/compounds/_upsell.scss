@@ -1,3 +1,5 @@
+@use '../core/functions' as *;
+
 @layer components {
 	.upsell {
 		@apply bg-white;
