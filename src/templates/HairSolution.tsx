@@ -239,7 +239,6 @@ const HairSolution = (props: any) => {
     } = usePrevNextButtons(emblaApi);
     const autoPlayClick = controlAutoplay(emblaApi);
 
-    console.log('extendedPostData', extendedPostData);
     return (
         <>
             {(!data.banner.image_d || !data.banner.image_m) && (
