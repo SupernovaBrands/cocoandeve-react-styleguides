@@ -240,7 +240,7 @@ const Sustainability = (props: any) => {
                     <h2 className="mb-1 lg:mb-[1rem] text-body text-center text-xl lg:text-2xl">{intro.heading}</h2>
                     <div className="flex flex-wrap -mx-hg lg:-mx-g lg:max-w-[92.5%] lg:mx-auto">
                         <div className="sustainability--intro w-full lg:w-[67%] lg:basis-[67%] lg:order-1 text-center lg:text-left flex content-center flex-wrap justify-center lg:justify-start px-[7px] pt-[7px] lg:px-3 lg:py-3">
-                            <style jsx>{inlineCss}</style>
+                            <style {...({jsx: true} as any)}>{inlineCss}</style>
                             <div className="text-sm lg:text-base" dangerouslySetInnerHTML={{
                                 __html: intro.text,
                             }}/>
