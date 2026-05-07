@@ -64,6 +64,7 @@
 
 	.swatch-overlay {
 		@screen lg {
+			width: 100%;
 			@apply left-0 right-0 bottom-[1.25rem];
 
 			.button-overlay {
