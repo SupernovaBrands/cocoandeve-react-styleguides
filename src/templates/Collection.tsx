@@ -769,7 +769,7 @@ const Collection = (props: any) => {
                         {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
                         {!isLoading && (
                             <>
-                                <style jsx>{footerCss}</style>
+                                <style {...({jsx: true} as any)}>{footerCss}</style>
                                 <div
                                     className="collection-footer__html"
                                     dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}

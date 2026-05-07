@@ -13,13 +13,13 @@ const modalVariant = {
 };
 
 const containerVariant = {
-	initial: { top: '-50%', transition: { type: 'spring' } },
+	initial: { top: '-50%', transition: { type: 'spring' as const } },
 	isOpen: { top: 'auto' },
 	exit: { top: '-50%' }
 };
 
 const horizontalVariant = {
-	initial: { left: 'auto', right: '-50%', transition: { type: 'spring' } },
+	initial: { left: 'auto', right: '-50%', transition: { type: 'spring' as const } },
 	isOpen: { left: 'auto', right: '0%' },
 	exit: { left: 'auto', right: '-50%' }
 }
@@ -62,9 +62,9 @@ const Modal = (props: any) => {
 	}, [isOpen, handleClose]);
 
 	if (!slideIn && (modalComp === 'newsletter' || modalComp === 'sweepstakes')) {
-		containerVariant.initial = { top: '0', transition: { type: 'spring' } };
+		containerVariant.initial = { top: '0', transition: { type: 'spring' as const } };
 		containerVariant.exit = { top: '0' };
-		horizontalVariant.initial = { left: 'auto', right: '0', transition: { type: 'spring' } };
+		horizontalVariant.initial = { left: 'auto', right: '0', transition: { type: 'spring' as const } };
 		horizontalVariant.exit = { left: 'auto', right: '0' }
 	}
 
