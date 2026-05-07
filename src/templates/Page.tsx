@@ -25,7 +25,7 @@ const Page = (props: any) => {
                         <h1 className="text-center md:mb-7 mb-5">
                             {content?.title}
                         </h1>
-                        <style jsx>{cssGrid}</style>
+                        <style {...({jsx: true} as any)}>{cssGrid}</style>
                         {/* {parse(content?.content.replace('<a class="link-color"', '<a class="link-color underline"'))} */}
                         <div className={`${!isLoading ? '' : 'invisible'} transition-all lg:mb-3`} dangerouslySetInnerHTML={{
 							__html: bodyContent ?? content?.content,
