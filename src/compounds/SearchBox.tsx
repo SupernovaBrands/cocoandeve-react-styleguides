@@ -176,13 +176,16 @@ const SearchBox = (props: any) => {
 								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
 								// featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
 								const { img } = await getFeaturedImgMeta(item, store);
+								// https://app.clickup.com/t/86evwdda2
+								// add condition to subtitle only showing for HERO productType
+								const showSubtitle = item.productType === 'HERO' && item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false;
 								return {
 									title: item.title,
 									handle: item.handle,
 									// subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
 									// 	(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
 									// 	item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower))) ? true : false,
-									subtitle: item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false,
+									subtitle: showSubtitle,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
