@@ -251,7 +251,7 @@ const HairSolution = (props: any) => {
             )}
             <div className={`flex flex-col`}>
             {data.range && (
-                <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-4'}`}>
+                <section className={`mt-3 mb-0 lg:mb-0 order-2 lg:mt-5`}>
                     <div className="container">
                         <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -510,7 +510,7 @@ const HairSolution = (props: any) => {
             )} */}
 
             {data.result && (
-                <section className={`my-3 lg:mb-4 lg:mt-0 container px-0 ${props.sectionTest ? 'lg:mt-5' : ''}`}>
+                <section className={`my-3 lg:mb-5 lg:mt-0 container px-0 lg:mt-5`}>
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
