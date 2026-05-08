@@ -608,7 +608,7 @@ const HairSolution = (props: any) => {
 
             <div className="my-3 lg:mb-5 lg:mt-0 container px-0 lg:mt-5">
                 <div className="container px-0 m-0">
-                    <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl">Haircare Decoded</h2>
+                    <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl">Hair Care Decoded</h2>
                     {blogCarouselArticles.length > 0 &&
                         <Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full px-hg lg:px-g mx-0">
                             <Carousel.Inner emblaRef={emblaRef}>
