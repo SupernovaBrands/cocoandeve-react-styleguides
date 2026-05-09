@@ -2,6 +2,9 @@ import CloseButton from '~/components/modal/CloseButton';
 import Button from '~/components/Button';
 import Paste from '~/images/icons/paste.svg';
 import { useState, useEffect } from 'react';
+import {
+	setCookie,
+} from '~/modules/utils';
 
 interface SalesPopupData {
 	sbp_img: any
@@ -58,6 +61,15 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 		setPlatform(os);
 	}, []);
 
+	const handleClick = (e) => {
+		e.preventDefault();
+		// Set cookie
+		setCookie('sales_popup', 'sales_popup', 30);
+
+		// Navigate after cookie is set
+		window.location.href = sbp_cta_url;
+	};
+
 	return (
 		<div className={`flex w-full h-full ${sbp_bg_color} ${sbp_image_position === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} flex-col`}>
 			<div className="lg:w-1/2 w-full lg:h-[480px] sm:h-[230px] flex items-center justify-center">
@@ -100,7 +112,7 @@ const SaleModal: React.FC<SalePopupProp> = ({ handleClose, data, store }) => {
 						</Button>
 					)
 					)}
-					<a href={sbp_cta_url} className="btn-lg hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-full mt-1">
+					<a href={sbp_cta_url} onClick={handleClick} className="btn-lg hover:no-underline hover:text-white w-full items-center border-2 border-primary bg-primary text-white inline-flex justify-center relative rounded-full mt-1">
 						{sbp_cta_text}
 					</a>
 				</div>
