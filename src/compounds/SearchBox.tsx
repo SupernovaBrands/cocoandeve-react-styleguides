@@ -179,6 +179,7 @@ const SearchBox = (props: any) => {
 								const collRes = await fetch(`/api/collectionProducts?handle=shop-2nd-variants-without-pdps&limit=250&sort=nosort`);
 								const collData = await collRes.json();
 								collectionHandles = (collData?.products || []).map((p: any) => p.handle);
+								// console.log('collectionHandles', collectionHandles);
 							} catch (e) {
 								console.log('Failed to fetch shop-2nd-variants-without-pdps collection', e);
 							}
@@ -193,13 +194,52 @@ const SearchBox = (props: any) => {
 								// also verify the set/upseell item is member of the shop-2nd-variants-without-pdps collection
 								const hasMatchingTag = item.productType === 'HERO' && item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower));
 								let showSubtitle = false;
-								if (hasMatchingTag && collectionHandles.length > 0) {
-									// Check if any product tag references a bundle handle from the collection
-									showSubtitle = item.tags?.some(tag => {
-										const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
-										return collectionHandles.some(handle => normalizedTag.includes(handle));
-									});
+								// if (hasMatchingTag && collectionHandles.length > 0) {
+								// 	// Check if any product tag references a bundle handle from the collection
+								// 	showSubtitle = item.tags?.some(tag => {
+								// 		const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
+								// 		return collectionHandles.some(handle => normalizedTag.includes(handle));
+								// 	});
+								// }
+								// Only fetch strapi data when subtitle check is needed (HERO with matching tag in collection)
+								// console.log('@@@', item, showSubtitle);
+								// if (showSubtitle) {
+								try {
+									const productStrapi = await fetch(`/api/getProductStrapi?handle=${item.handle}&region=${store}`).then(r => r.json());
+									const secondVariant = productStrapi?.[0]?.Sections?.find((s: any) => s.__component === 'product.second-variant');
+									const secondVarHandle = secondVariant?.productSecondVariant?.productSecondVariant?.[store]?.second_var_kit_handle;
+
+									if (secondVarHandle) {
+										// console.log('@@@ 1', item.handle);
+										// Fetch from both Strapi and Shopify in parallel — upsell title can come from either source
+										const [secondVarStrapi, secondVarShopify] = await Promise.all([
+											fetch(`/api/getProductStrapi?handle=${secondVarHandle}&region=${store}`).then(r => r.json()).catch(() => null),
+											fetch(`/api/getProductInfo?handle=${secondVarHandle}&region=${store}`).then(r => r.json()).catch(() => null),
+										]);
+										const strapiTitle = secondVarStrapi?.[0]?.title?.toLowerCase() || '';
+										const shopifyTitle = secondVarShopify?.product?.title?.toLowerCase() || '';
+										// console.log('shopifyTitle', shopifyTitle);
+										// console.log('a block', strapiTitle, shopifyTitle, keywordLower);
+										showSubtitle = strapiTitle.includes(keywordLower) || shopifyTitle.includes(keywordLower);
+									} else {
+										// Fallback: check Shopify product variants from predictive search data
+										const variants = item.variants?.nodes || item.variants?.edges?.map((e: any) => e.node) || [];
+										// console.log('fallback to shopify 2', item.handle, variants);
+										// console.log('b block', variants, keywordLower);
+										// Only check if product has more than 1 variant (single variant = no set/upsell)
+										if (variants.length > 1) {
+											showSubtitle = variants.slice(1).some((v: any) => {
+												const varTitle = v.title?.toLowerCase() || '';
+												return varTitle.includes(keywordLower);
+											});
+										}
+									}
+								} catch (e) {
+									console.log('Failed to fetch strapi product data for subtitle check', e);
+									showSubtitle = false;
 								}
+								// }
+
 								return {
 									title: item.title,
 									handle: item.handle,
