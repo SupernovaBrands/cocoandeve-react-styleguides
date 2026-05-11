@@ -47,13 +47,13 @@ const SearchBox = (props: any) => {
 	}
 
 	useEffect(() => {
-		if (keyword !== '' ) {
+		if (keyword !== '') {
 			setLoading(true);
 			const delayDebounceFn = setTimeout(() => {
 				setResult();
 			}, 750);
 			return () => clearTimeout(delayDebounceFn);
-		} else if (!init){
+		} else if (!init) {
 			setContent();
 			setProducts([]);
 			setInit(true);
@@ -106,7 +106,7 @@ const SearchBox = (props: any) => {
 
 	const keywordSort = (a, b) => {
 		const hasKeywordA = a.title.toLowerCase().includes(keyword.toLowerCase());
-  		const hasKeywordB = b.title.toLowerCase().includes(keyword.toLowerCase());
+		const hasKeywordB = b.title.toLowerCase().includes(keyword.toLowerCase());
 
 		if (hasKeywordA && !hasKeywordB) return -1;
 		if (!hasKeywordA && hasKeywordB) return 1;
@@ -129,11 +129,13 @@ const SearchBox = (props: any) => {
 				return true;
 			}
 		}
-		
+
 		return false;
 	};
 
-	async function setResult () {
+
+
+	async function setResult() {
 		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
 		if (keyword.trim() === '') {
@@ -152,7 +154,7 @@ const SearchBox = (props: any) => {
 						const keywordLower = keyword.toLowerCase();
 						const keywordHandle = keywordLower.trim().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 						// const isSetSearch = /\bset\b/.test(keywordLower);
-						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
+						productsData.sort((x, y) => (x.availableForSale === y.availableForSale) ? 0 : x.availableForSale ? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
 							t.handle === value.handle
 						)))
@@ -171,6 +173,16 @@ const SearchBox = (props: any) => {
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 
 						if (uniqueFiltered.length > 0) {
+							// Fetch collection handles from shop-2nd-variants-without-pdps to verify set availability
+							let collectionHandles: string[] = [];
+							try {
+								const collRes = await fetch(`/api/collectionProducts?handle=shop-2nd-variants-without-pdps&limit=250&sort=nosort`);
+								const collData = await collRes.json();
+								collectionHandles = (collData?.products || []).map((p: any) => p.handle);
+							} catch (e) {
+								console.log('Failed to fetch shop-2nd-variants-without-pdps collection', e);
+							}
+
 							uniqueFiltered = await Promise.all(uniqueFiltered.map(async (item) => {
 								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
 								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
@@ -178,7 +190,16 @@ const SearchBox = (props: any) => {
 								const { img } = await getFeaturedImgMeta(item, store);
 								// https://app.clickup.com/t/86evwdda2
 								// add condition to subtitle only showing for HERO productType
-								const showSubtitle = item.productType === 'HERO' && item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false;
+								// also verify the set/upseell item is member of the shop-2nd-variants-without-pdps collection
+								const hasMatchingTag = item.productType === 'HERO' && item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower));
+								let showSubtitle = false;
+								if (hasMatchingTag && collectionHandles.length > 0) {
+									// Check if any product tag references a bundle handle from the collection
+									showSubtitle = item.tags?.some(tag => {
+										const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
+										return collectionHandles.some(handle => normalizedTag.includes(handle));
+									});
+								}
 								return {
 									title: item.title,
 									handle: item.handle,
@@ -211,7 +232,7 @@ const SearchBox = (props: any) => {
 
 								const title = item?.title.toLowerCase();
 								const handle = item?.handle;
-								
+
 								const matchedParentProduct = products.find(product =>
 									product.product_type !== 'BUNDLE' &&
 									(
@@ -222,7 +243,7 @@ const SearchBox = (props: any) => {
 										)
 									)
 								);
-	
+
 								if (matchedParentProduct) {
 									const singleProduct = await fetch(
 										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
@@ -266,7 +287,7 @@ const SearchBox = (props: any) => {
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			// const pProducts = [];
-			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, {cache: 'force-cache'}).then((r) => r.json()));
+			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, { cache: 'force-cache' }).then((r) => r.json()));
 			const popProducts = await Promise.all(pInfos);
 			// popProducts.map((data) => {
 			// 	const { product } = data;
@@ -321,7 +342,7 @@ const SearchBox = (props: any) => {
 			'(min-width: 768px)': { active: true },
 		},
 	};
-	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options});
+	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options });
 	const {
 		prevBtnDisabled: prevDisabled8,
 		nextBtnDisabled: nextDisabled8,
@@ -352,7 +373,7 @@ const SearchBox = (props: any) => {
 			{!loading && keyword !== '' && products.length <= 0 && (
 				<div className="py-3 container search--not-found">
 					<p className="font-bold mb-g">0 results</p>
-					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
+					<p className="mb-0" dangerouslySetInnerHTML={{ __html: content?.search_no_result_1.replace('$keyword', keyword) }} />
 				</div>
 			)}
 			{loading && keyword !== '' && (
@@ -360,7 +381,7 @@ const SearchBox = (props: any) => {
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
 			)}
-			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts}/>}
+			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} />}
 
 			{!loading && keyword !== '' && products.length > 0 && (
 				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
