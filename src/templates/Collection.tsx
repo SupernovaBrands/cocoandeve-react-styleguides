@@ -441,7 +441,6 @@ const Collection = (props: any) => {
     // const [first, ...rest] = sidebarMenu;
     // const mobileDropdown = [...rest, first];
     // console.log('byobBanner', showByobCard);
-    console.log('platform', platform);
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
             <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select ${platform === 'os-win' ? 'pl-1 text-left lg:w-[150px]' : 'pl-0 text-right lg:w-[185px]'} bg-white text-sm lg:text-base w-[135px] min-h-[3.125em] indent-0 pr-2 lg:pr-[50px] [background-position:right_0_center]`} defaultValue={defaultSort}>
