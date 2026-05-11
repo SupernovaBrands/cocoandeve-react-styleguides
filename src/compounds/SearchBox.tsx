@@ -228,15 +228,20 @@ const SearchBox = (props: any) => {
 										// console.log('b block', variants, keywordLower);
 										// Only check if product has more than 1 variant (single variant = no set/upsell)
 										if (variants.length > 1) {
-											// Only consider variants that are set/bundle/kit/duo (not shade/size variants)
-											const setVariants = variants.slice(1).filter((v: any) => {
-												const t = v.title?.toLowerCase() || '';
-												return t.includes('set') || t.includes('bundle') || t.includes('kit') || t.includes('duo');
-											});
-											showSubtitle = setVariants.some((v: any) => {
-												const varTitle = v.title?.toLowerCase() || '';
-												return varTitle.includes(keywordLower);
-											});
+											const firstVarTitle = variants[0]?.title?.toLowerCase() || '';
+											const firstIsSet = firstVarTitle.includes('set') || firstVarTitle.includes('bundle') || firstVarTitle.includes('kit') || firstVarTitle.includes('duo');
+											// Only show subtitle if the first variant is a single product (not a set)
+											// If the first variant is already a set, the product IS the set — no subtitle needed
+											if (!firstIsSet) {
+												const setVariants = variants.slice(1).filter((v: any) => {
+													const t = v.title?.toLowerCase() || '';
+													return t.includes('set') || t.includes('bundle') || t.includes('kit') || t.includes('duo');
+												});
+												showSubtitle = setVariants.some((v: any) => {
+													const varTitle = v.title?.toLowerCase() || '';
+													return varTitle.includes(keywordLower);
+												});
+											}
 										}
 									}
 								} catch (e) {
