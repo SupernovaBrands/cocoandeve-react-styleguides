@@ -16,7 +16,7 @@ const SingleStar = ({score}) => (
 
 const RealResultCard = (props) => {
 	const { data, region, tab } = props;
-	const [status, checkStatus] = useState(false);
+	// const [status, checkStatus] = useState(false);
 	const [reveal, setReveal] = useState(false);
 	const [platform, setPlatform] = useState('unknown');
 
@@ -29,19 +29,19 @@ const RealResultCard = (props) => {
 		return div.innerHTML;
 	};
 
-	const checkProduct = async (handle) => {
-		let { product } = await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json());
-		// console.log('product', product)
-		if (product === null) {
-			// console.log('handle', handle)
-			// console.log('product data', product);
-			checkStatus(true)
-		}
-	}
+	// const checkProduct = async (handle) => {
+	// 	let { product } = await fetch(`/api/getProductInfo?handle=${handle}`).then((r) => r.json());
+	// 	// console.log('product', product)
+	// 	if (product === null) {
+	// 		// console.log('handle', handle)
+	// 		// console.log('product data', product);
+	// 		checkStatus(true)
+	// 	}
+	// }
 
-	if (data.handle) {
-		checkProduct(data.handle);
-	}
+	// if (data.handle) {
+	// 	checkProduct(data.handle);
+	// }
 
 	let review_type = data.review_type;
 
@@ -105,9 +105,9 @@ const RealResultCard = (props) => {
 	const children = parse(data.label)?.props?.children && parse(data.label)?.props?.children[1] ? parse(data.label)?.props?.children[1]?.props?.children : `Review @ ${data.author} for ${data.handle}`;
 	let titleDesc = `className="underline ml-[8px] text-body underline-offset-4 text-[14px]" aria-label="${children}" title="Go To Product Page - `;
 
-	if (status) {
-		data.label = data.label.replace(`<a href="/products/${data.handle}"`, `<a href="/collections/${tab}"`);
-	}
+	// if (status) {
+	// 	data.label = data.label.replace(`<a href="/products/${data.handle}"`, `<a href="/collections/${tab}"`);
+	// }
 
 	// const bodyTest = parse(`${data.body}`);
 	const MAX_CHARS = 130;
