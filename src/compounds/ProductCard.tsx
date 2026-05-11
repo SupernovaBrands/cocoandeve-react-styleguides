@@ -575,9 +575,9 @@ const ProductCard = (props: any) => {
                     </picture>
                     
                 </ConditionalWrap>
-                <div className="btn__hover-overlay absolute inset-x-0 mx-auto w-[calc(100%-1.5rem)] bottom-[.75rem]
+                <div className="btn__hover-overlay absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
                     opacity-0 translate-y-[.75rem]
-                    transition-[opacity,transform] duration-300
+                    transition-all duration-300
                     [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
                         <ProductCardButton
                             {...props}
