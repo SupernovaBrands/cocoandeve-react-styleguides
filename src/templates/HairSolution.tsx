@@ -337,7 +337,7 @@ const HairSolution = (props: any) => {
             {data.product && filteredProductRows && filteredProductRows.length > 0 && (
                 <section className={`my-3 lg:mt-5 lg:mb-5 order-0`}>
                     <div className="container px-0 lg:px-g">
-                        <h3 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
+                        <h2 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
