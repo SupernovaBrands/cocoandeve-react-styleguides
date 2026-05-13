@@ -47,13 +47,13 @@ const SearchBox = (props: any) => {
 	}
 
 	useEffect(() => {
-		if (keyword !== '' ) {
+		if (keyword !== '') {
 			setLoading(true);
 			const delayDebounceFn = setTimeout(() => {
 				setResult();
 			}, 750);
 			return () => clearTimeout(delayDebounceFn);
-		} else if (!init){
+		} else if (!init) {
 			setContent();
 			setProducts([]);
 			setInit(true);
@@ -106,7 +106,7 @@ const SearchBox = (props: any) => {
 
 	const keywordSort = (a, b) => {
 		const hasKeywordA = a.title.toLowerCase().includes(keyword.toLowerCase());
-  		const hasKeywordB = b.title.toLowerCase().includes(keyword.toLowerCase());
+		const hasKeywordB = b.title.toLowerCase().includes(keyword.toLowerCase());
 
 		if (hasKeywordA && !hasKeywordB) return -1;
 		if (!hasKeywordA && hasKeywordB) return 1;
@@ -129,11 +129,13 @@ const SearchBox = (props: any) => {
 				return true;
 			}
 		}
-		
+
 		return false;
 	};
 
-	async function setResult () {
+
+
+	async function setResult() {
 		const exclusion = content?.search_exclusion?.split(',') || '';
 		setLoading(true);
 		if (keyword.trim() === '') {
@@ -152,7 +154,7 @@ const SearchBox = (props: any) => {
 						const keywordLower = keyword.toLowerCase();
 						const keywordHandle = keywordLower.trim().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 						// const isSetSearch = /\bset\b/.test(keywordLower);
-						productsData.sort((x, y) => (x.availableForSale === y.availableForSale)? 0 : x.availableForSale? -1 : 1);
+						productsData.sort((x, y) => (x.availableForSale === y.availableForSale) ? 0 : x.availableForSale ? -1 : 1);
 						const uniqueHandle = productsData.filter((value, index, self) => index === self.findIndex((t) => (
 							t.handle === value.handle
 						)))
@@ -171,18 +173,90 @@ const SearchBox = (props: any) => {
 						let uniqueFiltered = uniqueCombined.filter((uniq) => !uniq.tags.includes('nosearch')).filter((d) => !d.tags.includes('parentkit'));
 
 						if (uniqueFiltered.length > 0) {
+							// Fetch collection handles from shop-2nd-variants-without-pdps to verify set availability
+							let collectionHandles: string[] = [];
+							try {
+								const collRes = await fetch(`/api/collectionProducts?handle=shop-2nd-variants-without-pdps&limit=250&sort=nosort`);
+								const collData = await collRes.json();
+								collectionHandles = (collData?.products || []).map((p: any) => p.handle);
+								// console.log('collectionHandles', collectionHandles);
+							} catch (e) {
+								console.log('Failed to fetch shop-2nd-variants-without-pdps collection', e);
+							}
+
 							uniqueFiltered = await Promise.all(uniqueFiltered.map(async (item) => {
 								// let featuredImg = featuredImgs.find((img) => img.handle === item.handle)
 								// 	? featuredImgs.find((img) => img.handle === item.handle).featured_image_url : null;
 								// featuredImg = (featuredImg === null) ? item.featuredImage?.url?.replace('.jpg', '_320x.jpg') : featuredImg;
 								const { img } = await getFeaturedImgMeta(item, store);
+								// https://app.clickup.com/t/86evwdda2
+								// add condition to subtitle only showing for HERO productType
+								// also verify the set/upseell item is member of the shop-2nd-variants-without-pdps collection
+								const hasMatchingTag = item.productType === 'HERO' && item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower));
+								let showSubtitle = false;
+								// if (hasMatchingTag && collectionHandles.length > 0) {
+								// 	// Check if any product tag references a bundle handle from the collection
+								// 	showSubtitle = item.tags?.some(tag => {
+								// 		const normalizedTag = tag.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9\s]/g, '-').trim();
+								// 		return collectionHandles.some(handle => normalizedTag.includes(handle));
+								// 	});
+								// }
+								// Only fetch strapi data when subtitle check is needed (HERO with matching tag in collection)
+								// console.log('@@@', item, showSubtitle);
+								// if (showSubtitle) {
+								try {
+									const productStrapi = await fetch(`/api/getProductStrapi?handle=${item.handle}&region=${store}`).then(r => r.json());
+									const secondVariant = productStrapi?.[0]?.Sections?.find((s: any) => s.__component === 'product.second-variant');
+									const secondVarHandle = secondVariant?.productSecondVariant?.productSecondVariant?.[store]?.second_var_kit_handle;
+
+									if (secondVarHandle) {
+										// console.log('@@@ 1', item.handle);
+										// Fetch from both Strapi and Shopify in parallel — upsell title can come from either source
+										const [secondVarStrapi, secondVarShopify] = await Promise.all([
+											fetch(`/api/getProductStrapi?handle=${secondVarHandle}&region=${store}`).then(r => r.json()).catch(() => null),
+											fetch(`/api/getProductInfo?handle=${secondVarHandle}&region=${store}`).then(r => r.json()).catch(() => null),
+										]);
+										const strapiTitle = secondVarStrapi?.[0]?.title?.toLowerCase() || '';
+										const shopifyTitle = secondVarShopify?.product?.title?.toLowerCase() || '';
+										// console.log('shopifyTitle', shopifyTitle);
+										// console.log('a block', strapiTitle, shopifyTitle, keywordLower);
+										showSubtitle = strapiTitle.includes(keywordLower) || shopifyTitle.includes(keywordLower);
+									} else {
+										// Fallback: check Shopify product variants from predictive search data
+										const variants = item.variants?.nodes || item.variants?.edges?.map((e: any) => e.node) || [];
+										// console.log('fallback to shopify 2', item.handle, variants);
+										// console.log('b block', variants, keywordLower);
+										// Only check if product has more than 1 variant (single variant = no set/upsell)
+										if (variants.length > 1) {
+											const firstVarTitle = variants[0]?.title?.toLowerCase() || '';
+											const firstIsSet = firstVarTitle.includes('set') || firstVarTitle.includes('bundle') || firstVarTitle.includes('kit') || firstVarTitle.includes('duo');
+											// Only show subtitle if the first variant is a single product (not a set)
+											// If the first variant is already a set, the product IS the set — no subtitle needed
+											if (!firstIsSet) {
+												const setVariants = variants.slice(1).filter((v: any) => {
+													const t = v.title?.toLowerCase() || '';
+													return t.includes('set') || t.includes('bundle') || t.includes('kit') || t.includes('duo');
+												});
+												showSubtitle = setVariants.some((v: any) => {
+													const varTitle = v.title?.toLowerCase() || '';
+													return varTitle.includes(keywordLower);
+												});
+											}
+										}
+									}
+								} catch (e) {
+									console.log('Failed to fetch strapi product data for subtitle check', e);
+									showSubtitle = false;
+								}
+								// }
+
 								return {
 									title: item.title,
 									handle: item.handle,
 									// subtitle: isSetSearch && item.product_type !== 'BUNDLE' && 
 									// 	(item.variants?.nodes?.some(v => checkVariantMatch(v.title?.toLowerCase(), keywordLower)) || 
 									// 	item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower))) ? true : false,
-									subtitle: item.tags?.some(v => checkTagSimilarity(v.toLowerCase(), keywordLower)) ? true : false,
+									subtitle: showSubtitle,
 									featuredImgUrl: img || '',
 									url: `/products/${item.handle}`,
 									product: item,
@@ -208,7 +282,7 @@ const SearchBox = (props: any) => {
 
 								const title = item?.title.toLowerCase();
 								const handle = item?.handle;
-								
+
 								const matchedParentProduct = products.find(product =>
 									product.product_type !== 'BUNDLE' &&
 									(
@@ -219,7 +293,7 @@ const SearchBox = (props: any) => {
 										)
 									)
 								);
-	
+
 								if (matchedParentProduct) {
 									const singleProduct = await fetch(
 										`/api/getProductInfo?handle=${matchedParentProduct.handle}&region=${store}`
@@ -263,7 +337,7 @@ const SearchBox = (props: any) => {
 		if (content?.search_popular_handles && content.search_popular_handles !== '') {
 			const handles = content.search_popular_handles.split(',');
 			// const pProducts = [];
-			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, {cache: 'force-cache'}).then((r) => r.json()));
+			const pInfos = handles.map(async (handle) => await fetch(`/api/getProductInfo?handle=${handle}&region=${store}`, { cache: 'force-cache' }).then((r) => r.json()));
 			const popProducts = await Promise.all(pInfos);
 			// popProducts.map((data) => {
 			// 	const { product } = data;
@@ -318,7 +392,7 @@ const SearchBox = (props: any) => {
 			'(min-width: 768px)': { active: true },
 		},
 	};
-	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options});
+	const [emblaRef8, emblaApi8] = useEmblaCarousel({ align: 'start', ...options });
 	const {
 		prevBtnDisabled: prevDisabled8,
 		nextBtnDisabled: nextDisabled8,
@@ -349,7 +423,7 @@ const SearchBox = (props: any) => {
 			{!loading && keyword !== '' && products.length <= 0 && (
 				<div className="py-3 container search--not-found">
 					<p className="font-bold mb-g">0 results</p>
-					<p className="mb-0" dangerouslySetInnerHTML={{__html: content?.search_no_result_1.replace('$keyword', keyword)}} />
+					<p className="mb-0" dangerouslySetInnerHTML={{ __html: content?.search_no_result_1.replace('$keyword', keyword) }} />
 				</div>
 			)}
 			{loading && keyword !== '' && (
@@ -357,7 +431,7 @@ const SearchBox = (props: any) => {
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
 			)}
-			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts}/>}
+			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} />}
 
 			{!loading && keyword !== '' && products.length > 0 && (
 				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
