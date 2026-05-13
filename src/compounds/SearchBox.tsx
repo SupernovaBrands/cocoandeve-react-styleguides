@@ -401,10 +401,10 @@ const SearchBox = (props: any) => {
 	} = usePrevNextButtons(emblaApi8);
 	// const autoPlayClick8 = controlAutoplay(emblaApi8);
 
-	useEffect(() => {
-		if (props.openSearchBox) document.body.classList.add('!overflow-y-hidden');
-		else document.body.classList.remove('!overflow-y-hidden');
-	}, [props.openSearchBox]);
+	// useEffect(() => {
+	// 	if (props.openSearchBox) document.body.classList.add('!overflow-y-hidden');
+	// 	else document.body.classList.remove('!overflow-y-hidden');
+	// }, [props.openSearchBox]);
 
 	return (
 		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-500 ease-in-out lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`}>

@@ -217,6 +217,12 @@ const Header = (props: any) => {
 		if (isLoggedIn && addingReward) setUserPts(-1);
 	}, [addingReward]);
 
+	useEffect(() => {
+		// console.log('props open searchbox', openSearchBox);
+		if (openSearchBox) document.body.classList.add('!overflow-y-hidden');
+		else document.body.classList.remove('!overflow-y-hidden');
+	}, [openSearchBox]);
+
 	return (
 		<>
 			<div style={{ height: scrolled ? headerHeight : 0 }} />
