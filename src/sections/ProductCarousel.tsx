@@ -9,6 +9,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 const Modal = dynamic(() => import('~/components/Modal'), { ssr: false });
 const ModalWaitlist = dynamic(() => import('~/components/modal/Waitlist'), { ssr: false });
+const ProductInfo = dynamic(() => import('~/components/modal/ProductInfo'), { ssr: false });
 import {
 	PrevButton,
 	NextButton,
@@ -37,7 +38,26 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, quickBuy } = props;
+	const {
+		formatMoney,
+		preOrderCtaLabel,
+		buildProductCardModel,
+		waitlistPdpStore,
+		strapiAutomateHardcode,
+		checkHardcodedImages,
+		checkHardcodedTitles,
+		checkHardcodedVariant,
+		checkHardcodedTagline,
+		checkHardcodedFaq,
+		checkHardcodedHowToUse,
+		ProductSettings,
+		BenefitIngredient,
+		HowToUse,
+		Faq,
+		FragranceNotes,
+		getActiveWL
+	} = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -122,6 +142,20 @@ const ProductCarousel = (props: any) => {
 		desktop: 4,
 	});
 
+	const [productData, setProductData] = useState({
+		open: false,
+		handle: null,
+		selectedVariant: null,
+		tab: null,
+		swatch: null
+	});
+
+	useEffect(() => {
+		// console.log('modal detail open', productData.open);
+		if (productData.open) document.body.classList.add('!overflow-hidden');
+		else document.body.classList.remove('!overflow-hidden');
+	}, [productData.open])
+
 	return (
 		<>
 			<div className={`container px-0 text-center product__carousel product__carousel-homepage py-3 lg:pb-[.5rem] lg:px-0 ${productPage ? 'mb-0 lg:mb-5 lg:pb-2' : ''}`}>
@@ -170,6 +204,8 @@ const ProductCarousel = (props: any) => {
 											store={store}
 											customProductTitle={customTitle}
 											isAboveFold={isAboveFold}
+											clickShowPopup={quickBuy}
+											setProductData={setProductData}
 										/>
 									})}
 								</Carousel.Inner>
@@ -287,6 +323,36 @@ const ProductCarousel = (props: any) => {
 			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
 				<ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({ ...waitlistData, open: false })} />
 			</Modal>
+			{quickBuy && (
+				<Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
+					<ProductInfo
+						preOrderCtaLabel={preOrderCtaLabel}
+						formatMoney={formatMoney}
+						quickBuy={quickBuy}
+						directAddToCart={true}
+						waitlistPdpStore={waitlistPdpStore}
+						getActiveWL={getActiveWL}
+						generalSetting={generalSetting}
+						strapiAutomateHardcode={strapiAutomateHardcode}
+						checkHardcodedImages={checkHardcodedImages}
+						checkHardcodedTitles={checkHardcodedTitles}
+						checkHardcodedVariant={checkHardcodedVariant}
+						checkHardcodedTagline={checkHardcodedTagline}
+						checkHardcodedFaq={checkHardcodedFaq}
+						checkHardcodedHowToUse={checkHardcodedHowToUse}
+						ProductSettings={ProductSettings}
+						BenefitIngredient={BenefitIngredient}
+						HowToUse={HowToUse}
+						Faq={Faq}
+						FragranceNotes={FragranceNotes}
+						store={store}
+						preOrderSetting={preOrders}
+						data={productData}
+						addToCart={addToCart}
+						buildProductCardModel={buildProductCardModel}
+						handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
+				</Modal>
+			)}
 		</>
 	);
 };
