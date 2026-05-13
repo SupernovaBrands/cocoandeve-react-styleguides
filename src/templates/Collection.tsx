@@ -16,6 +16,8 @@ import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import LaunchWaitList from "~/compounds/launch-waitlist";
 // import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
+import dynamic from "next/dynamic";
+const ProductInfo = dynamic(() => import('~/components/modal/ProductInfo'), { ssr: false });
 
 const QuizCardPlaceholder = (props) => {
     return props.split ? (
@@ -95,6 +97,26 @@ const Collection = (props: any) => {
         customProductTitle,
         childMenuData,
         byobBanner,
+        quickBuy,
+    } = props;
+
+    const {
+        formatMoney,
+        preOrderCtaLabel,
+        waitlistPdpStore,
+        strapiAutomateHardcode,
+        checkHardcodedImages,
+        checkHardcodedTitles,
+        checkHardcodedVariant,
+        checkHardcodedTagline,
+        checkHardcodedFaq,
+        checkHardcodedHowToUse,
+        ProductSettings,
+        BenefitIngredient,
+        HowToUse,
+        Faq,
+        FragranceNotes,
+        getActiveWL,
     } = props;
     // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -357,6 +379,14 @@ const Collection = (props: any) => {
         setParentParam(params.get('p'));
     }, [handle]);
 
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null,
+        tab: null,
+        swatch: null
+    });
+
     useEffect(() => {
         if (!mainNav || mainNav.length === 0) {
             if (subHandles) {
@@ -457,6 +487,11 @@ const Collection = (props: any) => {
         </div>
     );
 
+    useEffect(() => {
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
+    }, [productData.open])
 
     // console.log('collectionSettings', collectionSettings);
 
@@ -657,6 +692,8 @@ const Collection = (props: any) => {
                                                     collectionTemplate={true}
                                                     store={store}
                                                     customProductTitle={customProductTitle}
+                                                    clickShowPopup={quickBuy}
+                                                    setProductData={setProductData}
                                                 />
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
@@ -737,6 +774,8 @@ const Collection = (props: any) => {
                                                 collectionTemplate={true}
                                                 store={store}
                                                 customProductTitle={customProductTitle}
+                                                clickShowPopup={quickBuy}
+                                                setProductData={setProductData}
                                             />
                                         )}
                                         {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
@@ -805,6 +844,36 @@ const Collection = (props: any) => {
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
                     <ModalWaitlist store={store} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} waitlistPdp={waitlistPdpSetting} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })} />
+                </Modal>
+            )}
+            {!isLoading && quickBuy && (
+                <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
+                    <ProductInfo
+                        formatMoney={formatMoney}
+                        quickBuy={quickBuy}
+                        addToCart={addToCart}
+                        directAddToCart={true}
+                        waitlistPdpStore={waitlistPdpStore}
+                        getActiveWL={getActiveWL}
+                        generalSetting={generalSetting}
+                        strapiAutomateHardcode={strapiAutomateHardcode}
+                        checkHardcodedImages={checkHardcodedImages}
+                        checkHardcodedTitles={checkHardcodedTitles}
+                        checkHardcodedVariant={checkHardcodedVariant}
+                        checkHardcodedTagline={checkHardcodedTagline}
+                        checkHardcodedFaq={checkHardcodedFaq}
+                        checkHardcodedHowToUse={checkHardcodedHowToUse}
+                        ProductSettings={ProductSettings}
+                        BenefitIngredient={BenefitIngredient}
+                        HowToUse={HowToUse}
+                        Faq={Faq}
+                        FragranceNotes={FragranceNotes}
+                        preOrderCtaLabel={preOrderCtaLabel}
+                        store={store}
+                        data={productData}
+                        preOrderSetting={preOrders}
+                        buildProductCardModel={buildProductCardModel}
+                        handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
                 </Modal>
             )}
             {!isLoading && launchWL && (

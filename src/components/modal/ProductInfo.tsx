@@ -17,6 +17,7 @@ import { removeObjectWithId } from "~/modules/utils";
 import { useWindowSize } from "~/hooks/useWindowSize";
 import ProudToBe from "~/compounds/ProudToBe";
 import ProductWaitlist from "~/compounds/product-waitlist-oos";
+import QuantityBox from "~/components/cart/quantity-box";
 
 type imageProps = {
     id: number,
@@ -29,6 +30,12 @@ type imageProps = {
 const ProductInfo = (props: any) => {
     const activeImageIndex = 1;
     const {
+        preOrderSetting,
+        formatMoney,
+        bgColor,
+        textColor,
+        preOrderCtaLabel,
+        quickBuy,
         kitBuilder,
         getActiveWL,
         getId,
@@ -125,7 +132,7 @@ const ProductInfo = (props: any) => {
             setAddingItem(true);
             await addToCart({
                 id: selectedVariant.bundleId ? `gid://shopify/ProductVariant/${selectedVariant.bundleId.value}` : selectedVariant.id,
-                quantity: 1,
+                quantity,
                 handle: selectedVariant?.product?.handle,
                 title: selectedVariant.title,
             });
@@ -362,7 +369,7 @@ const ProductInfo = (props: any) => {
         }
         if (!isDesktop) {
             setTimeout(() => {
-                const wrapper = document.querySelector('.modal__mini-pdp').closest('.fixed')
+                const wrapper = document.querySelector('.modal__mini-pdp')?.closest('.fixed')
                 const el = (document.querySelector(`.modal__mini-pdp #accordion-${id}`) as HTMLDivElement)
                 if (el) wrapper.scrollTop = el.offsetTop;
             }, 365)
@@ -411,18 +418,23 @@ const ProductInfo = (props: any) => {
     const [swatchAvailable, setSwatchAvailable] = useState(true);
 
     const changeSwatch = (e: any) => {
-        const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll('span');
+        const el = quickBuy ? 'li' : 'span'
+        const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll(el);
+        // console.log('spanEls', spanEls);
         spanEls.forEach((span: any) => {
             span.classList.remove('border-primary');
             span.classList.add('border-white');
         });
-        e.target.classList.remove('border-white');
-        e.target.classList.add('border-primary');
-        const targetText = e.target.getAttribute('data-val');
-        swatchLabel.current.textContent = targetText;
-        const available = e.target.getAttribute('data-avail');
-        const id = e.target.getAttribute('data-id');
+        // console.log('e.target', e.target);
+        const target = quickBuy ? e.target.closest('li') : e.target
+        target.classList.remove('border-white');
+        target.classList.add('border-primary');
+        const targetText = target.getAttribute('data-val');
+        if (swatchLabel && swatchLabel.current) swatchLabel.current.textContent = targetText;
+        const available = target.getAttribute('data-avail');
+        const id = target.getAttribute('data-id');
         const selectedSwatch = productShopify?.variants?.nodes?.find((node: any) => node.id === id);
+        // console.log('selectedSwatch', selectedSwatch);
         if (selectedSwatch) {
             setSelectedVariant(selectedSwatch);
         }
@@ -496,10 +508,49 @@ const ProductInfo = (props: any) => {
         }
     }
 
+    const [quantity, setQuantity] = useState(1);
+    const onChangeQuantity = (e:any) => {
+        setQuantity(e);
+    }
+
+    const pdpCtaLabel = () => {
+        let defaultLabel = 'Add to Cart';
+        defaultLabel = (typeof preOrderCtaLabel === 'function') ? preOrderCtaLabel(preOrderSetting, selectedVariant, defaultLabel) : defaultLabel;
+        return defaultLabel;
+    };
+
+    const getBundleAppDiscounted = () => {
+        return parseFloat(selectedVariant.price.amount) * 100;
+    }
+
+    let os = 'unknown';
+    const [platform, setPlatform] = useState(os);
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+
+        if (/windows/i.test(userAgent)) {
+            os = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            os = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            os = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            os = 'os-android';
+        }
+
+        setPlatform(os);
+    }, []);
+
+    let imgWidth = quickBuy ? 'basis-[330px] w-[330px]' : 'basis-[240px] w-[240px]';
+
     return (
-        <div ref={shippingEl} className={`modal-content bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4' : 'pb-g pt-[50px] lg:pt-5'}`}>
-            {productShopify && productStrapi && <Close onClick={handleClose} className={`svg--current-color cursor-pointer close absolute font-size-sm w-[12px] h-[12px] top-[1.5rem] lg:top-[1.5rem] right-[1rem] lg:right-[1.5rem]`} />}
-            <div className="flex flex-wrap justify-center lg:grid lg:grid-cols-[48.48%_47.48%] lg:gap-4">
+        <div ref={shippingEl} className={`modal-content modal-content--product-info bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4 modal-content__loading' : 'pb-g pt-[50px] lg:pt-5'}`}>
+            {productShopify && productStrapi && 
+                <button type="button" onClick={handleClose} className="flex items-center justify-center w-[26px] h-[26px] close--icon z-[1] close absolute top-[1rem] lg:top-[1.5rem] right-[1rem] lg:right-[1.5rem]">
+                    <Close className={`svg--current-color cursor-pointer font-size-sm w-[12px] h-[12px]`} />
+                </button>
+            }
+            <div className="modal-content--inner flex flex-wrap justify-center lg:grid lg:grid-cols-[48.48%_47.48%] lg:gap-4">
                 {(!productShopify || !productStrapi) && (
                     <span className="spinner-border spinner-border-sm text-body !w-3 !h-3 lg:!w-4 lg:!h-4 lg:col-span-2 lg:justify-self-center" role="status" />
                 )}
@@ -509,17 +560,27 @@ const ProductInfo = (props: any) => {
                             <div className="product-image-carousel__container w-full px-0">
                                 <div className="carousel aspect-ratio overflow-hidden">
                                     <Carousel.Wrapper emblaApi={emblaMainApi} className="">
-                                        <Carousel.Inner emblaRef={emblaMainRef} innerClass="px-g lg:px-0" className="w-full">
-                                            {slides.map((slide, index) => (
-                                                <div className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full" key={index}>
-                                                    <picture className="flex items-center justify-center">
-                                                        <source srcSet={`${slide.src.replace('_text_', `Slide ${index + 1}`)}`} media="(min-width: 992px)" />
-                                                        <img height="367" width="367" fetchPriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-[.5rem]" src={`${slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`)}`} alt={`slide ${index + 1}`} />
-                                                    </picture>
-                                                </div>
-                                            ))}
+                                        <Carousel.Inner emblaRef={emblaMainRef} innerClass="px-g lg:px-0 carousel--inner" className="w-full">
+                                            {slides.map((slide, index) => {
+                                                const srcSet = slide.src.replace('_text_', `Slide ${index + 1}`);
+                                                let src = slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`);
+                                                
+                                                if (quickBuy) {
+                                                    src = slide.src.replace('.jpg', '_660x688_crop_center.jpg').replace('/public', '/660x').replace('_text_', `Slide ${index + 1}`);
+                                                }
+                                                return (
+                                                    <div className={`flex-grow-0 flex-shrink-0 ${imgWidth} pr-25 lg:pr-0 lg:basis-full lg:w-full`} key={index}>
+                                                        <picture className="flex items-center justify-center">
+                                                            <source srcSet={`${srcSet}`} media="(min-width: 992px)" />
+                                                            <img height="367" width="367" 
+                                                                //@ts-ignore
+                                                                fetchpriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-[.5rem]" src={`${src}`} alt={`slide ${index + 1}`} />
+                                                        </picture>
+                                                    </div>
+                                                )
+                                            })}
                                             {videoUrl && (
-                                                <div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[240px] w-[240px] pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
+                                                <div ref={targetRef as any} className={`flex-grow-0 flex-shrink-0 ${imgWidth} pr-25 lg:pr-0 lg:basis-full lg:w-full flex items-center`} key={slides.length}>
                                                     <video width="320" height="240" className="w-full h-auto max-w-full" muted={true} playsInline={true} loop={true} autoPlay ref={videoRef} >
                                                         <source src={videoUrl} type="video/mp4" />
                                                         Your browser does not support the video tag.
@@ -541,7 +602,7 @@ const ProductInfo = (props: any) => {
                                     )}
                                 </div>
                             </div>
-                            <div className="lg:w-full lg:px-0 hidden lg:block">
+                            <div className="lg:w-full lg:px-0 hidden lg:block product-thumbnail-carousel__container">
                                 <div className={`carousel w-full hidden lg:flex items-center mt-3`}>
                                     <Carousel.Wrapper className={`w-full flex flex-col items-start`} emblaApi={emblaThumbsApi}>
                                         <Carousel.Inner emblaRef={emblaThumbsRef} className={`flex`} innerClass={'max-w-[340px] mx-auto'}>
@@ -607,25 +668,64 @@ const ProductInfo = (props: any) => {
                             {tagline && <p className={`mb-[1rem] lg:mb-2 product__tagline text-sm lg:text-base`}>{tagline}</p>}
                             {data.swatch && (
                                 <>
-                                    <label className="block mb-[.625em]">
+                                    <label className={`${quickBuy ? 'inline-block mb-[.5rem] font-bold lg:text-lg' : 'block mb-[.625em]'}`}>
                                         {data.swatch.style && <strong>Style: </strong>}
-                                        {data.swatch.shade && <strong>Shade: </strong>}
+                                        {data.swatch.shade && <strong>{quickBuy ? 'Skin Tone' : 'Shade'}: </strong>}
                                         {data.swatch.tangleTamer && <strong>Type: </strong>}
                                         {data.swatch.scent && <strong>Scent: </strong>}
                                         {data.swatch.variant && <strong>Variant: </strong>}
-                                        <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
+                                        {!quickBuy && (
+                                            <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
+                                        )}
+                                        
                                     </label>
                                     <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
-                                        {data.swatch.data.length > 0 && data.swatch.data.map((item: any, i: any) => (
-                                            <li key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
-                                                <span onClick={changeSwatch} ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${selectedVariant.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
-                                            </li>
-                                        ))}
+                                        {data.swatch.data.length > 0 && data.swatch.data.map((item: any, i: any) => {
+                                            const activeSwatch = selectedVariant.id === item.id;
+                                            return (
+                                                <li data-id={item.id} data-val={item.label} data-avail={item.availableForSale} onClick={changeSwatch} key={`swatch-card-${item.id}`} className={`${quickBuy ? 'flex items-center py-[7px] px-g' : ''} w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${activeSwatch && !quickBuy ? 'active' : ''} ${quickBuy ? 'border' : ''} ${activeSwatch && quickBuy ? 'border-primary' : `${quickBuy ? 'border-white bg-[#F5F5F5]' : ''}`} cursor-pointer`} data-available={item.available ? 'available' : ''}>
+                                                    <span ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${activeSwatch ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
+                                                    {quickBuy && <span data-value={item.label.toLowerCase()} data-is-additional={selectedVariant?.isAdditional} className={`text-nowrap ml-1 lg:ml-1 text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{item.label.replace('Antioxidant Glow', '')}</span>}
+                                                </li>
+                                            )
+                                        })}
                                     </ul>
                                 </>
                             )}
+
+                            {quickBuy && (
+                                <div className="flex gap-g">
+                                    <QuantityBox
+                                        name="quantity-box"
+                                        editable={true}
+                                        isLastStock={selectedVariant?.quantityAvailable < 2}
+                                        productStock={selectedVariant?.quantityAvailable}
+                                        quantity={quantity}
+                                        onChangeQuantity={onChangeQuantity}
+                                        allowZero={false}
+                                    />
+
+                                    <Button type="button" onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} disabled={!selectedVariant.availableForSale} buttonClass={`${bgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'border-primary bg-primary hover:bg-primary-dark'} ${textColor ? textColor : 'text-white'} w-full text-sm lg:text-base border flex ${addingItem ? 'justify-center' : 'justify-between'} px-g items-center product-form-submit__cta`}>
+                                        {/* { !addingItem && (selectedVariant.availableForSale ? 'Add To Cart' : 'Out of Stock') } */}
+                                        {!addingItem && (
+                                            <>
+                                                <span className="product-form-submit__cta-text">{pdpCtaLabel()}</span>
+                                                <span className="">
+                                                    {!productShopify.isProductBundleApp?.value && selectedVariant.compareAtPrice && <span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store,parseFloat(selectedVariant.compareAtPrice.amount) * 100)}</span>}
+                                                    {!productShopify.isProductBundleApp?.value && <span className="product-form-submit__cta-price">{formatMoney(store,parseFloat(selectedVariant.price.amount) * 100)}</span>}
+                                                    {productShopify.isProductBundleApp?.value && <>
+                                                        { selectedVariant.compareAtPrice && (<span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store, (parseFloat(selectedVariant.compareAtPrice.amount) * 100))}</span>)}
+                                                        <span className="product-form-submit__cta-price">{formatMoney(store, getBundleAppDiscounted())}</span>
+                                                    </>}
+                                                </span>
+                                            </>
+                                        )}
+                                        { addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
+                                    </Button>
+                                </div>
+                            )}
                             
-                            {selectedVariant?.availableForSale && (
+                            {!quickBuy && selectedVariant?.availableForSale && (
                                 <Button onTouchStart={() => {}} disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (

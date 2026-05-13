@@ -125,6 +125,9 @@ const CarouselScrollbar = ({
                 event.stopPropagation()
             }
             setIsDragging(false);
+
+            // window.removeEventListener('touchmove', handleMouseMoveScrollbar);
+            // window.removeEventListener('touchend', handleMouseUp);
         },
         [isDragging]
     );
