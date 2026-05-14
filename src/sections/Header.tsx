@@ -111,20 +111,15 @@ const Header = (props: any) => {
 	const accountRef = useRef(null);
 
 	const handleScroll = useCallback(() => {
-		if (disabledScroll) return;
+		if (disabledScroll || openSearchBox) return;
 
 		const scrollTop = window.scrollY;
-		if (!openSearchBox) {
-			if (scrollTop > 0 && !scrolled && headerRef.current) {
-				const h = headerRef.current.offsetHeight;
-				headerHeightRef.current = h;
-				setHeaderHeight(h);
-			}
-			setScrolled(scrollTop > 0);
-		} else {
-			setScrolled(false);
-			setHeaderHeight(0);
+		if (scrollTop > 0 && !scrolled && headerRef.current) {
+			const h = headerRef.current.offsetHeight;
+			headerHeightRef.current = h;
+			setHeaderHeight(h);
 		}
+		setScrolled(scrollTop > 0);
 	}, [openSearchBox, disabledScroll, scrolled]);
 
 	useEffect(() => {
