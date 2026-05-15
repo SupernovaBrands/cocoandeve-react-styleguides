@@ -471,10 +471,10 @@ const Sustainability = (props: any) => {
                                             elseWrap={children => (
                                                 <div className="accordion-item border-t border-b border-gray-500">
                                                     <div
-                                                        className={`cursor-pointer flex w-full justify-between items-center ${
+                                                        className={`cursor-pointer flex w-full justify-between items-center py-2 ${
                                                             openIndex === index
-                                                                ? 'pt-2 pb-2 accordion-opened'
-                                                                : 'py-2'
+                                                                ? 'accordion-opened'
+                                                                : ''
                                                         }`}
                                                         onClick={() => onClick(index)}
                                                     >
@@ -495,7 +495,9 @@ const Sustainability = (props: any) => {
                                                                 : 'accordion-content--close'
                                                         }`}
                                                     >
-                                                        {children}
+                                                        <div className="accordion-content__inner">
+                                                            {children}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             )}

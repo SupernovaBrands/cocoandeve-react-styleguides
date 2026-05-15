@@ -156,12 +156,12 @@ const ProductInfo = (props: any) => {
         if (tabSelected && tabSelected.length >= maxItem) return false;
         setAddingItem(true);
         const productModel = await buildProductCardModel(store, productShopify, null, null);
-        
-        setTabSelected((prev) => {
-        // if (tabSelected && tabSelected.length >= maxItem) return false;
-        // const productModel = buildProductCardModel(store, productShopify, null, null);
 
-        // setTabSelected((prev) => {
+        setTabSelected((prev) => {
+            // if (tabSelected && tabSelected.length >= maxItem) return false;
+            // const productModel = buildProductCardModel(store, productShopify, null, null);
+
+            // setTabSelected((prev) => {
             const prevData = [...prev];
             prevData.push({
                 src: productModel.src,
@@ -222,8 +222,8 @@ const ProductInfo = (props: any) => {
     const slidesCount = slides.length + (videoStack?.video_thumbnail?.url ? 1 : 0);
 
     const productVideoData = videoStack?.productVideoPdp?.productVideoPdp?.[store];
-	const videoUrl = productVideoData?.video_url || videoStack?.video_url;
-	const videoThumbnail = productVideoData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
+    const videoUrl = productVideoData?.video_url || videoStack?.video_url;
+    const videoThumbnail = productVideoData?.video_thumbnail?.url || videoStack?.video_thumbnail?.url;
 
     const onThumbClick = (index: number) => {
         if (!emblaMainApi || !emblaThumbsApi) return;
@@ -367,7 +367,7 @@ const ProductInfo = (props: any) => {
         if (typeof callback === 'function') {
             callback();
         }
-        if (!isDesktop) {
+        if (!isDesktop && !quickBuy) {
             setTimeout(() => {
                 const wrapper = document.querySelector('.modal__mini-pdp')?.closest('.fixed')
                 const el = (document.querySelector(`.modal__mini-pdp #accordion-${id}`) as HTMLDivElement)
@@ -509,7 +509,7 @@ const ProductInfo = (props: any) => {
     }
 
     const [quantity, setQuantity] = useState(1);
-    const onChangeQuantity = (e:any) => {
+    const onChangeQuantity = (e: any) => {
         setQuantity(e);
     }
 
@@ -545,7 +545,7 @@ const ProductInfo = (props: any) => {
 
     return (
         <div ref={shippingEl} className={`modal-content modal-content--product-info bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4 modal-content__loading' : 'pb-g pt-[50px] lg:pt-5'}`}>
-            {productShopify && productStrapi && 
+            {productShopify && productStrapi &&
                 <button type="button" onClick={handleClose} className="flex items-center justify-center w-[26px] h-[26px] close--icon z-[1] close absolute top-[1rem] lg:top-[1.5rem] right-[1rem] lg:right-[1.5rem]">
                     <Close className={`svg--current-color cursor-pointer font-size-sm w-[12px] h-[12px]`} />
                 </button>
@@ -564,7 +564,7 @@ const ProductInfo = (props: any) => {
                                             {slides.map((slide, index) => {
                                                 const srcSet = slide.src.replace('_text_', `Slide ${index + 1}`);
                                                 let src = slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`);
-                                                
+
                                                 if (quickBuy) {
                                                     src = slide.src.replace('.jpg', '_660x688_crop_center.jpg').replace('/public', '/660x').replace('_text_', `Slide ${index + 1}`);
                                                 }
@@ -572,7 +572,7 @@ const ProductInfo = (props: any) => {
                                                     <div className={`flex-grow-0 flex-shrink-0 ${imgWidth} pr-25 lg:pr-0 lg:basis-full lg:w-full`} key={index}>
                                                         <picture className="flex items-center justify-center">
                                                             <source srcSet={`${srcSet}`} media="(min-width: 992px)" />
-                                                            <img height="367" width="367" 
+                                                            <img height="367" width="367"
                                                                 //@ts-ignore
                                                                 fetchpriority={index === 0 ? 'high' : 'low'} className="block w-full rounded-md lg:rounded-[.5rem]" src={`${src}`} alt={`slide ${index + 1}`} />
                                                         </picture>
@@ -677,7 +677,7 @@ const ProductInfo = (props: any) => {
                                         {!quickBuy && (
                                             <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
                                         )}
-                                        
+
                                     </label>
                                     <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
                                         {data.swatch.data.length > 0 && data.swatch.data.map((item: any, i: any) => {
@@ -711,20 +711,20 @@ const ProductInfo = (props: any) => {
                                             <>
                                                 <span className="product-form-submit__cta-text">{pdpCtaLabel()}</span>
                                                 <span className="">
-                                                    {!productShopify.isProductBundleApp?.value && selectedVariant.compareAtPrice && <span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store,parseFloat(selectedVariant.compareAtPrice.amount) * 100)}</span>}
-                                                    {!productShopify.isProductBundleApp?.value && <span className="product-form-submit__cta-price">{formatMoney(store,parseFloat(selectedVariant.price.amount) * 100)}</span>}
+                                                    {!productShopify.isProductBundleApp?.value && selectedVariant.compareAtPrice && <span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store, parseFloat(selectedVariant.compareAtPrice.amount) * 100)}</span>}
+                                                    {!productShopify.isProductBundleApp?.value && <span className="product-form-submit__cta-price">{formatMoney(store, parseFloat(selectedVariant.price.amount) * 100)}</span>}
                                                     {productShopify.isProductBundleApp?.value && <>
-                                                        { selectedVariant.compareAtPrice && (<span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store, (parseFloat(selectedVariant.compareAtPrice.amount) * 100))}</span>)}
+                                                        {selectedVariant.compareAtPrice && (<span className="product-form-submit__cta-compare line-through mr-25 font-normal">{formatMoney(store, (parseFloat(selectedVariant.compareAtPrice.amount) * 100))}</span>)}
                                                         <span className="product-form-submit__cta-price">{formatMoney(store, getBundleAppDiscounted())}</span>
                                                     </>}
                                                 </span>
                                             </>
                                         )}
-                                        { addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" /> }
+                                        {addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" />}
                                     </Button>
                                 </div>
                             )}
-                            
+
                             {!quickBuy && selectedVariant?.availableForSale && (
                                 <Button onTouchStart={() => {}} disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
