@@ -52,17 +52,23 @@
     }
 
     .accordion-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 350ms ease-in-out;
         overflow: hidden;
-        max-height: 0;
-        -webkit-transition: max-height 365ms ease-in-out;
-        -moz-transition: max-height 365ms ease-in-out;
-        -ms-transition: max-height 365ms ease-in-out;
-        -o-transition: max-height 365ms ease-in-out;
-        transition: max-height 365ms ease-in-out;
+
+        &__inner {
+            overflow: hidden;
+            transition: padding 350ms ease-in-out;
+            padding-bottom: 0;
+        }
 
         &--open {
-            height: auto;
-            max-height: 2000px;
+            grid-template-rows: 1fr;
+
+            .accordion-content__inner {
+                padding-bottom: 15px;
+            }
         }
     }
 }
