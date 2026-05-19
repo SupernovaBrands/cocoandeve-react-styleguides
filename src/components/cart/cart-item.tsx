@@ -319,18 +319,24 @@ export const CartItem = (props: CartItemProps) => {
 						{item.isFreeItem && item.attributes && item.attributes.findIndex((e: any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 							<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
-								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon">
-								<SvgTrash className="svg w-[1em]" />
-							</button>)}
-						{item.isFreeItem && item.attributes && item.attributes.findIndex((e: any) => e.key === '_swell_redemption_token') > -1 && (
-							<button className="cart-item__remove btn-unstyled text-body flex"
+								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon a">
+									<SvgTrash className="svg w-[1em]" />
+						</button>)}
+					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_swell_redemption_token') > -1 && (
+						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
-								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
-								<SvgTrash className="svg w-[1em]" />
-							</button>)}
-						{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
-							type="button" aria-label="Remove"
-							onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon b">
+									<SvgTrash className="svg w-[1em]" />
+						</button>)}
+					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon c">
+							<SvgTrash className="svg w-[1em]" />
+					</button>)}
+
+					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+						type="button" aria-label="Remove"
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon d">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
