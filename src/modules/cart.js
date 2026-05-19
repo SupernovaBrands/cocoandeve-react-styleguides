@@ -134,7 +134,9 @@ export default class CartAction {
 		const { merchandise: { product: { options } } } = item;
 		const swatches = options.filter((opt) => opt.name.toLowerCase().includes('color')
 			|| opt.name.toLowerCase().includes('style')
-			|| opt.name.toLowerCase().includes('scent')).map((opt) => {
+			|| opt.name.toLowerCase().includes('scent')
+			|| opt.name.toLowerCase().includes('foam')
+			|| opt.name.toLowerCase().includes('drops')).map((opt) => {
 			let { name } = opt;
 			if (name.toLowerCase().includes('drops') || name.toLowerCase().includes('foam') || name.toLowerCase().includes('color')) {
 				name = 'Shade';
