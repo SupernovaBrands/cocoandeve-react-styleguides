@@ -416,7 +416,7 @@ export const CartItem = (props: CartItemProps) => {
 
 										{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
 											<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-												{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
+												{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${isMultiOptions ? '' : opt.name}`}
 											</span>)}
 									</p>
 									{item.merchandise.product.handle === 'antioxidant-glow-cream' && (

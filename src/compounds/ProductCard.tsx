@@ -402,13 +402,15 @@ const SwatchOverlay = memo((props: any) => {
     let labelText = props.swatch.label;
     labelText = `<span class="lg:hidden">${labelText}</span><span class="hidden lg:inline">${labelText}</span>`;
 
+    if (product.handle === 'double-the-bronze-set') console.log('x', props.swatch);
+
     return (
         <>
             <AddToCartButton store={store} bgClass={props.bgClass} textClass={props.textClass} sustainability={props.sustainability} collectionTemplate={props.collectionTemplate} comparePrice={comparePrice} price={price} carousel={props.carousel} selectedVariant={selectedVariant} className="btn-choose mb-1 lg:mb-0" label={labelText} addToCart={false} sideUpsell={props.sideUpsell} trackEvent={props?.trackEvent} />
             <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
                 <div className={`article-swatch-heading text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
                     {isMultiTier ? (
-                        /* Multi-tier: render a swatch row per option (e.g., Shade 1, Shade 2) */
+                        /* multi tier block: render a swatch row per option (ex Shade 1, Shade 2) */
                         props.swatch.tiers.map((tier: any, tierIdx: number) => (
                             <div key={`tier-${tierIdx}`} className={tierIdx > 0 ? 'mt-[.625em]' : ''}>
                                 <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
@@ -418,11 +420,24 @@ const SwatchOverlay = memo((props: any) => {
                                 <ul className="list-unstyled product-variant-swatch flex justify-center lg:gap-g">
                                     {tier.data.map((item: any) => {
                                         const isSelected = tierSelections[tier.optionName] === item.label;
+
+                                        // check availability of variant based on swatch
+                                        const simulatedSelections = { ...tierSelections, [tier.optionName]: item.label };
+                                        const relativeVariant = props.swatch.data.find((v: any) =>
+                                            props.swatch.tiers.every((t: any) =>
+                                                v.selectedOptions.some((o: any) =>
+                                                    o.name === t.optionName && o.value === simulatedSelections[t.optionName]
+                                                )
+                                            )
+                                        );
+                                        const isAvailable = relativeVariant?.available ?? relativeVariant?.availableForSale ?? false;
+                                        // console.log('isAvailable', isAvailable);
+
                                         return (
-                                            <li key={`tier-${tierIdx}-${item.value}`} className={`w-auto product-variant-swatch__item available ${isSelected ? 'active' : ''}`}>
+                                            <li key={`tier-${tierIdx}-${item.value}`} className={`w-auto product-variant-swatch__item ${isAvailable ? 'available' : 'oos'} ${isSelected ? 'active' : ''}`}>
                                                 <span
                                                     onClick={() => changeTierSwatch(tier.optionName, item.label)}
-                                                    className={`block variant-swatch mx-auto border-2 ${isSelected ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')}`}
+                                                    className={`block variant-swatch mx-auto border-2 ${isSelected ? 'border-primary' : 'border-white'} ${isAvailable ? 'available' : 'oos'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')}`}
                                                 />
                                             </li>
                                         );
@@ -431,7 +446,7 @@ const SwatchOverlay = memo((props: any) => {
                             </div>
                         ))
                     ) : (
-                        /* Single-tier: existing swatch rendering */
+                        /* single tier block: existing swatch rendering */
                         <>
                             <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
                                 {props.swatch.style && <strong>Style: </strong>}
@@ -659,27 +674,27 @@ const ProductCard = (props: any) => {
                             </picture>
                         )}
                     </picture>
-                    
+
                 </ConditionalWrap>
                 <div className="btn__hover-overlay absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
                     opacity-0 translate-y-[.75rem]
                     transition-all duration-300
                     [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
-                        <ProductCardButton
-                            {...props}
-                            store={store}
-                            generalSetting={generalSetting}
-                            preOrders={preOrders}
-                            addToCart={addToCart}
-                            trackEvent={trackEvent}
-                            label={label}
-                            selectedVariant={selectedVariant}
-                            effectivelyAvailable={effectivelyAvailable}
-                            handleShade={handleShade}
-                            comparePrice={props.product.comparePrice}
-                            price={props.product.price}
-                            onVariantChange={handleVariantChange}
-                        />
+                    <ProductCardButton
+                        {...props}
+                        store={store}
+                        generalSetting={generalSetting}
+                        preOrders={preOrders}
+                        addToCart={addToCart}
+                        trackEvent={trackEvent}
+                        label={label}
+                        selectedVariant={selectedVariant}
+                        effectivelyAvailable={effectivelyAvailable}
+                        handleShade={handleShade}
+                        comparePrice={props.product.comparePrice}
+                        price={props.product.price}
+                        onVariantChange={handleVariantChange}
+                    />
                 </div>
 
                 {/* Badges */}
