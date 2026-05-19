@@ -30,7 +30,7 @@ type CartItemProps = {
 }
 
 
-export const CartItem = (props:CartItemProps) => {
+export const CartItem = (props: CartItemProps) => {
 	const { onChangeQuantity, onRemoveItem,
 		onChangeVariant, productStock,
 		productId, item, isLastStock,
@@ -51,14 +51,18 @@ export const CartItem = (props:CartItemProps) => {
 
 	const [hideItem, setHideItem] = useState(false);
 	const [editingVariant, setEditingVariant] = useState(null);
-	const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+	// const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 	const [selectedVariant, setSelectedVariant] = useState(selectedSwatch || []);
 	const [featuredImageUrl, setFeaturedImageUrl] = useState(item?.featuredImageUrl || '');
 	const [subtitles, setSubtitles] = useState([]);
 
 	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
 		setEditingVariant(index);
-		setSelectedVariant([swatchValue]);
+		setSelectedVariant((prev) => {
+			const updated = [...prev];
+			updated[index] = swatchValue;
+			return updated;
+		});
 		await onChangeVariant(item.id, variant.id, item.quantity, item);
 		setEditingVariant(null);
 	}
@@ -77,16 +81,17 @@ export const CartItem = (props:CartItemProps) => {
 		setSubtitles(subtitles);
 	}
 
-	const onAccordionOpen = () => {
-		// setOnAcco((prevState:any) => ({
-		// 	//@ts-ignore
-		// 	isAccordionOpen: !prevState.isAccordionOpen,
-		// }));
-	}
+	// const onAccordionOpen = () => {
+	// 	// setOnAcco((prevState:any) => ({
+	// 	// 	//@ts-ignore
+	// 	// 	isAccordionOpen: !prevState.isAccordionOpen,
+	// 	// }));
+	// 	// setIsAccordionOpen((prev) => !prev);
+	// }
 
 	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
-	const productTitle = (item:any) => {
+	const productTitle = (item: any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
 		if (item.merchandise.title.toLowerCase() === 'default title') {
 			return capitalizeString(item.merchandise.product.title);
@@ -103,7 +108,7 @@ export const CartItem = (props:CartItemProps) => {
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
 	}
 
-	const extractId = (id:string) => {
+	const extractId = (id: string) => {
 		const arrString = id.split('?')[0].split('/');
 		return arrString[arrString.length - 1];
 	}
@@ -202,14 +207,14 @@ export const CartItem = (props:CartItemProps) => {
 		const grouped = Object.values(
 			data.reduce((acc, item) => {
 				if (!acc[item.name]) {
-				acc[item.name] = { ...item };
+					acc[item.name] = { ...item };
 				} else {
-				// gabungkan id
-				acc[item.name].id += "|" + item.id;
-				// ambil intersection values
-				acc[item.name].values = acc[item.name].values.filter(v =>
-					item.values.includes(v)
-				);
+					// gabungkan id
+					acc[item.name].id += "|" + item.id;
+					// ambil intersection values
+					acc[item.name].values = acc[item.name].values.filter(v =>
+						item.values.includes(v)
+					);
 				}
 				return acc;
 			}, {})
@@ -222,9 +227,9 @@ export const CartItem = (props:CartItemProps) => {
 		setSelectedVariant(selectedSwatch);
 	}, [selectedSwatch]);
 
-	const isUpsell = (item:any) => {
+	const isUpsell = (item: any) => {
 		try {
-			return item.attributes.find((props:any) => props.key === '_front_upsell');
+			return item.attributes.find((props: any) => props.key === '_front_upsell');
 		} catch {
 			return null
 		}
@@ -240,76 +245,80 @@ export const CartItem = (props:CartItemProps) => {
 	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
 	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
 
+	// console.log('cart item', item);
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
-		<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
-			<ConditionWrapper
-				condition={!item.isFreeItem}
-				wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
-			>
-				{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
-					<img src={featuredImage.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
-				</picture>)}
-				{componentImage?.value && <picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
-					<img src={componentImage?.value} className="w-full object-contain bg-pink-light h-[78px]" alt={component?.title} loading="lazy" width="78" height="78" />
-				</picture>}
-			</ConditionWrapper>
-			<figcaption className={`w-9/12 px-hg lg:px-g`}>
-
-				<div className="flex items-start no-gutters justify-between">
-					<p className={`mb-1 font-bold ${isBundle ? 'w-auto' : 'w-2/3'} pl-0`}>
-						{item.isFreeItem && item.originalPrice >= 0 ? (
-							<ConditionWrapper
-								condition={item.isFreeItem}
-								wrapper={(children:any) => <span className="text-black">{children}</span>}
-							>
-								{ item.isFreeItem && !component && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`) }
-								{ item.isFreeItem && component && (`${component.title?.replace('FREE', '').replace('Free', '').trim()}`) }
-							</ConditionWrapper>
+			<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
+				<ConditionWrapper
+					condition={!item.isFreeItem}
+					wrapper={(children: any) => !isUpsell(item) ? <a href={item.url} className="w-3/12 px-hg lg:px-g">{children}</a> : <span className="w-3/12 px-hg lg:px-g">{children}</span>}
+				>
+					{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+						{item.featuredImageUrl ? (
+							<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 						) : (
+							<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+						)}
+					</picture>)}
+					{componentImage?.value && <picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
+						<img src={componentImage?.value} className="w-full object-contain bg-pink-light h-[78px]" alt={component?.title} loading="lazy" width="78" height="78" />
+					</picture>}
+				</ConditionWrapper>
+				<figcaption className={`w-9/12 px-hg lg:px-g`}>
+					{/* {isKitBuilder && (
+					<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-1">
+						<span className={`leading-[normal]`}>Bundle Builder Discount</span>
+					</div>
+				)} */}
+					<div className="flex items-start no-gutters justify-between">
+						<p className={`mb-1 font-bold ${isBundle ? 'w-auto' : 'w-2/3'} pl-0`}>
+							{item.isFreeItem && item.originalPrice >= 0 ? (
 								<ConditionWrapper
-									condition={!item.isFreeItem}
-									wrapper={(children: any) => {
-										if (item.disableCartItemLink || !isUpsell(item)) {
-											return (
-												<>
-													{/* {isKitBuilder && (
-														<div className="inline-flex badge rounded-[80px] py-[3.5px] px-[.5rem] lg:px-[.5rem] leading-[18px] bg-primary font-normal text-sm text-white mb-[.5rem]">
-															<span className={`leading-[normal]`}>Bundle Builder Discount</span>
-														</div>
-													)} */}
-													<span className="text-black inline-block">
+									condition={item.isFreeItem}
+									wrapper={(children: any) => <span className="text-black">{children}</span>}
+								>
+									{item.isFreeItem && !component && (`${item.merchandise.product.title.replace('FREE', '').replace('Free', '').trim()}`)}
+									{item.isFreeItem && component && (`${component.title?.replace('FREE', '').replace('Free', '').trim()}`)}
+								</ConditionWrapper>
+							) : (
+									<ConditionWrapper
+										condition={!item.isFreeItem}
+										wrapper={(children: any) => {
+											if (item.disableCartItemLink || !isUpsell(item)) {
+												return isMultiOptions ? (
+													<span className="text-black">{item?.merchandise?.product?.title || children}</span>
+												) : (
+													<span className="text-black">
 														{isBundle ? 'Build Your Own Bundle' : children}
 													</span>
-												</>
-											);
-										} else {
-											return (
-												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
-													{isBundle ? 'Build Your Own Bundle' : children}
-												</a>
-											);
-										}
-									}}
-								>
-									{ !item.isFreeItem && !component && (`${productTitle(item)}`) }
-									{ !item.isFreeItem && component && (`${component?.title}`) }
-									{`${item.recurring ? ' Subscriptions' : ''}`}
-								</ConditionWrapper>
+												);
+											} else {
+												return isMultiOptions ? (
+													<span className="text-black">{item?.merchandise?.product?.title || children}</span>
+												) : (
+													<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
+														{isBundle ? 'Build Your Own Bundle' : children}
+													</a>
+												);
+											}
+										}}
+									>
+										{!item.isFreeItem && !component && (`${productTitle(item)}`)}
+										{!item.isFreeItem && component && (`${component?.title}`)}
+										{`${item.recurring ? ' Subscriptions' : ''}`}
+									</ConditionWrapper>
+								)}
+							{item.recurring && (
+								<span className="text-primary mt-1 flex font-italic text-sm font-normal">
+									<SvgRecurring className="svg mr-1" />
+									{' '}
+									{item.recurringMessage}
+								</span>
 							)}
-
-						{item.recurring && (
-							<span className="text-primary mt-1 flex font-italic text-sm font-normal">
-								<SvgRecurring className="svg mr-1" />
-								{' '}
-								{item.recurringMessage}
-							</span>
-						)}
-
-					</p>
-					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
-						<button className="cart-item__remove btn-unstyled text-body flex"
+						</p>
+						{item.isFreeItem && item.attributes && item.attributes.findIndex((e: any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
+							<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon a">
 									<SvgTrash className="svg w-[1em]" />
@@ -331,179 +340,177 @@ export const CartItem = (props:CartItemProps) => {
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
-
-					{/* {isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
-						type="button" aria-label="Remove"
-						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+						{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+							type="button" aria-label="Remove"
+							onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
-						</button>)} */}
+						</button>)}
 
-				</div>
+					</div>
 
-				<ConditionWrapper
-					condition={isMultiOptions}
-					wrapper={(children:any) => (
-						<div className="pb-1">
-							<a onClick={onAccordionOpen} className={`${!isAccordionOpen ? 'collapsed' : ''} d-inline-block text-primary text-underline card-header p-0 border-b-[1px]-0 position-relative pr-2 mb-1`} data-toggle="collapse" href={`#cart-drawer__shade-${extractId(item.id)}`} role="button" aria-expanded={isAccordionOpen} aria-controls={`#cart-drawer__shade-${extractId(item.id)}`}>
-								{isAccordionOpen ? 'Hide details' : 'Show details'}
-								<SvgChevronDown className="svg chevron-down ml-1" width="12" height="12" />
-							</a>
-							<div className={`${isAccordionOpen ? 'd-block' : 'd-none'} collapse text-body`} id={`cart-drawer__shade-${extractId(item.id)}`}>
-								{children}
+					<ConditionWrapper
+						condition={isMultiOptions}
+						wrapper={(children: any) => (
+							<div className="pb-1">
+								{/* <button type="button" onClick={onAccordionOpen} className={`${!isAccordionOpen ? 'collapsed' : ''} inline-block text-primary text-underline card-header p-0 border-b-[1px]-0 position-relative pr-2 mb-1`}>
+									{isAccordionOpen ? 'Hide details' : 'Show details'}
+									<SvgChevronDown className="svg chevron-down ml-1" width="12" height="12" />
+								</button> */}
+								<div className={`block text-body`}>
+									{children}
+								</div>
 							</div>
-						</div>
-					)}
-				>
-					{groupSwatches(swatches).map((opt:any, index:number) => {
-						const options = item.merchandise.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
-						const selected = options.filter((option:any, ind:any) => option.name.toLowerCase() !== 'size' && index === ind)
-							.map((option:any) => option.value).join();
+						)}
+					>
+						{groupSwatches(swatches).map((opt: any, index: number) => {
+							const options = item.merchandise.selectedOptions.filter((option: any) => option.name.toLowerCase() !== 'size');
+							const selected = options.filter((option: any, ind: any) => option.name.toLowerCase() !== 'size' && index === ind)
+								.map((option: any) => option.value).join();
 
-						const itemSub = subtitles.length > 0 ? subtitles[index] : false;
+							const itemSub = subtitles.length > 0 ? subtitles[index] : false;
 
-						return (
-							<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? 'border-b-[1px] border-bg-primary-light-second' : ''}`}>
+							return (
+								<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? 'border-b-[1px] border-bg-primary-light-second' : ''}`}>
 
-								{isMultiOptions && itemSub && itemSub.split('///').map((sub:any, ind:number) => {
-									if (ind + 1 < itemSub.split('///').length) {
+									{isMultiOptions && itemSub && itemSub.split('///').map((sub: any, ind: number) => {
+										if (ind + 1 < itemSub.split('///').length) {
+											return (
+												<p className="font-size-sm mb-1 pb-1 border-b-[1px] border-bg-primary-light-second">{sub}</p>
+											);
+										}
 										return (
-											<p className="font-size-sm mb-1 pb-1 border-b-[1px] border-bg-primary-light-second">{sub}</p>
-										);
-									}
-									return (
-										<p className="font-size-sm mb-1 pb-1">{sub}</p>
-									);
-								})}
-
-								<p className="flex mb-1 items-center">
-
-									{!showSwatches && (
-										<i className={`d-block variant-swatch ${kebabCase(selected)}`} />
-									)}
-									{showSwatches && opt.values.map((val:any) => {
-										const o = [...selectedVariant];
-										o[index] = val;
-										const variant = variants.find((vari:any) => {
-											const selectedVaries = vari.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
-											const selectedVari = selectedVaries.map((option:any) => option.value);
-											return selectedVari.join() === o.join();
-										});
-
-										return variant && !isBundle && (
-											<button
-												key={`${opt.id}-${kebabCase(val)}`}
-												className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white' } ${!variant.availableForSale ? 'oos' : ''}`}
-												type="button"
-												tabIndex={-1}
-												disabled={!variant.availableForSale}
-												aria-label={kebabCase(val)}
-												onClick={() => selectedVariant[0] !== val ? onSelectVariant(variant, val, index) : null }
-											/>
+											<p className="font-size-sm mb-1 pb-1">{sub}</p>
 										);
 									})}
 
-									{editingVariant === index && (
-										<span className="spinner-border spinner-border-sm text-primary ml-1 !w-[20px] !h-[20px]" role="status" />
+									<p className="flex mb-1 items-center">
+
+										{!showSwatches && (
+											<i className={`d-block variant-swatch ${kebabCase(selected)}`} />
+										)}
+										{showSwatches && opt.values.map((val: any) => {
+											const o = [...selectedVariant];
+											o[index] = val;
+											const variant = variants.find((vari: any) => {
+												const selectedVaries = vari.selectedOptions.filter((option: any) => option.name.toLowerCase() !== 'size');
+												const selectedVari = selectedVaries.map((option: any) => option.value);
+												return selectedVari.join() === o.join();
+											});
+
+											return variant && !isBundle && (
+												<button
+													key={`${opt.id}-${kebabCase(val)}`}
+													className={`variant-swatch pr-0 mr-1 ${kebabCase(val)} ${selected === val ? 'border-2 border-primary selected' : 'border-2 border-white'} ${!variant.availableForSale ? 'oos' : ''}`}
+													type="button"
+													tabIndex={-1}
+													disabled={!variant.availableForSale}
+													aria-label={kebabCase(val)}
+													onClick={() => selectedVariant[0] !== val ? onSelectVariant(variant, val, index) : null}
+												/>
+											);
+										})}
+
+										{editingVariant === index && (
+											<span className="spinner-border spinner-border-sm text-primary ml-1 !w-[20px] !h-[20px]" role="status" />
+										)}
+
+										{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
+											<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
+												{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${isMultiOptions ? '' : opt.name}`}
+											</span>)}
+									</p>
+									{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
+										<div className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
+											{`${selected.replace(': limited edition!', '')} ${opt.name}`}
+										</div>
 									)}
+								</div>
 
-									{item.merchandise.product.handle !== 'antioxidant-glow-cream' && (
-									<span className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{`${!isBundle ? ' - ' : ''}${selected.replace(': limited edition!', '')} ${opt.name}`}
-									</span>)}
-								</p>
-								{item.merchandise.product.handle === 'antioxidant-glow-cream' && (
-									<div className={editingVariant === index ? 'hidden' : 'font-size-sm'}>
-										{`${selected.replace(': limited edition!', '')} ${opt.name}`}
-									</div>
-								)}
-							</div>
+							);
+						})}
 
-						);
-					})}
+					</ConditionWrapper>
 
-				</ConditionWrapper>
+					{item.attributes && item.attributes.map((itm: any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
 
-				{item.attributes && item.attributes.map((itm:any) => !itm.key.startsWith('_') && (<p key={itm.key} className="mb-1">{`${itm.key}: ${itm.value}`}</p>))}
+					<div className={`flex items-center justify-between`}>
+						{!isBundle && (
+							<QuantityBox
+								name="quantity-box"
+								editable={component ? false : !item.isFreeItem}
+								quantity={item.quantity}
+								onChangeQuantity={(newQty: number, callback: any) => onChangeQuantity(item, newQty, callback)}
+								isLastStock={isLastStock}
+								productId={productId}
+								productStock={component ? 10000 : productStock}
+								isModified={item.modified}
+								originalQuantity={component ? item.quantity : item.original_quantity}
+								allowZero={true}
+							/>
+						)}
+						{/* {isKitBuilder && (
+						<strong className="">x1</strong>
+					)} */}
+						{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
+							? (
+								<div className="flex flex-col text-right">
+									{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+									{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
+									<strong>
+										Free
+									</strong>
+								</div>
+							) : (
+								<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+									{isBundle ? (
+										<>
+											{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
+											<strong>{formatMoney(bundlePrice, false, store)}</strong>
+										</>
+									) : (
+										<>
+											{item.comparePrice > 0
+												? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+												: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+											<strong>
+												{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
+													? formatMoney(item.priceAfterDiscounted, false, store)
+													: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 
-				<div className={`flex items-center justify-between`}>
-					{!isBundle && (
-						<QuantityBox
-							name="quantity-box"
-							editable={component ? false : !item.isFreeItem}
-							quantity={item.quantity}
-							onChangeQuantity={(newQty:number, callback:any) => onChangeQuantity(item, newQty, callback)}
-							isLastStock={isLastStock}
-							productId={productId}
-							productStock={component ? 10000 : productStock}
-							isModified={item.modified}
-							originalQuantity={component ? item.quantity : item.original_quantity}
-							allowZero={true}
-						/>
+												{item.recurring && (item.period)}
+											</strong>
+										</>
+									)}
+								</div>
+							)}
+					</div>
+
+					{isBundle && bundleItems && bundleItems.length > 0 && (
+						<ul className="flex flex-col gap-[.25rem] pt-1">
+							{bundleItems.map((bundleItem) => (
+								<li className="flex items-center gap-[.25rem]">
+									<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
+									<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+								</li>
+							))}
+						</ul>
 					)}
 
-					{/* {isKitBuilder && (
-						<strong>x1</strong>
-					)} */}
-					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
-						? (
-							<div className="flex flex-col text-right">
-								{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
-								{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
-								<strong>
-									Free
-								</strong>
-							</div>
-						) : (
-							<div className={`flex ${isBundle ? 'gap-[.5rem]' : 'flex-col'} text-right`}>
-								{isBundle ? (
-									<>
-										{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
-										<strong>{formatMoney(bundlePrice, false, store)}</strong>
-									</>
-								) : (
-									<>
-										{item.comparePrice > 0
-											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-										<strong>
-											{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
-												? formatMoney(item.priceAfterDiscounted, false, store)
-												: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+					{(isLastStock) && (
+						<p className="mt-1 mb-0 text-danger">Oh nuts! You got the last one!</p>)}
+				</figcaption>
+			</figure>
 
-											{item.recurring && (item.period)}
-										</strong>
-									</>
-								)}
-							</div>
-						)}
-				</div>
-
-				{isBundle && bundleItems && bundleItems.length > 0 && (
-					<ul className="flex flex-col gap-[.25rem] pt-1">
-						{bundleItems.map((bundleItem) => (
-							<li className="flex items-center gap-[.25rem]">
-								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} loading='lazy' width={20} height={20} className="aspect-[1/1]" />
-								<span className="text-sm leading-[normal]">1x {bundleItem?.merchandise?.title}</span>
-							</li>
-						))}
-					</ul>
-				)}
-
-				{(isLastStock) && (
-					<p className="mt-1 mb-0 text-danger">Oh nuts! You got the last one!</p>)}
-			</figcaption>
-		</figure>
-
-		{item.showPreorderNotif?.show && (
-			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif?.note || ''}</span>
-		)}
-		{item.showPreorderNotif_2?.show && (
-			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif_2?.note}</span>
-		)}
-		{item.showPreorderNotif_3?.show && (
-			<span className="preorder-notif block mb-2 text-sm">{item.showPreorderNotif_3?.note}</span>
-		)}
-	</li>
+			{item.showPreorderNotif?.show && (
+				<span className="block mb-2 text-sm">{item.showPreorderNotif?.note || ''}</span>
+			)}
+			{item.showPreorderNotif_2?.show && (
+				<span className="block mb-2 text-sm">{item.showPreorderNotif_2?.note}</span>
+			)}
+			{item.showPreorderNotif_3?.show && (
+				<span className="block mb-2 text-sm">{item.showPreorderNotif_3?.note}</span>
+			)}
+		</li>
 
 	)
 }

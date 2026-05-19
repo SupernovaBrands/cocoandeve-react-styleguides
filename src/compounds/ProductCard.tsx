@@ -263,6 +263,30 @@ const SwatchOverlay = memo((props: any) => {
     const [hasUserSelectedSwatch, setHasUserSelectedSwatch] = useState(false);
     const { product, addToCart, preOrders, generalSetting, label, store, handleShade } = props;
 
+    const isMultiTier = props.swatch?.multiTier === true;
+
+    // Multi-tier: track selected value per option tier
+    const [tierSelections, setTierSelections] = useState(() => {
+        if (!isMultiTier || !props.swatch.tiers) return {};
+        const initial: Record<string, string> = {};
+        props.swatch.tiers.forEach((tier: any) => {
+            initial[tier.optionName] = tier.opts[0];
+        });
+        return initial;
+    });
+
+    // Multi-tier: resolve variant from combined tier selections
+    const resolvedMultiTierVariant = useMemo(() => {
+        if (!isMultiTier || !props.swatch.tiers) return null;
+        return product?.variants?.nodes.find((v: any) =>
+            props.swatch.tiers.every((tier: any) =>
+                v.selectedOptions.some((o: any) =>
+                    o.name === tier.optionName && o.value === tierSelections[tier.optionName]
+                )
+            )
+        ) || null;
+    }, [isMultiTier, tierSelections, product]);
+
     const firstAvailable = useMemo(() => {
         const autoTicks = generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [];
         let first: any = null;
@@ -286,8 +310,27 @@ const SwatchOverlay = memo((props: any) => {
         if (!hasUserSelectedSwatch && firstAvailable) {
             setSelectedVariant(firstAvailable);
             setSwatchAvailable(firstAvailable.id !== 0 && firstAvailable.availableForSale !== false);
+
+            // Multi-tier: sync tierSelections to match the first available variant
+            if (isMultiTier && firstAvailable?.selectedOptions && props.swatch.tiers) {
+                const initial: Record<string, string> = {};
+                props.swatch.tiers.forEach((tier: any) => {
+                    const match = firstAvailable.selectedOptions.find((o: any) => o.name === tier.optionName);
+                    if (match) initial[tier.optionName] = match.value;
+                });
+                setTierSelections(initial);
+            }
         }
     }, [firstAvailable, hasUserSelectedSwatch]);
+
+    // Multi-tier: update selectedVariant when tier selections change
+    useEffect(() => {
+        if (isMultiTier && resolvedMultiTierVariant && hasUserSelectedSwatch) {
+            setSelectedVariant(resolvedMultiTierVariant);
+            setSwatchAvailable(resolvedMultiTierVariant.availableForSale);
+            props.onVariantChange?.(resolvedMultiTierVariant);
+        }
+    }, [resolvedMultiTierVariant, isMultiTier, hasUserSelectedSwatch]);
 
     const { price, comparePrice } = useMemo(() => {
         const derivedPrice = selectedVariant?.price
@@ -323,6 +366,15 @@ const SwatchOverlay = memo((props: any) => {
 
     }, [product, store, handleShade]);
 
+    // Multi-tier: handler for individual tier swatch clicks
+    const changeTierSwatch = useCallback((optionName: string, value: string) => {
+        setTierSelections((prev) => ({
+            ...prev,
+            [optionName]: value,
+        }));
+        setHasUserSelectedSwatch(true);
+    }, []);
+
     const swatchSelected = props.swatch.data.find((sData) => sData.id === selectedVariant?.id) || props.swatch.data[0];
 
     if (props.quizResult) {
@@ -350,6 +402,8 @@ const SwatchOverlay = memo((props: any) => {
     let labelText = props.swatch.label;
     labelText = `<span class="lg:hidden">${labelText}</span><span class="hidden lg:inline">${labelText}</span>`;
 
+    // if (product.handle === 'double-the-bronze-set') console.log('x', props.swatch);
+
     return (
         <>
             <AddToCartButton
@@ -358,27 +412,68 @@ const SwatchOverlay = memo((props: any) => {
             />
             <div className={`!w-auto px-0 swatch-overlay ${props.sideUpsell ? 'left-[5px] lg:left-[5px] right-[5px] lg:right-[5px]' : 'left-0 right-0'} bottom-[35px] lg:bottom-[.75rem] flex-col items-center justify-end pb-0 absolute bg-white lg:px-0 border border-primary`}>
                 <div className={`article-swatch-heading text-center w-full pt-2 lg:pb-2 pb-1 ${props.sideUpsell ? 'lg:px-0' : 'lg:px-1'}`}>
-                    <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
-                        {props.swatch.style && <strong>Style: </strong>}
-                        {props.swatch.shade && <strong>Shade: </strong>}
-                        {props.swatch.tangleTamer && <strong>Type: </strong>}
-                        {props.swatch.scent && <strong>Scent: </strong>}
-                        {props.swatch.variant && <strong>Variant: </strong>}
-                        <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
-                    </div>
-                    <ul className="list-unstyled product-variant-swatch flex justify-center lg:gap-g">
-                        {props.swatch.data.map((item: any) => (
-                            <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
-                                <span
-                                    onClick={changeSwatch}
-                                    data-id={item.id}
-                                    data-val={item.label}
-                                    data-avail={item.availableForSale}
-                                    className={`block variant-swatch mx-auto border-2 ${selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}
-                                />
-                            </li>
-                        ))}
-                    </ul>
+                    {isMultiTier ? (
+                        /* multi tier block: render a swatch row per option (ex Shade 1, Shade 2) */
+                        props.swatch.tiers.map((tier: any, tierIdx: number) => (
+                            <div key={`tier-${tierIdx}`} className={tierIdx > 0 ? 'mt-[.625em]' : ''}>
+                                <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
+                                    <strong>Shade {tierIdx + 1}: </strong>
+                                    <span>{tierSelections[tier.optionName]}</span>
+                                </div>
+                                <ul className="list-unstyled product-variant-swatch flex justify-center lg:gap-g">
+                                    {tier.data.map((item: any) => {
+                                        const isSelected = tierSelections[tier.optionName] === item.label;
+
+                                        // check availability of variant based on swatch
+                                        const simulatedSelections = { ...tierSelections, [tier.optionName]: item.label };
+                                        const relativeVariant = props.swatch.data.find((v: any) =>
+                                            props.swatch.tiers.every((t: any) =>
+                                                v.selectedOptions.some((o: any) =>
+                                                    o.name === t.optionName && o.value === simulatedSelections[t.optionName]
+                                                )
+                                            )
+                                        );
+                                        const isAvailable = relativeVariant?.available ?? relativeVariant?.availableForSale ?? false;
+                                        // console.log('isAvailable', isAvailable);
+
+                                        return (
+                                            <li key={`tier-${tierIdx}-${item.value}`} className={`w-auto product-variant-swatch__item ${isAvailable ? 'available' : 'oos'} ${isSelected ? 'active' : ''}`}>
+                                                <span
+                                                    onClick={() => changeTierSwatch(tier.optionName, item.label)}
+                                                    className={`block variant-swatch mx-auto border-2 ${isSelected ? 'border-primary' : 'border-white'} ${isAvailable ? 'available' : 'oos'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')}`}
+                                                />
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        ))
+                    ) : (
+                        /* single tier block: existing swatch rendering */
+                        <>
+                            <div className="block mb-[.625em] article-swatch-label text-sm lg:text-base">
+                                {props.swatch.style && <strong>Style: </strong>}
+                                {props.swatch.shade && <strong>Shade: </strong>}
+                                {props.swatch.tangleTamer && <strong>Type: </strong>}
+                                {props.swatch.scent && <strong>Scent: </strong>}
+                                {props.swatch.variant && <strong>Variant: </strong>}
+                                <span ref={swatchLabel} data-swatch-label>{swatchSelected.label}</span>
+                            </div>
+                            <ul className="list-unstyled product-variant-swatch flex justify-center lg:gap-g">
+                                {props.swatch.data.map((item: any) => (
+                                    <li key={`swatch-card-${item.id}`} className={`${props.sideUpsell ? 'w-[42px]' : 'w-auto'} product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${selectedVariant?.id === item.id ? 'active' : ''}`} data-available={item.available ? 'available' : ''}>
+                                        <span
+                                            onClick={changeSwatch}
+                                            data-id={item.id}
+                                            data-val={item.label}
+                                            data-avail={item.availableForSale}
+                                            className={`block variant-swatch mx-auto border-2 ${selectedVariant?.id === item.id ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    )}
                 </div>
                 {swatchAvailable ? (
                     <AddToCartButton
@@ -431,6 +526,8 @@ const ProductCardButton = (props: any) => {
 const ProductCard = (props: any) => {
     const { kitBuilder, style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
     const { product } = props;
+
+    // if (product.handle === 'double-the-bronze-set') console.log('props', props);
 
     const autoTicks = useMemo(
         () => generalSetting?.auto_tick_variant?.split(',').map((v) => parseInt(v, 10)) || [],

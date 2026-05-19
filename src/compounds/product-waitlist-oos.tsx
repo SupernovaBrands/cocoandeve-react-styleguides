@@ -196,7 +196,7 @@ const ProductWaitlist = (props: any) => {
 			}
 			setData({...data});
 		}
-	}, [props.selectedVariant.id]);
+	}, [props.selectedVariant?.id]);
 
 	return (
 		<>
