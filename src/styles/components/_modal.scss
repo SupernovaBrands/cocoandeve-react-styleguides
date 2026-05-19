@@ -75,13 +75,13 @@
 			right: 1.5rem;
 		}
 
-		.variant-swatch {
-			@apply border-none w-[18px] h-[18px] lg:w-[20px] lg:h-[20px];
+		// .variant-swatch {
+		// 	@apply border-none w-[18px] h-[18px] lg:w-[20px] lg:h-[20px];
 
-			&::before {
-				@apply w-[18px] h-[18px] lg:w-[20px] lg:h-[20px]
-			}
-		}
+		// 	&::before {
+		// 		@apply w-[18px] h-[18px] lg:w-[20px] lg:h-[20px]
+		// 	}
+		// }
 
 		.product__accordion {
 			@apply pt-3 lg:mt-0 lg:pt-4;

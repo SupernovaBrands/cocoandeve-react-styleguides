@@ -668,24 +668,24 @@ const ProductInfo = (props: any) => {
                             {tagline && <p className={`mb-[1rem] lg:mb-2 product__tagline text-sm lg:text-base`}>{tagline}</p>}
                             {data.swatch && (
                                 <>
-                                    <label className={`${quickBuy ? 'inline-block mb-[.5rem] font-bold lg:text-lg' : 'block mb-[.625em]'}`}>
+                                    <label className={`block mb-[.625em]`}>
                                         {data.swatch.style && <strong>Style: </strong>}
-                                        {data.swatch.shade && <strong>{quickBuy ? 'Skin Tone' : 'Shade'}: </strong>}
+                                        {data.swatch.shade && <strong>Shade: </strong>}
                                         {data.swatch.tangleTamer && <strong>Type: </strong>}
                                         {data.swatch.scent && <strong>Scent: </strong>}
                                         {data.swatch.variant && <strong>Variant: </strong>}
-                                        {!quickBuy && (
+                                        {/* {!quickBuy && ( */}
                                             <span ref={swatchLabel} data-swatch-label>{data.swatch.data.find((sData) => sData.id === selectedVariant.id)?.label || data.swatch.data[0].label}</span>
-                                        )}
+                                        {/* )} */}
 
                                     </label>
                                     <ul className="mb-[1rem] list-unstyled product-variant-swatch flex justify-start">
                                         {data.swatch.data.length > 0 && data.swatch.data.map((item: any, i: any) => {
                                             const activeSwatch = selectedVariant.id === item.id;
                                             return (
-                                                <li data-id={item.id} data-val={item.label} data-avail={item.availableForSale} onClick={changeSwatch} key={`swatch-card-${item.id}`} className={`${quickBuy ? 'flex items-center py-[7px] px-g' : ''} w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${activeSwatch && !quickBuy ? 'active' : ''} ${quickBuy ? 'border' : ''} ${activeSwatch && quickBuy ? 'border-primary' : `${quickBuy ? 'border-white bg-[#F5F5F5]' : ''}`} cursor-pointer`} data-available={item.available ? 'available' : ''}>
+                                                <li data-id={item.id} data-val={item.label} data-avail={item.availableForSale} onClick={changeSwatch} key={`swatch-card-${item.id}`} className={`w-auto mr-1 product-variant-swatch__item ${item.available ? 'available' : 'oos'} ${activeSwatch ? 'active' : ''} ${activeSwatch ? 'border-primary' : ``} cursor-pointer`} data-available={item.available ? 'available' : ''}>
                                                     <span ref={spanEl} data-id={item.id} data-val={item.label} data-avail={item.availableForSale} className={`block variant-swatch mx-auto border-2 ${activeSwatch ? 'border-primary' : 'border-white'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')} ${item.available ? '' : 'oos'}`}></span>
-                                                    {quickBuy && <span data-value={item.label.toLowerCase()} data-is-additional={selectedVariant?.isAdditional} className={`text-nowrap ml-1 lg:ml-1 text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{item.label.replace('Antioxidant Glow', '')}</span>}
+                                                    {/* {quickBuy && <span data-value={item.label.toLowerCase()} data-is-additional={selectedVariant?.isAdditional} className={`text-nowrap ml-1 lg:ml-1 text-sm lg:text-base ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{item.label.replace('Antioxidant Glow', '')}</span>} */}
                                                 </li>
                                             )
                                         })}
