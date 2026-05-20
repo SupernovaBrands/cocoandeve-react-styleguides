@@ -29,6 +29,14 @@ export const CartDiscountForm = (props:any) => {
     const inputRef = useRef(null);
 
     useEffect(() => {
+        const handleLoading = (e: any) => {
+            setState((prevState: any) => ({ ...prevState, loading: e.detail }));
+        };
+        window.document.addEventListener('cart-discount-form-loading', handleLoading);
+        return () => window.document.removeEventListener('cart-discount-form-loading', handleLoading);
+    }, []);
+
+    useEffect(() => {
         const { isApplied, error } = props;
         if (!isApplied && error) {
             setState({ ...state, code: '', error: '' });
