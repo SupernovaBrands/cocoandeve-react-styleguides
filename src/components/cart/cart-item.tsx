@@ -383,6 +383,9 @@ export const CartItem = (props: CartItemProps) => {
 										);
 									})}
 
+									{isMultiOptions && (
+										<span className="font-size-sm inline-block pb-25">Skin Tone {index + 1}:</span>
+									)}
 									<p className="flex mb-1 items-center">
 
 										{!showSwatches && (
