@@ -528,7 +528,7 @@ const Cart: React.FC<Props> = (props) => {
 								</div>
 
 								{cartUpsell && cartUpsell.enable && cartUpsell.items.length > 0 && (
-									<CartUpsell {...cartUpsell} addToCart={addToCart} store={store}></CartUpsell>
+									<CartUpsell {...cartUpsell} onApplyDiscountCode={onApplyDiscountCode} addToCart={addToCart} store={store}></CartUpsell>
 								)}
 
 								{/* @ts-ignore */}

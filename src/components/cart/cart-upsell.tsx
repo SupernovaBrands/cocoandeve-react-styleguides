@@ -9,10 +9,11 @@ import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrow
 import { formatMoney } from '~/modules/utils';
 
 const CartUpsell = (props:any) => {
-    const { items: products, addToCart, store } = props;
+    // console.log('props', props);
+    const { items: products, addToCart, store, onApplyDiscountCode } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
-    const addUpsell = async (variant:any, percentage:any) => {
+    const addUpsell = async (variant:any, percentage:any, discount_code:string) => {
         setLoading(true);
         const addLine = await addToCart({
             id: variant.id,
@@ -24,6 +25,13 @@ const CartUpsell = (props:any) => {
             bubble: false,
         });
         setLoading(false);
+        if (discount_code) {
+            // auto apply disc code here
+            // console.log('auto apply discount code', discount_code);
+            window.document.dispatchEvent(new CustomEvent('cart-discount-form-loading', { detail: true }));
+            await onApplyDiscountCode(discount_code, true);
+            window.document.dispatchEvent(new CustomEvent('cart-discount-form-loading', { detail: false }));
+        }
         return addLine;
     }
 
@@ -147,7 +155,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="bfcm-btn btn btn-outline-body px-[28px] py-1 mt-1 min-w-[86px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="bfcm-btn btn btn-outline-body px-[28px] py-1 mt-1 min-w-[86px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage, item.discount_code)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}
