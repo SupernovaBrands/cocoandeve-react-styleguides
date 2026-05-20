@@ -166,7 +166,7 @@
         @apply mb-0
     }
     &-left {
-        @apply order-2 lg:order-1 sm:pb-[1rem] text-body px-g;
+        @apply order-2 lg:order-1 sm:py-[1rem] text-body px-g lg:py-0 lg:px-0;
     }
     &-right {
         @apply order-1;
@@ -178,9 +178,9 @@
 
     &-content > div {
         @apply lg:text-base lg:mb-2;
-        b {
-            @apply lg:text-lg;
-        }
+        // b {
+        //     @apply lg:text-lg;
+        // }
     }
 }
 
