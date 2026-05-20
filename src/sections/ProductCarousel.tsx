@@ -111,11 +111,19 @@ const ProductCarousel = (props: any) => {
 		}
 	}, [productPage]);
 
-	const tabConfig = [
+	let tabConfig = [
 		{ key: 'bestsellers', title: 'Best Sellers' },
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
 	];
+
+	if (store === 'uk' || store === 'us') {
+		tabConfig = [
+			{ key: 'valuesets', title: 'Value Sets' },
+			{ key: 'bestsellers', title: 'Best Sellers' },
+			{ key: 'new', title: 'New' }
+		];
+	}
 
 	const visibleCount = useVisibleCount({
 		mobile: 2,
