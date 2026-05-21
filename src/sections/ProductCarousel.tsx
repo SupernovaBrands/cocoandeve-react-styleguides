@@ -38,7 +38,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, quickBuy } = props;
+	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, quickBuy, hpTabProducts } = props;
 	const {
 		formatMoney,
 		preOrderCtaLabel,
@@ -66,7 +66,16 @@ const ProductCarousel = (props: any) => {
 			tab3: { products },
 		}
 	}
-	const [activeTab, setActiveTab] = useState('bestsellers');
+	const storeHpData = useMemo(() => {
+		const storeMap = hpTabProducts?.hpTabProducts?.hpTabProducts;
+		if (!storeMap) return null;
+		return [storeMap[store], storeMap['all']].find((d: any) => d?.tab_1_key) || null;
+	}, [hpTabProducts, store]);
+
+	const currentActiveTab = storeHpData
+		? (storeHpData[`tab_${storeHpData.active_tab}_key`] || storeHpData.tab_1_key)
+		: 'bestsellers';
+	const [activeTab, setActiveTab] = useState(currentActiveTab);
 
 	// const [isHomepage, setIsHomepage] = useState(false);
 	// const [isProduct, setIsProduct] = useState(false);
@@ -130,20 +139,15 @@ const ProductCarousel = (props: any) => {
 			});
 		}
 	}, [productPage]);
-
-	let tabConfig = [
+	let tabConfig: { key: string; title: string }[] = storeHpData ? [
+		{ key: storeHpData.tab_1_key, title: storeHpData.tab_1_title },
+		storeHpData.tab_2_key ? { key: storeHpData.tab_2_key, title: storeHpData.tab_2_title } : null,
+		storeHpData.tab_3_key ? { key: storeHpData.tab_3_key, title: storeHpData.tab_3_title } : null,
+	].filter(Boolean) as { key: string; title: string }[] : [
 		{ key: 'bestsellers', title: 'Best Sellers' },
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
 	];
-
-	if (store === 'uk' || store === 'us') {
-		tabConfig = [
-			{ key: 'valuesets', title: 'Value Sets' },
-			{ key: 'bestsellers', title: 'Best Sellers' },
-			{ key: 'new', title: 'New' }
-		];
-	}
 
 	const visibleCount = useVisibleCount({
 		mobile: 2,
