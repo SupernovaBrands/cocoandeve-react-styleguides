@@ -152,13 +152,13 @@ const BundleVariantCard = (props) => {
             </div>}
             <div className="float-left">
                 <figure className="flex">
-                    {urlSet && bundleImg && (
+                    {urlSet && bundleImg && imageSrc && (
                         <a href={`/products/${urlSet}`} className="block w-[34.7%] lg:w-[26.38%]">
                             <img loading="lazy" className="w-full h-full object-cover" src={imageSrc.replace('.jpg', '_240x.jpg')} alt={`Save with Sets ${optionValue.replace('1x ', '')}`} width={120} height={260} />
                         </a>
                     )}
 
-                    {!urlSet && bundleImg && (
+                    {!urlSet && bundleImg && imageSrc && (
                         <img loading="lazy" alt={`Save with Sets ${optionValue.replace('1x ', '')}`} className="w-[34.7%] lg:w-[26.38%] object-cover" src={imageSrc.replace('.jpg', '_240x.jpg')} width={120} height={260} />
                     )}
                     <figcaption className="min-h-[100%] w-[65.3%] lg:w-[73.62%] float-right px-[.75rem] py-[1rem] lg:p-[1rem] flex flex-col">
