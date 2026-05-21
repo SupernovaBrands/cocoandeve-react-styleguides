@@ -370,7 +370,7 @@ export const CartItem = (props: CartItemProps) => {
 							const itemSub = subtitles.length > 0 ? subtitles[index] : false;
 
 							return (
-								<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? 'border-b-[1px] border-bg-primary-light-second' : ''}`}>
+								<div key={opt.id} className={`mb-1 ${isMultiOptions && index === 0 ? `${isMultiOptions ? '' : 'border-b-[1px]'} border-bg-primary-light-second` : ''}`}>
 
 									{isMultiOptions && itemSub && itemSub.split('///').map((sub: any, ind: number) => {
 										if (ind + 1 < itemSub.split('///').length) {
@@ -383,8 +383,8 @@ export const CartItem = (props: CartItemProps) => {
 										);
 									})}
 
-									{isMultiOptions && (
-										<span className="font-size-sm inline-block pb-25">Skin Tone {index + 1}:</span>
+									{isMultiOptions && index === 0 && (
+										<span className="font-size-sm inline-block pb-25">Shades Selected:</span>
 									)}
 									<p className="flex mb-1 items-center">
 
