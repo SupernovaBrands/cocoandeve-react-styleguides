@@ -24,7 +24,6 @@ const InstagramTest = (props: any) => {
                     imageMobile: d.thumbnail_640_url.includes('cdn.shopify') ? d.thumbnail_640_url.replace('.jpg', '_252x252_crop_center.jpg').replace('.png', '_252x252_crop_center.png') : d.thumbnail_640_url,
                 }
             });
-            console.log(latestData, 'update new data');
             setData(latestData);
         }
     };
