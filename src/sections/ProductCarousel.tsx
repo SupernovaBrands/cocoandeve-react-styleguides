@@ -54,7 +54,7 @@ const ProductCarousel = (props: any) => {
 
 	const currentActiveTab = storeHpData
 		? (storeHpData[`tab_${storeHpData.active_tab}_key`] || storeHpData.tab_1_key)
-		: (store === 'uk' || store === 'us') ? 'valuesets' : 'bestsellers';
+		: 'bestsellers';
 	const [activeTab, setActiveTab] = useState(currentActiveTab);
 
 	// const [isHomepage, setIsHomepage] = useState(false);
@@ -128,14 +128,6 @@ const ProductCarousel = (props: any) => {
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
 	];
-
-	if (!storeHpData && (store === 'uk' || store === 'us')) {
-		tabConfig = [
-			{ key: 'valuesets', title: 'Value Sets' },
-			{ key: 'bestsellers', title: 'Best Sellers' },
-			{ key: 'new', title: 'New' }
-		];
-	}
 
 	const visibleCount = useVisibleCount({
 		mobile: 2,
