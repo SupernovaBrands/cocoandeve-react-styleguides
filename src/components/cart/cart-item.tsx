@@ -416,8 +416,8 @@ export const CartItem = (props:CartItemProps) => {
 					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 						? (
 							<div className="flex flex-col text-right">
-								{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
-								{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
+								{item.comparePrice > item.originalPrice && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+								{(!item.comparePrice || item.comparePrice <= item.originalPrice) && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
 								<strong>
 									Free
 								</strong>
@@ -426,12 +426,12 @@ export const CartItem = (props:CartItemProps) => {
 							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
 								{isBundle ? (
 									<>
-										{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
+										{bundleCompare > bundlePrice && <del>{formatMoney(bundleCompare, false, store)}</del>}
 										<strong>{formatMoney(bundlePrice, false, store)}</strong>
 									</>
 								) : (
 									<>
-										{item.comparePrice > 0
+										{item.comparePrice > item.originalPrice
 											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
 											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
 										<strong>

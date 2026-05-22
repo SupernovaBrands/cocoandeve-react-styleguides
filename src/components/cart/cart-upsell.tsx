@@ -53,7 +53,7 @@ const CartUpsell = (props:any) => {
     const getCompareAtPrice = (variant:any, percentage:number) => {
         if (percentage) {
             return formatMoney(parseFloat(variant.price.amount) * 100, false, store);;
-        } else if (variant.compareAtPrice) {
+        } else if (variant.compareAtPrice && parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price?.amount || '0')) {
             return formatMoney(parseFloat(variant.compareAtPrice.amount) * 100, false, store);
         }
         return null;
@@ -71,7 +71,7 @@ const CartUpsell = (props:any) => {
     const getSaving = (variant:any, percentage:number) => {
         if (percentage) {
             return `SAVE ${percentage}%`;
-        } else if (variant && variant.compareAtPrice) {
+        } else if (variant && variant.compareAtPrice && parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price?.amount || '0')) {
             const comparePrice = parseFloat(variant.compareAtPrice.amount) * 100;
             const price = parseFloat(variant.price.amount) * 100;
             const percent = Math.round(price/comparePrice * 100);
