@@ -282,33 +282,33 @@ export const CartItem = (props: CartItemProps) => {
 									{item.isFreeItem && component && (`${component.title?.replace('FREE', '').replace('Free', '').trim()}`)}
 								</ConditionWrapper>
 							) : (
-									<ConditionWrapper
-										condition={!item.isFreeItem}
-										wrapper={(children: any) => {
-											if (item.disableCartItemLink || !isUpsell(item)) {
-												return isMultiOptions ? (
-													<span className="text-black">{item?.merchandise?.product?.title || children}</span>
-												) : (
-													<span className="text-black">
-														{isBundle ? 'Build Your Own Bundle' : children}
-													</span>
-												);
-											} else {
-												return isMultiOptions ? (
-													<span className="text-black">{item?.merchandise?.product?.title || children}</span>
-												) : (
-													<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
-														{isBundle ? 'Build Your Own Bundle' : children}
-													</a>
-												);
-											}
-										}}
-									>
-										{!item.isFreeItem && !component && (`${productTitle(item)}`)}
-										{!item.isFreeItem && component && (`${component?.title}`)}
-										{`${item.recurring ? ' Subscriptions' : ''}`}
-									</ConditionWrapper>
-								)}
+								<ConditionWrapper
+									condition={!item.isFreeItem}
+									wrapper={(children: any) => {
+										if (item.disableCartItemLink || !isUpsell(item)) {
+											return isMultiOptions ? (
+												<span className="text-black">{item?.merchandise?.product?.title || children}</span>
+											) : (
+												<span className="text-black">
+													{isBundle ? 'Build Your Own Bundle' : children}
+												</span>
+											);
+										} else {
+											return isMultiOptions ? (
+												<span className="text-black">{item?.merchandise?.product?.title || children}</span>
+											) : (
+												<a href={`/products/${item.merchandise.product.handle}`} className="text-black hover:text-primary">
+													{isBundle ? 'Build Your Own Bundle' : children}
+												</a>
+											);
+										}
+									}}
+								>
+									{!item.isFreeItem && !component && (`${productTitle(item)}`)}
+									{!item.isFreeItem && component && (`${component?.title}`)}
+									{`${item.recurring ? ' Subscriptions' : ''}`}
+								</ConditionWrapper>
+							)}
 							{item.recurring && (
 								<span className="text-primary mt-1 flex font-italic text-sm font-normal">
 									<SvgRecurring className="svg mr-1" />
@@ -321,22 +321,22 @@ export const CartItem = (props: CartItemProps) => {
 							<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon a">
-									<SvgTrash className="svg w-[1em]" />
-						</button>)}
-					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_swell_redemption_token') > -1 && (
-						<button className="cart-item__remove btn-unstyled text-body flex"
+								<SvgTrash className="svg w-[1em]" />
+							</button>)}
+						{item.isFreeItem && item.attributes && item.attributes.findIndex((e: any) => e.key === '_swell_redemption_token') > -1 && (
+							<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
 								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon b">
-									<SvgTrash className="svg w-[1em]" />
-						</button>)}
-					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
-						type="button" aria-label="Remove"
-						onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon c">
+								<SvgTrash className="svg w-[1em]" />
+							</button>)}
+						{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
+							type="button" aria-label="Remove"
+							onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon c">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
-					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
-						type="button" aria-label="Remove"
-						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon d">
+						{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+							type="button" aria-label="Remove"
+							onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon d">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
@@ -457,8 +457,8 @@ export const CartItem = (props: CartItemProps) => {
 						{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
 							? (
 								<div className="flex flex-col text-right">
-									{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
-									{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
+									{item.comparePrice > item.originalPrice && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+									{(!item.comparePrice || item.comparePrice <= item.originalPrice) && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
 									<strong>
 										Free
 									</strong>
@@ -467,12 +467,12 @@ export const CartItem = (props: CartItemProps) => {
 								<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
 									{isBundle ? (
 										<>
-											{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
+											{bundleCompare > bundlePrice && <del>{formatMoney(bundleCompare, false, store)}</del>}
 											<strong>{formatMoney(bundlePrice, false, store)}</strong>
 										</>
 									) : (
 										<>
-											{item.comparePrice > 0
+											{item.comparePrice > item.originalPrice
 												? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
 												: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
 											<strong>

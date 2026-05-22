@@ -336,7 +336,7 @@ const SwatchOverlay = memo((props: any) => {
         const derivedPrice = selectedVariant?.price
             ? formatMoney(parseFloat(selectedVariant?.price.amount) * 100, false, store)
             : formatMoney(0, false, store);
-        const derivedComparePrice = selectedVariant?.compareAtPrice
+        const derivedComparePrice = selectedVariant?.compareAtPrice && parseFloat(selectedVariant.compareAtPrice.amount) > parseFloat(selectedVariant?.price?.amount || '0')
             ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store)
             : null;
         return { price: derivedPrice, comparePrice: derivedComparePrice };
@@ -614,8 +614,9 @@ const ProductCard = (props: any) => {
         });
     }, [product, selectedVariant, props.setProductData]);
 
+    if (product.handle === 'hair-volumising-shampoo') console.log('a', selectedVariant?.compareAtPrice?.amount);
     const price = selectedVariant?.price ? formatMoney(parseFloat(selectedVariant.price.amount) * 100, false, store) : formatMoney(0, false, store);
-    const comparePrice = selectedVariant?.compareAtPrice ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store) : null;
+    const comparePrice = selectedVariant?.compareAtPrice && parseFloat(selectedVariant.compareAtPrice.amount) > parseFloat(selectedVariant?.price?.amount || '0') ? formatMoney(parseFloat(selectedVariant.compareAtPrice.amount) * 100, false, store) : null;
 
     // if (product.handle === 'bronzing-self-tanner-drops') console.log('selectedVariant', selectedVariant);
     const [platform, setPlatform] = useState('unknown');
