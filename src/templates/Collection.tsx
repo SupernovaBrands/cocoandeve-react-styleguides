@@ -694,6 +694,7 @@ const Collection = (props: any) => {
                                                     customProductTitle={customProductTitle}
                                                     clickShowPopup={quickBuy}
                                                     setProductData={setProductData}
+                                                    quickBuy={quickBuy}
                                                 />
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
@@ -776,6 +777,7 @@ const Collection = (props: any) => {
                                                 customProductTitle={customProductTitle}
                                                 clickShowPopup={quickBuy}
                                                 setProductData={setProductData}
+                                                quickBuy={quickBuy}
                                             />
                                         )}
                                         {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (

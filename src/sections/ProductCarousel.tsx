@@ -215,6 +215,7 @@ const ProductCarousel = (props: any) => {
 											isAboveFold={isAboveFold}
 											clickShowPopup={quickBuy}
 											setProductData={setProductData}
+											quickBuy={quickBuy}
 										/>
 									})}
 								</Carousel.Inner>
