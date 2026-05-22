@@ -72,8 +72,9 @@ const ProductCarousel = (props: any) => {
 		return [storeMap[store], storeMap['all']].find((d: any) => d?.tab_1_key) || null;
 	}, [hpTabProducts, store]);
 
+	const tabIndexMap = { '1': 'bestsellers', '2': 'new', '3': 'valuesets' } as any;
 	const currentActiveTab = storeHpData
-		? (storeHpData[`tab_${storeHpData.active_tab}_key`] || storeHpData.tab_1_key)
+		? (tabIndexMap[storeHpData.active_tab] || 'bestsellers')
 		: 'bestsellers';
 	const [activeTab, setActiveTab] = useState(currentActiveTab);
 
@@ -139,11 +140,7 @@ const ProductCarousel = (props: any) => {
 			});
 		}
 	}, [productPage]);
-	let tabConfig: { key: string; title: string }[] = storeHpData ? [
-		{ key: storeHpData.tab_1_key, title: storeHpData.tab_1_title },
-		storeHpData.tab_2_key ? { key: storeHpData.tab_2_key, title: storeHpData.tab_2_title } : null,
-		storeHpData.tab_3_key ? { key: storeHpData.tab_3_key, title: storeHpData.tab_3_title } : null,
-	].filter(Boolean) as { key: string; title: string }[] : [
+	const tabConfig = [
 		{ key: 'bestsellers', title: 'Best Sellers' },
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
