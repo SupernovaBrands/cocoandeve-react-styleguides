@@ -552,7 +552,7 @@ const ProductCard = (props: any) => {
                     ">Learn more</span>
                 )}
                 <ConditionalWrap
-                    condition={clickShowPopup}
+                    condition={clickShowPopup && !quickBuy}
                     wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
                     elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
                 >
@@ -638,7 +638,7 @@ const ProductCard = (props: any) => {
                 )}
                 <p className={`product-title__text ${!kitBuilder && props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
-                        condition={clickShowPopup}
+                        condition={clickShowPopup && !quickBuy}
                         wrap={children => <span role="button" className="text-sm leading-[18px] hover:underline lg:text-base product-card__title text-body hover:text-body w-full mb-[3px]" onClick={openModal}>{children}</span>}
                         elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} leading-[18px] product-card__title text-body hover:text-body w-full mb-[3px]`}>{children}</a>}
                     >
