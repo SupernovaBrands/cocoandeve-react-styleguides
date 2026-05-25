@@ -95,11 +95,12 @@ const CartUpsell = (props:any) => {
 
     //@ts-ignore
     window.emblaBrow = emblaApi;
-    return (
+    console.log('upsell data', upsell);
+    return upsell.filter((up) => up.product.availableForSale).length > 0 && (
         <>
             <div className="relative mb-2 lg:mb-2">
-                { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
-                { upsell.length > 1 && (
+                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-md font-bold mb-2">You may love:</p> }
+                { upsell.filter((up) => up.product.availableForSale).length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>
                             <PrevButton
