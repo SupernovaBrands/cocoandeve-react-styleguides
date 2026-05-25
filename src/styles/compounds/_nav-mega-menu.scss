@@ -1,5 +1,9 @@
-.header-desktop-nav {
+.header-desktop-nav,
+.navbar-nav--right {
 	.nav-item {
+		.nav-mega-menu {
+			display: none;
+		}
 		&:hover {
 			.nav-mega-menu {
 				display: block !important;
