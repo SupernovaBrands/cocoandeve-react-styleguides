@@ -37,7 +37,7 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, hpTabProducts } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -46,7 +46,16 @@ const ProductCarousel = (props: any) => {
 			tab3: { products },
 		}
 	}
-	const currentActiveTab = (store === 'uk' || store === 'us') ? 'valuesets' : 'bestsellers';
+	const storeHpData = useMemo(() => {
+		const storeMap = hpTabProducts?.hpTabProducts?.hpTabProducts;
+		if (!storeMap) return null;
+		return [storeMap[store], storeMap['all']].find((d: any) => d?.tab_1_key) || null;
+	}, [hpTabProducts, store]);
+
+	const tabIndexMap = { '1': 'bestsellers', '2': 'new', '3': 'valuesets' } as any;
+	const currentActiveTab = storeHpData
+		? (tabIndexMap[storeHpData.active_tab] || 'bestsellers')
+		: 'bestsellers';
 	const [activeTab, setActiveTab] = useState(currentActiveTab);
 
 	// const [isHomepage, setIsHomepage] = useState(false);
@@ -111,20 +120,11 @@ const ProductCarousel = (props: any) => {
 			});
 		}
 	}, [productPage]);
-
-	let tabConfig = [
+	const tabConfig = [
 		{ key: 'bestsellers', title: 'Best Sellers' },
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
 	];
-
-	if (store === 'uk' || store === 'us') {
-		tabConfig = [
-			{ key: 'valuesets', title: 'Value Sets' },
-			{ key: 'bestsellers', title: 'Best Sellers' },
-			{ key: 'new', title: 'New' }
-		];
-	}
 
 	const visibleCount = useVisibleCount({
 		mobile: 2,
