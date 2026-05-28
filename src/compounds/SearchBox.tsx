@@ -431,7 +431,7 @@ const SearchBox = (props: any) => {
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
 			)}
-			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} />}
+			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} store={store} trackEvent={trackEvent} />}
 
 			{!loading && keyword !== '' && products.length > 0 && (
 				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
@@ -439,44 +439,58 @@ const SearchBox = (props: any) => {
 						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
-								<Carousel.Wrapper emblaApi={emblaApi8} className="lg:w-full">
-									<Carousel.Inner emblaRef={emblaRef8} className={`lg:-mx-g ${products.length <= 6 ? '!transition-none !transform-none' : ''}`}>
-										{products.map((item, index) => (
+								{/* Mobile: carousel */}
+								<div className="lg:hidden">
+									<Carousel.Wrapper emblaApi={emblaApi8} className="w-full">
+										<Carousel.Inner emblaRef={emblaRef8} className={products.length <= 6 ? '!transition-none !transform-none' : ''}>
+											{products.map((item, index) => (
+												<SearchProductCard
+													url={item.handle}
+													key={`s1-m-${index}`}
+													title={item?.title}
+													subtitle={item?.subtitle || false}
+													img={item?.featuredImgUrl}
+													classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full px-hg"
+													trackEvent={trackEvent}
+													store={store}
+												/>
+											))}
+										</Carousel.Inner>
+									</Carousel.Wrapper>
+								</div>
+								{/* Desktop: vertical list, 2 columns when > 6 */}
+								<div className="hidden lg:flex lg:gap-8">
+									<div className="flex flex-col flex-1">
+										{products.slice(0, 6).map((item, index) => (
 											<SearchProductCard
 												url={item.handle}
-												key={`s1--${index}`}
+												key={`s1-d1-${index}`}
 												title={item?.title}
 												subtitle={item?.subtitle || false}
 												img={item?.featuredImgUrl}
-												classes="carousel__slide flex-grow-0 flex-shrink-0 w-full basis-full lg:w-1/6 lg:basis-1/6 px-hg lg:px-g"
+												classes="w-full border-b border-gray-100 last:border-0"
 												trackEvent={trackEvent}
 												store={store}
 											/>
 										))}
-									</Carousel.Inner>
+									</div>
 									{products.length > 6 && (
-										<Carousel.Navigation>
-											<PrevButton
-												onClick={arrowClickPrev8}
-												disabled={prevDisabled8}
-												className={`hidden lg:flex lg:right-[3%] lg:left-auto lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body ${prevDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
-											>
-												<span className="bg-white w-2 h-2 absolute z-[-1] flex justify-center items-center">
-													<ChevronPrev className="w-g h-g svg--current-color" />
-												</span>
-											</PrevButton>
-											<NextButton
-												onClick={arrowClickNext8}
-												disabled={nextDisabled8}
-												className={`hidden lg:flex lg:right-0 lg:top-auto lg:bottom-auto lg:w-2 lg:h-2 text-body lg:-mr-[3px] ${nextDisabled8 ? 'opacity-50 pointer-events-none' : ''}`}
-											>
-												<span className="bg-white w-2 h-2 absolute z-[-1] flex justify-center items-center">
-													<ChevronNext className="w-[1rem] h-[1rem] svg--current-color" />
-												</span>
-											</NextButton>
-										</Carousel.Navigation>
+										<div className="flex flex-col flex-1">
+											{products.slice(6, 12).map((item, index) => (
+												<SearchProductCard
+													url={item.handle}
+													key={`s1-d2-${index}`}
+													title={item?.title}
+													subtitle={item?.subtitle || false}
+													img={item?.featuredImgUrl}
+													classes="w-full border-b border-gray-100 last:border-0"
+													trackEvent={trackEvent}
+													store={store}
+												/>
+											))}
+										</div>
 									)}
-								</Carousel.Wrapper>
+								</div>
 							</div>
 						</div>
 					</div>
