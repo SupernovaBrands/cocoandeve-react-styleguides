@@ -9,6 +9,7 @@ import NavMegaMenu from '~/compounds/NavMegaMenu';
 const MobileMenuDrop = dynamic(() => import('~/compounds/MobileMenuDrop'), { ssr: false });
 import BrandLogo from '~/images/ce-logo.svg';
 import Account from '~/images/icons/account-ico.svg';
+import Account2 from '~/images/icons/acc-ico.svg';
 import Search from '~/images/icons/search-ico.svg';
 import CartIcon from '~/images/icons/cart-ico.svg';
 // import SearchBox from '~/compounds/SearchBox';
@@ -263,7 +264,7 @@ const Header = (props: any) => {
 								</svg>
 							</button>
 							<button onClick={toggleAccountDropdown} className="flex items-center p-0 border-0 bg-transparent" aria-label="Account">
-								<Account style={{ width: 15, height: 16 }} />
+								<Account2 style={{ width: 15, height: 16 }} />
 							</button>
 						</div>
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BrandLogo from '~/images/ce-logo.svg';
-import Account from '~/images/icons/account-ico.svg';
+import Account from '~/images/icons/acc-ico.svg';
 import Search from '~/images/icons/search-ico.svg';
 import CartIcon from '~/images/icons/cart-ico.svg';
 import Close from '~/images/icons/close.svg';
