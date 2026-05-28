@@ -270,7 +270,8 @@ const Sweepstakes = (props) => {
                                         <small className="col-12 text-danger terms-error hidden">You have not agreed to the Privacy Policy & ToS</small>
                                     </div> */}
                                     {/* <div className="hidden input-error toc-error text-xs text-primary mb-2">You have not agreed to the Privacy Policy & ToS</div> */}
-                                    <p className={`text-[10px] mb-[1rem] leading-[13px] ${content.note_col}`}>
+                                    {/* <p className={`text-[10px] mb-[1rem] leading-[13px] ${content.note_col}`} dangerouslySetInnerHTML={{ __html: content.tos_label }} /> */}
+									<p className={`text-[10px] mb-[1rem] leading-[13px] ${content.note_col}`}>
 										{['my'].includes(store) && 'By signing up, you agree to receive exclusive offers via email. Sign up not required for purchase. Opt out any time.'}
 										{!['my'].includes(store) && <span dangerouslySetInnerHTML={{__html: 'By signing up, you agree to our <a href="/pages/privacy-policy" class="text-[10px] underline">Privacy Policy</a> and <a class="text-[10px] underline" href="https://coco--eve.myklpages.com/p/mobile-terms-of-service">SMS Terms</a> and to receive exclusive offers via marketing emails and/or recurring marketing text messages. Message frequency varies. Opt out at any time.'}} />}
 									</p>
