@@ -57,9 +57,9 @@ const NavMegaMenuMadeForYou = (props: any) => {
 
             {/* Banners */}
             <div className="px-g pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
-                <div className="flex gap-4 flex-grow">
+                <div className="flex gap-[16px] flex-grow">
                     {banners.map((banner: any, i: number) => (
-                        <div key={i} className={`${banner.bgColor || 'bg-gray-100'} rounded-lg px-[16px] pt-4 relative overflow-hidden flex-1 flex flex-col text-center`} style={{ minHeight: 420 }}>
+                        <div key={i} className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-1 flex flex-col text-center" style={{ minHeight: 420, backgroundColor: banner.bgColor || '#f3f4f6' }}>
                             <div className="mfy-content">
                                 <h4 className="font-bold mb-0 min-h-[60px]" style={{ fontSize: 24, lineHeight: '30px' }}>{banner.title}</h4>
                                 <p className="font-normal mb-0 min-h-[60px] mb-[16px]" style={{ fontSize: 16, lineHeight: '20px' }}>{banner.description}</p>

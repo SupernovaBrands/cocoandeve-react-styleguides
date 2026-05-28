@@ -18,7 +18,6 @@ import NavMegaMenuShop from '~/compounds/NavMegaMenuShop';
 import NavMegaMenuMadeForYou from '~/compounds/NavMegaMenuMadeForYou';
 import NavMegaMenuExplore from '~/compounds/NavMegaMenuExplore';
 import NavMegaMenuAskCoco from '~/compounds/NavMegaMenuAskCoco';
-import navContent from '~/data/nav-content.json';
 import Tooltip from '~/components/Tooltip';
 // import { useRouter } from 'next/navigation';
 import PalmTree from '~/images/icons/palm-tree-v2.svg';
@@ -28,9 +27,8 @@ const Header = (props: any) => {
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
 		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav,
-		hairRanges, buildProductCardModel, addToCart, preOrders, setWaitlistData,
+		hairRanges, buildProductCardModel, addToCart, preOrders, setWaitlistData, globalNav,
 	} = props;
-
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
 	const [openSearchBox, setOpenSearchBox] = useState(false);
@@ -47,7 +45,12 @@ const Header = (props: any) => {
 	const headerHeightRef = useReactRef<number>(0);
 	const annBarRef = useReactRef<HTMLDivElement>(null);
 	const [headerHeight, setHeaderHeight] = useState(0);
+	const [nav, setNav] = useState(globalNav?.nav || []);
 
+	useEffect(() => {
+		console.log('NAVV', nav);
+		console.log('globalNav3', globalNav);
+	}, [nav])
 	useEffect(() => {
 		if (!initialStore) {
 			setActiveMainMenu(store === 'us' ? mainNav : mainMenu);
@@ -57,7 +60,6 @@ const Header = (props: any) => {
 	const onToggleMobileNav = () => {
 		setOpenDrawer(!openDrawer);
 	}
-
 	const handleSearchBox = (title) => {
 		const megaMenuTitles = ['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'];
 		if (title.includes('Shop') || ['Hair', 'Tan', 'Tan & SPF', 'Suncare', 'Body', 'Value Sets', 'Skin', 'Skincare'].indexOf(title) > -1) {
@@ -306,7 +308,7 @@ const Header = (props: any) => {
 						)}
 						*/}
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:flex-1 lg:flex-row items-center">
-							{navContent.nav.filter(item => item.megaMenu?.type !== 'askCoco').map((item, i) => (
+							{nav.length && nav.filter(item => item.megaMenu?.type !== 'askCoco').map((item, i) => (
 								<li key={item.label} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
 									<a href={item.url || '#'} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{item.label}</a>
 									{item.megaMenu?.type === 'shop' && (
@@ -340,7 +342,7 @@ const Header = (props: any) => {
 
 						{/* Right nav */}
 						<ul className="basis-[30%] lg:flex-1 flex list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center gap-[20px]">
-							{navContent.nav.filter((item: any) => item.megaMenu?.type === 'askCoco').map((item: any) => (
+							{nav.filter((item: any) => item.megaMenu?.type === 'askCoco').map((item: any) => (
 								<li key={item.label} className="nav-item hidden lg:block">
 									<a className="inline-block no-underline m-0 text-primary font-bold py-[.375em] hover:no-underline hover:text-primary cursor-pointer whitespace-nowrap">
 										{item.label}
@@ -382,7 +384,7 @@ const Header = (props: any) => {
 						onToggleSearchBox={onToggleSearchBox}
 						toggleAccountDropdown={toggleAccountDropdown}
 						annBarHeight={annBarRef.current?.offsetHeight ?? 0}
-						nav={navContent.nav}
+						nav={nav}
 					/>
 				)}
 				{/* {openDrawer && (

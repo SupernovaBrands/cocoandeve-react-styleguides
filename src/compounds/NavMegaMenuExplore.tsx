@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const VISIBLE_COUNT = 3;
 
@@ -52,6 +52,16 @@ const TABS = [
     },
 ];
 
+const fetchArticle = async (blogHandle: string, handle: string) => {
+    try {
+        const res = await fetch(`/api/getArticle?blogHandle=${blogHandle}&handle=${handle}`);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch {
+        return null;
+    }
+};
+
 const NavMegaMenuExplore = (props: any) => {
     const { generalSetting, megaMenu } = props;
 
@@ -59,6 +69,37 @@ const NavMegaMenuExplore = (props: any) => {
 
     const [activeTab, setActiveTab] = useState(tabs[0]?.key || TABS[0].key);
     const [carouselIndex, setCarouselIndex] = useState(0);
+    const [enrichedItems, setEnrichedItems] = useState<Record<string, any[]>>({});
+
+    useEffect(() => {
+        const glossaryTab = megaMenu?.tabs?.[1];
+        if (!glossaryTab) return;
+        const items: any[] = glossaryTab.items || [];
+        if (!items.length) return;
+
+        const needsEnrich = items.some((item: any) => !item.title || !item.image?.url || !item.tags?.length);
+        if (!needsEnrich) {
+            setEnrichedItems(prev => ({ ...prev, [glossaryTab.key || glossaryTab.title]: items }));
+            return;
+        }
+
+        Promise.all(
+            items.map(async (item: any) => {
+                if (item.title && item.image?.url && item.tags?.length) return item;
+                const article = await fetchArticle(item.blogHandle, item.handle);
+                if (!article) return item;
+                return {
+                    ...item,
+                    title: item.title || article.title,
+                    image: item.image?.url ? item.image : article.image,
+                    tags: item.tags?.length ? item.tags : article.tags,
+                };
+            })
+        ).then(resolved => {
+            const key = glossaryTab.key || glossaryTab.title;
+            setEnrichedItems(prev => ({ ...prev, [key]: resolved }));
+        });
+    }, [megaMenu]);
 
     const handleTabHover = (tab: any) => {
         if (activeTab === tab.key) return;
@@ -67,7 +108,9 @@ const NavMegaMenuExplore = (props: any) => {
     };
 
     const currentTab = tabs.find((t: any) => t.key === activeTab) || tabs[0];
-    const currentArticles = currentTab.items || currentTab.articles || [];
+    const tabKey = currentTab?.key || currentTab?.title;
+    const rawItems = currentTab?.items || currentTab?.articles || [];
+    const currentArticles = enrichedItems[tabKey] ?? rawItems;
 
     const shopAllUrl = megaMenu?.shopAllUrl || generalSetting?.mega_menu_shop_all_url || '/collections/all';
     const buildYourOwnUrl = megaMenu?.buildYourOwnUrl || generalSetting?.mega_menu_button2_url || '/pages/build-your-own-bundle';
@@ -148,8 +191,8 @@ const NavMegaMenuExplore = (props: any) => {
 
                     {/* Featured banner */}
                     <div
-                        className={`${currentTab.featured.bgColor} rounded-lg px-[16px] pt-4 relative overflow-hidden flex-shrink-0 flex flex-col text-center`}
-                        style={{ width: 194, minHeight: 320 }}
+                        className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-shrink-0 flex flex-col text-center"
+                        style={{ width: 194, minHeight: 320, backgroundColor: currentTab.featured?.bgColor || '#f3f4f6' }}
                     >
                         <div className="flex-1">
                             <h4 className="font-bold mb-2" style={{ fontSize: 24, lineHeight: '30px' }}>{currentTab.featured.title}</h4>
