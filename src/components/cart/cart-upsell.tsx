@@ -95,7 +95,7 @@ const CartUpsell = (props:any) => {
 
     //@ts-ignore
     window.emblaBrow = emblaApi;
-    console.log('upsell data', upsell);
+    // console.log('upsell data', upsell);
     return upsell.filter((up) => up.product.availableForSale).length > 0 && (
         <>
             <div className="relative mb-2 lg:mb-2">
