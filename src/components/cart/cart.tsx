@@ -86,7 +86,7 @@ const Cart: React.FC<Props> = (props) => {
 
 	useEffect(() => {
         const userAgent = navigator.userAgent || navigator.vendor;
-    
+
         if (/windows/i.test(userAgent)) {
             os = 'os-win';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
@@ -96,7 +96,7 @@ const Cart: React.FC<Props> = (props) => {
         } else if (/android/i.test(userAgent)) {
             os = 'os-android';
         }
-    
+
         setPlatform(os);
     }, []);
 
@@ -345,6 +345,8 @@ const Cart: React.FC<Props> = (props) => {
 									<CartShippingMeter
 										target={shippingMeter.target}
 										current={shippingMeter.current}
+										progressText={shippingMeter.progressText || ''}
+										finalText={shippingMeter.finalText || ''}
 									/>
 								)}
 							{discountMeter && discountMeter.enabled && discountMeter
@@ -416,7 +418,7 @@ const Cart: React.FC<Props> = (props) => {
 									{mappedItems && mappedItems.map((mappedItem) => {
 										const item = mappedItem.item;
 										/* @ts-ignore */
-										const cartItemComponent:any = <CartItem 
+										const cartItemComponent:any = <CartItem
 											key={item.id}
 											item={item}
 											isLastStock={item.id === isLastStockKey}
