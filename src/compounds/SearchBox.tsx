@@ -18,7 +18,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 
 const SearchBox = (props: any) => {
-	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store } = props;
+	const { content, dummy, trackEvent, openAccountBox, getFeaturedImgMeta, store, addToCart, setWaitlistData, preOrders, generalSetting } = props;
 	const [keyword, setKeyword] = useState('');
 	const [keywords, setKeywords] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -408,12 +408,12 @@ const SearchBox = (props: any) => {
 
 	return (
 		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-500 ease-in-out lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`}>
-			<div className="border-b border-gray-400 w-full border-t">
+			<div className="border-[#ADADAD] w-full border-t">
 				<div className="bg-white px-g">
-					<div className="container relative flex items-center px-0 lg:px-g">
-						<Search className="absolute h2 mb-0 z-[1000] h-[1em]" />
-						<input type="text" placeholder={content?.search_input_placeholder} name="q" className="w-full py-2 pl-4 lg:pl-4 border-0 focus:outline-none" aria-label="search" onChange={onChange} value={keyword} />
-						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'opacity-50' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
+					<div className="container relative flex items-center px-0 lg:px-g lg:pt-[32px]">
+						<Search className="absolute h2 mb-0 z-[1000] h-[24px]" />
+						<input type="text" placeholder={"Search products here"} name="q" className="w-full py-[16px] pl-4 lg:pl-4 border-b border-[#a3a3a380] focus:border-b focus:border-[#a3a3a380] rounded-none outline-none focus:outline-none focus:ring-0" aria-label="search" onChange={onChange} value={keyword} />
+						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? '' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
 						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button" aria-label="Close search">
 							<Close className="h-[1em]" onClick={() => props.onToggleSearchBox()} />
 						</span>
@@ -431,12 +431,12 @@ const SearchBox = (props: any) => {
 					<Loading className="svg text-primary fill-primary h-[3.375em] mx-auto" />
 				</div>
 			)}
-			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} store={store} trackEvent={trackEvent} />}
+			{keyword === '' && <PopularProducts content={content} keywords={keywords} onClickTag={onClickTag} dummy={dummy} popProducts={popProducts} store={store} trackEvent={trackEvent} addToCart={addToCart} setWaitlistData={setWaitlistData} preOrders={preOrders} generalSetting={generalSetting} />}
 
 			{!loading && keyword !== '' && products.length > 0 && (
 				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 					<div className="flex flex-wrap lg:-mx-g">
-						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 text-base mb-1 px-hg lg:px-g">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 mb-1 px-hg lg:px-g text-[#4E4E4E] text-[14px]">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
 								{/* Mobile: carousel */}
@@ -468,7 +468,7 @@ const SearchBox = (props: any) => {
 												title={item?.title}
 												subtitle={item?.subtitle || false}
 												img={item?.featuredImgUrl}
-												classes="w-full border-b border-gray-100 last:border-0"
+												classes="w-full"
 												trackEvent={trackEvent}
 												store={store}
 											/>
