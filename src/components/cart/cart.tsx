@@ -397,13 +397,7 @@ const Cart: React.FC<Props> = (props) => {
 									{mappedItems && mappedItems.map((mappedItem) => {
 										const item = mappedItem.item;
 										/* @ts-ignore */
-<<<<<<< HEAD
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
-=======
-										const cartItemComponent:any = <CartItem
-											key={item.id}
-											item={item}
->>>>>>> 8f55c6b8 (fixed cart shipping meter)
 											isLastStock={item.id === isLastStockKey}
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
