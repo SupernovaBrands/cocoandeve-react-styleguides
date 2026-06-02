@@ -297,13 +297,15 @@ const HairSolution = (props: any) => {
                                 wrap={children => <TabContent active={activeTab === index}>{children}</TabContent>}
                                 elseWrap={children => (
                                     <div className={`accordion-item border-t border-b border-gray-500`}>
-                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center ${openIndex === index ? `pt-2 md:pt-[1.875rem] pb-2` : 'py-2 md:py-[1.875rem]'} ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
+                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center py-2 md:py-[1.875rem] ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
                                             <strong className="text-body no-underline leading-[17px]">{row.title}</strong>
                                             { openIndex === index && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                             { openIndex !== index && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                         </div>
                                         <div className={`accordion-content ${openIndex === index ? 'accordion-content--open' : 'accordion-content--close'}`}>
-                                            {children}
+                                            <div className="accordion-content__inner">
+                                                {children}
+                                            </div>
                                         </div>
                                     </div>
                                 )}

@@ -9,6 +9,7 @@ import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
 const Modal = dynamic(() => import('~/components/Modal'), { ssr: false });
 const ModalWaitlist = dynamic(() => import('~/components/modal/Waitlist'), { ssr: false });
+const ProductInfo = dynamic(() => import('~/components/modal/ProductInfo'), { ssr: false });
 import {
 	PrevButton,
 	NextButton,
@@ -37,7 +38,26 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting } = props;
+	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, quickBuy, hpTabProducts } = props;
+	const {
+		formatMoney,
+		preOrderCtaLabel,
+		buildProductCardModel,
+		waitlistPdpStore,
+		strapiAutomateHardcode,
+		checkHardcodedImages,
+		checkHardcodedTitles,
+		checkHardcodedVariant,
+		checkHardcodedTagline,
+		checkHardcodedFaq,
+		checkHardcodedHowToUse,
+		ProductSettings,
+		BenefitIngredient,
+		HowToUse,
+		Faq,
+		FragranceNotes,
+		getActiveWL
+	} = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -46,7 +66,16 @@ const ProductCarousel = (props: any) => {
 			tab3: { products },
 		}
 	}
-	const currentActiveTab = (store === 'uk' || store === 'us') ? 'valuesets' : 'bestsellers';
+	const storeHpData = useMemo(() => {
+		const storeMap = hpTabProducts?.hpTabProducts?.hpTabProducts;
+		if (!storeMap) return null;
+		return [storeMap[store], storeMap['all']].find((d: any) => d?.tab_1_key) || null;
+	}, [hpTabProducts, store]);
+
+	const tabIndexMap = { '1': 'bestsellers', '2': 'new', '3': 'valuesets' } as any;
+	const currentActiveTab = storeHpData
+		? (tabIndexMap[storeHpData.active_tab] || 'bestsellers')
+		: 'bestsellers';
 	const [activeTab, setActiveTab] = useState(currentActiveTab);
 
 	// const [isHomepage, setIsHomepage] = useState(false);
@@ -111,25 +140,30 @@ const ProductCarousel = (props: any) => {
 			});
 		}
 	}, [productPage]);
-
-	let tabConfig = [
+	const tabConfig = [
 		{ key: 'bestsellers', title: 'Best Sellers' },
 		{ key: 'new', title: 'New' },
 		{ key: 'valuesets', title: 'Value Sets' }
 	];
 
-	if (store === 'uk' || store === 'us') {
-		tabConfig = [
-			{ key: 'valuesets', title: 'Value Sets' },
-			{ key: 'bestsellers', title: 'Best Sellers' },
-			{ key: 'new', title: 'New' }
-		];
-	}
-
 	const visibleCount = useVisibleCount({
 		mobile: 2,
 		desktop: 4,
 	});
+
+	const [productData, setProductData] = useState({
+		open: false,
+		handle: null,
+		selectedVariant: null,
+		tab: null,
+		swatch: null
+	});
+
+	useEffect(() => {
+		// console.log('modal detail open', productData.open);
+		if (productData.open) document.body.classList.add('!overflow-hidden');
+		else document.body.classList.remove('!overflow-hidden');
+	}, [productData.open])
 
 	return (
 		<>
@@ -179,6 +213,9 @@ const ProductCarousel = (props: any) => {
 											store={store}
 											customProductTitle={customTitle}
 											isAboveFold={isAboveFold}
+											clickShowPopup={quickBuy}
+											setProductData={setProductData}
+											quickBuy={quickBuy}
 										/>
 									})}
 								</Carousel.Inner>
@@ -296,6 +333,36 @@ const ProductCarousel = (props: any) => {
 			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
 				<ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({ ...waitlistData, open: false })} />
 			</Modal>
+			{quickBuy && (
+				<Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
+					<ProductInfo
+						preOrderCtaLabel={preOrderCtaLabel}
+						formatMoney={formatMoney}
+						quickBuy={quickBuy}
+						directAddToCart={true}
+						waitlistPdpStore={waitlistPdpStore}
+						getActiveWL={getActiveWL}
+						generalSetting={generalSetting}
+						strapiAutomateHardcode={strapiAutomateHardcode}
+						checkHardcodedImages={checkHardcodedImages}
+						checkHardcodedTitles={checkHardcodedTitles}
+						checkHardcodedVariant={checkHardcodedVariant}
+						checkHardcodedTagline={checkHardcodedTagline}
+						checkHardcodedFaq={checkHardcodedFaq}
+						checkHardcodedHowToUse={checkHardcodedHowToUse}
+						ProductSettings={ProductSettings}
+						BenefitIngredient={BenefitIngredient}
+						HowToUse={HowToUse}
+						Faq={Faq}
+						FragranceNotes={FragranceNotes}
+						store={store}
+						preOrderSetting={preOrders}
+						data={productData}
+						addToCart={addToCart}
+						buildProductCardModel={buildProductCardModel}
+						handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
+				</Modal>
+			)}
 		</>
 	);
 };
