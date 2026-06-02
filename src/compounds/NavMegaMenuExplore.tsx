@@ -118,13 +118,13 @@ const NavMegaMenuExplore = (props: any) => {
     return (
         <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             {/* Tab bar */}
-            <div className="flex items-center justify-between px-g pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
+            <div className="flex items-center justify-between px-0 pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">
                     {tabs.map((tab: any) => (
                         <li key={tab.key}>
                             <button
                                 type="button"
-                                className={`px-3 py-[.375rem] text-base font-bold rounded transition-colors whitespace-nowrap ${activeTab === tab.key ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
+                                className={`px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap ${activeTab === tab.key ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
                                 onMouseEnter={() => handleTabHover(tab)}
                             >
                                 {tab.title}
@@ -143,15 +143,15 @@ const NavMegaMenuExplore = (props: any) => {
             </div>
 
             {/* Content */}
-            <div className="px-g pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
-                <div className="relative flex items-start gap-3">
+            <div className="px-0 pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
+                <div className="relative flex items-start gap-[16px]">
 
                     {/* Cards */}
                     <div className="flex gap-[16px] flex-1 min-w-0">
                         {currentArticles.slice(carouselIndex, carouselIndex + VISIBLE_COUNT).map((item: any, index: number) => (
                             currentTab.type === 'video' ? (
                                 <div key={`reel-${index}`} className="flex-shrink-0 flex flex-col" style={{ width: 293 }}>
-                                    <div className="rounded-lg overflow-hidden mb-3" style={{ width: 293, height: 385 }}>
+                                    <div className="rounded-lg overflow-hidden mb-1" style={{ width: 293, height: 385 }}>
                                         <video
                                             src={item.videoUrl}
                                             autoPlay
@@ -161,7 +161,7 @@ const NavMegaMenuExplore = (props: any) => {
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <p className="font-bold mb-1 text-body" style={{ fontSize: 16, lineHeight: '22px' }}>{item.author}</p>
+                                    <p className="font-bold mb-[5px] text-body" style={{ fontSize: 16, lineHeight: '22px' }}>{item.author}</p>
                                     <a href={item.productUrl} className="text-sm text-body underline underline-offset-2 hover:text-primary">{item.productName}</a>
                                 </div>
                             ) : (
@@ -171,19 +171,19 @@ const NavMegaMenuExplore = (props: any) => {
                                     className="flex-1 min-w-0 no-underline text-body hover:no-underline flex flex-col"
                                 >
                                     {item.image?.url && (
-                                        <div className="rounded-lg overflow-hidden mb-3 w-full" style={{ aspectRatio: '4/3' }}>
+                                        <div className="rounded-lg overflow-hidden mb-[16px] w-full">
                                             <img src={item.image.url} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
                                         </div>
                                     )}
                                     {item.tags?.length > 0 && (
-                                        <div className="flex gap-[6px] flex-wrap mb-2">
+                                        <div className="flex gap-[6px] flex-wrap mb-[8px] px-[12px]">
                                             {item.tags.map((tag: string, ti: number) => (
-                                                <span key={ti} className="text-xs font-bold px-[10px] py-[3px] rounded-full bg-secondary-light text-body">{tag}</span>
+                                                <span key={ti} className="font-normal px-[10px] py-[3px] bg-secondary-light text-body capitalize" style={{ fontSize: 12, lineHeight: 'normal' }}>{tag}</span>
                                             ))}
                                         </div>
                                     )}
-                                    <p className="font-bold mb-2 text-body" style={{ fontSize: 16, lineHeight: '22px' }}>{item.title}</p>
-                                    <span className="text-sm font-bold underline underline-offset-2 text-body hover:text-primary mt-auto">Read More</span>
+                                    <p className="font-normal mb-[14px] text-body px-[12px] leading-[25px] text-[20px]" style={{ fontSize: 16, lineHeight: '22px' }}>{item.title}</p>
+                                    <span className="text-[14px] font-normal underline underline-offset-2 px-[12px] text-body hover:text-primary mt-auto">Read More</span>
                                 </a>
                             )
                         ))}
@@ -192,15 +192,15 @@ const NavMegaMenuExplore = (props: any) => {
                     {/* Featured banner */}
                     <div
                         className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-shrink-0 flex flex-col text-center"
-                        style={{ width: 194, minHeight: 320, backgroundColor: currentTab.featured?.bgColor || '#f3f4f6' }}
+                        style={{ width: 234, height: currentTab.type === 'video' ? 442 : 327, backgroundColor: currentTab.featured?.bgColor || '#f3f4f6' }}
                     >
-                        <div className="flex-1">
-                            <h4 className="font-bold mb-2" style={{ fontSize: 24, lineHeight: '30px' }}>{currentTab.featured.title}</h4>
+                        <div className="mb-[16px]">
+                            <h4 className="font-bold mb-[4px]" style={{ fontSize: 20, lineHeight: '25px' }}>{currentTab.featured.title}</h4>
                             <p className="font-normal mb-0" style={{ fontSize: 16, lineHeight: '20px' }}>{currentTab.featured.description}</p>
                         </div>
                         <a
                             href={currentTab.featured.url}
-                            className="btn btn-primary inline-flex items-center justify-center font-bold mt-[20px]"
+                            className="btn btn-primary inline-flex items-center justify-center font-bold"
                             style={{ height: 40, fontSize: 16, lineHeight: '20px' }}
                         >
                             {currentTab.featured.ctaLabel}
