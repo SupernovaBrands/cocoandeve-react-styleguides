@@ -1,9 +1,8 @@
+@use 'core/type';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import 'core/fonts';
-@import 'core/type';
 
 @layer base {
 	a {
@@ -321,7 +320,5 @@ afterpay-placement {
 
 // @charset 'UTF-8';
 
-@import 'core/functions';
-
-// @import 'mixins/carousel';
-// @import 'bootstrap/core';
+// @use 'mixins/carousel';
+// @use 'bootstrap/core';
