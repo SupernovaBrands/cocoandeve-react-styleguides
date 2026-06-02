@@ -28,9 +28,9 @@ const NavMegaMenuShop = (props: any) => {
         setIsLoading(true);
 
         try {
-            const res = await fetch(`/api/collectionProducts?handle=${handle}&region=${store}&limit=7`);
+            const res = await fetch(`/api/collectionProducts?handle=${handle}&region=${store}&limit=12`);
             const data = await res.json();
-            const rawProducts = (data?.products || []).filter((p: any) => p.availableForSale).slice(0, 7);
+            const rawProducts = (data?.products || []).filter((p: any) => p.availableForSale).slice(0, 12);
 
             if (typeof buildProductCardModel === 'function') {
                 const cardModels = await Promise.all(
@@ -38,11 +38,17 @@ const NavMegaMenuShop = (props: any) => {
                 );
                 setTabProducts(prev => ({ ...prev, [id]: cardModels }));
             } else {
-                const mapped = rawProducts.map((p: any) => ({
-                    ...p,
-                    src: p.featuredImage?.url || '',
-                    imgHover: p.images?.edges?.[1]?.node?.url || '',
-                }));
+                const mapped = rawProducts.map((p: any) => {
+                    const rawNodes = p.variants?.nodes || p.variants?.edges?.map((e: any) => e.node) || [];
+                    return {
+                        ...p,
+                        src: p.featuredImage?.url || '',
+                        imgHover: p.images?.edges?.[1]?.node?.url || '',
+                        variants: {
+                            nodes: rawNodes,
+                        },
+                    };
+                });
                 setTabProducts(prev => ({ ...prev, [id]: mapped }));
             }
         } catch {
@@ -65,7 +71,6 @@ const NavMegaMenuShop = (props: any) => {
         const handle = tab.handle || tab.collectionHandle;
         if (handle) fetchTabProducts(handle, id);
     };
-
     const currentProducts = tabProducts[activeTab] || [];
     const canPrev = carouselIndex > 0;
     const canNext = carouselIndex + VISIBLE_COUNT < currentProducts.length;
@@ -79,7 +84,7 @@ const NavMegaMenuShop = (props: any) => {
     const isRangesTab = currentTabData && !currentTabData.handle && !currentTabData.collectionHandle;
 
     return (
-        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
+        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             {/* Tab bar */}
             <div className="flex items-center justify-between px-g pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">
@@ -87,7 +92,7 @@ const NavMegaMenuShop = (props: any) => {
                         <li key={tabId(tab)}>
                             <button
                                 type="button"
-                                className={`px-3 py-[.375rem] text-base font-bold rounded transition-colors whitespace-nowrap ${activeTab === tabId(tab) ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
+                                className={`px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap ${activeTab === tabId(tab) ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
                                 onMouseEnter={() => handleTabHover(tab)}
                             >
                                 {tab.title}
@@ -123,20 +128,20 @@ const NavMegaMenuShop = (props: any) => {
                         ))}
                     </div>
                 ) : (
-                    <div className="relative flex items-center">
+                    <div className="relative">
                         {canPrev && (
                             <button
                                 type="button"
                                 onClick={() => setCarouselIndex(i => i - 1)}
-                                className="absolute left-[-1.25rem] z-10 flex items-center justify-center w-7 h-7"
+                                className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white" style={{ left: -30 }}
                                 aria-label="Previous products"
                             >
-                                <ChevronPrev className="svg--current-color" />
+                                <ChevronPrev style={{ width: 12, height: 12 }} />
                             </button>
                         )}
-                        <div className="grid grid-cols-4 gap-[16px] w-full">
+                        <div className="grid gap-[16px] w-full" style={{ gridTemplateColumns: `repeat(${VISIBLE_COUNT}, 1fr)` }}>
                             {isLoading && currentProducts.length === 0 ? (
-                                <div className="col-span-4 py-4 text-center text-body">Loading...</div>
+                                <div className="col-span-full py-4 text-center text-body">Loading...</div>
                             ) : (
                                 currentProducts.slice(carouselIndex, carouselIndex + VISIBLE_COUNT).map((product: any, index: number) => (
                                     <ProductCard
@@ -161,10 +166,10 @@ const NavMegaMenuShop = (props: any) => {
                             <button
                                 type="button"
                                 onClick={() => setCarouselIndex(i => i + 1)}
-                                className="absolute right-[-1.25rem] z-10 flex items-center justify-center w-7 h-7"
+                                className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white shadow rounded-full" style={{ right: -30 }}
                                 aria-label="Next products"
                             >
-                                <ChevronNext className="svg--current-color" />
+                                <ChevronNext style={{ width: 12, height: 12 }} />
                             </button>
                         )}
                     </div>

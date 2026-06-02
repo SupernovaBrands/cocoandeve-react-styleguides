@@ -42,6 +42,16 @@ const Header = (props: any) => {
 	const [activeMainMenu, setActiveMainMenu] = useState(mainMenu);
 	const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 	const megaMenuCache = useReactRef<Record<string, any>>({});
+	const megaLeaveTimer = useReactRef<ReturnType<typeof setTimeout> | null>(null);
+
+	const handleNavMegaEnter = useCallback((type: string | null) => {
+		if (megaLeaveTimer.current) clearTimeout(megaLeaveTimer.current);
+		setHoveredNav(type);
+	}, []);
+
+	const handleNavMegaLeave = useCallback(() => {
+		megaLeaveTimer.current = setTimeout(() => setHoveredNav(null), 150);
+	}, []);
 	const headerRef = useReactRef<HTMLElement>(null);
 	const headerHeightRef = useReactRef<number>(0);
 	const annBarRef = useReactRef<HTMLDivElement>(null);
@@ -310,34 +320,19 @@ const Header = (props: any) => {
 						*/}
 						<ul className="header-desktop-nav list-reset pl-0 mb-0 hidden lg:flex lg:flex-1 lg:flex-row items-center">
 							{nav.length && nav.filter(item => item.megaMenu?.type !== 'askCoco').map((item, i) => (
-								<li key={item.label} className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}>
+								<li
+									key={item.label}
+									className={`nav-item ${i === 0 ? 'pr-hg' : 'px-hg'}`}
+									onMouseEnter={() => handleNavMegaEnter(item.megaMenu?.type || null)}
+									onMouseLeave={handleNavMegaLeave}
+								>
 									<a href={item.url || '#'} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{item.label}</a>
-									{item.megaMenu?.type === 'shop' && (
-										<NavMegaMenuShop
-											store={store}
-											generalSetting={generalSetting}
-											dummy={dummy}
-											hairRanges={hairRanges}
-											megaMenu={item.megaMenu}
-											buildProductCardModel={buildProductCardModel}
-											addToCart={addToCart}
-											trackEvent={trackEvent}
-											preOrders={preOrders}
-											setWaitlistData={setWaitlistData}
-										/>
-									)}
-									{item.megaMenu?.type === 'madeForYou' && (
-										<NavMegaMenuMadeForYou generalSetting={generalSetting} megaMenu={item.megaMenu} />
-									)}
-									{item.megaMenu?.type === 'explore' && (
-										<NavMegaMenuExplore store={store} generalSetting={generalSetting} megaMenu={item.megaMenu} />
-									)}
 								</li>
 							))}
 						</ul>
 
 						{/* Logo — centered */}
-						<a href="/" className="inline-block py-[11.250px] lg:py-[14.531px] mx-auto" aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block py-[8px] lg:py-[15.39px] mx-auto" aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
 
@@ -345,7 +340,7 @@ const Header = (props: any) => {
 						<ul className="basis-[30%] lg:flex-1 flex list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center gap-[20px]">
 							{nav.filter((item: any) => item.megaMenu?.type === 'askCoco').map((item: any) => (
 								<li key={item.label} className="nav-item hidden lg:block">
-									<a className="inline-block no-underline m-0 text-primary font-bold py-[.375em] hover:no-underline hover:text-primary cursor-pointer whitespace-nowrap">
+									<a className="inline-block no-underline m-0 font-bold py-[.375em] hover:no-underline text-body hover:text-body cursor-pointer whitespace-nowrap">
 										{item.label}
 									</a>
 									<NavMegaMenuAskCoco generalSetting={generalSetting} megaMenu={item.megaMenu} />
@@ -371,9 +366,40 @@ const Header = (props: any) => {
 								</a>
 							</li>
 						</ul>
-						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
-					</div>
+						</div>
+					{/* Mega menus outside the container div so flashBubble's `relative` class doesn't break their width */}
+					{nav.length > 0 && nav.filter((item: any) => item.megaMenu?.type !== 'askCoco').map((item: any) => (
+						<div
+							key={`mega-wrapper-${item.label}`}
+							style={{ display: hoveredNav === item.megaMenu?.type ? 'block' : 'none' }}
+							onMouseEnter={() => handleNavMegaEnter(item.megaMenu?.type || null)}
+							onMouseLeave={handleNavMegaLeave}
+						>
+							{item.megaMenu?.type === 'shop' && (
+								<NavMegaMenuShop
+									store={store}
+									generalSetting={generalSetting}
+									dummy={dummy}
+									hairRanges={hairRanges}
+									megaMenu={item.megaMenu}
+									buildProductCardModel={buildProductCardModel}
+									addToCart={addToCart}
+									trackEvent={trackEvent}
+									preOrders={preOrders}
+									setWaitlistData={setWaitlistData}
+								/>
+							)}
+							{item.megaMenu?.type === 'madeForYou' && (
+								<NavMegaMenuMadeForYou generalSetting={generalSetting} megaMenu={item.megaMenu} />
+							)}
+							{item.megaMenu?.type === 'explore' && (
+								<NavMegaMenuExplore store={store} generalSetting={generalSetting} megaMenu={item.megaMenu} />
+							)}
+						</div>
+					))}
 				</nav>
+				{/* Tooltip outside <nav> so its z-[1035] competes in <header>'s stacking context, above SearchBox z-[1020] */}
+				<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
 				{openDrawer && (
 					<MobileMenuDrop
 						onToggleMobileNav={onToggleMobileNav}
@@ -412,6 +438,10 @@ const Header = (props: any) => {
 						trackEvent={trackEvent}
 						openSearchBox={openSearchBox}
 						getFeaturedImgMeta={getFeaturedImgMeta}
+						addToCart={addToCart}
+						setWaitlistData={setWaitlistData}
+						preOrders={preOrders}
+						generalSetting={generalSetting}
 					/>
 				)}
 

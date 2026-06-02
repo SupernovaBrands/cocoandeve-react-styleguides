@@ -50,9 +50,9 @@ const STORE_LABELS: Record<string, string> = {
     int: 'Rest of the World (SGD)',
 };
 
-const Chevron = ({ open }: { open: boolean }) => (
+const Chevron = ({ open, size = 20 }: { open: boolean; size?: number }) => (
     <svg
-        width="12" height="7" viewBox="0 0 12 7" fill="none"
+        width={size} height={size * 0.9} viewBox="0 0 12 7" fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={`transition-transform duration-200 flex-shrink-0 ${open ? 'rotate-180' : ''}`}
     >
@@ -81,12 +81,13 @@ const MobileMenuDrop = (props: any) => {
     };
 
     const storeLabel = STORE_LABELS[store] || STORE_LABELS['int'];
+    const [storeOpen, setStoreOpen] = useState(false);
 
     return (
         <div className="fixed left-0 right-0 bottom-0 z-[1040] bg-white flex flex-col overflow-hidden" style={{ top: annBarHeight }}>
 
             {/* Header — mirrors the main nav exactly */}
-            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg border-b border-gray-100">
+            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg">
                 <div className="container px-0 flex flex-wrap items-center justify-between">
                     <div className="[flex-basis:30%] flex items-center gap-[16px]">
                         <button onClick={onToggleMobileNav} className="text-[13px] border-0 h-[40px] flex items-center bg-transparent" aria-label="Close menu">
@@ -97,7 +98,7 @@ const MobileMenuDrop = (props: any) => {
                         </button>
                     </div>
 
-                    <a href="/" className="inline-block py-[11.250px] mx-auto" aria-label="Visit Coco and Eve homepage">
+                    <a href="/" className="inline-block py-[8px] mx-auto" aria-label="Visit Coco and Eve homepage">
                         <BrandLogo />
                     </a>
 
@@ -118,7 +119,7 @@ const MobileMenuDrop = (props: any) => {
             </nav>
 
             {/* Nav */}
-            <nav className="flex-1 overflow-y-auto px-[16px]">
+            <nav className="flex-1 overflow-y-auto px-[16px] pt-[24px]">
                 {menu.map((item) => {
                     const hasChildren = item.children && item.children.length > 0;
                     const isL1Open = openL1 === item.label;
@@ -152,11 +153,11 @@ const MobileMenuDrop = (props: any) => {
                                                 style={{ opacity: isL2Dimmed ? 0.4 : 1 }}
                                             >
                                                 <button
-                                                    className="w-full flex items-center justify-between py-[4px] bg-transparent border-0 p-0 text-left"
+                                                    className="w-full flex items-center gap-[8px] py-[4px] bg-transparent border-0 p-0 text-left"
                                                     onClick={() => hasGrandchildren ? toggleL2(child.label) : (window.location.href = child.url || '#')}
                                                 >
                                                     <span className="text-body font-normal text-[20px] leading-[25px] not-italic">{child.label}</span>
-                                                    {hasGrandchildren && <Chevron open={isL2Open} />}
+                                                    {hasGrandchildren && <Chevron open={isL2Open} size={12} />}
                                                 </button>
 
                                                 {hasGrandchildren && isL2Open && (
@@ -184,10 +185,21 @@ const MobileMenuDrop = (props: any) => {
 
             {/* Footer — region */}
             <div className="px-[16px] py-[16px] border-t border-gray-100">
-                <button className="w-full flex items-center justify-between bg-transparent border-0 p-0">
-                    <span className="text-body text-[14px]">{storeLabel}</span>
-                    <Chevron open={false} />
+                <button className="w-full flex items-center justify-between bg-transparent border-0 p-0" onClick={() => setStoreOpen(o => !o)}>
+                    <span className="text-body text-[20px] leading-[25px]">{storeLabel}</span>
+                    <Chevron open={storeOpen} size={14} />
                 </button>
+                {storeOpen && (
+                    <ul className="list-none pl-0 mb-0 mt-2 flex flex-col gap-2">
+                        <li><a href="https://www.cocoandeve.com?store=us" className="text-body text-[16px] no-underline hover:text-primary">USA (USD)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=uk" className="text-body text-[16px] no-underline hover:text-primary">United Kingdom (GBP)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=ca" className="text-body text-[16px] no-underline hover:text-primary">Canada (CAD)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=au" className="text-body text-[16px] no-underline hover:text-primary">Australia (AUD)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=eu" className="text-body text-[16px] no-underline hover:text-primary">Europe (EUR)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=int" className="text-body text-[16px] no-underline hover:text-primary">Rest of the World (SGD)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=my" className="text-body text-[16px] no-underline hover:text-primary">Malaysia (MYR)</a></li>
+                    </ul>
+                )}
             </div>
 
         </div>
