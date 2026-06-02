@@ -332,7 +332,7 @@ const Header = (props: any) => {
 						</ul>
 
 						{/* Logo — centered */}
-						<a href="/" className="inline-block py-[8px] lg:py-[14.531px] mx-auto" aria-label="Visit Coco and Eve homepage">
+						<a href="/" className="inline-block py-[8px] lg:py-[15.39px] mx-auto" aria-label="Visit Coco and Eve homepage">
 							<BrandLogo className="lg:h-[2.578rem]" />
 						</a>
 

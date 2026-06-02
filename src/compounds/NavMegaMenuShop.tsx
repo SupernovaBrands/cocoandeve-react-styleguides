@@ -84,7 +84,7 @@ const NavMegaMenuShop = (props: any) => {
     const isRangesTab = currentTabData && !currentTabData.handle && !currentTabData.collectionHandle;
 
     return (
-        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
+        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             {/* Tab bar */}
             <div className="flex items-center justify-between px-g pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">

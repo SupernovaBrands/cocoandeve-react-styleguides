@@ -42,7 +42,7 @@ const NavMegaMenuMadeForYou = (props: any) => {
     const banners = megaMenu?.banners || madeForYouBanners || DEFAULT_BANNERS;
 
     return (
-        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]" >
+        <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]" >
             {/* Top bar */}
             <div className="flex items-center justify-end px-g pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <div className="flex gap-3 items-center">
@@ -56,17 +56,17 @@ const NavMegaMenuMadeForYou = (props: any) => {
             </div>
 
             {/* Banners */}
-            <div className="px-g pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
+            <div className="px-0 pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <div className="flex gap-[16px] flex-grow">
                     {banners.map((banner: any, i: number) => (
-                        <div key={i} className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-1 flex flex-col text-center" style={{ minHeight: 420, backgroundColor: banner.bgColor || '#f3f4f6' }}>
-                            <div className="mfy-content">
-                                <h4 className="font-bold mb-0 min-h-[60px]" style={{ fontSize: 24, lineHeight: '30px' }}>{banner.title}</h4>
-                                <p className="font-normal mb-0 min-h-[60px] mb-[16px]" style={{ fontSize: 16, lineHeight: '20px' }}>{banner.description}</p>
+                        <div key={i} className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-1 flex flex-col text-center" style={{ height: 378, backgroundColor: banner.bgColor || '#f3f4f6' }}>
+                            <div className="mfy-content min-h-[100px]">
+                                <h4 className="font-bold mb-[4px]" style={{ fontSize: 24, lineHeight: '30px' }}>{banner.title}</h4>
+                                <p className="font-normal  mb-[16px]" style={{ fontSize: 16, lineHeight: '20px' }}>{banner.description}</p>
                             </div>
                             <a
                                 href={banner.url}
-                                className="btn btn-primary inline-flex items-center justify-center font-bold"
+                                className="btn btn-primary inline-flex items-center justify-center font-bold relative z-[1] hover:bg-primary-dark hover:border-primary-dark hover:text-white transition-colors duration-150 border-none !no-underline self-center px-[28px]"
                                 style={{ height: 40, fontSize: 16, lineHeight: '20px' }}
                             >
                                 {banner.ctaLabel}
