@@ -178,7 +178,7 @@ const NavMegaMenuExplore = (props: any) => {
                                     {item.tags?.length > 0 && (
                                         <div className="flex gap-[6px] flex-wrap mb-[8px] px-[12px]">
                                             {item.tags.map((tag: string, ti: number) => (
-                                                <span key={ti} className="font-normal px-[10px] py-[3px] bg-secondary-light text-body capitalize" style={{ fontSize: 12, lineHeight: 'normal' }}>{tag}</span>
+                                                <span key={ti} className="font-normal px-[10px] pt-[5px] pb-[4px] h-[20px] bg-secondary-light text-body capitalize rounded-[4px]" style={{ fontSize: 12, lineHeight: 'normal' }}>{tag}</span>
                                             ))}
                                         </div>
                                     )}
@@ -200,7 +200,7 @@ const NavMegaMenuExplore = (props: any) => {
                         </div>
                         <a
                             href={currentTab.featured.url}
-                            className="btn btn-primary inline-flex items-center justify-center font-bold"
+                            className="btn btn-primary inline-flex items-center justify-center font-bold self-center px-[28px] hover:text-white hover:bg-primary-dark  !no-underline border-none"
                             style={{ height: 40, fontSize: 16, lineHeight: '20px' }}
                         >
                             {currentTab.featured.ctaLabel}
