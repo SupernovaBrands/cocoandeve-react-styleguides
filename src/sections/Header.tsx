@@ -340,7 +340,7 @@ const Header = (props: any) => {
 						<ul className="basis-[30%] lg:flex-1 flex list-reset pl-0 mb-0 navbar-nav--right flex-row justify-end items-center gap-[20px]">
 							{nav.filter((item: any) => item.megaMenu?.type === 'askCoco').map((item: any) => (
 								<li key={item.label} className="nav-item hidden lg:block">
-									<a className="inline-block no-underline m-0 font-bold py-[.375em] hover:no-underline text-body hover:text-body cursor-pointer whitespace-nowrap">
+									<a className="inline-block no-underline m-0 font-bold py-[.375em] hover:no-underline text-body hover:text-primary cursor-pointer whitespace-nowrap">
 										{item.label}
 									</a>
 									<NavMegaMenuAskCoco generalSetting={generalSetting} megaMenu={item.megaMenu} />

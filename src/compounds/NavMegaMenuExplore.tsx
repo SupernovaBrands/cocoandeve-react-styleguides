@@ -182,7 +182,7 @@ const NavMegaMenuExplore = (props: any) => {
                                             ))}
                                         </div>
                                     )}
-                                    <p className="font-normal mb-[14px] text-body px-[12px] leading-[25px] text-[20px]" style={{ fontSize: 16, lineHeight: '22px' }}>{item.title}</p>
+                                    <p className="font-normal mb-[14px] text-body px-[12px] leading-[25px] text-[20px]" style={{ fontSize: 20, lineHeight: '25px' }}>{item.title}</p>
                                     <span className="text-[14px] font-normal underline underline-offset-2 px-[12px] text-body hover:text-primary mt-auto">Read More</span>
                                 </a>
                             )

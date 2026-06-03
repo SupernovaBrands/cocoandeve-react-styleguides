@@ -436,7 +436,7 @@ const SearchBox = (props: any) => {
 			{!loading && keyword !== '' && products.length > 0 && (
 				<div className="container search--result-box lg:mt-2 px-hg lg:px-g lg:mb-3 max-h-[calc(100vh-16rem)] lg:max-h-none overflow-y-scroll lg:overflow-hidden">
 					<div className="flex flex-wrap lg:-mx-g">
-						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 mb-1 px-hg lg:px-g text-[#4E4E4E] text-[14px]">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
+						<h4 className="search--result-title container mx-auto mt-2 lg:mt-0 mb-1 px-hg lg:px-g text-[#4E4E4E] text-[14px] font-normal">{products.length === 1 ? `${products.length} result` : `${products.length} results`}</h4>
 						<div className="container flex flex-wrap order-2 search__carousel px-0">
 							<div className="container px-0 lg:px-g">
 								{/* Mobile: carousel */}
@@ -495,7 +495,7 @@ const SearchBox = (props: any) => {
 						</div>
 					</div>
 					{content?.search_footer_note && (
-						<p className="search--notes px-hg lg:px-0" dangerouslySetInnerHTML={{
+						<p className="search--notes px-hg lg:px-0 text-[#4E4E4E] text-[14px] leading-[18px] mt-[16px]" dangerouslySetInnerHTML={{
 							__html: content?.search_footer_note.replace('d-lg-none', 'lg:hidden').replace('d-none d-lg-inline', 'hidden lg:inline').replace('text-underline', 'underline')
 						}} />
 					)}

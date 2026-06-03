@@ -58,9 +58,9 @@ const PopularProducts = (props: any) => {
 			<div className="flex flex-wrap lg:-mx-g">
 				<h4 className="w-full lg:w-1/3 lg:mb-2 font-bold order-1 text-base px-0 lg:px-g mb-[16px]">{content?.popular_keywords_heading}</h4>
 				<h4 className="w-full lg:w-2/3 lg:mb-2 mb-[16px] font-bold order-3 lg:order-2 text-gray-600 text-base px-0 lg:px-[8px]">{content?.popular_products_heading}</h4>
-				<div className="w-full lg:w-1/3 order-2 mb-3 lg:px-g">
+				<div className="w-full lg:w-1/3 order-2 mb-3 lg:px-g flex flex-wrap gap-[8px] content-start">
 					{keywords && keywords.map((word: string) => (
-						<span key={`key-${word}`} onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer px-2 me-1 inline-flex items-center mb-1 rounded bg-gray-400 text-gray-600 h-[32px]">{word}</span>
+						<span key={`key-${word}`} onClick={() => onClickTag(word)} className="search-panel__tag cursor-pointer px-[12px] inline-flex items-center rounded bg-gray-400 text-gray-600 h-[32px]">{word}</span>
 					))}
 				</div>
 				<div className="w-full lg:w-2/3 order-4">
