@@ -409,12 +409,12 @@ const SearchBox = (props: any) => {
 	return (
 		<div className={`${openAccountBox ? 'z-[990]' : 'z-[1020]'} search-panel fixed lg:absolute w-full overflow-hidden h-full bg-white mt-lg-0 block transition-all duration-500 ease-in-out lg:left-auto ${props.openSearchBox ? 'left-0 opacity-100 lg:h-auto' : 'left-[100%] opacity-0 lg:h-0'}`}>
 			<div className="border-[#ADADAD] w-full border-t">
-				<div className="bg-white px-g">
+				<div className="bg-white px-0 lg:px-g">
 					<div className="container relative flex items-center px-0 lg:px-g lg:pt-[32px]">
-						<Search className="absolute h2 mb-0 z-[1000] h-[24px]" />
-						<input type="text" placeholder={"Search products here"} name="q" className="w-full py-[16px] pl-4 lg:pl-4 border-b border-[#a3a3a380] focus:border-b focus:border-[#a3a3a380] rounded-none outline-none focus:outline-none focus:ring-0" aria-label="search" onChange={onChange} value={keyword} />
-						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? '' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
-						<span className="search-panel__close absolute items-center font-bold flex right-0 lg:right-[1em]" role="button" aria-label="Close search">
+						<Search className="absolute h2 mb-0 z-[1000] h-[24px] ml-g lg:ml-0" />
+						<input type="text" placeholder={"Search products here"} name="q" className="w-full py-[16px] pl-[50px] lg:pl-4 border-b border-[#a3a3a380] focus:border-b focus:border-[#a3a3a380] rounded-none outline-none focus:outline-none focus:ring-0" aria-label="search" onChange={onChange} value={keyword} />
+						<span className={`search-panel__clear absolute items-center disabled right-[3em] ${keyword === '' ? 'hidden' : ''}`} role="button" onClick={() => setKeyword('')} aria-label={content?.search_clear || 'Clear search'}>{content?.search_clear}</span>
+						<span className="search-panel__close absolute items-center font-bold flex right-g lg:right-[1em]" role="button" aria-label="Close search">
 							<Close className="h-[1em]" onClick={() => props.onToggleSearchBox()} />
 						</span>
 					</div>
@@ -483,7 +483,7 @@ const SearchBox = (props: any) => {
 													title={item?.title}
 													subtitle={item?.subtitle || false}
 													img={item?.featuredImgUrl}
-													classes="w-full border-b border-gray-100 last:border-0"
+													classes="w-full last:border-0"
 													trackEvent={trackEvent}
 													store={store}
 												/>
