@@ -76,9 +76,9 @@ const NavMegaMenuShop = (props: any) => {
     const canNext = carouselIndex + VISIBLE_COUNT < currentProducts.length;
 
     const shopAllUrl = megaMenu?.shopAllUrl || generalSetting?.mega_menu_shop_all_url || '/collections/all';
-    const shopAllLabel = megaMenu?.shopAllLabel || generalSetting?.mega_menu_shop_all_label || 'Shop All';
+    const shopAllLabel = megaMenu?.shopAllLabel || 'Shop All';
     const buildYourOwnUrl = megaMenu?.buildYourOwnUrl || generalSetting?.mega_menu_button2_url || '/pages/build-your-own-bundle';
-    const buildYourOwnLabel = megaMenu?.buildYourOwnLabel || generalSetting?.mega_menu_button2_label || 'Build Your Own';
+    const buildYourOwnLabel = megaMenu?.buildYourOwnLabel || 'Build Your Own Bundle';
 
     const currentTabData = tabs.find((t: any) => tabId(t) === activeTab);
     const isRangesTab = currentTabData && !currentTabData.handle && !currentTabData.collectionHandle;
@@ -86,7 +86,7 @@ const NavMegaMenuShop = (props: any) => {
     return (
         <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]">
             {/* Tab bar */}
-            <div className="flex items-center justify-between px-g pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
+            <div className="flex items-center justify-between px-0 pt-3 pb-2 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">
                     {tabs.map((tab: any) => (
                         <li key={tabId(tab)}>
@@ -111,14 +111,14 @@ const NavMegaMenuShop = (props: any) => {
             </div>
 
             {/* Content */}
-            <div className="px-g pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
+            <div className="px-0 pb-3 mx-auto w-full" style={{ maxWidth: 1160 }}>
                 {isRangesTab ? (
                     <div className="flex gap-[16px]">
                         {ranges.map((range: any, i: number) => (
                             <div key={i} className="rounded-lg px-[16px] pt-4 relative overflow-hidden flex-shrink-0 text-center flex flex-col" style={{ width: 219, height: 378, backgroundColor: range.bgColor || '#f3f4f6' }}>
                                 <h4 className="mb-1 text-[24px] leading-[30px] font-bold">{range.title}</h4>
                                 <p className="font-normal mb-0" style={{ fontSize: 16, lineHeight: '20px' }}>{range.description}</p>
-                                <a href={range.url || `/collections/${range.handle}`} className="btn btn-primary inline-flex items-center justify-center mt-auto mb-[160px] font-bold" style={{ height: 40, fontSize: 16, lineHeight: '20px' }}>
+                                <a href={range.url || `/collections/${range.handle}`} className="btn btn-primary inline-flex items-center justify-center mt-auto mb-[160px] font-bold hover:text-white hover:bg-primary-dark  !no-underline border-none " style={{ height: 40, fontSize: 16, lineHeight: '20px' }}>
                                     Shop Products
                                 </a>
                                 {range.image?.url && (
@@ -136,7 +136,7 @@ const NavMegaMenuShop = (props: any) => {
                                 className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white" style={{ left: -30 }}
                                 aria-label="Previous products"
                             >
-                                <ChevronPrev style={{ width: 12, height: 12 }} />
+                                <ChevronPrev style={{ width: 15, height: 15 }} />
                             </button>
                         )}
                         <div className="grid gap-[16px] w-full" style={{ gridTemplateColumns: `repeat(${VISIBLE_COUNT}, 1fr)` }}>
@@ -166,10 +166,10 @@ const NavMegaMenuShop = (props: any) => {
                             <button
                                 type="button"
                                 onClick={() => setCarouselIndex(i => i + 1)}
-                                className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white shadow rounded-full" style={{ right: -30 }}
+                                className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white no-shadow rounded-full" style={{ right: -30 }}
                                 aria-label="Next products"
                             >
-                                <ChevronNext style={{ width: 12, height: 12 }} />
+                                <ChevronNext style={{ width: 15, height: 15 }} />
                             </button>
                         )}
                     </div>
