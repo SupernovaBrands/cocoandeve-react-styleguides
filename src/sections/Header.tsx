@@ -8,7 +8,7 @@ import NavMegaMenu from '~/compounds/NavMegaMenu';
 // const MobileMenu = dynamic(() => import('~/compounds/MobileMenu'), { ssr: false });
 const MobileMenuDrop = dynamic(() => import('~/compounds/MobileMenuDrop'), { ssr: false });
 import BrandLogo from '~/images/ce-logo.svg';
-import Account from '~/images/icons/account-ico.svg';
+import Account from '~/images/icons/account-ico2.svg';
 import Account2 from '~/images/icons/acc-ico.svg';
 import Search from '~/images/icons/search-ico.svg';
 import CartIcon from '~/images/icons/cart-ico.svg';
@@ -263,7 +263,7 @@ const Header = (props: any) => {
 					)}
 				</div>
 
-				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-hg z-[1000]`}>
+				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-g lg:px-hg z-[1000]`}>
 					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubbleWrapper || flashBubble ? 'relative' : ''}`}>
 						{/* Mobile hamburger + account */}
 						<div className="[flex-basis:30%] lg:hidden flex items-center gap-[16px]">
@@ -348,7 +348,7 @@ const Header = (props: any) => {
 							))}
 							<li key="account" id="dropdownMenuForm" className="relative dropdown--account hidden lg:flex items-center">
 								<button onClick={toggleAccountDropdown} className="flex items-center p-0 border-0 bg-transparent" data-cy="account-icon" aria-haspopup="true" aria-expanded="false" aria-label="Account">
-									<Account style={{ width: 15, height: 16 }} />
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 22" width="16" height="16"><path d="M19.1 18.2c0-1.8-.8-3.7-2.1-4.9-1.3-1.3-3.1-2-5-2H7.1c-1.9 0-3.6.7-5 2C.8 14.6 0 16.4 0 18.2v3.2h19.1v-3.2zm-12-4.9H12c1.3 0 2.6.5 3.6 1.4.9.9 1.5 2.2 1.5 3.5v1.2h-15v-1.2c0-1.3.5-2.6 1.5-3.5.9-.9 2.2-1.4 3.5-1.4zm2.4-3.2c.1 0 .1 0 0 0 1.4 0 2.7-.5 3.7-1.5 1-.9 1.5-2.2 1.5-3.6 0-1.3-.5-2.6-1.5-3.6C12.3.5 11 0 9.6 0h-.1C8.2 0 6.9.5 6 1.5 5 2.4 4.4 3.7 4.4 5c0 1.4.5 2.7 1.5 3.6 1 1 2.3 1.5 3.6 1.5zM6.4 5c0-.8.3-1.6.9-2.2.6-.5 1.4-.8 2.2-.8.8 0 1.6.3 2.2.9l.2.1c.6.6.9 1.3.8 2.1 0 .8-.3 1.6-.9 2.1-.6.6-1.4.9-2.2.9-.8 0-1.6-.3-2.2-.9-.6-.5-1-1.3-1-2.2z"></path></svg>
 								</button>
 								{!isLoggedIn && (
 									<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} generalSetting={generalSetting} />

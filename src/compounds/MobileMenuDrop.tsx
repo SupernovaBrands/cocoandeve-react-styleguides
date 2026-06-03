@@ -87,11 +87,14 @@ const MobileMenuDrop = (props: any) => {
         <div className="fixed left-0 right-0 bottom-0 z-[1040] bg-white flex flex-col overflow-hidden" style={{ top: annBarHeight }}>
 
             {/* Header — mirrors the main nav exactly */}
-            <nav className="bg-white relative flex flex-wrap items-center justify-between px-hg">
+            <nav className="bg-white relative flex flex-wrap items-center justify-between px-g ">
                 <div className="container px-0 flex flex-wrap items-center justify-between">
                     <div className="[flex-basis:30%] flex items-center gap-[16px]">
                         <button onClick={onToggleMobileNav} className="text-[13px] border-0 h-[40px] flex items-center bg-transparent" aria-label="Close menu">
-                            <Close style={{ width: 15, height: 15 }} />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <rect width="17.5992" height="2.19992" rx="1.09996" transform="matrix(0.707111 0.707103 -0.707111 0.707103 2.55566 1)" fill="#151515"/>
+                            <rect width="17.5992" height="2.19989" rx="1.09994" transform="matrix(0.707111 -0.707103 0.707111 0.707103 1 13.4448)" fill="#151515"/>
+                            </svg>
                         </button>
                         <button onClick={toggleAccountDropdown} className="flex items-center p-0 border-0 bg-transparent" aria-label="Account">
                             <Account style={{ width: 15, height: 16 }} />
@@ -119,7 +122,7 @@ const MobileMenuDrop = (props: any) => {
             </nav>
 
             {/* Nav */}
-            <nav className="flex-1 overflow-y-auto px-[16px] pt-[24px]">
+            <nav className="flex-1 overflow-y-auto px-g pt-[24px]">
                 {menu.map((item) => {
                     const hasChildren = item.children && item.children.length > 0;
                     const isL1Open = openL1 === item.label;
@@ -132,7 +135,7 @@ const MobileMenuDrop = (props: any) => {
                             style={{ opacity: isL1Dimmed ? 0.4 : 1 }}
                         >
                             <button
-                                className="w-full flex items-center justify-between py-[4px] bg-transparent border-0 p-0 text-left"
+                                className="w-full flex items-center justify-between py-[0] bg-transparent border-0 p-0 text-left"
                                 onClick={() => hasChildren ? toggleL1(item.label) : (window.location.href = item.url || '#')}
                             >
                                 <span className="text-body font-bold text-[32px] leading-[40px]">{item.label}</span>
@@ -184,7 +187,7 @@ const MobileMenuDrop = (props: any) => {
             </nav>
 
             {/* Footer — region */}
-            <div className="px-[16px] py-[16px] border-t border-gray-100">
+            <div className="px-[16px] py-[16px] ">
                 <button className="w-full flex items-center justify-between bg-transparent border-0 p-0" onClick={() => setStoreOpen(o => !o)}>
                     <span className="text-body text-[20px] leading-[25px]">{storeLabel}</span>
                     <Chevron open={storeOpen} size={14} />
