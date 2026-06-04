@@ -276,6 +276,9 @@ const Header = (props: any) => {
 							<button onClick={toggleAccountDropdown} className="flex items-center p-0 border-0 bg-transparent" aria-label="Account">
 								<Account2 style={{ width: 15, height: 16 }} />
 							</button>
+							{!isLoggedIn && (
+								<AccountDropdown store={store} timerData={timerBar} annBarEnabled={annBar?.enabled} scrolled={scrolled} swellLoyalty={swellLoyalty} openAccountBox={openAccountBox} isStickyEnabled={annBar?.isStickyEnabled} isScrollEnabled={annBar?.isScrollEnabled} toggleAccountDropdown={toggleAccountDropdown} generalSetting={generalSetting} />
+							)}
 						</div>
 
 						{/* Desktop left nav */}

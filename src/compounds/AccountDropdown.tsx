@@ -159,10 +159,10 @@ const AccountDropdown = (props:any) => {
     }, [tosAgree]);
 
     return (
-        <div id="account-dropdown" className={`dropdown-menu w-full ${isStickyEnabled && scrolled ? 'top-[87px]' : scrolled || !annBarEnabled ? 'top-[44px]' : 'top-[87px]'} ${timerData && timerData.notice_bar ? 'lg:top-[2.3em]' : 'lg:top-[3em]'} right-0 left-auto border-0 rounded-0 pb-0 ${isStickyEnabled && isScrollEnabled ? '-mt-[3px]' : '-mt-[1px]'} lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
+        <div id="account-dropdown" className={`dropdown-menu w-full ${isStickyEnabled && scrolled ? 'top-[87px]' : scrolled || !annBarEnabled ? 'top-[44px]' : 'top-[87px]'} ${timerData && timerData.notice_bar ? 'lg:top-[2.3em]' : 'lg:top-[3em]'} right-0 left-auto border-0 rounded-0 pb-0 ${isStickyEnabled && isScrollEnabled ? '-mt-[3px]' : '-mt-[7px] lg:-mt-[1px] '} lg:mt-0 pt-0 float-none ${!onModal ? 'z-[1030] fixed lg:absolute lg:w-[330px]' : ''} ${openAccountBox ? 'block' : 'hidden'}`}>
                 {activeFrame && (
                     <div className='flex dropdown__login__register'>
-                        <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
+                        <form onSubmit={handleLoginSubmit} id="dropdown__login" className={`p-g ${!onModal ? 'max-lg:[box-shadow:0_0.5rem_0.5rem_rgba(0,0,0,0.15)!important] lg:[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className="font-bold text-center px-2 mb-2">
                                 {swellLoyalty && swellLoyalty.enable_cart_swell_redemption && (
                                     'Earn and redeem points from purchases'
@@ -196,7 +196,7 @@ const AccountDropdown = (props:any) => {
                 )}
                 {!activeFrame && (
                     <div className={`flex dropdown__login__register`}>
-                        <form onSubmit={handleSubmit} id="dropdown__register" className={`p-g ${!onModal ? '[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
+                        <form onSubmit={handleSubmit} id="dropdown__register" className={`p-g ${!onModal ? 'max-lg:[box-shadow:0_0.5rem_0.5rem_rgba(0,0,0,0.15)!important] lg:[box-shadow:0_0.5rem_1rem_rgba(0,0,0,0.15)!important]' : ''} bg-white w-full`}>
                             <p className=" font-bold  text-center px-2 mb-2">Welcome</p>
                             <SocialLogin idSuffix={'registerDropdown'} store={store}/>
                             <p className="mb-g text-center auth-buttons">-- or --</p>
