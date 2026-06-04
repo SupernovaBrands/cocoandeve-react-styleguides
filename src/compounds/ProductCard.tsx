@@ -521,7 +521,7 @@ const ProductCardButton = (props: any) => {
 }
 
 const ProductCard = (props: any) => {
-    const { kitBuilder, style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
+    const { quickBuy, kitBuilder, style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
     const { product } = props;
 
     // if (product.handle === 'double-the-bronze-set') console.log('props', props);
@@ -649,7 +649,7 @@ const ProductCard = (props: any) => {
                     ">Learn more</span>
                 )}
                 <ConditionalWrap
-                    condition={clickShowPopup}
+                    condition={clickShowPopup && !quickBuy}
                     wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
                     elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
                 >
@@ -700,14 +700,14 @@ const ProductCard = (props: any) => {
                 {/* Badges */}
                 {!kitBuilder && props.product.activeBadges?.length === 0 && props.product.badgeText && !props.sideUpsell && (
                     <span className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[0.5rem] ${props.product?.badgeBgColor ? props.product?.badgeBgColor : 'bg-white'} absolute font-normal text-sm ${props.product?.badgeTextColor ? props.product?.badgeTextColor : 'text-body'} top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] ${props.sideUpsell ? 'lg:top-[8px]' : ''} product-card__badge`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>
-                        <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{props.product.badgeText}</span>
+                        <span className={`leading-[13px] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px] lg:!leading-[19px]' : 'lg:!leading-[18px]'} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`}>{props.product.badgeText}</span>
                     </span>
                 )}
                 {!kitBuilder && props.product.topBadges && !props.sideUpsell && (
                     <div className={`absolute top-[.5rem] left-[.5rem] lg:top-[.75rem] lg:left-[.75rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.topBadges.map((badge) => (
                             <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
-                                <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
+                                <span className={`leading-[13px] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px] lg:!leading-[19px]' : 'lg:!leading-[18px]'} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
@@ -716,7 +716,7 @@ const ProductCard = (props: any) => {
 
             {clickShowPopup && !kitBuilder && (
                 <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} group text-xs lg:py-[6px] lg:px-[8px] py-0 px-0 flex mb-0 hover:text-primary lg:bg-white cursor-pointer absolute top-[.5rem] right-[1rem] lg:right-[1rem] lg:top-[10px] product-card__badge items-center leading-none`}>
-                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
+                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'} ${quickBuy ? 'lg:!hidden' : ''}`}>Details</span>
                     <Eye className="h-[20px] lg:h-g w-[20px] lg:w-g block group-hover:hidden" />
                     <EyeHover className="h-[20px] lg:h-g w-[20px] lg:w-g hidden group-hover:block" />
                 </p>
@@ -728,14 +728,14 @@ const ProductCard = (props: any) => {
                     <div className={`pt-[.5rem] lg:pt-[1rem] pb-[.25rem] text-left flex flex-wrap gap-[.25rem] ${props.product?.badgeDirection === 'verical' || props.product?.badge_direction === 'vertical' ? 'flex-col items-start' : ''}`}>
                         {props.product.bottomBadges.map((badge) => (
                             <span key={badge.badge_text} className={`min-w-[3.375em] inline-flex items-center justify-center badge rounded-[2px] py-[2px] px-[.5rem] font-normal product-card__badge ${badge?.badge_bg_color ? badge?.badge_bg_color : 'bg-white'} ${badge?.badge_text_color ? badge?.badge_text_color : 'text-body'}`}>
-                                <span className={`leading-[normal] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : ''}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
+                                <span className={`leading-[13px] lg:!text-sm ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px] lg:!leading-[19px]' : ''} ${platform === 'os-android' ? 'relative top-[1.5px]' : 'lg:!leading-[18px]'}`} style={props.product?.badgeMobileFontSize && !props.landingPageTemplate ? { fontSize: `${props.product.badgeMobileFontSize}px` } : props.landingPageTemplate ? { fontSize: '12px' } : {}}>{badge.badge_text}</span>
                             </span>
                         ))}
                     </div>
                 )}
                 <p className={`product-title__text ${!kitBuilder && props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
-                        condition={clickShowPopup}
+                        condition={clickShowPopup && !quickBuy}
                         wrap={children => <span role="button" className="text-sm leading-[18px] hover:underline lg:text-base product-card__title text-body hover:text-body w-full mb-[3px]" onClick={openModal}>{children}</span>}
                         elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} leading-[18px] product-card__title text-body hover:text-body w-full mb-[3px]`}>{children}</a>}
                     >

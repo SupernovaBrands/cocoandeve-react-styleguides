@@ -324,6 +324,8 @@ const Cart: React.FC<Props> = (props) => {
 									<CartShippingMeter
 										target={shippingMeter.target}
 										current={shippingMeter.current}
+										progressText={shippingMeter.progressText || ''}
+										finalText={shippingMeter.finalText || ''}
 									/>
 								)}
 							{discountMeter && discountMeter.enabled && discountMeter
@@ -367,7 +369,7 @@ const Cart: React.FC<Props> = (props) => {
 								</div> */}
 							</div>
 
-							{/* {manualGwpSetting && manualGwpSetting.enabled && (
+							{manualGwpSetting && manualGwpSetting.enabled && (
 								<div className="px-g lg:px-3 pt-3 hidden lg:block">
 									<hr />
 									<CartManualGwp {...manualGwpSetting}
@@ -376,7 +378,7 @@ const Cart: React.FC<Props> = (props) => {
 										disableSelectItem={true}
 									/>
 								</div>
-							)} */}
+							)}
 							</>
 						) : (
 							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions

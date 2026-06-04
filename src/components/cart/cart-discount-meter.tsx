@@ -1,27 +1,30 @@
 /* global tSettings Shopify */
 import { useState, useEffect } from 'react';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { formatMoney } from '~/modules/utils';
 
-const CartDiscountMeter = (props) => {
-	const {
-		target,
-		current,
-		progressText,
-		useQuantity,
-		items
-	} = props;
-
-	const [state, setState] = useState({ target, current, progressText, progress: 0, text: '', items: [] });
+const CartDiscountMeter = ({
+	target = 0,
+	current = 0,
+	progressText = 'cartShippingMeter.inProgressText',
+	useQuantity = false,
+	items = [],
+}: {
+	target?: number,
+	current?: number,
+	progressText?: string,
+	useQuantity?: boolean,
+	items?: any[],
+}) => {
+	const [state, setState] = useState({ progress: 0, text: '' });
 
 	useEffect(() => {
-		const remaining = props.target - props.current;
+		const remaining = target - current;
 		const progress = remaining <= 0 || useQuantity ? 100 : Math.floor((current / target) * 100);
 		const amount = formatMoney(remaining);
 		const text = remaining <= 0 ? progressText : progressText.replace('#{remaining}', amount);
-		setState({...state, progress, text})
-	}, [props]);
+		setState({ progress, text });
+	}, [target, current, progressText, useQuantity]);
 
 	const totalDiscounted = items.reduce((n: any, { totalDiscountAmount }) => n + totalDiscountAmount, 0);
 
@@ -43,20 +46,5 @@ const CartDiscountMeter = (props) => {
 	);
 };
 
-CartDiscountMeter.propTypes = {
-	current: PropTypes.number,
-	target: PropTypes.number,
-	progressText: PropTypes.string,
-	useQuantity: PropTypes.bool,
-	items: PropTypes.array,
-};
-
-CartDiscountMeter.defaultProps = {
-	current: 0,
-	target: 0,
-	progressText: 'cartShippingMeter.inProgressText',
-	useQuantity: false,
-	items: [],
-};
 
 export default CartDiscountMeter;

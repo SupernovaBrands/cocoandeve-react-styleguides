@@ -488,16 +488,16 @@ export const CartItem = (props: CartItemProps) => {
 							)}
 					</div>
 
-					{isBundle && bundleItems && bundleItems.length > 0 && (
-						<ul className="flex flex-col gap-[.25rem] pt-1">
-							{bundleItems.map((bundleItem) => (
-								<li className="flex items-center gap-[.25rem]">
-									<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
-									<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
-								</li>
-							))}
-						</ul>
-					)}
+				{isBundle && bundleItems && bundleItems.length > 0 && (
+					<ul className="flex flex-col gap-[.25rem] pt-1">
+						{bundleItems.map((bundleItem, idx: number) => (
+							<li key={bundleItem?.merchandise?.id ?? idx} className="flex items-center gap-[.25rem]">
+								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
+								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+							</li>
+						))}
+					</ul>
+				)}
 
 					{(isLastStock) && (
 						<p className="mt-1 mb-0 text-danger">Oh nuts! You got the last one!</p>)}
