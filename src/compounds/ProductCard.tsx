@@ -275,11 +275,51 @@ const SwatchOverlay = memo((props: any) => {
         return initial;
     });
 
-    // Multi-tier: resolve variant from combined tier selections
+    // resolve multi tier shade so dark-ultra same as ultra-dark
     const resolvedMultiTierVariant = useMemo(() => {
         if (!isMultiTier || !props.swatch.tiers) return null;
-        return product?.variants?.nodes.find((v: any) =>
-            props.swatch.tiers.every((tier: any) =>
+        const tiers = props.swatch.tiers;
+        const nodes = product?.variants?.nodes || [];
+
+        if (tiers.length === 2) {
+            const val0 = tierSelections[tiers[0].optionName];
+            const val1 = tierSelections[tiers[1].optionName];
+
+            // Normalise: sort the two values so the canonical variant always has
+            // the alphabetically-smaller value in the first tier slot.
+            const canonicalSelections: Record<string, string> =
+                val0 <= val1
+                    ? { [tiers[0].optionName]: val0, [tiers[1].optionName]: val1 }
+                    : { [tiers[0].optionName]: val1, [tiers[1].optionName]: val0 };
+
+            const canonicalMatch = nodes.find((v: any) =>
+                tiers.every((tier: any) =>
+                    v.selectedOptions.some((o: any) =>
+                        o.name === tier.optionName && o.value === canonicalSelections[tier.optionName]
+                    )
+                )
+            ) || null;
+
+            if (canonicalMatch) return canonicalMatch;
+
+            // Fallback: if canonical variant doesn't exist, try the other direction
+            const fallbackSelections: Record<string, string> =
+                val0 <= val1
+                    ? { [tiers[0].optionName]: val1, [tiers[1].optionName]: val0 }
+                    : { [tiers[0].optionName]: val0, [tiers[1].optionName]: val1 };
+
+            return nodes.find((v: any) =>
+                tiers.every((tier: any) =>
+                    v.selectedOptions.some((o: any) =>
+                        o.name === tier.optionName && o.value === fallbackSelections[tier.optionName]
+                    )
+                )
+            ) || null;
+        }
+
+        // Non-2-tier fallback (exact match only)
+        return nodes.find((v: any) =>
+            tiers.every((tier: any) =>
                 v.selectedOptions.some((o: any) =>
                     o.name === tier.optionName && o.value === tierSelections[tier.optionName]
                 )
@@ -367,7 +407,8 @@ const SwatchOverlay = memo((props: any) => {
     }, [product, store, handleShade]);
 
     // Multi-tier: handler for individual tier swatch clicks
-    const changeTierSwatch = useCallback((optionName: string, value: string) => {
+    const changeTierSwatch = useCallback((optionName: string, value: string, isAvailable: boolean) => {
+        if (!isAvailable) return;
         setTierSelections((prev) => ({
             ...prev,
             [optionName]: value,
@@ -402,7 +443,7 @@ const SwatchOverlay = memo((props: any) => {
     let labelText = props.swatch.label;
     labelText = `<span class="lg:hidden">${labelText}</span><span class="hidden lg:inline">${labelText}</span>`;
 
-    if (product.handle === 'double-the-bronze-set') console.log('x', props.swatch);
+    // if (product.handle === 'test-double-the-bronze-set') console.log('x', product);
 
     return (
         <>
@@ -422,21 +463,39 @@ const SwatchOverlay = memo((props: any) => {
                                         const isSelected = tierSelections[tier.optionName] === item.label;
 
                                         // check availability of variant based on swatch
+                                        // Also check swapped combo for mirrored shade equivalence
                                         const simulatedSelections = { ...tierSelections, [tier.optionName]: item.label };
+                                        const tiers = props.swatch.tiers;
                                         const relativeVariant = props.swatch.data.find((v: any) =>
-                                            props.swatch.tiers.every((t: any) =>
+                                            tiers.every((t: any) =>
                                                 v.selectedOptions.some((o: any) =>
                                                     o.name === t.optionName && o.value === simulatedSelections[t.optionName]
                                                 )
                                             )
                                         );
-                                        const isAvailable = relativeVariant?.available ?? relativeVariant?.availableForSale ?? false;
+                                        // Check swapped variant availability too
+                                        let swappedVariant: any = null;
+                                        if (tiers.length === 2) {
+                                            const swappedSimulated: Record<string, string> = {
+                                                [tiers[0].optionName]: simulatedSelections[tiers[1].optionName],
+                                                [tiers[1].optionName]: simulatedSelections[tiers[0].optionName],
+                                            };
+                                            swappedVariant = props.swatch.data.find((v: any) =>
+                                                tiers.every((t: any) =>
+                                                    v.selectedOptions.some((o: any) =>
+                                                        o.name === t.optionName && o.value === swappedSimulated[t.optionName]
+                                                    )
+                                                )
+                                            ) || null;
+                                        }
+                                        const isAvailable = (relativeVariant?.available ?? relativeVariant?.availableForSale ?? false)
+                                            || (swappedVariant?.available ?? swappedVariant?.availableForSale ?? false);
                                         // console.log('isAvailable', isAvailable);
 
                                         return (
                                             <li key={`tier-${tierIdx}-${item.value}`} className={`w-auto product-variant-swatch__item ${isAvailable ? 'available' : 'oos'} ${isSelected ? 'active' : ''}`}>
                                                 <span
-                                                    onClick={() => changeTierSwatch(tier.optionName, item.label)}
+                                                    onClick={() => changeTierSwatch(tier.optionName, item.label, isAvailable)}
                                                     className={`block variant-swatch mx-auto border-2 ${isSelected ? 'border-primary' : 'border-white'} ${isAvailable ? 'available' : 'oos'} ${item.value.replace('&-', '').replace(':-limited-edition!', '')}`}
                                                 />
                                             </li>
