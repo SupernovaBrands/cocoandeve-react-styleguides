@@ -35,7 +35,7 @@ const ProductInfo = (props: any) => {
         bgColor,
         textColor,
         preOrderCtaLabel,
-        quickBuy,
+        // quickBuy,
         kitBuilder,
         getActiveWL,
         getId,
@@ -366,7 +366,7 @@ const ProductInfo = (props: any) => {
         if (typeof callback === 'function') {
             callback();
         }
-        if (!isDesktop && !quickBuy) {
+        if (!isDesktop) {
             setTimeout(() => {
                 const wrapper = document.querySelector('.modal__mini-pdp')?.closest('.fixed')
                 const el = (document.querySelector(`.modal__mini-pdp #accordion-${id}`) as HTMLDivElement)
@@ -417,7 +417,7 @@ const ProductInfo = (props: any) => {
     const [swatchAvailable, setSwatchAvailable] = useState(true);
 
     const changeSwatch = (e: any) => {
-        const el = quickBuy ? 'li' : 'span'
+        const el = 'span'
         const spanEls = e.target.closest('.product-variant-swatch').querySelectorAll(el);
         // console.log('spanEls', spanEls);
         spanEls.forEach((span: any) => {
@@ -425,7 +425,7 @@ const ProductInfo = (props: any) => {
             span.classList.add('border-white');
         });
         // console.log('e.target', e.target);
-        const target = quickBuy ? e.target.closest('li') : e.target
+        const target = e.target
         target.classList.remove('border-white');
         target.classList.add('border-primary');
         const targetText = target.getAttribute('data-val');
@@ -540,7 +540,7 @@ const ProductInfo = (props: any) => {
         setPlatform(os);
     }, []);
 
-    let imgWidth = quickBuy ? 'basis-[330px] w-[330px]' : 'basis-[240px] w-[240px]';
+    let imgWidth = 'basis-[240px] w-[240px]';
 
     return (
         <div ref={shippingEl} className={`modal-content modal-content--product-info bg-white px-0 rounded-[.5rem] lg:p-4 ${(!productShopify || !productStrapi) ? 'py-4 modal-content__loading' : 'pb-g pt-[50px] lg:pt-5'}`}>
@@ -564,9 +564,9 @@ const ProductInfo = (props: any) => {
                                                 const srcSet = slide.src.replace('_text_', `Slide ${index + 1}`);
                                                 let src = slide.src.replace('1140x1140', '614x614').replace('/public', '/592x').replace('_text_', `Slide ${index + 1}`);
 
-                                                if (quickBuy) {
-                                                    src = slide.src.replace('.jpg', '_660x688_crop_center.jpg').replace('/public', '/660x').replace('_text_', `Slide ${index + 1}`);
-                                                }
+                                                // if (quickBuy) {
+                                                //     src = slide.src.replace('.jpg', '_660x688_crop_center.jpg').replace('/public', '/660x').replace('_text_', `Slide ${index + 1}`);
+                                                // }
                                                 return (
                                                     <div className={`flex-grow-0 flex-shrink-0 ${imgWidth} pr-25 lg:pr-0 lg:basis-full lg:w-full`} key={index}>
                                                         <picture className="flex items-center justify-center">
@@ -692,7 +692,7 @@ const ProductInfo = (props: any) => {
                                 </>
                             )}
 
-                            {quickBuy && (
+                            {/* {quickBuy && (
                                 <div className="flex gap-g">
                                     <QuantityBox
                                         name="quantity-box"
@@ -705,7 +705,6 @@ const ProductInfo = (props: any) => {
                                     />
 
                                     <Button type="button" onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} disabled={!selectedVariant.availableForSale} buttonClass={`${bgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'border-primary bg-primary hover:bg-primary-dark'} ${textColor ? textColor : 'text-white'} w-full text-sm lg:text-base border flex ${addingItem ? 'justify-center' : 'justify-between'} px-g items-center product-form-submit__cta`}>
-                                        {/* { !addingItem && (selectedVariant.availableForSale ? 'Add To Cart' : 'Out of Stock') } */}
                                         {!addingItem && (
                                             <>
                                                 <span className="product-form-submit__cta-text">{pdpCtaLabel()}</span>
@@ -722,9 +721,9 @@ const ProductInfo = (props: any) => {
                                         {addingItem && <span className="spinner-border spinner-border-sm text-white ml-1 !w-[15px] !h-[15px]" role="status" />}
                                     </Button>
                                 </div>
-                            )}
+                            )} */}
 
-                            {!quickBuy && selectedVariant?.availableForSale && (
+                            {selectedVariant?.availableForSale && (
                                 <Button disabled={!selectedVariant?.availableForSale} onClick={directAddToCart ? () => addToCartHandle() : () => onAddItem()} buttonClass={`flex items-center justify-center h-[50px] inline-block w-auto min-w-[164px] product-card-btn border border-[transparent] lg:border-0 btn-sm md:text-base ${ctaBgColor === 'bg-dark' ? 'border-dark bg-dark hover:bg-dark' : 'btn-primary'} text-white rounded-none mb-1 lg:mb-2 sm:px-0 px-0 sm:flex-col sm:text-sm lg:justify-between lg:px-[2.8125rem] font-normal lg:min-w-[175px] ${selected.includes(selectedVariant?.id) ? 'opacity-[.6]' : ''}`}>
                                     {addingItem && <span className={`text-white spinner-border spinner-border-sm ml-1 !w-[15px] !h-[15px]`} role="status" />}
                                     {!addingItem && (

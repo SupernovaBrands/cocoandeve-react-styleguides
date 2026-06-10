@@ -426,7 +426,7 @@ const ProductCardButton = (props: any) => {
 }
 
 const ProductCard = (props: any) => {
-    const { quickBuy, kitBuilder, style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
+    const { kitBuilder, style, clickShowPopup, abtestBtn, smSingleStar, addToCart, trackEvent, carousel, eventNameOnClick, preOrders, generalSetting, label, store, smSingleStarAllDevice, sideUpsell, badge } = props;
     const { product } = props;
 
     const autoTicks = useMemo(
@@ -552,7 +552,7 @@ const ProductCard = (props: any) => {
                     ">Learn more</span>
                 )}
                 <ConditionalWrap
-                    condition={clickShowPopup && !quickBuy}
+                    condition={clickShowPopup}
                     wrap={children => <p role="button" className={`product-card--img block ${badge === false ? 'artical-detail' : ''}`} onClick={openModal}>{children}</p>}
                     elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}` : '#'} className="product-card--img block">{children}</a>}
                 >
@@ -619,7 +619,7 @@ const ProductCard = (props: any) => {
 
             {clickShowPopup && !kitBuilder && (
                 <p role="button" onClick={(e) => openModal(e)} className={`${badge === false ? 'artical-detail--link' : 'badge'} group text-xs lg:py-[6px] lg:px-[8px] py-0 px-0 flex mb-0 hover:text-primary lg:bg-white cursor-pointer absolute top-[.5rem] right-[1rem] lg:right-[1rem] lg:top-[10px] product-card__badge items-center leading-none`}>
-                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'} ${quickBuy ? 'lg:!hidden' : ''}`}>Details</span>
+                    <span className={`leading-none mr-[4px] ${badge === false ? 'hidden' : 'hidden lg:inline'}`}>Details</span>
                     <Eye className="h-[20px] lg:h-g w-[20px] lg:w-g block group-hover:hidden" />
                     <EyeHover className="h-[20px] lg:h-g w-[20px] lg:w-g hidden group-hover:block" />
                 </p>
@@ -638,7 +638,7 @@ const ProductCard = (props: any) => {
                 )}
                 <p className={`product-title__text ${!kitBuilder && props.product.bottomBadges ? 'pt-0' : 'pt-[.5rem] lg:pt-[1rem]'} lg:pb-[.25rem] pr-25 lg:pr-1 text-left grow flex flex-col items-start justify-center lg:justify-start h-100 ${props.shopArticle ? 'lg:min-h-[3.125em] lg:text-sm sm:text-lg leading-[1.25] lg:mb-[1rem!important] sm:mb-[10px!important]' : 'text-lg'} ${props.quizResult ? 'mb-0' : ''} ${props.carousel ? `${props.sustainability ? 'lg:min-h-[62.5px]' : ''} ${props.product.title.length > 40 ? 'lg:mx-0' : 'lg:mx-[0.625rem]'}` : 'px-0 lg:px-0'} ${props.quizResult ? '!min-h-0' : ''} ${props.homePage ? 'lg:min-h-[3.125em]' : ''} lg:min-h-[auto]`}>
                     <ConditionalWrap
-                        condition={clickShowPopup && !quickBuy}
+                        condition={clickShowPopup}
                         wrap={children => <span role="button" className="text-sm leading-[18px] hover:underline lg:text-base product-card__title text-body hover:text-body w-full mb-[3px]" onClick={openModal}>{children}</span>}
                         elseWrap={children => <a onClick={trackLink} href={props.product.handle ? `/products/${props.product.handle}?c=product-title` : '#'} className={`${props.shopArticle ? 'hover:text-body lg:text-sm sm:text-lg hover:[text-decoration-line:underline!important] [text-decoration-line:none!important]' : props.sideUpsell ? 'lg:text-[16px] text-[16px]' : 'text-sm lg:text-base'} leading-[18px] product-card__title text-body hover:text-body w-full mb-[3px]`}>{children}</a>}
                     >
