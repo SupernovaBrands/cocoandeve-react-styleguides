@@ -97,7 +97,7 @@ const Collection = (props: any) => {
         customProductTitle,
         childMenuData,
         byobBanner,
-        quickBuy,
+        // quickBuy,
     } = props;
 
     const {
@@ -692,9 +692,9 @@ const Collection = (props: any) => {
                                                     collectionTemplate={true}
                                                     store={store}
                                                     customProductTitle={customProductTitle}
-                                                    clickShowPopup={quickBuy}
+                                                    // clickShowPopup={quickBuy}
                                                     setProductData={setProductData}
-                                                    quickBuy={quickBuy}
+                                                    // quickBuy={quickBuy}
                                                 />
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
@@ -775,9 +775,9 @@ const Collection = (props: any) => {
                                                 collectionTemplate={true}
                                                 store={store}
                                                 customProductTitle={customProductTitle}
-                                                clickShowPopup={quickBuy}
+                                                // clickShowPopup={quickBuy}
                                                 setProductData={setProductData}
-                                                quickBuy={quickBuy}
+                                                // quickBuy={quickBuy}
                                             />
                                         )}
                                         {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
@@ -848,7 +848,7 @@ const Collection = (props: any) => {
                     <ModalWaitlist store={store} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} waitlistPdp={waitlistPdpSetting} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })} />
                 </Modal>
             )}
-            {!isLoading && quickBuy && (
+            {/* {!isLoading && quickBuy && (
                 <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
                     <ProductInfo
                         formatMoney={formatMoney}
@@ -877,7 +877,7 @@ const Collection = (props: any) => {
                         buildProductCardModel={buildProductCardModel}
                         handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
                 </Modal>
-            )}
+            )} */}
             {!isLoading && launchWL && (
                 <LaunchWaitlistModals
                     launchWL={launchWL}
