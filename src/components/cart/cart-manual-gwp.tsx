@@ -80,7 +80,7 @@ const CartManualGwp = (props:any) => {
 	return (
 			<div className="manual-gwp relative mt-4">
 				<p className="text-base font-bold mb-0">{title}</p>
-				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
+				<p className="text-base text-gray-600">{`${disableSelectItem ? 0 : selectedKey.length}/${maxSelected} item${(!disableSelectItem && selectedKey.length > 1) ? 's' : ''} selected`}</p>
 				{tierMessage && (
 					<p className="font-bold py-1 rounded text-primary text-sm">
 						{tierMessage}
@@ -142,7 +142,7 @@ const CartManualGwp = (props:any) => {
 										onClick={() => {
 											setShowMessage(true)
 										}}
-										buttonClass={`${!isSelected ? 'hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500' : ''} disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''} opacity-[.5]`}
+										buttonClass={`${!isSelected ? 'hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500' : ''} disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-white text-black hover:bg-black border-black' : ''} opacity-[.5]`}
 									>Add</Button>
 								)}
 							</li>
