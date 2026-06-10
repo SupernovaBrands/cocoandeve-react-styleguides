@@ -74,6 +74,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
     );
 
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const thumbScrollLock = useRef(false);
 
 	useEffect(() => {
 		setSelectedIndex(activeImageIndex);
@@ -106,6 +107,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	const onSelect = useCallback(() => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
+
+		if (thumbScrollLock.current) return;
+		
 		const index = emblaMainApi.selectedScrollSnap();
 		setSelectedIndex(index);
 		emblaThumbsApi.scrollTo(index);
@@ -157,6 +161,38 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
             stopVideoOnMove();
         }
     }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
+
+	useEffect(() => {
+		if (!emblaThumbsApi) return;
+
+		const viewport = emblaThumbsApi.rootNode();
+		if (!viewport) return;
+
+		const handleWheel = (e: WheelEvent) => {
+			if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+			e.preventDefault();
+
+			thumbScrollLock.current = true;
+			const viewport = emblaThumbsApi?.rootNode();
+
+			if (!viewport) return;
+
+			const speedFactor = 0.5;
+			viewport.scrollTop += e.deltaY * speedFactor;
+
+			clearTimeout((thumbScrollLock as any).t);
+
+			(thumbScrollLock as any).t = setTimeout(() => {
+				thumbScrollLock.current = false;
+			}, 150);
+		};
+
+		viewport.addEventListener('wheel', handleWheel, { passive: false });
+
+		return () => {
+			viewport.removeEventListener('wheel', handleWheel);
+		};
+	}, [emblaThumbsApi]);
 
 	const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
 

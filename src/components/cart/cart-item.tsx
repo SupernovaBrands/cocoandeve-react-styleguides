@@ -38,7 +38,7 @@ export const CartItem = (props:CartItemProps) => {
 
 	const { swatches, variants, selectedSwatch, attributes } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
-	const isMultiOptions = item.swatches.length > 1;
+	const isMultiOptions = item.swatches.length > 1 && !item.merchandise.product.isProductBundleApp?.value;
 
 	const componentsJson = attributes.find((attr) => attr.key === '_components')
 	const componentImage = attributes.find((attr) => attr.key === '_image')
@@ -103,7 +103,7 @@ export const CartItem = (props:CartItemProps) => {
 		}
 
 		const { swatches } = item;
-		if (swatches.length >= 2) {
+		if (swatches.length >= 2 && !item.merchandise.product.isProductBundleApp?.value) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
@@ -198,8 +198,31 @@ export const CartItem = (props:CartItemProps) => {
 		return () => {
 			active = false;
 		};
-	
+
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
+
+	const groupSwatches = (data) => {
+		if (!item.merchandise.product.isProductBundleApp?.value) {
+			return data;
+		}
+		const grouped = Object.values(
+			data.reduce((acc, item) => {
+				if (!acc[item.name]) {
+				acc[item.name] = { ...item };
+				} else {
+				// gabungkan id
+				acc[item.name].id += "|" + item.id;
+				// ambil intersection values
+				acc[item.name].values = acc[item.name].values.filter(v =>
+					item.values.includes(v)
+				);
+				}
+				return acc;
+			}, {})
+		);
+		return grouped;
+	}
+
 
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
@@ -286,24 +309,24 @@ export const CartItem = (props:CartItemProps) => {
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => (e.key === '_campaign_type' && ['auto_gwp', 'discount_code'].includes(e.value)) || e.key === '_free_sample') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
-								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon">
+								onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon a">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
 					{item.isFreeItem && item.attributes && item.attributes.findIndex((e:any) => e.key === '_swell_redemption_token') > -1 && (
 						<button className="cart-item__remove btn-unstyled text-body flex"
 								type="button" aria-label="Remove"
-								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+								onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon b">
 									<SvgTrash className="svg w-[1em]" />
 						</button>)}
 					{!item.isFreeItem && !isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
-						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+						onClick={() => onRemoveItem(item, item.attributes)} data-cy="cart-remove-icon c">
 							<SvgTrash className="svg w-[1em]" />
 					</button>)}
 
 					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
-						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
+						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon d">
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
@@ -323,8 +346,7 @@ export const CartItem = (props:CartItemProps) => {
 						</div>
 					)}
 				>
-
-					{swatches.map((opt:any, index:number) => {
+					{groupSwatches(swatches).map((opt:any, index:number) => {
 						const options = item.merchandise.selectedOptions.filter((option:any) => option.name.toLowerCase() !== 'size');
 						const selected = options.filter((option:any, ind:any) => option.name.toLowerCase() !== 'size' && index === ind)
 							.map((option:any) => option.value).join();
@@ -337,11 +359,11 @@ export const CartItem = (props:CartItemProps) => {
 								{isMultiOptions && itemSub && itemSub.split('///').map((sub:any, ind:number) => {
 									if (ind + 1 < itemSub.split('///').length) {
 										return (
-											<p className="font-size-sm mb-1 pb-1 border-b-[1px] border-bg-primary-light-second">{sub}</p>
+											<p key={ind} className="font-size-sm mb-1 pb-1 border-b-[1px] border-bg-primary-light-second">{sub}</p>
 										);
 									}
 									return (
-										<p className="font-size-sm mb-1 pb-1">{sub}</p>
+										<p key={ind} className="font-size-sm mb-1 pb-1">{sub}</p>
 									);
 								})}
 
@@ -449,8 +471,8 @@ export const CartItem = (props:CartItemProps) => {
 
 				{isBundle && bundleItems && bundleItems.length > 0 && (
 					<ul className="flex flex-col gap-[.25rem] pt-1">
-						{bundleItems.map((bundleItem) => (
-							<li className="flex items-center gap-[.25rem]">
+						{bundleItems.map((bundleItem, idx: number) => (
+							<li key={bundleItem?.merchandise?.id ?? idx} className="flex items-center gap-[.25rem]">
 								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
 								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
 							</li>

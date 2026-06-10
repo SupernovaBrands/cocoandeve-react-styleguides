@@ -16,6 +16,8 @@ import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import LaunchWaitList from "~/compounds/launch-waitlist";
 // import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
+import dynamic from "next/dynamic";
+const ProductInfo = dynamic(() => import('~/components/modal/ProductInfo'), { ssr: false });
 
 const QuizCardPlaceholder = (props) => {
     return props.split ? (
@@ -95,6 +97,26 @@ const Collection = (props: any) => {
         customProductTitle,
         childMenuData,
         byobBanner,
+        quickBuy,
+    } = props;
+
+    const {
+        formatMoney,
+        preOrderCtaLabel,
+        waitlistPdpStore,
+        strapiAutomateHardcode,
+        checkHardcodedImages,
+        checkHardcodedTitles,
+        checkHardcodedVariant,
+        checkHardcodedTagline,
+        checkHardcodedFaq,
+        checkHardcodedHowToUse,
+        ProductSettings,
+        BenefitIngredient,
+        HowToUse,
+        Faq,
+        FragranceNotes,
+        getActiveWL,
     } = props;
     // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -163,6 +185,7 @@ const Collection = (props: any) => {
         return handles.map((h) => ({ handle: h, title: h.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
     });
     const [defaultSort, setDefaultSort] = useState(sort);
+    const [platform, setPlatform] = useState('unknown');
 
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
@@ -352,6 +375,14 @@ const Collection = (props: any) => {
         setParentParam(params.get('p'));
     }, [handle]);
 
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null,
+        tab: null,
+        swatch: null
+    });
+
     useEffect(() => {
         if (!mainNav || mainNav.length === 0) {
             if (subHandles) {
@@ -415,6 +446,23 @@ const Collection = (props: any) => {
         else document.body.classList.remove('!overflow-y-hidden');
     }, [isOpen]);
 
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+        let detectedOS = 'unknown';
+
+        if (/windows/i.test(userAgent)) {
+            detectedOS = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            detectedOS = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            detectedOS = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            detectedOS = 'os-android';
+        }
+
+        setPlatform(detectedOS);
+    }, []);
+
     const footerCss = `
     .collection-footer__html p {
         margin-bottom: 1rem;
@@ -425,7 +473,7 @@ const Collection = (props: any) => {
     // console.log('byobBanner', showByobCard);
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
-            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white text-sm lg:text-base w-[135px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-2 lg:pr-[50px] [background-position:right_0_center]`} defaultValue={defaultSort}>
+            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select ${platform === 'os-win' ? 'pl-1 text-left lg:w-[150px]' : 'pl-0 text-right lg:w-[185px]'} bg-white text-sm lg:text-base w-[135px] min-h-[3.125em] indent-0 pr-2 lg:pr-[50px] [background-position:right_0_center]`} defaultValue={defaultSort}>
                 <option value="featured">Sort By</option>
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
@@ -435,8 +483,13 @@ const Collection = (props: any) => {
         </div>
     );
 
+    useEffect(() => {
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
+    }, [productData.open])
 
-    // console.log('sidebarMenu', sidebarMenu);
+    // console.log('collectionSettings', collectionSettings);
 
     const splitVersionCard = currentCollection?.handle === 'tan' ||
         !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
@@ -605,6 +658,7 @@ const Collection = (props: any) => {
                                                     <ProductCardKit
                                                         className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
+                                                        data={collectionSettings?.byobSetting}
                                                     />
                                                 )}
                                                 {collectionSettings.isLoading && (
@@ -634,6 +688,9 @@ const Collection = (props: any) => {
                                                     collectionTemplate={true}
                                                     store={store}
                                                     customProductTitle={customProductTitle}
+                                                    clickShowPopup={quickBuy}
+                                                    setProductData={setProductData}
+                                                    quickBuy={quickBuy}
                                                 />
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
@@ -651,8 +708,9 @@ const Collection = (props: any) => {
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.spf_cta_bg_color}
-                                                                    ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
+                                                                    ctaLabel={collectionSettings?.quizSetting?.spf_quiz_button_cta}
                                                                     splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.spf_quiz_subtitle_mobile || 'Find your SPF match in seconds'}
                                                                 />
                                                             )}
                                                             {(handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
@@ -668,19 +726,21 @@ const Collection = (props: any) => {
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.bfcm_cta_bg_color}
                                                                     splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.quiz_subtitle_mobile || 'Get matched in 90 seconds'}
                                                                 />
                                                             )}
                                                             <ProductCardQuiz
                                                                 className="relative"
-                                                                imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057"
+                                                                imgMb={collectionSettings?.byobSetting?.byob_image_mobile?.url?.replace('.jpg', '_x96.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056'}
+                                                                imgDt={collectionSettings?.byobSetting?.byob_image_desktop_split?.url?.replace('.jpg', '_417x.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057'}
                                                                 key={`collection-byob-card--${handle}--${index}`}
-                                                                href='/pages/build-your-own-bundle'
-                                                                ctaLabel='Get Started'
-                                                                heading='Build Your Own Bundle'
-                                                                title='Mix, match & save <br />up to 20% OFF!'
+                                                                href={collectionSettings?.byobSetting?.byob_url || '/pages/build-your-own-bundle'}
+                                                                ctaLabel={collectionSettings?.byobSetting?.byob_button_cta || 'Get Started'}
+                                                                heading={collectionSettings?.byobSetting?.byob_title || 'Build Your Own Bundle'}
+                                                                title={collectionSettings?.byobSetting?.byob_text || 'Mix, match & save <br />up to 20% OFF!'}
                                                                 store={store}
                                                                 ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                subtitleMobile={collectionSettings?.byobSetting?.byob_subtitle_mobile || 'Up to 20% OFF your routine'}
                                                             />
                                                         </div>
                                                     )}
@@ -711,6 +771,9 @@ const Collection = (props: any) => {
                                                 collectionTemplate={true}
                                                 store={store}
                                                 customProductTitle={customProductTitle}
+                                                clickShowPopup={quickBuy}
+                                                setProductData={setProductData}
+                                                quickBuy={quickBuy}
                                             />
                                         )}
                                         {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
@@ -719,6 +782,7 @@ const Collection = (props: any) => {
                                                     <ProductCardKit
                                                         className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
+                                                        data={collectionSettings?.byobSetting}
                                                     />
                                                 )}
                                                 {collectionSettings.isLoading && (
@@ -764,7 +828,7 @@ const Collection = (props: any) => {
                         {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
                         {!isLoading && (
                             <>
-                                <style jsx>{footerCss}</style>
+                                <style {...({jsx: true} as any)}>{footerCss}</style>
                                 <div
                                     className="collection-footer__html"
                                     dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}
@@ -778,6 +842,36 @@ const Collection = (props: any) => {
             {!isLoading && loadWaitlist && (
                 <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
                     <ModalWaitlist store={store} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} waitlistPdp={waitlistPdpSetting} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })} />
+                </Modal>
+            )}
+            {!isLoading && quickBuy && (
+                <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
+                    <ProductInfo
+                        formatMoney={formatMoney}
+                        quickBuy={quickBuy}
+                        addToCart={addToCart}
+                        directAddToCart={true}
+                        waitlistPdpStore={waitlistPdpStore}
+                        getActiveWL={getActiveWL}
+                        generalSetting={generalSetting}
+                        strapiAutomateHardcode={strapiAutomateHardcode}
+                        checkHardcodedImages={checkHardcodedImages}
+                        checkHardcodedTitles={checkHardcodedTitles}
+                        checkHardcodedVariant={checkHardcodedVariant}
+                        checkHardcodedTagline={checkHardcodedTagline}
+                        checkHardcodedFaq={checkHardcodedFaq}
+                        checkHardcodedHowToUse={checkHardcodedHowToUse}
+                        ProductSettings={ProductSettings}
+                        BenefitIngredient={BenefitIngredient}
+                        HowToUse={HowToUse}
+                        Faq={Faq}
+                        FragranceNotes={FragranceNotes}
+                        preOrderCtaLabel={preOrderCtaLabel}
+                        store={store}
+                        data={productData}
+                        preOrderSetting={preOrders}
+                        buildProductCardModel={buildProductCardModel}
+                        handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
                 </Modal>
             )}
             {!isLoading && launchWL && (

@@ -21,7 +21,7 @@ const CartShippingMeter = (props) => {
 	const remaining = target - current;
 	const progress = remaining <= 0 ? 100 : Math.floor((current / target) * 100);
 	const amount = formatMoney(remaining);
-	const text = remaining <= 0 ? finalText : progressText.replace('#{shipping_price}', amount).replace('#{amount}', amount);
+	const text = remaining <= 0 ? finalText : progressText?.replace('#{shipping_price}', amount).replace('#{amount}', amount);
 
 	return (
 		<div className="mt-1 border-b border-[#ADADAD] border-solid">

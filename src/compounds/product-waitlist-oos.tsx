@@ -115,10 +115,10 @@ const ProductWaitlist = (props: any) => {
 			data.formDescriptionThanks = props.vrt_waitlist_form_desc_thanks_cs;
 		} else if (wlTans.includes(props.handle)) {
 			data.formId = props.vrt_tan_smsbumpid;
-			data.waitlistTitle = props.vrt_waitlist_form_title;
-			data.formDescription = props.vrt_waitlist_form_description;
-			data.titleThanks = props.vrt_waitlist_form_title_thanks;
-			data.formDescriptionThanks = props.vrt_waitlist_form_description_thanks;
+			data.waitlistTitle = props.vrt_waitlist_form_title_tan;
+			data.formDescription = props.vrt_waitlist_form_description_tan;
+			data.titleThanks = props.vrt_waitlist_form_title_thanks_tan;
+			data.formDescriptionThanks = props.vrt_waitlist_form_desc_thanks_tan;
 		} else if (wlWrap.includes(props.handle)){
 			data.formId = props.vrt_wrap_smsbumpid;
 			data.waitlistTitle = props.vrt_waitlist_form_title_wrap;

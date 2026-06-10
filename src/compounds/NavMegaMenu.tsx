@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getFeaturedImages } from '~/modules/utils';
 
 const NavMegaMenu = (props: any) => {
     const { handle, listIds, dummy, store, getFeaturedImgMeta, cache } = props;

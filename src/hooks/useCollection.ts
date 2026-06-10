@@ -42,6 +42,7 @@ export const useCollectionSettings = (handle: string, store: string) => {
 	let filterCollectionHandles = data?.filter_collections_handles
 	filterCollectionHandles = filterCollectionHandles?.replace('hair', 'hair,hair-benefits');
 	const quizSetting = data?.quiz_collection;
+	const byobSetting = data?.byob_collection;
 
 	return {
 		error,
@@ -51,5 +52,6 @@ export const useCollectionSettings = (handle: string, store: string) => {
 		isLoading,
 		store,
 		quizSetting,
+		byobSetting,
 	}
 };

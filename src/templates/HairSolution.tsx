@@ -14,7 +14,11 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 import {
 	PrevButton,
 	NextButton,
+    controlAutoplay,
+    usePrevNextButtons
 } from '~/components/carousel/EmblaCarouselArrowButtons';
+import Autoplay from 'embla-carousel-autoplay';
+import PostCard from "~/compounds/PostCard";
 // import { PRODUCTS } from '~/modules/dummy_products';
 // import { VIDEOS } from '~/modules/dummy_videos';
 import VideoUpsellCard from '~/components/VideoUpsellCard';
@@ -31,7 +35,7 @@ const HairSolution = (props: any) => {
         generalSetting, addToCart, trackEvent, trackBluecoreEvent,
         strapiAutomateHardcode, checkHardcodedImages, checkHardcodedTitles,
         checkHardcodedVariant, checkHardcodedTagline, checkHardcodedFaq,
-        checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, FragranceNotes, buildProductCardModel
+        checkHardcodedHowToUse, BenefitIngredient, HowToUse, Faq, FragranceNotes, buildProductCardModel, blogCarouselArticles
     } = props;
     const [activeTab, setActiveTab] = useState(0);
     const [productTab, setProductTab] = useState(0);
@@ -220,6 +224,21 @@ const HairSolution = (props: any) => {
 
     const filteredProductRows = data.product.rows?.filter(row => !(row.title === 'Oily Scalp' && store === 'au'));
 
+    let extendedPostData = [...blogCarouselArticles];
+	if (extendedPostData.length < 3) {
+		const postItems = 4 - extendedPostData.length;
+		extendedPostData = extendedPostData.concat(extendedPostData.slice(0, postItems));
+	}
+
+    const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+        Autoplay({ playOnInit: false, delay: 3000 })
+    ]);
+    const {
+        onPrevButtonClick: arrowClickPrev,
+        onNextButtonClick: arrowClickNext
+    } = usePrevNextButtons(emblaApi);
+    const autoPlayClick = controlAutoplay(emblaApi);
+
     return (
         <>
             {(!data.banner.image_d || !data.banner.image_m) && (
@@ -251,7 +270,7 @@ const HairSolution = (props: any) => {
             )}
             <div className={`flex flex-col`}>
             {data.range && (
-                <section className={`mt-3 mb-0 lg:mb-0 ${props.sectionTest ? 'order-2 !mb-0 lg:mt-2' : 'lg:mt-4'}`}>
+                <section className={`mt-3 mb-0 lg:mb-0 order-2 lg:mt-5`}>
                     <div className="container">
                         <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl"
                             dangerouslySetInnerHTML={{
@@ -278,13 +297,15 @@ const HairSolution = (props: any) => {
                                 wrap={children => <TabContent active={activeTab === index}>{children}</TabContent>}
                                 elseWrap={children => (
                                     <div className={`accordion-item border-t border-b border-gray-500`}>
-                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center ${openIndex === index ? `pt-2 md:pt-[1.875rem] pb-2` : 'py-2 md:py-[1.875rem]'} ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
+                                        <div id={`accordion-${index}`} className={`cursor-pointer flex w-full justify-between items-center py-2 md:py-[1.875rem] ${openIndex === index ? 'border-gray-500 accordion-opened' : ''}`} onClick={() => onClick(index)}>
                                             <strong className="text-body no-underline leading-[17px]">{row.title}</strong>
                                             { openIndex === index && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                             { openIndex !== index && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
                                         </div>
                                         <div className={`accordion-content ${openIndex === index ? 'accordion-content--open' : 'accordion-content--close'}`}>
-                                            {children}
+                                            <div className="accordion-content__inner">
+                                                {children}
+                                            </div>
                                         </div>
                                     </div>
                                 )}
@@ -318,7 +339,7 @@ const HairSolution = (props: any) => {
             {data.product && filteredProductRows && filteredProductRows.length > 0 && (
                 <section className={`my-3 lg:mt-5 lg:mb-5 order-0`}>
                     <div className="container px-0 lg:px-g">
-                        <h3 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
+                        <h2 className="text-center text-xl mb-g lg:mb-[1rem] lg:text-2xl" dangerouslySetInnerHTML={{
                             __html: data.product.title
                         }} />
                         <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0">
@@ -510,7 +531,7 @@ const HairSolution = (props: any) => {
             )} */}
 
             {data.result && (
-                <section className={`my-3 lg:mb-4 lg:mt-0 container px-0 ${props.sectionTest ? 'lg:mt-5' : ''}`}>
+                <section className={`my-3 lg:mb-5 lg:mt-0 container px-0 lg:mt-5`}>
                     <h5 className="text-xl lg:text-2xl mb-g font-bold text-center">{data.result.title}</h5>
                     <div className="product__carousel-nav-container flex lg:justify-between lg:items-center container px-0 pb-[1rem] lg:pb-3 lg:px-g">
                         <ul className="product__carousel-nav list-style-none mx-auto lg:mx-0 flex flex-nowrap overflow-scroll lg:overflow-hidden hide-scrollbar lg:flex-wrap border-b-0 text-center justify-start px-g lg:px-0">
@@ -586,6 +607,42 @@ const HairSolution = (props: any) => {
                     </div>
                 </section>
             )}
+
+            <div className="my-3 lg:mb-5 lg:mt-0 container px-0 lg:mt-5">
+                <div className="container px-0 m-0">
+                    <h2 className="text-center text-xl mb-3 lg:mb-[1rem] lg:text-2xl">Hair Care Decoded</h2>
+                    {blogCarouselArticles.length > 0 &&
+                        <Carousel.Wrapper emblaApi={emblaApi} className="blog-post__carousel w-full px-hg lg:px-g mx-0">
+                            <Carousel.Inner emblaRef={emblaRef}>
+                                {extendedPostData.map((data, index) => (
+                                    <PostCard showSubtext={true} readMoreLink={true} carousel={true} key={index} textClass="flex-grow" fontWeight="font-bold" badgePadding="py-[6px] px-[12px] text-xs lg:text-sm" figcaptionPadding="p-[1rem]" pictureClass="blog-carousel__image embed-responsive m-0" className="flex-shrink-0 w-[335px] basis-[335px] px-[.375em] lg:px-[.5rem] lg:w-1/2 lg:basis-1/2" textPrimary={false} template="blog" data={data} bgColor={generalSetting?.bfcm_cta_bg_color} textColor={generalSetting?.bfcm_cta_text_color} store={store} />
+                                ))}
+                            </Carousel.Inner>
+                            <Carousel.Navigation>
+                                <PrevButton
+                                    onClick={() => autoPlayClick(arrowClickPrev)}
+                                    className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+                                >
+                                    <span className="absolute z-[1] flex justify-center items-center lg:-left-[2em] h-5 w-5 rounded-full">
+                                        <ChevronPrev className="svg--current-color w-g h-g" />
+                                    </span>
+                                </PrevButton>
+                                <NextButton
+                                    onClick={() => autoPlayClick(arrowClickNext)}
+                                    className="lg:w-auto lg:h-0 hidden lg:flex top-[9.3125em]"
+                                >
+                                    <span className="absolute z-[1] flex justify-center items-center lg:-right-[2em] h-5 w-5 rounded-full">
+                                        <ChevronNext className="svg--current-color w-g h-g" />
+                                    </span>
+                                </NextButton>
+                            </Carousel.Navigation>
+                        </Carousel.Wrapper>
+                    }
+                </div>
+                {/* {popularArticles.length > 0 &&<ArticleRecommendation popularArticles={popularArticles} />} */}
+                <div id="poppularArticles" className="container"></div>
+                <div id="topPostCard" className="px-g blog-post__cards flex flex-wrap mb-0 mt-0 w-full"></div>
+            </div>
             <Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({...waitlistData, ...{ open: false }})}>
                 <ModalWaitlist waitlistPdp={waitlistPdp} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({...waitlistData, open: false })} />
         	</Modal>

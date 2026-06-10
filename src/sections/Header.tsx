@@ -111,20 +111,15 @@ const Header = (props: any) => {
 	const accountRef = useRef(null);
 
 	const handleScroll = useCallback(() => {
-		if (disabledScroll) return;
+		if (disabledScroll || openSearchBox) return;
 
 		const scrollTop = window.scrollY;
-		if (!openSearchBox) {
-			if (scrollTop > 0 && !scrolled && headerRef.current) {
-				const h = headerRef.current.offsetHeight;
-				headerHeightRef.current = h;
-				setHeaderHeight(h);
-			}
-			setScrolled(scrollTop > 0);
-		} else {
-			setScrolled(false);
-			setHeaderHeight(0);
+		if (scrollTop > 0 && !scrolled && headerRef.current) {
+			const h = headerRef.current.offsetHeight;
+			headerHeightRef.current = h;
+			setHeaderHeight(h);
 		}
+		setScrolled(scrollTop > 0);
 	}, [openSearchBox, disabledScroll, scrolled]);
 
 	useEffect(() => {
@@ -216,6 +211,12 @@ const Header = (props: any) => {
 	useEffect(() => {
 		if (isLoggedIn && addingReward) setUserPts(-1);
 	}, [addingReward]);
+
+	useEffect(() => {
+		// console.log('props open searchbox', openSearchBox);
+		if (openSearchBox) document.body.classList.add('!overflow-y-hidden');
+		else document.body.classList.remove('!overflow-y-hidden');
+	}, [openSearchBox]);
 
 	return (
 		<>
