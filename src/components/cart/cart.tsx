@@ -323,7 +323,7 @@ const Cart: React.FC<Props> = (props) => {
 		return acc;
 	}, []);
 
-	// console.log('mappedItems', mappedItems);
+	// console.log('manualGwpSetting', manualGwpSetting);
 
 
 	return (
@@ -391,7 +391,7 @@ const Cart: React.FC<Props> = (props) => {
 							</div>
 
 							{manualGwpSetting && manualGwpSetting.enabled && (
-								<div className="px-g lg:px-3 pt-3 hidden lg:block">
+								<div className="px-g lg:px-3 pt-3">
 									<hr />
 									<CartManualGwp {...manualGwpSetting}
 										onAddItem={onToggleManualGwp}
@@ -450,7 +450,7 @@ const Cart: React.FC<Props> = (props) => {
 										<CartManualGwp {...manualGwpSetting}
 											maxSelected={manualGwpSetting?.maxSelected}
 											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
-											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 || manualGwpSetting?.disableSelectItem ? true : false }
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
 										/>
