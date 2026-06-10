@@ -98,7 +98,7 @@ const CartManualGwp = (props:any) => {
 						</button>
 					</>
 				)}
-				<ul className="list-unstyled manual-gwp__container flex text-center mt-[1rem] mb-4 lg:mb-[60px]" ref={scrollRef}>
+				<ul className="list-unstyled manual-gwp__container flex text-center mt-[1rem] mb-2" ref={scrollRef}>
 					{items?.filter((item) => item?.variantId !== '' && item?.handle !== '' && item?.enabledItem)?.map((item:any, index:number) => {
 						const isLoading = adding && processingId === item.id;
 						const isSelected = !!(selectedKey && selectedKey.find((key:any) => isItemIdInKey(key, item.id)));
