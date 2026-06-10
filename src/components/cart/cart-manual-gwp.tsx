@@ -142,7 +142,7 @@ const CartManualGwp = (props:any) => {
 										onClick={() => {
 											setShowMessage(true)
 										}}
-										buttonClass={`${!isSelected ? 'hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500' : ''} disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-white text-black hover:bg-black border-black' : ''} opacity-[.5]`}
+										buttonClass={`hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500 disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 opacity-[.5]`}
 									>Add</Button>
 								)}
 							</li>
