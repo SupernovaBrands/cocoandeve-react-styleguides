@@ -31,9 +31,13 @@ const CartManualGwp = (props:any) => {
 		}
 	}, [props])
 
+	// Only clear optimistic state when no operation is in progress
+	// This prevents stale manualGwpPrepare from resetting the UI mid-operation
 	useEffect(() => {
-		setOptimisticSelected(null);
-	}, [selectedKey]);
+		if (!adding) {
+			setOptimisticSelected(null);
+		}
+	}, [selectedKey, adding]);
 
 
 	const scroll = (direction:any) => {
