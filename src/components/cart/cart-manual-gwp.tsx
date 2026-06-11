@@ -167,7 +167,7 @@ const CartManualGwp = (props:any) => {
 				})}
 			</ul>
 			{/* {disableSelectItem && <hr />} */}
-			{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">{errorMessage}</p>}
+			{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1 -mx-1 lg:mx-0">{errorMessage}</p>}
 		</div>
 	);
 }
