@@ -90,7 +90,7 @@
         @apply border-t border-b w-auto h-auto me-25 py-[6px] flex-1 basis-auto lg:min-h-4 lg:flex lg:grow-0 lg:items-center lg:justify-end pr-g pl-1 bg-none rounded-none lg:py-[.5rem] lg:px-[1rem];
 
         &:after {
-            @apply w-[24px] left-[12.5px] lg:w-3;
+            @apply w-[24px] left-[9.5px] lg:left-[12.5px] lg:w-3;
         }
 
         &:before {
