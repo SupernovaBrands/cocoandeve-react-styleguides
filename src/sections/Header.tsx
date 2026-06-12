@@ -329,7 +329,7 @@ const Header = (props: any) => {
 									onMouseEnter={() => handleNavMegaEnter(item.megaMenu?.type || null)}
 									onMouseLeave={handleNavMegaLeave}
 								>
-									<a href={item.url || '#'} className="inline-block no-underline m-0 text-body font-bold py-[.375em] hover:no-underline hover:text-primary">{item.label}</a>
+									<a href={item.url || '#'} className={`inline-block no-underline m-0 font-bold py-[.375em] hover:no-underline hover:text-primary ${hoveredNav === item.megaMenu?.type ? 'text-primary' : 'text-body'}`}>{item.label}</a>
 								</li>
 							))}
 						</ul>
