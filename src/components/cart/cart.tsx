@@ -121,9 +121,9 @@ const Cart: React.FC<Props> = (props) => {
 
 			// validate for OOS item in cart
 			// console.log('manualGwpBuyItems', manualGwpBuyItems);
-			const gwpBuyItemInCarts = cartData.lines.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
+			const gwpBuyItemInCarts = cartData.lines?.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
 			if (gwpBuyItemInCarts.length === 0) {
-				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
+				const manualGwpItems = cartData.lines?.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
 				if (manualGwpItems.length > 0) {
 					manualGwpItems.forEach((item: any) => {
 						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id) && manualGwpBuyItems !== '') {
@@ -135,7 +135,7 @@ const Cart: React.FC<Props> = (props) => {
 					});
 				}
 			}
-			const oosInCarts = cartData.lines.filter((line: any) => !line.merchandise.availableForSale);
+			const oosInCarts = cartData.lines?.filter((line: any) => !line.merchandise.availableForSale);
 			if (oosInCarts.length > 0) {
 				oosInCarts.forEach((item: any) => {
 					onRemoveItem(item, []);
