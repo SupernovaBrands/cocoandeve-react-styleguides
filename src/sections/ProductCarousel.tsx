@@ -333,7 +333,7 @@ const ProductCarousel = (props: any) => {
 			<Modal className="modal-lg lg:max-w-[43.125rem] modal-dialog-centered" isOpen={waitlistData.open} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })}>
 				<ModalWaitlist waitlistPdp={waitlistPdpSetting} store={store} data={waitlistData} trackBluecoreEvent={trackBluecoreEvent} handleClose={() => setWaitlistData({ ...waitlistData, open: false })} />
 			</Modal>
-			{quickBuy && (
+			{/* {quickBuy && (
 				<Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
 					<ProductInfo
 						preOrderCtaLabel={preOrderCtaLabel}
@@ -362,7 +362,7 @@ const ProductCarousel = (props: any) => {
 						buildProductCardModel={buildProductCardModel}
 						handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
 				</Modal>
-			)}
+			)} */}
 		</>
 	);
 };
