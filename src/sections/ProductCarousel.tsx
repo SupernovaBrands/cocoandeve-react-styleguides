@@ -38,26 +38,26 @@ const ProductCarousel = (props: any) => {
 		date: '',
 	});
 
-	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, quickBuy, hpTabProducts } = props;
-	const {
-		formatMoney,
-		preOrderCtaLabel,
-		buildProductCardModel,
-		waitlistPdpStore,
-		strapiAutomateHardcode,
-		checkHardcodedImages,
-		checkHardcodedTitles,
-		checkHardcodedVariant,
-		checkHardcodedTagline,
-		checkHardcodedFaq,
-		checkHardcodedHowToUse,
-		ProductSettings,
-		BenefitIngredient,
-		HowToUse,
-		Faq,
-		FragranceNotes,
-		getActiveWL
-	} = props;
+	const { homePage, productPage, customProductTitle, waitlistPdpSetting, store, isStyleguide, products, data, addToCart, trackEvent, trackBluecoreEvent, preOrders, generalSetting, hpTabProducts } = props;
+	// const {
+	// 	formatMoney,
+	// 	preOrderCtaLabel,
+	// 	buildProductCardModel,
+	// 	waitlistPdpStore,
+	// 	strapiAutomateHardcode,
+	// 	checkHardcodedImages,
+	// 	checkHardcodedTitles,
+	// 	checkHardcodedVariant,
+	// 	checkHardcodedTagline,
+	// 	checkHardcodedFaq,
+	// 	checkHardcodedHowToUse,
+	// 	ProductSettings,
+	// 	BenefitIngredient,
+	// 	HowToUse,
+	// 	Faq,
+	// 	FragranceNotes,
+	// 	getActiveWL
+	// } = props;
 	let productsData = data;
 	if (isStyleguide && !data) {
 		productsData = {
@@ -213,9 +213,9 @@ const ProductCarousel = (props: any) => {
 											store={store}
 											customProductTitle={customTitle}
 											isAboveFold={isAboveFold}
-											clickShowPopup={quickBuy}
+											// clickShowPopup={quickBuy}
 											setProductData={setProductData}
-											quickBuy={quickBuy}
+											// quickBuy={quickBuy}
 										/>
 									})}
 								</Carousel.Inner>
