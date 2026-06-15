@@ -134,7 +134,7 @@ const CartManualGwp = (props:any) => {
 							{!disableSelectItem && (
 								<Button
 									lg={false}
-									buttonClass={`${!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-body btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white hover:bg-body' : ''}`}
+									buttonClass={`btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white' : ''} ${adding ? 'pointer-events-none' : (!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : 'hover:bg-body')}`}
 									onClick={() => {
 										if (!adding) {
 											if (isSelected) {
