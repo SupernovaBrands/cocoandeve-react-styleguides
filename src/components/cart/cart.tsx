@@ -291,7 +291,7 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData?.lines]);
 
-	const mappedItems = cart.items.reduce((acc, item) => {
+	const mappedItems = (cart.items || []).reduce((acc, item) => {
 		const bundleGroup = item.attributes.find(attr => attr.key === '_make_your_own_kit_group')?.value;
 
 		if (bundleGroup) {
