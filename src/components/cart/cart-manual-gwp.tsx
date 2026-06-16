@@ -11,7 +11,8 @@ const CartManualGwp = (props:any) => {
 	const [showScroll, setShowScroll] = useState(false);
 	const scrollRef = useRef(null);
 	const [adding, setAdding] = useState(false);
-	const [processingId, setProcessingId] = useState([]);
+	const [processingId, setProcessingId] = useState(null);
+	const [optimisticSelected, setOptimisticSelected] = useState(null);
 	const [showMessage, setShowMessage] = useState(false);
 	const {
 		title,
@@ -23,12 +24,20 @@ const CartManualGwp = (props:any) => {
 		disableSelectItem,
 		errorMessage
 	} = props;
-	
+
 	useEffect(() => {
 		if (items?.length > 3) {
 			setShowScroll(true);
 		}
 	}, [props])
+
+	// Only clear optimistic state when no operation is in progress
+	// This prevents stale manualGwpPrepare from resetting the UI mid-operation
+	useEffect(() => {
+		if (!adding) {
+			setOptimisticSelected(null);
+		}
+	}, [selectedKey, adding]);
 
 
 	const scroll = (direction:any) => {
@@ -41,6 +50,12 @@ const CartManualGwp = (props:any) => {
 	const markText = (price:any,compare:any) => ({ __html: `Worth ${compare && <del>{compare}</del>} ${price}` });
 
 	const removeItem = async (id:any) => {
+		if (adding) return;
+
+		const currentGifts = [...(selectedKey || [])];
+		const newSelected = currentGifts.filter((key: any) => !isItemIdInKey(key, id));
+		setOptimisticSelected(newSelected);
+
 		setAdding(true);
 		setProcessingId(id);
 		await onRemoveItem(id);
@@ -54,16 +69,17 @@ const CartManualGwp = (props:any) => {
 			return;
 		}
 
+		if (adding) return;
+
+		const currentGifts = [...(selectedKey || [])];
+		const newSelected = [...currentGifts, `${id}`];
+		while (newSelected.length > maxSelected) {
+			newSelected.shift();
+		}
+		setOptimisticSelected(newSelected);
+
 		setAdding(true);
 		setProcessingId(id);
-
-		const maxAllowedGifts = maxSelected;
-		const currentGifts = selectedKey || [];
-
-		if (currentGifts.length >= maxAllowedGifts) {
-			const giftToRemove = currentGifts[0];
-			await onRemoveItem(giftToRemove);
-		}
 
 		await onAddItem(id);
 
@@ -78,80 +94,81 @@ const CartManualGwp = (props:any) => {
 	}, [disableSelectItem]);
 
 	return (
-			<div className="manual-gwp relative mt-4">
-				<p className="text-base font-bold mb-0">{title}</p>
-				<p className="text-base text-gray-600">{`${selectedKey.length}/${maxSelected} item${selectedKey.length > 1 ? 's' : ''} selected`}</p>
-				{tierMessage && (
-					<p className="font-bold py-1 rounded text-primary text-sm">
-						{tierMessage}
-					</p>
-				)}
-				{showScroll && (
-					<>
-						<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
-							<SvgChevronPrev className="svg h-[20px]" />
-							<span className="hidden">Left</span>
-						</button>
-						<button className={`absolute btn-unstyled text-primary manual-gwp__right ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('right')}>
-							<SvgChevronNext className="svg h-[20px]" />
-							<span className="hidden">Right</span>
-						</button>
-					</>
-				)}
-				<ul className="list-unstyled manual-gwp__container flex text-center mt-[1rem] mb-4 lg:mb-[60px]" ref={scrollRef}>
-					{items?.filter((item) => item?.variantId !== '' && item?.handle !== '' && item?.enabledItem)?.map((item:any, index:number) => {
-						const isLoading = adding && processingId === item.id;
-						const isSelected = !!(selectedKey && selectedKey.find((key:any) => isItemIdInKey(key, item.id)));
-						return (
-							<li key={`${item.id}-${index}`} className="manual-gwp__item flex flex-col mr-2 w-[6em] relative max-w-[6em]">
-								<figure className="mb-0">
-									<picture className="block">
-										<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
-									</picture>
-									{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
-									<figcaption className="relative gap-[2px] -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
-										Worth {item.price}
-									</figcaption>
-								</figure>
-								<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
-								{!disableSelectItem && (
-									<Button
-										lg={false}
-										buttonClass={`${!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : ''} disabled:hover:bg-transparent disabled:hover:text-body btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white hover:bg-body' : ''}`}
-										onClick={() => {
-											if (!adding) {
-												if (isSelected) {
-													removeItem(item.variantId || item.id);
-												} else {
-													addItem(item.variantId || item.id);
-												}
+		<div className="manual-gwp relative mt-4">
+			<p className="text-base font-bold mb-0">{title}</p>
+			<p className="text-base text-gray-600">{`${disableSelectItem ? 0 : (optimisticSelected || selectedKey).length}/${maxSelected} item${(!disableSelectItem && (optimisticSelected || selectedKey).length > 1) ? 's' : ''} selected`}</p>
+			{tierMessage && (
+				<p className="font-bold py-1 rounded text-primary text-sm">
+					{tierMessage}
+				</p>
+			)}
+			{showScroll && (
+				<>
+					<button className={`absolute btn-unstyled text-primary manual-gwp__left ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('left')}>
+						<SvgChevronPrev className="svg h-[20px]" />
+						<span className="hidden">Left</span>
+					</button>
+					<button className={`absolute btn-unstyled text-primary manual-gwp__right ${showScroll ? '' : 'hidden'}`} aria-hidden="true" type="button" onClick={() => scroll('right')}>
+						<SvgChevronNext className="svg h-[20px]" />
+						<span className="hidden">Right</span>
+					</button>
+				</>
+			)}
+			<ul className="list-unstyled manual-gwp__container flex text-center mt-[1rem] mb-2" ref={scrollRef}>
+				{items?.filter((item) => item?.variantId !== '' && item?.handle !== '' && item?.enabledItem)?.map((item: any, index: number) => {
+					const isLoading = adding && processingId === item.id;
+					const displaySelected = optimisticSelected || selectedKey;
+					const isSelected = !!(displaySelected && displaySelected.find((key: any) => isItemIdInKey(key, item.id)));
+					return (
+						<li key={`${item.id}-${index}`} className="manual-gwp__item flex flex-col mr-2 w-[6em] relative max-w-[6em]">
+							<figure className="mb-0">
+								<picture className="block">
+									<img src={item.image} alt={item.title} className="w-full overflow-hidden rounded-full" loading="lazy" />
+								</picture>
+								{/* {item.price && item.price !== '$0' && item.price !== '0' && <figcaption className="relative -mt-1 bg-gray-400 text-xs rounded-h" dangerouslySetInnerHTML={markText(item.price)} />} */}
+								<figcaption className="relative gap-[2px] -mt-1 bg-gray-400 text-xs rounded-h min-h-[20px] flex items-center justify-center">
+									Worth {item.price}
+								</figcaption>
+							</figure>
+							<p className="grow my-1 text-sm h-full font-bold">{item.label}</p>
+							{!disableSelectItem && (
+								<Button
+									lg={false}
+									buttonClass={`btn-outline-body p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-body text-white' : ''} ${adding ? 'pointer-events-none' : (!isSelected ? 'hover:text-body hover:bg-transparent lg:hover:bg-body lg:hover:text-white' : 'hover:bg-body')}`}
+									onClick={() => {
+										if (!adding) {
+											if (isSelected) {
+												removeItem(item.variantId || item.id);
+											} else {
+												addItem(item.variantId || item.id);
 											}
-										}}
-										disabled={adding}
-										data-cy="cart-addfreegift-btn"
-									>
-										{isLoading && (
-											<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
-										)}
-										{!isLoading && (isSelected ? 'Remove' : 'Add')}
-									</Button>
-								)}
-								{disableSelectItem && (
-									<Button
-										lg={false}
-										onClick={() => {
-											setShowMessage(true)
-										}}
-										buttonClass={`${!isSelected ? 'hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500' : ''} disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 ${isSelected || isLoading ? 'bfcm-btn--selected bg-primary text-white hover:bg-primary' : ''} opacity-[.5]`}
-									>Add</Button>
-								)}
-							</li>
-						);
-					})}
-				</ul>
-				{/* {disableSelectItem && <hr />} */}
-				{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1">{errorMessage}</p>}
-			</div>
+										}
+									}}
+									disabled={adding}
+									data-cy="cart-addfreegift-btn"
+								>
+									{isLoading && (
+										<span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
+									)}
+									{!isLoading && (isSelected ? 'Remove' : 'Add')}
+								</Button>
+							)}
+							{disableSelectItem && (
+								<Button
+									lg={false}
+									onClick={() => {
+										setShowMessage(true)
+									}}
+									buttonClass={`hover:text-gray-500 hover:bg-transparent lg:hover:bg-white lg:hover:text-gray-500 disabled:hover:bg-transparent disabled:hover:text-gray-500 btn-outline-gray-500 p-1 opacity-[.5]`}
+								>Add</Button>
+							)}
+						</li>
+					);
+				})}
+			</ul>
+			{/* {disableSelectItem && <hr />} */}
+			{showMessage && <p className="text-primary mt-1 text-[14px] text-center mb-1 -mx-1 lg:mx-0">{errorMessage}</p>}
+		</div>
 	);
 }
 

@@ -100,9 +100,9 @@ const Cart: React.FC<Props> = (props) => {
 
 			// validate for OOS item in cart
 			// console.log('manualGwpBuyItems', manualGwpBuyItems);
-			const gwpBuyItemInCarts = cartData.lines.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle));
+			const gwpBuyItemInCarts = cartData.lines?.filter((line: any) => manualGwpBuyItems.includes(line.merchandise.product.handle)) || [];
 			if (gwpBuyItemInCarts.length === 0) {
-				const manualGwpItems = cartData.lines.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp'));
+				const manualGwpItems = cartData.lines?.filter((line: any) => line.attributes.find((attribute: any) => attribute.key === '_campaign_type' && attribute.value === 'manual_gwp')) || [];
 				if (manualGwpItems.length > 0) {
 					manualGwpItems.forEach((item: any) => {
 						if (!invalidGiftsToDelete.find((invalidId) => invalidId.id === item.id) && manualGwpBuyItems !== '') {
@@ -114,7 +114,7 @@ const Cart: React.FC<Props> = (props) => {
 					});
 				}
 			}
-			const oosInCarts = cartData.lines.filter((line: any) => !line.merchandise.availableForSale);
+			const oosInCarts = cartData.lines?.filter((line: any) => !line.merchandise.availableForSale) || [];
 			if (oosInCarts.length > 0) {
 				oosInCarts.forEach((item: any) => {
 					onRemoveItem(item, []);
@@ -250,7 +250,7 @@ const Cart: React.FC<Props> = (props) => {
 		if (!manualGwpSetting) return;
 
 		const maxAllowed = manualGwpSetting?.maxSelected;
-		const currentGifts = cartData.lines.filter(line => line.isManualGwp);
+		const currentGifts = cartData.lines?.filter(line => line.isManualGwp) || [];
 
 		if (currentGifts.length > maxAllowed) {
 			const giftsToRemove = currentGifts.slice(0, currentGifts.length - maxAllowed);
@@ -261,8 +261,8 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (!cartData?.lines) return;
 
-		const paidItems = cartData.lines.filter((line: any) => !line.isManualGwp);
-		const gwpItems = cartData.lines.filter((line: any) => line.isManualGwp);
+		const paidItems = cartData.lines?.filter((line: any) => !line.isManualGwp) || [];
+		const gwpItems = cartData.lines?.filter((line: any) => line.isManualGwp) || [];
 
 		if (paidItems.length === 0 && gwpItems.length > 0) {
 			const gwpIds = gwpItems.map((item: any) => item.id);
@@ -270,7 +270,7 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	}, [cartData?.lines]);
 
-	const mappedItems = cart.items.reduce((acc, item) => {
+	const mappedItems = (cart.items || []).reduce((acc, item) => {
 		const bundleGroup = item.attributes.find(attr => attr.key === '_make_your_own_kit_group')?.value;
 
 		if (bundleGroup) {
@@ -302,7 +302,7 @@ const Cart: React.FC<Props> = (props) => {
 		return acc;
 	}, []);
 
-	// console.log('mappedItems', mappedItems);
+	// console.log('manualGwpSetting', manualGwpSetting);
 
 
 	return (
@@ -370,7 +370,7 @@ const Cart: React.FC<Props> = (props) => {
 							</div>
 
 							{manualGwpSetting && manualGwpSetting.enabled && (
-								<div className="px-g lg:px-3 pt-3 hidden lg:block">
+								<div className="px-g lg:px-3 pt-3">
 									<hr />
 									<CartManualGwp {...manualGwpSetting}
 										onAddItem={onToggleManualGwp}
@@ -427,7 +427,7 @@ const Cart: React.FC<Props> = (props) => {
 										<CartManualGwp {...manualGwpSetting}
 											maxSelected={manualGwpSetting?.maxSelected}
 											tierMessage={manualGwpSetting?.tierMeta?.tierMessage}
-											disableSelectItem={manualGwpSetting?.maxSelected === 0 ? true : false }
+											disableSelectItem={manualGwpSetting?.maxSelected === 0 || manualGwpSetting?.disableSelectItem ? true : false }
 											onAddItem={onToggleManualGwp}
 											onRemoveItem={onToggleManualGwp}
 										/>
