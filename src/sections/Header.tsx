@@ -264,7 +264,7 @@ const Header = (props: any) => {
 				</div>
 
 				<nav className={`bg-white relative flex flex-wrap items-center justify-between px-g lg:px-hg z-[1000]`}>
-					<div className={`container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubbleWrapper || flashBubble ? 'relative' : ''}`}>
+					<div className={`header-wrapper container px-0 lg:px-g flex flex-wrap lg:flex-nowrap items-center justify-between ${flashBubbleWrapper || flashBubble ? 'relative' : ''}`}>
 						{/* Mobile hamburger + account */}
 						<div className="[flex-basis:30%] lg:hidden flex items-center gap-[16px]">
 							<button className="text-[13px] border-0 h-[40px]" type="button" data-cy="menu-icon" aria-label="Mobile navbar toggler" onClick={onToggleMobileNav}>
@@ -401,8 +401,13 @@ const Header = (props: any) => {
 						</div>
 					))}
 				</nav>
-				{/* Tooltip outside <nav> so its z-[1035] competes in <header>'s stacking context, above SearchBox z-[1020] */}
-				<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
+				{/* Wrapper mirrors nav > .header-wrapper's padding/container so the tooltip aligns to the container's right edge,
+				    while staying outside <nav> so its z-[1035] still competes in <header>'s stacking context, above SearchBox z-[1020] */}
+				<div className="lg:px-hg">
+					<div className="container relative px-0 lg:px-g">
+						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
+					</div>
+				</div>
 				{openDrawer && (
 					<MobileMenuDrop
 						onToggleMobileNav={onToggleMobileNav}
