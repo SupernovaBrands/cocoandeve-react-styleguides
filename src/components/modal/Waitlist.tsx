@@ -157,8 +157,8 @@ const Waitlist: React.FC<WaitlistProp> = ({ store, handleClose, data, trackBluec
 				// data.titleThanks = waitlistPdp.vrt_waitlist_form_title_thanks;
 				// data.formDescriptionThanks = props.vrt_waitlist_form_description_thanks;
 				setRestockType(null);
-				setFormTitle(waitlistPdp.vrt_waitlist_form_title);
-				setFormDescription(waitlistPdp.vrt_waitlist_form_description);
+				setFormTitle(waitlistPdp.vrt_waitlist_form_title_tan);
+				setFormDescription(waitlistPdp.vrt_waitlist_form_description_tan);
 			} else if (wlWrap.includes(data.handle)){
 				// data.formId = waitlistPdp.vrt_wrap_smsbumpid;
 				// data.waitlistTitle = waitlistPdp.vrt_waitlist_form_title_wrap;

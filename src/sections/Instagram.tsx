@@ -6,7 +6,32 @@ import {
 import { instagram_ph } from "~/modules/placeholders";
 
 const InstagramTest = (props: any) => {
-    const { instagramData: data } = props;
+    const { instagramData: igData, instagramFetch } = props;
+    const [data, setData] = useState(igData);
+
+    const fetchingData = async () => {
+        const dataIg = await instagramFetch();
+        if (dataIg && dataIg.status === 200 && dataIg.body) {
+            const latestData = dataIg.body.map((d, i) => {
+                let image = (i === 0) ? d.thumbnail_640_url.replace('.jpg', '_327x327_crop_center.jpg').replace('.png', '_327x327_crop_center.png') : d.thumbnail_url.replace('.jpg', '_240x240_crop_center.jpg').replace('.png', '_240x240_crop_center.png')
+                if (!d.thumbnail_640_url.includes('cdn.shopify')) {
+                    image = d.thumbnail_640_url
+                }
+
+                return {
+                    link: d.permalink,
+                    image,
+                    imageMobile: d.thumbnail_640_url.includes('cdn.shopify') ? d.thumbnail_640_url.replace('.jpg', '_252x252_crop_center.jpg').replace('.png', '_252x252_crop_center.png') : d.thumbnail_640_url,
+                }
+            });
+            console.log(latestData, 'update new data');
+            setData(latestData);
+        }
+    };
+
+    useEffect(() => {
+        fetchingData();
+    }, []);
     /*
 
     useEffect(() => {
@@ -108,7 +133,7 @@ const InstagramTest = (props: any) => {
                                             </a>
                                         </div>
                                     )}
-                                    
+
                                     <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-g md:gap-[.5rem]">
                                         {data && data.length && data.slice(0, 9).map((item, index) => {
                                             return (

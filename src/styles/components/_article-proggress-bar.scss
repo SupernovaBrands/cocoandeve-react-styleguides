@@ -1,3 +1,5 @@
+@use '../core/functions' as *;
+
 @layer components {
 	.reading-proggress-bar {
 		@apply bg-secondary-light;

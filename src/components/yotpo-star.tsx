@@ -14,11 +14,20 @@ const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 const { locale } = global.config.tSettings;
 const localeParam = locale.includes('en') ? 'en' : locale;
 
-const YotpoStar = (props:any) => {
+const YotpoStar = ({
+	productSkus,
+	productId,
+	productUrl = '',
+	showScore = false,
+	showTotal = true,
+	hideStars = false,
+	extraClass = '',
+	scrollToElement,
+}: any) => {
+	const props = { productSkus, productId, productUrl, showScore, showTotal, hideStars, extraClass, scrollToElement };
 	const [init, setInit] = useState(false);
 	const [score, setScore] = useState(0);
 	const [total, setTotal] = useState(0);
-	const { productSkus } = props;
 	const signature = encryptParam(`{sku:'${productSkus}',time:${currentTime()}}`);
 
 	const scrollToWidget = () => {
@@ -75,12 +84,5 @@ YotpoStar.propTypes = {
 	scrollToElement: PropTypes.func,
 };
 
-YotpoStar.defaultProps = {
-	productUrl: '',
-	showScore: false,
-	showTotal: true,
-	hideStars: false,
-	extraClass: '',
-};
 
 export default YotpoStar;

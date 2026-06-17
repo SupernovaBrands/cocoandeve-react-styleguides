@@ -105,7 +105,7 @@ const Stockist = (props: any) => {
                         <div className="hidden lg:block" dangerouslySetInnerHTML={{__html: content.desc.replace(/&nbsp;/g, '').replace('text-underline', 'underline').replace('href', 'aria-label="go to homepage to buy online" href')}} />
                     </div>
                     <div className="w-full lg:w-auto">
-                        <select title="Change your country or region" className="border-0 custom-select lg:min-w-[auto] min-w-[190px] rounded-none stockist__select py-[13px] pr-[12px] pl-[20px]" value={region} onChange={regionChangeHandler} >
+                        <select title="Change your country or region" className="border-0 custom-select min-w-[190px] rounded-none stockist__select py-[13px] pr-[12px] pl-[20px]" value={region} onChange={regionChangeHandler} >
                             {content.stockist_dropdown.contry_title1 && (
                                 <option value={content.stockist_dropdown.contry_title1.replace(/\s+/g, '-').toLowerCase()} data-label={content.stockist_dropdown.contry_title1}>{content.stockist_dropdown.contry_title1}</option>
                             )}
@@ -173,8 +173,8 @@ const Stockist = (props: any) => {
                                 <source srcSet="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d022c821-9395-482f-8d63-628c5427ca00/592x" media="(min-width: 992px)" />
                                 <img className="w-full lg:h-auto" src="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/discovermore_services_m_576x132.jpg?v=1771217468" loading="lazy" alt="Graphic showing the rewards program details, including points and free products" width={165} height={165} />
                             </picture>
-                            <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[0.75rem] lg:p-[1.5rem] flex flex-col">
-                                <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Beauty Confidence</p>
+                            <figcaption className="text-body text-left absolute top-0 bottom-0 left-0 right-0 p-[0.75rem] lg:p-2 flex flex-col">
+                                <p className="hidden lg:block text-xl mb-[.5rem] font-bold">Tried, Tested & Loved</p>
                                 <div className="grid grid-cols-[99fr_83fr_107fr] lg:grid-cols-1 gap-[1rem] lg:gap-[.75rem]">
                                     <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
                                         <i dangerouslySetInnerHTML={{ __html: AWARD_SVG }} className='w-2 h-2' />
@@ -186,7 +186,7 @@ const Stockist = (props: any) => {
                                     </div>
                                     <div className="flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem]">
                                         <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-2 h-2' />
-                                        <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">{totalReviews} Customer Reviews</p>
+                                        <p className="text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0">{totalReviews} customer reviews</p>
                                     </div>
                                 </div>
                             </figcaption>

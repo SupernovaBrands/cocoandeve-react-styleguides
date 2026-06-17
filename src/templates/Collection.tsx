@@ -16,6 +16,8 @@ import { checkLaunchWLBox, isWaitlist } from "~/modules/utils";
 // import LaunchWaitList from "~/compounds/launch-waitlist";
 // import CollectionServices from "~/compounds/CollectionServices";
 import LaunchWaitlistModals from "~/sections/LaunchWaitlistModals";
+import dynamic from "next/dynamic";
+const ProductInfo = dynamic(() => import('~/components/modal/ProductInfo'), { ssr: false });
 
 const QuizCardPlaceholder = (props) => {
     return props.split ? (
@@ -95,6 +97,26 @@ const Collection = (props: any) => {
         customProductTitle,
         childMenuData,
         byobBanner,
+        // quickBuy,
+    } = props;
+
+    const {
+        formatMoney,
+        preOrderCtaLabel,
+        waitlistPdpStore,
+        strapiAutomateHardcode,
+        checkHardcodedImages,
+        checkHardcodedTitles,
+        checkHardcodedVariant,
+        checkHardcodedTagline,
+        checkHardcodedFaq,
+        checkHardcodedHowToUse,
+        ProductSettings,
+        BenefitIngredient,
+        HowToUse,
+        Faq,
+        FragranceNotes,
+        getActiveWL,
     } = props;
     // console.log('mainnav', mainNav);
     // const [featuredImg, setFeaturedImg] = useState<any>([]);
@@ -163,6 +185,7 @@ const Collection = (props: any) => {
         return handles.map((h) => ({ handle: h, title: h.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
     });
     const [defaultSort, setDefaultSort] = useState(sort);
+    const [platform, setPlatform] = useState('unknown');
 
     const mainCollHandles = mainCollectionHandles && mainCollectionHandles.split(',');
 
@@ -322,24 +345,22 @@ const Collection = (props: any) => {
 
     useEffect(() => {
         setLoading(false);
+        // console.log('currentCollection', currentCollection);
+        const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
 
         let currentPos = parseInt(byobBanner?.desktop_position, 10);
 
         if (window.innerWidth < 769) {
             currentPos = parseInt(byobBanner?.mobile_position, 10);
         }
-
-        // console.log('currentCollection', currentCollection);
-        const DEFAULT_BYOB_POSITION = currentCollection?.products?.nodes?.length < 6 ? 3 : 5;
-        // console.log('currentCollection', currentCollection);
-        // console.log('parentCollection', parentCollection);
-        const show = (currentCollection?.handle !== 'tan' && parentCollection === null) || (parentCollection && parentCollection?.collection?.handle !== 'tan');
-        // console.log('kit banner', show);
-        setShowByobCard(prev => ({
-            show,
-            position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
-            dtPosition: currentPos > 0 ? currentPos : DEFAULT_BYOB_POSITION,
-        }));
+        setShowByobCard({ show: false, position: 0, dtPosition: 0 })
+        if (currentPos > 0) {
+            setShowByobCard({
+                show: true,
+                position: currentPos > 0 ? currentPos - 1 : DEFAULT_BYOB_POSITION,
+                dtPosition: currentPos > 0 ? currentPos : DEFAULT_BYOB_POSITION,
+            });
+        }
     }, [currentCollection, byobBanner]);
 
     const collectionSettings = useCollectionSettings(handle, store);
@@ -353,6 +374,14 @@ const Collection = (props: any) => {
         const params = new URLSearchParams(window.location.search);
         setParentParam(params.get('p'));
     }, [handle]);
+
+    const [productData, setProductData] = useState({
+        open: false,
+        handle: null,
+        selectedVariant: null,
+        tab: null,
+        swatch: null
+    });
 
     useEffect(() => {
         if (!mainNav || mainNav.length === 0) {
@@ -417,6 +446,23 @@ const Collection = (props: any) => {
         else document.body.classList.remove('!overflow-y-hidden');
     }, [isOpen]);
 
+    useEffect(() => {
+        const userAgent = navigator.userAgent || navigator.vendor;
+        let detectedOS = 'unknown';
+
+        if (/windows/i.test(userAgent)) {
+            detectedOS = 'os-win';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            detectedOS = 'os-mac';
+        } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+            detectedOS = 'os-ios';
+        } else if (/android/i.test(userAgent)) {
+            detectedOS = 'os-android';
+        }
+
+        setPlatform(detectedOS);
+    }, []);
+
     const footerCss = `
     .collection-footer__html p {
         margin-bottom: 1rem;
@@ -427,18 +473,28 @@ const Collection = (props: any) => {
     // console.log('byobBanner', showByobCard);
     const FilterOptions = (props: any) => (
         <div className={`w-auto lg:w-2/5 lg:flex items-center justify-end px-0 lg:pr-0 ${props.className}`}>
-            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 bg-white text-sm lg:text-base w-[150px] lg:w-[185px] min-h-[3.125em] indent-0 text-right pr-4 lg:pr-[50px]`} defaultValue={defaultSort}>
+            <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select ${platform === 'os-win' ? 'pl-1 text-left lg:w-[150px]' : 'pl-0 text-right lg:w-[185px]'} bg-white text-sm lg:text-base w-[135px] min-h-[3.125em] indent-0 pr-2 lg:pr-[50px] [background-position:right_0_center]`} defaultValue={defaultSort}>
                 <option value="featured">Sort By</option>
                 <option value="best-selling">Best selling</option>
                 <option value="price-low-high">Price, low to high</option>
                 <option value="price-high-low">Price, high to low</option>
-                <option value="newest">Date, new to old</option>
+                {/* <option value="newest">Date, new to old</option> */}
             </select>
         </div>
     );
 
+    useEffect(() => {
+        // console.log('modal detail open', productData.open);
+        if (productData.open) document.body.classList.add('!overflow-hidden');
+        else document.body.classList.remove('!overflow-hidden');
+    }, [productData.open])
 
-    // console.log('sidebarMenu', sidebarMenu);
+    // console.log('collectionSettings', collectionSettings);
+
+    const splitVersionCard = currentCollection?.handle === 'tan' ||
+        !!(parentCollection && parentCollection?.collection?.handle === 'tan') ||
+        currentCollection?.handle === 'spf' ||
+        !!(parentCollection && parentCollection?.collection?.handle === 'spf');
 
     return (
         <>
@@ -481,8 +537,8 @@ const Collection = (props: any) => {
                     )} */}
                     <div className={`w-full collection-template__products flex flex-wrap items-start min-h-[400px]`}>
                         <div className={`flex flex-wrap w-full justify-between items-center px-g lg:px-2`}>
-                            <h1 className="text-xl lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-150px)] lg:w-3/5 lg:order-first self-center text-body"
-                                dangerouslySetInnerHTML={{ __html: collectionTitle ?? 'Shop All' }}
+                            <h1 className={`text-[19px] lg:text-2xl leading-[30px] lg:leading-[40px] block w-[calc(100%-135px)] lg:w-3/5 lg:order-first self-center text-body`}
+                                dangerouslySetInnerHTML={{ __html: (collectionTitle ?? 'Shop All').replace('Shop ', '<span class="hidden lg:inline">Shop </span>') }}
                             />
                             {/* {collectionSettings.isLoading || loading ? (
                                 <>
@@ -503,10 +559,10 @@ const Collection = (props: any) => {
                                     )}
                                 </>
                             ) : ( */}
-                            <>
+                            {/* <>
                                 {!isLoading && (
-                                    <>
-                                        {/* <div className="w-1/2 lg:hidden px-hg">
+                                    <> */}
+                            {/* <div className="w-1/2 lg:hidden px-hg">
                                             <select aria-label="Filter collection items by sub collection" onChange={selectFilterChange} className={`custom-select p-1 rounded bg-gray-400 ${handle === 'all' ? 'mb-2' : ''} border border-gray-400 pl-g lg:min-w-[154px] w-full min-h-[3.125em] indent-0`} defaultValue={handle === 'all' ? '' : selectFilterValue}>
                                                 <option value="">Filter by</option>
                                                 {mobileDropdown.map((parent: any, index: number) => {
@@ -515,19 +571,19 @@ const Collection = (props: any) => {
                                                 })}
                                             </select>
                                         </div> */}
-                                        <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
-                                            {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
+                            <div className="w-auto lg:w-2/5 lg:hidden items-center justify-end px-0 lg:pr-0">
+                                {/* <select aria-label="Sort collection items by" name="sort" onChange={selectSortChange} className={`border-none custom-select pl-0 pr-[.5rem] bg-white w-[170px] min-h-[3.125em] indent-0 text-right pr-[40px]`} defaultValue={defaultSort}>
                                                 <option value="featured">Sort By</option>
                                                 <option value="best-selling">Best selling</option>
                                                 <option value="price-low-high">Price, low to high</option>
                                                 <option value="price-high-low">Price, high to low</option>
                                                 <option value="newest">Date, new to old</option>
                                             </select> */}
-                                            <FilterOptions className="lg:hidden" />
-                                        </div>
-                                    </>
+                                <FilterOptions className="lg:hidden" />
+                            </div>
+                            {/* </>
                                 )}
-                            </>
+                            </> */}
                             {/* )} */}
 
                             {handle === 'all' && <FilterOptions className="hidden lg:flex" />}
@@ -602,6 +658,7 @@ const Collection = (props: any) => {
                                                     <ProductCardKit
                                                         className="relative flex flex-col text-center collection-lg-order"
                                                         store={store}
+                                                        data={collectionSettings?.byobSetting}
                                                     />
                                                 )}
                                                 {collectionSettings.isLoading && (
@@ -631,60 +688,65 @@ const Collection = (props: any) => {
                                                     collectionTemplate={true}
                                                     store={store}
                                                     customProductTitle={customProductTitle}
+                                                    // clickShowPopup={quickBuy}
+                                                    setProductData={setProductData}
+                                                    // quickBuy={quickBuy}
                                                 />
 
                                                 <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': 4 } as React.CSSProperties}>
                                                     {!collectionSettings.isLoading && (
-                                                        handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf') ? (
-                                                            <ProductCardQuiz
-                                                                className="relative w-full lg:h-full"
-                                                                href={collectionSettings?.quizSetting?.spf_quiz_button_url}
-                                                                title={collectionSettings?.quizSetting?.spf_quiz_title}
-                                                                heading="SPF Quiz"
-                                                                imgMb="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/d336dfd0-5036-429d-18bb-fef66ee83500/public"
-                                                                imgDt="https://imagedelivery.net/ghVX8djKS3R8-n0oGeWHEA/7f323caa-7653-498e-bca3-b226fa9b9a00/public"
-                                                                key={`collection-quiz-card--spf--${index}`}
-                                                                quizSetting={collectionSettings.quizSetting}
-                                                                store={store}
-                                                                ctaBgColor={generalSetting?.spf_cta_bg_color}
-                                                                ctaLabel={collectionSettings.quizSetting?.spf_quiz_button_cta}
-                                                            />
-                                                        ) : (
-                                                            <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:justify-between lg:pb-[1rem]">
+                                                        <div className="w-full lg:h-full flex flex-col gap-[.75rem] md:gap-0 lg:gap-[1rem] lg:pb-[1rem]">
+                                                            {(handle === 'spf' || (parentCollection && parentCollection?.collection?.handle === 'spf')) && (
+                                                                <ProductCardQuiz
+                                                                    className="relative"
+                                                                    href={collectionSettings?.quizSetting?.spf_quiz_button_url}
+                                                                    title={collectionSettings?.quizSetting?.spf_quiz_title}
+                                                                    heading="SPF Quiz"
+                                                                    imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Mobile_1_x96.jpg?v=1777355616"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/SPF_Quiz_IMG_Resize_Desktop_1_417x.jpg?v=1777355617"
+                                                                    key={`collection-quiz-card--spf--${index}`}
+                                                                    quizSetting={collectionSettings.quizSetting}
+                                                                    store={store}
+                                                                    ctaBgColor={generalSetting?.spf_cta_bg_color}
+                                                                    ctaLabel={collectionSettings?.quizSetting?.spf_quiz_button_cta}
+                                                                    splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.spf_quiz_subtitle_mobile || 'Find your SPF match in seconds'}
+                                                                />
+                                                            )}
+                                                            {(handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
                                                                 <ProductCardQuiz
                                                                     className="relative"
                                                                     href={collectionSettings?.quizSetting?.quiz_button_url}
                                                                     title={collectionSettings?.quizSetting?.quiz_title}
                                                                     ctaLabel={collectionSettings.quizSetting?.quiz_button_cta}
                                                                     imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_MB_x96.jpg?v=1776308056"
-                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x285_crop_center.jpg?v=1776308057"
+                                                                    imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/Quiz_Card_DT_417x.jpg?v=1776308057"
                                                                     key={`collection-quiz-card--${handle}--${index}`}
                                                                     quizSetting={collectionSettings.quizSetting}
                                                                     store={store}
                                                                     ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                                    splitVersion={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')}
+                                                                    splitVersion={splitVersionCard}
+                                                                    subtitleMobile={collectionSettings?.quizSetting?.quiz_subtitle_mobile || 'Get matched in 90 seconds'}
                                                                 />
-
-                                                                {(currentCollection?.handle === 'tan' || (parentCollection && parentCollection?.collection?.handle === 'tan')) && (
-                                                                    <ProductCardQuiz
-                                                                        className="relative"
-                                                                        imgMb="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056"
-                                                                        imgDt="https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x285_crop_center.jpg?v=1776308057"
-                                                                        key={`collection-byob-card--${handle}--${index}`}
-                                                                        href='/pages/build-your-own-bundle'
-                                                                        ctaLabel='Get Started'
-                                                                        heading='Build Your Own Bundle'
-                                                                        title='Mix, match & save <br />your way!'
-                                                                        store={store}
-                                                                        ctaBgColor={generalSetting?.bfcm_cta_bg_color}
-                                                                    />
-                                                                )}
-                                                            </div>
-                                                        )
+                                                            )}
+                                                            <ProductCardQuiz
+                                                                className="relative"
+                                                                imgMb={collectionSettings?.byobSetting?.byob_image_mobile?.url?.replace('.jpg', '_x96.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_MB_x96.jpg?v=1776308056'}
+                                                                imgDt={collectionSettings?.byobSetting?.byob_image_desktop_split?.url?.replace('.jpg', '_417x.jpg') || 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/BYOB_Card_DT_417x.jpg?v=1776308057'}
+                                                                key={`collection-byob-card--${handle}--${index}`}
+                                                                href={collectionSettings?.byobSetting?.byob_url || '/pages/build-your-own-bundle'}
+                                                                ctaLabel={collectionSettings?.byobSetting?.byob_button_cta || 'Get Started'}
+                                                                heading={collectionSettings?.byobSetting?.byob_title || 'Build Your Own Bundle'}
+                                                                title={collectionSettings?.byobSetting?.byob_text || 'Mix, match & save <br />up to 20% OFF!'}
+                                                                store={store}
+                                                                ctaBgColor={generalSetting?.bfcm_cta_bg_color}
+                                                                subtitleMobile={collectionSettings?.byobSetting?.byob_subtitle_mobile || 'Up to 20% OFF your routine'}
+                                                            />
+                                                        </div>
                                                     )}
 
                                                     {collectionSettings.isLoading && (
-                                                        <QuizCardPlaceholder split={currentCollection?.handle === 'tan' || !!(parentCollection && parentCollection?.collection?.handle === 'tan')} />
+                                                        <QuizCardPlaceholder split={splitVersionCard} />
                                                     )}
                                                 </div>
                                             </>
@@ -709,7 +771,24 @@ const Collection = (props: any) => {
                                                 collectionTemplate={true}
                                                 store={store}
                                                 customProductTitle={customProductTitle}
+                                                // clickShowPopup={quickBuy}
+                                                setProductData={setProductData}
+                                                // quickBuy={quickBuy}
                                             />
+                                        )}
+                                        {showByobCard.show && collProducts.length === index + 1 && collProducts.length === showByobCard?.position && (
+                                            <div className="col-span-2 lg:col-span-1 collection-lg-order" style={{ '--lg-order': showByobCard?.dtPosition } as React.CSSProperties}>
+                                                {!collectionSettings.isLoading && (
+                                                    <ProductCardKit
+                                                        className="relative flex flex-col text-center collection-lg-order"
+                                                        store={store}
+                                                        data={collectionSettings?.byobSetting}
+                                                    />
+                                                )}
+                                                {collectionSettings.isLoading && (
+                                                    <QuizCardPlaceholder />
+                                                )}
+                                            </div>
                                         )}
                                     </Fragment>
                                 );
@@ -749,7 +828,7 @@ const Collection = (props: any) => {
                         {collectionSingle.collectionSingle.about_our_products.title && <h2 className="mb-2">{collectionSingle.collectionSingle.about_our_products.title}</h2>}
                         {!isLoading && (
                             <>
-                                <style jsx>{footerCss}</style>
+                                <style {...({jsx: true} as any)}>{footerCss}</style>
                                 <div
                                     className="collection-footer__html"
                                     dangerouslySetInnerHTML={{ __html: collectionSingle.collectionSingle.about_our_products.content_body }}
@@ -765,6 +844,36 @@ const Collection = (props: any) => {
                     <ModalWaitlist store={store} bluecoreProductWaitlist={bluecoreProductWaitlist} trackBluecoreEvent={trackBluecoreEvent} data={waitlistData} waitlistPdp={waitlistPdpSetting} handleClose={() => setWaitlistData({ ...waitlistData, ...{ open: false } })} />
                 </Modal>
             )}
+            {/* {!isLoading && quickBuy && (
+                <Modal contentClass={'flex-1 rounded-[.5rem]'} className="modal-lg modal--quick-buy" isOpen={productData.open} handleClose={() => setProductData({ ...productData, ...{ open: false } })}>
+                    <ProductInfo
+                        formatMoney={formatMoney}
+                        quickBuy={quickBuy}
+                        addToCart={addToCart}
+                        directAddToCart={true}
+                        waitlistPdpStore={waitlistPdpStore}
+                        getActiveWL={getActiveWL}
+                        generalSetting={generalSetting}
+                        strapiAutomateHardcode={strapiAutomateHardcode}
+                        checkHardcodedImages={checkHardcodedImages}
+                        checkHardcodedTitles={checkHardcodedTitles}
+                        checkHardcodedVariant={checkHardcodedVariant}
+                        checkHardcodedTagline={checkHardcodedTagline}
+                        checkHardcodedFaq={checkHardcodedFaq}
+                        checkHardcodedHowToUse={checkHardcodedHowToUse}
+                        ProductSettings={ProductSettings}
+                        BenefitIngredient={BenefitIngredient}
+                        HowToUse={HowToUse}
+                        Faq={Faq}
+                        FragranceNotes={FragranceNotes}
+                        preOrderCtaLabel={preOrderCtaLabel}
+                        store={store}
+                        data={productData}
+                        preOrderSetting={preOrders}
+                        buildProductCardModel={buildProductCardModel}
+                        handleClose={() => setProductData({ ...productData, ...{ open: false } })} />
+                </Modal>
+            )} */}
             {!isLoading && launchWL && (
                 <LaunchWaitlistModals
                     launchWL={launchWL}

@@ -74,6 +74,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
     );
 
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const thumbScrollLock = useRef(false);
 
 	useEffect(() => {
 		setSelectedIndex(activeImageIndex);
@@ -106,6 +107,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 
 	const onSelect = useCallback(() => {
 		if (!emblaMainApi || !emblaThumbsApi) return;
+
+		if (thumbScrollLock.current) return;
+		
 		const index = emblaMainApi.selectedScrollSnap();
 		setSelectedIndex(index);
 		emblaThumbsApi.scrollTo(index);
@@ -158,7 +162,43 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
         }
     }, [isVisible, startVideoOnMouseMove, stopVideoOnMove]);
 
+	useEffect(() => {
+		if (!emblaThumbsApi) return;
+
+		const viewport = emblaThumbsApi.rootNode();
+		if (!viewport) return;
+
+		const handleWheel = (e: WheelEvent) => {
+			if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+			e.preventDefault();
+
+			thumbScrollLock.current = true;
+			const viewport = emblaThumbsApi?.rootNode();
+
+			if (!viewport) return;
+
+			const speedFactor = 0.5;
+			viewport.scrollTop += e.deltaY * speedFactor;
+
+			clearTimeout((thumbScrollLock as any).t);
+
+			(thumbScrollLock as any).t = setTimeout(() => {
+				thumbScrollLock.current = false;
+			}, 150);
+		};
+
+		viewport.addEventListener('wheel', handleWheel, { passive: false });
+
+		return () => {
+			viewport.removeEventListener('wheel', handleWheel);
+		};
+	}, [emblaThumbsApi]);
+
 	const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+	const formatImageUrl = (url, index, size = '150x') => {
+		return url.replace('_text_', `${index + 1}`).replace(/(\.[a-z]+)(\?.*)?$/i, `_${size}$1$2`);
+	};
 
 	return (
 		<div className="flex w-full lg:w-7/12 lg:sticky lg:top-[115px] lg:self-start">
@@ -176,8 +216,8 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 										aria-label="View product thumbnail">
 										{isDesktop && (
 											<picture>
-												<source srcSet={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} media="(min-width: 769px)" />
-												<img loading="lazy" alt={`Thumbnail image of Product Image ${index}`} className="w-[70px]" src={`${slide.src.replace('1140x1140', '150x150').replace('/public', '/150x').replace('_text_', `${index + 1}`)}`} width={70} height={70} />
+												<source srcSet={`${formatImageUrl(slide.src, index, '150x')}`} media="(min-width: 769px)" />
+												<img loading="lazy" alt={`Thumbnail image of Product Image ${index}`} className="w-[70px]" src={`${formatImageUrl(slide.src, index, '150x')}`} width={70} height={70} />
 											</picture>
 										)}
 									</button>
