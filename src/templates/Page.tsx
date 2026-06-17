@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Page = (props: any) => {
-    const { content, isLoading, bodyContent } = props;
+    const { content, isLoading, bodyContent, hideEmail } = props;
     // console.log('test', content)
     const cssGrid = `
         .page-content p {
@@ -32,14 +32,16 @@ const Page = (props: any) => {
 						}} />
                     </div>
                 </div>
-                <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
-                    <div className="lg:w-2/3 lg:px-g sm:px-hg w-full text-center md:pt-10 md:pb-8 pt-6 pb-6 mb-3">
-                        <h2 className="md:mb-1 mb-3">
-                            Didn’t find your answer?
-                        </h2>
-                        <p>No worries, you can email us <a href="mailto:hello@cocoandeve.com" aria-label="Contact us here"><strong>here</strong></a>.</p>
+                {!hideEmail && (
+                    <div className="flex flex-wrap lg:-mx-g sm:-mx-hg justify-center">
+                        <div className="lg:w-2/3 lg:px-g sm:px-hg w-full text-center md:pt-10 md:pb-8 pt-6 pb-6 mb-3">
+                            <h2 className="md:mb-1 mb-3">
+                                Didn’t find your answer?
+                            </h2>
+                            <p>No worries, you can email us <a href="mailto:hello@cocoandeve.com" aria-label="Contact us here"><strong>here</strong></a>.</p>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
