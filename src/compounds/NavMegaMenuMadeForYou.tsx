@@ -44,7 +44,7 @@ const NavMegaMenuMadeForYou = (props: any) => {
     return (
         <div className="z-[1010] nav-mega-menu left-0 border-t w-full border-top-body mt-[18px] lg:mt-[35px] bg-white absolute before:bg-transparent before:w-full before:h-[1.25em] before:absolute before:-mt-[1.25em]" >
             {/* Top bar */}
-            <div className="flex items-center justify-end px-g pb-[32px] pt-[48px] mx-auto w-full" style={{ maxWidth: 1160 }}>
+            <div className="flex items-center justify-end px-0 pb-[32px] pt-[42.5px] mx-auto w-full" style={{ maxWidth: 1160 }}>
                 <div className="flex gap-3 items-center">
                     <a href={shopAllUrl} className="font-bold text-body hover:text-primary underline underline-offset-2 whitespace-nowrap">
                         Shop All
