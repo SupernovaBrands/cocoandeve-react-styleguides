@@ -87,10 +87,10 @@ export const CartItem = (props:CartItemProps) => {
 
 	// const isKitBuilder = item.attributes.find((attr) => attr.key === '_make_your_own_kit' && attr.value === 'yes');
 
-	let isRemovable = null;
-	if (isBundle) {
-		isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
-	}
+	// let isRemovable = null;
+	// if (isBundle) {
+	// 	isRemovable = item.attributes.find((attr) => attr.key === '_make_your_own_kit_removable' && attr.value === 'yes');
+	// }
 
 	const productTitle = (item:any) => {
 		// add handle for multiple swatch type product ex. glow-essentials-bundle
@@ -239,6 +239,10 @@ export const CartItem = (props:CartItemProps) => {
 	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
 	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
 
+	// console.log('bundleItems', bundleItems);
+	// console.log('is bundle', isBundle);
+	// console.log('is removable', isRemovable);
+
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
 		<figure className={`flex flex-wrap py-2 mb-0 items-start -mx-hg lg:-mx-g`}>
@@ -324,7 +328,7 @@ export const CartItem = (props:CartItemProps) => {
 							<SvgTrash className="svg w-[1em]" />
 					</button>)}
 
-					{isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+					{isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 						type="button" aria-label="Remove"
 						onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon d">
 							<SvgTrash className="svg w-[1em]" />
@@ -471,10 +475,19 @@ export const CartItem = (props:CartItemProps) => {
 
 				{isBundle && bundleItems && bundleItems.length > 0 && (
 					<ul className="flex flex-col gap-[.25rem] pt-1">
-						{bundleItems.map((bundleItem, idx: number) => (
-							<li key={bundleItem?.merchandise?.id ?? idx} className="flex items-center gap-[.25rem]">
-								<img src={bundleItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
-								<span className="text-sm">1x {bundleItem?.merchandise?.title}</span>
+						{Object.values(bundleItems.reduce((acc, bundleItem) => {
+							const key = bundleItem?.merchandise?.id || bundleItem?.merchandise?.title;
+							if (!key) return acc;
+							if (!acc[key]) {
+								acc[key] = { ...bundleItem, quantity: bundleItem.quantity || 1 };
+							} else {
+								acc[key].quantity += (bundleItem.quantity || 1);
+							}
+							return acc;
+						}, {} as Record<string, any>)).map((groupedItem: any, idx: number) => (
+							<li key={`${groupedItem?.merchandise?.id || idx}`} className="flex items-center gap-[.25rem]">
+								<img src={groupedItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
+								<span className="text-sm">{groupedItem.quantity}x {groupedItem?.merchandise?.title}</span>
 							</li>
 						))}
 					</ul>

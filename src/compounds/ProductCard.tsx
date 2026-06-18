@@ -33,17 +33,17 @@ const PARSED_DEFAULT_LABEL_SIDE_UPSELL = parse(DEFAULT_LABEL_SIDE_UPSELL);
 
 const ConditionalWrap = ({ condition, wrap, children, elseWrap }) => condition ? wrap(children) : elseWrap(children);
 
-const Pricing = memo(({ buttonData, collectionTemplate, kitBuilder, kitBuilderLabel }: PricingProps) => {
+const Pricing = memo(({ buttonData, collectionTemplate }: PricingProps) => {
     let label = buttonData.btnLabel ? buttonData.btnLabel : buttonData.label;
     let textColor = 'text-white';
     label = buttonData.sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : label;
 
     const parsedLabel = useMemo(() => {
-        if (kitBuilder) return parse(kitBuilderLabel || 'Add to Bundle');
+        // if (kitBuilder) return parse(kitBuilderLabel || 'Add to Bundle');
         if (!label || label === DEFAULT_LABEL) return PARSED_DEFAULT_LABEL;
         if (label === DEFAULT_LABEL_SIDE_UPSELL) return PARSED_DEFAULT_LABEL_SIDE_UPSELL;
         return parse(label);
-    }, [label, kitBuilder, kitBuilderLabel]);
+    }, [label]);
 
     // const displayPrice = hideCent && selectedVariant?.price
     //     ? formatMoney(Math.trunc(parseFloat(selectedVariant.price.amount)) * 100, false, store)
@@ -164,6 +164,12 @@ const LaunchButton = memo((props: any) => {
 const AddToCartButton = memo((props: any) => {
     const { overlayButton, product, maxItem, kitBuilder, itemSelected, setItemSelected, addToCart, selectedVariant, preOrders, sideUpsell, trackEvent, bgClass, textClass } = props;
     const [addingItem, setAddingItem] = useState(false);
+    const kitQuantity = useMemo(() => {
+        if (!kitBuilder || !itemSelected || !selectedVariant?.id) return 0;
+        return itemSelected.filter((item) => item.id === selectedVariant.id).length;
+    }, [kitBuilder, itemSelected, selectedVariant?.id]);
+
+    const isKitBuilderAdded = kitBuilder && kitQuantity > 0;
 
     const kitSelected = useMemo(() => {
         if (!itemSelected || itemSelected.length === 0) return [];
@@ -183,7 +189,27 @@ const AddToCartButton = memo((props: any) => {
         return sideUpsell ? DEFAULT_LABEL_SIDE_UPSELL : DEFAULT_LABEL;
     }, [selectedVariant?.id, preOrders, sideUpsell]);
 
+    const addKitItem = useCallback(() => {
+        if (!selectedVariant) return;
+        setItemSelected((prev) => {
+            if (prev.length >= maxItem) return prev;
+            return [...prev, {
+                src: product.src,
+                srcSet: product.srcSet,
+                title: selectedVariant.title,
+                id: selectedVariant.id,
+                price: selectedVariant?.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
+                comparePrice: selectedVariant?.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
+            }];
+        });
+    }, [selectedVariant, product, maxItem, setItemSelected]);
+
     const onAddItem = useCallback(async () => {
+        if (kitBuilder && !overlayButton) {
+            addKitItem();
+            return;
+        }
+
         if (typeof addToCart === 'function') {
             setAddingItem(true);
             await addToCart({
@@ -202,31 +228,7 @@ const AddToCartButton = memo((props: any) => {
                 });
             }
         }
-
-        if (kitBuilder && !overlayButton) {
-            // console.log('kitSelected', kitSelected);
-            // console.log('selecte variant id', selectedVariant);
-            if (kitSelected.includes(selectedVariant.id)) {
-                const currentSelected = [...itemSelected];
-                const newSelected = removeObjectWithId(currentSelected, selectedVariant.id);
-                setItemSelected(newSelected);
-                return false;
-            }
-            if (kitSelected.length >= maxItem) return false;
-            setItemSelected((prev) => {
-                const prevData = [...prev];
-                prevData.push({
-                    src: product.src,
-                    srcSet: product.srcSet,
-                    title: selectedVariant.title,
-                    id: selectedVariant.id,
-                    price: selectedVariant && selectedVariant.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
-                    comparePrice: selectedVariant && selectedVariant.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
-                });
-                return prevData;
-            })
-        }
-    }, [addToCart, selectedVariant, sideUpsell, trackEvent, kitSelected]);
+    }, [addToCart, selectedVariant, sideUpsell, trackEvent, kitBuilder, overlayButton, addKitItem]);
 
     const buttonData = useMemo(() => ({
         btnLabel: props.label,
@@ -239,19 +241,52 @@ const AddToCartButton = memo((props: any) => {
         sideUpsell: props.sideUpsell,
     }), [props.label, ctaLabel, addingItem, props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
-    const isKitBuilderAdded = kitSelected.includes(selectedVariant.id);
+    const onReduceQuantity = useCallback((e) => {
+        e.stopPropagation();
+        setItemSelected((prev) => {
+            const idx = prev.findIndex((item) => item.id === selectedVariant.id);
+            if (idx !== -1) {
+                const newArr = [...prev];
+                newArr.splice(idx, 1);
+                return newArr;
+            }
+            return prev;
+        });
+    }, [selectedVariant?.id, setItemSelected]);
+
+    const onIncreaseQuantity = useCallback((e) => {
+        e.stopPropagation();
+        addKitItem();
+    }, [addKitItem]);
+
+    const handleButtonClick = useCallback(async () => {
+        if (isKitBuilderAdded) return;
+        await onAddItem();
+    }, [isKitBuilderAdded, onAddItem]);
 
     return (
-        <Button onClick={onAddItem} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
-            <Pricing
-                store={props.store}
-                selectedVariant={selectedVariant}
-                hideCent={false}
-                collectionTemplate={props.collectionTemplate}
-                buttonData={buttonData}
-                kitBuilder={props.kitBuilder}
-                kitBuilderLabel={isKitBuilderAdded ? 'Remove' : 'Add to Bundle'}
-            />
+        <Button onClick={handleButtonClick} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${props.kitBuilder && isKitBuilderAdded ? 'bg-white hover:bg-white' : '' }`}>
+            <>
+                {!props.kitBuilder && <Pricing
+                    store={props.store}
+                    selectedVariant={selectedVariant}
+                    hideCent={false}
+                    collectionTemplate={props.collectionTemplate}
+                    buttonData={buttonData}
+                    // kitBuilder={props.kitBuilder}
+                    // kitBuilderLabel={isKitBuilderAdded ? 'Remove' : 'Add to Bundle'}
+                />}
+                {props.kitBuilder && !isKitBuilderAdded && <span className={`product-card-btn__text lg:w-full flex justify-center w-full text-center lg:text-left`}>
+                    Add to Bundle
+                </span>}
+                {props.kitBuilder && isKitBuilderAdded && <span className={`product-card-btn__text product-card-btn__text--qty bg-white text-body border border-body lg:w-full flex justify-center w-full text-center lg:text-left`}>
+                    <span className="px-0 inline-flex justify-between items-center w-full">
+                        <span onClick={onReduceQuantity} className="quantity-adjustment text-left mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">-</span>
+                        <span className="quantity-adjustment mb-0 py-[5.5px]">{kitQuantity}</span>
+                        <span onClick={onIncreaseQuantity} className="quantity-adjustment text-right mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">+</span>
+                    </span>
+                </span>}
+            </>
         </Button>
     );
 });

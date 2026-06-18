@@ -271,18 +271,19 @@ const Cart: React.FC<Props> = (props) => {
 	}, [cartData?.lines]);
 
 	const mappedItems = (cart.items || []).reduce((acc, item) => {
+		// console.log('item', item);
 		const bundleGroup = item.attributes.find(attr => attr.key === '_make_your_own_kit_group')?.value;
 
 		if (bundleGroup) {
 			const existingBundle = acc.find(i => i.isBundle && i.bundleGroup === bundleGroup);
 			if (existingBundle) {
 				existingBundle.bundleItems.push(item);
-				existingBundle.totalPrice += item.originalPrice;
-				existingBundle.totalComparePrice += item.comparePrice;
+				existingBundle.totalPrice += (item.originalPrice * item.quantity);
+				existingBundle.totalComparePrice += (item.comparePrice * item.quantity);
 				existingBundle.totalDiscountedPrice = Math.round(existingBundle.totalPrice * (1 - existingBundle.discount / 100));
 			} else {
 				const discount = Number(item.attributes.find(attr => attr.key === '_make_your_own_kit_discount')?.value ?? 0);
-				const totalPrice = item.originalPrice;
+				const totalPrice = (item.originalPrice * item.quantity);
 				const bundleEntry = {
 					isBundle: true,
 					bundleGroup,
@@ -290,7 +291,7 @@ const Cart: React.FC<Props> = (props) => {
 					bundleItems: [item],
 					discount,
 					totalPrice,
-					totalComparePrice: item.comparePrice,
+					totalComparePrice: (item.comparePrice * item.quantity),
 					totalDiscountedPrice: Math.round(totalPrice * (1 - discount / 100)),
 				};
 				acc.unshift(bundleEntry);
