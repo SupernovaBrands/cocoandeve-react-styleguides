@@ -4,22 +4,30 @@
 
         .product-card {
 
-            button:not(.button-overlay) {
+            button:not(.button-overlay):not(.quantity-adjustment) {
                 @apply mb-[.5rem] lg:mb-0 lg:min-h-[auto];
             }
             .product-card-btn__text {
-                @apply lg:leading-[10px] lg:py-g;
+                @apply px-[.75rem] py-1 lg:leading-[20px] lg:py-g;
+
+                &--qty {
+                    @apply p-0
+                }
             }
 
             .btn__hover-overlay {
-                @apply lg:left-0 lg:right-0 lg:bottom-0 lg:translate-y-0;
+                @apply lg:translate-y-0;
             }
             button {
-                @apply rounded-none;
+                @apply rounded-none !px-0;
             }
 
             .product-title__text {
                 @apply lg:pt-[1rem]
+            }
+
+            .quantity-adjustment {
+                @apply text-lg leading-[25px];
             }
         }
 
@@ -36,11 +44,11 @@
 
         .kit-builder--nav {
             button {
-                @apply text-base leading-[20px] px-[1rem] py-[.25rem] rounded-full bg-gray-400 text-gray-600 lg:text-lg lg:leading-[25px] lg:px-2 lg:py-1;
+                @apply text-base leading-[25px] px-[.5rem] py-[.5rem] bg-white text-gray-600 lg:leading-[25px] lg:px-2 lg:py-1;
 
 
                 &.nav--active {
-                    @apply bg-primary text-white;
+                    @apply bg-body text-white;
                 }
             }
         }
