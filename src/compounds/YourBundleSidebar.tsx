@@ -24,7 +24,7 @@ const ItemCard = (props) => {
         if (items.length === 0) setIsOpen(false);
     };
     return (
-        <li className={`flex bg-white rounded-[4px] relative aspect-square lg:w-[80px] lg:h-[80px] ${placeholder && index >= Math.min(Math.max(itemSelected.length + 1, 2), maxItem) ? 'lg:hidden' : ''}`}>
+        <li className={`flex bg-white rounded-[4px] relative aspect-square xl:w-[80px] xl:h-[80px] ${placeholder && index >= Math.min(Math.max(itemSelected.length + 1, 2), maxItem) ? 'lg:hidden' : ''}`}>
             {/* <span className="inline-block font-bold mr-[.5rem] mt-[.5rem] text-lg">{index + 1}</span> */}
             {/* {placeholder && <div className="w-[3rem] h-[3rem] rounded-[.5rem] bg-gray-400" />} */}
             {!placeholder && (
@@ -227,7 +227,7 @@ const YourBundleSidebar = (props: any) => {
     }
     `
 
-    console.log('strapiData', strapiData);
+    // console.log('strapiData', strapiData);
     return (
         <>
             <div className={`w-full lg:sticky lg:top-[230px] xl:top-[115px] ${isOpen ? 'before:content-[""] before:h-full before:w-full before:top-0 before:bottom-0 before:left-0 before:right-0 before:bg-black before:z-[9999] before:opacity-[.6] before:fixed lg:before:content-[none]' : ''}`}>
@@ -262,8 +262,8 @@ const YourBundleSidebar = (props: any) => {
                                 <div className={`absolute top-0 left-0 h-full bg-primary rounded-[5px] transition-all duration-100 
                                     ${itemSelected.length === 0 ? 'w-[1px]' : ''}
                                     ${itemSelected.length === 1 ? 'w-[2.5%] md:w-[1%] lg:w-[5%] xl:w-[4%]' : ''}
-                                    ${itemSelected.length === 2 ? 'w-[9%] lg:w-[12.5%]' : ''}
-                                    ${itemSelected.length === 3 ? 'w-[50%] md:w-[47.5%]' : ''}
+                                    ${itemSelected.length === 2 ? 'w-[9%] max-w-[26px] md:w-[4%] lg:w-[12.5%]' : ''}
+                                    ${itemSelected.length === 3 ? 'w-[50%] md:w-[47.5%] lg:w-[51%] xl:w-[52.5%]' : ''}
                                     ${itemSelected.length > 3 ? 'w-full' : ''}
                                 `}
                                     // style={{
@@ -278,11 +278,11 @@ const YourBundleSidebar = (props: any) => {
                                     {itemSelected.length >= 2 ? <PercentOffEnabled className="w-[20px] h-[20px]" /> : <PercentOffDisabled className="w-[20px] h-[20px]" />}
                                     <span className="text-sm mt-[.25rem] whitespace-nowrap">10% OFF</span>
                                 </div>
-                                <div className={`absolute -top-[7.5px] flex flex-col items-center left-[45%]`}>
+                                <div className={`absolute -top-[7.5px] flex flex-col items-center left-[45%] lg:left-[40%] xl:left-[42.5%]`}>
                                     {itemSelected.length >= 3 ? <PercentOffEnabled className="w-[20px] h-[20px]" /> : <PercentOffDisabled className="w-[20px] h-[20px]" />}
                                     <span className="text-sm mt-[.25rem] whitespace-nowrap">15% OFF</span>
                                 </div>
-                                <div className={`absolute -top-[7.5px] flex flex-col items-center -right-[5.5%]`}>
+                                <div className={`absolute -top-[7.5px] flex flex-col items-center -right-[5.5%] md:-right-[2.5%] lg:-right-[11.5%] xl:-right-[8.5%]`}>
                                     {itemSelected.length >= 4 ? <PercentOffEnabled className="w-[20px] h-[20px]" /> : <PercentOffDisabled className="w-[20px] h-[20px]" />}
                                     <span className="text-sm mt-[.25rem] whitespace-nowrap">20% OFF</span>
                                 </div>

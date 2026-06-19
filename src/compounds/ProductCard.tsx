@@ -259,6 +259,25 @@ const AddToCartButton = memo((props: any) => {
         addKitItem();
     }, [addKitItem]);
 
+    const onChangeQuantity = useCallback((e) => {
+        e.stopPropagation();
+        const newQty = Math.max(1, Math.min(maxItem, parseInt(e.target.value, 10) || 1));
+        if (!selectedVariant) return;
+        setItemSelected((prev) => {
+            const otherItems = prev.filter((item) => item.id !== selectedVariant.id);
+            const newItems = Array.from({ length: newQty }, () => ({
+                src: product.src,
+                srcSet: product.srcSet,
+                title: selectedVariant.title,
+                id: selectedVariant.id,
+                price: selectedVariant?.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
+                comparePrice: selectedVariant?.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
+            }));
+            const combined = [...otherItems, ...newItems];
+            return combined.slice(0, maxItem);
+        });
+    }, [selectedVariant, product, maxItem, setItemSelected]);
+
     const handleButtonClick = useCallback(async () => {
         if (isKitBuilderAdded) return;
         await onAddItem();
@@ -282,7 +301,15 @@ const AddToCartButton = memo((props: any) => {
                 {props.kitBuilder && isKitBuilderAdded && <span className={`product-card-btn__text product-card-btn__text--qty bg-white text-body border border-body lg:w-full flex justify-center w-full text-center lg:text-left`}>
                     <span className="px-0 inline-flex justify-between items-center w-full">
                         <span onClick={onReduceQuantity} className="quantity-adjustment text-left mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">-</span>
-                        <span className="quantity-adjustment mb-0 py-[5.5px]">{kitQuantity}</span>
+                        <input
+                            type="number"
+                            value={kitQuantity}
+                            onChange={onChangeQuantity}
+                            onClick={(e) => e.stopPropagation()}
+                            min={1}
+                            max={maxItem}
+                            className="quantity-adjustment mb-0 py-[11.5px] px-0 w-[2rem] text-center bg-transparent border-none outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+                        />
                         <span onClick={onIncreaseQuantity} className="quantity-adjustment text-right mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">+</span>
                     </span>
                 </span>}
