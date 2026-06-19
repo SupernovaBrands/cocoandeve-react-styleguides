@@ -138,13 +138,13 @@ const NavMegaMenuShop = (props: any) => {
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">
                     {tabs.map((tab: any) => (
                         <li key={tabId(tab)}>
-                            <button
-                                type="button"
-                                className={`px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap ${activeTab === tabId(tab) ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
+                            <a
+                                href={`/collections/${tab.handle || tab.collectionHandle}`}
+                                className={`mega-menu-tab items-center flex px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap no-underline hover:no-underline hover:text-white ${activeTab === tabId(tab) ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
                                 onMouseEnter={() => handleTabHover(tab)}
                             >
                                 {tab.title}
-                            </button>
+                            </a>
                         </li>
                     ))}
                 </ul>
@@ -167,16 +167,17 @@ const NavMegaMenuShop = (props: any) => {
                             <ul className="list-none pl-0 mb-0 mt-[16px] flex flex-col gap-[8px]">
                                 {children.map((child: any) => {
                                     const cid = childId(child);
+                                    const childHandle = child.collectionHandle || child.handle;
                                     return (
                                         <li key={cid}>
-                                            <button
-                                                type="button"
-                                                className={`w-full text-left bg-transparent border-0 not-italic leading-[25px] transition-all ${activeChild === cid ? 'font-bold text-body opacity-100' : 'font-normal text-body opacity-40 hover:font-bold hover:opacity-100'}`}
+                                            <a
+                                                href={`/collections/${childHandle}`}
+                                                className={`mega-menu-hover block w-full text-left no-underline hover:no-underline not-italic leading-[25px] transition-all ${activeChild === cid ? 'font-bold text-body opacity-100' : 'font-normal text-body opacity-40 hover:font-bold hover:opacity-100'}`}
                                                 style={{ fontSize: 20 }}
                                                 onMouseEnter={() => handleChildHover(child)}
                                             >
                                                 {child.title || child.label}
-                                            </button>
+                                            </a>
                                         </li>
                                     );
                                 })}

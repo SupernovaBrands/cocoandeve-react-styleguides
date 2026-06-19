@@ -374,7 +374,7 @@ const Header = (props: any) => {
 					{nav.length > 0 && nav.filter((item: any) => item.megaMenu?.type !== 'askCoco').map((item: any) => (
 						<div
 							key={`mega-wrapper-${item.label}`}
-							style={{ display: (hoveredNav === item.megaMenu?.type) ? 'block' : 'none' }}
+							style={{ display: (hoveredNav === item.megaMenu?.type || item.megaMenu?.type === 'explore') ? 'block' : 'none' }}
 							onMouseEnter={() => handleNavMegaEnter(item.megaMenu?.type || null)}
 							onMouseLeave={handleNavMegaLeave}
 						>
