@@ -106,7 +106,6 @@ const NavMegaMenuExplore = (props: any) => {
         setActiveTab(tab.key);
         setCarouselIndex(0);
     };
-
     const currentTab = tabs.find((t: any) => t.key === activeTab) || tabs[0];
     const tabKey = currentTab?.key || currentTab?.title;
     const rawItems = currentTab?.items || currentTab?.articles || [];
@@ -122,13 +121,13 @@ const NavMegaMenuExplore = (props: any) => {
                 <ul className="flex gap-[.25rem] list-none mb-0 pl-0">
                     {tabs.map((tab: any) => (
                         <li key={tab.key}>
-                            <button
-                                type="button"
-                                className={`px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap ${activeTab === tab.key ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
+                            <a
+                                href={`${tab.blogHandle}`}
+                                className={`items-center flex px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap no-underline hover:no-underline hover:text-white ${activeTab === tab.key ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
                                 onMouseEnter={() => handleTabHover(tab)}
                             >
                                 {tab.title}
-                            </button>
+                            </a>
                         </li>
                     ))}
                 </ul>
