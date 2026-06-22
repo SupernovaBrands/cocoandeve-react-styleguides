@@ -206,6 +206,7 @@ const AddToCartButton = memo((props: any) => {
 
     const onAddItem = useCallback(async () => {
         if (kitBuilder && !overlayButton) {
+            // console.log('here');
             addKitItem();
             return;
         }
@@ -284,7 +285,7 @@ const AddToCartButton = memo((props: any) => {
     }, [isKitBuilderAdded, onAddItem]);
 
     return (
-        <Button onClick={handleButtonClick} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${props.kitBuilder && isKitBuilderAdded ? 'bg-white hover:bg-white' : '' }`}>
+        <Button onClick={handleButtonClick} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${props.kitBuilder && isKitBuilderAdded ? 'bg-white hover:bg-white' : ''}`}>
             <>
                 {!props.kitBuilder && <Pricing
                     store={props.store}
@@ -292,8 +293,8 @@ const AddToCartButton = memo((props: any) => {
                     hideCent={false}
                     collectionTemplate={props.collectionTemplate}
                     buttonData={buttonData}
-                    // kitBuilder={props.kitBuilder}
-                    // kitBuilderLabel={isKitBuilderAdded ? 'Remove' : 'Add to Bundle'}
+                // kitBuilder={props.kitBuilder}
+                // kitBuilderLabel={isKitBuilderAdded ? 'Remove' : 'Add to Bundle'}
                 />}
                 {props.kitBuilder && !isKitBuilderAdded && <span className={`product-card-btn__text lg:w-full flex justify-center w-full text-center lg:text-left`}>
                     Add to Bundle
@@ -302,13 +303,15 @@ const AddToCartButton = memo((props: any) => {
                     <span className="px-0 inline-flex justify-between items-center w-full">
                         <span onClick={onReduceQuantity} className="quantity-adjustment text-left mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">-</span>
                         <input
+                            id={`kit-quantity-${selectedVariant?.id?.replace('gid://shopify/ProductVariant/', '')}`}
                             type="number"
                             value={kitQuantity}
                             onChange={onChangeQuantity}
                             onClick={(e) => e.stopPropagation()}
                             min={1}
+                            name="kit-input-quantity"
                             max={maxItem}
-                            className="quantity-adjustment mb-0 py-[11.5px] px-0 w-[2rem] text-center bg-transparent border-none outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+                            className="quantity-adjustment mb-0 py-[5px] lg:py-[11.5px] px-0 w-[2rem] text-center bg-transparent border-none outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
                         />
                         <span onClick={onIncreaseQuantity} className="quantity-adjustment text-right mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">+</span>
                     </span>
@@ -639,27 +642,28 @@ const ProductCard = (props: any) => {
                             </picture>
                         )}
                     </picture>
-                    
+
                 </ConditionalWrap>
                 <div className="btn__hover-overlay absolute left-[.75rem] right-[.75rem] bottom-[.75rem]
-                    opacity-0 translate-y-[.75rem]
+                    opacity-0 translate-y-[.75rem] pointer-events-none
                     transition-all duration-300
-                    [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0">
-                        <ProductCardButton
-                            {...props}
-                            store={store}
-                            generalSetting={generalSetting}
-                            preOrders={preOrders}
-                            addToCart={addToCart}
-                            trackEvent={trackEvent}
-                            label={label}
-                            selectedVariant={selectedVariant}
-                            effectivelyAvailable={effectivelyAvailable}
-                            handleShade={handleShade}
-                            comparePrice={props.product.comparePrice}
-                            price={props.product.price}
-                            onVariantChange={handleVariantChange}
-                        />
+                    [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:pointer-events-auto">
+                    <ProductCardButton
+                        {...props}
+                        store={store}
+                        generalSetting={generalSetting}
+                        preOrders={preOrders}
+                        addToCart={addToCart}
+                        trackEvent={trackEvent}
+                        label={label}
+                        selectedVariant={selectedVariant}
+                        effectivelyAvailable={effectivelyAvailable}
+                        handleShade={handleShade}
+                        comparePrice={props.product.comparePrice}
+                        price={props.product.price}
+                        onVariantChange={handleVariantChange}
+                        openModal={openModal}
+                    />
                 </div>
 
                 {/* Badges */}
