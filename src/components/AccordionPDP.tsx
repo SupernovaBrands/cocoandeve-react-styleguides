@@ -31,12 +31,12 @@ const AccordionPDP = (props: any) => {
 	return (
 		<div className={`border-t-0 border-b-0 ${props?.noWrapperBorder || props.isBundlePage ? '' : 'md:border-t md:border-b '} border-gray-500 accordion w-full accordion-flush`} id="accordionSimple">
 			{data.map((d: Accordion, index: number) => (
-				<div key={d.id} className={`accordion-item scroll-mt-[10px] border-t border-b border-gray-500`}>
-					<div id={`accordion-${d.id}`} className={`cursor-pointer scroll-mt-[10px] flex w-full justify-between items-center py-[15px] md:py-[30px] ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={(e) => onClick(d.id, e.target)}>
+				<details key={d.id} className={`accordion-item scroll-mt-[10px] border-t border-b border-gray-500`} open={props.openIndex === d.id || undefined}>
+					<summary id={`accordion-${d.id}`} className={`cursor-pointer scroll-mt-[10px] flex w-full justify-between items-center py-[15px] md:py-[30px] list-none ${props.openIndex === d.id ? 'border-gray-500 accordion-opened' : ''}`} onClick={(e) => { e.preventDefault(); onClick(d.id, (e.target as HTMLElement)); }}>
 						<strong className={`text-body no-underline ${props?.itemClasses}`}>{d.title}</strong>
 						{ props.openIndex === d.id && <MinusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
 						{ props.openIndex !== d.id && <PlusIcon className={`transform transition-transform h-[.75em] w-[.75em] mb-[3px]`}/> }
-					</div>
+					</summary>
 					<div className={`accordion-content ${props.openIndex === d.id ? 'accordion-content--open' : 'accordion-content--close'}`}>
 						<div className="accordion-content__inner">
 							{ d.text && <div className="pt-0 pb-1 text-sm" dangerouslySetInnerHTML={{ __html: d.text }}></div> }
@@ -44,7 +44,7 @@ const AccordionPDP = (props: any) => {
 							{ d.children && <div className={`pt-0 pb-3 text-sm`}>{ d.children }</div>}
 						</div>
 					</div>
-				</div>
+				</details>
 			))}
 		</div>
 	)
