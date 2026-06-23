@@ -31,21 +31,33 @@ const SLIDES = [
 const ImageBanner = (props: any) => {
 	const { index, slide, trackEvent } = props;
 	const isFirstSlide = index === 0;
+
+	// Helper: append Shopify CDN transform params to any CDN URL.
+	// width = pixel width, format=webp for modern compression, quality to tune file size.
+	const cdn = (url: string, width: number, quality = 80) => {
+		if (!url) return url;
+		const sep = url.includes('?') ? '&' : '?';
+		return `${url}${sep}width=${width}&format=webp&quality=${quality}`;
+	};
+
+	const desktopUrl = slide?.image_desktop?.url;
+	const mobileUrl = slide?.image_mobile?.url;
+
 	return (
 		<div className="flex-grow-0 flex-shrink-0 w-full basis-full" key={index}>
 			<Link onClick={() => { trackEvent('hero_banner_click', { category: 'Clickout' }) }} href={slide?.slide_url || ''} className="flex items-center justify-center">
 				<picture className='lg:px-g pt-[111.83575%] lg:pt-[38.17708%] relative block w-full overflow-hidden'>
-					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktoplg').replace('.jpg', '_1920x.jpg').replace('.gif', '_1920x.gif')} media="(min-width: 1601px)" width="1920" height="733" />
-					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktopmd').replace('.jpg', '_1600x.jpg').replace('.gif', '_1600x.gif')} media="(min-width: 1401px)" width="1600" height="611" />
-					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/desktopsm').replace('.jpg', '_1400x.jpg').replace('.gif', '_1400x.gif')} media="(min-width: 1201px)" width="1400" height="534" />
-					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/tablet').replace('.jpg', '_1200x.jpg').replace('.gif', '_1200x.gif')} media="(min-width: 1025px)" width="1200" height="458" />
-					<source srcSet={slide?.image_desktop?.url?.replace('/public', '/1140x').replace('.jpg', '_1140x.jpg').replace('.gif', '_1140x.gif')} media="(min-width: 992px)" width="1140" height="435" />
+					<source srcSet={cdn(desktopUrl, 1920)} media="(min-width: 1601px)" width="1920" height="733" />
+					<source srcSet={cdn(desktopUrl, 1600)} media="(min-width: 1401px)" width="1600" height="611" />
+					<source srcSet={cdn(desktopUrl, 1400)} media="(min-width: 1201px)" width="1400" height="534" />
+					<source srcSet={cdn(desktopUrl, 1200)} media="(min-width: 1025px)" width="1200" height="458" />
+					<source srcSet={cdn(desktopUrl, 1140)} media="(min-width: 992px)" width="1140" height="435" />
 					<img
 						// @ts-ignore
 						fetchpriority={isFirstSlide ? "high" : undefined}
 						loading={isFirstSlide ? "eager" : "lazy"}
 						className="block absolute left-0 right-0 bottom-0 object-cover top-0 w-full h-full"
-						src={slide?.image_mobile?.url?.replace('/public', '/722x').replace('.jpg', '_722x.jpg').replace('.gif', '_722x.gif')}
+						src={cdn(mobileUrl, 722)}
 						alt={`slide ${index + 1}`}
 						width="414"
 						height="926"

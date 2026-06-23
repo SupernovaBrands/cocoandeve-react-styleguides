@@ -7,6 +7,14 @@ import useMediaQuery from '~/hooks/useMediaQuery';
 import { useDotButton } from '~/components/carousel/EmblaCarouselDotButton';
 // import Link from "next/link";
 
+// Append Shopify CDN transform params to any CDN URL.
+// width = pixel width, format=webp for modern compression, quality to tune file size.
+const cdnImg = (url: string, width: number, quality = 70) => {
+    if (!url) return url;
+    const sep = url.includes('?') ? '&' : '?';
+    return `${url}${sep}width=828&format=webp&quality=${quality}`;
+};
+
 const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTextColor, isLocked, onTap }) => {
     const [tapped, setTapped] = useState(false);
 
@@ -31,8 +39,8 @@ const PlaygroundCardV2 = ({ data, store, imgMb, imgDt, imgAlt, ctaBgColor, ctaTe
         >
             <a className="relative block" href={store === 'ca' ? data?.button_link.replace('tan-and-spf', 'tan').replace('collections/skin', 'collections/skincare') : data?.button_link?.replace('collections/skin', 'collections/skincare')}>
                 <picture className={`block ${data?.playground_range_bg}`}>
-                    <source srcSet={imgDt} media="(min-width: 992px)" width={1440} height={460} />
-                    <img width="375" height="88" alt={imgAlt} className="w-full" src={imgMb} loading="lazy" decoding="async" />
+                    <source srcSet={cdnImg(imgDt, 1440)} media="(min-width: 992px)" width={1440} height={460} />
+                    <img width="375" height="88" alt={imgAlt} className="w-full" src={cdnImg(imgMb, 828)} loading="lazy" decoding="async" />
                 </picture>
                 <figcaption className="py-[1rem] absolute left-0 right-0 top-0 bottom-0 text-body text-left">
                     <div className="px-2 container flex flex-col h-full justify-center">
