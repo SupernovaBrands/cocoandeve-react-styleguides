@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useGlossaryArticles } from '~/hooks/useGlossaryArticles';
 
 const VISIBLE_COUNT = 3;
 
@@ -11,13 +12,6 @@ const DUMMY_REELS_AS_SEEN = [
     { videoUrl: REEL_VIDEO, author: 'Meredith Langosh', productName: 'Sunny Honey Bali Bronzing Foam', productUrl: '/products/sunny-honey-bali-bronzing-foam' },
     { videoUrl: REEL_VIDEO, author: 'Meredith Langosh', productName: 'Sunny Honey Bali Bronzing Foam', productUrl: '/products/sunny-honey-bali-bronzing-foam' },
     { videoUrl: REEL_VIDEO, author: 'Meredith Langosh', productName: 'Sunny Honey Bali Bronzing Foam', productUrl: '/products/sunny-honey-bali-bronzing-foam' },
-];
-
-const DUMMY_ARTICLES_GLOSSARY = [
-    { title: '5 things you\'re doing wrong with your hair care', handle: 'things-to-avoid-when-growing-our-hair', blogHandle: 'tropical-glossary', tags: ['Hair', 'Tips'], image: { url: PLACEHOLDER_IMAGE } },
-    { title: 'How to get the perfect self-tan every time', handle: 'things-to-avoid-when-growing-our-hair', blogHandle: 'tropical-glossary', tags: ['Tan', 'Guide'], image: { url: PLACEHOLDER_IMAGE } },
-    { title: 'The ultimate guide to SPF for your skin type', handle: 'things-to-avoid-when-growing-our-hair', blogHandle: 'tropical-glossary', tags: ['SPF', 'Suncare'], image: { url: PLACEHOLDER_IMAGE } },
-    { title: 'Why your hair needs a bond repair treatment', handle: 'things-to-avoid-when-growing-our-hair', blogHandle: 'tropical-glossary', tags: ['Hair', 'New'], image: { url: PLACEHOLDER_IMAGE } },
 ];
 
 const TABS = [
@@ -40,7 +34,6 @@ const TABS = [
         key: 'tropical-glossary',
         title: 'Tropical Glossary',
         blogHandle: 'tropical-glossary',
-        articles: DUMMY_ARTICLES_GLOSSARY,
         featured: {
             title: 'Tropical Glossary',
             description: 'From bronzed skin to glossy hair – discover every secret.',
@@ -52,65 +45,33 @@ const TABS = [
     },
 ];
 
-const fetchArticle = async (blogHandle: string, handle: string) => {
-    try {
-        const res = await fetch(`/api/getArticle?blogHandle=${blogHandle}&handle=${handle}`);
-        if (!res.ok) return null;
-        return await res.json();
-    } catch {
-        return null;
-    }
-};
-
 const NavMegaMenuExplore = (props: any) => {
-    const { generalSetting, megaMenu } = props;
+    const { store, generalSetting, megaMenu } = props;
 
     const tabs = megaMenu?.tabs || TABS;
 
+    // Only hit Strapi once the Tropical Glossary tab is actually opened
+    const [glossaryRequested, setGlossaryRequested] = useState(false);
+    const { articles: fetchedGlossaryArticles } = useGlossaryArticles(store, glossaryRequested);
+
+    const isGlossaryTab = (tab: any, index: number) => tab?.key === 'tropical-glossary' || index === 1;
+
     const [activeTab, setActiveTab] = useState(tabs[0]?.key || TABS[0].key);
     const [carouselIndex, setCarouselIndex] = useState(0);
-    const [enrichedItems, setEnrichedItems] = useState<Record<string, any[]>>({});
-
-    useEffect(() => {
-        const glossaryTab = megaMenu?.tabs?.[1];
-        if (!glossaryTab) return;
-        const items: any[] = glossaryTab.items || [];
-        if (!items.length) return;
-
-        const needsEnrich = items.some((item: any) => !item.title || !item.image?.url || !item.tags?.length);
-        if (!needsEnrich) {
-            setEnrichedItems(prev => ({ ...prev, [glossaryTab.key || glossaryTab.title]: items }));
-            return;
-        }
-
-        Promise.all(
-            items.map(async (item: any) => {
-                if (item.title && item.image?.url && item.tags?.length) return item;
-                const article = await fetchArticle(item.blogHandle, item.handle);
-                if (!article) return item;
-                return {
-                    ...item,
-                    title: item.title || article.title,
-                    image: item.image?.url ? item.image : article.image,
-                    tags: item.tags?.length ? item.tags : article.tags,
-                };
-            })
-        ).then(resolved => {
-            const key = glossaryTab.key || glossaryTab.title;
-            setEnrichedItems(prev => ({ ...prev, [key]: resolved }));
-        });
-    }, [megaMenu]);
 
     const handleTabHover = (tab: any) => {
+        const index = tabs.indexOf(tab);
+        if (isGlossaryTab(tab, index)) setGlossaryRequested(true);
         if (activeTab === tab.key) return;
         setActiveTab(tab.key);
         setCarouselIndex(0);
     };
-    const currentTab = tabs.find((t: any) => t.key === activeTab) || tabs[0];
-    const tabKey = currentTab?.key || currentTab?.title;
-    const rawItems = currentTab?.items || currentTab?.articles || [];
-    const currentArticles = enrichedItems[tabKey] ?? rawItems;
 
+    const currentTabIndex = tabs.findIndex((t: any) => t.key === activeTab);
+    const currentTab = currentTabIndex >= 0 ? tabs[currentTabIndex] : tabs[0];
+    const currentArticles = isGlossaryTab(currentTab, currentTabIndex)
+        ? fetchedGlossaryArticles
+        : (currentTab?.items || currentTab?.articles || []);
     const shopAllUrl = megaMenu?.shopAllUrl || generalSetting?.mega_menu_shop_all_url || '/collections/all';
     const buildYourOwnUrl = megaMenu?.buildYourOwnUrl || generalSetting?.mega_menu_button2_url || '/pages/build-your-own-bundle';
 
@@ -165,12 +126,12 @@ const NavMegaMenuExplore = (props: any) => {
                                 </div>
                             ) : (
                                 <a
-                                    key={`article-${item.handle}-${index}`}
-                                    href={`/blogs/${item.blogHandle}/${item.handle}`}
+                                    key={`article-${item.articleUrl || item.handle}-${index}`}
+                                    href={item.articleUrl || `/blogs/${item.blogHandle}/${item.handle}`}
                                     className="flex-1 min-w-0 no-underline text-body hover:no-underline flex flex-col"
                                 >
                                     {item.image?.url && (
-                                        <div className="rounded-lg overflow-hidden mb-[16px] w-full">
+                                        <div className="rounded-lg overflow-hidden mb-[16px] w-full aspect-[16/9]">
                                             <img src={item.image.url} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
                                         </div>
                                     )}

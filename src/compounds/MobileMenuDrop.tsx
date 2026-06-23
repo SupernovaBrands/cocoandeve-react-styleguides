@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import BrandLogo from '~/images/ce-logo.svg';
 import Account from '~/images/icons/acc-ico.svg';
 import Search from '~/images/icons/search-ico.svg';
@@ -9,6 +9,13 @@ type MenuItem = {
     label: string;
     url?: string;
     children?: MenuItem[];
+};
+
+const getHandleFromUrl = (url?: string) => {
+    if (!url) return '';
+    const path = url.split('?')[0].split('#')[0];
+    const segments = path.split('/').filter(Boolean);
+    return segments[segments.length - 1] || '';
 };
 
 const MENU: MenuItem[] = [
@@ -69,16 +76,96 @@ const MobileMenuDrop = (props: any) => {
     const menu: MenuItem[] = nav || MENU;
 
     const [openL1, setOpenL1] = useState<string | null>(null);
-    const [openL2, setOpenL2] = useState<string | null>(null);
+    const [openPath, setOpenPath] = useState<string[]>([]);
+    const [leafProducts, setLeafProducts] = useState<Record<string, MenuItem[]>>({});
+    const [loadingLeafKey, setLoadingLeafKey] = useState<string | null>(null);
+    const fetchedLeavesRef = useRef<Set<string>>(new Set());
+
+    const fetchLeafProducts = async (handle: string, key: string) => {
+        if (!handle || fetchedLeavesRef.current.has(key)) return;
+        fetchedLeavesRef.current.add(key);
+        setLoadingLeafKey(key);
+
+        try {
+            const res = await fetch(`/api/collectionProducts?handle=${handle}&region=${store}&limit=12`);
+            const data = await res.json();
+            const products = (data?.products || [])
+                .filter((p: any) => p.availableForSale)
+                .map((p: any): MenuItem => ({ label: p.title, url: `/products/${p.handle}` }));
+            setLeafProducts(prev => ({ ...prev, [key]: products }));
+        } catch {
+            fetchedLeavesRef.current.delete(key);
+        } finally {
+            setLoadingLeafKey(null);
+        }
+    };
 
     const toggleL1 = (label: string) => {
         setOpenL1(prev => prev === label ? null : label);
-        setOpenL2(null);
+        setOpenPath([]);
     };
 
-    const toggleL2 = (label: string) => {
-        setOpenL2(prev => prev === label ? null : label);
+    // Walks the branch one level at a time: a node with its own children just
+    // reveals those children (no fetch). A childless node is a true leaf —
+    // when fetchLeaf is on (Shop), that's where products get pulled from its
+    // own collection; otherwise the leaf is just whatever Strapi gave it.
+    const toggleBranch = (depth: number, node: MenuItem, fetchLeaf: boolean) => {
+        const opening = openPath[depth] !== node.label;
+        setOpenPath(prev => (opening ? [...prev.slice(0, depth), node.label] : prev.slice(0, depth)));
+
+        const hasChildren = node.children && node.children.length > 0;
+        if (opening && !hasChildren && fetchLeaf) {
+            const handle = getHandleFromUrl(node.url);
+            if (handle) fetchLeafProducts(handle, node.label);
+        }
     };
+
+    const renderBranch = (items: MenuItem[], depth: number, fetchLeaf: boolean) => (
+        <>
+            {items.map((node) => {
+                const hasChildren = node.children && node.children.length > 0;
+                const isStaticLeaf = !hasChildren && !fetchLeaf;
+                const isOpen = openPath[depth] === node.label;
+                const isDimmed = openPath[depth] != null && !isOpen;
+
+                return (
+                    <div
+                        key={node.label}
+                        className="transition-opacity duration-200"
+                        style={{ opacity: isDimmed ? 0.4 : 1 }}
+                    >
+                        <button
+                            className="w-full flex items-center gap-[8px] py-[4px] bg-transparent border-0 p-0 text-left"
+                            onClick={() => isStaticLeaf ? (window.location.href = node.url || '#') : toggleBranch(depth, node, fetchLeaf)}
+                        >
+                            <span className="text-body font-normal text-[20px] leading-[25px] not-italic">{node.label}</span>
+                            {!isStaticLeaf && <Chevron open={isOpen} size={12} />}
+                        </button>
+
+                        {!isStaticLeaf && isOpen && (
+                            <div className="pl-[16px] pb-[4px] flex flex-col gap-[8px]">
+                                {hasChildren ? (
+                                    renderBranch(node.children!, depth + 1, fetchLeaf)
+                                ) : loadingLeafKey === node.label && !leafProducts[node.label] ? (
+                                    <span className="text-[16px] text-body opacity-40">Loading...</span>
+                                ) : (
+                                    (leafProducts[node.label] || []).map((leaf) => (
+                                        <a
+                                            key={leaf.label}
+                                            href={leaf.url || '#'}
+                                            className="block text-[16px] not-italic font-normal leading-[20px] no-underline hover:text-body text-body hover:no-underline"
+                                        >
+                                            {leaf.label}
+                                        </a>
+                                    ))
+                                )}
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
+        </>
+    );
 
     const storeLabel = STORE_LABELS[store] || STORE_LABELS['int'];
     const [storeOpen, setStoreOpen] = useState(false);
@@ -144,41 +231,7 @@ const MobileMenuDrop = (props: any) => {
 
                             {hasChildren && isL1Open && (
                                 <div className="pb-[8px]">
-                                    {item.children!.map((child) => {
-                                        const hasGrandchildren = child.children && child.children.length > 0;
-                                        const isL2Open = openL2 === child.label;
-                                        const isL2Dimmed = openL2 !== null && !isL2Open;
-
-                                        return (
-                                            <div
-                                                key={child.label}
-                                                className="transition-opacity duration-200"
-                                                style={{ opacity: isL2Dimmed ? 0.4 : 1 }}
-                                            >
-                                                <button
-                                                    className="w-full flex items-center gap-[8px] py-[4px] bg-transparent border-0 p-0 text-left"
-                                                    onClick={() => hasGrandchildren ? toggleL2(child.label) : (window.location.href = child.url || '#')}
-                                                >
-                                                    <span className="text-body font-normal text-[20px] leading-[25px] not-italic">{child.label}</span>
-                                                    {hasGrandchildren && <Chevron open={isL2Open} size={12} />}
-                                                </button>
-
-                                                {hasGrandchildren && isL2Open && (
-                                                    <div className="pl-[16px] pb-[4px] flex flex-col gap-[8px]">
-                                                        {child.children!.map((grandchild) => (
-                                                            <a
-                                                                key={grandchild.label}
-                                                                href={grandchild.url || '#'}
-                                                                className="block text-[16px] not-italic font-normal leading-[20px] no-underline hover:text-body text-body hover:no-underline"
-                                                            >
-                                                                {grandchild.label}
-                                                            </a>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
+                                    {renderBranch(item.children!, 0, item.label === 'Shop')}
                                 </div>
                             )}
                         </div>

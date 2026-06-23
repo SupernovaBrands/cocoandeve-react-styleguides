@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { EmblaOptionsType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import Carousel from '~/components/carousel/EmblaCarouselMulti';
 import ProductCard from '~/compounds/ProductCard';
 import ChevronNext from '~/images/icons/chevron-next.svg';
 import ChevronPrev from '~/images/icons/chevron-prev.svg';
@@ -6,31 +9,39 @@ import ChevronPrev from '~/images/icons/chevron-prev.svg';
 const VISIBLE_COUNT = 4;
 const VISIBLE_COUNT_WITH_CHILDREN = 3;
 
-const isRangesType = (tab: any) => tab?.collectionHandle === 'hair';
+const emblaOptions: EmblaOptionsType = {
+    loop: true,
+    align: 'start',
+};
+
+const getHandleFromUrl = (url?: string) => {
+    if (!url) return '';
+    const path = url.split('?')[0].split('#')[0];
+    const segments = path.split('/').filter(Boolean);
+    return segments[segments.length - 1] || '';
+};
+
+const isRangesType = (tab: any) => getHandleFromUrl(tab?.url) === 'hair';
 
 const NavMegaMenuShop = (props: any) => {
     const {
-        store, generalSetting, megaMenu,
-        buildProductCardModel, addToCart, trackEvent, preOrders, setWaitlistData,
+        store, generalSetting, megaMenu, subNav,
+        buildProductCardModel, getFeaturedImgMeta, addToCart, trackEvent, preOrders, setWaitlistData,
     } = props;
-    const tabs = megaMenu?.tabs || [];
+    const tabs = subNav || [];
     const ranges = megaMenu?.hairRanges || [];
 
-    const tabId = (tab: any) => tab.key || tab.title || '';
-    const childId = (child: any) => child.key || child.label || child.collectionHandle || '';
+    const tabId = (tab: any) => tab.url || tab.label || '';
+    const childId = (child: any) => child.url || child.label || '';
 
     const firstTab = tabs[0];
-    const firstChildren = firstTab?.children || [];
 
     const [activeTab, setActiveTab] = useState(() => tabId(firstTab || {}));
-    const [activeChild, setActiveChild] = useState<string>(() => {
-        if (isRangesType(firstTab)) return '';
-        return firstChildren.length > 0 ? childId(firstChildren[0]) : '';
-    });
+    const [activeChild, setActiveChild] = useState<string>('');
     const [tabProducts, setTabProducts] = useState<Record<string, any[]>>({});
     const [isLoading, setIsLoading] = useState(false);
-    const [carouselIndex, setCarouselIndex] = useState(0);
     const fetchedTabs = useRef<Set<string>>(new Set());
+    const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions);
 
     const fetchTabProducts = async (handle: string, id: string) => {
         if (fetchedTabs.current.has(id)) return;
@@ -48,15 +59,22 @@ const NavMegaMenuShop = (props: any) => {
                 );
                 setTabProducts(prev => ({ ...prev, [id]: cardModels }));
             } else {
-                const mapped = rawProducts.map((p: any) => {
+                const mapped = await Promise.all(rawProducts.map(async (p: any) => {
                     const rawNodes = p.variants?.nodes || p.variants?.edges?.map((e: any) => e.node) || [];
+                    let src = p.featuredImage?.url || '';
+                    let imgHover = p.images?.edges?.[1]?.node?.url || '';
+                    if (typeof getFeaturedImgMeta === 'function') {
+                        const { img, imgHover: hoverImg } = await getFeaturedImgMeta(p, store);
+                        src = img || src;
+                        imgHover = hoverImg || imgHover;
+                    }
                     return {
                         ...p,
-                        src: p.featuredImage?.url || '',
-                        imgHover: p.images?.edges?.[1]?.node?.url || '',
+                        src,
+                        imgHover,
                         variants: { nodes: rawNodes },
                     };
-                });
+                }));
                 setTabProducts(prev => ({ ...prev, [id]: mapped }));
             }
         } catch {
@@ -67,40 +85,26 @@ const NavMegaMenuShop = (props: any) => {
     };
 
     useEffect(() => {
-        if (firstTab) {
-            if (isRangesType(firstTab)) {
-                // ranges tab: no auto-fetch, banners show by default
-            } else if (firstChildren.length > 0) {
-                const fc = firstChildren[0];
-                fetchTabProducts(fc.collectionHandle || fc.handle, childId(fc));
-            } else {
-                fetchTabProducts(firstTab.handle || firstTab.collectionHandle, tabId(firstTab));
-            }
+        if (firstTab && !isRangesType(firstTab)) {
+            const handle = getHandleFromUrl(firstTab.url);
+            if (handle) fetchTabProducts(handle, tabId(firstTab));
         }
     }, []);
 
     const handleTabHover = (tab: any) => {
         const id = tabId(tab);
-        if (activeTab === id) return;
-        setActiveTab(id);
-        setCarouselIndex(0);
+        const isSameTab = activeTab === id;
+        if (isSameTab && activeChild === '') return;
 
-        if (isRangesType(tab)) {
-            // Show range banners by default; don't auto-select a child
-            setActiveChild('');
-        } else {
-            const children = tab.children || [];
-            if (children.length > 0) {
-                const firstChild = children[0];
-                const cid = childId(firstChild);
-                setActiveChild(cid);
-                const handle = firstChild.collectionHandle || firstChild.handle;
-                if (handle) fetchTabProducts(handle, cid);
-            } else {
-                setActiveChild('');
-                const handle = tab.handle || tab.collectionHandle;
-                if (handle) fetchTabProducts(handle, id);
-            }
+        if (!isSameTab) {
+            setActiveTab(id);
+        }
+        setActiveChild('');
+
+        // Default to the tab's own collection; child collections only load on sidebar hover
+        if (!isRangesType(tab)) {
+            const handle = getHandleFromUrl(tab.url);
+            if (handle) fetchTabProducts(handle, id);
         }
     };
 
@@ -108,8 +112,7 @@ const NavMegaMenuShop = (props: any) => {
         const key = childId(child);
         if (activeChild === key) return;
         setActiveChild(key);
-        setCarouselIndex(0);
-        const handle = child.collectionHandle || child.handle;
+        const handle = getHandleFromUrl(child.url);
         if (handle) fetchTabProducts(handle, key);
     };
 
@@ -120,11 +123,16 @@ const NavMegaMenuShop = (props: any) => {
     const tabRanges = currentTabData?.ranges || ranges;
     const showRangeBanners = isRangesTab && !activeChild;
 
-    const productKey = hasChildren ? activeChild : activeTab;
+    const productKey = activeChild || activeTab;
     const currentProducts = tabProducts[productKey] || [];
     const visibleCount = hasChildren ? VISIBLE_COUNT_WITH_CHILDREN : VISIBLE_COUNT;
-    const canPrev = carouselIndex > 0;
-    const canNext = carouselIndex + visibleCount < currentProducts.length;
+
+    useEffect(() => {
+        if (emblaApi) {
+            emblaApi.reInit();
+            emblaApi.scrollTo(0, true);
+        }
+    }, [productKey, currentProducts, hasChildren, emblaApi]);
 
     const shopAllUrl = megaMenu?.shopAllUrl || generalSetting?.mega_menu_shop_all_url || '/collections/all';
     const shopAllLabel = megaMenu?.shopAllLabel || 'Shop All';
@@ -139,11 +147,11 @@ const NavMegaMenuShop = (props: any) => {
                     {tabs.map((tab: any) => (
                         <li key={tabId(tab)}>
                             <a
-                                href={`/collections/${tab.handle || tab.collectionHandle}`}
+                                href={tab.url || '#'}
                                 className={`mega-menu-tab items-center flex px-2 h-[45px] py-[.375rem] text-base transition-colors whitespace-nowrap no-underline hover:no-underline hover:text-white ${activeTab === tabId(tab) ? 'bg-dark text-white' : 'text-body hover:text-primary'}`}
                                 onMouseEnter={() => handleTabHover(tab)}
                             >
-                                {tab.title}
+                                {tab.label}
                             </a>
                         </li>
                     ))}
@@ -167,16 +175,15 @@ const NavMegaMenuShop = (props: any) => {
                             <ul className="list-none pl-0 mb-0 mt-[16px] flex flex-col gap-[8px]">
                                 {children.map((child: any) => {
                                     const cid = childId(child);
-                                    const childHandle = child.collectionHandle || child.handle;
                                     return (
                                         <li key={cid}>
                                             <a
-                                                href={`/collections/${childHandle}`}
+                                                href={child.url || '#'}
                                                 className={`mega-menu-hover block w-full text-left no-underline hover:no-underline not-italic leading-[25px] transition-all ${activeChild === cid ? 'font-bold text-body opacity-100' : 'font-normal text-body opacity-40 hover:font-bold hover:opacity-100'}`}
                                                 style={{ fontSize: 20 }}
                                                 onMouseEnter={() => handleChildHover(child)}
                                             >
-                                                {child.title || child.label}
+                                                {child.label}
                                             </a>
                                         </li>
                                     );
@@ -190,65 +197,61 @@ const NavMegaMenuShop = (props: any) => {
                         {showRangeBanners ? (
                             <div className="flex gap-[16px]">
                                 {tabRanges.map((range: any, i: number) => (
-                                    <div key={i} className="rounded-lg px-[16px] pt-[24px] relative overflow-hidden flex-shrink-0 text-center flex flex-col" style={{ width: 207, height: 280, backgroundColor: range.bgColor || '#f3f4f6' }}>
+                                    <a key={i} href={range.url || (range.handle ? `/collections/${range.handle}` : '#')} className="rounded-lg px-[16px] pt-[24px] relative overflow-hidden flex-shrink-0 text-center flex flex-col !no-underline hover:no-underline text-body hover:text-body" style={{ width: 207, height: 280, backgroundColor: range.bgColor || '#f3f4f6' }}>
                                         <h4 className="mb-1 text-[24px] leading-[30px] font-bold">{range.title}</h4>
                                         <p className="font-normal mb-0" style={{ fontSize: 16, lineHeight: '20px' }}>{range.description}</p>
-                                        {/* <a href={range.url || `/collections/${range.handle}`} className="btn btn-primary inline-flex items-center justify-center mt-auto mb-[160px] font-bold hover:text-white hover:bg-primary-dark !no-underline border-none" style={{ height: 40, fontSize: 16, lineHeight: '20px' }}>
-                                            Shop Products
-                                        </a> */}
                                         {range.image?.url && (
                                             <img src={range.image.url} alt={range.title} className="absolute bottom-0 left-0 w-full object-contain" loading="lazy" />
                                         )}
-                                    </div>
+                                    </a>
                                 ))}
                             </div>
                         ) : (
                             <>
-                                {canPrev && (
-                                    <button
-                                        type="button"
-                                        onClick={() => setCarouselIndex(i => i - 1)}
-                                        className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white"
-                                        style={{ left: -30 }}
-                                        aria-label="Previous products"
-                                    >
-                                        <ChevronPrev style={{ width: 15, height: 15 }} />
-                                    </button>
-                                )}
-                                <div className="grid gap-[16px] w-full" style={{ gridTemplateColumns: `repeat(${visibleCount}, 1fr)` }}>
-                                    {isLoading && currentProducts.length === 0 ? (
-                                        <div className="col-span-full py-4 text-center text-body">Loading...</div>
-                                    ) : (
-                                        currentProducts.slice(carouselIndex, carouselIndex + visibleCount).map((product: any, index: number) => (
-                                            <ProductCard
-                                                key={`mega-${product.handle}-${index}`}
-                                                keyName={`mega-${product.handle}-${index}`}
-                                                product={product}
-                                                className="relative mb-0 flex flex-col text-center"
-                                                button={true}
-                                                setWaitlistData={setWaitlistData || (() => {})}
-                                                smSingleStar={false}
-                                                carousel={true}
-                                                addToCart={addToCart || false}
-                                                trackEvent={trackEvent}
-                                                preOrders={preOrders}
-                                                generalSetting={generalSetting}
-                                                store={store}
-                                            />
-                                        ))
-                                    )}
-                                </div>
-                                {canNext && (
-                                    <button
-                                        type="button"
-                                        onClick={() => setCarouselIndex(i => i + 1)}
-                                        className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white no-shadow rounded-full"
-                                        style={{ right: -30 }}
-                                        aria-label="Next products"
-                                    >
-                                        <ChevronNext style={{ width: 15, height: 15 }} />
-                                    </button>
-                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => emblaApi?.scrollPrev()}
+                                    className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white"
+                                    style={{ left: -30 }}
+                                    aria-label="Previous products"
+                                >
+                                    <ChevronPrev style={{ width: 15, height: 15 }} />
+                                </button>
+                                <Carousel.Wrapper emblaApi={emblaApi}>
+                                    <Carousel.Inner emblaRef={emblaRef}>
+                                        {isLoading && currentProducts.length === 0 ? (
+                                            <div className="w-full py-4 text-center text-body">Loading...</div>
+                                        ) : (
+                                            currentProducts.map((product: any, index: number) => (
+                                                <ProductCard
+                                                    key={`mega-${product.handle}-${index}`}
+                                                    keyName={`mega-${product.handle}-${index}`}
+                                                    product={product}
+                                                    className="relative mb-0 flex-shrink-0 flex flex-col text-center px-[8px]"
+                                                    style={{ width: `${100 / visibleCount}%` }}
+                                                    button={true}
+                                                    setWaitlistData={setWaitlistData || (() => {})}
+                                                    smSingleStar={false}
+                                                    carousel={true}
+                                                    addToCart={addToCart || false}
+                                                    trackEvent={trackEvent}
+                                                    preOrders={preOrders}
+                                                    generalSetting={generalSetting}
+                                                    store={store}
+                                                />
+                                            ))
+                                        )}
+                                    </Carousel.Inner>
+                                </Carousel.Wrapper>
+                                <button
+                                    type="button"
+                                    onClick={() => emblaApi?.scrollNext()}
+                                    className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-8 h-8 bg-white no-shadow rounded-full"
+                                    style={{ right: -30 }}
+                                    aria-label="Next products"
+                                >
+                                    <ChevronNext style={{ width: 15, height: 15 }} />
+                                </button>
                             </>
                         )}
                     </div>
