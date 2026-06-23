@@ -385,7 +385,9 @@ const Header = (props: any) => {
 									dummy={dummy}
 									hairRanges={hairRanges}
 									megaMenu={item.megaMenu}
+									subNav={item.children}
 									buildProductCardModel={buildProductCardModel}
+									getFeaturedImgMeta={getFeaturedImgMeta}
 									addToCart={addToCart}
 									trackEvent={trackEvent}
 									preOrders={preOrders}
