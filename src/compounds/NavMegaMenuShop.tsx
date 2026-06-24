@@ -68,6 +68,11 @@ const NavMegaMenuShop = (props: any) => {
                         src = img || src;
                         imgHover = hoverImg || imgHover;
                     }
+                    if (src) {
+                        src = src.includes('imagedelivery.net')
+                            ? src.replace('public', '320x')
+                            : src.replace('.jpg', '_320x.jpg').replace('.png', '_320x.png');
+                    }
                     return {
                         ...p,
                         src,
