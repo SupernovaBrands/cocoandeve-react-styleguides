@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useGlossaryArticles } from '~/hooks/useGlossaryArticles';
+import PostTag from '~/components/PostTag';
 
 const VISIBLE_COUNT = 3;
 
@@ -138,7 +139,9 @@ const NavMegaMenuExplore = (props: any) => {
                                     {item.tags?.length > 0 && (
                                         <div className="flex gap-[6px] flex-wrap mb-[8px] px-[12px]">
                                             {item.tags.map((tag: string, ti: number) => (
-                                                <span key={ti} className="font-normal px-[10px] pt-[5px] pb-[4px] h-[20px] bg-secondary-light text-body capitalize rounded-[4px]" style={{ fontSize: 12, lineHeight: 'normal' }}>{tag}</span>
+                                                <PostTag key={ti} store={store} tag={tag} paddingClass="px-[10px] pt-[5px] pb-[4px] text-[12px] leading-[normal]">
+                                                    {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                                                </PostTag>
                                             ))}
                                         </div>
                                     )}

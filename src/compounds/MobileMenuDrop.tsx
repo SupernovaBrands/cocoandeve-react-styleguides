@@ -99,15 +99,15 @@ const MobileMenuDrop = (props: any) => {
                         style={{ opacity: isDimmed ? 0.4 : 1 }}
                     >
                         <button
-                            className="w-full flex items-center gap-[8px] py-[4px] bg-transparent border-0 p-0 text-left"
+                            className={`w-full flex items-center gap-[8px] ${depth === 1 ? '' : 'py-[4px]'} bg-transparent border-0 p-0 text-left`}
                             onClick={() => hasChildren ? toggleBranch(depth, node) : (window.location.href = node.url || '#')}
                         >
-                            <span className="text-body font-normal text-[20px] leading-[25px] not-italic">{node.label}</span>
+                            <span className={`text-body font-normal not-italic ${depth === 1 ? 'text-[16px] leading-[20px]' : 'text-[20px] leading-[25px]'}`}>{node.label}</span>
                             {hasChildren && <Chevron open={isOpen} size={12} />}
                         </button>
 
                         {hasChildren && isOpen && (
-                            <div className="pl-[16px] pb-[4px] flex flex-col gap-[8px]">
+                            <div className={`pl-[16px] pb-[4px] pt-[4px] flex flex-col gap-[8px]`}>
                                 {renderBranch(node.children!, depth + 1)}
                             </div>
                         )}

@@ -28,7 +28,7 @@ const Header = (props: any) => {
 		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
 		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav,
-		hairRanges, buildProductCardModel, addToCart, preOrders, setWaitlistData, globalNav,
+		hairRanges, buildProductCardModel, addToCart, preOrders, setWaitlistData, globalNav, squareBadge,
 	} = props;
 	const [openDrawer, setOpenDrawer] = useState(false);
 	// const [openCartDrawer, setOpenCartDrawer] = useState(false);
@@ -388,6 +388,7 @@ const Header = (props: any) => {
 									subNav={item.children}
 									buildProductCardModel={buildProductCardModel}
 									getFeaturedImgMeta={getFeaturedImgMeta}
+									squareBadge={squareBadge}
 									addToCart={addToCart}
 									trackEvent={trackEvent}
 									preOrders={preOrders}
