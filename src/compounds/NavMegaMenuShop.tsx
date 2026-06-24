@@ -25,7 +25,7 @@ const isRangesType = (tab: any) => getHandleFromUrl(tab?.url) === 'hair';
 
 const NavMegaMenuShop = (props: any) => {
     const {
-        store, generalSetting, megaMenu, subNav,
+        store, generalSetting, megaMenu, subNav, squareBadge,
         buildProductCardModel, getFeaturedImgMeta, addToCart, trackEvent, preOrders, setWaitlistData,
     } = props;
     const tabs = subNav || [];
@@ -55,7 +55,7 @@ const NavMegaMenuShop = (props: any) => {
 
             if (typeof buildProductCardModel === 'function') {
                 const cardModels = await Promise.all(
-                    rawProducts.map((p: any) => buildProductCardModel(store, p, generalSetting))
+                    rawProducts.map((p: any) => buildProductCardModel(store, p, generalSetting, squareBadge))
                 );
                 setTabProducts(prev => ({ ...prev, [id]: cardModels }));
             } else {
