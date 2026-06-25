@@ -133,7 +133,7 @@ const MobileMenuDrop = (props: any) => {
                             <rect width="17.5992" height="2.19989" rx="1.09994" transform="matrix(0.707111 -0.707103 0.707111 0.707103 1 13.4448)" fill="#151515"/>
                             </svg>
                         </button>
-                        <button onClick={toggleAccountDropdown} className="flex items-center p-0 border-0 bg-transparent" aria-label="Account">
+                        <button onClick={() => { onToggleMobileNav(); toggleAccountDropdown(); }} className="flex items-center p-0 border-0 bg-transparent" aria-label="Account">
                             <Account style={{ width: 15, height: 16 }} />
                         </button>
                     </div>
@@ -144,7 +144,7 @@ const MobileMenuDrop = (props: any) => {
 
                     <ul className="basis-[30%] flex list-reset pl-0 mb-0 flex-row justify-end items-center gap-[20px]">
                         <li className="flex items-center">
-                            <button type="button" className="flex items-center p-0 border-0 bg-transparent" onClick={onToggleSearchBox} aria-label="Search">
+                            <button type="button" className="flex items-center p-0 border-0 bg-transparent" onClick={() => { onToggleMobileNav(); onToggleSearchBox(); }} aria-label="Search">
                                 <Search style={{ width: 16, height: 16 }} />
                             </button>
                         </li>
