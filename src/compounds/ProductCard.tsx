@@ -193,6 +193,7 @@ const AddToCartButton = memo((props: any) => {
         if (!selectedVariant) return;
         setItemSelected((prev) => {
             if (prev.length >= maxItem) return prev;
+            if (prev.some((item) => item.id === selectedVariant.id)) return prev;
             return [...prev, {
                 src: product.src,
                 srcSet: product.srcSet,
@@ -206,7 +207,6 @@ const AddToCartButton = memo((props: any) => {
 
     const onAddItem = useCallback(async () => {
         if (kitBuilder && !overlayButton) {
-            // console.log('here');
             addKitItem();
             return;
         }
@@ -242,42 +242,47 @@ const AddToCartButton = memo((props: any) => {
         sideUpsell: props.sideUpsell,
     }), [props.label, ctaLabel, addingItem, props.comparePrice, props.price, props.carousel, props.collectionTemplate, props.sideUpsell]);
 
-    const onReduceQuantity = useCallback((e) => {
+    const onRemoveItem = useCallback((e) => {
         e.stopPropagation();
-        setItemSelected((prev) => {
-            const idx = prev.findIndex((item) => item.id === selectedVariant.id);
-            if (idx !== -1) {
-                const newArr = [...prev];
-                newArr.splice(idx, 1);
-                return newArr;
-            }
-            return prev;
-        });
+        setItemSelected((prev) => prev.filter((item) => item.id !== selectedVariant.id));
     }, [selectedVariant?.id, setItemSelected]);
 
-    const onIncreaseQuantity = useCallback((e) => {
-        e.stopPropagation();
-        addKitItem();
-    }, [addKitItem]);
-
-    const onChangeQuantity = useCallback((e) => {
-        e.stopPropagation();
-        const newQty = Math.max(1, Math.min(maxItem, parseInt(e.target.value, 10) || 1));
-        if (!selectedVariant) return;
-        setItemSelected((prev) => {
-            const otherItems = prev.filter((item) => item.id !== selectedVariant.id);
-            const newItems = Array.from({ length: newQty }, () => ({
-                src: product.src,
-                srcSet: product.srcSet,
-                title: selectedVariant.title,
-                id: selectedVariant.id,
-                price: selectedVariant?.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
-                comparePrice: selectedVariant?.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
-            }));
-            const combined = [...otherItems, ...newItems];
-            return combined.slice(0, maxItem);
-        });
-    }, [selectedVariant, product, maxItem, setItemSelected]);
+    // const onReduceQuantity = useCallback((e) => {
+    //     e.stopPropagation();
+    //     setItemSelected((prev) => {
+    //         const idx = prev.findIndex((item) => item.id === selectedVariant.id);
+    //         if (idx !== -1) {
+    //             const newArr = [...prev];
+    //             newArr.splice(idx, 1);
+    //             return newArr;
+    //         }
+    //         return prev;
+    //     });
+    // }, [selectedVariant?.id, setItemSelected]);
+    //
+    // const onIncreaseQuantity = useCallback((e) => {
+    //     e.stopPropagation();
+    //     addKitItem();
+    // }, [addKitItem]);
+    //
+    // const onChangeQuantity = useCallback((e) => {
+    //     e.stopPropagation();
+    //     const newQty = Math.max(1, Math.min(maxItem, parseInt(e.target.value, 10) || 1));
+    //     if (!selectedVariant) return;
+    //     setItemSelected((prev) => {
+    //         const otherItems = prev.filter((item) => item.id !== selectedVariant.id);
+    //         const newItems = Array.from({ length: newQty }, () => ({
+    //             src: product.src,
+    //             srcSet: product.srcSet,
+    //             title: selectedVariant.title,
+    //             id: selectedVariant.id,
+    //             price: selectedVariant?.price ? parseFloat(selectedVariant.price.amount) * 100 : product.priceInCent,
+    //             comparePrice: selectedVariant?.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice?.amount) * 100 : null
+    //         }));
+    //         const combined = [...otherItems, ...newItems];
+    //         return combined.slice(0, maxItem);
+    //     });
+    // }, [selectedVariant, product, maxItem, setItemSelected]);
 
     const handleButtonClick = useCallback(async () => {
         if (isKitBuilderAdded) return;
@@ -285,7 +290,7 @@ const AddToCartButton = memo((props: any) => {
     }, [isKitBuilderAdded, onAddItem]);
 
     return (
-        <Button onClick={handleButtonClick} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal ${props.kitBuilder && isKitBuilderAdded ? 'bg-white hover:bg-white' : ''}`}>
+        <Button onClick={handleButtonClick} buttonClass={`${props.className ?? ''} product-card-btn border border-[transparent] outline-none ${props.sustainability ? '' : 'lg:border-0'} flex flex-row btn-sm md:text-base ${bgClass ? bgClass : 'btn-primary'} ${textClass ? textClass : ''} rounded-0 mb-1 sm:px-0 px-0 ${props.carousel || props.collectionTemplate ? 'items-center justify-between !py-0 !px-g mb-1' : props.sideUpsell ? 'flex flex-col sm:text-sm lg:flex-col lg:justify-center lg:py-[5px]' : 'sm:flex-col sm:text-sm lg:justify-between !px-g'} font-normal`}>
             <>
                 {!props.kitBuilder && <Pricing
                     store={props.store}
@@ -299,6 +304,12 @@ const AddToCartButton = memo((props: any) => {
                 {props.kitBuilder && !isKitBuilderAdded && <span className={`product-card-btn__text lg:w-full flex justify-center w-full text-center lg:text-left`}>
                     Add to Bundle
                 </span>}
+                {props.kitBuilder && isKitBuilderAdded && <span onClick={onRemoveItem} className={`product-card-btn__text product-card-btn__text--qty bg-primary text-white border border-primary lg:w-full flex justify-center w-full text-center lg:text-left`}>
+                    <span className="px-0 inline-flex justify-center items-center w-full py-[5.5px] lg:py-[.875rem] hover:text-white">
+                        Remove
+                    </span>
+                </span>}
+                {/* quantity selector
                 {props.kitBuilder && isKitBuilderAdded && <span className={`product-card-btn__text product-card-btn__text--qty bg-white text-body border border-body lg:w-full flex justify-center w-full text-center lg:text-left`}>
                     <span className="px-0 inline-flex justify-between items-center w-full">
                         <span onClick={onReduceQuantity} className="quantity-adjustment text-left mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">-</span>
@@ -316,6 +327,7 @@ const AddToCartButton = memo((props: any) => {
                         <span onClick={onIncreaseQuantity} className="quantity-adjustment text-right mb-0 px-[1.5rem] py-[5.5px] lg:py-[11.5px] hover:text-primary">+</span>
                     </span>
                 </span>}
+                */}
             </>
         </Button>
     );
