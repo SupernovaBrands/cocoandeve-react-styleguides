@@ -305,7 +305,7 @@ const AddToCartButton = memo((props: any) => {
                     Add to Bundle
                 </span>}
                 {props.kitBuilder && isKitBuilderAdded && <span onClick={onRemoveItem} className={`product-card-btn__text product-card-btn__text--qty bg-primary text-white border border-primary lg:w-full flex justify-center w-full text-center lg:text-left`}>
-                    <span className="px-0 inline-flex justify-center items-center w-full py-[5.5px] lg:py-[.875rem] hover:text-white">
+                    <span className="px-0 inline-flex justify-center items-center w-full py-[8.5px] lg:py-[.875rem] hover:text-white">
                         Remove
                     </span>
                 </span>}
