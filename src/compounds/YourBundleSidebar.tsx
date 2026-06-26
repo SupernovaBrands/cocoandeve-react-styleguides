@@ -238,7 +238,7 @@ const YourBundleSidebar = (props: any) => {
                             <span className="font-bold lg:block">{strapiData?.sidebar_title}</span>
                             {!isOpen && (
                                 <div className="ml-[.5rem] text-sm py-[.25rem] px-[.75rem] bg-primary-light text-body lg:bg-white rounded-[.5rem] lg:hidden h-[26px]">
-                                    <span className="relative top-[1px] font-bold">Saving {bundleDiscount}%</span>
+                                    <span className="relative top-[1px] font-bold">{itemSelected.length > 0 ? `Saving ${bundleDiscount}%` : `${bundleDiscount}% OFF`}</span>
                                 </div>
                             )}
                         </div>

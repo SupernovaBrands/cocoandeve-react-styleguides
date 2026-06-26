@@ -495,9 +495,7 @@ const ProductCardButton = (props: any) => {
                 <LaunchButton {...rest} />
             )}
 
-            {props.kitBuilder && (
-                <span onClick={(e) => props.openModal(e)} className="inline-block mt-[.5rem] mb-[.5rem] lg:hidden text-sm leading-[18px] underline">Learn more</span>
-            )}
+            
         </>
     );
 }
@@ -738,7 +736,7 @@ const ProductCard = (props: any) => {
                     )}
                 </div>
 
-                <div className={`lg:hidden ${kitBuilder ? 'text-left' : ''}`}>
+                <div className={`lg:hidden ${kitBuilder ? 'relative text-left' : ''}`}>
                     <ProductCardButton
                         {...props}
                         store={store}
@@ -756,6 +754,9 @@ const ProductCard = (props: any) => {
                         openModal={openModal}
                     />
                 </div>
+                {kitBuilder && (
+                    <span onClick={(e) => openModal(e)} className="inline-block mt-[.5rem] mb-[.5rem] lg:hidden text-sm text-left leading-[18px] underline">Learn more</span>
+                )}
             </div>
         </div>
     ) : (
