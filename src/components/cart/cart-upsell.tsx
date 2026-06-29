@@ -100,7 +100,7 @@ const CartUpsell = (props:any) => {
         <>
             <div className="relative mb-2 lg:mb-2">
                 { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-md font-bold mb-25">{title}</p> }
-                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-sm mb-2">{desc}</p> }
+                { desc && upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-sm mb-2">{desc}</p> }
                 { upsell.filter((up) => up.product.availableForSale).length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>
