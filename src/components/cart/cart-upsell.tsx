@@ -10,7 +10,7 @@ import { formatMoney } from '~/modules/utils';
 
 const CartUpsell = (props:any) => {
     // console.log('props', props);
-    const { items: products, addToCart, store, onApplyDiscountCode } = props;
+    const { items: products, addToCart, store, onApplyDiscountCode, title, desc } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
     const addUpsell = async (variant:any, percentage:any, discount_code:string) => {
@@ -99,7 +99,8 @@ const CartUpsell = (props:any) => {
     return upsell.filter((up) => up.product.availableForSale).length > 0 && (
         <>
             <div className="relative mb-2 lg:mb-2">
-                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-md font-bold mb-2">You may love:</p> }
+                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-md font-bold mb-25">{title}</p> }
+                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-sm mb-2">{desc}</p> }
                 { upsell.filter((up) => up.product.availableForSale).length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>

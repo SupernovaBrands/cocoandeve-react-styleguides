@@ -56,7 +56,7 @@ export const CartDiscountForm = (props:any) => {
             hasCode: props.isApplied || !!props.appliedGiftCard.code,
         };
 
-        const validItems = props.cart.lines.filter((line: any) => {
+        const validItems = (props.cart?.lines || []).filter((line: any) => {
             const collections = line.merchandise.product.collections.nodes.map((item: any) => item.handle);
             const configCollections = props.discountBanner.collection_handle?.split(',') || [];
             const configProducts = props.discountBanner.product_handle?.split(',') || [];
