@@ -21,7 +21,7 @@ const apiUrl = 'https://reviews-api.cocoandeve.com/api';
 const QuizRewardTest = (props: any) => {
     const { store, generalSetting } = props;
     const ctaBgColor = generalSetting?.bfcm_cta_bg_color;
-    const [totalReviews, setTotalReviews] = useState('28159');
+    const [totalReviews, setTotalReviews] = useState('');
     const sectionRef = useRef<HTMLElement>(null);
     const hasFetched = useRef(false);
     let os = 'unknown';
@@ -55,7 +55,8 @@ const QuizRewardTest = (props: any) => {
                     fetch(`${apiUrl}/reviews/total.json?brand=cocoandeve`, { headers: { 'signature': signature } })
                         .then((data) => data.json())
                         .then((r) => {
-                            setTotalReviews(r?.response?.total_reviews?.toLocaleString());
+                            const total = r?.response?.total_reviews;
+                            if (total) setTotalReviews(total.toLocaleString());
                         })
                         .catch(() => { });
                     observer.disconnect();
@@ -169,7 +170,9 @@ const QuizRewardTest = (props: any) => {
                                 </div>
                                 <div className={`flex flex-auto min-w-0 flex-col lg:flex-row items-start lg:items-center lg:gap-[.5rem] ${store === 'my' ? 'lg:justify-center' : ''}`}>
                                     <i dangerouslySetInnerHTML={{ __html: STAR }} className='w-[18px] h-[18px]' />
-                                    <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>{totalReviews} customer reviews</p>
+                                    {totalReviews && (
+                                        <p className={`text-sm leading-[18px] lg:text-base lg:leading-2 mt-[.5rem] lg:mt-0 ${platform === 'os-mac' || platform === 'os-ios' ? 'relative top-[1px]' : ''}`}>{totalReviews} customer reviews</p>
+                                    )}
                                 </div>
                             </div>
                         </figcaption>
