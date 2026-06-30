@@ -319,7 +319,7 @@ const MobileMenu = (props: any) => {
 				<li key="countries" className="px-g py-1 border-b mb-g border-[#A3A3A3]" role="presentation">
 					<h4 id="countrySelect" className="flex items-center justify-between px-6 mb-0 bg-gray-200 border-b-1 border-gray-300 relative collapsed p-0 font-normal" data-toggle="collapse" data-target="#collapseCountry" aria-expanded="false" aria-controls="collapseCountry"
 						onClick={() => setStoreSelection(!storeSelection)}>
-						{currency === 'SGD' && 'Rest of the World (SGD)'}
+						{currency === 'SGD' && 'Asia (SGD)'}
 						{currency === 'USD' && 'USA (USD)'}
 						{currency === 'CAD' && 'Canada (CAD)'}
 						{currency === 'AUD' && 'Australia (AUD)'}
@@ -335,7 +335,7 @@ const MobileMenu = (props: any) => {
 						<li key="c-ca" className="py-25"><a href="https://www.cocoandeve.com?store=ca" className='text-body'>Canada (CAD)</a></li>
 						<li key="c-au" className="py-25"><a href="https://www.cocoandeve.com?store=au" className='text-body'>Australia (AUD)</a></li>
 						<li key="c-eu" className="py-25"><a href="https://www.cocoandeve.com?store=eu" className='text-body'>Europe (EUR)</a></li>
-						<li key="c-sg" className="py-25"><a href="https://www.cocoandeve.com?store=int" className='text-body'>Rest of the World (SGD)</a></li>
+						<li key="c-sg" className="py-25"><a href="https://www.cocoandeve.com?store=int" className='text-body'>Asia (SGD)</a></li>
 						<li key="c-my" className="py-25"><a href="https://www.cocoandeve.com?store=my" className='text-body'>Malaysia (MYR)</a></li>
 					</ul>
 				</li>
