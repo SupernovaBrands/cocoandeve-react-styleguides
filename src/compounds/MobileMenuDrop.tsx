@@ -47,7 +47,7 @@ const STORE_LABELS: Record<string, string> = {
     ca: 'Canada (CAD)',
     eu: 'Europe (EUR)',
     my: 'Malaysia (MYR)',
-    int: 'Rest of the World (SGD)',
+    int: 'Asia (SGD)',
 };
 
 const Chevron = ({ open, size = 20 }: { open: boolean; size?: number }) => (
