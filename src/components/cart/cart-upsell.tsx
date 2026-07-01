@@ -9,10 +9,11 @@ import { PrevButton, NextButton } from '~/components/carousel/EmblaCarouselArrow
 import { formatMoney } from '~/modules/utils';
 
 const CartUpsell = (props:any) => {
-    const { items: products, addToCart, store } = props;
+    // console.log('props', props);
+    const { items: products, addToCart, store, onApplyDiscountCode, title, desc } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
-    const addUpsell = async (variant:any, percentage:any) => {
+    const addUpsell = async (variant:any, percentage:any, discount_code:string) => {
         setLoading(true);
         const addLine = await addToCart({
             id: variant.id,
@@ -24,6 +25,13 @@ const CartUpsell = (props:any) => {
             bubble: false,
         });
         setLoading(false);
+        if (discount_code) {
+            // auto apply disc code here
+            // console.log('auto apply discount code', discount_code);
+            window.document.dispatchEvent(new CustomEvent('cart-discount-form-loading', { detail: true }));
+            await onApplyDiscountCode(discount_code, true);
+            window.document.dispatchEvent(new CustomEvent('cart-discount-form-loading', { detail: false }));
+        }
         return addLine;
     }
 
@@ -45,7 +53,7 @@ const CartUpsell = (props:any) => {
     const getCompareAtPrice = (variant:any, percentage:number) => {
         if (percentage) {
             return formatMoney(parseFloat(variant.price.amount) * 100, false, store);;
-        } else if (variant.compareAtPrice) {
+        } else if (variant.compareAtPrice && parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price?.amount || '0')) {
             return formatMoney(parseFloat(variant.compareAtPrice.amount) * 100, false, store);
         }
         return null;
@@ -63,7 +71,7 @@ const CartUpsell = (props:any) => {
     const getSaving = (variant:any, percentage:number) => {
         if (percentage) {
             return `SAVE ${percentage}%`;
-        } else if (variant && variant.compareAtPrice) {
+        } else if (variant && variant.compareAtPrice && parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price?.amount || '0')) {
             const comparePrice = parseFloat(variant.compareAtPrice.amount) * 100;
             const price = parseFloat(variant.price.amount) * 100;
             const percent = Math.round(price/comparePrice * 100);
@@ -87,11 +95,13 @@ const CartUpsell = (props:any) => {
 
     //@ts-ignore
     window.emblaBrow = emblaApi;
-    return (
+    // console.log('upsell data', upsell);
+    return upsell.filter((up) => up.product.availableForSale).length > 0 && (
         <>
             <div className="relative mb-2 lg:mb-2">
-                { upsell.length && <p className="text-md font-bold mb-2">You may love:</p> }
-                { upsell.length > 1 && (
+                { upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-md font-bold mb-25">{title}</p> }
+                { desc && upsell.filter((up) => up.product.availableForSale).length > 0 && <p className="text-sm mb-2">{desc}</p> }
+                { upsell.filter((up) => up.product.availableForSale).length > 1 && (
                     <div className="upsell-navigation absolute top-0 right-[10px] w-[50px]">
                         <Carousel.Navigation>
                             <PrevButton
@@ -147,7 +157,7 @@ const CartUpsell = (props:any) => {
                                                 <span className="text-primary font-bold">{getPrice(variant, item.percentage)}</span>
                                                 {getSaving(variant, item.percentage) && <span className="block text-primary">{getSaving(variant, item.percentage)}</span>}
                                             </p>
-                                            <button className="bfcm-btn btn btn-outline-body px-[28px] py-1 mt-1 min-w-[86px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage)}>
+                                            <button className="bfcm-btn btn btn-outline-body px-[28px] py-1 mt-1 min-w-[86px] self-start" type="button" onClick={() => addUpsell(variant, item.percentage, item.discount_code)}>
                                                 {loading && (
                                                     <span className="spinner-border spinner-border-sm !w-[15px] !h-[15px]" role="status" aria-hidden="true" />
                                                 )}

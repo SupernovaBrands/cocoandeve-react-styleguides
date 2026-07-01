@@ -154,6 +154,7 @@ const ProductInfo = (props: any) => {
         }
 
         if (tabSelected && tabSelected.length >= maxItem) return false;
+        setAddingItem(true);
         const productModel = await buildProductCardModel(store, productShopify, null, null);
 
         setTabSelected((prev) => {
@@ -172,6 +173,7 @@ const ProductInfo = (props: any) => {
             });
             return prevData;
         });
+        setAddingItem(false);
         setTimeout(() => {
             handleClose();
         }, 1500);

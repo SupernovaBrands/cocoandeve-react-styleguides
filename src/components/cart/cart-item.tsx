@@ -454,31 +454,31 @@ export const CartItem = (props: CartItemProps) => {
 						{/* {isKitBuilder && (
 						<strong className="">x1</strong>
 					)} */}
-						{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
-							? (
-								<div className="flex flex-col text-right">
-									{item.comparePrice > 0 && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
-									{!item.comparePrice && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
-									<strong>
-										Free
-									</strong>
-								</div>
-							) : (
-								<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
-									{isBundle ? (
-										<>
-											{bundleCompare > 0 && <del>{formatMoney(bundleCompare, false, store)}</del>}
-											<strong>{formatMoney(bundlePrice, false, store)}</strong>
-										</>
-									) : (
-										<>
-											{item.comparePrice > 0
-												? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-												: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-											<strong>
-												{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
-													? formatMoney(item.priceAfterDiscounted, false, store)
-													: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
+						? (
+							<div className="flex flex-col text-right">
+								{item.comparePrice > item.originalPrice && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+								{(!item.comparePrice || item.comparePrice <= item.originalPrice) && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
+								<strong>
+									Free
+								</strong>
+							</div>
+						) : (
+							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+								{isBundle ? (
+									<>
+										{bundleCompare > bundlePrice && <del>{formatMoney(bundleCompare, false, store)}</del>}
+										<strong>{formatMoney(bundlePrice, false, store)}</strong>
+									</>
+								) : (
+									<>
+										{item.comparePrice > item.originalPrice
+											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+										<strong>
+											{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
+												? formatMoney(item.priceAfterDiscounted, false, store)
+												: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 
 												{item.recurring && (item.period)}
 											</strong>

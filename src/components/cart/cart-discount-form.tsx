@@ -29,6 +29,14 @@ export const CartDiscountForm = (props:any) => {
     const inputRef = useRef(null);
 
     useEffect(() => {
+        const handleLoading = (e: any) => {
+            setState((prevState: any) => ({ ...prevState, loading: e.detail }));
+        };
+        window.document.addEventListener('cart-discount-form-loading', handleLoading);
+        return () => window.document.removeEventListener('cart-discount-form-loading', handleLoading);
+    }, []);
+
+    useEffect(() => {
         const { isApplied, error } = props;
         if (!isApplied && error) {
             setState({ ...state, code: '', error: '' });
@@ -48,7 +56,7 @@ export const CartDiscountForm = (props:any) => {
             hasCode: props.isApplied || !!props.appliedGiftCard.code,
         };
 
-        const validItems = props.cart.lines.filter((line: any) => {
+        const validItems = (props.cart?.lines || []).filter((line: any) => {
             const collections = line.merchandise.product.collections.nodes.map((item: any) => item.handle);
             const configCollections = props.discountBanner.collection_handle?.split(',') || [];
             const configProducts = props.discountBanner.product_handle?.split(',') || [];
