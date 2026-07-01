@@ -201,7 +201,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 		return url.replace('_text_', `${index + 1}`).replace(/(\.[a-z]+)(\?.*)?$/i, `_${size}$1$2`);
 	};
 
-	const soundEnabledHandles = ['tan-boosting-anti-aging-body-oil'];
+	const soundEnabledHandles = ['tan-boosting-anti-aging-body-oil', 'island-bronze-set'];
 	const soundEnabledStores = ['uk', 'eu', 'us'];
 	const isMuted = !(soundEnabledHandles.includes(handle) && soundEnabledStores.includes(store));
 	
