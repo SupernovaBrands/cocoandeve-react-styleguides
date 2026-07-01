@@ -324,7 +324,6 @@ const MobileMenu = (props: any) => {
 						{currency === 'CAD' && 'Canada (CAD)'}
 						{currency === 'AUD' && 'Australia (AUD)'}
 						{currency === 'EUR' && 'Europe (EUR)'}
-						{currency === 'MYR' && 'Malaysia (MYR)'}
 						{currency === 'GBP' && 'United Kingdom (GBP)'}
 						<ChevronNext className={`h-[1em] text-xs ${storeSelection ? 'rotate-180' : ''}`} />
 					</h4>
