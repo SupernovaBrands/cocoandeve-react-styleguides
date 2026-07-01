@@ -46,7 +46,6 @@ const STORE_LABELS: Record<string, string> = {
     au: 'Australia (AUD)',
     ca: 'Canada (CAD)',
     eu: 'Europe (EUR)',
-    my: 'Malaysia (MYR)',
     int: 'Asia (SGD)',
 };
 
@@ -202,8 +201,7 @@ const MobileMenuDrop = (props: any) => {
                         <li><a href="https://www.cocoandeve.com?store=ca" className="text-body text-[16px] no-underline hover:text-primary">Canada (CAD)</a></li>
                         <li><a href="https://www.cocoandeve.com?store=au" className="text-body text-[16px] no-underline hover:text-primary">Australia (AUD)</a></li>
                         <li><a href="https://www.cocoandeve.com?store=eu" className="text-body text-[16px] no-underline hover:text-primary">Europe (EUR)</a></li>
-                        <li><a href="https://www.cocoandeve.com?store=int" className="text-body text-[16px] no-underline hover:text-primary">Rest of the World (SGD)</a></li>
-                        <li><a href="https://www.cocoandeve.com?store=my" className="text-body text-[16px] no-underline hover:text-primary">Malaysia (MYR)</a></li>
+                        <li><a href="https://www.cocoandeve.com?store=int" className="text-body text-[16px] no-underline hover:text-primary">Asia (SGD)</a></li>
                     </ul>
                 )}
             </div>

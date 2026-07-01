@@ -336,7 +336,6 @@ const MobileMenu = (props: any) => {
 						<li key="c-au" className="py-25"><a href="https://www.cocoandeve.com?store=au" className='text-body'>Australia (AUD)</a></li>
 						<li key="c-eu" className="py-25"><a href="https://www.cocoandeve.com?store=eu" className='text-body'>Europe (EUR)</a></li>
 						<li key="c-sg" className="py-25"><a href="https://www.cocoandeve.com?store=int" className='text-body'>Asia (SGD)</a></li>
-						<li key="c-my" className="py-25"><a href="https://www.cocoandeve.com?store=my" className='text-body'>Malaysia (MYR)</a></li>
 					</ul>
 				</li>
 				<li key="others" className="flex flex-wrap -mx-hg px-g pt-g" role="presentation">
