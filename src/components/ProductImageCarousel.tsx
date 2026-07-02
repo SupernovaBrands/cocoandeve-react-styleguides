@@ -201,9 +201,9 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 		return url.replace('_text_', `${index + 1}`).replace(/(\.[a-z]+)(\?.*)?$/i, `_${size}$1$2`);
 	};
 
-	const soundEnabledHandles = ['tan-boosting-anti-aging-body-oil'];
-	const soundEnabledStores = ['uk', 'eu', 'us'];
-	const isMuted = !(soundEnabledHandles.includes(handle) && soundEnabledStores.includes(store));
+	// const soundEnabledHandles = ['tan-boosting-anti-aging-body-oil', 'island-bronze-set'];
+	// const soundEnabledStores = ['uk', 'eu', 'us'];
+	// const isMuted = !(soundEnabledHandles.includes(handle) && soundEnabledStores.includes(store));
 	
 	return (
 		<div className="flex w-full lg:w-7/12 lg:sticky lg:top-[115px] lg:self-start">
@@ -288,7 +288,7 @@ const ProductImageCarousel: React.FC<PropType> = ({ slides: slideBoxes, bottomBa
 							))}
 							{videoUrl && (
 								<div ref={targetRef as any} className="flex-grow-0 flex-shrink-0 basis-[97.5%] w-[97.5%] pr-[4px] lg:pr-0 lg:basis-full lg:w-full flex items-center" key={slides.length}>
-									<video width="320" height="240"  className="w-full h-auto max-w-full" muted={isMuted} playsInline={true} loop={true} autoPlay ref={videoRef} >
+									<video width="320" height="240"  className="w-full h-auto max-w-full" muted={false} playsInline={true} loop={true} autoPlay ref={videoRef} >
 										<source src={videoUrl} type="video/mp4" />
 										Your browser does not support the video tag.
 									</video>
