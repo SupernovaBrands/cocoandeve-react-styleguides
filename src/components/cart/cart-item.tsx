@@ -250,9 +250,7 @@ export const CartItem = (props: CartItemProps) => {
 	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
 	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
 
-	// console.log('bundleItems', bundleItems);
-	// console.log('is bundle', isBundle);
-	// console.log('is removable', isRemovable);
+	// console.log('cart item', item);
 
 	return (
 		<li className={`cart-item ${item?.isLoading ? 'opacity-50 pointer-events-none' : ''}`} data-mod={item.modified}>
@@ -348,7 +346,7 @@ export const CartItem = (props: CartItemProps) => {
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
-						{/* {isBundle && isRemovable && (<button className="cart-item__remove btn-unstyled text-body flex"
+						{/* {isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 							type="button" aria-label="Remove"
 							onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
@@ -462,31 +460,31 @@ export const CartItem = (props: CartItemProps) => {
 						{/* {isKitBuilder && (
 						<strong className="">x1</strong>
 					)} */}
-						{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
-							? (
-								<div className="flex flex-col text-right">
-									{item.comparePrice > item.originalPrice && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
-									{(!item.comparePrice || item.comparePrice <= item.originalPrice) && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
-									<strong>
-										Free
-									</strong>
-								</div>
-							) : (
-								<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
-									{isBundle ? (
-										<>
-											{bundleCompare > bundlePrice && <del>{formatMoney(bundleCompare, false, store)}</del>}
-											<strong>{formatMoney(bundlePrice, false, store)}</strong>
-										</>
-									) : (
-										<>
-											{item.comparePrice > item.originalPrice
-												? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
-												: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
-											<strong>
-												{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
-													? formatMoney(item.priceAfterDiscounted, false, store)
-													: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
+					{item.isFreeItem && !item.isManualGwp && parseFloat(item.cost.amountPerQuantity.amount) > 0
+						? (
+							<div className="flex flex-col text-right">
+								{item.comparePrice > item.originalPrice && <span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>}
+								{(!item.comparePrice || item.comparePrice <= item.originalPrice) && <span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>}
+								<strong>
+									Free
+								</strong>
+							</div>
+						) : (
+							<div className={`flex ${isBundle ? 'gap-[.75rem]' : 'flex-col'} text-right`}>
+								{isBundle ? (
+									<>
+										{bundleCompare > bundlePrice && <del>{formatMoney(bundleCompare, false, store)}</del>}
+										<strong>{formatMoney(bundlePrice, false, store)}</strong>
+									</>
+								) : (
+									<>
+										{item.comparePrice > item.originalPrice
+											? (<span className="line-through">{formatMoney(item.comparePrice, false, store)}</span>)
+											: item.totalDiscountAmount > 0 && (<span className="line-through">{formatMoney(item.originalPrice, false, store)}</span>)}
+										<strong>
+											{item.totalDiscountAmount > 0 && item.priceAfterDiscounted > 0
+												? formatMoney(item.priceAfterDiscounted, false, store)
+												: item.originalPrice > 0 && !item.modifiedDiscountedPrice ? formatMoney(item.originalPrice, false, store) : 'Free'}
 
 												{item.recurring && (item.period)}
 											</strong>
@@ -510,7 +508,7 @@ export const CartItem = (props: CartItemProps) => {
 						}, {} as Record<string, any>)).map((groupedItem: any, idx: number) => (
 							<li key={`${groupedItem?.merchandise?.id || idx}`} className="flex items-center gap-[.25rem]">
 								<img src={groupedItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
-								<span className="text-sm">{groupedItem.quantity}x {groupedItem?.merchandise?.title}</span>
+								<span className="text-sm">{`${groupedItem?.merchandise?.title?.includes('1x') ? '' : `${groupedItem.quantity}x`}`} {groupedItem?.merchandise?.title}</span>
 							</li>
 						))}
 					</ul>

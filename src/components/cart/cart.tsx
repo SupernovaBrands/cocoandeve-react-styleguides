@@ -324,7 +324,7 @@ const Cart: React.FC<Props> = (props) => {
 		return acc;
 	}, []);
 
-	// console.log('manualGwpSetting', manualGwpSetting);
+	// console.log('cart', cart);
 
 
 	return (
