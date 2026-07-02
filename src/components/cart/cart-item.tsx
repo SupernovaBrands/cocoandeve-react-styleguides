@@ -340,11 +340,11 @@ export const CartItem = (props: CartItemProps) => {
 							<SvgTrash className="svg w-[1em]" />
 						</button>)}
 
-						{isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
+						{/* {isBundle && (<button className="cart-item__remove btn-unstyled text-body flex"
 							type="button" aria-label="Remove"
 							onClick={() => onRemoveItem(item)} data-cy="cart-remove-icon">
 							<SvgTrash className="svg w-[1em]" />
-						</button>)}
+						</button>)} */}
 
 					</div>
 
