@@ -502,7 +502,7 @@ export const CartItem = (props: CartItemProps) => {
 						}, {} as Record<string, any>)).map((groupedItem: any, idx: number) => (
 							<li key={`${groupedItem?.merchandise?.id || idx}`} className="flex items-center gap-[.25rem]">
 								<img src={groupedItem?.merchandise?.image?.url?.replace('.jpg', '_40x.jpg')} width={20} height={20} loading='lazy' className="aspect-[1/1]" />
-								<span className="text-sm">{groupedItem.quantity}x {groupedItem?.merchandise?.title}</span>
+								<span className="text-sm">{`${groupedItem?.merchandise?.title?.includes('1x') ? '' : `${groupedItem.quantity}x`}`} {groupedItem?.merchandise?.title}</span>
 							</li>
 						))}
 					</ul>
