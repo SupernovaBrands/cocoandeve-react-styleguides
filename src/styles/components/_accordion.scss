@@ -71,4 +71,22 @@
             }
         }
     }
+
+    // No-JS fallback: native <details open> exposes accordion content
+    details.accordion-item[open] > .accordion-content {
+        grid-template-rows: 1fr;
+
+        > .accordion-content__inner {
+            padding-bottom: 15px;
+        }
+    }
+
+    // Remove native browser disclosure marker from <summary>
+    .accordion-item > summary {
+        list-style: none;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+    }
 }
