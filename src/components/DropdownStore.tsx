@@ -5,8 +5,8 @@ const DropdownStore = (props: any) => {
     const [activeCountry, setActive] = useState('US (USD)');
     const [open, setOpen] = useState(false);
     const openClasses = (direction === 'dropup') ?
-        'opacity-100 [transform:translate3d(0px,_-280px,_0px)!important] h-[280px]' :
-        'opacity-100 [transform:translate3d(0px,_22px,_0px)!important] h-[280px]';
+        'opacity-100 [transform:translate3d(0px,_-240px,_0px)!important] h-[240px]' :
+        'opacity-100 [transform:translate3d(0px,_22px,_0px)!important] h-[240px]';
     useEffect(() => {
         let activeCountry = 'US (USD)';
         if (store === 'ca') {
