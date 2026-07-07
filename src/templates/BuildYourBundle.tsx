@@ -217,9 +217,9 @@ const BuildYourBundle = (props: any) => {
                 </ul>
             </div> */}
             <div className="container--page pb-3 lg:pb-5">
-                <div className="flex lg:flex-col pb-[1rem] lg:pb-0 items-center px-g lg:px-0 pt-3 lg:pt-5">
-                    <p className="text-base lg:text-2xl font-bold lg:text-center mb-0 lg:mb-3 pr-[.5rem] lg:pr-0">{strapiData?.choose_product_text}</p>
-                    <ul className="kit-builder--nav list-style-none mx-0 flex gap-[.5rem] lg:gap-1 flex-wrap border-b-0 text-center justify-center">
+                <div className="container flex flex-col pb-[1rem] lg:pb-0 items-start px-g pt-3 lg:pt-5">
+                    <p className="text-xl lg:text-2xl font-bold lg:text-center mb-[1rem]">{strapiData?.choose_product_text}</p>
+                    <ul className="kit-builder--nav list-style-none mx-0 flex gap-0 lg:gap-[.375rem] flex-wrap border-b-0 text-center justify-center">
                         {strapiData.collection_1_label && <li><TabNav className={`${activeTab === 0 ? 'text-body' : ''}`} title={strapiData.collection_1_label || 'Hair'} active={activeTab === 0} onNavChange={() => setActiveTab(0)} /></li>}
                         {strapiData.collection_2_label && <li><TabNav className={`${activeTab === 1 ? 'text-body' : ''}`} title={strapiData.collection_2_label || 'Tan'} active={activeTab === 1} onNavChange={() => setActiveTab(1)} /></li>}
                         {strapiData.collection_3_label && <li><TabNav className={`${activeTab === 2 ? 'text-body' : ''}`} title={strapiData.collection_3_label || 'SPF'} active={activeTab === 2} onNavChange={() => setActiveTab(2)} /></li>}
@@ -227,7 +227,7 @@ const BuildYourBundle = (props: any) => {
                 </div>
                 <div className={`container px-g pb-0 lg:pt-3 lg:flex lg:gap-x-[1.875rem]`}>
                     <div className="lg:w-[71.966%]">
-                        <TabContent active={activeTab === 0} className="grid grid-cols-2 lg:grid-cols-3 gap-x-[.5rem] gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
+                        <TabContent active={activeTab === 0} className="grid grid-cols-2 lg:grid-cols-3 gap-x-g gap-y-4 lg:gap-x-[1rem] lg:gap-y-[2.75rem]">
                             {tab1Products.sort((a, b) => b.availableForSale - a.availableForSale).filter((item) => item && item.priceInCent > 0).map((item, index) => {
                                 const { isLaunchWL, launchBox } = checkLaunchWLBox(launchWL, item.handle);
                                 return (
