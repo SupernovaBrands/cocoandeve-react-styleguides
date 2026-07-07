@@ -243,6 +243,11 @@ export const CartItem = (props: CartItemProps) => {
 
 	let featuredImage = item.featuredImageUrl ? featuredImageUrl : item.merchandise?.product?.featuredImage?.url ?? '';
 	if (isBundle) featuredImage = 'https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB.jpg?v=1773887188';
+	useEffect(() => {
+		if (isBundle) {
+			setFeaturedImageUrl('https://cdn.shopify.com/s/files/1/0286/1327/9779/files/PDP_BYOB_150x150_crop_center.jpg?v=1773887188');
+		}
+	}, [isBundle, featuredImageUrl]);
 
 	// console.log('cart item', item);
 
@@ -255,13 +260,13 @@ export const CartItem = (props: CartItemProps) => {
 				>
 					{!componentImage?.value && (<picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
 						{item.featuredImageUrl ? (
-							<img src={featuredImageUrl.replace('/public', '/150x')} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+							<img src={featuredImageUrl.replace('/public', '/150x')} className={`w-full object-contain ${isBundle ? '' : 'bg-pink-light'} h-[70px]`} alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 						) : (
-							<img src={item.merchandise?.product?.featuredImage?.url || ''} className="w-full object-contain bg-pink-light h-[70px]" alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
+							<img src={item.merchandise?.product?.featuredImage?.url || ''} className={`w-full object-contain ${isBundle ? '' : 'bg-pink-light'} h-[70px]`} alt={item.merchandise.product.title} loading="lazy" width="78" height="78" />
 						)}
 					</picture>)}
 					{componentImage?.value && <picture className={item.isFreeItem ? 'w-3/12 px-hg lg:px-g' : ''}>
-						<img src={componentImage?.value} className="w-full object-contain bg-pink-light h-[78px]" alt={component?.title} loading="lazy" width="78" height="78" />
+						<img src={componentImage?.value} className={`w-full object-contain ${isBundle ? '' : 'bg-pink-light'} h-[78px]`} alt={component?.title} loading="lazy" width="78" height="78" />
 					</picture>}
 				</ConditionWrapper>
 				<figcaption className={`w-9/12 px-hg lg:px-g`}>
