@@ -68,7 +68,8 @@ const Cart: React.FC<Props> = (props) => {
 	const bundleLabel = strapiCartSetting?.body?.cartGeneral?.drawer_bundle_discount || 'Bundle Savings';
 	const manualGwpBuyItems = strapiCartSetting?.body?.manualGwp?.customer_buys || '';
 	const enabledFreeShippingMeasure = strapiCartSetting?.body?.shippingMetter?.enable_free_shipping_measure;
-
+	const shippingProgressText = strapiCartSetting?.body?.shippingMetter?.shipping_free_text || '';
+	const shippingFinalText = strapiCartSetting?.body?.shippingMetter?.shipping_final_text || '';
 	const [isLastStockKey, setLastStockKey] = useState('');
 
 	const [combineDiscount, setCombineDiscount] = useState(cart.combineDiscount);
@@ -346,8 +347,8 @@ const Cart: React.FC<Props> = (props) => {
 									<CartShippingMeter
 										target={shippingMeter.target}
 										current={shippingMeter.current}
-										progressText={shippingMeter.progressText || ''}
-										finalText={shippingMeter.finalText || ''}
+										progressText={shippingProgressText}
+										finalText={shippingFinalText}
 									/>
 								)}
 							{discountMeter && discountMeter.enabled && discountMeter
