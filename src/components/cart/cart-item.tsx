@@ -38,7 +38,7 @@ export const CartItem = (props: CartItemProps) => {
 
 	const { swatches, variants, selectedSwatch, attributes } = item;
 	const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
-	const isMultiOptions = item.swatches.length > 1 && !item.merchandise.product.isProductBundleApp?.value;
+	const isMultiOptions = item.swatches.length > 1 && !(item.merchandise.product.isProductBundleApp?.value && !item.merchandise.product.isProductBundleAllowMultishade?.value);
 
 	const componentsJson = attributes.find((attr) => attr.key === '_components')
 	const componentImage = attributes.find((attr) => attr.key === '_image')
@@ -108,7 +108,7 @@ export const CartItem = (props: CartItemProps) => {
 		}
 
 		const { swatches } = item;
-		if (swatches.length >= 2 && !item.merchandise.product.isProductBundleApp?.value) {
+		if (swatches.length >= 2 && !(item.merchandise.product.isProductBundleApp?.value && !item.merchandise.product.isProductBundleAllowMultishade?.value)) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
@@ -207,7 +207,7 @@ export const CartItem = (props: CartItemProps) => {
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
 	const groupSwatches = (data) => {
-		if (!item.merchandise.product.isProductBundleApp?.value) {
+		if (!item.merchandise.product.isProductBundleApp?.value || item.merchandise.product.isProductBundleAllowMultishade?.value) {
 			return data;
 		}
 		const grouped = Object.values(
