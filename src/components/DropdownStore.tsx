@@ -18,7 +18,7 @@ const DropdownStore = (props: any) => {
         } else if (store === 'au') {
             activeCountry = 'AU (AUD)';
         } else if (store === 'int') {
-            activeCountry = 'ROW (SGD)';
+            activeCountry = 'ASIA (SGD)';
         } else if (store === 'my') {
             activeCountry = 'MY (MYR)';
         }
@@ -50,7 +50,7 @@ const DropdownStore = (props: any) => {
                     <a className={` ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:bg-dark hover:border-dark' : 'hover:bg-primary hover:border-primary'} hover:text-white !no-underline block w-full clear-both font-normal  text-body whitespace-nowrap border-[0] px-[1.5rem] py-1  ${activeCountry === 'CA (CAD)' ? `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'bg-primary text-white'}` : 'bg-white text-body border-white'}`} href="https://www.cocoandeve.com/?store=ca">Canada (CAD)</a>
                     <a className={` ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:bg-dark hover:border-dark' : 'hover:bg-primary hover:border-primary'} hover:text-white !no-underline block w-full clear-both font-normal  text-body whitespace-nowrap border-[0] px-[1.5rem] py-1  ${activeCountry === 'AU (AUD)' ? `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'bg-primary text-white'}` : 'bg-white text-body border-white'}`} href="https://www.cocoandeve.com/?store=au">Australia (AUD)</a>
                     <a className={` ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:bg-dark hover:border-dark' : 'hover:bg-primary hover:border-primary'} hover:text-white !no-underline block w-full clear-both font-normal  text-body whitespace-nowrap border-[0] px-[1.5rem] py-1 ${activeCountry === 'EU (EUR)' ? `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'bg-primary text-white'}` : 'bg-white text-body border-white'}`} href="https://www.cocoandeve.com/?store=eu">Europe (EUR)</a>
-                    <a className={` ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:bg-dark hover:border-dark' : 'hover:bg-primary hover:border-primary'} hover:text-white !no-underline block w-full clear-both font-normal  text-body whitespace-nowrap border-[0] px-[1.5rem] py-1 ${activeCountry === 'ROW (SGD)' ? `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'bg-primary text-white'}` : 'bg-white text-body border-white'}`} href="https://www.cocoandeve.com/?store=int">Asia (SGD)</a>
+                    <a className={` ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'hover:bg-dark hover:border-dark' : 'hover:bg-primary hover:border-primary'} hover:text-white !no-underline block w-full clear-both font-normal  text-body whitespace-nowrap border-[0] px-[1.5rem] py-1 ${activeCountry === 'ASIA (SGD)' ? `${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark text-white' : 'bg-primary text-white'}` : 'bg-white text-body border-white'}`} href="https://www.cocoandeve.com/?store=int">Asia (SGD)</a>
                 </div>
             </div>
         </div>
