@@ -207,7 +207,7 @@ export const CartItem = (props: CartItemProps) => {
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
 	const groupSwatches = (data) => {
-		if (!item.merchandise.product.isProductBundleApp?.value || item.merchandise.product.isProductBundleAllowMultishade?.value) {
+		if (!item.merchandise.product.isProductBundleApp?.value || item.merchandise.product.isProductBundleAllowMultishade?.value === 'true') {
 			return data;
 		}
 		const grouped = Object.values(
