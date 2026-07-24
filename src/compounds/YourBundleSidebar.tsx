@@ -140,7 +140,7 @@ const YourBundleSidebar = (props: any) => {
                     { key: '_make_your_own_kit_discount', value: `${bundleDiscount}` },
                     { key: '_make_your_own_kit_notes', value: `${bundleDiscount}% Off - Bundle of ${row.length}` },
                     { key: '_make_your_own_kit_image', value: v.src.replace('320x', '150x') },
-                    { key: '_make_your_own_kit_orig_price', value: v.comparePrice ? (v.comparePrice).toString() : (v.price).toString() },
+                    { key: '_make_your_own_kit_orig_price', value: v.comparePrice ? Math.max(v.comparePrice, v.price).toString() : (v.price).toString() },
                     { key: '_make_your_own_kit_new_price', value: (v.price - (bundleDiscount / 100) * v.price).toString() }
                 ]
             }
@@ -199,10 +199,10 @@ const YourBundleSidebar = (props: any) => {
     let itemsReduced = 0;
     let origPrice = 0;
     selected.filter(it => it.id !== null && it.price).map((it) => {
-        origPrice += (it.comparePrice ? it.comparePrice : it.price)
+        origPrice += (it.comparePrice ? Math.max(it.comparePrice, it.price) : it.price)
 
         // item price use compare if any, if not use regular price
-        const itemPrice = it.comparePrice ? it.comparePrice : it.price;
+        const itemPrice = it.comparePrice ? Math.max(it.comparePrice, it.price) : it.price;
         const priceInt = parseInt(itemPrice, 10);
 
         // const tOrig = (priceInt / 100).toFixed(2);
