@@ -76,10 +76,10 @@ const BuildYourBundle = (props: any) => {
         const newSize = Math.min(Math.max(items.length + 1, MIN_ITEM), MAX_ITEM);
         setBundleSize(newSize);
         settingDiscount(items.length >= MIN_ITEM ? items.length : MIN_ITEM);
-        setTimeout(() => {
-            const sidebar = document.querySelector('.container--page');
-            if (sidebar && isDesktop) sidebar.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
+        // setTimeout(() => {
+        //     const sidebar = document.querySelector('.container--page');
+        //     if (sidebar && isDesktop) sidebar.scrollIntoView({ behavior: 'smooth' });
+        // }, 150);
     };
 
     useEffect(() => {
