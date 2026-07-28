@@ -362,33 +362,33 @@ const SwatchOverlay = memo((props: any) => {
             const val0 = tierSelections[tiers[0].optionName];
             const val1 = tierSelections[tiers[1].optionName];
 
-            // Normalise: sort the two values so the canonical variant always has
-            // the alphabetically-smaller value in the first tier slot.
-            const canonicalSelections: Record<string, string> =
-                val0 <= val1
-                    ? { [tiers[0].optionName]: val0, [tiers[1].optionName]: val1 }
-                    : { [tiers[0].optionName]: val1, [tiers[1].optionName]: val0 };
+            // Exact match: each tier keeps the value the user actually picked for it.
+            const directSelections: Record<string, string> = {
+                [tiers[0].optionName]: val0,
+                [tiers[1].optionName]: val1,
+            };
 
-            const canonicalMatch = nodes.find((v: any) =>
+            const directMatch = nodes.find((v: any) =>
                 tiers.every((tier: any) =>
                     v.selectedOptions.some((o: any) =>
-                        o.name === tier.optionName && o.value === canonicalSelections[tier.optionName]
+                        o.name === tier.optionName && o.value === directSelections[tier.optionName]
                     )
                 )
             ) || null;
 
-            if (canonicalMatch) return canonicalMatch;
+            if (directMatch) return directMatch;
 
-            // Fallback: if canonical variant doesn't exist, try the other direction
-            const fallbackSelections: Record<string, string> =
-                val0 <= val1
-                    ? { [tiers[0].optionName]: val1, [tiers[1].optionName]: val0 }
-                    : { [tiers[0].optionName]: val0, [tiers[1].optionName]: val1 };
+            // Fallback: some multi-tier bundles don't expose every ordering of a shade combo
+            // as its own variant, so if the exact combo is missing, try the value-swapped one.
+            const swappedSelections: Record<string, string> = {
+                [tiers[0].optionName]: val1,
+                [tiers[1].optionName]: val0,
+            };
 
             return nodes.find((v: any) =>
                 tiers.every((tier: any) =>
                     v.selectedOptions.some((o: any) =>
-                        o.name === tier.optionName && o.value === fallbackSelections[tier.optionName]
+                        o.name === tier.optionName && o.value === swappedSelections[tier.optionName]
                     )
                 )
             ) || null;

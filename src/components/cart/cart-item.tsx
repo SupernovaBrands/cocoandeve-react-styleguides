@@ -419,7 +419,7 @@ export const CartItem = (props: CartItemProps) => {
 													tabIndex={-1}
 													disabled={!variant.availableForSale}
 													aria-label={kebabCase(val)}
-													onClick={() => selectedVariant[0] !== val ? onSelectVariant(variant, val, index) : null}
+													onClick={() => selectedVariant[index] !== val ? onSelectVariant(variant, val, index) : null}
 												/>
 											);
 										})}
