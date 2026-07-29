@@ -27,13 +27,14 @@ type CartItemProps = {
 	bundleGroup?: string;
 	bundleCompare?: any;
 	bundlePrice?: any;
+	onShadeChangeError?: (message: string) => void;
 }
 
 
 export const CartItem = (props: CartItemProps) => {
 	const { onChangeQuantity, onRemoveItem,
 		onChangeVariant, productStock,
-		productId, item, isLastStock,
+		productId, item, isLastStock, onShadeChangeError,
 		useShopifyVariantInfo, store, getFeaturedImgMeta, isBundle, bundleItems, bundleGroup, bundleCompare, bundlePrice } = props;
 
 	const { swatches, variants, selectedSwatch, attributes } = item;
@@ -59,13 +60,26 @@ export const CartItem = (props: CartItemProps) => {
 
 	const onSelectVariant = async (variant: any, swatchValue: any, index: number) => {
 		setEditingVariant(index);
+		const previousVariant = selectedVariant;
 		setSelectedVariant((prev) => {
 			const updated = [...prev];
 			updated[index] = swatchValue;
 			return updated;
 		});
-		await onChangeVariant(item.id, variant.id, item.quantity, item);
-		setEditingVariant(null);
+		try {
+			const result = await onChangeVariant(item.id, variant.id, item.quantity, item);
+			if (result?.success === false) {
+				setSelectedVariant(previousVariant);
+				onShadeChangeError?.(`Items selected is currently sold out — this bundle item wasn't changed.`);
+			} else {
+				onShadeChangeError?.('');
+			}
+		} catch (e) {
+			setSelectedVariant(previousVariant);
+			onShadeChangeError?.(`Something went wrong changing this shade — please try again.`);
+		} finally {
+			setEditingVariant(null);
+		}
 	}
 
 	const variantSubtitle = () => {
@@ -229,9 +243,11 @@ export const CartItem = (props: CartItemProps) => {
 	}
 
 
+	const selectedSwatchKey = (selectedSwatch || []).join('|');
 	useEffect(() => {
 		setSelectedVariant(selectedSwatch);
-	}, [selectedSwatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedSwatchKey]);
 
 	const isUpsell = (item: any) => {
 		try {
