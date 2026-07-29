@@ -28,7 +28,7 @@ interface Props {
 	cartData: any;
 	itemCount?: any;
 	strapiCartSetting?: any;
-	onUpdateCart: (item: any, qty: number) => void;
+	onUpdateCart: (item: any, qty: number) => Promise<any>;
 	onDeleteLine: (lineId: any, attributes: Array<any>[]) => void;
 	discountMeter?: any;
 	getFeaturedImgMeta?: any;
@@ -80,7 +80,9 @@ const Cart: React.FC<Props> = (props) => {
 	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
 	const [invalidGiftsToDelete, setInvalidGiftsToDelete] = useState([]);
 	const [removedShades, setRemovedShades] = useState([]);
-	const [shadeChangeError, setShadeChangeError] = useState('');
+	// Shared inline error banner for any cart-drawer action that can silently fail due to stock
+	// (shade swap, quantity bump, upsell add, ...) — not just bundle shade changes.
+	const [cartActionError, setCartActionError] = useState('');
 
 	const handleOpenModalKlarna = () => {
 		setIsModalKlarnaOpen(false);
@@ -148,7 +150,7 @@ const Cart: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (!showCart) {
 			if (removedShades.length > 0) setRemovedShades([]);
-			if (shadeChangeError) setShadeChangeError('');
+			if (cartActionError) setCartActionError('');
 		}
 	}, [showCart]);
 
@@ -185,7 +187,18 @@ const Cart: React.FC<Props> = (props) => {
 			lastStock = true;
 		}
 		setLastStockKey('');
-		return await onUpdateCart(item, parseInt(qty));
+		try {
+			const result = await onUpdateCart(item, parseInt(qty));
+			if (result?.success === false) {
+				setCartActionError(`This item is currently sold out — quantity wasn't updated.`);
+			} else {
+				setCartActionError('');
+			}
+			return result;
+		} catch (e) {
+			setCartActionError(`Something went wrong updating this item — please try again.`);
+			return { success: false, reason: 'error' };
+		}
 	}
 
 	const onRemoveItem = (item: any, attributes: Array<any> = []) => {
@@ -426,7 +439,7 @@ const Cart: React.FC<Props> = (props) => {
 										/* @ts-ignore */
 										const cartItemComponent:any = <CartItem key={item.id} item={item}
 											isLastStock={item.id === isLastStockKey}
-											onShadeChangeError={setShadeChangeError}
+											onShadeChangeError={setCartActionError}
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
@@ -454,8 +467,8 @@ const Cart: React.FC<Props> = (props) => {
 									<p className="mt-1 mb-2 text-primary text-sm">{`${capitalizeString(removedShades.join(', '))} shade is currently sold out and has been removed from one of your bundle items.`}</p>
 								)}
 
-								{shadeChangeError && (
-									<p className="mt-1 mb-2 text-primary text-sm">{shadeChangeError}</p>
+								{cartActionError && (
+									<p className="mt-1 mb-2 text-primary text-sm">{cartActionError}</p>
 								)}
 
 								{manualGwpSetting && manualGwpSetting.enabled && (
@@ -566,7 +579,7 @@ const Cart: React.FC<Props> = (props) => {
 								</div>
 
 								{cartUpsell && cartUpsell.enable && cartUpsell.items.length > 0 && (
-									<CartUpsell {...cartUpsell} onApplyDiscountCode={onApplyDiscountCode} addToCart={addToCart} store={store}></CartUpsell>
+									<CartUpsell {...cartUpsell} onApplyDiscountCode={onApplyDiscountCode} addToCart={addToCart} onAddError={setCartActionError} store={store}></CartUpsell>
 								)}
 
 								{/* @ts-ignore */}
