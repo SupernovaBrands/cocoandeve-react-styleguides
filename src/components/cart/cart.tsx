@@ -9,7 +9,7 @@ import CartUpsell from '~/components/cart/cart-upsell';
 import CartExtras from '~/components/cart/cart-extras';
 import CartItem from "./cart-item";
 import CartSwellRedemption from '~/components/swell/cart-swell-redemption';
-import { encryptParam, formatMoney, getCookie } from "~/modules/utils";
+import { formatMoney, getCookie, capitalizeString } from "~/modules/utils";
 import KlarnaModal from '~/components/modal/KlarnaModal';
 import CartBundleItem from "./cart-bundle-item";
 
@@ -81,6 +81,8 @@ const Cart: React.FC<Props> = (props) => {
 	const [giftCardAmount, setGiftCardAmount] = useState(0);
 	const [isModalKlarnaOpen, setIsModalKlarnaOpen] = useState(false);
 	const [invalidGiftsToDelete, setInvalidGiftsToDelete] = useState([]);
+	const [removedShades, setRemovedShades] = useState([]);
+	const [shadeChangeError, setShadeChangeError] = useState('');
 
 	let os = 'unknown';
     const [platform, setPlatform] = useState(os);
@@ -117,6 +119,8 @@ const Cart: React.FC<Props> = (props) => {
 		}
 	};
 
+	const getShadeValues = (line: any) => (line.selectedSwatch || []).map((value: string) => (value || '').toLowerCase()).filter(Boolean);
+
 	useEffect(() => {
 		if (cartData) {
 
@@ -136,17 +140,38 @@ const Cart: React.FC<Props> = (props) => {
 					});
 				}
 			}
-			const oosInCarts = cartData.lines?.filter((line: any) => !line.merchandise.availableForSale) || [];
+			// a bundle line goes oos either when Shopify flags the variant itself unavailable,
+			// or when a shared shade component gets exhausted by another line in the same cart
+			// (surfaced as quantity === 0 on this line even though availableForSale is still true).
+			// the quantity===0 check is scoped to bundle-app products only: regular lines can pass through
+			// a transient quantity:0 state during tiered-discount optimistic updates (see updateLine in cart-hook.tsx)
+			// which is a normal removal in progress, not an inventory conflict
+			const oosInCarts = cartData.lines?.filter((line: any) => !line.merchandise.availableForSale
+				|| (line.merchandise.product.isProductBundleApp?.value && line.quantity === 0)) || [];
 			if (oosInCarts.length > 0) {
+				const depletedShades = oosInCarts.flatMap((item: any) => getShadeValues(item));
+				if (depletedShades.length > 0) {
+					setRemovedShades((prev: any) => Array.from(new Set([...(prev || []), ...depletedShades])));
+				}
 				oosInCarts.forEach((item: any) => {
 					onRemoveItem(item, []);
-				})
+				});
 			}
 
 			setCart({ ...cartData });
 			setCombineDiscount(cartData.combineDiscount);
 		}
 	}, [cartData, itemCount]);
+
+	// these notices reflect one-off events (a bundle line going oos, a shade swap that couldn't
+	// be fulfilled) — clear them once the drawer is closed so they don't linger indefinitely on
+	// next open
+	useEffect(() => {
+		if (!showCart) {
+			if (removedShades.length > 0) setRemovedShades([]);
+			if (shadeChangeError) setShadeChangeError('');
+		}
+	}, [showCart]);
 
 	// console.log('cartUpsell1', cartUpsell);
 
@@ -424,6 +449,7 @@ const Cart: React.FC<Props> = (props) => {
 											key={item.id}
 											item={item}
 											isLastStock={item.id === isLastStockKey}
+											onShadeChangeError={setShadeChangeError}
 											onChangeVariant={changeVariant}
 											onChangeQuantity={onChangeQuantity}
 											onRemoveItem={onRemoveItem}
@@ -446,6 +472,14 @@ const Cart: React.FC<Props> = (props) => {
 										</li>
 									)} */}
 								</ul>
+
+								{removedShades.length > 0 && (
+									<p className="mt-1 mb-2 text-primary text-sm">{`${capitalizeString(removedShades.join(', '))} shade is currently sold out and has been removed from one of your bundle items.`}</p>
+								)}
+
+								{shadeChangeError && (
+									<p className="mt-1 mb-2 text-primary text-sm">{shadeChangeError}</p>
+								)}
 
 								{manualGwpSetting && manualGwpSetting.enabled && (
 									<>
