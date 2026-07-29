@@ -10,12 +10,12 @@ import { formatMoney } from '~/modules/utils';
 
 const CartUpsell = (props:any) => {
     // console.log('props', props);
-    const { items: products, addToCart, store, onApplyDiscountCode, title, desc } = props;
+    const { items: products, addToCart, store, onApplyDiscountCode, onAddError, title, desc } = props;
     const [loading, setLoading] = useState(false);
     const [upsell, setUpsells] = useState(products ?? []);
     const addUpsell = async (variant:any, percentage:any, discount_code:string) => {
         setLoading(true);
-        const addLine = await addToCart({
+        const addedCart = await addToCart({
             id: variant.id,
             quantity: 1,
             attributes: [
@@ -25,6 +25,17 @@ const CartUpsell = (props:any) => {
             bubble: false,
         });
         setLoading(false);
+
+        // Shopify's cartLinesAdd can "succeed" (200, cart returned) while silently not adding
+        // the line at all (e.g. out of stock) since userErrors aren't queried for. Verify the
+        // line actually landed before treating this as a successful add.
+        const addedLine = addedCart?.lines?.find((line: any) => line.merchandise.id === variant.id);
+        if (!addedLine) {
+            onAddError?.(`This item is currently sold out and couldn't be added.`);
+        } else {
+            onAddError?.('');
+        }
+
         if (discount_code) {
             // auto apply disc code here
             // console.log('auto apply discount code', discount_code);
@@ -32,7 +43,7 @@ const CartUpsell = (props:any) => {
             await onApplyDiscountCode(discount_code, true);
             window.document.dispatchEvent(new CustomEvent('cart-discount-form-loading', { detail: false }));
         }
-        return addLine;
+        return addedCart;
     }
 
     const [emblaRef, emblaApi] = useEmblaCarousel({

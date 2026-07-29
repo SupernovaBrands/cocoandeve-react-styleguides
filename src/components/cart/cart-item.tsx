@@ -38,7 +38,9 @@ export const CartItem = (props: CartItemProps) => {
 		useShopifyVariantInfo, store, getFeaturedImgMeta, isBundle, bundleItems, bundleGroup, bundleCompare, bundlePrice } = props;
 
 	const { swatches, variants, selectedSwatch, attributes } = item;
-	const isMultiOptions = item.swatches.length > 1 && !(item.merchandise.product.isProductBundleApp?.value && !item.merchandise.product.isProductBundleAllowMultishade?.value);
+	// const showSwatches = variants && variants.length > 1 && !item.isFreeItem;
+	const isBundleSingleShade = item.merchandise.product.isProductBundleApp?.value && item.merchandise.product.isProductBundleAllowMultishade?.value !== 'true';
+	const isMultiOptions = item.swatches.length > 1 && !isBundleSingleShade;
 
 	const componentsJson = attributes.find((attr) => attr.key === '_components')
 	const componentImage = attributes.find((attr) => attr.key === '_image')
@@ -121,7 +123,7 @@ export const CartItem = (props: CartItemProps) => {
 		}
 
 		const { swatches } = item;
-		if (swatches.length >= 2 && !(item.merchandise.product.isProductBundleApp?.value && !item.merchandise.product.isProductBundleAllowMultishade?.value)) {
+		if (swatches.length >= 2 && !isBundleSingleShade) {
 			return capitalizeString(item.merchandise.title.split('/')[0]);
 		}
 		return capitalizeString(item.merchandise.product.title.split('/')[0].replace('1x ', ''));
@@ -220,7 +222,7 @@ export const CartItem = (props: CartItemProps) => {
 	}, [store, item.merchandise.product.handle, selectedVariant, useShopifyVariantInfo]);
 
 	const groupSwatches = (data) => {
-		if (!item.merchandise.product.isProductBundleApp?.value || item.merchandise.product.isProductBundleAllowMultishade?.value === 'true') {
+		if (!isBundleSingleShade) {
 			return data;
 		}
 		const grouped = Object.values(
@@ -391,8 +393,14 @@ export const CartItem = (props: CartItemProps) => {
 					>
 						{groupSwatches(swatches).map((opt: any, index: number) => {
 							const options = item.merchandise.selectedOptions.filter((option: any) => option.name.toLowerCase() !== 'size');
-							const selected = options.filter((option: any, ind: any) => option.name.toLowerCase() !== 'size' && index === ind)
-								.map((option: any) => option.value).join();
+							// When groupSwatches merged N raw shade positions (e.g. foam + drops) into this one
+							// row, opt.id is their concatenated ids ("id1|id2") — every one of those positions
+							// must be updated together, not just the raw slot that happens to sit at `index`.
+							const groupIndices = isBundleSingleShade
+								? Array.from({ length: opt.id.split('|').length }, (_, i: number) => i)
+								: [index];
+							const groupValues = groupIndices.map((i: number) => options[i]?.value);
+							const selected = groupValues.every((v: any) => v === groupValues[0]) ? groupValues[0] : '';
 
 							const itemSub = subtitles.length > 0 ? subtitles[index] : false;
 
@@ -420,7 +428,7 @@ export const CartItem = (props: CartItemProps) => {
 										)}
 										{showSwatches && opt.values.map((val: any) => {
 											const o = [...selectedVariant];
-											o[index] = val;
+											groupIndices.forEach((i: number) => { o[i] = val; });
 											const variant = variants.find((vari: any) => {
 												const selectedVaries = vari.selectedOptions.filter((option: any) => option.name.toLowerCase() !== 'size');
 												const selectedVari = selectedVaries.map((option: any) => option.value);
@@ -435,7 +443,7 @@ export const CartItem = (props: CartItemProps) => {
 													tabIndex={-1}
 													disabled={!variant.availableForSale}
 													aria-label={kebabCase(val)}
-													onClick={() => selectedVariant[index] !== val ? onSelectVariant(variant, val, index) : null}
+													onClick={() => selected !== val ? onSelectVariant(variant, val, index) : null}
 												/>
 											);
 										})}
@@ -514,6 +522,10 @@ export const CartItem = (props: CartItemProps) => {
 								</div>
 							)}
 					</div>
+
+					{item.quantity === 0 && (
+						<p className="mt-1 mb-1 text-primary text-sm">This item is currently sold out.</p>
+					)}
 
 				{isBundle && bundleItems && bundleItems.length > 0 && (
 					<ul className="flex flex-col gap-[.25rem] pt-1">
