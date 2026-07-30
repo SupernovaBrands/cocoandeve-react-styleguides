@@ -25,7 +25,7 @@ import PalmTree from '~/images/icons/palm-tree-v2.svg';
 
 const Header = (props: any) => {
 	const { store, swellLoyalty, searchBox, timerBar, annBar, mainMenu, menuBannerCode, menuBannerQuiz, disabledScroll,
-		flashBubble, setFlashBubble, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
+		flashBubble, setFlashBubble, bubbleMessage, getCollectionProductsByHandle, dummy, cartCount, checkoutUrl,
 		isAuthenticated, generalSetting, trackEvent, points, cart, cartItems, setPoints, originalPts, openDropdownRegister, setOpenDropDownRegister,
 		getFeaturedImgMeta, checkintPoints, addingReward, setAccountPage, accountPageKey, initialStore, mainNav,
 		hairRanges, buildProductCardModel, addToCart, preOrders, setWaitlistData, globalNav, squareBadge,
@@ -408,7 +408,7 @@ const Header = (props: any) => {
 				    while staying outside <nav> so its z-[1035] still competes in <header>'s stacking context, above SearchBox z-[1020] */}
 				<div className="lg:px-hg">
 					<div className="container relative px-0 lg:px-g">
-						<Tooltip tooltipShow={flashBubble} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
+						<Tooltip tooltipShow={flashBubble} message={bubbleMessage} closeTip={closeTip} checkoutUrl={checkoutUrl} generalSetting={generalSetting} />
 					</div>
 				</div>
 				{openDrawer && (
