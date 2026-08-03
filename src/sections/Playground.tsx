@@ -177,17 +177,37 @@ const Playground = (props: any) => {
                         />
                     )}
                     {/* SPF */}
-                    {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (
-                        <PlaygroundCardV2 store={store} data={content?.range_5}
-                            imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_m_828x.jpg?v=1771226109`}
-                            imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_d_1920x.jpg?v=1771226885`}
-                            imgAlt={`${content?.range_5?.Title} Playground - ${content?.range_5?.text?.replace(/(<([^>]+)>)/gi, '')}`}
-                            ctaBgColor={ctaBgColor}
-                            ctaTextColor={ctaTextColor}
-                            isLocked={navigating}
-                            onTap={() => setNavigating(true)}
-                        />
-                    )}
+                    {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (() => {
+                        const spfImages = {
+                            us: {
+                                imgDt: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Desktop_US_0eca9031b0.jpg?v=1785736047`,
+                                imgMb: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Mobile_US_31193d4091.jpg?v=1785736046`,
+                            },
+                            uk: {
+                                imgDt: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Desktop_ROW_b08d094913.jpg?v=1785735940`,
+                                imgMb: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Mobile_ROW_fa528d12bd.jpg?v=1785735940`,
+                            },
+                            eu: {
+                                imgDt: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Desktop_ROW_b08d094913.jpg?v=1785735940`,
+                                imgMb: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Mobile_ROW_fa528d12bd.jpg?v=1785735940`,
+                            },
+                        };
+
+                        const imgDt = spfImages[store]?.imgDt ?? `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_d_1920x.jpg?v=1771226885`;
+                        const imgMb = spfImages[store]?.imgMb ?? `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_m_828x.jpg?v=1771226109`;
+
+                        return (
+                            <PlaygroundCardV2 store={store} data={content?.range_5}
+                                imgMb={imgMb}
+                                imgDt={imgDt}
+                                imgAlt={`${content?.range_5?.Title} Playground - ${content?.range_5?.text?.replace(/(<([^>]+)>)/gi, '')}`}
+                                ctaBgColor={ctaBgColor}
+                                ctaTextColor={ctaTextColor}
+                                isLocked={navigating}
+                                onTap={() => setNavigating(true)}
+                            />
+                        );
+                    })()}
 
                     {/* skin */}
                     {['int', 'au'].includes(store) && (

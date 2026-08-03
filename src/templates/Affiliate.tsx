@@ -78,9 +78,9 @@ const Affiliate = (props: any) => {
 						<div className="container lg:h-full">
 							<div className="flex justify-center lg:justify-start items-center h-full">
 								<div className="f-text lg:border-t lg:border-t-transparent text-center lg:text-left lg:flex-1 lg:flex flex-col gap-[24px] text-affiliate-black">
-									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px]">{banner.introducing}</h5>
-									<h1 className="text-[24px] leading-[30px] mb-[8px] lg:mb-0 my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%]" dangerouslySetInnerHTML={{__html: banner.title}} />
-									<h2 className="font-normal text-base lg:text-[24px] leading-[20px] lg:leading-[30px] mb-[16px] lg:mb-0" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
+									<h5 className="text-base tracking-[.8px] lg:text-xl lg:leading-[29px] lg:tracking-[1.2px] text-white">{banner.introducing}</h5>
+									<h1 className="text-[24px] leading-[30px] mb-[8px] lg:mb-0 my-0 mx-0 lg:text-[55px] lg:leading-[40px] lg:max-w-[90%] text-white" dangerouslySetInnerHTML={{__html: banner.title}} />
+									<h2 className="font-normal text-base lg:text-[24px] leading-[20px] lg:leading-[30px] mb-[16px] lg:mb-0 text-white" dangerouslySetInnerHTML={{__html: banner.subtitle}} />
 									<a
 										href={banner.cta}
 										className={`relative m-auto btn ${generalSetting?.bfcm_cta_bg_color === 'bg-dark' ? 'bg-dark lg:border-dark text-white' : 'btn-primary lg:border-primary'} block fixed lg:static bottom-0 left-0 right-0 h-[50px] max-w-[174px] z-10 w-full
