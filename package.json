@@ -16,7 +16,7 @@
   "dependencies": {
     "@shopify/theme-images": "^4.1.1",
     "@svgr/webpack": "^8.1.0",
-    "axios": "^1.16.0",
+    "axios": "^1.16.1",
     "crypto-js": "^4.2.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-auto-height": "^8.6.0",
