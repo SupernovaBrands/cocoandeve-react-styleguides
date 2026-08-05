@@ -171,7 +171,7 @@ const Playground = (props: any) => {
                         />
                     )}
                     {/* SPF */}
-                    {['us', 'uk', 'eu', 'ca', 'dev'].includes(store) && (() => {
+                    {['us', 'uk', 'eu', 'dev'].includes(store) && (() => {
                         const spfImages = {
                             us: {
                                 imgDt: `https://cdn.shopify.com/s/files/1/0286/1327/9779/files/strapi-170726_SPF_Banner_on_Homepage_Desktop_US_0eca9031b0.jpg?v=1785736047`,
@@ -204,7 +204,7 @@ const Playground = (props: any) => {
                     })()}
 
                     {/* skin */}
-                    {['int', 'au'].includes(store) && (
+                    {['int', 'au', 'ca'].includes(store) && (
                         <PlaygroundCardV2 store={store} data={content?.range_3}
                             imgMb={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_m_828x.jpg?v=1771226109`}
                             imgDt={`https://cdn.shopify.com/s/files/1/0286/1327/9779/files/playground_skin_d_1920x.jpg?v=1771226885`}
