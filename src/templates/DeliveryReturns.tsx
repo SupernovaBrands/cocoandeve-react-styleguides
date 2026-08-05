@@ -193,9 +193,9 @@ const DeliveryReturns = (props: any) => {
                             <div className="lg:w-1/5 sm:w-1/2 px-hg lg:px-g pb-3">
                                 <h5 className="font-bold mb-1 text-md text-left">Asia</h5>
                                 <ul className="delivery-countries-text m-0 text-left text-sm">
-                                    <li className="flex"><China className="mr-[7px] mt-[1px]" />China <br className="block lg:hidden"/>(Hong Kong, Macao)</li>
+                                    {/* <li className="flex"><China className="mr-[7px] mt-[1px]" />China <br className="block lg:hidden"/>(Hong Kong, Macao)</li> */}
                                     <li className="flex"><Malaysia className="mr-[7px] mt-[1px]" />Malaysia</li>
-                                    <li className="flex"><Philippines className="mr-[7px] mt-[1px]" />Philippines</li>
+                                    {/* <li className="flex"><Philippines className="mr-[7px] mt-[1px]" />Philippines</li> */}
                                     <li className="flex"><Singapore className="mr-[7px] mt-[1px]" />Singapore</li>
 
                                 </ul>
